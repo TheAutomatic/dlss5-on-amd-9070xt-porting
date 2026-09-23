@@ -239,6 +239,9 @@ public:
   // The stream and clear queue are confirmed complete. A pre-recorded consumer
   // can now submit; otherwise RecordOutputReadable may still be called.
   failed=false;
+  // WaitForSubmittedWork must fence a later consumer on the bridge queue,
+  // even when no regular HIP enqueue happened on this frame.
+  pending=true;
   phase=consumer_recorded?Phase::OutputRecorded:Phase::HipQueued;
   return true;
  }
