@@ -221,7 +221,7 @@ public:
  }
  public:
  // After producer submission and before consumer submission, clear the private
- // neural output so the caller can decode original Color. The caller must drain
+ // neural output so a normal decoder view can use original Color. The caller must drain
  // any other queue that used Output() before calling this method, and drain a
  // different consumer queue before reusing or destroying the bridge. On false,
  // do not submit the consumer or reuse the bridge.
