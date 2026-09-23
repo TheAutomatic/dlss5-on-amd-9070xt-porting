@@ -113,6 +113,7 @@ std::wstring FindWeightsDir(const std::wstring &assets)
     const std::wstring sub = JoinPath(assets, L"weights");
     if (FileExists(JoinPath(sub, L"block0-ffn.f16")) || FileExists(JoinPath(sub, L"block0-ffn.f32")))
         return sub;
+
     wchar_t env[MAX_PATH] {};
     if (GetEnvironmentVariableW(L"LMXXF_WEIGHTS_DIR", env, MAX_PATH) && env[0])
     {
@@ -242,6 +243,7 @@ struct Session
 {
     ID3D12Device *device = nullptr;
     ID3D12CommandQueue *queue = nullptr;
+    ID3D12CommandQueue *fallbackConsumerQueue = nullptr;
     std::wstring assetsDir;
     std::wstring modulesDir;
     std::wstring weightsDir;
@@ -250,6 +252,7 @@ struct Session
     bool modulesValidated = false;
     bool hipPrepared = false;
     bool queueBound = false;
+    bool zeroOutputFallback = false;
     bool failed = false; /* Fail-closed poisoning */
     hip_reference::D3D12Bridge *bridge = nullptr;
     NativeGameCodec *encode = nullptr;
@@ -264,8 +267,21 @@ struct Session
     {
         if (bridge)
         {
-            bridge->CancelUnsubmitted();
-            bridge->NotifyOutputSubmittedIfRecorded(queue);
+            try
+            {
+                bridge->CancelUnsubmitted();
+                bridge->NotifyOutputSubmittedIfRecorded(queue);
+            }
+            catch (...)
+            {
+                AbandonSessionResources();
+                throw std::runtime_error("TeardownCodecChain: bridge acknowledgement failed");
+            }
+            if (!bridge->WaitForSubmittedWork())
+            {
+                AbandonSessionResources();
+                throw std::runtime_error("TeardownCodecChain: bridge work did not complete");
+            }
         }
         delete bridge;
         bridge = nullptr;
@@ -288,9 +304,9 @@ struct Session
 
     // Wait until queue work that may touch encode/rgb/bridge shared resources is done.
     // Returns S_OK only when completion is confirmed; callers must retain resources on failure.
-    HRESULT DrainGpu()
+    HRESULT DrainQueue(ID3D12CommandQueue *target)
     {
-        if (!device || !queue)
+        if (!device || !target)
             return S_OK;
         if (FAILED(device->GetDeviceRemovedReason()))
             return DXGI_ERROR_DEVICE_REMOVED;
@@ -306,7 +322,7 @@ struct Session
             return HRESULT_FROM_WIN32(err ? err : ERROR_OUTOFMEMORY);
         }
         const UINT64 v = 1;
-        hr = queue->Signal(fence, v);
+        hr = target->Signal(fence, v);
         if (FAILED(hr))
         {
             CloseHandle(ev);
@@ -321,12 +337,33 @@ struct Session
             return hr;
         }
         const DWORD wr = WaitForSingleObject(ev, 30000);
-        CloseHandle(ev);
         const UINT64 completed = fence->GetCompletedValue();
-        fence->Release();
+        // A timeout can leave SetEventOnCompletion armed. Retain the event and
+        // fence until process exit instead of closing a future signal target.
+        if (wr == WAIT_OBJECT_0 && completed >= v)
+        {
+            CloseHandle(ev);
+            fence->Release();
+        }
         if (wr != WAIT_OBJECT_0 || completed < v)
             return wr == WAIT_TIMEOUT ? HRESULT_FROM_WIN32(ERROR_TIMEOUT) : E_FAIL;
         return S_OK;
+    }
+
+    HRESULT DrainGpu()
+    {
+        const HRESULT sessionHr = DrainQueue(queue);
+        if (FAILED(sessionHr))
+            return sessionHr;
+        if (!fallbackConsumerQueue)
+            return S_OK;
+        const HRESULT consumerHr = DrainQueue(fallbackConsumerQueue);
+        if (SUCCEEDED(consumerHr))
+        {
+            fallbackConsumerQueue->Release();
+            fallbackConsumerQueue = nullptr;
+        }
+        return consumerHr;
     }
 
     void AbandonSessionResources()
@@ -338,6 +375,8 @@ struct Session
         rgbTex = nullptr;
         rgbInput = nullptr;
         encode = nullptr;
+        // The queue may still own GPU work. Keep our reference on fail-closed teardown.
+        fallbackConsumerQueue = nullptr;
         if (queue)
         {
             queue->Release();
@@ -362,8 +401,21 @@ struct Session
         }
         if (bridge)
         {
-            bridge->CancelUnsubmitted();
-            bridge->NotifyOutputSubmittedIfRecorded(queue);
+            try
+            {
+                bridge->CancelUnsubmitted();
+                bridge->NotifyOutputSubmittedIfRecorded(queue);
+            }
+            catch (...)
+            {
+                AbandonSessionResources();
+                return;
+            }
+            if (!bridge->WaitForSubmittedWork())
+            {
+                AbandonSessionResources();
+                return;
+            }
         }
         // Bridge dtor also synchronizes HIP / pending fence, then frees shared buffers.
         delete bridge;
@@ -501,8 +553,8 @@ int32_t Create(const LmxxfNrCreateInfo *info, void **context)
         *context = nullptr;
         if (info->struct_size != sizeof(LmxxfNrCreateInfo))
             return Fail(LMXXF_NR_INVALID_ARGUMENT, "Create: struct_size mismatch");
-        if (info->flags != 0)
-            return Fail(LMXXF_NR_INVALID_ARGUMENT, "Create: flags must be 0");
+        if (info->flags & ~LMXXF_NR_CREATE_FLAG_ZERO_OUTPUT_FALLBACK)
+            return Fail(LMXXF_NR_INVALID_ARGUMENT, "Create: unknown flags");
         if (!info->device || !info->queue)
             return Fail(LMXXF_NR_INVALID_ARGUMENT, "Create: device and queue required");
         if (!info->assets_directory || !info->assets_directory[0])
@@ -522,6 +574,7 @@ int32_t Create(const LmxxfNrCreateInfo *info, void **context)
             return st;
 
         auto *session = new Session;
+        session->zeroOutputFallback = (info->flags & LMXXF_NR_CREATE_FLAG_ZERO_OUTPUT_FALLBACK) != 0;
         session->assetsDir = assets;
         session->modulesDir = modulesDir;
         session->weightsDir = FindWeightsDir(assets);
@@ -596,6 +649,11 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
             return Fail(LMXXF_NR_INVALID_ARGUMENT, "PrepareFrame: struct_size mismatch");
         job->handle = nullptr;
         job->private_output = nullptr;
+        if (session->fallbackConsumerQueue && FAILED(session->DrainGpu()))
+        {
+            session->failed = true;
+            return Fail(LMXXF_NR_FAILED, "PrepareFrame: fallback consumer queue did not drain");
+        }
         if (!session->queueBound && !session->hipPrepared)
             return Fail(LMXXF_NR_NOT_IMPLEMENTED, "PrepareFrame: call PrepareSession with a live D3D12 queue first");
         if (!info->color || !info->color_width || !info->color_height)
@@ -892,12 +950,78 @@ int32_t EnqueueHip(void *context, void *job, void *command_queue)
             return static_cast<int32_t>(LMXXF_NR_OK);
         }
         auto *targetQueue = static_cast<ID3D12CommandQueue *>(command_queue ? command_queue : session->queue);
+        const bool queueMatch = !session->queue || NativeSameDevice(targetQueue, session->queue);
+        if (!queueMatch)
+        {
+            if (!session->zeroOutputFallback)
+                throw std::runtime_error("EnqueueHip: command queue does not match session queue");
+            ID3D12Device *targetDevice = nullptr;
+            if (!targetQueue || FAILED(targetQueue->GetDevice(IID_PPV_ARGS(&targetDevice))) || !targetDevice)
+                throw std::runtime_error("EnqueueHip: cannot query fallback queue device");
+            const bool sameDevice = NativeSameDevice(targetDevice, session->device);
+            targetDevice->Release();
+            if (!sameDevice)
+                throw std::runtime_error("EnqueueHip: fallback queue device mismatch");
+            // Queue mismatch: cannot synchronize HIP with targetQueue on this session.
+            // Complete old readers and the target queue's submitted producer
+            // before a HIP zero write. A D3D12 zero copy is also ordered here.
+            if (FAILED(session->DrainGpu()) || FAILED(session->DrainQueue(targetQueue)))
+            {
+                session->failed = true;
+                return Fail(LMXXF_NR_FAILED, "EnqueueHip: producer or old session queue did not drain before fallback clear");
+            }
+            // A zero neural output makes the decode shader use original Color.
+            const bool cleared = session->bridge && session->bridge->ClearOutput(targetQueue);
+            if (cleared)
+            {
+                targetQueue->AddRef();
+                session->fallbackConsumerQueue = targetQueue;
+                if (j->state == LMXXF_NR_JOB_PRODUCER_SUBMITTED)
+                    j->state = LMXXF_NR_JOB_NR_COMPLETE;
+                SetError("EnqueueHip: queue mismatch; output zeroed for original Color passthrough");
+                return static_cast<int32_t>(LMXXF_NR_OK);
+            }
+            else
+            {
+                session->failed = true;
+                SetError("EnqueueHip: queue mismatch and output clear failed; cannot guarantee clean visual fallback");
+                return static_cast<int32_t>(LMXXF_NR_FAILED);
+            }
+        }
         QueueContract(session, targetQueue);
-        session->bridge->EnqueueAfterProducer(targetQueue, j->seed, false);
-        if (j->state == LMXXF_NR_JOB_PRODUCER_SUBMITTED)
-            j->state = LMXXF_NR_JOB_NR_COMPLETE;
-        SetError("");
-        return static_cast<int32_t>(LMXXF_NR_OK);
+        try
+        {
+            session->bridge->EnqueueAfterProducer(targetQueue, j->seed, false);
+            if (j->state == LMXXF_NR_JOB_PRODUCER_SUBMITTED)
+                j->state = LMXXF_NR_JOB_NR_COMPLETE;
+            SetError("");
+            return static_cast<int32_t>(LMXXF_NR_OK);
+        }
+        catch (const std::exception &ex)
+        {
+            if (!session->zeroOutputFallback)
+                throw;
+            const bool cleared = session->bridge && session->bridge->ClearOutput(targetQueue);
+            if (cleared)
+            {
+                if (j->state == LMXXF_NR_JOB_PRODUCER_SUBMITTED)
+                    j->state = LMXXF_NR_JOB_NR_COMPLETE;
+                std::string msg = "EnqueueHip: enqueue failed (";
+                msg += ex.what();
+                msg += "); output zeroed for original Color passthrough";
+                SetError(msg.c_str());
+                return static_cast<int32_t>(LMXXF_NR_OK);
+            }
+            else
+            {
+                session->failed = true;
+                std::string msg = "EnqueueHip: enqueue failed (";
+                msg += ex.what();
+                msg += ") and clear failed; cannot guarantee clean visual fallback";
+                SetError(msg.c_str());
+                return static_cast<int32_t>(LMXXF_NR_FAILED);
+            }
+        }
     });
 }
 
