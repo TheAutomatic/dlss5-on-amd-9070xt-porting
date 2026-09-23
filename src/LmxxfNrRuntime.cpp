@@ -24,6 +24,10 @@ namespace
 {
 thread_local char g_lastError[256] = {};
 
+// EnqueueHip's recovery waits run inside the host's ExecuteCommandLists. Windows resets a GPU
+// stuck for 2 s (TDR), so waiting longer there only lengthens a stall; teardown keeps 30 s.
+constexpr DWORD kSubmissionWaitMs = 3000;
+
 void SetError(const char *text)
 {
     if (!text)
@@ -303,7 +307,7 @@ struct Session
 
     // Wait until queue work that may touch encode/rgb/bridge shared resources is done.
     // Returns S_OK only when completion is confirmed; callers must retain resources on failure.
-    HRESULT DrainQueue(ID3D12CommandQueue *target)
+    HRESULT DrainQueue(ID3D12CommandQueue *target, DWORD timeoutMs = 30000)
     {
         if (!device || !target)
             return S_OK;
@@ -335,7 +339,7 @@ struct Session
             fence->Release();
             return hr;
         }
-        const DWORD wr = WaitForSingleObject(ev, 30000);
+        const DWORD wr = WaitForSingleObject(ev, timeoutMs);
         const UINT64 completed = fence->GetCompletedValue();
         // A timeout can leave SetEventOnCompletion armed. Retain the event and
         // fence until process exit instead of closing a future signal target.
@@ -349,14 +353,14 @@ struct Session
         return S_OK;
     }
 
-    HRESULT DrainGpu()
+    HRESULT DrainGpu(DWORD timeoutMs = 30000)
     {
-        const HRESULT sessionHr = DrainQueue(queue);
+        const HRESULT sessionHr = DrainQueue(queue, timeoutMs);
         if (FAILED(sessionHr))
             return sessionHr;
         if (!fallbackConsumerQueue)
             return S_OK;
-        const HRESULT consumerHr = DrainQueue(fallbackConsumerQueue);
+        const HRESULT consumerHr = DrainQueue(fallbackConsumerQueue, timeoutMs);
         if (SUCCEEDED(consumerHr))
         {
             fallbackConsumerQueue->Release();
@@ -964,7 +968,8 @@ int32_t EnqueueHip(void *context, void *job, void *command_queue)
             // Queue mismatch: cannot synchronize HIP with targetQueue on this session.
             // Complete old readers and the target queue's submitted producer
             // before a HIP zero write. A D3D12 zero copy is also ordered here.
-            if (FAILED(session->DrainGpu()) || FAILED(session->DrainQueue(targetQueue)))
+            if (FAILED(session->DrainGpu(kSubmissionWaitMs)) ||
+                FAILED(session->DrainQueue(targetQueue, kSubmissionWaitMs)))
             {
                 session->failed = true;
                 return Fail(LMXXF_NR_FAILED, "EnqueueHip: producer or old session queue did not drain before fallback clear");
