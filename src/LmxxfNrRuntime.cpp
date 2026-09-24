@@ -13,6 +13,7 @@
 #include "native_rgb_texture.h"
 #include "hip_d3d12_bridge.h"
 
+#include <atomic>
 #include <cstdio>
 #include <cstring>
 #include <cstdlib>
@@ -810,8 +811,10 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
                                     !(ed.Flags & D3D12_RESOURCE_FLAG_DENY_SHADER_RESOURCE);
             if (!exposureOk)
             {
-                static unsigned exposureNotices = 0;
-                if (exposureNotices < 3 || (exposureNotices % 300) == 0)
+                // Atomic: sessions on different threads share it.
+                static std::atomic<unsigned> exposureNotices {0};
+                const unsigned notice = exposureNotices.fetch_add(1, std::memory_order_relaxed);
+                if (notice < 3 || (notice % 300) == 0)
                 {
                     char msg[224];
                     std::snprintf(msg, sizeof msg,
@@ -825,7 +828,6 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
                     SetError(msg);
                     keepLastError = true;
                 }
-                ++exposureNotices;
                 frameExposure = nullptr;
                 frameExposureState = D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE;
             }
@@ -833,6 +835,12 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
         // Choose what the codecs will bind: our stable copy if this frame has a usable source,
         // otherwise nothing. Rebuilding follows a change of THAT, not of the game's pointer.
         ID3D12Resource *bindExposure = nullptr;
+        // A copy replaced below while the codecs are alive. The codecs hold an SRV to it and
+        // frames already submitted may still read it, so it is only released once the drain in
+        // the rebuild below has succeeded. Keeping it alive until then also keeps its address
+        // out of reuse: a new copy allocated at the same address would compare equal to
+        // boundExposure, skip the rebuild and leave the codecs reading a freed resource.
+        ID3D12Resource *retiredExposure = nullptr;
         if (frameExposure)
         {
             const DXGI_FORMAT srcFormat = frameExposure->GetDesc().Format;
@@ -840,7 +848,12 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
             {
                 if (session->exposureCopy)
                 {
-                    session->exposureCopy->Release();
+                    // Without codecs nothing references it: every path that tears the chain
+                    // down drains the GPU first.
+                    if (session->encode)
+                        retiredExposure = session->exposureCopy;
+                    else
+                        session->exposureCopy->Release();
                     session->exposureCopy = nullptr;
                 }
                 D3D12_RESOURCE_DESC cd {};
@@ -914,6 +927,11 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
             session->TeardownCodecChain();
             session->job = {};
         }
+        // Reached only after any drain above succeeded (a failed drain returns and leaks it,
+        // fail-closed). Without a rebuild the retired copy was never bound: a new copy cannot
+        // share its address while it lives, so no rebuild means both bindings were null.
+        if (retiredExposure)
+            retiredExposure->Release();
 
         if (!session->encode)
         {
@@ -1068,25 +1086,29 @@ int32_t RecordInputs(void *context, void *job, void *command_list)
         // the codec's own exposure transition is a no-op.
         if (session->boundExposure && j->sourceExposure)
         {
+            // A source already in COPY_SOURCE needs no transition, and a barrier whose before and
+            // after states are equal is invalid - so it only joins the batch when it moves.
+            const bool moveSource = j->sourceExposureState != D3D12_RESOURCE_STATE_COPY_SOURCE;
+            const UINT nb = moveSource ? 2u : 1u;
             D3D12_RESOURCE_BARRIER b[2] {};
             b[0].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-            b[0].Transition = {j->sourceExposure, D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
-                               j->sourceExposureState, D3D12_RESOURCE_STATE_COPY_SOURCE};
-            b[1].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-            b[1].Transition = {session->exposureCopy, D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
+            b[0].Transition = {session->exposureCopy, D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
                                D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE, D3D12_RESOURCE_STATE_COPY_DEST};
-            list->ResourceBarrier(2, b);
+            b[1].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+            b[1].Transition = {j->sourceExposure, D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
+                               j->sourceExposureState, D3D12_RESOURCE_STATE_COPY_SOURCE};
+            list->ResourceBarrier(nb, b);
             D3D12_TEXTURE_COPY_LOCATION dst {}, src {};
             dst.pResource = session->exposureCopy;
             dst.Type = D3D12_TEXTURE_COPY_TYPE_SUBRESOURCE_INDEX;
             src.pResource = j->sourceExposure;
             src.Type = D3D12_TEXTURE_COPY_TYPE_SUBRESOURCE_INDEX;
             list->CopyTextureRegion(&dst, 0, 0, 0, &src, nullptr);
-            b[0].Transition.StateBefore = D3D12_RESOURCE_STATE_COPY_SOURCE;
-            b[0].Transition.StateAfter = j->sourceExposureState;
-            b[1].Transition.StateBefore = D3D12_RESOURCE_STATE_COPY_DEST;
-            b[1].Transition.StateAfter = D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE;
-            list->ResourceBarrier(2, b);
+            b[0].Transition.StateBefore = D3D12_RESOURCE_STATE_COPY_DEST;
+            b[0].Transition.StateAfter = D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE;
+            b[1].Transition.StateBefore = D3D12_RESOURCE_STATE_COPY_SOURCE;
+            b[1].Transition.StateAfter = j->sourceExposureState;
+            list->ResourceBarrier(nb, b);
         }
         NativeCodecParameters encParams = NativeGameCodec::LegacyParameters();
         encParams.pre_exposure = j->pre_exposure;
