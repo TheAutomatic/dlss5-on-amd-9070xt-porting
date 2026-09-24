@@ -445,6 +445,30 @@ struct Session
     }
 };
 
+// The codec's colour-input contract, checked here instead of letting the codec throw.
+// A game that simply uses a texture we cannot represent is a per-title limit, not a GPU
+// fault: it must not poison the session (which silently disables NR for the rest of the
+// process). The reason names the property; "codec unverified input format/geometry" alone
+// does not say which one failed.
+const char *ColorInputProblem(const D3D12_RESOURCE_DESC &desc)
+{
+    if (desc.Dimension != D3D12_RESOURCE_DIMENSION_TEXTURE2D)
+        return "not TEXTURE2D";
+    if (!NativeInputGeometry::Supported(desc.Width, desc.Height, NativeFitLargeInput()))
+        return "outside admitted geometry";
+    if (desc.DepthOrArraySize != 1)
+        return "DepthOrArraySize != 1";
+    if (desc.MipLevels != 1)
+        return "MipLevels != 1";
+    if (desc.SampleDesc.Count != 1)
+        return "SampleDesc.Count != 1";
+    if (!(NativeIsGameColor(desc.Format) || desc.Format == DXGI_FORMAT_R9G9B9E5_SHAREDEXP))
+        return "unsupported DXGI format";
+    if (desc.Flags & D3D12_RESOURCE_FLAG_DENY_SHADER_RESOURCE)
+        return "DENY_SHADER_RESOURCE";
+    return nullptr;
+}
+
 void RequireSession(Session *s)
 {
     if (!s)
@@ -750,6 +774,18 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
         const DXGI_FORMAT cfmt = cdesc.Format;
         const UINT cw = static_cast<UINT>(cdesc.Width);
         const UINT ch = cdesc.Height;
+        if (const char *why = ColorInputProblem(cdesc))
+        {
+            char msg[224];
+            std::snprintf(msg, sizeof msg,
+                          "PrepareFrame: colour rejected (%s): fmt=%u %llux%llu arr=%u mips=%u "
+                          "samples=%u flags=0x%x fitLarge=%d",
+                          why, unsigned(cfmt), static_cast<unsigned long long>(cdesc.Width),
+                          static_cast<unsigned long long>(cdesc.Height), unsigned(cdesc.DepthOrArraySize),
+                          unsigned(cdesc.MipLevels), unsigned(cdesc.SampleDesc.Count), unsigned(cdesc.Flags),
+                          NativeFitLargeInput() ? 1 : 0);
+            return Fail(LMXXF_NR_INVALID_ARGUMENT, msg);
+        }
         const bool geoChanged =
             session->encode &&
             (session->job.width != info->color_width || session->job.height != info->color_height ||
@@ -787,6 +823,10 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
                 OutputDebugStringA("\n");
                 SetError(geoMsg);
             }
+            // One warm-up dispatch before recording so lazy weight and module uploads cannot
+            // land inside the producer-wait callback later. Only reached after the colour
+            // contract passed, so a title we cannot serve never pays for it.
+            session->bridge->PrepareStagedKernels();
             NativeGameCodec *enc = nullptr;
             NativeGameRgbInput *rgbIn = nullptr;
             NativeRgbTexture *rgbOut = nullptr;
@@ -794,14 +834,20 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
             ID3D12Resource *disp = nullptr;
             try
             {
+                // RGB9E5 is only accepted when the codec keeps a private FP16 output: that
+                // format cannot be a UAV target and is never written, only read. Driven by the
+                // input format rather than game identity; every other format keeps its existing
+                // output route.
+                const bool privateFloatOutput = (cfmt == DXGI_FORMAT_R9G9B9E5_SHAREDEXP);
                 enc = new NativeGameCodec();
-                enc->Create(session->device, {color}, session->shaderDir);
+                enc->Create(session->device, {color}, session->shaderDir, privateFloatOutput);
                 rgbIn = new NativeGameRgbInput();
                 rgbIn->Create(session->device, enc->Output(), session->shaderDir);
                 rgbOut = new NativeRgbTexture();
                 rgbOut->Create(session->device, session->bridge->Output(), session->shaderDir);
                 dec = new NativeGameCodec();
-                dec->Create(session->device, {enc->Output(), rgbOut->Output(), color}, session->shaderDir);
+                dec->Create(session->device, {enc->Output(), rgbOut->Output(), color}, session->shaderDir,
+                            privateFloatOutput);
                 if (dec->BufferOutput())
                 {
                     D3D12_RESOURCE_DESC td = cdesc;
