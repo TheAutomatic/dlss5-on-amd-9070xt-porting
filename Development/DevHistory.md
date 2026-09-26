@@ -691,3 +691,7 @@ RE9 目录原为 0.29～0.31 同款宿主 0ef10229 + runtime 6e9974d7 + 旧 24 �
 ## 2026-09-27 04:19：pack8 候选装进剑星（待实测）
 
 `deployments/pack8-20260927`：只换双架构 c32-wave1、c64-wave2（装前核对为 0.32 模块，payload 与离线验证候选同 hash）。备份 `D:\DLSSNR-Lab\pack8-20260927\backups\stellar-20260927-041916`，`install.ps1 -RestoreBackup` 还原。add-on/flags 未动。
+
+## 2026-09-27 04:25～04:40：转置布局、持久化——判断为无明显收益，未实现
+
+c64-wave2 已用交换操作数让累加器直接当下一操作数（FFN 展开、V），剩余 LDS 往返全是一 wave 一头下的跨头交换；单核 ISA WMMA 150 / VALU 2933 / ds 70，瓶颈是 VALU。持久化：C256 族 34 派发 1.86ms（1080），PDL 已使其 −0.09ms，额外只剩派发尾部空转，估 ≤0.1ms，成本数小时，暂不做。剩余 VALU 前几位 med3 336、`+0.f` 的 add 336、cvt_pk 240；后续小刀见 `results/transpose-persist-20260927`。
