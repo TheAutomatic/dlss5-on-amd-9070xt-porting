@@ -48,7 +48,13 @@ DEV void w2_bits(i2&a,uint e,uint v){a[e/4]=int(uint(a[e/4])|((v&255u)<<(8*(e%4)
 #define W2_PACK8 0
 #endif
 #if W2_PACK8
+#if W2_PACK8==2
+// +0.f before the clamp: clamp(x+0) == clamp(x)+0 for every x (only -0 changes, to +0; x+0 is never -0 under RNE) and lets
+// a preceding multiply contract into fma(a,b,+0), which rounds exactly like the multiply (results/transpose-persist-20260927).
+DEV float w2_z(float x){return __builtin_fminf(__builtin_fmaxf(x+0.f,-448.f),448.f);}
+#else
 DEV float w2_z(float x){return __builtin_fminf(__builtin_fmaxf(x,-448.f),448.f)+0.f;}
+#endif
 DEV i2 w2_pack8(const float*t){int lo=__builtin_amdgcn_cvt_pk_fp8_f32(w2_z(t[0]),w2_z(t[1]),0,false);lo=__builtin_amdgcn_cvt_pk_fp8_f32(w2_z(t[2]),w2_z(t[3]),lo,true);
  int hi=__builtin_amdgcn_cvt_pk_fp8_f32(w2_z(t[4]),w2_z(t[5]),0,false);hi=__builtin_amdgcn_cvt_pk_fp8_f32(w2_z(t[6]),w2_z(t[7]),hi,true);i2 a;a[0]=lo;a[1]=hi;return a;}
 #define W2_Q8_DECL(A) i2 A;float A##_t[8]

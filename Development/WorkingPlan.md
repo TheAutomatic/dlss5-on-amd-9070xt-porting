@@ -27,8 +27,8 @@
 5. **decoder 投影**（0.34/0.46ms）：加宽 null 的原因是 2×2 上采样尾部串行化；试把上采样写出与矩阵段解耦（尾部独立展开），不改 WMMA 组织。
 6. **ViT QKV 归一化**（0.34/0.54ms）：FP16 WMMA 是原版 float 权重决定的（逐位约束），加宽 null 因 wave 不足；只查归一化段与 wave 数，别动乘法精度。
 7. host 侧 C256 宽权重片段约 −0.03ms（`mhfast-wide-frag-20260923`，见下文后备）。
-7a. **PACK8 进发包**（`results/pack8-20260927`，逐位，全开 ALL = `CW_PACK8`+`W2_PACK8` 整网 900 −8.7%、1080 −9.1%）：下次发包 c32-wave1 配方加 `CW_PACK8 1`、c64-wave2 加 `W2_PACK8 1`；`DF_PACK8`（deep/ViT）逐位但不赚，不进。
-7c. **C64～C256 剩余 VALU**（`results/transpose-persist-20260927`）：转置布局已在用、持久化估 ≤0.1ms 均不做；c64_wave2 VALU 前几位 med3 336、`+0.f` add 336。先试把 `+0.f` 移到 clamp 前让 `a*poly` 合成 fma（构造逐位）；+0 初值累加器输出免 `+0.f` 需先探针穷举。
+7a. **PACK8 进发包**（`results/pack8-20260927`，逐位，全开 ALL = `CW_PACK8`+`W2_PACK8` 整网 900 −8.7%、1080 −9.1%）：下次发包 c32-wave1 配方加 `CW_PACK8 1`、c64-wave2 加 `W2_PACK8 2`（2 = 1 再加 fma 合并，逐位再 −0.6%）；`DF_PACK8`（deep/ViT）逐位但不赚，不进。
+7c. **C64～C256 剩余 VALU**（`results/transpose-persist-20260927`）：转置布局已在用、持久化估 ≤0.1ms 均不做；c64_wave2 VALU 前几位 med3 336、`+0.f` add 336。`+0.f` 移到 clamp 前已做（`W2_PACK8 2`，逐位 −0.6%）；+0 初值累加器输出免 `+0.f` 需先探针穷举。
 7b. **c32-wave1 clamp 改 fmed3**（`HIP_FP8_SAT_MODE 3`，逐位，900/1080 约 −0.03/−0.04ms，`results/fp8-sat-mode-20260927`）：下次重编 c32-wave1 时并入配方；同法看 C64～C256/deep 未折叠 clamp 数。MODE.FP16_OVFL 路线因 f16 溢出语义不逐位，已否决。
 
 **C. 需要 Zero 拍板的**

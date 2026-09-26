@@ -5,7 +5,7 @@
 param([string[]]$Sets=@('A','CW','W2','DF','MF','ALL'),[string[]]$Targets=@('gfx1201'))
 $ErrorActionPreference='Stop';$d=Split-Path -Parent $MyInvocation.MyCommand.Path
 $rtc='D:\DLSSNR-Lab\dual-arch-src\rtc_compile.exe'
-$map=@{A=@();CW=@('CW_PACK8 1');W2=@('W2_PACK8 1');DF=@('DF_PACK8 1');ALL=@('CW_PACK8 1','W2_PACK8 1')}
+$map=@{A=@();CW=@('CW_PACK8 1');W2=@('W2_PACK8 1');DF=@('DF_PACK8 1');ALL=@('CW_PACK8 1','W2_PACK8 1');Z=@('CW_PACK8 1','W2_PACK8 2')}
 foreach($s in $Sets){
  $out="$d\modules-$s";$t=Measure-Command{& "$d\hip\build-modules.ps1" -Compiler $rtc -SourceDir "$d\hip" -OutputDir $out -Targets $Targets -ExtraDefines $(if($map[$s].Count){$map[$s]}else{@("PACK8_NONE 1")})|Out-Null}
  "set $s built in $([int]$t.TotalSeconds)s -> $out"
