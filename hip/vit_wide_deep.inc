@@ -20,7 +20,7 @@ DEV void vit_project_frag_tiles(const float*in,const float*w,const float*skip,fl
   for(uint t=0;t<TM;t++)for(uint j=0;j<TN;j++)if(t<live)for(uint e=0;e<8;e++)a[t][j][e]=H(skip[(first+t*16+gr()*8+e)*OUT+row+j*16+rc()]*w[IN*OUT+row+j*16+rc()]);
   for(uint k=p*(IN/4);k<(p+1)*(IN/4);k+=16){i2 x[TM];
 #pragma unroll
-   for(uint t=0;t<TM;t++){x[t]=i2{};if(t<live)for(uint e=0;e<8;e++)pack(x[t],e,in[(first+t*16+rc())*IN+k+gr()*8+e]);}
+   for(uint t=0;t<TM;t++){x[t]=i2{};if(t<live)DF_PACK8_LOOP(x[t],in[(first+t*16+rc())*IN+k+gr()*8+e]);}
 #pragma unroll
    for(uint j=0;j<TN;j++){uint r0=row+j*16;i2 y;__builtin_memcpy(&y,wf+((r0/16)*(IN/32)+k/32)*512+((((k%32)/16)*2+gr())*16+rc())*8,8);
 #pragma unroll

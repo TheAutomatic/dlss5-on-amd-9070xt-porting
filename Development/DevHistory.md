@@ -683,3 +683,7 @@ RE9 目录原为 0.29～0.31 同款宿主 0ef10229 + runtime 6e9974d7 + 旧 24 �
 探针 `wmma_transpose_probe`：gfx12 fp8/f16 WMMA 交换参数与结果转置 2000 组 × 256 值 0 差异，转置排布逐位可行（难点在复刻 `w2_serial_norm` 等归约顺序）。
 
 我们 `c64_wave2` 静态 ISA：WMMA 150 对 VALU ~3900；每个 E4M3 字节约 6 条 VALU（med3、只用一半的 `cvt_pk_fp8 v,x,x`、移位、and、cmp_neq+cndmask 做 ±0→+0、or）。`W2_PACK8`（`hip/wave_owned_mh.inc`，默认 0）：两值一条 cvt_pk 直写片段字，clamp 后 `+0.f` 代替 ±0 选择（NaN/Inf/下溢 -0 语义不变，放在 clamp 后避免与乘法收缩）。8 个量化点，C256 注意力体从同文件抽取一并生效。静态指令 −25%、VALU −30%，VGPR 不变；默认值 gfx1201/gfx1200 与 0.32 模块代码段相同。7 组 × 12 帧逐位；两批 ABBA 千帧 900 10.693→10.277 / 10.774→10.377，1080 14.995→14.385 / 15.032→14.426（约 −4%）。未装游戏、未发包。下一步：发包时配方加 `W2_PACK8 1`；同法推广 C32/C256 FFN/deep。结果 `results/c64-block-fused-20260927`。
+
+## 2026-09-27 04:10～05:10：pack8——两值一条 cvt_pk 推广到 C32，全开逐位整网 −9%
+
+把 W2_PACK8 的打包法搬到其余逐字节 E4M3 片段（`hip/build-modules.ps1` 加 `-ExtraDefines`，全套 29 模块按生产配方编，A 组与 0.32 装机代码段相同）。`CW_PACK8`（`wave_owned_c32.inc` 10 处片段）：c32-wave1 指令 −5.2%、VALU −7.4%、VGPR 略降；7 用例逐位；900 10.68→10.18、1080 14.98→14.24 ms（约 −5%）。`DF_PACK8`（deep_fast / vit-wide / c512-m32-deep 的 8 处 `pack()` 循环）：逐位但 ISA 只少 0.5～1.7%，计时不赚，默认 0 不采用。multihead_fast_padded 的两处在生产关闭分支里，撤回。全开 ALL = CW + W2（只换 c32-wave1、c64-wave2）：7 用例逐位；两批 ABBA 900 −0.94ms（−8.7%）、1080 −1.37ms（−9.1%）。生产配方未改。详见 `results/pack8-20260927`。

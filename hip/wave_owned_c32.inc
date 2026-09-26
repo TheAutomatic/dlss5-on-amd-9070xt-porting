@@ -21,6 +21,31 @@
 #define CW_VEC_INPUT 0 /* 1: mapped/post input rows read as b128/b64 instead of per-element loads (bit-exact; results/c32-wave-phase-20260926) */
 #endif
 using cw_i16=int __attribute__((ext_vector_type(16)));
+// CW_PACK8 (2026-09-27, results/pack8-20260927): the same bytes as put_bits(a,e,fp8(x)) -- the identical clamp, then
+// v_cvt_pk_fp8_f32 on two values at once written straight into the fragment word instead of one cvt + and/shift/or per byte.
+// fp8() has no -0 select in C32, so nothing else changes.
+#ifndef CW_PACK8
+#define CW_PACK8 0
+#endif
+#if CW_PACK8
+#if HIP_FP8_SAT_MODE==3
+DEV float cw_z(float x){return __builtin_amdgcn_fmed3f(x,-448.f,448.f);}
+#elif HIP_C32_BRANCHLESS_F
+DEV float cw_z(float x){return __builtin_fminf(__builtin_fmaxf(x,-448.f),448.f);}
+#else
+DEV float cw_z(float x){return clampf(x,-448.f,448.f);}
+#endif
+DEV i2 cw_pack8(const float*t){int lo=__builtin_amdgcn_cvt_pk_fp8_f32(cw_z(t[0]),cw_z(t[1]),0,false);lo=__builtin_amdgcn_cvt_pk_fp8_f32(cw_z(t[2]),cw_z(t[3]),lo,true);
+ int hi=__builtin_amdgcn_cvt_pk_fp8_f32(cw_z(t[4]),cw_z(t[5]),0,false);hi=__builtin_amdgcn_cvt_pk_fp8_f32(cw_z(t[6]),cw_z(t[7]),hi,true);i2 a;a[0]=lo;a[1]=hi;return a;}
+#define CW_Q8_DECL(A) i2 A;float A##_t[8]
+#define CW_Q8_SET(A,E,X) A##_t[E]=(X)
+#define CW_Q8_END(A) A=cw_pack8(A##_t)
+#else
+#define CW_Q8_DECL(A) i2 A{}
+#define CW_Q8_SET(A,E,X) put_bits(A,E,fp8(X))
+#define CW_Q8_END(A) (void)0
+#endif
+
 DEV i2 cw_input(const unsigned char*in,uint win,uint qt,uint ci,uint width,uint height,uint sx,uint sy,uint prevw,uint px,uint py,uint r,uint g){
  uint ww=width+2*sx;int x=int((win%(ww/8))*8+(qt*16+r)%8)-int(sx),y=int((win/(ww/8))*8+(qt*16+r)/8)-int(sy);i2 a{};
  if(x>=0&&y>=0&&x<int(width)&&y<int(height)){uint xx=uint(x)+px,yy=uint(y)+py,tile=(yy/8)*(prevw/8)+xx/8,tok=(yy%8)*8+xx%8;__builtin_memcpy(&a,in+(tile*64+tok)*32+ci*16+g*8,8);}return a;
@@ -69,7 +94,7 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
     h8 b{};for(uint e=0;e<8;e++)b[e]=(_Float16)fw[(ci*16+r)*16+g*8+e];
     f8 pre=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(b,a,f8{});h8 zero{};
     pre=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(zero,zero,pre);
-    i2 packed{};for(uint e=0;e<8;e++){float v=Hrtz(pre[e]);put_bits(packed,e,fp8(v));ffn[ci][e]=clampf(v,-448.f,448.f)*fw[8704+ci*16+g*8+e];}input[ci]=packed;
+    CW_Q8_DECL(packed);for(uint e=0;e<8;e++){float v=Hrtz(pre[e]);CW_Q8_SET(packed,e,v);ffn[ci][e]=clampf(v,-448.f,448.f)*fw[8704+ci*16+g*8+e];}CW_Q8_END(packed);input[ci]=packed;
    }
   }
   else{
@@ -90,9 +115,9 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
      }else __builtin_memcpy(src,__builtin_assume_aligned(reinterpret_cast<const float*>(in)+(uint(y)*width+uint(x))*32+c0,32),32);
     }
     float res[8];__builtin_memcpy(res,__builtin_assume_aligned(fw+8704+c0,32),32);
-    i2 a{};for(uint e=0;e<8;e++){float v=src[e];put_bits(a,e,fp8(v));ffn[ci][e]=clampf(float((_Float16)v),-448.f,448.f)*res[e];}input[ci]=a;}
+    CW_Q8_DECL(a);for(uint e=0;e<8;e++){float v=src[e];CW_Q8_SET(a,e,v);ffn[ci][e]=clampf(float((_Float16)v),-448.f,448.f)*res[e];}CW_Q8_END(a);input[ci]=a;}
 #else
-   for(uint ci=0;ci<2;ci++){i2 a{};for(uint e=0;e<8;e++){uint c=ci*16+g*8+e;float v=0.f;if(valid){if constexpr(Post){uint p=uint(y)*width+uint(x),low=(uint(y)/2)*(width/2)+uint(x)/2;float high=__builtin_amdgcn_cvt_f32_fp8(int(skip[p*32+c]),0);v=Hrtz(Hrtz(reinterpret_cast<const float*>(in)[low*32+c]*scales[c])+high*scales[32+c]);}else v=reinterpret_cast<const float*>(in)[(uint(y)*width+uint(x))*32+c];}put_bits(a,e,fp8(v));ffn[ci][e]=clampf(float((_Float16)v),-448.f,448.f)*fw[8704+c];}input[ci]=a;}
+   for(uint ci=0;ci<2;ci++){CW_Q8_DECL(a);for(uint e=0;e<8;e++){uint c=ci*16+g*8+e;float v=0.f;if(valid){if constexpr(Post){uint p=uint(y)*width+uint(x),low=(uint(y)/2)*(width/2)+uint(x)/2;float high=__builtin_amdgcn_cvt_f32_fp8(int(skip[p*32+c]),0);v=Hrtz(Hrtz(reinterpret_cast<const float*>(in)[low*32+c]*scales[c])+high*scales[32+c]);}else v=reinterpret_cast<const float*>(in)[(uint(y)*width+uint(x))*32+c];}CW_Q8_SET(a,e,v);ffn[ci][e]=clampf(float((_Float16)v),-448.f,448.f)*fw[8704+c];}CW_Q8_END(a);input[ci]=a;}
 #endif
   }
   if constexpr(Chain)for(uint part=0;part<3;part++)for(uint ci=0;ci<2;ci++)for(uint kt=0;kt<2;kt++){
@@ -104,10 +129,10 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
 #endif
   for(uint ht=0;ht<8;ht++){
    f8 expanded{};for(uint kt=0;kt<2;kt++){i2 b=matrix8(fw+512,(ht*16+r)*32+kt*16+g*8);expanded=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,input[kt],expanded);}
-   i2 a{};for(uint e=0;e<8;e++){float v=expanded[e],g=clampf(v,-4.f,4.f),q=absf(g)*(-.055908203125f)+.447265625f,p=g*q+.89453125f;put_bits(a,e,fp8(v*p));}
+   CW_Q8_DECL(a);for(uint e=0;e<8;e++){float v=expanded[e],g=clampf(v,-4.f,4.f),q=absf(g)*(-.055908203125f)+.447265625f,p=g*q+.89453125f;CW_Q8_SET(a,e,v*p);}CW_Q8_END(a);
    for(uint ci=0;ci<2;ci++){i2 b=matrix8(fw+4608,(ci*16+r)*128+ht*16+g*8);ffn[ci]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,a,ffn[ci]);}
   }
-  i2 feature[2];for(uint ci=0;ci<2;ci++){i2 a{};for(uint e=0;e<8;e++){float v=Hrtz(ffn[ci][e]);residual[((qt*2+ci)*32+(g*16+r))*8+e]=(_Float16)v;put_bits(a,e,fp8(v));}feature[ci]=a;}
+  i2 feature[2];for(uint ci=0;ci<2;ci++){CW_Q8_DECL(a);for(uint e=0;e<8;e++){float v=Hrtz(ffn[ci][e]);residual[((qt*2+ci)*32+(g*16+r))*8+e]=(_Float16)v;CW_Q8_SET(a,e,v);}CW_Q8_END(a);feature[ci]=a;}
   for(uint part=0;part<3;part++){
    uint qlane=__builtin_amdgcn_workitem_id_x();
 #if CW_QKV_FENCE
@@ -116,7 +141,7 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
    uint qr=qlane&15u,qg=qlane>>4;
    f8 q[2]{};for(uint ci=0;ci<2;ci++)for(uint kt=0;kt<2;kt++){i2 b=matrix8(w,part*1024+(ci*16+qr)*32+kt*16+qg*8);q[ci]=part<2?__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,feature[kt],q[ci]):__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(feature[kt],b,q[ci]);}
    f8 sum{};if(part<2)for(uint ci=0;ci<2;ci++){h8 squares{},ones{};for(uint e=0;e<8;e++){squares[e]=(_Float16)(q[ci][e]*q[ci][e]);ones[e]=(_Float16)1.f;}sum=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(ones,squares,sum);}
-   for(uint ci=0;ci<2;ci++){i2 a{};for(uint e=0;e<8;e++){float v=q[ci][e];if(part<2)v*=__builtin_amdgcn_rsqf(maxf(sum[e],6.198883056640625e-5f))*(part==0?w[8192]:1.f);put_bits(a,e,fp8(v));}
+   for(uint ci=0;ci<2;ci++){CW_Q8_DECL(a);for(uint e=0;e<8;e++){float v=q[ci][e];if(part<2)v*=__builtin_amdgcn_rsqf(maxf(sum[e],6.198883056640625e-5f))*(part==0?w[8192]:1.f);CW_Q8_SET(a,e,v);}CW_Q8_END(a);
     if(part==0){queries[qt*4+ci*2]=a[0];queries[qt*4+ci*2+1]=a[1];}else if(part==1){keys[qt*4+ci*2]=a[0];keys[qt*4+ci*2+1]=a[1];}else{values[qt*4+ci*2]=a[0];values[qt*4+ci*2+1]=a[1];}
    }
 #if CW_QKV_FENCE
@@ -139,11 +164,11 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
   }
   f8 sums{};h8 ones{};for(uint e=0;e<8;e++)ones[e]=(_Float16)1.f;
   _Pragma("unroll 4") for(uint kt=0;kt<4;kt++)sums=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(ones,ex[kt],sums);
-  i2 prob[4];_Pragma("unroll 4") for(uint kt=0;kt<4;kt++){i2 a{};for(uint e=0;e<8;e++)put_bits(a,e,fp8(float(ex[kt][e])*norm_inverse(sums[e])));prob[kt]=a;}
-  i2 av[2];for(uint ci=0;ci<2;ci++){f8 acc{};_Pragma("unroll 4") for(uint kt=0;kt<4;kt++)acc=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12((i2{values[kt*4+ci*2],values[kt*4+ci*2+1]}),prob[kt],acc);i2 a{};for(uint e=0;e<8;e++)put_bits(a,e,fp8(acc[e]));av[ci]=a;}
+  i2 prob[4];_Pragma("unroll 4") for(uint kt=0;kt<4;kt++){CW_Q8_DECL(a);for(uint e=0;e<8;e++)CW_Q8_SET(a,e,float(ex[kt][e])*norm_inverse(sums[e]));CW_Q8_END(a);prob[kt]=a;}
+  i2 av[2];for(uint ci=0;ci<2;ci++){f8 acc{};_Pragma("unroll 4") for(uint kt=0;kt<4;kt++)acc=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12((i2{values[kt*4+ci*2],values[kt*4+ci*2+1]}),prob[kt],acc);CW_Q8_DECL(a);for(uint e=0;e<8;e++)CW_Q8_SET(a,e,acc[e]);CW_Q8_END(a);av[ci]=a;}
   for(uint ci=0;ci<2;ci++){
    f8 acc{};for(uint kt=0;kt<2;kt++){i2 b=matrix8(w,3072+(ci*16+r)*32+kt*16+g*8);acc=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,av[kt],acc);}
-   i2 a{};for(uint e=0;e<8;e++){float res=float(residual[((qt*2+ci)*32+(g*16+r))*8+e]),prod=res*w[8193+ci*16+g*8+e],v=Hrtz(acc[e]+prod);if constexpr(Finish||Post)residual[((qt*2+ci)*32+(g*16+r))*8+e]=(_Float16)v;else put_bits(a,e,fp8(F(float((_Float16)v))));}
+   CW_Q8_DECL(a);for(uint e=0;e<8;e++){float res=float(residual[((qt*2+ci)*32+(g*16+r))*8+e]),prod=res*w[8193+ci*16+g*8+e],v=Hrtz(acc[e]+prod);if constexpr(Finish||Post)residual[((qt*2+ci)*32+(g*16+r))*8+e]=(_Float16)v;else CW_Q8_SET(a,e,F(float((_Float16)v)));}if constexpr(!Finish&&!Post)CW_Q8_END(a);
    if constexpr(!Finish&&!Post)__builtin_memcpy(out+(win*64+qt*16+r)*32+ci*16+g*8,&a,8);
   }
   __builtin_amdgcn_sched_barrier(0);
