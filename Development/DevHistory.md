@@ -687,3 +687,7 @@ RE9 目录原为 0.29～0.31 同款宿主 0ef10229 + runtime 6e9974d7 + 旧 24 �
 ## 2026-09-27 04:10～05:10：pack8——两值一条 cvt_pk 推广到 C32，全开逐位整网 −9%
 
 把 W2_PACK8 的打包法搬到其余逐字节 E4M3 片段（`hip/build-modules.ps1` 加 `-ExtraDefines`，全套 29 模块按生产配方编，A 组与 0.32 装机代码段相同）。`CW_PACK8`（`wave_owned_c32.inc` 10 处片段）：c32-wave1 指令 −5.2%、VALU −7.4%、VGPR 略降；7 用例逐位；900 10.68→10.18、1080 14.98→14.24 ms（约 −5%）。`DF_PACK8`（deep_fast / vit-wide / c512-m32-deep 的 8 处 `pack()` 循环）：逐位但 ISA 只少 0.5～1.7%，计时不赚，默认 0 不采用。multihead_fast_padded 的两处在生产关闭分支里，撤回。全开 ALL = CW + W2（只换 c32-wave1、c64-wave2）：7 用例逐位；两批 ABBA 900 −0.94ms（−8.7%）、1080 −1.37ms（−9.1%）。生产配方未改。详见 `results/pack8-20260927`。
+
+## 2026-09-27 04:19：pack8 候选装进剑星（待实测）
+
+`deployments/pack8-20260927`：只换双架构 c32-wave1、c64-wave2（装前核对为 0.32 模块，payload 与离线验证候选同 hash）。备份 `D:\DLSSNR-Lab\pack8-20260927\backups\stellar-20260927-041916`，`install.ps1 -RestoreBackup` 还原。add-on/flags 未动。
