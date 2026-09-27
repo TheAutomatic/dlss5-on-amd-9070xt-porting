@@ -59,6 +59,15 @@ DEV float cw_output_value(float v){
 #ifndef CW_PREFIX_FULL_TILE
 #define CW_PREFIX_FULL_TILE 0 /* prefix only: host emits complete 8x8 tiles, sx=sy=0, so its per-pixel bounds tests are redundant */
 #endif
+#ifndef CW_POST_HEAD_VEC
+#define CW_POST_HEAD_VEC 0 /* RGB head: read each contiguous eight-half group together, retain channel reduction order */
+#endif
+#ifndef CW_POST_FULL_TILE
+#define CW_POST_FULL_TILE 0 /* specialize interior RGB output windows once per wave */
+#endif
+#ifndef CW_FINISH_FULL_TILE
+#define CW_FINISH_FULL_TILE 0 /* specialize interior main/down output windows once per wave */
+#endif
 DEV uint cw_prefix_byte(float v){
 #if CW_PREFIX_DIRECT_OUT
  return fp8(v+0.f);
@@ -66,6 +75,8 @@ DEV uint cw_prefix_byte(float v){
  return fp8(F(v));
 #endif
 }
+struct cw_true {constexpr operator bool()const{return true;}};
+struct cw_false {constexpr operator bool()const{return false;}};
 using cw_i16=int __attribute__((ext_vector_type(16)));
 // CW_PACK8 (2026-09-27, results/pack8-20260927): the same bytes as put_bits(a,e,fp8(x)) -- the identical clamp, then
 // v_cvt_pk_fp8_f32 on two values at once written straight into the fragment word instead of one cvt + and/shift/or per byte.
@@ -274,6 +285,30 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
   __builtin_amdgcn_sched_barrier(0);
  }
 
+#if CW_POST_HEAD_VEC || CW_POST_FULL_TILE
+ if constexpr(Post){
+  WG_FENCE(3);WG_FENCE(2);
+  uint lane=__builtin_amdgcn_workitem_id_x(),ww=width+2*sx,tx=(win%(ww/8))*8,ty=(win/(ww/8))*8;
+  auto emit=[&](auto full){
+  for(uint t=lane;t<64;t+=32){int x=int(tx+t%8)-int(sx),y=int(ty+t/8)-int(sy);if(full||(x>=0&&y>=0&&x<int(width)&&y<int(height))){
+   uint p=uint(y)*width+uint(x);float sums[3]{};
+#if CW_POST_HEAD_VEC
+   for(uint cg=0;cg<4;cg++){h8 fs;float hr[8],hg[8],hb[8];uint c=cg*8;
+    __builtin_memcpy(&fs,residual+((t/16*2+c/16)*32+(c%16/8*16+t%16))*8,16);
+    __builtin_memcpy(hr,headw+c,32);__builtin_memcpy(hg,headw+32+c,32);__builtin_memcpy(hb,headw+64+c,32);
+    for(uint e=0;e<8;e++){float f=float(fs[e]);sums[0]+=f*hr[e];sums[1]+=f*hg[e];sums[2]+=f*hb[e];}}
+#else
+   for(uint c=0;c<32;c++){float f=float(residual[((t/16*2+c/16)*32+(c%16/8*16+t%16))*8+c%8]);sums[0]+=f*headw[c];sums[1]+=f*headw[32+c];sums[2]+=f*headw[64+c];}
+#endif
+   for(uint c=0;c<3;c++){float acc=Hrtz(sums[c]),centered=color[p*4+c]*.125f-.0625f,v=(acc*rgbscale+centered)*8.f+.5f;rgb[p*3+c]=cw_clampf(v,0.f,1.f);}
+  }}};
+#if CW_POST_FULL_TILE
+  if(tx>=sx&&ty>=sy&&tx+8<=width+sx&&ty+8<=height+sy)emit(cw_true{});else emit(cw_false{});
+#else
+  emit(cw_false{});
+#endif
+ }
+#else
  if constexpr(Post){
   WG_FENCE(3);WG_FENCE(2);
   uint lane=__builtin_amdgcn_workitem_id_x(),ww=width+2*sx,tx=(win%(ww/8))*8,ty=(win/(ww/8))*8;
@@ -283,6 +318,35 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
    for(uint c=0;c<3;c++){float acc=Hrtz(sums[c]),centered=color[p*4+c]*.125f-.0625f,v=(acc*rgbscale+centered)*8.f+.5f;rgb[p*3+c]=cw_clampf(v,0.f,1.f);}
   }}
  }
+#endif
+ if constexpr(CW_FINISH_FULL_TILE&&!Prefix){
+ if constexpr(Finish){
+  WG_FENCE(3);WG_FENCE(2);
+  uint c=__builtin_amdgcn_workitem_id_x(),ww=width+2*sx,tx=(win%(ww/8))*8,ty=(win/(ww/8))*8;
+  auto load=[&](uint t)->float{return float(residual[((t/16*2+c/16)*32+(c%16/8*16+t%16))*8+c%8]);};
+#if CW_TAIL_QUAD
+  auto put_main=[&](uint t,float raw_v){int x=int(tx+t%8)-int(sx),y=int(ty+t/8)-int(sy);if(x>=0&&y>=0&&x<int(width)&&y<int(height)){uint dest=(uint(y)*width+uint(x))*32+c;float v=F(raw_v);
+   if constexpr(Prefix)*reinterpret_cast<unsigned char*>(reinterpret_cast<char*>(main)+dest)=static_cast<unsigned char>(fp8(v));else *reinterpret_cast<float*>(reinterpret_cast<char*>(main)+dest*4u)=v;}};
+  for(uint k=0;k<16;k++){uint t=(k/4)*16+(k%4)*2;float a0=load(t),a1=load(t+1),b0=load(t+8),b1=load(t+9);
+   if(main){put_main(t,a0);put_main(t+1,a1);put_main(t+8,b0);put_main(t+9,b1);}
+   if(down){float top=Hrtz(a0+a1),bottom=Hrtz(b0+b1);uint x=tx+t%8,y=ty+t/8;
+    if constexpr(DownCrop){int cx=int(x/2)-int(sx/2),cy=int(y/2)-int(sy/2);if(cx>=0&&cy>=0&&cx<int(width/2)&&cy<int(height/2))*reinterpret_cast<float*>(reinterpret_cast<char*>(down)+((uint(cy)*(width/2)+uint(cx))*32+c)*4u)=F(Hrtz(Hrtz(top+bottom)*.25f));}
+    else *reinterpret_cast<float*>(reinterpret_cast<char*>(down)+(((y/2)*(ww/2)+x/2)*32+c)*4u)=F(Hrtz(Hrtz(top+bottom)*.25f));}
+  }
+  // The quad route above emits both outputs.
+#endif
+  auto emit=[&](auto full){if(main)for(uint t=0;t<64;t++){int x=int(tx+t%8)-int(sx),y=int(ty+t/8)-int(sy);if(full||(Prefix&&CW_PREFIX_FULL_TILE)||(x>=0&&y>=0&&x<int(width)&&y<int(height))){uint dest=(uint(y)*width+uint(x))*32+c;float v=load(t);if constexpr(Prefix)reinterpret_cast<unsigned char*>(main)[dest]=static_cast<unsigned char>(cw_prefix_byte(v));else main[dest]=F(v);}}
+  if(!CW_TAIL_QUAD&&down)for(uint k=0;k<16;k++){uint t=(k/4)*16+(k%4)*2;float top=Hrtz(load(t)+load(t+1)),bottom=Hrtz(load(t+8)+load(t+9));uint x=tx+t%8,y=ty+t/8;
+   if constexpr(DownCrop){int cx=int(x/2)-int(sx/2),cy=int(y/2)-int(sy/2);if(full||(cx>=0&&cy>=0&&cx<int(width/2)&&cy<int(height/2)))down[(uint(cy)*(width/2)+uint(cx))*32+c]=F(Hrtz(Hrtz(top+bottom)*.25f));}
+   else down[((y/2)*(ww/2)+x/2)*32+c]=F(Hrtz(Hrtz(top+bottom)*.25f));
+  }
+  };
+#if !CW_TAIL_QUAD
+  // DownCrop uses sx/2,sy/2; the production shifts are even. Keep the generic edge path for odd shifts.
+  if(tx>=sx&&ty>=sy&&tx+8<=width+sx&&ty+8<=height+sy&&(!DownCrop||((sx|sy)&1u)==0))emit(cw_true{});else emit(cw_false{});
+#endif
+ }
+ }else{
  if constexpr(Finish){
   WG_FENCE(3);WG_FENCE(2);
   uint c=__builtin_amdgcn_workitem_id_x(),ww=width+2*sx,tx=(win%(ww/8))*8,ty=(win/(ww/8))*8;
@@ -303,6 +367,7 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
    if constexpr(DownCrop){int cx=int(x/2)-int(sx/2),cy=int(y/2)-int(sy/2);if(cx>=0&&cy>=0&&cx<int(width/2)&&cy<int(height/2))down[(uint(cy)*(width/2)+uint(cx))*32+c]=F(Hrtz(Hrtz(top+bottom)*.25f));}
    else down[((y/2)*(ww/2)+x/2)*32+c]=F(Hrtz(Hrtz(top+bottom)*.25f));
   }
+ }
  }
 }
 #define CW_ENTRY KERNEL __attribute__((amdgpu_flat_work_group_size(32,32)))
