@@ -872,3 +872,10 @@ R（mix RTZ+FP8配对）：普通向量1871→1657，VMEM/WMMA不变，VGPR96→
 ## 2026-09-28 07:05：帧时间分布日志 DLSS5_FRAME_STATS（分身）
 
 `src/native_frame_stats.h` + add-on（pre-upscale 每次超分记一帧，原因 run/bypass/init/error/unsupported/idle）+ RE9 runtime（EnqueueHip 记 run/error）；共用解析 `NativeFrameStatsSeconds`，三模板加 `DLSS5_FRAME_STATS=0`，CONFIGURATION.md 一行。关时每帧一次比较；开时每帧一次 QPC + 固定 0.25 ms 直方图，窗口末写一行。rt_bench 1080 600 帧 ABBA：开/关/0.35 runtime 差在噪声内（12.59～12.73 ms），hash 全同。剑星换 add-on c38bcdd4 + `DLSS5_FRAME_STATS=5`（备份 `D:\DLSSNR-Lab\frame-stats-20260928\backups\stellar-20260928-070548`）。结果 `results/frame-stats-20260928`。
+
+## 2026-09-28 07:16：帧时间日志首次实测（剑星 1080P 原生 AA）
+
+add-on c38bcdd4 + `DLSS5_FRAME_STATS=5`（`results/frame-stats-20260928`）。
+- 跑图（EXACT）：平均 17.9ms（55.8fps）、p50 18.0；多数 5 秒窗口 p99/max 28～32ms（约 1% 帧接近两帧时长），1% low 31～35fps；少数窗口干净（p99 19）。
+- **站立不动（EXACT）**：平均 17.9ms、p50 18.0、**p99 18.5、max 18.5**，1% low 54.1fps；两分钟内仅 2 帧约 30ms。AE 静止复用时 16.66ms（贴 60）。
+- 两种情况 NR 都是每帧执行（run=frames，bypass/error=0）。结论：跑图时的 1% 顿挫来自游戏跑动（流式加载等），不是网络；我们的帧时间抖动在 ±0.5ms 内。进图前 20 秒的秒级停顿是加载。
