@@ -55,6 +55,14 @@ DEV void w2_bits(i2&a,uint e,uint v){a[e/4]=int(uint(a[e/4])|((v&255u)<<(8*(e%4)
 // +-Inf/NaN inputs (E4M3 NaN byte instead of +-448/-448).
 DEV float w2_z(float x){return x+0.f;}
 #define W2_OVFL(v) __builtin_amdgcn_s_setreg(1|(23<<6),(v))
+#elif W2_PACK8==5
+// 5 = census probe, never production: as 3, but any input that is non-finite (W2_CENSUS_T 0) or has |x| > W2_CENSUS_T
+// becomes 123.0 (E4M3 0x5F rounds it to 120). A set that stays bit-identical to 3 on the regression corpus proves no such
+// input reached a C64-C256 pack there (results/ovfl-census-20260927).
+#ifndef W2_CENSUS_T
+#define W2_CENSUS_T 0
+#endif
+DEV float w2_z(float x){bool hit=W2_CENSUS_T?!(__builtin_fabsf(x)<=float(W2_CENSUS_T)):!__builtin_isfinite(x);return hit?123.f:__builtin_amdgcn_fmed3f(x+0.f,-448.f,448.f);}
 #elif W2_PACK8==3
 // 3 = 2 with the clamp as one v_med3_f32 (__builtin_amdgcn_fmed3f) instead of fminf/fmaxf, which the compiler lowers with an
 // extra v_max_num(x,x) canonicalisation; same byte for every input, NaN -> -448 (probe in experiments/fp8-sat-mode).

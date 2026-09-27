@@ -730,3 +730,10 @@ ACO 对照（`results/aco-isa-20260927`）指向 E4M3 转换前的 `v_max_num x,
 ## 2026-09-27 12:39：fmed3 配方（M）剑星实测
 
 剑星整套 29 模块换成 M（`deployments/fmed3-20260927`）。Zero：1080P 窗口 + FSR 原生 AA（EXACT）主菜单 **50～51**、简单场景 **54～55**；0.33 为 49～50 / 53～54，各 +1 帧（离线 −0.5%，读数接近分辨率下限，结论＝方向一致、无回退）。
+
+## 2026-09-27 13:20：ACO 后续——OVFL census、成对解包、DF_PACK8（`results/ovfl-census-20260927`）
+
+- 分段 FP16_OVFL：探针 W2_PACK8 5（非有限或 |x|>T 改写成 123）对 M 逐位——非有限、|x|>448 两档 7 用例全同，T=1 阳性对照立刻不同：语料里 C64～C256 打包输入全部有限且在 ±448 内（clamp 从未起作用，距 f16 溢出 ≥146 倍）。理论：输入均为有限 E4M3/f16 操作数的 f32 累加、RTZ f16、守护 rsq、Σexp≥1；唯一 Inf 来源是链头 RNE f16 溢出，未观测到。P（= M + W2_PACK8 4，与 O 代码段 29/29 同）两批 ABBA：900 −0.051/−0.048、1080 −0.086/−0.088 ms。只换 c64-wave2 装剑星（备份 `D:\DLSSNR-Lab\ovfl-20260927\backups\stellar-20260927-131752`），未进配方。
+- `v_cvt_pk_f32_fp8` 在 gfx1201 返回 (byte0,byte0)/(byte2,byte2)（asm 与 builtin 同），成对解包不可用；ACO 在 fswin64 用了 64 次，值得告诉 mochizuki。
+- v_pk_f16：站点是 Hrtz（RTZ）往返，pk f16 按 MODE 取 RNE，不做。DF_PACK8：多数站点在生产不走的分支，活的 `vit_project_frag_n64` 访存受限（VMEM 164 / WMMA 64）。
+- `hip/build-modules.ps1`：-ExtraDefines 同名宏覆盖配方值（默认编译不变）。
