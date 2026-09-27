@@ -1,5 +1,8 @@
 OptiScaler-REFramework-DLSS5-AMD @VERSION@ — special RE9 pre-SR full package
 
+0.35 update
+Same new kernels as the regular package (three C32 rounds + ViT byte stream); the runtime honours DLSS5_HIP_VIT_STREAM (template default 3, falls back when the module is missing). Host unchanged.
+
 0.34 update
 1. The host follows the queue that actually executes the split command list (a swap-chain rebuild that moves submission to another queue no longer stops NR until restart); a job not retired after 8 evaluations is dropped. Onimusha: Way of the Sword (Xbox) tested: medium settings, 2K Quality about 60 fps (visible in gameplay; title/main-menu backgrounds do not pass through the upscaler).
 2. Runtime: the residual VRAM growth per resolution/preset switch is gone (about 35 MB -> 0); geometry and kernel switches are logged to OptiScaler.log on every size/tier change.

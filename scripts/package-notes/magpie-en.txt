@@ -1,5 +1,11 @@
 Magpie-DLSS5-AMD @VERSION@ — full portable package
 
+0.35
+1. Three bit-exact C32 rounds (Yami): duplicate FP8 round trips removed, RTZ and LDS stores vectorized, per-segment saturation mode in the packing sections, full-window fast paths in prefix/finish.
+2. ViT byte stream (DLSS5_HIP_VIT_STREAM=3, new vit-stream module): the attention AV result goes to the projection as bytes and the contract step uses the half interface; compatible with adaptive reuse. 1080 tier about -1.3%.
+Network offline 900 tier about 9.3 ms, 1080 tier about 12.75 ms (0.34: 9.6 / 13.4). Stellar Blade 1080p native AA, EXACT common scenes 54 -> about 56.7.
+0.34 -> 0.35 kernel output is bit-identical.
+
 0.34
 1. Fewer plain ALU instructions (bit-identical): clamps before FP8 conversion as a single med3/fmed3 without the compiler's canonicalize; the C64-C256 packing sections switch saturation mode per segment and fold the product and the -0 -> +0 into one fma. Network offline 900 tier 9.80 -> about 9.6 ms, 1080 tier 13.64 -> about 13.4 ms; Stellar Blade 1080p native AA, EXACT: main menu 50-51, common scenes 54.
 2. The PDL tile-flag counter could wrap after a long session and release a consumer early; fixed. PDL buffers are freed on exit.
