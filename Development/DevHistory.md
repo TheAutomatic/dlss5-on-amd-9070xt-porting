@@ -760,3 +760,7 @@ RE9 残余显存：`NativeTrackedResources` 对大 RGB 输入缓冲 AddRef 后�
 ## 2026-09-27 16:16：HEAD add-on 86ef4182 + c64-wave2（W2_PACK8 6）剑星实测
 
 剑星换 add-on 86ef4182（HEAD b112239：含闇的 PDL 回绕修复与析构释放）+ 按配方编的 c64-wave2（W2_PACK8 6，gfx1201 c6a462d0 / gfx1200 17807f69），PDL=1；备份 `D:\DLSSNR-Lab\build-0927\backup-stellar-20260927-154942`。Zero：1080P 中画质原生 AA，EXACT 普通场景 54、主菜单 50～51；AE 普通场景 58、主菜单 53～54。与 P 同，无回退——W2_PACK8 6 与 HEAD add-on 游戏内验收通过。
+
+## 2026-09-27 16:25：RE9 装 0.34 候选（宿主 aa3761f2 + runtime ca6d6bdc + 剑星同款模块）
+
+备份 `D:\DLSSNR-Lab\build-0927\backup-re9-20260927-161816`。Zero（中画质）：2K 高质量 **58**、2K 原生 AA **41**（此前 0.31 模块 + 0.32 runtime 为 54 / 38）。日志：`net=1600x900 color_job=1712x960 modules_ok=58 wave_owned=1/1 c512_m32=1/1`。F8 无反应属预期（RE9 runtime 无自适应复用，模板 VIT_ADAPTIVE=0）。未在同一局内切档，几何日志随切档打印与切档 0 MiB 尚未游戏内验证。
