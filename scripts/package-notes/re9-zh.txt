@@ -1,5 +1,9 @@
 OptiScaler-REFramework-DLSS5-AMD @VERSION@ — RE9特殊前置完整包
 
+0.33 更新
+1. FP8打包提速：C32与C64～C256核把两个值用一条转换指令直接写进矩阵片段，省掉逐字节拼装（逐位相同）。离线整网900档10.74→9.80ms、1080档15.01→13.64ms（约−9%）；《剑星》1080P原生AA、EXACT：主菜单47～48→49～50，常见场景51～52→53～54。
+（runtime与宿主沿用0.32，只换新核模块。）
+
 0.32 更新（可配置）
 runtime 现在从 DLSS5-AMD\native-game-flags.txt 读取以下键（其余键仍只属于常规包，对本 runtime 无效）：
 - DLSS5_HIP_*：内核开关，与常规包同名同含义。新核默认开：DLSS5_HIP_WAVE_OWNED=1（一头一 wave）、DLSS5_HIP_C512_M32=1、DLSS5_HIP_VIT_PROJ_N64=1、DLSS5_HIP_PDL=1；设 0 回到 0.30 的核。所需模块缺失时自动关掉该组，不影响 NR 运行。

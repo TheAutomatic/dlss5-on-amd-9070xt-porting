@@ -1,5 +1,10 @@
 OptiScaler-DLSS5-AMD @VERSION@ — standard full game package
 
+0.33
+1. FP8 packing: the C32 and C64-C256 kernels convert two values per instruction straight into the matrix fragment instead of assembling bytes (bit-identical). Network offline 900 tier 10.74 -> 9.80 ms, 1080 tier 15.01 -> 13.64 ms (about -9%); Stellar Blade 1080p native AA, EXACT: main menu 47-48 -> 49-50, common scenes 51-52 -> 53-54.
+2. The status line ends with AE/EXACT (visible when F8 toggles; it used to sit on the hidden FPS line); F7 hides/shows the on-screen text.
+0.32 -> 0.33 kernel output is bit-identical.
+
 0.32
 1. Switching resolution or DLSS preset no longer leaks VRAM: the AMD HIP driver never returns imported shared buffers, so each switch used to lose 70-90 MB (several GB after dozens of switches); buffers are now reused per network tier, capped around 200 MB.
 2. C32 input reads as whole-line vector loads (bit-identical, about -0.9%).
@@ -13,7 +18,7 @@ Set any of the three flags to 0 to return to the 0.30 path. 0.30 -> 0.31 kernel 
 Measured (RX 9070 XT, over Splashtop, Stellar Blade main menu): 2K quality 57 fps (simple scene hits a 60 cap), 2K Native AA 43-44.
 The regular OptiScaler framework retains the 0.27 baseline; this is not the RE9 host.
 
-Exit the game, back up existing mod files, and extract ALL files beside the actual game executable (often Binaries/Win64). Select DLSS input in the game; OptiScaler routes it to FSR. Supported integration is low-resolution rendering → DLSS5 → FSR → display. Neural input is no longer size-limited: tiers are 720/900/1080 and an input at most 10% beyond a tier is fitted down into it; above 1080p it is fitted onto the 1080 tier and restored (DLSS5_FIT_LARGE=1). F6 toggles NR; Insert opens OptiScaler; Home opens ReShade.
+Exit the game, back up existing mod files, and extract ALL files beside the actual game executable (often Binaries/Win64). Select DLSS input in the game; OptiScaler routes it to FSR. Supported integration is low-resolution rendering → DLSS5 → FSR → display. Neural input is no longer size-limited: tiers are 720/900/1080 and an input at most 10% beyond a tier is fitted down into it; above 1080p it is fitted onto the 1080 tier and restored (DLSS5_FIT_LARGE=1). F6 toggles NR; F7 hides/shows the on-screen text; F8 toggles reuse/full compute; Insert opens OptiScaler; Home opens ReShade.
 
 DLSS5-AMD/native-game-flags.txt uses the repository standard template and NETWORK_HEIGHT=auto. Existing block skips remain; adaptive reuse is on (F8 switches reuse/full; set DLSS5_VIT_ADAPTIVE=0 to disable). DLSS5_SHOW_FPS and DLSS5_NOTICE control the corresponding information.
 

@@ -1,5 +1,9 @@
 OptiScaler-REFramework-DLSS5-AMD @VERSION@ — special RE9 pre-SR full package
 
+0.33 update
+1. FP8 packing: the C32 and C64-C256 kernels convert two values per instruction straight into the matrix fragment instead of assembling bytes (bit-identical). Network offline 900 tier 10.74 -> 9.80 ms, 1080 tier 15.01 -> 13.64 ms (about -9%); Stellar Blade 1080p native AA, EXACT: main menu 47-48 -> 49-50, common scenes 51-52 -> 53-54.
+(Runtime and host unchanged from 0.32; only the kernel modules are new.)
+
 0.32 update (configurable)
 The runtime now reads these keys from DLSS5-AMD\native-game-flags.txt (other keys still belong to the regular package and have no effect here):
 - DLSS5_HIP_*: kernel switches, same names and meaning as the regular package. New kernels on by default: DLSS5_HIP_WAVE_OWNED=1 (one head per wave), DLSS5_HIP_C512_M32=1, DLSS5_HIP_VIT_PROJ_N64=1, DLSS5_HIP_PDL=1; 0 returns to the 0.30 kernels. A group whose modules are missing switches itself off; NR keeps running.
