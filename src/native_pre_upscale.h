@@ -5,7 +5,6 @@
 #include <cmath>
 #include <deque>
 #include <atomic>
-#include "native_frame_stats.h"
 
 // EXPERIMENT ONLY: the captured list must contain no consumers of the FFX output
 // after the dispatch site. This is the Stellar Blade submission contract, not a
@@ -25,7 +24,7 @@ inline int Mode(){
 }
 inline bool Enabled(){return Mode()!=0;}
 inline bool FitLargeFromFile(){static const bool v=[]{unsigned x=0;if(FILE*f=_wfopen(NativeLabPath(L"native-game-flags.txt").c_str(),L"rb")){char line[256];while(fgets(line,sizeof line,f))sscanf(line,"DLSS5_FIT_LARGE=%u",&x);fclose(f);}return x==1;}();return v;}
-struct DisplaySettings {unsigned notice=2;unsigned fps=0;unsigned frame_stats=0;};
+struct DisplaySettings {unsigned notice=2;unsigned fps=0;};
 inline const DisplaySettings&Display(){
  // Read before the background initializer applies flags to the environment.
  static const DisplaySettings settings=[](){DisplaySettings v;
@@ -33,7 +32,6 @@ inline const DisplaySettings&Display(){
    char line[256];while(fgets(line,sizeof line,f)){unsigned n;
     if(sscanf(line,"DLSS5_NOTICE=%u",&n)==1)v.notice=n;
     if(sscanf(line,"DLSS5_SHOW_FPS=%u",&n)==1)v.fps=n;
-    if(!strncmp(line,"DLSS5_FRAME_STATS=",18)){try{v.frame_stats=NativeFrameStatsSeconds(line+18);}catch(...){v.frame_stats=0;}}
    }fclose(f);
   }return v;
  }();return settings;
@@ -162,10 +160,6 @@ inline void DumpDebug(ID3D12Device*d){
   if(FILE*f=_wfopen(NativeLabPath(L"logs\\native-pre-debug.txt").c_str(),L"ab")){for(UINT64 i=n>80?n-80:0;i<n;i++){SIZE_T len=0;q->GetMessage(i,nullptr,&len);std::vector<char>b(len);auto*m=reinterpret_cast<D3D12_MESSAGE*>(b.data());if(len&&SUCCEEDED(q->GetMessage(i,m,&len)))fprintf(f,"[%u/%u] %s\n",unsigned(m->Severity),unsigned(m->ID),m->pDescription?m->pDescription:"");}fclose(f);}q->Release();}
 #endif
 }
-inline NativeFrameStats&FrameStats(){ // configured once from the flags file (Display()); off costs one compare per frame
- static NativeFrameStats*st=[](){auto*x=new NativeFrameStats;if(Display().frame_stats){CreateDirectoryW(NativeLabPath(L"logs").c_str(),nullptr);x->Configure(Display().frame_stats,NativeLabPath(L"logs\\frame-stats.txt"));}return x;}();
- return *st;
-}
 inline bool Process(ID3D12CommandQueue*q,Job&j){
  auto*&s=State();auto d=j.desc;bool processed=false;uint32_t result=~0u;
  try{
@@ -206,7 +200,6 @@ inline bool Process(ID3D12CommandQueue*q,Job&j){
    }
   }
   if(Mode()==1&&!supported&&j.frame%100==0)Log(j.frame,d,"unsupported low-res input: FFX only");
-  if(FrameStats().On())FrameStats().Frame(processed?NFS_RUN:Mode()!=1?NFS_IDLE:neural_oneshot.Bypassed()?NFS_BYPASS:!supported?NFS_UNSUPPORTED:neural_oneshot.Phase()==5?NFS_ERROR:neural_oneshot.Phase()<4?NFS_INIT:NFS_IDLE);
   s->submit.Submit([&](ID3D12GraphicsCommandList*c){
    for(unsigned i=0;i<7;i++)if(j.desc.resources[i].resource){bool duplicate=false;for(unsigned k=0;k<i;k++)duplicate|=j.desc.resources[k].resource==j.desc.resources[i].resource;if(!duplicate)Transition(c,static_cast<ID3D12Resource*>(j.desc.resources[i].resource),j.states[i],replay_states[i]);}
    d.command_list=c;Guard guard;if(j.frame<5)Log(j.frame,d,"before original FFX replay");
@@ -231,7 +224,7 @@ inline bool Process(ID3D12CommandQueue*q,Job&j){
   s->cpu_ms+=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-started).count();
   if(++s->cpu_frames%100==0){if(FILE*f=_wfopen(NativeLabPath(L"logs\\native-pre-upscale.txt").c_str(),L"ab")){fprintf(f,"pid=%lu frame=%u async=%u submit_cpu_ms=%.3f retained=%zu\n",GetCurrentProcessId(),j.frame,unsigned(s->submit.Deferred()),s->cpu_ms/100,s->retired.size());fclose(f);}s->cpu_ms=0;}
   if(result)throw std::runtime_error("FFX replay returned error");return true;
- }catch(const std::exception&e){if(FrameStats().On())FrameStats().Frame(NFS_ERROR);PrivateBarrierResource()=nullptr;Fatal().store(true);if(s){s->failed=true;DumpDebug(s->submit.Device());}Log(j.frame,d,e.what(),processed,result);return false;}
+ }catch(const std::exception&e){PrivateBarrierResource()=nullptr;Fatal().store(true);if(s){s->failed=true;DumpDebug(s->submit.Device());}Log(j.frame,d,e.what(),processed,result);return false;}
 }
 inline bool Execute(ID3D12CommandQueue*q,UINT count,ID3D12CommandList*const*lists,ExecuteLists real_execute){
  if(!HasPendingJobs()||Replaying()||!q||!lists||!real_execute||q->GetDesc().Type!=D3D12_COMMAND_LIST_TYPE_DIRECT)return false;

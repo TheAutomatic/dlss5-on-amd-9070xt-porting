@@ -1,7 +1,5 @@
 # 给闇：对照 mochizuki 0.0.2.2 找下一批提速（2026-09-28 07:00，朱雀）
 
-> **暂缓（09-28 07:00 Zero 定）：等帧时间日志分身交活、9070 空出来后再转给闇。9070 同一时间只给一个执行者跑 GPU 测试，否则 ABBA 计时互相干扰。**
-
 C512 第一轮收到（`results/c512-round1-20260927`，无稳定候选、未合入；结论"C512 不是并行度不足"很有用）。先 `git pull`。另一个分身同时在改 `src/`（帧时间分布日志），你只动 `hip/` 与 `Development/HIP/hip_reference_network.h` 的内核分派，别碰 `src/`；push 前 pull --rebase。
 
 ## mochizuki 0.0.2.2（今天凌晨，commit 228d3a6）
