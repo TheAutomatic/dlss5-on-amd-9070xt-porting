@@ -1,5 +1,10 @@
 OptiScaler-DLSS5-AMD @VERSION@ — standard full game package
 
+0.34
+1. Fewer plain ALU instructions (bit-identical): clamps before FP8 conversion as a single med3/fmed3 without the compiler's canonicalize; the C64-C256 packing sections switch saturation mode per segment and fold the product and the -0 -> +0 into one fma. Network offline 900 tier 9.80 -> about 9.6 ms, 1080 tier 13.64 -> about 13.4 ms; Stellar Blade 1080p native AA, EXACT: main menu 50-51, common scenes 54.
+2. The PDL tile-flag counter could wrap after a long session and release a consumer early; fixed. PDL buffers are freed on exit.
+0.33 -> 0.34 kernel output is bit-identical.
+
 0.33
 1. FP8 packing: the C32 and C64-C256 kernels convert two values per instruction straight into the matrix fragment instead of assembling bytes (bit-identical). Network offline 900 tier 10.74 -> 9.80 ms, 1080 tier 15.01 -> 13.64 ms (about -9%); Stellar Blade 1080p native AA, EXACT: main menu 47-48 -> 49-50, common scenes 51-52 -> 53-54.
 2. The status line ends with AE/EXACT (visible when F8 toggles; it used to sit on the hidden FPS line); F7 hides/shows the on-screen text.
