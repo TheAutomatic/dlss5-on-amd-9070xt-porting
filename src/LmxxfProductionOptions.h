@@ -67,7 +67,7 @@ inline hip_reference::Options LmxxfProductionOptions(unsigned processing_w, unsi
     // DLSS5_HIP_* in scripts/hip-game-flags.txt and scripts/hip-re9-flags.txt.
     o.mh_feature_byte = o.mh_proj_diag_fb = o.mh_byte_stream = o.decoder_byte = o.mh_ffn_frag256 = true;
     // 0.31 template defaults (hip-game-flags.txt): one-head-per-wave, C512 32 tokens, ViT projection 64 columns, chain flags.
-    o.wave_owned = o.c512_m32 = o.vit_proj_n64 = o.pdl = true;
+    o.wave_owned = o.c512_m32 = o.vit_proj_n64 = true; // PDL off by default since 2026-09-27 (results/pdl-audit-20260927)
     if (const char *skip = std::getenv("DLSS5_SKIP_BLOCKS"))
         o.skip_blocks = hip_reference::ParseSkipBlocks(skip);
     NativeApplyHipEnvironment(o, true);
