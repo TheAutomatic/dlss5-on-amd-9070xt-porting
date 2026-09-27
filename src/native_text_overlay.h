@@ -9,6 +9,14 @@
 #include <cstring>
 #include <cctype>
 #include <mutex>
+#include <atomic>
+/* F7 hides/shows every on-screen line (status, FPS, notices); edge-triggered, polled from the draw calls. */
+inline bool NativeOverlayVisible(){
+ static std::atomic<bool> hidden{false},down{false};
+ const bool now=(GetAsyncKeyState(VK_F7)&0x8000)!=0;
+ if(now&&!down.exchange(true))hidden=!hidden;else if(!now)down=false;
+ return !hidden;
+}
 /* Draw into a private strip, then copy to the host texture without creating a host UAV.
    Callers serialize recording and submit on one queue; unchanged text reuses the GPU strip. */
 class NativeTextOverlay {
@@ -51,6 +59,7 @@ public:
  ~NativeTextOverlay(){if(strip)strip->Release();if(pso)pso->Release();if(root)root->Release();if(device)device->Release();}
  /* text: ASCII, at most 64 chars (lower case is raised); drawn `scale` times enlarged at (x, y) of the host texture, which is in `state` */
  void Draw(ID3D12GraphicsCommandList*c,ID3D12Resource*texture,const char*text,UINT x=24,UINT y=24,UINT scale=3,D3D12_RESOURCE_STATES state=D3D12_RESOURCE_STATE_UNORDERED_ACCESS){
+  if(!NativeOverlayVisible())return;
   if(!c||!texture||!text)return;auto desc=texture->GetDesc();if(desc.Dimension!=D3D12_RESOURCE_DIMENSION_TEXTURE2D)return;
   UINT mode=0,bpp=0;const DXGI_FORMAT cf=CopyFormat(desc.Format,mode,bpp);if(cf==DXGI_FORMAT_UNKNOWN)return;
   ID3D12Device*d=nullptr;if(FAILED(texture->GetDevice(IID_PPV_ARGS(&d))))return;const bool ok=Create(d);d->Release();if(!ok)return;
