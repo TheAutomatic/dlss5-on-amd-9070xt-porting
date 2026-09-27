@@ -1,0 +1,7 @@
+device=AMD Radeon RX 9070 XT MP=32 LDS=65536
+A,c512-m32-deep,split_mix_blocked_h16w_m32,32,96,0,0,64
+R,c512-m32-deep,split_mix_blocked_h16w_m32,32,97,0,0,56
+N,c512-m32-deep,split_mix_blocked_h16w_m32_n32,32,62,0,0,64
+A,c512-m32-mh,mh_qkv_normalize_frag_c512_m32,32,155,5456,0,12
+Q,c512-m32-mh,mh_qkv_normalize_frag_c512_m32,32,155,5456,0,12
+L,c512-m32-mh,mh_qkv_normalize_frag_c512_m32,32,151,4420,0,14

@@ -25,3 +25,13 @@ old=' __attribute__((shared)) c5u4 tile[16*4];';assert old in s;s=s.replace(old,
 #else
  __attribute__((shared)) c5u4 tile[16*4];
 #endif''');s=s.replace('__attribute__((shared)) float raw[17*65];','#if C512_QKV_LDS_ALIAS\n __attribute__((shared,aligned(16))) float raw[17*65];\n#else\n __attribute__((shared)) float raw[17*65];\n#endif');p.write_text(s)
+p=out/'c512_m32_mh.inc';s=p.read_text();needle='  for(uint n=0;n<4;n++)for(uint e=0;e<8;e++){uint row=g*8+e;tb[';assert s.count(needle)==1
+s=s.replace(needle,'''#if C512_QKV_LDS_ALIAS == 2
+  // Read all coefficients before aliasing stores; avoid conservative reloads after every byte store.
+  f8 inv0{},inv1{};for(uint e=0;e<8;e++){inv0[e]=raw[16*65+g*8+e];inv1[e]=raw[16*65+16+g*8+e];}
+#define C512_INV(N,E,ROW) ((N)<2?inv0[E]:inv1[E])
+#else
+#define C512_INV(N,E,ROW) raw[16*65+(N/2)*16+ROW]
+#endif
+'''+needle,1)
+start=s.index('#define C512_INV');a=s.index('  for(uint n=0;n<4;n++)for(uint e=0;e<8;e++){uint row=g*8+e;tb[',start);b=s.index('\n',a);s=s[:a]+s[a:b].replace('raw[16*65+(n/2)*16+row]','C512_INV(n,e,row)')+'\n#undef C512_INV'+s[b:];p.write_text(s)

@@ -609,7 +609,7 @@
       }
     ]
   },
-  "L": {
+  "L-initial": {
     "kernel": "mh_qkv_normalize_frag_c512_m32",
     "classes": {
       "SMEM": 3,
@@ -775,6 +775,177 @@
           [
             999,
             1008
+          ]
+        ]
+      }
+    ]
+  },
+  "L": {
+    "kernel": "mh_qkv_normalize_frag_c512_m32",
+    "classes": {
+      "SMEM": 3,
+      "SALU": 226,
+      "WAIT": 577,
+      "VALU": 927,
+      "VOPD": 188,
+      "VMEM": 198,
+      "WMMA": 256,
+      "DS": 148
+    },
+    "ops": {
+      "s_load_b32": 1,
+      "s_mul_hi_u32": 1,
+      "s_delay_alu": 60,
+      "s_lshr_b32": 1,
+      "s_lshl_b32": 6,
+      "s_wait_kmcnt": 2,
+      "s_cmp_ge_u32": 1,
+      "s_cbranch_scc1": 9,
+      "s_clause": 33,
+      "s_load_b128": 1,
+      "s_load_b64": 1,
+      "v_lshlrev_b32_e32": 6,
+      "s_or_b32": 8,
+      "v_lshrrev_b32_e32": 2,
+      "s_cmp_lt_u32": 3,
+      "s_mul_i32": 3,
+      "v_or_b32_e32": 3,
+      "s_cselect_b32": 3,
+      "s_mov_b32": 11,
+      "s_sub_co_i32": 2,
+      "v_and_b32_e32": 2,
+      "v_lshl_or_b32": 2,
+      "v_add_co_u32": 145,
+      "v_add_co_ci_u32_e64": 145,
+      "s_wait_alu": 325,
+      "s_add_nc_u64": 20,
+      "v_mov_b32_e32": 110,
+      "v_dual_mov_b32": 146,
+      "s_mov_b64": 1,
+      "s_branch": 12,
+      "global_load_b64": 192,
+      "s_wait_loadcnt": 122,
+      "v_wmma_f32_16x16x16_fp8_fp8": 256,
+      "s_cmp_eq_u32": 8,
+      "s_and_not1_b32": 34,
+      "s_cbranch_vccnz": 36,
+      "s_add_co_i32": 41,
+      "s_addk_co_i32": 8,
+      "v_mul_u32_u24_e32": 3,
+      "v_lshlrev_b64_e32": 1,
+      "v_add_lshl_u32": 2,
+      "v_add_nc_u32_e32": 16,
+      "s_and_b32": 8,
+      "s_cbranch_vccz": 2,
+      "ds_store_2addr_b32": 26,
+      "ds_store_b32": 14,
+      "v_cmp_gt_u32_e32": 2,
+      "s_wait_dscnt": 34,
+      "s_and_saveexec_b32": 2,
+      "s_cbranch_execz": 4,
+      "ds_load_2addr_b32": 32,
+      "global_load_b32": 2,
+      "v_dual_mul_f32": 36,
+      "v_dual_add_f32": 4,
+      "v_mul_f32_e32": 52,
+      "v_add_f32_e32": 54,
+      "v_max_num_f32_e32": 2,
+      "v_rsq_f32_e32": 2,
+      "ds_load_b128": 12,
+      "v_med3_num_f32": 64,
+      "v_cmp_neq_f32_e32": 64,
+      "v_cvt_pk_fp8_f32": 128,
+      "v_cvt_f32_fp8_e32": 64,
+      "v_cndmask_b32_e32": 54,
+      "ds_store_b8": 64,
+      "v_dual_cndmask_b32": 2,
+      "v_cmpx_gt_u32_e64": 2,
+      "v_mad_co_u64_u32": 2,
+      "global_store_b128": 4,
+      "s_nop": 1,
+      "s_sendmsg": 1,
+      "s_endpgm": 1
+    },
+    "loops": [
+      {
+        "trips": 8,
+        "ranges": [
+          [
+            97,
+            166
+          ],
+          [
+            166,
+            176
+          ],
+          [
+            176,
+            178
+          ],
+          [
+            178,
+            208
+          ],
+          [
+            208,
+            210
+          ],
+          [
+            210,
+            233
+          ],
+          [
+            233,
+            235
+          ],
+          [
+            235,
+            265
+          ],
+          [
+            265,
+            268
+          ]
+        ]
+      },
+      {
+        "trips": 2,
+        "ranges": [
+          [
+            314,
+            324
+          ],
+          [
+            324,
+            344
+          ],
+          [
+            344,
+            362
+          ],
+          [
+            362,
+            394
+          ],
+          [
+            394,
+            415
+          ],
+          [
+            415,
+            417
+          ],
+          [
+            417,
+            496
+          ],
+          [
+            496,
+            861
+          ],
+          [
+            861,
+            870
           ]
         ]
       }

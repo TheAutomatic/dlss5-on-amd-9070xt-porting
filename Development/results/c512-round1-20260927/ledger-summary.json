@@ -1,0 +1,383 @@
+{
+  "900": {
+    "mh_shift_pack": {
+      "calls": 13,
+      "resources": [
+        {
+          "groups": 3584,
+          "threads": 256,
+          "vgpr": 6,
+          "lds": 0,
+          "scratch": 0,
+          "resident_groups_per_mp": 8,
+          "waves": 28672,
+          "total_resident_waves": 2048,
+          "grid_to_resident_capacity": 14.0
+        },
+        {
+          "groups": 4480,
+          "threads": 256,
+          "vgpr": 6,
+          "lds": 0,
+          "scratch": 0,
+          "resident_groups_per_mp": 8,
+          "waves": 35840,
+          "total_resident_waves": 2048,
+          "grid_to_resident_capacity": 17.5
+        }
+      ],
+      "marginal_round_ms": [],
+      "marginal_mean_ms": null
+    },
+    "split_mix_blocked_h16w_m32": {
+      "calls": 13,
+      "resources": [
+        {
+          "groups": 448,
+          "threads": 32,
+          "vgpr": 96,
+          "lds": 0,
+          "scratch": 0,
+          "resident_groups_per_mp": 64,
+          "waves": 448,
+          "total_resident_waves": 2048,
+          "grid_to_resident_capacity": 0.21875
+        },
+        {
+          "groups": 560,
+          "threads": 32,
+          "vgpr": 96,
+          "lds": 0,
+          "scratch": 0,
+          "resident_groups_per_mp": 64,
+          "waves": 560,
+          "total_resident_waves": 2048,
+          "grid_to_resident_capacity": 0.2734375
+        }
+      ],
+      "marginal_round_ms": [
+        0.20921093750000042,
+        0.24168281250000012,
+        0.2415218750000001
+      ],
+      "marginal_mean_ms": 0.23080520833333354
+    },
+    "split_ffn_fused_fp8_t8": {
+      "calls": 13,
+      "resources": [
+        {
+          "groups": 896,
+          "threads": 128,
+          "vgpr": 112,
+          "lds": 4160,
+          "scratch": 0,
+          "resident_groups_per_mp": 12,
+          "waves": 3584,
+          "total_resident_waves": 1536,
+          "grid_to_resident_capacity": 2.3333333333333335
+        },
+        {
+          "groups": 1120,
+          "threads": 128,
+          "vgpr": 112,
+          "lds": 4160,
+          "scratch": 0,
+          "resident_groups_per_mp": 12,
+          "waves": 4480,
+          "total_resident_waves": 1536,
+          "grid_to_resident_capacity": 2.9166666666666665
+        }
+      ],
+      "marginal_round_ms": [
+        0.2330843749999998,
+        0.21479843749999983,
+        0.21839374999999928
+      ],
+      "marginal_mean_ms": 0.22209218749999962
+    },
+    "split_projection_frag": {
+      "calls": 13,
+      "resources": [
+        {
+          "groups": 896,
+          "threads": 32,
+          "vgpr": 83,
+          "lds": 0,
+          "scratch": 0,
+          "resident_groups_per_mp": 56,
+          "waves": 896,
+          "total_resident_waves": 1792,
+          "grid_to_resident_capacity": 0.5
+        },
+        {
+          "groups": 1120,
+          "threads": 32,
+          "vgpr": 83,
+          "lds": 0,
+          "scratch": 0,
+          "resident_groups_per_mp": 56,
+          "waves": 1120,
+          "total_resident_waves": 1792,
+          "grid_to_resident_capacity": 0.625
+        }
+      ],
+      "marginal_round_ms": [
+        0.18037343750000012,
+        0.20866718749999924,
+        0.16672343749999996
+      ],
+      "marginal_mean_ms": 0.18525468749999977
+    },
+    "mh_qkv_normalize_frag_c512_m32": {
+      "calls": 13,
+      "resources": [
+        {
+          "groups": 1344,
+          "threads": 32,
+          "vgpr": 155,
+          "lds": 5456,
+          "scratch": 0,
+          "resident_groups_per_mp": 12,
+          "waves": 1344,
+          "total_resident_waves": 384,
+          "grid_to_resident_capacity": 3.5
+        },
+        {
+          "groups": 1680,
+          "threads": 32,
+          "vgpr": 155,
+          "lds": 5456,
+          "scratch": 0,
+          "resident_groups_per_mp": 12,
+          "waves": 1680,
+          "total_resident_waves": 384,
+          "grid_to_resident_capacity": 4.375
+        }
+      ],
+      "marginal_round_ms": [
+        0.47988125000000004,
+        0.46841874999999966,
+        0.4868234375
+      ],
+      "marginal_mean_ms": 0.4783744791666666
+    },
+    "mh_attention_fused_fp8_out": {
+      "calls": 13,
+      "resources": [
+        {
+          "groups": 448,
+          "threads": 128,
+          "vgpr": 103,
+          "lds": 15360,
+          "scratch": 0,
+          "resident_groups_per_mp": 4,
+          "waves": 1792,
+          "total_resident_waves": 512,
+          "grid_to_resident_capacity": 3.5
+        },
+        {
+          "groups": 560,
+          "threads": 128,
+          "vgpr": 103,
+          "lds": 15360,
+          "scratch": 0,
+          "resident_groups_per_mp": 4,
+          "waves": 2240,
+          "total_resident_waves": 512,
+          "grid_to_resident_capacity": 4.375
+        }
+      ],
+      "marginal_round_ms": [
+        0.1718421874999998,
+        0.16601562500000044,
+        0.16604218749999955
+      ],
+      "marginal_mean_ms": 0.1679666666666666
+    },
+    "mh_attention_project_frag_c512": {
+      "calls": 13,
+      "resources": [
+        {
+          "groups": 896,
+          "threads": 32,
+          "vgpr": 80,
+          "lds": 0,
+          "scratch": 0,
+          "resident_groups_per_mp": 64,
+          "waves": 896,
+          "total_resident_waves": 2048,
+          "grid_to_resident_capacity": 0.4375
+        },
+        {
+          "groups": 1120,
+          "threads": 32,
+          "vgpr": 80,
+          "lds": 0,
+          "scratch": 0,
+          "resident_groups_per_mp": 64,
+          "waves": 1120,
+          "total_resident_waves": 2048,
+          "grid_to_resident_capacity": 0.546875
+        }
+      ],
+      "marginal_round_ms": [
+        0.24909843750000027,
+        0.2360281249999998,
+        0.221984374999999
+      ],
+      "marginal_mean_ms": 0.23570364583333303
+    }
+  },
+  "1080": {
+    "mh_shift_pack": {
+      "calls": 13,
+      "resources": [
+        {
+          "groups": 5120,
+          "threads": 256,
+          "vgpr": 6,
+          "lds": 0,
+          "scratch": 0,
+          "resident_groups_per_mp": 8,
+          "waves": 40960,
+          "total_resident_waves": 2048,
+          "grid_to_resident_capacity": 20.0
+        }
+      ],
+      "marginal_round_ms": [],
+      "marginal_mean_ms": null
+    },
+    "split_mix_blocked_h16w_m32": {
+      "calls": 13,
+      "resources": [
+        {
+          "groups": 640,
+          "threads": 32,
+          "vgpr": 96,
+          "lds": 0,
+          "scratch": 0,
+          "resident_groups_per_mp": 64,
+          "waves": 640,
+          "total_resident_waves": 2048,
+          "grid_to_resident_capacity": 0.3125
+        }
+      ],
+      "marginal_round_ms": [
+        0.29017656249999924,
+        0.28915625,
+        0.28267343749999974
+      ],
+      "marginal_mean_ms": 0.28733541666666634
+    },
+    "split_ffn_fused_fp8_t8": {
+      "calls": 13,
+      "resources": [
+        {
+          "groups": 1280,
+          "threads": 128,
+          "vgpr": 112,
+          "lds": 4160,
+          "scratch": 0,
+          "resident_groups_per_mp": 12,
+          "waves": 5120,
+          "total_resident_waves": 1536,
+          "grid_to_resident_capacity": 3.3333333333333335
+        }
+      ],
+      "marginal_round_ms": [
+        0.2782093750000003,
+        0.27998437499999973,
+        0.2755000000000005
+      ],
+      "marginal_mean_ms": 0.27789791666666686
+    },
+    "split_projection_frag": {
+      "calls": 13,
+      "resources": [
+        {
+          "groups": 1280,
+          "threads": 32,
+          "vgpr": 83,
+          "lds": 0,
+          "scratch": 0,
+          "resident_groups_per_mp": 56,
+          "waves": 1280,
+          "total_resident_waves": 1792,
+          "grid_to_resident_capacity": 0.7142857142857143
+        }
+      ],
+      "marginal_round_ms": [
+        0.20571406250000068,
+        0.2073953124999992,
+        0.19230937500000023
+      ],
+      "marginal_mean_ms": 0.20180625000000005
+    },
+    "mh_qkv_normalize_frag_c512_m32": {
+      "calls": 13,
+      "resources": [
+        {
+          "groups": 1920,
+          "threads": 32,
+          "vgpr": 155,
+          "lds": 5456,
+          "scratch": 0,
+          "resident_groups_per_mp": 12,
+          "waves": 1920,
+          "total_resident_waves": 384,
+          "grid_to_resident_capacity": 5.0
+        }
+      ],
+      "marginal_round_ms": [
+        0.4057015625000009,
+        0.4183640624999998,
+        0.39739687499999965
+      ],
+      "marginal_mean_ms": 0.40715416666666676
+    },
+    "mh_attention_fused_fp8_out": {
+      "calls": 13,
+      "resources": [
+        {
+          "groups": 640,
+          "threads": 128,
+          "vgpr": 103,
+          "lds": 15360,
+          "scratch": 0,
+          "resident_groups_per_mp": 4,
+          "waves": 2560,
+          "total_resident_waves": 512,
+          "grid_to_resident_capacity": 5.0
+        }
+      ],
+      "marginal_round_ms": [
+        0.22154843750000008,
+        0.21076562500000007,
+        0.21790312499999986
+      ],
+      "marginal_mean_ms": 0.2167390625
+    },
+    "mh_attention_project_frag_c512": {
+      "calls": 13,
+      "resources": [
+        {
+          "groups": 1280,
+          "threads": 32,
+          "vgpr": 80,
+          "lds": 0,
+          "scratch": 0,
+          "resident_groups_per_mp": 64,
+          "waves": 1280,
+          "total_resident_waves": 2048,
+          "grid_to_resident_capacity": 0.625
+        }
+      ],
+      "marginal_round_ms": [
+        0.2956046875,
+        0.3110828125000009,
+        0.31105937500000014
+      ],
+      "marginal_mean_ms": 0.30591562500000036
+    }
+  }
+}

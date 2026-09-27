@@ -1,0 +1,158 @@
+{
+  "900": {
+    "mh_shift_pack": {
+      "calls": 13,
+      "resources": [
+        {
+          "groups": 3584,
+          "threads": 256,
+          "vgpr": 6,
+          "lds": 0,
+          "scratch": 0,
+          "resident_groups_per_mp": 8
+        },
+        {
+          "groups": 4480,
+          "threads": 256,
+          "vgpr": 6,
+          "lds": 0,
+          "scratch": 0,
+          "resident_groups_per_mp": 8
+        }
+      ],
+      "marginal_round_ms": [
+        0.11209999999999942,
+        0.10338281250000003
+      ],
+      "marginal_mean_ms": 0.10774140624999973
+    },
+    "mh_pool_project_group_c256": {
+      "calls": 1,
+      "resources": [
+        {
+          "groups": 94,
+          "threads": 256,
+          "vgpr": 98,
+          "lds": 8448,
+          "scratch": 0,
+          "resident_groups_per_mp": 7
+        }
+      ],
+      "marginal_round_ms": [
+        0.013492187499999364,
+        0.00932343750000042
+      ],
+      "marginal_mean_ms": 0.011407812499999892
+    },
+    "mh_pool": {
+      "calls": 1,
+      "resources": [
+        {
+          "groups": 800,
+          "threads": 256,
+          "vgpr": 12,
+          "lds": 0,
+          "scratch": 0,
+          "resident_groups_per_mp": 8
+        }
+      ],
+      "marginal_round_ms": [
+        -0.010254687500000692,
+        -0.010948437500000185
+      ],
+      "marginal_mean_ms": -0.010601562500000439
+    },
+    "mh_pool_project_production_h16w": {
+      "calls": 1,
+      "resources": [
+        {
+          "groups": 1600,
+          "threads": 32,
+          "vgpr": 62,
+          "lds": 0,
+          "scratch": 0,
+          "resident_groups_per_mp": 64
+        }
+      ],
+      "marginal_round_ms": [
+        0.06199843750000067,
+        0.04499687500000027
+      ],
+      "marginal_mean_ms": 0.05349765625000047
+    }
+  },
+  "1080": {
+    "mh_shift_pack": {
+      "calls": 13,
+      "resources": [
+        {
+          "groups": 5120,
+          "threads": 256,
+          "vgpr": 6,
+          "lds": 0,
+          "scratch": 0,
+          "resident_groups_per_mp": 8
+        }
+      ],
+      "marginal_round_ms": [
+        0.13612656250000033,
+        0.151751562499999
+      ],
+      "marginal_mean_ms": 0.14393906249999966
+    },
+    "mh_pool_project_group_c256": {
+      "calls": 1,
+      "resources": [
+        {
+          "groups": 135,
+          "threads": 256,
+          "vgpr": 98,
+          "lds": 8448,
+          "scratch": 0,
+          "resident_groups_per_mp": 7
+        }
+      ],
+      "marginal_round_ms": [
+        0.030557812500000114,
+        0.020424999999999915
+      ],
+      "marginal_mean_ms": 0.025491406250000015
+    },
+    "mh_pool": {
+      "calls": 1,
+      "resources": [
+        {
+          "groups": 1280,
+          "threads": 256,
+          "vgpr": 12,
+          "lds": 0,
+          "scratch": 0,
+          "resident_groups_per_mp": 8
+        }
+      ],
+      "marginal_round_ms": [
+        0.011732812499999579,
+        0.008160937500000465
+      ],
+      "marginal_mean_ms": 0.009946875000000022
+    },
+    "mh_pool_project_production_h16w": {
+      "calls": 1,
+      "resources": [
+        {
+          "groups": 2560,
+          "threads": 32,
+          "vgpr": 62,
+          "lds": 0,
+          "scratch": 0,
+          "resident_groups_per_mp": 64
+        }
+      ],
+      "marginal_round_ms": [
+        0.13010312499999976,
+        0.12738281250000005
+      ],
+      "marginal_mean_ms": 0.1287429687499999
+    }
+  }
+}

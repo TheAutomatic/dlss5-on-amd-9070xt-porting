@@ -1,0 +1,158 @@
+{
+  "L": {
+    "timing": {
+      "900-r1": {
+        "baseline_ms": 9.244441250000005,
+        "candidate_ms": 9.233973124999999,
+        "delta_ms": -0.010468125000006268,
+        "delta_percent": -0.1132369682159684
+      },
+      "1080-r1": {
+        "baseline_ms": 12.62943,
+        "candidate_ms": 12.616216875,
+        "delta_ms": -0.013213125000000048,
+        "delta_percent": -0.10462170501757129
+      },
+      "900-r2": {
+        "baseline_ms": 9.313425624999995,
+        "candidate_ms": 9.305568125000004,
+        "delta_ms": -0.007857499999991191,
+        "delta_percent": -0.0843674531409766
+      },
+      "1080-r2": {
+        "baseline_ms": 12.63846375,
+        "candidate_ms": 12.658241875,
+        "delta_ms": 0.019778125000000202,
+        "delta_percent": 0.15649152769852126
+      }
+    },
+    "correctness": {
+      "correct": 84,
+      "adaptive": 84
+    },
+    "adaptive": {
+      "matched_decisions": 84,
+      "reuse_counts": {
+        "0": 41,
+        "1": 43
+      }
+    }
+  },
+  "N": {
+    "timing": {
+      "900-r1": {
+        "baseline_ms": 9.250303749999995,
+        "candidate_ms": 9.273340624999989,
+        "delta_ms": 0.02303687499999363,
+        "delta_percent": 0.24903911939100354
+      },
+      "1080-r1": {
+        "baseline_ms": 12.629885625,
+        "candidate_ms": 12.66613625,
+        "delta_ms": 0.036250624999999204,
+        "delta_percent": 0.2870225913071067
+      },
+      "900-r2": {
+        "baseline_ms": 9.331125625,
+        "candidate_ms": 9.329581875000006,
+        "delta_ms": -0.0015437499999944038,
+        "delta_percent": -0.01654409191382822
+      },
+      "1080-r2": {
+        "baseline_ms": 12.662088125,
+        "candidate_ms": 12.707873750000001,
+        "delta_ms": 0.04578562500000061,
+        "delta_percent": 0.361596164455702
+      }
+    },
+    "correctness": {
+      "correct": 84,
+      "adaptive": 84
+    },
+    "adaptive": {
+      "matched_decisions": 84,
+      "reuse_counts": {
+        "0": 41,
+        "1": 43
+      }
+    }
+  },
+  "Q": {
+    "timing": {
+      "900-r1": {
+        "baseline_ms": 9.230720000000005,
+        "candidate_ms": 9.236905000000004,
+        "delta_ms": 0.006184999999998553,
+        "delta_percent": 0.06700452402410573
+      },
+      "1080-r1": {
+        "baseline_ms": 12.623279375,
+        "candidate_ms": 12.614997500000001,
+        "delta_ms": -0.008281874999997996,
+        "delta_percent": -0.06560795142029896
+      },
+      "900-r2": {
+        "baseline_ms": 9.319931249999996,
+        "candidate_ms": 9.31311,
+        "delta_ms": -0.006821249999996226,
+        "delta_percent": -0.07318991757579996
+      },
+      "1080-r2": {
+        "baseline_ms": 12.65516625,
+        "candidate_ms": 12.640807500000001,
+        "delta_ms": -0.014358749999999532,
+        "delta_percent": -0.11346156752385372
+      }
+    },
+    "correctness": {
+      "correct": 84,
+      "adaptive": 84
+    },
+    "adaptive": {
+      "matched_decisions": 84,
+      "reuse_counts": {
+        "0": 41,
+        "1": 43
+      }
+    }
+  },
+  "R": {
+    "timing": {
+      "900-r1": {
+        "baseline_ms": 9.27682125,
+        "candidate_ms": 9.206688125000005,
+        "delta_ms": -0.07013312499999458,
+        "delta_percent": -0.7560038412941728
+      },
+      "1080-r1": {
+        "baseline_ms": 12.6239675,
+        "candidate_ms": 12.615319374999999,
+        "delta_ms": -0.008648125000000562,
+        "delta_percent": -0.06850560253740534
+      },
+      "900-r2": {
+        "baseline_ms": 9.327303750000006,
+        "candidate_ms": 9.307556250000005,
+        "delta_ms": -0.01974750000000114,
+        "delta_percent": -0.21171713208119058
+      },
+      "1080-r2": {
+        "baseline_ms": 12.65616125,
+        "candidate_ms": 12.646145,
+        "delta_ms": -0.010016249999999616,
+        "delta_percent": -0.07914129570686379
+      }
+    },
+    "correctness": {
+      "correct": 84,
+      "adaptive": 84
+    },
+    "adaptive": {
+      "matched_decisions": 84,
+      "reuse_counts": {
+        "0": 41,
+        "1": 43
+      }
+    }
+  }
+}
