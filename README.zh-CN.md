@@ -16,7 +16,7 @@ DLSS 5（DLSSNR）跑在 AMD RX 9070 XT / RDNA 4 上。
 | **Magpie**（便携） | 任何游戏，不需要游戏支持超分 | Magpie 抓游戏窗口；网络接在效果组的 FSR3_SR 一项里，之后 FSR4 放大到全屏（可选 XeSS 帧生成） |
 | **OptiScaler-REFramework**（只给 RE9） | 《生化危机 9》，常规路线切不开它的命令提交 | TheAutomatic 改的 OptiScaler 宿主 + 我们的 `LmxxfNrRuntime.dll`（成对使用，别和常规包混装） |
 
-**当前版本：0.33（2026-09-27）。** C32 与 C64～C256 核 FP8 打包提速：一条转换指令转两个值直接写进矩阵片段（逐位相同；网络约 −9%，《剑星》1080P 原生 AA、EXACT 主菜单 47～48→49～50）。黄字末尾显示 AE/EXACT，F7 隐藏/显示屏幕文字。RE9 宿主与 runtime 不变（只换新核模块）。下载：[夸克](https://pan.quark.cn/s/6bb64e46ab67) · [Gofile 镜像](https://gofile.io/d/8yAjJX1b)（也在下面的更新记录表）。
+**当前版本：0.34（2026-09-27）。** 继续压普通算术指令，全部逐位相同：FP8 clamp 改单条 med3/fmed3 并去掉编译器插的规范化，C64～C256 打包段分段开关饱和模式、乘积与 −0→+0 合成一条 fma（网络 1080 档 13.64→约 13.4ms；《剑星》1080P 原生 AA、EXACT 主菜单 50～51；RE9 中画质 2K 高质量 54→58、原生 AA 38→41）。修 PDL 旗子计数回绕。RE9 包：宿主跟随实际执行切分列表的队列（《鬼武者：剑之道》Xbox 版可用），runtime 切档不再涨显存、每次尺寸/档位变化打印几何。全部模块改由生产配方从源码编出。下载：[夸克](https://pan.quark.cn/s/4b572b0a5b81) · [Gofile 镜像](https://gofile.io/d/cfHqVzD1)（也在下面的更新记录表）。
 
 **环境要求。** RDNA 4 显卡（RX 9070 XT 实测；RX 9060 的内核随包但没机器测）和带 `amdhip64_7.dll` 的 AMD 驱动（现在的正式版驱动就带）。
 不需要 HIP SDK、Agility SDK、预览版 DXC、Windows 开发人员模式。900P 下插件占显存约 1.2 GB（权重 0.6 GB、激活 0.3 GB；`DLSS5_HIP_MEMORY=1`
@@ -75,7 +75,7 @@ AMD 光流只在第一项开，FSR4 和 XeSS 帧生成的 Optical Flow Method �
 
 ## 编译
 
-### 现在的包怎么编（0.33）——每个发布文件从哪来
+### 现在的包怎么编（0.34）——每个发布文件从哪来
 
 | 包里的文件 | 源码 | 编法 |
 |---|---|---|
@@ -87,7 +87,7 @@ AMD 光流只在第一项开，FSR4 和 XeSS 帧生成的 Optical Flow Method �
 | `DLSS5-AMD\native-game-flags.txt`（包也认 `DLSS5_HIP_MODULES=<目录>`，从别处加载模块；`Development/HIP/validate-modules.ps1` 对一套模块跑逐位校验） | `scripts/hip-game-flags.txt` / `hip-magpie-flags.txt` / `hip-re9-flags.txt`（说明在 `scripts/CONFIGURATION.md`） | 直接拷 |
 | 权重（`*.f16` / `*.f32`）、`noise.f32` | 不在仓库里（见"权重"） | 随包；新包从上一个完整包接着做 |
 
-打包：`Development/tools/package-033.ps1`（Windows）把上一版完整包解开、逐文件对 `SHA256SUMS.txt` 校验，换上表里变过的文件（每个都核 hash，模块还要和测试机上装着的那份相同），编一遍 fit shader，写 `release.json`、`SHA256SUMS.txt`，压 zip 再读回核对。之前的版本：`package-032.ps1` … `package-026.ps1`、`package-0281-re9.ps1`。
+打包：`Development/tools/package-034.ps1`（Windows）把上一版完整包解开、逐文件对 `SHA256SUMS.txt` 校验，换上表里变过的文件（每个都核 hash，模块还要和测试机上装着的那份相同），编一遍 fit shader，写 `release.json`、`SHA256SUMS.txt`，压 zip 再读回核对。之前的版本：`package-033.ps1` … `package-026.ps1`、`package-0281-re9.ps1`。
 
 内核出包前的验证：`Development/HIP/validate-modules.ps1`（一套模块对 golden 的逐位校验）和每个生产候选都要过的整网回归（`Development/deployments/stellar-prod6-20260923/regression-prod6.ps1`：两段输入各 12 帧 RGB hash、1000 帧计时、额外控制组）。0.20 以来仓库里每一次内核改动都和上一版逐位相同，除非它的开关自己说明不是（目前唯一的非逐位开关 `HIP_FFN_WAVE_NORM`，默认关）。
 
@@ -161,6 +161,7 @@ powershell -ExecutionPolicy Bypass -File scripts\deploy_fast.ps1 -Source <lab> -
 | 0.31 · 三个包（Magpie · OptiScaler · OptiScaler-REFramework，HIP）[夸克](https://pan.quark.cn/s/e76b8611e3cc) · [Google Drive 镜像](https://drive.google.com/drive/folders/1xtBe_XhgF9eqBlrlIQMgWcEkzm0UKHIZ?usp=sharing) | 09-26 | 档位选择：输入两轴都不超过某档 110% 时往下缩进该档（2K 质量 1707×961 → 900 档，原先放大进 1080 档）。一头一 wave 核（C32/C64/C128 整块 + C256 注意力；`DLSS5_HIP_WAVE_OWNED=1`；逐位，整网约 −6%；`results/c64-wave2-20260926`、`wave-owned-*`）；C512 QKV/mix 32 token（`DLSS5_HIP_C512_M32=1`，逐位，约 −1.3%；`results/c512-ffn-20260926`）；ViT 投影 64 列（`DLSS5_HIP_VIT_PROJ_N64=1`，逐位，1080 约 −1.8%；`results/m32-sweep-20260926`）。常规包默认 `DLSS5_VIT_ADAPTIVE=1`（静止 +3 帧，运动自动失效）。每架构 29 个模块。RE9 包：宿主/runtime 与 0.30 相同，新核随包不启用。《剑星》主菜单 2K 质量 57、2K Native AA 43～44。 |
 | 0.32 · 三个包（Magpie · OptiScaler · OptiScaler-REFramework，HIP）[夸克](https://pan.quark.cn/s/b805e071405c) · [Gofile 镜像](https://gofile.io/d/CZ67LYIc) | 09-26 | 显存池：HIP 导入的 D3D12 共享缓冲区驱动不归还，改为按档位复用（切 40 次 +3GB → 平台；`results/vram-leak-20260926`）。C32 宽读（逐位，−0.8/−0.9%；`results/c32-wave-phase-20260926`）。RE9 runtime 读 flags（`DLSS5_HIP_*`/`SKIP_BLOCKS`/`FIT_LARGE`/`NETWORK_HEIGHT`），默认开 0.31 新核，兼容老宿主两参数 `EnqueueHip`（`results/re9-runtime-flags-20260926`）；合入 PR #9。RE9 中画质 2K 高质量 54、原生 AA 38。 |
 | 0.33 · 三个包（Magpie · OptiScaler · OptiScaler-REFramework，HIP）[夸克](https://pan.quark.cn/s/6bb64e46ab67) · [Gofile 镜像](https://gofile.io/d/8yAjJX1b) | 09-27 | FP8 打包（c32-wave1 的 `CW_PACK8`、c64-wave2 的 `W2_PACK8`）：一条 `cvt_pk` 转两个值写进片段字；逐位相同，网络 900 档 10.74→9.80ms、1080 档 15.01→13.64ms（`results/c64-block-fused-20260927`、`results/pack8-20260927`）。《剑星》1080P 原生 AA、EXACT：主菜单 49～50、常见场景 53～54。黄字显示 AE/EXACT；F7 开关屏幕文字。 |
+| 0.34 · 三个包（Magpie · OptiScaler · OptiScaler-REFramework，HIP）[夸克](https://pan.quark.cn/s/4b572b0a5b81) · [Gofile 镜像](https://gofile.io/d/cfHqVzD1) | 09-27 | fmed3 clamp（`HIP_FMED3_CLAMP`、C32 `HIP_FP8_SAT_MODE 3`）与 `W2_PACK8 6`（分段 FP16_OVFL + fma(x,y,+0) 打包），逐位相同（`results/fmed3-ovfl-20260927`、`results/ovfl-census-20260927`、`results/c64-hand-asm-20260927`）；整套模块由 `hip/build-modules.ps1` 编出。PDL 计数回绕保护（`results/pdl-audit-20260927`）。RE9：宿主换队列跟随 + 看门狗（`results/onimusha-presr-20260927`），runtime 切档泄漏 35MB→0 与几何日志（`results/re9-runtime-leak-20260927`）。《剑星》1080P AA EXACT 主菜单 50～51 / 场景 54；RE9 中画质 2K 高质量 58、原生 AA 41；鬼武者 2K 质量约 60。 |
 
 ## 权重
 
