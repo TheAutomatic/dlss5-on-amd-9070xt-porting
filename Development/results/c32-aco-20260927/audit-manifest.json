@@ -1,0 +1,40 @@
+{
+  "git_base": "61ac166",
+  "mochizuki_commit": "4f62a8a6900a4cbf70563ea3df2c5e3348ff63a6",
+  "files": {
+    "/home/lmxxf/work/aco-isa/aco/g_fswin32.s": {
+      "sha256": "abe4cfb45994c27323e81699e6f1f59456b012e48f09a23fdb598a7085f8b48c"
+    },
+    "/home/lmxxf/work/aco-isa/aco/g_fswinds32.s": {
+      "sha256": "3c918993400026fab91f95c5a957852ca09b5f944050d5a7bbb87fed5d94ae76"
+    },
+    "/home/lmxxf/work/aco-isa/aco/g_fswinimagepreds32.s": {
+      "sha256": "7c3b9fe9b75c7e9af701a3a7369e222eb4087bd703f26b19ecbac2bbb5ebe8a1"
+    },
+    "/home/lmxxf/work/aco-isa/aco/g_fswinimagepost32.s": {
+      "sha256": "8c0e1f6780068039b3d63c0319448c75e75c53ab22f54ab3a46326c8b04deb53"
+    },
+    "/tmp/c32-aco-20260927/base.s": {
+      "sha256": "09aa3dab977b689ab147726c4c3ca28a9d5f34b08d6562c907e8f9c35e0e13ed"
+    },
+    "/tmp/c32-aco-20260927/base.hsaco": {
+      "sha256": "5e9b3593451812b0fd7fb4686c1cdf2f915328633b287c4950de8dd84d02f31b"
+    },
+    "/tmp/c32-aco-20260927/base-debug.s": {
+      "sha256": "72a232700094c174d41eb657d277cf7f59b7d94a0b7fa8b896841bc748af0ea5"
+    },
+    "/tmp/c32-aco-20260927/base-debug.hsaco": {
+      "sha256": "c9cee44a907798f35136736ab08c90ef3ca527ee2a2553438eefb548fb9778a9"
+    },
+    "/tmp/c32-aco-20260927/base.generated.hip": {
+      "sha256": "3c600d6ef6ba4183eddb4d068dfd070160855891486219e8cf8e1bb1ddc8841c"
+    }
+  },
+  "final_sources": {
+    "hip/wave_owned_c32.inc": "e29d0410bc1fe71aa4192a451c57b00760c4fb195838eb752dead3b4e4559af2",
+    "hip/build-modules.ps1": "2f5cb8d4544df6e407c7ab716ec462290217d6fd0a66ee263980e1ece2a9661d",
+    "Development/HIP/benchmark_vit_reuse.cpp": "99f78a67899dbb61d15c6e4e195edd770e5f7546024b02ac1654c242aa0619f4",
+    "Development/HIP/experiments/c32-aco/ledger.py": "c40cc3720ad6eb5fb11f232634d66d3aab37873663d25bbc8261333e7a20db1b"
+  },
+  "benchmark_sha256": "e8d6e03173b9c1afec0a6d2e2a866e76d6fc7ad74becbc367d2c96aaccb84d15"
+}

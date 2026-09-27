@@ -1,0 +1,16 @@
+{
+  "baseline": {
+    "gfx1200": "6d6e57f29fef12b056ebada09e0e64482bab942423d3779b13d7bf6c1d4bcf67",
+    "gfx1201": "5e9b3593451812b0fd7fb4686c1cdf2f915328633b287c4950de8dd84d02f31b"
+  },
+  "candidate": {
+    "gfx1200": "2d345933c9f1cbe23bbe76122c151c8082c96630d1b560192c456fd75bce5841",
+    "gfx1201": "05359b6a2f4e8cb6979959d503248df3abe5c93448e13fc318b80d4fb0efe4d2"
+  },
+  "defines": [
+    "CW_DIRECT_OUT 1",
+    "CW_RTZ_PAIR 1"
+  ],
+  "module": "c32-wave1",
+  "baseline_release": "0.34"
+}

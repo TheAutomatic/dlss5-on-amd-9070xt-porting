@@ -25,7 +25,7 @@
 
 ## B. 优化候选（逐位；按"收益 × 把握"排）
 
-1. **C32 融合核 ISA 审计**（c32-wave1，整网最大头 34%）：用 C64 那套方法——循环加权 VALU 统计 + ACO 对照 + 手改汇编当显微镜（`HIP/experiments/c64-hand-asm` 的 asm_compile 往返零成本），找出 LLVM 未收缩/多余的段，回源码修。
+1. **C32 ACO 审计已完成并装剑星（09-27 17:34，待 Zero 实测）**：chain 动态 VALU+VOPD 5079 对 ACO fswin32 2061；差距含固定归约/残差算法，不能全归编译器。3 个独立候选均过双架构编译、7用例逐位、两档两批千帧 ABBA；med3 小刀留关，`CW_DIRECT_OUT 1` + `CW_RTZ_PAIR 1` 已进 c32-wave1 配方。组合 900 −0.127/−0.137ms、1080 −0.187/−0.193ms（约 −1.3～−1.4%），组合另过完整回归；只换剑星两份 c32-wave1，备份 `D:\DLSSNR-Lab\c32-aco-20260927\backups\stellar-20260927-173404`。未发包。指令分段/ACO 对照/原始数据见 `results/c32-aco-20260927`。
 2. **ViT 生产者直接写 E4M3**（`vit_byte_stream` 路线）：DF_PACK8 不赚是因为 ViT 真在跑的核读 f32 输入、访存受限（VMEM 164 vs WMMA 64）；ACO 的 gemm 读生产者写好的 E4M3 字节。难点：与自适应复用互斥，需兼容。
 3. **帧时间分布日志**（Zero 09-27：帧率不一定涨，但卡顿因素在减少）：add-on / runtime 记每帧耗时分布（1% low、最长帧、NR 实际调用率），让"卡不卡"可量化，也用来验证换队列/显存池这类稳定性修复。
 4. C512 FFN 链剩余两核（`ffn_fused_t8`、`projection_frag`，`results/c512-ffn-20260926`），先读 ISA 定性。

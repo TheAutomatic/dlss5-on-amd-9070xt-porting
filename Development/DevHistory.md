@@ -768,3 +768,12 @@ RE9 残余显存：`NativeTrackedResources` 对大 RGB 输入缓冲 AddRef 后�
 ## 2026-09-27 16:34：0.34 打包
 
 `tools/package-034.ps1`（源码 9bd416fa），以 0.33 三包为底：add-on 86ef4182、58 模块（生产配方，取自剑星实装）、RE9 宿主 aa3761f2 + runtime ca6d6bdc + 重新生成的 re9-presr-source.tar.gz（含换队列修复 g_requeue）。三包逐文件校验、44 shader 变体通过；RE9 runtime-smoke 在打包时跑通，几何行 `net=1600x900 color_job=1506x848 … pdl=1/1 … applied=15`。结果 `tools/release-034-results.json`。
+
+
+## 2026-09-27 17:34：C32 ACO 分段账 + 去重复量化/RTZ 向量暂存，组合逐位约 −1.4%
+
+按 `conversation/20260927/yami-c32-aco-audit.md`，以 0.34 实装模块为基线。加入 debug 行号的汇编与生产 `.text/.rodata/.note` 完全一致，按 ISA 真实回边与源码归属分段；特别是尾部源码64次已展开成32轮，不能照源码数数。chain 每窗口 VALU+VOPD 5079，对 ACO fswin32 2061；我们 WMMA336 对256，80条差额来自三段对角残差48、Q/K固定half归约16、softmax固定归约16。激活、归一化、投影量化是向量指令大头；ACO 的不同数学路线和窗口展开供数也占差额。
+
+3个源码候选（默认0）各过双架构编译、7用例84帧逐位、两档两批1000帧ABBA：B `CW_FMED3_CLAMP` 接近噪声留关；C `CW_DIRECT_OUT` 去掉 `F()` 后又 PACK8 的重复往返、保留精确负零归一化，900 −0.073/−0.086、1080 −0.117/−0.109ms；D `CW_RTZ_PAIR` 用现有 RTZ 转换的两个输入，保留half位模式、16B读写LDS，900 −0.110/−0.093、1080 −0.153/−0.139ms。标量探针：65536个half编码C零差异，1048576对输入D零差异；没有使用已否定的packed-half算术或MODE路线。
+
+E=C+D 另过7用例逐位，ABBA 900 9.611→9.484 / 9.701→9.564，1080 13.344→13.157 / 13.372→13.179ms，约 −1.3～−1.4%，不相加。两宏已进 `hip/build-modules.ps1`，配方双架构重编与E代码段全同。17:34 仅换剑星 c32-wave1 两份（gfx1201 05359b6a / gfx1200 2d345933），add-on/dxgi/INI/flags 前后哈希不变；备份 `D:\DLSSNR-Lab\c32-aco-20260927\backups\stellar-20260927-173404`，安装/还原脚本同目录。游戏画面/FPS 等 Zero，未发包。结果 `results/c32-aco-20260927`、部署 `deployments/c32-aco-20260927`。
