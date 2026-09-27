@@ -1,0 +1,4426 @@
+{
+  "900": {
+    "c64_wave2": {
+      "calls": [],
+      "dispatches": 0,
+      "windows": 0,
+      "wave_windows": 0,
+      "per_window_upper": {
+        "SMEM": 6,
+        "WAIT": 5540,
+        "SALU": 3890,
+        "VALU": 11070,
+        "VMEM": 1152,
+        "VOPD": 1836,
+        "DS": 272,
+        "WMMA": 912
+      },
+      "weighted_upper": {
+        "SMEM": 0,
+        "WAIT": 0,
+        "SALU": 0,
+        "VALU": 0,
+        "VMEM": 0,
+        "VOPD": 0,
+        "DS": 0,
+        "WMMA": 0
+      },
+      "weighted_phases": {
+        "input": {
+          "SMEM": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "VMEM": 0,
+          "VOPD": 0,
+          "DS": 0
+        },
+        "ffn_loop": {
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VOPD": 0
+        },
+        "ffn_expand": {
+          "VALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "activation": {
+          "VALU": 0,
+          "VOPD": 0,
+          "WAIT": 0,
+          "SALU": 0
+        },
+        "ffn_contract": {
+          "WAIT": 0,
+          "VALU": 0,
+          "VMEM": 0,
+          "WMMA": 0
+        },
+        "contract_rtz_pack": {
+          "VALU": 0,
+          "SALU": 0,
+          "VOPD": 0,
+          "WAIT": 0,
+          "DS": 0
+        },
+        "ffn_mix": {
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "control_unattributed": {
+          "WAIT": 0,
+          "VALU": 0,
+          "VOPD": 0,
+          "SALU": 0
+        },
+        "residual_input_rtz": {
+          "WAIT": 0,
+          "VMEM": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "VOPD": 0
+        },
+        "feature_pack": {
+          "VOPD": 0,
+          "WAIT": 0,
+          "VALU": 0,
+          "SALU": 0,
+          "DS": 0
+        },
+        "qkv_matrix": {
+          "VOPD": 0,
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "WMMA": 0,
+          "DS": 0
+        },
+        "qkv_norm_pack": {
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "VOPD": 0,
+          "VALU": 0,
+          "SALU": 0
+        },
+        "score_exp": {
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "WMMA": 0,
+          "VOPD": 0
+        },
+        "softmax": {
+          "WAIT": 0,
+          "VOPD": 0,
+          "WMMA": 0,
+          "VALU": 0,
+          "SALU": 0
+        },
+        "av": {
+          "WMMA": 0,
+          "WAIT": 0,
+          "VOPD": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "DS": 0
+        },
+        "projection": {
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "tail": {
+          "VMEM": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "VOPD": 0
+        }
+      },
+      "ordinary_work_share": 0.0
+    },
+    "c64_wave2_bi": {
+      "calls": [
+        {
+          "block": 8,
+          "windows": 1550,
+          "waves_per_window": 2,
+          "post": 3
+        },
+        {
+          "block": 65,
+          "windows": 1550,
+          "waves_per_window": 2,
+          "post": 0
+        }
+      ],
+      "dispatches": 2,
+      "windows": 3100,
+      "wave_windows": 6200,
+      "per_window_upper": {
+        "SMEM": 6,
+        "WAIT": 5262,
+        "SALU": 3890,
+        "VALU": 10908,
+        "VOPD": 1892,
+        "VMEM": 1136,
+        "DS": 272,
+        "WMMA": 912
+      },
+      "weighted_upper": {
+        "SMEM": 18600,
+        "WAIT": 16312200,
+        "SALU": 12059000,
+        "VALU": 33814800,
+        "VOPD": 5865200,
+        "VMEM": 3521600,
+        "DS": 843200,
+        "WMMA": 2827200
+      },
+      "weighted_phases": {
+        "input": {
+          "SMEM": 18600,
+          "WAIT": 328600,
+          "SALU": 359600,
+          "VALU": 3137200,
+          "VOPD": 396800,
+          "VMEM": 49600,
+          "DS": 24800
+        },
+        "ffn_loop": {
+          "VALU": 514600,
+          "SALU": 489800,
+          "WAIT": 148800
+        },
+        "ffn_expand": {
+          "VALU": 1587200,
+          "WAIT": 1884800,
+          "VMEM": 793600,
+          "DS": 198400,
+          "WMMA": 793600
+        },
+        "activation": {
+          "VALU": 6348800,
+          "VOPD": 2182400,
+          "WAIT": 1190400,
+          "SALU": 396800
+        },
+        "ffn_contract": {
+          "WAIT": 1091200,
+          "VALU": 793600,
+          "VMEM": 396800,
+          "WMMA": 396800
+        },
+        "contract_rtz_pack": {
+          "VALU": 1364000,
+          "SALU": 99200,
+          "VOPD": 74400,
+          "WAIT": 99200,
+          "DS": 49600
+        },
+        "ffn_mix": {
+          "VALU": 179800,
+          "SALU": 105400,
+          "WAIT": 248000,
+          "WMMA": 198400
+        },
+        "control_unattributed": {
+          "WAIT": 254200,
+          "VALU": 446400,
+          "VOPD": 24800,
+          "SALU": 31000
+        },
+        "residual_input_rtz": {
+          "WAIT": 620000,
+          "SALU": 49600,
+          "VALU": 1711200,
+          "VMEM": 719200,
+          "DS": 49600,
+          "VOPD": 372000
+        },
+        "feature_pack": {
+          "VOPD": 223200,
+          "WAIT": 124000,
+          "VALU": 248000,
+          "SALU": 99200,
+          "DS": 49600
+        },
+        "qkv_matrix": {
+          "VOPD": 18600,
+          "VALU": 880400,
+          "SALU": 6200,
+          "WAIT": 1264800,
+          "VMEM": 607600,
+          "WMMA": 595200,
+          "DS": 136400
+        },
+        "qkv_norm_pack": {
+          "WAIT": 1333000,
+          "VMEM": 12400,
+          "DS": 210800,
+          "VOPD": 688200,
+          "VALU": 3230200,
+          "SALU": 297600
+        },
+        "score_exp": {
+          "VALU": 3143400,
+          "SALU": 241800,
+          "WAIT": 477400,
+          "VMEM": 198400,
+          "WMMA": 198400,
+          "VOPD": 1190400
+        },
+        "softmax": {
+          "VOPD": 421600,
+          "WMMA": 99200,
+          "WAIT": 570400,
+          "VALU": 3025600,
+          "SALU": 372000
+        },
+        "av": {
+          "WMMA": 198400,
+          "WAIT": 272800,
+          "VOPD": 248000,
+          "SALU": 99200,
+          "VALU": 198400,
+          "DS": 49600
+        },
+        "projection": {
+          "VALU": 62000,
+          "SALU": 99200,
+          "WAIT": 446400,
+          "VMEM": 347200,
+          "DS": 74400,
+          "WMMA": 347200
+        },
+        "tail": {
+          "VMEM": 396800,
+          "WAIT": 5958200,
+          "SALU": 9312400,
+          "VALU": 6944000,
+          "VOPD": 24800
+        }
+      },
+      "ordinary_work_share": 0.1403720442168543
+    },
+    "c64_wave2_bo": {
+      "calls": [
+        {
+          "block": 5,
+          "windows": 1500,
+          "waves_per_window": 2,
+          "post": 4
+        }
+      ],
+      "dispatches": 1,
+      "windows": 1500,
+      "wave_windows": 3000,
+      "per_window_upper": {
+        "SMEM": 6,
+        "WAIT": 3980,
+        "SALU": 1476,
+        "VALU": 9420,
+        "VMEM": 1040,
+        "VOPD": 1872,
+        "DS": 272,
+        "WMMA": 912
+      },
+      "weighted_upper": {
+        "SMEM": 9000,
+        "WAIT": 5970000,
+        "SALU": 2214000,
+        "VALU": 14130000,
+        "VMEM": 1560000,
+        "VOPD": 2808000,
+        "DS": 408000,
+        "WMMA": 1368000
+      },
+      "weighted_phases": {
+        "input": {
+          "SMEM": 9000,
+          "WAIT": 294000,
+          "SALU": 174000,
+          "VALU": 1149000,
+          "VMEM": 48000,
+          "VOPD": 225000,
+          "DS": 12000
+        },
+        "ffn_loop": {
+          "VALU": 243000,
+          "SALU": 237000,
+          "WAIT": 72000,
+          "VOPD": 3000
+        },
+        "ffn_expand": {
+          "VALU": 768000,
+          "WAIT": 912000,
+          "VMEM": 384000,
+          "DS": 96000,
+          "WMMA": 384000
+        },
+        "activation": {
+          "VALU": 3168000,
+          "VOPD": 1008000,
+          "WAIT": 480000,
+          "SALU": 192000
+        },
+        "ffn_contract": {
+          "WAIT": 528000,
+          "VALU": 384000,
+          "VMEM": 192000,
+          "WMMA": 192000
+        },
+        "contract_rtz_pack": {
+          "VALU": 660000,
+          "SALU": 48000,
+          "VOPD": 36000,
+          "WAIT": 48000,
+          "DS": 24000
+        },
+        "ffn_mix": {
+          "VALU": 93000,
+          "SALU": 51000,
+          "WAIT": 144000,
+          "VMEM": 72000,
+          "WMMA": 96000
+        },
+        "control_unattributed": {
+          "WAIT": 135000,
+          "VALU": 240000,
+          "VOPD": 12000,
+          "SALU": 3000
+        },
+        "residual_input_rtz": {
+          "WAIT": 480000,
+          "VMEM": 276000,
+          "SALU": 36000,
+          "VALU": 1404000,
+          "VOPD": 84000,
+          "DS": 24000
+        },
+        "feature_pack": {
+          "VALU": 156000,
+          "VOPD": 84000,
+          "SALU": 48000,
+          "WAIT": 48000,
+          "DS": 24000
+        },
+        "qkv_matrix": {
+          "VOPD": 9000,
+          "VALU": 426000,
+          "SALU": 3000,
+          "WAIT": 606000,
+          "VMEM": 294000,
+          "WMMA": 288000,
+          "DS": 66000
+        },
+        "qkv_norm_pack": {
+          "WAIT": 633000,
+          "VMEM": 6000,
+          "DS": 102000,
+          "VOPD": 327000,
+          "VALU": 1575000,
+          "SALU": 144000
+        },
+        "score_exp": {
+          "VALU": 1521000,
+          "SALU": 123000,
+          "WAIT": 219000,
+          "VMEM": 96000,
+          "WMMA": 96000,
+          "VOPD": 576000
+        },
+        "softmax": {
+          "WAIT": 288000,
+          "VOPD": 192000,
+          "WMMA": 48000,
+          "VALU": 1488000,
+          "SALU": 180000
+        },
+        "av": {
+          "WMMA": 96000,
+          "WAIT": 132000,
+          "VOPD": 120000,
+          "SALU": 48000,
+          "VALU": 96000,
+          "DS": 24000
+        },
+        "projection": {
+          "VALU": 15000,
+          "SALU": 45000,
+          "WAIT": 216000,
+          "VMEM": 168000,
+          "DS": 36000,
+          "WMMA": 168000
+        },
+        "tail": {
+          "VOPD": 132000,
+          "SALU": 882000,
+          "WAIT": 735000,
+          "VALU": 744000,
+          "VMEM": 24000
+        }
+      },
+      "ordinary_work_share": 0.05991990133430137
+    },
+    "c64_wave2_bi_bo": {
+      "calls": [
+        {
+          "block": 6,
+          "windows": 1581,
+          "waves_per_window": 2,
+          "post": 4
+        },
+        {
+          "block": 7,
+          "windows": 1530,
+          "waves_per_window": 2,
+          "post": 4
+        },
+        {
+          "block": 62,
+          "windows": 1500,
+          "waves_per_window": 2,
+          "post": 4
+        },
+        {
+          "block": 63,
+          "windows": 1581,
+          "waves_per_window": 2,
+          "post": 4
+        },
+        {
+          "block": 64,
+          "windows": 1530,
+          "waves_per_window": 2,
+          "post": 4
+        }
+      ],
+      "dispatches": 5,
+      "windows": 7722,
+      "wave_windows": 15444,
+      "per_window_upper": {
+        "SMEM": 6,
+        "WAIT": 3870,
+        "SALU": 1476,
+        "VALU": 9178,
+        "VOPD": 1968,
+        "VMEM": 1024,
+        "DS": 272,
+        "WMMA": 912
+      },
+      "weighted_upper": {
+        "SMEM": 46332,
+        "WAIT": 29884140,
+        "SALU": 11397672,
+        "VALU": 70872516,
+        "VOPD": 15196896,
+        "VMEM": 7907328,
+        "DS": 2100384,
+        "WMMA": 7042464
+      },
+      "weighted_phases": {
+        "input": {
+          "SMEM": 46332,
+          "WAIT": 818532,
+          "SALU": 895752,
+          "VALU": 7814664,
+          "VOPD": 988416,
+          "VMEM": 123552,
+          "DS": 61776
+        },
+        "ffn_loop": {
+          "VALU": 1281852,
+          "SALU": 1220076,
+          "WAIT": 370656
+        },
+        "ffn_expand": {
+          "VALU": 3953664,
+          "WAIT": 4694976,
+          "VMEM": 1976832,
+          "DS": 494208,
+          "WMMA": 1976832
+        },
+        "activation": {
+          "VALU": 15814656,
+          "VOPD": 5436288,
+          "WAIT": 2965248,
+          "SALU": 988416
+        },
+        "ffn_contract": {
+          "WAIT": 2718144,
+          "VALU": 1976832,
+          "VMEM": 988416,
+          "WMMA": 988416
+        },
+        "contract_rtz_pack": {
+          "VALU": 3397680,
+          "SALU": 247104,
+          "VOPD": 185328,
+          "WAIT": 247104,
+          "DS": 123552
+        },
+        "ffn_mix": {
+          "VALU": 447876,
+          "SALU": 262548,
+          "WAIT": 864864,
+          "WMMA": 494208
+        },
+        "control_unattributed": {
+          "WAIT": 694980,
+          "VALU": 1235520,
+          "VOPD": 61776,
+          "SALU": 77220
+        },
+        "residual_input_rtz": {
+          "WAIT": 1606176,
+          "SALU": 123552,
+          "VALU": 4200768,
+          "VMEM": 1791504,
+          "DS": 123552,
+          "VOPD": 926640
+        },
+        "feature_pack": {
+          "VOPD": 617760,
+          "WAIT": 308880,
+          "SALU": 247104,
+          "VALU": 555984,
+          "DS": 123552
+        },
+        "qkv_matrix": {
+          "VOPD": 46332,
+          "VALU": 2193048,
+          "SALU": 15444,
+          "WAIT": 3119688,
+          "VMEM": 1513512,
+          "WMMA": 1482624,
+          "DS": 339768
+        },
+        "qkv_norm_pack": {
+          "WAIT": 3305016,
+          "VMEM": 30888,
+          "DS": 525096,
+          "VOPD": 1683396,
+          "VALU": 8108100,
+          "SALU": 741312
+        },
+        "score_exp": {
+          "VALU": 7830108,
+          "SALU": 633204,
+          "WAIT": 1173744,
+          "VMEM": 494208,
+          "WMMA": 494208,
+          "VOPD": 2965248
+        },
+        "softmax": {
+          "VOPD": 988416,
+          "WMMA": 247104,
+          "WAIT": 1420848,
+          "VALU": 7660224,
+          "SALU": 926640
+        },
+        "av": {
+          "WMMA": 494208,
+          "WAIT": 679536,
+          "VOPD": 617760,
+          "SALU": 247104,
+          "VALU": 494208,
+          "DS": 123552
+        },
+        "projection": {
+          "VALU": 77220,
+          "SALU": 231660,
+          "WAIT": 1111968,
+          "VMEM": 864864,
+          "DS": 185328,
+          "WMMA": 864864
+        },
+        "tail": {
+          "VOPD": 679536,
+          "SALU": 4540536,
+          "WAIT": 3783780,
+          "VALU": 3830112,
+          "VMEM": 123552
+        }
+      },
+      "ordinary_work_share": 0.3044793172122644
+    },
+    "c128_wave2": {
+      "calls": [],
+      "dispatches": 0,
+      "windows": 0,
+      "wave_windows": 0,
+      "per_window_upper": {
+        "SMEM": 12,
+        "WAIT": 13084,
+        "SALU": 7696,
+        "VALU": 22592,
+        "VOPD": 3952,
+        "VMEM": 3456,
+        "DS": 832,
+        "WMMA": 2976
+      },
+      "weighted_upper": {
+        "SMEM": 0,
+        "WAIT": 0,
+        "SALU": 0,
+        "VALU": 0,
+        "VOPD": 0,
+        "VMEM": 0,
+        "DS": 0,
+        "WMMA": 0
+      },
+      "weighted_phases": {
+        "input": {
+          "SMEM": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "VOPD": 0,
+          "VMEM": 0,
+          "DS": 0
+        },
+        "ffn_loop": {
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VOPD": 0
+        },
+        "ffn_expand": {
+          "VALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "activation": {
+          "VALU": 0,
+          "WAIT": 0,
+          "VOPD": 0,
+          "SALU": 0
+        },
+        "ffn_contract": {
+          "VMEM": 0,
+          "WAIT": 0,
+          "WMMA": 0
+        },
+        "contract_rtz_pack": {
+          "VALU": 0,
+          "SALU": 0,
+          "VOPD": 0,
+          "WAIT": 0,
+          "DS": 0
+        },
+        "ffn_mix": {
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "control_unattributed": {
+          "WAIT": 0,
+          "VALU": 0,
+          "VOPD": 0,
+          "SALU": 0
+        },
+        "residual_input_rtz": {
+          "WAIT": 0,
+          "VMEM": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "VOPD": 0,
+          "DS": 0
+        },
+        "feature_pack": {
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VOPD": 0,
+          "DS": 0
+        },
+        "qkv_matrix": {
+          "VOPD": 0,
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "qkv_norm_pack": {
+          "VMEM": 0,
+          "DS": 0,
+          "VOPD": 0,
+          "WAIT": 0,
+          "VALU": 0,
+          "SALU": 0
+        },
+        "score_exp": {
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "WMMA": 0,
+          "VOPD": 0
+        },
+        "softmax": {
+          "WAIT": 0,
+          "VOPD": 0,
+          "WMMA": 0,
+          "VALU": 0,
+          "SALU": 0
+        },
+        "av": {
+          "WMMA": 0,
+          "WAIT": 0,
+          "VOPD": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "DS": 0
+        },
+        "projection": {
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "tail": {
+          "VMEM": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "VOPD": 0
+        }
+      },
+      "ordinary_work_share": 0.0
+    },
+    "c128_wave2_bi": {
+      "calls": [
+        {
+          "block": 14,
+          "windows": 416,
+          "waves_per_window": 4,
+          "post": 3
+        },
+        {
+          "block": 61,
+          "windows": 400,
+          "waves_per_window": 4,
+          "post": 0
+        }
+      ],
+      "dispatches": 2,
+      "windows": 816,
+      "wave_windows": 3264,
+      "per_window_upper": {
+        "SMEM": 12,
+        "WAIT": 12484,
+        "SALU": 7696,
+        "VALU": 22988,
+        "VOPD": 3704,
+        "VMEM": 3424,
+        "DS": 832,
+        "WMMA": 2976
+      },
+      "weighted_upper": {
+        "SMEM": 9792,
+        "WAIT": 10186944,
+        "SALU": 6279936,
+        "VALU": 18758208,
+        "VOPD": 3022464,
+        "VMEM": 2793984,
+        "DS": 678912,
+        "WMMA": 2428416
+      },
+      "weighted_phases": {
+        "input": {
+          "SMEM": 9792,
+          "WAIT": 186048,
+          "SALU": 176256,
+          "VALU": 1635264,
+          "VOPD": 270912,
+          "VMEM": 26112,
+          "DS": 13056
+        },
+        "ffn_loop": {
+          "VALU": 760512,
+          "WAIT": 378624,
+          "SALU": 205632
+        },
+        "ffn_expand": {
+          "VALU": 1044480,
+          "WAIT": 1618944,
+          "VMEM": 835584,
+          "DS": 208896,
+          "WMMA": 835584
+        },
+        "activation": {
+          "VALU": 3446784,
+          "WAIT": 574464,
+          "VOPD": 1096704,
+          "SALU": 208896
+        },
+        "ffn_contract": {
+          "VMEM": 208896,
+          "WAIT": 208896,
+          "WMMA": 208896
+        },
+        "contract_rtz_pack": {
+          "VALU": 718080,
+          "SALU": 52224,
+          "VOPD": 39168,
+          "WAIT": 52224,
+          "DS": 26112
+        },
+        "ffn_mix": {
+          "VALU": 97920,
+          "WAIT": 329664,
+          "SALU": 52224,
+          "WMMA": 208896,
+          "DS": 13056
+        },
+        "control_unattributed": {
+          "WAIT": 133824,
+          "VALU": 235008,
+          "VOPD": 13056,
+          "SALU": 16320
+        },
+        "residual_input_rtz": {
+          "WAIT": 326400,
+          "SALU": 26112,
+          "VALU": 1018368,
+          "VMEM": 483072,
+          "DS": 39168,
+          "VOPD": 130560
+        },
+        "feature_pack": {
+          "VOPD": 130560,
+          "WAIT": 65280,
+          "SALU": 52224,
+          "VALU": 117504,
+          "DS": 26112
+        },
+        "qkv_matrix": {
+          "VOPD": 9792,
+          "VALU": 871488,
+          "SALU": 3264,
+          "WAIT": 1393728,
+          "VMEM": 626688,
+          "DS": 117504,
+          "WMMA": 626688
+        },
+        "qkv_norm_pack": {
+          "VMEM": 13056,
+          "DS": 143616,
+          "VOPD": 352512,
+          "WAIT": 643008,
+          "VALU": 1720128,
+          "SALU": 156672
+        },
+        "score_exp": {
+          "VALU": 1680960,
+          "SALU": 127296,
+          "WAIT": 238272,
+          "VMEM": 104448,
+          "WMMA": 104448,
+          "VOPD": 626688
+        },
+        "softmax": {
+          "WAIT": 313344,
+          "VOPD": 208896,
+          "WMMA": 52224,
+          "VALU": 1618944,
+          "SALU": 195840
+        },
+        "av": {
+          "WMMA": 104448,
+          "WAIT": 143616,
+          "VOPD": 130560,
+          "SALU": 52224,
+          "VALU": 104448,
+          "DS": 26112
+        },
+        "projection": {
+          "VALU": 32640,
+          "SALU": 52224,
+          "WAIT": 365568,
+          "VMEM": 287232,
+          "DS": 65280,
+          "WMMA": 287232
+        },
+        "tail": {
+          "VMEM": 208896,
+          "WAIT": 3215040,
+          "SALU": 4902528,
+          "VALU": 3655680,
+          "VOPD": 13056
+        }
+      },
+      "ordinary_work_share": 0.07705134710324599
+    },
+    "c128_wave2_bo": {
+      "calls": [
+        {
+          "block": 9,
+          "windows": 375,
+          "waves_per_window": 4,
+          "post": 4
+        }
+      ],
+      "dispatches": 1,
+      "windows": 375,
+      "wave_windows": 1500,
+      "per_window_upper": {
+        "SMEM": 12,
+        "WAIT": 10328,
+        "SALU": 2868,
+        "VALU": 19052,
+        "VOPD": 4144,
+        "VMEM": 3232,
+        "DS": 832,
+        "WMMA": 2976
+      },
+      "weighted_upper": {
+        "SMEM": 4500,
+        "WAIT": 3873000,
+        "SALU": 1075500,
+        "VALU": 7144500,
+        "VOPD": 1554000,
+        "VMEM": 1212000,
+        "DS": 312000,
+        "WMMA": 1116000
+      },
+      "weighted_phases": {
+        "input": {
+          "SMEM": 4500,
+          "WAIT": 153000,
+          "SALU": 81000,
+          "VALU": 564000,
+          "VOPD": 141000,
+          "VMEM": 24000,
+          "DS": 6000
+        },
+        "ffn_loop": {
+          "VALU": 348000,
+          "WAIT": 177000,
+          "SALU": 94500,
+          "VOPD": 1500
+        },
+        "ffn_expand": {
+          "VALU": 480000,
+          "WAIT": 744000,
+          "VMEM": 384000,
+          "DS": 96000,
+          "WMMA": 384000
+        },
+        "activation": {
+          "VALU": 1344000,
+          "WAIT": 360000,
+          "VOPD": 624000,
+          "SALU": 96000
+        },
+        "ffn_contract": {
+          "VMEM": 96000,
+          "WAIT": 96000,
+          "WMMA": 96000
+        },
+        "contract_rtz_pack": {
+          "VALU": 330000,
+          "SALU": 24000,
+          "VOPD": 18000,
+          "WAIT": 24000,
+          "DS": 12000
+        },
+        "ffn_mix": {
+          "VALU": 43500,
+          "WAIT": 114000,
+          "SALU": 24000,
+          "VMEM": 84000,
+          "DS": 24000,
+          "WMMA": 96000
+        },
+        "control_unattributed": {
+          "WAIT": 73500,
+          "VALU": 126000,
+          "VOPD": 6000,
+          "SALU": 1500
+        },
+        "residual_input_rtz": {
+          "WAIT": 258000,
+          "VMEM": 138000,
+          "SALU": 18000,
+          "VALU": 684000,
+          "VOPD": 42000
+        },
+        "feature_pack": {
+          "VALU": 96000,
+          "VOPD": 42000,
+          "WAIT": 30000,
+          "SALU": 24000,
+          "DS": 12000
+        },
+        "qkv_matrix": {
+          "VOPD": 4500,
+          "VALU": 400500,
+          "SALU": 1500,
+          "WAIT": 648000,
+          "VMEM": 288000,
+          "DS": 54000,
+          "WMMA": 288000
+        },
+        "qkv_norm_pack": {
+          "VMEM": 6000,
+          "DS": 66000,
+          "VOPD": 165000,
+          "WAIT": 292500,
+          "VALU": 784500,
+          "SALU": 72000
+        },
+        "score_exp": {
+          "VALU": 772500,
+          "SALU": 61500,
+          "WAIT": 109500,
+          "VMEM": 48000,
+          "WMMA": 48000,
+          "VOPD": 288000
+        },
+        "softmax": {
+          "WAIT": 144000,
+          "VOPD": 96000,
+          "WMMA": 24000,
+          "VALU": 744000,
+          "SALU": 90000
+        },
+        "av": {
+          "WMMA": 48000,
+          "WAIT": 66000,
+          "VOPD": 60000,
+          "SALU": 24000,
+          "VALU": 48000,
+          "DS": 12000
+        },
+        "projection": {
+          "VALU": 7500,
+          "SALU": 22500,
+          "WAIT": 168000,
+          "VMEM": 132000,
+          "DS": 30000,
+          "WMMA": 132000
+        },
+        "tail": {
+          "VOPD": 66000,
+          "SALU": 441000,
+          "WAIT": 415500,
+          "VALU": 372000,
+          "VMEM": 12000
+        }
+      },
+      "ordinary_work_share": 0.030771830307971454
+    },
+    "c128_wave2_bi_bo": {
+      "calls": [
+        {
+          "block": 10,
+          "windows": 416,
+          "waves_per_window": 4,
+          "post": 4
+        },
+        {
+          "block": 11,
+          "windows": 390,
+          "waves_per_window": 4,
+          "post": 4
+        },
+        {
+          "block": 12,
+          "windows": 400,
+          "waves_per_window": 4,
+          "post": 4
+        },
+        {
+          "block": 13,
+          "windows": 375,
+          "waves_per_window": 4,
+          "post": 4
+        },
+        {
+          "block": 56,
+          "windows": 390,
+          "waves_per_window": 4,
+          "post": 4
+        },
+        {
+          "block": 57,
+          "windows": 400,
+          "waves_per_window": 4,
+          "post": 4
+        },
+        {
+          "block": 58,
+          "windows": 375,
+          "waves_per_window": 4,
+          "post": 4
+        },
+        {
+          "block": 59,
+          "windows": 416,
+          "waves_per_window": 4,
+          "post": 4
+        },
+        {
+          "block": 60,
+          "windows": 390,
+          "waves_per_window": 4,
+          "post": 4
+        }
+      ],
+      "dispatches": 9,
+      "windows": 3552,
+      "wave_windows": 14208,
+      "per_window_upper": {
+        "SMEM": 12,
+        "WAIT": 9664,
+        "SALU": 2868,
+        "VALU": 19512,
+        "VOPD": 3864,
+        "VMEM": 3200,
+        "DS": 832,
+        "WMMA": 2976
+      },
+      "weighted_upper": {
+        "SMEM": 42624,
+        "WAIT": 34326528,
+        "SALU": 10187136,
+        "VALU": 69306624,
+        "VOPD": 13724928,
+        "VMEM": 11366400,
+        "DS": 2955264,
+        "WMMA": 10570752
+      },
+      "weighted_phases": {
+        "input": {
+          "SMEM": 42624,
+          "WAIT": 809856,
+          "SALU": 767232,
+          "VALU": 7118208,
+          "VOPD": 1179264,
+          "VMEM": 113664,
+          "DS": 56832
+        },
+        "ffn_loop": {
+          "VALU": 3310464,
+          "WAIT": 1648128,
+          "SALU": 895104
+        },
+        "ffn_expand": {
+          "VALU": 4546560,
+          "WAIT": 7047168,
+          "VMEM": 3637248,
+          "DS": 909312,
+          "WMMA": 3637248
+        },
+        "activation": {
+          "VALU": 15003648,
+          "WAIT": 2500608,
+          "VOPD": 4773888,
+          "SALU": 909312
+        },
+        "ffn_contract": {
+          "VMEM": 909312,
+          "WAIT": 909312,
+          "WMMA": 909312
+        },
+        "contract_rtz_pack": {
+          "VALU": 3125760,
+          "SALU": 227328,
+          "VOPD": 170496,
+          "WAIT": 227328,
+          "DS": 113664
+        },
+        "ffn_mix": {
+          "VALU": 426240,
+          "WAIT": 1435008,
+          "SALU": 227328,
+          "WMMA": 909312,
+          "DS": 56832
+        },
+        "control_unattributed": {
+          "WAIT": 639360,
+          "VALU": 1136640,
+          "VOPD": 56832,
+          "SALU": 71040
+        },
+        "residual_input_rtz": {
+          "WAIT": 1420800,
+          "SALU": 113664,
+          "VALU": 4432896,
+          "VMEM": 2102784,
+          "DS": 170496,
+          "VOPD": 568320
+        },
+        "feature_pack": {
+          "VOPD": 568320,
+          "WAIT": 284160,
+          "SALU": 227328,
+          "VALU": 511488,
+          "DS": 113664
+        },
+        "qkv_matrix": {
+          "VOPD": 42624,
+          "VALU": 3793536,
+          "SALU": 14208,
+          "WAIT": 6066816,
+          "VMEM": 2727936,
+          "DS": 511488,
+          "WMMA": 2727936
+        },
+        "qkv_norm_pack": {
+          "VMEM": 56832,
+          "DS": 625152,
+          "VOPD": 1534464,
+          "WAIT": 2798976,
+          "VALU": 7487616,
+          "SALU": 681984
+        },
+        "score_exp": {
+          "VALU": 7317120,
+          "SALU": 582528,
+          "WAIT": 1022976,
+          "VMEM": 454656,
+          "WMMA": 454656,
+          "VOPD": 2727936
+        },
+        "softmax": {
+          "WAIT": 1363968,
+          "VOPD": 909312,
+          "WMMA": 227328,
+          "VALU": 7047168,
+          "SALU": 852480
+        },
+        "av": {
+          "WMMA": 454656,
+          "WAIT": 625152,
+          "VOPD": 568320,
+          "SALU": 227328,
+          "VALU": 454656,
+          "DS": 113664
+        },
+        "projection": {
+          "VALU": 71040,
+          "SALU": 213120,
+          "WAIT": 1591296,
+          "VMEM": 1250304,
+          "DS": 284160,
+          "WMMA": 1250304
+        },
+        "tail": {
+          "VOPD": 625152,
+          "SALU": 4177152,
+          "WAIT": 3935616,
+          "VALU": 3523584,
+          "VMEM": 113664
+        }
+      },
+      "ordinary_work_share": 0.2937325778411804
+    },
+    "c256_wave2": {
+      "calls": [],
+      "dispatches": 0,
+      "windows": 0,
+      "wave_windows": 0,
+      "per_window_upper": {
+        "SMEM": 24,
+        "WAIT": 29664,
+        "SALU": 15392,
+        "VALU": 46352,
+        "VOPD": 6264,
+        "VMEM": 11520,
+        "DS": 2816,
+        "WMMA": 10560
+      },
+      "weighted_upper": {
+        "SMEM": 0,
+        "WAIT": 0,
+        "SALU": 0,
+        "VALU": 0,
+        "VOPD": 0,
+        "VMEM": 0,
+        "DS": 0,
+        "WMMA": 0
+      },
+      "weighted_phases": {
+        "input": {
+          "SMEM": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "VOPD": 0,
+          "VMEM": 0,
+          "DS": 0
+        },
+        "ffn_loop": {
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VOPD": 0
+        },
+        "ffn_expand": {
+          "VALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "activation": {
+          "VALU": 0,
+          "WAIT": 0,
+          "VOPD": 0,
+          "SALU": 0
+        },
+        "ffn_contract": {
+          "VMEM": 0,
+          "WAIT": 0,
+          "WMMA": 0
+        },
+        "contract_rtz_pack": {
+          "VALU": 0,
+          "SALU": 0,
+          "VOPD": 0,
+          "WAIT": 0,
+          "DS": 0
+        },
+        "ffn_mix": {
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "control_unattributed": {
+          "WAIT": 0,
+          "VALU": 0,
+          "SALU": 0
+        },
+        "residual_input_rtz": {
+          "WAIT": 0,
+          "VMEM": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "VOPD": 0,
+          "DS": 0
+        },
+        "feature_pack": {
+          "VOPD": 0,
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "DS": 0
+        },
+        "qkv_matrix": {
+          "VOPD": 0,
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "qkv_norm_pack": {
+          "VMEM": 0,
+          "DS": 0,
+          "VOPD": 0,
+          "WAIT": 0,
+          "VALU": 0,
+          "SALU": 0
+        },
+        "score_exp": {
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "WMMA": 0,
+          "VOPD": 0
+        },
+        "softmax": {
+          "WAIT": 0,
+          "VOPD": 0,
+          "WMMA": 0,
+          "VALU": 0,
+          "SALU": 0
+        },
+        "av": {
+          "WMMA": 0,
+          "WAIT": 0,
+          "VALU": 0,
+          "SALU": 0,
+          "VOPD": 0,
+          "DS": 0
+        },
+        "projection": {
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "tail": {
+          "VMEM": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "DS": 0,
+          "VOPD": 0
+        }
+      },
+      "ordinary_work_share": 0.0
+    },
+    "c256_wave2_bi": {
+      "calls": [],
+      "dispatches": 0,
+      "windows": 0,
+      "wave_windows": 0,
+      "per_window_upper": {
+        "SMEM": 24,
+        "WAIT": 30728,
+        "SALU": 15392,
+        "VALU": 47192,
+        "VOPD": 5840,
+        "VMEM": 11456,
+        "DS": 2816,
+        "WMMA": 10560
+      },
+      "weighted_upper": {
+        "SMEM": 0,
+        "WAIT": 0,
+        "SALU": 0,
+        "VALU": 0,
+        "VOPD": 0,
+        "VMEM": 0,
+        "DS": 0,
+        "WMMA": 0
+      },
+      "weighted_phases": {
+        "input": {
+          "SMEM": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "VOPD": 0,
+          "VMEM": 0,
+          "DS": 0
+        },
+        "ffn_loop": {
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0
+        },
+        "ffn_expand": {
+          "VALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "activation": {
+          "VALU": 0,
+          "VOPD": 0,
+          "WAIT": 0,
+          "SALU": 0
+        },
+        "ffn_contract": {
+          "VMEM": 0,
+          "WAIT": 0,
+          "WMMA": 0
+        },
+        "contract_rtz_pack": {
+          "VALU": 0,
+          "SALU": 0,
+          "VOPD": 0,
+          "WAIT": 0,
+          "DS": 0
+        },
+        "ffn_mix": {
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "control_unattributed": {
+          "WAIT": 0,
+          "VALU": 0,
+          "SALU": 0
+        },
+        "residual_input_rtz": {
+          "WAIT": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "VMEM": 0,
+          "VOPD": 0
+        },
+        "feature_pack": {
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VOPD": 0,
+          "DS": 0
+        },
+        "qkv_matrix": {
+          "VOPD": 0,
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "qkv_norm_pack": {
+          "VMEM": 0,
+          "DS": 0,
+          "VOPD": 0,
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0
+        },
+        "score_exp": {
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "WMMA": 0,
+          "VOPD": 0
+        },
+        "softmax": {
+          "WAIT": 0,
+          "VOPD": 0,
+          "WMMA": 0,
+          "VALU": 0,
+          "SALU": 0
+        },
+        "av": {
+          "WMMA": 0,
+          "WAIT": 0,
+          "VALU": 0,
+          "SALU": 0,
+          "VOPD": 0,
+          "DS": 0
+        },
+        "projection": {
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "tail": {
+          "VMEM": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "DS": 0,
+          "VOPD": 0
+        }
+      },
+      "ordinary_work_share": 0.0
+    },
+    "c256_wave2_bo": {
+      "calls": [],
+      "dispatches": 0,
+      "windows": 0,
+      "wave_windows": 0,
+      "per_window_upper": {
+        "SMEM": 24,
+        "WAIT": 23992,
+        "SALU": 5736,
+        "VALU": 39400,
+        "VOPD": 6584,
+        "VMEM": 11072,
+        "DS": 2816,
+        "WMMA": 10560
+      },
+      "weighted_upper": {
+        "SMEM": 0,
+        "WAIT": 0,
+        "SALU": 0,
+        "VALU": 0,
+        "VOPD": 0,
+        "VMEM": 0,
+        "DS": 0,
+        "WMMA": 0
+      },
+      "weighted_phases": {
+        "input": {
+          "SMEM": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "VOPD": 0,
+          "VMEM": 0,
+          "DS": 0
+        },
+        "ffn_loop": {
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VOPD": 0
+        },
+        "ffn_expand": {
+          "VALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "activation": {
+          "VALU": 0,
+          "WAIT": 0,
+          "VOPD": 0,
+          "SALU": 0
+        },
+        "ffn_contract": {
+          "VMEM": 0,
+          "WAIT": 0,
+          "WMMA": 0
+        },
+        "contract_rtz_pack": {
+          "VALU": 0,
+          "SALU": 0,
+          "VOPD": 0,
+          "WAIT": 0,
+          "DS": 0
+        },
+        "ffn_mix": {
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "control_unattributed": {
+          "WAIT": 0,
+          "VALU": 0,
+          "SALU": 0
+        },
+        "residual_input_rtz": {
+          "WAIT": 0,
+          "VMEM": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "VOPD": 0,
+          "DS": 0
+        },
+        "feature_pack": {
+          "VOPD": 0,
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "DS": 0
+        },
+        "qkv_matrix": {
+          "VOPD": 0,
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "qkv_norm_pack": {
+          "VMEM": 0,
+          "DS": 0,
+          "VOPD": 0,
+          "WAIT": 0,
+          "VALU": 0,
+          "SALU": 0
+        },
+        "score_exp": {
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "WMMA": 0,
+          "VOPD": 0
+        },
+        "softmax": {
+          "WAIT": 0,
+          "VOPD": 0,
+          "WMMA": 0,
+          "VALU": 0,
+          "SALU": 0
+        },
+        "av": {
+          "WMMA": 0,
+          "WAIT": 0,
+          "VALU": 0,
+          "SALU": 0,
+          "VOPD": 0,
+          "DS": 0
+        },
+        "projection": {
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "tail": {
+          "VOPD": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VALU": 0,
+          "VMEM": 0,
+          "DS": 0
+        }
+      },
+      "ordinary_work_share": 0.0
+    },
+    "c256_wave2_bi_bo": {
+      "calls": [],
+      "dispatches": 0,
+      "windows": 0,
+      "wave_windows": 0,
+      "per_window_upper": {
+        "SMEM": 24,
+        "WAIT": 25056,
+        "SALU": 5736,
+        "VALU": 40240,
+        "VOPD": 6160,
+        "VMEM": 11008,
+        "DS": 2816,
+        "WMMA": 10560
+      },
+      "weighted_upper": {
+        "SMEM": 0,
+        "WAIT": 0,
+        "SALU": 0,
+        "VALU": 0,
+        "VOPD": 0,
+        "VMEM": 0,
+        "DS": 0,
+        "WMMA": 0
+      },
+      "weighted_phases": {
+        "input": {
+          "SMEM": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "VOPD": 0,
+          "VMEM": 0,
+          "DS": 0
+        },
+        "ffn_loop": {
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0
+        },
+        "ffn_expand": {
+          "VALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "activation": {
+          "VALU": 0,
+          "VOPD": 0,
+          "WAIT": 0,
+          "SALU": 0
+        },
+        "ffn_contract": {
+          "VMEM": 0,
+          "WAIT": 0,
+          "WMMA": 0
+        },
+        "contract_rtz_pack": {
+          "VALU": 0,
+          "SALU": 0,
+          "VOPD": 0,
+          "WAIT": 0,
+          "DS": 0
+        },
+        "ffn_mix": {
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "control_unattributed": {
+          "WAIT": 0,
+          "VALU": 0,
+          "SALU": 0
+        },
+        "residual_input_rtz": {
+          "WAIT": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "VMEM": 0,
+          "VOPD": 0
+        },
+        "feature_pack": {
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VOPD": 0,
+          "DS": 0
+        },
+        "qkv_matrix": {
+          "VOPD": 0,
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "qkv_norm_pack": {
+          "VMEM": 0,
+          "DS": 0,
+          "VOPD": 0,
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0
+        },
+        "score_exp": {
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "WMMA": 0,
+          "VOPD": 0
+        },
+        "softmax": {
+          "WAIT": 0,
+          "VOPD": 0,
+          "WMMA": 0,
+          "VALU": 0,
+          "SALU": 0
+        },
+        "av": {
+          "WMMA": 0,
+          "WAIT": 0,
+          "VALU": 0,
+          "SALU": 0,
+          "VOPD": 0,
+          "DS": 0
+        },
+        "projection": {
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "tail": {
+          "VOPD": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VALU": 0,
+          "VMEM": 0,
+          "DS": 0
+        }
+      },
+      "ordinary_work_share": 0.0
+    },
+    "c256_attn_wave": {
+      "calls": [
+        {
+          "block": 22,
+          "windows": 104,
+          "waves_per_window": 8,
+          "post": 3
+        },
+        {
+          "block": 55,
+          "windows": 104,
+          "waves_per_window": 8,
+          "post": 0
+        }
+      ],
+      "dispatches": 2,
+      "windows": 208,
+      "wave_windows": 1664,
+      "per_window_upper": {
+        "SMEM": 48,
+        "WAIT": 13128,
+        "SALU": 14784,
+        "VALU": 19848,
+        "VMEM": 2264,
+        "DS": 960,
+        "VOPD": 2400,
+        "WMMA": 1856
+      },
+      "weighted_upper": {
+        "SMEM": 9984,
+        "WAIT": 2730624,
+        "SALU": 3075072,
+        "VALU": 4128384,
+        "VMEM": 470912,
+        "DS": 199680,
+        "VOPD": 499200,
+        "WMMA": 386048
+      },
+      "weighted_phases": {
+        "input_qkv": {
+          "SMEM": 9984,
+          "WAIT": 277888,
+          "SALU": 131456,
+          "VALU": 347776,
+          "VMEM": 58240,
+          "DS": 119808,
+          "VOPD": 1664
+        },
+        "score_exp": {
+          "VALU": 845312,
+          "WAIT": 118144,
+          "VOPD": 324480,
+          "SALU": 73216,
+          "VMEM": 53248,
+          "WMMA": 53248
+        },
+        "softmax": {
+          "WMMA": 26624,
+          "WAIT": 153088,
+          "VOPD": 93184,
+          "VALU": 825344,
+          "SALU": 99840
+        },
+        "av": {
+          "WMMA": 53248,
+          "WAIT": 73216,
+          "VOPD": 66560,
+          "SALU": 26624,
+          "VALU": 53248,
+          "DS": 13312
+        },
+        "control_unattributed": {
+          "WAIT": 11648,
+          "SALU": 8320
+        },
+        "projection": {
+          "SALU": 19968,
+          "WAIT": 279552,
+          "VMEM": 252928,
+          "VALU": 19968,
+          "DS": 13312,
+          "WMMA": 252928
+        },
+        "tail": {
+          "VALU": 2036736,
+          "WAIT": 1817088,
+          "VOPD": 13312,
+          "DS": 53248,
+          "SALU": 2715648,
+          "VMEM": 106496
+        }
+      },
+      "ordinary_work_share": 0.01637055004700624
+    },
+    "c256_attn_wave_bo": {
+      "calls": [
+        {
+          "block": 15,
+          "windows": 104,
+          "waves_per_window": 8,
+          "post": 4
+        },
+        {
+          "block": 16,
+          "windows": 104,
+          "waves_per_window": 8,
+          "post": 4
+        },
+        {
+          "block": 17,
+          "windows": 104,
+          "waves_per_window": 8,
+          "post": 4
+        },
+        {
+          "block": 18,
+          "windows": 104,
+          "waves_per_window": 8,
+          "post": 4
+        },
+        {
+          "block": 19,
+          "windows": 104,
+          "waves_per_window": 8,
+          "post": 4
+        },
+        {
+          "block": 20,
+          "windows": 104,
+          "waves_per_window": 8,
+          "post": 4
+        },
+        {
+          "block": 21,
+          "windows": 104,
+          "waves_per_window": 8,
+          "post": 4
+        },
+        {
+          "block": 48,
+          "windows": 104,
+          "waves_per_window": 8,
+          "post": 0
+        },
+        {
+          "block": 49,
+          "windows": 104,
+          "waves_per_window": 8,
+          "post": 4
+        },
+        {
+          "block": 50,
+          "windows": 104,
+          "waves_per_window": 8,
+          "post": 4
+        },
+        {
+          "block": 51,
+          "windows": 104,
+          "waves_per_window": 8,
+          "post": 4
+        },
+        {
+          "block": 52,
+          "windows": 104,
+          "waves_per_window": 8,
+          "post": 4
+        },
+        {
+          "block": 53,
+          "windows": 104,
+          "waves_per_window": 8,
+          "post": 4
+        },
+        {
+          "block": 54,
+          "windows": 104,
+          "waves_per_window": 8,
+          "post": 4
+        }
+      ],
+      "dispatches": 14,
+      "windows": 1456,
+      "wave_windows": 11648,
+      "per_window_upper": {
+        "SMEM": 48,
+        "WAIT": 7400,
+        "SALU": 4080,
+        "VALU": 12296,
+        "VMEM": 1816,
+        "DS": 928,
+        "VOPD": 2712,
+        "WMMA": 1856
+      },
+      "weighted_upper": {
+        "SMEM": 69888,
+        "WAIT": 10774400,
+        "SALU": 5940480,
+        "VALU": 17902976,
+        "VMEM": 2644096,
+        "DS": 1351168,
+        "VOPD": 3948672,
+        "WMMA": 2702336
+      },
+      "weighted_phases": {
+        "input_qkv": {
+          "SMEM": 69888,
+          "WAIT": 1956864,
+          "SALU": 920192,
+          "VALU": 2434432,
+          "VMEM": 407680,
+          "DS": 838656,
+          "VOPD": 11648
+        },
+        "score_exp": {
+          "VALU": 5835648,
+          "WAIT": 792064,
+          "VOPD": 2259712,
+          "SALU": 430976,
+          "VMEM": 372736,
+          "WMMA": 372736
+        },
+        "softmax": {
+          "WMMA": 186368,
+          "WAIT": 1071616,
+          "VOPD": 652288,
+          "VALU": 5777408,
+          "SALU": 698880
+        },
+        "av": {
+          "WMMA": 372736,
+          "WAIT": 512512,
+          "VOPD": 465920,
+          "SALU": 186368,
+          "VALU": 372736,
+          "DS": 93184
+        },
+        "projection": {
+          "VALU": 221312,
+          "WAIT": 2259712,
+          "SALU": 291200,
+          "VMEM": 1770496,
+          "DS": 372736,
+          "WMMA": 1770496
+        },
+        "control_unattributed": {
+          "WAIT": 81536,
+          "SALU": 11648,
+          "VALU": 93184
+        },
+        "tail": {
+          "VOPD": 559104,
+          "SALU": 3401216,
+          "WAIT": 4100096,
+          "VALU": 3168256,
+          "VMEM": 93184,
+          "DS": 46592
+        }
+      },
+      "ordinary_work_share": 0.07730243193717581
+    }
+  },
+  "1080": {
+    "c64_wave2": {
+      "calls": [],
+      "dispatches": 0,
+      "windows": 0,
+      "wave_windows": 0,
+      "per_window_upper": {
+        "SMEM": 6,
+        "WAIT": 5540,
+        "SALU": 3890,
+        "VALU": 11070,
+        "VMEM": 1152,
+        "VOPD": 1836,
+        "DS": 272,
+        "WMMA": 912
+      },
+      "weighted_upper": {
+        "SMEM": 0,
+        "WAIT": 0,
+        "SALU": 0,
+        "VALU": 0,
+        "VMEM": 0,
+        "VOPD": 0,
+        "DS": 0,
+        "WMMA": 0
+      },
+      "weighted_phases": {
+        "input": {
+          "SMEM": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "VMEM": 0,
+          "VOPD": 0,
+          "DS": 0
+        },
+        "ffn_loop": {
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VOPD": 0
+        },
+        "ffn_expand": {
+          "VALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "activation": {
+          "VALU": 0,
+          "VOPD": 0,
+          "WAIT": 0,
+          "SALU": 0
+        },
+        "ffn_contract": {
+          "WAIT": 0,
+          "VALU": 0,
+          "VMEM": 0,
+          "WMMA": 0
+        },
+        "contract_rtz_pack": {
+          "VALU": 0,
+          "SALU": 0,
+          "VOPD": 0,
+          "WAIT": 0,
+          "DS": 0
+        },
+        "ffn_mix": {
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "control_unattributed": {
+          "WAIT": 0,
+          "VALU": 0,
+          "VOPD": 0,
+          "SALU": 0
+        },
+        "residual_input_rtz": {
+          "WAIT": 0,
+          "VMEM": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "VOPD": 0
+        },
+        "feature_pack": {
+          "VOPD": 0,
+          "WAIT": 0,
+          "VALU": 0,
+          "SALU": 0,
+          "DS": 0
+        },
+        "qkv_matrix": {
+          "VOPD": 0,
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "WMMA": 0,
+          "DS": 0
+        },
+        "qkv_norm_pack": {
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "VOPD": 0,
+          "VALU": 0,
+          "SALU": 0
+        },
+        "score_exp": {
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "WMMA": 0,
+          "VOPD": 0
+        },
+        "softmax": {
+          "WAIT": 0,
+          "VOPD": 0,
+          "WMMA": 0,
+          "VALU": 0,
+          "SALU": 0
+        },
+        "av": {
+          "WMMA": 0,
+          "WAIT": 0,
+          "VOPD": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "DS": 0
+        },
+        "projection": {
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "tail": {
+          "VMEM": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "VOPD": 0
+        }
+      },
+      "ordinary_work_share": 0.0
+    },
+    "c64_wave2_bi": {
+      "calls": [
+        {
+          "block": 8,
+          "windows": 2220,
+          "waves_per_window": 2,
+          "post": 3
+        },
+        {
+          "block": 65,
+          "windows": 2220,
+          "waves_per_window": 2,
+          "post": 0
+        }
+      ],
+      "dispatches": 2,
+      "windows": 4440,
+      "wave_windows": 8880,
+      "per_window_upper": {
+        "SMEM": 6,
+        "WAIT": 5262,
+        "SALU": 3890,
+        "VALU": 10908,
+        "VOPD": 1892,
+        "VMEM": 1136,
+        "DS": 272,
+        "WMMA": 912
+      },
+      "weighted_upper": {
+        "SMEM": 26640,
+        "WAIT": 23363280,
+        "SALU": 17271600,
+        "VALU": 48431520,
+        "VOPD": 8400480,
+        "VMEM": 5043840,
+        "DS": 1207680,
+        "WMMA": 4049280
+      },
+      "weighted_phases": {
+        "input": {
+          "SMEM": 26640,
+          "WAIT": 470640,
+          "SALU": 515040,
+          "VALU": 4493280,
+          "VOPD": 568320,
+          "VMEM": 71040,
+          "DS": 35520
+        },
+        "ffn_loop": {
+          "VALU": 737040,
+          "SALU": 701520,
+          "WAIT": 213120
+        },
+        "ffn_expand": {
+          "VALU": 2273280,
+          "WAIT": 2699520,
+          "VMEM": 1136640,
+          "DS": 284160,
+          "WMMA": 1136640
+        },
+        "activation": {
+          "VALU": 9093120,
+          "VOPD": 3125760,
+          "WAIT": 1704960,
+          "SALU": 568320
+        },
+        "ffn_contract": {
+          "WAIT": 1562880,
+          "VALU": 1136640,
+          "VMEM": 568320,
+          "WMMA": 568320
+        },
+        "contract_rtz_pack": {
+          "VALU": 1953600,
+          "SALU": 142080,
+          "VOPD": 106560,
+          "WAIT": 142080,
+          "DS": 71040
+        },
+        "ffn_mix": {
+          "VALU": 257520,
+          "SALU": 150960,
+          "WAIT": 355200,
+          "WMMA": 284160
+        },
+        "control_unattributed": {
+          "WAIT": 364080,
+          "VALU": 639360,
+          "VOPD": 35520,
+          "SALU": 44400
+        },
+        "residual_input_rtz": {
+          "WAIT": 888000,
+          "SALU": 71040,
+          "VALU": 2450880,
+          "VMEM": 1030080,
+          "DS": 71040,
+          "VOPD": 532800
+        },
+        "feature_pack": {
+          "VOPD": 319680,
+          "WAIT": 177600,
+          "VALU": 355200,
+          "SALU": 142080,
+          "DS": 71040
+        },
+        "qkv_matrix": {
+          "VOPD": 26640,
+          "VALU": 1260960,
+          "SALU": 8880,
+          "WAIT": 1811520,
+          "VMEM": 870240,
+          "WMMA": 852480,
+          "DS": 195360
+        },
+        "qkv_norm_pack": {
+          "WAIT": 1909200,
+          "VMEM": 17760,
+          "DS": 301920,
+          "VOPD": 985680,
+          "VALU": 4626480,
+          "SALU": 426240
+        },
+        "score_exp": {
+          "VALU": 4502160,
+          "SALU": 346320,
+          "WAIT": 683760,
+          "VMEM": 284160,
+          "WMMA": 284160,
+          "VOPD": 1704960
+        },
+        "softmax": {
+          "VOPD": 603840,
+          "WMMA": 142080,
+          "WAIT": 816960,
+          "VALU": 4333440,
+          "SALU": 532800
+        },
+        "av": {
+          "WMMA": 284160,
+          "WAIT": 390720,
+          "VOPD": 355200,
+          "SALU": 142080,
+          "VALU": 284160,
+          "DS": 71040
+        },
+        "projection": {
+          "VALU": 88800,
+          "SALU": 142080,
+          "WAIT": 639360,
+          "VMEM": 497280,
+          "DS": 106560,
+          "WMMA": 497280
+        },
+        "tail": {
+          "VMEM": 568320,
+          "WAIT": 8533680,
+          "SALU": 13337760,
+          "VALU": 9945600,
+          "VOPD": 35520
+        }
+      },
+      "ordinary_work_share": 0.14063144548419243
+    },
+    "c64_wave2_bo": {
+      "calls": [
+        {
+          "block": 5,
+          "windows": 2160,
+          "waves_per_window": 2,
+          "post": 4
+        }
+      ],
+      "dispatches": 1,
+      "windows": 2160,
+      "wave_windows": 4320,
+      "per_window_upper": {
+        "SMEM": 6,
+        "WAIT": 3980,
+        "SALU": 1476,
+        "VALU": 9420,
+        "VMEM": 1040,
+        "VOPD": 1872,
+        "DS": 272,
+        "WMMA": 912
+      },
+      "weighted_upper": {
+        "SMEM": 12960,
+        "WAIT": 8596800,
+        "SALU": 3188160,
+        "VALU": 20347200,
+        "VMEM": 2246400,
+        "VOPD": 4043520,
+        "DS": 587520,
+        "WMMA": 1969920
+      },
+      "weighted_phases": {
+        "input": {
+          "SMEM": 12960,
+          "WAIT": 423360,
+          "SALU": 250560,
+          "VALU": 1654560,
+          "VMEM": 69120,
+          "VOPD": 324000,
+          "DS": 17280
+        },
+        "ffn_loop": {
+          "VALU": 349920,
+          "SALU": 341280,
+          "WAIT": 103680,
+          "VOPD": 4320
+        },
+        "ffn_expand": {
+          "VALU": 1105920,
+          "WAIT": 1313280,
+          "VMEM": 552960,
+          "DS": 138240,
+          "WMMA": 552960
+        },
+        "activation": {
+          "VALU": 4561920,
+          "VOPD": 1451520,
+          "WAIT": 691200,
+          "SALU": 276480
+        },
+        "ffn_contract": {
+          "WAIT": 760320,
+          "VALU": 552960,
+          "VMEM": 276480,
+          "WMMA": 276480
+        },
+        "contract_rtz_pack": {
+          "VALU": 950400,
+          "SALU": 69120,
+          "VOPD": 51840,
+          "WAIT": 69120,
+          "DS": 34560
+        },
+        "ffn_mix": {
+          "VALU": 133920,
+          "SALU": 73440,
+          "WAIT": 207360,
+          "VMEM": 103680,
+          "WMMA": 138240
+        },
+        "control_unattributed": {
+          "WAIT": 194400,
+          "VALU": 345600,
+          "VOPD": 17280,
+          "SALU": 4320
+        },
+        "residual_input_rtz": {
+          "WAIT": 691200,
+          "VMEM": 397440,
+          "SALU": 51840,
+          "VALU": 2021760,
+          "VOPD": 120960,
+          "DS": 34560
+        },
+        "feature_pack": {
+          "VALU": 224640,
+          "VOPD": 120960,
+          "SALU": 69120,
+          "WAIT": 69120,
+          "DS": 34560
+        },
+        "qkv_matrix": {
+          "VOPD": 12960,
+          "VALU": 613440,
+          "SALU": 4320,
+          "WAIT": 872640,
+          "VMEM": 423360,
+          "WMMA": 414720,
+          "DS": 95040
+        },
+        "qkv_norm_pack": {
+          "WAIT": 911520,
+          "VMEM": 8640,
+          "DS": 146880,
+          "VOPD": 470880,
+          "VALU": 2268000,
+          "SALU": 207360
+        },
+        "score_exp": {
+          "VALU": 2190240,
+          "SALU": 177120,
+          "WAIT": 315360,
+          "VMEM": 138240,
+          "WMMA": 138240,
+          "VOPD": 829440
+        },
+        "softmax": {
+          "WAIT": 414720,
+          "VOPD": 276480,
+          "WMMA": 69120,
+          "VALU": 2142720,
+          "SALU": 259200
+        },
+        "av": {
+          "WMMA": 138240,
+          "WAIT": 190080,
+          "VOPD": 172800,
+          "SALU": 69120,
+          "VALU": 138240,
+          "DS": 34560
+        },
+        "projection": {
+          "VALU": 21600,
+          "SALU": 64800,
+          "WAIT": 311040,
+          "VMEM": 241920,
+          "DS": 51840,
+          "WMMA": 241920
+        },
+        "tail": {
+          "VOPD": 190080,
+          "SALU": 1270080,
+          "WAIT": 1058400,
+          "VALU": 1071360,
+          "VMEM": 34560
+        }
+      },
+      "ordinary_work_share": 0.0603551205306905
+    },
+    "c64_wave2_bi_bo": {
+      "calls": [
+        {
+          "block": 6,
+          "windows": 2257,
+          "waves_per_window": 2,
+          "post": 4
+        },
+        {
+          "block": 7,
+          "windows": 2196,
+          "waves_per_window": 2,
+          "post": 4
+        },
+        {
+          "block": 62,
+          "windows": 2160,
+          "waves_per_window": 2,
+          "post": 4
+        },
+        {
+          "block": 63,
+          "windows": 2257,
+          "waves_per_window": 2,
+          "post": 4
+        },
+        {
+          "block": 64,
+          "windows": 2196,
+          "waves_per_window": 2,
+          "post": 4
+        }
+      ],
+      "dispatches": 5,
+      "windows": 11066,
+      "wave_windows": 22132,
+      "per_window_upper": {
+        "SMEM": 6,
+        "WAIT": 3870,
+        "SALU": 1476,
+        "VALU": 9178,
+        "VOPD": 1968,
+        "VMEM": 1024,
+        "DS": 272,
+        "WMMA": 912
+      },
+      "weighted_upper": {
+        "SMEM": 66396,
+        "WAIT": 42825420,
+        "SALU": 16333416,
+        "VALU": 101563748,
+        "VOPD": 21777888,
+        "VMEM": 11331584,
+        "DS": 3009952,
+        "WMMA": 10092192
+      },
+      "weighted_phases": {
+        "input": {
+          "SMEM": 66396,
+          "WAIT": 1172996,
+          "SALU": 1283656,
+          "VALU": 11198792,
+          "VOPD": 1416448,
+          "VMEM": 177056,
+          "DS": 88528
+        },
+        "ffn_loop": {
+          "VALU": 1836956,
+          "SALU": 1748428,
+          "WAIT": 531168
+        },
+        "ffn_expand": {
+          "VALU": 5665792,
+          "WAIT": 6728128,
+          "VMEM": 2832896,
+          "DS": 708224,
+          "WMMA": 2832896
+        },
+        "activation": {
+          "VALU": 22663168,
+          "VOPD": 7790464,
+          "WAIT": 4249344,
+          "SALU": 1416448
+        },
+        "ffn_contract": {
+          "WAIT": 3895232,
+          "VALU": 2832896,
+          "VMEM": 1416448,
+          "WMMA": 1416448
+        },
+        "contract_rtz_pack": {
+          "VALU": 4869040,
+          "SALU": 354112,
+          "VOPD": 265584,
+          "WAIT": 354112,
+          "DS": 177056
+        },
+        "ffn_mix": {
+          "VALU": 641828,
+          "SALU": 376244,
+          "WAIT": 1239392,
+          "WMMA": 708224
+        },
+        "control_unattributed": {
+          "WAIT": 995940,
+          "VALU": 1770560,
+          "VOPD": 88528,
+          "SALU": 110660
+        },
+        "residual_input_rtz": {
+          "WAIT": 2301728,
+          "SALU": 177056,
+          "VALU": 6019904,
+          "VMEM": 2567312,
+          "DS": 177056,
+          "VOPD": 1327920
+        },
+        "feature_pack": {
+          "VOPD": 885280,
+          "WAIT": 442640,
+          "SALU": 354112,
+          "VALU": 796752,
+          "DS": 177056
+        },
+        "qkv_matrix": {
+          "VOPD": 66396,
+          "VALU": 3142744,
+          "SALU": 22132,
+          "WAIT": 4470664,
+          "VMEM": 2168936,
+          "WMMA": 2124672,
+          "DS": 486904
+        },
+        "qkv_norm_pack": {
+          "WAIT": 4736248,
+          "VMEM": 44264,
+          "DS": 752488,
+          "VOPD": 2412388,
+          "VALU": 11619300,
+          "SALU": 1062336
+        },
+        "score_exp": {
+          "VALU": 11220924,
+          "SALU": 907412,
+          "WAIT": 1682032,
+          "VMEM": 708224,
+          "WMMA": 708224,
+          "VOPD": 4249344
+        },
+        "softmax": {
+          "VOPD": 1416448,
+          "WMMA": 354112,
+          "WAIT": 2036144,
+          "VALU": 10977472,
+          "SALU": 1327920
+        },
+        "av": {
+          "WMMA": 708224,
+          "WAIT": 973808,
+          "VOPD": 885280,
+          "SALU": 354112,
+          "VALU": 708224,
+          "DS": 177056
+        },
+        "projection": {
+          "VALU": 110660,
+          "SALU": 331980,
+          "WAIT": 1593504,
+          "VMEM": 1239392,
+          "DS": 265584,
+          "WMMA": 1239392
+        },
+        "tail": {
+          "VOPD": 973808,
+          "SALU": 6506808,
+          "WAIT": 5422340,
+          "VALU": 5488736,
+          "VMEM": 177056
+        }
+      },
+      "ordinary_work_share": 0.30521031389120756
+    },
+    "c128_wave2": {
+      "calls": [],
+      "dispatches": 0,
+      "windows": 0,
+      "wave_windows": 0,
+      "per_window_upper": {
+        "SMEM": 12,
+        "WAIT": 13084,
+        "SALU": 7696,
+        "VALU": 22592,
+        "VOPD": 3952,
+        "VMEM": 3456,
+        "DS": 832,
+        "WMMA": 2976
+      },
+      "weighted_upper": {
+        "SMEM": 0,
+        "WAIT": 0,
+        "SALU": 0,
+        "VALU": 0,
+        "VOPD": 0,
+        "VMEM": 0,
+        "DS": 0,
+        "WMMA": 0
+      },
+      "weighted_phases": {
+        "input": {
+          "SMEM": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "VOPD": 0,
+          "VMEM": 0,
+          "DS": 0
+        },
+        "ffn_loop": {
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VOPD": 0
+        },
+        "ffn_expand": {
+          "VALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "activation": {
+          "VALU": 0,
+          "WAIT": 0,
+          "VOPD": 0,
+          "SALU": 0
+        },
+        "ffn_contract": {
+          "VMEM": 0,
+          "WAIT": 0,
+          "WMMA": 0
+        },
+        "contract_rtz_pack": {
+          "VALU": 0,
+          "SALU": 0,
+          "VOPD": 0,
+          "WAIT": 0,
+          "DS": 0
+        },
+        "ffn_mix": {
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "control_unattributed": {
+          "WAIT": 0,
+          "VALU": 0,
+          "VOPD": 0,
+          "SALU": 0
+        },
+        "residual_input_rtz": {
+          "WAIT": 0,
+          "VMEM": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "VOPD": 0,
+          "DS": 0
+        },
+        "feature_pack": {
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VOPD": 0,
+          "DS": 0
+        },
+        "qkv_matrix": {
+          "VOPD": 0,
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "qkv_norm_pack": {
+          "VMEM": 0,
+          "DS": 0,
+          "VOPD": 0,
+          "WAIT": 0,
+          "VALU": 0,
+          "SALU": 0
+        },
+        "score_exp": {
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "WMMA": 0,
+          "VOPD": 0
+        },
+        "softmax": {
+          "WAIT": 0,
+          "VOPD": 0,
+          "WMMA": 0,
+          "VALU": 0,
+          "SALU": 0
+        },
+        "av": {
+          "WMMA": 0,
+          "WAIT": 0,
+          "VOPD": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "DS": 0
+        },
+        "projection": {
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "tail": {
+          "VMEM": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "VOPD": 0
+        }
+      },
+      "ordinary_work_share": 0.0
+    },
+    "c128_wave2_bi": {
+      "calls": [
+        {
+          "block": 14,
+          "windows": 589,
+          "waves_per_window": 4,
+          "post": 3
+        },
+        {
+          "block": 61,
+          "windows": 570,
+          "waves_per_window": 4,
+          "post": 0
+        }
+      ],
+      "dispatches": 2,
+      "windows": 1159,
+      "wave_windows": 4636,
+      "per_window_upper": {
+        "SMEM": 12,
+        "WAIT": 12484,
+        "SALU": 7696,
+        "VALU": 22988,
+        "VOPD": 3704,
+        "VMEM": 3424,
+        "DS": 832,
+        "WMMA": 2976
+      },
+      "weighted_upper": {
+        "SMEM": 13908,
+        "WAIT": 14468956,
+        "SALU": 8919664,
+        "VALU": 26643092,
+        "VOPD": 4292936,
+        "VMEM": 3968416,
+        "DS": 964288,
+        "WMMA": 3449184
+      },
+      "weighted_phases": {
+        "input": {
+          "SMEM": 13908,
+          "WAIT": 264252,
+          "SALU": 250344,
+          "VALU": 2322636,
+          "VOPD": 384788,
+          "VMEM": 37088,
+          "DS": 18544
+        },
+        "ffn_loop": {
+          "VALU": 1080188,
+          "WAIT": 537776,
+          "SALU": 292068
+        },
+        "ffn_expand": {
+          "VALU": 1483520,
+          "WAIT": 2299456,
+          "VMEM": 1186816,
+          "DS": 296704,
+          "WMMA": 1186816
+        },
+        "activation": {
+          "VALU": 4895616,
+          "WAIT": 815936,
+          "VOPD": 1557696,
+          "SALU": 296704
+        },
+        "ffn_contract": {
+          "VMEM": 296704,
+          "WAIT": 296704,
+          "WMMA": 296704
+        },
+        "contract_rtz_pack": {
+          "VALU": 1019920,
+          "SALU": 74176,
+          "VOPD": 55632,
+          "WAIT": 74176,
+          "DS": 37088
+        },
+        "ffn_mix": {
+          "VALU": 139080,
+          "WAIT": 468236,
+          "SALU": 74176,
+          "WMMA": 296704,
+          "DS": 18544
+        },
+        "control_unattributed": {
+          "WAIT": 190076,
+          "VALU": 333792,
+          "VOPD": 18544,
+          "SALU": 23180
+        },
+        "residual_input_rtz": {
+          "WAIT": 463600,
+          "SALU": 37088,
+          "VALU": 1446432,
+          "VMEM": 686128,
+          "DS": 55632,
+          "VOPD": 185440
+        },
+        "feature_pack": {
+          "VOPD": 185440,
+          "WAIT": 92720,
+          "SALU": 74176,
+          "VALU": 166896,
+          "DS": 37088
+        },
+        "qkv_matrix": {
+          "VOPD": 13908,
+          "VALU": 1237812,
+          "SALU": 4636,
+          "WAIT": 1979572,
+          "VMEM": 890112,
+          "DS": 166896,
+          "WMMA": 890112
+        },
+        "qkv_norm_pack": {
+          "VMEM": 18544,
+          "DS": 203984,
+          "VOPD": 500688,
+          "WAIT": 913292,
+          "VALU": 2443172,
+          "SALU": 222528
+        },
+        "score_exp": {
+          "VALU": 2387540,
+          "SALU": 180804,
+          "WAIT": 338428,
+          "VMEM": 148352,
+          "WMMA": 148352,
+          "VOPD": 890112
+        },
+        "softmax": {
+          "WAIT": 445056,
+          "VOPD": 296704,
+          "WMMA": 74176,
+          "VALU": 2299456,
+          "SALU": 278160
+        },
+        "av": {
+          "WMMA": 148352,
+          "WAIT": 203984,
+          "VOPD": 185440,
+          "SALU": 74176,
+          "VALU": 148352,
+          "DS": 37088
+        },
+        "projection": {
+          "VALU": 46360,
+          "SALU": 74176,
+          "WAIT": 519232,
+          "VMEM": 407968,
+          "DS": 92720,
+          "WMMA": 407968
+        },
+        "tail": {
+          "VMEM": 296704,
+          "WAIT": 4566460,
+          "SALU": 6963272,
+          "VALU": 5192320,
+          "VOPD": 18544
+        }
+      },
+      "ordinary_work_share": 0.07655156135943572
+    },
+    "c128_wave2_bo": {
+      "calls": [
+        {
+          "block": 9,
+          "windows": 540,
+          "waves_per_window": 4,
+          "post": 4
+        }
+      ],
+      "dispatches": 1,
+      "windows": 540,
+      "wave_windows": 2160,
+      "per_window_upper": {
+        "SMEM": 12,
+        "WAIT": 10328,
+        "SALU": 2868,
+        "VALU": 19052,
+        "VOPD": 4144,
+        "VMEM": 3232,
+        "DS": 832,
+        "WMMA": 2976
+      },
+      "weighted_upper": {
+        "SMEM": 6480,
+        "WAIT": 5577120,
+        "SALU": 1548720,
+        "VALU": 10288080,
+        "VOPD": 2237760,
+        "VMEM": 1745280,
+        "DS": 449280,
+        "WMMA": 1607040
+      },
+      "weighted_phases": {
+        "input": {
+          "SMEM": 6480,
+          "WAIT": 220320,
+          "SALU": 116640,
+          "VALU": 812160,
+          "VOPD": 203040,
+          "VMEM": 34560,
+          "DS": 8640
+        },
+        "ffn_loop": {
+          "VALU": 501120,
+          "WAIT": 254880,
+          "SALU": 136080,
+          "VOPD": 2160
+        },
+        "ffn_expand": {
+          "VALU": 691200,
+          "WAIT": 1071360,
+          "VMEM": 552960,
+          "DS": 138240,
+          "WMMA": 552960
+        },
+        "activation": {
+          "VALU": 1935360,
+          "WAIT": 518400,
+          "VOPD": 898560,
+          "SALU": 138240
+        },
+        "ffn_contract": {
+          "VMEM": 138240,
+          "WAIT": 138240,
+          "WMMA": 138240
+        },
+        "contract_rtz_pack": {
+          "VALU": 475200,
+          "SALU": 34560,
+          "VOPD": 25920,
+          "WAIT": 34560,
+          "DS": 17280
+        },
+        "ffn_mix": {
+          "VALU": 62640,
+          "WAIT": 164160,
+          "SALU": 34560,
+          "VMEM": 120960,
+          "DS": 34560,
+          "WMMA": 138240
+        },
+        "control_unattributed": {
+          "WAIT": 105840,
+          "VALU": 181440,
+          "VOPD": 8640,
+          "SALU": 2160
+        },
+        "residual_input_rtz": {
+          "WAIT": 371520,
+          "VMEM": 198720,
+          "SALU": 25920,
+          "VALU": 984960,
+          "VOPD": 60480
+        },
+        "feature_pack": {
+          "VALU": 138240,
+          "VOPD": 60480,
+          "WAIT": 43200,
+          "SALU": 34560,
+          "DS": 17280
+        },
+        "qkv_matrix": {
+          "VOPD": 6480,
+          "VALU": 576720,
+          "SALU": 2160,
+          "WAIT": 933120,
+          "VMEM": 414720,
+          "DS": 77760,
+          "WMMA": 414720
+        },
+        "qkv_norm_pack": {
+          "VMEM": 8640,
+          "DS": 95040,
+          "VOPD": 237600,
+          "WAIT": 421200,
+          "VALU": 1129680,
+          "SALU": 103680
+        },
+        "score_exp": {
+          "VALU": 1112400,
+          "SALU": 88560,
+          "WAIT": 157680,
+          "VMEM": 69120,
+          "WMMA": 69120,
+          "VOPD": 414720
+        },
+        "softmax": {
+          "WAIT": 207360,
+          "VOPD": 138240,
+          "WMMA": 34560,
+          "VALU": 1071360,
+          "SALU": 129600
+        },
+        "av": {
+          "WMMA": 69120,
+          "WAIT": 95040,
+          "VOPD": 86400,
+          "SALU": 34560,
+          "VALU": 69120,
+          "DS": 17280
+        },
+        "projection": {
+          "VALU": 10800,
+          "SALU": 32400,
+          "WAIT": 241920,
+          "VMEM": 190080,
+          "DS": 43200,
+          "WMMA": 190080
+        },
+        "tail": {
+          "VOPD": 95040,
+          "SALU": 635040,
+          "WAIT": 598320,
+          "VALU": 535680,
+          "VMEM": 17280
+        }
+      },
+      "ordinary_work_share": 0.030995336871898174
+    },
+    "c128_wave2_bi_bo": {
+      "calls": [
+        {
+          "block": 10,
+          "windows": 589,
+          "waves_per_window": 4,
+          "post": 4
+        },
+        {
+          "block": 11,
+          "windows": 558,
+          "waves_per_window": 4,
+          "post": 4
+        },
+        {
+          "block": 12,
+          "windows": 570,
+          "waves_per_window": 4,
+          "post": 4
+        },
+        {
+          "block": 13,
+          "windows": 540,
+          "waves_per_window": 4,
+          "post": 4
+        },
+        {
+          "block": 56,
+          "windows": 558,
+          "waves_per_window": 4,
+          "post": 4
+        },
+        {
+          "block": 57,
+          "windows": 570,
+          "waves_per_window": 4,
+          "post": 4
+        },
+        {
+          "block": 58,
+          "windows": 540,
+          "waves_per_window": 4,
+          "post": 4
+        },
+        {
+          "block": 59,
+          "windows": 589,
+          "waves_per_window": 4,
+          "post": 4
+        },
+        {
+          "block": 60,
+          "windows": 558,
+          "waves_per_window": 4,
+          "post": 4
+        }
+      ],
+      "dispatches": 9,
+      "windows": 5072,
+      "wave_windows": 20288,
+      "per_window_upper": {
+        "SMEM": 12,
+        "WAIT": 9664,
+        "SALU": 2868,
+        "VALU": 19512,
+        "VOPD": 3864,
+        "VMEM": 3200,
+        "DS": 832,
+        "WMMA": 2976
+      },
+      "weighted_upper": {
+        "SMEM": 60864,
+        "WAIT": 49015808,
+        "SALU": 14546496,
+        "VALU": 98964864,
+        "VOPD": 19598208,
+        "VMEM": 16230400,
+        "DS": 4219904,
+        "WMMA": 15094272
+      },
+      "weighted_phases": {
+        "input": {
+          "SMEM": 60864,
+          "WAIT": 1156416,
+          "SALU": 1095552,
+          "VALU": 10164288,
+          "VOPD": 1683904,
+          "VMEM": 162304,
+          "DS": 81152
+        },
+        "ffn_loop": {
+          "VALU": 4727104,
+          "WAIT": 2353408,
+          "SALU": 1278144
+        },
+        "ffn_expand": {
+          "VALU": 6492160,
+          "WAIT": 10062848,
+          "VMEM": 5193728,
+          "DS": 1298432,
+          "WMMA": 5193728
+        },
+        "activation": {
+          "VALU": 21424128,
+          "WAIT": 3570688,
+          "VOPD": 6816768,
+          "SALU": 1298432
+        },
+        "ffn_contract": {
+          "VMEM": 1298432,
+          "WAIT": 1298432,
+          "WMMA": 1298432
+        },
+        "contract_rtz_pack": {
+          "VALU": 4463360,
+          "SALU": 324608,
+          "VOPD": 243456,
+          "WAIT": 324608,
+          "DS": 162304
+        },
+        "ffn_mix": {
+          "VALU": 608640,
+          "WAIT": 2049088,
+          "SALU": 324608,
+          "WMMA": 1298432,
+          "DS": 81152
+        },
+        "control_unattributed": {
+          "WAIT": 912960,
+          "VALU": 1623040,
+          "VOPD": 81152,
+          "SALU": 101440
+        },
+        "residual_input_rtz": {
+          "WAIT": 2028800,
+          "SALU": 162304,
+          "VALU": 6329856,
+          "VMEM": 3002624,
+          "DS": 243456,
+          "VOPD": 811520
+        },
+        "feature_pack": {
+          "VOPD": 811520,
+          "WAIT": 405760,
+          "SALU": 324608,
+          "VALU": 730368,
+          "DS": 162304
+        },
+        "qkv_matrix": {
+          "VOPD": 60864,
+          "VALU": 5416896,
+          "SALU": 20288,
+          "WAIT": 8662976,
+          "VMEM": 3895296,
+          "DS": 730368,
+          "WMMA": 3895296
+        },
+        "qkv_norm_pack": {
+          "VMEM": 81152,
+          "DS": 892672,
+          "VOPD": 2191104,
+          "WAIT": 3996736,
+          "VALU": 10691776,
+          "SALU": 973824
+        },
+        "score_exp": {
+          "VALU": 10448320,
+          "SALU": 831808,
+          "WAIT": 1460736,
+          "VMEM": 649216,
+          "WMMA": 649216,
+          "VOPD": 3895296
+        },
+        "softmax": {
+          "WAIT": 1947648,
+          "VOPD": 1298432,
+          "WMMA": 324608,
+          "VALU": 10062848,
+          "SALU": 1217280
+        },
+        "av": {
+          "WMMA": 649216,
+          "WAIT": 892672,
+          "VOPD": 811520,
+          "SALU": 324608,
+          "VALU": 649216,
+          "DS": 162304
+        },
+        "projection": {
+          "VALU": 101440,
+          "SALU": 304320,
+          "WAIT": 2272256,
+          "VMEM": 1785344,
+          "DS": 405760,
+          "WMMA": 1785344
+        },
+        "tail": {
+          "VOPD": 892672,
+          "SALU": 5964672,
+          "WAIT": 5619776,
+          "VALU": 5031424,
+          "VMEM": 162304
+        }
+      },
+      "ordinary_work_share": 0.2933857016541101
+    },
+    "c256_wave2": {
+      "calls": [],
+      "dispatches": 0,
+      "windows": 0,
+      "wave_windows": 0,
+      "per_window_upper": {
+        "SMEM": 24,
+        "WAIT": 29664,
+        "SALU": 15392,
+        "VALU": 46352,
+        "VOPD": 6264,
+        "VMEM": 11520,
+        "DS": 2816,
+        "WMMA": 10560
+      },
+      "weighted_upper": {
+        "SMEM": 0,
+        "WAIT": 0,
+        "SALU": 0,
+        "VALU": 0,
+        "VOPD": 0,
+        "VMEM": 0,
+        "DS": 0,
+        "WMMA": 0
+      },
+      "weighted_phases": {
+        "input": {
+          "SMEM": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "VOPD": 0,
+          "VMEM": 0,
+          "DS": 0
+        },
+        "ffn_loop": {
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VOPD": 0
+        },
+        "ffn_expand": {
+          "VALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "activation": {
+          "VALU": 0,
+          "WAIT": 0,
+          "VOPD": 0,
+          "SALU": 0
+        },
+        "ffn_contract": {
+          "VMEM": 0,
+          "WAIT": 0,
+          "WMMA": 0
+        },
+        "contract_rtz_pack": {
+          "VALU": 0,
+          "SALU": 0,
+          "VOPD": 0,
+          "WAIT": 0,
+          "DS": 0
+        },
+        "ffn_mix": {
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "control_unattributed": {
+          "WAIT": 0,
+          "VALU": 0,
+          "SALU": 0
+        },
+        "residual_input_rtz": {
+          "WAIT": 0,
+          "VMEM": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "VOPD": 0,
+          "DS": 0
+        },
+        "feature_pack": {
+          "VOPD": 0,
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "DS": 0
+        },
+        "qkv_matrix": {
+          "VOPD": 0,
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "qkv_norm_pack": {
+          "VMEM": 0,
+          "DS": 0,
+          "VOPD": 0,
+          "WAIT": 0,
+          "VALU": 0,
+          "SALU": 0
+        },
+        "score_exp": {
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "WMMA": 0,
+          "VOPD": 0
+        },
+        "softmax": {
+          "WAIT": 0,
+          "VOPD": 0,
+          "WMMA": 0,
+          "VALU": 0,
+          "SALU": 0
+        },
+        "av": {
+          "WMMA": 0,
+          "WAIT": 0,
+          "VALU": 0,
+          "SALU": 0,
+          "VOPD": 0,
+          "DS": 0
+        },
+        "projection": {
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "tail": {
+          "VMEM": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "DS": 0,
+          "VOPD": 0
+        }
+      },
+      "ordinary_work_share": 0.0
+    },
+    "c256_wave2_bi": {
+      "calls": [],
+      "dispatches": 0,
+      "windows": 0,
+      "wave_windows": 0,
+      "per_window_upper": {
+        "SMEM": 24,
+        "WAIT": 30728,
+        "SALU": 15392,
+        "VALU": 47192,
+        "VOPD": 5840,
+        "VMEM": 11456,
+        "DS": 2816,
+        "WMMA": 10560
+      },
+      "weighted_upper": {
+        "SMEM": 0,
+        "WAIT": 0,
+        "SALU": 0,
+        "VALU": 0,
+        "VOPD": 0,
+        "VMEM": 0,
+        "DS": 0,
+        "WMMA": 0
+      },
+      "weighted_phases": {
+        "input": {
+          "SMEM": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "VOPD": 0,
+          "VMEM": 0,
+          "DS": 0
+        },
+        "ffn_loop": {
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0
+        },
+        "ffn_expand": {
+          "VALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "activation": {
+          "VALU": 0,
+          "VOPD": 0,
+          "WAIT": 0,
+          "SALU": 0
+        },
+        "ffn_contract": {
+          "VMEM": 0,
+          "WAIT": 0,
+          "WMMA": 0
+        },
+        "contract_rtz_pack": {
+          "VALU": 0,
+          "SALU": 0,
+          "VOPD": 0,
+          "WAIT": 0,
+          "DS": 0
+        },
+        "ffn_mix": {
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "control_unattributed": {
+          "WAIT": 0,
+          "VALU": 0,
+          "SALU": 0
+        },
+        "residual_input_rtz": {
+          "WAIT": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "VMEM": 0,
+          "VOPD": 0
+        },
+        "feature_pack": {
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VOPD": 0,
+          "DS": 0
+        },
+        "qkv_matrix": {
+          "VOPD": 0,
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "qkv_norm_pack": {
+          "VMEM": 0,
+          "DS": 0,
+          "VOPD": 0,
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0
+        },
+        "score_exp": {
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "WMMA": 0,
+          "VOPD": 0
+        },
+        "softmax": {
+          "WAIT": 0,
+          "VOPD": 0,
+          "WMMA": 0,
+          "VALU": 0,
+          "SALU": 0
+        },
+        "av": {
+          "WMMA": 0,
+          "WAIT": 0,
+          "VALU": 0,
+          "SALU": 0,
+          "VOPD": 0,
+          "DS": 0
+        },
+        "projection": {
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "tail": {
+          "VMEM": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "DS": 0,
+          "VOPD": 0
+        }
+      },
+      "ordinary_work_share": 0.0
+    },
+    "c256_wave2_bo": {
+      "calls": [],
+      "dispatches": 0,
+      "windows": 0,
+      "wave_windows": 0,
+      "per_window_upper": {
+        "SMEM": 24,
+        "WAIT": 23992,
+        "SALU": 5736,
+        "VALU": 39400,
+        "VOPD": 6584,
+        "VMEM": 11072,
+        "DS": 2816,
+        "WMMA": 10560
+      },
+      "weighted_upper": {
+        "SMEM": 0,
+        "WAIT": 0,
+        "SALU": 0,
+        "VALU": 0,
+        "VOPD": 0,
+        "VMEM": 0,
+        "DS": 0,
+        "WMMA": 0
+      },
+      "weighted_phases": {
+        "input": {
+          "SMEM": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "VOPD": 0,
+          "VMEM": 0,
+          "DS": 0
+        },
+        "ffn_loop": {
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VOPD": 0
+        },
+        "ffn_expand": {
+          "VALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "activation": {
+          "VALU": 0,
+          "WAIT": 0,
+          "VOPD": 0,
+          "SALU": 0
+        },
+        "ffn_contract": {
+          "VMEM": 0,
+          "WAIT": 0,
+          "WMMA": 0
+        },
+        "contract_rtz_pack": {
+          "VALU": 0,
+          "SALU": 0,
+          "VOPD": 0,
+          "WAIT": 0,
+          "DS": 0
+        },
+        "ffn_mix": {
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "control_unattributed": {
+          "WAIT": 0,
+          "VALU": 0,
+          "SALU": 0
+        },
+        "residual_input_rtz": {
+          "WAIT": 0,
+          "VMEM": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "VOPD": 0,
+          "DS": 0
+        },
+        "feature_pack": {
+          "VOPD": 0,
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "DS": 0
+        },
+        "qkv_matrix": {
+          "VOPD": 0,
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "qkv_norm_pack": {
+          "VMEM": 0,
+          "DS": 0,
+          "VOPD": 0,
+          "WAIT": 0,
+          "VALU": 0,
+          "SALU": 0
+        },
+        "score_exp": {
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "WMMA": 0,
+          "VOPD": 0
+        },
+        "softmax": {
+          "WAIT": 0,
+          "VOPD": 0,
+          "WMMA": 0,
+          "VALU": 0,
+          "SALU": 0
+        },
+        "av": {
+          "WMMA": 0,
+          "WAIT": 0,
+          "VALU": 0,
+          "SALU": 0,
+          "VOPD": 0,
+          "DS": 0
+        },
+        "projection": {
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "tail": {
+          "VOPD": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VALU": 0,
+          "VMEM": 0,
+          "DS": 0
+        }
+      },
+      "ordinary_work_share": 0.0
+    },
+    "c256_wave2_bi_bo": {
+      "calls": [],
+      "dispatches": 0,
+      "windows": 0,
+      "wave_windows": 0,
+      "per_window_upper": {
+        "SMEM": 24,
+        "WAIT": 25056,
+        "SALU": 5736,
+        "VALU": 40240,
+        "VOPD": 6160,
+        "VMEM": 11008,
+        "DS": 2816,
+        "WMMA": 10560
+      },
+      "weighted_upper": {
+        "SMEM": 0,
+        "WAIT": 0,
+        "SALU": 0,
+        "VALU": 0,
+        "VOPD": 0,
+        "VMEM": 0,
+        "DS": 0,
+        "WMMA": 0
+      },
+      "weighted_phases": {
+        "input": {
+          "SMEM": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "VOPD": 0,
+          "VMEM": 0,
+          "DS": 0
+        },
+        "ffn_loop": {
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0
+        },
+        "ffn_expand": {
+          "VALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "activation": {
+          "VALU": 0,
+          "VOPD": 0,
+          "WAIT": 0,
+          "SALU": 0
+        },
+        "ffn_contract": {
+          "VMEM": 0,
+          "WAIT": 0,
+          "WMMA": 0
+        },
+        "contract_rtz_pack": {
+          "VALU": 0,
+          "SALU": 0,
+          "VOPD": 0,
+          "WAIT": 0,
+          "DS": 0
+        },
+        "ffn_mix": {
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "control_unattributed": {
+          "WAIT": 0,
+          "VALU": 0,
+          "SALU": 0
+        },
+        "residual_input_rtz": {
+          "WAIT": 0,
+          "SALU": 0,
+          "VALU": 0,
+          "VMEM": 0,
+          "VOPD": 0
+        },
+        "feature_pack": {
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0,
+          "VOPD": 0,
+          "DS": 0
+        },
+        "qkv_matrix": {
+          "VOPD": 0,
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "qkv_norm_pack": {
+          "VMEM": 0,
+          "DS": 0,
+          "VOPD": 0,
+          "VALU": 0,
+          "WAIT": 0,
+          "SALU": 0
+        },
+        "score_exp": {
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "WMMA": 0,
+          "VOPD": 0
+        },
+        "softmax": {
+          "WAIT": 0,
+          "VOPD": 0,
+          "WMMA": 0,
+          "VALU": 0,
+          "SALU": 0
+        },
+        "av": {
+          "WMMA": 0,
+          "WAIT": 0,
+          "VALU": 0,
+          "SALU": 0,
+          "VOPD": 0,
+          "DS": 0
+        },
+        "projection": {
+          "VALU": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VMEM": 0,
+          "DS": 0,
+          "WMMA": 0
+        },
+        "tail": {
+          "VOPD": 0,
+          "SALU": 0,
+          "WAIT": 0,
+          "VALU": 0,
+          "VMEM": 0,
+          "DS": 0
+        }
+      },
+      "ordinary_work_share": 0.0
+    },
+    "c256_attn_wave": {
+      "calls": [
+        {
+          "block": 22,
+          "windows": 150,
+          "waves_per_window": 8,
+          "post": 3
+        },
+        {
+          "block": 55,
+          "windows": 150,
+          "waves_per_window": 8,
+          "post": 0
+        }
+      ],
+      "dispatches": 2,
+      "windows": 300,
+      "wave_windows": 2400,
+      "per_window_upper": {
+        "SMEM": 48,
+        "WAIT": 13128,
+        "SALU": 14784,
+        "VALU": 19848,
+        "VMEM": 2264,
+        "DS": 960,
+        "VOPD": 2400,
+        "WMMA": 1856
+      },
+      "weighted_upper": {
+        "SMEM": 14400,
+        "WAIT": 3938400,
+        "SALU": 4435200,
+        "VALU": 5954400,
+        "VMEM": 679200,
+        "DS": 288000,
+        "VOPD": 720000,
+        "WMMA": 556800
+      },
+      "weighted_phases": {
+        "input_qkv": {
+          "SMEM": 14400,
+          "WAIT": 400800,
+          "SALU": 189600,
+          "VALU": 501600,
+          "VMEM": 84000,
+          "DS": 172800,
+          "VOPD": 2400
+        },
+        "score_exp": {
+          "VALU": 1219200,
+          "WAIT": 170400,
+          "VOPD": 468000,
+          "SALU": 105600,
+          "VMEM": 76800,
+          "WMMA": 76800
+        },
+        "softmax": {
+          "WMMA": 38400,
+          "WAIT": 220800,
+          "VOPD": 134400,
+          "VALU": 1190400,
+          "SALU": 144000
+        },
+        "av": {
+          "WMMA": 76800,
+          "WAIT": 105600,
+          "VOPD": 96000,
+          "SALU": 38400,
+          "VALU": 76800,
+          "DS": 19200
+        },
+        "control_unattributed": {
+          "WAIT": 16800,
+          "SALU": 12000
+        },
+        "projection": {
+          "SALU": 28800,
+          "WAIT": 403200,
+          "VMEM": 364800,
+          "VALU": 28800,
+          "DS": 19200,
+          "WMMA": 364800
+        },
+        "tail": {
+          "VALU": 2937600,
+          "WAIT": 2620800,
+          "VOPD": 19200,
+          "DS": 76800,
+          "SALU": 3916800,
+          "VMEM": 153600
+        }
+      },
+      "ordinary_work_share": 0.016515880485284594
+    },
+    "c256_attn_wave_bo": {
+      "calls": [
+        {
+          "block": 15,
+          "windows": 135,
+          "waves_per_window": 8,
+          "post": 4
+        },
+        {
+          "block": 16,
+          "windows": 160,
+          "waves_per_window": 8,
+          "post": 4
+        },
+        {
+          "block": 17,
+          "windows": 144,
+          "waves_per_window": 8,
+          "post": 4
+        },
+        {
+          "block": 18,
+          "windows": 150,
+          "waves_per_window": 8,
+          "post": 4
+        },
+        {
+          "block": 19,
+          "windows": 135,
+          "waves_per_window": 8,
+          "post": 4
+        },
+        {
+          "block": 20,
+          "windows": 160,
+          "waves_per_window": 8,
+          "post": 4
+        },
+        {
+          "block": 21,
+          "windows": 144,
+          "waves_per_window": 8,
+          "post": 4
+        },
+        {
+          "block": 48,
+          "windows": 135,
+          "waves_per_window": 8,
+          "post": 0
+        },
+        {
+          "block": 49,
+          "windows": 160,
+          "waves_per_window": 8,
+          "post": 4
+        },
+        {
+          "block": 50,
+          "windows": 144,
+          "waves_per_window": 8,
+          "post": 4
+        },
+        {
+          "block": 51,
+          "windows": 150,
+          "waves_per_window": 8,
+          "post": 4
+        },
+        {
+          "block": 52,
+          "windows": 135,
+          "waves_per_window": 8,
+          "post": 4
+        },
+        {
+          "block": 53,
+          "windows": 160,
+          "waves_per_window": 8,
+          "post": 4
+        },
+        {
+          "block": 54,
+          "windows": 144,
+          "waves_per_window": 8,
+          "post": 4
+        }
+      ],
+      "dispatches": 14,
+      "windows": 2056,
+      "wave_windows": 16448,
+      "per_window_upper": {
+        "SMEM": 48,
+        "WAIT": 7400,
+        "SALU": 4080,
+        "VALU": 12296,
+        "VMEM": 1816,
+        "DS": 928,
+        "VOPD": 2712,
+        "WMMA": 1856
+      },
+      "weighted_upper": {
+        "SMEM": 98688,
+        "WAIT": 15214400,
+        "SALU": 8388480,
+        "VALU": 25280576,
+        "VMEM": 3733696,
+        "DS": 1907968,
+        "VOPD": 5575872,
+        "WMMA": 3815936
+      },
+      "weighted_phases": {
+        "input_qkv": {
+          "SMEM": 98688,
+          "WAIT": 2763264,
+          "SALU": 1299392,
+          "VALU": 3437632,
+          "VMEM": 575680,
+          "DS": 1184256,
+          "VOPD": 16448
+        },
+        "score_exp": {
+          "VALU": 8240448,
+          "WAIT": 1118464,
+          "VOPD": 3190912,
+          "SALU": 608576,
+          "VMEM": 526336,
+          "WMMA": 526336
+        },
+        "softmax": {
+          "WMMA": 263168,
+          "WAIT": 1513216,
+          "VOPD": 921088,
+          "VALU": 8158208,
+          "SALU": 986880
+        },
+        "av": {
+          "WMMA": 526336,
+          "WAIT": 723712,
+          "VOPD": 657920,
+          "SALU": 263168,
+          "VALU": 526336,
+          "DS": 131584
+        },
+        "projection": {
+          "VALU": 312512,
+          "WAIT": 3190912,
+          "SALU": 411200,
+          "VMEM": 2500096,
+          "DS": 526336,
+          "WMMA": 2500096
+        },
+        "control_unattributed": {
+          "WAIT": 115136,
+          "SALU": 16448,
+          "VALU": 131584
+        },
+        "tail": {
+          "VOPD": 789504,
+          "SALU": 4802816,
+          "WAIT": 5789696,
+          "VALU": 4473856,
+          "VMEM": 131584,
+          "DS": 65792
+        }
+      },
+      "ordinary_work_share": 0.07635463972318093
+    }
+  }
+}

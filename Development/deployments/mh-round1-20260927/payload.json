@@ -1,0 +1,17 @@
+{
+    "module":  "c64-wave2",
+    "defines":  [
+                    "W2_BYTE_INPUT_LOADS 1",
+                    "W2_RTZ_PAIR 1",
+                    "W2_DIRECT_COORDS 1"
+                ],
+    "candidate":  {
+                      "gfx1201":  "F60EAEE8024E8FCA752407C95F0A5537B9B5154C5561C3ACA5BD437BA620A0C0",
+                      "gfx1200":  "9A0FDA18327D6AB87D6CE8FE126D6BC656EB3F3C4F1EE2CE30F8138A978CB347"
+                  },
+    "baseline_commit":  "4937bac",
+    "baseline":  {
+                     "gfx1201":  "C6A462D0D1A0FA77ED48323D3A000B74D30B88C90E4C1AF0E0D6A64E18372F26",
+                     "gfx1200":  "17807F69AAA301CD779B9739AF78F64E204E0757511649ECFEC3851554CCD8C6"
+                 }
+}

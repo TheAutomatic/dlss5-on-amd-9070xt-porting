@@ -1,0 +1,187 @@
+{
+  "timing": {
+    "runtime-regression-B-correct": {},
+    "runtime-regression-B-adaptive": {},
+    "runtime-regression-B-r1": {
+      "900": {
+        "baseline_ms": 9.30560437499999,
+        "candidate_ms": 9.27738000000001,
+        "delta_ms": -0.028224374999981094,
+        "percent": -0.3033051251975394
+      },
+      "1080": {
+        "baseline_ms": 12.73280625,
+        "candidate_ms": 12.7061825,
+        "delta_ms": -0.026623749999998836,
+        "percent": -0.20909569718772225
+      }
+    },
+    "runtime-regression-B-r2": {
+      "900": {
+        "baseline_ms": 9.385223124999994,
+        "candidate_ms": 9.35451,
+        "delta_ms": -0.03071312499999479,
+        "percent": -0.32724981165532796
+      },
+      "1080": {
+        "baseline_ms": 12.754972500000001,
+        "candidate_ms": 12.723219375,
+        "delta_ms": -0.0317531250000016,
+        "percent": -0.24894702830603466
+      }
+    },
+    "runtime-regression-R-correct": {},
+    "runtime-regression-R-adaptive": {},
+    "runtime-regression-R-r1": {
+      "900": {
+        "baseline_ms": 9.326410625000001,
+        "candidate_ms": 9.278818125,
+        "delta_ms": -0.04759250000000037,
+        "percent": -0.5102981405560869
+      },
+      "1080": {
+        "baseline_ms": 12.739778125,
+        "candidate_ms": 12.7411575,
+        "delta_ms": 0.0013793749999990723,
+        "percent": 0.010827307873539915
+      }
+    },
+    "runtime-regression-R-r2": {
+      "900": {
+        "baseline_ms": 9.424778125,
+        "candidate_ms": 9.352434999999996,
+        "delta_ms": -0.07234312500000328,
+        "percent": -0.7675843827888884
+      },
+      "1080": {
+        "baseline_ms": 12.757661875,
+        "candidate_ms": 12.703849375,
+        "delta_ms": -0.053812499999999375,
+        "percent": -0.42180534746301124
+      }
+    },
+    "runtime-regression-T-correct": {},
+    "runtime-regression-T-adaptive": {},
+    "runtime-regression-T-r1": {
+      "900": {
+        "baseline_ms": 9.328238124999984,
+        "candidate_ms": 9.32094124999999,
+        "delta_ms": -0.007296874999994429,
+        "percent": -0.07822350697114233
+      },
+      "1080": {
+        "baseline_ms": 12.733460000000001,
+        "candidate_ms": 12.745630625,
+        "delta_ms": 0.012170624999999546,
+        "percent": 0.09557987381276778
+      }
+    },
+    "runtime-regression-T-r2": {
+      "900": {
+        "baseline_ms": 9.447248749999995,
+        "candidate_ms": 9.43270875,
+        "delta_ms": -0.01453999999999489,
+        "percent": -0.15390724204223938
+      },
+      "1080": {
+        "baseline_ms": 12.76231375,
+        "candidate_ms": 12.765486875,
+        "delta_ms": 0.003173124999999999,
+        "percent": 0.02486324237249704
+      }
+    },
+    "runtime-regression-C-correct": {},
+    "runtime-regression-C-adaptive": {},
+    "runtime-regression-C-r1": {
+      "900": {
+        "baseline_ms": 9.32298874999999,
+        "candidate_ms": 9.3122625,
+        "delta_ms": -0.0107262499999905,
+        "percent": -0.11505162440521577
+      },
+      "1080": {
+        "baseline_ms": 12.727431875,
+        "candidate_ms": 12.68338375,
+        "delta_ms": -0.04404812499999977,
+        "percent": -0.3460880830682078
+      }
+    },
+    "runtime-regression-C-r2": {
+      "900": {
+        "baseline_ms": 9.380525000000006,
+        "candidate_ms": 9.354474999999994,
+        "delta_ms": -0.02605000000001212,
+        "percent": -0.2777030070279851
+      },
+      "1080": {
+        "baseline_ms": 12.742257500000001,
+        "candidate_ms": 12.7077875,
+        "delta_ms": -0.03447000000000067,
+        "percent": -0.2705172140807899
+      }
+    },
+    "runtime-regression-D-correct": {},
+    "runtime-regression-D-adaptive": {},
+    "runtime-regression-D-r1": {
+      "900": {
+        "baseline_ms": 9.319976249999995,
+        "candidate_ms": 9.351121875000004,
+        "delta_ms": 0.031145625000009503,
+        "percent": 0.33418137733998154
+      },
+      "1080": {
+        "baseline_ms": 12.7208,
+        "candidate_ms": 12.709076249999999,
+        "delta_ms": -0.011723750000001587,
+        "percent": -0.09216204955664331
+      }
+    },
+    "runtime-regression-D-r2": {
+      "900": {
+        "baseline_ms": 9.366617500000011,
+        "candidate_ms": 9.353732500000005,
+        "delta_ms": -0.01288500000000603,
+        "percent": -0.1375629996634986
+      },
+      "1080": {
+        "baseline_ms": 12.731853125,
+        "candidate_ms": 12.704416875,
+        "delta_ms": -0.02743625000000094,
+        "percent": -0.21549298229122105
+      }
+    },
+    "runtime-regression-E-correct": {},
+    "runtime-regression-E-adaptive": {},
+    "runtime-regression-E-r1": {
+      "900": {
+        "baseline_ms": 9.286518125000004,
+        "candidate_ms": 9.21715625,
+        "delta_ms": -0.06936187500000379,
+        "percent": -0.7469093805274163
+      },
+      "1080": {
+        "baseline_ms": 12.713285625000001,
+        "candidate_ms": 12.60639875,
+        "delta_ms": -0.10688687500000071,
+        "percent": -0.8407494187797737
+      }
+    },
+    "runtime-regression-E-r2": {
+      "900": {
+        "baseline_ms": 9.350438749999995,
+        "candidate_ms": 9.283383750000006,
+        "delta_ms": -0.0670549999999892,
+        "percent": -0.7171321238801709
+      },
+      "1080": {
+        "baseline_ms": 12.719538125,
+        "candidate_ms": 12.62006125,
+        "delta_ms": -0.09947687500000058,
+        "percent": -0.7820793021130257
+      }
+    }
+  },
+  "measurement_rows": 264,
+  "frame_hashes": 2016,
+  "matched_candidate_frames": 1008
+}

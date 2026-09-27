@@ -1,0 +1,43 @@
+[
+  {
+    "check": "defaults-off",
+    "arch": "gfx1200",
+    "equal": true,
+    "sha256": [
+      "cea31390b1a36a3ec46391f883bf761a8f17e4954ce2b1f405b824b04ba7c7d8",
+      "6a957c14928335abce6a286fd40d36bb37c3760a67c566d76b6ed2c05b8d3efb"
+    ]
+  },
+  {
+    "check": "production-vs-tested",
+    "arch": "gfx1200",
+    "equal": true,
+    "sha256": [
+      "9a0fda18327d6ab87d6ce8fe126d6bc656eb3f3c4f1ee2ce30f8138a978cb347",
+      "88d24e2e98a315ca8fc22e8f5fd67e5b20fa96ea6776bdd6b3bdcf632c7809b7"
+    ]
+  },
+  {
+    "check": "defaults-off",
+    "arch": "gfx1201",
+    "equal": true,
+    "sha256": [
+      "69cab58e83473cd0cc0321ee28aa212c2728c02f80906df74d4efea08ae0d248",
+      "ecc8d1eac301e826268c64b71afff8040982f65f54206807ed8f891aedce46c0"
+    ]
+  },
+  {
+    "check": "production-vs-tested",
+    "arch": "gfx1201",
+    "equal": true,
+    "sha256": [
+      "f60eaee8024e8fca752407c95f0a5537b9b5154c5561c3aca5bd437ba620a0c0",
+      "fec6d993c791185a03c70afe267c53353e88557edb048e27271bf8498eb69c30"
+    ]
+  },
+  {
+    "check": "debug-vs-baseline",
+    "arch": "gfx1201",
+    "equal": true
+  }
+]

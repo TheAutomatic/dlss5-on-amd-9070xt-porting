@@ -1,0 +1,436 @@
+{
+  "900-pdl1": {
+    "dispatches": 214,
+    "unmarked_wall_median_ms": 9.0685,
+    "marked_wall_median_ms": 9.111,
+    "marker_perturbation_percent": 0.4686552351546609,
+    "gpu_span_median_ms": 8.7455649375,
+    "reconstructed_ms": 8.8106570413125,
+    "reconstruction_vs_span_percent": 0.7442870103610143,
+    "regions": [
+      {
+        "region": "input C32",
+        "start": 0,
+        "end": 1,
+        "dispatches": 1,
+        "mean_ms": 0.6225899979375,
+        "sd_ms": 0.04797279408854043
+      },
+      {
+        "region": "encoder C32",
+        "start": 1,
+        "end": 5,
+        "dispatches": 4,
+        "mean_ms": 0.607394998875,
+        "sd_ms": 0.12202360248346394
+      },
+      {
+        "region": "encoder C64",
+        "start": 5,
+        "end": 10,
+        "dispatches": 5,
+        "mean_ms": 0.47812343018750003,
+        "sd_ms": 0.08103509649598405
+      },
+      {
+        "region": "encoder C128",
+        "start": 10,
+        "end": 17,
+        "dispatches": 7,
+        "mean_ms": 0.5399078355,
+        "sd_ms": 0.08738331475893159
+      },
+      {
+        "region": "encoder C256",
+        "start": 17,
+        "end": 34,
+        "dispatches": 17,
+        "mean_ms": 0.6067228242499999,
+        "sd_ms": 0.0874231102189178
+      },
+      {
+        "region": "encoder C512",
+        "start": 34,
+        "end": 91,
+        "dispatches": 57,
+        "mean_ms": 1.04555343834375,
+        "sd_ms": 0.09376791074591984
+      },
+      {
+        "region": "bottleneck head",
+        "start": 91,
+        "end": 93,
+        "dispatches": 2,
+        "mean_ms": 0.06502471856250003,
+        "sd_ms": 0.07838203139791382
+      },
+      {
+        "region": "ViT",
+        "start": 93,
+        "end": 142,
+        "dispatches": 49,
+        "mean_ms": 1.24991371478125,
+        "sd_ms": 0.07251523954938643
+      },
+      {
+        "region": "decoder transition",
+        "start": 142,
+        "end": 144,
+        "dispatches": 2,
+        "mean_ms": 0.009631216499999928,
+        "sd_ms": 0.10759452176819202
+      },
+      {
+        "region": "decoder C512",
+        "start": 144,
+        "end": 179,
+        "dispatches": 35,
+        "mean_ms": 0.6735684872187501,
+        "sd_ms": 0.08004297092611212
+      },
+      {
+        "region": "decoder C256",
+        "start": 179,
+        "end": 196,
+        "dispatches": 17,
+        "mean_ms": 0.5523393304375,
+        "sd_ms": 0.08801208907043184
+      },
+      {
+        "region": "decoder C128",
+        "start": 196,
+        "end": 203,
+        "dispatches": 7,
+        "mean_ms": 0.45491717756249994,
+        "sd_ms": 0.07896722334757399
+      },
+      {
+        "region": "decoder C64",
+        "start": 203,
+        "end": 208,
+        "dispatches": 5,
+        "mean_ms": 0.5289399773124999,
+        "sd_ms": 0.10911155014661879
+      },
+      {
+        "region": "decoder C32",
+        "start": 208,
+        "end": 213,
+        "dispatches": 5,
+        "mean_ms": 0.76538439096875,
+        "sd_ms": 0.09973657491945526
+      },
+      {
+        "region": "post/RGB",
+        "start": 213,
+        "end": 214,
+        "dispatches": 1,
+        "mean_ms": 0.6106455028750002,
+        "sd_ms": 0.10859803299310807
+      }
+    ],
+    "families": {
+      "C32": {
+        "mean_ms": 2.60601489065625,
+        "dispatches": 11,
+        "share_percent": 29.577985823722848
+      },
+      "C64": {
+        "mean_ms": 1.0070634075,
+        "dispatches": 10,
+        "share_percent": 11.430060241568324
+      },
+      "C128": {
+        "mean_ms": 0.9948250130624999,
+        "dispatches": 14,
+        "share_percent": 11.29115579460012
+      },
+      "C256": {
+        "mean_ms": 1.1590621546875,
+        "dispatches": 34,
+        "share_percent": 13.155229505049917
+      },
+      "C512": {
+        "mean_ms": 1.7191219255624999,
+        "dispatches": 92,
+        "share_percent": 19.511847045023636
+      },
+      "ViT": {
+        "mean_ms": 1.24991371478125,
+        "dispatches": 49,
+        "share_percent": 14.18638483963795
+      },
+      "transitions": {
+        "mean_ms": 0.07465593506249996,
+        "dispatches": 4,
+        "share_percent": 0.8473367503972061
+      }
+    },
+    "old_families": {
+      "C32": {
+        "mean_ms": 4.4047349988125,
+        "dispatches": 11,
+        "compute_share_percent": 35.064234863815656,
+        "approx_principal_GFLOP": 205.21392537600002,
+        "approx_principal_TFLOPS": 46.58939196826255
+      },
+      "C64": {
+        "mean_ms": 1.6145687253749998,
+        "dispatches": 18,
+        "compute_share_percent": 12.852899664924973,
+        "approx_principal_GFLOP": 83.983597568,
+        "approx_principal_TFLOPS": 52.01611814231937
+      },
+      "C128": {
+        "mean_ms": 1.5405723899999995,
+        "dispatches": 26,
+        "compute_share_percent": 12.263846093404737,
+        "approx_principal_GFLOP": 106.526932992,
+        "approx_principal_TFLOPS": 69.14763219403149
+      },
+      "C256": {
+        "mean_ms": 1.6700950713124993,
+        "dispatches": 34,
+        "compute_share_percent": 13.294921451844472,
+        "approx_principal_GFLOP": 132.170907648,
+        "approx_principal_TFLOPS": 79.13975073534534
+      },
+      "C512": {
+        "mean_ms": 1.7598062454375003,
+        "dispatches": 92,
+        "compute_share_percent": 14.009074217056398,
+        "approx_principal_GFLOP": 100.470358016,
+        "approx_principal_TFLOPS": 57.09171579341813
+      },
+      "ViT": {
+        "mean_ms": 1.488111317125,
+        "dispatches": 49,
+        "compute_share_percent": 11.84622565063289,
+        "approx_principal_GFLOP": 85.7735168,
+        "approx_principal_TFLOPS": 57.63918049202975
+      },
+      "transitions": {
+        "mean_ms": 0.08401376006249983,
+        "dispatches": 4,
+        "compute_share_percent": 0.6687980583208634
+      }
+    }
+  },
+  "1080-pdl1": {
+    "dispatches": 214,
+    "unmarked_wall_median_ms": 12.4485,
+    "marked_wall_median_ms": 12.489,
+    "marker_perturbation_percent": 0.32534040245813983,
+    "gpu_span_median_ms": 12.075819969,
+    "reconstructed_ms": 11.945496099124998,
+    "reconstruction_vs_span_percent": -1.0792134216107665,
+    "regions": [
+      {
+        "region": "input C32",
+        "start": 0,
+        "end": 1,
+        "dispatches": 1,
+        "mean_ms": 0.8948724978125,
+        "sd_ms": 0.07221075190562855
+      },
+      {
+        "region": "encoder C32",
+        "start": 1,
+        "end": 5,
+        "dispatches": 4,
+        "mean_ms": 0.877415618,
+        "sd_ms": 0.0734170254165088
+      },
+      {
+        "region": "encoder C64",
+        "start": 5,
+        "end": 10,
+        "dispatches": 5,
+        "mean_ms": 0.7108287438750001,
+        "sd_ms": 0.10017998287730168
+      },
+      {
+        "region": "encoder C128",
+        "start": 10,
+        "end": 17,
+        "dispatches": 7,
+        "mean_ms": 0.71754405646875,
+        "sd_ms": 0.0803360442825719
+      },
+      {
+        "region": "encoder C256",
+        "start": 17,
+        "end": 34,
+        "dispatches": 17,
+        "mean_ms": 0.8694937825625001,
+        "sd_ms": 0.06362460077460984
+      },
+      {
+        "region": "encoder C512",
+        "start": 34,
+        "end": 91,
+        "dispatches": 57,
+        "mean_ms": 1.24900719521875,
+        "sd_ms": 0.07838038535117378
+      },
+      {
+        "region": "bottleneck head",
+        "start": 91,
+        "end": 93,
+        "dispatches": 2,
+        "mean_ms": 0.15429438634374984,
+        "sd_ms": 0.09774260856500515
+      },
+      {
+        "region": "ViT",
+        "start": 93,
+        "end": 142,
+        "dispatches": 49,
+        "mean_ms": 1.70260125403125,
+        "sd_ms": 0.07727591299947896
+      },
+      {
+        "region": "decoder transition",
+        "start": 142,
+        "end": 144,
+        "dispatches": 2,
+        "mean_ms": -0.0006730854375000261,
+        "sd_ms": 0.05586359780033967
+      },
+      {
+        "region": "decoder C512",
+        "start": 144,
+        "end": 179,
+        "dispatches": 35,
+        "mean_ms": 0.7112190723124998,
+        "sd_ms": 0.10630794959080622
+      },
+      {
+        "region": "decoder C256",
+        "start": 179,
+        "end": 196,
+        "dispatches": 17,
+        "mean_ms": 0.7257750331874998,
+        "sd_ms": 0.07711232401448041
+      },
+      {
+        "region": "decoder C128",
+        "start": 196,
+        "end": 203,
+        "dispatches": 7,
+        "mean_ms": 0.6684003174374997,
+        "sd_ms": 0.08232030400153544
+      },
+      {
+        "region": "decoder C64",
+        "start": 203,
+        "end": 208,
+        "dispatches": 5,
+        "mean_ms": 0.69390156871875,
+        "sd_ms": 0.09645231940861032
+      },
+      {
+        "region": "decoder C32",
+        "start": 208,
+        "end": 213,
+        "dispatches": 5,
+        "mean_ms": 1.1320175528125,
+        "sd_ms": 0.0654140544420539
+      },
+      {
+        "region": "post/RGB",
+        "start": 213,
+        "end": 214,
+        "dispatches": 1,
+        "mean_ms": 0.8387981057812498,
+        "sd_ms": 0.08926536678793096
+      }
+    ],
+    "families": {
+      "C32": {
+        "mean_ms": 3.74310377440625,
+        "dispatches": 11,
+        "share_percent": 31.334854101877195
+      },
+      "C64": {
+        "mean_ms": 1.40473031259375,
+        "dispatches": 10,
+        "share_percent": 11.759497478691118
+      },
+      "C128": {
+        "mean_ms": 1.3859443739062498,
+        "dispatches": 14,
+        "share_percent": 11.602233698839596
+      },
+      "C256": {
+        "mean_ms": 1.59526881575,
+        "dispatches": 34,
+        "share_percent": 13.354563113262854
+      },
+      "C512": {
+        "mean_ms": 1.9602262675312498,
+        "dispatches": 92,
+        "share_percent": 16.409751853460783
+      },
+      "ViT": {
+        "mean_ms": 1.70260125403125,
+        "dispatches": 49,
+        "share_percent": 14.253081160488302
+      },
+      "transitions": {
+        "mean_ms": 0.1536213009062498,
+        "dispatches": 4,
+        "share_percent": 1.2860185933801653
+      }
+    },
+    "old_families": {
+      "C32": {
+        "mean_ms": 6.443643458,
+        "dispatches": 11,
+        "compute_share_percent": 35.539569266317464,
+        "approx_principal_GFLOP": 295.02210048,
+        "approx_principal_TFLOPS": 45.78498211500516
+      },
+      "C64": {
+        "mean_ms": 2.3631099760625,
+        "dispatches": 18,
+        "compute_share_percent": 13.03360609965627,
+        "approx_principal_GFLOP": 120.406933504,
+        "approx_principal_TFLOPS": 50.95274224377252
+      },
+      "C128": {
+        "mean_ms": 2.214217454125,
+        "dispatches": 26,
+        "compute_share_percent": 12.212397395120515,
+        "approx_principal_GFLOP": 152.74396876799997,
+        "approx_principal_TFLOPS": 68.98327374461076
+      },
+      "C256": {
+        "mean_ms": 2.253877967937499,
+        "dispatches": 34,
+        "compute_share_percent": 12.43114282803659,
+        "approx_principal_GFLOP": 188.794011648,
+        "approx_principal_TFLOPS": 83.76407877164863
+      },
+      "C512": {
+        "mean_ms": 2.1786626579374997,
+        "dispatches": 92,
+        "compute_share_percent": 12.016296827158973,
+        "approx_principal_GFLOP": 126.50020864000001,
+        "approx_principal_TFLOPS": 58.06323809660164
+      },
+      "ViT": {
+        "mean_ms": 2.4709113536875003,
+        "dispatches": 49,
+        "compute_share_percent": 13.62817880562304,
+        "approx_principal_GFLOP": 142.27079168,
+        "approx_principal_TFLOPS": 57.57826620031517
+      },
+      "transitions": {
+        "mean_ms": 0.20647627093750026,
+        "dispatches": 4,
+        "compute_share_percent": 1.1388087780871474
+      }
+    }
+  }
+}

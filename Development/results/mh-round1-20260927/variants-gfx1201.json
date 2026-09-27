@@ -1,0 +1,2865 @@
+{
+  "/tmp/mh-round1-20260927/build-A/gfx1201/c64-wave2.hsaco.s": {
+    "c64_wave2": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 976,
+        "SALU": 550,
+        "VALU": 1962,
+        "VMEM": 195,
+        "VOPD": 276,
+        "DS": 73,
+        "WMMA": 150
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2770,
+        "SALU": 1945,
+        "VALU": 5535,
+        "VMEM": 576,
+        "VOPD": 918,
+        "DS": 136,
+        "WMMA": 456
+      },
+      "resources": {
+        "group_segment_fixed_size": 8192,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c64_wave2_bi": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 909,
+        "SALU": 550,
+        "VALU": 2031,
+        "VOPD": 277,
+        "VMEM": 187,
+        "DS": 73,
+        "WMMA": 150
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2631,
+        "SALU": 1945,
+        "VALU": 5454,
+        "VOPD": 946,
+        "VMEM": 568,
+        "DS": 136,
+        "WMMA": 456
+      },
+      "resources": {
+        "group_segment_fixed_size": 8192,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c64_wave2_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 784,
+        "SALU": 249,
+        "VALU": 1746,
+        "VMEM": 181,
+        "VOPD": 285,
+        "DS": 73,
+        "WMMA": 150
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 1990,
+        "SALU": 738,
+        "VALU": 4710,
+        "VMEM": 520,
+        "VOPD": 936,
+        "DS": 136,
+        "WMMA": 456
+      },
+      "resources": {
+        "group_segment_fixed_size": 8192,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c64_wave2_bi_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 732,
+        "SALU": 249,
+        "VALU": 1817,
+        "VOPD": 285,
+        "VMEM": 173,
+        "DS": 73,
+        "WMMA": 150
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 1935,
+        "SALU": 738,
+        "VALU": 4589,
+        "VOPD": 984,
+        "VMEM": 512,
+        "DS": 136,
+        "WMMA": 456
+      },
+      "resources": {
+        "group_segment_fixed_size": 8192,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c128_wave2": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1231,
+        "SALU": 547,
+        "VALU": 2111,
+        "VOPD": 286,
+        "VMEM": 315,
+        "DS": 103,
+        "WMMA": 270
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 3271,
+        "SALU": 1924,
+        "VALU": 5648,
+        "VOPD": 988,
+        "VMEM": 864,
+        "DS": 208,
+        "WMMA": 744
+      },
+      "resources": {
+        "group_segment_fixed_size": 16384,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c128_wave2_bi": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1168,
+        "SALU": 547,
+        "VALU": 2204,
+        "VOPD": 275,
+        "VMEM": 307,
+        "DS": 103,
+        "WMMA": 270
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 3121,
+        "SALU": 1924,
+        "VALU": 5747,
+        "VOPD": 926,
+        "VMEM": 856,
+        "DS": 208,
+        "WMMA": 744
+      },
+      "resources": {
+        "group_segment_fixed_size": 16384,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c128_wave2_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1058,
+        "SALU": 246,
+        "VALU": 1889,
+        "VOPD": 298,
+        "VMEM": 301,
+        "DS": 103,
+        "WMMA": 270
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2582,
+        "SALU": 717,
+        "VALU": 4763,
+        "VOPD": 1036,
+        "VMEM": 808,
+        "DS": 208,
+        "WMMA": 744
+      },
+      "resources": {
+        "group_segment_fixed_size": 16384,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c128_wave2_bi_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 991,
+        "SALU": 246,
+        "VALU": 1986,
+        "VOPD": 285,
+        "VMEM": 293,
+        "DS": 103,
+        "WMMA": 270
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2416,
+        "SALU": 717,
+        "VALU": 4878,
+        "VOPD": 966,
+        "VMEM": 800,
+        "DS": 208,
+        "WMMA": 744
+      },
+      "resources": {
+        "group_segment_fixed_size": 16384,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_wave2": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1443,
+        "SALU": 547,
+        "VALU": 2065,
+        "VOPD": 228,
+        "VMEM": 555,
+        "DS": 163,
+        "WMMA": 510
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 3708,
+        "SALU": 1924,
+        "VALU": 5794,
+        "VOPD": 783,
+        "VMEM": 1440,
+        "DS": 352,
+        "WMMA": 1320
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 207
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_wave2_bi": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1405,
+        "SALU": 547,
+        "VALU": 2176,
+        "VOPD": 208,
+        "VMEM": 547,
+        "DS": 163,
+        "WMMA": 510
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 3841,
+        "SALU": 1924,
+        "VALU": 5899,
+        "VOPD": 730,
+        "VMEM": 1432,
+        "DS": 352,
+        "WMMA": 1320
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 191
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_wave2_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1265,
+        "SALU": 246,
+        "VALU": 1847,
+        "VOPD": 238,
+        "VMEM": 541,
+        "DS": 163,
+        "WMMA": 510
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2999,
+        "SALU": 717,
+        "VALU": 4925,
+        "VOPD": 823,
+        "VMEM": 1384,
+        "DS": 352,
+        "WMMA": 1320
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 207
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_wave2_bi_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1227,
+        "SALU": 246,
+        "VALU": 1958,
+        "VOPD": 218,
+        "VMEM": 533,
+        "DS": 163,
+        "WMMA": 510
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 3132,
+        "SALU": 717,
+        "VALU": 5030,
+        "VOPD": 770,
+        "VMEM": 1376,
+        "DS": 352,
+        "WMMA": 1320
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 191
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_attn_wave": {
+      "static": {
+        "SMEM": 6,
+        "WAIT": 439,
+        "SALU": 331,
+        "VALU": 661,
+        "VMEM": 89,
+        "DS": 84,
+        "VOPD": 78,
+        "WMMA": 58
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 6,
+        "WAIT": 1641,
+        "SALU": 1848,
+        "VALU": 2481,
+        "VMEM": 283,
+        "DS": 120,
+        "VOPD": 300,
+        "WMMA": 232
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        1,
+        4,
+        4,
+        2
+      ]
+    },
+    "c256_attn_wave_bo": {
+      "static": {
+        "SMEM": 6,
+        "WAIT": 370,
+        "SALU": 201,
+        "VALU": 571,
+        "VMEM": 83,
+        "DS": 83,
+        "VOPD": 87,
+        "WMMA": 58
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 6,
+        "WAIT": 925,
+        "SALU": 510,
+        "VALU": 1537,
+        "VMEM": 227,
+        "DS": 116,
+        "VOPD": 339,
+        "WMMA": 232
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        1,
+        4,
+        4
+      ]
+    }
+  },
+  "/tmp/mh-round1-20260927/build-B/gfx1201/c64-wave2.hsaco.s": {
+    "c64_wave2": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 943,
+        "SALU": 550,
+        "VALU": 1870,
+        "VOPD": 286,
+        "VMEM": 182,
+        "DS": 73,
+        "WMMA": 150
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2641,
+        "SALU": 1945,
+        "VALU": 5251,
+        "VOPD": 940,
+        "VMEM": 524,
+        "DS": 136,
+        "WMMA": 456
+      },
+      "resources": {
+        "group_segment_fixed_size": 8192,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c64_wave2_bi": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 950,
+        "SALU": 577,
+        "VALU": 1721,
+        "VOPD": 247,
+        "VMEM": 172,
+        "DS": 77,
+        "WMMA": 150
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2642,
+        "SALU": 1990,
+        "VALU": 5189,
+        "VOPD": 883,
+        "VMEM": 508,
+        "DS": 140,
+        "WMMA": 456
+      },
+      "resources": {
+        "group_segment_fixed_size": 8192,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c64_wave2_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 761,
+        "SALU": 249,
+        "VALU": 1656,
+        "VOPD": 294,
+        "VMEM": 168,
+        "DS": 73,
+        "WMMA": 150
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 1925,
+        "SALU": 738,
+        "VALU": 4386,
+        "VOPD": 978,
+        "VMEM": 468,
+        "DS": 136,
+        "WMMA": 456
+      },
+      "resources": {
+        "group_segment_fixed_size": 8192,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c64_wave2_bi_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 767,
+        "SALU": 276,
+        "VALU": 1511,
+        "VOPD": 253,
+        "VMEM": 158,
+        "DS": 77,
+        "WMMA": 150
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 1910,
+        "SALU": 783,
+        "VALU": 4340,
+        "VOPD": 913,
+        "VMEM": 452,
+        "DS": 140,
+        "WMMA": 456
+      },
+      "resources": {
+        "group_segment_fixed_size": 8192,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c128_wave2": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1207,
+        "SALU": 547,
+        "VALU": 2031,
+        "VOPD": 290,
+        "VMEM": 302,
+        "DS": 103,
+        "WMMA": 270
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 3199,
+        "SALU": 1924,
+        "VALU": 5340,
+        "VOPD": 1022,
+        "VMEM": 812,
+        "DS": 208,
+        "WMMA": 744
+      },
+      "resources": {
+        "group_segment_fixed_size": 16384,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c128_wave2_bi": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1207,
+        "SALU": 574,
+        "VALU": 1863,
+        "VOPD": 261,
+        "VMEM": 292,
+        "DS": 107,
+        "WMMA": 270
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 3157,
+        "SALU": 1969,
+        "VALU": 5289,
+        "VOPD": 960,
+        "VMEM": 796,
+        "DS": 212,
+        "WMMA": 744
+      },
+      "resources": {
+        "group_segment_fixed_size": 16384,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c128_wave2_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1030,
+        "SALU": 246,
+        "VALU": 1813,
+        "VOPD": 300,
+        "VMEM": 288,
+        "DS": 103,
+        "WMMA": 270
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2494,
+        "SALU": 717,
+        "VALU": 4471,
+        "VOPD": 1062,
+        "VMEM": 756,
+        "DS": 208,
+        "WMMA": 744
+      },
+      "resources": {
+        "group_segment_fixed_size": 16384,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c128_wave2_bi_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1030,
+        "SALU": 273,
+        "VALU": 1645,
+        "VOPD": 271,
+        "VMEM": 278,
+        "DS": 107,
+        "WMMA": 270
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2452,
+        "SALU": 762,
+        "VALU": 4420,
+        "VOPD": 1000,
+        "VMEM": 740,
+        "DS": 212,
+        "WMMA": 744
+      },
+      "resources": {
+        "group_segment_fixed_size": 16384,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_wave2": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1421,
+        "SALU": 547,
+        "VALU": 2021,
+        "VOPD": 214,
+        "VMEM": 542,
+        "DS": 163,
+        "WMMA": 510
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 3560,
+        "SALU": 1924,
+        "VALU": 5744,
+        "VOPD": 688,
+        "VMEM": 1388,
+        "DS": 352,
+        "WMMA": 1320
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 206
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_wave2_bi": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1423,
+        "SALU": 574,
+        "VALU": 1829,
+        "VOPD": 197,
+        "VMEM": 532,
+        "DS": 167,
+        "WMMA": 510
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 3532,
+        "SALU": 1969,
+        "VALU": 5615,
+        "VOPD": 659,
+        "VMEM": 1372,
+        "DS": 356,
+        "WMMA": 1320
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 188
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_wave2_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1243,
+        "SALU": 246,
+        "VALU": 1803,
+        "VOPD": 224,
+        "VMEM": 528,
+        "DS": 163,
+        "WMMA": 510
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2851,
+        "SALU": 717,
+        "VALU": 4875,
+        "VOPD": 728,
+        "VMEM": 1332,
+        "DS": 352,
+        "WMMA": 1320
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 206
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_wave2_bi_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1245,
+        "SALU": 273,
+        "VALU": 1611,
+        "VOPD": 207,
+        "VMEM": 518,
+        "DS": 167,
+        "WMMA": 510
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2823,
+        "SALU": 762,
+        "VALU": 4746,
+        "VOPD": 699,
+        "VMEM": 1316,
+        "DS": 356,
+        "WMMA": 1320
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 188
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_attn_wave": {
+      "static": {
+        "SMEM": 6,
+        "WAIT": 439,
+        "SALU": 331,
+        "VALU": 661,
+        "VMEM": 89,
+        "DS": 84,
+        "VOPD": 78,
+        "WMMA": 58
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 6,
+        "WAIT": 1641,
+        "SALU": 1848,
+        "VALU": 2481,
+        "VMEM": 283,
+        "DS": 120,
+        "VOPD": 300,
+        "WMMA": 232
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        1,
+        4,
+        4,
+        2
+      ]
+    },
+    "c256_attn_wave_bo": {
+      "static": {
+        "SMEM": 6,
+        "WAIT": 370,
+        "SALU": 201,
+        "VALU": 571,
+        "VMEM": 83,
+        "DS": 83,
+        "VOPD": 87,
+        "WMMA": 58
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 6,
+        "WAIT": 925,
+        "SALU": 510,
+        "VALU": 1537,
+        "VMEM": 227,
+        "DS": 116,
+        "VOPD": 339,
+        "WMMA": 232
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        1,
+        4,
+        4
+      ]
+    }
+  },
+  "/tmp/mh-round1-20260927/build-R/gfx1201/c64-wave2.hsaco.s": {
+    "c64_wave2": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 946,
+        "SALU": 550,
+        "VALU": 1854,
+        "VOPD": 294,
+        "VMEM": 182,
+        "DS": 73,
+        "WMMA": 150
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2653,
+        "SALU": 1945,
+        "VALU": 5163,
+        "VOPD": 984,
+        "VMEM": 524,
+        "DS": 136,
+        "WMMA": 456
+      },
+      "resources": {
+        "group_segment_fixed_size": 8192,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c64_wave2_bi": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 898,
+        "SALU": 550,
+        "VALU": 2015,
+        "VOPD": 278,
+        "VMEM": 172,
+        "DS": 73,
+        "WMMA": 150
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2590,
+        "SALU": 1945,
+        "VALU": 5426,
+        "VOPD": 956,
+        "VMEM": 508,
+        "DS": 136,
+        "WMMA": 456
+      },
+      "resources": {
+        "group_segment_fixed_size": 8192,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c64_wave2_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 762,
+        "SALU": 249,
+        "VALU": 1646,
+        "VOPD": 299,
+        "VMEM": 168,
+        "DS": 73,
+        "WMMA": 150
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 1905,
+        "SALU": 738,
+        "VALU": 4370,
+        "VOPD": 986,
+        "VMEM": 468,
+        "DS": 136,
+        "WMMA": 456
+      },
+      "resources": {
+        "group_segment_fixed_size": 8192,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c64_wave2_bi_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 716,
+        "SALU": 249,
+        "VALU": 1803,
+        "VOPD": 285,
+        "VMEM": 158,
+        "DS": 73,
+        "WMMA": 150
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 1874,
+        "SALU": 738,
+        "VALU": 4569,
+        "VOPD": 990,
+        "VMEM": 452,
+        "DS": 136,
+        "WMMA": 456
+      },
+      "resources": {
+        "group_segment_fixed_size": 8192,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c128_wave2": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1210,
+        "SALU": 547,
+        "VALU": 2023,
+        "VOPD": 294,
+        "VMEM": 302,
+        "DS": 103,
+        "WMMA": 270
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 3211,
+        "SALU": 1924,
+        "VALU": 5308,
+        "VOPD": 1038,
+        "VMEM": 812,
+        "DS": 208,
+        "WMMA": 744
+      },
+      "resources": {
+        "group_segment_fixed_size": 16384,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c128_wave2_bi": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1157,
+        "SALU": 547,
+        "VALU": 2176,
+        "VOPD": 282,
+        "VMEM": 292,
+        "DS": 103,
+        "WMMA": 270
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 3077,
+        "SALU": 1924,
+        "VALU": 5701,
+        "VOPD": 945,
+        "VMEM": 796,
+        "DS": 208,
+        "WMMA": 744
+      },
+      "resources": {
+        "group_segment_fixed_size": 16384,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c128_wave2_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1033,
+        "SALU": 246,
+        "VALU": 1805,
+        "VOPD": 304,
+        "VMEM": 288,
+        "DS": 103,
+        "WMMA": 270
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2506,
+        "SALU": 717,
+        "VALU": 4439,
+        "VOPD": 1078,
+        "VMEM": 756,
+        "DS": 208,
+        "WMMA": 744
+      },
+      "resources": {
+        "group_segment_fixed_size": 16384,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c128_wave2_bi_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 980,
+        "SALU": 246,
+        "VALU": 1958,
+        "VOPD": 292,
+        "VMEM": 278,
+        "DS": 103,
+        "WMMA": 270
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2372,
+        "SALU": 717,
+        "VALU": 4832,
+        "VOPD": 985,
+        "VMEM": 740,
+        "DS": 208,
+        "WMMA": 744
+      },
+      "resources": {
+        "group_segment_fixed_size": 16384,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_wave2": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1423,
+        "SALU": 547,
+        "VALU": 2009,
+        "VOPD": 220,
+        "VMEM": 542,
+        "DS": 163,
+        "WMMA": 510
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 3568,
+        "SALU": 1924,
+        "VALU": 5696,
+        "VOPD": 712,
+        "VMEM": 1388,
+        "DS": 352,
+        "WMMA": 1320
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 206
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_wave2_bi": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1383,
+        "SALU": 547,
+        "VALU": 2146,
+        "VOPD": 216,
+        "VMEM": 532,
+        "DS": 163,
+        "WMMA": 510
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 3732,
+        "SALU": 1924,
+        "VALU": 5917,
+        "VOPD": 699,
+        "VMEM": 1372,
+        "DS": 352,
+        "WMMA": 1320
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 192
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_wave2_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1245,
+        "SALU": 246,
+        "VALU": 1791,
+        "VOPD": 230,
+        "VMEM": 528,
+        "DS": 163,
+        "WMMA": 510
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2859,
+        "SALU": 717,
+        "VALU": 4827,
+        "VOPD": 752,
+        "VMEM": 1332,
+        "DS": 352,
+        "WMMA": 1320
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 206
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_wave2_bi_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1205,
+        "SALU": 246,
+        "VALU": 1928,
+        "VOPD": 226,
+        "VMEM": 518,
+        "DS": 163,
+        "WMMA": 510
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 3023,
+        "SALU": 717,
+        "VALU": 5048,
+        "VOPD": 739,
+        "VMEM": 1316,
+        "DS": 352,
+        "WMMA": 1320
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 192
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_attn_wave": {
+      "static": {
+        "SMEM": 6,
+        "WAIT": 439,
+        "SALU": 331,
+        "VALU": 661,
+        "VMEM": 89,
+        "DS": 84,
+        "VOPD": 78,
+        "WMMA": 58
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 6,
+        "WAIT": 1641,
+        "SALU": 1848,
+        "VALU": 2481,
+        "VMEM": 283,
+        "DS": 120,
+        "VOPD": 300,
+        "WMMA": 232
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        1,
+        4,
+        4,
+        2
+      ]
+    },
+    "c256_attn_wave_bo": {
+      "static": {
+        "SMEM": 6,
+        "WAIT": 370,
+        "SALU": 201,
+        "VALU": 571,
+        "VMEM": 83,
+        "DS": 83,
+        "VOPD": 87,
+        "WMMA": 58
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 6,
+        "WAIT": 925,
+        "SALU": 510,
+        "VALU": 1537,
+        "VMEM": 227,
+        "DS": 116,
+        "VOPD": 339,
+        "WMMA": 232
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        1,
+        4,
+        4
+      ]
+    }
+  },
+  "/tmp/mh-round1-20260927/build-T/gfx1201/c64-wave2.hsaco.s": {
+    "c64_wave2": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1223,
+        "SALU": 953,
+        "VALU": 2253,
+        "VMEM": 225,
+        "VOPD": 283,
+        "DS": 76,
+        "WMMA": 164
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 3725,
+        "SALU": 3464,
+        "VALU": 6669,
+        "VMEM": 696,
+        "VOPD": 922,
+        "DS": 148,
+        "WMMA": 512
+      },
+      "resources": {
+        "group_segment_fixed_size": 8192,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c64_wave2_bi": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1164,
+        "SALU": 953,
+        "VALU": 2348,
+        "VOPD": 271,
+        "VMEM": 217,
+        "DS": 76,
+        "WMMA": 164
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 3618,
+        "SALU": 3464,
+        "VALU": 6638,
+        "VOPD": 925,
+        "VMEM": 688,
+        "DS": 148,
+        "WMMA": 512
+      },
+      "resources": {
+        "group_segment_fixed_size": 8192,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c64_wave2_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 860,
+        "SALU": 351,
+        "VALU": 1827,
+        "VMEM": 197,
+        "VOPD": 298,
+        "DS": 76,
+        "WMMA": 164
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2282,
+        "SALU": 1050,
+        "VALU": 4935,
+        "VMEM": 584,
+        "VOPD": 1000,
+        "DS": 148,
+        "WMMA": 512
+      },
+      "resources": {
+        "group_segment_fixed_size": 8192,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c64_wave2_bi_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 798,
+        "SALU": 351,
+        "VALU": 1932,
+        "VOPD": 281,
+        "VMEM": 189,
+        "DS": 76,
+        "WMMA": 164
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2166,
+        "SALU": 1050,
+        "VALU": 4938,
+        "VOPD": 986,
+        "VMEM": 576,
+        "DS": 148,
+        "WMMA": 512
+      },
+      "resources": {
+        "group_segment_fixed_size": 8192,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c128_wave2": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1490,
+        "SALU": 950,
+        "VALU": 2466,
+        "VOPD": 269,
+        "VMEM": 353,
+        "DS": 108,
+        "WMMA": 292
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 4262,
+        "SALU": 3443,
+        "VALU": 6972,
+        "VOPD": 905,
+        "VMEM": 1016,
+        "DS": 228,
+        "WMMA": 832
+      },
+      "resources": {
+        "group_segment_fixed_size": 16384,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c128_wave2_bi": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1434,
+        "SALU": 950,
+        "VALU": 2523,
+        "VOPD": 276,
+        "VMEM": 345,
+        "DS": 108,
+        "WMMA": 292
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 4167,
+        "SALU": 3443,
+        "VALU": 6873,
+        "VOPD": 942,
+        "VMEM": 1008,
+        "DS": 228,
+        "WMMA": 832
+      },
+      "resources": {
+        "group_segment_fixed_size": 16384,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c128_wave2_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1129,
+        "SALU": 348,
+        "VALU": 2016,
+        "VOPD": 296,
+        "VMEM": 325,
+        "DS": 108,
+        "WMMA": 292
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2806,
+        "SALU": 1029,
+        "VALU": 5250,
+        "VOPD": 977,
+        "VMEM": 904,
+        "DS": 228,
+        "WMMA": 832
+      },
+      "resources": {
+        "group_segment_fixed_size": 16384,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c128_wave2_bi_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1083,
+        "SALU": 348,
+        "VALU": 2079,
+        "VOPD": 300,
+        "VMEM": 317,
+        "DS": 108,
+        "WMMA": 292
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2730,
+        "SALU": 1029,
+        "VALU": 5169,
+        "VOPD": 1005,
+        "VMEM": 896,
+        "DS": 228,
+        "WMMA": 832
+      },
+      "resources": {
+        "group_segment_fixed_size": 16384,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_wave2": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1699,
+        "SALU": 950,
+        "VALU": 2252,
+        "VOPD": 270,
+        "VMEM": 609,
+        "DS": 172,
+        "WMMA": 548
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 4705,
+        "SALU": 3443,
+        "VALU": 6635,
+        "VOPD": 918,
+        "VMEM": 1656,
+        "DS": 388,
+        "WMMA": 1472
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 190
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_wave2_bi": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1667,
+        "SALU": 950,
+        "VALU": 2325,
+        "VOPD": 269,
+        "VMEM": 601,
+        "DS": 172,
+        "WMMA": 548
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 4901,
+        "SALU": 3443,
+        "VALU": 6474,
+        "VOPD": 980,
+        "VMEM": 1648,
+        "DS": 388,
+        "WMMA": 1472
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 186
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_wave2_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1360,
+        "SALU": 348,
+        "VALU": 1818,
+        "VOPD": 289,
+        "VMEM": 581,
+        "DS": 172,
+        "WMMA": 548
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 3490,
+        "SALU": 1029,
+        "VALU": 4905,
+        "VOPD": 994,
+        "VMEM": 1544,
+        "DS": 388,
+        "WMMA": 1472
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 190
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_wave2_bi_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1301,
+        "SALU": 348,
+        "VALU": 1859,
+        "VOPD": 304,
+        "VMEM": 573,
+        "DS": 172,
+        "WMMA": 548
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 3416,
+        "SALU": 1029,
+        "VALU": 4694,
+        "VOPD": 1081,
+        "VMEM": 1536,
+        "DS": 388,
+        "WMMA": 1472
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 186
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_attn_wave": {
+      "static": {
+        "SMEM": 6,
+        "WAIT": 828,
+        "SALU": 913,
+        "VALU": 1078,
+        "VMEM": 151,
+        "DS": 92,
+        "VOPD": 75,
+        "WMMA": 96
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 6,
+        "WAIT": 2697,
+        "SALU": 3244,
+        "VALU": 3538,
+        "VMEM": 499,
+        "DS": 152,
+        "VOPD": 285,
+        "WMMA": 384
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        1,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_attn_wave_bo": {
+      "static": {
+        "SMEM": 6,
+        "WAIT": 465,
+        "SALU": 311,
+        "VALU": 642,
+        "VMEM": 123,
+        "DS": 92,
+        "VOPD": 95,
+        "WMMA": 96
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 6,
+        "WAIT": 1245,
+        "SALU": 830,
+        "VALU": 1788,
+        "VMEM": 387,
+        "DS": 152,
+        "VOPD": 371,
+        "WMMA": 384
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        1,
+        4,
+        4,
+        4
+      ]
+    }
+  },
+  "/tmp/mh-round1-20260927/build-C/gfx1201/c64-wave2.hsaco.s": {
+    "c64_wave2": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 921,
+        "SALU": 540,
+        "VALU": 1909,
+        "VOPD": 260,
+        "VMEM": 195,
+        "DS": 73,
+        "WMMA": 150
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2604,
+        "SALU": 1935,
+        "VALU": 5560,
+        "VOPD": 809,
+        "VMEM": 576,
+        "DS": 136,
+        "WMMA": 456
+      },
+      "resources": {
+        "group_segment_fixed_size": 8192,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c64_wave2_bi": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 862,
+        "SALU": 540,
+        "VALU": 1988,
+        "VOPD": 256,
+        "VMEM": 187,
+        "DS": 73,
+        "WMMA": 150
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2461,
+        "SALU": 1935,
+        "VALU": 5525,
+        "VOPD": 814,
+        "VMEM": 568,
+        "DS": 136,
+        "WMMA": 456
+      },
+      "resources": {
+        "group_segment_fixed_size": 8192,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c64_wave2_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 741,
+        "SALU": 239,
+        "VALU": 1693,
+        "VOPD": 269,
+        "VMEM": 181,
+        "DS": 73,
+        "WMMA": 150
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 1884,
+        "SALU": 728,
+        "VALU": 4681,
+        "VOPD": 854,
+        "VMEM": 520,
+        "DS": 136,
+        "WMMA": 456
+      },
+      "resources": {
+        "group_segment_fixed_size": 8192,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c64_wave2_bi_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 683,
+        "SALU": 239,
+        "VALU": 1774,
+        "VOPD": 264,
+        "VMEM": 173,
+        "DS": 73,
+        "WMMA": 150
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 1745,
+        "SALU": 728,
+        "VALU": 4654,
+        "VOPD": 855,
+        "VMEM": 512,
+        "DS": 136,
+        "WMMA": 456
+      },
+      "resources": {
+        "group_segment_fixed_size": 8192,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c128_wave2": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1178,
+        "SALU": 537,
+        "VALU": 2056,
+        "VOPD": 271,
+        "VMEM": 315,
+        "DS": 103,
+        "WMMA": 270
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 3158,
+        "SALU": 1914,
+        "VALU": 5533,
+        "VOPD": 949,
+        "VMEM": 864,
+        "DS": 208,
+        "WMMA": 744
+      },
+      "resources": {
+        "group_segment_fixed_size": 16384,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c128_wave2_bi": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1129,
+        "SALU": 537,
+        "VALU": 2137,
+        "VOPD": 266,
+        "VMEM": 307,
+        "DS": 103,
+        "WMMA": 270
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 3076,
+        "SALU": 1914,
+        "VALU": 5530,
+        "VOPD": 938,
+        "VMEM": 856,
+        "DS": 208,
+        "WMMA": 744
+      },
+      "resources": {
+        "group_segment_fixed_size": 16384,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c128_wave2_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1004,
+        "SALU": 236,
+        "VALU": 1838,
+        "VOPD": 281,
+        "VMEM": 301,
+        "DS": 103,
+        "WMMA": 270
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2462,
+        "SALU": 707,
+        "VALU": 4664,
+        "VOPD": 989,
+        "VMEM": 808,
+        "DS": 208,
+        "WMMA": 744
+      },
+      "resources": {
+        "group_segment_fixed_size": 16384,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c128_wave2_bi_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 952,
+        "SALU": 236,
+        "VALU": 1919,
+        "VOPD": 276,
+        "VMEM": 293,
+        "DS": 103,
+        "WMMA": 270
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2365,
+        "SALU": 707,
+        "VALU": 4661,
+        "VOPD": 978,
+        "VMEM": 800,
+        "DS": 208,
+        "WMMA": 744
+      },
+      "resources": {
+        "group_segment_fixed_size": 16384,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_wave2": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1393,
+        "SALU": 537,
+        "VALU": 2018,
+        "VOPD": 209,
+        "VMEM": 555,
+        "DS": 163,
+        "WMMA": 510
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 3568,
+        "SALU": 1914,
+        "VALU": 5705,
+        "VOPD": 731,
+        "VMEM": 1440,
+        "DS": 352,
+        "WMMA": 1320
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 210
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_wave2_bi": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1336,
+        "SALU": 537,
+        "VALU": 2099,
+        "VOPD": 204,
+        "VMEM": 547,
+        "DS": 163,
+        "WMMA": 510
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 3460,
+        "SALU": 1914,
+        "VALU": 5642,
+        "VOPD": 744,
+        "VMEM": 1432,
+        "DS": 352,
+        "WMMA": 1320
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 206
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_wave2_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1215,
+        "SALU": 236,
+        "VALU": 1798,
+        "VOPD": 220,
+        "VMEM": 541,
+        "DS": 163,
+        "WMMA": 510
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2853,
+        "SALU": 707,
+        "VALU": 4834,
+        "VOPD": 772,
+        "VMEM": 1384,
+        "DS": 352,
+        "WMMA": 1320
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 210
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_wave2_bi_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1158,
+        "SALU": 236,
+        "VALU": 1881,
+        "VOPD": 214,
+        "VMEM": 533,
+        "DS": 163,
+        "WMMA": 510
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2742,
+        "SALU": 707,
+        "VALU": 4773,
+        "VOPD": 784,
+        "VMEM": 1376,
+        "DS": 352,
+        "WMMA": 1320
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 206
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_attn_wave": {
+      "static": {
+        "SMEM": 6,
+        "WAIT": 430,
+        "SALU": 324,
+        "VALU": 649,
+        "VMEM": 89,
+        "DS": 84,
+        "VOPD": 76,
+        "WMMA": 58
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 6,
+        "WAIT": 1617,
+        "SALU": 1841,
+        "VALU": 2430,
+        "VMEM": 283,
+        "DS": 120,
+        "VOPD": 292,
+        "WMMA": 232
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        1,
+        4,
+        4,
+        2
+      ]
+    },
+    "c256_attn_wave_bo": {
+      "static": {
+        "SMEM": 6,
+        "WAIT": 361,
+        "SALU": 196,
+        "VALU": 580,
+        "VMEM": 84,
+        "DS": 83,
+        "VOPD": 75,
+        "WMMA": 58
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 6,
+        "WAIT": 886,
+        "SALU": 511,
+        "VALU": 1561,
+        "VMEM": 231,
+        "DS": 116,
+        "VOPD": 291,
+        "WMMA": 232
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        1,
+        4,
+        4
+      ]
+    }
+  },
+  "/tmp/mh-round1-20260927/build-D/gfx1201/c64-wave2.hsaco.s": {
+    "c64_wave2": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 976,
+        "SALU": 550,
+        "VALU": 1962,
+        "VMEM": 195,
+        "VOPD": 276,
+        "DS": 73,
+        "WMMA": 150
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2770,
+        "SALU": 1945,
+        "VALU": 5535,
+        "VMEM": 576,
+        "VOPD": 918,
+        "DS": 136,
+        "WMMA": 456
+      },
+      "resources": {
+        "group_segment_fixed_size": 8192,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c64_wave2_bi": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 909,
+        "SALU": 550,
+        "VALU": 2031,
+        "VOPD": 277,
+        "VMEM": 187,
+        "DS": 73,
+        "WMMA": 150
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2631,
+        "SALU": 1945,
+        "VALU": 5454,
+        "VOPD": 946,
+        "VMEM": 568,
+        "DS": 136,
+        "WMMA": 456
+      },
+      "resources": {
+        "group_segment_fixed_size": 8192,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c64_wave2_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 784,
+        "SALU": 249,
+        "VALU": 1746,
+        "VMEM": 181,
+        "VOPD": 285,
+        "DS": 73,
+        "WMMA": 150
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 1990,
+        "SALU": 738,
+        "VALU": 4710,
+        "VMEM": 520,
+        "VOPD": 936,
+        "DS": 136,
+        "WMMA": 456
+      },
+      "resources": {
+        "group_segment_fixed_size": 8192,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c64_wave2_bi_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 732,
+        "SALU": 249,
+        "VALU": 1817,
+        "VOPD": 285,
+        "VMEM": 173,
+        "DS": 73,
+        "WMMA": 150
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 1935,
+        "SALU": 738,
+        "VALU": 4589,
+        "VOPD": 984,
+        "VMEM": 512,
+        "DS": 136,
+        "WMMA": 456
+      },
+      "resources": {
+        "group_segment_fixed_size": 8192,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c128_wave2": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1231,
+        "SALU": 547,
+        "VALU": 2111,
+        "VOPD": 286,
+        "VMEM": 315,
+        "DS": 103,
+        "WMMA": 270
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 3271,
+        "SALU": 1924,
+        "VALU": 5648,
+        "VOPD": 988,
+        "VMEM": 864,
+        "DS": 208,
+        "WMMA": 744
+      },
+      "resources": {
+        "group_segment_fixed_size": 16384,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c128_wave2_bi": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1168,
+        "SALU": 547,
+        "VALU": 2204,
+        "VOPD": 275,
+        "VMEM": 307,
+        "DS": 103,
+        "WMMA": 270
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 3121,
+        "SALU": 1924,
+        "VALU": 5747,
+        "VOPD": 926,
+        "VMEM": 856,
+        "DS": 208,
+        "WMMA": 744
+      },
+      "resources": {
+        "group_segment_fixed_size": 16384,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c128_wave2_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1058,
+        "SALU": 246,
+        "VALU": 1889,
+        "VOPD": 298,
+        "VMEM": 301,
+        "DS": 103,
+        "WMMA": 270
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2582,
+        "SALU": 717,
+        "VALU": 4763,
+        "VOPD": 1036,
+        "VMEM": 808,
+        "DS": 208,
+        "WMMA": 744
+      },
+      "resources": {
+        "group_segment_fixed_size": 16384,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c128_wave2_bi_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 991,
+        "SALU": 246,
+        "VALU": 1986,
+        "VOPD": 285,
+        "VMEM": 293,
+        "DS": 103,
+        "WMMA": 270
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2416,
+        "SALU": 717,
+        "VALU": 4878,
+        "VOPD": 966,
+        "VMEM": 800,
+        "DS": 208,
+        "WMMA": 744
+      },
+      "resources": {
+        "group_segment_fixed_size": 16384,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 169
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_wave2": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1443,
+        "SALU": 547,
+        "VALU": 2065,
+        "VOPD": 228,
+        "VMEM": 555,
+        "DS": 163,
+        "WMMA": 510
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 3708,
+        "SALU": 1924,
+        "VALU": 5794,
+        "VOPD": 783,
+        "VMEM": 1440,
+        "DS": 352,
+        "WMMA": 1320
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 207
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_wave2_bi": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1405,
+        "SALU": 547,
+        "VALU": 2176,
+        "VOPD": 208,
+        "VMEM": 547,
+        "DS": 163,
+        "WMMA": 510
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 3841,
+        "SALU": 1924,
+        "VALU": 5899,
+        "VOPD": 730,
+        "VMEM": 1432,
+        "DS": 352,
+        "WMMA": 1320
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 191
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_wave2_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1265,
+        "SALU": 246,
+        "VALU": 1847,
+        "VOPD": 238,
+        "VMEM": 541,
+        "DS": 163,
+        "WMMA": 510
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 2999,
+        "SALU": 717,
+        "VALU": 4925,
+        "VOPD": 823,
+        "VMEM": 1384,
+        "DS": 352,
+        "WMMA": 1320
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 207
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_wave2_bi_bo": {
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1227,
+        "SALU": 246,
+        "VALU": 1958,
+        "VOPD": 218,
+        "VMEM": 533,
+        "DS": 163,
+        "WMMA": 510
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 3,
+        "WAIT": 3132,
+        "SALU": 717,
+        "VALU": 5030,
+        "VOPD": 770,
+        "VMEM": 1376,
+        "DS": 352,
+        "WMMA": 1320
+      },
+      "resources": {
+        "group_segment_fixed_size": 32768,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 191
+      },
+      "loop_trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "c256_attn_wave": {
+      "static": {
+        "SMEM": 6,
+        "WAIT": 429,
+        "SALU": 331,
+        "VALU": 684,
+        "VMEM": 83,
+        "DS": 78,
+        "WMMA": 58,
+        "VOPD": 77
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 6,
+        "WAIT": 1640,
+        "SALU": 1848,
+        "VALU": 2513,
+        "VMEM": 283,
+        "DS": 108,
+        "WMMA": 232,
+        "VOPD": 302
+      },
+      "resources": {
+        "group_segment_fixed_size": 16384,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 152
+      },
+      "loop_trips": [
+        1,
+        4,
+        4,
+        2
+      ]
+    },
+    "c256_attn_wave_bo": {
+      "static": {
+        "SMEM": 6,
+        "WAIT": 361,
+        "SALU": 201,
+        "VALU": 614,
+        "VMEM": 77,
+        "DS": 78,
+        "VOPD": 77,
+        "WMMA": 58
+      },
+      "all_branch_upper_per_wave": {
+        "SMEM": 6,
+        "WAIT": 934,
+        "SALU": 510,
+        "VALU": 1658,
+        "VMEM": 227,
+        "DS": 108,
+        "VOPD": 305,
+        "WMMA": 232
+      },
+      "resources": {
+        "group_segment_fixed_size": 16384,
+        "private_segment_fixed_size": 0,
+        "next_free_vgpr": 144
+      },
+      "loop_trips": [
+        1,
+        4,
+        4
+      ]
+    }
+  }
+}

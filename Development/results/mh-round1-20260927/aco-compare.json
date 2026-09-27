@@ -1,0 +1,119 @@
+{
+  "g_fswinds128": {
+    "static_upper": {
+      "SALU": 349,
+      "WAIT": 737,
+      "SMEM": 37,
+      "VALU": 2270,
+      "VMEM": 145,
+      "DS": 292,
+      "WMMA": 704,
+      "VOPD": 447
+    },
+    "sha256": "4c56c0f991469963cb95463947d10d4d980caaa46ede9877c4c2b577d09ab38f"
+  },
+  "g_fswin128": {
+    "static_upper": {
+      "SALU": 105,
+      "WAIT": 475,
+      "SMEM": 2,
+      "VALU": 1764,
+      "VMEM": 137,
+      "DS": 224,
+      "VOPD": 456,
+      "WMMA": 704
+    },
+    "sha256": "fb96d96db3de7b62317aa048db2ac24fcc06e11ff5af16b9e09668a1d29fa4d0"
+  },
+  "g_fswin256": {
+    "static_upper": {
+      "SALU": 105,
+      "WAIT": 694,
+      "SMEM": 2,
+      "VALU": 1770,
+      "VMEM": 209,
+      "DS": 416,
+      "VOPD": 475,
+      "WMMA": 1280
+    },
+    "sha256": "2061b9097251fb3c651f76af6374200a2ea3df3d6dd668e7041e935350e9a4fa"
+  },
+  "g_fswin64": {
+    "static_upper": {
+      "SALU": 105,
+      "WAIT": 412,
+      "SMEM": 2,
+      "VALU": 1759,
+      "VMEM": 101,
+      "DS": 128,
+      "VOPD": 440,
+      "WMMA": 416
+    },
+    "sha256": "1c12957a56a4f469c08d9b880622c314a777da215ef672d0e555e5de21ffd438"
+  },
+  "g_fswinds256": {
+    "static_upper": {
+      "SALU": 349,
+      "WAIT": 890,
+      "SMEM": 37,
+      "VALU": 2279,
+      "VMEM": 217,
+      "DS": 484,
+      "WMMA": 1280,
+      "VOPD": 493
+    },
+    "sha256": "fbbd4cf1336215e8d547608617a745e92a7ecc3fd7db09e327ef244affe562d7"
+  },
+  "g_fswinfusedup128": {
+    "static_upper": {
+      "SALU": 194,
+      "WAIT": 585,
+      "SMEM": 12,
+      "VALU": 2058,
+      "VMEM": 183,
+      "WMMA": 736,
+      "DS": 228,
+      "VOPD": 455
+    },
+    "sha256": "8f06f8429bdf5e76e86015d404e9fcb4c8273e912c7a129396ab5a0b71f3a636"
+  },
+  "g_fswinfusedup256": {
+    "static_upper": {
+      "SALU": 194,
+      "WAIT": 863,
+      "SMEM": 12,
+      "VALU": 2266,
+      "VMEM": 303,
+      "WMMA": 1344,
+      "DS": 420,
+      "VOPD": 483
+    },
+    "sha256": "b5fd7586cf223ae1c6521c669913146888279ca91f4a6861c7c9fa510f732058"
+  },
+  "g_fswinfusedup64": {
+    "static_upper": {
+      "SALU": 194,
+      "WAIT": 463,
+      "SMEM": 12,
+      "VALU": 1981,
+      "VMEM": 123,
+      "WMMA": 432,
+      "DS": 132,
+      "VOPD": 429
+    },
+    "sha256": "a4a08da6f0170485b6eaaeda113962b49a963a6e51bc7b3abacf8d5420a93037"
+  },
+  "g_fswinds64": {
+    "static_upper": {
+      "SALU": 349,
+      "WAIT": 597,
+      "SMEM": 37,
+      "VALU": 2232,
+      "VMEM": 109,
+      "DS": 196,
+      "WMMA": 416,
+      "VOPD": 448
+    },
+    "sha256": "77860d58daa63dfd89e641abad811f5b0f5a66af2ed94a130b97d14f08c37ad0"
+  }
+}

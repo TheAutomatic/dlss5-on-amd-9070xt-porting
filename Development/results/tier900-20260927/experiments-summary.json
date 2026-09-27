@@ -1,0 +1,67 @@
+{
+  "timing": {
+    "runtime-regression-P-correct": {},
+    "runtime-regression-P-adaptive": {},
+    "runtime-regression-P-r1": {
+      "900": {
+        "baseline_ms": 9.309103125000005,
+        "candidate_ms": 9.523546875000005,
+        "delta_ms": 0.21444374999999916,
+        "percent": 2.303591947801076
+      },
+      "1080": {
+        "baseline_ms": 12.715264999999999,
+        "candidate_ms": 12.7057075,
+        "delta_ms": -0.009557499999997887,
+        "percent": -0.07516555887744358
+      }
+    },
+    "runtime-regression-P-r2": {
+      "900": {
+        "baseline_ms": 9.371346249999998,
+        "candidate_ms": 9.532062499999995,
+        "delta_ms": 0.16071624999999656,
+        "percent": 1.7149750496092908
+      },
+      "1080": {
+        "baseline_ms": 12.72179375,
+        "candidate_ms": 12.703051875,
+        "delta_ms": -0.018741874999999908,
+        "percent": -0.1473210096650135
+      }
+    },
+    "runtime-regression-U-correct": {},
+    "runtime-regression-U-adaptive": {},
+    "runtime-regression-U-r1": {
+      "900": {
+        "baseline_ms": 9.285365625,
+        "candidate_ms": 9.457744999999996,
+        "delta_ms": 0.1723793749999949,
+        "percent": 1.856462975845341
+      },
+      "1080": {
+        "baseline_ms": 12.719998125,
+        "candidate_ms": 12.700651875,
+        "delta_ms": -0.019346249999999898,
+        "percent": -0.1520931827967531
+      }
+    },
+    "runtime-regression-U-r2": {
+      "900": {
+        "baseline_ms": 9.364117499999995,
+        "candidate_ms": 9.521986250000001,
+        "delta_ms": 0.15786875000000578,
+        "percent": 1.685890314810834
+      },
+      "1080": {
+        "baseline_ms": 12.719910625,
+        "candidate_ms": 12.69810875,
+        "delta_ms": -0.021801875000001303,
+        "percent": -0.17139959267600258
+      }
+    }
+  },
+  "measurement_rows": 88,
+  "frame_hashes": 672,
+  "matched_candidate_frames": 336
+}

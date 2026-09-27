@@ -1,0 +1,1 @@
+extern "C" __attribute__((global)) void byte_probe(unsigned*out){unsigned i=__builtin_amdgcn_workitem_id_x();float v=__builtin_amdgcn_cvt_f32_fp8(int(i),0);out[i]=unsigned(__builtin_amdgcn_cvt_pk_fp8_f32(v,v,0,false))&255u;}

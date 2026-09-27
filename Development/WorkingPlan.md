@@ -17,7 +17,7 @@
 
 ## 正在进行
 
-- **闇第四刀已交付（09-27 21:02，待Zero画面验收）**：剑星新add-on4151123e + vit-stream（gfx1201 ad59f7be / gfx1200 0c9171ee），`DLSS5_HIP_VIT_STREAM=3`。标准1080 EXACT整网12.91～12.92→12.74～12.77ms（−1.23～−1.38%，过0.5%门槛），AE运动回放省0.040/0.043ms；900基本持平。EXACT/AE各7组逐位，AE43复用+41刷新，RE9开关与缺模块回退已冒烟。备份 `D:\DLSSNR-Lab\vit-bytestream-20260927\backups\stellar-20260927-210229`。C512 half出口无收益，不采用。未发包。
+- **闇第五刀已交付（09-27 23:06，待Zero实机验收）**：剑星仅换两份c64-wave2（gfx1201 f60eaee8 / gfx1200 9a0fda18），B+R+C：字节输入宽读取、RTZ配对、直接坐标。900整网9.22～9.28ms（两批−0.75%/−0.72%），1080 12.61～12.62ms（−0.84%/−0.78%），两档过0.5%门槛。EXACT/AE各7组逐位，AE43复用+41刷新；不加运行开关，host/flags/RE9 ABI不变。备份 `D:\DLSSNR-Lab\mh-round1-20260927\backups\stellar-20260927-230633`。未发包。
 
 ## Zero 的标准与取舍（为什么这样定）
 
@@ -45,9 +45,9 @@
 
 ## B. 优化候选（逐位；按"收益 × 把握"排）
 
-1. **ViT字节AV + contract-half已成熟并装剑星**（见“正在进行”）：保留n64/fragment核与f32复用缓存，用具名kernel和host配对；源码宏默认0，模块配方开1，三种发布flags模板设stream=3。候选分账、其余f32边流量表、两档两批EXACT与AE结果见 `results/vit-bytestream-20260927`。强制QKV unroll2只略改善900、1080少赚，保持默认展开。下一步若继续，考虑block输出直接给下一块expand字节，收益小于本轮QKV；不再用单砍VALU的DF_PACK8。
+1. **C64～C256第五轮已完成并装剑星**（见“正在进行”）：12整块变体+2 attention中实际8核调用；C256四个整块核均0次。B/R/C进配方，T完整窗口与D直接feature不稳定，不采用。完整循环/窗口加权账、ACO及各候选见 `results/mh-round1-20260927`。ViT已进0.35，本轮不继续追小f32边。
 2. **帧时间分布日志**（Zero：帧率不一定涨，但卡顿因素在减少）：记每帧耗时分布（1% low、最长帧、NR 实际调用率），让"卡不卡"可量化。
-3. **C512 mix已出账并试half出口，null**（`results/c512-mix-20260927`）：EXACT/AE各7组逐位，但900 +0.015/+0.008ms、1080 +0.002/+0.005ms，不合配方。mixed出口不是已证实的主瓶颈；后续数据形态应查packed输入及其残差消费者，尾部算术/任何MODE另做敏感性与census。不能仅凭VMEM数断言纯DRAM或纯VALU受限。
+3. **900专项已量账，C512现场零扫描路线关闭**（`results/tier900-20260927`）：0.35纯HIP族账C512占900的19.5%、1080的16.4%，900填充token比例和固定派发更突出。带输入全零/权重有限检查的mix省算P与标量化U均逐位，但900慢1.7～2.3%，均不开；不可删检查换速度。前轮half出口也null。未来要换前提（生产者直接提供有效tile信息/主输入供数），不重复现场扫描；尾部算术或新MODE仍要独立证据与census。
 4. decoder 投影（2×2 上采样尾部串行化）；ViT QKV 归一化段；C32 FFN 权重按 WMMA 片段预排；host 侧 C256 宽权重片段（约 −0.03ms）；C32 对角残差跳过全零 K16 半块（约 −0.1～0.2%，`results/c32-diag-zero-20260925`）。
 5. `Development/HIP/validate-modules.ps1` 默认资产目录已不存在，修路径后纳入发包前检查。
 6. 可告知 mochizuki：`v_cvt_pk_f32_fp8` 在 gfx1201 实测返回同一字节两份（`HIP/experiments/pair-unpack`），他的 fswin64 用了 64 次。
