@@ -53,6 +53,19 @@ DEV float cw_output_value(float v){
  return F(float((_Float16)v));
 #endif
 }
+#ifndef CW_PREFIX_DIRECT_OUT
+#define CW_PREFIX_DIRECT_OUT 0 /* prefix byte tail: avoid fp8(F(half-value)); retain exact-zero canonicalization */
+#endif
+#ifndef CW_PREFIX_FULL_TILE
+#define CW_PREFIX_FULL_TILE 0 /* prefix only: host emits complete 8x8 tiles, sx=sy=0, so its per-pixel bounds tests are redundant */
+#endif
+DEV uint cw_prefix_byte(float v){
+#if CW_PREFIX_DIRECT_OUT
+ return fp8(v+0.f);
+#else
+ return fp8(F(v));
+#endif
+}
 using cw_i16=int __attribute__((ext_vector_type(16)));
 // CW_PACK8 (2026-09-27, results/pack8-20260927): the same bytes as put_bits(a,e,fp8(x)) -- the identical clamp, then
 // v_cvt_pk_fp8_f32 on two values at once written straight into the fragment word instead of one cvt + and/shift/or per byte.
@@ -68,15 +81,52 @@ DEV float cw_z(float x){return __builtin_fminf(__builtin_fmaxf(x,-448.f),448.f);
 #else
 DEV float cw_z(float x){return clampf(x,-448.f,448.f);}
 #endif
-DEV i2 cw_pack8(const float*t){int lo=__builtin_amdgcn_cvt_pk_fp8_f32(cw_z(t[0]),cw_z(t[1]),0,false);lo=__builtin_amdgcn_cvt_pk_fp8_f32(cw_z(t[2]),cw_z(t[3]),lo,true);
- int hi=__builtin_amdgcn_cvt_pk_fp8_f32(cw_z(t[4]),cw_z(t[5]),0,false);hi=__builtin_amdgcn_cvt_pk_fp8_f32(cw_z(t[6]),cw_z(t[7]),hi,true);i2 a;a[0]=lo;a[1]=hi;return a;}
+#ifndef CW_PACK_CENSUS
+#define CW_PACK_CENSUS 0 /* diagnostic only: per-kind, per-site pack counts / nonfinite / >448 / >1 / maximum absolute finite value */
+#endif
+#ifndef CW_PACK_MODE_MASK
+#define CW_PACK_MODE_MASK 0 /* bit per pack site: input, hidden, feature, QKV, probability, AV, output */
+#endif
+#if CW_PACK_CENSUS
+extern "C" __attribute__((device)) uint cw_pack_census[6*7*5]={};
+template<uint Site,uint Kind> DEV void cw_census(const float*t){
+ uint lane=__builtin_amdgcn_workitem_id_x(),flags=0,mx=0;
+ for(uint e=0;e<8;e++){uint ab=bits(t[e])&0x7fffffffu;flags|=(ab>=0x7f800000u?1u:0u)|(ab>0x43e00000u?2u:0u)|(ab>0x3f800000u?4u:0u);if(ab<0x7f800000u&&ab>mx)mx=ab;}
+ for(uint sh=16;sh;sh>>=1){uint other=uint(__builtin_amdgcn_ds_bpermute((lane^sh)*4,int(mx)));if(other>mx)mx=other;flags|=uint(__builtin_amdgcn_ds_bpermute((lane^sh)*4,int(flags)));}
+ if(lane==0){uint*p=cw_pack_census+(Kind*7+Site)*5;__hip_atomic_fetch_add(p,1u,__ATOMIC_RELAXED,__HIP_MEMORY_SCOPE_AGENT);
+  if(flags&1)__hip_atomic_fetch_add(p+1,1u,__ATOMIC_RELAXED,__HIP_MEMORY_SCOPE_AGENT);
+  if(flags&2)__hip_atomic_fetch_add(p+2,1u,__ATOMIC_RELAXED,__HIP_MEMORY_SCOPE_AGENT);
+  if(flags&4)__hip_atomic_fetch_add(p+3,1u,__ATOMIC_RELAXED,__HIP_MEMORY_SCOPE_AGENT);
+  __hip_atomic_fetch_max(p+4,mx,__ATOMIC_RELAXED,__HIP_MEMORY_SCOPE_AGENT);}
+}
+#endif
+template<uint Site,uint Kind> DEV i2 cw_pack8(const float*t){
+#if CW_PACK_CENSUS
+ cw_census<Site,Kind>(t);
+#endif
+// Keep MODE and its four conversions indivisible: LLVM can hoist the FP8 intrinsics outside s_setreg.
+ if constexpr((CW_PACK_MODE_MASK&(1u<<Site))!=0){int lo,hi;
+  asm volatile("s_setreg_imm32_b32 hwreg(HW_REG_MODE, 23, 1), 1\n\t"
+               "v_cvt_pk_fp8_f32 %0, %2, %3\n\t"
+               "v_cvt_pk_fp8_f32 %1, %6, %7\n\t"
+               "v_cvt_pk_fp8_f32 %0, %4, %5 op_sel:[0,0,1]\n\t"
+               "v_cvt_pk_fp8_f32 %1, %8, %9 op_sel:[0,0,1]\n\t"
+               "s_setreg_imm32_b32 hwreg(HW_REG_MODE, 23, 1), 0"
+               : "=&v"(lo),"=&v"(hi) : "v"(t[0]),"v"(t[1]),"v"(t[2]),"v"(t[3]),"v"(t[4]),"v"(t[5]),"v"(t[6]),"v"(t[7]) : "memory");
+  return i2{lo,hi};}
+ int lo=__builtin_amdgcn_cvt_pk_fp8_f32(cw_z(t[0]),cw_z(t[1]),0,false);lo=__builtin_amdgcn_cvt_pk_fp8_f32(cw_z(t[2]),cw_z(t[3]),lo,true);
+ int hi=__builtin_amdgcn_cvt_pk_fp8_f32(cw_z(t[4]),cw_z(t[5]),0,false);hi=__builtin_amdgcn_cvt_pk_fp8_f32(cw_z(t[6]),cw_z(t[7]),hi,true);
+ i2 a;a[0]=lo;a[1]=hi;return a;}
+
 #define CW_Q8_DECL(A) i2 A;float A##_t[8]
 #define CW_Q8_SET(A,E,X) A##_t[E]=(X)
-#define CW_Q8_END(A) A=cw_pack8(A##_t)
+#define CW_Q8_END_SITE(A,S) A=cw_pack8<S,cw_kind>(A##_t)
+#define CW_Q8_END(A) CW_Q8_END_SITE(A,0)
 #else
 #define CW_Q8_DECL(A) i2 A{}
 #define CW_Q8_SET(A,E,X) put_bits(A,E,fp8(X))
 #define CW_Q8_END(A) (void)0
+#define CW_Q8_END_SITE(A,S) (void)0
 #endif
 
 DEV i2 cw_input(const unsigned char*in,uint win,uint qt,uint ci,uint width,uint height,uint sx,uint sy,uint prevw,uint px,uint py,uint r,uint g){
@@ -85,6 +135,7 @@ DEV i2 cw_input(const unsigned char*in,uint win,uint qt,uint ci,uint width,uint 
 }
 template<bool Chain,bool Finish=false,bool DownCrop=false,bool Post=false,bool Prefix=false>
 DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned char*out,uint windows,uint mode,uint raw,uint width,uint height,uint sx,uint sy,uint prevw,uint px,uint py,float*main=nullptr,float*down=nullptr,const unsigned char*skip=nullptr,const float*scales=nullptr,const float*color=nullptr,const float*headw=nullptr,float*rgb=nullptr,float rgbscale=0.f,const float*history=nullptr,uint seed=0,uint temporal=0){fp8_sat_mode();
+ constexpr uint cw_kind=Prefix?5:Post?4:Finish?(DownCrop?3:2):Chain?0:1;
  uint win=bid();if(win>=windows)return;
  __attribute__((shared)) _Float16 residual[4*2*32*8];
  cw_i16 keys{},values{},queries{};
@@ -162,7 +213,7 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
 #endif
   for(uint ht=0;ht<8;ht++){
    f8 expanded{};for(uint kt=0;kt<2;kt++){i2 b=matrix8(fw+512,(ht*16+r)*32+kt*16+g*8);expanded=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,input[kt],expanded);}
-   CW_Q8_DECL(a);for(uint e=0;e<8;e++){float v=expanded[e],g=cw_clampf(v,-4.f,4.f),q=absf(g)*(-.055908203125f)+.447265625f,p=g*q+.89453125f;CW_Q8_SET(a,e,v*p);}CW_Q8_END(a);
+   CW_Q8_DECL(a);for(uint e=0;e<8;e++){float v=expanded[e],g=cw_clampf(v,-4.f,4.f),q=absf(g)*(-.055908203125f)+.447265625f,p=g*q+.89453125f;CW_Q8_SET(a,e,v*p);}CW_Q8_END_SITE(a,1);
    for(uint ci=0;ci<2;ci++){i2 b=matrix8(fw+4608,(ci*16+r)*128+ht*16+g*8);ffn[ci]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,a,ffn[ci]);}
   }
   i2 feature[2];for(uint ci=0;ci<2;ci++){CW_Q8_DECL(a);
@@ -172,7 +223,7 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
 #else
    for(uint e=0;e<8;e++){float v=Hrtz(ffn[ci][e]);residual[((qt*2+ci)*32+(g*16+r))*8+e]=(_Float16)v;CW_Q8_SET(a,e,v);}
 #endif
-   CW_Q8_END(a);feature[ci]=a;}
+   CW_Q8_END_SITE(a,2);feature[ci]=a;}
   for(uint part=0;part<3;part++){
    uint qlane=__builtin_amdgcn_workitem_id_x();
 #if CW_QKV_FENCE
@@ -181,7 +232,7 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
    uint qr=qlane&15u,qg=qlane>>4;
    f8 q[2]{};for(uint ci=0;ci<2;ci++)for(uint kt=0;kt<2;kt++){i2 b=matrix8(w,part*1024+(ci*16+qr)*32+kt*16+qg*8);q[ci]=part<2?__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,feature[kt],q[ci]):__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(feature[kt],b,q[ci]);}
    f8 sum{};if(part<2)for(uint ci=0;ci<2;ci++){h8 squares{},ones{};for(uint e=0;e<8;e++){squares[e]=(_Float16)(q[ci][e]*q[ci][e]);ones[e]=(_Float16)1.f;}sum=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(ones,squares,sum);}
-   for(uint ci=0;ci<2;ci++){CW_Q8_DECL(a);for(uint e=0;e<8;e++){float v=q[ci][e];if(part<2)v*=__builtin_amdgcn_rsqf(maxf(sum[e],6.198883056640625e-5f))*(part==0?w[8192]:1.f);CW_Q8_SET(a,e,v);}CW_Q8_END(a);
+   for(uint ci=0;ci<2;ci++){CW_Q8_DECL(a);for(uint e=0;e<8;e++){float v=q[ci][e];if(part<2)v*=__builtin_amdgcn_rsqf(maxf(sum[e],6.198883056640625e-5f))*(part==0?w[8192]:1.f);CW_Q8_SET(a,e,v);}CW_Q8_END_SITE(a,3);
     if(part==0){queries[qt*4+ci*2]=a[0];queries[qt*4+ci*2+1]=a[1];}else if(part==1){keys[qt*4+ci*2]=a[0];keys[qt*4+ci*2+1]=a[1];}else{values[qt*4+ci*2]=a[0];values[qt*4+ci*2+1]=a[1];}
    }
 #if CW_QKV_FENCE
@@ -204,8 +255,8 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
   }
   f8 sums{};h8 ones{};for(uint e=0;e<8;e++)ones[e]=(_Float16)1.f;
   _Pragma("unroll 4") for(uint kt=0;kt<4;kt++)sums=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(ones,ex[kt],sums);
-  i2 prob[4];_Pragma("unroll 4") for(uint kt=0;kt<4;kt++){CW_Q8_DECL(a);for(uint e=0;e<8;e++)CW_Q8_SET(a,e,float(ex[kt][e])*norm_inverse(sums[e]));CW_Q8_END(a);prob[kt]=a;}
-  i2 av[2];for(uint ci=0;ci<2;ci++){f8 acc{};_Pragma("unroll 4") for(uint kt=0;kt<4;kt++)acc=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12((i2{values[kt*4+ci*2],values[kt*4+ci*2+1]}),prob[kt],acc);CW_Q8_DECL(a);for(uint e=0;e<8;e++)CW_Q8_SET(a,e,acc[e]);CW_Q8_END(a);av[ci]=a;}
+  i2 prob[4];_Pragma("unroll 4") for(uint kt=0;kt<4;kt++){CW_Q8_DECL(a);for(uint e=0;e<8;e++)CW_Q8_SET(a,e,float(ex[kt][e])*norm_inverse(sums[e]));CW_Q8_END_SITE(a,4);prob[kt]=a;}
+  i2 av[2];for(uint ci=0;ci<2;ci++){f8 acc{};_Pragma("unroll 4") for(uint kt=0;kt<4;kt++)acc=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12((i2{values[kt*4+ci*2],values[kt*4+ci*2+1]}),prob[kt],acc);CW_Q8_DECL(a);for(uint e=0;e<8;e++)CW_Q8_SET(a,e,acc[e]);CW_Q8_END_SITE(a,5);av[ci]=a;}
   for(uint ci=0;ci<2;ci++){
    f8 acc{};for(uint kt=0;kt<2;kt++){i2 b=matrix8(w,3072+(ci*16+r)*32+kt*16+g*8);acc=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,av[kt],acc);}
    CW_Q8_DECL(a);
@@ -217,7 +268,7 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
 #else
    for(uint e=0;e<8;e++){float res=float(residual[((qt*2+ci)*32+(g*16+r))*8+e]),prod=res*w[8193+ci*16+g*8+e],v=Hrtz(acc[e]+prod);if constexpr(Finish||Post)residual[((qt*2+ci)*32+(g*16+r))*8+e]=(_Float16)v;else CW_Q8_SET(a,e,cw_output_value(v));}
 #endif
-   if constexpr(!Finish&&!Post)CW_Q8_END(a);
+   if constexpr(!Finish&&!Post)CW_Q8_END_SITE(a,6);
    if constexpr(!Finish&&!Post)__builtin_memcpy(out+(win*64+qt*16+r)*32+ci*16+g*8,&a,8);
   }
   __builtin_amdgcn_sched_barrier(0);
@@ -247,7 +298,7 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
   }
   if(false)
 #endif
-  if(main)for(uint t=0;t<64;t++){int x=int(tx+t%8)-int(sx),y=int(ty+t/8)-int(sy);if(x>=0&&y>=0&&x<int(width)&&y<int(height)){uint dest=(uint(y)*width+uint(x))*32+c;float v=F(load(t));if constexpr(Prefix)reinterpret_cast<unsigned char*>(main)[dest]=static_cast<unsigned char>(fp8(v));else main[dest]=v;}}
+  if(main)for(uint t=0;t<64;t++){int x=int(tx+t%8)-int(sx),y=int(ty+t/8)-int(sy);if((Prefix&&CW_PREFIX_FULL_TILE)||(x>=0&&y>=0&&x<int(width)&&y<int(height))){uint dest=(uint(y)*width+uint(x))*32+c;float v=load(t);if constexpr(Prefix)reinterpret_cast<unsigned char*>(main)[dest]=static_cast<unsigned char>(cw_prefix_byte(v));else main[dest]=F(v);}}
   if(!CW_TAIL_QUAD&&down)for(uint k=0;k<16;k++){uint t=(k/4)*16+(k%4)*2;float top=Hrtz(load(t)+load(t+1)),bottom=Hrtz(load(t+8)+load(t+9));uint x=tx+t%8,y=ty+t/8;
    if constexpr(DownCrop){int cx=int(x/2)-int(sx/2),cy=int(y/2)-int(sy/2);if(cx>=0&&cy>=0&&cx<int(width/2)&&cy<int(height/2))down[(uint(cy)*(width/2)+uint(cx))*32+c]=F(Hrtz(Hrtz(top+bottom)*.25f));}
    else down[((y/2)*(ww/2)+x/2)*32+c]=F(Hrtz(Hrtz(top+bottom)*.25f));

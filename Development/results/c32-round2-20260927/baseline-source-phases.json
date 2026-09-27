@@ -1,0 +1,535 @@
+{
+  "c32_wave1_chain": {
+    "control_unattributed": {
+      "SMEM": 4,
+      "WAIT": 63,
+      "SALU": 84,
+      "VOPD": 36,
+      "VALU": 96
+    },
+    "input": {
+      "VALU": 8,
+      "WAIT": 16,
+      "SALU": 24,
+      "VMEM": 8
+    },
+    "ffn_residual": {
+      "WAIT": 68,
+      "VMEM": 48,
+      "SALU": 4,
+      "WMMA": 48,
+      "VOPD": 4
+    },
+    "ffn_expand": {
+      "WAIT": 192,
+      "VMEM": 64,
+      "VALU": 64,
+      "SALU": 96,
+      "WMMA": 64
+    },
+    "activation_pack": {
+      "WAIT": 384,
+      "VOPD": 640,
+      "VALU": 992
+    },
+    "ffn_contract": {
+      "WAIT": 128,
+      "VMEM": 64,
+      "WMMA": 64
+    },
+    "qkv_matrix": {
+      "WAIT": 80,
+      "VMEM": 48,
+      "WMMA": 48,
+      "VALU": 48
+    },
+    "feature_rtz_pack": {
+      "VALU": 228,
+      "VOPD": 8,
+      "SALU": 4,
+      "DS": 8
+    },
+    "qkv_norm": {
+      "SMEM": 4,
+      "VALU": 624,
+      "WMMA": 16,
+      "VOPD": 96,
+      "WAIT": 80
+    },
+    "scores_exp": {
+      "VALU": 472,
+      "WAIT": 40,
+      "SALU": 16,
+      "VMEM": 40,
+      "WMMA": 32,
+      "VOPD": 192
+    },
+    "softmax": {
+      "VOPD": 68,
+      "WAIT": 48,
+      "VALU": 520,
+      "WMMA": 16
+    },
+    "projection_quant": {
+      "WAIT": 76,
+      "VMEM": 32,
+      "DS": 8,
+      "VALU": 360,
+      "VOPD": 88,
+      "WMMA": 16
+    },
+    "av": {
+      "VOPD": 8,
+      "WMMA": 32,
+      "VALU": 96
+    },
+    "tail": {
+      "VMEM": 8
+    }
+  },
+  "c32_wave1_mapped": {
+    "control_unattributed": {
+      "SMEM": 3,
+      "WAIT": 37,
+      "SALU": 84,
+      "VOPD": 45,
+      "VALU": 140
+    },
+    "input": {
+      "VALU": 260,
+      "VOPD": 52,
+      "WAIT": 64,
+      "SALU": 28,
+      "VMEM": 32
+    },
+    "ffn_expand": {
+      "WAIT": 192,
+      "VMEM": 64,
+      "VALU": 64,
+      "SALU": 96,
+      "WMMA": 64
+    },
+    "activation_pack": {
+      "WAIT": 416,
+      "VOPD": 640,
+      "VALU": 992
+    },
+    "ffn_contract": {
+      "WAIT": 128,
+      "VMEM": 64,
+      "WMMA": 64
+    },
+    "qkv_matrix": {
+      "WAIT": 92,
+      "VMEM": 48,
+      "WMMA": 48,
+      "VALU": 48
+    },
+    "feature_rtz_pack": {
+      "VALU": 228,
+      "VOPD": 8,
+      "DS": 8
+    },
+    "qkv_norm": {
+      "VOPD": 104,
+      "SMEM": 4,
+      "SALU": 4,
+      "VALU": 624,
+      "WMMA": 16,
+      "WAIT": 88
+    },
+    "scores_exp": {
+      "VALU": 472,
+      "WAIT": 40,
+      "SALU": 16,
+      "VMEM": 40,
+      "WMMA": 32,
+      "VOPD": 192
+    },
+    "softmax": {
+      "VOPD": 88,
+      "WAIT": 64,
+      "VALU": 480,
+      "WMMA": 16
+    },
+    "projection_quant": {
+      "WAIT": 76,
+      "VMEM": 32,
+      "DS": 8,
+      "VALU": 360,
+      "VOPD": 88,
+      "WMMA": 16
+    },
+    "av": {
+      "VOPD": 8,
+      "WMMA": 32,
+      "VALU": 96
+    },
+    "tail": {
+      "VMEM": 8
+    }
+  },
+  "c32_wave1_finish": {
+    "control_unattributed": {
+      "SMEM": 5,
+      "WAIT": 63,
+      "SALU": 88,
+      "VOPD": 32,
+      "VALU": 97
+    },
+    "input": {
+      "VALU": 8,
+      "WAIT": 16,
+      "SALU": 24,
+      "VMEM": 8
+    },
+    "ffn_residual": {
+      "WAIT": 68,
+      "VMEM": 48,
+      "SALU": 4,
+      "WMMA": 48,
+      "VOPD": 4
+    },
+    "ffn_expand": {
+      "WAIT": 192,
+      "VMEM": 64,
+      "VALU": 64,
+      "SALU": 96,
+      "WMMA": 64
+    },
+    "activation_pack": {
+      "WAIT": 448,
+      "VOPD": 640,
+      "VALU": 992
+    },
+    "ffn_contract": {
+      "WAIT": 128,
+      "VMEM": 64,
+      "WMMA": 64
+    },
+    "qkv_matrix": {
+      "WAIT": 84,
+      "VMEM": 48,
+      "WMMA": 48,
+      "VALU": 48
+    },
+    "feature_rtz_pack": {
+      "VALU": 228,
+      "VOPD": 8,
+      "SALU": 4,
+      "DS": 8
+    },
+    "qkv_norm": {
+      "SMEM": 4,
+      "VALU": 592,
+      "WMMA": 16,
+      "VOPD": 112,
+      "WAIT": 84
+    },
+    "scores_exp": {
+      "VALU": 472,
+      "WAIT": 40,
+      "SALU": 16,
+      "VMEM": 56,
+      "WMMA": 32,
+      "VOPD": 192
+    },
+    "softmax": {
+      "VOPD": 72,
+      "WAIT": 52,
+      "VALU": 512,
+      "WMMA": 16
+    },
+    "projection_quant": {
+      "DS": 16,
+      "WAIT": 60,
+      "VMEM": 8,
+      "VALU": 168,
+      "WMMA": 16,
+      "VOPD": 44
+    },
+    "av": {
+      "VOPD": 8,
+      "WMMA": 32,
+      "VALU": 96
+    },
+    "tail": {
+      "SALU": 1282,
+      "WAIT": 1340,
+      "VALU": 1352,
+      "DS": 128,
+      "VMEM": 80,
+      "VOPD": 47
+    }
+  },
+  "c32_wave1_finish_dcrop": {
+    "control_unattributed": {
+      "SMEM": 5,
+      "WAIT": 63,
+      "SALU": 97,
+      "VOPD": 32,
+      "VALU": 99
+    },
+    "input": {
+      "VALU": 8,
+      "WAIT": 12,
+      "SALU": 24,
+      "VMEM": 8
+    },
+    "ffn_residual": {
+      "WAIT": 68,
+      "VMEM": 48,
+      "SALU": 4,
+      "WMMA": 48,
+      "VOPD": 4
+    },
+    "ffn_expand": {
+      "WAIT": 192,
+      "VMEM": 64,
+      "VALU": 64,
+      "SALU": 96,
+      "WMMA": 64
+    },
+    "activation_pack": {
+      "WAIT": 448,
+      "VOPD": 640,
+      "VALU": 992
+    },
+    "ffn_contract": {
+      "WAIT": 128,
+      "VMEM": 64,
+      "WMMA": 64
+    },
+    "qkv_matrix": {
+      "WAIT": 84,
+      "VMEM": 48,
+      "WMMA": 48,
+      "VALU": 48
+    },
+    "feature_rtz_pack": {
+      "VALU": 228,
+      "VOPD": 8,
+      "SALU": 4,
+      "DS": 8
+    },
+    "qkv_norm": {
+      "SMEM": 4,
+      "VALU": 592,
+      "WMMA": 16,
+      "VOPD": 112,
+      "WAIT": 84
+    },
+    "scores_exp": {
+      "VALU": 472,
+      "WAIT": 40,
+      "SALU": 16,
+      "VMEM": 56,
+      "WMMA": 32,
+      "VOPD": 192
+    },
+    "softmax": {
+      "VOPD": 72,
+      "WAIT": 52,
+      "VALU": 512,
+      "WMMA": 16
+    },
+    "projection_quant": {
+      "DS": 16,
+      "WAIT": 60,
+      "VMEM": 8,
+      "VALU": 168,
+      "WMMA": 16,
+      "VOPD": 44
+    },
+    "av": {
+      "VOPD": 8,
+      "WMMA": 32,
+      "VALU": 96
+    },
+    "tail": {
+      "SALU": 1668,
+      "WAIT": 1585,
+      "VALU": 1440,
+      "VOPD": 48,
+      "DS": 128,
+      "VMEM": 80
+    }
+  },
+  "c32_wave1_post": {
+    "control_unattributed": {
+      "SMEM": 3,
+      "WAIT": 33,
+      "SALU": 89,
+      "VALU": 142,
+      "VOPD": 43
+    },
+    "input": {
+      "VALU": 672,
+      "VOPD": 152,
+      "WAIT": 108,
+      "SALU": 28,
+      "VMEM": 72
+    },
+    "ffn_expand": {
+      "WAIT": 192,
+      "VMEM": 64,
+      "VALU": 64,
+      "SALU": 96,
+      "WMMA": 64
+    },
+    "activation_pack": {
+      "WAIT": 448,
+      "VOPD": 640,
+      "VALU": 992
+    },
+    "ffn_contract": {
+      "WAIT": 128,
+      "VMEM": 64,
+      "WMMA": 64
+    },
+    "qkv_matrix": {
+      "WAIT": 84,
+      "VMEM": 48,
+      "WMMA": 48,
+      "VALU": 48
+    },
+    "feature_rtz_pack": {
+      "VALU": 228,
+      "VOPD": 8,
+      "DS": 8
+    },
+    "qkv_norm": {
+      "SMEM": 4,
+      "VOPD": 116,
+      "VALU": 600,
+      "SALU": 4,
+      "WMMA": 16,
+      "WAIT": 76
+    },
+    "scores_exp": {
+      "VALU": 496,
+      "WAIT": 36,
+      "SALU": 16,
+      "VMEM": 56,
+      "WMMA": 32,
+      "VOPD": 180
+    },
+    "softmax": {
+      "VOPD": 60,
+      "WAIT": 72,
+      "VALU": 536,
+      "WMMA": 16
+    },
+    "projection_quant": {
+      "WAIT": 60,
+      "VMEM": 16,
+      "DS": 16,
+      "VALU": 240,
+      "WMMA": 16,
+      "VOPD": 8
+    },
+    "av": {
+      "VALU": 104,
+      "VOPD": 4,
+      "WMMA": 32,
+      "WAIT": 12
+    },
+    "tail": {
+      "WAIT": 191,
+      "SALU": 29,
+      "VALU": 399,
+      "VOPD": 103,
+      "VMEM": 60,
+      "DS": 8
+    }
+  },
+  "c32_wave1_prefix": {
+    "control_unattributed": {
+      "SMEM": 4,
+      "WAIT": 32,
+      "SALU": 78,
+      "VOPD": 33,
+      "VALU": 87
+    },
+    "input": {
+      "WAIT": 148,
+      "VALU": 800,
+      "SALU": 16,
+      "VMEM": 40,
+      "VOPD": 88,
+      "DS": 4,
+      "WMMA": 16
+    },
+    "ffn_expand": {
+      "WAIT": 192,
+      "VMEM": 64,
+      "VALU": 64,
+      "SALU": 96,
+      "WMMA": 64
+    },
+    "activation_pack": {
+      "WAIT": 448,
+      "VOPD": 640,
+      "VALU": 992
+    },
+    "ffn_contract": {
+      "WAIT": 128,
+      "VMEM": 64,
+      "WMMA": 64
+    },
+    "qkv_matrix": {
+      "WAIT": 88,
+      "VMEM": 48,
+      "WMMA": 48,
+      "VALU": 48
+    },
+    "feature_rtz_pack": {
+      "VALU": 228,
+      "VOPD": 8,
+      "DS": 8
+    },
+    "qkv_norm": {
+      "SMEM": 4,
+      "VOPD": 120,
+      "VALU": 592,
+      "SALU": 4,
+      "WAIT": 76,
+      "WMMA": 16
+    },
+    "scores_exp": {
+      "VALU": 512,
+      "WAIT": 24,
+      "SALU": 16,
+      "VMEM": 40,
+      "WMMA": 32,
+      "VOPD": 172
+    },
+    "softmax": {
+      "VOPD": 52,
+      "WAIT": 52,
+      "VALU": 552,
+      "WMMA": 16
+    },
+    "projection_quant": {
+      "WAIT": 64,
+      "VMEM": 24,
+      "DS": 16,
+      "VALU": 200,
+      "WMMA": 16,
+      "VOPD": 28
+    },
+    "av": {
+      "VOPD": 8,
+      "WMMA": 32,
+      "VALU": 96
+    },
+    "tail": {
+      "SALU": 953,
+      "WAIT": 1095,
+      "VALU": 1225,
+      "DS": 128,
+      "VOPD": 111,
+      "VMEM": 80
+    }
+  }
+}

@@ -1,0 +1,434 @@
+case=900-static-False C32_CALL W=1600 H=960 kernel=c32_wave1_prefix windows=24000
+case=900-static-False C32_CALL W=1600 H=960 kernel=c32_wave1_mapped windows=6000
+case=900-static-False C32_CALL W=1600 H=960 kernel=c32_wave1_chain windows=6161
+case=900-static-False C32_CALL W=1600 H=960 kernel=c32_wave1_chain windows=6060
+case=900-static-False C32_CALL W=1600 H=960 kernel=c32_wave1_finish_dcrop windows=6100
+case=900-static-False C32_CALL W=1600 H=960 kernel=c32_wave1_mapped windows=6000
+case=900-static-False C32_CALL W=1600 H=960 kernel=c32_wave1_chain windows=6161
+case=900-static-False C32_CALL W=1600 H=960 kernel=c32_wave1_chain windows=6060
+case=900-static-False C32_CALL W=1600 H=960 kernel=c32_wave1_finish windows=6100
+case=900-static-False C32_CALL W=1600 H=960 kernel=c32_wave1_post windows=24321
+case=900-static-True C32_CALL W=1600 H=960 kernel=c32_wave1_prefix windows=24000
+case=900-static-True C32_CALL W=1600 H=960 kernel=c32_wave1_mapped windows=6000
+case=900-static-True C32_CALL W=1600 H=960 kernel=c32_wave1_chain windows=6161
+case=900-static-True C32_CALL W=1600 H=960 kernel=c32_wave1_chain windows=6060
+case=900-static-True C32_CALL W=1600 H=960 kernel=c32_wave1_finish_dcrop windows=6100
+case=900-static-True C32_CALL W=1600 H=960 kernel=c32_wave1_mapped windows=6000
+case=900-static-True C32_CALL W=1600 H=960 kernel=c32_wave1_chain windows=6161
+case=900-static-True C32_CALL W=1600 H=960 kernel=c32_wave1_chain windows=6060
+case=900-static-True C32_CALL W=1600 H=960 kernel=c32_wave1_finish windows=6100
+case=900-static-True C32_CALL W=1600 H=960 kernel=c32_wave1_post windows=24321
+case=900-static-True C32_CENSUS kind=0 site=0 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=900-static-True C32_CENSUS kind=0 site=1 packs=9385728 nonfinite_waves=0 over448_waves=0 over1_waves=7326804 maxabs=245.447495
+case=900-static-True C32_CENSUS kind=0 site=2 packs=2346432 nonfinite_waves=0 over448_waves=0 over1_waves=2318460 maxabs=345
+case=900-static-True C32_CENSUS kind=0 site=3 packs=7039296 nonfinite_waves=0 over448_waves=0 over1_waves=3484332 maxabs=388.088379
+case=900-static-True C32_CENSUS kind=0 site=4 packs=4692864 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.863736689
+case=900-static-True C32_CENSUS kind=0 site=5 packs=2346432 nonfinite_waves=0 over448_waves=0 over1_waves=2317704 maxabs=356.1875
+case=900-static-True C32_CENSUS kind=0 site=6 packs=2346432 nonfinite_waves=0 over448_waves=0 over1_waves=2328324 maxabs=351.25
+case=900-static-True C32_CENSUS kind=1 site=0 packs=1152000 nonfinite_waves=0 over448_waves=0 over1_waves=905928 maxabs=342.75
+case=900-static-True C32_CENSUS kind=1 site=1 packs=4608000 nonfinite_waves=0 over448_waves=0 over1_waves=2330280 maxabs=119.881165
+case=900-static-True C32_CENSUS kind=1 site=2 packs=1152000 nonfinite_waves=0 over448_waves=0 over1_waves=960360 maxabs=339.25
+case=900-static-True C32_CENSUS kind=1 site=3 packs=3456000 nonfinite_waves=0 over448_waves=0 over1_waves=1603188 maxabs=180.193115
+case=900-static-True C32_CENSUS kind=1 site=4 packs=2304000 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.491426498
+case=900-static-True C32_CENSUS kind=1 site=5 packs=1152000 nonfinite_waves=0 over448_waves=0 over1_waves=1130196 maxabs=93.7519531
+case=900-static-True C32_CENSUS kind=1 site=6 packs=1152000 nonfinite_waves=0 over448_waves=0 over1_waves=1141032 maxabs=342.25
+case=900-static-True C32_CENSUS kind=2 site=0 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=900-static-True C32_CENSUS kind=2 site=1 packs=2342400 nonfinite_waves=0 over448_waves=0 over1_waves=2304000 maxabs=186.164703
+case=900-static-True C32_CENSUS kind=2 site=2 packs=585600 nonfinite_waves=0 over448_waves=0 over1_waves=576000 maxabs=343.5
+case=900-static-True C32_CENSUS kind=2 site=3 packs=1756800 nonfinite_waves=0 over448_waves=0 over1_waves=1152000 maxabs=284.185059
+case=900-static-True C32_CENSUS kind=2 site=4 packs=1171200 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.918514967
+case=900-static-True C32_CENSUS kind=2 site=5 packs=585600 nonfinite_waves=0 over448_waves=0 over1_waves=585600 maxabs=256.15625
+case=900-static-True C32_CENSUS kind=2 site=6 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=900-static-True C32_CENSUS kind=3 site=0 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=900-static-True C32_CENSUS kind=3 site=1 packs=2342400 nonfinite_waves=0 over448_waves=0 over1_waves=2288580 maxabs=158.278061
+case=900-static-True C32_CENSUS kind=3 site=2 packs=585600 nonfinite_waves=0 over448_waves=0 over1_waves=576000 maxabs=169.875
+case=900-static-True C32_CENSUS kind=3 site=3 packs=1756800 nonfinite_waves=0 over448_waves=0 over1_waves=575952 maxabs=144.826294
+case=900-static-True C32_CENSUS kind=3 site=4 packs=1171200 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.341261983
+case=900-static-True C32_CENSUS kind=3 site=5 packs=585600 nonfinite_waves=0 over448_waves=0 over1_waves=574188 maxabs=31.7006836
+case=900-static-True C32_CENSUS kind=3 site=6 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=900-static-True C32_CENSUS kind=4 site=0 packs=2334816 nonfinite_waves=0 over448_waves=0 over1_waves=2315520 maxabs=66.5625
+case=900-static-True C32_CENSUS kind=4 site=1 packs=9339264 nonfinite_waves=0 over448_waves=0 over1_waves=8908656 maxabs=23.8051281
+case=900-static-True C32_CENSUS kind=4 site=2 packs=2334816 nonfinite_waves=0 over448_waves=0 over1_waves=2315520 maxabs=65.4375
+case=900-static-True C32_CENSUS kind=4 site=3 packs=7004448 nonfinite_waves=0 over448_waves=0 over1_waves=4631040 maxabs=37.3768311
+case=900-static-True C32_CENSUS kind=4 site=4 packs=4669632 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.759441078
+case=900-static-True C32_CENSUS kind=4 site=5 packs=2334816 nonfinite_waves=0 over448_waves=0 over1_waves=2328120 maxabs=35.8554688
+case=900-static-True C32_CENSUS kind=4 site=6 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=900-static-True C32_CENSUS kind=5 site=0 packs=2304000 nonfinite_waves=0 over448_waves=0 over1_waves=2206080 maxabs=3.60351562
+case=900-static-True C32_CENSUS kind=5 site=1 packs=9216000 nonfinite_waves=0 over448_waves=0 over1_waves=12 maxabs=1.01990616
+case=900-static-True C32_CENSUS kind=5 site=2 packs=2304000 nonfinite_waves=0 over448_waves=0 over1_waves=1811160 maxabs=4.1796875
+case=900-static-True C32_CENSUS kind=5 site=3 packs=6912000 nonfinite_waves=0 over448_waves=0 over1_waves=2290908 maxabs=8.68166351
+case=900-static-True C32_CENSUS kind=5 site=4 packs=4608000 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.285327613
+case=900-static-True C32_CENSUS kind=5 site=5 packs=2304000 nonfinite_waves=0 over448_waves=0 over1_waves=1443276 maxabs=7.84863281
+case=900-static-True C32_CENSUS kind=5 site=6 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=900-motion-False C32_CALL W=1600 H=960 kernel=c32_wave1_prefix windows=24000
+case=900-motion-False C32_CALL W=1600 H=960 kernel=c32_wave1_mapped windows=6000
+case=900-motion-False C32_CALL W=1600 H=960 kernel=c32_wave1_chain windows=6161
+case=900-motion-False C32_CALL W=1600 H=960 kernel=c32_wave1_chain windows=6060
+case=900-motion-False C32_CALL W=1600 H=960 kernel=c32_wave1_finish_dcrop windows=6100
+case=900-motion-False C32_CALL W=1600 H=960 kernel=c32_wave1_mapped windows=6000
+case=900-motion-False C32_CALL W=1600 H=960 kernel=c32_wave1_chain windows=6161
+case=900-motion-False C32_CALL W=1600 H=960 kernel=c32_wave1_chain windows=6060
+case=900-motion-False C32_CALL W=1600 H=960 kernel=c32_wave1_finish windows=6100
+case=900-motion-False C32_CALL W=1600 H=960 kernel=c32_wave1_post windows=24321
+case=900-motion-True C32_CALL W=1600 H=960 kernel=c32_wave1_prefix windows=24000
+case=900-motion-True C32_CALL W=1600 H=960 kernel=c32_wave1_mapped windows=6000
+case=900-motion-True C32_CALL W=1600 H=960 kernel=c32_wave1_chain windows=6161
+case=900-motion-True C32_CALL W=1600 H=960 kernel=c32_wave1_chain windows=6060
+case=900-motion-True C32_CALL W=1600 H=960 kernel=c32_wave1_finish_dcrop windows=6100
+case=900-motion-True C32_CALL W=1600 H=960 kernel=c32_wave1_mapped windows=6000
+case=900-motion-True C32_CALL W=1600 H=960 kernel=c32_wave1_chain windows=6161
+case=900-motion-True C32_CALL W=1600 H=960 kernel=c32_wave1_chain windows=6060
+case=900-motion-True C32_CALL W=1600 H=960 kernel=c32_wave1_finish windows=6100
+case=900-motion-True C32_CALL W=1600 H=960 kernel=c32_wave1_post windows=24321
+case=900-motion-True C32_CENSUS kind=0 site=0 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=900-motion-True C32_CENSUS kind=0 site=1 packs=9385728 nonfinite_waves=0 over448_waves=0 over1_waves=7326433 maxabs=245.447495
+case=900-motion-True C32_CENSUS kind=0 site=2 packs=2346432 nonfinite_waves=0 over448_waves=0 over1_waves=2318356 maxabs=345
+case=900-motion-True C32_CENSUS kind=0 site=3 packs=7039296 nonfinite_waves=0 over448_waves=0 over1_waves=3484829 maxabs=388.088379
+case=900-motion-True C32_CENSUS kind=0 site=4 packs=4692864 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.935964227
+case=900-motion-True C32_CENSUS kind=0 site=5 packs=2346432 nonfinite_waves=0 over448_waves=0 over1_waves=2317722 maxabs=356.1875
+case=900-motion-True C32_CENSUS kind=0 site=6 packs=2346432 nonfinite_waves=0 over448_waves=0 over1_waves=2328029 maxabs=351.25
+case=900-motion-True C32_CENSUS kind=1 site=0 packs=1152000 nonfinite_waves=0 over448_waves=0 over1_waves=906086 maxabs=343
+case=900-motion-True C32_CENSUS kind=1 site=1 packs=4608000 nonfinite_waves=0 over448_waves=0 over1_waves=2330165 maxabs=133.534729
+case=900-motion-True C32_CENSUS kind=1 site=2 packs=1152000 nonfinite_waves=0 over448_waves=0 over1_waves=960528 maxabs=339.5
+case=900-motion-True C32_CENSUS kind=1 site=3 packs=3456000 nonfinite_waves=0 over448_waves=0 over1_waves=1604210 maxabs=215.572968
+case=900-motion-True C32_CENSUS kind=1 site=4 packs=2304000 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.500515223
+case=900-motion-True C32_CENSUS kind=1 site=5 packs=1152000 nonfinite_waves=0 over448_waves=0 over1_waves=1129299 maxabs=98.3032227
+case=900-motion-True C32_CENSUS kind=1 site=6 packs=1152000 nonfinite_waves=0 over448_waves=0 over1_waves=1141032 maxabs=342.25
+case=900-motion-True C32_CENSUS kind=2 site=0 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=900-motion-True C32_CENSUS kind=2 site=1 packs=2342400 nonfinite_waves=0 over448_waves=0 over1_waves=2304000 maxabs=188.695435
+case=900-motion-True C32_CENSUS kind=2 site=2 packs=585600 nonfinite_waves=0 over448_waves=0 over1_waves=576000 maxabs=343.5
+case=900-motion-True C32_CENSUS kind=2 site=3 packs=1756800 nonfinite_waves=0 over448_waves=0 over1_waves=1152000 maxabs=284.185059
+case=900-motion-True C32_CENSUS kind=2 site=4 packs=1171200 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.951414943
+case=900-motion-True C32_CENSUS kind=2 site=5 packs=585600 nonfinite_waves=0 over448_waves=0 over1_waves=585600 maxabs=256.15625
+case=900-motion-True C32_CENSUS kind=2 site=6 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=900-motion-True C32_CENSUS kind=3 site=0 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=900-motion-True C32_CENSUS kind=3 site=1 packs=2342400 nonfinite_waves=0 over448_waves=0 over1_waves=2288700 maxabs=170.230438
+case=900-motion-True C32_CENSUS kind=3 site=2 packs=585600 nonfinite_waves=0 over448_waves=0 over1_waves=576000 maxabs=182.75
+case=900-motion-True C32_CENSUS kind=3 site=3 packs=1756800 nonfinite_waves=0 over448_waves=0 over1_waves=575982 maxabs=150.476074
+case=900-motion-True C32_CENSUS kind=3 site=4 packs=1171200 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.353611082
+case=900-motion-True C32_CENSUS kind=3 site=5 packs=585600 nonfinite_waves=0 over448_waves=0 over1_waves=574079 maxabs=44.9757538
+case=900-motion-True C32_CENSUS kind=3 site=6 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=900-motion-True C32_CENSUS kind=4 site=0 packs=2334816 nonfinite_waves=0 over448_waves=0 over1_waves=2315520 maxabs=66.8125
+case=900-motion-True C32_CENSUS kind=4 site=1 packs=9339264 nonfinite_waves=0 over448_waves=0 over1_waves=8910641 maxabs=30.0513153
+case=900-motion-True C32_CENSUS kind=4 site=2 packs=2334816 nonfinite_waves=0 over448_waves=0 over1_waves=2315520 maxabs=66
+case=900-motion-True C32_CENSUS kind=4 site=3 packs=7004448 nonfinite_waves=0 over448_waves=0 over1_waves=4631040 maxabs=42.3078613
+case=900-motion-True C32_CENSUS kind=4 site=4 packs=4669632 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.803255379
+case=900-motion-True C32_CENSUS kind=4 site=5 packs=2334816 nonfinite_waves=0 over448_waves=0 over1_waves=2327972 maxabs=36.0585938
+case=900-motion-True C32_CENSUS kind=4 site=6 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=900-motion-True C32_CENSUS kind=5 site=0 packs=2304000 nonfinite_waves=0 over448_waves=0 over1_waves=2205839 maxabs=3.60351562
+case=900-motion-True C32_CENSUS kind=5 site=1 packs=9216000 nonfinite_waves=0 over448_waves=0 over1_waves=9 maxabs=1.01990616
+case=900-motion-True C32_CENSUS kind=5 site=2 packs=2304000 nonfinite_waves=0 over448_waves=0 over1_waves=1810939 maxabs=4.2109375
+case=900-motion-True C32_CENSUS kind=5 site=3 packs=6912000 nonfinite_waves=0 over448_waves=0 over1_waves=2290990 maxabs=8.68166351
+case=900-motion-True C32_CENSUS kind=5 site=4 packs=4608000 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.30789274
+case=900-motion-True C32_CENSUS kind=5 site=5 packs=2304000 nonfinite_waves=0 over448_waves=0 over1_waves=1442987 maxabs=7.93530273
+case=900-motion-True C32_CENSUS kind=5 site=6 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=1080-static-False C32_CALL W=1920 H=1152 kernel=c32_wave1_prefix windows=34560
+case=1080-static-False C32_CALL W=1920 H=1152 kernel=c32_wave1_mapped windows=8640
+case=1080-static-False C32_CALL W=1920 H=1152 kernel=c32_wave1_chain windows=8833
+case=1080-static-False C32_CALL W=1920 H=1152 kernel=c32_wave1_chain windows=8712
+case=1080-static-False C32_CALL W=1920 H=1152 kernel=c32_wave1_finish_dcrop windows=8760
+case=1080-static-False C32_CALL W=1920 H=1152 kernel=c32_wave1_mapped windows=8640
+case=1080-static-False C32_CALL W=1920 H=1152 kernel=c32_wave1_chain windows=8833
+case=1080-static-False C32_CALL W=1920 H=1152 kernel=c32_wave1_chain windows=8712
+case=1080-static-False C32_CALL W=1920 H=1152 kernel=c32_wave1_finish windows=8760
+case=1080-static-False C32_CALL W=1920 H=1152 kernel=c32_wave1_post windows=34945
+case=1080-static-True C32_CALL W=1920 H=1152 kernel=c32_wave1_prefix windows=34560
+case=1080-static-True C32_CALL W=1920 H=1152 kernel=c32_wave1_mapped windows=8640
+case=1080-static-True C32_CALL W=1920 H=1152 kernel=c32_wave1_chain windows=8833
+case=1080-static-True C32_CALL W=1920 H=1152 kernel=c32_wave1_chain windows=8712
+case=1080-static-True C32_CALL W=1920 H=1152 kernel=c32_wave1_finish_dcrop windows=8760
+case=1080-static-True C32_CALL W=1920 H=1152 kernel=c32_wave1_mapped windows=8640
+case=1080-static-True C32_CALL W=1920 H=1152 kernel=c32_wave1_chain windows=8833
+case=1080-static-True C32_CALL W=1920 H=1152 kernel=c32_wave1_chain windows=8712
+case=1080-static-True C32_CALL W=1920 H=1152 kernel=c32_wave1_finish windows=8760
+case=1080-static-True C32_CALL W=1920 H=1152 kernel=c32_wave1_post windows=34945
+case=1080-static-True C32_CENSUS kind=0 site=0 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=1080-static-True C32_CENSUS kind=0 site=1 packs=13474560 nonfinite_waves=0 over448_waves=0 over1_waves=10515228 maxabs=188.365219
+case=1080-static-True C32_CENSUS kind=0 site=2 packs=3368640 nonfinite_waves=0 over448_waves=0 over1_waves=3330840 maxabs=265.25
+case=1080-static-True C32_CENSUS kind=0 site=3 packs=10105920 nonfinite_waves=0 over448_waves=0 over1_waves=5007108 maxabs=327.636719
+case=1080-static-True C32_CENSUS kind=0 site=4 packs=6737280 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.82175535
+case=1080-static-True C32_CENSUS kind=0 site=5 packs=3368640 nonfinite_waves=0 over448_waves=0 over1_waves=3326520 maxabs=304.40625
+case=1080-static-True C32_CENSUS kind=0 site=6 packs=3368640 nonfinite_waves=0 over448_waves=0 over1_waves=3343884 maxabs=273.5
+case=1080-static-True C32_CENSUS kind=1 site=0 packs=1658880 nonfinite_waves=0 over448_waves=0 over1_waves=1303308 maxabs=255.375
+case=1080-static-True C32_CENSUS kind=1 site=1 packs=6635520 nonfinite_waves=0 over448_waves=0 over1_waves=3354720 maxabs=114.730621
+case=1080-static-True C32_CENSUS kind=1 site=2 packs=1658880 nonfinite_waves=0 over448_waves=0 over1_waves=1379796 maxabs=252.25
+case=1080-static-True C32_CENSUS kind=1 site=3 packs=4976640 nonfinite_waves=0 over448_waves=0 over1_waves=2334060 maxabs=175.32251
+case=1080-static-True C32_CENSUS kind=1 site=4 packs=3317760 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.482479841
+case=1080-static-True C32_CENSUS kind=1 site=5 packs=1658880 nonfinite_waves=0 over448_waves=0 over1_waves=1624452 maxabs=91.984375
+case=1080-static-True C32_CENSUS kind=1 site=6 packs=1658880 nonfinite_waves=0 over448_waves=0 over1_waves=1640604 maxabs=256.25
+case=1080-static-True C32_CENSUS kind=2 site=0 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=1080-static-True C32_CENSUS kind=2 site=1 packs=3363840 nonfinite_waves=0 over448_waves=0 over1_waves=3317760 maxabs=147.237747
+case=1080-static-True C32_CENSUS kind=2 site=2 packs=840960 nonfinite_waves=0 over448_waves=0 over1_waves=829440 maxabs=281.25
+case=1080-static-True C32_CENSUS kind=2 site=3 packs=2522880 nonfinite_waves=0 over448_waves=0 over1_waves=1658880 maxabs=251.957031
+case=1080-static-True C32_CENSUS kind=2 site=4 packs=1681920 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.938095391
+case=1080-static-True C32_CENSUS kind=2 site=5 packs=840960 nonfinite_waves=0 over448_waves=0 over1_waves=840960 maxabs=215.0625
+case=1080-static-True C32_CENSUS kind=2 site=6 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=1080-static-True C32_CENSUS kind=3 site=0 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=1080-static-True C32_CENSUS kind=3 site=1 packs=3363840 nonfinite_waves=0 over448_waves=0 over1_waves=3290112 maxabs=131.77803
+case=1080-static-True C32_CENSUS kind=3 site=2 packs=840960 nonfinite_waves=0 over448_waves=0 over1_waves=829440 maxabs=136.5
+case=1080-static-True C32_CENSUS kind=3 site=3 packs=2522880 nonfinite_waves=0 over448_waves=0 over1_waves=829416 maxabs=119.22403
+case=1080-static-True C32_CENSUS kind=3 site=4 packs=1681920 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.349458247
+case=1080-static-True C32_CENSUS kind=3 site=5 packs=840960 nonfinite_waves=0 over448_waves=0 over1_waves=824256 maxabs=35.4138184
+case=1080-static-True C32_CENSUS kind=3 site=6 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=1080-static-True C32_CENSUS kind=4 site=0 packs=3354720 nonfinite_waves=0 over448_waves=0 over1_waves=3331584 maxabs=62.0625
+case=1080-static-True C32_CENSUS kind=4 site=1 packs=13418880 nonfinite_waves=0 over448_waves=0 over1_waves=12732804 maxabs=23.5648708
+case=1080-static-True C32_CENSUS kind=4 site=2 packs=3354720 nonfinite_waves=0 over448_waves=0 over1_waves=3331584 maxabs=61.3125
+case=1080-static-True C32_CENSUS kind=4 site=3 packs=10064160 nonfinite_waves=0 over448_waves=0 over1_waves=6663168 maxabs=35.9875488
+case=1080-static-True C32_CENSUS kind=4 site=4 packs=6709440 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.704790473
+case=1080-static-True C32_CENSUS kind=4 site=5 packs=3354720 nonfinite_waves=0 over448_waves=0 over1_waves=3350664 maxabs=31.0117188
+case=1080-static-True C32_CENSUS kind=4 site=6 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=1080-static-True C32_CENSUS kind=5 site=0 packs=3317760 nonfinite_waves=0 over448_waves=0 over1_waves=3175956 maxabs=3.60351562
+case=1080-static-True C32_CENSUS kind=5 site=1 packs=13271040 nonfinite_waves=0 over448_waves=0 over1_waves=12 maxabs=1.01888442
+case=1080-static-True C32_CENSUS kind=5 site=2 packs=3317760 nonfinite_waves=0 over448_waves=0 over1_waves=2607936 maxabs=4.1640625
+case=1080-static-True C32_CENSUS kind=5 site=3 packs=9953280 nonfinite_waves=0 over448_waves=0 over1_waves=3297696 maxabs=8.92930603
+case=1080-static-True C32_CENSUS kind=5 site=4 packs=6635520 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.280122548
+case=1080-static-True C32_CENSUS kind=5 site=5 packs=3317760 nonfinite_waves=0 over448_waves=0 over1_waves=2077392 maxabs=7.93457031
+case=1080-static-True C32_CENSUS kind=5 site=6 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=1080-motion-False C32_CALL W=1920 H=1152 kernel=c32_wave1_prefix windows=34560
+case=1080-motion-False C32_CALL W=1920 H=1152 kernel=c32_wave1_mapped windows=8640
+case=1080-motion-False C32_CALL W=1920 H=1152 kernel=c32_wave1_chain windows=8833
+case=1080-motion-False C32_CALL W=1920 H=1152 kernel=c32_wave1_chain windows=8712
+case=1080-motion-False C32_CALL W=1920 H=1152 kernel=c32_wave1_finish_dcrop windows=8760
+case=1080-motion-False C32_CALL W=1920 H=1152 kernel=c32_wave1_mapped windows=8640
+case=1080-motion-False C32_CALL W=1920 H=1152 kernel=c32_wave1_chain windows=8833
+case=1080-motion-False C32_CALL W=1920 H=1152 kernel=c32_wave1_chain windows=8712
+case=1080-motion-False C32_CALL W=1920 H=1152 kernel=c32_wave1_finish windows=8760
+case=1080-motion-False C32_CALL W=1920 H=1152 kernel=c32_wave1_post windows=34945
+case=1080-motion-True C32_CALL W=1920 H=1152 kernel=c32_wave1_prefix windows=34560
+case=1080-motion-True C32_CALL W=1920 H=1152 kernel=c32_wave1_mapped windows=8640
+case=1080-motion-True C32_CALL W=1920 H=1152 kernel=c32_wave1_chain windows=8833
+case=1080-motion-True C32_CALL W=1920 H=1152 kernel=c32_wave1_chain windows=8712
+case=1080-motion-True C32_CALL W=1920 H=1152 kernel=c32_wave1_finish_dcrop windows=8760
+case=1080-motion-True C32_CALL W=1920 H=1152 kernel=c32_wave1_mapped windows=8640
+case=1080-motion-True C32_CALL W=1920 H=1152 kernel=c32_wave1_chain windows=8833
+case=1080-motion-True C32_CALL W=1920 H=1152 kernel=c32_wave1_chain windows=8712
+case=1080-motion-True C32_CALL W=1920 H=1152 kernel=c32_wave1_finish windows=8760
+case=1080-motion-True C32_CALL W=1920 H=1152 kernel=c32_wave1_post windows=34945
+case=1080-motion-True C32_CENSUS kind=0 site=0 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=1080-motion-True C32_CENSUS kind=0 site=1 packs=13474560 nonfinite_waves=0 over448_waves=0 over1_waves=10514810 maxabs=213.768509
+case=1080-motion-True C32_CENSUS kind=0 site=2 packs=3368640 nonfinite_waves=0 over448_waves=0 over1_waves=3330618 maxabs=268.25
+case=1080-motion-True C32_CENSUS kind=0 site=3 packs=10105920 nonfinite_waves=0 over448_waves=0 over1_waves=5007510 maxabs=327.636719
+case=1080-motion-True C32_CENSUS kind=0 site=4 packs=6737280 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.884772301
+case=1080-motion-True C32_CENSUS kind=0 site=5 packs=3368640 nonfinite_waves=0 over448_waves=0 over1_waves=3326664 maxabs=304.40625
+case=1080-motion-True C32_CENSUS kind=0 site=6 packs=3368640 nonfinite_waves=0 over448_waves=0 over1_waves=3343652 maxabs=273.5
+case=1080-motion-True C32_CENSUS kind=1 site=0 packs=1658880 nonfinite_waves=0 over448_waves=0 over1_waves=1302872 maxabs=270.5
+case=1080-motion-True C32_CENSUS kind=1 site=1 packs=6635520 nonfinite_waves=0 over448_waves=0 over1_waves=3354661 maxabs=135.678726
+case=1080-motion-True C32_CENSUS kind=1 site=2 packs=1658880 nonfinite_waves=0 over448_waves=0 over1_waves=1379508 maxabs=269
+case=1080-motion-True C32_CENSUS kind=1 site=3 packs=4976640 nonfinite_waves=0 over448_waves=0 over1_waves=2331094 maxabs=178.736328
+case=1080-motion-True C32_CENSUS kind=1 site=4 packs=3317760 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.516799748
+case=1080-motion-True C32_CENSUS kind=1 site=5 packs=1658880 nonfinite_waves=0 over448_waves=0 over1_waves=1624190 maxabs=91.984375
+case=1080-motion-True C32_CENSUS kind=1 site=6 packs=1658880 nonfinite_waves=0 over448_waves=0 over1_waves=1640707 maxabs=270.5
+case=1080-motion-True C32_CENSUS kind=2 site=0 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=1080-motion-True C32_CENSUS kind=2 site=1 packs=3363840 nonfinite_waves=0 over448_waves=0 over1_waves=3317760 maxabs=197.698395
+case=1080-motion-True C32_CENSUS kind=2 site=2 packs=840960 nonfinite_waves=0 over448_waves=0 over1_waves=829440 maxabs=281.25
+case=1080-motion-True C32_CENSUS kind=2 site=3 packs=2522880 nonfinite_waves=0 over448_waves=0 over1_waves=1658880 maxabs=251.957031
+case=1080-motion-True C32_CENSUS kind=2 site=4 packs=1681920 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.983491242
+case=1080-motion-True C32_CENSUS kind=2 site=5 packs=840960 nonfinite_waves=0 over448_waves=0 over1_waves=840960 maxabs=218.09375
+case=1080-motion-True C32_CENSUS kind=2 site=6 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=1080-motion-True C32_CENSUS kind=3 site=0 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=1080-motion-True C32_CENSUS kind=3 site=1 packs=3363840 nonfinite_waves=0 over448_waves=0 over1_waves=3290230 maxabs=150.413712
+case=1080-motion-True C32_CENSUS kind=3 site=2 packs=840960 nonfinite_waves=0 over448_waves=0 over1_waves=829440 maxabs=167.125
+case=1080-motion-True C32_CENSUS kind=3 site=3 packs=2522880 nonfinite_waves=0 over448_waves=0 over1_waves=829377 maxabs=136.505249
+case=1080-motion-True C32_CENSUS kind=3 site=4 packs=1681920 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.354958266
+case=1080-motion-True C32_CENSUS kind=3 site=5 packs=840960 nonfinite_waves=0 over448_waves=0 over1_waves=824380 maxabs=46.9482422
+case=1080-motion-True C32_CENSUS kind=3 site=6 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=1080-motion-True C32_CENSUS kind=4 site=0 packs=3354720 nonfinite_waves=0 over448_waves=0 over1_waves=3331584 maxabs=75.0625
+case=1080-motion-True C32_CENSUS kind=4 site=1 packs=13418880 nonfinite_waves=0 over448_waves=0 over1_waves=12733955 maxabs=24.7088051
+case=1080-motion-True C32_CENSUS kind=4 site=2 packs=3354720 nonfinite_waves=0 over448_waves=0 over1_waves=3331584 maxabs=66.5625
+case=1080-motion-True C32_CENSUS kind=4 site=3 packs=10064160 nonfinite_waves=0 over448_waves=0 over1_waves=6663168 maxabs=36.9724121
+case=1080-motion-True C32_CENSUS kind=4 site=4 packs=6709440 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.749532342
+case=1080-motion-True C32_CENSUS kind=4 site=5 packs=3354720 nonfinite_waves=0 over448_waves=0 over1_waves=3350363 maxabs=34.5585938
+case=1080-motion-True C32_CENSUS kind=4 site=6 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=1080-motion-True C32_CENSUS kind=5 site=0 packs=3317760 nonfinite_waves=0 over448_waves=0 over1_waves=3175902 maxabs=3.60351562
+case=1080-motion-True C32_CENSUS kind=5 site=1 packs=13271040 nonfinite_waves=0 over448_waves=0 over1_waves=12 maxabs=1.01888442
+case=1080-motion-True C32_CENSUS kind=5 site=2 packs=3317760 nonfinite_waves=0 over448_waves=0 over1_waves=2607949 maxabs=4.20703125
+case=1080-motion-True C32_CENSUS kind=5 site=3 packs=9953280 nonfinite_waves=0 over448_waves=0 over1_waves=3297675 maxabs=8.92930603
+case=1080-motion-True C32_CENSUS kind=5 site=4 packs=6635520 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.308258653
+case=1080-motion-True C32_CENSUS kind=5 site=5 packs=3317760 nonfinite_waves=0 over448_waves=0 over1_waves=2078327 maxabs=8.04345703
+case=1080-motion-True C32_CENSUS kind=5 site=6 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=720-motion-False C32_CALL W=1280 H=768 kernel=c32_wave1_prefix windows=15360
+case=720-motion-False C32_CALL W=1280 H=768 kernel=c32_wave1_mapped windows=3840
+case=720-motion-False C32_CALL W=1280 H=768 kernel=c32_wave1_chain windows=3969
+case=720-motion-False C32_CALL W=1280 H=768 kernel=c32_wave1_chain windows=3888
+case=720-motion-False C32_CALL W=1280 H=768 kernel=c32_wave1_finish_dcrop windows=3920
+case=720-motion-False C32_CALL W=1280 H=768 kernel=c32_wave1_mapped windows=3840
+case=720-motion-False C32_CALL W=1280 H=768 kernel=c32_wave1_chain windows=3969
+case=720-motion-False C32_CALL W=1280 H=768 kernel=c32_wave1_chain windows=3888
+case=720-motion-False C32_CALL W=1280 H=768 kernel=c32_wave1_finish windows=3920
+case=720-motion-False C32_CALL W=1280 H=768 kernel=c32_wave1_post windows=15617
+case=720-motion-True C32_CALL W=1280 H=768 kernel=c32_wave1_prefix windows=15360
+case=720-motion-True C32_CALL W=1280 H=768 kernel=c32_wave1_mapped windows=3840
+case=720-motion-True C32_CALL W=1280 H=768 kernel=c32_wave1_chain windows=3969
+case=720-motion-True C32_CALL W=1280 H=768 kernel=c32_wave1_chain windows=3888
+case=720-motion-True C32_CALL W=1280 H=768 kernel=c32_wave1_finish_dcrop windows=3920
+case=720-motion-True C32_CALL W=1280 H=768 kernel=c32_wave1_mapped windows=3840
+case=720-motion-True C32_CALL W=1280 H=768 kernel=c32_wave1_chain windows=3969
+case=720-motion-True C32_CALL W=1280 H=768 kernel=c32_wave1_chain windows=3888
+case=720-motion-True C32_CALL W=1280 H=768 kernel=c32_wave1_finish windows=3920
+case=720-motion-True C32_CALL W=1280 H=768 kernel=c32_wave1_post windows=15617
+case=720-motion-True C32_CENSUS kind=0 site=0 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=720-motion-True C32_CENSUS kind=0 site=1 packs=6034176 nonfinite_waves=0 over448_waves=0 over1_waves=4710543 maxabs=272.077271
+case=720-motion-True C32_CENSUS kind=0 site=2 packs=1508544 nonfinite_waves=0 over448_waves=0 over1_waves=1488515 maxabs=316
+case=720-motion-True C32_CENSUS kind=0 site=3 packs=4525632 nonfinite_waves=0 over448_waves=0 over1_waves=2236625 maxabs=363.498047
+case=720-motion-True C32_CENSUS kind=0 site=4 packs=3017088 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.928025484
+case=720-motion-True C32_CENSUS kind=0 site=5 packs=1508544 nonfinite_waves=0 over448_waves=0 over1_waves=1490439 maxabs=350.4375
+case=720-motion-True C32_CENSUS kind=0 site=6 packs=1508544 nonfinite_waves=0 over448_waves=0 over1_waves=1495739 maxabs=322
+case=720-motion-True C32_CENSUS kind=1 site=0 packs=737280 nonfinite_waves=0 over448_waves=0 over1_waves=580519 maxabs=329.5
+case=720-motion-True C32_CENSUS kind=1 site=1 packs=2949120 nonfinite_waves=0 over448_waves=0 over1_waves=1491979 maxabs=189.64325
+case=720-motion-True C32_CENSUS kind=1 site=2 packs=737280 nonfinite_waves=0 over448_waves=0 over1_waves=615520 maxabs=326.25
+case=720-motion-True C32_CENSUS kind=1 site=3 packs=2211840 nonfinite_waves=0 over448_waves=0 over1_waves=1018124 maxabs=217.222656
+case=720-motion-True C32_CENSUS kind=1 site=4 packs=1474560 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.500343382
+case=720-motion-True C32_CENSUS kind=1 site=5 packs=737280 nonfinite_waves=0 over448_waves=0 over1_waves=723677 maxabs=90.1824341
+case=720-motion-True C32_CENSUS kind=1 site=6 packs=737280 nonfinite_waves=0 over448_waves=0 over1_waves=731327 maxabs=330.5
+case=720-motion-True C32_CENSUS kind=2 site=0 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=720-motion-True C32_CENSUS kind=2 site=1 packs=1505280 nonfinite_waves=0 over448_waves=0 over1_waves=1474560 maxabs=233.180008
+case=720-motion-True C32_CENSUS kind=2 site=2 packs=376320 nonfinite_waves=0 over448_waves=0 over1_waves=368640 maxabs=312.5
+case=720-motion-True C32_CENSUS kind=2 site=3 packs=1128960 nonfinite_waves=0 over448_waves=0 over1_waves=737280 maxabs=266.136719
+case=720-motion-True C32_CENSUS kind=2 site=4 packs=752640 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.970048428
+case=720-motion-True C32_CENSUS kind=2 site=5 packs=376320 nonfinite_waves=0 over448_waves=0 over1_waves=376320 maxabs=257.78125
+case=720-motion-True C32_CENSUS kind=2 site=6 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=720-motion-True C32_CENSUS kind=3 site=0 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=720-motion-True C32_CENSUS kind=3 site=1 packs=1505280 nonfinite_waves=0 over448_waves=0 over1_waves=1467962 maxabs=208.872177
+case=720-motion-True C32_CENSUS kind=3 site=2 packs=376320 nonfinite_waves=0 over448_waves=0 over1_waves=368640 maxabs=242.875
+case=720-motion-True C32_CENSUS kind=3 site=3 packs=1128960 nonfinite_waves=0 over448_waves=0 over1_waves=368638 maxabs=189.046143
+case=720-motion-True C32_CENSUS kind=3 site=4 packs=752640 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.354107946
+case=720-motion-True C32_CENSUS kind=3 site=5 packs=376320 nonfinite_waves=0 over448_waves=0 over1_waves=368925 maxabs=48.9122314
+case=720-motion-True C32_CENSUS kind=3 site=6 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=720-motion-True C32_CENSUS kind=4 site=0 packs=1499232 nonfinite_waves=0 over448_waves=0 over1_waves=1483776 maxabs=80.3125
+case=720-motion-True C32_CENSUS kind=4 site=1 packs=5996928 nonfinite_waves=0 over448_waves=0 over1_waves=5716152 maxabs=27.2979984
+case=720-motion-True C32_CENSUS kind=4 site=2 packs=1499232 nonfinite_waves=0 over448_waves=0 over1_waves=1483776 maxabs=79.4375
+case=720-motion-True C32_CENSUS kind=4 site=3 packs=4497696 nonfinite_waves=0 over448_waves=0 over1_waves=2967552 maxabs=41.4641113
+case=720-motion-True C32_CENSUS kind=4 site=4 packs=2998464 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.981087446
+case=720-motion-True C32_CENSUS kind=4 site=5 packs=1499232 nonfinite_waves=0 over448_waves=0 over1_waves=1493719 maxabs=35.203125
+case=720-motion-True C32_CENSUS kind=4 site=6 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=720-motion-True C32_CENSUS kind=5 site=0 packs=1474560 nonfinite_waves=0 over448_waves=0 over1_waves=1411957 maxabs=3.60351562
+case=720-motion-True C32_CENSUS kind=5 site=1 packs=5898240 nonfinite_waves=0 over448_waves=0 over1_waves=12 maxabs=1.01941848
+case=720-motion-True C32_CENSUS kind=5 site=2 packs=1474560 nonfinite_waves=0 over448_waves=0 over1_waves=1158590 maxabs=4.203125
+case=720-motion-True C32_CENSUS kind=5 site=3 packs=4423680 nonfinite_waves=0 over448_waves=0 over1_waves=1467457 maxabs=8.59631348
+case=720-motion-True C32_CENSUS kind=5 site=4 packs=2949120 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.312576324
+case=720-motion-True C32_CENSUS kind=5 site=5 packs=1474560 nonfinite_waves=0 over448_waves=0 over1_waves=923503 maxabs=7.66210938
+case=720-motion-True C32_CENSUS kind=5 site=6 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=900-history-False C32_CALL W=1600 H=960 kernel=c32_wave1_prefix windows=24000
+case=900-history-False C32_CALL W=1600 H=960 kernel=c32_wave1_mapped windows=6000
+case=900-history-False C32_CALL W=1600 H=960 kernel=c32_wave1_chain windows=6161
+case=900-history-False C32_CALL W=1600 H=960 kernel=c32_wave1_chain windows=6060
+case=900-history-False C32_CALL W=1600 H=960 kernel=c32_wave1_finish_dcrop windows=6100
+case=900-history-False C32_CALL W=1600 H=960 kernel=c32_wave1_mapped windows=6000
+case=900-history-False C32_CALL W=1600 H=960 kernel=c32_wave1_chain windows=6161
+case=900-history-False C32_CALL W=1600 H=960 kernel=c32_wave1_chain windows=6060
+case=900-history-False C32_CALL W=1600 H=960 kernel=c32_wave1_finish windows=6100
+case=900-history-False C32_CALL W=1600 H=960 kernel=c32_wave1_post windows=24321
+case=900-history-True C32_CALL W=1600 H=960 kernel=c32_wave1_prefix windows=24000
+case=900-history-True C32_CALL W=1600 H=960 kernel=c32_wave1_mapped windows=6000
+case=900-history-True C32_CALL W=1600 H=960 kernel=c32_wave1_chain windows=6161
+case=900-history-True C32_CALL W=1600 H=960 kernel=c32_wave1_chain windows=6060
+case=900-history-True C32_CALL W=1600 H=960 kernel=c32_wave1_finish_dcrop windows=6100
+case=900-history-True C32_CALL W=1600 H=960 kernel=c32_wave1_mapped windows=6000
+case=900-history-True C32_CALL W=1600 H=960 kernel=c32_wave1_chain windows=6161
+case=900-history-True C32_CALL W=1600 H=960 kernel=c32_wave1_chain windows=6060
+case=900-history-True C32_CALL W=1600 H=960 kernel=c32_wave1_finish windows=6100
+case=900-history-True C32_CALL W=1600 H=960 kernel=c32_wave1_post windows=24321
+case=900-history-True C32_CENSUS kind=0 site=0 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=900-history-True C32_CENSUS kind=0 site=1 packs=9385728 nonfinite_waves=0 over448_waves=0 over1_waves=7334687 maxabs=250.883698
+case=900-history-True C32_CENSUS kind=0 site=2 packs=2346432 nonfinite_waves=0 over448_waves=0 over1_waves=2320587 maxabs=345
+case=900-history-True C32_CENSUS kind=0 site=3 packs=7039296 nonfinite_waves=0 over448_waves=0 over1_waves=3549430 maxabs=388.088379
+case=900-history-True C32_CENSUS kind=0 site=4 packs=4692864 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.87283057
+case=900-history-True C32_CENSUS kind=0 site=5 packs=2346432 nonfinite_waves=0 over448_waves=0 over1_waves=2324928 maxabs=356.1875
+case=900-history-True C32_CENSUS kind=0 site=6 packs=2346432 nonfinite_waves=0 over448_waves=0 over1_waves=2330047 maxabs=351.25
+case=900-history-True C32_CENSUS kind=1 site=0 packs=1152000 nonfinite_waves=0 over448_waves=0 over1_waves=906087 maxabs=342.75
+case=900-history-True C32_CENSUS kind=1 site=1 packs=4608000 nonfinite_waves=0 over448_waves=0 over1_waves=2329814 maxabs=135.491791
+case=900-history-True C32_CENSUS kind=1 site=2 packs=1152000 nonfinite_waves=0 over448_waves=0 over1_waves=960644 maxabs=339.25
+case=900-history-True C32_CENSUS kind=1 site=3 packs=3456000 nonfinite_waves=0 over448_waves=0 over1_waves=1575540 maxabs=210.128418
+case=900-history-True C32_CENSUS kind=1 site=4 packs=2304000 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.49503842
+case=900-history-True C32_CENSUS kind=1 site=5 packs=1152000 nonfinite_waves=0 over448_waves=0 over1_waves=1131756 maxabs=93.7519531
+case=900-history-True C32_CENSUS kind=1 site=6 packs=1152000 nonfinite_waves=0 over448_waves=0 over1_waves=1141042 maxabs=342.25
+case=900-history-True C32_CENSUS kind=2 site=0 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=900-history-True C32_CENSUS kind=2 site=1 packs=2342400 nonfinite_waves=0 over448_waves=0 over1_waves=2304000 maxabs=196.693787
+case=900-history-True C32_CENSUS kind=2 site=2 packs=585600 nonfinite_waves=0 over448_waves=0 over1_waves=576000 maxabs=343.5
+case=900-history-True C32_CENSUS kind=2 site=3 packs=1756800 nonfinite_waves=0 over448_waves=0 over1_waves=1152000 maxabs=284.185059
+case=900-history-True C32_CENSUS kind=2 site=4 packs=1171200 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.976647079
+case=900-history-True C32_CENSUS kind=2 site=5 packs=585600 nonfinite_waves=0 over448_waves=0 over1_waves=585600 maxabs=256.15625
+case=900-history-True C32_CENSUS kind=2 site=6 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=900-history-True C32_CENSUS kind=3 site=0 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=900-history-True C32_CENSUS kind=3 site=1 packs=2342400 nonfinite_waves=0 over448_waves=0 over1_waves=2296706 maxabs=188.851578
+case=900-history-True C32_CENSUS kind=3 site=2 packs=585600 nonfinite_waves=0 over448_waves=0 over1_waves=576000 maxabs=200
+case=900-history-True C32_CENSUS kind=3 site=3 packs=1756800 nonfinite_waves=0 over448_waves=0 over1_waves=575996 maxabs=166.5224
+case=900-history-True C32_CENSUS kind=3 site=4 packs=1171200 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.355949223
+case=900-history-True C32_CENSUS kind=3 site=5 packs=585600 nonfinite_waves=0 over448_waves=0 over1_waves=578465 maxabs=45.2434082
+case=900-history-True C32_CENSUS kind=3 site=6 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=900-history-True C32_CENSUS kind=4 site=0 packs=2334816 nonfinite_waves=0 over448_waves=0 over1_waves=2315422 maxabs=66.5625
+case=900-history-True C32_CENSUS kind=4 site=1 packs=9339264 nonfinite_waves=0 over448_waves=0 over1_waves=8961904 maxabs=26.2681198
+case=900-history-True C32_CENSUS kind=4 site=2 packs=2334816 nonfinite_waves=0 over448_waves=0 over1_waves=2289290 maxabs=65.4375
+case=900-history-True C32_CENSUS kind=4 site=3 packs=7004448 nonfinite_waves=0 over448_waves=0 over1_waves=4338085 maxabs=39.8388672
+case=900-history-True C32_CENSUS kind=4 site=4 packs=4669632 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.819527805
+case=900-history-True C32_CENSUS kind=4 site=5 packs=2334816 nonfinite_waves=0 over448_waves=0 over1_waves=1612720 maxabs=37.0039062
+case=900-history-True C32_CENSUS kind=4 site=6 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=900-history-True C32_CENSUS kind=5 site=0 packs=2304000 nonfinite_waves=0 over448_waves=0 over1_waves=2205966 maxabs=3.60546875
+case=900-history-True C32_CENSUS kind=5 site=1 packs=9216000 nonfinite_waves=0 over448_waves=0 over1_waves=4 maxabs=1.01990616
+case=900-history-True C32_CENSUS kind=5 site=2 packs=2304000 nonfinite_waves=0 over448_waves=0 over1_waves=1811099 maxabs=4.1796875
+case=900-history-True C32_CENSUS kind=5 site=3 packs=6912000 nonfinite_waves=0 over448_waves=0 over1_waves=2290723 maxabs=8.68166351
+case=900-history-True C32_CENSUS kind=5 site=4 packs=4608000 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.31098628
+case=900-history-True C32_CENSUS kind=5 site=5 packs=2304000 nonfinite_waves=0 over448_waves=0 over1_waves=1443446 maxabs=7.86572266
+case=900-history-True C32_CENSUS kind=5 site=6 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=1080-history-False C32_CALL W=1920 H=1152 kernel=c32_wave1_prefix windows=34560
+case=1080-history-False C32_CALL W=1920 H=1152 kernel=c32_wave1_mapped windows=8640
+case=1080-history-False C32_CALL W=1920 H=1152 kernel=c32_wave1_chain windows=8833
+case=1080-history-False C32_CALL W=1920 H=1152 kernel=c32_wave1_chain windows=8712
+case=1080-history-False C32_CALL W=1920 H=1152 kernel=c32_wave1_finish_dcrop windows=8760
+case=1080-history-False C32_CALL W=1920 H=1152 kernel=c32_wave1_mapped windows=8640
+case=1080-history-False C32_CALL W=1920 H=1152 kernel=c32_wave1_chain windows=8833
+case=1080-history-False C32_CALL W=1920 H=1152 kernel=c32_wave1_chain windows=8712
+case=1080-history-False C32_CALL W=1920 H=1152 kernel=c32_wave1_finish windows=8760
+case=1080-history-False C32_CALL W=1920 H=1152 kernel=c32_wave1_post windows=34945
+case=1080-history-True C32_CALL W=1920 H=1152 kernel=c32_wave1_prefix windows=34560
+case=1080-history-True C32_CALL W=1920 H=1152 kernel=c32_wave1_mapped windows=8640
+case=1080-history-True C32_CALL W=1920 H=1152 kernel=c32_wave1_chain windows=8833
+case=1080-history-True C32_CALL W=1920 H=1152 kernel=c32_wave1_chain windows=8712
+case=1080-history-True C32_CALL W=1920 H=1152 kernel=c32_wave1_finish_dcrop windows=8760
+case=1080-history-True C32_CALL W=1920 H=1152 kernel=c32_wave1_mapped windows=8640
+case=1080-history-True C32_CALL W=1920 H=1152 kernel=c32_wave1_chain windows=8833
+case=1080-history-True C32_CALL W=1920 H=1152 kernel=c32_wave1_chain windows=8712
+case=1080-history-True C32_CALL W=1920 H=1152 kernel=c32_wave1_finish windows=8760
+case=1080-history-True C32_CALL W=1920 H=1152 kernel=c32_wave1_post windows=34945
+case=1080-history-True C32_CENSUS kind=0 site=0 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=1080-history-True C32_CENSUS kind=0 site=1 packs=13474560 nonfinite_waves=0 over448_waves=0 over1_waves=10526160 maxabs=296.786957
+case=1080-history-True C32_CENSUS kind=0 site=2 packs=3368640 nonfinite_waves=0 over448_waves=0 over1_waves=3333619 maxabs=265.25
+case=1080-history-True C32_CENSUS kind=0 site=3 packs=10105920 nonfinite_waves=0 over448_waves=0 over1_waves=5087874 maxabs=327.636719
+case=1080-history-True C32_CENSUS kind=0 site=4 packs=6737280 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.877227962
+case=1080-history-True C32_CENSUS kind=0 site=5 packs=3368640 nonfinite_waves=0 over448_waves=0 over1_waves=3336840 maxabs=313.3125
+case=1080-history-True C32_CENSUS kind=0 site=6 packs=3368640 nonfinite_waves=0 over448_waves=0 over1_waves=3345736 maxabs=273.5
+case=1080-history-True C32_CENSUS kind=1 site=0 packs=1658880 nonfinite_waves=0 over448_waves=0 over1_waves=1303336 maxabs=267.5
+case=1080-history-True C32_CENSUS kind=1 site=1 packs=6635520 nonfinite_waves=0 over448_waves=0 over1_waves=3354116 maxabs=142.324814
+case=1080-history-True C32_CENSUS kind=1 site=2 packs=1658880 nonfinite_waves=0 over448_waves=0 over1_waves=1380346 maxabs=263
+case=1080-history-True C32_CENSUS kind=1 site=3 packs=4976640 nonfinite_waves=0 over448_waves=0 over1_waves=2300315 maxabs=183.144531
+case=1080-history-True C32_CENSUS kind=1 site=4 packs=3317760 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.501374304
+case=1080-history-True C32_CENSUS kind=1 site=5 packs=1658880 nonfinite_waves=0 over448_waves=0 over1_waves=1627247 maxabs=91.984375
+case=1080-history-True C32_CENSUS kind=1 site=6 packs=1658880 nonfinite_waves=0 over448_waves=0 over1_waves=1640753 maxabs=263.5
+case=1080-history-True C32_CENSUS kind=2 site=0 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=1080-history-True C32_CENSUS kind=2 site=1 packs=3363840 nonfinite_waves=0 over448_waves=0 over1_waves=3317760 maxabs=233.668335
+case=1080-history-True C32_CENSUS kind=2 site=2 packs=840960 nonfinite_waves=0 over448_waves=0 over1_waves=829440 maxabs=281.25
+case=1080-history-True C32_CENSUS kind=2 site=3 packs=2522880 nonfinite_waves=0 over448_waves=0 over1_waves=1658880 maxabs=251.957031
+case=1080-history-True C32_CENSUS kind=2 site=4 packs=1681920 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.949771345
+case=1080-history-True C32_CENSUS kind=2 site=5 packs=840960 nonfinite_waves=0 over448_waves=0 over1_waves=840960 maxabs=215.0625
+case=1080-history-True C32_CENSUS kind=2 site=6 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=1080-history-True C32_CENSUS kind=3 site=0 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=1080-history-True C32_CENSUS kind=3 site=1 packs=3363840 nonfinite_waves=0 over448_waves=0 over1_waves=3302614 maxabs=163.341278
+case=1080-history-True C32_CENSUS kind=3 site=2 packs=840960 nonfinite_waves=0 over448_waves=0 over1_waves=829440 maxabs=162.75
+case=1080-history-True C32_CENSUS kind=3 site=3 packs=2522880 nonfinite_waves=0 over448_waves=0 over1_waves=829438 maxabs=131.940979
+case=1080-history-True C32_CENSUS kind=3 site=4 packs=1681920 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.350342125
+case=1080-history-True C32_CENSUS kind=3 site=5 packs=840960 nonfinite_waves=0 over448_waves=0 over1_waves=831318 maxabs=36.2199707
+case=1080-history-True C32_CENSUS kind=3 site=6 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=1080-history-True C32_CENSUS kind=4 site=0 packs=3354720 nonfinite_waves=0 over448_waves=0 over1_waves=3331477 maxabs=93.4375
+case=1080-history-True C32_CENSUS kind=4 site=1 packs=13418880 nonfinite_waves=0 over448_waves=0 over1_waves=12907310 maxabs=25.4740486
+case=1080-history-True C32_CENSUS kind=4 site=2 packs=3354720 nonfinite_waves=0 over448_waves=0 over1_waves=3302453 maxabs=65
+case=1080-history-True C32_CENSUS kind=4 site=3 packs=10064160 nonfinite_waves=0 over448_waves=0 over1_waves=6305149 maxabs=41.0100098
+case=1080-history-True C32_CENSUS kind=4 site=4 packs=6709440 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.757914543
+case=1080-history-True C32_CENSUS kind=4 site=5 packs=3354720 nonfinite_waves=0 over448_waves=0 over1_waves=2509190 maxabs=38.1713867
+case=1080-history-True C32_CENSUS kind=4 site=6 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0
+case=1080-history-True C32_CENSUS kind=5 site=0 packs=3317760 nonfinite_waves=0 over448_waves=0 over1_waves=3175958 maxabs=3.60351562
+case=1080-history-True C32_CENSUS kind=5 site=1 packs=13271040 nonfinite_waves=0 over448_waves=0 over1_waves=12 maxabs=1.01990616
+case=1080-history-True C32_CENSUS kind=5 site=2 packs=3317760 nonfinite_waves=0 over448_waves=0 over1_waves=2607874 maxabs=4.171875
+case=1080-history-True C32_CENSUS kind=5 site=3 packs=9953280 nonfinite_waves=0 over448_waves=0 over1_waves=3297694 maxabs=8.92930603
+case=1080-history-True C32_CENSUS kind=5 site=4 packs=6635520 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0.313419133
+case=1080-history-True C32_CENSUS kind=5 site=5 packs=3317760 nonfinite_waves=0 over448_waves=0 over1_waves=2078068 maxabs=7.93457031
+case=1080-history-True C32_CENSUS kind=5 site=6 packs=0 nonfinite_waves=0 over448_waves=0 over1_waves=0 maxabs=0

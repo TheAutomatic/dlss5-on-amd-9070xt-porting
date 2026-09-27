@@ -1,0 +1,632 @@
+[
+  {
+    "kernel": "c32_wave1_chain",
+    "segments": [
+      {
+        "begin": 262,
+        "end": 267,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 327,
+        "end": 332,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 342,
+        "end": 347,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 423,
+        "end": 428,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 450,
+        "end": 455,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 520,
+        "end": 525,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 533,
+        "end": 538,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 556,
+        "end": 561,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 568,
+        "end": 573,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 926,
+        "end": 931,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 938,
+        "end": 943,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 949,
+        "end": 954,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 961,
+        "end": 966,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 972,
+        "end": 977,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 980,
+        "end": 985,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 1058,
+        "end": 1063,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 1133,
+        "end": 1138,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      }
+    ]
+  },
+  {
+    "kernel": "c32_wave1_mapped",
+    "segments": [
+      {
+        "begin": 154,
+        "end": 159,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 239,
+        "end": 244,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 312,
+        "end": 317,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 374,
+        "end": 379,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 391,
+        "end": 396,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 474,
+        "end": 479,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 499,
+        "end": 504,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 577,
+        "end": 582,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 589,
+        "end": 594,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 612,
+        "end": 617,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 624,
+        "end": 629,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 987,
+        "end": 992,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 999,
+        "end": 1004,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 1010,
+        "end": 1015,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 1022,
+        "end": 1027,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 1031,
+        "end": 1036,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 1041,
+        "end": 1046,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 1117,
+        "end": 1122,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 1191,
+        "end": 1196,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      }
+    ]
+  },
+  {
+    "kernel": "c32_wave1_finish",
+    "segments": [
+      {
+        "begin": 269,
+        "end": 274,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 334,
+        "end": 339,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 349,
+        "end": 354,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 430,
+        "end": 435,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 457,
+        "end": 462,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 527,
+        "end": 532,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 540,
+        "end": 545,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 563,
+        "end": 568,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 575,
+        "end": 580,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 929,
+        "end": 934,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 940,
+        "end": 945,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 951,
+        "end": 956,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 963,
+        "end": 968,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 973,
+        "end": 978,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 982,
+        "end": 987,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      }
+    ]
+  },
+  {
+    "kernel": "c32_wave1_finish_dcrop",
+    "segments": [
+      {
+        "begin": 266,
+        "end": 271,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 331,
+        "end": 336,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 346,
+        "end": 351,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 427,
+        "end": 432,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 454,
+        "end": 459,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 524,
+        "end": 529,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 537,
+        "end": 542,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 560,
+        "end": 565,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 572,
+        "end": 577,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 926,
+        "end": 931,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 937,
+        "end": 942,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 948,
+        "end": 953,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 960,
+        "end": 965,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 970,
+        "end": 975,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 979,
+        "end": 984,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      }
+    ]
+  },
+  {
+    "kernel": "c32_wave1_post",
+    "segments": [
+      {
+        "begin": 300,
+        "end": 305,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 522,
+        "end": 527,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 589,
+        "end": 594,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 654,
+        "end": 659,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 669,
+        "end": 674,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 751,
+        "end": 756,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 777,
+        "end": 782,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 850,
+        "end": 855,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 862,
+        "end": 867,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 885,
+        "end": 890,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 897,
+        "end": 902,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 1262,
+        "end": 1267,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 1273,
+        "end": 1278,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 1284,
+        "end": 1289,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 1295,
+        "end": 1300,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 1306,
+        "end": 1311,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 1314,
+        "end": 1319,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      }
+    ]
+  },
+  {
+    "kernel": "c32_wave1_prefix",
+    "segments": [
+      {
+        "begin": 431,
+        "end": 436,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 553,
+        "end": 558,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 620,
+        "end": 625,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 685,
+        "end": 690,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 700,
+        "end": 705,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 782,
+        "end": 787,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 807,
+        "end": 812,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 880,
+        "end": 885,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 892,
+        "end": 897,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 915,
+        "end": 920,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 927,
+        "end": 932,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 1286,
+        "end": 1291,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 1298,
+        "end": 1303,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 1310,
+        "end": 1315,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 1321,
+        "end": 1326,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 1330,
+        "end": 1335,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      },
+      {
+        "begin": 1340,
+        "end": 1345,
+        "fp8_conversions": 4,
+        "half_narrowing": 0
+      }
+    ]
+  }
+]

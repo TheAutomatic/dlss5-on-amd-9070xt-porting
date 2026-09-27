@@ -1,0 +1,47 @@
+[
+  {
+    "check": "default",
+    "arch": "gfx1200",
+    "code_identical": true,
+    "sections_sha256": {
+      ".note": "7865d666a829b378e85385b6c1033db1730b07103af88ead122f1591c88f8c40",
+      ".rodata": "7e707d52a51854e0ad798775f49ffdff348efaf3539f0410903d01090b5843fc",
+      ".text": "db98c42943f8a8524beaf15c9427905c56f68cbe297dd43fdefab71e616752b7"
+    }
+  },
+  {
+    "check": "production",
+    "arch": "gfx1200",
+    "code_identical": true,
+    "sections_sha256": {
+      ".note": "e5ae011881b7cb24a9c7061ca426bb60b78298d3cbd7692288f656152e447fb8",
+      ".rodata": "2efebd4dab4231ed4d4893a806e3ff0245797ab167e9faa7eb5fcf9fd9d1b1ff",
+      ".text": "5bde6569b8a2e890caaca9c706d54072eb3d33517c2c72c2bf381c52945ecf8c"
+    }
+  },
+  {
+    "check": "default",
+    "arch": "gfx1201",
+    "code_identical": true,
+    "sections_sha256": {
+      ".note": "0a8e8d29c9d76444576a247b3ae5efd9585277635b9ebce0f2e2d620f3d1b01c",
+      ".rodata": "7e707d52a51854e0ad798775f49ffdff348efaf3539f0410903d01090b5843fc",
+      ".text": "db98c42943f8a8524beaf15c9427905c56f68cbe297dd43fdefab71e616752b7"
+    }
+  },
+  {
+    "check": "production",
+    "arch": "gfx1201",
+    "code_identical": true,
+    "sections_sha256": {
+      ".note": "a904daf696d5110080b1934c519e063abcca062955604ffa150330344942ca56",
+      ".rodata": "2efebd4dab4231ed4d4893a806e3ff0245797ab167e9faa7eb5fcf9fd9d1b1ff",
+      ".text": "5bde6569b8a2e890caaca9c706d54072eb3d33517c2c72c2bf381c52945ecf8c"
+    }
+  },
+  {
+    "check": "debug",
+    "arch": "gfx1201",
+    "code_identical": true
+  }
+]
