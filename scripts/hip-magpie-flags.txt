@@ -119,9 +119,7 @@ DLSS5_HIP_DECODER_BYTE=1
 DLSS5_HIP_MH_FFN_FRAG256=1
 DLSS5_HIP_VIT_BYTE_STREAM=0
 DLSS5_HIP_GRAPH=0
-# 2026-09-27: off by default. The flag protocol has no proven acquire and no documented forward-progress guarantee
-# (results/pdl-audit-20260927); a stall risk is not worth ~0.5%. Set 1 to re-enable.
-DLSS5_HIP_PDL=0
+DLSS5_HIP_PDL=1
 # 0.31 (2026-09-26): bit-exact faster kernels. wave-owned = one head per wave for C32/C64/C128 + C256 attention (46 blocks);
 # C512_M32 = C512 QKV/mix at 32 tokens per wave; VIT_PROJ_N64 = ViT projection 64 columns per wave. Each falls back to the 0.30 path if 0.
 DLSS5_HIP_WAVE_OWNED=1

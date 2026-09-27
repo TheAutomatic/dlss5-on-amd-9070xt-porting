@@ -124,6 +124,4 @@ DLSS5_VIT_ADAPTIVE=0
 DLSS5_HIP_WAVE_OWNED=1
 DLSS5_HIP_C512_M32=1
 DLSS5_HIP_VIT_PROJ_N64=1
-# 2026-09-27: off by default. The flag protocol has no proven acquire and no documented forward-progress guarantee
-# (results/pdl-audit-20260927); a stall risk is not worth ~0.5%. Set 1 to re-enable.
-DLSS5_HIP_PDL=0
+DLSS5_HIP_PDL=1
