@@ -706,3 +706,7 @@ c64-wave2 已用交换操作数让累加器直接当下一操作数（FFN 展开
 - AE（开机默认）：简单场景静止 57～58、运动 53～54，主菜单 52～53。
 - **F8 切 EXACT：简单场景 53～54、主菜单 49～50**；0.32 基准 51～52 / 47～48，各 +2 帧（约 +4%，离线网络 −9%，网络约占整帧一半）。
 - 黄字无 AE/EXACT 字样：已知，提示只挂 FPS 行（A 尾巴第 4 条）。
+
+## 2026-09-27 09:00：0.33 打包
+
+`Development/tools/package-033.ps1`（源码 2cb0ab90），以 0.32 三包为底：add-on b08cd2e3（黄字 AE/EXACT、F7 开关文字、共用 env 解析——HEAD add-on 首次进游戏，剑星/匹诺曹实测正常）、c32-wave1（CW_PACK8）+ c64-wave2（W2_PACK8 1）双架构；RE9 宿主与 runtime 沿用 0.32。三包逐文件校验、44 shader 变体通过；RE9 包 runtime-smoke 在打包后补跑通过（打包时 Magpie 开着被跳过，Magpie 空闲不影响）。结果 `Development/tools/release-033-results.json`。W2_PACK8 2 与 HIP_FP8_SAT_MODE 3 未进本包（未进游戏验证）。
