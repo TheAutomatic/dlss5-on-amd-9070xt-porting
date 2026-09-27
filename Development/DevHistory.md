@@ -741,3 +741,7 @@ ACO 对照（`results/aco-isa-20260927`）指向 E4M3 转换前的 `v_max_num x,
 ## 2026-09-27 13:40～15:20：C64 融合核手改汇编（`results/c64-hand-asm-20260927`）
 
 新工具 `experiments/c64-hand-asm/asm_compile.cpp`：COMGR 汇编 `.hsaco.s` → 可加载模块；P 配方 c64-wave2 原样往返逐位（仅 16 位字面量高半与 gfx10+ 忽略的 SGPR 粒度字段不同）。手改 c64_wave2_bi_bo 的 FFN 隐层循环：`x*poly` + `+0` 合成 `v_dual_fmaak_f32 …,0`、删死的 `v_mov v38/v39,0`（探针：fp8 WMMA 从不输出 −0），每窗口 −192 VALU、逐位，但 ABBA 噪声内。关键发现：**激活多项式在 g=−4 恰为 +0，x≤−4 全是 −0，`+0` 是必要的**；LLVM 不收缩 `mul+add0`。回推源码 `W2_PACK8 6`（`W2_Q8_SETF` = `fmaf(x,y,0)`，四个乘积打包站点）：12 个 wave2 变体各 −165～195 条、逐位，两批 ABBA 900 −0.013/−0.028、1080 −0.015/−0.025 ms（约 −0.2%）；默认配方代码不变。未装游戏、未进配方（剑星 P 待实测，通过后用 6 代替 4）。
+
+## 2026-09-27 14:08：分段 FP16_OVFL（P）剑星实测通过，配方改 W2_PACK8 6
+
+剑星装 P（c64-wave2 = W2_PACK8 4，`deployments/ovfl-20260927`）。Zero：画面无变化（运动无黑块/闪烁），1080P AA 中画质 EXACT 简单场景 54～55，与 M 同（0.5% 在读数分辨率下）。`hip/build-modules.ps1` c64-wave2 配方 W2_PACK8 3→6（= 4 + W2_Q8_SETF fma，`results/c64-hand-asm-20260927` 7 用例逐位）；6 本身未进游戏，下次发包前按惯例双架构重编 + 7 用例回归 + 装剑星确认。
