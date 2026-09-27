@@ -1,0 +1,292 @@
+CONFIG wave_owned_active=1 pdl=1 skip=3
+VERIFY label=warm bitdiff=0 invalid=0
+DEVICE,AMD Radeon RX 9070 XT,MP=32,warp=32,threads=2048,LDS=65536
+TOPO,block70,c32_wave1,c32_wave1_prefix,24000,32,129,4096,0,16
+TOPO,block0,c32_wave1,c32_wave1_mapped,6000,32,133,4096,0,16
+TOPO,block0,c32_wave1,c32_wave1_chain,6161,32,134,4096,0,16
+TOPO,block0,c32_wave1,c32_wave1_chain,6060,32,134,4096,0,16
+TOPO,block0,c32_wave1,c32_wave1_finish_dcrop,6100,32,131,4096,0,16
+TOPO,block4-down,mh_fast,mh_pool_project_production_h16w,24000,32,62,0,0,64
+TOPO,block4-down,c64_wave2,c64_wave2_bo,1500,64,157,8192,0,8
+TOPO,block5,c64_wave2,c64_wave2_bi_bo,1581,64,140,8192,0,8
+TOPO,block6,c64_wave2,c64_wave2_bi_bo,1530,64,140,8192,0,8
+TOPO,block7,c64_wave2,c64_wave2_bi,1550,64,140,8192,0,8
+TOPO,block8,mh_fast,mh_pool_project_group_c64,1500,64,100,2304,0,28
+TOPO,block8,c64_wave2,c128_wave2_bo,375,128,157,16384,0,4
+TOPO,block9,c64_wave2,c128_wave2_bi_bo,416,128,144,16384,0,4
+TOPO,block10,c64_wave2,c128_wave2_bi_bo,390,128,144,16384,0,4
+TOPO,block11,c64_wave2,c128_wave2_bi_bo,400,128,144,16384,0,4
+TOPO,block12,c64_wave2,c128_wave2_bi_bo,375,128,144,16384,0,4
+TOPO,block13,c64_wave2,c128_wave2_bi,416,128,144,16384,0,4
+TOPO,block14,mh_fast,mh_pool_project_group_c128,375,128,98,4352,0,14
+TOPO,block14,mh_fast,mh_ffn_fused_c256_frag_project_mapped_g128_qkv_fb_pdl,416,512,98,30016,0,2
+TOPO,block14,c64_wave2,c256_attn_wave_bo,104,256,139,32768,0,2
+TOPO,block15,mh_fast,mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl,416,512,102,30016,0,2
+TOPO,block15,c64_wave2,c256_attn_wave_bo,104,256,139,32768,0,2
+TOPO,block16,mh_fast,mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl,416,512,102,30016,0,2
+TOPO,block16,c64_wave2,c256_attn_wave_bo,104,256,139,32768,0,2
+TOPO,block17,mh_fast,mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl,416,512,102,30016,0,2
+TOPO,block17,c64_wave2,c256_attn_wave_bo,104,256,139,32768,0,2
+TOPO,block18,mh_fast,mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl,416,512,102,30016,0,2
+TOPO,block18,c64_wave2,c256_attn_wave_bo,104,256,139,32768,0,2
+TOPO,block19,mh_fast,mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl,416,512,102,30016,0,2
+TOPO,block19,c64_wave2,c256_attn_wave_bo,104,256,139,32768,0,2
+TOPO,block20,mh_fast,mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl,416,512,102,30016,0,2
+TOPO,block20,c64_wave2,c256_attn_wave_bo,104,256,139,32768,0,2
+TOPO,block21,mh_fast,mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl,416,512,102,30016,0,2
+TOPO,block21,c64_wave2,c256_attn_wave,104,256,150,32768,0,2
+TOPO,block22,mh_fast,mh_pool_project_group_c256,94,256,98,8448,0,7
+TOPO,block22,mh,mh_shift_pack,3584,256,6,0,0,8
+TOPO,block22,c512_m32_deep,split_mix_blocked_h16w_m32,448,32,96,0,0,64
+TOPO,block22,deep_fast,split_ffn_fused_fp8_t8,896,128,112,4160,0,12
+TOPO,block22,deep_fast,split_projection_frag,896,32,83,0,0,56
+TOPO,block22,c512_m32_mh,mh_qkv_normalize_frag_c512_m32,1344,32,155,5456,0,12
+TOPO,block22,mh_fused,mh_attention_fused_fp8_out,448,128,103,15360,0,4
+TOPO,block22,mh_fast,mh_attention_project_frag_c512,896,32,80,0,0,64
+TOPO,block23,mh,mh_shift_pack,4480,256,6,0,0,8
+TOPO,block23,c512_m32_deep,split_mix_blocked_h16w_m32,560,32,96,0,0,64
+TOPO,block23,deep_fast,split_ffn_fused_fp8_t8,1120,128,112,4160,0,12
+TOPO,block23,deep_fast,split_projection_frag,1120,32,83,0,0,56
+TOPO,block23,c512_m32_mh,mh_qkv_normalize_frag_c512_m32,1680,32,155,5456,0,12
+TOPO,block23,mh_fused,mh_attention_fused_fp8_out,560,128,103,15360,0,4
+TOPO,block23,mh_fast,mh_attention_project_frag_c512,1120,32,80,0,0,64
+TOPO,block24,mh,mh_shift_pack,3584,256,6,0,0,8
+TOPO,block24,c512_m32_deep,split_mix_blocked_h16w_m32,448,32,96,0,0,64
+TOPO,block24,deep_fast,split_ffn_fused_fp8_t8,896,128,112,4160,0,12
+TOPO,block24,deep_fast,split_projection_frag,896,32,83,0,0,56
+TOPO,block24,c512_m32_mh,mh_qkv_normalize_frag_c512_m32,1344,32,155,5456,0,12
+TOPO,block24,mh_fused,mh_attention_fused_fp8_out,448,128,103,15360,0,4
+TOPO,block24,mh_fast,mh_attention_project_frag_c512,896,32,80,0,0,64
+TOPO,block25,mh,mh_shift_pack,4480,256,6,0,0,8
+TOPO,block25,c512_m32_deep,split_mix_blocked_h16w_m32,560,32,96,0,0,64
+TOPO,block25,deep_fast,split_ffn_fused_fp8_t8,1120,128,112,4160,0,12
+TOPO,block25,deep_fast,split_projection_frag,1120,32,83,0,0,56
+TOPO,block25,c512_m32_mh,mh_qkv_normalize_frag_c512_m32,1680,32,155,5456,0,12
+TOPO,block25,mh_fused,mh_attention_fused_fp8_out,560,128,103,15360,0,4
+TOPO,block25,mh_fast,mh_attention_project_frag_c512,1120,32,80,0,0,64
+TOPO,block26,mh,mh_shift_pack,3584,256,6,0,0,8
+TOPO,block26,c512_m32_deep,split_mix_blocked_h16w_m32,448,32,96,0,0,64
+TOPO,block26,deep_fast,split_ffn_fused_fp8_t8,896,128,112,4160,0,12
+TOPO,block26,deep_fast,split_projection_frag,896,32,83,0,0,56
+TOPO,block26,c512_m32_mh,mh_qkv_normalize_frag_c512_m32,1344,32,155,5456,0,12
+TOPO,block26,mh_fused,mh_attention_fused_fp8_out,448,128,103,15360,0,4
+TOPO,block26,mh_fast,mh_attention_project_frag_c512,896,32,80,0,0,64
+TOPO,block27,mh,mh_shift_pack,4480,256,6,0,0,8
+TOPO,block27,c512_m32_deep,split_mix_blocked_h16w_m32,560,32,96,0,0,64
+TOPO,block27,deep_fast,split_ffn_fused_fp8_t8,1120,128,112,4160,0,12
+TOPO,block27,deep_fast,split_projection_frag,1120,32,83,0,0,56
+TOPO,block27,c512_m32_mh,mh_qkv_normalize_frag_c512_m32,1680,32,155,5456,0,12
+TOPO,block27,mh_fused,mh_attention_fused_fp8_out,560,128,103,15360,0,4
+TOPO,block27,mh_fast,mh_attention_project_frag_c512,1120,32,80,0,0,64
+TOPO,block28,mh,mh_shift_pack,3584,256,6,0,0,8
+TOPO,block28,c512_m32_deep,split_mix_blocked_h16w_m32,448,32,96,0,0,64
+TOPO,block28,deep_fast,split_ffn_fused_fp8_t8,896,128,112,4160,0,12
+TOPO,block28,deep_fast,split_projection_frag,896,32,83,0,0,56
+TOPO,block28,c512_m32_mh,mh_qkv_normalize_frag_c512_m32,1344,32,155,5456,0,12
+TOPO,block28,mh_fused,mh_attention_fused_fp8_out,448,128,103,15360,0,4
+TOPO,block28,mh_fast,mh_attention_project_frag_c512,896,32,80,0,0,64
+TOPO,block29,mh,mh_shift_pack,4480,256,6,0,0,8
+TOPO,block29,c512_m32_deep,split_mix_blocked_h16w_m32,560,32,96,0,0,64
+TOPO,block29,deep_fast,split_ffn_fused_fp8_t8,1120,128,112,4160,0,12
+TOPO,block29,deep_fast,split_projection_frag,1120,32,83,0,0,56
+TOPO,block29,c512_m32_mh,mh_qkv_normalize_frag_c512_m32,1680,32,155,5456,0,12
+TOPO,block29,mh_fused,mh_attention_fused_fp8_out,560,128,103,15360,0,4
+TOPO,block29,mh_fast,mh_attention_project_frag_c512,1120,32,80,0,0,64
+TOPO,block30,mh,mh_pool,800,256,12,0,0,8
+TOPO,block30,mh_fast,mh_pool_project_production_h16w,1600,32,62,0,0,64
+TOPO,head,deep,vit_gather,1600,256,6,0,0,8
+TOPO,head,deep_fast,vit_pack_input,400,256,7,0,0,8
+TOPO,head,deep_fast,vit_expand_blocked_fp8_frag_bytein,1600,32,77,0,0,64
+TOPO,head,vit_stream,vit_stream_contract_frag_hout,400,32,205,0,0,24
+TOPO,head,vit_stream,vit_stream_qkv_frag_hin,2400,32,96,2112,0,31
+TOPO,head,deep_fast,vit_attention_fused_400_bytein_bout,800,32,75,1536,0,42
+TOPO,head,vit_stream,vit_stream_project_n64_bh,400,32,120,0,0,44
+TOPO,block31,deep_fast,vit_pack_input,400,256,7,0,0,8
+TOPO,block31,deep_fast,vit_expand_blocked_fp8_frag_bytein,1600,32,77,0,0,64
+TOPO,block31,vit_stream,vit_stream_contract_frag_hout,400,32,205,0,0,24
+TOPO,block31,vit_stream,vit_stream_qkv_frag_hin,2400,32,96,2112,0,31
+TOPO,block31,deep_fast,vit_attention_fused_400_bytein_bout,800,32,75,1536,0,42
+TOPO,block31,vit_stream,vit_stream_project_n64_bh,400,32,120,0,0,44
+TOPO,block32,deep_fast,vit_pack_input,400,256,7,0,0,8
+TOPO,block32,deep_fast,vit_expand_blocked_fp8_frag_bytein,1600,32,77,0,0,64
+TOPO,block32,vit_stream,vit_stream_contract_frag_hout,400,32,205,0,0,24
+TOPO,block32,vit_stream,vit_stream_qkv_frag_hin,2400,32,96,2112,0,31
+TOPO,block32,deep_fast,vit_attention_fused_400_bytein_bout,800,32,75,1536,0,42
+TOPO,block32,vit_stream,vit_stream_project_n64_bh,400,32,120,0,0,44
+TOPO,block33,deep_fast,vit_pack_input,400,256,7,0,0,8
+TOPO,block33,deep_fast,vit_expand_blocked_fp8_frag_bytein,1600,32,77,0,0,64
+TOPO,block33,vit_stream,vit_stream_contract_frag_hout,400,32,205,0,0,24
+TOPO,block33,vit_stream,vit_stream_qkv_frag_hin,2400,32,96,2112,0,31
+TOPO,block33,deep_fast,vit_attention_fused_400_bytein_bout,800,32,75,1536,0,42
+TOPO,block33,vit_stream,vit_stream_project_n64_bh,400,32,120,0,0,44
+TOPO,block34,deep_fast,vit_pack_input,400,256,7,0,0,8
+TOPO,block34,deep_fast,vit_expand_blocked_fp8_frag_bytein,1600,32,77,0,0,64
+TOPO,block34,vit_stream,vit_stream_contract_frag_hout,400,32,205,0,0,24
+TOPO,block34,vit_stream,vit_stream_qkv_frag_hin,2400,32,96,2112,0,31
+TOPO,block34,deep_fast,vit_attention_fused_400_bytein_bout,800,32,75,1536,0,42
+TOPO,block34,vit_stream,vit_stream_project_n64_bh,400,32,120,0,0,44
+TOPO,block35,deep_fast,vit_pack_input,400,256,7,0,0,8
+TOPO,block35,deep_fast,vit_expand_blocked_fp8_frag_bytein,1600,32,77,0,0,64
+TOPO,block35,vit_stream,vit_stream_contract_frag_hout,400,32,205,0,0,24
+TOPO,block35,vit_stream,vit_stream_qkv_frag_hin,2400,32,96,2112,0,31
+TOPO,block35,deep_fast,vit_attention_fused_400_bytein_bout,800,32,75,1536,0,42
+TOPO,block35,vit_stream,vit_stream_project_n64_bh,400,32,120,0,0,44
+TOPO,block36,deep_fast,vit_pack_input,400,256,7,0,0,8
+TOPO,block36,deep_fast,vit_expand_blocked_fp8_frag_bytein,1600,32,77,0,0,64
+TOPO,block36,vit_stream,vit_stream_contract_frag_hout,400,32,205,0,0,24
+TOPO,block36,vit_stream,vit_stream_qkv_frag_hin,2400,32,96,2112,0,31
+TOPO,block36,deep_fast,vit_attention_fused_400_bytein_bout,800,32,75,1536,0,42
+TOPO,block36,vit_stream,vit_stream_project_n64_bh,400,32,120,0,0,44
+TOPO,block37,deep_fast,vit_pack_input,400,256,7,0,0,8
+TOPO,block37,deep_fast,vit_expand_blocked_fp8_frag_bytein,1600,32,77,0,0,64
+TOPO,block37,vit_stream,vit_stream_contract_frag_hout,400,32,205,0,0,24
+TOPO,block37,vit_stream,vit_stream_qkv_frag_hin,2400,32,96,2112,0,31
+TOPO,block37,deep_fast,vit_attention_fused_400_bytein_bout,800,32,75,1536,0,42
+TOPO,block37,vit_stream,vit_stream_project_n64_bh,400,32,120,0,0,44
+TOPO,block38,deep,vit_gather,1600,256,6,0,0,8
+TOPO,block38,deep_fast,decoder_project2x_h16w,800,32,64,0,0,64
+TOPO,block39,mh,mh_shift_pack,3584,256,6,0,0,8
+TOPO,block39,c512_m32_deep,split_mix_blocked_h16w_m32,448,32,96,0,0,64
+TOPO,block39,deep_fast,split_ffn_fused_fp8_t8,896,128,112,4160,0,12
+TOPO,block39,deep_fast,split_projection_frag,896,32,83,0,0,56
+TOPO,block39,c512_m32_mh,mh_qkv_normalize_frag_c512_m32,1344,32,155,5456,0,12
+TOPO,block39,mh_fused,mh_attention_fused_fp8_out,448,128,103,15360,0,4
+TOPO,block39,mh_fast,mh_attention_project_frag_c512,896,32,80,0,0,64
+TOPO,block40,mh,mh_shift_pack,4480,256,6,0,0,8
+TOPO,block40,c512_m32_deep,split_mix_blocked_h16w_m32,560,32,96,0,0,64
+TOPO,block40,deep_fast,split_ffn_fused_fp8_t8,1120,128,112,4160,0,12
+TOPO,block40,deep_fast,split_projection_frag,1120,32,83,0,0,56
+TOPO,block40,c512_m32_mh,mh_qkv_normalize_frag_c512_m32,1680,32,155,5456,0,12
+TOPO,block40,mh_fused,mh_attention_fused_fp8_out,560,128,103,15360,0,4
+TOPO,block40,mh_fast,mh_attention_project_frag_c512,1120,32,80,0,0,64
+TOPO,block43,mh,mh_shift_pack,3584,256,6,0,0,8
+TOPO,block43,c512_m32_deep,split_mix_blocked_h16w_m32,448,32,96,0,0,64
+TOPO,block43,deep_fast,split_ffn_fused_fp8_t8,896,128,112,4160,0,12
+TOPO,block43,deep_fast,split_projection_frag,896,32,83,0,0,56
+TOPO,block43,c512_m32_mh,mh_qkv_normalize_frag_c512_m32,1344,32,155,5456,0,12
+TOPO,block43,mh_fused,mh_attention_fused_fp8_out,448,128,103,15360,0,4
+TOPO,block43,mh_fast,mh_attention_project_frag_c512,896,32,80,0,0,64
+TOPO,block44,mh,mh_shift_pack,4480,256,6,0,0,8
+TOPO,block44,c512_m32_deep,split_mix_blocked_h16w_m32,560,32,96,0,0,64
+TOPO,block44,deep_fast,split_ffn_fused_fp8_t8,1120,128,112,4160,0,12
+TOPO,block44,deep_fast,split_projection_frag,1120,32,83,0,0,56
+TOPO,block44,c512_m32_mh,mh_qkv_normalize_frag_c512_m32,1680,32,155,5456,0,12
+TOPO,block44,mh_fused,mh_attention_fused_fp8_out,560,128,103,15360,0,4
+TOPO,block44,mh_fast,mh_attention_project_frag_c512,1120,32,80,0,0,64
+TOPO,block46,mh,mh_shift_pack,4480,256,6,0,0,8
+TOPO,block46,c512_m32_deep,split_mix_blocked_h16w_m32,560,32,96,0,0,64
+TOPO,block46,deep_fast,split_ffn_fused_fp8_t8,1120,128,112,4160,0,12
+TOPO,block46,deep_fast,split_projection_frag,1120,32,83,0,0,56
+TOPO,block46,c512_m32_mh,mh_qkv_normalize_frag_c512_m32,1680,32,155,5456,0,12
+TOPO,block46,mh_fused,mh_attention_fused_fp8_out,560,128,103,15360,0,4
+TOPO,block46,mh_fast,mh_attention_project_frag_c512,1120,32,80,0,0,64
+TOPO,block47,deep_fast,decoder_project2x_h16w_byteout,1504,32,64,0,0,64
+TOPO,block47,mh_fast,mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl,416,512,102,30016,0,2
+TOPO,block47,c64_wave2,c256_attn_wave_bo,104,256,139,32768,0,2
+TOPO,block48,mh_fast,mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl,416,512,102,30016,0,2
+TOPO,block48,c64_wave2,c256_attn_wave_bo,104,256,139,32768,0,2
+TOPO,block49,mh_fast,mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl,416,512,102,30016,0,2
+TOPO,block49,c64_wave2,c256_attn_wave_bo,104,256,139,32768,0,2
+TOPO,block50,mh_fast,mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl,416,512,102,30016,0,2
+TOPO,block50,c64_wave2,c256_attn_wave_bo,104,256,139,32768,0,2
+TOPO,block51,mh_fast,mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl,416,512,102,30016,0,2
+TOPO,block51,c64_wave2,c256_attn_wave_bo,104,256,139,32768,0,2
+TOPO,block52,mh_fast,mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl,416,512,102,30016,0,2
+TOPO,block52,c64_wave2,c256_attn_wave_bo,104,256,139,32768,0,2
+TOPO,block53,mh_fast,mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl,416,512,102,30016,0,2
+TOPO,block53,c64_wave2,c256_attn_wave_bo,104,256,139,32768,0,2
+TOPO,block54,mh_fast,mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl,416,512,102,30016,0,2
+TOPO,block54,c64_wave2,c256_attn_wave,104,256,150,32768,0,2
+TOPO,block55,deep_fast,decoder_project2x_h16w_byteout,3000,32,64,0,0,64
+TOPO,block55,c64_wave2,c128_wave2_bi_bo,390,128,144,16384,0,4
+TOPO,block56,c64_wave2,c128_wave2_bi_bo,400,128,144,16384,0,4
+TOPO,block57,c64_wave2,c128_wave2_bi_bo,375,128,144,16384,0,4
+TOPO,block58,c64_wave2,c128_wave2_bi_bo,416,128,144,16384,0,4
+TOPO,block59,c64_wave2,c128_wave2_bi_bo,390,128,144,16384,0,4
+TOPO,block60,c64_wave2,c128_wave2_bi,400,128,144,16384,0,4
+TOPO,block61,deep_fast,decoder_project2x_h16w_byteout,6000,32,64,0,0,64
+TOPO,block61,c64_wave2,c64_wave2_bi_bo,1500,64,140,8192,0,8
+TOPO,block62,c64_wave2,c64_wave2_bi_bo,1581,64,140,8192,0,8
+TOPO,block63,c64_wave2,c64_wave2_bi_bo,1530,64,140,8192,0,8
+TOPO,block64,c64_wave2,c64_wave2_bi,1550,64,140,8192,0,8
+TOPO,block65,deep_fast,decoder_project2x_h16w,12000,32,64,0,0,64
+TOPO,block65,c32_wave1,c32_wave1_mapped,6000,32,133,4096,0,16
+TOPO,block65,c32_wave1,c32_wave1_chain,6161,32,134,4096,0,16
+TOPO,block65,c32_wave1,c32_wave1_chain,6060,32,134,4096,0,16
+TOPO,block65,c32_wave1,c32_wave1_finish,6100,32,131,4096,0,16
+TOPO,block69,c32_wave1,c32_wave1_post,24321,32,132,4096,0,16
+VERIFY label=topology bitdiff=0 invalid=0
+VERIFY label=split_mix_blocked_h16w_m32$ bitdiff=0 invalid=0
+VERIFY label=split_mix_blocked_h16w_m32$ bitdiff=0 invalid=0
+VERIFY label=split_mix_blocked_h16w_m32$ bitdiff=0 invalid=0
+VERIFY label=split_mix_blocked_h16w_m32$ bitdiff=0 invalid=0
+VERIFY label=split_mix_blocked_h16w_m32$ bitdiff=0 invalid=0
+VERIFY label=split_mix_blocked_h16w_m32$ bitdiff=0 invalid=0
+VERIFY label=split_mix_blocked_h16w_m32$ bitdiff=0 invalid=0
+VERIFY label=split_mix_blocked_h16w_m32$ bitdiff=0 invalid=0
+VERIFY label=split_mix_blocked_h16w_m32$ bitdiff=0 invalid=0
+VERIFY label=split_mix_blocked_h16w_m32$ bitdiff=0 invalid=0
+VERIFY label=split_mix_blocked_h16w_m32$ bitdiff=0 invalid=0
+VERIFY label=split_mix_blocked_h16w_m32$ bitdiff=0 invalid=0
+VERIFY label=split_ffn_fused_fp8_t8$ bitdiff=0 invalid=0
+VERIFY label=split_ffn_fused_fp8_t8$ bitdiff=0 invalid=0
+VERIFY label=split_ffn_fused_fp8_t8$ bitdiff=0 invalid=0
+VERIFY label=split_ffn_fused_fp8_t8$ bitdiff=0 invalid=0
+VERIFY label=split_ffn_fused_fp8_t8$ bitdiff=0 invalid=0
+VERIFY label=split_ffn_fused_fp8_t8$ bitdiff=0 invalid=0
+VERIFY label=split_ffn_fused_fp8_t8$ bitdiff=0 invalid=0
+VERIFY label=split_ffn_fused_fp8_t8$ bitdiff=0 invalid=0
+VERIFY label=split_ffn_fused_fp8_t8$ bitdiff=0 invalid=0
+VERIFY label=split_ffn_fused_fp8_t8$ bitdiff=0 invalid=0
+VERIFY label=split_ffn_fused_fp8_t8$ bitdiff=0 invalid=0
+VERIFY label=split_ffn_fused_fp8_t8$ bitdiff=0 invalid=0
+VERIFY label=split_projection_frag$ bitdiff=0 invalid=0
+VERIFY label=split_projection_frag$ bitdiff=0 invalid=0
+VERIFY label=split_projection_frag$ bitdiff=0 invalid=0
+VERIFY label=split_projection_frag$ bitdiff=0 invalid=0
+VERIFY label=split_projection_frag$ bitdiff=0 invalid=0
+VERIFY label=split_projection_frag$ bitdiff=0 invalid=0
+VERIFY label=split_projection_frag$ bitdiff=0 invalid=0
+VERIFY label=split_projection_frag$ bitdiff=0 invalid=0
+VERIFY label=split_projection_frag$ bitdiff=0 invalid=0
+VERIFY label=split_projection_frag$ bitdiff=0 invalid=0
+VERIFY label=split_projection_frag$ bitdiff=0 invalid=0
+VERIFY label=split_projection_frag$ bitdiff=0 invalid=0
+VERIFY label=mh_qkv_normalize_frag_c512_m32$ bitdiff=0 invalid=0
+VERIFY label=mh_qkv_normalize_frag_c512_m32$ bitdiff=0 invalid=0
+VERIFY label=mh_qkv_normalize_frag_c512_m32$ bitdiff=0 invalid=0
+VERIFY label=mh_qkv_normalize_frag_c512_m32$ bitdiff=0 invalid=0
+VERIFY label=mh_qkv_normalize_frag_c512_m32$ bitdiff=0 invalid=0
+VERIFY label=mh_qkv_normalize_frag_c512_m32$ bitdiff=0 invalid=0
+VERIFY label=mh_qkv_normalize_frag_c512_m32$ bitdiff=0 invalid=0
+VERIFY label=mh_qkv_normalize_frag_c512_m32$ bitdiff=0 invalid=0
+VERIFY label=mh_qkv_normalize_frag_c512_m32$ bitdiff=0 invalid=0
+VERIFY label=mh_qkv_normalize_frag_c512_m32$ bitdiff=0 invalid=0
+VERIFY label=mh_qkv_normalize_frag_c512_m32$ bitdiff=0 invalid=0
+VERIFY label=mh_qkv_normalize_frag_c512_m32$ bitdiff=0 invalid=0
+VERIFY label=mh_attention_fused_fp8_out$ bitdiff=0 invalid=0
+VERIFY label=mh_attention_fused_fp8_out$ bitdiff=0 invalid=0
+VERIFY label=mh_attention_fused_fp8_out$ bitdiff=0 invalid=0
+VERIFY label=mh_attention_fused_fp8_out$ bitdiff=0 invalid=0
+VERIFY label=mh_attention_fused_fp8_out$ bitdiff=0 invalid=0
+VERIFY label=mh_attention_fused_fp8_out$ bitdiff=0 invalid=0
+VERIFY label=mh_attention_fused_fp8_out$ bitdiff=0 invalid=0
+VERIFY label=mh_attention_fused_fp8_out$ bitdiff=0 invalid=0
+VERIFY label=mh_attention_fused_fp8_out$ bitdiff=0 invalid=0
+VERIFY label=mh_attention_fused_fp8_out$ bitdiff=0 invalid=0
+VERIFY label=mh_attention_fused_fp8_out$ bitdiff=0 invalid=0
+VERIFY label=mh_attention_fused_fp8_out$ bitdiff=0 invalid=0
+VERIFY label=mh_attention_project_frag_c512$ bitdiff=0 invalid=0
+VERIFY label=mh_attention_project_frag_c512$ bitdiff=0 invalid=0
+VERIFY label=mh_attention_project_frag_c512$ bitdiff=0 invalid=0
+VERIFY label=mh_attention_project_frag_c512$ bitdiff=0 invalid=0
+VERIFY label=mh_attention_project_frag_c512$ bitdiff=0 invalid=0
+VERIFY label=mh_attention_project_frag_c512$ bitdiff=0 invalid=0
+VERIFY label=mh_attention_project_frag_c512$ bitdiff=0 invalid=0
+VERIFY label=mh_attention_project_frag_c512$ bitdiff=0 invalid=0
+VERIFY label=mh_attention_project_frag_c512$ bitdiff=0 invalid=0
+VERIFY label=mh_attention_project_frag_c512$ bitdiff=0 invalid=0
+VERIFY label=mh_attention_project_frag_c512$ bitdiff=0 invalid=0
+VERIFY label=mh_attention_project_frag_c512$ bitdiff=0 invalid=0
+VERIFY label=final bitdiff=0 invalid=0
+PASS c512 ledger checks=75

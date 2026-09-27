@@ -1,0 +1,783 @@
+{
+  "ZR": {
+    "kernel": "split_mix_blocked_h16w_m32",
+    "classes": {
+      "SMEM": 3,
+      "SALU": 178,
+      "WAIT": 775,
+      "VALU": 1783,
+      "VOPD": 88,
+      "VMEM": 320,
+      "WMMA": 256
+    },
+    "ops": {
+      "s_load_b32": 1,
+      "s_lshl_b32": 3,
+      "s_delay_alu": 114,
+      "s_and_not1_b32": 1,
+      "s_wait_kmcnt": 2,
+      "s_cmp_ge_u32": 1,
+      "s_cbranch_scc1": 33,
+      "v_lshrrev_b32_e32": 1,
+      "s_or_b32": 1,
+      "s_load_b128": 1,
+      "s_cmp_lt_u32": 1,
+      "v_mov_b32_e32": 139,
+      "v_and_b32_e32": 2,
+      "s_cselect_b32": 1,
+      "v_dual_mov_b32": 70,
+      "s_and_b32": 4,
+      "v_or3_b32": 3,
+      "s_wait_alu": 260,
+      "v_lshl_or_b32": 1,
+      "v_lshlrev_b64_e32": 63,
+      "s_load_b64": 1,
+      "v_and_or_b32": 1,
+      "v_add_co_u32": 130,
+      "v_add_co_ci_u32_e64": 130,
+      "s_mov_b32": 2,
+      "s_branch": 33,
+      "v_add3_u32": 32,
+      "s_clause": 143,
+      "global_load_b128": 256,
+      "s_wait_loadcnt": 256,
+      "v_cvt_f16_f32_e32": 512,
+      "v_pack_b32_f16": 256,
+      "s_add_co_i32": 32,
+      "s_cmp_gt_u32": 32,
+      "v_wmma_f32_16x16x16_f16": 256,
+      "s_cbranch_vccnz": 32,
+      "v_cvt_pkrtz_f16_f32": 64,
+      "v_cvt_f32_f16": 64,
+      "v_dual_max_num_f32": 15,
+      "v_or_b32_e32": 30,
+      "v_med3_num_f32": 64,
+      "v_lshlrev_b32_e32": 2,
+      "v_cvt_pk_fp8_f32": 64,
+      "v_max_num_f32_e32": 41,
+      "v_cmp_neq_f32_e64": 32,
+      "v_cvt_f32_fp8_e32": 64,
+      "v_cndmask_b32_e64": 32,
+      "global_store_b32": 64,
+      "s_cbranch_vccz": 1,
+      "v_cmp_neq_f32_e32": 32,
+      "v_cndmask_b32_e32": 24,
+      "v_dual_cndmask_b32": 3,
+      "s_endpgm": 1
+    },
+    "loops": [
+      {
+        "trips": 32,
+        "ranges": [
+          [
+            77,
+            102
+          ],
+          [
+            102,
+            148
+          ],
+          [
+            148,
+            151
+          ],
+          [
+            151,
+            157
+          ]
+        ]
+      }
+    ]
+  },
+  "R": {
+    "kernel": "split_mix_blocked_h16w_m32",
+    "classes": {
+      "SMEM": 3,
+      "SALU": 370,
+      "WAIT": 807,
+      "VALU": 1561,
+      "VOPD": 96,
+      "VMEM": 320,
+      "WMMA": 256
+    },
+    "ops": {
+      "s_load_b32": 1,
+      "s_lshl_b32": 3,
+      "s_delay_alu": 188,
+      "s_and_not1_b32": 1,
+      "s_wait_kmcnt": 2,
+      "s_cmp_ge_u32": 1,
+      "s_cbranch_scc1": 33,
+      "v_lshrrev_b32_e32": 33,
+      "s_or_b32": 65,
+      "v_mov_b32_e32": 154,
+      "v_and_b32_e32": 2,
+      "s_cmp_lt_u32": 1,
+      "s_load_b128": 1,
+      "s_cselect_b32": 1,
+      "s_load_b64": 1,
+      "v_dual_mov_b32": 71,
+      "s_and_b32": 36,
+      "v_or3_b32": 2,
+      "s_wait_alu": 264,
+      "v_lshl_or_b32": 1,
+      "v_lshlrev_b64_e32": 34,
+      "v_and_or_b32": 1,
+      "v_add_co_u32": 101,
+      "v_add_co_ci_u32_e64": 101,
+      "s_mov_b32": 88,
+      "s_branch": 33,
+      "v_add3_u32": 32,
+      "s_clause": 128,
+      "global_load_b128": 256,
+      "s_wait_loadcnt": 224,
+      "v_cvt_f16_f32_e32": 512,
+      "v_pack_b32_f16": 256,
+      "s_add_co_i32": 32,
+      "s_cmp_gt_u32": 32,
+      "v_wmma_f32_16x16x16_f16": 256,
+      "s_cbranch_vccnz": 32,
+      "v_cvt_pkrtz_f16_f32": 32,
+      "v_cvt_f32_f16": 64,
+      "v_dual_max_num_f32": 25,
+      "v_med3_num_f32": 64,
+      "v_cvt_pk_fp8_f32": 32,
+      "v_cmpx_neq_f32_e32": 55,
+      "v_cvt_f32_fp8_e32": 32,
+      "v_cvt_f32_fp8_e64": 32,
+      "v_or_b32_e32": 1,
+      "v_lshlrev_b32_e32": 1,
+      "global_store_b32": 64,
+      "v_max_num_f32_e32": 10,
+      "v_cmp_neq_f32_e32": 9,
+      "s_and_saveexec_b32": 9,
+      "s_cbranch_vccz": 1,
+      "s_nop": 1,
+      "s_sendmsg": 1,
+      "s_endpgm": 1
+    },
+    "loops": [
+      {
+        "trips": 32,
+        "ranges": [
+          [
+            79,
+            104
+          ],
+          [
+            104,
+            145
+          ],
+          [
+            145,
+            152
+          ],
+          [
+            152,
+            158
+          ]
+        ]
+      }
+    ]
+  },
+  "N": {
+    "kernel": "split_mix_blocked_h16w_m32_n32",
+    "classes": {
+      "SMEM": 3,
+      "SALU": 178,
+      "WAIT": 666,
+      "VALU": 1449,
+      "VOPD": 60,
+      "VMEM": 224,
+      "WMMA": 128
+    },
+    "ops": {
+      "s_load_b32": 1,
+      "s_lshl_b32": 3,
+      "s_delay_alu": 155,
+      "s_and_not1_b32": 1,
+      "s_wait_kmcnt": 2,
+      "s_cmp_ge_u32": 1,
+      "s_cbranch_scc1": 33,
+      "v_lshrrev_b32_e32": 1,
+      "s_or_b32": 1,
+      "s_load_b128": 1,
+      "s_cmp_lt_u32": 1,
+      "v_mov_b32_e32": 99,
+      "v_and_b32_e32": 2,
+      "s_cselect_b32": 1,
+      "v_dual_mov_b32": 53,
+      "s_and_b32": 4,
+      "v_or3_b32": 3,
+      "s_wait_alu": 214,
+      "v_lshl_or_b32": 1,
+      "v_lshlrev_b64_e32": 49,
+      "s_load_b64": 1,
+      "v_and_or_b32": 1,
+      "v_add_co_u32": 116,
+      "v_add_co_ci_u32_e64": 116,
+      "s_mov_b32": 2,
+      "s_branch": 33,
+      "v_add3_u32": 32,
+      "s_clause": 103,
+      "global_load_b128": 192,
+      "s_wait_loadcnt": 192,
+      "v_cvt_f16_f32_e32": 512,
+      "v_pack_b32_f16": 256,
+      "s_add_co_i32": 32,
+      "s_cmp_gt_u32": 32,
+      "v_wmma_f32_16x16x16_f16": 128,
+      "s_cbranch_vccnz": 32,
+      "v_cvt_pkrtz_f16_f32": 32,
+      "v_cvt_f32_f16": 32,
+      "v_dual_max_num_f32": 6,
+      "v_or_b32_e32": 16,
+      "v_med3_num_f32": 32,
+      "v_lshlrev_b32_e32": 2,
+      "v_cvt_pk_fp8_f32": 32,
+      "v_cvt_f32_fp8_e32": 32,
+      "v_cmp_neq_f32_e64": 16,
+      "v_cndmask_b32_e64": 16,
+      "v_max_num_f32_e32": 22,
+      "global_store_b32": 32,
+      "s_cbranch_vccz": 1,
+      "v_cmp_neq_f32_e32": 16,
+      "v_cndmask_b32_e32": 13,
+      "v_dual_cndmask_b32": 1,
+      "s_endpgm": 1
+    },
+    "loops": [
+      {
+        "trips": 32,
+        "ranges": [
+          [
+            61,
+            86
+          ],
+          [
+            86,
+            124
+          ],
+          [
+            124,
+            127
+          ],
+          [
+            127,
+            133
+          ]
+        ]
+      }
+    ]
+  },
+  "ZQ": {
+    "kernel": "mh_qkv_normalize_frag_c512_m32",
+    "classes": {
+      "SMEM": 3,
+      "SALU": 226,
+      "WAIT": 574,
+      "VALU": 919,
+      "VOPD": 198,
+      "VMEM": 198,
+      "WMMA": 256,
+      "DS": 174
+    },
+    "ops": {
+      "s_load_b32": 1,
+      "s_mul_hi_u32": 1,
+      "s_delay_alu": 58,
+      "s_lshr_b32": 1,
+      "s_lshl_b32": 6,
+      "s_wait_kmcnt": 2,
+      "s_cmp_ge_u32": 1,
+      "s_cbranch_scc1": 9,
+      "s_clause": 33,
+      "s_load_b128": 1,
+      "s_load_b64": 1,
+      "v_lshlrev_b32_e32": 8,
+      "s_or_b32": 8,
+      "v_lshrrev_b32_e32": 2,
+      "s_cmp_lt_u32": 3,
+      "s_mul_i32": 3,
+      "v_or_b32_e32": 11,
+      "s_cselect_b32": 3,
+      "s_mov_b32": 11,
+      "s_sub_co_i32": 2,
+      "v_and_b32_e32": 2,
+      "v_lshl_or_b32": 2,
+      "v_add_co_u32": 145,
+      "v_add_co_ci_u32_e64": 145,
+      "s_wait_alu": 324,
+      "s_add_nc_u64": 20,
+      "v_mov_b32_e32": 104,
+      "v_dual_mov_b32": 140,
+      "s_mov_b64": 1,
+      "s_branch": 12,
+      "global_load_b64": 192,
+      "s_wait_loadcnt": 122,
+      "v_wmma_f32_16x16x16_fp8_fp8": 256,
+      "s_cmp_eq_u32": 8,
+      "s_and_not1_b32": 34,
+      "s_cbranch_vccnz": 36,
+      "s_add_co_i32": 41,
+      "s_addk_co_i32": 8,
+      "v_mul_u32_u24_e32": 3,
+      "v_add_nc_u32_e32": 17,
+      "v_lshlrev_b64_e32": 1,
+      "v_add_lshl_u32": 3,
+      "s_and_b32": 8,
+      "s_cbranch_vccz": 2,
+      "ds_store_b32": 66,
+      "v_cmp_gt_u32_e32": 2,
+      "s_wait_dscnt": 34,
+      "s_and_saveexec_b32": 2,
+      "s_cbranch_execz": 4,
+      "ds_load_2addr_b32": 32,
+      "global_load_b32": 2,
+      "v_dual_mul_f32": 38,
+      "v_dual_add_f32": 4,
+      "v_mul_f32_e32": 50,
+      "v_add_f32_e32": 54,
+      "v_max_num_f32_e32": 2,
+      "v_rsq_f32_e32": 2,
+      "ds_load_b128": 12,
+      "v_med3_num_f32": 64,
+      "v_cmp_neq_f32_e32": 64,
+      "v_cvt_pk_fp8_f32": 128,
+      "v_cvt_f32_fp8_e32": 64,
+      "v_cndmask_b32_e32": 42,
+      "v_dual_cndmask_b32": 16,
+      "ds_store_b8": 64,
+      "v_cmpx_gt_u32_e64": 2,
+      "v_mad_co_u64_u32": 2,
+      "global_store_b128": 4,
+      "s_nop": 1,
+      "s_sendmsg": 1,
+      "s_endpgm": 1
+    },
+    "loops": [
+      {
+        "trips": 8,
+        "ranges": [
+          [
+            97,
+            166
+          ],
+          [
+            166,
+            176
+          ],
+          [
+            176,
+            178
+          ],
+          [
+            178,
+            208
+          ],
+          [
+            208,
+            210
+          ],
+          [
+            210,
+            233
+          ],
+          [
+            233,
+            235
+          ],
+          [
+            235,
+            265
+          ],
+          [
+            265,
+            268
+          ]
+        ]
+      },
+      {
+        "trips": 2,
+        "ranges": [
+          [
+            327,
+            337
+          ],
+          [
+            337,
+            357
+          ],
+          [
+            357,
+            375
+          ],
+          [
+            375,
+            419
+          ],
+          [
+            419,
+            440
+          ],
+          [
+            440,
+            442
+          ],
+          [
+            442,
+            521
+          ],
+          [
+            521,
+            880
+          ],
+          [
+            880,
+            889
+          ]
+        ]
+      }
+    ]
+  },
+  "Q": {
+    "kernel": "mh_qkv_normalize_frag_c512_m32",
+    "classes": {
+      "SMEM": 3,
+      "SALU": 226,
+      "WAIT": 570,
+      "VALU": 755,
+      "VOPD": 184,
+      "VMEM": 198,
+      "WMMA": 256,
+      "DS": 174
+    },
+    "ops": {
+      "s_load_b32": 1,
+      "s_mul_hi_u32": 1,
+      "s_delay_alu": 54,
+      "s_lshr_b32": 1,
+      "s_lshl_b32": 6,
+      "s_wait_kmcnt": 2,
+      "s_cmp_ge_u32": 1,
+      "s_cbranch_scc1": 9,
+      "s_clause": 33,
+      "s_load_b128": 1,
+      "s_load_b64": 1,
+      "v_lshlrev_b32_e32": 8,
+      "s_or_b32": 8,
+      "v_lshrrev_b32_e32": 2,
+      "s_cmp_lt_u32": 3,
+      "s_mul_i32": 3,
+      "v_or_b32_e32": 11,
+      "s_cselect_b32": 3,
+      "s_mov_b32": 11,
+      "s_sub_co_i32": 2,
+      "v_and_b32_e32": 2,
+      "v_lshl_or_b32": 2,
+      "v_add_co_u32": 145,
+      "v_add_co_ci_u32_e64": 145,
+      "s_wait_alu": 324,
+      "s_add_nc_u64": 20,
+      "v_mov_b32_e32": 58,
+      "v_dual_mov_b32": 138,
+      "s_mov_b64": 1,
+      "s_branch": 12,
+      "global_load_b64": 192,
+      "s_wait_loadcnt": 122,
+      "v_wmma_f32_16x16x16_fp8_fp8": 256,
+      "s_cmp_eq_u32": 8,
+      "s_and_not1_b32": 34,
+      "s_cbranch_vccnz": 36,
+      "s_add_co_i32": 41,
+      "s_addk_co_i32": 8,
+      "v_mul_u32_u24_e32": 3,
+      "v_add_nc_u32_e32": 17,
+      "v_lshlrev_b64_e32": 1,
+      "v_add_lshl_u32": 3,
+      "s_and_b32": 8,
+      "s_cbranch_vccz": 2,
+      "ds_store_b32": 66,
+      "v_cmp_gt_u32_e32": 2,
+      "s_wait_dscnt": 34,
+      "s_and_saveexec_b32": 2,
+      "s_cbranch_execz": 4,
+      "ds_load_2addr_b32": 32,
+      "global_load_b32": 2,
+      "v_dual_mul_f32": 40,
+      "v_dual_add_f32": 4,
+      "v_mul_f32_e32": 46,
+      "v_add_f32_e32": 54,
+      "v_max_num_f32_e32": 2,
+      "v_rsq_f32_e32": 2,
+      "ds_load_b128": 12,
+      "v_med3_num_f32": 64,
+      "v_cmp_neq_f32_e32": 64,
+      "v_cvt_pk_fp8_f32": 64,
+      "v_cndmask_b32_e32": 56,
+      "v_dual_cndmask_b32": 2,
+      "ds_store_b8": 64,
+      "v_cmpx_gt_u32_e64": 2,
+      "v_mad_co_u64_u32": 2,
+      "global_store_b128": 4,
+      "s_nop": 1,
+      "s_sendmsg": 1,
+      "s_endpgm": 1
+    },
+    "loops": [
+      {
+        "trips": 8,
+        "ranges": [
+          [
+            97,
+            166
+          ],
+          [
+            166,
+            176
+          ],
+          [
+            176,
+            178
+          ],
+          [
+            178,
+            208
+          ],
+          [
+            208,
+            210
+          ],
+          [
+            210,
+            233
+          ],
+          [
+            233,
+            235
+          ],
+          [
+            235,
+            265
+          ],
+          [
+            265,
+            268
+          ]
+        ]
+      },
+      {
+        "trips": 2,
+        "ranges": [
+          [
+            327,
+            337
+          ],
+          [
+            337,
+            357
+          ],
+          [
+            357,
+            375
+          ],
+          [
+            375,
+            419
+          ],
+          [
+            419,
+            440
+          ],
+          [
+            440,
+            442
+          ],
+          [
+            442,
+            521
+          ],
+          [
+            521,
+            789
+          ],
+          [
+            789,
+            798
+          ]
+        ]
+      }
+    ]
+  },
+  "L": {
+    "kernel": "mh_qkv_normalize_frag_c512_m32",
+    "classes": {
+      "SMEM": 3,
+      "SALU": 226,
+      "WAIT": 768,
+      "VALU": 893,
+      "VOPD": 211,
+      "VMEM": 198,
+      "WMMA": 256,
+      "DS": 230
+    },
+    "ops": {
+      "s_load_b32": 1,
+      "s_mul_hi_u32": 1,
+      "s_delay_alu": 196,
+      "s_lshr_b32": 1,
+      "s_lshl_b32": 6,
+      "s_wait_kmcnt": 2,
+      "s_cmp_ge_u32": 1,
+      "s_cbranch_scc1": 9,
+      "s_clause": 33,
+      "s_load_b128": 1,
+      "s_load_b64": 1,
+      "v_lshlrev_b32_e32": 8,
+      "s_or_b32": 8,
+      "v_lshrrev_b32_e32": 2,
+      "s_cmp_lt_u32": 3,
+      "s_mul_i32": 3,
+      "v_or_b32_e32": 10,
+      "s_cselect_b32": 3,
+      "s_mov_b32": 11,
+      "s_sub_co_i32": 2,
+      "v_and_b32_e32": 2,
+      "v_lshl_or_b32": 2,
+      "v_add_co_u32": 145,
+      "v_add_co_ci_u32_e64": 145,
+      "s_wait_alu": 324,
+      "s_add_nc_u64": 20,
+      "v_mov_b32_e32": 88,
+      "v_dual_mov_b32": 121,
+      "s_mov_b64": 1,
+      "s_branch": 12,
+      "global_load_b64": 192,
+      "s_wait_loadcnt": 122,
+      "v_wmma_f32_16x16x16_fp8_fp8": 256,
+      "s_cmp_eq_u32": 8,
+      "s_and_not1_b32": 34,
+      "s_cbranch_vccnz": 36,
+      "s_add_co_i32": 41,
+      "s_addk_co_i32": 8,
+      "v_mul_u32_u24_e32": 4,
+      "v_add_lshl_u32": 3,
+      "v_lshlrev_b64_e32": 1,
+      "v_add_nc_u32_e32": 17,
+      "s_and_b32": 8,
+      "s_cbranch_vccz": 2,
+      "ds_store_b32": 66,
+      "v_cmp_gt_u32_e32": 2,
+      "s_wait_dscnt": 90,
+      "s_and_saveexec_b32": 2,
+      "s_cbranch_execz": 4,
+      "ds_load_2addr_b32": 32,
+      "global_load_b32": 2,
+      "v_dual_mul_f32": 24,
+      "v_dual_add_f32": 4,
+      "v_mul_f32_e32": 80,
+      "v_add_f32_e32": 54,
+      "v_max_num_f32_e32": 2,
+      "v_rsq_f32_e32": 2,
+      "ds_load_b32": 64,
+      "v_med3_num_f32": 64,
+      "v_cmp_neq_f32_e32": 64,
+      "v_cvt_pk_fp8_f32": 128,
+      "v_cvt_f32_fp8_e32": 64,
+      "v_dual_cndmask_b32": 62,
+      "ds_store_b8": 64,
+      "v_cndmask_b32_e32": 2,
+      "v_cmpx_gt_u32_e64": 2,
+      "ds_load_b128": 4,
+      "v_mad_co_u64_u32": 2,
+      "global_store_b128": 4,
+      "s_nop": 1,
+      "s_sendmsg": 1,
+      "s_endpgm": 1
+    },
+    "loops": [
+      {
+        "trips": 8,
+        "ranges": [
+          [
+            98,
+            167
+          ],
+          [
+            167,
+            177
+          ],
+          [
+            177,
+            179
+          ],
+          [
+            179,
+            209
+          ],
+          [
+            209,
+            211
+          ],
+          [
+            211,
+            234
+          ],
+          [
+            234,
+            236
+          ],
+          [
+            236,
+            266
+          ],
+          [
+            266,
+            269
+          ]
+        ]
+      },
+      {
+        "trips": 2,
+        "ranges": [
+          [
+            328,
+            338
+          ],
+          [
+            338,
+            358
+          ],
+          [
+            358,
+            376
+          ],
+          [
+            376,
+            420
+          ],
+          [
+            420,
+            441
+          ],
+          [
+            441,
+            443
+          ],
+          [
+            443,
+            522
+          ],
+          [
+            522,
+            999
+          ],
+          [
+            999,
+            1008
+          ]
+        ]
+      }
+    ]
+  }
+}

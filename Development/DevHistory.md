@@ -840,3 +840,12 @@ B去FP8输入往返并合宽读取（保留0x7f→0xff规范化，256编码探�
 ## 2026-09-27 23:26：C64～C256 深挖（闇第五刀）剑星实测
 
 剑星换两份 c64-wave2（`results/mh-round1-20260927`，备份 `D:\DLSSNR-Lab\mh-round1-20260927\backups\stellar-20260927-230633`）。Zero：1080P 原生 AA，EXACT 黄字 **57.1**（0.35 约 56.7）。离线 900 −0.72～0.75%、1080 −0.78～0.84%，同向。
+
+
+## 2026-09-27：第六轮C512完成900资源账与四候选编译，GPU实测被游戏占用中断
+
+按d1a255e任务单，以第五刀剑星实装为基线。实际派发与HIP occupancy API：设备32 MP/WGP，C512 900的1792/2240 token对应28/35窗口（此前104/135窗口不能用于本族），mix448/560组×1wave，QKV1344/1680组×1wave。mix VGPR96/LDS0/API64组每MP，总wave仅全卡容量22～27%；QKV VGPR155/LDS5456/API12组每MP，约3.5～4.4轮驻留容量。六核三批重复派发边际账900：mix0.231、FFN0.222、FFN投影0.185、QKV0.478、attention0.168、attention投影0.236ms；75次原始FP32检查逐位，不把边际成本相加成精确整帧归因。
+
+准备R（mix RTZ与FP8配对，普通向量1871→1657，WMMA256不变）、Q（QKV去q8(F)往返，1117→939）、N（mix每wave输出32通道，组数翻倍，VGPR62；原K顺序，重复A读取增加）、L（QKV raw和输出LDS分时复用，5456→4420B，VGPR155/private0）。四候选双架构编译；默认关闭Z四模块与现场基线代码/metadata全同。ACO实际manifest为ffwd_wgw4、FM2阈值2560、投影tile32×128；它不是一味增加组数，融合/复用与数学差异需分开。
+
+1080账本中途《33号远征》SandFall-WinGDK-Shipping启动，基线12.5→21ms。停本实验ledger，未动游戏；受污染1080结果单独留档不采用。空闲检查扩到Shipping进程，ledger每槽也检查，等待Zero关游戏后resume.ps1重跑。候选尚未GPU逐位/ABBA、未进配方、未装机、未发布。结果及续跑入口 `results/c512-round1-20260927`、`HIP/experiments/c512-round1`。剑星900测法：1600×900窗口+FSR原生AA，或2K质量1707×961→auto900；F8 EXACT，避开60上限。
