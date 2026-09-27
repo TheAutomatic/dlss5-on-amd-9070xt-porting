@@ -824,3 +824,4 @@ C512主mix分段账：K512循环1120普通向量/256VMEM/256WMMA，尾部701向�
 ## 2026-09-27 21:26：0.35 打包 + RE9 实测
 
 `tools/package-035.ps1`（源码 ec96774d），以 0.34 为底：add-on 4151123e、60 模块（每架构 30，新增 vit-stream）、RE9 runtime 432d8ccf（宿主 aa3761f2 不变）、模板加 `DLSS5_HIP_VIT_STREAM=3`。三包校验与 44 变体通过；RE9 冒烟因游戏运行被跳过，待补。RE9 装同款（备份 `D:\DLSSNR-Lab\release-035\backup-re9-20260927-212302`），Zero 中画质：2K 原生 AA **42**（41）、2K 高质量 **58～59**（58），同一测试画面。
+- 21:38 补跑 0.35 RE9 包冒烟通过：`vit_stream=3/3 … pdl=1/1 … applied=16`，`lmxxf_nr_gpu: ok`。发布：夸克 https://pan.quark.cn/s/83e6172e6c79 + Gofile https://gofile.io/d/NnF4GitT，tag 0.35 = ec96774d。

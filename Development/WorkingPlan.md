@@ -5,7 +5,7 @@
 
 ## 当前基线（09-27 晚）
 
-- **0.34 已发布**（09-27 16:46，夸克 https://pan.quark.cn/s/4b572b0a5b81 + Gofile https://gofile.io/d/cfHqVzD1，tag 0.34 = 9bd416fa）：add-on 86ef4182、58 模块按配方编（fmed3 + 分段 FP16_OVFL + fma 打包）、RE9 宿主 aa3761f2（换队列跟随 + 看门狗）+ runtime ca6d6bdc（切档泄漏 0、几何日志）。脚本 `tools/package-034.ps1`，清单 `tools/release-034-results.json`。
+- **0.35 已发布**（09-27 21:36，夸克 https://pan.quark.cn/s/83e6172e6c79 + Gofile https://gofile.io/d/NnF4GitT，tag 0.35 = ec96774d）：add-on 4151123e（ViT 字节流开关）、每架构 30 模块（C32 闇三刀 + vit-stream）、RE9 runtime 432d8ccf（宿主 aa3761f2 不变），模板 `DLSS5_HIP_VIT_STREAM=3`。脚本 `tools/package-035.ps1`（下次复制它；模块数检查是 30/60）。
 - **0.34 之后已进配方、已装剑星、未发包**（闇）：C32 第一刀 `CW_DIRECT_OUT`+`CW_RTZ_PAIR`（`results/c32-aco-20260927`），第二刀 `CW_PACK_MODE_MASK 127`+`CW_PREFIX_DIRECT_OUT`+`CW_PREFIX_FULL_TILE`（`results/c32-round2-20260927`）。离线 900 ≈9.31～9.40、1080 ≈12.92 ms（0.32 为 10.74/15.01）。
 - **剑星实测轨迹**（1080P 原生 AA，EXACT 普通场景）：0.32 51～52 → 0.33 53～54 → 0.34 54 → C32 第一刀 55～56 → **第二刀 56～57**（AE 约 59，贴 60）。
 - **各游戏现装**：
