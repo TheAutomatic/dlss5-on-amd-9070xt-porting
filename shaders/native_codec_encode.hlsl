@@ -23,7 +23,7 @@ cbuffer CodecConstants : register(b0) {
 #if NATIVE_CODEC_EXPOSURE
 Texture2D<float> GameExposure : register(t4);
 #endif
-// Mirror daniel white-point meter: aim encoded mean at mid-grey (0.45).
+// Aim encoded mean at mid-grey (0.45) when estimating a white point.
 static const float kTargetEncodedMean = 0.45f;
 float WhitePointForMean(float meanLuma) {
     float encoded = pow(kTargetEncodedMean, 2.2f);
