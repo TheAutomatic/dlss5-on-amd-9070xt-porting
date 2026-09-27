@@ -1,0 +1,86 @@
+--- /dev/fd/63	2026-09-27 13:59:43.064283888 +0800
++++ /dev/fd/62	2026-09-27 13:59:43.064283888 +0800
+@@ -743,31 +743,19 @@
+ 	s_delay_alu instid0(VALU_DEP_2) | instskip(NEXT) | instid1(VALU_DEP_4)
+ 	v_dual_mul_f32 v67, v67, v77 :: v_dual_add_f32 v62, 0x3f650000, v62
+ 	v_dual_add_f32 v47, 0x3f650000, v47 :: v_dual_add_f32 v64, 0x3f650000, v64
+-	s_delay_alu instid0(VALU_DEP_3) | instskip(NEXT) | instid1(VALU_DEP_3)
+ 	v_dual_add_f32 v61, 0x3f650000, v61 :: v_dual_add_f32 v66, 0x3f650000, v66
+-	v_dual_add_f32 v63, 0x3f650000, v63 :: v_dual_mul_f32 v40, v40, v62
+-	s_delay_alu instid0(VALU_DEP_3) | instskip(NEXT) | instid1(VALU_DEP_4)
+-	v_dual_add_f32 v65, 0x3f650000, v65 :: v_dual_mul_f32 v38, v38, v47
+-	v_dual_add_f32 v67, 0x3f650000, v67 :: v_dual_mul_f32 v42, v42, v64
+-	s_delay_alu instid0(VALU_DEP_4) | instskip(NEXT) | instid1(VALU_DEP_4)
+-	v_dual_mul_f32 v39, v39, v61 :: v_dual_mul_f32 v44, v44, v66
+-	v_mul_f32_e32 v41, v41, v63
+-	s_delay_alu instid0(VALU_DEP_4) | instskip(NEXT) | instid1(VALU_DEP_4)
+-	v_mul_f32_e32 v43, v43, v65
+-	v_mul_f32_e32 v45, v45, v67
++	v_add_f32_e32 v63, 0x3f650000, v63
++	v_add_f32_e32 v65, 0x3f650000, v65
++	v_add_f32_e32 v67, 0x3f650000, v67
++	v_dual_fmaak_f32 v38, v38, v47, 0x0 :: v_dual_fmaak_f32 v39, v39, v61, 0x0
++	v_dual_fmaak_f32 v40, v40, v62, 0x0 :: v_dual_fmaak_f32 v41, v41, v63, 0x0
++	v_dual_fmaak_f32 v42, v42, v64, 0x0 :: v_dual_fmaak_f32 v43, v43, v65, 0x0
++	v_dual_fmaak_f32 v44, v44, v66, 0x0 :: v_dual_fmaak_f32 v45, v45, v67, 0x0
+ 	s_setreg_imm32_b32 hwreg(HW_REG_MODE, 23, 1), 1
+-	v_dual_add_f32 v47, 0, v38 :: v_dual_mov_b32 v38, 0
+-	v_dual_add_f32 v61, 0, v39 :: v_dual_add_f32 v42, 0, v42
+-	v_dual_add_f32 v43, 0, v43 :: v_dual_add_f32 v40, 0, v40
+-	v_mov_b32_e32 v39, 0
+-	s_delay_alu instid0(VALU_DEP_3) | instskip(SKIP_1) | instid1(VALU_DEP_3)
+-	v_cvt_pk_fp8_f32 v38, v47, v61
+-	v_add_f32_e32 v41, 0, v41
++	v_cvt_pk_fp8_f32 v38, v38, v39
+ 	v_cvt_pk_fp8_f32 v39, v42, v43
+-	v_dual_add_f32 v42, 0, v44 :: v_dual_add_f32 v43, 0, v45
+-	s_delay_alu instid0(VALU_DEP_3) | instskip(NEXT) | instid1(VALU_DEP_2)
+ 	v_cvt_pk_fp8_f32 v38, v40, v41 op_sel:[0,0,1]
+-	v_cvt_pk_fp8_f32 v39, v42, v43 op_sel:[0,0,1]
++	v_cvt_pk_fp8_f32 v39, v44, v45 op_sel:[0,0,1]
+ 	s_setreg_imm32_b32 hwreg(HW_REG_MODE, 23, 1), 0
+ 	s_wait_alu 0xfffe
+ 	v_add_co_u32 v40, s26, s4, v33
+@@ -809,33 +797,23 @@
+ 	v_dual_mul_f32 v65, v65, v75 :: v_dual_add_f32 v62, 0x3f650000, v62
+ 	s_delay_alu instid0(VALU_DEP_3) | instskip(NEXT) | instid1(VALU_DEP_3)
+ 	v_dual_add_f32 v45, 0x3f650000, v45 :: v_dual_add_f32 v64, 0x3f650000, v64
+-	v_dual_add_f32 v47, 0x3f650000, v47 :: v_dual_mul_f32 v44, v52, v44
+-	s_delay_alu instid0(VALU_DEP_4)
++	v_add_f32_e32 v47, 0x3f650000, v47
+ 	v_add_f32_e32 v63, 0x3f650000, v63
+ 	v_add_f32_e32 v61, 0x3f650000, v61
+ 	v_add_f32_e32 v65, 0x3f650000, v65
+-	v_mul_f32_e32 v45, v53, v45
+-	v_mul_f32_e32 v47, v54, v47
+-	v_dual_mul_f32 v53, v56, v62 :: v_dual_mul_f32 v54, v57, v63
+-	v_dual_mul_f32 v52, v55, v61 :: v_dual_mul_f32 v55, v58, v64
++	v_dual_fmaak_f32 v52, v52, v44, 0x0 :: v_dual_fmaak_f32 v53, v53, v45, 0x0
++	v_dual_fmaak_f32 v54, v54, v47, 0x0 :: v_dual_fmaak_f32 v55, v55, v61, 0x0
+ 	s_wait_loadcnt 0x1
+ 	v_wmma_f32_16x16x16_fp8_fp8 v[9:16], v[40:41], v[38:39], v[9:16]
+-	v_mul_f32_e32 v40, v59, v65
+ 	s_wait_loadcnt 0x0
+ 	v_wmma_f32_16x16x16_fp8_fp8 v[1:8], v[42:43], v[38:39], v[1:8]
+ 	s_setreg_imm32_b32 hwreg(HW_REG_MODE, 23, 1), 1
+-	v_dual_add_f32 v41, 0, v44 :: v_dual_add_f32 v42, 0, v45
+-	v_dual_mov_b32 v38, 0 :: v_dual_add_f32 v43, 0, v53
+-	v_dual_add_f32 v44, 0, v54 :: v_dual_mov_b32 v39, 0
+-	v_add_f32_e32 v40, 0, v40
+-	s_delay_alu instid0(VALU_DEP_3) | instskip(SKIP_1) | instid1(VALU_DEP_4)
+-	v_cvt_pk_fp8_f32 v38, v41, v42
+-	v_dual_add_f32 v41, 0, v47 :: v_dual_add_f32 v42, 0, v52
+-	v_cvt_pk_fp8_f32 v39, v43, v44
+-	v_add_f32_e32 v43, 0, v55
+-	s_delay_alu instid0(VALU_DEP_3) | instskip(NEXT) | instid1(VALU_DEP_2)
+-	v_cvt_pk_fp8_f32 v38, v41, v42 op_sel:[0,0,1]
+-	v_cvt_pk_fp8_f32 v39, v43, v40 op_sel:[0,0,1]
++	v_dual_fmaak_f32 v56, v56, v62, 0x0 :: v_dual_fmaak_f32 v57, v57, v63, 0x0
++	v_dual_fmaak_f32 v58, v58, v64, 0x0 :: v_dual_fmaak_f32 v59, v59, v65, 0x0
++	v_cvt_pk_fp8_f32 v38, v52, v53
++	v_cvt_pk_fp8_f32 v38, v54, v55 op_sel:[0,0,1]
++	v_cvt_pk_fp8_f32 v39, v56, v57
++	v_cvt_pk_fp8_f32 v39, v58, v59 op_sel:[0,0,1]
+ 	s_setreg_imm32_b32 hwreg(HW_REG_MODE, 23, 1), 0
+ 	v_add_co_u32 v40, vcc_lo, s4, v29
+ 	s_wait_alu 0xfffd

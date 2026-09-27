@@ -737,3 +737,7 @@ ACO 对照（`results/aco-isa-20260927`）指向 E4M3 转换前的 `v_max_num x,
 - `v_cvt_pk_f32_fp8` 在 gfx1201 返回 (byte0,byte0)/(byte2,byte2)（asm 与 builtin 同），成对解包不可用；ACO 在 fswin64 用了 64 次，值得告诉 mochizuki。
 - v_pk_f16：站点是 Hrtz（RTZ）往返，pk f16 按 MODE 取 RNE，不做。DF_PACK8：多数站点在生产不走的分支，活的 `vit_project_frag_n64` 访存受限（VMEM 164 / WMMA 64）。
 - `hip/build-modules.ps1`：-ExtraDefines 同名宏覆盖配方值（默认编译不变）。
+
+## 2026-09-27 13:40～15:20：C64 融合核手改汇编（`results/c64-hand-asm-20260927`）
+
+新工具 `experiments/c64-hand-asm/asm_compile.cpp`：COMGR 汇编 `.hsaco.s` → 可加载模块；P 配方 c64-wave2 原样往返逐位（仅 16 位字面量高半与 gfx10+ 忽略的 SGPR 粒度字段不同）。手改 c64_wave2_bi_bo 的 FFN 隐层循环：`x*poly` + `+0` 合成 `v_dual_fmaak_f32 …,0`、删死的 `v_mov v38/v39,0`（探针：fp8 WMMA 从不输出 −0），每窗口 −192 VALU、逐位，但 ABBA 噪声内。关键发现：**激活多项式在 g=−4 恰为 +0，x≤−4 全是 −0，`+0` 是必要的**；LLVM 不收缩 `mul+add0`。回推源码 `W2_PACK8 6`（`W2_Q8_SETF` = `fmaf(x,y,0)`，四个乘积打包站点）：12 个 wave2 变体各 −165～195 条、逐位，两批 ABBA 900 −0.013/−0.028、1080 −0.015/−0.025 ms（约 −0.2%）；默认配方代码不变。未装游戏、未进配方（剑星 P 待实测，通过后用 6 代替 4）。

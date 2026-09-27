@@ -48,7 +48,16 @@ DEV void w2_bits(i2&a,uint e,uint v){a[e/4]=int(uint(a[e/4])|((v&255u)<<(8*(e%4)
 #define W2_PACK8 0
 #endif
 #if W2_PACK8
-#if W2_PACK8==4
+#if W2_PACK8==6
+// 6 = 4, but where the packed value is a product x*y the multiply and the -0 -> +0 add become one fma(x,y,+0) (W2_Q8_SETF):
+// one rounding of the exact product plus an exact zero is the multiply's rounding, and the sum is never -0, so the bits equal
+// mul-then-add-0. LLVM does not contract the pair itself (results/c64-hand-asm-20260927, found by hand-editing the ISA). The
+// +0 is load-bearing: the FFN activation polynomial is exactly +0 at the clamp g=-4, so every x<=-4 gives x*poly = -0.
+// Other stored values get the +0 at store time (w2_z0), outside the MODE segment.
+DEV float w2_z(float x){return x;}
+DEV float w2_z0(float x){return x+0.f;}
+#define W2_OVFL(v) __builtin_amdgcn_s_setreg(1|(23<<6),(v))
+#elif W2_PACK8==4
 // 4 = segmented MODE.FP16_OVFL (as ACO does in mochizuki's fswin): saturation on only for the four conversions of one
 // fragment, so v_cvt_pk_fp8_f32 clamps finite overflow to +-448 itself and the med3 goes. No f16 narrowing runs inside the
 // segment (FP instructions read MODE, the compiler does not move them across s_setreg). Differs from the clamp only for
@@ -80,11 +89,18 @@ DEV float w2_z(float x){return __builtin_fminf(__builtin_fmaxf(x,-448.f),448.f)+
 DEV i2 w2_pack8(const float*t){W2_OVFL(1);int lo=__builtin_amdgcn_cvt_pk_fp8_f32(w2_z(t[0]),w2_z(t[1]),0,false);lo=__builtin_amdgcn_cvt_pk_fp8_f32(w2_z(t[2]),w2_z(t[3]),lo,true);
  int hi=__builtin_amdgcn_cvt_pk_fp8_f32(w2_z(t[4]),w2_z(t[5]),0,false);hi=__builtin_amdgcn_cvt_pk_fp8_f32(w2_z(t[6]),w2_z(t[7]),hi,true);W2_OVFL(0);i2 a;a[0]=lo;a[1]=hi;return a;}
 #define W2_Q8_DECL(A) i2 A;float A##_t[8]
+#if W2_PACK8==6
+#define W2_Q8_SET(A,E,X) A##_t[E]=w2_z0(X)
+#define W2_Q8_SETF(A,E,X,Y) A##_t[E]=__builtin_fmaf((X),(Y),0.f)
+#else
 #define W2_Q8_SET(A,E,X) A##_t[E]=(X)
+#define W2_Q8_SETF(A,E,X,Y) W2_Q8_SET(A,E,(X)*(Y))
+#endif
 #define W2_Q8_END(A) A=w2_pack8(A##_t)
 #else
 #define W2_Q8_DECL(A) i2 A{}
 #define W2_Q8_SET(A,E,X) w2_bits(A,E,q8_fused_round(X))
+#define W2_Q8_SETF(A,E,X,Y) W2_Q8_SET(A,E,(X)*(Y))
 #define W2_Q8_END(A) (void)0
 #endif
 DEV float w2_shuffle(float v,uint src){return __builtin_bit_cast(float,__builtin_amdgcn_ds_bpermute(src*4,__builtin_bit_cast(int,v)));}
@@ -135,7 +151,7 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
    }
    _Pragma("unroll") for(uint tile=0;tile<W2_HIDDEN_TILES;tile++){
     W2_Q8_DECL(hidden);
-    for(uint e=0;e<8;e++){float a=expanded[tile][e],g=clampf(a,-4.f,4.f),q=absf(g)*(-.055908203125f)+.447265625f,poly=g*q+.89453125f;W2_Q8_SET(hidden,e,a*poly);}W2_Q8_END(hidden);
+    for(uint e=0;e<8;e++){float a=expanded[tile][e],g=clampf(a,-4.f,4.f),q=absf(g)*(-.055908203125f)+.447265625f,poly=g*q+.89453125f;W2_Q8_SETF(hidden,e,a,poly);}W2_Q8_END(hidden);
     for(uint ci=0;ci<2;ci++){
      i2 b=w2_weight(fw+4*C*C,head*32+ci*16+rc,4*C,head*128+(ht+tile)*16);
      contract[ci]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,hidden,contract[ci]);
@@ -179,7 +195,7 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
    }
    float inv=1.f;
    if(part<2){float ss=w2_serial_norm(q[0],q[1]);inv=__builtin_amdgcn_rsqf(maxf(ss,6.198883056640625e-5f))*(part==0?aw[4*C*C+(C/32)*4096+head]:1.f);}
-   for(uint ci=0;ci<2;ci++){W2_Q8_DECL(a);for(uint e=0;e<8;e++)W2_Q8_SET(a,e,q[ci][e]*inv);W2_Q8_END(a);
+   for(uint ci=0;ci<2;ci++){W2_Q8_DECL(a);for(uint e=0;e<8;e++)W2_Q8_SETF(a,e,q[ci][e],inv);W2_Q8_END(a);
 #if W2_ROLL_QUERY && !W2_DEFER_Q
     if(part==0){query_words[qt*4+ci*2]=a[0];query_words[qt*4+ci*2+1]=a[1];}else
 #endif
@@ -211,7 +227,7 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
   }
   float qs=w2_serial_norm(query[0],query[1]);
   float qinv=__builtin_amdgcn_rsqf(maxf(qs,6.198883056640625e-5f))*aw[4*C*C+(C/32)*4096+head];
-  i2 query_frag[2];for(uint ci=0;ci<2;ci++){W2_Q8_DECL(a);for(uint e=0;e<8;e++)W2_Q8_SET(a,e,query[ci][e]*qinv);W2_Q8_END(a);query_frag[ci]=a;}
+  i2 query_frag[2];for(uint ci=0;ci<2;ci++){W2_Q8_DECL(a);for(uint e=0;e<8;e++)W2_Q8_SETF(a,e,query[ci][e],qinv);W2_Q8_END(a);query_frag[ci]=a;}
 #endif
   h8 exponent[4];
   _Pragma("unroll 4") for(uint key=0;key<4;key++){
@@ -237,7 +253,7 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
    _Pragma("unroll 2") for(uint half=0;half<2;half++)sums[side]=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(ones,exponent[side+2*half],sums[side]);
   }
   i2 prob[4];
-  _Pragma("unroll 4") for(uint key=0;key<4;key++){W2_Q8_DECL(a);for(uint e=0;e<8;e++){float inv=1.f/(sums[0][e]+sums[1][e]);W2_Q8_SET(a,e,float(exponent[key][e])*inv);}W2_Q8_END(a);prob[key]=a;}
+  _Pragma("unroll 4") for(uint key=0;key<4;key++){W2_Q8_DECL(a);for(uint e=0;e<8;e++){float inv=1.f/(sums[0][e]+sums[1][e]);W2_Q8_SETF(a,e,float(exponent[key][e]),inv);}W2_Q8_END(a);prob[key]=a;}
   for(uint ci=0;ci<2;ci++){
    f8 av{};
    _Pragma("unroll 4") for(uint key=0;key<4;key++)av=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(qkv[2][key][ci],prob[key],av);
