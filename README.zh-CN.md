@@ -16,7 +16,7 @@ DLSS 5（DLSSNR）跑在 AMD RX 9070 XT / RDNA 4 上。
 | **Magpie**（便携） | 任何游戏，不需要游戏支持超分 | Magpie 抓游戏窗口；网络接在效果组的 FSR3_SR 一项里，之后 FSR4 放大到全屏（可选 XeSS 帧生成） |
 | **OptiScaler-REFramework**（只给 RE9） | 《生化危机 9》，常规路线切不开它的命令提交 | TheAutomatic 改的 OptiScaler 宿主 + 我们的 `LmxxfNrRuntime.dll`（成对使用，别和常规包混装） |
 
-**当前版本：0.34（2026-09-27）。** 继续压普通算术指令，全部逐位相同：FP8 clamp 改单条 med3/fmed3 并去掉编译器插的规范化，C64～C256 打包段分段开关饱和模式、乘积与 −0→+0 合成一条 fma（网络 1080 档 13.64→约 13.4ms；《剑星》1080P 原生 AA、EXACT 主菜单 50～51；RE9 中画质 2K 高质量 54→58、原生 AA 38→41）。修 PDL 旗子计数回绕。RE9 包：宿主跟随实际执行切分列表的队列（《鬼武者：剑之道》Xbox 版可用），runtime 切档不再涨显存、每次尺寸/档位变化打印几何。全部模块改由生产配方从源码编出。下载：[夸克](https://pan.quark.cn/s/4b572b0a5b81) · [Gofile 镜像](https://gofile.io/d/cfHqVzD1)（也在下面的更新记录表）。
+**当前版本：0.35（2026-09-27）。** C32 三轮逐位提速（去重复 FP8 往返、RTZ/LDS 向量化、分段饱和模式、prefix/finish 完整窗口快路径）与 ViT 字节流（`DLSS5_HIP_VIT_STREAM=3`，新增 `vit-stream` 模块：注意力输出以字节直接喂投影，兼容自适应复用）。离线网络 900 档约 9.3ms、1080 档约 12.75ms。《剑星》1080P 原生 AA、EXACT 普通场景约 56.7（0.34 为 54）；RE9 中画质 2K 高质量 58～59、原生 AA 42。下载：[夸克](https://pan.quark.cn/s/83e6172e6c79) · [Gofile 镜像](https://gofile.io/d/NnF4GitT)（也在下面的更新记录表）。
 
 **环境要求。** RDNA 4 显卡（RX 9070 XT 实测；RX 9060 的内核随包但没机器测）和带 `amdhip64_7.dll` 的 AMD 驱动（现在的正式版驱动就带）。
 不需要 HIP SDK、Agility SDK、预览版 DXC、Windows 开发人员模式。900P 下插件占显存约 1.2 GB（权重 0.6 GB、激活 0.3 GB；`DLSS5_HIP_MEMORY=1`
@@ -75,19 +75,19 @@ AMD 光流只在第一项开，FSR4 和 XeSS 帧生成的 Optical Flow Method �
 
 ## 编译
 
-### 现在的包怎么编（0.34）——每个发布文件从哪来
+### 现在的包怎么编（0.35）——每个发布文件从哪来
 
 | 包里的文件 | 源码 | 编法 |
 |---|---|---|
 | `dlss5-amd.addon64`（Magpie / OptiScaler 包） | `src/native_submission_order_probe.cpp` + `src/*.h`、`Development/HIP/*.h`（桥） | Linux/WSL：`bash scripts/build-addon-oneclick.sh dlss5-amd.addon64 --hip`（自动把 MinHook 和 ReShade 6.8 头文件拉到 `third_party/`；需要 `g++-mingw-w64-x86-64`）。编译结果不是逐字节可复现的，重编后按游戏内表现验收，不比 hash |
-| `DLSS5-AMD\native-game-tiled-assets\HIP\gfx1200\*.hsaco`、`...\gfx1201\*.hsaco`（0.31 起各 29 个模块） | `hip/*.hip`，配方 `hip/build-modules.ps1` | 任意一台装着 AMD 驱动（System32 里有 `amd_comgr_3.dll`）的 Windows：`x86_64-w64-mingw32-g++ -std=c++17 -O2 -static hip/rtc_compile.cpp -o rtc_compile.exe`，然后 `powershell -File hip\build-modules.ps1 -Compiler rtc_compile.exe -OutputDir <out>`（默认两种架构都编；`-Only <名字>` 只编一个）。编译不需要显卡；每个 `.hsaco` 旁边会落 `.hsaco.s` 汇编。两个架构约 6 分钟。每次编译都会嵌一个随机的 `__hip_cuid_…` 符号，所以重编结果别比文件 hash，用 `python3 hip/compare-modules.py <输出目录> <包>\DLSS5-AMD\native-game-tiled-assets\HIP` 比代码段；2026-09-26 全新 clone 实测 58 个里 52 个一致，另 6 个是非 packed 的后备模块 `c32_fused_ffn_attention` / `deep_fast` / `multihead-fast-padded-wave`（默认不加载），包里还是早先编的旧版 |
+| `DLSS5-AMD\native-game-tiled-assets\HIP\gfx1200\*.hsaco`、`...\gfx1201\*.hsaco`（0.31 起各 29 个模块，0.35 起 30 个） | `hip/*.hip`，配方 `hip/build-modules.ps1` | 任意一台装着 AMD 驱动（System32 里有 `amd_comgr_3.dll`）的 Windows：`x86_64-w64-mingw32-g++ -std=c++17 -O2 -static hip/rtc_compile.cpp -o rtc_compile.exe`，然后 `powershell -File hip\build-modules.ps1 -Compiler rtc_compile.exe -OutputDir <out>`（默认两种架构都编；`-Only <名字>` 只编一个）。编译不需要显卡；每个 `.hsaco` 旁边会落 `.hsaco.s` 汇编。两个架构约 6 分钟。每次编译都会嵌一个随机的 `__hip_cuid_…` 符号，所以重编结果别比文件 hash，用 `python3 hip/compare-modules.py <输出目录> <包>\DLSS5-AMD\native-game-tiled-assets\HIP` 比代码段；2026-09-26 全新 clone 实测 58 个里 52 个一致，另 6 个是非 packed 的后备模块 `c32_fused_ffn_attention` / `deep_fast` / `multihead-fast-padded-wave`（默认不加载），包里还是早先编的旧版 |
 | `shaders/*.hlsl` 那 12 个（编解码、屏幕文字、RGB 搬运、时序座标、帧检查） | `shaders/`（历史 DX12 网络链在 `shaders/dx12-network/`） | 直接以源码随包；运行时由系统 `d3dcompiler` 编（宿主按 `#define` 选 44 个变体） |
 | RE9 包：`dxgi.dll`（改过的 OptiScaler 宿主）+ `LmxxfNrRuntime.dll` | TheAutomatic 的 fork `release/1.9.0` @ `8f71f73` + 我们在 `Development/RE9/presr/` 的补丁 | `python3 Development/RE9/presr/prepare-host.py`（需要锁定版本的宿主源码：`git clone https://github.com/TheAutomatic/dlss-5-amd-project /tmp/re9-upstream-bridge-review && git -C /tmp/re9-upstream-bridge-review checkout 8f71f73`；重写宿主/runtime 源码并把 `src/`、`shaders/`、`hip/` 拷进 `third_party/lmxxf/`），再 `bash Development/RE9/presr/build-runtime.sh`（MinGW，编 runtime 和冒烟测试）和 Windows 上跑 `build-host.ps1`（Visual Studio 2022 Build Tools：MSVC v143 + Windows SDK 10.0.26100；用 vswhere 自动找，或 `-MSBuild <路径>`）。不用 Linux 也行：每个 RE9 包都带着准备好的源码 `sources\re9-presr-source.tar.gz`，`powershell -File Development\RE9\presr\build-host.ps1 -Root <工作目录> -Archive <那个 tar.gz>` 就能编出宿主（`<工作目录>\bin\OptiScaler.dll`，发布时改名 `dxgi.dll`；2026-09-26 用 0.32 包里的源码实测：91 秒，大小与发布的 `dxgi.dll` 相同，hash 因 MSVC 时间戳不同）。上游 clone 放别处就设 `RE9_UPSTREAM=<目录>`——见 `Development/RE9/presr/README.md`；同一套源码打成 `sources/re9-presr-source.tar.gz` 随包（`bundle-source.py`） |
 | 独立的 `LmxxfNrRuntime.dll`（接口 `include/LmxxfNrApi.h`，TheAutomatic 贡献） | `src/LmxxfNrRuntime.cpp` | Linux/WSL：`bash scripts/build-runtime.sh`；Windows：`scripts\build-runtime.cmd`（要 MSYS2 UCRT64 的 g++：`pacman -S mingw-w64-ucrt-x86_64-gcc`；用别的 g++ 就设 `LMXXF_GXX`） |
 | `DLSS5-AMD\native-game-flags.txt`（包也认 `DLSS5_HIP_MODULES=<目录>`，从别处加载模块；`Development/HIP/validate-modules.ps1` 对一套模块跑逐位校验） | `scripts/hip-game-flags.txt` / `hip-magpie-flags.txt` / `hip-re9-flags.txt`（说明在 `scripts/CONFIGURATION.md`） | 直接拷 |
 | 权重（`*.f16` / `*.f32`）、`noise.f32` | 不在仓库里（见"权重"） | 随包；新包从上一个完整包接着做 |
 
-打包：`Development/tools/package-034.ps1`（Windows）把上一版完整包解开、逐文件对 `SHA256SUMS.txt` 校验，换上表里变过的文件（每个都核 hash，模块还要和测试机上装着的那份相同），编一遍 fit shader，写 `release.json`、`SHA256SUMS.txt`，压 zip 再读回核对。之前的版本：`package-033.ps1` … `package-026.ps1`、`package-0281-re9.ps1`。
+打包：`Development/tools/package-035.ps1`（Windows）把上一版完整包解开、逐文件对 `SHA256SUMS.txt` 校验，换上表里变过的文件（每个都核 hash，模块还要和测试机上装着的那份相同），编一遍 fit shader，写 `release.json`、`SHA256SUMS.txt`，压 zip 再读回核对。之前的版本：`package-034.ps1` … `package-026.ps1`、`package-0281-re9.ps1`。
 
 内核出包前的验证：`Development/HIP/validate-modules.ps1`（一套模块对 golden 的逐位校验）和每个生产候选都要过的整网回归（`Development/deployments/stellar-prod6-20260923/regression-prod6.ps1`：两段输入各 12 帧 RGB hash、1000 帧计时、额外控制组）。0.20 以来仓库里每一次内核改动都和上一版逐位相同，除非它的开关自己说明不是（目前唯一的非逐位开关 `HIP_FFN_WAVE_NORM`，默认关）。
 
@@ -162,6 +162,7 @@ powershell -ExecutionPolicy Bypass -File scripts\deploy_fast.ps1 -Source <lab> -
 | 0.32 · 三个包（Magpie · OptiScaler · OptiScaler-REFramework，HIP）[夸克](https://pan.quark.cn/s/b805e071405c) · [Gofile 镜像](https://gofile.io/d/CZ67LYIc) | 09-26 | 显存池：HIP 导入的 D3D12 共享缓冲区驱动不归还，改为按档位复用（切 40 次 +3GB → 平台；`results/vram-leak-20260926`）。C32 宽读（逐位，−0.8/−0.9%；`results/c32-wave-phase-20260926`）。RE9 runtime 读 flags（`DLSS5_HIP_*`/`SKIP_BLOCKS`/`FIT_LARGE`/`NETWORK_HEIGHT`），默认开 0.31 新核，兼容老宿主两参数 `EnqueueHip`（`results/re9-runtime-flags-20260926`）；合入 PR #9。RE9 中画质 2K 高质量 54、原生 AA 38。 |
 | 0.33 · 三个包（Magpie · OptiScaler · OptiScaler-REFramework，HIP）[夸克](https://pan.quark.cn/s/6bb64e46ab67) · [Gofile 镜像](https://gofile.io/d/8yAjJX1b) | 09-27 | FP8 打包（c32-wave1 的 `CW_PACK8`、c64-wave2 的 `W2_PACK8`）：一条 `cvt_pk` 转两个值写进片段字；逐位相同，网络 900 档 10.74→9.80ms、1080 档 15.01→13.64ms（`results/c64-block-fused-20260927`、`results/pack8-20260927`）。《剑星》1080P 原生 AA、EXACT：主菜单 49～50、常见场景 53～54。黄字显示 AE/EXACT；F7 开关屏幕文字。 |
 | 0.34 · 三个包（Magpie · OptiScaler · OptiScaler-REFramework，HIP）[夸克](https://pan.quark.cn/s/4b572b0a5b81) · [Gofile 镜像](https://gofile.io/d/cfHqVzD1) | 09-27 | fmed3 clamp（`HIP_FMED3_CLAMP`、C32 `HIP_FP8_SAT_MODE 3`）与 `W2_PACK8 6`（分段 FP16_OVFL + fma(x,y,+0) 打包），逐位相同（`results/fmed3-ovfl-20260927`、`results/ovfl-census-20260927`、`results/c64-hand-asm-20260927`）；整套模块由 `hip/build-modules.ps1` 编出。PDL 计数回绕保护（`results/pdl-audit-20260927`）。RE9：宿主换队列跟随 + 看门狗（`results/onimusha-presr-20260927`），runtime 切档泄漏 35MB→0 与几何日志（`results/re9-runtime-leak-20260927`）。《剑星》1080P AA EXACT 主菜单 50～51 / 场景 54；RE9 中画质 2K 高质量 58、原生 AA 41；鬼武者 2K 质量约 60。 |
+| 0.35 · 三个包（Magpie · OptiScaler · OptiScaler-REFramework，HIP）[夸克](https://pan.quark.cn/s/83e6172e6c79) · [Gofile 镜像](https://gofile.io/d/NnF4GitT) | 09-27 | 闇的 C32 三轮（`CW_DIRECT_OUT`、`CW_RTZ_PAIR`、`CW_PACK_MODE_MASK`、`CW_PREFIX_DIRECT_OUT`、`CW_PREFIX_FULL_TILE`、finish 完整窗口；`results/c32-aco-20260927`、`c32-round2-20260927`、`c32-round3-20260927`）与 ViT 字节流（`DLSS5_HIP_VIT_STREAM`，`results/vit-bytestream-20260927`）；每架构 30 模块。相对 0.34 全部逐位相同。《剑星》1080P AA EXACT 约 56.7；RE9 中画质 2K 高质量 58～59、原生 AA 42。 |
 
 ## 权重
 
