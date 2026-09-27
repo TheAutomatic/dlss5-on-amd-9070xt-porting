@@ -120,6 +120,12 @@ s=s.replace('        api->table.Retire(session, pendingJob);','        const aut
 # Invalid input is a non-mutating NR bypass, not a request to discard a live session.
 s=s.replace('const bool rebindish = frameRc == LMXXF_NR_UNAVAILABLE || (err[0] && (std::strstr(err, "rebind") || std::strstr(err, "geometry")));', 'const bool rebindish = frameRc != LMXXF_NR_INVALID_ARGUMENT && (frameRc == LMXXF_NR_UNAVAILABLE || (err[0] && (std::strstr(err, "rebind") || std::strstr(err, "geometry"))));')
 write(name,s)
+# Onimusha (results/onimusha-presr-20260927): after a swapchain rebuild the game can submit our split list on a queue
+# other than the bootstrap one; Submitted() then never retires the job and NR stops until restart. Follow the queue the
+# between-slot actually ran on (session rebuilt there), and give up a job that stays pending for 8 evaluations.
+import re as _re
+_d=open(here/'host-queue-follow.py',encoding='utf-8').read() if (here/'host-queue-follow.py').exists() else None
+if _d: exec(_d)
 name='dlssnr/amd/AmdBridge.cpp';s=original(name).replace('    return std::filesystem::exists(Directory() / L"dlssnr_amd_pass1.dll", ec);','    if(DlssNr::Backend::RequestedKind()==DlssNr::Backend::Kind::Lmxxf)\n        return std::filesystem::exists(Directory() / L"LmxxfNrRuntime.dll", ec);\n    return std::filesystem::exists(Directory() / L"dlssnr_amd_pass1.dll", ec);');write(name,s)
 # Aliasing barriers are forwarded verbatim into the current segment. A completed
 # barrier before the cut requires no replay; splitting must not overlap an open

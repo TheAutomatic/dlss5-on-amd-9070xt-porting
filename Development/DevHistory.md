@@ -718,3 +718,7 @@ c64-wave2 已用交换操作数让累加器直接当下一操作数（FFN 展开
 - 我们每个 FP8 字节约 4.5 条（cvt_f32_f16 → `max x,x,x` 规范化 → med3 → +0 → 半条 cvt_pk）。ACO 用 MODE.FP16_OVFL **分段开关**（fswin64 里 5 次 s_setreg：FP8 段置 1 无 clamp，f16 收窄段前置 0）；我们 fp8-sat-mode 否决的是入口一次性设置，分段版未测。
 - 其他：ACO 用 `v_cvt_pk_f32_fp8` 成对解包、`v_pk_*_f16`、`v_fma_mix_f32`；VOPD 占比 20% 对我们 15%。
 候选与估算见 `results/aco-isa-20260927/README.md`、WorkingPlan 7c。未测时（假设备不执行），未动 9070。
+
+## 2026-09-27 09:30～11:10：鬼武者 0.33 RE9 包"不生效"——换队列后任务永远不退役
+
+诊断（9070 上 ssh + 交互计划任务起 Xbox 版、SendInput 扫描码操作；`results/onimusha-presr-20260927`）：链路本身通（FFX 输入 → NGX → lmxxf 切分 + HIP，逐帧 betweenHits/enqueueCalls 递增），`DebugView=4` 紫色在**游戏内**可见、F6 可切；**标题/主菜单背景不经超分输入，看不出效果**。Zero 那局 09:24:01 游戏重建交换链（显示/帧生成设置）后状态卡死在 `prior job not yet submitted`：任务已入队 HIP，但游戏改在另一个队列执行我们的切分列表，`Submitted()` 只认构造时的队列，任务永不退役。修：切分槽记下实际执行队列、`Submitted` 在该队列退役并触发会话在新队列重建；另加 8 次评估看门狗。宿主 aa3761f2 装在鬼武者（0.33 dxgi 留存），8 次帧生成切换 + 窗口→无边框均正常；换队列没再出现，重建路径未实测。配方 `Development/RE9/presr/host-queue-follow.py`（prepare-host 调用，输出与实测源码逐字节同）。未发包。

@@ -1,0 +1,15 @@
+--- a/OptiScaler-DLSSNR-PreSR-Multipass-main/OptiScaler/dlssnr/backend/LmxxfEvaluateCut.h
++++ b/OptiScaler-DLSSNR-PreSR-Multipass-main/OptiScaler/dlssnr/backend/LmxxfEvaluateCut.h
+@@ -25,4 +25,6 @@
+     std::atomic<int> skippedHits { 0 };
+     std::atomic<int32_t> lastEnqueueRc { 0 };
++    // Queue that actually executed the split list (can differ from the bootstrap queue after a swapchain rebuild).
++    std::atomic<ID3D12CommandQueue *> lastQueue { nullptr };
+ };
+ 
+@@ -55,4 +57,5 @@
+     auto *const job = p.job;
+     const EnqueueHipFn fn = p.enqueueHip;
++    p.lastQueue.store(queue, std::memory_order_relaxed);
+     // Consume before call so a nested Submitted cannot double-fire the same job.
+     ClearPendingEnqueue();

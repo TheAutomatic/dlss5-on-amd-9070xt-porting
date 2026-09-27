@@ -19,6 +19,7 @@
 2. **RE9 runtime 只在首帧打几何行**：改设置后不再打印，补"尺寸/档位变化即打印"（含 net=、color_job=、四组开关状态）。
 3. **RE9 runtime 切档仍约 +35MB/次**（显存池后，旧版约 180MB/次），来源未查（候选：共享栅栏信号量导入、codec/曝光资源重建）。
 4. AE/EXACT 提示只附在 FPS 行、黄字行看不到，挪到黄字行（常规 add-on）。
+6. **RE9 宿主换队列修复待发**（`results/onimusha-presr-20260927`）：鬼武者重建交换链后游戏换队列提交，任务不退役、NR 停到重启；修复宿主 aa3761f2 已装鬼武者、未发包。下次 RE9 包带上，并告知 TheAutomatic。
 5. **3 个后备模块与源码不符**（09-26 按 README 在 9070 全新 clone 重编验证，`hip/compare-modules.py`）：58 个里 52 个代码段一致；`c32_fused_ffn_attention`、`deep_fast`、`multihead-fast-padded-wave`（非 packed，默认不加载）是历次包原样沿用的旧编译。下次发包从源码重编这 3 个（两架构 6 个），过一次 validate-modules，让包能从源码完整复现。
 
 **B. 逐位小刀（每刀预期 0.1～0.3%，攒着合包）**
