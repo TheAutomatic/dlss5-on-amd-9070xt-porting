@@ -211,7 +211,12 @@ inline bool Process(ID3D12CommandQueue*q,Job&j){
    if(Mode()==1&&Display().notice>=2){
    char text[96],fps[20]="";const double ms=neural_oneshot.AvgMs();if(Display().fps&&processed&&ms>0)snprintf(fps,sizeof fps," %.1f FPS",1000.0/ms);
    const unsigned phase=neural_oneshot.Phase();const char*status=processed?"ON":phase==1?"INIT":phase==5?"ERROR":!supported?"UNSUPPORTED":"OFF";
-   snprintf(text,sizeof text,"DLSS5 %s %ux%u -> FSR %ux%u%s",status,d.render[0],d.render[1],d.upscale[0]?d.upscale[0]:d.resources[6].width,d.upscale[1]?d.upscale[1]:d.resources[6].height,fps);
+   const char*reuse="";
+#ifdef DLSS5_USE_HIP
+   // F8 state of the adaptive ViT reuse; the FPS line that used to carry it is suppressed on this route.
+   if(const char*v=std::getenv("DLSS5_VIT_REUSE_HOTKEY");v&&!strcmp(v,"1"))reuse=hip_reference::AdaptivePreviewState.load()?" AE":" EXACT";
+#endif
+   snprintf(text,sizeof text,"DLSS5 %s %ux%u -> FSR %ux%u%s%s",status,d.render[0],d.render[1],d.upscale[0]?d.upscale[0]:d.resources[6].width,d.upscale[1]?d.upscale[1]:d.resources[6].height,fps,reuse);
    s->overlay.Draw(c,static_cast<ID3D12Resource*>(d.resources[6].resource),text,24,24,3,j.states[6]);
    }
   });
