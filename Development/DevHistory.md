@@ -764,3 +764,7 @@ RE9 残余显存：`NativeTrackedResources` 对大 RGB 输入缓冲 AddRef 后�
 ## 2026-09-27 16:25：RE9 装 0.34 候选（宿主 aa3761f2 + runtime ca6d6bdc + 剑星同款模块）
 
 备份 `D:\DLSSNR-Lab\build-0927\backup-re9-20260927-161816`。Zero（中画质）：2K 高质量 **58**、2K 原生 AA **41**（此前 0.31 模块 + 0.32 runtime 为 54 / 38）。日志：`net=1600x900 color_job=1712x960 modules_ok=58 wave_owned=1/1 c512_m32=1/1`。F8 无反应属预期（RE9 runtime 无自适应复用，模板 VIT_ADAPTIVE=0）。未在同一局内切档，几何日志随切档打印与切档 0 MiB 尚未游戏内验证。
+
+## 2026-09-27 16:34：0.34 打包
+
+`tools/package-034.ps1`（源码 9bd416fa），以 0.33 三包为底：add-on 86ef4182、58 模块（生产配方，取自剑星实装）、RE9 宿主 aa3761f2 + runtime ca6d6bdc + 重新生成的 re9-presr-source.tar.gz（含换队列修复 g_requeue）。三包逐文件校验、44 shader 变体通过；RE9 runtime-smoke 在打包时跑通，几何行 `net=1600x900 color_job=1506x848 … pdl=1/1 … applied=15`。结果 `tools/release-034-results.json`。
