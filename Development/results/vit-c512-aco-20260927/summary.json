@@ -1,0 +1,37 @@
+{
+  "timing": {
+    "runtime-regression-V-correct": {},
+    "runtime-regression-V-r1": {
+      "900": {
+        "baseline_ms": 9.341293125000005,
+        "candidate_ms": 9.298934375000009,
+        "delta_ms": -0.04235874999999645,
+        "percent": -0.4534570260581128
+      },
+      "1080": {
+        "baseline_ms": 12.954731875,
+        "candidate_ms": 12.900544375,
+        "delta_ms": -0.05418749999999939,
+        "percent": -0.4182834544385283
+      }
+    },
+    "runtime-regression-V-r2": {
+      "900": {
+        "baseline_ms": 9.44239,
+        "candidate_ms": 9.39660499999999,
+        "delta_ms": -0.04578500000000929,
+        "percent": -0.4848878303057691
+      },
+      "1080": {
+        "baseline_ms": 12.98565625,
+        "candidate_ms": 12.9413875,
+        "delta_ms": -0.04426875000000052,
+        "percent": -0.3409049889180671
+      }
+    },
+    "runtime-regression-V-adaptive": {}
+  },
+  "measurement_rows": 44,
+  "frame_hashes": 336,
+  "matched_candidate_frames": 168
+}

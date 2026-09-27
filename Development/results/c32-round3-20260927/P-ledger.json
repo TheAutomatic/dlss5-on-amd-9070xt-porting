@@ -1,0 +1,355 @@
+{
+  "isa_sha256": "aee333d731506ab7649694194b88e2ee81c6c607cf2ede58f3315108837dde2c",
+  "kernels": {
+    "c32_wave1_chain": {
+      "per_window": {
+        "SMEM": 4,
+        "WAIT": 1071,
+        "SALU": 417,
+        "VOPD": 1080,
+        "VALU": 2701,
+        "VMEM": 320,
+        "WMMA": 336,
+        "DS": 16
+      },
+      "tail": {
+        "WAIT": 1,
+        "SALU": 2
+      },
+      "reviewed_loops": [
+        [
+          123,
+          733,
+          4
+        ],
+        [
+          227,
+          331,
+          8
+        ],
+        [
+          761,
+          1536,
+          4
+        ]
+      ],
+      "omit": []
+    },
+    "c32_wave1_mapped": {
+      "per_window": {
+        "SMEM": 3,
+        "WAIT": 1084,
+        "SALU": 434,
+        "VOPD": 974,
+        "VALU": 3258,
+        "VMEM": 296,
+        "WMMA": 288,
+        "DS": 16
+      },
+      "tail": {
+        "WAIT": 1,
+        "SALU": 2
+      },
+      "reviewed_loops": [
+        [
+          116,
+          830,
+          4
+        ],
+        [
+          296,
+          421,
+          8
+        ],
+        [
+          857,
+          1652,
+          4
+        ]
+      ],
+      "omit": []
+    },
+    "c32_wave1_finish": {
+      "per_window": {
+        "SMEM": 5,
+        "WAIT": 2235,
+        "SALU": 1562,
+        "VOPD": 1059,
+        "VALU": 3560,
+        "VMEM": 368,
+        "WMMA": 336,
+        "DS": 88
+      },
+      "tail": {
+        "SALU": 1162,
+        "WAIT": 1187,
+        "VOPD": 33,
+        "VALU": 961,
+        "DS": 64,
+        "VMEM": 64
+      },
+      "loops": [
+        {
+          "start": 130,
+          "end": 740,
+          "label": ".LBB12_2",
+          "trips": 4
+        },
+        {
+          "start": 234,
+          "end": 338,
+          "label": ".LBB12_7",
+          "trips": 8
+        },
+        {
+          "start": 761,
+          "end": 1493,
+          "label": ".LBB12_10",
+          "trips": 4
+        },
+        {
+          "start": 1513,
+          "end": 1691,
+          "label": ".LBB12_13",
+          "trips": 32
+        }
+      ],
+      "omitted_null_down_lines": 1804,
+      "opcodes": {
+        "s_wait_alu": 959,
+        "s_delay_alu": 835,
+        "v_cvt_pk_fp8_f32": 416,
+        "v_med3_num_f32": 384,
+        "v_dual_mul_f32": 380,
+        "v_wmma_f32_16x16x16_fp8_fp8": 304,
+        "s_wait_loadcnt": 276,
+        "v_dual_add_f32": 276,
+        "v_mul_f32_e64": 256,
+        "v_mul_f32_e32": 256,
+        "global_load_b64": 248,
+        "s_add_co_i32": 216,
+        "s_and_b32": 204,
+        "v_lshrrev_b32_e32": 202,
+        "v_dual_max_num_f32": 192,
+        "v_cvt_f32_f16_e32": 192,
+        "s_setreg_imm32_b32": 176,
+        "s_cselect_b32": 163,
+        "v_lshlrev_b32_e32": 138,
+        "s_or_b32": 136,
+        "v_and_b32_e32": 129,
+        "v_dual_sub_f32": 128,
+        "v_cvt_f32_f16_e64": 128,
+        "v_add_co_u32": 111,
+        "v_add_co_ci_u32_e64": 111,
+        "v_and_or_b32": 100,
+        "s_cmp_lt_i32": 96,
+        "s_clause": 89,
+        "v_lshl_or_b32": 77,
+        "v_dual_mov_b32": 75,
+        "s_wait_dscnt": 73,
+        "s_sub_co_i32": 69,
+        "s_cmp_lg_u32": 64,
+        "v_cvt_pkrtz_f16_f32": 64,
+        "v_fma_mixlo_f16": 64,
+        "v_fma_mixhi_f16": 64,
+        "v_rsq_f32_e32": 64,
+        "v_perm_b32": 64,
+        "v_fma_f32": 64,
+        "s_cmp_gt_i32": 64,
+        "s_and_not1_b32": 64,
+        "s_cbranch_vccnz": 64,
+        "v_or3_b32": 64,
+        "ds_load_u16": 64,
+        "v_med3_num_f16": 64,
+        "v_cmp_neq_f16_e32": 64,
+        "v_cvt_f32_fp8_e32": 64,
+        "v_lshlrev_b64_e32": 64,
+        "v_cndmask_b32_e32": 64,
+        "global_store_b32": 64,
+        "v_movreld_b32_e32": 48,
+        "global_load_b128": 48,
+        "v_fmac_f32_e32": 48,
+        "v_mov_b32_e32": 47,
+        "v_add_nc_u32_e32": 46,
+        "s_cbranch_scc0": 40,
+        "s_cbranch_scc1": 35,
+        "s_mul_i32": 35,
+        "s_lshr_b32": 34,
+        "s_branch": 33,
+        "v_wmma_f32_16x16x16_f16": 32,
+        "v_add_f32_e32": 32,
+        "v_rcp_f32_e32": 32,
+        "s_mov_b32": 21,
+        "ds_store_b128": 16,
+        "v_movrels_b32_e32": 16,
+        "s_and_saveexec_b32": 8,
+        "s_cbranch_execz": 8,
+        "global_load_b32": 8,
+        "s_cmp_eq_u32": 8,
+        "v_dual_fmac_f32": 8,
+        "ds_load_b128": 8,
+        "s_lshl_b32": 7,
+        "v_subrev_nc_u32_e32": 5,
+        "v_cmp_gt_i32_e64": 5,
+        "v_mad_co_u64_u32": 4,
+        "v_cmp_lt_i32_e64": 4,
+        "s_add_nc_u64": 4,
+        "s_cmp_ge_u32": 3,
+        "s_wait_kmcnt": 2,
+        "s_mul_hi_u32": 2,
+        "s_cmp_eq_u64": 2,
+        "s_load_b32": 1,
+        "s_load_b128": 1,
+        "s_load_b64": 1,
+        "s_load_b256": 1,
+        "s_load_b96": 1,
+        "s_cvt_f32_u32": 1,
+        "v_rcp_iflag_f32_e32": 1,
+        "v_readfirstlane_b32": 1,
+        "v_or_b32_e32": 1,
+        "s_mul_f32": 1,
+        "v_mad_u32_u24": 1,
+        "s_cvt_u32_f32": 1,
+        "v_cmp_lt_i32_e32": 1,
+        "s_mov_b64": 1,
+        "s_nop": 1,
+        "s_sendmsg": 1,
+        "s_endpgm": 1
+      }
+    },
+    "c32_wave1_finish_dcrop": {
+      "per_window": {
+        "SMEM": 5,
+        "WAIT": 2618,
+        "SALU": 2002,
+        "VOPD": 1077,
+        "VALU": 4038,
+        "VMEM": 384,
+        "WMMA": 336,
+        "DS": 152
+      },
+      "tail": {
+        "VALU": 1443,
+        "SALU": 1602,
+        "WAIT": 1571,
+        "VOPD": 49,
+        "DS": 128,
+        "VMEM": 80
+      },
+      "reviewed_loops": [
+        [
+          127,
+          737,
+          4
+        ],
+        [
+          231,
+          335,
+          8
+        ],
+        [
+          758,
+          1490,
+          4
+        ],
+        [
+          1512,
+          1689,
+          32
+        ],
+        [
+          1706,
+          1904,
+          16
+        ]
+      ],
+      "omit": []
+    },
+    "c32_wave1_post": {
+      "per_window": {
+        "SMEM": 3,
+        "WAIT": 1254,
+        "SALU": 452,
+        "VALU": 3547,
+        "VOPD": 1331,
+        "VMEM": 388,
+        "WMMA": 288,
+        "DS": 32
+      },
+      "tail": {
+        "WAIT": 185,
+        "SALU": 34,
+        "VALU": 378,
+        "VOPD": 107,
+        "VMEM": 60,
+        "DS": 8
+      },
+      "reviewed_loops": [
+        [
+          121,
+          1163,
+          4
+        ],
+        [
+          653,
+          756,
+          8
+        ],
+        [
+          1187,
+          1894,
+          4
+        ],
+        [
+          1929,
+          2496,
+          2
+        ]
+      ],
+      "omit": []
+    },
+    "c32_wave1_prefix": {
+      "per_window": {
+        "SMEM": 5,
+        "WAIT": 1489,
+        "SALU": 787,
+        "VOPD": 1212,
+        "VALU": 4212,
+        "VMEM": 368,
+        "DS": 156,
+        "WMMA": 304
+      },
+      "tail": {
+        "SALU": 390,
+        "WAIT": 375,
+        "VALU": 938,
+        "VOPD": 79,
+        "DS": 128,
+        "VMEM": 80
+      },
+      "reviewed_loops": [
+        [
+          132,
+          1314,
+          4
+        ],
+        [
+          807,
+          910,
+          8
+        ],
+        [
+          1338,
+          2051,
+          4
+        ],
+        [
+          2098,
+          2245,
+          16
+        ]
+      ],
+      "omit": []
+    }
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "g_ffwd3": {
+    "trips": 4,
+    "classes": {
+      "VALU": 1118,
+      "SALU": 44,
+      "VOPD": 33,
+      "WAIT": 342,
+      "SMEM": 10,
+      "VMEM": 164,
+      "WMMA": 256
+    }
+  },
+  "g_ffwd3w": {
+    "trips": 4,
+    "classes": {
+      "VALU": 2184,
+      "SALU": 61,
+      "VOPD": 35,
+      "WAIT": 533,
+      "SMEM": 10,
+      "VMEM": 200,
+      "WMMA": 512
+    }
+  },
+  "g_gemmproj": {
+    "trips": 2,
+    "classes": {
+      "VALU": 329,
+      "SALU": 55,
+      "WAIT": 153,
+      "VOPD": 18,
+      "SMEM": 10,
+      "VMEM": 164,
+      "WMMA": 128
+    }
+  },
+  "g_gemmvact": {
+    "trips": 32,
+    "classes": {
+      "VALU": 1299,
+      "SALU": 399,
+      "WAIT": 561,
+      "VOPD": 190,
+      "SMEM": 70,
+      "VMEM": 512,
+      "WMMA": 1024
+    }
+  },
+  "g_gemmvproj": {
+    "trips": 32,
+    "classes": {
+      "VALU": 1861,
+      "SALU": 368,
+      "WAIT": 966,
+      "VOPD": 64,
+      "SMEM": 72,
+      "VMEM": 784,
+      "WMMA": 1024
+    }
+  },
+  "g_gemmvqkv": {
+    "trips": 32,
+    "classes": {
+      "VALU": 799,
+      "SALU": 373,
+      "WAIT": 482,
+      "VOPD": 64,
+      "SMEM": 70,
+      "VMEM": 512,
+      "WMMA": 1024
+    }
+  },
+  "g_gemmvqkvnorm": {
+    "trips": 32,
+    "classes": {
+      "VALU": 1919,
+      "SALU": 561,
+      "WAIT": 924,
+      "VOPD": 72,
+      "SMEM": 100,
+      "VMEM": 544,
+      "WMMA": 1024
+    }
+  },
+  "g_gemmvqkvs": {
+    "trips": 4,
+    "classes": {
+      "VALU": 191,
+      "SALU": 66,
+      "WAIT": 190,
+      "VOPD": 16,
+      "SMEM": 11,
+      "VMEM": 224,
+      "WMMA": 256
+    }
+  }
+}

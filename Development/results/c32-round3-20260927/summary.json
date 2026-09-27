@@ -1,0 +1,94 @@
+{
+  "timing": {
+    "runtime-regression-P-correct": {},
+    "runtime-regression-P-r1": {
+      "900": {
+        "baseline_ms": 9.308804375000001,
+        "candidate_ms": 9.314149375,
+        "delta_ms": 0.005344999999998379,
+        "percent": 0.05741875953857445
+      },
+      "1080": {
+        "baseline_ms": 12.91156625,
+        "candidate_ms": 12.945413125,
+        "delta_ms": 0.033846875000000054,
+        "percent": 0.2621438355706829
+      }
+    },
+    "runtime-regression-P-r2": {
+      "900": {
+        "baseline_ms": 9.450918125000001,
+        "candidate_ms": 9.437830000000005,
+        "delta_ms": -0.013088124999995898,
+        "percent": -0.1384852225666311
+      },
+      "1080": {
+        "baseline_ms": 12.98410125,
+        "candidate_ms": 13.006896875,
+        "delta_ms": 0.02279562500000054,
+        "percent": 0.17556567498271392
+      }
+    },
+    "runtime-regression-Q-correct": {},
+    "runtime-regression-Q-r1": {
+      "900": {
+        "baseline_ms": 9.317814375,
+        "candidate_ms": 9.313321874999996,
+        "delta_ms": -0.004492500000003119,
+        "percent": -0.04821409634492291
+      },
+      "1080": {
+        "baseline_ms": 12.9431925,
+        "candidate_ms": 12.938725,
+        "delta_ms": -0.004467500000000513,
+        "percent": -0.034516213832103126
+      }
+    },
+    "runtime-regression-Q-r2": {
+      "900": {
+        "baseline_ms": 9.420993125000006,
+        "candidate_ms": 9.413065,
+        "delta_ms": -0.007928125000006503,
+        "percent": -0.0841538136671427
+      },
+      "1080": {
+        "baseline_ms": 12.981770000000001,
+        "candidate_ms": 12.977010625,
+        "delta_ms": -0.004759375000000787,
+        "percent": -0.03666198831130396
+      }
+    },
+    "runtime-regression-F-correct": {},
+    "runtime-regression-F-r1": {
+      "900": {
+        "baseline_ms": 9.32517125,
+        "candidate_ms": 9.304281250000006,
+        "delta_ms": -0.020889999999994302,
+        "percent": -0.22401733372986454
+      },
+      "1080": {
+        "baseline_ms": 12.94708125,
+        "candidate_ms": 12.9131575,
+        "delta_ms": -0.033923749999999586,
+        "percent": -0.26201851479072946
+      }
+    },
+    "runtime-regression-F-r2": {
+      "900": {
+        "baseline_ms": 9.430484374999995,
+        "candidate_ms": 9.407363749999991,
+        "delta_ms": -0.023120625000004225,
+        "percent": -0.2451690080871871
+      },
+      "1080": {
+        "baseline_ms": 12.99174375,
+        "candidate_ms": 12.956535625,
+        "delta_ms": -0.0352081249999987,
+        "percent": -0.2710038442683915
+      }
+    }
+  },
+  "measurement_rows": 90,
+  "frame_hashes": 504,
+  "matched_candidate_frames": 252
+}
