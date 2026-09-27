@@ -1,174 +1,79 @@
-# 当前工作计划（覆盖式，不续写；最后更新 2026-09-26 22:00，朱雀）
+# 当前工作计划（覆盖式，不续写；最后更新 2026-09-27 14:40，朱雀）
 
 > 这里只记当前状态、下一步和等待事项；实验过程与完成记录进 DevHistory.md。开 session 先读这页。
 > 节奏：过日子式，没有 deadline。优先做有具体瓶颈证据、可逐位验证的小实验，够用就交。
 
-## 当前基线（09-26 晚）
+## 当前基线（09-27 午）
 
-- **0.32 已发布**（09-26 21:51，夸克 + **Gofile 镜像**，tag 0.32 = e1d9bd3）：常规 add-on 5950fe20（显存池 + PR #9 共享头），c32-wave1 宽读版，每架构 29 模块；RE9 runtime 2aedb521（读 flags、0.31 新核默认开、显存池、PR #9、兼容老宿主两参数 EnqueueHip）+ 新 hip-re9-flags 模板。清单 `tools/release-032-results.json`，脚本 `tools/package-032.ps1`（下次复制改版本/哈希）。
-- **剑星 = 0.32 常规包原样全新安装**（旧目录备份 `D:\DLSSNR-Lab\stellar-fresh-032\backup-20260926-213704`）。标准测试（1080P 窗口 + FSR 原生 AA + 主菜单，F8 切 EXACT）：简单场景晃动 49～50；2K 质量主菜单 57、2K AA 44/47。
-- **RE9 = 0.31 HIP + 0.32 runtime**（中画质：2K 高质量 54、2K 原生 AA 38；新核开/关 A/B 约 +5%）。旧 HIP 备份 `D:\DLSSNR-Lab\re9-runtime-flags-20260926\pre-031-hip-backup`。
-- **对照**：Daniel 0.4.0 同像素约快 6%（关时序历史、LocalTone=0）；3z AMDNR 0.3.3.2 同设置慢约 9%，其"Model interleave"（整网隔帧）默认关、不跟进。
-- **逐族账**（1080）：C32 34% / C512 14.5% / ViT 14.5% / C64·C128·C256 各约 12%；C32 单 wave 阶段账：FFN 38%、输入 25%。逐位路线进入收益递减：剩余大块卡在 exp 映射 + FP8 打包的 VALU 串行链。
-- 非逐位候选 6b 未装（约 −1.1%，PSNR 58dB，等 Zero 看画质）。
+- **0.33 已发布**（09-27 09:00，夸克 https://pan.quark.cn/s/6bb64e46ab67 + Gofile https://gofile.io/d/8yAjJX1b，tag 0.33 = 2cb0ab90）：add-on b08cd2e3（黄字 AE/EXACT、F7 开关屏幕文字、共用 env 解析），c32-wave1 `CW_PACK8` + c64-wave2 `W2_PACK8 1`；RE9 宿主/runtime 沿用 0.32。脚本 `tools/package-033.ps1`，清单 `tools/release-033-results.json`。
+- **生产配方（`hip/build-modules.ps1` 默认）= M + `W2_PACK8 6`**：CW_PACK8 + HIP_FP8_SAT_MODE 3（C32 med3）+ HIP_FMED3_CLAMP + 分段 FP16_OVFL + 乘积打包 fma(x,y,+0)；3 个后备模块已从源码重编，下个包可完全从源码复现。离线网络：900 ≈9.62、1080 ≈13.39 ms（0.32 为 10.74/15.01）。
+- **标准测试**：《剑星》1080P 窗口 + FSR 原生 AA，F8 切 EXACT（黄字末尾可见），看主菜单与简单场景。读数分辨率约 1 帧，0.5% 以下的改动只能看"无回退、无黑块"。
+- **各游戏现装**：
+  - 剑星：0.33 add-on + M 全套 + c64-wave2 = P（W2_PACK8 4）；EXACT 主菜单 **50～51**、简单场景 **54～55**（0.32 为 47～48 / 51～52）。
+  - 匹诺曹：0.32 全新 + 0.33 模块 + add-on b08c；1080P 最低画质也贴 58～59，不作对比。
+  - 鬼武者（Xbox）：0.33 RE9 包 + 换队列宿主 aa3761f2 + 剑星同款模块；中画质 2K 质量约 60 帧，可玩。
+  - RE9：0.31 HIP + 0.32 runtime（未随 0.33 更新）。
+- **对照**：mochizuki DLSSNR-AMD（Vulkan，Linux ACO 1080p 5.9ms / Windows LLPC 9.4ms）；折算我们 1080 约 12.6ms（1152→1080 行），与其 Windows 版差约 1.3 倍。C64 按循环加权 VALU 我们约 7490 vs ACO 2199（WMMA 相当）→ 差距在 FP8 转换/打包周边的普通算术。
 
-## 下一步候选（09-26 晚，按"收益 × 把握"排）
+## A. 下个包（0.34）必须做
 
-**A. 遗留尾巴（下次发包前必须处理）**
-1. **仓库 HEAD 的 add-on 未回归**：RE9 那次把 add-on 的 env 选项解析搬进 `src/native_hip_env_options.h`（行为应不变），并补了 PR #9 删掉的 `<cmath>`。0.32 发的是搬家前的 5950fe20。下次重编 add-on 前先跑 NativeGameFrame 回归 + 千帧长测，确认与 5950fe20 同输出同速度。
-2. **RE9 runtime 只在首帧打几何行**：改设置后不再打印，补"尺寸/档位变化即打印"（含 net=、color_job=、四组开关状态）。
-3. **RE9 runtime 切档仍约 +35MB/次**（显存池后，旧版约 180MB/次），来源未查（候选：共享栅栏信号量导入、codec/曝光资源重建）。
-4. AE/EXACT 提示只附在 FPS 行、黄字行看不到，挪到黄字行（常规 add-on）。
-5. ~~3 个后备模块与源码不符~~ 09-27 已随新配方从源码重编（`results/fmed3-ovfl-20260927`）。下次发包模块 = `hip/build-modules.ps1` 默认编译（set M：pack8 + SAT3 + FMED3），不再从上一包沿用。
-6. **RE9 宿主换队列修复待发**（`results/onimusha-presr-20260927`）：鬼武者重建交换链后游戏换队列提交，任务不退役、NR 停到重启；修复宿主 aa3761f2 已装鬼武者、未发包。下次 RE9 包带上，并告知 TheAutomatic。
+1. **按配方双架构重编全部模块**，7 用例逐位回归 + 900/1080 ABBA，装剑星确认（`W2_PACK8 6` 首次进游戏）。
+2. **RE9 包带换队列修复**（宿主 aa3761f2，`results/onimusha-presr-20260927`）：鬼武者重建交换链后换队列提交，旧宿主任务不退役、NR 停到重启；修复 = 跟随实际队列 + 8 次看门狗。"新队列重建会话"路径尚未实机触发。发包说明加"鬼武者（Xbox）实测可用"；告知 TheAutomatic。
+3. RE9 runtime：尺寸/档位变化即打印几何行（net=、color_job=、四组开关）；切档残余约 +35MB/次，来源未查。
+4. `Development/HIP/validate-modules.ps1` 默认资产目录已不存在，修路径后纳入发包前检查。
+5. 发包流程照旧：以上一包为底逐文件校验；**有游戏开着时 RE9 冒烟会被跳过，打完要补跑**（0.33 就是补跑的）。
 
-**B. 逐位小刀（每刀预期 0.1～0.3%，攒着合包）**
-3. **C512 FFN 链剩余两核**：`ffn_fused_t8`（900/1080 边际 0.23/0.29ms）、`projection_frag`（0.16/0.24；32 token 已 null，拆原因后换思路）。先读 ISA 定性再动（`results/c512-ffn-20260926`）。
-4. **C32 FFN 权重按 WMMA 片段预排**（下文"后续小刀"一节，计划仍有效）：c32-wave1 上 FFN 38%，其中权重读取部分；只改排列与寻址，不动算术。
-5. **decoder 投影**（0.34/0.46ms）：加宽 null 的原因是 2×2 上采样尾部串行化；试把上采样写出与矩阵段解耦（尾部独立展开），不改 WMMA 组织。
-6. **ViT QKV 归一化**（0.34/0.54ms）：FP16 WMMA 是原版 float 权重决定的（逐位约束），加宽 null 因 wave 不足；只查归一化段与 wave 数，别动乘法精度。
-7. host 侧 C256 宽权重片段约 −0.03ms（`mhfast-wide-frag-20260923`，见下文后备）。
-7a. **PACK8 进发包**（`results/pack8-20260927`，逐位，全开 ALL = `CW_PACK8`+`W2_PACK8` 整网 900 −8.7%、1080 −9.1%）：下次发包 c32-wave1 配方加 `CW_PACK8 1`、c64-wave2 加 `W2_PACK8 2`（2 = 1 再加 fma 合并，逐位再 −0.6%）；`DF_PACK8`（deep/ViT）逐位但不赚，不进。
-7c. **C64～C256 剩余 VALU**（`results/transpose-persist-20260927`）：转置布局已在用、持久化估 ≤0.1ms 均不做；c64_wave2 VALU 前几位 med3 336、`+0.f` add 336。`+0.f` 移到 clamp 前已做（`W2_PACK8 2`，逐位 −0.6%）；+0 初值累加器输出免 `+0.f` 需先探针穷举。
-7b. **c32-wave1 clamp 改 fmed3**（`HIP_FP8_SAT_MODE 3`，逐位，900/1080 约 −0.03/−0.04ms，`results/fp8-sat-mode-20260927`）：下次重编 c32-wave1 时并入配方；同法看 C64～C256/deep 未折叠 clamp 数。MODE.FP16_OVFL 路线因 f16 溢出语义不逐位，已否决。
-7c. **ACO 对照候选**（`results/aco-isa-20260927`，DGX Spark 上 Mesa drm-shim 假 gfx1201 拿到 ACO ISA）：C64 窗口动态 VALU 我们约 7490、ACO 约 2199（WMMA 相当）。按收益：① FP16_OVFL **分段**开关只包 FP8 转换段、段外关（RADV 原生做法；入口一次性那版因 f16 收窄出错，分段没测过），去 med3+规范化，估 C64 VALU −15～19%；② clamp 改 `__builtin_amdgcn_fmed3f` 去掉 `max x,x,x`（推到 wave_owned_mh.inc），约 −6%；③ `v_cvt_pk_f32_fp8` 成对解包 ~1%；④ 单次 f16 运算改 `v_pk_*_f16`；⑤ 链头暂存两值一条 cvt_pk。先 ② 再 ① 的 C64 原型。
-- **7d（09-27 下午，`results/ovfl-census-20260927`）**：分段 FP16_OVFL（W2_PACK8 4）census：7 用例 C64～C256 打包输入全部有限且 |x|≤448（探针 W2_PACK8 5，阳性对照 T=1 生效）；两批 ABBA 900 −0.05、1080 −0.09 ms。**候选，已装剑星（deployments/ovfl-20260927），Zero 实测无异常后进配方**。成对解包 `v_cvt_pk_f32_fp8` 在 gfx1201 实测返回同一字节两份（不可用）；v_pk_f16 需切 f16 舍入模式，不做。DF_PACK8 不赚是 f32 输入访存受限；下一刀候选 = ViT 生产者直接写 E4M3（`vit_byte_stream` 路线，需与自适应复用兼容）。
-- **7e（09-27，`results/c64-hand-asm-20260927`）**：手改汇编实验。工具 `asm_compile`（COMGR 汇编 .s → 模块，往返逐位）。手改本身噪声内；回推源码 `W2_PACK8 6`（乘积打包站点显式 fma(x,y,+0)，LLVM 不自行收缩）：wave2 12 变体各 −4% 指令、逐位、整网约 −0.2%。**P 实测通过后配方用 6 代替 4**。经验：手改当显微镜找病根，再回源码修；不常驻生产。
+## B. 优化候选（逐位；按"收益 × 把握"排）
 
-**C. 需要 Zero 拍板的**
-8. **有损**：6b（−1.1%）、ViT QKV 改 FP8（估整网 2～4%，Daniel 的做法）。按老规矩看 PSNR + Zero 游戏内看画质。
-9. **加档 1728×1024**：2K 质量档不再缩 6%，画质向，不提速；每加一档多一套特化核与黄金 hash。
-10. 不做：整网隔帧（3z 的 Model interleave，运动拖影）；RDNA3 后端（无卡可测）。
+1. **C32 融合核 ISA 审计**（c32-wave1，整网最大头 34%）：用 C64 那套方法——循环加权 VALU 统计 + ACO 对照 + 手改汇编当显微镜（`HIP/experiments/c64-hand-asm` 的 asm_compile 往返零成本），找出 LLVM 未收缩/多余的段，回源码修。
+2. **ViT 生产者直接写 E4M3**（`vit_byte_stream` 路线）：DF_PACK8 不赚是因为 ViT 真在跑的核读 f32 输入、访存受限（VMEM 164 vs WMMA 64）；ACO 的 gemm 读生产者写好的 E4M3 字节。难点：与自适应复用互斥，需兼容。
+3. **帧时间分布日志**（Zero 09-27：帧率不一定涨，但卡顿因素在减少）：add-on / runtime 记每帧耗时分布（1% low、最长帧、NR 实际调用率），让"卡不卡"可量化，也用来验证换队列/显存池这类稳定性修复。
+4. C512 FFN 链剩余两核（`ffn_fused_t8`、`projection_frag`，`results/c512-ffn-20260926`），先读 ISA 定性。
+5. decoder 投影（0.34/0.46ms，2×2 上采样尾部串行化）；ViT QKV 归一化段（0.34/0.54ms）；C32 FFN 权重按 WMMA 片段预排；host 侧 C256 宽权重片段（约 −0.03ms，`mhfast-wide-frag-20260923`）；C32 对角残差跳过全零 K16 半块（约 −0.1～0.2%，`results/c32-diag-zero-20260925`，攒着合包）。
+6. 已知外部信息：`v_cvt_pk_f32_fp8` 在 gfx1201 实测返回同一字节两份（`HIP/experiments/pair-unpack`），ACO 在 mochizuki 的 fswin64 里用了 64 次——可告知作者。
 
-## 研究判断（09-25 晚校准）
+## C. 需要 Zero 拍板
 
-主线继续追 **数据布局、请求组织与局部依赖**。矩阵峰值不能直接当整网提速空间；也不能把尚未解释的时间直接列为必要损失。
+- **有损**：6b（−1.1%，PSNR 58dB）、ViT QKV 改 FP8（估整网 2～4%，Daniel 的做法）。看 PSNR + Zero 游戏内看画质。
+- **加档 1728×1024**：2K 质量档不再缩 6%，画质向不提速；每加一档多一套特化核与黄金 hash。
+- 不做：整网隔帧（3z Model interleave，运动拖影）；RDNA3 后端（无卡可测）。
 
-318 的三张账本仍有用，但“必要损失七八成”“剩下只能有损拿 1%”不是已证明的下限。后续全行写逐位 −0.6～0.7%，PDL 900 约 −1.6% / 1080 约 −0.6%，说明供数和调度仍有可回收部分。这些百分比来自不同对照，不能直接相加。
+## 研究判断（09-27 校准）
 
-功耗账支持功耗约束影响时钟，但“删掉某类操作后时钟不动”不等于它不耗电。C512 PDL 与 C64–256 收益不相加已实测；功耗墙是解释候选，尚需排除请求竞争、驻留和协议开销。不因此把未测的 ViT/Down/Up 一并判死，也不急着扩展。
+- **RDNA4 上 FP8 WMMA 与 VALU 不重叠**（mochizuki 实测，我们 PACK8 −9% 印证）：删 VALU 就是直接省时间；我们的差距在 FP8 转换/打包周边，不在矩阵乘。
+- **LLVM 不是处处差**：VOPD 配对、`+0.f`（−0→+0，激活在 g=−4 恰为 +0，承重）、WMMA 前后等待本来就对；它真正做不到的是把 `mul` 与 `add 0` 收缩成 fma、自行去掉 NaN 规范化——这类要在源码里显式写（fmaf、fmed3）。
+- **手改汇编 = 显微镜，不进生产**：找到病根回源码修；手改稿是对某版 .s 的补丁，源码一改就作废。
+- **单核单段的小刀测不出来**：一个核一段循环省 3% VALU，整网不到 0.1%；要测得出，改动得覆盖多核或多族。
+- 矩阵峰值不能当提速空间；未解释时间也不能直接列为必要损失。不同对照的百分比不相加。
 
-## 已调查：mapped/post 输入布局
+## PDL（维持现状，不扩大）
 
-**目标：生产者直接按消费者的 tile 顺序写，让 C32 mapped/post 少做散读。** chain 已有 tile 顺序和宽读；mapped/post 的行主序 f32 输入是下一处候选。旧计划“读等待砍半、整网约 1%”仅作假设，不作收益承诺。
-
-1. 从现行 prod8 调用链追出这几个核的输入生产者、所有消费者、布局和存活期；确认编码/合并层中哪些写入能直接调整。
-2. 在当前版本重测目标核 staging 份额；旧版本阶段账只作线索。
-3. 做最小布局候选，优先融入已有生产者，保持数值转换和算术顺序。若需要独立重排核，把它的成本完整计入。
-4. 对照覆盖生产者→消费者整段及整网，检查其他消费者有无代价。900/1080 同批 ABBA + 逐位验证；局部快、整网不赚则归档，不硬推生产。
-
-**09-25 本轮代码审计**：数据流已列在 `HIP/experiments/c32-post-input/README.md`。实际生产者是 HIP block0 / decoder66 / block69，不是 HLSL 编码层；mapped/post 自 09-23 已使用每 lane 4 次 b128 读取，原计划的窄读前提过时。tile 重排是否减少请求要重新证明。
-
-**本轮结果（22:21 起已自行跑完）**：`results/c32-post-input-20260925`。通用纵向复用两档平均慢约 0.027ms；偶数几何特化与 block69→post70 FP16 连接均无稳定收益（约 ±0.02ms 噪声内）。各槽首尾 RGB 逐位同，原核机器码对 prod8 全同；特化实际少两条 b128，FP16 也实际缩小了读取宽度，仍未赚。不采用，不装机。这三个局部方向暂关；完整 tile 布局尚未否定，但需新证据才扩大改造。随后已完成 ViT 编号对照，见下节。
-
-## 已调查：ViT 权重地址布局与工作组顺序
-
-目标是找真实核可用的供数改法，暂不把“完整逆向 L0”当交付。
-
-- 已有线索：受控微基准 tile 间隔 +256B / 地址 bit10 敏感；真实 ViT 展开核曾量到 L2 命中约 99.95% 但 memory stalled 约 68%。缓存命中不等于送数及时。
-- 已补读 page/pitch/groups 三份旧实验：完整 4MiB 工作集上的 padding/xor 无大收益，特殊 span64 不再追。下一具体候选：真实 ViT 核保持一 wave 一组，在小范围二维 token tile / 输出列 tile 内重排 group 编号，对照 A/B 复用取舍；区别于旧的随机乘 stride 置换和多 wave 合组。先证明全网格无漏无重，再测逐位与整网 ABBA，不改累加顺序。
-- 先确认真实核收益，再量整网；计入打包、工作集膨胀和驻留代价。此前编号重排曾慢 45%，应先读原实验，解释新对照为何不同，不盲目重复。
-
-### 网友线索：FlashAttention PR #2217
-
-来源：https://github.com/Dao-AILab/flash-attention/pull/2217 （09-25 已读代码和讨论；所读 head `6cfbf7b9128a6e75300a4e1dd9e17bd59bc46cf7`）。
-
-核心是按头分组，让长序列反复读取的 K/V 工作集装进 Infinity Cache；实现包含 K/V 分组复制与多次 launch。示例 17,160 token × 40 头 × 128 维 FP16，K/V 合计约 335MiB，10 头一组约 84MiB，对应 96MiB 缓存。作者报告特定负载 2～4 倍，不是本项目预期。
-
-本项目窗口只有 64 token、每头 32 维，按 FP16 算每窗口每头 K/V 8KiB；ViT 640 token × 总通道 1024，全部 K/V 按 FP16 算 2.5MiB（以上是容量估算，不是运行时完整工作集）。与其长序列溢出末级缓存的场景不同，不直接照搬按头拆 launch，也不替换原版特殊 softmax 算术。
-
-**借用点：让复用同一份数据的工作挨着执行。** 并入本节权重布局/工作组顺序对照，是否获益由实验决定。
-
-**22:33 起实测完成**：展开/收缩分别 GM2/4/8，共六候选，两档各三组 ABBA。槽首尾 RGB 逐位同、原核与 prod8 机器码全同；均无稳定提速，不采用。结果 `results/vit-group-order-20260925`。完整权重的这组局部编号策略暂关，不扩大参数搜索，也不将结论外推到所有缓存优化。
-
-## 已完成：prod8 C32 新阶段账与删零候选
-
-- `results/c32-phase-current-20260925`：去逐核同步，预分配trace、参数传指针、本地20位SHADER_CYCLES，每次一阶段+整段，稀疏窗口与两种采样余数。两档RGB逐位同，插桩整帧增加约0.05～0.14ms（不到1%），无spill，但部分核寄存器/调度仍变化；比例只用于选热点。
-- C32内部观测：输入准备约24%，FFN整体约38%；细分为入口同步约2.6%、残差初始化约4%、FFN展开/激活/收缩主体约25%、FFN发布约6.8%。主体包含权重读取与FP8转换，不是纯矩阵算术时间。新旧分段边界不同，不直接相减。
-- **可保留候选：C32 对角残差跳过全零K16半块**。每个目标wave省6条WMMA；全部有限FP8编码×六组真实权重位模式检查通过。短槽3轮、800帧长槽2轮两档均快：长槽900约−0.026ms（0.2%）、1080约−0.015ms（0.09%）。收益小，不单独装游戏，留下一次合包。
-- 候选已双架构编译；gfx1201正式回放8条件×12帧，96个候选RGB帧全部与prod8同哈希。标准模块仅三核变化，目标代码与计时候选相同，其余七核字节不变。gfx1200仅编译验证。
-- 构建/复现：`HIP/experiments/c32-diag-zero`；结果与模块SHA `results/c32-diag-zero-20260925`。靶机 `c32-diag-zero/candidate-modules`、`candidate-gfx1200`，生产配方/游戏/发布包尚未替换，源码由prepare.py生成。后续源变要重建重核，不能直接沿用旧hash。
-
-## 当前主线：一头一 wave，C64/C128已有收益，拆解C256回退
-
-`results/closed-v040-20260926` 已完成0.3.3/0.4.0的gfx1201静态对照，样本均匹配官方资产hash，44→86个导出（新增42，其中24个MH专用核），无未知指令。C32单wave在0.3.3已存在，0.4.0主要把寄存器路线扩到MH/ViT/C512；未做运行时同条件跑分，不将42%或60fps当实测。
-
-- 关键差别：他的C32是32线程/2KB LDS/零barrier，当前我们是128线程/约15KB LDS。输入/输出按四个4×4片段宽读写；新MH按头数使用2/4/8wave。借的是数据归属与协作方式，不是仅改编号。
-- **02:21 派发追踪**：旧版Swin快分支只接受C32，新版跳转表扩为C32/64/128/256；通用路径的每窗口8/16/32KiB显式global workspace被快分支绕过。旧C64入口可追到先把准备后的输入写进workspace，不能仅称为“概率表”。详见闭源报告新增小节与dispatch-delta文件。
-- **先做C64受控原型**：一头一wave，完整窗口状态尽量在寄存器/片上，验证中间global存取与跨wave协作成本。保持当前FP8/FP16舍入、求和顺序和视觉控制值；闭源packed-half归约不自动逐位等价，不顺带改变。C32可作实现热身，但不用于解释作者本次版本增幅。
-- 对照不仅看kernel时间，还看完整C32链的布局转换代价、VGPR/溢出、数值和整网收益。闭源寄存器核也有spill，不盲抄168个寄存器预算。
-- **旧null已核查**：`Development/HIP/c64_window_fused.hip` 是256线程、`head=alltid/128`、每wave16token，nrm/feat放LDS；仍然一头四wave，未测试本次一头一wave。因此可开新对照。对方旧swin_var也已融合，不能把新版本简单解释成“首次融合”。C256跨层chain仍不作为默认提速证据。
-- **视觉校准**：网友说偏淡，安装模板确有LocalTone=0、LocalStructure=1、ToneChannels=0、ToneLift=0；UI把LocalTone定义为大范围光色响应。默认调法是解释候选，未经网友同帧A/B，不据此断言省计算换画质；我们的视觉强度不照搬。
-- 对方默认PreUpscale=1，所以1080输出未必1080网络计算。以后实机比必须记录输入/处理尺寸、FG、网络实际调用率。
-
-**首个实测节点**：`c64-wave2` 独立64线程原型已完成，保留32项f32归一化与旧softmax顺序；两档三组ABBA逐位同，900 −0.149ms、1080 −0.257ms（约1.3～1.5%）。LDS8KiB、4barrier、VGPR190/191、无spill。还没有达到质变目标，也未做完整历史回归/装机。结果 `results/c64-wave2-20260926`。
-
-**扩展结果**：C128/C256已逐位跑通。片段权重、QKV地址生命周期隔离、编译调度栅栏、滚动query循环、两路FFN展开组合后，仅替换C64+C128的20块，900/1080各三组200帧ABBA，整网平均−0.29591/−0.50451ms（约2.5%/3.0%耗时下降），所有槽首尾RGB逐位同。C256单独仍+0.21068ms（短筛），暂保留生产路径。全部通道强行替换收益更少。
-
-**C256拆分已实测**：mode 6保留生产FFN/QKV，仅替换attention/projection；PDL输出目标16→8wave，前段不变。两档各三组200帧ABBA全部逐位，900 −0.09923ms、1080 −0.12809ms。新核float/byte输出151/142VGPR、零spill、LDS32KiB。mode 7组合也完成两档各三组200帧ABBA：900 −0.39283ms、1080 −0.67259ms（约3.3%/4.0%耗时下降），所有槽首尾逐位同。
-
-**直接读取残差候选已测**：`-DirectFeature`将C256 attention-only LDS从32降为16KiB，VGPR由151/142变152/144、仍无spill。1080三组200帧ABBA逐位同，相对prod8 −0.15698ms；上一版−0.12809ms来自不同批次，不足以证明这0.029ms差别真实。保留开关，暂不替换已测mode 7组合。
-
-**C32单wave八块已完成**：`HIP/experiments/c32-wave1`覆盖block1–4/66–69（mapped首块、chain、finish），保持半精度残差、裁切和下采样顺序。展开窗口首版两档三组200帧ABBA逐位，900 −0.09231ms、1080 −0.13849ms；mapped达到256VGPR并有14个VGPR溢出。QKV子段隔离与WGP短筛均未胜出，不采用。
-
-**关键排程改进**：`-RollHidden -RollWindow`，将Q/K/V存为可统一索引的向量，保留四个query tile的外层循环，避免全展开。chain/mapped降为165VGPR，finish174，全部零spill、4KiB LDS。两档三组200帧ABBA全部首尾RGB逐位、每帧8块替换计数正确：900 **−0.17215ms**，1080 **−0.25694ms**（各约1.5%耗时下降）。与MH约4%尚未组合测量，不能相加。
-
-**全C32与组合已验证**：prefix/post也已逐位跑通，C32共10块，两档三组200帧ABBA：900 −0.29543ms、1080 −0.45633ms。每档额外16帧位移/增益/黑白/非零种子/历史输入，与当场baseline逐帧RGB全同。
-
-`HIP/experiments/wave-owned-combined`将完整C32与MH最佳候选合用（共46块），同一整网直接ABBA：900 **11.661→10.959ms（−0.70240ms，−6.02%）**；1080 **16.694→15.592ms（−1.10176ms，−6.60%）**。三组差值稳定，槽首尾逐位；两档各16帧动态历史对照也全同。结果`results/wave-owned-combined-20260926`，module hash清单已归档。未采用C256直接feature读取候选、未用WGP/QKV隔离。不是简单相加两次实验百分比。
-
-**完整runtime已过**：`prepare-runtime.py`生成独立NativeGameFrame实验host，DLSS5_HIP_WAVE_OWNED=0/1切基线/候选。900/1080固定与移动、720移动、900连续历史共72个候选RGBA16F输出帧与基线逐位相同，46块/帧替换计数正确。每槽1000帧、去前200帧的完整处理ABBA：900 **11.97599→11.26015ms（−5.98%）**，1080 **16.99748→15.86386ms（−6.67%）**；包含D3D12前后处理与提交完成，不是游戏FPS。gfx1200两个额外模块编译通过，只有gfx1201有实机运行验证。日志、所有逐帧hash、CSV、编译清单归档`results/wave-owned-combined-20260926/runtime-evidence`。
-
-**生产源已接入（默认关）**：`Options.wave_owned` / `DLSS5_HIP_WAVE_OWNED=1`，匹配已验证配置才激活；不同布局/graph/相关跳层保留原路，既有ViT skip42/43/46允许。规范实现移到`hip/wave_owned_*.inc`，实验共用；通用构建脚本输出26模块。两架构编译、标准/增量配方指令及metadata一致（仅编译单元标识符不同）；新add-on已构建，hash见production结果。
-
-实际生产host回归：72个启用候选帧逐位同；两种浮点布局回落额外24帧逐位同，回落测试使用没有新模块的旧目录。1000帧/槽、丢前200帧ABBA：900 **11.98305→11.26020ms（−6.03%）**；1080 **16.99276→15.87261ms（−6.59%）**。结果`results/wave-owned-production-20260926`。新plugin与四个模块payload、已知prod8预检/备份/回滚安装脚本就绪，**未执行安装**。
-
-**下一步**：先取同场景游戏baseline，再以可回滚payload测试剑星/2077实际FPS，确认激活日志；之后单独处理RE9/C API per-instance配置（当前环境开关仅接NativeGameFrame add-on，不自动启用RE9）。游戏与已发布包未改。随后继续追ViT/C512新版寄存器路径与外部激活布局；Daniel 0.3→0.4的42%因果份额仍未运行时分解，不能以本轮6.6%宣告目标完成。C32在Daniel旧版已存在，只作为缩小实现差距的独立路线。
-
-## 后续小刀：C32 FFN 权重按 WMMA 片段预排
-
-新账里FFN主体仍贵。当前 `PackedC32Weight` 对两个矩阵做FP8压缩，主体仍按行排列，消费者每lane取8B片段。先做纯权重排列，不改算术或激活布局：
-
-1. 先核查旧实验有无同一改法，区分C64/C128 tiled/frag失败与本次C32的不同目标。
-2. 重点看收缩矩阵32×128：按现有128B请求覆盖口径，32lane读取16行各16B时会触及16行缓存；按片段排成连续256B可降为2行。展开128×32同样检查。只是静态覆盖预测，不许直接兑换提速。
-3. 复用已有 `FragmentPackedMatrix` 打包机制或等价排列，保留原float区域偏移、残差缩放、block0 prefix权重及对角片段。打包与消费者寻址必须成对切换；原布局/同体对照/只收缩/只展开分开测。
-4. 先检查取出的8B片段逐字节一致，再做整网逐位与ABBA；若有收益再做多帧回归。不要同时动输出转置、同步或累加顺序。
-
-## PDL：先补正确性依据，暂缓扩大
-
-- prod8 的 C64/C128/C256 tile 旗子已过 18 槽 2880 帧逐位与生产回归，实验入口 `results/pdl-chain-20260925`。
-- 待审：累计计数器的相邻复用、输入张量覆盖与 pool 存活期、生产者发布和消费者可见性。尤其原记录依赖“至少隔 4 个 launch + CP 按包序派发组”的经验判断：明确下一轮生产者为何不能覆盖仍被上一轮消费者读取的数据。不能只用更多通过帧数代替依赖论证。
-- C512 单独约 −0.16ms，但叠加现有 PDL 不赚，暂不采用（`results/pdl-c512-20260925`）。只有新的测量能区分原因时再复测；功耗上限改变后的对照是候选，尚未执行，也不自动修改用户调校。
-- 不铺开 ViT/Down/Up 旗子，先解决现有协议依据和收益不相加的问题。
+prod8 的 C64/C128/C256 tile 旗子已过 18 槽 2880 帧逐位与生产回归（`results/pdl-chain-20260925`）。待补正确性论证：累计计数器相邻复用、输入覆盖与 pool 存活期、生产者发布与消费者可见性（原记录依赖"至少隔 4 个 launch + CP 按包序派发"经验判断）。C512 PDL 与现有 PDL 收益不相加，暂不采用；不铺开 ViT/Down/Up。
 
 ## 产品适配与等待事项
 
-- **下一版 PRE_UPSCALE=auto**：探测同列表超分后是否还有 draw/dispatch，不适合前置则回落后置（地平线 6、卧龙 2）。实现时处理好探测帧的原超分执行与回滚，避免重复执行或漏执行；切上下文后重新判定。当前 0.30 包不改，README 已记地平线手动配置。
-- **卧龙 2**：Alpha Demo 已卸载、残留已清。装回来后用常规包 + EnableFfxInputs=false + ASYNC=0 重试；同列表后续 draw 是已确认障碍。RE9 定制宿主还涉及曝光发现与提交观察差异。
-- **网友统一宿主补丁**：审单 `RE9/presr/contrib/generic-host-20260924/REVIEW.md`。查询记账与提前包裹可借，backend/runtime 构建存在旧快照/漏补丁问题；等 Zero 获得对方实测游戏与帧率，再决定合入实测。
-- **2077**：STRENGTH=auto 默认 1,0（只转亮度），避免前置线性域神经色相再过游戏 LUT 后红偏；ASYNC=auto 默认关，避免延后提交读到瞬态别名资源。持续关注动态场景反馈。
-- 网友反馈：超宽屏 FIT_LARGE、9060 系列实机、RE9 帧生成/HDR；issue 来了照旧处理。
+- **PRE_UPSCALE=auto**：探测同列表超分后是否还有 draw/dispatch，不适合前置则回落后置（地平线 6、卧龙 2）；探测帧的原超分执行与回滚要处理好。
+- **卧龙 2**：装回后试常规包 + EnableFfxInputs=false + ASYNC=0；同列表后续 draw 是已确认障碍。RE9 前置宿主既然在鬼武者跑通，可作为 RE 引擎以外同类游戏的候选路线。
+- **网友统一宿主补丁**：审单 `RE9/presr/contrib/generic-host-20260924/REVIEW.md`，等对方实测游戏与帧率再定。
+- **2077**：STRENGTH=auto 默认 1,0（只转亮度），ASYNC=auto 默认关；持续看动态场景反馈。
+- 网友反馈：超宽屏 FIT_LARGE、9060 实机、RE9 帧生成/HDR；issue 来了照旧处理。
+- 新权重（传闻 380.8.3，未证实）：等下一个原生 DLSS 5 游戏出来比 DLL（SHA / WEIGHTS_HT 153 条 / 15 个 CUBIN / 层尺寸）；Zero 09-27：先不管。
 
-## 后备小实验与文档
+## 已关路线（有新证据才重开）
 
-- host 侧 C256 宽权重片段约 −0.03ms仍待顺带：`mhfast-wide-frag-20260923` 指的是 `@ffn-frag-wide` / `@qkv-frag-only-wide` 两个新打包键；模板已有 `MH_FFN_FRAG256=1` 只是原片段路径，不能据此误判宽片段已合入。
-- wave 局部栅栏旧 null：先查清 LOCAL_FFN/ATTN_SYNC 与 lane staging 组合后哈希变化的原因，不能因旧账里 barrier 占比高就直接启用。
-- 6b 若 Zero 要看：补 gfx1200 构建，准备只换 mh_fast 两架构的 payload，再做动态画质验收。认可后才考虑 C32 同型归一化；ViT/C512 改累加顺序仍属后备有损研究，收益未定。
-- 318 待校准：ViT 单测 2.5GHz 不能代表整网状态；“必要损失/只剩 1%”改为当时已解释部分与未回收部分，补全行写和 PDL 后续。此轮只更新计划，正文未改。
-
-## 已关路线
-- C32 finish/prefix 尾部合并遍历（CW_TAIL_QUAD，09-26）：−0.01ms 在噪声内；尾部是写出量形状，lane=通道连续写已最优（`results/c32-tail-20260926`）。
-
-- **C512 一头一 wave（attention/projection-only，09-26）**：逐位但 null（900 −0.017、1080 −0.019 ms）；C512 窗口少（104/135），融合丢并行度，两 wave 一头撞 VGPR 上限。C512 若再动，看 FFN 链而非注意力。`results/c512-wave-20260926`。
-
-- 直达 LDS 读取：现有 gfx1201/comgr 的 builtin 与汇编试验不支持目标指令，当前工具链路线已关；不重复盲试。
-- 双 stream 重叠：当前 Windows HIP 实测不并发，事件对成本高；已改用同流任意序。
-- C32 转置尾部并宽逐位但慢；其余旧 null 见 DevHistory §7。只有明确瓶颈/条件变化才重测。
+- MODE.FP16_OVFL **核入口一次性**设置（f16 收窄溢出语义变，720 不逐位）；分段开关版已采用。
+- `v_cvt_pk_f32_fp8` 成对解包（gfx1201 返回同字节两份）；`v_pk_*_f16`（我们的 f16 是 Hrtz 往返，需切舍入模式，每值省不到 1 条）。
+- 转置布局（C64～C256 已在用）；C256 持久化（估 ≤0.1ms，PDL 已拿走大部分）。
+- DF_PACK8（deep/ViT 逐位但不赚，访存受限）。
+- C512 一头一 wave、C32 尾部合并遍历、C32 转置尾部并宽、mapped/post 输入布局三方向、ViT group 编号重排、直达 LDS 读取（工具链不支持）、双 stream 重叠（Windows HIP 不并发）。详见 DevHistory §7 与各 results。
 
 ## 机器与流程
 
-**09-25 22:21 Zero 明确授权：本 DLSS5 优化项目的耗时编译、远程实验、回归和分析由 agent 自主执行，不再把命令交给 Zero。** 仍先检查机器空闲，游戏运行时不换文件、不跑测试台；需要人眼的画质判断再请 Zero 看。
-
-**git（09-24 用户定）：只 commit/push 本仓（297），不再往外层 ai-theorys-study 提指针提交。**
-
-9070 机器 `amd9070`，工作根 `D:\DLSSNR-Lab\hip-backend\`；编译 `dual-arch-src\rtc_compile.exe <out> <src> comgr gfx1201`（输出旁自带 .hsaco.s）；跑前 `check-idle.ps1`；长 ssh 用后台任务。实验模板：kernel 后缀 ABBA（c32-lds-alias）、模块集 ABBA（mhfast-vgpr-cap；容忍 bitdiff 的 host 在 mhfast-tail-ablate）、核内打点（launch-occupancy）。候选流程 deployments/stellar-prod6-20260923（build → regression → payload → install）；发包 Development/tools/package-030.ps1（下次以此复制改版本号和 hash）；**发布 = 夸克 + 一个海外镜像**（09-24 起给没有中国手机号的用户；0.29～0.31 用 Google Drive，0.32 用 Gofile，以 Zero 给的为准），README 中英两处链接都要写，发布后按打包源码提交补 tag。**新功能/新开关必须同时在 RE9 runtime 开口**（TheAutomatic 09-26 提；0.31 新核只接了 add-on，RE9 包没法配置就是这么来的）：`DLSS5_*` 键统一走 `src/native_hip_env_options.h`，add-on 和 `LmxxfNrRuntime` 都经它读 flags，`scripts/hip-re9-flags.txt` 同步加键；发包前在 RE9 日志核对新开关 requested/active。生产配方：c32 = ISA_HALF+PREPACKED+C32_DIAG，mh_fused = ISA_HALF+MH_RTZ_ISA，mh_fast = ISA_HALF+PREPACKED+FFN_HOIST_RES 2，deep_fast = ISA_HALF+PREPACKED+BRANCHLESS_F。
+- **授权（09-25）**：DLSS5 优化的编译、远程实验、回归、分析由 agent 自主执行；动 GPU 前查空闲，游戏运行时不换文件、不跑测试台；画质判断请 Zero。**09-27 起 9070 整机交给 agent**（Zero 改在 3080 游戏本上对话/玩游戏），剑星等游戏的实测仍由 Zero 回 9070 时做。
+- **游戏进程名**：剑星 `SB-Win64-Shipping`、匹诺曹 `LOP-Win64-Shipping`（不是 LiesofP）、鬼武者 `OnimushaWotS`、RE9 `re9`；Magpie 空闲可忽略。
+- **git**：只 commit/push 本仓（297），commit 不加 Co-Authored-By；多个分身并行时 push 前 `git pull --rebase`。
+- **9070**（`amd9070`）：工作根 `D:\DLSSNR-Lab\`；模块编译 `hip/rtc_compile.cpp` → `hip/build-modules.ps1`（`-ExtraDefines` 同名宏覆盖配方）；模块比对用 `hip/compare-modules.py`（比代码段，不比文件 hash）；汇编往返 `HIP/experiments/c64-hand-asm/asm_compile.cpp`；候选部署照 `deployments/<名>/`（payload + install.ps1 + 备份/还原）。PowerShell：含中文路径的 .ps1 要 UTF-8 BOM，含 `(x86)` 的命令写进脚本文件再跑。
+- **DGX Spark**：`~/work/aco-isa/` 有 Mesa 26.2.3 RADV + drm-shim 假 gfx1201（`LD_PRELOAD=libamdgpu_noop_drm_shim.so AMDGPU_GPU_ID=gfx1201`），可离线拿 ACO ISA 作参照（`results/aco-isa-20260927/tools`）。
+- **发布**：以上一包为底，`tools/package-0xx.ps1` 逐文件校验、换文件、编 44 shader 变体、压包读回；= 夸克 + 一个海外镜像（0.32/0.33 用 Gofile，以 Zero 给的为准）；README 中英"当前版本"段 + 更新记录表（**按版本从旧到新，新行加在最后**）；按打包源码提交补 tag。
+- **新功能/新开关必须同时在 RE9 runtime 开口**（TheAutomatic 09-26）：`DLSS5_*` 键统一走 `src/native_hip_env_options.h`，`scripts/hip-re9-flags.txt` 同步加键；发包前在 RE9 日志核对 requested/active。
+- **后台等待**：等后台任务用完成通知，不自己写 `until` 轮询（09-26/27 两次轮询条件自匹配、挂着不退）。
