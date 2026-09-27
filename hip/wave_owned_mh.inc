@@ -48,15 +48,29 @@ DEV void w2_bits(i2&a,uint e,uint v){a[e/4]=int(uint(a[e/4])|((v&255u)<<(8*(e%4)
 #define W2_PACK8 0
 #endif
 #if W2_PACK8
-#if W2_PACK8==2
+#if W2_PACK8==4
+// 4 = segmented MODE.FP16_OVFL (as ACO does in mochizuki's fswin): saturation on only for the four conversions of one
+// fragment, so v_cvt_pk_fp8_f32 clamps finite overflow to +-448 itself and the med3 goes. No f16 narrowing runs inside the
+// segment (FP instructions read MODE, the compiler does not move them across s_setreg). Differs from the clamp only for
+// +-Inf/NaN inputs (E4M3 NaN byte instead of +-448/-448).
+DEV float w2_z(float x){return x+0.f;}
+#define W2_OVFL(v) __builtin_amdgcn_s_setreg(1|(23<<6),(v))
+#elif W2_PACK8==3
+// 3 = 2 with the clamp as one v_med3_f32 (__builtin_amdgcn_fmed3f) instead of fminf/fmaxf, which the compiler lowers with an
+// extra v_max_num(x,x) canonicalisation; same byte for every input, NaN -> -448 (probe in experiments/fp8-sat-mode).
+DEV float w2_z(float x){return __builtin_amdgcn_fmed3f(x+0.f,-448.f,448.f);}
+#elif W2_PACK8==2
 // +0.f before the clamp: clamp(x+0) == clamp(x)+0 for every x (only -0 changes, to +0; x+0 is never -0 under RNE) and lets
 // a preceding multiply contract into fma(a,b,+0), which rounds exactly like the multiply (results/transpose-persist-20260927).
 DEV float w2_z(float x){return __builtin_fminf(__builtin_fmaxf(x+0.f,-448.f),448.f);}
 #else
 DEV float w2_z(float x){return __builtin_fminf(__builtin_fmaxf(x,-448.f),448.f)+0.f;}
 #endif
-DEV i2 w2_pack8(const float*t){int lo=__builtin_amdgcn_cvt_pk_fp8_f32(w2_z(t[0]),w2_z(t[1]),0,false);lo=__builtin_amdgcn_cvt_pk_fp8_f32(w2_z(t[2]),w2_z(t[3]),lo,true);
- int hi=__builtin_amdgcn_cvt_pk_fp8_f32(w2_z(t[4]),w2_z(t[5]),0,false);hi=__builtin_amdgcn_cvt_pk_fp8_f32(w2_z(t[6]),w2_z(t[7]),hi,true);i2 a;a[0]=lo;a[1]=hi;return a;}
+#ifndef W2_OVFL
+#define W2_OVFL(v) (void)0
+#endif
+DEV i2 w2_pack8(const float*t){W2_OVFL(1);int lo=__builtin_amdgcn_cvt_pk_fp8_f32(w2_z(t[0]),w2_z(t[1]),0,false);lo=__builtin_amdgcn_cvt_pk_fp8_f32(w2_z(t[2]),w2_z(t[3]),lo,true);
+ int hi=__builtin_amdgcn_cvt_pk_fp8_f32(w2_z(t[4]),w2_z(t[5]),0,false);hi=__builtin_amdgcn_cvt_pk_fp8_f32(w2_z(t[6]),w2_z(t[7]),hi,true);W2_OVFL(0);i2 a;a[0]=lo;a[1]=hi;return a;}
 #define W2_Q8_DECL(A) i2 A;float A##_t[8]
 #define W2_Q8_SET(A,E,X) A##_t[E]=(X)
 #define W2_Q8_END(A) A=w2_pack8(A##_t)

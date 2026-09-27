@@ -722,3 +722,7 @@ c64-wave2 已用交换操作数让累加器直接当下一操作数（FFN 展开
 ## 2026-09-27 09:30～11:10：鬼武者 0.33 RE9 包"不生效"——换队列后任务永远不退役
 
 诊断（9070 上 ssh + 交互计划任务起 Xbox 版、SendInput 扫描码操作；`results/onimusha-presr-20260927`）：链路本身通（FFX 输入 → NGX → lmxxf 切分 + HIP，逐帧 betweenHits/enqueueCalls 递增），`DebugView=4` 紫色在**游戏内**可见、F6 可切；**标题/主菜单背景不经超分输入，看不出效果**。Zero 那局 09:24:01 游戏重建交换链（显示/帧生成设置）后状态卡死在 `prior job not yet submitted`：任务已入队 HIP，但游戏改在另一个队列执行我们的切分列表，`Submitted()` 只认构造时的队列，任务永不退役。修：切分槽记下实际执行队列、`Submitted` 在该队列退役并触发会话在新队列重建；另加 8 次评估看门狗。宿主 aa3761f2 装在鬼武者（0.33 dxgi 留存），8 次帧生成切换 + 窗口→无边框均正常；换队列没再出现，重建路径未实测。配方 `Development/RE9/presr/host-queue-follow.py`（prepare-host 调用，输出与实测源码逐字节同）。未发包。
+
+## 2026-09-27 11:20～12:40：fmed3 夹值（逐位，约 −0.5%）进下版配方；分段 FP16_OVFL 暂缓
+
+ACO 对照（`results/aco-isa-20260927`）指向 E4M3 转换前的 `v_max_num x,x` 规范化：`fminf/fmaxf` 形成的 med3 前面都有一条。W2_PACK8 3 单独改 w2_z 编出来与 2 相同——规范化来自 multihead_fast_padded 的共用 `clampf/F()/q8_fused_round`。新宏 `HIP_FMED3_CLAMP`（`__builtin_amdgcn_fmed3f`，NaN 同样得 lo）：c64-wave2 规范化 1826→84，7 用例全同，比 Z（CW_PACK8+W2_PACK8 2）900 −0.03/−0.05、1080 −0.07/−0.08 ms。配方写进 `hip/build-modules.ps1`（c32-wave1 加 SAT3，c64-wave2 加 W2_PACK8 3+FMED3，c512-m32-mh、mh-fast-padded-wave(-packed) 加 FMED3），默认编译与实验集 M 逐模块代码相同，3 个旧后备顺带从源码重编。分段 FP16_OVFL（W2_PACK8 4，每片段 4 次转换前后 s_setreg）再 −0.5% 且语料逐位，但 ±Inf/NaN 输入会变 E4M3 NaN 字节（0.10 黑块保护失效的方向），暂不采用。`results/fmed3-ovfl-20260927`。
