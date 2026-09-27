@@ -745,3 +745,7 @@ ACO 对照（`results/aco-isa-20260927`）指向 E4M3 转换前的 `v_max_num x,
 ## 2026-09-27 14:08：分段 FP16_OVFL（P）剑星实测通过，配方改 W2_PACK8 6
 
 剑星装 P（c64-wave2 = W2_PACK8 4，`deployments/ovfl-20260927`）。Zero：画面无变化（运动无黑块/闪烁），1080P AA 中画质 EXACT 简单场景 54～55，与 M 同（0.5% 在读数分辨率下）。`hip/build-modules.ps1` c64-wave2 配方 W2_PACK8 3→6（= 4 + W2_Q8_SETF fma，`results/c64-hand-asm-20260927` 7 用例逐位）；6 本身未进游戏，下次发包前按惯例双架构重编 + 7 用例回归 + 装剑星确认。
+
+## 2026-09-27 14:25：鬼武者（Xbox）RE9 前置路线可玩
+
+鬼武者装 0.33 RE9 包 + 换队列宿主 aa3761f2 + 剑星同款模块（M + P c64-wave2，备份 `D:\DLSSNR-Lab\ovfl-20260927\backups\onimusha-20260927-140953`）。Zero：中画质 2K 质量（约 900 档）基本稳定 60 帧（疑似上限），体验舒适。RE9 前置路线首次在 RE9 以外的 RE 引擎游戏上可玩；换队列修复的"新队列重建会话"路径仍未实测触发。
