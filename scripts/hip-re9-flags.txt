@@ -128,3 +128,6 @@ DLSS5_HIP_PDL=1
 
 # ViT typed edges: 1=FP8 AV, 2=F16 contract, 3=both; exact in AE and EXACT.
 DLSS5_HIP_VIT_STREAM=3
+# 2026-09-28: frame-time log. DLSS5_FRAME_STATS=<seconds> appends one line per window to DLSS5-AMD\logs\frame-stats.txt
+# (frame interval avg/p50/p99/max, 1% low, why NR did or did not run). 0 = off (no cost).
+DLSS5_FRAME_STATS=0

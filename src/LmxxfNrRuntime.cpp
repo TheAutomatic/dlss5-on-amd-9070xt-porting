@@ -1377,7 +1377,7 @@ int32_t RecordInputs(void *context, void *job, void *command_list)
 int32_t EnqueueHip(void *context, void *job, void *command_queue)
 {
     auto *session = static_cast<Session *>(context);
-    return GuardSession(session, [&] {
+    const int32_t rc = GuardSession(session, [&] {
         if (!session)
             return Fail(LMXXF_NR_INVALID_ARGUMENT, "EnqueueHip: null context");
         if (!session->hipPrepared)
@@ -1473,6 +1473,20 @@ int32_t EnqueueHip(void *context, void *job, void *command_queue)
             }
         }
     });
+    // DLSS5_FRAME_STATS (native_frame_stats.h): read once, after Create exported the flags file to the environment.
+    static NativeFrameStats *stats = [] {
+        auto *x = new NativeFrameStats;
+        unsigned sec = 0;
+        try { sec = NativeFrameStatsSeconds(std::getenv("DLSS5_FRAME_STATS")); } catch (...) { sec = 0; }
+        if (sec) {
+            CreateDirectoryW(NativeLabPath(L"logs").c_str(), nullptr);
+            x->Configure(sec, NativeLabPath(L"logs\\frame-stats.txt"));
+        }
+        return x;
+    }();
+    if (stats->On())
+        stats->Frame(rc == static_cast<int32_t>(LMXXF_NR_OK) ? NFS_RUN : NFS_ERROR);
+    return rc;
 }
 
 int32_t RecordOutputs(void *context, void *job, void *command_list)

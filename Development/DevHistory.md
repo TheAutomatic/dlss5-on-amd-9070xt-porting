@@ -868,3 +868,7 @@ R（mix RTZ+FP8配对）：普通向量1871→1657，VMEM/WMMA不变，VGPR96→
 ## 2026-09-28 06:56：光与影：33 号远征队（Xbox，UE5）可玩
 
 9070 装 0.35 常规包 + 剑星同款 c64-wave2（exe 在 `Content\Sandfall\Binaries\WinGDK`，游戏自带 FSR dll，常规包 EnableFfxInputs=false 默认已处理；备份 `D:\DLSSNR-Lab\e33-fresh-035\backup-20260927-233842`）。Zero：没问题，能玩。C512 第一轮（闇，`results/c512-round1-20260927`）无稳定过门槛候选、未合入：工作组翻倍变慢——C512 瓶颈不是并行度不足。
+
+## 2026-09-28 07:05：帧时间分布日志 DLSS5_FRAME_STATS（分身）
+
+`src/native_frame_stats.h` + add-on（pre-upscale 每次超分记一帧，原因 run/bypass/init/error/unsupported/idle）+ RE9 runtime（EnqueueHip 记 run/error）；共用解析 `NativeFrameStatsSeconds`，三模板加 `DLSS5_FRAME_STATS=0`，CONFIGURATION.md 一行。关时每帧一次比较；开时每帧一次 QPC + 固定 0.25 ms 直方图，窗口末写一行。rt_bench 1080 600 帧 ABBA：开/关/0.35 runtime 差在噪声内（12.59～12.73 ms），hash 全同。剑星换 add-on c38bcdd4 + `DLSS5_FRAME_STATS=5`（备份 `D:\DLSSNR-Lab\frame-stats-20260928\backups\stellar-20260928-070548`）。结果 `results/frame-stats-20260928`。
