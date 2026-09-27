@@ -726,3 +726,7 @@ c64-wave2 已用交换操作数让累加器直接当下一操作数（FFN 展开
 ## 2026-09-27 11:20～12:40：fmed3 夹值（逐位，约 −0.5%）进下版配方；分段 FP16_OVFL 暂缓
 
 ACO 对照（`results/aco-isa-20260927`）指向 E4M3 转换前的 `v_max_num x,x` 规范化：`fminf/fmaxf` 形成的 med3 前面都有一条。W2_PACK8 3 单独改 w2_z 编出来与 2 相同——规范化来自 multihead_fast_padded 的共用 `clampf/F()/q8_fused_round`。新宏 `HIP_FMED3_CLAMP`（`__builtin_amdgcn_fmed3f`，NaN 同样得 lo）：c64-wave2 规范化 1826→84，7 用例全同，比 Z（CW_PACK8+W2_PACK8 2）900 −0.03/−0.05、1080 −0.07/−0.08 ms。配方写进 `hip/build-modules.ps1`（c32-wave1 加 SAT3，c64-wave2 加 W2_PACK8 3+FMED3，c512-m32-mh、mh-fast-padded-wave(-packed) 加 FMED3），默认编译与实验集 M 逐模块代码相同，3 个旧后备顺带从源码重编。分段 FP16_OVFL（W2_PACK8 4，每片段 4 次转换前后 s_setreg）再 −0.5% 且语料逐位，但 ±Inf/NaN 输入会变 E4M3 NaN 字节（0.10 黑块保护失效的方向），暂不采用。`results/fmed3-ovfl-20260927`。
+
+## 2026-09-27 12:39：fmed3 配方（M）剑星实测
+
+剑星整套 29 模块换成 M（`deployments/fmed3-20260927`）。Zero：1080P 窗口 + FSR 原生 AA（EXACT）主菜单 **50～51**、简单场景 **54～55**；0.33 为 49～50 / 53～54，各 +1 帧（离线 −0.5%，读数接近分辨率下限，结论＝方向一致、无回退）。
