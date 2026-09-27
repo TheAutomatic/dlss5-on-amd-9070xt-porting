@@ -777,3 +777,7 @@ RE9 残余显存：`NativeTrackedResources` 对大 RGB 输入缓冲 AddRef 后�
 3个源码候选（默认0）各过双架构编译、7用例84帧逐位、两档两批1000帧ABBA：B `CW_FMED3_CLAMP` 接近噪声留关；C `CW_DIRECT_OUT` 去掉 `F()` 后又 PACK8 的重复往返、保留精确负零归一化，900 −0.073/−0.086、1080 −0.117/−0.109ms；D `CW_RTZ_PAIR` 用现有 RTZ 转换的两个输入，保留half位模式、16B读写LDS，900 −0.110/−0.093、1080 −0.153/−0.139ms。标量探针：65536个half编码C零差异，1048576对输入D零差异；没有使用已否定的packed-half算术或MODE路线。
 
 E=C+D 另过7用例逐位，ABBA 900 9.611→9.484 / 9.701→9.564，1080 13.344→13.157 / 13.372→13.179ms，约 −1.3～−1.4%，不相加。两宏已进 `hip/build-modules.ps1`，配方双架构重编与E代码段全同。17:34 仅换剑星 c32-wave1 两份（gfx1201 05359b6a / gfx1200 2d345933），add-on/dxgi/INI/flags 前后哈希不变；备份 `D:\DLSSNR-Lab\c32-aco-20260927\backups\stellar-20260927-173404`，安装/还原脚本同目录。游戏画面/FPS 等 Zero，未发包。结果 `results/c32-aco-20260927`、部署 `deployments/c32-aco-20260927`。
+
+## 2026-09-27 18:22：C32 ACO 候选（闇，CW_DIRECT_OUT + CW_RTZ_PAIR）剑星实测
+
+剑星 c32-wave1 换闇的组合（gfx1201 05359b6a / gfx1200 2d345933，`results/c32-aco-20260927`）。Zero：1080P 原生 AA，AE 普通场景 59；**EXACT 普通场景 55～56**（上轮 54）。与离线 −1.3～1.4% 同向，无回退。
