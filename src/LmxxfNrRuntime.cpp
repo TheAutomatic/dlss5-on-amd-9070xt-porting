@@ -24,7 +24,7 @@
 
 namespace
 {
-thread_local char g_lastError[256] = {};
+thread_local char g_lastError[2048] = {};
 
 // LMXXF_NR_FRAME_INFO_V1_SIZE is what an ABI v1 host sends as struct_size. It must equal the
 // offset where the exposure fields start, or an old host's frames are rejected outright.
@@ -351,6 +351,7 @@ hip_reference::Options RuntimeOptions(unsigned w, unsigned h, const std::wstring
         }
         return any || FileExists(JoinPath(modulesDir, f));
     };
+    const bool requestedWave = opt.wave_owned, requestedM32 = opt.c512_m32, requestedVit = opt.vit_proj_n64;
     std::string gates;
     if (opt.wave_owned && !(has(L"c32-wave1.hsaco") && has(L"c64-wave2.hsaco")))
         opt.wave_owned = false, gates += " wave_owned:nomodule";
@@ -362,9 +363,9 @@ hip_reference::Options RuntimeOptions(unsigned w, unsigned h, const std::wstring
     {
         char t[256];
         std::snprintf(t, sizeof t, "wave_owned=%u/%u c512_m32=%u/%u vit_proj_n64=%u/%u pdl=%u skip=%zu",
-                      unsigned(opt.wave_owned), unsigned(hip_reference::WaveOwnedCompatible(opt)),
-                      unsigned(opt.c512_m32), unsigned(hip_reference::C512M32Compatible(opt)),
-                      unsigned(opt.vit_proj_n64), unsigned(hip_reference::VitProjN64Compatible(opt)),
+                      unsigned(requestedWave), unsigned(hip_reference::WaveOwnedCompatible(opt)),
+                      unsigned(requestedM32), unsigned(hip_reference::C512M32Compatible(opt)),
+                      unsigned(requestedVit), unsigned(hip_reference::VitProjN64Compatible(opt)),
                       unsigned(opt.pdl), opt.skip_blocks.size());
         *note = t + gates;
     }
@@ -412,6 +413,44 @@ struct Session
     /* Count of codec+HIP teardowns triggered by geoChanged (exposure/valid/format/alloc). */
     uint32_t codecRecreates = 0;
     std::string optionsNote;
+    unsigned loggedColorW=0, loggedColorH=0, loggedNetW=0, loggedNetH=0, loggedProcW=0, loggedProcH=0;
+    unsigned builtProcW=0, builtProcH=0;
+
+    std::string EffectiveOptionsNote() const
+    {
+        // PDL's requested flag alone does not tell whether this configuration dispatched a tile chain.
+        const bool activePdl = bridge && bridge->PdlActive();
+        std::string actual = optionsNote;
+        const auto pos = actual.find(" pdl=");
+        if (pos != std::string::npos) {
+            const auto end = actual.find(' ', pos+1);
+            actual.insert(end == std::string::npos ? actual.size() : end, activePdl ? "/1" : "/0");
+        }
+        return actual;
+    }
+
+    void LogGeometry()
+    {
+        const auto geo = NativeCurrentNetworkGeometry();
+        if (loggedColorW == job.width && loggedColorH == job.height &&
+            loggedNetW == geo.valid_width && loggedNetH == geo.valid_height &&
+            loggedProcW == geo.processing_width && loggedProcH == geo.processing_height) return;
+        char dims[160];
+        std::snprintf(dims, sizeof dims, "lmxxf: geometry net=%ux%u color_job=%ux%u proc=%ux%u ",
+                      geo.valid_width, geo.valid_height, job.width, job.height,
+                      geo.processing_width, geo.processing_height);
+        const std::string line = dims + EffectiveOptionsNote() + " | " + FlagsInfo();
+        OutputDebugStringA((line+"\n").c_str());
+        CreateDirectoryW(NativeLabPath(L"logs").c_str(), nullptr);
+        if (FILE* f = _wfopen(NativeLabPath(L"logs\\native-re9-runtime.txt").c_str(), L"ab")) {
+            std::fprintf(f, "pid=%lu tick=%llu %s\n", GetCurrentProcessId(), GetTickCount64(), line.c_str());
+            std::fclose(f);
+        }
+        SetError(line.c_str()); // host can also forward this successful-PrepareFrame notice
+        loggedColorW=job.width; loggedColorH=job.height;
+        loggedNetW=geo.valid_width; loggedNetH=geo.valid_height;
+        loggedProcW=geo.processing_width; loggedProcH=geo.processing_height;
+    }
 
     // NativeGameCodec::Record wants one state per source plus one more for the exposure SRV.
     // RecordInputs always leaves the copy in NON_PIXEL_SHADER_RESOURCE.
@@ -931,6 +970,7 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
                 return Fail(LMXXF_NR_FAILED, "PrepareFrame: graph must stay off");
             session->bridge = new hip_reference::D3D12Bridge();
             session->bridge->Create(session->queue, opt, {});
+            session->builtProcW=geo.processing_width; session->builtProcH=geo.processing_height;
             session->hipPrepared = true;
             char geoMsg[192] {};
             std::snprintf(geoMsg, sizeof geoMsg,
@@ -1072,15 +1112,18 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
         const bool allocChanged = session->encode &&
                                   ((session->allocWidth && cw != session->allocWidth) ||
                                    (session->allocHeight && ch != session->allocHeight));
-        const bool geoChanged = exposureChanged || validChanged || formatChanged || allocChanged;
+        const auto resolvedGeo = NativeCurrentNetworkGeometry();
+        const bool tierChanged = session->encode &&
+            (session->builtProcW != resolvedGeo.processing_width || session->builtProcH != resolvedGeo.processing_height);
+        const bool geoChanged = exposureChanged || validChanged || formatChanged || allocChanged || tierChanged;
         bool keepRecreateLog = false;
         if (session->encode && geoChanged)
         {
             ++session->codecRecreates;
             char reason[96] {};
-            std::snprintf(reason, sizeof reason, "%s%s%s%s", exposureChanged ? "exposure+" : "",
+            std::snprintf(reason, sizeof reason, "%s%s%s%s%s", exposureChanged ? "exposure+" : "",
                           validChanged ? "valid+" : "", formatChanged ? "format+" : "",
-                          allocChanged ? "alloc+" : "");
+                          allocChanged ? "alloc+" : "", tierChanged ? "tier+" : "");
             size_t rlen = std::strlen(reason);
             if (rlen && reason[rlen - 1] == '+')
                 reason[rlen - 1] = 0;
@@ -1124,6 +1167,7 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
                     return Fail(LMXXF_NR_FAILED, "PrepareFrame: graph must stay off");
                 session->bridge = new hip_reference::D3D12Bridge();
                 session->bridge->Create(session->queue, opt, {});
+                session->builtProcW=geo.processing_width; session->builtProcH=geo.processing_height;
                 session->hipPrepared = true;
                 char geoMsg[192] {};
                 std::snprintf(geoMsg, sizeof geoMsg,
@@ -1240,6 +1284,7 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
                                    ? static_cast<void *>(session->decodeDisplay)
                                    : static_cast<void *>(session->decode->Output());
         SetError("");
+        session->LogGeometry();
         return static_cast<int32_t>(LMXXF_NR_OK);
     });
 }
@@ -1596,7 +1641,7 @@ int32_t GetStatus(void *context, char *buf, uint32_t buf_chars)
                               static_cast<unsigned>(session->hsacoCount), geo.valid_width, geo.valid_height,
                               session->job.width, session->job.height,
                               session->weightsDir.empty() ? 0u : 1u, session->codecRecreates,
-                              session->optionsNote.c_str(), FlagsInfo().c_str());
+                              session->EffectiveOptionsNote().c_str(), FlagsInfo().c_str());
             }
             else
             {

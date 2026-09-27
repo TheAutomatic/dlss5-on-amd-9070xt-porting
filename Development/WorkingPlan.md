@@ -19,7 +19,7 @@
 
 1. **按配方双架构重编全部模块**，7 用例逐位回归 + 900/1080 ABBA，装剑星确认（`W2_PACK8 6` 首次进游戏）。
 2. **RE9 包带换队列修复**（宿主 aa3761f2，`results/onimusha-presr-20260927`）：鬼武者重建交换链后换队列提交，旧宿主任务不退役、NR 停到重启；修复 = 跟随实际队列 + 8 次看门狗。"新队列重建会话"路径尚未实机触发。发包说明加"鬼武者（Xbox）实测可用"；告知 TheAutomatic。
-3. RE9 runtime：尺寸/档位变化即打印几何行（net=、color_job=、四组开关）；切档残余约 +35MB/次，来源未查。
+3. **RE9 runtime 尾巴已修，待入包**（闇，`results/re9-runtime-leak-20260927`）：尺寸/档位变化记录 net/color_job/四组 requested/active/flags 路径；解绑 RGB 输入的驻留名单引用并释放 PDL 4 MiB 旗子。120 次切档末 18 次各档平台，稳态 +0 MiB/次；多尺寸 hash、runtime-smoke 通过。候选 `D:\DLSSNR-Lab\re9-runtime-leak-20260927\LmxxfNrRuntime.dll`（ca6d6bdc），未装游戏；presr 构建入口已统一到 scripts/build-runtime.sh。
 4. `Development/HIP/validate-modules.ps1` 默认资产目录已不存在，修路径后纳入发包前检查。
 5. 发包流程照旧：以上一包为底逐文件校验；**有游戏开着时 RE9 冒烟会被跳过，打完要补跑**（0.33 就是补跑的）。
 
@@ -48,7 +48,7 @@
 
 ## PDL（维持现状，不扩大）
 
-prod8 的 C64/C128/C256 tile 旗子已过 18 槽 2880 帧逐位与生产回归（`results/pdl-chain-20260925`）。待补正确性论证：累计计数器相邻复用、输入覆盖与 pool 存活期、生产者发布与消费者可见性（原记录依赖"至少隔 4 个 launch + CP 按包序派发"经验判断）。C512 PDL 与现有 PDL 收益不相加，暂不采用；不铺开 ViT/Down/Up。
+**审计已交付**（闇，`results/pdl-audit-20260927`）：原实现存在 uint32 计数回绕提前放行的竞态，已在 host 加“溢出前同步→清槽→同步”；上限降至 64 的压力版两档共 134 次重置、24 帧逐位。pool 的 32 引用覆盖当前最长 8 块链；但消费者缺 agent acquire、任意序自旋进展与同槽代际覆盖仍未形成完整文档证明，**不能盖章 PDL=1 安全**。现成保守方案 PDL=0 已过 7 用例 84 帧逐位；固定旧模块集两批 ABBA 代价：900 +0.056/+0.066ms，1080 +0.079/+0.079ms。生产默认仍 1，本轮未碰 hip/；下包前决定是否采用 0 的保守配置。C512 不采用，不铺开 ViT/Down/Up。
 
 ## 产品适配与等待事项
 

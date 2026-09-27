@@ -139,6 +139,10 @@ for folder,patterns in [('src',('*.h',)),('Development/HIP',('*.h',)),('shaders'
  target=host/'third_party/lmxxf'/folder;target.mkdir(parents=True,exist_ok=True)
  for pattern in patterns:
   for p in (root/folder).glob(pattern):shutil.copyfile(p,target/p.name)
+# Canonical runtime accompanies the core snapshot (build with include/ before the old ABI-2 host header).
+shutil.copyfile(root/'src/LmxxfNrRuntime.cpp',host/'third_party/lmxxf/src/LmxxfNrRuntime.cpp')
+(host/'third_party/lmxxf/include').mkdir(exist_ok=True)
+shutil.copyfile(root/'include/LmxxfNrApi.h',host/'third_party/lmxxf/include/LmxxfNrApi.h')
 shutil.copyfile(root/'LICENSE',host/'third_party/lmxxf/LICENSE')
 (here/'upstream.json').write_text(json.dumps({'repository':'https://github.com/TheAutomatic/dlss-5-amd-project','branch':'release/1.9.0','commit':rev,'core_base':subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip(),'host_license':'GPL-3.0 (retained upstream)','core_license':'MIT'},indent=2)+'\n')
 print('prepared external host',rev)

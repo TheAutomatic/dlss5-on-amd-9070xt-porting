@@ -749,3 +749,10 @@ ACO 对照（`results/aco-isa-20260927`）指向 E4M3 转换前的 `v_max_num x,
 ## 2026-09-27 14:25：鬼武者（Xbox）RE9 前置路线可玩
 
 鬼武者装 0.33 RE9 包 + 换队列宿主 aa3761f2 + 剑星同款模块（M + P c64-wave2，备份 `D:\DLSSNR-Lab\ovfl-20260927\backups\onimusha-20260927-140953`）。Zero：中画质 2K 质量（约 900 档）基本稳定 60 帧（疑似上限），体验舒适。RE9 前置路线首次在 RE9 以外的 RE 引擎游戏上可玩；换队列修复的"新队列重建会话"路径仍未实测触发。
+
+
+## 2026-09-27（14:48 派工后）：闇交付 PDL 审计与 RE9 runtime 尾巴
+
+派工单 `conversation/20260927/yami-dlss5-tasks-20260927.md`。PDL 原实现找到确定边界反例：uint32 累计目标回绕，旧计数直接满足新目标；host 在即将溢出时同步旧用户、清零该槽、等待清零，保留正常帧并发。上限降至 64 的隔离压力构建：900/1080 历史序列实际重置 70/64 次，各 12 帧逐位。当前 pool 的 32 引用覆盖最长 8 块链；消费者无 agent acquire、任意序自旋进展及同槽代际覆盖仍缺完整保证，不能宣布 PDL=1 已证明安全。PDL=0 完整 NativeGameFrame 7 用例 84 帧逐位；两批千帧 ABBA（固定 re9-runtime-flags 的旧模块集）900 代价 +0.056/+0.066ms，1080 +0.079/+0.079ms。默认未改、hip/ 未改。证据与官方文档依据 `results/pdl-audit-20260927`。
+
+RE9 残余显存：`NativeTrackedResources` 对大 RGB 输入缓冲 AddRef 后永不解绑，另有 PDL 4 MiB 旗子未释放；修拥有者析构解绑、旗子释放和 pdl_keep 析构顺序。原版 24 次切档最后 3005 MiB，修后同阶段 2296；最终候选跑 120 阶段，最后 18 次 1080/720/900 分别固定 2475/2467/2443 MiB，稳态 +0 MiB/次。每阶段末帧 hash 全同；共享信号量 100 次与未执行模块加载/卸载 50 次均无显存增长，stream 复用探针无改善不采用；桥接独立重建也呈渐进平台，未强行命名驱动内部缓存。几何变化现在写独立 logs/native-re9-runtime.txt + 调试输出 + 成功通知，四组 requested/active 与 flags 路径齐；120 阶段恰好 120 行。强制 900/1080 的 24 帧 hash 与旧版同，runtime-smoke 通过。presr runtime 构建改走仓内 canonical 源。DLL ca6d6bdc 在 `D:\DLSSNR-Lab\re9-runtime-leak-20260927\LmxxfNrRuntime.dll`，未装游戏、未发包。结果 `results/re9-runtime-leak-20260927`；下次合包时取候选/从本提交重编并做整包冒烟。
