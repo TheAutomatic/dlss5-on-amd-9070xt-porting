@@ -1,0 +1,52 @@
+{
+  "gfx1200": {
+    "split_mix_m32_hout": {
+      "static": {
+        "SMEM": 3,
+        "SALU": 23,
+        "WAIT": 170,
+        "VALU": 799,
+        "VOPD": 54,
+        "VMEM": 72,
+        "WMMA": 8
+      }
+    },
+    "split_ffn_t8_hin": {
+      "static": {
+        "SMEM": 2,
+        "SALU": 13,
+        "WAIT": 119,
+        "VOPD": 64,
+        "VALU": 599,
+        "VMEM": 52,
+        "WMMA": 32,
+        "DS": 48
+      }
+    }
+  },
+  "gfx1201": {
+    "split_mix_m32_hout": {
+      "static": {
+        "SMEM": 3,
+        "SALU": 23,
+        "WAIT": 170,
+        "VALU": 799,
+        "VOPD": 54,
+        "VMEM": 72,
+        "WMMA": 8
+      }
+    },
+    "split_ffn_t8_hin": {
+      "static": {
+        "SMEM": 2,
+        "SALU": 13,
+        "WAIT": 119,
+        "VOPD": 64,
+        "VALU": 599,
+        "VMEM": 52,
+        "WMMA": 32,
+        "DS": 48
+      }
+    }
+  }
+}

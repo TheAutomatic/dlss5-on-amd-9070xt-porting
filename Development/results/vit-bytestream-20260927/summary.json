@@ -1,0 +1,155 @@
+{
+  "timing": {
+    "runtime-regression-V1-correct": {},
+    "runtime-regression-V1-adaptive": {},
+    "runtime-regression-V1-r1": {
+      "900": {
+        "baseline_ms": 9.310534374999996,
+        "candidate_ms": 9.262223125,
+        "delta_ms": -0.04831124999999581,
+        "percent": -0.5188880471750146
+      },
+      "1080": {
+        "baseline_ms": 12.82511625,
+        "candidate_ms": 12.75604625,
+        "delta_ms": -0.06906999999999996,
+        "percent": -0.5385526232559501
+      }
+    },
+    "runtime-regression-V1-r2": {
+      "900": {
+        "baseline_ms": 9.299658125,
+        "candidate_ms": 9.28069,
+        "delta_ms": -0.01896812500000067,
+        "percent": -0.2039658312708248
+      },
+      "1080": {
+        "baseline_ms": 12.874835625,
+        "candidate_ms": 12.805173125,
+        "delta_ms": -0.06966249999999974,
+        "percent": -0.5410748690626521
+      }
+    },
+    "runtime-regression-V2-correct": {},
+    "runtime-regression-V2-adaptive": {},
+    "runtime-regression-V2-r1": {
+      "900": {
+        "baseline_ms": 9.31809125,
+        "candidate_ms": 9.337528749999993,
+        "delta_ms": 0.019437499999993335,
+        "percent": 0.2085995884617775
+      },
+      "1080": {
+        "baseline_ms": 12.910355625000001,
+        "candidate_ms": 12.809056875,
+        "delta_ms": -0.10129875000000155,
+        "percent": -0.7846317556415183
+      }
+    },
+    "runtime-regression-V2-r2": {
+      "900": {
+        "baseline_ms": 9.382329999999996,
+        "candidate_ms": 9.423074999999995,
+        "delta_ms": 0.040744999999999365,
+        "percent": 0.4342737891333881
+      },
+      "1080": {
+        "baseline_ms": 12.941809375,
+        "candidate_ms": 12.847923125000001,
+        "delta_ms": -0.09388624999999884,
+        "percent": -0.7254491800919416
+      }
+    },
+    "runtime-regression-V3-correct": {},
+    "runtime-regression-V3-adaptive": {},
+    "runtime-regression-V3-r1": {
+      "900": {
+        "baseline_ms": 9.311093749999994,
+        "candidate_ms": 9.312592500000004,
+        "delta_ms": 0.0014987500000103182,
+        "percent": 0.016096390394637616
+      },
+      "1080": {
+        "baseline_ms": 12.91442625,
+        "candidate_ms": 12.736026875,
+        "delta_ms": -0.1783993749999997,
+        "percent": -1.3813960569870387
+      }
+    },
+    "runtime-regression-V3-r2": {
+      "900": {
+        "baseline_ms": 9.397450625000005,
+        "candidate_ms": 9.4030725,
+        "delta_ms": 0.0056218749999956685,
+        "percent": 0.05982340556320853
+      },
+      "1080": {
+        "baseline_ms": 12.924387500000002,
+        "candidate_ms": 12.765709375,
+        "delta_ms": -0.15867812500000156,
+        "percent": -1.2277419336119477
+      }
+    },
+    "runtime-regression-V4-correct": {},
+    "runtime-regression-V4-adaptive": {},
+    "runtime-regression-V4-r1": {
+      "900": {
+        "baseline_ms": 9.315660625,
+        "candidate_ms": 9.305458124999994,
+        "delta_ms": -0.010202500000005443,
+        "percent": -0.10951987637489724
+      },
+      "1080": {
+        "baseline_ms": 12.9122725,
+        "candidate_ms": 12.75756875,
+        "delta_ms": -0.15470374999999947,
+        "percent": -1.1981140422803183
+      }
+    },
+    "runtime-regression-V4-r2": {
+      "900": {
+        "baseline_ms": 9.381163749999995,
+        "candidate_ms": 9.365878125,
+        "delta_ms": -0.015285624999995306,
+        "percent": -0.16293953935081484
+      },
+      "1080": {
+        "baseline_ms": 12.954653125,
+        "candidate_ms": 12.812738750000001,
+        "delta_ms": -0.14191437499999893,
+        "percent": -1.0954702810693662
+      }
+    },
+    "runtime-regression-V3-ae-r1": {
+      "900": {
+        "baseline_ms": 8.668736874999995,
+        "candidate_ms": 8.63517000000001,
+        "delta_ms": -0.033566874999985785,
+        "percent": -0.387217601410772
+      },
+      "1080": {
+        "baseline_ms": 11.973581875,
+        "candidate_ms": 11.933941874999999,
+        "delta_ms": -0.03964000000000212,
+        "percent": -0.3310621701494987
+      }
+    },
+    "runtime-regression-V3-ae-r2": {
+      "900": {
+        "baseline_ms": 8.774416875000005,
+        "candidate_ms": 8.781963749999996,
+        "delta_ms": 0.007546874999990294,
+        "percent": 0.08600998912522417
+      },
+      "1080": {
+        "baseline_ms": 11.983473125,
+        "candidate_ms": 11.940906250000001,
+        "delta_ms": -0.04256687499999856,
+        "percent": -0.35521317197428903
+      }
+    }
+  },
+  "measurement_rows": 192,
+  "frame_hashes": 1344,
+  "matched_candidate_frames": 672
+}

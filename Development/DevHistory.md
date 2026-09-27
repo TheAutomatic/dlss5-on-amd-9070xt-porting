@@ -805,3 +805,14 @@ ViT/C512重新导出十条ACO管线，按tile/循环量对齐。C512主投影与
 ## 2026-09-27 20:12：C32 第三刀（闇，finish 内部窗口快路径）剑星实测
 
 剑星装闇第三刀（`results/c32-round3-20260927`，备份 `D:\DLSSNR-Lab\c32-round3-20260927\backups\stellar-20260927-200610`）。Zero：1080P 原生 AA，EXACT 普通场景 **56～57**，与第二刀同（离线 −0.25%，在读数分辨率下），无回退。
+
+
+## 2026-09-27 21:02：第四轮，ViT显式字节/half接口装剑星；C512 half出口无收益
+
+闇按eda801c任务单交付。新增独立vit-stream模块，源码HIP_VIT_STREAM_KERNELS默认0、配方1；公共DLSS5_HIP_VIT_STREAM mask（1=AV FP8、2=contract F16、3=组合），host具名kernel配对，保持n64/fragment与f32 AE缓存。contract的FP8格点精确存half，QKV直接读half、投影残差同步改half；无新增重排kernel，无数学/求和/舍入顺序变化。V1/V2独立EXACT、AE各7组逐位；组合V3另对旧host+当前实装，900两批+0.0015/+0.0056ms基本持平，1080 12.9144→12.7360 / 12.9244→12.7657ms（−1.38%/−1.23%，标准1080整网过0.5%门槛）。AE运动千帧两批900 −0.0336/+0.0075、1080 −0.0396/−0.0426ms。QKV half自动展开8倍导致VGPR59→96，V4强制2倍降48、逐位，但1080少赚0.02ms，只略改善900，不采用。
+
+四个ViT候选共672候选帧全逐位（连基线1344hash）；每个AE43复用+41刷新，336组决策逐字段同。QKV普通向量1338→350、VMEM287→223、WMMA130相同；组合投影3128→779、452→388、WMMA256相同，请求读取132.5→82.5KiB/wave。其它f32边按流量列账，优先做了AV、contract→QKV/残差两条；不把请求字节比例当DRAM利用率或整网收益。RE9共享解析、requested/active日志与flags模板同步；mask0/3的12帧hash同、齐模块/缺模块smoke通过（缺模块3/0）。双架构复编与实测V3代码相同，gfx1200仅编译。
+
+C512主mix分段账：K512循环1120普通向量/256VMEM/256WMMA，尾部701向量/64VMEM；尝试mix→FFN half出口，原F(Hrtz)值精确保存，mixed读写减半但主mix128KiB读取不变。EXACT/AE各7组逐位，900两批+0.0145/+0.0083、1080+0.0021/+0.0055ms，明确不采用。结果不支持mixed临时张量为主要瓶颈；下一步应查packed输入/残差生产者或另做尾部敏感性/census，未使用MODE，也不强称纯DRAM或纯VALU受限。
+
+21:02仅装剑星新add-on4151123e、vit-stream gfx1201 ad59f7be / gfx1200 0c9171ee、flags stream=3，旧模块保留（含第三刀C32），新建全套HIP校验清单。备份 `D:\DLSSNR-Lab\vit-bytestream-20260927\backups\stellar-20260927-210229`；dxgi/INI/C32哈希不变。C512候选和RE9 DLL未装游戏，未发包，画面/FPS待Zero。完整报告 `results/vit-bytestream-20260927`、`results/c512-mix-20260927`，部署 `deployments/vit-bytestream-20260927`。

@@ -1,0 +1,27 @@
+{
+  "vit_stream_project_n64_b": {
+    "group_segment_fixed_size": 0,
+    "private_segment_fixed_size": 0,
+    "next_free_vgpr": 120
+  },
+  "vit_stream_project_n64_h": {
+    "group_segment_fixed_size": 0,
+    "private_segment_fixed_size": 0,
+    "next_free_vgpr": 160
+  },
+  "vit_stream_project_n64_bh": {
+    "group_segment_fixed_size": 0,
+    "private_segment_fixed_size": 0,
+    "next_free_vgpr": 120
+  },
+  "vit_stream_qkv_frag_hin": {
+    "group_segment_fixed_size": 2112,
+    "private_segment_fixed_size": 0,
+    "next_free_vgpr": 96
+  },
+  "vit_stream_contract_frag_hout": {
+    "group_segment_fixed_size": 0,
+    "private_segment_fixed_size": 0,
+    "next_free_vgpr": 205
+  }
+}

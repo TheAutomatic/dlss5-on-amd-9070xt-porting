@@ -1,0 +1,58 @@
+{
+  "vit_stream_project_n64_b": {
+    "static": {
+      "SMEM": 4,
+      "WAIT": 122,
+      "SALU": 36,
+      "VALU": 401,
+      "VOPD": 78,
+      "VMEM": 88,
+      "WMMA": 16
+    }
+  },
+  "vit_stream_project_n64_h": {
+    "static": {
+      "SMEM": 4,
+      "WAIT": 279,
+      "SALU": 31,
+      "VALU": 919,
+      "VOPD": 187,
+      "VMEM": 164,
+      "WMMA": 64
+    }
+  },
+  "vit_stream_project_n64_bh": {
+    "static": {
+      "SMEM": 4,
+      "WAIT": 117,
+      "SALU": 36,
+      "VALU": 404,
+      "VOPD": 93,
+      "VMEM": 88,
+      "WMMA": 16
+    }
+  },
+  "vit_stream_qkv_frag_hin": {
+    "static": {
+      "SMEM": 6,
+      "WAIT": 219,
+      "SALU": 133,
+      "VALU": 280,
+      "VOPD": 42,
+      "VMEM": 55,
+      "WMMA": 18,
+      "DS": 22
+    }
+  },
+  "vit_stream_contract_frag_hout": {
+    "static": {
+      "WAIT": 176,
+      "SMEM": 4,
+      "SALU": 48,
+      "VALU": 514,
+      "VOPD": 145,
+      "VMEM": 148,
+      "WMMA": 64
+    }
+  }
+}

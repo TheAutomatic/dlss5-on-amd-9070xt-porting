@@ -1,0 +1,1100 @@
+pid=6356 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=6356 c512_m32_requested=1 c512_m32_active=1
+pid=6356 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=6356 vit_stream_requested=0 vit_stream_active=0
+pid=6356 wave_owned_requested=1 wave_owned_active=1
+pid=6356 hip_device=0
+pid=23088 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V1\gfx1201
+pid=23088 c512_m32_requested=1 c512_m32_active=1
+pid=23088 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=23088 vit_stream_requested=1 vit_stream_active=1
+pid=23088 wave_owned_requested=1 wave_owned_active=1
+pid=23088 hip_device=0
+pid=21752 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=21752 c512_m32_requested=1 c512_m32_active=1
+pid=21752 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=21752 vit_stream_requested=0 vit_stream_active=0
+pid=21752 wave_owned_requested=1 wave_owned_active=1
+pid=21752 hip_device=0
+pid=28500 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V1\gfx1201
+pid=28500 c512_m32_requested=1 c512_m32_active=1
+pid=28500 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=28500 vit_stream_requested=1 vit_stream_active=1
+pid=28500 wave_owned_requested=1 wave_owned_active=1
+pid=28500 hip_device=0
+pid=30980 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=30980 c512_m32_requested=1 c512_m32_active=1
+pid=30980 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=30980 vit_stream_requested=0 vit_stream_active=0
+pid=30980 wave_owned_requested=1 wave_owned_active=1
+pid=30980 hip_device=0
+pid=24100 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V1\gfx1201
+pid=24100 c512_m32_requested=1 c512_m32_active=1
+pid=24100 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=24100 vit_stream_requested=1 vit_stream_active=1
+pid=24100 wave_owned_requested=1 wave_owned_active=1
+pid=24100 hip_device=0
+pid=9756 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=9756 c512_m32_requested=1 c512_m32_active=1
+pid=9756 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=9756 vit_stream_requested=0 vit_stream_active=0
+pid=9756 wave_owned_requested=1 wave_owned_active=1
+pid=9756 hip_device=0
+pid=21156 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V1\gfx1201
+pid=21156 c512_m32_requested=1 c512_m32_active=1
+pid=21156 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=21156 vit_stream_requested=1 vit_stream_active=1
+pid=21156 wave_owned_requested=1 wave_owned_active=1
+pid=21156 hip_device=0
+pid=35040 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1280x768 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=35040 c512_m32_requested=1 c512_m32_active=1
+pid=35040 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=35040 vit_stream_requested=0 vit_stream_active=0
+pid=35040 wave_owned_requested=1 wave_owned_active=1
+pid=35040 hip_device=0
+pid=34176 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1280x768 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V1\gfx1201
+pid=34176 c512_m32_requested=1 c512_m32_active=1
+pid=34176 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=34176 vit_stream_requested=1 vit_stream_active=1
+pid=34176 wave_owned_requested=1 wave_owned_active=1
+pid=34176 hip_device=0
+pid=23588 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=23588 c512_m32_requested=1 c512_m32_active=1
+pid=23588 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=23588 vit_stream_requested=0 vit_stream_active=0
+pid=23588 wave_owned_requested=1 wave_owned_active=1
+pid=23588 hip_device=0
+pid=34500 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V1\gfx1201
+pid=34500 c512_m32_requested=1 c512_m32_active=1
+pid=34500 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=34500 vit_stream_requested=1 vit_stream_active=1
+pid=34500 wave_owned_requested=1 wave_owned_active=1
+pid=34500 hip_device=0
+pid=33752 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=33752 c512_m32_requested=1 c512_m32_active=1
+pid=33752 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=33752 vit_stream_requested=0 vit_stream_active=0
+pid=33752 wave_owned_requested=1 wave_owned_active=1
+pid=33752 hip_device=0
+pid=35456 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V1\gfx1201
+pid=35456 c512_m32_requested=1 c512_m32_active=1
+pid=35456 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=35456 vit_stream_requested=1 vit_stream_active=1
+pid=35456 wave_owned_requested=1 wave_owned_active=1
+pid=35456 hip_device=0
+pid=8512 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=8512 c512_m32_requested=1 c512_m32_active=1
+pid=8512 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=8512 vit_stream_requested=0 vit_stream_active=0
+pid=8512 wave_owned_requested=1 wave_owned_active=1
+pid=8512 hip_device=0
+pid=19716 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V1\gfx1201
+pid=19716 c512_m32_requested=1 c512_m32_active=1
+pid=19716 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=19716 vit_stream_requested=1 vit_stream_active=1
+pid=19716 wave_owned_requested=1 wave_owned_active=1
+pid=19716 hip_device=0
+pid=35672 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=35672 c512_m32_requested=1 c512_m32_active=1
+pid=35672 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=35672 vit_stream_requested=0 vit_stream_active=0
+pid=35672 wave_owned_requested=1 wave_owned_active=1
+pid=35672 hip_device=0
+pid=24120 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V1\gfx1201
+pid=24120 c512_m32_requested=1 c512_m32_active=1
+pid=24120 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=24120 vit_stream_requested=1 vit_stream_active=1
+pid=24120 wave_owned_requested=1 wave_owned_active=1
+pid=24120 hip_device=0
+pid=30440 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=30440 c512_m32_requested=1 c512_m32_active=1
+pid=30440 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=30440 vit_stream_requested=0 vit_stream_active=0
+pid=30440 wave_owned_requested=1 wave_owned_active=1
+pid=30440 hip_device=0
+pid=13348 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V1\gfx1201
+pid=13348 c512_m32_requested=1 c512_m32_active=1
+pid=13348 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=13348 vit_stream_requested=1 vit_stream_active=1
+pid=13348 wave_owned_requested=1 wave_owned_active=1
+pid=13348 hip_device=0
+pid=33800 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=33800 c512_m32_requested=1 c512_m32_active=1
+pid=33800 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=33800 vit_stream_requested=0 vit_stream_active=0
+pid=33800 wave_owned_requested=1 wave_owned_active=1
+pid=33800 hip_device=0
+pid=18112 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V1\gfx1201
+pid=18112 c512_m32_requested=1 c512_m32_active=1
+pid=18112 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=18112 vit_stream_requested=1 vit_stream_active=1
+pid=18112 wave_owned_requested=1 wave_owned_active=1
+pid=18112 hip_device=0
+pid=23048 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1280x768 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=23048 c512_m32_requested=1 c512_m32_active=1
+pid=23048 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=23048 vit_stream_requested=0 vit_stream_active=0
+pid=23048 wave_owned_requested=1 wave_owned_active=1
+pid=23048 hip_device=0
+pid=20564 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1280x768 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V1\gfx1201
+pid=20564 c512_m32_requested=1 c512_m32_active=1
+pid=20564 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=20564 vit_stream_requested=1 vit_stream_active=1
+pid=20564 wave_owned_requested=1 wave_owned_active=1
+pid=20564 hip_device=0
+pid=24252 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=24252 c512_m32_requested=1 c512_m32_active=1
+pid=24252 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=24252 vit_stream_requested=0 vit_stream_active=0
+pid=24252 wave_owned_requested=1 wave_owned_active=1
+pid=24252 hip_device=0
+pid=23692 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V1\gfx1201
+pid=23692 c512_m32_requested=1 c512_m32_active=1
+pid=23692 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=23692 vit_stream_requested=1 vit_stream_active=1
+pid=23692 wave_owned_requested=1 wave_owned_active=1
+pid=23692 hip_device=0
+pid=13972 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=13972 c512_m32_requested=1 c512_m32_active=1
+pid=13972 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=13972 vit_stream_requested=0 vit_stream_active=0
+pid=13972 wave_owned_requested=1 wave_owned_active=1
+pid=13972 hip_device=0
+pid=32140 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V1\gfx1201
+pid=32140 c512_m32_requested=1 c512_m32_active=1
+pid=32140 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=32140 vit_stream_requested=1 vit_stream_active=1
+pid=32140 wave_owned_requested=1 wave_owned_active=1
+pid=32140 hip_device=0
+pid=8584 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=8584 c512_m32_requested=1 c512_m32_active=1
+pid=8584 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=8584 vit_stream_requested=0 vit_stream_active=0
+pid=8584 wave_owned_requested=1 wave_owned_active=1
+pid=8584 hip_device=0
+pid=32988 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V1\gfx1201
+pid=32988 c512_m32_requested=1 c512_m32_active=1
+pid=32988 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=32988 vit_stream_requested=1 vit_stream_active=1
+pid=32988 wave_owned_requested=1 wave_owned_active=1
+pid=32988 hip_device=0
+pid=4768 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V1\gfx1201
+pid=4768 c512_m32_requested=1 c512_m32_active=1
+pid=4768 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=4768 vit_stream_requested=1 vit_stream_active=1
+pid=4768 wave_owned_requested=1 wave_owned_active=1
+pid=4768 hip_device=0
+pid=12996 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=12996 c512_m32_requested=1 c512_m32_active=1
+pid=12996 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=12996 vit_stream_requested=0 vit_stream_active=0
+pid=12996 wave_owned_requested=1 wave_owned_active=1
+pid=12996 hip_device=0
+pid=35240 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=35240 c512_m32_requested=1 c512_m32_active=1
+pid=35240 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=35240 vit_stream_requested=0 vit_stream_active=0
+pid=35240 wave_owned_requested=1 wave_owned_active=1
+pid=35240 hip_device=0
+pid=13240 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V1\gfx1201
+pid=13240 c512_m32_requested=1 c512_m32_active=1
+pid=13240 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=13240 vit_stream_requested=1 vit_stream_active=1
+pid=13240 wave_owned_requested=1 wave_owned_active=1
+pid=13240 hip_device=0
+pid=32328 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V1\gfx1201
+pid=32328 c512_m32_requested=1 c512_m32_active=1
+pid=32328 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=32328 vit_stream_requested=1 vit_stream_active=1
+pid=32328 wave_owned_requested=1 wave_owned_active=1
+pid=32328 hip_device=0
+pid=16764 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=16764 c512_m32_requested=1 c512_m32_active=1
+pid=16764 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=16764 vit_stream_requested=0 vit_stream_active=0
+pid=16764 wave_owned_requested=1 wave_owned_active=1
+pid=16764 hip_device=0
+pid=11928 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=11928 c512_m32_requested=1 c512_m32_active=1
+pid=11928 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=11928 vit_stream_requested=0 vit_stream_active=0
+pid=11928 wave_owned_requested=1 wave_owned_active=1
+pid=11928 hip_device=0
+pid=25064 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V1\gfx1201
+pid=25064 c512_m32_requested=1 c512_m32_active=1
+pid=25064 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=25064 vit_stream_requested=1 vit_stream_active=1
+pid=25064 wave_owned_requested=1 wave_owned_active=1
+pid=25064 hip_device=0
+pid=30332 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V1\gfx1201
+pid=30332 c512_m32_requested=1 c512_m32_active=1
+pid=30332 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=30332 vit_stream_requested=1 vit_stream_active=1
+pid=30332 wave_owned_requested=1 wave_owned_active=1
+pid=30332 hip_device=0
+pid=31928 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=31928 c512_m32_requested=1 c512_m32_active=1
+pid=31928 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=31928 vit_stream_requested=0 vit_stream_active=0
+pid=31928 wave_owned_requested=1 wave_owned_active=1
+pid=31928 hip_device=0
+pid=34800 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=34800 c512_m32_requested=1 c512_m32_active=1
+pid=34800 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=34800 vit_stream_requested=0 vit_stream_active=0
+pid=34800 wave_owned_requested=1 wave_owned_active=1
+pid=34800 hip_device=0
+pid=8796 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V1\gfx1201
+pid=8796 c512_m32_requested=1 c512_m32_active=1
+pid=8796 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=8796 vit_stream_requested=1 vit_stream_active=1
+pid=8796 wave_owned_requested=1 wave_owned_active=1
+pid=8796 hip_device=0
+pid=22912 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V1\gfx1201
+pid=22912 c512_m32_requested=1 c512_m32_active=1
+pid=22912 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=22912 vit_stream_requested=1 vit_stream_active=1
+pid=22912 wave_owned_requested=1 wave_owned_active=1
+pid=22912 hip_device=0
+pid=9672 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=9672 c512_m32_requested=1 c512_m32_active=1
+pid=9672 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=9672 vit_stream_requested=0 vit_stream_active=0
+pid=9672 wave_owned_requested=1 wave_owned_active=1
+pid=9672 hip_device=0
+pid=33892 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=33892 c512_m32_requested=1 c512_m32_active=1
+pid=33892 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=33892 vit_stream_requested=0 vit_stream_active=0
+pid=33892 wave_owned_requested=1 wave_owned_active=1
+pid=33892 hip_device=0
+pid=8676 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V2\gfx1201
+pid=8676 c512_m32_requested=1 c512_m32_active=1
+pid=8676 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=8676 vit_stream_requested=2 vit_stream_active=2
+pid=8676 wave_owned_requested=1 wave_owned_active=1
+pid=8676 hip_device=0
+pid=20540 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=20540 c512_m32_requested=1 c512_m32_active=1
+pid=20540 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=20540 vit_stream_requested=0 vit_stream_active=0
+pid=20540 wave_owned_requested=1 wave_owned_active=1
+pid=20540 hip_device=0
+pid=34616 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V2\gfx1201
+pid=34616 c512_m32_requested=1 c512_m32_active=1
+pid=34616 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=34616 vit_stream_requested=2 vit_stream_active=2
+pid=34616 wave_owned_requested=1 wave_owned_active=1
+pid=34616 hip_device=0
+pid=34540 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=34540 c512_m32_requested=1 c512_m32_active=1
+pid=34540 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=34540 vit_stream_requested=0 vit_stream_active=0
+pid=34540 wave_owned_requested=1 wave_owned_active=1
+pid=34540 hip_device=0
+pid=9296 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V2\gfx1201
+pid=9296 c512_m32_requested=1 c512_m32_active=1
+pid=9296 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=9296 vit_stream_requested=2 vit_stream_active=2
+pid=9296 wave_owned_requested=1 wave_owned_active=1
+pid=9296 hip_device=0
+pid=2064 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=2064 c512_m32_requested=1 c512_m32_active=1
+pid=2064 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=2064 vit_stream_requested=0 vit_stream_active=0
+pid=2064 wave_owned_requested=1 wave_owned_active=1
+pid=2064 hip_device=0
+pid=12420 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V2\gfx1201
+pid=12420 c512_m32_requested=1 c512_m32_active=1
+pid=12420 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=12420 vit_stream_requested=2 vit_stream_active=2
+pid=12420 wave_owned_requested=1 wave_owned_active=1
+pid=12420 hip_device=0
+pid=24732 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1280x768 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=24732 c512_m32_requested=1 c512_m32_active=1
+pid=24732 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=24732 vit_stream_requested=0 vit_stream_active=0
+pid=24732 wave_owned_requested=1 wave_owned_active=1
+pid=24732 hip_device=0
+pid=25332 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1280x768 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V2\gfx1201
+pid=25332 c512_m32_requested=1 c512_m32_active=1
+pid=25332 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=25332 vit_stream_requested=2 vit_stream_active=2
+pid=25332 wave_owned_requested=1 wave_owned_active=1
+pid=25332 hip_device=0
+pid=9044 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=9044 c512_m32_requested=1 c512_m32_active=1
+pid=9044 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=9044 vit_stream_requested=0 vit_stream_active=0
+pid=9044 wave_owned_requested=1 wave_owned_active=1
+pid=9044 hip_device=0
+pid=23004 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V2\gfx1201
+pid=23004 c512_m32_requested=1 c512_m32_active=1
+pid=23004 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=23004 vit_stream_requested=2 vit_stream_active=2
+pid=23004 wave_owned_requested=1 wave_owned_active=1
+pid=23004 hip_device=0
+pid=12348 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=12348 c512_m32_requested=1 c512_m32_active=1
+pid=12348 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=12348 vit_stream_requested=0 vit_stream_active=0
+pid=12348 wave_owned_requested=1 wave_owned_active=1
+pid=12348 hip_device=0
+pid=35268 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V2\gfx1201
+pid=35268 c512_m32_requested=1 c512_m32_active=1
+pid=35268 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=35268 vit_stream_requested=2 vit_stream_active=2
+pid=35268 wave_owned_requested=1 wave_owned_active=1
+pid=35268 hip_device=0
+pid=23268 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=23268 c512_m32_requested=1 c512_m32_active=1
+pid=23268 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=23268 vit_stream_requested=0 vit_stream_active=0
+pid=23268 wave_owned_requested=1 wave_owned_active=1
+pid=23268 hip_device=0
+pid=15756 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V2\gfx1201
+pid=15756 c512_m32_requested=1 c512_m32_active=1
+pid=15756 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=15756 vit_stream_requested=2 vit_stream_active=2
+pid=15756 wave_owned_requested=1 wave_owned_active=1
+pid=15756 hip_device=0
+pid=30040 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=30040 c512_m32_requested=1 c512_m32_active=1
+pid=30040 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=30040 vit_stream_requested=0 vit_stream_active=0
+pid=30040 wave_owned_requested=1 wave_owned_active=1
+pid=30040 hip_device=0
+pid=24340 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V2\gfx1201
+pid=24340 c512_m32_requested=1 c512_m32_active=1
+pid=24340 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=24340 vit_stream_requested=2 vit_stream_active=2
+pid=24340 wave_owned_requested=1 wave_owned_active=1
+pid=24340 hip_device=0
+pid=25860 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=25860 c512_m32_requested=1 c512_m32_active=1
+pid=25860 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=25860 vit_stream_requested=0 vit_stream_active=0
+pid=25860 wave_owned_requested=1 wave_owned_active=1
+pid=25860 hip_device=0
+pid=12116 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V2\gfx1201
+pid=12116 c512_m32_requested=1 c512_m32_active=1
+pid=12116 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=12116 vit_stream_requested=2 vit_stream_active=2
+pid=12116 wave_owned_requested=1 wave_owned_active=1
+pid=12116 hip_device=0
+pid=3744 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=3744 c512_m32_requested=1 c512_m32_active=1
+pid=3744 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=3744 vit_stream_requested=0 vit_stream_active=0
+pid=3744 wave_owned_requested=1 wave_owned_active=1
+pid=3744 hip_device=0
+pid=31392 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V2\gfx1201
+pid=31392 c512_m32_requested=1 c512_m32_active=1
+pid=31392 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=31392 vit_stream_requested=2 vit_stream_active=2
+pid=31392 wave_owned_requested=1 wave_owned_active=1
+pid=31392 hip_device=0
+pid=17124 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1280x768 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=17124 c512_m32_requested=1 c512_m32_active=1
+pid=17124 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=17124 vit_stream_requested=0 vit_stream_active=0
+pid=17124 wave_owned_requested=1 wave_owned_active=1
+pid=17124 hip_device=0
+pid=27316 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1280x768 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V2\gfx1201
+pid=27316 c512_m32_requested=1 c512_m32_active=1
+pid=27316 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=27316 vit_stream_requested=2 vit_stream_active=2
+pid=27316 wave_owned_requested=1 wave_owned_active=1
+pid=27316 hip_device=0
+pid=27900 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=27900 c512_m32_requested=1 c512_m32_active=1
+pid=27900 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=27900 vit_stream_requested=0 vit_stream_active=0
+pid=27900 wave_owned_requested=1 wave_owned_active=1
+pid=27900 hip_device=0
+pid=10876 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V2\gfx1201
+pid=10876 c512_m32_requested=1 c512_m32_active=1
+pid=10876 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=10876 vit_stream_requested=2 vit_stream_active=2
+pid=10876 wave_owned_requested=1 wave_owned_active=1
+pid=10876 hip_device=0
+pid=9156 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=9156 c512_m32_requested=1 c512_m32_active=1
+pid=9156 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=9156 vit_stream_requested=0 vit_stream_active=0
+pid=9156 wave_owned_requested=1 wave_owned_active=1
+pid=9156 hip_device=0
+pid=23920 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V2\gfx1201
+pid=23920 c512_m32_requested=1 c512_m32_active=1
+pid=23920 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=23920 vit_stream_requested=2 vit_stream_active=2
+pid=23920 wave_owned_requested=1 wave_owned_active=1
+pid=23920 hip_device=0
+pid=18376 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=18376 c512_m32_requested=1 c512_m32_active=1
+pid=18376 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=18376 vit_stream_requested=0 vit_stream_active=0
+pid=18376 wave_owned_requested=1 wave_owned_active=1
+pid=18376 hip_device=0
+pid=31464 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V2\gfx1201
+pid=31464 c512_m32_requested=1 c512_m32_active=1
+pid=31464 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=31464 vit_stream_requested=2 vit_stream_active=2
+pid=31464 wave_owned_requested=1 wave_owned_active=1
+pid=31464 hip_device=0
+pid=1892 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V2\gfx1201
+pid=1892 c512_m32_requested=1 c512_m32_active=1
+pid=1892 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=1892 vit_stream_requested=2 vit_stream_active=2
+pid=1892 wave_owned_requested=1 wave_owned_active=1
+pid=1892 hip_device=0
+pid=33884 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=33884 c512_m32_requested=1 c512_m32_active=1
+pid=33884 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=33884 vit_stream_requested=0 vit_stream_active=0
+pid=33884 wave_owned_requested=1 wave_owned_active=1
+pid=33884 hip_device=0
+pid=24272 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=24272 c512_m32_requested=1 c512_m32_active=1
+pid=24272 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=24272 vit_stream_requested=0 vit_stream_active=0
+pid=24272 wave_owned_requested=1 wave_owned_active=1
+pid=24272 hip_device=0
+pid=30348 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V2\gfx1201
+pid=30348 c512_m32_requested=1 c512_m32_active=1
+pid=30348 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=30348 vit_stream_requested=2 vit_stream_active=2
+pid=30348 wave_owned_requested=1 wave_owned_active=1
+pid=30348 hip_device=0
+pid=32240 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V2\gfx1201
+pid=32240 c512_m32_requested=1 c512_m32_active=1
+pid=32240 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=32240 vit_stream_requested=2 vit_stream_active=2
+pid=32240 wave_owned_requested=1 wave_owned_active=1
+pid=32240 hip_device=0
+pid=26556 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=26556 c512_m32_requested=1 c512_m32_active=1
+pid=26556 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=26556 vit_stream_requested=0 vit_stream_active=0
+pid=26556 wave_owned_requested=1 wave_owned_active=1
+pid=26556 hip_device=0
+pid=12176 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=12176 c512_m32_requested=1 c512_m32_active=1
+pid=12176 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=12176 vit_stream_requested=0 vit_stream_active=0
+pid=12176 wave_owned_requested=1 wave_owned_active=1
+pid=12176 hip_device=0
+pid=29936 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V2\gfx1201
+pid=29936 c512_m32_requested=1 c512_m32_active=1
+pid=29936 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=29936 vit_stream_requested=2 vit_stream_active=2
+pid=29936 wave_owned_requested=1 wave_owned_active=1
+pid=29936 hip_device=0
+pid=31524 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V2\gfx1201
+pid=31524 c512_m32_requested=1 c512_m32_active=1
+pid=31524 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=31524 vit_stream_requested=2 vit_stream_active=2
+pid=31524 wave_owned_requested=1 wave_owned_active=1
+pid=31524 hip_device=0
+pid=22624 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=22624 c512_m32_requested=1 c512_m32_active=1
+pid=22624 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=22624 vit_stream_requested=0 vit_stream_active=0
+pid=22624 wave_owned_requested=1 wave_owned_active=1
+pid=22624 hip_device=0
+pid=12848 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=12848 c512_m32_requested=1 c512_m32_active=1
+pid=12848 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=12848 vit_stream_requested=0 vit_stream_active=0
+pid=12848 wave_owned_requested=1 wave_owned_active=1
+pid=12848 hip_device=0
+pid=22704 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V2\gfx1201
+pid=22704 c512_m32_requested=1 c512_m32_active=1
+pid=22704 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=22704 vit_stream_requested=2 vit_stream_active=2
+pid=22704 wave_owned_requested=1 wave_owned_active=1
+pid=22704 hip_device=0
+pid=21248 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V2\gfx1201
+pid=21248 c512_m32_requested=1 c512_m32_active=1
+pid=21248 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=21248 vit_stream_requested=2 vit_stream_active=2
+pid=21248 wave_owned_requested=1 wave_owned_active=1
+pid=21248 hip_device=0
+pid=35036 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=35036 c512_m32_requested=1 c512_m32_active=1
+pid=35036 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=35036 vit_stream_requested=0 vit_stream_active=0
+pid=35036 wave_owned_requested=1 wave_owned_active=1
+pid=35036 hip_device=0
+pid=4536 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=4536 c512_m32_requested=1 c512_m32_active=1
+pid=4536 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=4536 wave_owned_requested=1 wave_owned_active=1
+pid=4536 hip_device=0
+pid=24964 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=24964 c512_m32_requested=1 c512_m32_active=1
+pid=24964 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=24964 vit_stream_requested=3 vit_stream_active=3
+pid=24964 wave_owned_requested=1 wave_owned_active=1
+pid=24964 hip_device=0
+pid=8512 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=8512 c512_m32_requested=1 c512_m32_active=1
+pid=8512 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=8512 wave_owned_requested=1 wave_owned_active=1
+pid=8512 hip_device=0
+pid=8700 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=8700 c512_m32_requested=1 c512_m32_active=1
+pid=8700 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=8700 vit_stream_requested=3 vit_stream_active=3
+pid=8700 wave_owned_requested=1 wave_owned_active=1
+pid=8700 hip_device=0
+pid=29884 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=29884 c512_m32_requested=1 c512_m32_active=1
+pid=29884 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=29884 wave_owned_requested=1 wave_owned_active=1
+pid=29884 hip_device=0
+pid=19520 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=19520 c512_m32_requested=1 c512_m32_active=1
+pid=19520 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=19520 vit_stream_requested=3 vit_stream_active=3
+pid=19520 wave_owned_requested=1 wave_owned_active=1
+pid=19520 hip_device=0
+pid=3364 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=3364 c512_m32_requested=1 c512_m32_active=1
+pid=3364 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=3364 wave_owned_requested=1 wave_owned_active=1
+pid=3364 hip_device=0
+pid=22020 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=22020 c512_m32_requested=1 c512_m32_active=1
+pid=22020 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=22020 vit_stream_requested=3 vit_stream_active=3
+pid=22020 wave_owned_requested=1 wave_owned_active=1
+pid=22020 hip_device=0
+pid=26040 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1280x768 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=26040 c512_m32_requested=1 c512_m32_active=1
+pid=26040 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=26040 wave_owned_requested=1 wave_owned_active=1
+pid=26040 hip_device=0
+pid=25680 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1280x768 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=25680 c512_m32_requested=1 c512_m32_active=1
+pid=25680 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=25680 vit_stream_requested=3 vit_stream_active=3
+pid=25680 wave_owned_requested=1 wave_owned_active=1
+pid=25680 hip_device=0
+pid=8428 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=8428 c512_m32_requested=1 c512_m32_active=1
+pid=8428 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=8428 wave_owned_requested=1 wave_owned_active=1
+pid=8428 hip_device=0
+pid=19008 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=19008 c512_m32_requested=1 c512_m32_active=1
+pid=19008 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=19008 vit_stream_requested=3 vit_stream_active=3
+pid=19008 wave_owned_requested=1 wave_owned_active=1
+pid=19008 hip_device=0
+pid=35376 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=35376 c512_m32_requested=1 c512_m32_active=1
+pid=35376 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=35376 wave_owned_requested=1 wave_owned_active=1
+pid=35376 hip_device=0
+pid=32192 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=32192 c512_m32_requested=1 c512_m32_active=1
+pid=32192 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=32192 vit_stream_requested=3 vit_stream_active=3
+pid=32192 wave_owned_requested=1 wave_owned_active=1
+pid=32192 hip_device=0
+pid=15280 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=15280 c512_m32_requested=1 c512_m32_active=1
+pid=15280 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=15280 wave_owned_requested=1 wave_owned_active=1
+pid=15280 hip_device=0
+pid=32688 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=32688 c512_m32_requested=1 c512_m32_active=1
+pid=32688 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=32688 vit_stream_requested=3 vit_stream_active=3
+pid=32688 wave_owned_requested=1 wave_owned_active=1
+pid=32688 hip_device=0
+pid=29228 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=29228 c512_m32_requested=1 c512_m32_active=1
+pid=29228 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=29228 wave_owned_requested=1 wave_owned_active=1
+pid=29228 hip_device=0
+pid=30672 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=30672 c512_m32_requested=1 c512_m32_active=1
+pid=30672 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=30672 vit_stream_requested=3 vit_stream_active=3
+pid=30672 wave_owned_requested=1 wave_owned_active=1
+pid=30672 hip_device=0
+pid=21044 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=21044 c512_m32_requested=1 c512_m32_active=1
+pid=21044 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=21044 wave_owned_requested=1 wave_owned_active=1
+pid=21044 hip_device=0
+pid=13592 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=13592 c512_m32_requested=1 c512_m32_active=1
+pid=13592 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=13592 vit_stream_requested=3 vit_stream_active=3
+pid=13592 wave_owned_requested=1 wave_owned_active=1
+pid=13592 hip_device=0
+pid=7368 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=7368 c512_m32_requested=1 c512_m32_active=1
+pid=7368 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=7368 wave_owned_requested=1 wave_owned_active=1
+pid=7368 hip_device=0
+pid=17716 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=17716 c512_m32_requested=1 c512_m32_active=1
+pid=17716 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=17716 vit_stream_requested=3 vit_stream_active=3
+pid=17716 wave_owned_requested=1 wave_owned_active=1
+pid=17716 hip_device=0
+pid=24772 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1280x768 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=24772 c512_m32_requested=1 c512_m32_active=1
+pid=24772 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=24772 wave_owned_requested=1 wave_owned_active=1
+pid=24772 hip_device=0
+pid=552 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1280x768 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=552 c512_m32_requested=1 c512_m32_active=1
+pid=552 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=552 vit_stream_requested=3 vit_stream_active=3
+pid=552 wave_owned_requested=1 wave_owned_active=1
+pid=552 hip_device=0
+pid=2632 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=2632 c512_m32_requested=1 c512_m32_active=1
+pid=2632 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=2632 wave_owned_requested=1 wave_owned_active=1
+pid=2632 hip_device=0
+pid=20700 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=20700 c512_m32_requested=1 c512_m32_active=1
+pid=20700 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=20700 vit_stream_requested=3 vit_stream_active=3
+pid=20700 wave_owned_requested=1 wave_owned_active=1
+pid=20700 hip_device=0
+pid=20024 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=20024 c512_m32_requested=1 c512_m32_active=1
+pid=20024 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=20024 wave_owned_requested=1 wave_owned_active=1
+pid=20024 hip_device=0
+pid=31904 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=31904 c512_m32_requested=1 c512_m32_active=1
+pid=31904 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=31904 vit_stream_requested=3 vit_stream_active=3
+pid=31904 wave_owned_requested=1 wave_owned_active=1
+pid=31904 hip_device=0
+pid=30500 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=30500 c512_m32_requested=1 c512_m32_active=1
+pid=30500 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=30500 wave_owned_requested=1 wave_owned_active=1
+pid=30500 hip_device=0
+pid=30200 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=30200 c512_m32_requested=1 c512_m32_active=1
+pid=30200 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=30200 vit_stream_requested=3 vit_stream_active=3
+pid=30200 wave_owned_requested=1 wave_owned_active=1
+pid=30200 hip_device=0
+pid=21992 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=21992 c512_m32_requested=1 c512_m32_active=1
+pid=21992 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=21992 vit_stream_requested=3 vit_stream_active=3
+pid=21992 wave_owned_requested=1 wave_owned_active=1
+pid=21992 hip_device=0
+pid=18032 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=18032 c512_m32_requested=1 c512_m32_active=1
+pid=18032 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=18032 wave_owned_requested=1 wave_owned_active=1
+pid=18032 hip_device=0
+pid=25168 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=25168 c512_m32_requested=1 c512_m32_active=1
+pid=25168 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=25168 wave_owned_requested=1 wave_owned_active=1
+pid=25168 hip_device=0
+pid=13972 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=13972 c512_m32_requested=1 c512_m32_active=1
+pid=13972 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=13972 vit_stream_requested=3 vit_stream_active=3
+pid=13972 wave_owned_requested=1 wave_owned_active=1
+pid=13972 hip_device=0
+pid=27560 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=27560 c512_m32_requested=1 c512_m32_active=1
+pid=27560 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=27560 vit_stream_requested=3 vit_stream_active=3
+pid=27560 wave_owned_requested=1 wave_owned_active=1
+pid=27560 hip_device=0
+pid=6252 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=6252 c512_m32_requested=1 c512_m32_active=1
+pid=6252 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=6252 wave_owned_requested=1 wave_owned_active=1
+pid=6252 hip_device=0
+pid=1416 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=1416 c512_m32_requested=1 c512_m32_active=1
+pid=1416 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=1416 wave_owned_requested=1 wave_owned_active=1
+pid=1416 hip_device=0
+pid=26164 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=26164 c512_m32_requested=1 c512_m32_active=1
+pid=26164 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=26164 vit_stream_requested=3 vit_stream_active=3
+pid=26164 wave_owned_requested=1 wave_owned_active=1
+pid=26164 hip_device=0
+pid=3216 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=3216 c512_m32_requested=1 c512_m32_active=1
+pid=3216 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=3216 vit_stream_requested=3 vit_stream_active=3
+pid=3216 wave_owned_requested=1 wave_owned_active=1
+pid=3216 hip_device=0
+pid=25552 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=25552 c512_m32_requested=1 c512_m32_active=1
+pid=25552 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=25552 wave_owned_requested=1 wave_owned_active=1
+pid=25552 hip_device=0
+pid=19956 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=19956 c512_m32_requested=1 c512_m32_active=1
+pid=19956 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=19956 wave_owned_requested=1 wave_owned_active=1
+pid=19956 hip_device=0
+pid=16160 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=16160 c512_m32_requested=1 c512_m32_active=1
+pid=16160 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=16160 vit_stream_requested=3 vit_stream_active=3
+pid=16160 wave_owned_requested=1 wave_owned_active=1
+pid=16160 hip_device=0
+pid=25148 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=25148 c512_m32_requested=1 c512_m32_active=1
+pid=25148 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=25148 vit_stream_requested=3 vit_stream_active=3
+pid=25148 wave_owned_requested=1 wave_owned_active=1
+pid=25148 hip_device=0
+pid=35256 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=35256 c512_m32_requested=1 c512_m32_active=1
+pid=35256 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=35256 wave_owned_requested=1 wave_owned_active=1
+pid=35256 hip_device=0
+pid=25772 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=25772 c512_m32_requested=1 c512_m32_active=1
+pid=25772 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=25772 wave_owned_requested=1 wave_owned_active=1
+pid=25772 hip_device=0
+pid=21068 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V4\gfx1201
+pid=21068 c512_m32_requested=1 c512_m32_active=1
+pid=21068 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=21068 vit_stream_requested=3 vit_stream_active=3
+pid=21068 wave_owned_requested=1 wave_owned_active=1
+pid=21068 hip_device=0
+pid=580 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=580 c512_m32_requested=1 c512_m32_active=1
+pid=580 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=580 wave_owned_requested=1 wave_owned_active=1
+pid=580 hip_device=0
+pid=22832 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V4\gfx1201
+pid=22832 c512_m32_requested=1 c512_m32_active=1
+pid=22832 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=22832 vit_stream_requested=3 vit_stream_active=3
+pid=22832 wave_owned_requested=1 wave_owned_active=1
+pid=22832 hip_device=0
+pid=11472 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=11472 c512_m32_requested=1 c512_m32_active=1
+pid=11472 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=11472 wave_owned_requested=1 wave_owned_active=1
+pid=11472 hip_device=0
+pid=31048 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V4\gfx1201
+pid=31048 c512_m32_requested=1 c512_m32_active=1
+pid=31048 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=31048 vit_stream_requested=3 vit_stream_active=3
+pid=31048 wave_owned_requested=1 wave_owned_active=1
+pid=31048 hip_device=0
+pid=32316 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=32316 c512_m32_requested=1 c512_m32_active=1
+pid=32316 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=32316 wave_owned_requested=1 wave_owned_active=1
+pid=32316 hip_device=0
+pid=15292 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V4\gfx1201
+pid=15292 c512_m32_requested=1 c512_m32_active=1
+pid=15292 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=15292 vit_stream_requested=3 vit_stream_active=3
+pid=15292 wave_owned_requested=1 wave_owned_active=1
+pid=15292 hip_device=0
+pid=18864 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1280x768 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=18864 c512_m32_requested=1 c512_m32_active=1
+pid=18864 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=18864 wave_owned_requested=1 wave_owned_active=1
+pid=18864 hip_device=0
+pid=18896 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1280x768 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V4\gfx1201
+pid=18896 c512_m32_requested=1 c512_m32_active=1
+pid=18896 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=18896 vit_stream_requested=3 vit_stream_active=3
+pid=18896 wave_owned_requested=1 wave_owned_active=1
+pid=18896 hip_device=0
+pid=23260 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=23260 c512_m32_requested=1 c512_m32_active=1
+pid=23260 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=23260 wave_owned_requested=1 wave_owned_active=1
+pid=23260 hip_device=0
+pid=21632 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V4\gfx1201
+pid=21632 c512_m32_requested=1 c512_m32_active=1
+pid=21632 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=21632 vit_stream_requested=3 vit_stream_active=3
+pid=21632 wave_owned_requested=1 wave_owned_active=1
+pid=21632 hip_device=0
+pid=33296 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=33296 c512_m32_requested=1 c512_m32_active=1
+pid=33296 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=33296 wave_owned_requested=1 wave_owned_active=1
+pid=33296 hip_device=0
+pid=16720 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V4\gfx1201
+pid=16720 c512_m32_requested=1 c512_m32_active=1
+pid=16720 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=16720 vit_stream_requested=3 vit_stream_active=3
+pid=16720 wave_owned_requested=1 wave_owned_active=1
+pid=16720 hip_device=0
+pid=7616 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=7616 c512_m32_requested=1 c512_m32_active=1
+pid=7616 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=7616 wave_owned_requested=1 wave_owned_active=1
+pid=7616 hip_device=0
+pid=32476 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V4\gfx1201
+pid=32476 c512_m32_requested=1 c512_m32_active=1
+pid=32476 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=32476 vit_stream_requested=3 vit_stream_active=3
+pid=32476 wave_owned_requested=1 wave_owned_active=1
+pid=32476 hip_device=0
+pid=10872 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=10872 c512_m32_requested=1 c512_m32_active=1
+pid=10872 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=10872 wave_owned_requested=1 wave_owned_active=1
+pid=10872 hip_device=0
+pid=13148 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V4\gfx1201
+pid=13148 c512_m32_requested=1 c512_m32_active=1
+pid=13148 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=13148 vit_stream_requested=3 vit_stream_active=3
+pid=13148 wave_owned_requested=1 wave_owned_active=1
+pid=13148 hip_device=0
+pid=18928 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=18928 c512_m32_requested=1 c512_m32_active=1
+pid=18928 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=18928 wave_owned_requested=1 wave_owned_active=1
+pid=18928 hip_device=0
+pid=31476 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V4\gfx1201
+pid=31476 c512_m32_requested=1 c512_m32_active=1
+pid=31476 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=31476 vit_stream_requested=3 vit_stream_active=3
+pid=31476 wave_owned_requested=1 wave_owned_active=1
+pid=31476 hip_device=0
+pid=13172 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=13172 c512_m32_requested=1 c512_m32_active=1
+pid=13172 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=13172 wave_owned_requested=1 wave_owned_active=1
+pid=13172 hip_device=0
+pid=12140 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V4\gfx1201
+pid=12140 c512_m32_requested=1 c512_m32_active=1
+pid=12140 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=12140 vit_stream_requested=3 vit_stream_active=3
+pid=12140 wave_owned_requested=1 wave_owned_active=1
+pid=12140 hip_device=0
+pid=23312 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1280x768 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=23312 c512_m32_requested=1 c512_m32_active=1
+pid=23312 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=23312 wave_owned_requested=1 wave_owned_active=1
+pid=23312 hip_device=0
+pid=22736 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1280x768 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V4\gfx1201
+pid=22736 c512_m32_requested=1 c512_m32_active=1
+pid=22736 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=22736 vit_stream_requested=3 vit_stream_active=3
+pid=22736 wave_owned_requested=1 wave_owned_active=1
+pid=22736 hip_device=0
+pid=29804 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=29804 c512_m32_requested=1 c512_m32_active=1
+pid=29804 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=29804 wave_owned_requested=1 wave_owned_active=1
+pid=29804 hip_device=0
+pid=13256 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V4\gfx1201
+pid=13256 c512_m32_requested=1 c512_m32_active=1
+pid=13256 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=13256 vit_stream_requested=3 vit_stream_active=3
+pid=13256 wave_owned_requested=1 wave_owned_active=1
+pid=13256 hip_device=0
+pid=22396 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=22396 c512_m32_requested=1 c512_m32_active=1
+pid=22396 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=22396 wave_owned_requested=1 wave_owned_active=1
+pid=22396 hip_device=0
+pid=16492 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V4\gfx1201
+pid=16492 c512_m32_requested=1 c512_m32_active=1
+pid=16492 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=16492 vit_stream_requested=3 vit_stream_active=3
+pid=16492 wave_owned_requested=1 wave_owned_active=1
+pid=16492 hip_device=0
+pid=34324 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=34324 c512_m32_requested=1 c512_m32_active=1
+pid=34324 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=34324 wave_owned_requested=1 wave_owned_active=1
+pid=34324 hip_device=0
+pid=19288 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V4\gfx1201
+pid=19288 c512_m32_requested=1 c512_m32_active=1
+pid=19288 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=19288 vit_stream_requested=3 vit_stream_active=3
+pid=19288 wave_owned_requested=1 wave_owned_active=1
+pid=19288 hip_device=0
+pid=12628 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V4\gfx1201
+pid=12628 c512_m32_requested=1 c512_m32_active=1
+pid=12628 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=12628 vit_stream_requested=3 vit_stream_active=3
+pid=12628 wave_owned_requested=1 wave_owned_active=1
+pid=12628 hip_device=0
+pid=30540 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=30540 c512_m32_requested=1 c512_m32_active=1
+pid=30540 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=30540 wave_owned_requested=1 wave_owned_active=1
+pid=30540 hip_device=0
+pid=32492 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=32492 c512_m32_requested=1 c512_m32_active=1
+pid=32492 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=32492 wave_owned_requested=1 wave_owned_active=1
+pid=32492 hip_device=0
+pid=16708 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V4\gfx1201
+pid=16708 c512_m32_requested=1 c512_m32_active=1
+pid=16708 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=16708 vit_stream_requested=3 vit_stream_active=3
+pid=16708 wave_owned_requested=1 wave_owned_active=1
+pid=16708 hip_device=0
+pid=29588 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V4\gfx1201
+pid=29588 c512_m32_requested=1 c512_m32_active=1
+pid=29588 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=29588 vit_stream_requested=3 vit_stream_active=3
+pid=29588 wave_owned_requested=1 wave_owned_active=1
+pid=29588 hip_device=0
+pid=18152 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=18152 c512_m32_requested=1 c512_m32_active=1
+pid=18152 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=18152 wave_owned_requested=1 wave_owned_active=1
+pid=18152 hip_device=0
+pid=21752 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=21752 c512_m32_requested=1 c512_m32_active=1
+pid=21752 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=21752 wave_owned_requested=1 wave_owned_active=1
+pid=21752 hip_device=0
+pid=32736 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V4\gfx1201
+pid=32736 c512_m32_requested=1 c512_m32_active=1
+pid=32736 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=32736 vit_stream_requested=3 vit_stream_active=3
+pid=32736 wave_owned_requested=1 wave_owned_active=1
+pid=32736 hip_device=0
+pid=35744 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V4\gfx1201
+pid=35744 c512_m32_requested=1 c512_m32_active=1
+pid=35744 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=35744 vit_stream_requested=3 vit_stream_active=3
+pid=35744 wave_owned_requested=1 wave_owned_active=1
+pid=35744 hip_device=0
+pid=6900 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=6900 c512_m32_requested=1 c512_m32_active=1
+pid=6900 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=6900 wave_owned_requested=1 wave_owned_active=1
+pid=6900 hip_device=0
+pid=35804 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=35804 c512_m32_requested=1 c512_m32_active=1
+pid=35804 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=35804 wave_owned_requested=1 wave_owned_active=1
+pid=35804 hip_device=0
+pid=17016 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V4\gfx1201
+pid=17016 c512_m32_requested=1 c512_m32_active=1
+pid=17016 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=17016 vit_stream_requested=3 vit_stream_active=3
+pid=17016 wave_owned_requested=1 wave_owned_active=1
+pid=17016 hip_device=0
+pid=596 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V4\gfx1201
+pid=596 c512_m32_requested=1 c512_m32_active=1
+pid=596 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=596 vit_stream_requested=3 vit_stream_active=3
+pid=596 wave_owned_requested=1 wave_owned_active=1
+pid=596 hip_device=0
+pid=20572 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=20572 c512_m32_requested=1 c512_m32_active=1
+pid=20572 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=20572 wave_owned_requested=1 wave_owned_active=1
+pid=20572 hip_device=0
+pid=29872 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=29872 c512_m32_requested=1 c512_m32_active=1
+pid=29872 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=29872 wave_owned_requested=1 wave_owned_active=1
+pid=29872 hip_device=0
+pid=3216 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=3216 c512_m32_requested=1 c512_m32_active=1
+pid=3216 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=3216 vit_stream_requested=3 vit_stream_active=3
+pid=3216 wave_owned_requested=1 wave_owned_active=1
+pid=3216 hip_device=0
+pid=35376 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=35376 c512_m32_requested=1 c512_m32_active=1
+pid=35376 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=35376 vit_stream_requested=3 vit_stream_active=3
+pid=35376 wave_owned_requested=1 wave_owned_active=1
+pid=35376 hip_device=0
+pid=24248 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=24248 c512_m32_requested=1 c512_m32_active=1
+pid=24248 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=24248 wave_owned_requested=1 wave_owned_active=1
+pid=24248 hip_device=0
+pid=34060 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=34060 c512_m32_requested=1 c512_m32_active=1
+pid=34060 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=34060 wave_owned_requested=1 wave_owned_active=1
+pid=34060 hip_device=0
+pid=13240 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=13240 c512_m32_requested=1 c512_m32_active=1
+pid=13240 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=13240 vit_stream_requested=3 vit_stream_active=3
+pid=13240 wave_owned_requested=1 wave_owned_active=1
+pid=13240 hip_device=0
+pid=8644 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=8644 c512_m32_requested=1 c512_m32_active=1
+pid=8644 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=8644 vit_stream_requested=3 vit_stream_active=3
+pid=8644 wave_owned_requested=1 wave_owned_active=1
+pid=8644 hip_device=0
+pid=26256 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=26256 c512_m32_requested=1 c512_m32_active=1
+pid=26256 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=26256 wave_owned_requested=1 wave_owned_active=1
+pid=26256 hip_device=0
+pid=29228 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=29228 c512_m32_requested=1 c512_m32_active=1
+pid=29228 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=29228 wave_owned_requested=1 wave_owned_active=1
+pid=29228 hip_device=0
+pid=16720 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=16720 c512_m32_requested=1 c512_m32_active=1
+pid=16720 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=16720 vit_stream_requested=3 vit_stream_active=3
+pid=16720 wave_owned_requested=1 wave_owned_active=1
+pid=16720 hip_device=0
+pid=6392 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=6392 c512_m32_requested=1 c512_m32_active=1
+pid=6392 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=6392 vit_stream_requested=3 vit_stream_active=3
+pid=6392 wave_owned_requested=1 wave_owned_active=1
+pid=6392 hip_device=0
+pid=21428 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1600x960 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=21428 c512_m32_requested=1 c512_m32_active=1
+pid=21428 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=21428 wave_owned_requested=1 wave_owned_active=1
+pid=21428 hip_device=0
+pid=32252 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=32252 c512_m32_requested=1 c512_m32_active=1
+pid=32252 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=32252 wave_owned_requested=1 wave_owned_active=1
+pid=32252 hip_device=0
+pid=30632 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=30632 c512_m32_requested=1 c512_m32_active=1
+pid=30632 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=30632 vit_stream_requested=3 vit_stream_active=3
+pid=30632 wave_owned_requested=1 wave_owned_active=1
+pid=30632 hip_device=0
+pid=23632 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-V3\gfx1201
+pid=23632 c512_m32_requested=1 c512_m32_active=1
+pid=23632 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=23632 vit_stream_requested=3 vit_stream_active=3
+pid=23632 wave_owned_requested=1 wave_owned_active=1
+pid=23632 hip_device=0
+pid=26192 runtime=7 fast=1 packed_weights=1 packed_c32=1 fp8_normalized=1 fp8_ffn=1 fp8_av=1 fp8_deep=1 fp8_middle=1 half_c32=1 crop_c32=1 fused_qkv_norm=1 fused_mh_ffn=1 tiled_mh_ffn=1 tiled_ffn_min_c=256 mapped_c32=1 vit_blocked=1 vit_contract_blocked=1 vit_split_k=0 vit_weight_mask=1 vit_pack_input=1 elide_identity_shift=1 vit_qkv_fused=1 ffn_qkv=1 ffn_qkv_max_c=256 grouped_mh_contract=1 direct_prefix_input=1 prefix_fused=1 mh_input_mapped=1 mh_project_crop=1 vit_qkv_blocked=1 split_project_blocked=1 split_mix_blocked=1 split_ffn_fused=1 fused_ffn_project=1 post_merge_fold=1 pre_main8=1 raw_chain=1 graph=0 sparse_weights=0 processing=1920x1152 modules=D:\DLSSNR-Lab\hip-backend\vit-bytestream\modules-A\gfx1201
+pid=26192 c512_m32_requested=1 c512_m32_active=1
+pid=26192 vit_proj_n64_requested=1 vit_proj_n64_active=1
+pid=26192 wave_owned_requested=1 wave_owned_active=1
+pid=26192 hip_device=0

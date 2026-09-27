@@ -17,7 +17,7 @@
 
 ## 正在进行
 
-- **闇 第三刀**（任务单 `conversation/20260927/yami-round3.md`）：① post（C32 加权 26%，最大）单独段账与逐位候选；② finish/finish_dcrop 完整内部窗口免逐像素裁切；③ 离开 C32，C512/ViT 的 ACO 对照，重点是数据形态（ViT 读 f32、访存受限；`vit_byte_stream` 与自适应复用互斥待解）。
+- **闇第四刀已交付（09-27 21:02，待Zero画面验收）**：剑星新add-on4151123e + vit-stream（gfx1201 ad59f7be / gfx1200 0c9171ee），`DLSS5_HIP_VIT_STREAM=3`。标准1080 EXACT整网12.91～12.92→12.74～12.77ms（−1.23～−1.38%，过0.5%门槛），AE运动回放省0.040/0.043ms；900基本持平。EXACT/AE各7组逐位，AE43复用+41刷新，RE9开关与缺模块回退已冒烟。备份 `D:\DLSSNR-Lab\vit-bytestream-20260927\backups\stellar-20260927-210229`。C512 half出口无收益，不采用。未发包。
 
 ## Zero 的标准与取舍（为什么这样定）
 
@@ -45,9 +45,9 @@
 
 ## B. 优化候选（逐位；按"收益 × 把握"排）
 
-1. **闇第三刀已交付、finish已装剑星（09-27 20:06，待Zero画面验收）**。post分段账4909条普通向量，RGB头502；成组读取1080变慢，整窗判断仅约−0.005ms，均不开。finish内部窗口 `CW_FINISH_FULL_TILE 1` 已进配方，7组逐位/双架构/两批千帧ABBA：900 −0.021/−0.023ms、1080 −0.034/−0.035ms（−0.22～−0.27%）；实装gfx1201 1753400c，备份 `D:\DLSSNR-Lab\c32-round3-20260927\backups\stellar-20260927-200610`。ViT最小字节AV→n64原型EXACT/AE各7组逐位，AE 43命中+41刷新；EXACT两档省0.04～0.05ms，未装游戏。复用与内部字节张量可兼容，不必先压缓存；下一步显式byte kernel/host配对，再扩精确f16接口。C512投影/QKV已读字节，优先查mix供数。详见 `results/c32-round3-20260927` / `results/vit-c512-aco-20260927`，未发包。
+1. **ViT字节AV + contract-half已成熟并装剑星**（见“正在进行”）：保留n64/fragment核与f32复用缓存，用具名kernel和host配对；源码宏默认0，模块配方开1，三种发布flags模板设stream=3。候选分账、其余f32边流量表、两档两批EXACT与AE结果见 `results/vit-bytestream-20260927`。强制QKV unroll2只略改善900、1080少赚，保持默认展开。下一步若继续，考虑block输出直接给下一块expand字节，收益小于本轮QKV；不再用单砍VALU的DF_PACK8。
 2. **帧时间分布日志**（Zero：帧率不一定涨，但卡顿因素在减少）：记每帧耗时分布（1% low、最长帧、NR 实际调用率），让"卡不卡"可量化。
-3. C512 FFN 链剩余两核（`ffn_fused_t8`、`projection_frag`，`results/c512-ffn-20260926`）。
+3. **C512 mix已出账并试half出口，null**（`results/c512-mix-20260927`）：EXACT/AE各7组逐位，但900 +0.015/+0.008ms、1080 +0.002/+0.005ms，不合配方。mixed出口不是已证实的主瓶颈；后续数据形态应查packed输入及其残差消费者，尾部算术/任何MODE另做敏感性与census。不能仅凭VMEM数断言纯DRAM或纯VALU受限。
 4. decoder 投影（2×2 上采样尾部串行化）；ViT QKV 归一化段；C32 FFN 权重按 WMMA 片段预排；host 侧 C256 宽权重片段（约 −0.03ms）；C32 对角残差跳过全零 K16 半块（约 −0.1～0.2%，`results/c32-diag-zero-20260925`）。
 5. `Development/HIP/validate-modules.ps1` 默认资产目录已不存在，修路径后纳入发包前检查。
 6. 可告知 mochizuki：`v_cvt_pk_f32_fp8` 在 gfx1201 实测返回同一字节两份（`HIP/experiments/pair-unpack`），他的 fswin64 用了 64 次。

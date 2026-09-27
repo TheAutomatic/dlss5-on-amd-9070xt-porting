@@ -1,0 +1,37 @@
+{
+  "timing": {
+    "runtime-regression-H-correct": {},
+    "runtime-regression-H-adaptive": {},
+    "runtime-regression-H-r1": {
+      "900": {
+        "baseline_ms": 9.369159999999995,
+        "candidate_ms": 9.383695625,
+        "delta_ms": 0.01453562500000416,
+        "percent": 0.15514331060633157
+      },
+      "1080": {
+        "baseline_ms": 12.927209375,
+        "candidate_ms": 12.929305625000001,
+        "delta_ms": 0.002096250000001021,
+        "percent": 0.016215796767826696
+      }
+    },
+    "runtime-regression-H-r2": {
+      "900": {
+        "baseline_ms": 9.422749999999986,
+        "candidate_ms": 9.431086874999995,
+        "delta_ms": 0.008336875000008348,
+        "percent": 0.08847602876027594
+      },
+      "1080": {
+        "baseline_ms": 12.947910624999999,
+        "candidate_ms": 12.953375625,
+        "delta_ms": 0.005465000000000941,
+        "percent": 0.04220758204376285
+      }
+    }
+  },
+  "measurement_rows": 44,
+  "frame_hashes": 336,
+  "matched_candidate_frames": 168
+}
