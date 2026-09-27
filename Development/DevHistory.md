@@ -864,3 +864,7 @@ R（mix RTZ+FP8配对）：普通向量1871→1657，VMEM/WMMA不变，VGPR96→
 结论：mix多拆组的供数/指令代价未被并行度抵消；Q删量化VALU没有稳定收益；L真实提升驻留仍只约0.1%。900 QKV倒挂尚未闭环，不据此声称纯DRAM带宽受限或C512已到极限。后续需换主循环供数/packed生产者/归一化调度切口，不重复已测形态。ACO实际manifest ffwd_wgw4、FM2阈值2560、投影32×128，强调复用/融合，不是单纯增组；其有效tile域和数学路线不同。完整结果 `results/c512-round1-20260927`，复现 `HIP/experiments/c512-round1`。
 
 剑星900实测设置：1600×900窗口+FSR原生AA，NETWORK_HEIGHT=auto（或900），F8 EXACT；平常2K质量1707×961在auto下同样900。保持同中画质同机位、读黄字小数，避开60上限。本轮没改游戏设置。
+
+## 2026-09-28 06:56：光与影：33 号远征队（Xbox，UE5）可玩
+
+9070 装 0.35 常规包 + 剑星同款 c64-wave2（exe 在 `Content\Sandfall\Binaries\WinGDK`，游戏自带 FSR dll，常规包 EnableFfxInputs=false 默认已处理；备份 `D:\DLSSNR-Lab\e33-fresh-035\backup-20260927-233842`）。Zero：没问题，能玩。C512 第一轮（闇，`results/c512-round1-20260927`）无稳定过门槛候选、未合入：工作组翻倍变慢——C512 瓶颈不是并行度不足。
