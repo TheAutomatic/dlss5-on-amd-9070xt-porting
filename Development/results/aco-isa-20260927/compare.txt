@@ -1,0 +1,58 @@
+Instruction classes, same classifier (tools/isa_stats.py). ACO = straight-line (fully unrolled). Ours = static unless marked dynamic.
+g_fswin32.s                                          total   2788 VALU   1600 VOPD   461 WMMA   256 DS    12 VMEM    82 SALU   129 SMEM    3 WAIT   245
+g_fswin64.s                                          total   3363 VALU   1759 VOPD   440 WMMA   416 DS   128 VMEM   101 SALU   105 SMEM    2 WAIT   412
+g_fswin128.s                                         total   3867 VALU   1764 VOPD   456 WMMA   704 DS   224 VMEM   137 SALU   105 SMEM    2 WAIT   475
+g_fswin256.s                                         total   4951 VALU   1770 VOPD   475 WMMA  1280 DS   416 VMEM   209 SALU   105 SMEM    2 WAIT   694
+g_attn.s                                             total   1663 VALU   1019 VOPD    59 WMMA   112 DS    24 VMEM    74 SALU   153 SMEM    9 WAIT   213
+c32_wave1_chain                                      total   1400 VALU    786 VOPD   202 WMMA    56 DS    32 VMEM    50 SALU    68 SMEM    5 WAIT   201
+c32_wave1_finish                                     total   2009 VALU   1116 VOPD   191 WMMA    56 DS   114 VMEM    64 SALU   145 SMEM    6 WAIT   317
+c32_wave1_prefix                                     total   2229 VALU   1300 VOPD   220 WMMA    48 DS   115 VMEM    60 SALU   152 SMEM    5 WAIT   329
+c64_wave2_bi_bo                                      total   3989 VALU   2333 VOPD   354 WMMA   150 DS    70 VMEM   173 SALU   177 SMEM    3 WAIT   729
+c128_wave2_bi_bo                                     total   4657 VALU   2440 VOPD   385 WMMA   270 DS   100 VMEM   293 SALU   174 SMEM    3 WAIT   992
+c256_wave2_bi_bo                                     total   5327 VALU   2436 VOPD   306 WMMA   510 DS   160 VMEM   533 SALU   174 SMEM    3 WAIT  1205
+c256_attn_wave_bo                                    total   1615 VALU    726 VOPD    86 WMMA    58 DS    82 VMEM    83 SALU   185 SMEM    6 WAIT   389
+
+Dynamic per window (loop trip counts traced in the ISA: 4x4 inner, 4, 4, 4):
+c64_wave2_bi_bo dynamic/window: total 10961 VALU 6377 VOPD 1113 WMMA 456 DS 100 VMEM 509 SALU 534 SMEM 3 WAIT 1869
+     1216 v_med3_num_f32
+      856 v_add_f32_e32
+      527 v_mul_f32_e32
+      480 v_cvt_pk_fp8_f32
+      379 v_dual_add_f32
+      281 v_max_num_f32_e32
+      265 v_add_nc_u32_e32
+      261 v_dual_mul_f32
+      256 v_mul_f32_e64
+      205 v_and_b32_e32
+      192 v_cvt_pkrtz_f16_f32
+      192 v_cvt_f32_f16
+      177 v_dual_max_num_f32
+      152 v_or_b32_e32
+      150 v_dual_mov_b32
+      145 v_lshrrev_b32_e32
+      128 v_cvt_f32_fp8_e32
+      128 v_cvt_f32_f16_e64
+      117 v_mov_b32_e32
+      113 v_add_co_u32
+
+ACO g_fswin64 top VALU:
+         416 v_cvt_pk_fp8_f32
+         384 v_fma_mix_f32
+         256 v_maxmin_f32
+         232 v_dual_mul_f32
+         139 v_dual_fmaak_f32
+          77 v_lshl_add_u32
+          72 v_fma_mixlo_f16
+          64 v_cvt_pk_f32_fp8
+          64 v_fma_mixhi_f16
+          64 v_pk_max_f16
+          64 v_pk_min_f16
+          64 v_pk_add_f16
+          56 v_dual_fmac_f32
+          35 v_mul_f32
+          28 v_add3_u32
+          17 v_add_u32
+          16 v_cndmask_b32
+          13 v_dual_mov_b32
+          13 v_fmaak_f32
+          12 v_permlanex16_b32

@@ -710,3 +710,11 @@ c64-wave2 已用交换操作数让累加器直接当下一操作数（FFN 展开
 ## 2026-09-27 09:00：0.33 打包
 
 `Development/tools/package-033.ps1`（源码 2cb0ab90），以 0.32 三包为底：add-on b08cd2e3（黄字 AE/EXACT、F7 开关文字、共用 env 解析——HEAD add-on 首次进游戏，剑星/匹诺曹实测正常）、c32-wave1（CW_PACK8）+ c64-wave2（W2_PACK8 1）双架构；RE9 宿主与 runtime 沿用 0.32。三包逐文件校验、44 shader 变体通过；RE9 包 runtime-smoke 在打包后补跑通过（打包时 Magpie 开着被跳过，Magpie 空闲不影响）。结果 `Development/tools/release-033-results.json`。W2_PACK8 2 与 HIP_FP8_SAT_MODE 3 未进本包（未进游戏验证）。
+
+## 2026-09-27 11:00：ACO ISA 对照（DGX Spark，无 AMD 卡）
+
+在 `~/work/aco-isa/` 编 Mesa 26.2.3（仅 RADV，本地 libdrm 2.4.133，drm-shim），`LD_PRELOAD=libamdgpu_noop_drm_shim.so AMDGPU_GPU_ID=gfx1201` 得假 RX 9070 XT（coopmat + float8 齐）；源码编 glslang 16.5.0，出 mochizuki 46 条管线 SPIR-V，自写 `dump_isa` 经 pipeline_executable_properties 取 ACO 统计与汇编。对照 0.33 的 c32-wave1/c64-wave2 `.hsaco.s`。
+- ACO fswin 全展开；我们 `c64_wave2_bi_bo` 有循环，按 ISA 追出的次数加权后每窗口：WMMA 456 对 ACO 416（对得上），VALU+VOPD ~7490 对 ~2199（约 3.4 倍）——C64 族 1.83 对 0.71ms 的主因。
+- 我们每个 FP8 字节约 4.5 条（cvt_f32_f16 → `max x,x,x` 规范化 → med3 → +0 → 半条 cvt_pk）。ACO 用 MODE.FP16_OVFL **分段开关**（fswin64 里 5 次 s_setreg：FP8 段置 1 无 clamp，f16 收窄段前置 0）；我们 fp8-sat-mode 否决的是入口一次性设置，分段版未测。
+- 其他：ACO 用 `v_cvt_pk_f32_fp8` 成对解包、`v_pk_*_f16`、`v_fma_mix_f32`；VOPD 占比 20% 对我们 15%。
+候选与估算见 `results/aco-isa-20260927/README.md`、WorkingPlan 7c。未测时（假设备不执行），未动 9070。

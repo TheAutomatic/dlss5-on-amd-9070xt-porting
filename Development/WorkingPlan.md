@@ -30,6 +30,7 @@
 7a. **PACK8 进发包**（`results/pack8-20260927`，逐位，全开 ALL = `CW_PACK8`+`W2_PACK8` 整网 900 −8.7%、1080 −9.1%）：下次发包 c32-wave1 配方加 `CW_PACK8 1`、c64-wave2 加 `W2_PACK8 2`（2 = 1 再加 fma 合并，逐位再 −0.6%）；`DF_PACK8`（deep/ViT）逐位但不赚，不进。
 7c. **C64～C256 剩余 VALU**（`results/transpose-persist-20260927`）：转置布局已在用、持久化估 ≤0.1ms 均不做；c64_wave2 VALU 前几位 med3 336、`+0.f` add 336。`+0.f` 移到 clamp 前已做（`W2_PACK8 2`，逐位 −0.6%）；+0 初值累加器输出免 `+0.f` 需先探针穷举。
 7b. **c32-wave1 clamp 改 fmed3**（`HIP_FP8_SAT_MODE 3`，逐位，900/1080 约 −0.03/−0.04ms，`results/fp8-sat-mode-20260927`）：下次重编 c32-wave1 时并入配方；同法看 C64～C256/deep 未折叠 clamp 数。MODE.FP16_OVFL 路线因 f16 溢出语义不逐位，已否决。
+7c. **ACO 对照候选**（`results/aco-isa-20260927`，DGX Spark 上 Mesa drm-shim 假 gfx1201 拿到 ACO ISA）：C64 窗口动态 VALU 我们约 7490、ACO 约 2199（WMMA 相当）。按收益：① FP16_OVFL **分段**开关只包 FP8 转换段、段外关（RADV 原生做法；入口一次性那版因 f16 收窄出错，分段没测过），去 med3+规范化，估 C64 VALU −15～19%；② clamp 改 `__builtin_amdgcn_fmed3f` 去掉 `max x,x,x`（推到 wave_owned_mh.inc），约 −6%；③ `v_cvt_pk_f32_fp8` 成对解包 ~1%；④ 单次 f16 运算改 `v_pk_*_f16`；⑤ 链头暂存两值一条 cvt_pk。先 ② 再 ① 的 C64 原型。
 
 **C. 需要 Zero 拍板的**
 8. **有损**：6b（−1.1%）、ViT QKV 改 FP8（估整网 2～4%，Daniel 的做法）。按老规矩看 PSNR + Zero 游戏内看画质。
