@@ -816,3 +816,7 @@ ViT/C512重新导出十条ACO管线，按tile/循环量对齐。C512主投影与
 C512主mix分段账：K512循环1120普通向量/256VMEM/256WMMA，尾部701向量/64VMEM；尝试mix→FFN half出口，原F(Hrtz)值精确保存，mixed读写减半但主mix128KiB读取不变。EXACT/AE各7组逐位，900两批+0.0145/+0.0083、1080+0.0021/+0.0055ms，明确不采用。结果不支持mixed临时张量为主要瓶颈；下一步应查packed输入/残差生产者或另做尾部敏感性/census，未使用MODE，也不强称纯DRAM或纯VALU受限。
 
 21:02仅装剑星新add-on4151123e、vit-stream gfx1201 ad59f7be / gfx1200 0c9171ee、flags stream=3，旧模块保留（含第三刀C32），新建全套HIP校验清单。备份 `D:\DLSSNR-Lab\vit-bytestream-20260927\backups\stellar-20260927-210229`；dxgi/INI/C32哈希不变。C512候选和RE9 DLL未装游戏，未发包，画面/FPS待Zero。完整报告 `results/vit-bytestream-20260927`、`results/c512-mix-20260927`，部署 `deployments/vit-bytestream-20260927`。
+
+## 2026-09-27 21:17：ViT 字节流（闇，DLSS5_HIP_VIT_STREAM=3）剑星实测
+
+剑星装新 add-on + 两份 vit-stream 模块（`results/vit-bytestream-20260927`，备份 `D:\DLSSNR-Lab\vit-bytestream-20260927\backups\stellar-20260927-210229`）。Zero：1080P 原生 AA，EXACT 普通场景 56～57，**看黄字小数通常 56.7 左右，比上轮高约 0.3**——与离线 1080 −1.3%、网络约占整帧一半吻合。此后读数改看小数。
