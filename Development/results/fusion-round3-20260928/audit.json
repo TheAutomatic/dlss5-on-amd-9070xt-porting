@@ -1,0 +1,225 @@
+{
+  "build-D-gfx1201/c64-wave2.hsaco.s": {
+    "baseline": "/tmp/c512-fusion/production/gfx1201/c64-wave2.hsaco.s",
+    "existing_count": 102,
+    "changed_existing": {},
+    "all_existing_equal": true,
+    "new": {
+      "c128_wave2_down": {
+        "resources": {
+          "group_segment_fixed_size": 16384,
+          "max_flat_workgroup_size": 128,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 27,
+          "vgpr_count": 160,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 4,
+          "WAIT": 1575,
+          "SALU": 926,
+          "VALU": 2502,
+          "VOPD": 335,
+          "VMEM": 332,
+          "DS": 156,
+          "WMMA": 298,
+          "vector_slots": 3172
+        }
+      },
+      "c64_wave2_down": {
+        "resources": {
+          "group_segment_fixed_size": 8192,
+          "max_flat_workgroup_size": 64,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 32,
+          "vgpr_count": 139,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 4,
+          "WAIT": 1331,
+          "SALU": 931,
+          "VALU": 2388,
+          "VOPD": 323,
+          "VMEM": 212,
+          "DS": 124,
+          "WMMA": 170,
+          "vector_slots": 3034
+        }
+      }
+    }
+  },
+  "build-P-gfx1201/vit-stream.hsaco.s": {
+    "baseline": "/tmp/daniel-kernels/ours-current/vit-stream.hsaco.s",
+    "existing_count": 81,
+    "changed_existing": {},
+    "all_existing_equal": true,
+    "new": {
+      "vit_stream_project_n64_bh_pack": {
+        "resources": {
+          "group_segment_fixed_size": 0,
+          "max_flat_workgroup_size": 32,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 15,
+          "vgpr_count": 120,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 5,
+          "WAIT": 113,
+          "SALU": 36,
+          "VALU": 466,
+          "VOPD": 95,
+          "VMEM": 120,
+          "WMMA": 16,
+          "vector_slots": 656
+        }
+      },
+      "vit_stream_gather_pack": {
+        "resources": {
+          "group_segment_fixed_size": 0,
+          "max_flat_workgroup_size": 256,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 10,
+          "vgpr_count": 16,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 2,
+          "VALU": 38,
+          "WAIT": 23,
+          "SALU": 4,
+          "VMEM": 7,
+          "VOPD": 2,
+          "vector_slots": 42
+        }
+      }
+    }
+  },
+  "build-Q-gfx1201/vit-stream.hsaco.s": {
+    "baseline": "/tmp/daniel-kernels/ours-current/vit-stream.hsaco.s",
+    "existing_count": 81,
+    "changed_existing": {},
+    "all_existing_equal": true,
+    "new": {
+      "vit_stream_project_n64_bh_pack": {
+        "resources": {
+          "group_segment_fixed_size": 0,
+          "max_flat_workgroup_size": 32,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 15,
+          "vgpr_count": 120,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 5,
+          "WAIT": 123,
+          "SALU": 36,
+          "VALU": 426,
+          "VOPD": 99,
+          "VMEM": 120,
+          "WMMA": 16,
+          "vector_slots": 624
+        }
+      },
+      "vit_stream_gather_pack": {
+        "resources": {
+          "group_segment_fixed_size": 0,
+          "max_flat_workgroup_size": 256,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 10,
+          "vgpr_count": 16,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 2,
+          "VALU": 38,
+          "WAIT": 23,
+          "SALU": 4,
+          "VMEM": 7,
+          "VOPD": 2,
+          "vector_slots": 42
+        }
+      }
+    }
+  },
+  "build-T-gfx1201/c32-wave1.hsaco.s": {
+    "baseline": "/tmp/daniel-kernels/ours-current/c32-wave1.hsaco.s",
+    "existing_count": 16,
+    "changed_existing": {},
+    "all_existing_equal": true,
+    "new": {
+      "c32_wave1_up": {
+        "resources": {
+          "group_segment_fixed_size": 4096,
+          "max_flat_workgroup_size": 32,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 26,
+          "vgpr_count": 154,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 4,
+          "WAIT": 351,
+          "SALU": 174,
+          "VALU": 940,
+          "VOPD": 176,
+          "VMEM": 102,
+          "WMMA": 52,
+          "DS": 20,
+          "vector_slots": 1292
+        }
+      }
+    }
+  },
+  "build-U-gfx1201/c64-wave2.hsaco.s": {
+    "baseline": "/tmp/c512-fusion/production/gfx1201/c64-wave2.hsaco.s",
+    "existing_count": 102,
+    "changed_existing": {},
+    "all_existing_equal": true,
+    "new": {
+      "c64_wave2_up": {
+        "resources": {
+          "group_segment_fixed_size": 8192,
+          "max_flat_workgroup_size": 64,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 92,
+          "vgpr_count": 140,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 4,
+          "WAIT": 1835,
+          "SALU": 542,
+          "VALU": 3538,
+          "VOPD": 372,
+          "VMEM": 308,
+          "WMMA": 178,
+          "DS": 146,
+          "vector_slots": 4282
+        }
+      },
+      "c128_wave2_up": {
+        "resources": {
+          "group_segment_fixed_size": 16384,
+          "max_flat_workgroup_size": 128,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 87,
+          "vgpr_count": 160,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 4,
+          "WAIT": 2025,
+          "SALU": 527,
+          "VALU": 3615,
+          "VOPD": 373,
+          "VMEM": 404,
+          "WMMA": 294,
+          "DS": 178,
+          "vector_slots": 4361
+        }
+      }
+    }
+  }
+}

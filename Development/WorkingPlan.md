@@ -22,10 +22,11 @@
 
 ## 正在进行
 
-- **C512融合＋C64/C128共用权重已交付并装剑星（闇，09-28 21:05）**：`results/c512-fusion-20260928`。QKV/norm/attention合为64线程、6KiB LDS核；小通道FFN两qt共享权重。900派发214→201、1080 198→185；两轮1000帧ABBA：900−0.32462/−0.32731ms（−3.59%/−3.59%），1080−0.30972/−0.31986ms（−2.55%/−2.63%）。最终组合EXACT/AE168帧同golden、AE44复用/40刷新且决策全同。float FMA、1152、post(-4,-4)不变。
-- **当前剑星现场**：add-on **257a2fdb**，基于61a81c75增加C512路由；gfx1201 c512-m32-mh **51c2fa1a**、c64-wave2 **abffcd1a**。两模块×双架构已换，其他56模块及输入shader/配置原哈希；备份 `D:\DLSSNR-Lab\hip-backend\c512-fusion\backups\stellar-20260928-210508`。**DIRECT_IO=3、MAKE_RESIDENT_EVERY=60均未动**，不发包。页首旧C38现场描述已由此条替代；新版本本机画面/FPS待Zero。
-- **驻留尖刺由Hikari/Zero另测**：上轮C256本机59.0fps/16.95ms已兑现；MAKE_RESIDENT_EVERY从60改0是否使p99回18ms，本轮没有做这个变量。内核收益与该实验分开。
-- **900的C256仍走原分体PDL**：新16wave/窗口逐位但慢0.12174ms，关闭；900现在通过C512与C64/C128获得收益。C512 FFN M32和删无用float写也没采用；ViT/边界融合属余力项，本轮未扩。
+- **融合收尾已完成，0.36清单已交（闇，09-28 22:09）**：`results/fusion-round3-20260928/README.md`及`package-036-checklist.md`。最终合C64/C128上采样入首块（U2）＋C32上采样入首块（T），少3派发：900 201→198、1080 185→182。两轮整网900−0.17046/−0.18227ms（−1.95%/−2.08%），1080−0.24862/−0.26374ms（−2.10%/−2.23%）；最终EXACT/AE168帧逐位、AE44复用/40刷新且全字段同。
+- **相对0.35真实发布包累计**：同批ABBA，900−0.79132/−0.79465ms（−8.45%/−8.47%），1080−1.14182/−1.12918ms（−8.98%/−8.88%）；不是逐刀相加。0.35实际60模块通过发布manifest，0.36最终60模块已与repo及冻结载荷逐一验hash。期间float FMA授权换过基准，不称与0.35逐位。
+- **当前剑星现场**：add-on **d2290ad7**；gfx1201 c32-wave1 **d5cca499**、c64-wave2 **c8a88d27**。仅宿主＋4模块＋HIP校验表更新，另56模块、flags、输入shader、dxgi/OptiScaler原哈希；备份 `D:\DLSSNR-Lab\hip-backend\fusion-round3\backups\stellar-20260928-220957`。**DIRECT_IO=3、MAKE_RESIDENT_EVERY=60未动**。游戏新标尺是2K（2560×1440）原生AA EXACT，上一版52～53；本轮装后待Zero实测。页首旧现场描述由此条替代。
+- **供Hikari打0.36**：add-on及RE9 runtime **7ce2bc21**已编；runtime ABI2两档末帧hash对照及smoke通过，未装RE9。常规/Magpie DIRECT_IO保持1，RE9不写；驻留60/60/未设、FRAME_STATS全0等按清单。尚未打包/发包，Hikari据清单写package-036。
+- **本波不再扩**：ViT pack P/G/Q/R虽逐位但未赚，Down融合D慢；C32/ViT未找到新的小型权重复用切口，未重复旧M2/M4实验。驻留改0的p99实验仍由Hikari/Zero另做。
 
 ## Zero 的标准与取舍（为什么这样定）
 
@@ -55,17 +56,15 @@
 
 ## B. 优化候选（逐位；按"收益 × 把握"排）
 
-**已完成并合入**：C256两qt共享权重只启1080；本轮同写法推广C64/C128，权重请求均减半，C128 VGPR144→159但组合仍快。C512 QKV+norm+attention已融合，每帧少13派发、LDS6KiB/VGPR122/零spill，数学工作量不变。
+**本波已收尾**：C256整块仅1080；C512 QKV/attention融合；C64/C128 FFN两qt权重复用；本轮C32/C64/C128 Up与首块融合。最终配方、载荷与累计ms统一见`results/fusion-round3-20260928/package-036-checklist.md`，下一步打0.36，不继续为了派发数硬扩。
 
-**本轮关掉的路线**：C512 FFN M32虽权重减半，VGPR113→216/LDS4160→8320，反慢0.10～0.15ms；删_t8无人消费float写约噪声级；900 C256每头两wave/16wave整块多两次同步，零spill仍慢0.12174ms。不按“少读/少派发”直接假定赚时间，见`results/c512-fusion-20260928`。
-
-**下一优先级**：ViT每块6→5的融合/入口打包，或C64/C128/C32上下采样边界融合；本轮不强扩。C512原mix→expand→contract旧失败路线仍不原样重跑。
+**已交负账**：C512 FFN M32/删float写、900 C256 wave16、ViT投影byte出口/入口gather-pack（含复用FP8编码修剪）、C64/C128 Down融合均未采用。C32跨qt共享要大改流水，ViT M2/M4等旧形状已试，不重跑。新切口须有新供数/布局证据。
 
 1. **ACO 两段已交付并合配方**：C32激活前NaN规范化已删；C64～C256有界倒数已用。乘加独立舍入只对保持当前fast输出是约束，不能称NVIDIA原语义（本轮已核实原版half FMA）；float FMA已获批合入新基准，H候选不采用。C32 half直入 M/N净增指令，不重做。C64打包清零已在Daniel轮验证为null；剩余可定位项是C256 FFN标量量化/地址开销，先看 `results/aco-lineup-20260928` 的逐条表再定下一刀。本轮组合两档约−0.7%，已装剑星。
 
 2. **mochizuki 0.0.2.2本轮路线已测，不重复**：I/P组合C只有900−0.13%/−0.29%、1080−0.22%/−0.14%；S/V计数器叠加更慢，最终F去额外invalidate并保留hidden后仍慢0.1～0.2%；O占用上限约0.1%，G组间重排慢约1%，H四wave同组慢约0.3～0.5%。真实舍入不能因为后面还有FP8就删（已有标量反例）；下一轮需新证据/新切口。完整逐条适用性、ISA/资源/回归/ABBA在 `results/mochizuki-022-20260928`。
 
-3. **decoder / 上采样**（C512→C32 那几段，2×2 上采样尾部串行化）：还没按 C32/MH 的方法系统挖过，对照 ACO 的 `fswinfusedup*`。
+3. **decoder / 上采样**：C64/C128/C32边界已融合并合入；C256/C512边界未扩大。Down本轮已做逐位候选但变慢，有新组织证据再开。
 4. C512 若再动：换切口（packed 输入生产者/主循环供数、归一化调度），不重复 mix 拆组、去重复量化、LDS 复用、half 出口、现场零扫描（`results/c512-round1-20260927`、`tier900-20260927`）。
 5. 小件：ViT QKV 归一化段；C32 FFN 权重按 WMMA 片段预排；host 侧 C256 宽权重片段（约 −0.03ms）；C32 对角残差跳过全零 K16 半块（约 −0.1～0.2%，`results/c32-diag-zero-20260925`）。
 6. 帧时间日志：Magpie 路线未接；RE9 runtime 只见自己被调用的帧。
