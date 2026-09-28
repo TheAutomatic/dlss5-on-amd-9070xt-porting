@@ -1,0 +1,19 @@
+--- a/Development/HIP/hip_reference_network.h
++++ b/Development/HIP/hip_reference_network.h
+@@ -1,3 +1,6 @@
++#ifndef C512_T8_M32_HOST
++#define C512_T8_M32_HOST 0
++#endif
+ #pragma once
+ // SDKless HIP host graph. Scalar numerical validation path, not a realtime backend.
+ #include "hip_api.h"
+@@ -225,6 +228,9 @@
+    if(kernel=="vit_qkv_project_normalize_fused_f16compact_fp8_h16in_n4")groups=count/1024;
+    if(kernel=="split_mix_blocked"||kernel=="split_mix_blocked_h16w"||kernel=="split_projection_blocked"||kernel=="split_projection_blocked_t8"||kernel=="split_projection_frag")groups=count/1024;
+    if(kernel=="split_ffn_fused"||kernel=="split_ffn_fused_fp8"||kernel=="split_ffn_fused_fp8_mix"||kernel=="split_ffn_fused_fp8_t8"){threads=128;groups=count/1024;}
++   #if C512_T8_M32_HOST
++   if(kernel=="split_ffn_fused_fp8_t8"){threads=128;groups=((count/512+31)/32)*8;}
++#endif
+    if(kernel=="vit_ffn_fused"){threads=512;groups=count/16384;}
+    if(kernel=="vit_contract_combine"||kernel=="vit_pack_input"||kernel=="vit_pack_input_tiled")threads=256;
+    if(kernel=="vit_qkv_normalize")count=Count(size_t(count)*32);

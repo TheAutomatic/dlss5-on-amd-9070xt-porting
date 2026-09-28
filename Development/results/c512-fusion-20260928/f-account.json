@@ -1,0 +1,407 @@
+{
+  "unchanged_exports": {
+    "mh_ffn_expand_fast": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_contract_fast": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_project_fast": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_qkv_fast": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_attention_project_fast_scalar": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_contract_fast_pre": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_contract_fast_rtz": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_contract_fast_rne": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_qkv_normalize_fast": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_attention_project_fast_matrix": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_scores_exp_fast": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_probabilities_fast": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_attention_av_fast": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_pool_project_production": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_pool_project_production_h16w": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_pool_project_group_c64": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_pool_project_group_c128": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_pool_project_group_c256": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_pool_project_fused_c64": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_pool_project_fused_c128": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_pool_project_fused_c256": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_qkv_normalize_wave_c512": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_qkv_normalize_frag_c512": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_attention_project_frag_c512": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_qkv_normalize_fast_wave": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_qkv_normalize_fast_wave_fp8": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_expand_fast_fp8": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_contract_fast_fp8": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_attention_project_fast_scalar_fp8": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_attention_project_fast_matrix_fp8": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_contract_fast_fp8_out": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_project_fast_fp8": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_qkv_normalize_fused": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c64": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c128": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c256": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c64_tiled": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c128_tiled": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c256_tiled": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c64_project": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c128_project": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c256_tiled_project": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_attention_crop": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c64_project_mapped": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c128_project_mapped": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c256_tiled_project_mapped": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c64_project_g128": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c64_project_mapped_g128": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c128_project_g128": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c128_project_mapped_g128": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c256_tiled_project_g128": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c256_tiled_project_mapped_g128": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c64_project_g128_qkv": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c64_project_mapped_g128_qkv": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c128_project_g128_qkv": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c128_project_mapped_g128_qkv": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c64_frag_project_g128_qkv": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c64_frag_project_mapped_g128_qkv": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c128_frag_project_g128_qkv": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c128_frag_project_mapped_g128_qkv": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c64_tiled_project_g128_qkv": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c64_tiled_project_mapped_g128_qkv": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c128_tiled_project_g128_qkv": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c128_tiled_project_mapped_g128_qkv": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c256_tiled_project_g128_qkv": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c256_tiled_project_mapped_g128_qkv": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c64_project_g128_qkv_bn": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c64_project_mapped_g128_qkv_bn": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c128_project_g128_qkv_bn": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c128_project_mapped_g128_qkv_bn": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c64_project_g128_qkv_fb": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c64_project_mapped_g128_qkv_fb": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c128_project_g128_qkv_fb": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c128_project_mapped_g128_qkv_fb": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c256_tiled_project_g128_qkv_fb": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c256_tiled_project_mapped_g128_qkv_fb": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c64_project_g128_qkv_bytein_fb": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c64_project_mapped_g128_qkv_bytein_fb": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c128_project_g128_qkv_bytein_fb": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c128_project_mapped_g128_qkv_bytein_fb": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c256_tiled_project_g128_qkv_bytein_fb": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c256_tiled_project_mapped_g128_qkv_bytein_fb": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c256_frag_project_g128_qkv": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c256_frag_project_mapped_g128_qkv": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c256_frag_project_g128_qkv_fb": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_fb": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c256_frag_project_g128_qkv_bytein_fb": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "mh_qkv_normalize_frag_c512_m32": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "amdhsa.kernels": {
+      "isa_equal": true,
+      "resources_equal": true
+    },
+    "amdhsa.version": {
+      "isa_equal": true,
+      "resources_equal": true
+    }
+  },
+  "f_per_wave": {
+    "SMEM": 9,
+    "SALU": 176,
+    "WAIT": 956,
+    "VALU": 2417,
+    "VOPD": 338,
+    "DS": 100,
+    "VMEM": 404,
+    "global_read_bytes_fullwave": 106496,
+    "WMMA": 424,
+    "barrier_signal": 1,
+    "global_write_bytes_fullwave": 1024
+  },
+  "qkv_m32_per_wave": {
+    "SMEM": 3,
+    "SALU": 226,
+    "WAIT": 574,
+    "VALU": 919,
+    "VOPD": 198,
+    "VMEM": 198,
+    "global_read_bytes_fullwave": 49408,
+    "WMMA": 256,
+    "DS": 174,
+    "global_write_bytes_fullwave": 2048
+  },
+  "attention_per_wave": {
+    "SMEM": 3,
+    "WAIT": 244,
+    "SALU": 104,
+    "VALU": 781,
+    "VOPD": 78,
+    "VMEM": 50,
+    "global_read_bytes_fullwave": 4352,
+    "DS": 185,
+    "barrier_signal": 3,
+    "WMMA": 20,
+    "global_write_bytes_fullwave": 512
+  },
+  "notes": "Counts are path sums; full-wave global request bytes include all lanes, not unique tensor nor DRAM bytes. Old QKV represents 32token*2heads*1part: per window/head multiply3. F 2waves per window/head. Attention normalization needs dispatch work coverage."
+}

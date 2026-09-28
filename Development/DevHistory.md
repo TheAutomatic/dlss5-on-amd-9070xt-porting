@@ -1001,3 +1001,14 @@ EXACT/AE各7组×12帧共168候选帧同09-28 float FMA goldens，无NaN/Inf；A
 ## 2026-09-28 20:28：剑星本机实测 59（C256 融合 + 直写 IO + FMA + ACO 两刀）
 
 9070 本机，1080P 原生 AA、EXACT、简单画面静止：黄字 **59**（第五刀本机 57.1；Daniel 0.5.0 reference 贴 60 上限）。现装宿主 61a81c75、DLSS5_DIRECT_IO=3。
+
+
+## 2026-09-28 21:05：C512融合＋C64/C128权重复用，900−3.59%、1080−2.55～2.63%，已装剑星
+
+按8c9a61db任务顺序完成前三项，余力ViT/边界未扩。Daniel C512四buffer由host闭环：270/外部→FFWD→278→conv(残差270/外部)→280→attn3→288→conv(残差280)→270；QKV只在attn3的6KiB LDS内。新c512_qkv_attention_fused每window/head两wave各32查询，122VGPR、6144B LDS、零spill，只一次组同步；Q/K逐通道32项平方和、softmax两侧树与普通1/x、FP8/half舍入边界及现float FMA均不变，AV接原projection/crop。每window/head新旧WMMA都848。删除全局QKV交界约900档81.20MB、1080档102.24MB逻辑量；单head分组使输入共享变少，ISA路径和读取请求反增，不称DRAM流量减少。实抓C512族92→79，整网900档214→201、1080档198→185。
+
+C256的两qt FFN权重复用推广C64/C128：主力FFN权重请求192→96、320→160，WMMA456/744恒等，VGPR140不变/144→159、LDS8/16KiB不变、零spill；Sboth短筛900−0.10199、1080−0.15768ms。C512 FFN M32也实现并逐位，但VGPR113→216、LDS4160→8320，M/MD反慢0.10～0.15ms；仅删_t8无人消费float输出D只有−0.00654/−0.00251ms，均未合入。900新C256 wave16每头两wave、两平面保持32KiB、多两barrier，四导出VGPR208/200/208/200且零spill，900-motion12帧逐位但慢0.12174ms，900保留原分体PDL。
+
+最终C=F融合＋Sboth用生产host和双架构配方验证：EXACT/AE各7×12=168帧同09-28 float FMA golden、无NaN/Inf，AE44复用/40刷新、所有字段同。独立F亦过168，8个短筛各12，共432个候选帧同golden；额外用游戏CODEC_SRGB=0配置对F/C各12帧对拍同基线，单列24帧，不混CODEC1固定夹具。每槽1000帧弃200、首尾读回的两轮ABBA：900 9.046038→8.721419 / 9.108684→8.781375ms（−0.324618/−0.327309，−3.589%/−3.593%）；1080 12.131856→11.822138 / 12.149375→11.829512ms（−0.309719/−0.319863，−2.553%/−2.633%）。80短/长计时槽原序列复算；双架构新宏默认关代码同原，生产gfx1201代码同实测F/Sboth。gfx1200仅编译核对，真卡gfx1201。
+
+装剑星宿主257a2fdbd7fbd0472cb9e58843ee6e9a99a777f00adb0ad84b8ee6b7ebbb93ac，基于61a81c75增加C512路由；每架构c512-m32-mh/c64-wave2共4模块，gfx1201为51c2fa1a/abffcd1a，gfx1200为7d9e0068/dfdf3970。备份D:\DLSSNR-Lab\hip-backend\c512-fusion\backups\stellar-20260928-210508；DIRECT_IO=3、MAKE_RESIDENT_EVERY=60及flags/输入shader/dxgi/OptiScaler全保留原哈希，其他56模块未变。未发包，画面/FPS待Zero；驻留改0的p99实验留给Hikari/Zero，本轮未混测。报告、哈希、原始时序、ISA账与回滚脚本在results/c512-fusion-20260928和HIP/experiments/c512-fusion。
