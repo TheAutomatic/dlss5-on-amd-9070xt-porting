@@ -1,111 +1,81 @@
-# 当前工作计划（覆盖式，不续写；最后更新 2026-09-28 07:35，朱雀）
+# 当前工作计划（覆盖式，不续写；最后更新 2026-09-28 23:55，朱雀）
 
-> 开 session 先读这页。**这是项目唯一的"现状 + 规矩 + 为什么"**：实验过程与数据进 DevHistory.md（只追加），其余一律改这页（整页重写，读一遍再重写，该删的删）。不要另开别的工作日志——两份日志等于没有。
+> 开 session 先读这页。**这是项目唯一的"现状 + 规矩 + 为什么"**：实验过程与数据进 DevHistory.md（只追加），版本改动进 CHANGELOG（中英两份），其余一律改这页（整页重写，读一遍再重写，该删的删）。
 > 节奏：过日子式，没有 deadline。优先做有具体瓶颈证据、可逐位验证的小实验，够用就交。
 
-## 当前基线（09-28 float FMA）
+## 当前基线（0.36，09-28）
 
-- **0.35 已发布**（09-27 21:36，夸克 https://pan.quark.cn/s/83e6172e6c79 + Gofile https://gofile.io/d/NnF4GitT，tag 0.35 = ec96774d）：add-on 4151123e、每架构 30 模块（C32 闇三刀 + vit-stream）、RE9 runtime 432d8ccf + 宿主 aa3761f2，模板 `DLSS5_HIP_VIT_STREAM=3`。脚本 `tools/package-035.ps1`（下次复制它；模块数检查 30/60）。
-- **0.35 之后已进仓库、未发包**：
-  - **09-28 起基准改为 float FMA**：7个fast源文件23处激活，覆盖C32/MH含C256/ViT/C512与HIP fallback；168帧EXACT/AE新goldens在 `results/float-fma-20260928/new-baseline-hashes.csv`，以后逐位对它，旧HLSL precise和三道旧hash不再作裁判。
-  - 闇第五刀 C64～C256（c64-wave2 配方加字节输入整组读取 + RTZ 配对 + 直接坐标，`results/mh-round1-20260927`）：离线 900 −0.7%、1080 −0.8%，只换模块、无新开关。
-  - 帧时间日志 `DLSS5_FRAME_STATS=<秒>`（add-on + RE9 runtime，`results/frame-stats-20260928`，模板默认 0）。
-- **离线网络**：float FMA生产基准900约9.09～9.15ms、1080约12.40～12.43ms；对同批旧基准约−1.2%。详见 `results/float-fma-20260928`。
-- **剑星实测**（1080P 原生 AA，EXACT 黄字）：0.32 51～52 → 0.35 56.7 → 第五刀 **57.1**。帧时间日志：站立不动 p99 = max ≈ 18.5ms（抖动 ±0.5ms）；跑图时约 1% 帧 28～32ms，是游戏流式加载，不是网络。
+- **0.36 已发布**（09-28 23:36，夸克 https://pan.quark.cn/s/e5afdaca0769 + Gofile https://gofile.io/d/Z1hWdjcB，tag 0.36 = 2a72897d）：add-on d2290ad7、RE9 runtime 7ce2bc21 + 宿主 aa3761f2（沿用）、输入 shader 5be59a41、每架构 30 模块（清单 `results/fusion-round3-20260928/package-036-checklist.md`、`HIP-SHA256SUMS`）。脚本 `tools/package-036.ps1`（下次复制它）；Magpie 包自带 `ReShade.ini`（`TutorialProgress=4`，去 Home 引导遮罩）。
+- **0.36 相对 0.35**：ACO 对齐两刀（C32 去 NaN 规范化、C64～C256 有界倒数）、**float FMA（09-28 起新逐位基准，与 0.35 不逐位，对 NVIDIA 误差持平）**、`DLSS5_DIRECT_IO`（输入直写，发布默认 1）、C256 整块融合（1080）、C512 QKV+attention 融合、C64/C128 FFN 权重复用、C32/C64/C128 上采样与首块融合、帧时间日志 `DLSS5_FRAME_STATS`。派发 214 → 1080 档 182、900 档 198。离线 900 −0.79ms（−8.5%）、1080 −1.13ms（−8.9%）。
+- **剑星本机**（EXACT 静止）：1080P 原生 AA **60**（窗口模式 DWM 60Hz 封顶，量不出提速）；**2K（2560×1440）原生 AA 54**（新标尺；C512 融合版 52～53）。
 - **各游戏现装**：
-  - 剑星：add-on c38bcdd4（帧时间日志）不变；**float FMA 15模块×双架构已安装**，C32 gfx1201 AA999258、C64 F9E8F0C5，flags不变。备份 `D:\DLSSNR-Lab\float-fma-20260928\backups\stellar-20260928-153921`。本机画面/FPS待Zero。
-  - RE9：0.35 全套；中画质 2K 高质量 58～59、原生 AA 42。同一局内切档（几何日志、0 MiB）仍未实机走到。
-  - 33 号远征队（9070，Xbox，UE5，exe 在 `Content\Sandfall\Binaries\WinGDK`）：0.35 常规包 + 第五刀 c64-wave2；可玩。
-  - 鬼武者（9070，Xbox）：0.33 RE9 包 + 宿主 aa3761f2 + 0.34 模块；2K 质量约 60，可玩。
-  - 匹诺曹：旧版，贴 60，不作对比。
-- **对照**：mochizuki DLSSNR-AMD 0.0.2.2（09-28）：Linux 1080p 5.60ms；Windows 9.4 → 7.79ms（去掉 AMD Windows 编译器保留的 f32→f16→f32 往返——与我们 COMGR 同一家编译器）。我们 1080 折回 1080 行约 11.8ms，差约 1.5 倍。
+  - 剑星：add-on d2290ad7 + 0.36 模块，flags `DLSS5_DIRECT_IO=3`（含 FSR 输出直交，仅剑星现场）、`MAKE_RESIDENT_EVERY=60`、`FRAME_STATS=5`。备份 `D:\DLSSNR-Lab\hip-backend\fusion-round3\backups\stellar-20260928-220957`。
+  - RE9：0.35 全套（0.36 runtime 只在包内冒烟过，未装进游戏）；中画质 2K 高质量 58～59、原生 AA 42。
+  - 33 号远征队：0.35 常规包 + 第五刀；鬼武者：0.33 RE9 包 + 0.34 模块；匹诺曹：旧版，贴 60 不作对比。
+- **对手（09-28 剑星实测 + 静态对照）**：Daniel 0.5.0 默认 fast 档（f32 累加、e4m3 一次舍入、近似 rsqrt/rcp）网络 9.4～10.0ms，reference 档 11.0ms；他 1080 只算 1088 行、post 位移 0（有损简化，不追）。mochizuki 0.0.2.2（Claude Code 合写）Windows 版自称与 Linux 差 48.6dB。**我们 0.36 在完整 1152 行、NVIDIA 位移下与他们打平。** 换装对照用 `D:\DLSSNR-Lab\daniel-050\swap.ps1 daniel|ours`，看他日志 `dlssnr_on_amd.log` 的 network 均值。
 
 ## 正在进行
 
-- **融合收尾已完成，0.36清单已交（闇，09-28 22:09）**：`results/fusion-round3-20260928/README.md`及`package-036-checklist.md`。最终合C64/C128上采样入首块（U2）＋C32上采样入首块（T），少3派发：900 201→198、1080 185→182。两轮整网900−0.17046/−0.18227ms（−1.95%/−2.08%），1080−0.24862/−0.26374ms（−2.10%/−2.23%）；最终EXACT/AE168帧逐位、AE44复用/40刷新且全字段同。
-- **相对0.35真实发布包累计**：同批ABBA，900−0.79132/−0.79465ms（−8.45%/−8.47%），1080−1.14182/−1.12918ms（−8.98%/−8.88%）；不是逐刀相加。0.35实际60模块通过发布manifest，0.36最终60模块已与repo及冻结载荷逐一验hash。期间float FMA授权换过基准，不称与0.35逐位。
-- **当前剑星现场**：add-on **d2290ad7**；gfx1201 c32-wave1 **d5cca499**、c64-wave2 **c8a88d27**。仅宿主＋4模块＋HIP校验表更新，另56模块、flags、输入shader、dxgi/OptiScaler原哈希；备份 `D:\DLSSNR-Lab\hip-backend\fusion-round3\backups\stellar-20260928-220957`。**DIRECT_IO=3、MAKE_RESIDENT_EVERY=60未动**。游戏新标尺是2K（2560×1440）原生AA EXACT，上一版52～53；本轮装后待Zero实测。页首旧现场描述由此条替代。
-- **供Hikari打0.36**：add-on及RE9 runtime **7ce2bc21**已编；runtime ABI2两档末帧hash对照及smoke通过，未装RE9。常规/Magpie DIRECT_IO保持1，RE9不写；驻留60/60/未设、FRAME_STATS全0等按清单。尚未打包/发包，Hikari据清单写package-036。
-- **本波不再扩**：ViT pack P/G/Q/R虽逐位但未赚，Down融合D慢；C32/ViT未找到新的小型权重复用切口，未重复旧M2/M4实验。驻留改0的p99实验仍由Hikari/Zero另做。
+- 无。0.36 刚发，等 Zero 定下一步。
 
 ## Zero 的标准与取舍（为什么这样定）
 
-- **测帧只用剑星**：1080P 窗口 + FSR 原生 AA，F8 切 EXACT，**读黄字 FPS 的小数**（分辨率约 0.2～0.3 帧；网络约占整帧一半，离线 −1% ≈ 游戏 +0.25 帧@56）。测 900 档：1600×900 窗口 + FSR 原生 AA（网络档 900 或 auto），避开贴 60 的场景。查卡顿：开 `DLSS5_FRAME_STATS`，站立不动对比跑图。
-- **逐位是硬门槛**：每个优化与09-28 float FMA新基准输出一个比特都不差（7 用例回归，EXACT 与 AE 都要，AE 覆盖复用/刷新帧 + 900/1080 两批 ABBA）；有反例就不改。有损的等 Zero 拍板（C 段）。
-- **稳定性不操心**：只修自己能复现的；理论风险和别人机器上的个例记下，不追。
-- **风险不换速度**：PDL 保持 1。Zero 说"没必要增加 X 风险"时，先确认是"别担心 X"还是"别冒 X"（09-27 朱雀读反过一次）。
-- 发布：夸克 + Gofile；README 中英"当前版本"段 + 更新记录表（**按版本从旧到新，新行加在最后**）；按打包源码提交补 tag。
+- **测帧**：剑星 **2K 原生 AA + F8 EXACT**，读黄字小数（1080P 已被 60Hz 封顶）。只用 9070 本机数据，**Splashtop 远程读数不作数**（编码占 GPU、抖动大）。帧率随画面运动起伏是游戏渲染本身；比版本只用"同一位置、静止、简单画面"。网络本身的快慢以离线 ABBA 为准；帧时间日志 `frame-stats.txt` 由 agent 自己去 9070 取，不让 Zero 发。
+- **逐位是硬门槛**：对 09-28 float FMA 基准（`results/float-fma-20260928/new-baseline-hashes.csv`，0.36 即此基准）一个比特都不差，7 用例、EXACT/AE 都要、两档 ABBA；有反例就不改。**逐位是"对上一版"，不是"对 NVIDIA"**——最早版本才与原版全字节一致，此后转 fast、跳层、float FMA 都是 Zero 拍板的有记录偏离。误差会逐层逐帧放大，所以非拍板不偏离。
+- **偏离的做法**：先核实（查 NVIDIA 原文/量 RMSE），Zero 批准后作为一次单独偏离合入，新版本成为新基准，CHANGELOG 写明。
+- **稳定性不操心**：只修能复现的。**风险不换速度**：PDL 保持 1。
+- **发布**：夸克 + Gofile；README 中英"当前版本"段 + 更新记录表（按版本从旧到新，一句话，**不写内部代号闇/Yami/朱雀/分身**）+ CHANGELOG 中英详细一节（改了什么/效果/新开关/是否逐位/有损/results）；链接回来后在打包源码提交上打 tag。
 
 ## 派活方法
 
-- **分工**：Zero 给意图 + 验收 + 转发给闇 → 朱雀拆解、写任务单、记账（本页、DevHistory、打包、README、公众号）→ 分身（fork）和闇执行。
-- **探路给分身，采矿给闇**：分身适合"能不能/值不值"，任务单写成果门槛（"至少一个 ≥0.5% 逐位候选，否则拿证据证明挖不动"）；闇（GPT 6 Astra，Codex）适合方法已验证后一刀一刀磨，每次带成果或扎实的 null 交付。
-- **任务单三要素**：从哪下手（带上他上轮的账）、别走哪几条路（已关路线）、什么时候停（门槛、够用就交、卡 2h 换下一个）。放 `conversation/<日期>/`，Zero 转给闇（只有 Zero 转发他才知道，任务单里不写"暂缓"之类给自己看的话）。
-- **git 协作（09-28 教训）**：有分身在同一仓库改代码时，**主进程提交只 `git add <具体文件>`，绝不用 `commit -a`**（那次把分身未完成的 src 改动带进提交、revert 又从工作区抹掉）。改代码的分身用 worktree 隔离（Agent `isolation: "worktree"`，等于旁边多一份检出在自己分支上的 clone）；闇在他自己的 clone。
-- fork 分身继承全部上下文、只回摘要；fork 后互相看不见，新信息用 SendMessage 转。等后台任务用完成通知，不自己写 `until` 轮询。
+- **分工**：Zero 给意图 + 验收 + 转发给闇 → 朱雀拆解、写任务单、记账（本页、DevHistory、CHANGELOG、打包、README）→ 分身和闇执行。
+- **探路给分身，采矿给闇**；任务单三要素：从哪下手、别走哪几条路、什么时候停。放 `conversation/<日期>/`，Zero 转发。
+- **对照物比招式管用**（09-28 教训）：照抄 mochizuki 的改动一轮 null；改成"挑一两段和 ACO/Daniel 的 ISA 逐条对齐、每条多出的指令归类（语义必须/编译器产物/源码写法）"后连续出刀。Daniel 是同 HIP 同编译器同算术，比 ACO 更直接；他的 168 个内核已解包在 DGX scratchpad `d050/`（会丢，丢了重跑 `tools/closed-inspect/extract.py`）。
+- **git 协作**：主进程只 `git add <具体文件>`，绝不 `commit -a`；分身在同仓库改东西时，主进程提交先只本地 commit，等分身 push 时带上（工作区有它的未暂存改动时 pull --rebase 会失败）。改代码的分身用 worktree。等后台任务用完成通知，不写轮询。
 
 ## 研究判断（技术主线的"为什么"）
 
-- **RDNA4 上 FP8 WMMA 与 VALU 不重叠**：删 VALU 就是省时间。路线 = 看 ACO 的 ISA → 在 HIP 源码里逼 LLVM 编出同等指令（PACK8、fmed3、分段 FP16_OVFL、fma(x,y,+0)、去重复量化/往返、RTZ/LDS 向量化）。
-- **LLVM 不是处处差**：VOPD、`+0.f`（−0→+0，承重）、WMMA 等待本来就对；它做不到的是 `mul`+`add 0` 收缩、自行去 NaN 规范化、去掉 f32↔f16 往返——要在源码里显式写。
-- **手改汇编 = 显微镜**，不进生产。
-- **按调用次数加权再选目标**；单核单段小刀整网测不出来。
-- **访存受限的核（ViT、部分 C512）砍 VALU 不赚**，要改数据形态（生产者直接写消费者要的字节/half）；生产者多出的转换要算进去（C512 half 出口的教训）。
-- **C512 不是并行度不足**（工作组翻倍变慢，QKV 驻留 12→14 组也不赚）。
-- 分段 FP16_OVFL 用前必须 census（该段输入无 Inf/NaN、|x|≤448）。
+- **RDNA4 上 FP8 WMMA 与 VALU 不重叠**：删 VALU 就是省时间。但 0.36 后我们 C32/C64 普通向量指令已不比 Daniel 多，剩下差距主要在**派发/融合与访存**（显存读取请求约是他的 2 倍）。
+- **融合赚不赚看组织方式**：旧 C256 整块融合更慢，学 Daniel"多组 token 共用一份权重"后变快（权重读取减半、寄存器 190→154）。少读取不一定兑现（去清零、C32 权重缓存都 null），要整网实测。
+- **LLVM 做不到的要源码显式写**：`mul`+`add 0` 收缩、NaN 规范化、f32↔f16 往返、已知范围的除法（写成有界倒数）。手改汇编只当显微镜。
+- **按调用次数加权再选目标**；访存受限的核砍 VALU 不赚，要改数据形态；C512 不是并行度不足。
+- **网络外流水线**：拷贝不是大头（直写 IO 只省 0.02～0.05ms），剩余差距更可能在 HIP↔D3D 交接（我们共享 fence 挂起等唤醒，Daniel GPU 轮询标志）。
 
 ## B. 优化候选（逐位；按"收益 × 把握"排）
 
-**本波已收尾**：C256整块仅1080；C512 QKV/attention融合；C64/C128 FFN两qt权重复用；本轮C32/C64/C128 Up与首块融合。最终配方、载荷与累计ms统一见`results/fusion-round3-20260928/package-036-checklist.md`，下一步打0.36，不继续为了派发数硬扩。
+1. **C512 剩余派发**：79 对 Daniel 64（他 16 块×4，我们 13 块有效，不能直接相减）；需要新内核，按 Daniel 组织再看。
+2. **ViT**：49 对 40（每块 6 对 5 + 入口打包）；本轮 P/G/Q/R 候选逐位但不赚，要新的组织证据。
+3. **HIP↔D3D 交接改 GPU 轮询**（`results/frame-breakdown-20260928` 第 4 项）：收益待测，会碰看门狗（Daniel 用 1 像素 draw 分片自旋规避）。
+4. **900 档**：C256 整块在 900 仍走分体（新分组变慢）；2K 质量档落 900，值得换思路再看。
+5. 小件：C256 FFN 标量量化/地址开销（`results/aco-lineup-20260928` 逐条表）；ViT QKV 归一化段；C32 对角残差跳过全零 K16 半块（约 −0.1～0.2%）。
+6. 杂项：`MAKE_RESIDENT_EVERY=60` 疑似每 60 帧一次约 30ms 尖刺（p99），改 0 测一次（C.C. 令"把延迟波形拉直"）；常规 OptiScaler 包也带 ReShade 却无 ini，新用户可能见引导遮罩，下版照 Magpie 补；`validate-modules.ps1` 修路径；帧时间日志 Magpie 路线未接。
 
-**已交负账**：C512 FFN M32/删float写、900 C256 wave16、ViT投影byte出口/入口gather-pack（含复用FP8编码修剪）、C64/C128 Down融合均未采用。C32跨qt共享要大改流水，ViT M2/M4等旧形状已试，不重跑。新切口须有新供数/布局证据。
+**已交负账（别重复）**：mochizuki 0.0.2.2 各路线（I/P/S/V/F/O/G/H，`results/mochizuki-022-20260928`）；C512 FFN M32、900 C256 新分组、ViT byte 出口/入口 gather-pack、C64/C128 Down 融合、去清零、C32 权重缓存。
 
-1. **ACO 两段已交付并合配方**：C32激活前NaN规范化已删；C64～C256有界倒数已用。乘加独立舍入只对保持当前fast输出是约束，不能称NVIDIA原语义（本轮已核实原版half FMA）；float FMA已获批合入新基准，H候选不采用。C32 half直入 M/N净增指令，不重做。C64打包清零已在Daniel轮验证为null；剩余可定位项是C256 FFN标量量化/地址开销，先看 `results/aco-lineup-20260928` 的逐条表再定下一刀。本轮组合两档约−0.7%，已装剑星。
+## C. 需要 Zero 拍板（有损）
 
-2. **mochizuki 0.0.2.2本轮路线已测，不重复**：I/P组合C只有900−0.13%/−0.29%、1080−0.22%/−0.14%；S/V计数器叠加更慢，最终F去额外invalidate并保留hidden后仍慢0.1～0.2%；O占用上限约0.1%，G组间重排慢约1%，H四wave同组慢约0.3～0.5%。真实舍入不能因为后面还有FP8就删（已有标量反例）；下一轮需新证据/新切口。完整逐条适用性、ISA/资源/回归/ABBA在 `results/mochizuki-022-20260928`。
-
-3. **decoder / 上采样**：C64/C128/C32边界已融合并合入；C256/C512边界未扩大。Down本轮已做逐位候选但变慢，有新组织证据再开。
-4. C512 若再动：换切口（packed 输入生产者/主循环供数、归一化调度），不重复 mix 拆组、去重复量化、LDS 复用、half 出口、现场零扫描（`results/c512-round1-20260927`、`tier900-20260927`）。
-5. 小件：ViT QKV 归一化段；C32 FFN 权重按 WMMA 片段预排；host 侧 C256 宽权重片段（约 −0.03ms）；C32 对角残差跳过全零 K16 半块（约 −0.1～0.2%，`results/c32-diag-zero-20260925`）。
-6. 帧时间日志：Magpie 路线未接；RE9 runtime 只见自己被调用的帧。
-7. `Development/HIP/validate-modules.ps1` 默认资产目录已不存在，修路径后纳入发包前检查。
-8. 可告知 mochizuki：`v_cvt_pk_f32_fp8` 在 gfx1201 实测返回同一字节两份（`HIP/experiments/pair-unpack`），他的 fswin64 用了 64 次。
-
-## C. 需要 Zero 拍板
-
-- **1088几何**：原版1080已是1152；若以后试缩到1088，应作为改变输出的新几何方案，面积估0.70ms，未实测。900对Daniel已经同为960，原版900尚未知。
-- **有损**：6b（−1.1%，PSNR 58dB）、ViT QKV 改 FP8（估整网 2～4%，Daniel 的做法）。
-- **加档 1728×1024**：2K 质量档不再缩 6%，画质向不提速。
-- 不做：整网隔帧（3z Model interleave，运动拖影）；RDNA3 后端（无卡可测）。
+- **fast 档**（Daniel 默认那套：e4m3 一次舍入、近似 rsqrt/rcp、f32 累加等）：他 fast 比 reference 快约 1ms；可做成 EXACT 之外单独一档。
+- ViT QKV 改 FP8（估整网 2～4%）；6b（−1.1%，PSNR 58dB）。
+- 几何：缩到 1088 行（估 0.70ms，NVIDIA 原版是 1152，属偏离）；加档 1728×1024（画质向）。
+- 不做：整网隔帧（运动拖影）；RDNA3 后端（无卡可测；Daniel 做法 = f16 权重副本 + f16 WMMA + 整数模拟 e4m3，VALU 约 4 倍，留作参考）。
 
 ## 产品适配与等待事项
 
-- **PRE_UPSCALE=auto**：探测同列表超分后是否还有 draw/dispatch，不适合前置则回落后置（地平线 6、卧龙 2）。
-- **卧龙 2**：常规包 + EnableFfxInputs=false + ASYNC=0 重试；RE9 前置宿主（鬼武者已跑通）是 RE 引擎外同类游戏的候选路线。
-- 自带 FSR dll 的游戏（2077、33 号远征队）：常规包默认 EnableFfxInputs=false 已覆盖；若只见色调变化，再设 `DLSS5_PRE_UPSCALE_ASYNC=0`。
-- **网友统一宿主补丁**：审单 `RE9/presr/contrib/generic-host-20260924/REVIEW.md`，等对方实测。
-- 换队列修复（0.34 起）告知 TheAutomatic（未确认是否已告知）。
-- 新权重（传闻 380.8.3，未证实）：等下一个原生 DLSS 5 游戏出来比 DLL；Zero：先不管。
-- PDL：acquire/进展性论证是文档欠账（`results/pdl-audit-20260927`），出现实际卡死再切 0；不扩到 C512/ViT/Down/Up（除非闇这轮证明叠加赚且带回绕保护）。
-
-## 已关路线（有新证据才重开）
-
-- MODE.FP16_OVFL 核入口一次性（720 不逐位；分段版已采用）；`v_cvt_pk_f32_fp8` 成对解包；`v_pk_*_f16`。
-- 转置布局（已在用）；C256 持久化；DF_PACK8（访存受限）；C32 激活合 fma（有反例）；C32 post 两候选。
-- C512：一头一 wave、工作组翻倍、mix 拆组、去重复量化、LDS 复用、half 出口、现场全零/有限扫描。
-- C32 尾部合并遍历、C32 转置尾部并宽、mapped/post 输入布局三方向、ViT group 编号重排、直达 LDS 读取、双 stream 重叠。详见 DevHistory 与各 results。
+- **PR #12（TheAutomatic）**：已回复（`conversation/20260928/pr12-review.md`）——PDL 预检 + TYPELESS 开关可合；ColorStrength 默认映射、preOnly 白点、auto_white 与调试视图冲突、R10G10B10A2 写回路径待他改/说明，建议拆 PR。等他回。
+- **PRE_UPSCALE=auto**、卧龙 2 重试、自带 FSR dll 的游戏（`EnableFfxInputs=false`、必要时 `ASYNC=0`）、网友统一宿主补丁（`RE9/presr/contrib/generic-host-20260924/REVIEW.md`）——照旧等。
+- 新权重传闻：Zero 说先不管。PDL acquire 论证是文档欠账，出现实际卡死再切 0。
 
 ## 机器与流程
 
-- **授权**：编译、远程实验、回归、分析由 agent 自主执行；动 GPU 前查空闲，游戏运行时不换文件；画质判断请 Zero。9070 整机交给 agent，Zero 在 3080 游戏本上对话，实测时回 9070。
-- **游戏进程名**：剑星 `SB-Win64-Shipping`、匹诺曹 `LOP-Win64-Shipping`、鬼武者 `OnimushaWotS`、RE9 `re9`、33 号远征队 `SandFall*`；Magpie 空闲可忽略。
-- **git**：只推 297，commit 不加 Co-Authored-By；push 前 `git pull --rebase`；只 add 具体文件。实验 exe、部署二进制不进仓库（.gitignore 已配）。
-- **9070**（`ssh amd9070`）：工作根 `D:\DLSSNR-Lab\`；`hip/rtc_compile.cpp` → `hip/build-modules.ps1`（`-ExtraDefines`、`-Only`）；`hip/compare-modules.py` 比代码段；`HIP/experiments/c64-hand-asm/asm_compile.cpp` 汇编往返；部署照 `deployments/<名>/`；给游戏装包可复用 scratchpad 的 `sb-fresh032.ps1` 思路（整包解压 + 全量备份 + manifest 还原）。PowerShell：中文路径 .ps1 要 UTF-8 BOM，`(x86)` 路径写进脚本文件。
-- **3080 游戏本**（`ssh rtx3080`，192.168.31.243）：ssh 会话 PATH 不全，用 `C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -EncodedCommand <UTF-16LE base64>`；scp 不通，文件让它自己下载；桌面在 OneDrive 下。
-- **DGX Spark**：`~/work/aco-isa/` 有 Mesa 26.2.3 RADV + drm-shim 假 gfx1201，可离线拿 ACO ISA（`results/aco-isa-20260927/tools`）。
-- **发布**：以上一包为底，复制上一版 `tools/package-0xx.ps1` 改版本/哈希/变更（模块数、flags 检查要跟着改），逐文件校验、编 44 shader 变体、压包读回；RE9 宿主或 runtime 变了就用 `prepare-host.py` + `bundle-source.py` 重新生成源码包（跑完 `git checkout Development/RE9/presr/upstream.json`）；有游戏开着时 RE9 冒烟会被跳过，要补跑。
-- **新功能/新开关必须同时在 RE9 runtime 开口**：`DLSS5_*` 键走 `src/native_hip_env_options.h`，三个 flags 模板与 `scripts/CONFIGURATION.md` 同步。
+- **授权**：编译、远程实验、回归、分析由 agent 自主执行；动 GPU 前查游戏进程，游戏运行时不换文件、不跑 GPU 冒烟；画质判断请 Zero。
+- **游戏进程名**：剑星 `SB-Win64-Shipping`、匹诺曹 `LOP-Win64-Shipping`、鬼武者 `OnimushaWotS`、RE9 `re9`、33 号远征队 `SandFall*`。
+- **git**：只推 297，commit 不加 Co-Authored-By；push 前 `git pull --rebase`；只 add 具体文件。
+- **9070**（`ssh amd9070`）：工作根 `D:\DLSSNR-Lab\`；`hip/build-modules.ps1`（`-ExtraDefines`、`-Only`）；`hip/compare-modules.py`；完整游戏帧回放 `results/frame-breakdown-20260928/replay.ps1`（`DLSS5_BENCH_PLAIN=1` 模拟剑星非时序会话）；打好的包在 `D:\給網友打包\`。ssh 远端是 cmd，多条 PowerShell 分开调；`(x86)` 路径写进脚本文件。
+- **3080 游戏本**（`ssh rtx3080`）：PATH 不全，用 `powershell -EncodedCommand`；scp 不通。
+- **DGX Spark**：`~/work/aco-isa/` 有 RADV + drm-shim 假 gfx1201，离线拿 ACO ISA。
+- **发布**：复制上一版 `tools/package-0xx.ps1` 改版本/哈希/变更，逐文件校验、编 44 shader 变体、压包读回；RE9 runtime 变了用 `prepare-host.py` + `bundle-source.py` 重生源码包（跑完 `git checkout Development/RE9/presr/upstream.json`）。
+- **新开关必须同时在 RE9 runtime 开口**（`src/native_hip_env_options.h`、三个 flags 模板、`scripts/CONFIGURATION.md`），RE9 不适用的写明。
 
 ## 公众号素材（Zero 还没说写）
 
-两天从 51 到 57 帧（0.32→0.35 + 第五刀）；ACO 当老师、手写汇编当显微镜；PDL 竞态与"风险不重要"；帧时间日志证明顿挫是游戏的；人给意图、AI 拆解执行的半人马分工；人+AI 产出带现实校验的数据防坍缩。
+一天从被反超到追平（57→60，2K 54）；"两次舍入是不是 NVIDIA 原意"——逐位原来是对上一版；照抄对手 null、逐条对齐才出刀；Daniel 的 60 帧是刷新率上限；三家都是"人 + AI"，比的是谁更会驾驭 AI。随手发版文已写 `wechat/临时-dlss5-0.36.md`。
