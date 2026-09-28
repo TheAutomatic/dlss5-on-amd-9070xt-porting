@@ -193,9 +193,15 @@ Download: [Quark](https://pan.quark.cn/s/83e6172e6c79) · [Gofile mirror](https:
 - **Bit-exact**: all changes bit-exact against 0.34.
 - **Folders**: `results/c32-aco-20260927`, `c32-round2-20260927`, `c32-round3-20260927`, `vit-bytestream-20260927`.
 
-## Unreleased (preparing 0.36)
+## 0.36 (09-28, tag pending)
 
-In the repository since 0.35, not packaged yet (in order):
+Download: [Quark](TODO-QUARK) · [Gofile mirror](TODO-GOFILE) (all three packages)
+
+- **Summary**: add-on d2290ad7; 30 modules per architecture; RE9 runtime 7ce2bc21 (host aa3761f2 unchanged); input shader `native_game_rgb_input.hlsl` 5be59a41 (matches the direct input write).
+- **Cumulative effect (vs the 0.35 release packages, two ABBA rounds in one batch)**: offline 900 tier 9.37 → 8.58 ms (−0.79 ms, −8.5%), 1080 tier 12.71 → 11.58 ms (−1.13 to −1.14 ms, −8.9%). Kernel launches per frame at 1080: 214 → 182.
+- **Bit-exactness**: **0.36 is not bit-identical to 0.35** — the float FMA activation (item 4 below) is a deliberate numeric change with essentially unchanged error against NVIDIA's reference; 0.36 is the new bit-exact baseline. Every other item was bit-exact against the build before it.
+- **New switches**: `DLSS5_DIRECT_IO` (1 in the regular/Magpie templates, not set for RE9), `DLSS5_FRAME_STATS=<seconds>` (0 in templates).
+- **What changed** (in order):
 
 1. **C64–C256 deep pass** (c64-wave2 recipe: whole-group byte input reads, RTZ pairing, direct coordinates): offline 900 −0.7%, 1080 −0.8%; bit-exact; modules only. `results/mh-round1-20260927`, `tier900-20260927`. Stellar Blade 1080p AA EXACT 57.1.
 2. **Frame-time distribution log** `DLSS5_FRAME_STATS=<seconds>` (add-on + RE9 runtime, writes `DLSS5-AMD\logs\frame-stats.txt`, 0 in templates). `results/frame-stats-20260928`.
@@ -204,6 +210,6 @@ In the repository since 0.35, not packaged yet (in order):
 5. **Direct input / direct output** `DLSS5_DIRECT_IO` (0 old path, 1 input written straight into the HIP shared buffer, 3 also lets FSR read the decode output directly): one 35 MB copy and one copy-back removed; offline −0.02 to −0.05 ms; network output bit-exact. Temporal sessions (Magpie), `DLSS5_OVERLAP` and non-RGBA16F formats fall back automatically; RE9 not affected. `results/zero-copy-io-20260928`.
 6. **C256 whole-block fusion** (several token groups share one weight read; FFN weight reads halved; main kernel VGPR 190→154): 1080 −1.67% / −1.63% (about −0.20 ms), 900 keeps the old path; dispatches per frame at 1080 214→198; bit-exact. `results/c256-fusion-20260928`.
 7. **C512 fusion + C64/C128 weight sharing**: one dispatch fewer per C512 block (1080 198→185, 900 214→201); C64/C128 weight reads halved. 900 −3.59% (about −0.33 ms), 1080 −2.55% / −2.63% (about −0.31 ms); bit-exact. Offline 1080 tier about 11.82 ms, 900 tier about 8.72 ms. `results/c512-fusion-20260928`.
-8. (In progress) Final ViT and boundary fusion.
+8. **Upsample fused into the first block**: the C64/C128 and C32 upsamples merged into the next level's first block, 3 fewer launches per frame (1080 185→182, 900 201→198); 900 −0.17 to −0.18 ms, 1080 −0.25 to −0.26 ms; bit-exact. ViT and downsample candidates measured no gain and were not merged. `results/fusion-round3-20260928` (with `package-036-checklist.md`).
 
 In game (local, RX 9070 XT): Stellar Blade 1080p native AA EXACT standing still 59–60 (now at the 60 Hz windowed-mode cap); 2560×1440 native AA EXACT 52–53 (the in-game comparison setting from now on).

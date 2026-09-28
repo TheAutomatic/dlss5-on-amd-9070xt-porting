@@ -1,7 +1,15 @@
 Magpie-DLSS5-AMD @VERSION@ — full portable package
 
+0.36
+1. Leaner arithmetic (bit-identical to the previous build at each step): the C32 activation drops a redundant NaN canonicalization; the C64-C256 softmax uses a bounded reciprocal (same summation order and rounding fix-up).
+2. Float FMA activation (C32, C64-C256, ViT/C512): multiply-add contracted into one float FMA with a single rounding (NVIDIA's original also uses a single-rounding half FMA here). This changes the output slightly: 0.36 is NOT bit-identical to 0.35 (error against NVIDIA's reference is essentially unchanged); 0.36 is the new bit-exact baseline.
+3. Fused blocks: C256 whole-block kernel with FFN weights shared across token groups (1080 tier); C512 QKV + attention fused; C64/C128 FFN weight reuse; C32/C64/C128 upsample fused into the first block. Kernel launches per frame at 1080: 214 -> 182.
+4. Direct input (DLSS5_DIRECT_IO=1, default): the input pass writes straight into the HIP shared buffer (one 35 MB copy less). Value 3 also hands the decoded output straight to FSR in pre-upscale mode (not a default); 0 restores the old path.
+5. Frame-time log DLSS5_FRAME_STATS=<seconds> (default 0): one line per window to DLSS5-AMD\logs\frame-stats.txt.
+Network offline vs 0.35: 900 tier about -0.79 ms (-8.5%), 1080 tier about -1.13 ms (-8.9%). Stellar Blade 1080p native AA, EXACT: about 57 -> 59-60 (now at the 60 Hz window cap); 2560x1440 native AA, EXACT: 52-53 (new reference point).
+
 0.35
-1. Three bit-exact C32 rounds (Yami): duplicate FP8 round trips removed, RTZ and LDS stores vectorized, per-segment saturation mode in the packing sections, full-window fast paths in prefix/finish.
+1. Three bit-exact C32 rounds: duplicate FP8 round trips removed, RTZ and LDS stores vectorized, per-segment saturation mode in the packing sections, full-window fast paths in prefix/finish.
 2. ViT byte stream (DLSS5_HIP_VIT_STREAM=3, new vit-stream module): the attention AV result goes to the projection as bytes and the contract step uses the half interface; compatible with adaptive reuse. 1080 tier about -1.3%.
 Network offline 900 tier about 9.3 ms, 1080 tier about 12.75 ms (0.34: 9.6 / 13.4). Stellar Blade 1080p native AA, EXACT common scenes 54 -> about 56.7.
 0.34 -> 0.35 kernel output is bit-identical.
