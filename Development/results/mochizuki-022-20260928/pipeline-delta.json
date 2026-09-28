@@ -1,0 +1,928 @@
+{
+  "windows": {
+    "attn": {
+      "added": [
+        "NR_ATTN_EDGE=1",
+        "NR_ATTN_EXP2=1",
+        "NR_ATTN_QKSWAP=1",
+        "NR_ATTN_VFRAG=1",
+        "NR_OCC_LDS=3072"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "ffwd3": {
+      "added": [
+        "NR_FFWD_GMAJOR=1",
+        "NR_OCC_LDS=21504"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "ffwd3w": {
+      "added": [
+        "NR_ACC_F16=0",
+        "NR_COHERENT_ACT=0",
+        "NR_FFWD_FM=2",
+        "NR_FFWD_GMAJOR=1",
+        "NR_FFWD_KOFF=1",
+        "NR_FFWD_PACK=1",
+        "NR_FFWD_PAIR=1",
+        "NR_FFWD_WGW=4",
+        "NR_OUT_TILED",
+        "NR_QPAD=0",
+        "NR_QUANT_EXPLICIT=1",
+        "NR_WAVE_UNIFORM=0"
+      ],
+      "removed": [],
+      "new_pipeline": true
+    },
+    "fswin128": {
+      "added": [
+        "NR_ACT_ALT=3",
+        "NR_V_SWAP=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "fswin256": {
+      "added": [
+        "NR_ACT_ALT=3",
+        "NR_V_SWAP=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "fswin32": {
+      "added": [
+        "NR_ACT_ALT=3",
+        "NR_EDGE_BODIES=1",
+        "NR_V_SWAP=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "fswin64": {
+      "added": [
+        "NR_ACT_ALT=3",
+        "NR_V_SWAP=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "fswinds128": {
+      "added": [
+        "NR_ACT_ALT=3",
+        "NR_POOL_DPP16=7"
+      ],
+      "removed": [
+        "NR_POOL_DPP16=2"
+      ],
+      "new_pipeline": false
+    },
+    "fswinds256": {
+      "added": [
+        "NR_ACT_ALT=3",
+        "NR_POOL_DPP16=7"
+      ],
+      "removed": [
+        "NR_POOL_DPP16=2"
+      ],
+      "new_pipeline": false
+    },
+    "fswinds32": {
+      "added": [
+        "NR_ACT_ALT=3",
+        "NR_POOL_DPP16=7",
+        "NR_V_SWAP=1"
+      ],
+      "removed": [
+        "NR_POOL_DPP16=2"
+      ],
+      "new_pipeline": false
+    },
+    "fswinds64": {
+      "added": [
+        "NR_ACT_ALT=3",
+        "NR_POOL_DPP16=7"
+      ],
+      "removed": [
+        "NR_POOL_DPP16=2"
+      ],
+      "new_pipeline": false
+    },
+    "fswindsp128": {
+      "added": [
+        "NR_ACT_ALT=3",
+        "NR_ACT_PAT=5",
+        "NR_DS_QPAIR=1",
+        "NR_POOL_DPP16=7",
+        "NR_V_SWAP=1"
+      ],
+      "removed": [
+        "NR_POOL_DPP16=2"
+      ],
+      "new_pipeline": false
+    },
+    "fswindsp256": {
+      "added": [
+        "NR_ACT_ALT=3",
+        "NR_DS_QPAIR=1",
+        "NR_POOL_DPP16=7",
+        "NR_V_SWAP=1"
+      ],
+      "removed": [
+        "NR_POOL_DPP16=2"
+      ],
+      "new_pipeline": false
+    },
+    "fswindsp32": {
+      "added": [
+        "NR_ACT_ALT=3",
+        "NR_ACT_PAT=3",
+        "NR_DS_QPAIR=1",
+        "NR_POOL_DPP16=7",
+        "NR_V_SWAP=1"
+      ],
+      "removed": [
+        "NR_POOL_DPP16=2"
+      ],
+      "new_pipeline": false
+    },
+    "fswindsp64": {
+      "added": [
+        "NR_ACT_ALT=3",
+        "NR_ACT_PAT=7",
+        "NR_DS_QPAIR=1",
+        "NR_POOL_DPP16=7",
+        "NR_V_SWAP=1"
+      ],
+      "removed": [
+        "NR_POOL_DPP16=2"
+      ],
+      "new_pipeline": false
+    },
+    "fswinfusedup128": {
+      "added": [
+        "NR_ACT_ALT=3",
+        "NR_ACT_PAT=7",
+        "NR_UPS_BLEND_PK=2",
+        "NR_V_SWAP=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "fswinfusedup256": {
+      "added": [
+        "NR_ACT_ALT=3",
+        "NR_UPS_BLEND_PK=2",
+        "NR_V_SWAP=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "fswinfusedup32": {
+      "added": [
+        "NR_ACT_ALT=3",
+        "NR_ACT_PAT=2",
+        "NR_UPS_BLEND_PK=1",
+        "NR_V_SWAP=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "fswinfusedup64": {
+      "added": [
+        "NR_ACT_ALT=3",
+        "NR_ACT_PAT=7",
+        "NR_UPS_BLEND_PK=2",
+        "NR_V_SWAP=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "fswinimagepost32": {
+      "added": [
+        "NR_ACT_ALT=3",
+        "NR_ACT_PAT=3",
+        "NR_OUT0_NOFORMAT=1",
+        "NR_POST_ALPHA=1",
+        "NR_POST_NO_OUT1=1",
+        "NR_QK_SAT=1",
+        "NR_V_SWAP=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "fswinimagepreds32": {
+      "added": [
+        "NR_ACT_ALT=3",
+        "NR_ACT_PAT=5",
+        "NR_HALF_RTE=1",
+        "NR_NOISE_FIELD=1",
+        "NR_POOL_DPP16=7",
+        "NR_QK_SAT=1",
+        "NR_V_SWAP=1"
+      ],
+      "removed": [
+        "NR_POOL_DPP16=2"
+      ],
+      "new_pipeline": false
+    },
+    "fswinp128": {
+      "added": [
+        "NR_ACT_ALT=3",
+        "NR_ACT_PAT=3",
+        "NR_STRAG=2",
+        "NR_STRAG_ESC=1",
+        "NR_V_SWAP=1",
+        "NR_YOUNG_CUS=128"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "fswinp256": {
+      "added": [
+        "NR_ACT_ALT=3",
+        "NR_EDGE_BODIES=1",
+        "NR_V_SWAP=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "fswinp64": {
+      "added": [
+        "NR_ACT_ALT=3",
+        "NR_ACT_PAT=3",
+        "NR_V_SWAP=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "fswinpds128": {
+      "added": [
+        "NR_ACC_F16=0",
+        "NR_ACTIVATION_LUT=0",
+        "NR_ACT_ALT=3",
+        "NR_ACT_F32=1",
+        "NR_ACT_HORNER=1",
+        "NR_ACT_PAT=3",
+        "NR_BAKED_EXP_BIAS=1",
+        "NR_BLEND_VECTOR_LOAD=1",
+        "NR_C=128",
+        "NR_COHERENT_ACT=1",
+        "NR_DS_IDENTITY_FAST=1",
+        "NR_DS_PROJECT",
+        "NR_DS_QPAIR=1",
+        "NR_EDGE_BODIES=1",
+        "NR_EXPAND_GROUP=2",
+        "NR_FWAVES=2",
+        "NR_HEADS=4",
+        "NR_HWAVES=1",
+        "NR_IMAGE=1",
+        "NR_NORM_F32=1",
+        "NR_OOB_BRANCH=1",
+        "NR_PACKED_DENSE=7",
+        "NR_PACKED_EXPAND=1",
+        "NR_PACKED_QKV=1",
+        "NR_PACK_C32=1",
+        "NR_PERSIST=1",
+        "NR_PERSIST_DF=1",
+        "NR_PERSIST_DS=1",
+        "NR_PERSIST_ONE=1",
+        "NR_PKN=1",
+        "NR_POOL_ADDR_UNIFORM=1",
+        "NR_POOL_DPP16=5",
+        "NR_POOL_F16",
+        "NR_POOL_PACKED=0",
+        "NR_POOL_VECTOR_STORE=1",
+        "NR_PROB_BOUNDED=1",
+        "NR_PROB_LATE_SHUFFLE=1",
+        "NR_QK_SCALE_FAST=5",
+        "NR_QK_TOGETHER=1",
+        "NR_QPAD=0",
+        "NR_QUANT_EXPLICIT=1",
+        "NR_QUANT_MODE=4",
+        "NR_RESIDUAL_F32=1",
+        "NR_STRAG=2",
+        "NR_STRAG_ESC=1",
+        "NR_SWIN_BIAS_F16=0",
+        "NR_V_SWAP=1",
+        "NR_WAVE_UNIFORM=0",
+        "NR_YOUNG_CUS=128"
+      ],
+      "removed": [],
+      "new_pipeline": true
+    },
+    "fswinpds256": {
+      "added": [
+        "NR_ACT_ALT=3",
+        "NR_ACT_PAT=3",
+        "NR_DS_QPAIR=1",
+        "NR_EDGE_BODIES=1",
+        "NR_PERSIST_ONE=1",
+        "NR_POOL_DPP16=5",
+        "NR_V_SWAP=1"
+      ],
+      "removed": [
+        "NR_POOL_DPP16=2"
+      ],
+      "new_pipeline": false
+    },
+    "fswinpds64": {
+      "added": [
+        "NR_ACC_F16=0",
+        "NR_ACTIVATION_LUT=0",
+        "NR_ACT_ALT=3",
+        "NR_ACT_F32=1",
+        "NR_ACT_HORNER=1",
+        "NR_ACT_PAT=3",
+        "NR_BAKED_EXP_BIAS=1",
+        "NR_BLEND_VECTOR_LOAD=1",
+        "NR_C=64",
+        "NR_COHERENT_ACT=1",
+        "NR_DS_IDENTITY_FAST=1",
+        "NR_DS_PROJECT",
+        "NR_DS_QPAIR=1",
+        "NR_EDGE_BODIES=1",
+        "NR_EXPAND_GROUP=2",
+        "NR_FWAVES=2",
+        "NR_HEADS=2",
+        "NR_HWAVES=1",
+        "NR_IMAGE=1",
+        "NR_NORM_F32=1",
+        "NR_OOB_BRANCH=1",
+        "NR_PACKED_DENSE=7",
+        "NR_PACKED_EXPAND=1",
+        "NR_PACKED_QKV=1",
+        "NR_PACK_C32=1",
+        "NR_PERSIST=1",
+        "NR_PERSIST_DF=1",
+        "NR_PERSIST_DS=1",
+        "NR_PKN=1",
+        "NR_POOL_ADDR_UNIFORM=1",
+        "NR_POOL_DPP16=5",
+        "NR_POOL_F16",
+        "NR_POOL_PACKED=0",
+        "NR_POOL_VECTOR_STORE=1",
+        "NR_PROB_BOUNDED=1",
+        "NR_PROB_LATE_SHUFFLE=1",
+        "NR_QK_SCALE_FAST=5",
+        "NR_QK_TOGETHER=1",
+        "NR_QPAD=0",
+        "NR_QUANT_EXPLICIT=1",
+        "NR_QUANT_MODE=4",
+        "NR_RESIDUAL_F32=1",
+        "NR_SWIN_BIAS_F16=0",
+        "NR_V_SWAP=1",
+        "NR_WAVE_UNIFORM=1"
+      ],
+      "removed": [],
+      "new_pipeline": true
+    },
+    "fswinpup128": {
+      "added": [
+        "NR_ACC_F16=0",
+        "NR_ACTIVATION_LUT=0",
+        "NR_ACT_ALT=3",
+        "NR_ACT_F32=1",
+        "NR_ACT_HORNER=1",
+        "NR_ACT_PAT=3",
+        "NR_BAKED_EXP_BIAS=1",
+        "NR_BLEND_VECTOR_LOAD=1",
+        "NR_C=128",
+        "NR_COHERENT_ACT=1",
+        "NR_EDGE_BODIES=1",
+        "NR_EXPAND_GROUP=2",
+        "NR_FUSED_UPS_BLEND",
+        "NR_FWAVES=2",
+        "NR_HEADS=4",
+        "NR_HWAVES=1",
+        "NR_IMAGE=1",
+        "NR_NORM_F32=1",
+        "NR_OOB_BRANCH=1",
+        "NR_PACKED_DENSE=7",
+        "NR_PACKED_EXPAND=1",
+        "NR_PACKED_QKV=1",
+        "NR_PACK_C32=1",
+        "NR_PERSIST=1",
+        "NR_PERSIST_DF=1",
+        "NR_PERSIST_ONE=1",
+        "NR_PERSIST_UPS=1",
+        "NR_PKN=1",
+        "NR_PROB_BOUNDED=1",
+        "NR_PROB_LATE_SHUFFLE=1",
+        "NR_QK_SCALE_FAST=5",
+        "NR_QK_TOGETHER=1",
+        "NR_QPAD=0",
+        "NR_QUANT_EXPLICIT=1",
+        "NR_QUANT_MODE=4",
+        "NR_RESIDUAL_F32=1",
+        "NR_STRAG=2",
+        "NR_STRAG_ESC=1",
+        "NR_SWIN_BIAS_F16=0",
+        "NR_UPS_ALIAS=1",
+        "NR_UPS_BLEND_PK=2",
+        "NR_V_SWAP=1",
+        "NR_WAVE_UNIFORM=0",
+        "NR_WIDE_UPS_PROJECT",
+        "NR_YOUNG_CUS=128"
+      ],
+      "removed": [],
+      "new_pipeline": true
+    },
+    "fswinpup256": {
+      "added": [
+        "NR_ACT_ALT=3",
+        "NR_ACT_PAT=7",
+        "NR_EDGE_BODIES=1",
+        "NR_PERSIST_ONE=1",
+        "NR_UPS_BLEND_PK=2",
+        "NR_V_SWAP=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "fswinpup64": {
+      "added": [
+        "NR_ACC_F16=0",
+        "NR_ACTIVATION_LUT=0",
+        "NR_ACT_ALT=3",
+        "NR_ACT_F32=1",
+        "NR_ACT_HORNER=1",
+        "NR_ACT_PAT=3",
+        "NR_BAKED_EXP_BIAS=1",
+        "NR_BLEND_VECTOR_LOAD=1",
+        "NR_C=64",
+        "NR_COHERENT_ACT=1",
+        "NR_EDGE_BODIES=1",
+        "NR_EXPAND_GROUP=2",
+        "NR_FUSED_UPS_BLEND",
+        "NR_FWAVES=2",
+        "NR_HEADS=2",
+        "NR_HWAVES=1",
+        "NR_IMAGE=1",
+        "NR_NORM_F32=1",
+        "NR_OOB_BRANCH=1",
+        "NR_PACKED_DENSE=7",
+        "NR_PACKED_EXPAND=1",
+        "NR_PACKED_QKV=1",
+        "NR_PACK_C32=1",
+        "NR_PERSIST=1",
+        "NR_PERSIST_DF=1",
+        "NR_PERSIST_UPS=1",
+        "NR_PKN=1",
+        "NR_PROB_BOUNDED=1",
+        "NR_PROB_LATE_SHUFFLE=1",
+        "NR_QK_SCALE_FAST=5",
+        "NR_QK_TOGETHER=1",
+        "NR_QPAD=0",
+        "NR_QUANT_EXPLICIT=1",
+        "NR_QUANT_MODE=4",
+        "NR_RESIDUAL_F32=1",
+        "NR_SWIN_BIAS_F16=0",
+        "NR_UPS_ALIAS=1",
+        "NR_UPS_BLEND_PK=2",
+        "NR_V_SWAP=1",
+        "NR_WAVE_UNIFORM=1",
+        "NR_WIDE_UPS_PROJECT"
+      ],
+      "removed": [],
+      "new_pipeline": true
+    },
+    "gemmnores": {
+      "added": [
+        "NR_OUT_PERM=2"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "gemmpool": {
+      "added": [
+        "NR_POOL_FRAG=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "gemmproj": {
+      "added": [
+        "NR_GEMM_REMAP_PC=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "gemmprojc": {
+      "added": [
+        "NR_ACC_F16=0",
+        "NR_COHERENT_ACT=0",
+        "NR_EPI_FRAGMENT=1",
+        "NR_GEMM_REMAP_PC=1",
+        "NR_KFRAG=16",
+        "NR_KOFF_SPLIT=1",
+        "NR_MFRAG=2",
+        "NR_NFRAG=2",
+        "NR_OCC_LDS=16384",
+        "NR_OUT_E4M3",
+        "NR_OUT_TILED",
+        "NR_PACKED_WEIGHT_N2=1",
+        "NR_QPAD=0",
+        "NR_QUANT_EXPLICIT=1",
+        "NR_R_E4M3",
+        "NR_SWAP_AB=1",
+        "NR_WAVE_UNIFORM=0",
+        "NR_WM=1",
+        "NR_WN=4"
+      ],
+      "removed": [],
+      "new_pipeline": true
+    },
+    "gemmprojt": {
+      "added": [
+        "NR_ACC_F16=0",
+        "NR_COHERENT_ACT=0",
+        "NR_EPI_FRAGMENT=1",
+        "NR_GEMM_REMAP_PC=1",
+        "NR_KFRAG=16",
+        "NR_KOFF_SPLIT=1",
+        "NR_MFRAG=2",
+        "NR_NFRAG=2",
+        "NR_OUT_E4M3",
+        "NR_OUT_PERM=1",
+        "NR_OUT_TILED",
+        "NR_PACKED_WEIGHT_N2=1",
+        "NR_QPAD=0",
+        "NR_QUANT_EXPLICIT=1",
+        "NR_R_E4M3",
+        "NR_WAVE_UNIFORM=0",
+        "NR_WM=1",
+        "NR_WN=4"
+      ],
+      "removed": [],
+      "new_pipeline": true
+    },
+    "gemmprojw": {
+      "added": [
+        "NR_GEMM_REMAP_PC=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "gemmvact": {
+      "added": [
+        "NR_GEMM_REMAP_PC=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "gemmvqkvnorm": {
+      "added": [
+        "NR_QKV_NO_BCAST=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "noisefield": {
+      "added": [
+        "NR_QPAD=0",
+        "NR_QUANT_EXPLICIT=1"
+      ],
+      "removed": [],
+      "new_pipeline": true
+    },
+    "vitattn": {
+      "added": [
+        "NR_VBDA=1",
+        "NR_VKPERM=1",
+        "NR_VOUT_VEC=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "vitattnnobda": {
+      "added": [
+        "NR_C=1024",
+        "NR_COHERENT_ACT=0",
+        "NR_HEADS=32",
+        "NR_KC=64",
+        "NR_QPAD=0",
+        "NR_QT=32",
+        "NR_QUANT_EXPLICIT=1",
+        "NR_VADDR=1",
+        "NR_VKMAN=1",
+        "NR_VKPERM=1",
+        "NR_VOUT_VEC=1",
+        "NR_VPACKED_DEN=1",
+        "NR_VPRENORMALIZED=1",
+        "NR_VQCLAMP=1",
+        "NR_VSPLIT_TAIL=1",
+        "NR_VTRANS=1",
+        "NR_VWAVES=1"
+      ],
+      "removed": [],
+      "new_pipeline": true
+    }
+  },
+  "linux": {
+    "attn": {
+      "added": [
+        "NR_ATTN_EDGE=1",
+        "NR_ATTN_EXP2=1",
+        "NR_ATTN_REMAP=16",
+        "NR_GEMM_REMAP_PC=1",
+        "NR_OCC_LDS=3072",
+        "NR_TCHAIN=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "ffwd3": {
+      "added": [
+        "NR_FFWD_GMAJOR=1",
+        "NR_GEMM_REMAP_PC=1",
+        "NR_OCC_LDS=21504",
+        "NR_TCHAIN=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "ffwd3w": {
+      "added": [
+        "NR_FFWD_GMAJOR=1",
+        "NR_GEMM_REMAP_PC=1",
+        "NR_TCHAIN=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "fswin32": {
+      "added": [
+        "NR_EDGE_BODIES=1",
+        "NR_TCHAIN=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "fswinds128": {
+      "added": [
+        "NR_POOL_DPP16=7"
+      ],
+      "removed": [
+        "NR_POOL_DPP16=2"
+      ],
+      "new_pipeline": false
+    },
+    "fswinds256": {
+      "added": [
+        "NR_POOL_DPP16=7"
+      ],
+      "removed": [
+        "NR_POOL_DPP16=2"
+      ],
+      "new_pipeline": false
+    },
+    "fswinds32": {
+      "added": [
+        "NR_POOL_DPP16=7"
+      ],
+      "removed": [
+        "NR_POOL_DPP16=2"
+      ],
+      "new_pipeline": false
+    },
+    "fswinds64": {
+      "added": [
+        "NR_POOL_DPP16=7"
+      ],
+      "removed": [
+        "NR_POOL_DPP16=2"
+      ],
+      "new_pipeline": false
+    },
+    "fswindsp128": {
+      "added": [
+        "NR_POOL_DPP16=7"
+      ],
+      "removed": [
+        "NR_POOL_DPP16=2"
+      ],
+      "new_pipeline": false
+    },
+    "fswindsp256": {
+      "added": [
+        "NR_POOL_DPP16=7"
+      ],
+      "removed": [
+        "NR_POOL_DPP16=2"
+      ],
+      "new_pipeline": false
+    },
+    "fswindsp32": {
+      "added": [
+        "NR_POOL_DPP16=7",
+        "NR_TCHAIN=1"
+      ],
+      "removed": [
+        "NR_POOL_DPP16=2"
+      ],
+      "new_pipeline": false
+    },
+    "fswindsp64": {
+      "added": [
+        "NR_POOL_DPP16=7"
+      ],
+      "removed": [
+        "NR_POOL_DPP16=2"
+      ],
+      "new_pipeline": false
+    },
+    "fswinfusedup128": {
+      "added": [
+        "NR_UPS_BLEND_PK=2"
+      ],
+      "removed": [
+        "NR_UPS_BLEND_PK=1"
+      ],
+      "new_pipeline": false
+    },
+    "fswinfusedup256": {
+      "added": [
+        "NR_UPS_BLEND_PK=2"
+      ],
+      "removed": [
+        "NR_UPS_BLEND_PK=1"
+      ],
+      "new_pipeline": false
+    },
+    "fswinfusedup32": {
+      "added": [
+        "NR_TCHAIN=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "fswinfusedup64": {
+      "added": [
+        "NR_UPS_BLEND_PK=2"
+      ],
+      "removed": [
+        "NR_UPS_BLEND_PK=1"
+      ],
+      "new_pipeline": false
+    },
+    "fswinimagepreds32": {
+      "added": [
+        "NR_POOL_DPP16=7"
+      ],
+      "removed": [
+        "NR_POOL_DPP16=2"
+      ],
+      "new_pipeline": false
+    },
+    "fswinp256": {
+      "added": [
+        "NR_EDGE_BODIES=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "fswinpds128": {
+      "added": [
+        "NR_EDGE_BODIES=1",
+        "NR_POOL_DPP16=5",
+        "NR_TCHAIN=1"
+      ],
+      "removed": [
+        "NR_POOL_DPP16=2"
+      ],
+      "new_pipeline": false
+    },
+    "fswinpds256": {
+      "added": [
+        "NR_EDGE_BODIES=1",
+        "NR_POOL_DPP16=5",
+        "NR_TCHAIN=1"
+      ],
+      "removed": [
+        "NR_POOL_DPP16=2"
+      ],
+      "new_pipeline": false
+    },
+    "fswinpds64": {
+      "added": [
+        "NR_EDGE_BODIES=1",
+        "NR_POOL_DPP16=5",
+        "NR_TCHAIN=1"
+      ],
+      "removed": [
+        "NR_POOL_DPP16=2"
+      ],
+      "new_pipeline": false
+    },
+    "fswinpup128": {
+      "added": [
+        "NR_EDGE_BODIES=1",
+        "NR_TCHAIN=1",
+        "NR_UPS_BLEND_PK=2"
+      ],
+      "removed": [
+        "NR_UPS_BLEND_PK=1"
+      ],
+      "new_pipeline": false
+    },
+    "fswinpup256": {
+      "added": [
+        "NR_EDGE_BODIES=1",
+        "NR_TCHAIN=1",
+        "NR_UPS_BLEND_PK=2"
+      ],
+      "removed": [
+        "NR_UPS_BLEND_PK=1"
+      ],
+      "new_pipeline": false
+    },
+    "fswinpup64": {
+      "added": [
+        "NR_EDGE_BODIES=1",
+        "NR_TCHAIN=1",
+        "NR_UPS_BLEND_PK=2"
+      ],
+      "removed": [
+        "NR_UPS_BLEND_PK=1"
+      ],
+      "new_pipeline": false
+    },
+    "gemmproj": {
+      "added": [
+        "NR_GEMM_REMAP_PC=1",
+        "NR_TCHAIN=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "gemmprojc": {
+      "added": [
+        "NR_ACC_F16=0",
+        "NR_COHERENT_ACT=0",
+        "NR_EPI_FRAGMENT=1",
+        "NR_GEMM_REMAP_PC=1",
+        "NR_KFRAG=16",
+        "NR_KOFF_SPLIT=1",
+        "NR_MFRAG=2",
+        "NR_NFRAG=2",
+        "NR_OCC_LDS=16384",
+        "NR_OUT_E4M3",
+        "NR_OUT_TILED",
+        "NR_PACKED_WEIGHT_N2=1",
+        "NR_R_E4M3",
+        "NR_SWAP_AB=1",
+        "NR_TCHAIN=1",
+        "NR_WAVE_UNIFORM=0",
+        "NR_WM=1",
+        "NR_WN=4"
+      ],
+      "removed": [],
+      "new_pipeline": true
+    },
+    "gemmprojt": {
+      "added": [
+        "NR_GEMM_REMAP_PC=1",
+        "NR_TCHAIN=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "gemmprojw": {
+      "added": [
+        "NR_GEMM_REMAP_PC=1",
+        "NR_OCC_LDS=16384",
+        "NR_TCHAIN=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "gemmvact": {
+      "added": [
+        "NR_GEMM_REMAP_PC=1",
+        "NR_TCHAIN=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "gemmvqkvnorm": {
+      "added": [
+        "NR_GEMM_REMAP_PC=1",
+        "NR_TCHAIN=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    },
+    "vitattn": {
+      "added": [
+        "NR_TCHAIN=1",
+        "NR_VKPERM=1"
+      ],
+      "removed": [],
+      "new_pipeline": false
+    }
+  }
+}

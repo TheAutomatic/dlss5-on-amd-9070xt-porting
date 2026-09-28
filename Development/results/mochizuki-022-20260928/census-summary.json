@@ -1,0 +1,41 @@
+{
+  "modules_scanned": 30,
+  "exports_scanned": 990,
+  "active_exports": 40,
+  "scope": "EXACT production topology; static conversion sites weighted by actual dispatched waves, not an executed-instruction count. Removal fraction is proven I+P only, not an upper bound on future optimization.",
+  "tiers": {
+    "900": {
+      "weighted_sites": {
+        "narrow_rne_static": 13394884,
+        "narrow_rtz_pair_static": 12835619,
+        "widen_static": 27052339,
+        "same_block_roundtrip_sites": 16957275,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0
+      },
+      "I_removed_static_wave_weighted": 1162272,
+      "P_removed_static_wave_weighted": 336000,
+      "proven_removable_site_fraction_percent": 2.811922081783851,
+      "I_removed_loop_expanded_instructions": 4649088,
+      "P_removed_loop_expanded_upper_instructions": 1344000,
+      "dispatches": 214
+    },
+    "1080": {
+      "weighted_sites": {
+        "narrow_rne_static": 18944760,
+        "narrow_rtz_pair_static": 17875315,
+        "widen_static": 38108851,
+        "same_block_roundtrip_sites": 23733123,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0
+      },
+      "I_removed_static_wave_weighted": 1671200,
+      "P_removed_static_wave_weighted": 483840,
+      "proven_removable_site_fraction_percent": 2.8761122240027834,
+      "I_removed_loop_expanded_instructions": 6684800,
+      "P_removed_loop_expanded_upper_instructions": 1935360,
+      "dispatches": 214
+    }
+  },
+  "non_kernel_labels_excluded": 90
+}

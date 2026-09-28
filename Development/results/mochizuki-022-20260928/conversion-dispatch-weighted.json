@@ -1,0 +1,835 @@
+{
+  "metric": "static sites times actual dispatched waves; not loop-expanded, not runtime instruction executions. Same-BB def/use is conservative; LDS sites are separate, not counted as proven redundant.",
+  "kernels": {
+    "c32-wave1:c32_wave1_chain": {
+      "900": {
+        "calls": 4,
+        "waves": 24442,
+        "same_block_roundtrip_sites": 586608,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 391072,
+        "widen_static": 1955360
+      },
+      "1080": {
+        "calls": 4,
+        "waves": 35090,
+        "same_block_roundtrip_sites": 842160,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 561440,
+        "widen_static": 2807200
+      }
+    },
+    "c32-wave1:c32_wave1_mapped": {
+      "900": {
+        "calls": 2,
+        "waves": 12000,
+        "same_block_roundtrip_sites": 480000,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 192000,
+        "narrow_rtz_pair_static": 192000,
+        "widen_static": 1152000
+      },
+      "1080": {
+        "calls": 2,
+        "waves": 17280,
+        "same_block_roundtrip_sites": 691200,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 276480,
+        "narrow_rtz_pair_static": 276480,
+        "widen_static": 1658880
+      }
+    },
+    "c32-wave1:c32_wave1_finish": {
+      "900": {
+        "calls": 1,
+        "waves": 6100,
+        "same_block_roundtrip_sites": 878400,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 878400,
+        "widen_static": 1988600
+      },
+      "1080": {
+        "calls": 1,
+        "waves": 8760,
+        "same_block_roundtrip_sites": 1261440,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 1261440,
+        "widen_static": 2855760
+      }
+    },
+    "c32-wave1:c32_wave1_finish_dcrop": {
+      "900": {
+        "calls": 1,
+        "waves": 6100,
+        "same_block_roundtrip_sites": 512400,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 512400,
+        "widen_static": 1256600
+      },
+      "1080": {
+        "calls": 1,
+        "waves": 8760,
+        "same_block_roundtrip_sites": 735840,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 735840,
+        "widen_static": 1804560
+      }
+    },
+    "c32-wave1:c32_wave1_post": {
+      "900": {
+        "calls": 1,
+        "waves": 24321,
+        "same_block_roundtrip_sites": 1629507,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 389136,
+        "narrow_rtz_pair_static": 1240371,
+        "widen_static": 3575187
+      },
+      "1080": {
+        "calls": 1,
+        "waves": 34945,
+        "same_block_roundtrip_sites": 2341315,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 559120,
+        "narrow_rtz_pair_static": 1782195,
+        "widen_static": 5136915
+      }
+    },
+    "c32-wave1:c32_wave1_prefix": {
+      "900": {
+        "calls": 1,
+        "waves": 24000,
+        "same_block_roundtrip_sites": 2784000,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 528000,
+        "narrow_rtz_pair_static": 2784000,
+        "widen_static": 5568000
+      },
+      "1080": {
+        "calls": 1,
+        "waves": 34560,
+        "same_block_roundtrip_sites": 4008960,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 760320,
+        "narrow_rtz_pair_static": 4008960,
+        "widen_static": 8017920
+      }
+    },
+    "c64-wave2:c64_wave2_bi": {
+      "900": {
+        "calls": 2,
+        "waves": 6200,
+        "same_block_roundtrip_sites": 316200,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 297600,
+        "widen_static": 396800
+      },
+      "1080": {
+        "calls": 2,
+        "waves": 8880,
+        "same_block_roundtrip_sites": 452880,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 426240,
+        "widen_static": 568320
+      }
+    },
+    "c64-wave2:c64_wave2_bo": {
+      "900": {
+        "calls": 1,
+        "waves": 3000,
+        "same_block_roundtrip_sites": 135000,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 96000,
+        "widen_static": 144000
+      },
+      "1080": {
+        "calls": 1,
+        "waves": 4320,
+        "same_block_roundtrip_sites": 194400,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 138240,
+        "widen_static": 207360
+      }
+    },
+    "c64-wave2:c64_wave2_bi_bo": {
+      "900": {
+        "calls": 5,
+        "waves": 15444,
+        "same_block_roundtrip_sites": 540540,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 494208,
+        "widen_static": 741312
+      },
+      "1080": {
+        "calls": 5,
+        "waves": 22132,
+        "same_block_roundtrip_sites": 774620,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 708224,
+        "widen_static": 1062336
+      }
+    },
+    "c64-wave2:c128_wave2_bi": {
+      "900": {
+        "calls": 2,
+        "waves": 3264,
+        "same_block_roundtrip_sites": 166464,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 156672,
+        "widen_static": 208896
+      },
+      "1080": {
+        "calls": 2,
+        "waves": 4636,
+        "same_block_roundtrip_sites": 236436,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 222528,
+        "widen_static": 296704
+      }
+    },
+    "c64-wave2:c128_wave2_bo": {
+      "900": {
+        "calls": 1,
+        "waves": 1500,
+        "same_block_roundtrip_sites": 67500,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 48000,
+        "widen_static": 72000
+      },
+      "1080": {
+        "calls": 1,
+        "waves": 2160,
+        "same_block_roundtrip_sites": 97200,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 69120,
+        "widen_static": 103680
+      }
+    },
+    "c64-wave2:c128_wave2_bi_bo": {
+      "900": {
+        "calls": 9,
+        "waves": 14208,
+        "same_block_roundtrip_sites": 497280,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 454656,
+        "widen_static": 681984
+      },
+      "1080": {
+        "calls": 9,
+        "waves": 20288,
+        "same_block_roundtrip_sites": 710080,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 649216,
+        "widen_static": 973824
+      }
+    },
+    "c64-wave2:c256_attn_wave": {
+      "900": {
+        "calls": 2,
+        "waves": 1664,
+        "same_block_roundtrip_sites": 26624,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 26624,
+        "widen_static": 26624
+      },
+      "1080": {
+        "calls": 2,
+        "waves": 2400,
+        "same_block_roundtrip_sites": 38400,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 38400,
+        "widen_static": 38400
+      }
+    },
+    "c64-wave2:c256_attn_wave_bo": {
+      "900": {
+        "calls": 14,
+        "waves": 11648,
+        "same_block_roundtrip_sites": 186368,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 186368,
+        "widen_static": 186368
+      },
+      "1080": {
+        "calls": 14,
+        "waves": 16448,
+        "same_block_roundtrip_sites": 263168,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 263168,
+        "widen_static": 263168
+      }
+    },
+    "vit-stream:vit_stream_project_n64_bh": {
+      "900": {
+        "calls": 8,
+        "waves": 3200,
+        "same_block_roundtrip_sites": 204800,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 204800,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 307200
+      },
+      "1080": {
+        "calls": 8,
+        "waves": 5120,
+        "same_block_roundtrip_sites": 327680,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 327680,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 491520
+      }
+    },
+    "vit-stream:vit_stream_qkv_frag_hin": {
+      "900": {
+        "calls": 8,
+        "waves": 19200,
+        "same_block_roundtrip_sites": 0,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 0
+      },
+      "1080": {
+        "calls": 8,
+        "waves": 30720,
+        "same_block_roundtrip_sites": 0,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 0
+      }
+    },
+    "vit-stream:vit_stream_contract_frag_hout": {
+      "900": {
+        "calls": 8,
+        "waves": 3200,
+        "same_block_roundtrip_sites": 204800,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 307200,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 204800
+      },
+      "1080": {
+        "calls": 8,
+        "waves": 5120,
+        "same_block_roundtrip_sites": 327680,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 491520,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 327680
+      }
+    },
+    "c512-m32-deep:split_mix_blocked_h16w_m32": {
+      "900": {
+        "calls": 13,
+        "waves": 6608,
+        "same_block_roundtrip_sites": 422912,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 105728,
+        "narrow_rtz_pair_static": 422912,
+        "widen_static": 422912
+      },
+      "1080": {
+        "calls": 13,
+        "waves": 8320,
+        "same_block_roundtrip_sites": 532480,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 133120,
+        "narrow_rtz_pair_static": 532480,
+        "widen_static": 532480
+      }
+    },
+    "multihead-fast-padded-wave-packed:mh_pool_project_production_h16w": {
+      "900": {
+        "calls": 2,
+        "waves": 25600,
+        "same_block_roundtrip_sites": 409600,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 614400,
+        "narrow_rtz_pair_static": 204800,
+        "widen_static": 409600
+      },
+      "1080": {
+        "calls": 2,
+        "waves": 37120,
+        "same_block_roundtrip_sites": 593920,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 890880,
+        "narrow_rtz_pair_static": 296960,
+        "widen_static": 593920
+      }
+    },
+    "multihead-fast-padded-wave-packed:mh_pool_project_group_c64": {
+      "900": {
+        "calls": 1,
+        "waves": 3000,
+        "same_block_roundtrip_sites": 108000,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 111000,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 108000
+      },
+      "1080": {
+        "calls": 1,
+        "waves": 4320,
+        "same_block_roundtrip_sites": 155520,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 159840,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 155520
+      }
+    },
+    "multihead-fast-padded-wave-packed:mh_pool_project_group_c128": {
+      "900": {
+        "calls": 1,
+        "waves": 1500,
+        "same_block_roundtrip_sites": 54000,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 55500,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 54000
+      },
+      "1080": {
+        "calls": 1,
+        "waves": 2160,
+        "same_block_roundtrip_sites": 77760,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 79920,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 77760
+      }
+    },
+    "multihead-fast-padded-wave-packed:mh_pool_project_group_c256": {
+      "900": {
+        "calls": 1,
+        "waves": 752,
+        "same_block_roundtrip_sites": 27072,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 27824,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 27072
+      },
+      "1080": {
+        "calls": 1,
+        "waves": 1080,
+        "same_block_roundtrip_sites": 38880,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 39960,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 38880
+      }
+    },
+    "multihead-fast-padded-wave-packed:mh_attention_project_frag_c512": {
+      "900": {
+        "calls": 13,
+        "waves": 13216,
+        "same_block_roundtrip_sites": 528640,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 528640,
+        "widen_static": 528640
+      },
+      "1080": {
+        "calls": 13,
+        "waves": 16640,
+        "same_block_roundtrip_sites": 665600,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 665600,
+        "widen_static": 665600
+      }
+    },
+    "multihead-fast-padded-wave-packed:mh_ffn_fused_c256_frag_project_g128_qkv_bytein_fb_pdl": {
+      "1080": {
+        "calls": 3,
+        "waves": 25920,
+        "same_block_roundtrip_sites": 414720,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 414720,
+        "widen_static": 414720
+      }
+    },
+    "multihead-fast-padded-wave-packed:mh_ffn_fused_c256_frag_project_g128_qkv_fb_pdl": {
+      "1080": {
+        "calls": 1,
+        "waves": 8640,
+        "same_block_roundtrip_sites": 138240,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 138240,
+        "widen_static": 138240
+      }
+    },
+    "multihead-fast-padded-wave-packed:mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl": {
+      "900": {
+        "calls": 15,
+        "waves": 99840,
+        "same_block_roundtrip_sites": 1597440,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 1597440,
+        "widen_static": 1597440
+      },
+      "1080": {
+        "calls": 12,
+        "waves": 116224,
+        "same_block_roundtrip_sites": 1859584,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 1859584,
+        "widen_static": 1859584
+      }
+    },
+    "multihead-fast-padded-wave-packed:mh_ffn_fused_c256_frag_project_mapped_g128_qkv_fb_pdl": {
+      "900": {
+        "calls": 1,
+        "waves": 6656,
+        "same_block_roundtrip_sites": 106496,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 106496,
+        "widen_static": 106496
+      }
+    },
+    "deep_reference:vit_gather": {
+      "900": {
+        "calls": 2,
+        "waves": 25600,
+        "same_block_roundtrip_sites": 0,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 0
+      },
+      "1080": {
+        "calls": 2,
+        "waves": 40960,
+        "same_block_roundtrip_sites": 0,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 0
+      }
+    },
+    "deep_fast-packed:vit_attention_fused_400_bytein_bout": {
+      "900": {
+        "calls": 8,
+        "waves": 6400,
+        "same_block_roundtrip_sites": 102400,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 102400,
+        "widen_static": 102400
+      }
+    },
+    "deep_fast-packed:vit_attention_fused_640_bytein_bout": {
+      "1080": {
+        "calls": 8,
+        "waves": 10240,
+        "same_block_roundtrip_sites": 163840,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 163840,
+        "widen_static": 163840
+      }
+    },
+    "deep_fast-packed:decoder_project2x_h16w": {
+      "900": {
+        "calls": 2,
+        "waves": 12800,
+        "same_block_roundtrip_sites": 768000,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 4556800,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 768000
+      },
+      "1080": {
+        "calls": 2,
+        "waves": 18560,
+        "same_block_roundtrip_sites": 1113600,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 6607360,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 1113600
+      }
+    },
+    "deep_fast-packed:decoder_project2x_h16w_byteout": {
+      "900": {
+        "calls": 3,
+        "waves": 10504,
+        "same_block_roundtrip_sites": 630240,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 3739424,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 630240
+      },
+      "1080": {
+        "calls": 3,
+        "waves": 15120,
+        "same_block_roundtrip_sites": 907200,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 5382720,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 907200
+      }
+    },
+    "deep_fast-packed:vit_pack_input": {
+      "900": {
+        "calls": 8,
+        "waves": 25600,
+        "same_block_roundtrip_sites": 0,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 0
+      },
+      "1080": {
+        "calls": 8,
+        "waves": 40960,
+        "same_block_roundtrip_sites": 0,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 0
+      }
+    },
+    "deep_fast-packed:vit_expand_blocked_fp8_frag_bytein": {
+      "900": {
+        "calls": 8,
+        "waves": 12800,
+        "same_block_roundtrip_sites": 0,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 0
+      },
+      "1080": {
+        "calls": 8,
+        "waves": 20480,
+        "same_block_roundtrip_sites": 0,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 0
+      }
+    },
+    "deep_fast-packed:split_ffn_fused_fp8_t8": {
+      "900": {
+        "calls": 13,
+        "waves": 52864,
+        "same_block_roundtrip_sites": 2114560,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 1691648,
+        "narrow_rtz_pair_static": 2114560,
+        "widen_static": 2114560
+      },
+      "1080": {
+        "calls": 13,
+        "waves": 66560,
+        "same_block_roundtrip_sites": 2662400,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 2129920,
+        "narrow_rtz_pair_static": 2662400,
+        "widen_static": 2662400
+      }
+    },
+    "deep_fast-packed:split_projection_frag": {
+      "900": {
+        "calls": 13,
+        "waves": 13216,
+        "same_block_roundtrip_sites": 845824,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 845824,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 845824
+      },
+      "1080": {
+        "calls": 13,
+        "waves": 16640,
+        "same_block_roundtrip_sites": 1064960,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 1064960,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 1064960
+      }
+    },
+    "multihead-reference:mh_shift_pack": {
+      "900": {
+        "calls": 13,
+        "waves": 422912,
+        "same_block_roundtrip_sites": 0,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 0
+      },
+      "1080": {
+        "calls": 13,
+        "waves": 532480,
+        "same_block_roundtrip_sites": 0,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 0
+      }
+    },
+    "multihead-reference:mh_pool": {
+      "900": {
+        "calls": 1,
+        "waves": 6400,
+        "same_block_roundtrip_sites": 25600,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 25600,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 25600
+      },
+      "1080": {
+        "calls": 1,
+        "waves": 10240,
+        "same_block_roundtrip_sites": 40960,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 40960,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 40960
+      }
+    },
+    "c512-m32-mh:mh_qkv_normalize_frag_c512_m32": {
+      "900": {
+        "calls": 13,
+        "waves": 19824,
+        "same_block_roundtrip_sites": 0,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 0
+      },
+      "1080": {
+        "calls": 13,
+        "waves": 24960,
+        "same_block_roundtrip_sites": 0,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 0
+      }
+    },
+    "multihead_fused_attention:mh_attention_fused_fp8_out": {
+      "900": {
+        "calls": 13,
+        "waves": 26432,
+        "same_block_roundtrip_sites": 0,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 845824
+      },
+      "1080": {
+        "calls": 13,
+        "waves": 33280,
+        "same_block_roundtrip_sites": 0,
+        "half_grid_renarrowing_sites": 0,
+        "narrow_to_lds_sites": 0,
+        "narrow_rne_static": 0,
+        "narrow_rtz_pair_static": 0,
+        "widen_static": 1064960
+      }
+    }
+  }
+}

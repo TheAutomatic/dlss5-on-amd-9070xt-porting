@@ -1,0 +1,3 @@
+Command: python3 hip/compare-modules.py /tmp/mochizuki-022/census /tmp/mochizuki-022/baseline
+Observed at initial census build: identical code: 30  differ: 0
+Target: gfx1201. Sections: .text, .rodata, .note.

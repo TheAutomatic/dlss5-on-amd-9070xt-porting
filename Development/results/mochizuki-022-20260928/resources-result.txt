@@ -1,0 +1,23 @@
+device=AMD Radeon RX 9070 XT MP=32 LDS=65536
+A,c32-wave1,c32_wave1_mapped,32,133,4096,0,16
+I,c32-wave1,c32_wave1_mapped,32,133,4096,0,16
+A,c32-wave1,c32_wave1_post,32,132,4096,0,16
+I,c32-wave1,c32_wave1_post,32,132,4096,0,16
+A,c32-wave1,c32_wave1_prefix,32,129,4096,0,16
+P,c32-wave1,c32_wave1_prefix,32,129,4096,0,16
+A,c512-m32-deep,split_mix_blocked_h16w_m32,32,96,0,0,64
+O,c512-m32-deep,split_mix_blocked_h16w_m32,32,102,4096,0,16
+G,c512-m32-deep,split_mix_blocked_h16w_m32,32,95,0,0,64
+A,c512-m32-mh,mh_qkv_normalize_frag_c512_m32,32,155,5456,0,12
+G,c512-m32-mh,mh_qkv_normalize_frag_c512_m32,32,155,5456,0,12
+S,c512-m32-mh,mh_qkv_normalize_frag_c512_m32_tc,32,155,5456,0,12
+A,deep_fast-packed,split_projection_frag,32,83,0,0,56
+S,deep_fast-packed,split_projection_frag_tc,32,84,0,0,56
+A,vit-stream,vit_stream_contract_frag_hout,32,205,0,0,24
+O,vit-stream,vit_stream_contract_frag_hout,32,205,4096,0,16
+V,vit-stream,vit_stream_contract_frag_hout_tc,32,206,0,0,24
+F,vit-stream,vit_stream_contract_frag_hout_tc,32,206,0,0,24
+A,vit-stream,vit_stream_qkv_frag_hin,32,96,2112,0,31
+V,vit-stream,vit_stream_qkv_frag_hin_tc,32,97,2112,0,31
+F,vit-stream,vit_stream_qkv_frag_hin_tc,32,97,2112,0,31
+H,c512-m32-deep,split_mix_blocked_h16w_m32_wg4,128,95,0,0,16
