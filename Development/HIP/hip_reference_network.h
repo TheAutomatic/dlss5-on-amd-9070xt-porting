@@ -251,6 +251,7 @@ class Network {
   if(module=="c32_wave1"&&kernel=="c32_wave1_up"){groups=count;threads=32;}
   if(module=="c512_m32_mh"||module=="c512_m32_deep"){groups=count/1024;threads=32;}
   if(module=="c512_m32_mh"&&kernel=="c512_qkv_attention_fused"){groups=count;threads=64;}
+  if(module=="c512_m32_mh"&&kernel=="c512_qkv_attention_compact"){groups=count;threads=64;}
   if(vit_proj_n64_active&&module=="deep_fast"&&kernel=="vit_project_frag"&&count%1024==0){module="vit_wide_deep";kernel="vit_project_frag_n64";groups=unsigned(((count/1024+15)/16)*16);threads=32;}
   if(kernel=="vit_stream_contract_frag_hout"){module="vit_stream";groups=count/1024;threads=32;}
   if(kernel=="vit_stream_qkv_frag_hin"){module="vit_stream";groups=count/512;threads=32;}
@@ -359,7 +360,26 @@ class Network {
  /* byte_in/byte_out (option mh_byte_stream, C64/128/256 chains only): the residual stream between consecutive blocks of a
     chain is the E4M3 byte of the lattice-exact block output; chain heads read the f32 tensor from pool/Up, chain tails
     (raw Hrtz outputs, Down/skip consumers) still write f32. Inside a block the FFN feature is always bytes on this path. */
- Tensor Body(Tensor input,U w,U h,U c,U shift,U block,bool raw,bool byte_in=false,bool byte_out=false){if(PdlChainHead(block))pdl_prev={};pdl_ffn_flags=nullptr;if(opt.skip_blocks.count(block)){Stage("block"+std::to_string(block),input);return input;}U sx=(shift&1)?4:0,sy=(shift&2)?4:0,ww=(w+sx+7)&~7u,hh=(h+sy+7)&~7u,n=ww*hh;const bool identity=opt.elide_identity_shift&&!sx&&!sy&&ww==w&&hh==h;bool mapped=opt.mh_input_mapped&&c!=512&&!identity;const bool byte_feature=(opt.mh_byte_stream||opt.mh_feature_byte)&&c!=512;if((byte_in||byte_out)&&!byte_feature)throw std::runtime_error("byte residual stream requires the mh_byte_stream C64/128/256 path");if(byte_in&&!(identity||mapped))throw std::runtime_error("byte block input requires mapped/identity FFN input");if(byte_out&&(raw||!(identity||opt.mh_project_crop)))throw std::runtime_error("byte block output requires a lattice output on the crop/identity path");if(wave_owned_active&&(c==64||c==128||(c==256&&opt.width==1920&&opt.height==1152))){
+ Tensor CompactC512Body(Tensor input,U w,U h,U ww,U hh,U sx,U sy,U block,bool raw){
+  U valid=w*h,n=(valid+15)&~15u;
+  auto compact=input;
+  if(n!=valid){compact=New(size_t(n)*512);Run("mh","mh_shift_pack",size_t(n)*512,P(input),P(compact),valid,U(1),n,U(1),U(0),U(0),U(512),U(0));}
+  auto mixed=New(size_t(n)*512),contract=New(size_t(n)*512),contract8=New(size_t(n)*128),ffn=New(size_t(n)*512),ffn8=New(size_t(n)*128);
+  Run("c512_m32_deep","split_mix_blocked_h16w_m32",size_t((n+31)/32*32)*256,P(compact),PackedSplitFfnWeightMixHalf(Block(block,"ffwd")),P(mixed),n);
+  Run("deep","split_ffn_fused_fp8_t8",size_t(n)*512,P(mixed),PackedSplitFfnWeightMixHalf(Block(block,"ffwd")),P(contract),P(contract8),n);
+  mixed.reset();
+  Run("deep","split_projection_frag",size_t(n)*512,P(contract8),PackedSplitProjectionFrag(Block(block,"ffwd-projection")),P(compact),P(ffn),P(ffn8),n);
+  compact.reset();contract.reset();contract8.reset();
+  auto av=New(size_t(n)*128);
+  Run("c512_m32_mh","c512_qkv_attention_compact",size_t(ww)*hh/64*16,P(ffn8),PackedMhWeightQkvFrag(Block(block,"attention"),512),P(av),w,h,ww,hh,sx,sy);
+  ffn8.reset();
+  auto result=New(size_t(valid)*512);
+  Run("mh_fast","mh_attention_project_frag_c512",size_t(n)*512,P(av),P(ffn),PackedMhWeightQkvFrag(Block(block,"attention"),512),P(result),n,U(raw?3:0),w,h,w,U(0),U(0));
+  Stage("block"+std::to_string(block),result);return result;
+ }
+ Tensor Body(Tensor input,U w,U h,U c,U shift,U block,bool raw,bool byte_in=false,bool byte_out=false){if(PdlChainHead(block))pdl_prev={};pdl_ffn_flags=nullptr;if(opt.skip_blocks.count(block)){Stage("block"+std::to_string(block),input);return input;}U sx=(shift&1)?4:0,sy=(shift&2)?4:0,ww=(w+sx+7)&~7u,hh=(h+sy+7)&~7u,n=ww*hh;
+ if(c==512&&c512_m32_active&&opt.fast_deep&&opt.packed_weights&&opt.split_mix_h16w&&!opt.split_mix_fused&&opt.split_ffn_fused&&opt.c512_proj_tiles&&opt.c512_qkv_frag&&opt.c512_proj_frag&&opt.fp8_av&&opt.fused_mh&&opt.fp8_normalized&&!byte_in&&!byte_out&&ww%8==0&&hh%8==0)return CompactC512Body(input,w,h,ww,hh,sx,sy,block,raw);
+ const bool identity=opt.elide_identity_shift&&!sx&&!sy&&ww==w&&hh==h;bool mapped=opt.mh_input_mapped&&c!=512&&!identity;const bool byte_feature=(opt.mh_byte_stream||opt.mh_feature_byte)&&c!=512;if((byte_in||byte_out)&&!byte_feature)throw std::runtime_error("byte residual stream requires the mh_byte_stream C64/128/256 path");if(byte_in&&!(identity||mapped))throw std::runtime_error("byte block input requires mapped/identity FFN input");if(byte_out&&(raw||!(identity||opt.mh_project_crop)))throw std::runtime_error("byte block output requires a lattice output on the crop/identity path");if(wave_owned_active&&(c==64||c==128||(c==256&&opt.width==1920&&opt.height==1152))){
   // C256 whole-block fusion wins at 1080; retain the split PDL path at smaller tiers.
   if(!(identity||mapped)||!opt.grouped_mh_contract||!opt.packed_weights||!byte_feature||!opt.mh_proj_diag_fb)throw std::runtime_error("wave-owned block input contract");
   pdl_prev={};pdl_ffn_flags=nullptr;pdl_anyorder=false;

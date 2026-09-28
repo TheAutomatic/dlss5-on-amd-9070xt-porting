@@ -1,0 +1,48 @@
+SYNTHETIC_ONLY device=AMD Radeon RX 9070 XT W=60 H=36 P=135 input=+-0.25 weights=+-1/64
+variant=A check output=1 bytes=1105920 guard_bad=0 invalid_fp8=0 nonzero=755676 hash=306fcb48009aee47
+check output=0 bytes=1105920 guard_bad=0 invalid_fp8=0 nonzero=1105920 hash=19bd1c452a97f283
+check output=0 bytes=524288 guard_bad=0 invalid_fp8=0 nonzero=524288 hash=3f19e18bafbd6803
+variant=B check output=1 bytes=1105920 guard_bad=0 invalid_fp8=0 nonzero=755676 hash=306fcb48009aee47
+check output=0 bytes=1105920 guard_bad=0 invalid_fp8=0 nonzero=1105920 hash=19bd1c452a97f283
+check output=0 bytes=524288 guard_bad=0 invalid_fp8=0 nonzero=524288 hash=3f19e18bafbd6803
+variant=C check output=0 bytes=4423680 guard_bad=0 invalid_fp8=0 nonzero=1105920 hash=723766361b746c83
+check output=0 bytes=2097152 guard_bad=0 invalid_fp8=0 nonzero=524288 hash=f37f3328b1fc8303
+check output=0 bytes=4423680 guard_bad=0 invalid_fp8=0 nonzero=1786209 hash=fd8f1d59ecb5219d
+check output=0 bytes=4423680 guard_bad=0 invalid_fp8=0 nonzero=804753 hash=36845da2cdaed212
+check output=1 bytes=1105920 guard_bad=0 invalid_fp8=0 nonzero=757802 hash=f6aab1a75f0a9326
+our_float_finite bad=0 values=1105920
+our_float_finite bad=0 values=1105920
+timing round=0 slot=0 variant=A launches=200 total_ms=6.775800 us_per_launch=33.879001
+timing round=0 slot=1 variant=B launches=200 total_ms=6.488520 us_per_launch=32.442601
+timing round=0 slot=2 variant=B launches=200 total_ms=6.131880 us_per_launch=30.659399
+timing round=0 slot=3 variant=A launches=200 total_ms=6.218240 us_per_launch=31.091199
+timing round=1 slot=0 variant=A launches=200 total_ms=6.194420 us_per_launch=30.972099
+timing round=1 slot=1 variant=B launches=200 total_ms=6.200620 us_per_launch=31.003101
+timing round=1 slot=2 variant=B launches=200 total_ms=6.301980 us_per_launch=31.509900
+timing round=1 slot=3 variant=A launches=200 total_ms=6.020820 us_per_launch=30.104101
+timing round=2 slot=0 variant=A launches=200 total_ms=6.249120 us_per_launch=31.245601
+timing round=2 slot=1 variant=B launches=200 total_ms=6.213240 us_per_launch=31.066201
+timing round=2 slot=2 variant=B launches=200 total_ms=6.161720 us_per_launch=30.808599
+timing round=2 slot=3 variant=A launches=200 total_ms=6.183440 us_per_launch=30.917201
+timing round=0 slot=0 variant=A launches=200 total_ms=6.388040 us_per_launch=31.940200
+timing round=0 slot=1 variant=C launches=200 total_ms=6.838100 us_per_launch=34.190500
+timing round=0 slot=2 variant=C launches=200 total_ms=6.771940 us_per_launch=33.859701
+timing round=0 slot=3 variant=A launches=200 total_ms=6.301660 us_per_launch=31.508300
+timing round=1 slot=0 variant=A launches=200 total_ms=6.365700 us_per_launch=31.828499
+timing round=1 slot=1 variant=C launches=200 total_ms=6.792080 us_per_launch=33.960400
+timing round=1 slot=2 variant=C launches=200 total_ms=6.739560 us_per_launch=33.697801
+timing round=1 slot=3 variant=A launches=200 total_ms=6.334200 us_per_launch=31.671000
+timing round=2 slot=0 variant=A launches=200 total_ms=6.251940 us_per_launch=31.259699
+timing round=2 slot=1 variant=C launches=200 total_ms=6.708980 us_per_launch=33.544900
+timing round=2 slot=2 variant=C launches=200 total_ms=6.888220 us_per_launch=34.441099
+timing round=2 slot=3 variant=A launches=200 total_ms=6.291460 us_per_launch=31.457300
+check output=1 bytes=1105920 guard_bad=0 invalid_fp8=0 nonzero=755676 hash=306fcb48009aee47
+check output=0 bytes=1105920 guard_bad=0 invalid_fp8=0 nonzero=1105920 hash=19bd1c452a97f283
+check output=0 bytes=524288 guard_bad=0 invalid_fp8=0 nonzero=524288 hash=3f19e18bafbd6803
+check output=0 bytes=4423680 guard_bad=0 invalid_fp8=0 nonzero=1105920 hash=723766361b746c83
+check output=0 bytes=2097152 guard_bad=0 invalid_fp8=0 nonzero=524288 hash=f37f3328b1fc8303
+check output=0 bytes=4423680 guard_bad=0 invalid_fp8=0 nonzero=1786209 hash=fd8f1d59ecb5219d
+check output=0 bytes=4423680 guard_bad=0 invalid_fp8=0 nonzero=804753 hash=36845da2cdaed212
+check output=1 bytes=1105920 guard_bad=0 invalid_fp8=0 nonzero=757802 hash=f6aab1a75f0a9326
+our_float_finite bad=0 values=1105920
+our_float_finite bad=0 values=1105920

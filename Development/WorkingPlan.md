@@ -16,7 +16,7 @@
 
 ## 正在进行
 
-- 无。0.36 刚发，等 Zero 定下一步。
+- **09-29 深层任务已完成，已装剑星**：C512点运算紧凑布局，900省0.164～0.176ms、1080省0.228～0.248ms，逐位；整网198/169派发。现场add-on b5ab8c3a + c512-m32-mh双架构，DIRECT_IO=3 / MAKE_RESIDENT_EVERY=60保留，备份 `D:\DLSSNR-Lab\hip-backend\deep-layers\backups\stellar-20260929-010247`。报告 `results/deep-layers-20260929/README.md`；0.36发布包未改，等Zero本机2K原生AA EXACT复测。
 
 ## Zero 的标准与取舍（为什么这样定）
 
@@ -43,14 +43,14 @@
 
 ## B. 优化候选（逐位；按"收益 × 把握"排）
 
-1. **C512 剩余派发**：79 对 Daniel 64（他 16 块×4，我们 13 块有效，不能直接相减）；需要新内核，按 Daniel 组织再看。
-2. **ViT**：49 对 40（每块 6 对 5 + 入口打包）；本轮 P/G/Q/R 候选逐位但不赚，要新的组织证据。
+1. **C512 剩余派发**：1080紧凑点运算已合，族79→66（13块×5 + pool），900仍79（每块补4个尾token）；Daniel 16块×4=64，不能直接相减。单wave寄存器FFN、再并mix均逐位但慢，需新证据再开。1080有效60×36相同，但旧点运算在64×40补边域；已改为2160个紧凑token，attention原窗口保持。
+2. **ViT**：完整边界口径50对42（两边都含入口/出口repack；旧49/40口径不同）。producer P/G/Q/R及09-29消费端float打包V均逐位但慢，暂保现路。Daniel FFWD已独立launch并拿到同尺寸合成微秒账，不能当真实模型耗时。
 3. **HIP↔D3D 交接改 GPU 轮询**（`results/frame-breakdown-20260928` 第 4 项）：收益待测，会碰看门狗（Daniel 用 1 像素 draw 分片自旋规避）。
-4. **900 档**：C256 整块在 900 仍走分体（新分组变慢）；2K 质量档落 900，值得换思路再看。
+4. **900 档**：本轮C512紧凑布局已省约2%，点运算26432→19552token，派发198不变；C256仍分体。Daniel900的C512 52×32/ViT448与我们50×30/400不同，不作等尺寸模型对照。
 5. 小件：C256 FFN 标量量化/地址开销（`results/aco-lineup-20260928` 逐条表）；ViT QKV 归一化段；C32 对角残差跳过全零 K16 半块（约 −0.1～0.2%）。
 6. 杂项：`MAKE_RESIDENT_EVERY=60` 疑似每 60 帧一次约 30ms 尖刺（p99），改 0 测一次（C.C. 令"把延迟波形拉直"）；常规 OptiScaler 包也带 ReShade 却无 ini，新用户可能见引导遮罩，下版照 Magpie 补；`validate-modules.ps1` 修路径；帧时间日志 Magpie 路线未接。
 
-**已交负账（别重复）**：mochizuki 0.0.2.2 各路线（I/P/S/V/F/O/G/H，`results/mochizuki-022-20260928`）；C512 FFN M32、900 C256 新分组、ViT byte 出口/入口 gather-pack、C64/C128 Down 融合、去清零、C32 权重缓存。
+**已交负账（别重复）**：mochizuki 0.0.2.2 各路线（I/P/S/V/F/O/G/H，`results/mochizuki-022-20260928`）；C512 FFN M32、900 C256 新分组、ViT byte 出口/入口 gather-pack、C64/C128 Down 融合、去清零、C32 权重缓存；09-29 C512单wave寄存器FFN R/RF、ViT消费端float打包V。全16份权重能精确FP8编码，但旧block46展开改FP8 WMMA有10个float元素位差，不能据此换指令。
 
 ## C. 需要 Zero 拍板（有损）
 

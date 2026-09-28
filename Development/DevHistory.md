@@ -1037,3 +1037,12 @@ C256的两qt FFN权重复用推广C64/C128：主力FFN权重请求192→96、320
 ## 2026-09-28 22:51：收尾融合后剑星本机读数（宿主 d2290ad7）
 
 EXACT 静止：2K（2560×1440）原生 AA **54**（C512 融合版 52～53）；1080P 原生 AA **60**（触 60Hz 上限）。
+
+
+## 2026-09-29 01:02：C512点运算紧凑布局，900/1080约再省2%，已装剑星
+
+对齐Daniel深层发现“60×36有效尺寸相同”不等于实际工作量相同：Daniel FFWD/conv按135个4×4tile，我们先shift-pack到64×40后点运算也跑160tile。新compact保mix/FFN/projection原算术，先按有效raster执行，只在attention读取时按原shift映射/补零，不删padding key或改softmax。900每块1500→1504尾补齐，13块点运算26432→19552（−26.03%）；108033280→28080（−15.625%，M32 mix尾槽实际−15.0%）。attention窗口/组数不变，整网trace900保持198，1080182→169。实验C完整EXACT/AE各84帧同，84组AE决策同；生产P独立168帧也命中09-28 float FMA goldens、无NaN/Inf，AE44复用/40刷新且所有字段同；含短筛共384候选帧同golden，另游戏CODEC0现场12帧相同。
+
+两轮千帧ABBA（弃前200帧）先C后生产P：9008.51943→8.35530（−0.16413ms/−1.927%）、8.51362→8.33801（−0.17561/−2.063%）；108011.57261→11.34437（−0.22823/−1.972%）、11.58796→11.33980（−0.24815/−2.141%）。91个kernel函数体实测/生产全同，整ELF仅函数拼接次序不同；host五代码/数据段同，默认关双架构还原同。生产c512-m32-mh gfx1200 ec9e8d92、gfx1201 4bb9b847，add-on b5ab8c3a；基于d2290ad7，DIRECT_IO=3/MAKE_RESIDENT_EVERY=60不动，01:02已装剑星，备份D:\DLSSNR-Lab\hip-backend\deep-layers\backups\stellar-20260929-010247；其他58模块、flags/输入shader/dxgi/OptiScaler原hash，60模块与仓库及现场清单全部核对。RE9 runtime隔离900/1080各12帧回放末帧hash同0.36，smoke通过，未装RE9，不发包。
+
+R单wave寄存器FFN、RF再并mix、V消费端float打包均12帧短筛逐位但更慢：900+0.1996/+0.1406/+0.1474ms，1080+0.2648/+0.2989/+0.3370ms，关闭。Daniel FFWD单核已实际launch：非零合成graph负载下V1比我方mix＋FFN两核快约1～2.6µs，不外推模型。全16权重8388608值FP8精确，但找回旧block46/pattern2展开FP8导致10个float元素位差的原日志，RF8不构建、不重试。详细几何/计时/身份/微测与FP8证据在results/deep-layers-20260929，本机画面/FPS待Zero。

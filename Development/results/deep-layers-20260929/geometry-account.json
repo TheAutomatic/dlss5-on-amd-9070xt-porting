@@ -1,0 +1,138 @@
+{
+  "blocks": [
+    {
+      "block": 23,
+      "shift": 0,
+      "sx": 0,
+      "sy": 0,
+      "old900": 1792,
+      "old1080": 2560
+    },
+    {
+      "block": 24,
+      "shift": 3,
+      "sx": 4,
+      "sy": 4,
+      "old900": 2240,
+      "old1080": 2560
+    },
+    {
+      "block": 25,
+      "shift": 1,
+      "sx": 4,
+      "sy": 0,
+      "old900": 1792,
+      "old1080": 2560
+    },
+    {
+      "block": 26,
+      "shift": 2,
+      "sx": 0,
+      "sy": 4,
+      "old900": 2240,
+      "old1080": 2560
+    },
+    {
+      "block": 27,
+      "shift": 0,
+      "sx": 0,
+      "sy": 0,
+      "old900": 1792,
+      "old1080": 2560
+    },
+    {
+      "block": 28,
+      "shift": 3,
+      "sx": 4,
+      "sy": 4,
+      "old900": 2240,
+      "old1080": 2560
+    },
+    {
+      "block": 29,
+      "shift": 1,
+      "sx": 4,
+      "sy": 0,
+      "old900": 1792,
+      "old1080": 2560
+    },
+    {
+      "block": 30,
+      "shift": 2,
+      "sx": 0,
+      "sy": 4,
+      "old900": 2240,
+      "old1080": 2560
+    },
+    {
+      "block": 40,
+      "shift": 0,
+      "sx": 0,
+      "sy": 0,
+      "old900": 1792,
+      "old1080": 2560
+    },
+    {
+      "block": 41,
+      "shift": 3,
+      "sx": 4,
+      "sy": 4,
+      "old900": 2240,
+      "old1080": 2560
+    },
+    {
+      "block": 44,
+      "shift": 0,
+      "sx": 0,
+      "sy": 0,
+      "old900": 1792,
+      "old1080": 2560
+    },
+    {
+      "block": 45,
+      "shift": 3,
+      "sx": 4,
+      "sy": 4,
+      "old900": 2240,
+      "old1080": 2560
+    },
+    {
+      "block": 47,
+      "shift": 2,
+      "sx": 0,
+      "sy": 4,
+      "old900": 2240,
+      "old1080": 2560
+    }
+  ],
+  "tiers": {
+    "900": {
+      "old_tokens": 26432,
+      "compact_tokens": 19552,
+      "valid_tokens": 19500,
+      "mix_lane_capacity": 19552,
+      "pointwise_reduction_pct": 26.02905569007264,
+      "mix_work_reduction_pct": 26.02905569007264,
+      "old_float_buffer_sum_B": 54132736,
+      "compact_float_buffer_sum_B": 40042496,
+      "old_byte_buffer_sum_B": 13533184,
+      "compact_byte_buffer_sum_B": 10010624,
+      "attention_windows": 413,
+      "attention_groups": 6608
+    },
+    "1080": {
+      "old_tokens": 33280,
+      "compact_tokens": 28080,
+      "valid_tokens": 28080,
+      "mix_lane_capacity": 28288,
+      "pointwise_reduction_pct": 15.625,
+      "mix_work_reduction_pct": 15.0,
+      "old_float_buffer_sum_B": 68157440,
+      "compact_float_buffer_sum_B": 57507840,
+      "old_byte_buffer_sum_B": 17039360,
+      "compact_byte_buffer_sum_B": 14376960,
+      "attention_windows": 520,
+      "attention_groups": 8320
+    }
+  }
+}
