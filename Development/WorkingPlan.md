@@ -21,7 +21,8 @@
 
 ## 正在进行
 
-- **mochizuki 0.0.2.2对照已交账（闇，09-28），无达标组合、不合生产/不装机**：30模块复编对现场全同；990个真实kernel导出（排除90个伪标签）、900/1080联合活跃40个、214派发。Windows Q32有真实half舍入删除，不能整体照抄。I/P无损表示优化、S/V/F短tile链、O占用上限、G重排、H四wave同组及C=I+P+O组合均未过任一档≥0.5%门槛。标准1512候选帧+120回绕压力帧逐位，756组AE决策同。并行ViT发现并修复实验host提前回收hidden的缺口，最终F重新全过但仍不赚；生产串行路径未改。报告 `results/mochizuki-022-20260928`。现场60模块hash不变，保留第五刀与帧时间日志版add-on，未发包。
+- 无（等 Zero 定下一步）。
+- 上一轮：**mochizuki 0.0.2.2对照已交账（闇，09-28），无达标组合、不合生产/不装机**：30模块复编对现场全同；990个真实kernel导出（排除90个伪标签）、900/1080联合活跃40个、214派发。Windows Q32有真实half舍入删除，不能整体照抄。I/P无损表示优化、S/V/F短tile链、O占用上限、G重排、H四wave同组及C=I+P+O组合均未过任一档≥0.5%门槛。标准1512候选帧+120回绕压力帧逐位，756组AE决策同。并行ViT发现并修复实验host提前回收hidden的缺口，最终F重新全过但仍不赚；生产串行路径未改。报告 `results/mochizuki-022-20260928`。现场60模块hash不变，保留第五刀与帧时间日志版add-on，未发包。
 
 ## Zero 的标准与取舍（为什么这样定）
 
@@ -53,13 +54,12 @@
 
 1. **mochizuki 0.0.2.2本轮路线已测，不重复**：I/P组合C只有900−0.13%/−0.29%、1080−0.22%/−0.14%；S/V计数器叠加更慢，最终F去额外invalidate并保留hidden后仍慢0.1～0.2%；O占用上限约0.1%，G组间重排慢约1%，H四wave同组慢约0.3～0.5%。真实舍入不能因为后面还有FP8就删（已有标量反例）；下一轮需新证据/新切口。完整逐条适用性、ISA/资源/回归/ABBA在 `results/mochizuki-022-20260928`。
 
-2. 闇当前任务（见"正在进行"）。
-3. **decoder / 上采样**（C512→C32 那几段，2×2 上采样尾部串行化）：还没按 C32/MH 的方法系统挖过，对照 ACO 的 `fswinfusedup*`。
-4. C512 若再动：换切口（packed 输入生产者/主循环供数、归一化调度），不重复 mix 拆组、去重复量化、LDS 复用、half 出口、现场零扫描（`results/c512-round1-20260927`、`tier900-20260927`）。
-5. 小件：ViT QKV 归一化段；C32 FFN 权重按 WMMA 片段预排；host 侧 C256 宽权重片段（约 −0.03ms）；C32 对角残差跳过全零 K16 半块（约 −0.1～0.2%，`results/c32-diag-zero-20260925`）。
-6. 帧时间日志：Magpie 路线未接；RE9 runtime 只见自己被调用的帧。
-7. `Development/HIP/validate-modules.ps1` 默认资产目录已不存在，修路径后纳入发包前检查。
-8. 可告知 mochizuki：`v_cvt_pk_f32_fp8` 在 gfx1201 实测返回同一字节两份（`HIP/experiments/pair-unpack`），他的 fswin64 用了 64 次。
+2. **decoder / 上采样**（C512→C32 那几段，2×2 上采样尾部串行化）：还没按 C32/MH 的方法系统挖过，对照 ACO 的 `fswinfusedup*`。
+3. C512 若再动：换切口（packed 输入生产者/主循环供数、归一化调度），不重复 mix 拆组、去重复量化、LDS 复用、half 出口、现场零扫描（`results/c512-round1-20260927`、`tier900-20260927`）。
+4. 小件：ViT QKV 归一化段；C32 FFN 权重按 WMMA 片段预排；host 侧 C256 宽权重片段（约 −0.03ms）；C32 对角残差跳过全零 K16 半块（约 −0.1～0.2%，`results/c32-diag-zero-20260925`）。
+5. 帧时间日志：Magpie 路线未接；RE9 runtime 只见自己被调用的帧。
+6. `Development/HIP/validate-modules.ps1` 默认资产目录已不存在，修路径后纳入发包前检查。
+7. 可告知 mochizuki：`v_cvt_pk_f32_fp8` 在 gfx1201 实测返回同一字节两份（`HIP/experiments/pair-unpack`），他的 fswin64 用了 64 次。
 
 ## C. 需要 Zero 拍板
 
