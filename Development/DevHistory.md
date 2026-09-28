@@ -911,3 +911,7 @@ R独立两批900−0.459%/−0.288%、1080−0.345%/−0.372%，不足门槛。�
 R/C各EXACT84+AE84，连M共420候选帧逐位/840哈希，168组AE决策相同，每组43复用41刷新。最终清理M/N实验helper，默认关Z与第五刀、配方P与实测C各双架构四文件代码/metadata全同。配方已合两个宏；gfx1200仅编译，gfx1201实测。
 
 剑星已安装c32-wave1（gfx1201 11ed6305 / gfx1200 f67be506）与c64-wave2（643a3a7f / 5b368198），备份 `D:\DLSSNR-Lab\aco-lineup-20260928\backups\stellar-20260928-115800`。四文件回读同，另56模块及add-on/dxgi/ini/flags hash不变；未发包。游戏验收待Zero。部署`deployments/aco-lineup-20260928`，脚本`HIP/experiments/aco-lineup`。本轮够用交付，未扩到decoder/布局。
+
+## 2026-09-28 13:52：ACO 对齐两刀剑星首测（Splashtop 远程）
+
+剑星 1080P 原生 AA、EXACT、简单画面黄字 **57.1**。本次经 Splashtop 远程，Zero 估远程损失 1～2 帧，与本机测的第五刀 57.1 不可直接比；待本机复测。
