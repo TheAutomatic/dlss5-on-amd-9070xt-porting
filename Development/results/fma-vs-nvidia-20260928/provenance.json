@@ -1,0 +1,50 @@
+{
+  "large-resources/nvidia/nvngx_dlssnr.dll": {
+    "bytes": 165840496,
+    "sha256": "e16bcf15e16e13f527491cdf7845b2fe6521a738d8f7c9c721866a8496e1fc8e"
+  },
+  "release/native-kernel-params-25972-17399312/launch-0001.bin": {
+    "bytes": 264,
+    "sha256": "e9418d00f4edd51c8e8f735cbc8bd6597e41538dc3abf8d804721ab16965ef95"
+  },
+  "release/native-c32/block1.weights": {
+    "bytes": 20672,
+    "sha256": "0270fb8f406d3d0a916953ddaf6ec5d29328fe95b9d6cb408ca0c25c91108e3a"
+  },
+  "release/native-c32/amd-block1/input.f32": {
+    "bytes": 262144,
+    "sha256": "42653bb7ec285851b90efca27c1b7318d1223c5c509c882b2da9a086cfc2a6bb"
+  },
+  "release/native-c32/amd-block1/oracle.f32": {
+    "bytes": 262144,
+    "sha256": "be70e0050bc4930b4c5734c0b366f40c090bed3c8b284a83066055f0cd18a6d0"
+  },
+  "release/native-rgb-valid1080/amd-full/input.f32": {
+    "bytes": 33177600,
+    "sha256": "d69fde8a94ed5e7a2391fe90887385ef9e32b5987a9b5ce4718fe8e833bb8119"
+  },
+  "release/native-rgb-valid1080/amd-full/oracle-final.f32": {
+    "bytes": 26542080,
+    "sha256": "c1d6ab580e4d3bfb46acb90646d1a65d609cbcf6dbdcdde12d1bef18703afbe3"
+  },
+  "Development/HIP/hip_reference_network.h": {
+    "bytes": 104813,
+    "sha256": "0f4a562b0c4ae58a49f1126e13799a9cf92268b6a1987f682c389102d8482862"
+  },
+  "hip/build-modules.ps1": {
+    "bytes": 9021,
+    "sha256": "cfde5ef794c34f47fcb1520e79d2ae7664c6e77297eb92094b02ab9265f77fcd"
+  },
+  "hip/wave_owned_c32.inc": {
+    "bytes": 26228,
+    "sha256": "d30989c086f061c9d7272f39078ef698eefce33c8ffdb8860a207e1f8ed4a1f7"
+  },
+  "hip/wave_owned_mh.inc": {
+    "bytes": 20489,
+    "sha256": "a0e4eede56b3d07bb27c130c312260502880ed1cc22f7c18ba2eb9e02592deb4"
+  },
+  "hip/rtc_compile.cpp": {
+    "bytes": 7517,
+    "sha256": "d68333a323be330fa81d54fda16deff220c4eeddc66fa633785dc7fe9eca6cbe"
+  }
+}

@@ -1,0 +1,261 @@
+{
+  "finite_half_sweep": {
+    "input_count": 63488,
+    "raw": {
+      "A:H": {
+        "count": 63488,
+        "different": 49091,
+        "exact_fraction": 0.22676726310483872,
+        "nonfinite_error_count": 903,
+        "mae": null,
+        "max_error": null,
+        "finite_only_mae": 0.26143923590041257
+      },
+      "F:H": {
+        "count": 63488,
+        "different": 49091,
+        "exact_fraction": 0.22676726310483872,
+        "nonfinite_error_count": 903,
+        "mae": null,
+        "max_error": null,
+        "finite_only_mae": 0.26143923577424577
+      },
+      "A:F": {
+        "count": 63488,
+        "different": 2162,
+        "exact_fraction": 0.9659463205645161,
+        "nonfinite_error_count": 0,
+        "mae": 3.2953557015774446e-09,
+        "max_error": 4.76837158203125e-07,
+        "finite_only_mae": 3.2953557015774446e-09
+      }
+    },
+    "fp8_decoded": {
+      "A:H": {
+        "count": 63488,
+        "different": 170,
+        "exact_fraction": 0.9973223286290323,
+        "nonfinite_error_count": 0,
+        "mae": 0.0040429945914976055,
+        "max_error": 32.0,
+        "finite_only_mae": 0.0040429945914976055
+      },
+      "F:H": {
+        "count": 63488,
+        "different": 170,
+        "exact_fraction": 0.9973223286290323,
+        "nonfinite_error_count": 0,
+        "mae": 0.0040429945914976055,
+        "max_error": 32.0,
+        "finite_only_mae": 0.0040429945914976055
+      },
+      "A:F": {
+        "count": 63488,
+        "different": 0,
+        "exact_fraction": 1.0,
+        "nonfinite_error_count": 0,
+        "mae": 0.0,
+        "max_error": 0.0,
+        "finite_only_mae": 0.0
+      }
+    },
+    "fp8_changed_A_F_examples": []
+  },
+  "real_block1_expand_fp32": {
+    "input_count": 262144,
+    "raw": {
+      "A:H": {
+        "count": 262144,
+        "different": 262102,
+        "exact_fraction": 0.00016021728515625,
+        "nonfinite_error_count": 0,
+        "mae": 8.315681406873172e-05,
+        "max_error": 0.0024254322052001953,
+        "finite_only_mae": 8.315681406873172e-05
+      },
+      "F:H": {
+        "count": 262144,
+        "different": 262102,
+        "exact_fraction": 0.00016021728515625,
+        "nonfinite_error_count": 0,
+        "mae": 8.315685747179065e-05,
+        "max_error": 0.0024251937866210938,
+        "finite_only_mae": 8.315685747179065e-05
+      },
+      "A:F": {
+        "count": 262144,
+        "different": 17467,
+        "exact_fraction": 0.9333686828613281,
+        "nonfinite_error_count": 0,
+        "mae": 2.698773204912186e-09,
+        "max_error": 2.384185791015625e-07,
+        "finite_only_mae": 2.698773204912186e-09
+      }
+    },
+    "fp8_decoded": {
+      "A:H": {
+        "count": 262144,
+        "different": 1080,
+        "exact_fraction": 0.995880126953125,
+        "nonfinite_error_count": 0,
+        "mae": 0.00010854005813598633,
+        "max_error": 0.125,
+        "finite_only_mae": 0.00010854005813598633
+      },
+      "F:H": {
+        "count": 262144,
+        "different": 1080,
+        "exact_fraction": 0.995880126953125,
+        "nonfinite_error_count": 0,
+        "mae": 0.00010854005813598633,
+        "max_error": 0.125,
+        "finite_only_mae": 0.00010854005813598633
+      },
+      "A:F": {
+        "count": 262144,
+        "different": 0,
+        "exact_fraction": 1.0,
+        "nonfinite_error_count": 0,
+        "mae": 0.0,
+        "max_error": 0.0,
+        "finite_only_mae": 0.0
+      }
+    },
+    "fp8_changed_A_F_examples": []
+  },
+  "real_block1_expand_half": {
+    "input_count": 262144,
+    "raw": {
+      "A:H": {
+        "count": 262144,
+        "different": 262127,
+        "exact_fraction": 6.4849853515625e-05,
+        "nonfinite_error_count": 0,
+        "mae": 6.924598654772969e-05,
+        "max_error": 0.0016491413116455078,
+        "finite_only_mae": 6.924598654772969e-05
+      },
+      "F:H": {
+        "count": 262144,
+        "different": 262127,
+        "exact_fraction": 6.4849853515625e-05,
+        "nonfinite_error_count": 0,
+        "mae": 6.924599640606606e-05,
+        "max_error": 0.0016493797302246094,
+        "finite_only_mae": 6.924599640606606e-05
+      },
+      "A:F": {
+        "count": 262144,
+        "different": 15969,
+        "exact_fraction": 0.9390830993652344,
+        "nonfinite_error_count": 0,
+        "mae": 2.503381058005516e-09,
+        "max_error": 2.384185791015625e-07,
+        "finite_only_mae": 2.503381058005516e-09
+      }
+    },
+    "fp8_decoded": {
+      "A:H": {
+        "count": 262144,
+        "different": 1107,
+        "exact_fraction": 0.9957771301269531,
+        "nonfinite_error_count": 0,
+        "mae": 0.00011540204286575317,
+        "max_error": 0.25,
+        "finite_only_mae": 0.00011540204286575317
+      },
+      "F:H": {
+        "count": 262144,
+        "different": 1107,
+        "exact_fraction": 0.9957771301269531,
+        "nonfinite_error_count": 0,
+        "mae": 0.00011540204286575317,
+        "max_error": 0.25,
+        "finite_only_mae": 0.00011540204286575317
+      },
+      "A:F": {
+        "count": 262144,
+        "different": 0,
+        "exact_fraction": 1.0,
+        "nonfinite_error_count": 0,
+        "mae": 0.0,
+        "max_error": 0.0,
+        "finite_only_mae": 0.0
+      }
+    },
+    "fp8_changed_A_F_examples": []
+  },
+  "original_CUBIN_block1_oracle_controlled_activation": {
+    "A": {
+      "count": 65536,
+      "different": 2982,
+      "exact_fraction": 0.954498291015625,
+      "nonfinite_error_count": 0,
+      "mae": 0.0015082359313964844,
+      "max_error": 1.0,
+      "finite_only_mae": 0.0015082359313964844
+    },
+    "F": {
+      "count": 65536,
+      "different": 2982,
+      "exact_fraction": 0.954498291015625,
+      "nonfinite_error_count": 0,
+      "mae": 0.0015082359313964844,
+      "max_error": 1.0,
+      "finite_only_mae": 0.0015082359313964844
+    },
+    "H": {
+      "count": 65536,
+      "different": 0,
+      "exact_fraction": 1.0,
+      "nonfinite_error_count": 0,
+      "mae": 0.0,
+      "max_error": 0.0,
+      "finite_only_mae": 0.0
+    }
+  },
+  "block_pairwise": {
+    "A:F": {
+      "count": 65536,
+      "different": 0,
+      "exact_fraction": 1.0,
+      "nonfinite_error_count": 0,
+      "mae": 0.0,
+      "max_error": 0.0,
+      "finite_only_mae": 0.0
+    },
+    "A:H": {
+      "count": 65536,
+      "different": 2982,
+      "exact_fraction": 0.954498291015625,
+      "nonfinite_error_count": 0,
+      "mae": 0.0015082359313964844,
+      "max_error": 1.0,
+      "finite_only_mae": 0.0015082359313964844
+    },
+    "F:H": {
+      "count": 65536,
+      "different": 2982,
+      "exact_fraction": 0.954498291015625,
+      "nonfinite_error_count": 0,
+      "mae": 0.0015082359313964844,
+      "max_error": 1.0,
+      "finite_only_mae": 0.0015082359313964844
+    }
+  },
+  "provenance": {
+    "input": "/home/lmxxf/work/ai-theorys-study/wechat/assets/297/release/native-c32/amd-block1/input.f32",
+    "weights": "/home/lmxxf/work/ai-theorys-study/wechat/assets/297/release/native-c32/block1.weights",
+    "oracle": "/home/lmxxf/work/ai-theorys-study/wechat/assets/297/release/native-c32/amd-block1/oracle.f32",
+    "warning": "Controlled activation substitution in recovered NVIDIA CPU reference; not full AMD/Daniel network comparison."
+  },
+  "original_reference_vs_H": {
+    "count": 65536,
+    "different": 0,
+    "exact_fraction": 1.0,
+    "nonfinite_error_count": 0,
+    "mae": 0.0,
+    "max_error": 0.0,
+    "finite_only_mae": 0.0
+  }
+}

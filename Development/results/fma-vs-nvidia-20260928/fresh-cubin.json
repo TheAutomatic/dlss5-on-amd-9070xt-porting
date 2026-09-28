@@ -1,0 +1,59 @@
+{
+  "compile_command": [
+    "c++",
+    "-O2",
+    "-I/usr/local/cuda/include",
+    "Development/run_original_fused_global.cpp",
+    "-lcuda",
+    "-o",
+    "/tmp/fma-vs-nvidia/oracle-probe/original-caller"
+  ],
+  "launch_command": [
+    "/tmp/fma-vs-nvidia/oracle-probe/original-caller",
+    "/tmp/fma-vs-nvidia/cubins/dlssnr-00.cubin",
+    "release/native-c32/block1.weights",
+    "/tmp/fma-vs-nvidia/oracle-probe/reconstructed-plain-input.fp8",
+    "/tmp/fma-vs-nvidia/oracle-probe/fresh-main.fp8",
+    "/tmp/fma-vs-nvidia/oracle-probe/fresh-aux.fp8",
+    "cc_tinlayout_fused_swin_1h_32_1_fp8",
+    "64",
+    "32",
+    "8",
+    "4",
+    "1",
+    "4",
+    "0"
+  ],
+  "input_layout": "8x8 tile float32 -> HWC -> 2 planar C16 slabs, exact FP8 decode roundtrip verified",
+  "output_layout": "VERIFIED: float oracle comes from inpview variant in 4x4 physical cells; mapped by post-skip-basis/matrix.f32 exactly as reference --output-cells",
+  "inpview_launch_command": [
+    "/tmp/fma-vs-nvidia/oracle-probe/original-caller",
+    "/tmp/fma-vs-nvidia/cubins/dlssnr-00.cubin",
+    "release/native-c32/block1.weights",
+    "/tmp/fma-vs-nvidia/oracle-probe/reconstructed-plain-input.fp8",
+    "/tmp/fma-vs-nvidia/oracle-probe/fresh-inpview-main.fp8",
+    "/tmp/fma-vs-nvidia/oracle-probe/fresh-inpview-aux.fp8",
+    "cc_tinlayout_fused_swin_1h_32_1_inpview_fp8",
+    "64",
+    "32",
+    "8",
+    "4",
+    "1",
+    "5",
+    "0"
+  ],
+  "inpview_raw_arena_different_bytes": 0,
+  "raw_arena_bytes": 8388608,
+  "raw_arena_different_bytes": 0,
+  "active_output_bytes": 65536,
+  "active_different_bytes": 0,
+  "decoded_vs_saved_float_oracle_different": 0,
+  "decoded_vs_saved_float_oracle_mae": 0.0,
+  "sha256": {
+    "/tmp/fma-vs-nvidia/cubins/dlssnr-00.cubin": "feb368ff5279a7408b1e55554db6e468d7f114a24b18b2af8d7e6989a410c612",
+    "/home/lmxxf/work/ai-theorys-study/wechat/assets/297/release/native-c32/block1.weights": "0270fb8f406d3d0a916953ddaf6ec5d29328fe95b9d6cb408ca0c25c91108e3a",
+    "/tmp/fma-vs-nvidia/oracle-probe/reconstructed-plain-input.fp8": "d699914bf43fb545abbb74b856713497e5e5af4879dc15ba2781e89f7872ecb4",
+    "/tmp/fma-vs-nvidia/oracle-probe/fresh-main.fp8": "9af3efe0f612f7289ffa3006cfcff2c0206b57ef45524cf1580962617248b5f3",
+    "/home/lmxxf/work/ai-theorys-study/wechat/assets/297/release/native-c32/block1-output.fp8": "9af3efe0f612f7289ffa3006cfcff2c0206b57ef45524cf1580962617248b5f3"
+  }
+}
