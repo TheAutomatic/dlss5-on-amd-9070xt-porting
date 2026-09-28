@@ -947,3 +947,7 @@ EXACT/AE各7×12=84候选帧全部有限，连旧基线336帧；AE84次复用/�
 **纠正上轮原版整网误差**：fma-vs-nvidia的oracle-final是post_shift=0，而其runner用3，故撤回“0.145%/0.517%改善”；局部CUBIN/ISA、尺寸及计时不受影响，旧报告加校正。此次统一post_shift=3、全部71块、seed0，以原版shift-full-oracle为裁判，历史exact采样shader按accepted SHA取自450d63b。单帧可见RMSE A 0.0080383812→P 0.0080365856；五帧off/on/off/on/off聚合0.0080368624→0.0080010754，均不劣。五帧是固定RGB/history受控开关，不冒称原输出自反馈；正常游戏式反馈由七用例覆盖。
 
 15:39只换剑星30个HSACO（15×gfx1200/1201）和对应HIP checksum，C32 gfx1201 AA999258、C64 F9E8F0C5；回读同payload，其余30模块与addon/dxgi/INI/flags hash不变。备份 `D:\DLSSNR-Lab\float-fma-20260928\backups\stellar-20260928-153921`，部署 `deployments/float-fma-20260928`。gfx1200仅编译，gfx1201实测。不发包，本机画面/FPS待Zero，仍1080P窗口＋FSR原生AA＋F8 EXACT＋黄字小数，也补此前ACO两刀远程57.1的本机读数。完整结果 `results/float-fma-20260928`，复现 `HIP/experiments/float-fma`。
+
+## 2026-09-28 15:49：float FMA 剑星首测（Splashtop 远程）
+
+EXACT 黄字 56.7～57.1 来回跳，看不出比上一刀（远程 57.1）有提升。离线预期约 +0.5 帧（ACO 两刀 + FMA 合计约 −2%），落在远程读数的抖动范围内；待本机复测或用 DLSS5_FRAME_STATS 看均值。
