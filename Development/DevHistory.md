@@ -1033,3 +1033,7 @@ C256的两qt FFN权重复用推广C64/C128：主力FFN权重请求192→96、320
 0.35累计另做同批ABBA：真实发布目录60模块逐个通过其SHA256SUMS，宿主4151123e/sourceec96774d；与tag HIP清单26个物理hash不同，不据此推断机器码不同。用0.35引擎源码＋同一无temporal-config测量probe、发布模块/资产，旧900输出75AABA同历史golden。累计900档9.368873→8.577554 / 9.385209→8.590563ms，省0.791318/0.794646ms（8.446%/8.467%）；1080档12.715527→11.573710 / 12.711608→11.582428ms，省1.141817/1.129181ms（8.980%/8.883%）。120个短/长/累计计时槽原序列复算；不相加逐刀百分比，也不称0.36与0.35逐位（float FMA中途获批变更）。
 
 剑星新宿主d2290ad7426967edfd566b5c53e1e2ae580a41463b08594375079fb7b84abfdf；双架构c32-wave1/c64-wave2共4模块，gfx1201 d5cca499/c8a88d27，gfx1200 df29c19f/b6359c05。备份D:\DLSSNR-Lab\hip-backend\fusion-round3\backups\stellar-20260928-220957；DIRECT_IO3/MAKE_RESIDENT60及flags/输入shader/dxgi/OptiScaler原哈希，其他56模块未变，全部60模块与repo及冻结载荷核对。RE9 runtime7ce2bc21已编，在1707×961输入下900/1080各12帧回放末帧hash同基线（b2980ada643da964/758674a8bbd0206d），smoke通过，未装RE9。0.36清单在results/fusion-round3-20260928/package-036-checklist.md：常规/Magpie DIRECT_IO1，RE9不写；FRAME_STATS全0、其余模板默认保留，含全部hash/来源/累计ms。Hikari据此打包，当前未打包未发包；本机按2K原生AA EXACT新标尺复测。
+
+## 2026-09-28 22:51：收尾融合后剑星本机读数（宿主 d2290ad7）
+
+EXACT 静止：2K（2560×1440）原生 AA **54**（C512 融合版 52～53）；1080P 原生 AA **60**（触 60Hz 上限）。
