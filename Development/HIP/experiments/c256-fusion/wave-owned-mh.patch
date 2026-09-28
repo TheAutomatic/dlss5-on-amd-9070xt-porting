@@ -1,0 +1,113 @@
+--- hip/wave_owned_mh.inc	2026-09-28 15:26:30.691889363 +0800
++++ /tmp/c256-fusion/code/wave_owned_mh.inc	2026-09-28 19:57:33.060499268 +0800
+@@ -53,6 +53,22 @@
+ #ifndef W2_FULL_WINDOW
+ #define W2_FULL_WINDOW 0
+ #endif
++// C256-only scheduling experiments. Defaults preserve the existing source path.
++#ifndef W2_FFN_QT_BATCH
++#define W2_FFN_QT_BATCH 0
++#endif
++#ifndef W2_C256_HIDDEN_TILES
++#define W2_C256_HIDDEN_TILES 0
++#endif
++#ifndef W2_C256_Q_LDS
++#define W2_C256_Q_LDS 0
++#endif
++#if W2_FFN_QT_BATCH != 0 && W2_FFN_QT_BATCH != 2 && W2_FFN_QT_BATCH != 4
++#error W2_FFN_QT_BATCH must be 0, 2 or 4
++#endif
++#if W2_C256_Q_LDS && (!W2_ROLL_QUERY || W2_DEFER_Q)
++#error W2_C256_Q_LDS requires W2_ROLL_QUERY=1 and W2_DEFER_Q=0
++#endif
+ struct w2_true{constexpr operator bool()const{return true;}};
+ struct w2_false{constexpr operator bool()const{return false;}};
+ DEV uint w2_canonical_byte_word(uint x){return x|(((x&0x7f7f7f7fu)+0x01010101u)&0x80808080u);}
+@@ -191,6 +207,49 @@
+  }
+  w2_sync();
+  // Each head contracts only its own 128 hidden channels. Expanded fragments never enter LDS.
++#if W2_FFN_QT_BATCH
++ if constexpr(C==256){
++ // Same WMMA chains, but one loaded weight fragment feeds B independent token tiles.
++ // No reduction is reassociated: expanded keeps kt order; contract keeps ht/tile order.
++ constexpr uint B=W2_FFN_QT_BATCH;
++ constexpr uint T=W2_C256_HIDDEN_TILES?W2_C256_HIDDEN_TILES:W2_HIDDEN_TILES;
++ static_assert(T==1||T==2||T==4||T==8,"C256 hidden tile batch must divide eight");
++ _Pragma("clang loop unroll(disable)") for(uint qb=0;qb<4;qb+=B){
++  f8 contract[B][2]{};
++  _Pragma("clang loop unroll(disable)") for(uint ht=0;ht<8;ht+=T){
++   f8 expanded[B][T]{};
++   for(uint kt=0;kt<C/16;kt++){
++    i2 inputs[B];
++    _Pragma("unroll") for(uint qi=0;qi<B;qi++)inputs[qi]=w2_load<C>(plane0,qb+qi,kt);
++    _Pragma("unroll") for(uint tile=0;tile<T;tile++){
++     i2 b=w2_weight(fw,head*128+(ht+tile)*16+rc,C,kt*16);
++     _Pragma("unroll") for(uint qi=0;qi<B;qi++)expanded[qi][tile]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,inputs[qi],expanded[qi][tile]);
++    }
++   }
++   _Pragma("unroll") for(uint tile=0;tile<T;tile++){
++    i2 hidden[B];
++    _Pragma("unroll") for(uint qi=0;qi<B;qi++){
++     W2_Q8_DECL(packed);
++     for(uint e=0;e<8;e++){float a=expanded[qi][tile][e],g=clampf(a,-4.f,4.f),q=__builtin_fmaf(absf(g),-.055908203125f,.447265625f),poly=__builtin_fmaf(g,q,.89453125f);W2_Q8_SETF(packed,e,a,poly);}W2_Q8_END(packed);hidden[qi]=packed;
++    }
++    for(uint ci=0;ci<2;ci++){
++     i2 b=w2_weight(fw+4*C*C,head*32+ci*16+rc,4*C,head*128+(ht+tile)*16);
++     _Pragma("unroll") for(uint qi=0;qi<B;qi++)contract[qi][ci]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,hidden[qi],contract[qi][ci]);
++    }
++   }
++  }
++  _Pragma("unroll") for(uint qi=0;qi<B;qi++)for(uint ci=0;ci<2;ci++){
++#if W2_RTZ_PAIR
++   f8 rounded=w2_rtz8(contract[qi][ci]);W2_Q8_DECL(a);for(uint e=0;e<8;e++)W2_Q8_SET(a,e,rounded[e]);W2_Q8_END(a);
++#else
++   W2_Q8_DECL(a);for(uint e=0;e<8;e++)W2_Q8_SET(a,e,Hrtz(contract[qi][ci][e]));W2_Q8_END(a);
++#endif
++   w2_store<C>(plane1,qb+qi,head*2+ci,a);
++  }
++ }
++ }else
++#endif
++ {
+  _Pragma("clang loop unroll(disable)") for(uint qt=0;qt<4;qt++){
+   f8 contract[2]{};
+   _Pragma("clang loop unroll(disable)") for(uint ht=0;ht<8;ht+=W2_HIDDEN_TILES){
+@@ -217,6 +276,7 @@
+   for(uint ci=0;ci<2;ci++){W2_Q8_DECL(a);for(uint e=0;e<8;e++)W2_Q8_SET(a,e,Hrtz(contract[ci][e]));W2_Q8_END(a);w2_store<C>(plane1,qt,head*2+ci,a);}
+ #endif
+  }
++ }
+  w2_sync();
+  // Cross-head FFN mixing plus the original residual. plane0 is now free for feature bytes.
+  _Pragma("clang loop unroll(disable)") for(uint qt=0;qt<4;qt++){
+@@ -266,7 +326,12 @@
+    if(part<2){float ss=w2_serial_norm(q[0],q[1]);inv=__builtin_amdgcn_rsqf(maxf(ss,6.198883056640625e-5f))*(part==0?aw[4*C*C+(C/32)*4096+head]:1.f);}
+    for(uint ci=0;ci<2;ci++){W2_Q8_DECL(a);for(uint e=0;e<8;e++)W2_Q8_SETF(a,e,q[ci][e],inv);W2_Q8_END(a);
+ #if W2_ROLL_QUERY && !W2_DEFER_Q
+-    if(part==0){query_words[qt*4+ci*2]=a[0];query_words[qt*4+ci*2+1]=a[1];}else
++    if(part==0){
++#if W2_C256_Q_LDS
++     if constexpr(C==256)w2_store<C>(plane1,qt,head*2+ci,a);else
++#endif
++     {query_words[qt*4+ci*2]=a[0];query_words[qt*4+ci*2+1]=a[1];}
++    }else
+ #endif
+     qkv[part][qt][ci]=a;
+    }
+@@ -281,7 +346,14 @@
+ #endif
+  for(uint qt=0;qt<4;qt++){
+ #if W2_ROLL_QUERY && !W2_DEFER_Q
+-  i2 query_frag[2];_Pragma("unroll 2") for(uint ci=0;ci<2;ci++)query_frag[ci]=i2{query_words[qt*4+ci*2],query_words[qt*4+ci*2+1]};
++  i2 query_frag[2];_Pragma("unroll 2") for(uint ci=0;ci<2;ci++){
++#if W2_C256_Q_LDS && !defined(W2_ATTENTION_ONLY)
++   // plane1 holds this wave's Q until this qt is consumed, then the same slots hold AV.
++   // Every head owns disjoint ct slots; there are no cross-wave Q read/write hazards.
++   if constexpr(C==256)query_frag[ci]=w2_load<C>(plane1,qt,head*2+ci);else
++#endif
++   query_frag[ci]=i2{query_words[qt*4+ci*2],query_words[qt*4+ci*2+1]};
++  }
+ #endif
+ #if W2_DEFER_Q
+   uint qlane=w2_lane();

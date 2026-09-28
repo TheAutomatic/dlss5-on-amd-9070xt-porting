@@ -1,0 +1,257 @@
+{
+  "timings": [
+    {
+      "batch": "runtime-regression-B-long1",
+      "height": 900,
+      "frames_per_slot": 1000,
+      "baseline_ms": 9.051988749999996,
+      "candidate_ms": 9.047188749999997,
+      "delta_ms": -0.004799999999999471,
+      "percent": -0.05302702127197856,
+      "slots": {
+        "0": 9.04632999999999,
+        "1": 9.04607125,
+        "2": 9.04830624999999,
+        "3": 9.0576475
+      }
+    },
+    {
+      "batch": "runtime-regression-B-long1",
+      "height": 1080,
+      "frames_per_slot": 1000,
+      "baseline_ms": 12.32646875,
+      "candidate_ms": 12.120526875,
+      "delta_ms": -0.2059418750000006,
+      "percent": -1.6707288938691445,
+      "slots": {
+        "0": 12.318065,
+        "1": 12.12061625,
+        "2": 12.1204375,
+        "3": 12.3348725
+      }
+    },
+    {
+      "batch": "runtime-regression-B-long2",
+      "height": 900,
+      "frames_per_slot": 1000,
+      "baseline_ms": 9.097763125000006,
+      "candidate_ms": 9.101486875000004,
+      "delta_ms": 0.0037237499999989154,
+      "percent": 0.040930390787674575,
+      "slots": {
+        "0": 9.09682875,
+        "1": 9.10788875000001,
+        "2": 9.095085,
+        "3": 9.09869750000001
+      }
+    },
+    {
+      "batch": "runtime-regression-B-long2",
+      "height": 1080,
+      "frames_per_slot": 1000,
+      "baseline_ms": 12.34041875,
+      "candidate_ms": 12.138835,
+      "delta_ms": -0.20158374999999928,
+      "percent": -1.6335243891136164,
+      "slots": {
+        "0": 12.3300275,
+        "1": 12.12552875,
+        "2": 12.15214125,
+        "3": 12.35081
+      }
+    },
+    {
+      "batch": "runtime-regression-B-screen1",
+      "height": 900,
+      "frames_per_slot": 200,
+      "baseline_ms": 8.923002976190475,
+      "candidate_ms": 9.05264880952381,
+      "delta_ms": 0.1296458333333348,
+      "percent": 1.4529394832577314,
+      "slots": {
+        "0": 8.919,
+        "1": 9.05348214285714,
+        "2": 9.05181547619048,
+        "3": 8.92700595238095
+      }
+    },
+    {
+      "batch": "runtime-regression-B-screen1",
+      "height": 1080,
+      "frames_per_slot": 200,
+      "baseline_ms": 12.23934226190475,
+      "candidate_ms": 12.01818154761905,
+      "delta_ms": -0.2211607142856984,
+      "percent": -1.8069656812692125,
+      "slots": {
+        "0": 12.2383333333333,
+        "1": 12.0161130952381,
+        "2": 12.02025,
+        "3": 12.2403511904762
+      }
+    },
+    {
+      "batch": "runtime-regression-BL-screen1",
+      "height": 900,
+      "frames_per_slot": 200,
+      "baseline_ms": 8.917672619047615,
+      "candidate_ms": 9.05539285714286,
+      "delta_ms": 0.1377202380952447,
+      "percent": 1.5443518054372385,
+      "slots": {
+        "0": 8.90290476190476,
+        "1": 9.05644047619048,
+        "2": 9.05434523809524,
+        "3": 8.93244047619047
+      }
+    },
+    {
+      "batch": "runtime-regression-BL-screen1",
+      "height": 1080,
+      "frames_per_slot": 200,
+      "baseline_ms": 12.2277023809524,
+      "candidate_ms": 12.004675595238101,
+      "delta_ms": -0.22302678571429801,
+      "percent": -1.8239467952844146,
+      "slots": {
+        "0": 12.213,
+        "1": 12.0029345238095,
+        "2": 12.0064166666667,
+        "3": 12.2424047619048
+      }
+    },
+    {
+      "batch": "runtime-regression-F1-screen1",
+      "height": 900,
+      "frames_per_slot": 200,
+      "baseline_ms": 8.899270833333329,
+      "candidate_ms": 8.950175595238095,
+      "delta_ms": 0.050904761904766005,
+      "percent": 0.5720104810620574,
+      "slots": {
+        "0": 8.89240476190476,
+        "1": 8.94352380952381,
+        "2": 8.95682738095238,
+        "3": 8.9061369047619
+      }
+    },
+    {
+      "batch": "runtime-regression-F1-screen1",
+      "height": 1080,
+      "frames_per_slot": 200,
+      "baseline_ms": 12.217,
+      "candidate_ms": 12.0395148809524,
+      "delta_ms": -0.177485119047601,
+      "percent": -1.4527717037537968,
+      "slots": {
+        "0": 12.1968630952381,
+        "1": 12.0215892857143,
+        "2": 12.0574404761905,
+        "3": 12.2371369047619
+      }
+    },
+    {
+      "batch": "runtime-regression-FL-screen1",
+      "height": 900,
+      "frames_per_slot": 200,
+      "baseline_ms": 8.925627976190484,
+      "candidate_ms": 8.964354166666665,
+      "delta_ms": 0.03872619047618109,
+      "percent": 0.4338763679091917,
+      "slots": {
+        "0": 8.91527380952382,
+        "1": 8.96170238095238,
+        "2": 8.96700595238095,
+        "3": 8.93598214285715
+      }
+    },
+    {
+      "batch": "runtime-regression-FL-screen1",
+      "height": 1080,
+      "frames_per_slot": 200,
+      "baseline_ms": 12.237660714285699,
+      "candidate_ms": 12.0560714285714,
+      "delta_ms": -0.1815892857142991,
+      "percent": -1.4838561875009315,
+      "slots": {
+        "0": 12.2405476190476,
+        "1": 12.060869047619,
+        "2": 12.0512738095238,
+        "3": 12.2347738095238
+      }
+    },
+    {
+      "batch": "runtime-regression-L-screen1",
+      "height": 900,
+      "frames_per_slot": 200,
+      "baseline_ms": 8.930919642857145,
+      "candidate_ms": 9.094889880952376,
+      "delta_ms": 0.16397023809523148,
+      "percent": 1.835983802926422,
+      "slots": {
+        "0": 8.92658333333333,
+        "1": 9.0935119047619,
+        "2": 9.09626785714285,
+        "3": 8.93525595238096
+      }
+    },
+    {
+      "batch": "runtime-regression-L-screen1",
+      "height": 1080,
+      "frames_per_slot": 200,
+      "baseline_ms": 12.2264375,
+      "candidate_ms": 12.08177976190475,
+      "delta_ms": -0.1446577380952494,
+      "percent": -1.1831552575739979,
+      "slots": {
+        "0": 12.2175773809524,
+        "1": 12.0752619047619,
+        "2": 12.0882976190476,
+        "3": 12.2352976190476
+      }
+    },
+    {
+      "batch": "runtime-regression-O-screen1",
+      "height": 900,
+      "frames_per_slot": 200,
+      "baseline_ms": 8.8861755952381,
+      "candidate_ms": 9.061702380952385,
+      "delta_ms": 0.17552678571428437,
+      "percent": 1.975279284469078,
+      "slots": {
+        "0": 8.86876785714286,
+        "1": 9.04980357142858,
+        "2": 9.07360119047619,
+        "3": 8.90358333333334
+      }
+    },
+    {
+      "batch": "runtime-regression-O-screen1",
+      "height": 1080,
+      "frames_per_slot": 200,
+      "baseline_ms": 12.18098809523805,
+      "candidate_ms": 12.04534226190475,
+      "delta_ms": -0.1356458333332995,
+      "percent": -1.1135864535187223,
+      "slots": {
+        "0": 12.1635952380952,
+        "1": 12.0355357142857,
+        "2": 12.0551488095238,
+        "3": 12.1983809523809
+      }
+    }
+  ],
+  "candidate_frames_matching_float_fma": 240,
+  "candidate_frames_by_batch": {
+    "runtime-regression-O-screen": 12,
+    "runtime-regression-L-screen": 12,
+    "runtime-regression-B-screen": 12,
+    "runtime-regression-BL-screen": 12,
+    "runtime-regression-F1-screen": 12,
+    "runtime-regression-FL-screen": 12,
+    "runtime-regression-B-exact": 84,
+    "runtime-regression-B-adaptive": 84
+  },
+  "AE_pairs": 84,
+  "AE_all_fields_different": 0
+}

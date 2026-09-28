@@ -984,3 +984,16 @@ P：默认0 W2_PACK_NOZERO，仅实验源；借Daniel低/高半覆盖目的寄�
 C32供数：默认0 CW_WEIGHT_CACHE mask1/2/3，QKV/投影缓存跨四qt复用，同索引/MMA顺序。六导出每wave确实少36/12/48条global_load_b64；Q/C VGPR+12～24，R+2～8，零spill，WMMA/DS/FP8数不变。Q/R/C各12帧1080-motion逐位；两档两轮200帧短筛，Q/R近噪声，C最好900约−0.19%，未做无意义的完整AE。新IO又补C两批短筛：900+0.02324/+0.01834ms，1080−0.00567/+0.01099ms，也不采用。合计228候选帧对float FMA golden同（P168+Q/R/C36+新IO P24），80有效计时槽原序列独立复算；另16旧P槽隔离。
 
 没有合配方、没有装机、没有新备份、不发包。17:10用户说明分身已更新剑星，本轮只读核实add-on ABEF6155F703616070D20CE73D8357D2F19DDC76C3C03DA838D6C236CBBD5F74、DLSS5_DIRECT_IO=3；60内核仍与开工同。以后部署须基于该宿主重新备份并保留3，不覆盖旧C38。完整对应、host地址、循环上界、字节/毫秒条件模型、候选patch、双架构默认关代码身份与实测在 `results/daniel-kernels-20260928`、`HIP/experiments/daniel-kernels`。
+
+
+## 2026-09-28 20:17：C256整块融合重开，仅1080启用，整网−1.67%/−1.63%，已装剑星
+
+按4f0a62f7任务单，读Daniel C256 reference：8wave/窗口、32KiB LDS，普通153VGPR/零private；flags4仍private272。四qt复用权重，lower16KiB阶段复用、upper片段供attention读取（Q的命名是数据流推断）。历史“持久化已关”其实没实现；真正旧wave2融合900短筛+0.21068ms，修spill后仍慢。旧整块把同64token的前段4组×16waves变成1组×8waves，工作量不减，不能把慢因擅定为LDS冲突。
+
+试O旧整块、L Q存LDS、B两qt共享FFN权重、BL、F1/FL四qt单hidden，共6个12帧1080-motion逐位短筛。F四qt双hidden有spill，只编译审计。B每wave FFN权重请求576→288，主力完整核VMEM1316→1028、VGPR190→154、WMMA仍1320；向量槽反增5251→5650，不冒称少算。Q LDS单独不降峰值，BL与B速度接近，F1/FL更慢。B两档短筛900+0.12965ms、1080−0.22116ms；旧O当前1080也−0.13565ms，故新组织不是全部收益来源。
+
+最终只保留W2_FFN_QT_BATCH默认0/生产配方2，在host仅1920×1152放行C256整块。1152行、post(-4,-4)、float FMA及所有舍入/累加顺序不变，无新用户flags，900/720保持原分体PDL。16个C256块实抓整网214→198；族34包含两个上下采样，融合后18。生产runner与实测tier runner五个代码/数据段完全相同，双架构生产.text/.rodata/.note与候选B相同，宏全0与旧模块相同；其余C64/C128/attention-only的ISA资源不变。
+
+EXACT/AE各7组×12帧共168候选帧同09-28 float FMA goldens，无NaN/Inf；AE44复用/40刷新、84行全部字段相同。加短筛共240候选帧。正式ABBA每槽1000帧弃200，DIRECT_IO3/BENCH_PLAIN1：900 9.051989→9.047189 / 9.097763→9.101487ms（持平），1080 12.326469→12.120527 / 12.340419→12.138835ms（−0.205942/−0.201584，−1.671%/−1.634%）。64短/长计时槽的原始序列已独立复算。gfx1200只编译，GPU实测gfx1201；离线只覆盖输入直写，不声称覆盖FSR输出直交。
+
+20:16装剑星：宿主61a81c75421e9da237370971922ed5bd59692804e1138a5754454ebc5b6e686e，基于abef6155对应源码仅增加C256档位路由；c64-wave2 gfx1200 434cd8ef、gfx1201 5bcffdf6。备份D:\DLSSNR-Lab\hip-backend\c256-fusion\backups\stellar-20260928-201658；DIRECT_IO=3、输入shader、flags/dxgi/OptiScaler全保留原哈希，另58模块未变。安装前查进程、备份/载荷/读回均校验，不发包，游戏画面/FPS待Zero。C512只读找到QKV+norm+attention新合核方向，理论少13派发，需另写内核；不把此方向当本轮成绩。完整证据、复现与还原脚本在results/c256-fusion-20260928及HIP/experiments/c256-fusion。
