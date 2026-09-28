@@ -1012,3 +1012,7 @@ C256的两qt FFN权重复用推广C64/C128：主力FFN权重请求192→96、320
 最终C=F融合＋Sboth用生产host和双架构配方验证：EXACT/AE各7×12=168帧同09-28 float FMA golden、无NaN/Inf，AE44复用/40刷新、所有字段同。独立F亦过168，8个短筛各12，共432个候选帧同golden；额外用游戏CODEC_SRGB=0配置对F/C各12帧对拍同基线，单列24帧，不混CODEC1固定夹具。每槽1000帧弃200、首尾读回的两轮ABBA：900 9.046038→8.721419 / 9.108684→8.781375ms（−0.324618/−0.327309，−3.589%/−3.593%）；1080 12.131856→11.822138 / 12.149375→11.829512ms（−0.309719/−0.319863，−2.553%/−2.633%）。80短/长计时槽原序列复算；双架构新宏默认关代码同原，生产gfx1201代码同实测F/Sboth。gfx1200仅编译核对，真卡gfx1201。
 
 装剑星宿主257a2fdbd7fbd0472cb9e58843ee6e9a99a777f00adb0ad84b8ee6b7ebbb93ac，基于61a81c75增加C512路由；每架构c512-m32-mh/c64-wave2共4模块，gfx1201为51c2fa1a/abffcd1a，gfx1200为7d9e0068/dfdf3970。备份D:\DLSSNR-Lab\hip-backend\c512-fusion\backups\stellar-20260928-210508；DIRECT_IO=3、MAKE_RESIDENT_EVERY=60及flags/输入shader/dxgi/OptiScaler全保留原哈希，其他56模块未变。未发包，画面/FPS待Zero；驻留改0的p99实验留给Hikari/Zero，本轮未混测。报告、哈希、原始时序、ISA账与回滚脚本在results/c512-fusion-20260928和HIP/experiments/c512-fusion。
+
+## 2026-09-28 21:14：C512 融合后剑星本机 59～60，已触 60Hz 上限
+
+宿主 257a2fdb。1080P 原生 AA EXACT 静止：黄字 59～60，frame-stats avg 16.78～17.00ms，p50 恒 17.00（窗口模式 DWM 60Hz 封顶，上一刀 16.95）。此后 1080P 剑星读数量不出提速，改看离线/日志网络时间、更重场景或提高刷新率。p99 多数窗口回到 17.5～18.8ms（30ms 尖刺减少，可能是 MAKE_RESIDENT_EVERY 开销被空闲吸收）。
