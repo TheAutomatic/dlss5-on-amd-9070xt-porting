@@ -997,3 +997,7 @@ C32供数：默认0 CW_WEIGHT_CACHE mask1/2/3，QKV/投影缓存跨四qt复用�
 EXACT/AE各7组×12帧共168候选帧同09-28 float FMA goldens，无NaN/Inf；AE44复用/40刷新、84行全部字段相同。加短筛共240候选帧。正式ABBA每槽1000帧弃200，DIRECT_IO3/BENCH_PLAIN1：900 9.051989→9.047189 / 9.097763→9.101487ms（持平），1080 12.326469→12.120527 / 12.340419→12.138835ms（−0.205942/−0.201584，−1.671%/−1.634%）。64短/长计时槽的原始序列已独立复算。gfx1200只编译，GPU实测gfx1201；离线只覆盖输入直写，不声称覆盖FSR输出直交。
 
 20:16装剑星：宿主61a81c75421e9da237370971922ed5bd59692804e1138a5754454ebc5b6e686e，基于abef6155对应源码仅增加C256档位路由；c64-wave2 gfx1200 434cd8ef、gfx1201 5bcffdf6。备份D:\DLSSNR-Lab\hip-backend\c256-fusion\backups\stellar-20260928-201658；DIRECT_IO=3、输入shader、flags/dxgi/OptiScaler全保留原哈希，另58模块未变。安装前查进程、备份/载荷/读回均校验，不发包，游戏画面/FPS待Zero。C512只读找到QKV+norm+attention新合核方向，理论少13派发，需另写内核；不把此方向当本轮成绩。完整证据、复现与还原脚本在results/c256-fusion-20260928及HIP/experiments/c256-fusion。
+
+## 2026-09-28 20:28：剑星本机实测 59（C256 融合 + 直写 IO + FMA + ACO 两刀）
+
+9070 本机，1080P 原生 AA、EXACT、简单画面静止：黄字 **59**（第五刀本机 57.1；Daniel 0.5.0 reference 贴 60 上限）。现装宿主 61a81c75、DLSS5_DIRECT_IO=3。
