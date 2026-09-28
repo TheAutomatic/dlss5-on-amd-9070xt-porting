@@ -79,5 +79,7 @@
       "max_abs": 0.05335235595703125,
       "psnr_peak1_db": 42.51066204109408
     }
-  }
+  },
+  "valid_comparison": false,
+  "invalid_reason": "Oracle used post_shift=0 but runner used post_shift=3; do not use these distances as aligned NVIDIA accuracy. Superseded by ../float-fma-20260928/oracle-comparison.json."
 }

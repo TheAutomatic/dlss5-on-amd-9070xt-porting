@@ -10,6 +10,9 @@
 # projection 64-column module). 2026-09-26: the mh_fast row now spells out HIP_FFN_LINE_STORES 1 -- prod7/prod8 were built
 # with it (deployments/stellar-prod7-20260924, prod8/mhfast.generated.hip) but the row lacked it, so a recipe rebuild silently
 # dropped the prod7 full-line stores (bit-exact either way, -0.6/-0.7%).; by default gfx1200 and gfx1201 go into architecture subdirectories.
+# 2026-09-28 numerical baseline: fast activations explicitly fuse both polynomial multiply-adds as float FMA.
+# This intentionally replaces the separate-rounding fast baseline; half reference kernels remain unchanged.
+# DX12 precise fast shaders retain the old baseline; see README.md (Numerical baseline).
 # One row per module: output name, extra #defines, source files (concatenated in order). Every row prepends HIP_ISA_HALF 1;
 # names ending in -packed also prepend HIP_PREPACKED_WEIGHTS 1. The extra defines below are the production selections of
 # 2026-09-17 (0.20); they coincide with the sources' defaults and are spelled out so the recipe does not depend on them.

@@ -1,5 +1,7 @@
 # FMA 与 NVIDIA 原版、工作尺寸核实
 
+> **后续校正（float-fma 合入轮）**：本报告的整网 raw 比较误用了 post_shift=0 的 `oracle-final.f32`，而候选 runner 是 post_shift=3。整网旧表保留为错误对照记录，**撤回据此计算的0.145%/0.517%精度改善结论**；局部CUBIN/ISA、历史exact字节核对、计时和尺寸审计不受影响。正确同shift单帧/五帧比较见 [`../float-fma-20260928/README.md`](../float-fma-20260928/README.md)。
+
 任务 `conversation/20260928/yami-fma-vs-nvidia.md`；起点 `2137a35`，现场基线为 ACO-lineup。**仅审计与隔离实验；未改生产配方、未安装、未发布。**
 
 ## 先回答疑问

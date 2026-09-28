@@ -236,7 +236,7 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
 #endif
   for(uint ht=0;ht<8;ht++){
    f8 expanded{};for(uint kt=0;kt<2;kt++){i2 b=matrix8(fw+512,(ht*16+r)*32+kt*16+g*8);expanded=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,input[kt],expanded);}
-   CW_Q8_DECL(a);for(uint e=0;e<8;e++){float v=expanded[e],g=cw_act_gate(v),q=absf(g)*(-.055908203125f)+.447265625f,p=g*q+.89453125f;CW_Q8_SET(a,e,v*p);}CW_Q8_END_SITE(a,1);
+   CW_Q8_DECL(a);for(uint e=0;e<8;e++){float v=expanded[e],g=cw_act_gate(v),q=__builtin_fmaf(absf(g),-.055908203125f,.447265625f),p=__builtin_fmaf(g,q,.89453125f);CW_Q8_SET(a,e,v*p);}CW_Q8_END_SITE(a,1);
    for(uint ci=0;ci<2;ci++){i2 b=matrix8(fw+4608,(ci*16+r)*128+ht*16+g*8);ffn[ci]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,a,ffn[ci]);}
   }
   i2 feature[2];for(uint ci=0;ci<2;ci++){CW_Q8_DECL(a);

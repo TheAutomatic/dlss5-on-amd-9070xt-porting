@@ -1,0 +1,226 @@
+{
+    "backup":  "D:\\DLSSNR-Lab\\float-fma-20260928\\backups\\stellar-20260928-153921",
+    "files":  [
+                  {
+                      "arch":  "gfx1200",
+                      "module":  "c32-wave1.hsaco",
+                      "baseline":  "F67BE50649A50B84CA75E623E7BDE163CFB4B121F0A2DCAB9F6AF56365B71BF1",
+                      "candidate":  "28EC514D656F13C71D7FB1714B72534BF05BFC8F5EAE05F36E57D63C45FA29E1"
+                  },
+                  {
+                      "arch":  "gfx1200",
+                      "module":  "c32_fast.hsaco",
+                      "baseline":  "8653D22BA443EC412CAC9643EB6D20D4DEC3CE084B907A480551B4E2810EE08A",
+                      "candidate":  "FFF987B9ADA5AF154B3862CC2D2B8B0474A2AA82C6271E7EA378FC473B2FF617"
+                  },
+                  {
+                      "arch":  "gfx1200",
+                      "module":  "c32_fused_ffn_attention-packed.hsaco",
+                      "baseline":  "07E05314DE428A51546C2A4DDED86F5BE43DEB7C223F76611D9DBDEEC90A1FF3",
+                      "candidate":  "575837DBE03CAFADEA219A535B66336CD822E74111D00D5D168A681FC8E9CC5A"
+                  },
+                  {
+                      "arch":  "gfx1200",
+                      "module":  "c32_fused_ffn_attention.hsaco",
+                      "baseline":  "B1E75A18CF2E7EF1F43AF334E4257191F96CD390F7B243ACEBC4196671F87E43",
+                      "candidate":  "3F2C7E312BED2F84E47E2013A5D16540F2E07DEA9F4D9F6D7F69DC0F882BE917"
+                  },
+                  {
+                      "arch":  "gfx1200",
+                      "module":  "c512-m32-deep.hsaco",
+                      "baseline":  "53DCE0DADBF47CEA31D7F223E3E093417493D39D22667F95B25FD39CD5AD03E4",
+                      "candidate":  "7C6897ECD7FD7FD26382B3BF3BA50C570D967A8D5DAC3C43060632AEDDA85170"
+                  },
+                  {
+                      "arch":  "gfx1200",
+                      "module":  "c512-m32-mh.hsaco",
+                      "baseline":  "66E653708E40FE50F74EF994E11949710E8733300377CA456F84903F356DCBF6",
+                      "candidate":  "5D2B6270C48D5B022705A7B52AD047EE9723B306C2BDA6EC420C477F5513EC05"
+                  },
+                  {
+                      "arch":  "gfx1200",
+                      "module":  "c64-wave2.hsaco",
+                      "baseline":  "5B3681989C25C7E59D946808AF3139B39147C3A09E35B2DA7F9D9E3078970DF5",
+                      "candidate":  "A85AA9E46BE544C74A406B9D30E05F2470ACA7DC7B5197047EB805819021D903"
+                  },
+                  {
+                      "arch":  "gfx1200",
+                      "module":  "deep_fast-packed.hsaco",
+                      "baseline":  "0C549E41D36525A6C704F4B2204307D45294703CC7B5DFB797BF649EB1725E46",
+                      "candidate":  "54B287AF72E0956B56BF10955DF70F538B439CD8E2CF709BF8600347FCA219BE"
+                  },
+                  {
+                      "arch":  "gfx1200",
+                      "module":  "deep_fast.hsaco",
+                      "baseline":  "8A29B962EAD72A4988273A19C024A27103D2E4A9E31EE86BA3718B46AE8C5FF8",
+                      "candidate":  "B7800509D90133AA495595BB8AD3925F4F0C716D6B5FCC46BD7C8DC597D370E4"
+                  },
+                  {
+                      "arch":  "gfx1200",
+                      "module":  "multihead-fast-packed.hsaco",
+                      "baseline":  "8F0EC5D8B1B86776A294DE79B62F7507BA00059F158565D876D6E3AA9FC56ED7",
+                      "candidate":  "8D602696B3D97D6DBAC759350951D744D4AA37578ABCDDE52BEE681EF68718C4"
+                  },
+                  {
+                      "arch":  "gfx1200",
+                      "module":  "multihead-fast-padded-wave-packed.hsaco",
+                      "baseline":  "2CD0F21150F00C398EBDFF78523C49E1047D8C7963FAD15C426B8B185E5A3325",
+                      "candidate":  "B235B6F60025B432D5BC44C886CA3094F8BEA3586F592B224922D2210EB6766A"
+                  },
+                  {
+                      "arch":  "gfx1200",
+                      "module":  "multihead-fast-padded-wave.hsaco",
+                      "baseline":  "2CB99D4A815E9B67F569C8828F277C09ECE7971B36CA371B2BD48D10B009DBF8",
+                      "candidate":  "F35AD8C356E22D8B5474E5A6429AEE452113BD347BADE064AE0CCFFF1C881EE3"
+                  },
+                  {
+                      "arch":  "gfx1200",
+                      "module":  "multihead-fast.hsaco",
+                      "baseline":  "F0CEB8562242BDD8ED56F0DDD72D60F965D71AA33A34AB037D04758ECFC0308C",
+                      "candidate":  "04D80A8CF63D5B0D908ECFBC3D25D12A3E4087BE5FBC0ECB962D8E7FE8D6AEBA"
+                  },
+                  {
+                      "arch":  "gfx1200",
+                      "module":  "vit-stream.hsaco",
+                      "baseline":  "0C9171EE9AE08CF8FEC44186F29EAE451455E2D3573B3CA8297DC06F4E77CB4D",
+                      "candidate":  "742B58ADF52781AF5FDECE01F6BF8976FC182B3250862D7AFF8AF2D0C24ABF54"
+                  },
+                  {
+                      "arch":  "gfx1200",
+                      "module":  "vit-wide-deep.hsaco",
+                      "baseline":  "D5AACCE44BD31EB33A6ADAB34B08907A46BD3BE49198CD6E2A3630F7C44FA8E5",
+                      "candidate":  "ED2E228C07E885CD6AD2E966CBBE81A3BBB51988567F64B855B41C6DC01C4015"
+                  },
+                  {
+                      "arch":  "gfx1201",
+                      "module":  "c32-wave1.hsaco",
+                      "baseline":  "11ED63057443A8E9121DBBDBD27B6ED2798688D0D7D593FBBFA893CB2416CDC6",
+                      "candidate":  "AA9992585C7BBC26C9B574BE29298DE4FB88913BB93CAB8E6096DA273DF9DEC3"
+                  },
+                  {
+                      "arch":  "gfx1201",
+                      "module":  "c32_fast.hsaco",
+                      "baseline":  "3D3B7E40B917CB1E31E9D3FE46CB59840BFE45DE1C9E51BF9845B0DECF3A48D3",
+                      "candidate":  "A639601561123594F6D8B335F884F4E229338875F460213AF1396BC2F28C90EC"
+                  },
+                  {
+                      "arch":  "gfx1201",
+                      "module":  "c32_fused_ffn_attention-packed.hsaco",
+                      "baseline":  "0289229BE526219C6033E6E8383C0C6E076995DC2E14DACFD370A1F73F893337",
+                      "candidate":  "F8D140DC702F2BD8B22A37E15A12AC901BE7D493EE5FA03337AF6DCD6EDDAF85"
+                  },
+                  {
+                      "arch":  "gfx1201",
+                      "module":  "c32_fused_ffn_attention.hsaco",
+                      "baseline":  "3AD918864E3292E3560B0129D5B6AFDE64A8DB669056FBE9FE62A59B274556F3",
+                      "candidate":  "16726C35E7D094FEED5D1924D4D39A5F2102997D4C25E3986E444A251B0588AF"
+                  },
+                  {
+                      "arch":  "gfx1201",
+                      "module":  "c512-m32-deep.hsaco",
+                      "baseline":  "A738C644123ECD3C83A02A1D474668C863C3612D346AB204589AF5F52CF43842",
+                      "candidate":  "B03DDE0F3020B63811BB80BE64B4177210D342B03B5093E51F9F1C8C044F0FCF"
+                  },
+                  {
+                      "arch":  "gfx1201",
+                      "module":  "c512-m32-mh.hsaco",
+                      "baseline":  "0AE5641B48C2D60929642C656922B6D77EAFFED127D50BBAD4183B4E541A5B66",
+                      "candidate":  "9A47275F3D862700B1511BF6B7006221C00527F79C1979461656B58A9C772093"
+                  },
+                  {
+                      "arch":  "gfx1201",
+                      "module":  "c64-wave2.hsaco",
+                      "baseline":  "643A3A7F696F86E91CC7031EE843B6C19E8F0C7B7882D7F22CEEEF58CCB02B80",
+                      "candidate":  "F9E8F0C5C4ECA1C2AB919194AE284FFB355B67B313CE3A8AE5516165306553DD"
+                  },
+                  {
+                      "arch":  "gfx1201",
+                      "module":  "deep_fast-packed.hsaco",
+                      "baseline":  "2409E2C411B8D33D8FA439A69B2A7746199B7DF3B6536828F7A92EF6D6AB8EEE",
+                      "candidate":  "7AA3A1C765D1C29D926C090E1531E86D65156F880B152D94EE8C58D80E5AE2D7"
+                  },
+                  {
+                      "arch":  "gfx1201",
+                      "module":  "deep_fast.hsaco",
+                      "baseline":  "640520F688B5420A5988D19FC4416576F54D8356D212115B67E0317428778A2E",
+                      "candidate":  "E89492644074EE2E6A68D0BD64BF39EE2FC0BB788F3B73BD505D9584F26DD305"
+                  },
+                  {
+                      "arch":  "gfx1201",
+                      "module":  "multihead-fast-packed.hsaco",
+                      "baseline":  "39D5376CDB6C603130048E1F369DCC9CD7887C23FBA084D9132E6C35073A7795",
+                      "candidate":  "31E258756683B9A60E455C1C315C7B22B9605D90AE784891073FB6C74BA8EAD7"
+                  },
+                  {
+                      "arch":  "gfx1201",
+                      "module":  "multihead-fast-padded-wave-packed.hsaco",
+                      "baseline":  "1EE4C91EC39DF2536C8FACCD99CDB28CCC5C39105F6066494A04CF1739F4FCBE",
+                      "candidate":  "1D0103A7A977B256D93C31DCDD3E12B6BE7CCFC15FB1E473D30CC6F64490AD2F"
+                  },
+                  {
+                      "arch":  "gfx1201",
+                      "module":  "multihead-fast-padded-wave.hsaco",
+                      "baseline":  "5E0D77B1E621D1D193BA5152440F0E634CBE3DD2D049FD38B65EF7E97353B311",
+                      "candidate":  "FDA0068D36FCA2F08A512166CFAF4D95D59DD3ED573C5E06169B9CE1F9EC7BC3"
+                  },
+                  {
+                      "arch":  "gfx1201",
+                      "module":  "multihead-fast.hsaco",
+                      "baseline":  "9FE4B5F7016A5369F4A7995AD9E2BDD56F21C393FA0FAA1561CDA5F6B7A7EB4C",
+                      "candidate":  "3493FB0EDE45F233A5D09472BD7A76D7532387F1FD6B0C835D46C20C0D196C9A"
+                  },
+                  {
+                      "arch":  "gfx1201",
+                      "module":  "vit-stream.hsaco",
+                      "baseline":  "AD59F7BEC8296C4D975969722343727AA345310B273D764A14A0FD053D962D47",
+                      "candidate":  "9585EEE07B3CAFB86E41F611F7762006FB6482BFCC25FE436EFF98402443ACD3"
+                  },
+                  {
+                      "arch":  "gfx1201",
+                      "module":  "vit-wide-deep.hsaco",
+                      "baseline":  "B9D8D4418993A210C71001FC603C2E9E7F4D808D887A8F0993BC2B460EA2CB8B",
+                      "candidate":  "1D590B9279FDE04874B7BAF07E6EA827C228FA7AA4E72397D9E8D341D93EF7C4"
+                  }
+              ],
+    "modules_changed":  [
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1200\\c512-m32-deep.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1201\\multihead-fast-padded-wave-packed.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1200\\c32_fused_ffn_attention.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1201\\vit-wide-deep.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1200\\c32_fused_ffn_attention-packed.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1200\\c512-m32-mh.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1201\\c512-m32-deep.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1201\\multihead-fast.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1201\\c32_fast.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1201\\c32-wave1.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1200\\c64-wave2.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1200\\c32_fast.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1201\\multihead-fast-padded-wave.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1200\\vit-stream.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1200\\multihead-fast.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1200\\multihead-fast-padded-wave-packed.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1201\\deep_fast.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1200\\deep_fast-packed.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1200\\c32-wave1.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1201\\deep_fast-packed.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1201\\c32_fused_ffn_attention-packed.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1200\\deep_fast.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1200\\multihead-fast-packed.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1201\\vit-stream.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1200\\vit-wide-deep.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1201\\c64-wave2.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1201\\multihead-fast-packed.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1201\\c32_fused_ffn_attention.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1201\\c512-m32-mh.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1200\\multihead-fast-padded-wave.hsaco"
+                        ],
+    "protected_hashes":  {
+                             "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-flags.txt":  "72958E4A51021A588B86601A2BF245548FCA25BDA07173470F6FD6806799F397",
+                             "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\OptiScaler.ini":  "6630654CEFE238A8F4E0B509F5A0B47031C90B769C3087330331A9E3AECAA220",
+                             "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\dxgi.dll":  "FBFB6676B829DAD7E020FB830586A16AA0EC6ADD78016DB48EF12E2AE1803231",
+                             "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\dlss5-amd.addon64":  "C38BCDD4BEA5925C691019584818E8A50AF4D6818234FAD65CB48B861BA90E37"
+                         },
+    "other_modules_unchanged":  30,
+    "addon_changed":  false,
+    "flags_changed":  false
+}

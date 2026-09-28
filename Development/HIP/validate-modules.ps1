@@ -1,4 +1,6 @@
 param([string]$Candidate='c32-bf',[string]$Assets='D:\DLSSNR-Lab\network-720p\DLSS5-AMD\native-game-tiled-assets',[string]$Modules='', [string]$Flags='vitcf-on-flags.txt', [string]$Runner='benchmark_pinline.exe', [string]$Reference='reference_vitcf.exe', [string[]]$ReferenceArgs=@())
+# Historical pre-2026-09-28 separate-rounding goldens. Do not use them as the new float-FMA production oracle.
+# New baseline/checker: experiments/float-fma/README.md and results/float-fma-20260928/new-baseline-hashes.csv.
 $ErrorActionPreference='Stop'
 $r='D:\DLSSNR-Lab\hip-backend'
 $a=$Assets

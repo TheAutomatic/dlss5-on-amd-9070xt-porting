@@ -204,7 +204,7 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
    }
    _Pragma("unroll") for(uint tile=0;tile<W2_HIDDEN_TILES;tile++){
     W2_Q8_DECL(hidden);
-    for(uint e=0;e<8;e++){float a=expanded[tile][e],g=clampf(a,-4.f,4.f),q=absf(g)*(-.055908203125f)+.447265625f,poly=g*q+.89453125f;W2_Q8_SETF(hidden,e,a,poly);}W2_Q8_END(hidden);
+    for(uint e=0;e<8;e++){float a=expanded[tile][e],g=clampf(a,-4.f,4.f),q=__builtin_fmaf(absf(g),-.055908203125f,.447265625f),poly=__builtin_fmaf(g,q,.89453125f);W2_Q8_SETF(hidden,e,a,poly);}W2_Q8_END(hidden);
     for(uint ci=0;ci<2;ci++){
      i2 b=w2_weight(fw+4*C*C,head*32+ci*16+rc,4*C,head*128+(ht+tile)*16);
      contract[ci]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,hidden,contract[ci]);

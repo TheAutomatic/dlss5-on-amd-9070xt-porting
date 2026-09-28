@@ -1,0 +1,103 @@
+{
+  "scope": "71 blocks, fixed RGB/history, five-frame off/on/reset; not previous-output feedback or game acceptance",
+  "oracles": [
+    "release/native-rgb-valid1080/post70/shift-full-oracle.f32",
+    "release/native-temporal-valid1080/post70/shift-full-oracle.f32"
+  ],
+  "reports": [
+    {
+      "prefix": "/tmp/float-fma/oracle/oracle-A",
+      "frames": [
+        {
+          "frame": 0,
+          "history": 0,
+          "rmse": 0.008050136640098285,
+          "visible_rmse": 0.008038381189888408,
+          "sha256": "c754b3e25584d88b4e9d5a96df88306dcb4b23e3f727129cb0a2a8366d7b0c70",
+          "finite": true
+        },
+        {
+          "frame": 1,
+          "history": 1,
+          "rmse": 0.00802885997507154,
+          "visible_rmse": 0.008034583747010122,
+          "sha256": "80cb376f4b2be092eeee968aac65f61017bf7ff89bcf7cb2cdffecb0ffa140ed",
+          "finite": true
+        },
+        {
+          "frame": 2,
+          "history": 0,
+          "rmse": 0.008050136640098285,
+          "visible_rmse": 0.008038381189888408,
+          "sha256": "c754b3e25584d88b4e9d5a96df88306dcb4b23e3f727129cb0a2a8366d7b0c70",
+          "finite": true
+        },
+        {
+          "frame": 3,
+          "history": 1,
+          "rmse": 0.00802885997507154,
+          "visible_rmse": 0.008034583747010122,
+          "sha256": "80cb376f4b2be092eeee968aac65f61017bf7ff89bcf7cb2cdffecb0ffa140ed",
+          "finite": true
+        },
+        {
+          "frame": 4,
+          "history": 0,
+          "rmse": 0.008050136640098285,
+          "visible_rmse": 0.008038381189888408,
+          "sha256": "c754b3e25584d88b4e9d5a96df88306dcb4b23e3f727129cb0a2a8366d7b0c70",
+          "finite": true
+        }
+      ],
+      "aggregate_rmse": 0.00804163272938239,
+      "visible_aggregate_rmse": 0.008036862428053546
+    },
+    {
+      "prefix": "/tmp/float-fma/oracle/oracle-P",
+      "frames": [
+        {
+          "frame": 0,
+          "history": 0,
+          "rmse": 0.008042248878235878,
+          "visible_rmse": 0.00803658561598525,
+          "sha256": "b57723aebb6062234ae5dfe46e61eaa18b9a7851f37eb90c2fd01076e8173f1b",
+          "finite": true
+        },
+        {
+          "frame": 1,
+          "history": 1,
+          "rmse": 0.007953228503887938,
+          "visible_rmse": 0.007947512526153052,
+          "sha256": "a96ca5338c7f8501b6615d1495c1d72ee69c15f1aaa8be10933e095f4e72cfbd",
+          "finite": true
+        },
+        {
+          "frame": 2,
+          "history": 0,
+          "rmse": 0.008042248878235878,
+          "visible_rmse": 0.00803658561598525,
+          "sha256": "b57723aebb6062234ae5dfe46e61eaa18b9a7851f37eb90c2fd01076e8173f1b",
+          "finite": true
+        },
+        {
+          "frame": 3,
+          "history": 1,
+          "rmse": 0.007953228503887938,
+          "visible_rmse": 0.007947512526153052,
+          "sha256": "a96ca5338c7f8501b6615d1495c1d72ee69c15f1aaa8be10933e095f4e72cfbd",
+          "finite": true
+        },
+        {
+          "frame": 4,
+          "history": 0,
+          "rmse": 0.008042248878235878,
+          "visible_rmse": 0.00803658561598525,
+          "sha256": "b57723aebb6062234ae5dfe46e61eaa18b9a7851f37eb90c2fd01076e8173f1b",
+          "finite": true
+        }
+      ],
+      "aggregate_rmse": 0.008006759498430932,
+      "visible_aggregate_rmse": 0.008001075375171795
+    }
+  ]
+}

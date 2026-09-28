@@ -934,3 +934,16 @@ R/C各EXACT84+AE84，连M共420候选帧逐位/840哈希，168组AE决策相同�
 尺寸：1080原始blob有效1920×1080、处理1920×1152（原捕获器只读不改参），我们已同，按该原生合同无可省行数、收益0ms。原DLL0x18003c580按layer shape下降次数求2^count对齐步长；Daniel固定ceil64，所以1080默认1088，900默认1600×960（与我们同）。原版900计数尚未知。若另试1152→1088，少64行/5.56%处理像素，面积估约0.70ms，未实现/未ABBA；边界可经ViT影响整图与后续历史。旧1088证据是4K的encoder半尺寸，不是1080原生合同。
 
 全证据、三方逐条表、fresh CUBIN、原版误差、32槽原始计时序列、336份逐帧hash及复现脚本在 `results/fma-vs-nvidia-20260928`、`HIP/experiments/fma-vs-nvidia`。gfx1201实测，未编/测gfx1200；现场60模块对开工快照均同，只改实验和记录，不改生产配方、不装机、不发包。
+
+
+## 2026-09-28 15:39：float FMA 合生产并装剑星；新逐位基准
+
+按e3f6863任务单和Zero批准，**09-28 起基准改为 float FMA；09-28 起基准变更：float FMA 激活**。7个fast源文件23处两层乘加显式__builtin_fmaf，覆盖C32 wave/非wave、C64/C128/C256、ViT/C512；末次乘法、量化、矩阵累加、softmax/归一化、half参考均未动。15个受影响模块双架构重编，含缺可选模块时的旧HIP fallback；旧HLSL precise保留历史对照，不再作新HIP逐位裁判，无新flags或host/RE9 ABI改动。
+
+EXACT/AE各7×12=84候选帧全部有限，连旧基线336帧；AE84次复用/刷新决策变化1帧，43/41→44/40。1080-history第8帧relative 0.225316525→0.219200358跨0.22阈值而复用，age/reason合计3帧不同，连分数50帧不同。额外两次该12帧用例重放，24个输出及整份AE决策日志均同新基准。新goldens `results/float-fma-20260928/new-baseline-hashes.csv`（84 EXACT＋84 AE），检查器 `HIP/experiments/float-fma/check-baseline.py`；旧三道golden脚本已标历史，配方SHA256SUMS同步。
+
+两档两轮ABBA，1000帧弃200、仅首尾读回：900 9.19493→9.08504 / 9.26532→9.15082ms（−1.20%/−1.24%）；1080 12.55121→12.39985 / 12.57806→12.43015（−1.21%/−1.18%）。16槽原始帧时已归档并独立复算均值。
+
+**纠正上轮原版整网误差**：fma-vs-nvidia的oracle-final是post_shift=0，而其runner用3，故撤回“0.145%/0.517%改善”；局部CUBIN/ISA、尺寸及计时不受影响，旧报告加校正。此次统一post_shift=3、全部71块、seed0，以原版shift-full-oracle为裁判，历史exact采样shader按accepted SHA取自450d63b。单帧可见RMSE A 0.0080383812→P 0.0080365856；五帧off/on/off/on/off聚合0.0080368624→0.0080010754，均不劣。五帧是固定RGB/history受控开关，不冒称原输出自反馈；正常游戏式反馈由七用例覆盖。
+
+15:39只换剑星30个HSACO（15×gfx1200/1201）和对应HIP checksum，C32 gfx1201 AA999258、C64 F9E8F0C5；回读同payload，其余30模块与addon/dxgi/INI/flags hash不变。备份 `D:\DLSSNR-Lab\float-fma-20260928\backups\stellar-20260928-153921`，部署 `deployments/float-fma-20260928`。gfx1200仅编译，gfx1201实测。不发包，本机画面/FPS待Zero，仍1080P窗口＋FSR原生AA＋F8 EXACT＋黄字小数，也补此前ACO两刀远程57.1的本机读数。完整结果 `results/float-fma-20260928`，复现 `HIP/experiments/float-fma`。
