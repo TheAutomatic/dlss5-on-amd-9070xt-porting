@@ -1,0 +1,44 @@
+{
+    "backup":  "D:\\DLSSNR-Lab\\aco-lineup-20260928\\backups\\stellar-20260928-115800",
+    "files":  [
+                  {
+                      "arch":  "gfx1200",
+                      "module":  "c32-wave1.hsaco",
+                      "baseline":  "834C709516314091E45A1BE7A3E266F84D1AF96B81388009E3967B3801D15522",
+                      "candidate":  "F67BE50649A50B84CA75E623E7BDE163CFB4B121F0A2DCAB9F6AF56365B71BF1"
+                  },
+                  {
+                      "arch":  "gfx1200",
+                      "module":  "c64-wave2.hsaco",
+                      "baseline":  "9A0FDA18327D6AB87D6CE8FE126D6BC656EB3F3C4F1EE2CE30F8138A978CB347",
+                      "candidate":  "5B3681989C25C7E59D946808AF3139B39147C3A09E35B2DA7F9D9E3078970DF5"
+                  },
+                  {
+                      "arch":  "gfx1201",
+                      "module":  "c32-wave1.hsaco",
+                      "baseline":  "1753400C0BD0A812DB7CFFD3106EB554E9DEA2D22D36357BCF08C23845F15847",
+                      "candidate":  "11ED63057443A8E9121DBBDBD27B6ED2798688D0D7D593FBBFA893CB2416CDC6"
+                  },
+                  {
+                      "arch":  "gfx1201",
+                      "module":  "c64-wave2.hsaco",
+                      "baseline":  "F60EAEE8024E8FCA752407C95F0A5537B9B5154C5561C3ACA5BD437BA620A0C0",
+                      "candidate":  "643A3A7F696F86E91CC7031EE843B6C19E8F0C7B7882D7F22CEEEF58CCB02B80"
+                  }
+              ],
+    "modules_changed":  [
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1201\\c32-wave1.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1200\\c64-wave2.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1200\\c32-wave1.hsaco",
+                            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1201\\c64-wave2.hsaco"
+                        ],
+    "protected_hashes":  {
+                             "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-flags.txt":  "72958E4A51021A588B86601A2BF245548FCA25BDA07173470F6FD6806799F397",
+                             "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\OptiScaler.ini":  "6630654CEFE238A8F4E0B509F5A0B47031C90B769C3087330331A9E3AECAA220",
+                             "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\dxgi.dll":  "FBFB6676B829DAD7E020FB830586A16AA0EC6ADD78016DB48EF12E2AE1803231",
+                             "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\dlss5-amd.addon64":  "C38BCDD4BEA5925C691019584818E8A50AF4D6818234FAD65CB48B861BA90E37"
+                         },
+    "other_modules_unchanged":  56,
+    "addon_changed":  false,
+    "flags_changed":  false
+}

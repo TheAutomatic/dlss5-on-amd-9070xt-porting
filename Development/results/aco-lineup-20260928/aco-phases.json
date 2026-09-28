@@ -1,0 +1,786 @@
+{
+  "g_fswinds128": {
+    "activation": {
+      "ordinary": 908.0,
+      "scalar_ops": 1152,
+      "opcodes": {
+        "v_maxmin_f32": 256.0,
+        "v_fma_mix_f32": 256.0,
+        "v_dual_fmaak_f32": 119.0,
+        "v_dual_mul_f32": 125.0,
+        "v_cvt_pk_fp8_f32": 128.0,
+        "v_fmaak_f32": 18.0,
+        "v_mul_f32": 6.0
+      }
+    },
+    "softmax": {
+      "ordinary": 276.0,
+      "scalar_ops": 276,
+      "opcodes": {
+        "v_fma_mix_f32": 128.0,
+        "v_pk_add_f16": 64.0,
+        "v_cvt_pk_fp8_f32": 64.0,
+        "v_permlanex16_b32": 4.0,
+        "v_add_f16": 4.0,
+        "v_max_f16": 4.0,
+        "v_cvt_f32_f16": 4.0,
+        "v_rcp_f32": 4.0
+      }
+    }
+  },
+  "g_fswindsp64": {
+    "activation": {
+      "ordinary": 910.5,
+      "scalar_ops": 1152,
+      "opcodes": {
+        "v_maxmin_f32": 256.0,
+        "v_fma_mix_f32": 256.0,
+        "v_dual_fmaak_f32": 119.5,
+        "v_mul_f32": 12.0,
+        "v_dual_mul_f32": 122.0,
+        "v_cvt_pk_fp8_f32": 128.0,
+        "v_fmaak_f32": 17.0
+      }
+    },
+    "softmax": {
+      "ordinary": 276.0,
+      "scalar_ops": 276,
+      "opcodes": {
+        "v_pk_add_f16": 64.0,
+        "v_fma_mix_f32": 128.0,
+        "v_cvt_pk_fp8_f32": 64.0,
+        "v_permlanex16_b32": 4.0,
+        "v_add_f16": 4.0,
+        "v_max_f16": 4.0,
+        "v_cvt_f32_f16": 4.0,
+        "v_rcp_f32": 4.0
+      }
+    }
+  },
+  "g_fswin128": {
+    "activation": {
+      "ordinary": 906.5,
+      "scalar_ops": 1152,
+      "opcodes": {
+        "v_maxmin_f32": 256.0,
+        "v_fma_mix_f32": 256.0,
+        "v_dual_fmaak_f32": 122.0,
+        "v_dual_mul_f32": 123.5,
+        "v_cvt_pk_fp8_f32": 128.0,
+        "v_fmaak_f32": 12.0,
+        "v_mul_f32": 9.0
+      }
+    },
+    "softmax": {
+      "ordinary": 276.0,
+      "scalar_ops": 276,
+      "opcodes": {
+        "v_pk_add_f16": 64.0,
+        "v_cvt_pk_fp8_f32": 64.0,
+        "v_permlanex16_b32": 4.0,
+        "v_add_f16": 4.0,
+        "v_max_f16": 4.0,
+        "v_cvt_f32_f16": 4.0,
+        "v_rcp_f32": 4.0,
+        "v_fma_mix_f32": 128.0
+      }
+    }
+  },
+  "g_fswinpds128": {
+    "activation": {
+      "ordinary": 2738.5,
+      "scalar_ops": 3456,
+      "opcodes": {
+        "v_maxmin_f32": 768.0,
+        "v_fma_mix_f32": 768.0,
+        "v_dual_fmaak_f32": 344.5,
+        "v_dual_mul_f32": 373.0,
+        "v_cvt_pk_fp8_f32": 384.0,
+        "v_fmaak_f32": 79.0,
+        "v_mul_f32": 22.0
+      }
+    },
+    "softmax": {
+      "ordinary": 828.0,
+      "scalar_ops": 828,
+      "opcodes": {
+        "v_fma_mix_f32": 384.0,
+        "v_cvt_pk_fp8_f32": 192.0,
+        "v_pk_add_f16": 192.0,
+        "v_permlanex16_b32": 12.0,
+        "v_add_f16": 12.0,
+        "v_max_f16": 12.0,
+        "v_cvt_f32_f16": 12.0,
+        "v_rcp_f32": 12.0
+      }
+    }
+  },
+  "g_fswin256": {
+    "activation": {
+      "ordinary": 904.0,
+      "scalar_ops": 1152,
+      "opcodes": {
+        "v_maxmin_f32": 256.0,
+        "v_fma_mix_f32": 256.0,
+        "v_dual_fmaak_f32": 123.0,
+        "v_dual_mul_f32": 125.0,
+        "v_cvt_pk_fp8_f32": 128.0,
+        "v_fmaak_f32": 10.0,
+        "v_mul_f32": 6.0
+      }
+    },
+    "softmax": {
+      "ordinary": 276.0,
+      "scalar_ops": 276,
+      "opcodes": {
+        "v_pk_add_f16": 64.0,
+        "v_permlanex16_b32": 4.0,
+        "v_add_f16": 4.0,
+        "v_max_f16": 4.0,
+        "v_cvt_f32_f16": 4.0,
+        "v_rcp_f32": 4.0,
+        "v_fma_mix_f32": 128.0,
+        "v_cvt_pk_fp8_f32": 64.0
+      }
+    }
+  },
+  "g_fswin64": {
+    "activation": {
+      "ordinary": 909.5,
+      "scalar_ops": 1152,
+      "opcodes": {
+        "v_maxmin_f32": 256.0,
+        "v_fma_mix_f32": 256.0,
+        "v_fmaak_f32": 13.0,
+        "v_dual_fmaak_f32": 121.5,
+        "v_mul_f32": 14.0,
+        "v_dual_mul_f32": 121.0,
+        "v_cvt_pk_fp8_f32": 128.0
+      }
+    },
+    "softmax": {
+      "ordinary": 276.0,
+      "scalar_ops": 276,
+      "opcodes": {
+        "v_pk_add_f16": 64.0,
+        "v_cvt_pk_fp8_f32": 64.0,
+        "v_fma_mix_f32": 128.0,
+        "v_permlanex16_b32": 4.0,
+        "v_add_f16": 4.0,
+        "v_max_f16": 4.0,
+        "v_cvt_f32_f16": 4.0,
+        "v_rcp_f32": 4.0
+      }
+    }
+  },
+  "g_fswinp256": {
+    "activation": {
+      "ordinary": 2724.5,
+      "scalar_ops": 3456,
+      "opcodes": {
+        "v_cvt_pk_fp8_f32": 384.0,
+        "v_maxmin_f32": 768.0,
+        "v_dual_mul_f32": 371.0,
+        "v_fma_mix_f32": 768.0,
+        "v_fmaak_f32": 47.0,
+        "v_dual_fmaak_f32": 360.5,
+        "v_mul_f32": 26.0
+      }
+    },
+    "softmax": {
+      "ordinary": 828.0,
+      "scalar_ops": 828,
+      "opcodes": {
+        "v_fma_mix_f32": 384.0,
+        "v_pk_add_f16": 192.0,
+        "v_add_f16": 12.0,
+        "v_cvt_pk_fp8_f32": 192.0,
+        "v_permlanex16_b32": 12.0,
+        "v_max_f16": 12.0,
+        "v_cvt_f32_f16": 12.0,
+        "v_rcp_f32": 12.0
+      }
+    }
+  },
+  "g_fswindsp32": {
+    "activation": {
+      "ordinary": 911.0,
+      "scalar_ops": 1152,
+      "opcodes": {
+        "v_maxmin_f32": 256.0,
+        "v_fma_mix_f32": 256.0,
+        "v_dual_fmaak_f32": 118.5,
+        "v_dual_mul_f32": 122.5,
+        "v_cvt_pk_fp8_f32": 128.0,
+        "v_mul_f32": 11.0,
+        "v_fmaak_f32": 19.0
+      }
+    },
+    "softmax": {
+      "ordinary": 276.0,
+      "scalar_ops": 276,
+      "opcodes": {
+        "v_fma_mix_f32": 128.0,
+        "v_cvt_pk_fp8_f32": 64.0,
+        "v_pk_add_f16": 64.0,
+        "v_permlanex16_b32": 4.0,
+        "v_add_f16": 4.0,
+        "v_max_f16": 4.0,
+        "v_cvt_f32_f16": 4.0,
+        "v_rcp_f32": 4.0
+      }
+    }
+  },
+  "g_fswinpds256": {
+    "activation": {
+      "ordinary": 2723.5,
+      "scalar_ops": 3456,
+      "opcodes": {
+        "v_dual_mul_f32": 373.5,
+        "v_cvt_pk_fp8_f32": 384.0,
+        "v_maxmin_f32": 768.0,
+        "v_fma_mix_f32": 768.0,
+        "v_dual_fmaak_f32": 359.0,
+        "v_fmaak_f32": 50.0,
+        "v_mul_f32": 21.0
+      }
+    },
+    "softmax": {
+      "ordinary": 828.0,
+      "scalar_ops": 828,
+      "opcodes": {
+        "v_cvt_pk_fp8_f32": 192.0,
+        "v_pk_add_f16": 192.0,
+        "v_permlanex16_b32": 12.0,
+        "v_add_f16": 12.0,
+        "v_max_f16": 12.0,
+        "v_cvt_f32_f16": 12.0,
+        "v_rcp_f32": 12.0,
+        "v_fma_mix_f32": 384.0
+      }
+    }
+  },
+  "g_fswinpds64": {
+    "activation": {
+      "ordinary": 2743.5,
+      "scalar_ops": 3456,
+      "opcodes": {
+        "v_dual_fmaak_f32": 345.0,
+        "v_maxmin_f32": 768.0,
+        "v_fma_mix_f32": 768.0,
+        "v_dual_mul_f32": 367.5,
+        "v_cvt_pk_fp8_f32": 384.0,
+        "v_mul_f32": 33.0,
+        "v_fmaak_f32": 78.0
+      }
+    },
+    "softmax": {
+      "ordinary": 828.0,
+      "scalar_ops": 828,
+      "opcodes": {
+        "v_pk_add_f16": 192.0,
+        "v_fma_mix_f32": 384.0,
+        "v_permlanex16_b32": 12.0,
+        "v_add_f16": 12.0,
+        "v_max_f16": 12.0,
+        "v_cvt_f32_f16": 12.0,
+        "v_rcp_f32": 12.0,
+        "v_cvt_pk_fp8_f32": 192.0
+      }
+    }
+  },
+  "g_fswinpup128": {
+    "activation": {
+      "ordinary": 2743.5,
+      "scalar_ops": 3456,
+      "opcodes": {
+        "v_dual_fmaak_f32": 341.5,
+        "v_dual_mul_f32": 371.0,
+        "v_fma_mix_f32": 768.0,
+        "v_cvt_pk_fp8_f32": 384.0,
+        "v_mul_f32": 26.0,
+        "v_maxmin_f32": 768.0,
+        "v_fmaak_f32": 85.0
+      }
+    },
+    "softmax": {
+      "ordinary": 828.0,
+      "scalar_ops": 828,
+      "opcodes": {
+        "v_fma_mix_f32": 384.0,
+        "v_cvt_pk_fp8_f32": 192.0,
+        "v_pk_add_f16": 192.0,
+        "v_permlanex16_b32": 12.0,
+        "v_add_f16": 12.0,
+        "v_max_f16": 12.0,
+        "v_cvt_f32_f16": 12.0,
+        "v_rcp_f32": 12.0
+      }
+    }
+  },
+  "g_fswinds32": {
+    "activation": {
+      "ordinary": 911.5,
+      "scalar_ops": 1152,
+      "opcodes": {
+        "v_maxmin_f32": 256.0,
+        "v_fma_mix_f32": 256.0,
+        "v_dual_fmaak_f32": 119.0,
+        "v_dual_mul_f32": 121.5,
+        "v_cvt_pk_fp8_f32": 128.0,
+        "v_fmaak_f32": 18.0,
+        "v_mul_f32": 13.0
+      }
+    },
+    "softmax": {
+      "ordinary": 276.0,
+      "scalar_ops": 276,
+      "opcodes": {
+        "v_fma_mix_f32": 128.0,
+        "v_cvt_pk_fp8_f32": 64.0,
+        "v_pk_add_f16": 64.0,
+        "v_permlanex16_b32": 4.0,
+        "v_add_f16": 4.0,
+        "v_max_f16": 4.0,
+        "v_cvt_f32_f16": 4.0,
+        "v_rcp_f32": 4.0
+      }
+    }
+  },
+  "g_fswinp64": {
+    "activation": {
+      "ordinary": 909.5,
+      "scalar_ops": 1152,
+      "opcodes": {
+        "v_maxmin_f32": 256.0,
+        "v_fma_mix_f32": 256.0,
+        "v_dual_fmaak_f32": 117.5,
+        "v_mul_f32": 6.0,
+        "v_dual_mul_f32": 125.0,
+        "v_cvt_pk_fp8_f32": 128.0,
+        "v_fmaak_f32": 21.0
+      }
+    },
+    "softmax": {
+      "ordinary": 276.0,
+      "scalar_ops": 276,
+      "opcodes": {
+        "v_pk_add_f16": 64.0,
+        "v_fma_mix_f32": 128.0,
+        "v_permlanex16_b32": 4.0,
+        "v_add_f16": 4.0,
+        "v_max_f16": 4.0,
+        "v_cvt_f32_f16": 4.0,
+        "v_rcp_f32": 4.0,
+        "v_cvt_pk_fp8_f32": 64.0
+      }
+    }
+  },
+  "g_fswin32": {
+    "activation": {
+      "ordinary": 2730.5,
+      "scalar_ops": 3456,
+      "opcodes": {
+        "v_maxmin_f32": 768.0,
+        "v_fma_mix_f32": 768.0,
+        "v_dual_fmaak_f32": 357.5,
+        "v_dual_mul_f32": 368.0,
+        "v_cvt_pk_fp8_f32": 384.0,
+        "v_fmaak_f32": 53.0,
+        "v_mul_f32": 32.0
+      }
+    },
+    "softmax": {
+      "ordinary": 828.0,
+      "scalar_ops": 828,
+      "opcodes": {
+        "v_fma_mix_f32": 384.0,
+        "v_cvt_pk_fp8_f32": 192.0,
+        "v_pk_add_f16": 192.0,
+        "v_permlanex16_b32": 12.0,
+        "v_add_f16": 12.0,
+        "v_max_f16": 12.0,
+        "v_cvt_f32_f16": 12.0,
+        "v_rcp_f32": 12.0
+      }
+    }
+  },
+  "g_fswinds256": {
+    "activation": {
+      "ordinary": 912.5,
+      "scalar_ops": 1152,
+      "opcodes": {
+        "v_maxmin_f32": 256.0,
+        "v_fma_mix_f32": 256.0,
+        "v_fmaak_f32": 22.0,
+        "v_dual_mul_f32": 122.5,
+        "v_dual_fmaak_f32": 117.0,
+        "v_cvt_pk_fp8_f32": 128.0,
+        "v_mul_f32": 11.0
+      }
+    },
+    "softmax": {
+      "ordinary": 276.0,
+      "scalar_ops": 276,
+      "opcodes": {
+        "v_cvt_pk_fp8_f32": 64.0,
+        "v_fma_mix_f32": 128.0,
+        "v_pk_add_f16": 64.0,
+        "v_permlanex16_b32": 4.0,
+        "v_add_f16": 4.0,
+        "v_max_f16": 4.0,
+        "v_cvt_f32_f16": 4.0,
+        "v_rcp_f32": 4.0
+      }
+    }
+  },
+  "g_fswindsp128": {
+    "activation": {
+      "ordinary": 906.0,
+      "scalar_ops": 1152,
+      "opcodes": {
+        "v_maxmin_f32": 256.0,
+        "v_fma_mix_f32": 256.0,
+        "v_dual_fmaak_f32": 122.0,
+        "v_dual_mul_f32": 124.0,
+        "v_cvt_pk_fp8_f32": 128.0,
+        "v_mul_f32": 8.0,
+        "v_fmaak_f32": 12.0
+      }
+    },
+    "softmax": {
+      "ordinary": 276.0,
+      "scalar_ops": 276,
+      "opcodes": {
+        "v_fma_mix_f32": 128.0,
+        "v_pk_add_f16": 64.0,
+        "v_cvt_pk_fp8_f32": 64.0,
+        "v_permlanex16_b32": 4.0,
+        "v_add_f16": 4.0,
+        "v_max_f16": 4.0,
+        "v_cvt_f32_f16": 4.0,
+        "v_rcp_f32": 4.0
+      }
+    }
+  },
+  "g_fswinfusedup128": {
+    "activation": {
+      "ordinary": 912.5,
+      "scalar_ops": 1152,
+      "opcodes": {
+        "v_maxmin_f32": 256.0,
+        "v_fma_mix_f32": 256.0,
+        "v_dual_fmaak_f32": 118.5,
+        "v_dual_mul_f32": 121.0,
+        "v_mul_f32": 14.0,
+        "v_cvt_pk_fp8_f32": 128.0,
+        "v_fmaak_f32": 19.0
+      }
+    },
+    "softmax": {
+      "ordinary": 276.0,
+      "scalar_ops": 276,
+      "opcodes": {
+        "v_pk_add_f16": 64.0,
+        "v_permlanex16_b32": 4.0,
+        "v_add_f16": 4.0,
+        "v_max_f16": 4.0,
+        "v_cvt_f32_f16": 4.0,
+        "v_rcp_f32": 4.0,
+        "v_fma_mix_f32": 128.0,
+        "v_cvt_pk_fp8_f32": 64.0
+      }
+    }
+  },
+  "g_fswinp128": {
+    "activation": {
+      "ordinary": 913.0,
+      "scalar_ops": 1152,
+      "opcodes": {
+        "v_maxmin_f32": 256.0,
+        "v_fma_mix_f32": 256.0,
+        "v_dual_fmaak_f32": 115.5,
+        "v_dual_mul_f32": 123.5,
+        "v_cvt_pk_fp8_f32": 128.0,
+        "v_fmaak_f32": 25.0,
+        "v_mul_f32": 9.0
+      }
+    },
+    "softmax": {
+      "ordinary": 276.0,
+      "scalar_ops": 276,
+      "opcodes": {
+        "v_fma_mix_f32": 128.0,
+        "v_cvt_pk_fp8_f32": 64.0,
+        "v_pk_add_f16": 64.0,
+        "v_permlanex16_b32": 4.0,
+        "v_add_f16": 4.0,
+        "v_max_f16": 4.0,
+        "v_cvt_f32_f16": 4.0,
+        "v_rcp_f32": 4.0
+      }
+    }
+  },
+  "g_fswinfusedup256": {
+    "activation": {
+      "ordinary": 908.5,
+      "scalar_ops": 1152,
+      "opcodes": {
+        "v_cvt_pk_fp8_f32": 128.0,
+        "v_dual_mul_f32": 124.0,
+        "v_fma_mix_f32": 256.0,
+        "v_dual_fmaak_f32": 119.5,
+        "v_maxmin_f32": 256.0,
+        "v_fmaak_f32": 17.0,
+        "v_mul_f32": 8.0
+      }
+    },
+    "softmax": {
+      "ordinary": 276.0,
+      "scalar_ops": 276,
+      "opcodes": {
+        "v_fma_mix_f32": 128.0,
+        "v_pk_add_f16": 64.0,
+        "v_permlanex16_b32": 4.0,
+        "v_add_f16": 4.0,
+        "v_max_f16": 4.0,
+        "v_cvt_f32_f16": 4.0,
+        "v_rcp_f32": 4.0,
+        "v_cvt_pk_fp8_f32": 64.0
+      }
+    }
+  },
+  "g_fswinimagepost32": {
+    "activation": {
+      "ordinary": 957.5,
+      "scalar_ops": 1152,
+      "opcodes": {
+        "v_maxmin_f32": 256.0,
+        "v_fma_mix_f32": 256.0,
+        "v_fmaak_f32": 74.0,
+        "v_mul_f32": 49.0,
+        "v_dual_mul_f32": 103.0,
+        "v_dual_fmaak_f32": 91.0,
+        "v_cvt_pk_fp8_f32": 128.0,
+        "v_dual_mov_b32": 0.5
+      }
+    },
+    "softmax": {
+      "ordinary": 276.0,
+      "scalar_ops": 276,
+      "opcodes": {
+        "v_pk_add_f16": 64.0,
+        "v_permlanex16_b32": 4.0,
+        "v_add_f16": 4.0,
+        "v_max_f16": 4.0,
+        "v_cvt_f32_f16": 4.0,
+        "v_rcp_f32": 4.0,
+        "v_fma_mix_f32": 128.0,
+        "v_cvt_pk_fp8_f32": 64.0
+      }
+    }
+  },
+  "g_fswinfusedup32": {
+    "activation": {
+      "ordinary": 912.0,
+      "scalar_ops": 1152,
+      "opcodes": {
+        "v_maxmin_f32": 256.0,
+        "v_fma_mix_f32": 256.0,
+        "v_fmaak_f32": 19.0,
+        "v_dual_fmaak_f32": 118.5,
+        "v_dual_mul_f32": 121.5,
+        "v_cvt_pk_fp8_f32": 128.0,
+        "v_mul_f32": 13.0
+      }
+    },
+    "softmax": {
+      "ordinary": 276.0,
+      "scalar_ops": 276,
+      "opcodes": {
+        "v_fma_mix_f32": 128.0,
+        "v_cvt_pk_fp8_f32": 64.0,
+        "v_pk_add_f16": 64.0,
+        "v_permlanex16_b32": 4.0,
+        "v_add_f16": 4.0,
+        "v_max_f16": 4.0,
+        "v_cvt_f32_f16": 4.0,
+        "v_rcp_f32": 4.0
+      }
+    }
+  },
+  "g_fswinpup64": {
+    "activation": {
+      "ordinary": 2736.5,
+      "scalar_ops": 3456,
+      "opcodes": {
+        "v_fma_mix_f32": 768.0,
+        "v_dual_fmaak_f32": 349.5,
+        "v_cvt_pk_fp8_f32": 384.0,
+        "v_maxmin_f32": 768.0,
+        "v_dual_mul_f32": 370.0,
+        "v_fmaak_f32": 69.0,
+        "v_mul_f32": 28.0
+      }
+    },
+    "softmax": {
+      "ordinary": 828.0,
+      "scalar_ops": 828,
+      "opcodes": {
+        "v_cvt_pk_fp8_f32": 192.0,
+        "v_fma_mix_f32": 384.0,
+        "v_pk_add_f16": 192.0,
+        "v_permlanex16_b32": 12.0,
+        "v_add_f16": 12.0,
+        "v_max_f16": 12.0,
+        "v_cvt_f32_f16": 12.0,
+        "v_rcp_f32": 12.0
+      }
+    }
+  },
+  "g_fswinimagepreds32": {
+    "activation": {
+      "ordinary": 909.5,
+      "scalar_ops": 1152,
+      "opcodes": {
+        "v_maxmin_f32": 256.0,
+        "v_fma_mix_f32": 256.0,
+        "v_fmaak_f32": 21.0,
+        "v_dual_fmaak_f32": 117.5,
+        "v_dual_mul_f32": 125.0,
+        "v_cvt_pk_fp8_f32": 128.0,
+        "v_mul_f32": 6.0
+      }
+    },
+    "softmax": {
+      "ordinary": 276.0,
+      "scalar_ops": 276,
+      "opcodes": {
+        "v_pk_add_f16": 64.0,
+        "v_permlanex16_b32": 4.0,
+        "v_add_f16": 4.0,
+        "v_max_f16": 4.0,
+        "v_cvt_f32_f16": 4.0,
+        "v_rcp_f32": 4.0,
+        "v_fma_mix_f32": 128.0,
+        "v_cvt_pk_fp8_f32": 64.0
+      }
+    }
+  },
+  "g_fswinfusedup64": {
+    "activation": {
+      "ordinary": 912.0,
+      "scalar_ops": 1152,
+      "opcodes": {
+        "v_maxmin_f32": 256.0,
+        "v_fma_mix_f32": 256.0,
+        "v_dual_fmaak_f32": 118.5,
+        "v_fmaak_f32": 19.0,
+        "v_dual_mul_f32": 121.5,
+        "v_cvt_pk_fp8_f32": 128.0,
+        "v_mul_f32": 13.0
+      }
+    },
+    "softmax": {
+      "ordinary": 276.0,
+      "scalar_ops": 276,
+      "opcodes": {
+        "v_fma_mix_f32": 128.0,
+        "v_pk_add_f16": 64.0,
+        "v_cvt_pk_fp8_f32": 64.0,
+        "v_permlanex16_b32": 4.0,
+        "v_add_f16": 4.0,
+        "v_max_f16": 4.0,
+        "v_cvt_f32_f16": 4.0,
+        "v_rcp_f32": 4.0
+      }
+    }
+  },
+  "g_fswinpup256": {
+    "activation": {
+      "ordinary": 2713.0,
+      "scalar_ops": 3456,
+      "opcodes": {
+        "v_dual_fmaak_f32": 364.0,
+        "v_fma_mix_f32": 768.0,
+        "v_dual_mul_f32": 379.0,
+        "v_maxmin_f32": 768.0,
+        "v_cvt_pk_fp8_f32": 384.0,
+        "v_fmaak_f32": 40.0,
+        "v_mul_f32": 10.0
+      }
+    },
+    "softmax": {
+      "ordinary": 826.0,
+      "scalar_ops": 826,
+      "opcodes": {
+        "v_fma_mix_f32": 384.0,
+        "v_pk_add_f16": 190.0,
+        "v_cvt_pk_fp8_f32": 192.0,
+        "v_permlanex16_b32": 12.0,
+        "v_add_f16": 12.0,
+        "v_max_f16": 12.0,
+        "v_cvt_f32_f16": 12.0,
+        "v_rcp_f32": 12.0
+      }
+    }
+  },
+  "g_fswinds64": {
+    "activation": {
+      "ordinary": 909.0,
+      "scalar_ops": 1152,
+      "opcodes": {
+        "v_maxmin_f32": 256.0,
+        "v_fma_mix_f32": 256.0,
+        "v_fmaak_f32": 16.0,
+        "v_dual_mul_f32": 123.0,
+        "v_dual_fmaak_f32": 120.0,
+        "v_cvt_pk_fp8_f32": 128.0,
+        "v_mul_f32": 10.0
+      }
+    },
+    "softmax": {
+      "ordinary": 276.0,
+      "scalar_ops": 276,
+      "opcodes": {
+        "v_cvt_pk_fp8_f32": 64.0,
+        "v_pk_add_f16": 64.0,
+        "v_permlanex16_b32": 4.0,
+        "v_add_f16": 4.0,
+        "v_max_f16": 4.0,
+        "v_cvt_f32_f16": 4.0,
+        "v_rcp_f32": 4.0,
+        "v_fma_mix_f32": 128.0
+      }
+    }
+  },
+  "g_fswindsp256": {
+    "activation": {
+      "ordinary": 903.5,
+      "scalar_ops": 1152,
+      "opcodes": {
+        "v_maxmin_f32": 256.0,
+        "v_fma_mix_f32": 256.0,
+        "v_dual_fmaak_f32": 123.0,
+        "v_dual_mul_f32": 125.5,
+        "v_cvt_pk_fp8_f32": 128.0,
+        "v_fmaak_f32": 10.0,
+        "v_mul_f32": 5.0
+      }
+    },
+    "softmax": {
+      "ordinary": 272.0,
+      "scalar_ops": 272,
+      "opcodes": {
+        "v_pk_add_f16": 60.0,
+        "v_cvt_pk_fp8_f32": 64.0,
+        "v_permlanex16_b32": 4.0,
+        "v_add_f16": 4.0,
+        "v_max_f16": 4.0,
+        "v_cvt_f32_f16": 4.0,
+        "v_rcp_f32": 4.0,
+        "v_fma_mix_f32": 128.0
+      }
+    }
+  }
+}
