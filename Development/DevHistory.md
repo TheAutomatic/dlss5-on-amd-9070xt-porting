@@ -967,3 +967,7 @@ EXACT 黄字 56.7～57.1 来回跳，看不出比上一刀（远程 57.1）有�
 ## 2026-09-28 16:40：一帧时间账 vs Daniel 0.5.0 reference（分身，`results/frame-breakdown-20260928`）
 
 离线完整 NativeGameFrame 回放（现场剑星 30 模块 + flags，1080=1920×1152）wall 12.32/12.36ms；由 09-27 纯 HIP 跨度 12.08 按此后三刀推算网络约 11.75ms，故网络外流水线约 0.55ms（Daniel 约 0.11）。两边整帧差约 1.1ms = 内核约 0.65 + 流水线约 0.45；此前"Daniel 整帧约 14ms、网络外差 1.5～2ms"是对其 60 帧上限下 slack 的误读，撤回。可做项：内核（闇路线）、输入零拷贝（encode 直写共享缓冲，约 0.1～0.15）、输出少一次回拷（约 0.05～0.1）、HIP→D3D 交接改 GPU 轮询（待测）。游戏内确认需 Zero 做 F6 对照（站立 30s 开 / 30s F6 直通，看 frame-stats 的 bypass 窗口）。未改代码、未装机。
+
+## 2026-09-28 17:05：网络前后零拷贝 DLSS5_DIRECT_IO（分身）
+
+frame-breakdown 可做项 2、3。位 1（默认开）：RGB 输入 pass 直接写 HIP 共享输入缓冲（可 UAV、静息 COMMON），桥接跳过 35MB 拷贝，HIP 后端从不读的 tile 副本不再写/分配；位 2（剑星装机开，模板关）：pre-upscale 路线 FSR 直接读 decode 的 RGBA16F 输出纹理，省回拷。时序会话、OVERLAP、非 RGBA16F 颜色自动走旧路径；RE9 runtime 不读此键。离线回放（`benchmark_vit_reuse` 加 `DLSS5_BENCH_PLAIN=1` 非时序会话，同剑星）9 组 108 候选帧逐位、AE 决策同；ABBA 两批直写快 0.02～0.05ms（−0.14～−0.40%），远小于带宽粗估，说明网络外开销主要不在拷贝本身，更可能在跨 API 交接。剑星已装 `DIRECT_IO=3`（add-on abef6155，备份 `D:\DLSSNR-Lab\zero-copy-io-20260928\backups\stellar-20260928-170538`），位 2 画面待 Zero 本机确认。`results/zero-copy-io-20260928`。

@@ -138,3 +138,7 @@ DLSS5_HIP_VIT_STREAM=3
 # 2026-09-28: frame-time log. DLSS5_FRAME_STATS=<seconds> appends one line per window to DLSS5-AMD\logs\frame-stats.txt
 # (frame interval avg/p50/p99/max, 1% low, why NR did or did not run). 0 = off (no cost).
 DLSS5_FRAME_STATS=0
+# 2026-09-28: zero-copy I/O around the network (pure data movement, output bit-exact). 1 = the input pass writes the HIP network input
+# directly (no 35 MB copy); 3 = also hands the decoder output to FSR directly on the pre-upscale route (RGBA16F colour, no copy back).
+# History (temporal) sessions keep the old path automatically. 0 = previous behaviour.
+DLSS5_DIRECT_IO=1

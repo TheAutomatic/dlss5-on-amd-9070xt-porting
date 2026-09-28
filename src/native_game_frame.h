@@ -123,6 +123,11 @@ public:
  }
  ID3D12Resource*RingSlot(UINT f)const{return ring[f%2];}UINT64 RingBytes()const{return UINT64(values)*4;}void CountDump(){dumps++;}
 };
+/* DLSS5_DIRECT_IO (2026-09-28, pure data movement; network input/output bytes unchanged): bit 1 = the RGB input pass writes the
+   network input straight into the HIP bridge's shared buffer (no 35 MB copy, no unused tile copy); bit 2 = the pre-upscale route
+   feeds the decoder output to FSR directly instead of copying it back into the private colour texture (RGBA16F games only).
+   Temporal (history) sessions and DLSS5_OVERLAP keep the old path. Default 1; 0 = previous behaviour. */
+inline unsigned NativeDirectIo(){static unsigned v=[]{const wchar_t*s=_wgetenv(L"DLSS5_DIRECT_IO");return s?unsigned(wcstoul(s,nullptr,10))&3u:1u;}();return v;}
 inline void NativeGameFrameStep(const char*step,ID3D12Device*d=nullptr){if(FILE*f=_wfopen(NativeLabPath(L"logs\\native-game-oneshot.txt").c_str(),L"ab")){fprintf(f,"pid=%lu tick=%llu event=frame_create_step detail=%s removed=%08x\n",GetCurrentProcessId(),GetTickCount64(),step,d?unsigned(d->GetDeviceRemovedReason()):0u);fclose(f);}}
 class NativeGameFrame {
  struct Resources {
@@ -184,7 +189,12 @@ public:
    NativeGameFrameStep("encode",d);resources->encode.Create(d,{source},directory);
    resources->original=source;
    {const auto&g=resources->encode.Geometry();char info[160];snprintf(info,sizeof info,"input=%ux%u network=%ux%u viewport=%u,%u,%u,%u output=%ux%u",g.width,g.height,g.network_width,g.network_height,g.x,g.y,g.fit_width,g.fit_height,g.width,g.height);NativeGameFrameStep(info,d);}
-   NativeGameFrameStep("input",d);resources->input.Create(d,resources->encode.Output(),directory);
+ #ifdef DLSS5_USE_HIP
+   const bool direct_input=(NativeDirectIo()&1)&&!resources->overlap&&!temporal_config&&!temporal_rgb;
+#else
+   const bool direct_input=false;
+#endif
+   NativeGameFrameStep("input",d);resources->input.Create(d,resources->encode.Output(),directory,!direct_input);
    if(temporal_config&&!temporal_rgb){
     // Motion vectors arrive in UV units of the render grid; the coordinate pass uses the captured
     // NGX contract (subrect 0,0..render extent over the motion texture; displacement scale 1/1920,1/1080).
@@ -210,7 +220,7 @@ public:
    // Captured original post origin(-4,-4) corresponds to shift3.
    NativeGameFrameStep("network",d);
 #ifdef DLSS5_USE_HIP
-   resources->network.Create(resources->overlap?resources->compute_queue:resources->queue,resources->input.PostBase(),noise,directory,temporal_rgb,3);
+   resources->network.Create(resources->overlap?resources->compute_queue:resources->queue,resources->input.PostBase(),noise,directory,temporal_rgb,3,direct_input);if(direct_input){resources->input.RedirectOutput(resources->network.DirectInput());NativeGameFrameStep("direct_input",d);}
 #else
    resources->network.Create(d,resources->input.Tiles(),resources->input.PostBase(),noise,directory,temporal_rgb,3);
 #endif
@@ -333,8 +343,18 @@ public:
 #endif
  // motion_texture: this frame's FSR motion vectors (compute-read state). reset: FFX reset flag.
  // History is the previous processed frame's network output; the first frame and reset frames run without it.
+ /* DLSS5_DIRECT_IO bit 2: the decoder's RGBA16F output texture, when the caller may hand it to the upscaler in place of the target
+    (same size and exact format as the source, texture output, no overlap). Rests in NON_PIXEL_SHADER_RESOURCE between frames; the next
+    frame's decode rewrites it later on the same queue. nullptr = deliver by copy as before. */
+ ID3D12Resource*DirectOutput(){
+  std::lock_guard<std::mutex>guard(mutex);
+  if(!(NativeDirectIo()&2)||!ready||failed||!resources||resources->overlap||resources->decode.BufferOutput()||!resources->original)return nullptr;
+  auto o=resources->decode.Output()->GetDesc(),t=resources->original->GetDesc();
+  return o.Dimension==D3D12_RESOURCE_DIMENSION_TEXTURE2D&&o.Width==t.Width&&o.Height==t.Height&&o.Format==t.Format&&t.Format==DXGI_FORMAT_R16G16B16A16_FLOAT?resources->decode.Output():nullptr;
+ }
+ // deliver=false: skip the copy into target (the caller consumes DirectOutput() instead); only valid when DirectOutput() is non-null.
  void ProcessSubmittedFrame(ID3D12Resource*target,D3D12_RESOURCE_STATES source_state,
-                            D3D12_RESOURCE_STATES target_state,UINT seed,bool temporal_enabled=false,ID3D12Resource*motion_texture=nullptr,bool reset=false){
+                            D3D12_RESOURCE_STATES target_state,UINT seed,bool temporal_enabled=false,ID3D12Resource*motion_texture=nullptr,bool reset=false,bool deliver=true){
   std::lock_guard<std::mutex>guard(mutex);
   if(!ready||failed||!target)throw std::runtime_error("frame unavailable");
   if(target==resources->original&&source_state!=target_state)throw std::runtime_error("aliased frame texture states disagree");
@@ -347,6 +367,7 @@ public:
    if(use_history&&r.feed.NeedsMotionRebind(motion_texture)){r.submit.Flush();if(r.overlap)r.compute.Flush();}
    {static unsigned every=[]{const wchar_t*v=_wgetenv(L"DLSS5_MAKE_RESIDENT_EVERY");return v?unsigned(wcstoul(v,nullptr,10)):0u;}();static unsigned frames=0;static unsigned fails=0;
     if(every&&++frames%every==0){HRESULT mr=NativeMakeAllResident(r.submit.Device());if(FAILED(mr)&&++fails<=5)if(FILE*f=_wfopen(NativeLabPath(L"logs\\native-submission-order.txt").c_str(),L"ab")){fprintf(f,"pid=%lu make_resident_failed hr=%08x tracked=%u\n",GetCurrentProcessId(),unsigned(mr),unsigned(NativeTrackedResources().size()));fclose(f);}}}
+   if(!deliver&&(r.overlap||r.decode.BufferOutput()))throw std::runtime_error("direct output unavailable");
    if(r.overlap){ProcessOverlap(r,target,source_state,target_state,seed,temporal_enabled,motion_texture,reset,use_history);return;}
    if(r.black.enabled){const UINT bad=r.black.Poll(r.submit.Completed());if(bad!=UINT_MAX){r.submit.Flush();const std::wstring prefix=NativeLabPath((L"logs\\black-"+std::to_wstring(bad)).c_str());
      auto*dev=r.submit.Device();D3D12_HEAP_PROPERTIES hp{};hp.Type=D3D12_HEAP_TYPE_READBACK;D3D12_RESOURCE_DESC rd{};rd.Dimension=D3D12_RESOURCE_DIMENSION_BUFFER;rd.Width=r.black.RingBytes();rd.Height=1;rd.DepthOrArraySize=rd.MipLevels=1;rd.SampleDesc.Count=1;rd.Layout=D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
@@ -361,6 +382,7 @@ public:
     if(use_history)r.smooth.Record(c);r.black.Record(c);
     if(r.temporal)r.feed.RecordHistory(c);
     r.neural.Record(c);r.decode.Record(c,{D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,source_state});
+    if(deliver){
     D3D12_RESOURCE_BARRIER b[2]{};for(auto&v:b)v.Type=D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
     b[0].Transition={r.decode.Output(),D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,D3D12_RESOURCE_STATE_COPY_SOURCE};
     b[1].Transition={target,D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,target_state,D3D12_RESOURCE_STATE_COPY_DEST};
@@ -370,6 +392,7 @@ public:
     for(auto&v:b)std::swap(v.Transition.StateBefore,v.Transition.StateAfter);
     c->ResourceBarrier(1,b);if(target_state!=D3D12_RESOURCE_STATE_COPY_DEST)c->ResourceBarrier(1,b+1);
     if(r.fps_text[0])r.fps_overlay.Draw(c,target,r.fps_text,24,96,3,target_state);
+    }
     if(r.probe_on){r.probe.Mark(c,"t3");r.probe.Resolve(c);}
    });r.black.Submitted(r.submit.LastValue());
    if(r.probe_on){r.submit.Flush();std::vector<double>iv;if(r.probe.Intervals(r.submit.TimestampFrequency(),iv)&&iv.size()==3){for(int i=0;i<3;i++)r.probe_sum[i]+=iv[i];}

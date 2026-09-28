@@ -167,7 +167,7 @@ inline NativeFrameStats&FrameStats(){ // configured once from the flags file (Di
  return *st;
 }
 inline bool Process(ID3D12CommandQueue*q,Job&j){
- auto*&s=State();auto d=j.desc;bool processed=false;uint32_t result=~0u;
+ auto*&s=State();auto d=j.desc;bool processed=false;uint32_t result=~0u;ID3D12Resource*fed=nullptr;
  try{
  if(!s||s->submit.Queue()!=q){if(s){Log(j.frame,j.desc,"queue changed: retaining old runtime");if(!neural_oneshot.ResetForNewSession("pre-upscale queue changed"))throw std::runtime_error("queue changed during initialization/render");}
   s=new Runtime;s->submit.Create(q,Async(),j.record_device,Async());
@@ -199,10 +199,12 @@ inline bool Process(ID3D12CommandQueue*q,Job&j){
     if(wants||ph==0||ph==5){
      if(ph==0||ph==5){NativeMotionVectorScale()[0]=d.motion_scale[0];NativeMotionVectorScale()[1]=d.motion_scale[1];if(Display().notice>=2)s->overlay.Prepare(static_cast<ID3D12Resource*>(d.resources[6].resource));}
      /* reset=true means the network never samples motion/history in this prototype. */
-     neural_oneshot.OnSubmitted(q,s->low,motion,true,d.resources[2].width,d.resources[2].height,d.render[0],d.render[1],D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,true);
+     neural_oneshot.OnSubmitted(q,s->low,motion,true,d.resources[2].width,d.resources[2].height,d.render[0],d.render[1],D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,true,true);
      processed=wants&&neural_oneshot.Phase()==4;
     }
-    if(processed){d.resources[0].resource=s->low;d.resources[0].width=d.render[0];d.resources[0].height=d.render[1];d.resources[0].state=4;}
+    /* DLSS5_DIRECT_IO bit 2: FSR reads the decoder output itself (same bytes the copy would have put in low; NON_PIXEL_SHADER_RESOURCE) */
+    fed=processed&&neural_oneshot.Delivered()?neural_oneshot.Delivered():s->low;
+    if(processed){d.resources[0].resource=fed;d.resources[0].width=d.render[0];d.resources[0].height=d.render[1];d.resources[0].state=4;}
    }
   }
   if(Mode()==1&&!supported&&j.frame%100==0)Log(j.frame,d,"unsupported low-res input: FFX only");
@@ -210,9 +212,9 @@ inline bool Process(ID3D12CommandQueue*q,Job&j){
   s->submit.Submit([&](ID3D12GraphicsCommandList*c){
    for(unsigned i=0;i<7;i++)if(j.desc.resources[i].resource){bool duplicate=false;for(unsigned k=0;k<i;k++)duplicate|=j.desc.resources[k].resource==j.desc.resources[i].resource;if(!duplicate)Transition(c,static_cast<ID3D12Resource*>(j.desc.resources[i].resource),j.states[i],replay_states[i]);}
    d.command_list=c;Guard guard;if(j.frame<5)Log(j.frame,d,"before original FFX replay");
-   if(processed){PrivateBarrierResource()=s->low;PrivateBarrierState()=D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE;}
+   if(processed){PrivateBarrierResource()=fed;PrivateBarrierState()=D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE;}
    result=original(&j.context,&d.header);
-   if(processed){PrivateBarrierResource()=nullptr;Transition(c,s->low,PrivateBarrierState(),D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE);}
+   if(processed){PrivateBarrierResource()=nullptr;Transition(c,fed,PrivateBarrierState(),D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE);}
    if(j.frame<5)Log(j.frame,d,"after original FFX replay",processed,result);
    for(unsigned i=0;i<7;i++)if(j.desc.resources[i].resource){bool duplicate=false;for(unsigned k=0;k<i;k++)duplicate|=j.desc.resources[k].resource==j.desc.resources[i].resource;if(!duplicate)Transition(c,static_cast<ID3D12Resource*>(j.desc.resources[i].resource),replay_states[i],j.states[i]);}
    if(Mode()==1&&Display().notice>=2){
