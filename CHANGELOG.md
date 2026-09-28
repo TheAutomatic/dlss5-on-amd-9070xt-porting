@@ -195,7 +195,7 @@ Download: [Quark](https://pan.quark.cn/s/83e6172e6c79) · [Gofile mirror](https:
 
 ## 0.36 (09-28, tag pending)
 
-Download: [Quark](TODO-QUARK) · [Gofile mirror](TODO-GOFILE) (all three packages)
+Download: [Quark](https://pan.quark.cn/s/e5afdaca0769) · [Gofile mirror](https://gofile.io/d/Z1hWdjcB) (all three packages)
 
 - **Summary**: add-on d2290ad7; 30 modules per architecture; RE9 runtime 7ce2bc21 (host aa3761f2 unchanged); input shader `native_game_rgb_input.hlsl` 5be59a41 (matches the direct input write).
 - **Cumulative effect (vs the 0.35 release packages, two ABBA rounds in one batch)**: offline 900 tier 9.37 → 8.58 ms (−0.79 ms, −8.5%), 1080 tier 12.71 → 11.58 ms (−1.13 to −1.14 ms, −8.9%). Kernel launches per frame at 1080: 214 → 182.

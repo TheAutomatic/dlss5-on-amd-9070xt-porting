@@ -197,7 +197,7 @@
 
 ## 0.36（09-28，tag 待补）
 
-下载：[夸克](TODO-QUARK) · [Gofile 镜像](TODO-GOFILE)（三个包）
+下载：[夸克](https://pan.quark.cn/s/e5afdaca0769) · [Gofile 镜像](https://gofile.io/d/Z1hWdjcB)（三个包）
 
 - **汇总**：插件 d2290ad7；每架构 30 个模块；RE9 runtime 7ce2bc21（宿主 aa3761f2 不变）；输入 shader `native_game_rgb_input.hlsl` 5be59a41（匹配输入直写）。
 - **累计效果（相对 0.35 发布包，同批两轮 ABBA）**：离线 900 档 9.37 → 8.58 ms（−0.79 ms，−8.5%）、1080 档 12.71 → 11.58 ms（−1.13～−1.14 ms，−8.9%）。1080 档每帧派发 214 → 182。
