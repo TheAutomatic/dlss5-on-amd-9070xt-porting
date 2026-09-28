@@ -951,3 +951,15 @@ EXACT/AE各7×12=84候选帧全部有限，连旧基线336帧；AE84次复用/�
 ## 2026-09-28 15:49：float FMA 剑星首测（Splashtop 远程）
 
 EXACT 黄字 56.7～57.1 来回跳，看不出比上一刀（远程 57.1）有提升。离线预期约 +0.5 帧（ACO 两刀 + FMA 合计约 −2%），落在远程读数的抖动范围内；待本机复测或用 DLSS5_FRAME_STATS 看均值。
+
+## 2026-09-28 16:15：Daniel 0.5.0 剑星实测对照（9070 本机日志）
+
+装法同 0.4.0（`D:\DLSSNR-Lab\daniel-050\swap.ps1`，改名我们的 dxgi.dll，放其 mod.dll；测完已切回 ours）。剑星 1080P 原生 AA，站立不动：
+
+| | 网络 GPU（200 帧均值） | 整帧 |
+|---|---|---|
+| Daniel 0.5.0 fast（默认；f32 累加、e4m3 一次舍入、近似 rsqrt/rcp、硬件噪声/sRGB） | 9.4～10.0ms | 贴 60（窗口模式 DWM 刷新率上限），wait-for-capture 余 5～7ms |
+| Daniel 0.5.0 reference（PTX 算术） | 11.0～11.1ms | 贴 60，余约 2.5ms（估不封顶约 14ms） |
+| 我们（float FMA 版，15:48 frame-stats） | 离线约 12.3ms | 17.6ms / 56.8fps |
+
+判断：网络本身 reference 对 reference 差约 1.2ms（~10%）；整帧差约 3ms，其中约 1.5～2ms 在网络之外（他 inline 同帧、输入输出零拷贝、拷贝+apply 0.1ms）。mochizuki 0.0.2.2 与 Daniel 0.5.0 均已快于我们。
