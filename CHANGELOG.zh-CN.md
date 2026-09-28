@@ -195,7 +195,7 @@
 - **逐位**：相对 0.34 全部逐位。
 - **实验目录**：`results/c32-aco-20260927`、`c32-round2-20260927`、`c32-round3-20260927`、`vit-bytestream-20260927`。
 
-## 0.36（09-28，tag 待补）
+## 0.36（09-28，tag `2a72897d`）
 
 下载：[夸克](https://pan.quark.cn/s/e5afdaca0769) · [Gofile 镜像](https://gofile.io/d/Z1hWdjcB)（三个包）
 
