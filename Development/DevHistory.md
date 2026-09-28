@@ -915,3 +915,7 @@ R/C各EXACT84+AE84，连M共420候选帧逐位/840哈希，168组AE决策相同�
 ## 2026-09-28 13:52：ACO 对齐两刀剑星首测（Splashtop 远程）
 
 剑星 1080P 原生 AA、EXACT、简单画面黄字 **57.1**。本次经 Splashtop 远程，Zero 估远程损失 1～2 帧，与本机测的第五刀 57.1 不可直接比；待本机复测。
+
+## 2026-09-28 14:10：Daniel 闭源 v0.5.0 静态分析（分身）
+
+安装包 39df94a0…，静态提取未运行、未动 9070。内核 86→168，几乎全部多一个 bool 模板参（Lb1=fast，无 div_scale/fixup；Lb0=reference）。默认 `Quality=fast`（UI 称 RX 9000 快约 13%）。RDNA3：gfx1100 代码对象 1.1→7.9MB，全部 `v_wmma_f32_16x16x16_f16` + 显存 f16 权重副本 + 整数位运算模拟 e4m3，寄存器快核自 09-27 起成为唯一 RDNA3 路径——+207% 即 RDNA3 从通用核换到快核，不是新算术。RDNA4 reference 版对 0.4.0 同名核：去 scratch 溢出、`v_mov`/打包大减、cvt 数不变（数值路线未动），与我们第五刀同类。新 env `DLSSNR_EXTENT`/`PAD128`：默认改按 NVIDIA 原生工作尺寸跑网络、128 对齐成回退，可能同时贡献提速与"更贴近 NVIDIA"。待查两件：我们 1080 档 1152 行是否大于 NVIDIA 工作尺寸（不逐位，需 Zero 拍板）；Daniel reference 大量 `v_fma_mix*_f16`，与我们判定"两次独立舍入是语义必须"的那段是否真符合 NVIDIA PTX（未核实）。报告 `results/daniel-050-20260928`。
