@@ -6,7 +6,7 @@ OptiScaler-DLSS5-AMD @VERSION@ — standard full game package
 3. Fused blocks: C256 whole-block kernel with FFN weights shared across token groups (1080 tier); C512 QKV + attention fused; C64/C128 FFN weight reuse; C32/C64/C128 upsample fused into the first block. Kernel launches per frame at 1080: 214 -> 182.
 4. Direct input (DLSS5_DIRECT_IO=1, default): the input pass writes straight into the HIP shared buffer (one 35 MB copy less). Value 3 also hands the decoded output straight to FSR in pre-upscale mode (not a default); 0 restores the old path.
 5. Frame-time log DLSS5_FRAME_STATS=<seconds> (default 0): one line per window to DLSS5-AMD\logs\frame-stats.txt.
-Network offline vs 0.35: 900 tier about -0.79 ms (-8.5%), 1080 tier about -1.13 ms (-8.9%). Stellar Blade 1080p native AA, EXACT: about 57 -> 59-60 (now at the 60 Hz window cap); 2560x1440 native AA, EXACT: 52-53 (new reference point).
+Network offline vs 0.35: 900 tier about -0.79 ms (-8.5%), 1080 tier about -1.13 ms (-8.9%). Stellar Blade 1080p native AA, EXACT: about 57 -> 59-60 (now at the 60 Hz window cap); 2560x1440 native AA, EXACT: 54 (new reference point).
 
 0.35
 1. Three bit-exact C32 rounds: duplicate FP8 round trips removed, RTZ and LDS stores vectorized, per-segment saturation mode in the packing sections, full-window fast paths in prefix/finish.
