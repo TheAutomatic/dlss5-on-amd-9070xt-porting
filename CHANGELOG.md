@@ -193,7 +193,7 @@ Download: [Quark](https://pan.quark.cn/s/83e6172e6c79) · [Gofile mirror](https:
 - **Bit-exact**: all changes bit-exact against 0.34.
 - **Folders**: `results/c32-aco-20260927`, `c32-round2-20260927`, `c32-round3-20260927`, `vit-bytestream-20260927`.
 
-## 0.36 (09-28, tag `2a72897d`)
+## 0.36 (09-28, tag 2a72897d)
 
 Download: [Quark](https://pan.quark.cn/s/e5afdaca0769) · [Gofile mirror](https://gofile.io/d/Z1hWdjcB) (all three packages)
 
