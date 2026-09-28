@@ -1,0 +1,2824 @@
+[
+  {
+    "line": 33048,
+    "address": "180025061",
+    "symbol": "_Z16k_swin_1h_32_fp810SwinParams",
+    "context": [
+      "180025049:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025052:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002505a:     \tleaq\t0x5638f(%rip), %rdx     # 0x18007b3f0",
+      "180025061:     \tleaq\t0x5e4d0(%rip), %r8      # 0x180083538",
+      "180025068:     \tmovq\t%rsi, %rcx",
+      "18002506b:     \tmovq\t%r8, %r9",
+      "18002506e:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025073:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "180025078:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "18002507d:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33057,
+    "address": "180025095",
+    "symbol": "_Z21k_pre_block_1h_32_fp89PreParams",
+    "context": [
+      "18002507d:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025086:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002508e:     \tleaq\t0x56363(%rip), %rdx     # 0x18007b3f8",
+      "180025095:     \tleaq\t0x5e4bd(%rip), %r8      # 0x180083559",
+      "18002509c:     \tmovq\t%rsi, %rcx",
+      "18002509f:     \tmovq\t%r8, %r9",
+      "1800250a2:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800250a7:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "1800250ac:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "1800250b1:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33066,
+    "address": "1800250c9",
+    "symbol": "_Z22k_post_block_1h_32_fp810PostParams",
+    "context": [
+      "1800250b1:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800250ba:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800250c2:     \tleaq\t0x56337(%rip), %rdx     # 0x18007b400",
+      "1800250c9:     \tleaq\t0x5e4ad(%rip), %r8      # 0x18008357d",
+      "1800250d0:     \tmovq\t%rsi, %rcx",
+      "1800250d3:     \tmovq\t%r8, %r9",
+      "1800250d6:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800250db:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "1800250e0:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "1800250e5:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33075,
+    "address": "1800250fd",
+    "symbol": "_Z13k_tin_to_fragPKhPhii",
+    "context": [
+      "1800250e5:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800250ee:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800250f6:     \tleaq\t0x5630b(%rip), %rdx     # 0x18007b408",
+      "1800250fd:     \tleaq\t0x5e4a0(%rip), %r8      # 0x1800835a4",
+      "180025104:     \tmovq\t%rsi, %rcx",
+      "180025107:     \tmovq\t%r8, %r9",
+      "18002510a:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "18002510f:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "180025114:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "180025119:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33084,
+    "address": "180025131",
+    "symbol": "_Z13k_frag_to_tinPKhPhii",
+    "context": [
+      "180025119:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025122:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002512a:     \tleaq\t0x562df(%rip), %rdx     # 0x18007b410",
+      "180025131:     \tleaq\t0x5e485(%rip), %r8      # 0x1800835bd",
+      "180025138:     \tmovq\t%rsi, %rcx",
+      "18002513b:     \tmovq\t%r8, %r9",
+      "18002513e:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025143:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "180025148:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "18002514d:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33093,
+    "address": "180025165",
+    "symbol": "_Z12k_w16_decodePKhPDF16_y",
+    "context": [
+      "18002514d:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025156:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002515e:     \tleaq\t0x562b3(%rip), %rdx     # 0x18007b418",
+      "180025165:     \tleaq\t0x5e46a(%rip), %r8      # 0x1800835d6",
+      "18002516c:     \tmovq\t%rsi, %rcx",
+      "18002516f:     \tmovq\t%r8, %r9",
+      "180025172:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025177:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "18002517c:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "180025181:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33102,
+    "address": "180025199",
+    "symbol": "_Z10k_reg_copy9VarParams",
+    "context": [
+      "180025181:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002518a:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025192:     \tleaq\t0x56287(%rip), %rdx     # 0x18007b420",
+      "180025199:     \tleaq\t0x5e451(%rip), %r8      # 0x1800835f1",
+      "1800251a0:     \tmovq\t%rsi, %rcx",
+      "1800251a3:     \tmovq\t%r8, %r9",
+      "1800251a6:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800251ab:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "1800251b0:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "1800251b5:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33111,
+    "address": "1800251cd",
+    "symbol": "_Z6k_ffwd10FfwdParams",
+    "context": [
+      "1800251b5:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800251be:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800251c6:     \tleaq\t0x5625b(%rip), %rdx     # 0x18007b428",
+      "1800251cd:     \tleaq\t0x5e436(%rip), %r8      # 0x18008360a",
+      "1800251d4:     \tmovq\t%rsi, %rcx",
+      "1800251d7:     \tmovq\t%r8, %r9",
+      "1800251da:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800251df:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "1800251e4:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "1800251e9:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33120,
+    "address": "180025201",
+    "symbol": "_Z10k_conv_res10ConvParams",
+    "context": [
+      "1800251e9:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800251f2:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800251fa:     \tleaq\t0x5622f(%rip), %rdx     # 0x18007b430",
+      "180025201:     \tleaq\t0x5e418(%rip), %r8      # 0x180083620",
+      "180025208:     \tmovq\t%rsi, %rcx",
+      "18002520b:     \tmovq\t%r8, %r9",
+      "18002520e:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025213:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "180025218:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "18002521d:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33129,
+    "address": "180025235",
+    "symbol": "_Z10k_qkv_attn10AttnParams",
+    "context": [
+      "18002521d:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025226:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002522e:     \tleaq\t0x56203(%rip), %rdx     # 0x18007b438",
+      "180025235:     \tleaq\t0x5e3ff(%rip), %r8      # 0x18008363b",
+      "18002523c:     \tmovq\t%rsi, %rcx",
+      "18002523f:     \tmovq\t%r8, %r9",
+      "180025242:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025247:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "18002524c:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "180025251:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33138,
+    "address": "180025269",
+    "symbol": "_Z16k_tin_to_frag512PKhPhi",
+    "context": [
+      "180025251:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002525a:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025262:     \tleaq\t0x561d7(%rip), %rdx     # 0x18007b440",
+      "180025269:     \tleaq\t0x5e3e6(%rip), %r8      # 0x180083656",
+      "180025270:     \tmovq\t%rsi, %rcx",
+      "180025273:     \tmovq\t%r8, %r9",
+      "180025276:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "18002527b:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "180025280:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "180025285:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33147,
+    "address": "18002529d",
+    "symbol": "_Z16k_frag512_to_tinPKhPhi",
+    "context": [
+      "180025285:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002528e:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025296:     \tleaq\t0x561ab(%rip), %rdx     # 0x18007b448",
+      "18002529d:     \tleaq\t0x5e3cd(%rip), %r8      # 0x180083671",
+      "1800252a4:     \tmovq\t%rsi, %rcx",
+      "1800252a7:     \tmovq\t%r8, %r9",
+      "1800252aa:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800252af:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "1800252b4:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "1800252b9:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33156,
+    "address": "1800252d1",
+    "symbol": "_Z8k_expand12ExpandParams",
+    "context": [
+      "1800252b9:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800252c2:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800252ca:     \tleaq\t0x5617f(%rip), %rdx     # 0x18007b450",
+      "1800252d1:     \tleaq\t0x5e3b4(%rip), %r8      # 0x18008368c",
+      "1800252d8:     \tmovq\t%rsi, %rcx",
+      "1800252db:     \tmovq\t%r8, %r9",
+      "1800252de:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800252e3:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "1800252e8:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "1800252ed:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33165,
+    "address": "180025305",
+    "symbol": "_Z13k_conv_splitk12ConvParams1d",
+    "context": [
+      "1800252ed:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800252f6:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800252fe:     \tleaq\t0x56153(%rip), %rdx     # 0x18007b458",
+      "180025305:     \tleaq\t0x5e39a(%rip), %r8      # 0x1800836a6",
+      "18002530c:     \tmovq\t%rsi, %rcx",
+      "18002530f:     \tmovq\t%r8, %r9",
+      "180025312:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025317:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "18002531c:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "180025321:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33174,
+    "address": "180025339",
+    "symbol": "_Z5k_qkv9QkvParams",
+    "context": [
+      "180025321:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002532a:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025332:     \tleaq\t0x56127(%rip), %rdx     # 0x18007b460",
+      "180025339:     \tleaq\t0x5e386(%rip), %r8      # 0x1800836c6",
+      "180025340:     \tmovq\t%rsi, %rcx",
+      "180025343:     \tmovq\t%r8, %r9",
+      "180025346:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "18002534b:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "180025350:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "180025355:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33183,
+    "address": "18002536d",
+    "symbol": "_Z11k_attention12AttnParams1d",
+    "context": [
+      "180025355:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002535e:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025366:     \tleaq\t0x560fb(%rip), %rdx     # 0x18007b468",
+      "18002536d:     \tleaq\t0x5e365(%rip), %r8      # 0x1800836d9",
+      "180025374:     \tmovq\t%rsi, %rcx",
+      "180025377:     \tmovq\t%r8, %r9",
+      "18002537a:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "18002537f:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "180025384:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "180025389:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33192,
+    "address": "1800253a1",
+    "symbol": "_Z14k_reg1d_reduce12ConvParams1d",
+    "context": [
+      "180025389:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025392:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002539a:     \tleaq\t0x560cf(%rip), %rdx     # 0x18007b470",
+      "1800253a1:     \tleaq\t0x5e34f(%rip), %r8      # 0x1800836f7",
+      "1800253a8:     \tmovq\t%rsi, %rcx",
+      "1800253ab:     \tmovq\t%r8, %r9",
+      "1800253ae:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800253b3:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "1800253b8:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "1800253bd:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33201,
+    "address": "1800253d5",
+    "symbol": "_Z14k_ffwd_inpview12FfwdPlParams",
+    "context": [
+      "1800253bd:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800253c6:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800253ce:     \tleaq\t0x560a3(%rip), %rdx     # 0x18007b478",
+      "1800253d5:     \tleaq\t0x5e33c(%rip), %r8      # 0x180083718",
+      "1800253dc:     \tmovq\t%rsi, %rcx",
+      "1800253df:     \tmovq\t%r8, %r9",
+      "1800253e2:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800253e7:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "1800253ec:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "1800253f1:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33210,
+    "address": "180025409",
+    "symbol": "_Z12k_final_head10HeadParams",
+    "context": [
+      "1800253f1:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800253fa:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025402:     \tleaq\t0x56077(%rip), %rdx     # 0x18007b480",
+      "180025409:     \tleaq\t0x5e329(%rip), %r8      # 0x180083739",
+      "180025410:     \tmovq\t%rsi, %rcx",
+      "180025413:     \tmovq\t%r8, %r9",
+      "180025416:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "18002541b:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "180025420:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "180025425:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33219,
+    "address": "18002543d",
+    "symbol": "_Z8k_repack12RepackParams",
+    "context": [
+      "180025425:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002542e:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025436:     \tleaq\t0x5604b(%rip), %rdx     # 0x18007b488",
+      "18002543d:     \tleaq\t0x5e312(%rip), %r8      # 0x180083756",
+      "180025444:     \tmovq\t%rsi, %rcx",
+      "180025447:     \tmovq\t%r8, %r9",
+      "18002544a:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "18002544f:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "180025454:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "180025459:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33228,
+    "address": "180025471",
+    "symbol": "_Z13k_clock_probePy",
+    "context": [
+      "180025459:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025462:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002546a:     \tleaq\t0x5601f(%rip), %rdx     # 0x18007b490",
+      "180025471:     \tleaq\t0x5e2f8(%rip), %r8      # 0x180083770",
+      "180025478:     \tmovq\t%rsi, %rcx",
+      "18002547b:     \tmovq\t%r8, %r9",
+      "18002547e:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025483:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "180025488:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "18002548d:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33237,
+    "address": "1800254a5",
+    "symbol": "_Z6k_mean10MeanParams",
+    "context": [
+      "18002548d:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025496:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002549e:     \tleaq\t0x55ff3(%rip), %rdx     # 0x18007b498",
+      "1800254a5:     \tleaq\t0x5e2d8(%rip), %r8      # 0x180083784",
+      "1800254ac:     \tmovq\t%rsi, %rcx",
+      "1800254af:     \tmovq\t%r8, %r9",
+      "1800254b2:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800254b7:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "1800254bc:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "1800254c1:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33246,
+    "address": "1800254d9",
+    "symbol": "_Z8k_import12ImportParams",
+    "context": [
+      "1800254c1:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800254ca:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800254d2:     \tleaq\t0x55fc7(%rip), %rdx     # 0x18007b4a0",
+      "1800254d9:     \tleaq\t0x5e2ba(%rip), %r8      # 0x18008379a",
+      "1800254e0:     \tmovq\t%rsi, %rcx",
+      "1800254e3:     \tmovq\t%r8, %r9",
+      "1800254e6:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800254eb:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "1800254f0:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "1800254f5:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33255,
+    "address": "18002550d",
+    "symbol": "_Z8k_export12ExportParams",
+    "context": [
+      "1800254f5:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800254fe:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025506:     \tleaq\t0x55f9b(%rip), %rdx     # 0x18007b4a8",
+      "18002550d:     \tleaq\t0x5e2a0(%rip), %r8      # 0x1800837b4",
+      "180025514:     \tmovq\t%rsi, %rcx",
+      "180025517:     \tmovq\t%r8, %r9",
+      "18002551a:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "18002551f:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "180025524:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "180025529:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33264,
+    "address": "180025541",
+    "symbol": "_Z11k_reproject12ReprojParams",
+    "context": [
+      "180025529:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025532:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002553a:     \tleaq\t0x55f6f(%rip), %rdx     # 0x18007b4b0",
+      "180025541:     \tleaq\t0x5e286(%rip), %r8      # 0x1800837ce",
+      "180025548:     \tmovq\t%rsi, %rcx",
+      "18002554b:     \tmovq\t%r8, %r9",
+      "18002554e:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025553:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "180025558:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "18002555d:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33273,
+    "address": "180025575",
+    "symbol": "_Z11k_flag_waitPjjj",
+    "context": [
+      "18002555d:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025566:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002556e:     \tleaq\t0x55f6b(%rip), %rdx     # 0x18007b4e0",
+      "180025575:     \tleaq\t0x5e270(%rip), %r8      # 0x1800837ec",
+      "18002557c:     \tmovq\t%rsi, %rcx",
+      "18002557f:     \tmovq\t%r8, %r9",
+      "180025582:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025587:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "18002558c:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "180025591:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33282,
+    "address": "1800255a9",
+    "symbol": "_Z13k_align_probePh",
+    "context": [
+      "180025591:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002559a:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800255a2:     \tleaq\t0x55f3f(%rip), %rdx     # 0x18007b4e8",
+      "1800255a9:     \tleaq\t0x5e250(%rip), %r8      # 0x180083800",
+      "1800255b0:     \tmovq\t%rsi, %rcx",
+      "1800255b3:     \tmovq\t%r8, %r9",
+      "1800255b6:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800255bb:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "1800255c0:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "1800255c5:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33291,
+    "address": "1800255dd",
+    "symbol": "_Z10k_flag_setPjjS_",
+    "context": [
+      "1800255c5:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800255ce:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800255d6:     \tleaq\t0x55f13(%rip), %rdx     # 0x18007b4f0",
+      "1800255dd:     \tleaq\t0x5e230(%rip), %r8      # 0x180083814",
+      "1800255e4:     \tmovq\t%rsi, %rcx",
+      "1800255e7:     \tmovq\t%r8, %r9",
+      "1800255ea:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800255ef:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "1800255f4:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "1800255f9:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33300,
+    "address": "180025611",
+    "symbol": "_Z16k_reg_swin_chainILi256ELb0EEv11ChainParams",
+    "context": [
+      "1800255f9:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025602:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002560a:     \tleaq\t0x60c27(%rip), %rdx     # 0x180086238",
+      "180025611:     \tleaq\t0x5e210(%rip), %r8      # 0x180083828",
+      "180025618:     \tmovq\t%rsi, %rcx",
+      "18002561b:     \tmovq\t%r8, %r9",
+      "18002561e:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025623:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "180025628:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "18002562d:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33309,
+    "address": "180025645",
+    "symbol": "_Z12k_reg_swin32ILi0ELb1EEv9VarParams",
+    "context": [
+      "18002562d:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025636:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002563e:     \tleaq\t0x60c83(%rip), %rdx     # 0x1800862c8",
+      "180025645:     \tleaq\t0x5e20b(%rip), %r8      # 0x180083857",
+      "18002564c:     \tmovq\t%rsi, %rcx",
+      "18002564f:     \tmovq\t%r8, %r9",
+      "180025652:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025657:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "18002565c:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "180025661:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33318,
+    "address": "180025679",
+    "symbol": "_Z12k_reg_swin32ILi0ELb0EEv9VarParams",
+    "context": [
+      "180025661:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002566a:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025672:     \tleaq\t0x60c57(%rip), %rdx     # 0x1800862d0",
+      "180025679:     \tleaq\t0x5e1fd(%rip), %r8      # 0x18008387d",
+      "180025680:     \tmovq\t%rsi, %rcx",
+      "180025683:     \tmovq\t%r8, %r9",
+      "180025686:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "18002568b:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "180025690:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "180025695:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33327,
+    "address": "1800256ad",
+    "symbol": "_Z12k_reg_swin32ILi1ELb1EEv9VarParams",
+    "context": [
+      "180025695:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002569e:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800256a6:     \tleaq\t0x60c2b(%rip), %rdx     # 0x1800862d8",
+      "1800256ad:     \tleaq\t0x5e1ef(%rip), %r8      # 0x1800838a3",
+      "1800256b4:     \tmovq\t%rsi, %rcx",
+      "1800256b7:     \tmovq\t%r8, %r9",
+      "1800256ba:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800256bf:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "1800256c4:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "1800256c9:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33336,
+    "address": "1800256e1",
+    "symbol": "_Z12k_reg_swin32ILi1ELb0EEv9VarParams",
+    "context": [
+      "1800256c9:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800256d2:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800256da:     \tleaq\t0x60bff(%rip), %rdx     # 0x1800862e0",
+      "1800256e1:     \tleaq\t0x5e1e1(%rip), %r8      # 0x1800838c9",
+      "1800256e8:     \tmovq\t%rsi, %rcx",
+      "1800256eb:     \tmovq\t%r8, %r9",
+      "1800256ee:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800256f3:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "1800256f8:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "1800256fd:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33345,
+    "address": "180025715",
+    "symbol": "_Z12k_reg_swin32ILi2ELb1EEv9VarParams",
+    "context": [
+      "1800256fd:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025706:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002570e:     \tleaq\t0x60bd3(%rip), %rdx     # 0x1800862e8",
+      "180025715:     \tleaq\t0x5e1d3(%rip), %r8      # 0x1800838ef",
+      "18002571c:     \tmovq\t%rsi, %rcx",
+      "18002571f:     \tmovq\t%r8, %r9",
+      "180025722:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025727:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "18002572c:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "180025731:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33354,
+    "address": "180025749",
+    "symbol": "_Z12k_reg_swin32ILi2ELb0EEv9VarParams",
+    "context": [
+      "180025731:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002573a:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025742:     \tleaq\t0x60ba7(%rip), %rdx     # 0x1800862f0",
+      "180025749:     \tleaq\t0x5e1c5(%rip), %r8      # 0x180083915",
+      "180025750:     \tmovq\t%rsi, %rcx",
+      "180025753:     \tmovq\t%r8, %r9",
+      "180025756:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "18002575b:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "180025760:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "180025765:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33363,
+    "address": "18002577d",
+    "symbol": "_Z12k_reg_swin32ILi4ELb1EEv9VarParams",
+    "context": [
+      "180025765:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002576e:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025776:     \tleaq\t0x60b7b(%rip), %rdx     # 0x1800862f8",
+      "18002577d:     \tleaq\t0x5e1b7(%rip), %r8      # 0x18008393b",
+      "180025784:     \tmovq\t%rsi, %rcx",
+      "180025787:     \tmovq\t%r8, %r9",
+      "18002578a:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "18002578f:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "180025794:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "180025799:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33372,
+    "address": "1800257b1",
+    "symbol": "_Z12k_reg_swin32ILi4ELb0EEv9VarParams",
+    "context": [
+      "180025799:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800257a2:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800257aa:     \tleaq\t0x60b4f(%rip), %rdx     # 0x180086300",
+      "1800257b1:     \tleaq\t0x5e1a9(%rip), %r8      # 0x180083961",
+      "1800257b8:     \tmovq\t%rsi, %rcx",
+      "1800257bb:     \tmovq\t%r8, %r9",
+      "1800257be:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800257c3:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "1800257c8:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "1800257cd:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33381,
+    "address": "1800257e5",
+    "symbol": "_Z12k_reg_swin32ILi5ELb1EEv9VarParams",
+    "context": [
+      "1800257cd:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800257d6:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800257de:     \tleaq\t0x60b23(%rip), %rdx     # 0x180086308",
+      "1800257e5:     \tleaq\t0x5e19b(%rip), %r8      # 0x180083987",
+      "1800257ec:     \tmovq\t%rsi, %rcx",
+      "1800257ef:     \tmovq\t%r8, %r9",
+      "1800257f2:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800257f7:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "1800257fc:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "180025801:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33390,
+    "address": "180025819",
+    "symbol": "_Z12k_reg_swin32ILi5ELb0EEv9VarParams",
+    "context": [
+      "180025801:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002580a:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025812:     \tleaq\t0x60af7(%rip), %rdx     # 0x180086310",
+      "180025819:     \tleaq\t0x5e18d(%rip), %r8      # 0x1800839ad",
+      "180025820:     \tmovq\t%rsi, %rcx",
+      "180025823:     \tmovq\t%r8, %r9",
+      "180025826:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "18002582b:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "180025830:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "180025835:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33399,
+    "address": "18002584d",
+    "symbol": "_Z12k_reg_swin32ILi8ELb1EEv9VarParams",
+    "context": [
+      "180025835:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002583e:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025846:     \tleaq\t0x60acb(%rip), %rdx     # 0x180086318",
+      "18002584d:     \tleaq\t0x5e17f(%rip), %r8      # 0x1800839d3",
+      "180025854:     \tmovq\t%rsi, %rcx",
+      "180025857:     \tmovq\t%r8, %r9",
+      "18002585a:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "18002585f:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "180025864:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "180025869:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33408,
+    "address": "180025881",
+    "symbol": "_Z12k_reg_swin32ILi8ELb0EEv9VarParams",
+    "context": [
+      "180025869:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025872:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002587a:     \tleaq\t0x60a9f(%rip), %rdx     # 0x180086320",
+      "180025881:     \tleaq\t0x5e171(%rip), %r8      # 0x1800839f9",
+      "180025888:     \tmovq\t%rsi, %rcx",
+      "18002588b:     \tmovq\t%r8, %r9",
+      "18002588e:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025893:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "180025898:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "18002589d:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33417,
+    "address": "1800258b5",
+    "symbol": "_Z12k_reg_swin32ILi20ELb1EEv9VarParams",
+    "context": [
+      "18002589d:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800258a6:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800258ae:     \tleaq\t0x60a73(%rip), %rdx     # 0x180086328",
+      "1800258b5:     \tleaq\t0x5e163(%rip), %r8      # 0x180083a1f",
+      "1800258bc:     \tmovq\t%rsi, %rcx",
+      "1800258bf:     \tmovq\t%r8, %r9",
+      "1800258c2:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800258c7:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "1800258cc:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "1800258d1:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33426,
+    "address": "1800258e9",
+    "symbol": "_Z12k_reg_swin32ILi20ELb0EEv9VarParams",
+    "context": [
+      "1800258d1:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800258da:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800258e2:     \tleaq\t0x60a47(%rip), %rdx     # 0x180086330",
+      "1800258e9:     \tleaq\t0x5e156(%rip), %r8      # 0x180083a46",
+      "1800258f0:     \tmovq\t%rsi, %rcx",
+      "1800258f3:     \tmovq\t%r8, %r9",
+      "1800258f6:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800258fb:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "180025900:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "180025905:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33435,
+    "address": "18002591d",
+    "symbol": "_Z12k_reg_swin32ILi32ELb1EEv9VarParams",
+    "context": [
+      "180025905:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002590e:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025916:     \tleaq\t0x60a1b(%rip), %rdx     # 0x180086338",
+      "18002591d:     \tleaq\t0x5e149(%rip), %r8      # 0x180083a6d",
+      "180025924:     \tmovq\t%rsi, %rcx",
+      "180025927:     \tmovq\t%r8, %r9",
+      "18002592a:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "18002592f:     \tmovups\t%xmm6, 0x38(%rsp)",
+      "180025934:     \tmovups\t%xmm6, 0x28(%rsp)",
+      "180025939:     \tmovq\t$0x0, 0x48(%rsp)"
+    ]
+  },
+  {
+    "line": 33444,
+    "address": "180025951",
+    "symbol": "_Z12k_reg_swin32ILi32ELb0EEv9VarParams",
+    "context": [
+      "180025939:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025942:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002594a:     \tleaq\t0x609ef(%rip), %rdx     # 0x180086340",
+      "180025951:     \tleaq\t0x5e13c(%rip), %r8      # 0x180083a94",
+      "180025958:     \tmovq\t%rsi, %rcx",
+      "18002595b:     \tmovq\t%r8, %r9",
+      "18002595e:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025963:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002596c:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180025975:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33455,
+    "address": "18002599f",
+    "symbol": "_Z10k_swin_varILi32ELb1ELb1EEv9VarParams",
+    "context": [
+      "180025987:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180025990:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025998:     \tleaq\t0x608a1(%rip), %rdx     # 0x180086240",
+      "18002599f:     \tleaq\t0x5e115(%rip), %r8      # 0x180083abb",
+      "1800259a6:     \tmovq\t%rsi, %rcx",
+      "1800259a9:     \tmovq\t%r8, %r9",
+      "1800259ac:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800259b1:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800259ba:     \tmovq\t$0x0, 0x40(%rsp)",
+      "1800259c3:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33466,
+    "address": "1800259ed",
+    "symbol": "_Z10k_swin_varILi32ELb1ELb0EEv9VarParams",
+    "context": [
+      "1800259d5:     \tmovq\t$0x0, 0x28(%rsp)",
+      "1800259de:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800259e6:     \tleaq\t0x6085b(%rip), %rdx     # 0x180086248",
+      "1800259ed:     \tleaq\t0x5e0f0(%rip), %r8      # 0x180083ae4",
+      "1800259f4:     \tmovq\t%rsi, %rcx",
+      "1800259f7:     \tmovq\t%r8, %r9",
+      "1800259fa:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800259ff:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025a08:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180025a11:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33477,
+    "address": "180025a3b",
+    "symbol": "_Z7k_noiseILb1EEvPDF16_iij",
+    "context": [
+      "180025a23:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180025a2c:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025a34:     \tleaq\t0x60815(%rip), %rdx     # 0x180086250",
+      "180025a3b:     \tleaq\t0x5e0cb(%rip), %r8      # 0x180083b0d",
+      "180025a42:     \tmovq\t%rsi, %rcx",
+      "180025a45:     \tmovq\t%r8, %r9",
+      "180025a48:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025a4d:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025a56:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180025a5f:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33488,
+    "address": "180025a89",
+    "symbol": "_Z7k_noiseILb0EEvPDF16_iij",
+    "context": [
+      "180025a71:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180025a7a:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025a82:     \tleaq\t0x607cf(%rip), %rdx     # 0x180086258",
+      "180025a89:     \tleaq\t0x5e098(%rip), %r8      # 0x180083b28",
+      "180025a90:     \tmovq\t%rsi, %rcx",
+      "180025a93:     \tmovq\t%r8, %r9",
+      "180025a96:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025a9b:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025aa4:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180025aad:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33499,
+    "address": "180025ad7",
+    "symbol": "_Z16k_reg_swin_chainILi256ELb1EEv11ChainParams",
+    "context": [
+      "180025abf:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180025ac8:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025ad0:     \tleaq\t0x60871(%rip), %rdx     # 0x180086348",
+      "180025ad7:     \tleaq\t0x5e065(%rip), %r8      # 0x180083b43",
+      "180025ade:     \tmovq\t%rsi, %rcx",
+      "180025ae1:     \tmovq\t%r8, %r9",
+      "180025ae4:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025ae9:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025af2:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180025afb:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33510,
+    "address": "180025b25",
+    "symbol": "_Z13k_reg_swin_mhILi64ELi0ELb1EEv9VarParams",
+    "context": [
+      "180025b0d:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180025b16:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025b1e:     \tleaq\t0x6085b(%rip), %rdx     # 0x180086380",
+      "180025b25:     \tleaq\t0x5e046(%rip), %r8      # 0x180083b72",
+      "180025b2c:     \tmovq\t%rsi, %rcx",
+      "180025b2f:     \tmovq\t%r8, %r9",
+      "180025b32:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025b37:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025b40:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180025b49:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33521,
+    "address": "180025b73",
+    "symbol": "_Z13k_reg_swin_mhILi64ELi0ELb0EEv9VarParams",
+    "context": [
+      "180025b5b:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180025b64:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025b6c:     \tleaq\t0x60815(%rip), %rdx     # 0x180086388",
+      "180025b73:     \tleaq\t0x5e024(%rip), %r8      # 0x180083b9e",
+      "180025b7a:     \tmovq\t%rsi, %rcx",
+      "180025b7d:     \tmovq\t%r8, %r9",
+      "180025b80:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025b85:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025b8e:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180025b97:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33532,
+    "address": "180025bc1",
+    "symbol": "_Z13k_reg_swin_mhILi64ELi1ELb1EEv9VarParams",
+    "context": [
+      "180025ba9:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180025bb2:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025bba:     \tleaq\t0x607cf(%rip), %rdx     # 0x180086390",
+      "180025bc1:     \tleaq\t0x5e002(%rip), %r8      # 0x180083bca",
+      "180025bc8:     \tmovq\t%rsi, %rcx",
+      "180025bcb:     \tmovq\t%r8, %r9",
+      "180025bce:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025bd3:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025bdc:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180025be5:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33543,
+    "address": "180025c0f",
+    "symbol": "_Z13k_reg_swin_mhILi64ELi1ELb0EEv9VarParams",
+    "context": [
+      "180025bf7:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180025c00:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025c08:     \tleaq\t0x60789(%rip), %rdx     # 0x180086398",
+      "180025c0f:     \tleaq\t0x5dfe0(%rip), %r8      # 0x180083bf6",
+      "180025c16:     \tmovq\t%rsi, %rcx",
+      "180025c19:     \tmovq\t%r8, %r9",
+      "180025c1c:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025c21:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025c2a:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180025c33:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33554,
+    "address": "180025c5d",
+    "symbol": "_Z13k_reg_swin_mhILi64ELi2ELb1EEv9VarParams",
+    "context": [
+      "180025c45:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180025c4e:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025c56:     \tleaq\t0x60743(%rip), %rdx     # 0x1800863a0",
+      "180025c5d:     \tleaq\t0x5dfbe(%rip), %r8      # 0x180083c22",
+      "180025c64:     \tmovq\t%rsi, %rcx",
+      "180025c67:     \tmovq\t%r8, %r9",
+      "180025c6a:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025c6f:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025c78:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180025c81:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33565,
+    "address": "180025cab",
+    "symbol": "_Z13k_reg_swin_mhILi64ELi2ELb0EEv9VarParams",
+    "context": [
+      "180025c93:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180025c9c:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025ca4:     \tleaq\t0x606fd(%rip), %rdx     # 0x1800863a8",
+      "180025cab:     \tleaq\t0x5df9c(%rip), %r8      # 0x180083c4e",
+      "180025cb2:     \tmovq\t%rsi, %rcx",
+      "180025cb5:     \tmovq\t%r8, %r9",
+      "180025cb8:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025cbd:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025cc6:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180025ccf:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33576,
+    "address": "180025cf9",
+    "symbol": "_Z13k_reg_swin_mhILi64ELi4ELb1EEv9VarParams",
+    "context": [
+      "180025ce1:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180025cea:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025cf2:     \tleaq\t0x606b7(%rip), %rdx     # 0x1800863b0",
+      "180025cf9:     \tleaq\t0x5df7a(%rip), %r8      # 0x180083c7a",
+      "180025d00:     \tmovq\t%rsi, %rcx",
+      "180025d03:     \tmovq\t%r8, %r9",
+      "180025d06:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025d0b:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025d14:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180025d1d:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33587,
+    "address": "180025d47",
+    "symbol": "_Z13k_reg_swin_mhILi64ELi4ELb0EEv9VarParams",
+    "context": [
+      "180025d2f:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180025d38:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025d40:     \tleaq\t0x60671(%rip), %rdx     # 0x1800863b8",
+      "180025d47:     \tleaq\t0x5df58(%rip), %r8      # 0x180083ca6",
+      "180025d4e:     \tmovq\t%rsi, %rcx",
+      "180025d51:     \tmovq\t%r8, %r9",
+      "180025d54:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025d59:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025d62:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180025d6b:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33598,
+    "address": "180025d95",
+    "symbol": "_Z13k_reg_swin_mhILi64ELi5ELb1EEv9VarParams",
+    "context": [
+      "180025d7d:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180025d86:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025d8e:     \tleaq\t0x6062b(%rip), %rdx     # 0x1800863c0",
+      "180025d95:     \tleaq\t0x5df36(%rip), %r8      # 0x180083cd2",
+      "180025d9c:     \tmovq\t%rsi, %rcx",
+      "180025d9f:     \tmovq\t%r8, %r9",
+      "180025da2:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025da7:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025db0:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180025db9:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33609,
+    "address": "180025de3",
+    "symbol": "_Z13k_reg_swin_mhILi64ELi5ELb0EEv9VarParams",
+    "context": [
+      "180025dcb:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180025dd4:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025ddc:     \tleaq\t0x605e5(%rip), %rdx     # 0x1800863c8",
+      "180025de3:     \tleaq\t0x5df14(%rip), %r8      # 0x180083cfe",
+      "180025dea:     \tmovq\t%rsi, %rcx",
+      "180025ded:     \tmovq\t%r8, %r9",
+      "180025df0:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025df5:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025dfe:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180025e07:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33620,
+    "address": "180025e31",
+    "symbol": "_Z13k_reg_swin_mhILi64ELi8ELb1EEv9VarParams",
+    "context": [
+      "180025e19:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180025e22:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025e2a:     \tleaq\t0x6059f(%rip), %rdx     # 0x1800863d0",
+      "180025e31:     \tleaq\t0x5def2(%rip), %r8      # 0x180083d2a",
+      "180025e38:     \tmovq\t%rsi, %rcx",
+      "180025e3b:     \tmovq\t%r8, %r9",
+      "180025e3e:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025e43:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025e4c:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180025e55:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33631,
+    "address": "180025e7f",
+    "symbol": "_Z13k_reg_swin_mhILi64ELi8ELb0EEv9VarParams",
+    "context": [
+      "180025e67:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180025e70:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025e78:     \tleaq\t0x60559(%rip), %rdx     # 0x1800863d8",
+      "180025e7f:     \tleaq\t0x5ded0(%rip), %r8      # 0x180083d56",
+      "180025e86:     \tmovq\t%rsi, %rcx",
+      "180025e89:     \tmovq\t%r8, %r9",
+      "180025e8c:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025e91:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025e9a:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180025ea3:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33642,
+    "address": "180025ecd",
+    "symbol": "_Z13k_reg_swin_mhILi64ELi10ELb1EEv9VarParams",
+    "context": [
+      "180025eb5:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180025ebe:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025ec6:     \tleaq\t0x60513(%rip), %rdx     # 0x1800863e0",
+      "180025ecd:     \tleaq\t0x5deae(%rip), %r8      # 0x180083d82",
+      "180025ed4:     \tmovq\t%rsi, %rcx",
+      "180025ed7:     \tmovq\t%r8, %r9",
+      "180025eda:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025edf:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025ee8:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180025ef1:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33653,
+    "address": "180025f1b",
+    "symbol": "_Z13k_reg_swin_mhILi64ELi10ELb0EEv9VarParams",
+    "context": [
+      "180025f03:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180025f0c:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025f14:     \tleaq\t0x604cd(%rip), %rdx     # 0x1800863e8",
+      "180025f1b:     \tleaq\t0x5de8d(%rip), %r8      # 0x180083daf",
+      "180025f22:     \tmovq\t%rsi, %rcx",
+      "180025f25:     \tmovq\t%r8, %r9",
+      "180025f28:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025f2d:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025f36:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180025f3f:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33664,
+    "address": "180025f69",
+    "symbol": "_Z13k_reg_swin_mhILi64ELi3ELb1EEv9VarParams",
+    "context": [
+      "180025f51:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180025f5a:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025f62:     \tleaq\t0x60487(%rip), %rdx     # 0x1800863f0",
+      "180025f69:     \tleaq\t0x5de6c(%rip), %r8      # 0x180083ddc",
+      "180025f70:     \tmovq\t%rsi, %rcx",
+      "180025f73:     \tmovq\t%r8, %r9",
+      "180025f76:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025f7b:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025f84:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180025f8d:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33675,
+    "address": "180025fb7",
+    "symbol": "_Z13k_reg_swin_mhILi64ELi3ELb0EEv9VarParams",
+    "context": [
+      "180025f9f:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180025fa8:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025fb0:     \tleaq\t0x60441(%rip), %rdx     # 0x1800863f8",
+      "180025fb7:     \tleaq\t0x5de4a(%rip), %r8      # 0x180083e08",
+      "180025fbe:     \tmovq\t%rsi, %rcx",
+      "180025fc1:     \tmovq\t%r8, %r9",
+      "180025fc4:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180025fc9:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180025fd2:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180025fdb:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33686,
+    "address": "180026005",
+    "symbol": "_Z13k_reg_swin_mhILi128ELi0ELb1EEv9VarParams",
+    "context": [
+      "180025fed:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180025ff6:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180025ffe:     \tleaq\t0x603fb(%rip), %rdx     # 0x180086400",
+      "180026005:     \tleaq\t0x5de28(%rip), %r8      # 0x180083e34",
+      "18002600c:     \tmovq\t%rsi, %rcx",
+      "18002600f:     \tmovq\t%r8, %r9",
+      "180026012:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026017:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026020:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026029:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33697,
+    "address": "180026053",
+    "symbol": "_Z13k_reg_swin_mhILi128ELi0ELb0EEv9VarParams",
+    "context": [
+      "18002603b:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026044:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002604c:     \tleaq\t0x603b5(%rip), %rdx     # 0x180086408",
+      "180026053:     \tleaq\t0x5de07(%rip), %r8      # 0x180083e61",
+      "18002605a:     \tmovq\t%rsi, %rcx",
+      "18002605d:     \tmovq\t%r8, %r9",
+      "180026060:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026065:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002606e:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026077:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33708,
+    "address": "1800260a1",
+    "symbol": "_Z13k_reg_swin_mhILi128ELi1ELb1EEv9VarParams",
+    "context": [
+      "180026089:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026092:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002609a:     \tleaq\t0x6036f(%rip), %rdx     # 0x180086410",
+      "1800260a1:     \tleaq\t0x5dde6(%rip), %r8      # 0x180083e8e",
+      "1800260a8:     \tmovq\t%rsi, %rcx",
+      "1800260ab:     \tmovq\t%r8, %r9",
+      "1800260ae:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800260b3:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800260bc:     \tmovq\t$0x0, 0x40(%rsp)",
+      "1800260c5:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33719,
+    "address": "1800260ef",
+    "symbol": "_Z13k_reg_swin_mhILi128ELi1ELb0EEv9VarParams",
+    "context": [
+      "1800260d7:     \tmovq\t$0x0, 0x28(%rsp)",
+      "1800260e0:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800260e8:     \tleaq\t0x60329(%rip), %rdx     # 0x180086418",
+      "1800260ef:     \tleaq\t0x5ddc5(%rip), %r8      # 0x180083ebb",
+      "1800260f6:     \tmovq\t%rsi, %rcx",
+      "1800260f9:     \tmovq\t%r8, %r9",
+      "1800260fc:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026101:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002610a:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026113:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33730,
+    "address": "18002613d",
+    "symbol": "_Z13k_reg_swin_mhILi128ELi2ELb1EEv9VarParams",
+    "context": [
+      "180026125:     \tmovq\t$0x0, 0x28(%rsp)",
+      "18002612e:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026136:     \tleaq\t0x602e3(%rip), %rdx     # 0x180086420",
+      "18002613d:     \tleaq\t0x5dda4(%rip), %r8      # 0x180083ee8",
+      "180026144:     \tmovq\t%rsi, %rcx",
+      "180026147:     \tmovq\t%r8, %r9",
+      "18002614a:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "18002614f:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026158:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026161:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33741,
+    "address": "18002618b",
+    "symbol": "_Z13k_reg_swin_mhILi128ELi2ELb0EEv9VarParams",
+    "context": [
+      "180026173:     \tmovq\t$0x0, 0x28(%rsp)",
+      "18002617c:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026184:     \tleaq\t0x6029d(%rip), %rdx     # 0x180086428",
+      "18002618b:     \tleaq\t0x5dd83(%rip), %r8      # 0x180083f15",
+      "180026192:     \tmovq\t%rsi, %rcx",
+      "180026195:     \tmovq\t%r8, %r9",
+      "180026198:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "18002619d:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800261a6:     \tmovq\t$0x0, 0x40(%rsp)",
+      "1800261af:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33752,
+    "address": "1800261d9",
+    "symbol": "_Z13k_reg_swin_mhILi128ELi4ELb1EEv9VarParams",
+    "context": [
+      "1800261c1:     \tmovq\t$0x0, 0x28(%rsp)",
+      "1800261ca:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800261d2:     \tleaq\t0x60257(%rip), %rdx     # 0x180086430",
+      "1800261d9:     \tleaq\t0x5dd62(%rip), %r8      # 0x180083f42",
+      "1800261e0:     \tmovq\t%rsi, %rcx",
+      "1800261e3:     \tmovq\t%r8, %r9",
+      "1800261e6:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800261eb:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800261f4:     \tmovq\t$0x0, 0x40(%rsp)",
+      "1800261fd:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33763,
+    "address": "180026227",
+    "symbol": "_Z13k_reg_swin_mhILi128ELi4ELb0EEv9VarParams",
+    "context": [
+      "18002620f:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026218:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026220:     \tleaq\t0x60211(%rip), %rdx     # 0x180086438",
+      "180026227:     \tleaq\t0x5dd41(%rip), %r8      # 0x180083f6f",
+      "18002622e:     \tmovq\t%rsi, %rcx",
+      "180026231:     \tmovq\t%r8, %r9",
+      "180026234:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026239:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026242:     \tmovq\t$0x0, 0x40(%rsp)",
+      "18002624b:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33774,
+    "address": "180026275",
+    "symbol": "_Z13k_reg_swin_mhILi128ELi5ELb1EEv9VarParams",
+    "context": [
+      "18002625d:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026266:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002626e:     \tleaq\t0x601cb(%rip), %rdx     # 0x180086440",
+      "180026275:     \tleaq\t0x5dd20(%rip), %r8      # 0x180083f9c",
+      "18002627c:     \tmovq\t%rsi, %rcx",
+      "18002627f:     \tmovq\t%r8, %r9",
+      "180026282:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026287:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026290:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026299:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33785,
+    "address": "1800262c3",
+    "symbol": "_Z13k_reg_swin_mhILi128ELi5ELb0EEv9VarParams",
+    "context": [
+      "1800262ab:     \tmovq\t$0x0, 0x28(%rsp)",
+      "1800262b4:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800262bc:     \tleaq\t0x60185(%rip), %rdx     # 0x180086448",
+      "1800262c3:     \tleaq\t0x5dcff(%rip), %r8      # 0x180083fc9",
+      "1800262ca:     \tmovq\t%rsi, %rcx",
+      "1800262cd:     \tmovq\t%r8, %r9",
+      "1800262d0:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800262d5:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800262de:     \tmovq\t$0x0, 0x40(%rsp)",
+      "1800262e7:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33796,
+    "address": "180026311",
+    "symbol": "_Z13k_reg_swin_mhILi128ELi8ELb1EEv9VarParams",
+    "context": [
+      "1800262f9:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026302:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002630a:     \tleaq\t0x6013f(%rip), %rdx     # 0x180086450",
+      "180026311:     \tleaq\t0x5dcde(%rip), %r8      # 0x180083ff6",
+      "180026318:     \tmovq\t%rsi, %rcx",
+      "18002631b:     \tmovq\t%r8, %r9",
+      "18002631e:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026323:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002632c:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026335:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33807,
+    "address": "18002635f",
+    "symbol": "_Z13k_reg_swin_mhILi128ELi8ELb0EEv9VarParams",
+    "context": [
+      "180026347:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026350:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026358:     \tleaq\t0x600f9(%rip), %rdx     # 0x180086458",
+      "18002635f:     \tleaq\t0x5dcbd(%rip), %r8      # 0x180084023",
+      "180026366:     \tmovq\t%rsi, %rcx",
+      "180026369:     \tmovq\t%r8, %r9",
+      "18002636c:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026371:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002637a:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026383:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33818,
+    "address": "1800263ad",
+    "symbol": "_Z13k_reg_swin_mhILi128ELi10ELb1EEv9VarParams",
+    "context": [
+      "180026395:     \tmovq\t$0x0, 0x28(%rsp)",
+      "18002639e:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800263a6:     \tleaq\t0x600b3(%rip), %rdx     # 0x180086460",
+      "1800263ad:     \tleaq\t0x5dc9c(%rip), %r8      # 0x180084050",
+      "1800263b4:     \tmovq\t%rsi, %rcx",
+      "1800263b7:     \tmovq\t%r8, %r9",
+      "1800263ba:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800263bf:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800263c8:     \tmovq\t$0x0, 0x40(%rsp)",
+      "1800263d1:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33829,
+    "address": "1800263fb",
+    "symbol": "_Z13k_reg_swin_mhILi128ELi10ELb0EEv9VarParams",
+    "context": [
+      "1800263e3:     \tmovq\t$0x0, 0x28(%rsp)",
+      "1800263ec:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800263f4:     \tleaq\t0x6006d(%rip), %rdx     # 0x180086468",
+      "1800263fb:     \tleaq\t0x5dc7c(%rip), %r8      # 0x18008407e",
+      "180026402:     \tmovq\t%rsi, %rcx",
+      "180026405:     \tmovq\t%r8, %r9",
+      "180026408:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "18002640d:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026416:     \tmovq\t$0x0, 0x40(%rsp)",
+      "18002641f:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33840,
+    "address": "180026449",
+    "symbol": "_Z13k_reg_swin_mhILi128ELi3ELb1EEv9VarParams",
+    "context": [
+      "180026431:     \tmovq\t$0x0, 0x28(%rsp)",
+      "18002643a:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026442:     \tleaq\t0x60027(%rip), %rdx     # 0x180086470",
+      "180026449:     \tleaq\t0x5dc5c(%rip), %r8      # 0x1800840ac",
+      "180026450:     \tmovq\t%rsi, %rcx",
+      "180026453:     \tmovq\t%r8, %r9",
+      "180026456:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "18002645b:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026464:     \tmovq\t$0x0, 0x40(%rsp)",
+      "18002646d:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33851,
+    "address": "180026497",
+    "symbol": "_Z13k_reg_swin_mhILi128ELi3ELb0EEv9VarParams",
+    "context": [
+      "18002647f:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026488:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026490:     \tleaq\t0x5ffe1(%rip), %rdx     # 0x180086478",
+      "180026497:     \tleaq\t0x5dc3b(%rip), %r8      # 0x1800840d9",
+      "18002649e:     \tmovq\t%rsi, %rcx",
+      "1800264a1:     \tmovq\t%r8, %r9",
+      "1800264a4:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800264a9:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800264b2:     \tmovq\t$0x0, 0x40(%rsp)",
+      "1800264bb:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33862,
+    "address": "1800264e5",
+    "symbol": "_Z13k_reg_swin_mhILi256ELi0ELb1EEv9VarParams",
+    "context": [
+      "1800264cd:     \tmovq\t$0x0, 0x28(%rsp)",
+      "1800264d6:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800264de:     \tleaq\t0x5ff9b(%rip), %rdx     # 0x180086480",
+      "1800264e5:     \tleaq\t0x5dc1a(%rip), %r8      # 0x180084106",
+      "1800264ec:     \tmovq\t%rsi, %rcx",
+      "1800264ef:     \tmovq\t%r8, %r9",
+      "1800264f2:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800264f7:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026500:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026509:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33873,
+    "address": "180026533",
+    "symbol": "_Z13k_reg_swin_mhILi256ELi0ELb0EEv9VarParams",
+    "context": [
+      "18002651b:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026524:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002652c:     \tleaq\t0x5ff55(%rip), %rdx     # 0x180086488",
+      "180026533:     \tleaq\t0x5dbf9(%rip), %r8      # 0x180084133",
+      "18002653a:     \tmovq\t%rsi, %rcx",
+      "18002653d:     \tmovq\t%r8, %r9",
+      "180026540:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026545:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002654e:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026557:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33884,
+    "address": "180026581",
+    "symbol": "_Z13k_reg_swin_mhILi256ELi1ELb1EEv9VarParams",
+    "context": [
+      "180026569:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026572:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002657a:     \tleaq\t0x5ff0f(%rip), %rdx     # 0x180086490",
+      "180026581:     \tleaq\t0x5dbd8(%rip), %r8      # 0x180084160",
+      "180026588:     \tmovq\t%rsi, %rcx",
+      "18002658b:     \tmovq\t%r8, %r9",
+      "18002658e:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026593:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002659c:     \tmovq\t$0x0, 0x40(%rsp)",
+      "1800265a5:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33895,
+    "address": "1800265cf",
+    "symbol": "_Z13k_reg_swin_mhILi256ELi1ELb0EEv9VarParams",
+    "context": [
+      "1800265b7:     \tmovq\t$0x0, 0x28(%rsp)",
+      "1800265c0:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800265c8:     \tleaq\t0x5fec9(%rip), %rdx     # 0x180086498",
+      "1800265cf:     \tleaq\t0x5dbb7(%rip), %r8      # 0x18008418d",
+      "1800265d6:     \tmovq\t%rsi, %rcx",
+      "1800265d9:     \tmovq\t%r8, %r9",
+      "1800265dc:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800265e1:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800265ea:     \tmovq\t$0x0, 0x40(%rsp)",
+      "1800265f3:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33906,
+    "address": "18002661d",
+    "symbol": "_Z13k_reg_swin_mhILi256ELi2ELb1EEv9VarParams",
+    "context": [
+      "180026605:     \tmovq\t$0x0, 0x28(%rsp)",
+      "18002660e:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026616:     \tleaq\t0x5fe83(%rip), %rdx     # 0x1800864a0",
+      "18002661d:     \tleaq\t0x5db96(%rip), %r8      # 0x1800841ba",
+      "180026624:     \tmovq\t%rsi, %rcx",
+      "180026627:     \tmovq\t%r8, %r9",
+      "18002662a:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "18002662f:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026638:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026641:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33917,
+    "address": "18002666b",
+    "symbol": "_Z13k_reg_swin_mhILi256ELi2ELb0EEv9VarParams",
+    "context": [
+      "180026653:     \tmovq\t$0x0, 0x28(%rsp)",
+      "18002665c:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026664:     \tleaq\t0x5fe3d(%rip), %rdx     # 0x1800864a8",
+      "18002666b:     \tleaq\t0x5db75(%rip), %r8      # 0x1800841e7",
+      "180026672:     \tmovq\t%rsi, %rcx",
+      "180026675:     \tmovq\t%r8, %r9",
+      "180026678:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "18002667d:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026686:     \tmovq\t$0x0, 0x40(%rsp)",
+      "18002668f:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33928,
+    "address": "1800266b9",
+    "symbol": "_Z13k_reg_swin_mhILi256ELi4ELb1EEv9VarParams",
+    "context": [
+      "1800266a1:     \tmovq\t$0x0, 0x28(%rsp)",
+      "1800266aa:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800266b2:     \tleaq\t0x5fdf7(%rip), %rdx     # 0x1800864b0",
+      "1800266b9:     \tleaq\t0x5db54(%rip), %r8      # 0x180084214",
+      "1800266c0:     \tmovq\t%rsi, %rcx",
+      "1800266c3:     \tmovq\t%r8, %r9",
+      "1800266c6:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800266cb:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800266d4:     \tmovq\t$0x0, 0x40(%rsp)",
+      "1800266dd:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33939,
+    "address": "180026707",
+    "symbol": "_Z13k_reg_swin_mhILi256ELi4ELb0EEv9VarParams",
+    "context": [
+      "1800266ef:     \tmovq\t$0x0, 0x28(%rsp)",
+      "1800266f8:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026700:     \tleaq\t0x5fdb1(%rip), %rdx     # 0x1800864b8",
+      "180026707:     \tleaq\t0x5db33(%rip), %r8      # 0x180084241",
+      "18002670e:     \tmovq\t%rsi, %rcx",
+      "180026711:     \tmovq\t%r8, %r9",
+      "180026714:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026719:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026722:     \tmovq\t$0x0, 0x40(%rsp)",
+      "18002672b:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33950,
+    "address": "180026755",
+    "symbol": "_Z13k_reg_swin_mhILi256ELi5ELb1EEv9VarParams",
+    "context": [
+      "18002673d:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026746:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002674e:     \tleaq\t0x5fd6b(%rip), %rdx     # 0x1800864c0",
+      "180026755:     \tleaq\t0x5db12(%rip), %r8      # 0x18008426e",
+      "18002675c:     \tmovq\t%rsi, %rcx",
+      "18002675f:     \tmovq\t%r8, %r9",
+      "180026762:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026767:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026770:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026779:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33961,
+    "address": "1800267a3",
+    "symbol": "_Z13k_reg_swin_mhILi256ELi5ELb0EEv9VarParams",
+    "context": [
+      "18002678b:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026794:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002679c:     \tleaq\t0x5fd25(%rip), %rdx     # 0x1800864c8",
+      "1800267a3:     \tleaq\t0x5daf1(%rip), %r8      # 0x18008429b",
+      "1800267aa:     \tmovq\t%rsi, %rcx",
+      "1800267ad:     \tmovq\t%r8, %r9",
+      "1800267b0:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800267b5:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800267be:     \tmovq\t$0x0, 0x40(%rsp)",
+      "1800267c7:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33972,
+    "address": "1800267f1",
+    "symbol": "_Z13k_reg_swin_mhILi256ELi8ELb1EEv9VarParams",
+    "context": [
+      "1800267d9:     \tmovq\t$0x0, 0x28(%rsp)",
+      "1800267e2:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800267ea:     \tleaq\t0x5fcdf(%rip), %rdx     # 0x1800864d0",
+      "1800267f1:     \tleaq\t0x5dad0(%rip), %r8      # 0x1800842c8",
+      "1800267f8:     \tmovq\t%rsi, %rcx",
+      "1800267fb:     \tmovq\t%r8, %r9",
+      "1800267fe:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026803:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002680c:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026815:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33983,
+    "address": "18002683f",
+    "symbol": "_Z13k_reg_swin_mhILi256ELi8ELb0EEv9VarParams",
+    "context": [
+      "180026827:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026830:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026838:     \tleaq\t0x5fc99(%rip), %rdx     # 0x1800864d8",
+      "18002683f:     \tleaq\t0x5daaf(%rip), %r8      # 0x1800842f5",
+      "180026846:     \tmovq\t%rsi, %rcx",
+      "180026849:     \tmovq\t%r8, %r9",
+      "18002684c:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026851:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002685a:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026863:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 33994,
+    "address": "18002688d",
+    "symbol": "_Z13k_reg_swin_mhILi256ELi10ELb1EEv9VarParams",
+    "context": [
+      "180026875:     \tmovq\t$0x0, 0x28(%rsp)",
+      "18002687e:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026886:     \tleaq\t0x5fc53(%rip), %rdx     # 0x1800864e0",
+      "18002688d:     \tleaq\t0x5da8e(%rip), %r8      # 0x180084322",
+      "180026894:     \tmovq\t%rsi, %rcx",
+      "180026897:     \tmovq\t%r8, %r9",
+      "18002689a:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "18002689f:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800268a8:     \tmovq\t$0x0, 0x40(%rsp)",
+      "1800268b1:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34005,
+    "address": "1800268db",
+    "symbol": "_Z13k_reg_swin_mhILi256ELi10ELb0EEv9VarParams",
+    "context": [
+      "1800268c3:     \tmovq\t$0x0, 0x28(%rsp)",
+      "1800268cc:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800268d4:     \tleaq\t0x5fc0d(%rip), %rdx     # 0x1800864e8",
+      "1800268db:     \tleaq\t0x5da6e(%rip), %r8      # 0x180084350",
+      "1800268e2:     \tmovq\t%rsi, %rcx",
+      "1800268e5:     \tmovq\t%r8, %r9",
+      "1800268e8:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800268ed:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800268f6:     \tmovq\t$0x0, 0x40(%rsp)",
+      "1800268ff:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34016,
+    "address": "180026929",
+    "symbol": "_Z13k_reg_swin_mhILi256ELi3ELb1EEv9VarParams",
+    "context": [
+      "180026911:     \tmovq\t$0x0, 0x28(%rsp)",
+      "18002691a:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026922:     \tleaq\t0x5fbc7(%rip), %rdx     # 0x1800864f0",
+      "180026929:     \tleaq\t0x5da4e(%rip), %r8      # 0x18008437e",
+      "180026930:     \tmovq\t%rsi, %rcx",
+      "180026933:     \tmovq\t%r8, %r9",
+      "180026936:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "18002693b:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026944:     \tmovq\t$0x0, 0x40(%rsp)",
+      "18002694d:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34027,
+    "address": "180026977",
+    "symbol": "_Z13k_reg_swin_mhILi256ELi3ELb0EEv9VarParams",
+    "context": [
+      "18002695f:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026968:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026970:     \tleaq\t0x5fb81(%rip), %rdx     # 0x1800864f8",
+      "180026977:     \tleaq\t0x5da2d(%rip), %r8      # 0x1800843ab",
+      "18002697e:     \tmovq\t%rsi, %rcx",
+      "180026981:     \tmovq\t%r8, %r9",
+      "180026984:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026989:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026992:     \tmovq\t$0x0, 0x40(%rsp)",
+      "18002699b:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34038,
+    "address": "1800269c5",
+    "symbol": "_Z10k_swin_varILi64ELb0ELb1EEv9VarParams",
+    "context": [
+      "1800269ad:     \tmovq\t$0x0, 0x28(%rsp)",
+      "1800269b6:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800269be:     \tleaq\t0x5f98b(%rip), %rdx     # 0x180086350",
+      "1800269c5:     \tleaq\t0x5da0c(%rip), %r8      # 0x1800843d8",
+      "1800269cc:     \tmovq\t%rsi, %rcx",
+      "1800269cf:     \tmovq\t%r8, %r9",
+      "1800269d2:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800269d7:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800269e0:     \tmovq\t$0x0, 0x40(%rsp)",
+      "1800269e9:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34049,
+    "address": "180026a13",
+    "symbol": "_Z10k_swin_varILi128ELb0ELb1EEv9VarParams",
+    "context": [
+      "1800269fb:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026a04:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026a0c:     \tleaq\t0x5f945(%rip), %rdx     # 0x180086358",
+      "180026a13:     \tleaq\t0x5d9e7(%rip), %r8      # 0x180084401",
+      "180026a1a:     \tmovq\t%rsi, %rcx",
+      "180026a1d:     \tmovq\t%r8, %r9",
+      "180026a20:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026a25:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026a2e:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026a37:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34060,
+    "address": "180026a61",
+    "symbol": "_Z10k_swin_varILi256ELb0ELb1EEv9VarParams",
+    "context": [
+      "180026a49:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026a52:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026a5a:     \tleaq\t0x5f8ff(%rip), %rdx     # 0x180086360",
+      "180026a61:     \tleaq\t0x5d9c3(%rip), %r8      # 0x18008442b",
+      "180026a68:     \tmovq\t%rsi, %rcx",
+      "180026a6b:     \tmovq\t%r8, %r9",
+      "180026a6e:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026a73:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026a7c:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026a85:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34071,
+    "address": "180026aaf",
+    "symbol": "_Z10k_swin_varILi64ELb0ELb0EEv9VarParams",
+    "context": [
+      "180026a97:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026aa0:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026aa8:     \tleaq\t0x5f8b9(%rip), %rdx     # 0x180086368",
+      "180026aaf:     \tleaq\t0x5d99f(%rip), %r8      # 0x180084455",
+      "180026ab6:     \tmovq\t%rsi, %rcx",
+      "180026ab9:     \tmovq\t%r8, %r9",
+      "180026abc:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026ac1:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026aca:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026ad3:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34082,
+    "address": "180026afd",
+    "symbol": "_Z10k_swin_varILi128ELb0ELb0EEv9VarParams",
+    "context": [
+      "180026ae5:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026aee:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026af6:     \tleaq\t0x5f873(%rip), %rdx     # 0x180086370",
+      "180026afd:     \tleaq\t0x5d97a(%rip), %r8      # 0x18008447e",
+      "180026b04:     \tmovq\t%rsi, %rcx",
+      "180026b07:     \tmovq\t%r8, %r9",
+      "180026b0a:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026b0f:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026b18:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026b21:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34093,
+    "address": "180026b4b",
+    "symbol": "_Z10k_swin_varILi256ELb0ELb0EEv9VarParams",
+    "context": [
+      "180026b33:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026b3c:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026b44:     \tleaq\t0x5f82d(%rip), %rdx     # 0x180086378",
+      "180026b4b:     \tleaq\t0x5d956(%rip), %r8      # 0x1800844a8",
+      "180026b52:     \tmovq\t%rsi, %rcx",
+      "180026b55:     \tmovq\t%r8, %r9",
+      "180026b58:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026b5d:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026b66:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026b6f:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34104,
+    "address": "180026b99",
+    "symbol": "_Z14k_reg_vit_ffwdILi2ELb1ELb1EEv13VitFfwdParams",
+    "context": [
+      "180026b81:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026b8a:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026b92:     \tleaq\t0x5f9a7(%rip), %rdx     # 0x180086540",
+      "180026b99:     \tleaq\t0x5d932(%rip), %r8      # 0x1800844d2",
+      "180026ba0:     \tmovq\t%rsi, %rcx",
+      "180026ba3:     \tmovq\t%r8, %r9",
+      "180026ba6:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026bab:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026bb4:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026bbd:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34115,
+    "address": "180026be7",
+    "symbol": "_Z14k_reg_vit_ffwdILi2ELb1ELb0EEv13VitFfwdParams",
+    "context": [
+      "180026bcf:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026bd8:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026be0:     \tleaq\t0x5f961(%rip), %rdx     # 0x180086548",
+      "180026be7:     \tleaq\t0x5d915(%rip), %r8      # 0x180084503",
+      "180026bee:     \tmovq\t%rsi, %rcx",
+      "180026bf1:     \tmovq\t%r8, %r9",
+      "180026bf4:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026bf9:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026c02:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026c0b:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34126,
+    "address": "180026c35",
+    "symbol": "_Z14k_reg_vit_ffwdILi2ELb0ELb1EEv13VitFfwdParams",
+    "context": [
+      "180026c1d:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026c26:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026c2e:     \tleaq\t0x5f91b(%rip), %rdx     # 0x180086550",
+      "180026c35:     \tleaq\t0x5d8f8(%rip), %r8      # 0x180084534",
+      "180026c3c:     \tmovq\t%rsi, %rcx",
+      "180026c3f:     \tmovq\t%r8, %r9",
+      "180026c42:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026c47:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026c50:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026c59:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34137,
+    "address": "180026c83",
+    "symbol": "_Z14k_reg_vit_ffwdILi2ELb0ELb0EEv13VitFfwdParams",
+    "context": [
+      "180026c6b:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026c74:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026c7c:     \tleaq\t0x5f8d5(%rip), %rdx     # 0x180086558",
+      "180026c83:     \tleaq\t0x5d8db(%rip), %r8      # 0x180084565",
+      "180026c8a:     \tmovq\t%rsi, %rcx",
+      "180026c8d:     \tmovq\t%r8, %r9",
+      "180026c90:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026c95:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026c9e:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026ca7:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34148,
+    "address": "180026cd1",
+    "symbol": "_Z14k_reg_vit_ffwdILi1ELb1ELb1EEv13VitFfwdParams",
+    "context": [
+      "180026cb9:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026cc2:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026cca:     \tleaq\t0x5f88f(%rip), %rdx     # 0x180086560",
+      "180026cd1:     \tleaq\t0x5d8be(%rip), %r8      # 0x180084596",
+      "180026cd8:     \tmovq\t%rsi, %rcx",
+      "180026cdb:     \tmovq\t%r8, %r9",
+      "180026cde:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026ce3:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026cec:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026cf5:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34159,
+    "address": "180026d1f",
+    "symbol": "_Z14k_reg_vit_ffwdILi1ELb1ELb0EEv13VitFfwdParams",
+    "context": [
+      "180026d07:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026d10:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026d18:     \tleaq\t0x5f849(%rip), %rdx     # 0x180086568",
+      "180026d1f:     \tleaq\t0x5d8a1(%rip), %r8      # 0x1800845c7",
+      "180026d26:     \tmovq\t%rsi, %rcx",
+      "180026d29:     \tmovq\t%r8, %r9",
+      "180026d2c:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026d31:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026d3a:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026d43:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34170,
+    "address": "180026d6d",
+    "symbol": "_Z14k_reg_vit_ffwdILi1ELb0ELb1EEv13VitFfwdParams",
+    "context": [
+      "180026d55:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026d5e:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026d66:     \tleaq\t0x5f803(%rip), %rdx     # 0x180086570",
+      "180026d6d:     \tleaq\t0x5d884(%rip), %r8      # 0x1800845f8",
+      "180026d74:     \tmovq\t%rsi, %rcx",
+      "180026d77:     \tmovq\t%r8, %r9",
+      "180026d7a:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026d7f:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026d88:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026d91:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34181,
+    "address": "180026dbb",
+    "symbol": "_Z14k_reg_vit_ffwdILi1ELb0ELb0EEv13VitFfwdParams",
+    "context": [
+      "180026da3:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026dac:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026db4:     \tleaq\t0x5f7bd(%rip), %rdx     # 0x180086578",
+      "180026dbb:     \tleaq\t0x5d867(%rip), %r8      # 0x180084629",
+      "180026dc2:     \tmovq\t%rsi, %rcx",
+      "180026dc5:     \tmovq\t%r8, %r9",
+      "180026dc8:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026dcd:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026dd6:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026ddf:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34192,
+    "address": "180026e09",
+    "symbol": "_Z14k_reg_vit_convILi2ELi0ELb1EEv13VitConvParams",
+    "context": [
+      "180026df1:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026dfa:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026e02:     \tleaq\t0x5f777(%rip), %rdx     # 0x180086580",
+      "180026e09:     \tleaq\t0x5d84a(%rip), %r8      # 0x18008465a",
+      "180026e10:     \tmovq\t%rsi, %rcx",
+      "180026e13:     \tmovq\t%r8, %r9",
+      "180026e16:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026e1b:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026e24:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026e2d:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34203,
+    "address": "180026e57",
+    "symbol": "_Z14k_reg_vit_convILi2ELi0ELb0EEv13VitConvParams",
+    "context": [
+      "180026e3f:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026e48:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026e50:     \tleaq\t0x5f731(%rip), %rdx     # 0x180086588",
+      "180026e57:     \tleaq\t0x5d82d(%rip), %r8      # 0x18008468b",
+      "180026e5e:     \tmovq\t%rsi, %rcx",
+      "180026e61:     \tmovq\t%r8, %r9",
+      "180026e64:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026e69:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026e72:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026e7b:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34214,
+    "address": "180026ea5",
+    "symbol": "_Z14k_reg_vit_convILi2ELi1ELb1EEv13VitConvParams",
+    "context": [
+      "180026e8d:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026e96:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026e9e:     \tleaq\t0x5f6eb(%rip), %rdx     # 0x180086590",
+      "180026ea5:     \tleaq\t0x5d810(%rip), %r8      # 0x1800846bc",
+      "180026eac:     \tmovq\t%rsi, %rcx",
+      "180026eaf:     \tmovq\t%r8, %r9",
+      "180026eb2:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026eb7:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026ec0:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026ec9:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34225,
+    "address": "180026ef3",
+    "symbol": "_Z14k_reg_vit_convILi2ELi1ELb0EEv13VitConvParams",
+    "context": [
+      "180026edb:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026ee4:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026eec:     \tleaq\t0x5f6a5(%rip), %rdx     # 0x180086598",
+      "180026ef3:     \tleaq\t0x5d7f3(%rip), %r8      # 0x1800846ed",
+      "180026efa:     \tmovq\t%rsi, %rcx",
+      "180026efd:     \tmovq\t%r8, %r9",
+      "180026f00:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026f05:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026f0e:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026f17:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34236,
+    "address": "180026f41",
+    "symbol": "_Z14k_reg_vit_convILi2ELi2ELb1EEv13VitConvParams",
+    "context": [
+      "180026f29:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026f32:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026f3a:     \tleaq\t0x5f65f(%rip), %rdx     # 0x1800865a0",
+      "180026f41:     \tleaq\t0x5d7d6(%rip), %r8      # 0x18008471e",
+      "180026f48:     \tmovq\t%rsi, %rcx",
+      "180026f4b:     \tmovq\t%r8, %r9",
+      "180026f4e:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026f53:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026f5c:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026f65:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34247,
+    "address": "180026f8f",
+    "symbol": "_Z14k_reg_vit_convILi2ELi2ELb0EEv13VitConvParams",
+    "context": [
+      "180026f77:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026f80:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026f88:     \tleaq\t0x5f619(%rip), %rdx     # 0x1800865a8",
+      "180026f8f:     \tleaq\t0x5d7b9(%rip), %r8      # 0x18008474f",
+      "180026f96:     \tmovq\t%rsi, %rcx",
+      "180026f99:     \tmovq\t%r8, %r9",
+      "180026f9c:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026fa1:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026faa:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180026fb3:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34258,
+    "address": "180026fdd",
+    "symbol": "_Z14k_reg_vit_convILi2ELi4ELb1EEv13VitConvParams",
+    "context": [
+      "180026fc5:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180026fce:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180026fd6:     \tleaq\t0x5f5d3(%rip), %rdx     # 0x1800865b0",
+      "180026fdd:     \tleaq\t0x5d79c(%rip), %r8      # 0x180084780",
+      "180026fe4:     \tmovq\t%rsi, %rcx",
+      "180026fe7:     \tmovq\t%r8, %r9",
+      "180026fea:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180026fef:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180026ff8:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180027001:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34269,
+    "address": "18002702b",
+    "symbol": "_Z14k_reg_vit_convILi2ELi4ELb0EEv13VitConvParams",
+    "context": [
+      "180027013:     \tmovq\t$0x0, 0x28(%rsp)",
+      "18002701c:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180027024:     \tleaq\t0x5f58d(%rip), %rdx     # 0x1800865b8",
+      "18002702b:     \tleaq\t0x5d77f(%rip), %r8      # 0x1800847b1",
+      "180027032:     \tmovq\t%rsi, %rcx",
+      "180027035:     \tmovq\t%r8, %r9",
+      "180027038:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "18002703d:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180027046:     \tmovq\t$0x0, 0x40(%rsp)",
+      "18002704f:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34280,
+    "address": "180027079",
+    "symbol": "_Z14k_reg_vit_convILi1ELi0ELb1EEv13VitConvParams",
+    "context": [
+      "180027061:     \tmovq\t$0x0, 0x28(%rsp)",
+      "18002706a:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180027072:     \tleaq\t0x5f547(%rip), %rdx     # 0x1800865c0",
+      "180027079:     \tleaq\t0x5d762(%rip), %r8      # 0x1800847e2",
+      "180027080:     \tmovq\t%rsi, %rcx",
+      "180027083:     \tmovq\t%r8, %r9",
+      "180027086:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "18002708b:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180027094:     \tmovq\t$0x0, 0x40(%rsp)",
+      "18002709d:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34291,
+    "address": "1800270c7",
+    "symbol": "_Z14k_reg_vit_convILi1ELi0ELb0EEv13VitConvParams",
+    "context": [
+      "1800270af:     \tmovq\t$0x0, 0x28(%rsp)",
+      "1800270b8:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800270c0:     \tleaq\t0x5f501(%rip), %rdx     # 0x1800865c8",
+      "1800270c7:     \tleaq\t0x5d745(%rip), %r8      # 0x180084813",
+      "1800270ce:     \tmovq\t%rsi, %rcx",
+      "1800270d1:     \tmovq\t%r8, %r9",
+      "1800270d4:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800270d9:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800270e2:     \tmovq\t$0x0, 0x40(%rsp)",
+      "1800270eb:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34302,
+    "address": "180027115",
+    "symbol": "_Z14k_reg_vit_convILi1ELi1ELb1EEv13VitConvParams",
+    "context": [
+      "1800270fd:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180027106:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002710e:     \tleaq\t0x5f4bb(%rip), %rdx     # 0x1800865d0",
+      "180027115:     \tleaq\t0x5d728(%rip), %r8      # 0x180084844",
+      "18002711c:     \tmovq\t%rsi, %rcx",
+      "18002711f:     \tmovq\t%r8, %r9",
+      "180027122:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180027127:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180027130:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180027139:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34313,
+    "address": "180027163",
+    "symbol": "_Z14k_reg_vit_convILi1ELi1ELb0EEv13VitConvParams",
+    "context": [
+      "18002714b:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180027154:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002715c:     \tleaq\t0x5f475(%rip), %rdx     # 0x1800865d8",
+      "180027163:     \tleaq\t0x5d70b(%rip), %r8      # 0x180084875",
+      "18002716a:     \tmovq\t%rsi, %rcx",
+      "18002716d:     \tmovq\t%r8, %r9",
+      "180027170:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180027175:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002717e:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180027187:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34324,
+    "address": "1800271b1",
+    "symbol": "_Z14k_reg_vit_convILi1ELi2ELb1EEv13VitConvParams",
+    "context": [
+      "180027199:     \tmovq\t$0x0, 0x28(%rsp)",
+      "1800271a2:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800271aa:     \tleaq\t0x5f42f(%rip), %rdx     # 0x1800865e0",
+      "1800271b1:     \tleaq\t0x5d6ee(%rip), %r8      # 0x1800848a6",
+      "1800271b8:     \tmovq\t%rsi, %rcx",
+      "1800271bb:     \tmovq\t%r8, %r9",
+      "1800271be:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800271c3:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800271cc:     \tmovq\t$0x0, 0x40(%rsp)",
+      "1800271d5:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34335,
+    "address": "1800271ff",
+    "symbol": "_Z14k_reg_vit_convILi1ELi2ELb0EEv13VitConvParams",
+    "context": [
+      "1800271e7:     \tmovq\t$0x0, 0x28(%rsp)",
+      "1800271f0:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800271f8:     \tleaq\t0x5f3e9(%rip), %rdx     # 0x1800865e8",
+      "1800271ff:     \tleaq\t0x5d6d1(%rip), %r8      # 0x1800848d7",
+      "180027206:     \tmovq\t%rsi, %rcx",
+      "180027209:     \tmovq\t%r8, %r9",
+      "18002720c:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180027211:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002721a:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180027223:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34346,
+    "address": "18002724d",
+    "symbol": "_Z14k_reg_vit_convILi1ELi4ELb1EEv13VitConvParams",
+    "context": [
+      "180027235:     \tmovq\t$0x0, 0x28(%rsp)",
+      "18002723e:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180027246:     \tleaq\t0x5f3a3(%rip), %rdx     # 0x1800865f0",
+      "18002724d:     \tleaq\t0x5d6b4(%rip), %r8      # 0x180084908",
+      "180027254:     \tmovq\t%rsi, %rcx",
+      "180027257:     \tmovq\t%r8, %r9",
+      "18002725a:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "18002725f:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180027268:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180027271:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34357,
+    "address": "18002729b",
+    "symbol": "_Z14k_reg_vit_convILi1ELi4ELb0EEv13VitConvParams",
+    "context": [
+      "180027283:     \tmovq\t$0x0, 0x28(%rsp)",
+      "18002728c:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180027294:     \tleaq\t0x5f35d(%rip), %rdx     # 0x1800865f8",
+      "18002729b:     \tleaq\t0x5d697(%rip), %r8      # 0x180084939",
+      "1800272a2:     \tmovq\t%rsi, %rcx",
+      "1800272a5:     \tmovq\t%r8, %r9",
+      "1800272a8:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800272ad:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800272b6:     \tmovq\t$0x0, 0x40(%rsp)",
+      "1800272bf:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34368,
+    "address": "1800272e9",
+    "symbol": "_Z15k_reg_vit_attn2ILb1EEv10AttnParams",
+    "context": [
+      "1800272d1:     \tmovq\t$0x0, 0x28(%rsp)",
+      "1800272da:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800272e2:     \tleaq\t0x5f317(%rip), %rdx     # 0x180086600",
+      "1800272e9:     \tleaq\t0x5d67a(%rip), %r8      # 0x18008496a",
+      "1800272f0:     \tmovq\t%rsi, %rcx",
+      "1800272f3:     \tmovq\t%r8, %r9",
+      "1800272f6:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800272fb:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180027304:     \tmovq\t$0x0, 0x40(%rsp)",
+      "18002730d:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34379,
+    "address": "180027337",
+    "symbol": "_Z15k_reg_vit_attn3ILb0EEv10AttnParams",
+    "context": [
+      "18002731f:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180027328:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180027330:     \tleaq\t0x5f2d1(%rip), %rdx     # 0x180086608",
+      "180027337:     \tleaq\t0x5d653(%rip), %r8      # 0x180084991",
+      "18002733e:     \tmovq\t%rsi, %rcx",
+      "180027341:     \tmovq\t%r8, %r9",
+      "180027344:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180027349:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180027352:     \tmovq\t$0x0, 0x40(%rsp)",
+      "18002735b:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34390,
+    "address": "180027385",
+    "symbol": "_Z7k_ffwd2ILb1EEv11Ffwd2Params",
+    "context": [
+      "18002736d:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180027376:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002737e:     \tleaq\t0x5f17b(%rip), %rdx     # 0x180086500",
+      "180027385:     \tleaq\t0x5d62c(%rip), %r8      # 0x1800849b8",
+      "18002738c:     \tmovq\t%rsi, %rcx",
+      "18002738f:     \tmovq\t%r8, %r9",
+      "180027392:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180027397:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800273a0:     \tmovq\t$0x0, 0x40(%rsp)",
+      "1800273a9:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34401,
+    "address": "1800273d3",
+    "symbol": "_Z7k_ffwd2ILb0EEv11Ffwd2Params",
+    "context": [
+      "1800273bb:     \tmovq\t$0x0, 0x28(%rsp)",
+      "1800273c4:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800273cc:     \tleaq\t0x5f135(%rip), %rdx     # 0x180086508",
+      "1800273d3:     \tleaq\t0x5d5fd(%rip), %r8      # 0x1800849d7",
+      "1800273da:     \tmovq\t%rsi, %rcx",
+      "1800273dd:     \tmovq\t%r8, %r9",
+      "1800273e0:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800273e5:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800273ee:     \tmovq\t$0x0, 0x40(%rsp)",
+      "1800273f7:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34412,
+    "address": "180027421",
+    "symbol": "_Z16k_conv_res_viewsILb0EEv12ConvPlParams",
+    "context": [
+      "180027409:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180027412:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002741a:     \tleaq\t0x5f0ef(%rip), %rdx     # 0x180086510",
+      "180027421:     \tleaq\t0x5d5ce(%rip), %r8      # 0x1800849f6",
+      "180027428:     \tmovq\t%rsi, %rcx",
+      "18002742b:     \tmovq\t%r8, %r9",
+      "18002742e:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180027433:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002743c:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180027445:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34423,
+    "address": "18002746f",
+    "symbol": "_Z11k_conv_res2ILb1EEv11Conv2Params",
+    "context": [
+      "180027457:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180027460:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180027468:     \tleaq\t0x5f0a9(%rip), %rdx     # 0x180086518",
+      "18002746f:     \tleaq\t0x5d5aa(%rip), %r8      # 0x180084a20",
+      "180027476:     \tmovq\t%rsi, %rcx",
+      "180027479:     \tmovq\t%r8, %r9",
+      "18002747c:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180027481:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002748a:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180027493:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34434,
+    "address": "1800274bd",
+    "symbol": "_Z11k_conv_res2ILb0EEv11Conv2Params",
+    "context": [
+      "1800274a5:     \tmovq\t$0x0, 0x28(%rsp)",
+      "1800274ae:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800274b6:     \tleaq\t0x5f063(%rip), %rdx     # 0x180086520",
+      "1800274bd:     \tleaq\t0x5d580(%rip), %r8      # 0x180084a44",
+      "1800274c4:     \tmovq\t%rsi, %rcx",
+      "1800274c7:     \tmovq\t%r8, %r9",
+      "1800274ca:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800274cf:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800274d8:     \tmovq\t$0x0, 0x40(%rsp)",
+      "1800274e1:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34445,
+    "address": "18002750b",
+    "symbol": "_Z11k_qkv_attn2ILb1EEv10AttnParams",
+    "context": [
+      "1800274f3:     \tmovq\t$0x0, 0x28(%rsp)",
+      "1800274fc:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180027504:     \tleaq\t0x5f01d(%rip), %rdx     # 0x180086528",
+      "18002750b:     \tleaq\t0x5d556(%rip), %r8      # 0x180084a68",
+      "180027512:     \tmovq\t%rsi, %rcx",
+      "180027515:     \tmovq\t%r8, %r9",
+      "180027518:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "18002751d:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180027526:     \tmovq\t$0x0, 0x40(%rsp)",
+      "18002752f:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34456,
+    "address": "180027559",
+    "symbol": "_Z11k_qkv_attn2ILb0EEv10AttnParams",
+    "context": [
+      "180027541:     \tmovq\t$0x0, 0x28(%rsp)",
+      "18002754a:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180027552:     \tleaq\t0x5efd7(%rip), %rdx     # 0x180086530",
+      "180027559:     \tleaq\t0x5d52b(%rip), %r8      # 0x180084a8b",
+      "180027560:     \tmovq\t%rsi, %rcx",
+      "180027563:     \tmovq\t%r8, %r9",
+      "180027566:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "18002756b:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180027574:     \tmovq\t$0x0, 0x40(%rsp)",
+      "18002757d:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34467,
+    "address": "1800275a7",
+    "symbol": "_Z16k_conv_res_viewsILb1EEv12ConvPlParams",
+    "context": [
+      "18002758f:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180027598:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800275a0:     \tleaq\t0x5ef91(%rip), %rdx     # 0x180086538",
+      "1800275a7:     \tleaq\t0x5d500(%rip), %r8      # 0x180084aae",
+      "1800275ae:     \tmovq\t%rsi, %rcx",
+      "1800275b1:     \tmovq\t%r8, %r9",
+      "1800275b4:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800275b9:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800275c2:     \tmovq\t$0x0, 0x40(%rsp)",
+      "1800275cb:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34478,
+    "address": "1800275f5",
+    "symbol": "_Z10k_reg_headILi4EEv13HeadRegParams",
+    "context": [
+      "1800275dd:     \tmovq\t$0x0, 0x28(%rsp)",
+      "1800275e6:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800275ee:     \tleaq\t0x5f01b(%rip), %rdx     # 0x180086610",
+      "1800275f5:     \tleaq\t0x5d4dc(%rip), %r8      # 0x180084ad8",
+      "1800275fc:     \tmovq\t%rsi, %rcx",
+      "1800275ff:     \tmovq\t%r8, %r9",
+      "180027602:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180027607:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180027610:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180027619:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34489,
+    "address": "180027643",
+    "symbol": "_Z9k_expand2ILi1ELb1ELb0EEv12ExpandParams",
+    "context": [
+      "18002762b:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180027634:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002763c:     \tleaq\t0x5ec1d(%rip), %rdx     # 0x180086260",
+      "180027643:     \tleaq\t0x5d4b3(%rip), %r8      # 0x180084afd",
+      "18002764a:     \tmovq\t%rsi, %rcx",
+      "18002764d:     \tmovq\t%r8, %r9",
+      "180027650:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180027655:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002765e:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180027667:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34500,
+    "address": "180027691",
+    "symbol": "_Z9k_expand2ILi2ELb0ELb1EEv12ExpandParams",
+    "context": [
+      "180027679:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180027682:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002768a:     \tleaq\t0x5ebd7(%rip), %rdx     # 0x180086268",
+      "180027691:     \tleaq\t0x5d48f(%rip), %r8      # 0x180084b27",
+      "180027698:     \tmovq\t%rsi, %rcx",
+      "18002769b:     \tmovq\t%r8, %r9",
+      "18002769e:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800276a3:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800276ac:     \tmovq\t$0x0, 0x40(%rsp)",
+      "1800276b5:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34511,
+    "address": "1800276df",
+    "symbol": "_Z9k_expand2ILi2ELb0ELb0EEv12ExpandParams",
+    "context": [
+      "1800276c7:     \tmovq\t$0x0, 0x28(%rsp)",
+      "1800276d0:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800276d8:     \tleaq\t0x5eb91(%rip), %rdx     # 0x180086270",
+      "1800276df:     \tleaq\t0x5d46b(%rip), %r8      # 0x180084b51",
+      "1800276e6:     \tmovq\t%rsi, %rcx",
+      "1800276e9:     \tmovq\t%r8, %r9",
+      "1800276ec:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800276f1:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800276fa:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180027703:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34522,
+    "address": "18002772d",
+    "symbol": "_Z9k_expand2ILi1ELb0ELb1EEv12ExpandParams",
+    "context": [
+      "180027715:     \tmovq\t$0x0, 0x28(%rsp)",
+      "18002771e:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180027726:     \tleaq\t0x5eb4b(%rip), %rdx     # 0x180086278",
+      "18002772d:     \tleaq\t0x5d447(%rip), %r8      # 0x180084b7b",
+      "180027734:     \tmovq\t%rsi, %rcx",
+      "180027737:     \tmovq\t%r8, %r9",
+      "18002773a:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "18002773f:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180027748:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180027751:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34533,
+    "address": "18002777b",
+    "symbol": "_Z9k_expand2ILi1ELb0ELb0EEv12ExpandParams",
+    "context": [
+      "180027763:     \tmovq\t$0x0, 0x28(%rsp)",
+      "18002776c:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180027774:     \tleaq\t0x5eb05(%rip), %rdx     # 0x180086280",
+      "18002777b:     \tleaq\t0x5d423(%rip), %r8      # 0x180084ba5",
+      "180027782:     \tmovq\t%rsi, %rcx",
+      "180027785:     \tmovq\t%r8, %r9",
+      "180027788:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "18002778d:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180027796:     \tmovq\t$0x0, 0x40(%rsp)",
+      "18002779f:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34544,
+    "address": "1800277c9",
+    "symbol": "_Z12k_reg1d_convILi1ELb1ELb1EEv12ConvParams1d",
+    "context": [
+      "1800277b1:     \tmovq\t$0x0, 0x28(%rsp)",
+      "1800277ba:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800277c2:     \tleaq\t0x5ee4f(%rip), %rdx     # 0x180086618",
+      "1800277c9:     \tleaq\t0x5d3ff(%rip), %r8      # 0x180084bcf",
+      "1800277d0:     \tmovq\t%rsi, %rcx",
+      "1800277d3:     \tmovq\t%r8, %r9",
+      "1800277d6:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800277db:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800277e4:     \tmovq\t$0x0, 0x40(%rsp)",
+      "1800277ed:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34555,
+    "address": "180027817",
+    "symbol": "_Z12k_reg1d_convILi1ELb1ELb0EEv12ConvParams1d",
+    "context": [
+      "1800277ff:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180027808:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180027810:     \tleaq\t0x5ee09(%rip), %rdx     # 0x180086620",
+      "180027817:     \tleaq\t0x5d3df(%rip), %r8      # 0x180084bfd",
+      "18002781e:     \tmovq\t%rsi, %rcx",
+      "180027821:     \tmovq\t%r8, %r9",
+      "180027824:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180027829:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180027832:     \tmovq\t$0x0, 0x40(%rsp)",
+      "18002783b:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34566,
+    "address": "180027865",
+    "symbol": "_Z12k_reg1d_convILi1ELb0ELb1EEv12ConvParams1d",
+    "context": [
+      "18002784d:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180027856:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "18002785e:     \tleaq\t0x5edc3(%rip), %rdx     # 0x180086628",
+      "180027865:     \tleaq\t0x5d3bf(%rip), %r8      # 0x180084c2b",
+      "18002786c:     \tmovq\t%rsi, %rcx",
+      "18002786f:     \tmovq\t%r8, %r9",
+      "180027872:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180027877:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180027880:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180027889:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34577,
+    "address": "1800278b3",
+    "symbol": "_Z12k_reg1d_convILi1ELb0ELb0EEv12ConvParams1d",
+    "context": [
+      "18002789b:     \tmovq\t$0x0, 0x28(%rsp)",
+      "1800278a4:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800278ac:     \tleaq\t0x5ed7d(%rip), %rdx     # 0x180086630",
+      "1800278b3:     \tleaq\t0x5d39f(%rip), %r8      # 0x180084c59",
+      "1800278ba:     \tmovq\t%rsi, %rcx",
+      "1800278bd:     \tmovq\t%r8, %r9",
+      "1800278c0:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800278c5:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800278ce:     \tmovq\t$0x0, 0x40(%rsp)",
+      "1800278d7:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34588,
+    "address": "180027901",
+    "symbol": "_Z12k_reg1d_convILi2ELb0ELb1EEv12ConvParams1d",
+    "context": [
+      "1800278e9:     \tmovq\t$0x0, 0x28(%rsp)",
+      "1800278f2:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800278fa:     \tleaq\t0x5ed37(%rip), %rdx     # 0x180086638",
+      "180027901:     \tleaq\t0x5d37f(%rip), %r8      # 0x180084c87",
+      "180027908:     \tmovq\t%rsi, %rcx",
+      "18002790b:     \tmovq\t%r8, %r9",
+      "18002790e:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180027913:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002791c:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180027925:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34599,
+    "address": "18002794f",
+    "symbol": "_Z12k_reg1d_convILi2ELb0ELb0EEv12ConvParams1d",
+    "context": [
+      "180027937:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180027940:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180027948:     \tleaq\t0x5ecf1(%rip), %rdx     # 0x180086640",
+      "18002794f:     \tleaq\t0x5d35f(%rip), %r8      # 0x180084cb5",
+      "180027956:     \tmovq\t%rsi, %rcx",
+      "180027959:     \tmovq\t%r8, %r9",
+      "18002795c:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180027961:     \tmovq\t$0x0, 0x48(%rsp)",
+      "18002796a:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180027973:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34610,
+    "address": "18002799d",
+    "symbol": "_Z11k_reg1d_qkvILb1ELb1EEv14Reg1dQkvParams",
+    "context": [
+      "180027985:     \tmovq\t$0x0, 0x28(%rsp)",
+      "18002798e:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180027996:     \tleaq\t0x5ecab(%rip), %rdx     # 0x180086648",
+      "18002799d:     \tleaq\t0x5d33f(%rip), %r8      # 0x180084ce3",
+      "1800279a4:     \tmovq\t%rsi, %rcx",
+      "1800279a7:     \tmovq\t%r8, %r9",
+      "1800279aa:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800279af:     \tmovq\t$0x0, 0x48(%rsp)",
+      "1800279b8:     \tmovq\t$0x0, 0x40(%rsp)",
+      "1800279c1:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34621,
+    "address": "1800279eb",
+    "symbol": "_Z11k_reg1d_qkvILb1ELb0EEv14Reg1dQkvParams",
+    "context": [
+      "1800279d3:     \tmovq\t$0x0, 0x28(%rsp)",
+      "1800279dc:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "1800279e4:     \tleaq\t0x5ec65(%rip), %rdx     # 0x180086650",
+      "1800279eb:     \tleaq\t0x5d31c(%rip), %r8      # 0x180084d0e",
+      "1800279f2:     \tmovq\t%rsi, %rcx",
+      "1800279f5:     \tmovq\t%r8, %r9",
+      "1800279f8:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "1800279fd:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180027a06:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180027a0f:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34632,
+    "address": "180027a39",
+    "symbol": "_Z11k_reg1d_qkvILb0ELb1EEv14Reg1dQkvParams",
+    "context": [
+      "180027a21:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180027a2a:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180027a32:     \tleaq\t0x5ec1f(%rip), %rdx     # 0x180086658",
+      "180027a39:     \tleaq\t0x5d2f9(%rip), %r8      # 0x180084d39",
+      "180027a40:     \tmovq\t%rsi, %rcx",
+      "180027a43:     \tmovq\t%r8, %r9",
+      "180027a46:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180027a4b:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180027a54:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180027a5d:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34643,
+    "address": "180027a87",
+    "symbol": "_Z11k_reg1d_qkvILb0ELb0EEv14Reg1dQkvParams",
+    "context": [
+      "180027a6f:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180027a78:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180027a80:     \tleaq\t0x5ebd9(%rip), %rdx     # 0x180086660",
+      "180027a87:     \tleaq\t0x5d2d6(%rip), %r8      # 0x180084d64",
+      "180027a8e:     \tmovq\t%rsi, %rcx",
+      "180027a91:     \tmovq\t%r8, %r9",
+      "180027a94:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180027a99:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180027aa2:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180027aab:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34654,
+    "address": "180027ad5",
+    "symbol": "_Z12k_reg1d_attnILi1ELb1EEv15Reg1dAttnParams",
+    "context": [
+      "180027abd:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180027ac6:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180027ace:     \tleaq\t0x5eb93(%rip), %rdx     # 0x180086668",
+      "180027ad5:     \tleaq\t0x5d2b3(%rip), %r8      # 0x180084d8f",
+      "180027adc:     \tmovq\t%rsi, %rcx",
+      "180027adf:     \tmovq\t%r8, %r9",
+      "180027ae2:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180027ae7:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180027af0:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180027af9:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34665,
+    "address": "180027b23",
+    "symbol": "_Z12k_reg1d_attnILi1ELb0EEv15Reg1dAttnParams",
+    "context": [
+      "180027b0b:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180027b14:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180027b1c:     \tleaq\t0x5eb4d(%rip), %rdx     # 0x180086670",
+      "180027b23:     \tleaq\t0x5d292(%rip), %r8      # 0x180084dbc",
+      "180027b2a:     \tmovq\t%rsi, %rcx",
+      "180027b2d:     \tmovq\t%r8, %r9",
+      "180027b30:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180027b35:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180027b3e:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180027b47:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34676,
+    "address": "180027b71",
+    "symbol": "_Z11k_contract2ILb1EEv12ConvParams1d",
+    "context": [
+      "180027b59:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180027b62:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180027b6a:     \tleaq\t0x5e717(%rip), %rdx     # 0x180086288",
+      "180027b71:     \tleaq\t0x5d271(%rip), %r8      # 0x180084de9",
+      "180027b78:     \tmovq\t%rsi, %rcx",
+      "180027b7b:     \tmovq\t%r8, %r9",
+      "180027b7e:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180027b83:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180027b8c:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180027b95:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34687,
+    "address": "180027bbf",
+    "symbol": "_Z6k_qkv2ILb1EEv9QkvParams",
+    "context": [
+      "180027ba7:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180027bb0:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180027bb8:     \tleaq\t0x5e6d1(%rip), %rdx     # 0x180086290",
+      "180027bbf:     \tleaq\t0x5d248(%rip), %r8      # 0x180084e0e",
+      "180027bc6:     \tmovq\t%rsi, %rcx",
+      "180027bc9:     \tmovq\t%r8, %r9",
+      "180027bcc:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180027bd1:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180027bda:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180027be3:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34698,
+    "address": "180027c0d",
+    "symbol": "_Z12k_attention2ILb1EEv12AttnParams1d",
+    "context": [
+      "180027bf5:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180027bfe:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180027c06:     \tleaq\t0x5e68b(%rip), %rdx     # 0x180086298",
+      "180027c0d:     \tleaq\t0x5d215(%rip), %r8      # 0x180084e29",
+      "180027c14:     \tmovq\t%rsi, %rcx",
+      "180027c17:     \tmovq\t%r8, %r9",
+      "180027c1a:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180027c1f:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180027c28:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180027c31:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34709,
+    "address": "180027c5b",
+    "symbol": "_Z11k_contract2ILb0EEv12ConvParams1d",
+    "context": [
+      "180027c43:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180027c4c:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180027c54:     \tleaq\t0x5e645(%rip), %rdx     # 0x1800862a0",
+      "180027c5b:     \tleaq\t0x5d1ed(%rip), %r8      # 0x180084e4f",
+      "180027c62:     \tmovq\t%rsi, %rcx",
+      "180027c65:     \tmovq\t%r8, %r9",
+      "180027c68:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180027c6d:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180027c76:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180027c7f:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34720,
+    "address": "180027ca9",
+    "symbol": "_Z6k_qkv2ILb0EEv9QkvParams",
+    "context": [
+      "180027c91:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180027c9a:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180027ca2:     \tleaq\t0x5e5ff(%rip), %rdx     # 0x1800862a8",
+      "180027ca9:     \tleaq\t0x5d1c4(%rip), %r8      # 0x180084e74",
+      "180027cb0:     \tmovq\t%rsi, %rcx",
+      "180027cb3:     \tmovq\t%r8, %r9",
+      "180027cb6:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180027cbb:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180027cc4:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180027ccd:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34731,
+    "address": "180027cf7",
+    "symbol": "_Z12k_attention2ILb0EEv12AttnParams1d",
+    "context": [
+      "180027cdf:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180027ce8:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180027cf0:     \tleaq\t0x5e5b9(%rip), %rdx     # 0x1800862b0",
+      "180027cf7:     \tleaq\t0x5d191(%rip), %r8      # 0x180084e8f",
+      "180027cfe:     \tmovq\t%rsi, %rcx",
+      "180027d01:     \tmovq\t%r8, %r9",
+      "180027d04:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180027d09:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180027d12:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180027d1b:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34742,
+    "address": "180027d45",
+    "symbol": "_Z11k_reg_decupILb1EEv14DecUpRegParams",
+    "context": [
+      "180027d2d:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180027d36:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180027d3e:     \tleaq\t0x5e933(%rip), %rdx     # 0x180086678",
+      "180027d45:     \tleaq\t0x5d169(%rip), %r8      # 0x180084eb5",
+      "180027d4c:     \tmovq\t%rsi, %rcx",
+      "180027d4f:     \tmovq\t%r8, %r9",
+      "180027d52:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180027d57:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180027d60:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180027d69:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34753,
+    "address": "180027d93",
+    "symbol": "_Z11k_reg_decupILb0EEv14DecUpRegParams",
+    "context": [
+      "180027d7b:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180027d84:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180027d8c:     \tleaq\t0x5e8ed(%rip), %rdx     # 0x180086680",
+      "180027d93:     \tleaq\t0x5d142(%rip), %r8      # 0x180084edc",
+      "180027d9a:     \tmovq\t%rsi, %rcx",
+      "180027d9d:     \tmovq\t%r8, %r9",
+      "180027da0:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180027da5:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180027dae:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180027db7:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34764,
+    "address": "180027de1",
+    "symbol": "_Z14k_dec_upsampleILb1EEv11DecUpParams",
+    "context": [
+      "180027dc9:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180027dd2:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180027dda:     \tleaq\t0x5e4d7(%rip), %rdx     # 0x1800862b8",
+      "180027de1:     \tleaq\t0x5d11b(%rip), %r8      # 0x180084f03",
+      "180027de8:     \tmovq\t%rsi, %rcx",
+      "180027deb:     \tmovq\t%r8, %r9",
+      "180027dee:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180027df3:     \tmovq\t$0x0, 0x48(%rsp)",
+      "180027dfc:     \tmovq\t$0x0, 0x40(%rsp)",
+      "180027e05:     \tmovq\t$0x0, 0x38(%rsp)"
+    ]
+  },
+  {
+    "line": 34775,
+    "address": "180027e2f",
+    "symbol": "_Z14k_dec_upsampleILb0EEv11DecUpParams",
+    "context": [
+      "180027e17:     \tmovq\t$0x0, 0x28(%rsp)",
+      "180027e20:     \tmovl\t$0xffffffff, 0x20(%rsp) # imm = 0xFFFFFFFF",
+      "180027e28:     \tleaq\t0x5e491(%rip), %rdx     # 0x1800862c0",
+      "180027e2f:     \tleaq\t0x5d0f4(%rip), %r8      # 0x180084f2a",
+      "180027e36:     \tmovq\t%rsi, %rcx",
+      "180027e39:     \tmovq\t%r8, %r9",
+      "180027e3c:     \tcallq\t0x18007a050 <waveOutWrite+0x75040>",
+      "180027e41:     \tmovl\t$0x0, 0x38(%rsp)",
+      "180027e49:     \tmovl\t$0x1, 0x30(%rsp)",
+      "180027e51:     \tmovq\t$0x200, 0x28(%rsp)      # imm = 0x200"
+    ]
+  }
+]

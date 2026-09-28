@@ -971,3 +971,16 @@ EXACT 黄字 56.7～57.1 来回跳，看不出比上一刀（远程 57.1）有�
 ## 2026-09-28 17:05：网络前后零拷贝 DLSS5_DIRECT_IO（分身）
 
 frame-breakdown 可做项 2、3。位 1（默认开）：RGB 输入 pass 直接写 HIP 共享输入缓冲（可 UAV、静息 COMMON），桥接跳过 35MB 拷贝，HIP 后端从不读的 tile 副本不再写/分配；位 2（剑星装机开，模板关）：pre-upscale 路线 FSR 直接读 decode 的 RGBA16F 输出纹理，省回拷。时序会话、OVERLAP、非 RGBA16F 颜色自动走旧路径；RE9 runtime 不读此键。离线回放（`benchmark_vit_reuse` 加 `DLSS5_BENCH_PLAIN=1` 非时序会话，同剑星）9 组 108 候选帧逐位、AE 决策同；ABBA 两批直写快 0.02～0.05ms（−0.14～−0.40%），远小于带宽粗估，说明网络外开销主要不在拷贝本身，更可能在跨 API 交接。剑星已装 `DIRECT_IO=3`（add-on abef6155，备份 `D:\DLSSNR-Lab\zero-copy-io-20260928\backups\stellar-20260928-170538`），位 2 画面待 Zero 本机确认。`results/zero-copy-io-20260928`。
+
+
+## 2026-09-28：Daniel 0.5.0 reference逐核映射，两族候选无达标收益
+
+按21fc931任务单，先DGX离线读168导出（70 reference/69 fast/29共享）、166个host注册/329处引用。同为Clang21 revision590b9320，但选项未知；reference半精度/归约/除法与当前float FMA数学不同，未借它们改基准。命名纠正reg_vit=C512窗口、reg1d=全局ViT；默认C256 persistent chain关闭。默认主体host推导154派发：Swin46+C51264+ViT40+repack2+head1+decoder1；我方实抓214，C512跳42/43/46只13块，对方16块。三几何219行位置配对带grid/waves/资源/静态分类，复杂动态未知保留NA。
+
+C32/C64完整循环路径上界（同1152，非硬件计数器）：我方issued982.77M/310.69M，对方1002.07M/337.24M；向量槽我方反而少，VMEM49.62M/16.54M对21.55M/8.57M。Daniel旧→新去spill是真的，但我方相应生产核已零spill。1088与1152在Daniel深层都60×36/ViT640；900为52×32/448（我方50×30/400）。Daniel post双轴shift0由host/ISA证，我方shift3多边界waves，属窗口语义差。按历史族账×浅层wave差的几何等价约C32.207/C256.084/C64.077/C128.075ms（合.443），非实测；C256/C512/ViT逻辑中间读写的带宽等价时间单列，不与整体约.65ms差额相加归因。
+
+P：默认0 W2_PACK_NOZERO，仅实验源；借Daniel低/高半覆盖目的寄存器，无需预先清零。8活跃核资源不变，去72～76个静态向量槽，C64/128每核24个空MODE段→0，无half收窄混入；同时有互斥分支打包合并，不能只叫“一条mov”。EXACT/AE各84帧逐位、84组AE所有字段同。初轮P计时后来发现与分身zero-copy实验文件时间区间重叠，且旧guard漏benchmark-zc，不能排除并发；全部隔离作废（数值hash保留）。用户17:07明确交卡后，用新benchmark-zc/assets、DIRECT_IO=3/BENCH_PLAIN=1重测：900 +0.00642/−0.00958ms，1080−0.01019/−0.01468ms（两批1000帧弃200），仍远不到0.5%。guard已改benchmark/rt_bench前缀。
+
+C32供数：默认0 CW_WEIGHT_CACHE mask1/2/3，QKV/投影缓存跨四qt复用，同索引/MMA顺序。六导出每wave确实少36/12/48条global_load_b64；Q/C VGPR+12～24，R+2～8，零spill，WMMA/DS/FP8数不变。Q/R/C各12帧1080-motion逐位；两档两轮200帧短筛，Q/R近噪声，C最好900约−0.19%，未做无意义的完整AE。新IO又补C两批短筛：900+0.02324/+0.01834ms，1080−0.00567/+0.01099ms，也不采用。合计228候选帧对float FMA golden同（P168+Q/R/C36+新IO P24），80有效计时槽原序列独立复算；另16旧P槽隔离。
+
+没有合配方、没有装机、没有新备份、不发包。17:10用户说明分身已更新剑星，本轮只读核实add-on ABEF6155F703616070D20CE73D8357D2F19DDC76C3C03DA838D6C236CBBD5F74、DLSS5_DIRECT_IO=3；60内核仍与开工同。以后部署须基于该宿主重新备份并保留3，不覆盖旧C38。完整对应、host地址、循环上界、字节/毫秒条件模型、候选patch、双架构默认关代码身份与实测在 `results/daniel-kernels-20260928`、`HIP/experiments/daniel-kernels`。

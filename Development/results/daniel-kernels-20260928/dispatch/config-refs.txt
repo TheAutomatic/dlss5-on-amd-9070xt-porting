@@ -1,0 +1,163 @@
+6846 18000803c:     	leaq	0x8adbb(%rip), %rdx     # 0x180092dfe Rdna3RegKernels
+6853 18000805f:     	leaq	0x91734(%rip), %rcx     # 0x18009979a ini: Rdna3RegKernels=%s is obsolete and ignored: the register kernels are the only RDNA3 path since 2026-09-27
+7456 180008af4:     	leaq	0x88e97(%rip), %rdx     # 0x180091992 Quality
+8203 180009881:     	leaq	0x8d833(%rip), %rdx     # 0x1800970bb IDXGIFactory2::CreateSwapChainForHwnd
+8209 1800098a4:     	leaq	0x8d810(%rip), %rdx     # 0x1800970bb IDXGIFactory2::CreateSwapChainForHwnd
+8259 180009991:     	leaq	0x8b7fe(%rip), %rdx     # 0x180095196 IDXGIFactory::CreateSwapChain
+8265 1800099b4:     	leaq	0x8b7db(%rip), %rdx     # 0x180095196 IDXGIFactory::CreateSwapChain
+8319 180009ab1:     	leaq	0x889a5(%rip), %rdx     # 0x18009245d IDXGISwapChain::Present
+8324 180009acd:     	leaq	0x8bd59(%rip), %rcx     # 0x18009582d dummy swapchain failed; no present hook
+8328 180009ae5:     	leaq	0x88971(%rip), %rdx     # 0x18009245d IDXGISwapChain::Present
+8378 180009bd1:     	leaq	0x8ff61(%rip), %rdx     # 0x180099b39 IDXGISwapChain1::Present1
+8384 180009bf4:     	leaq	0x8ff3e(%rip), %rdx     # 0x180099b39 IDXGISwapChain1::Present1
+9235 18000a7f7:     	leaq	0x9044d(%rip), %rcx     # 0x18009ac4b swapchain %p created on queue %p (device %p)
+9306 18000a901:     	leaq	0x90436(%rip), %rcx     # 0x18009ad3e device %p (from the first presented swapchain)
+9396 18000aa6b:     	leaq	0x8f934(%rip), %rcx     # 0x18009a3a6 ignoring a swapchain that is not on our device (another renderer in the process, e.g. an overlay)
+9485 18000ac61:     	leaq	0x88ba6(%rip), %rcx     # 0x18009380e env: swapchain %ux%u format %d, %u buffers, swap effect %d, %s
+9967 18000b5a2:     	leaq	0x8f984(%rip), %rcx     # 0x18009af2d env: RDNA3 (%s) detected: the RDNA3 register kernels run (the RDNA3 path; tested on an RX 7900 XT (gfx1100) and an RX 7700 XT (gfx1101); gfx1102 / gfx11-generic (RX 7600, RDNA3 iGPUs) untested -- please report results with this log)
+9970 18000b5b1:     	leaq	0x8d705(%rip), %rcx     # 0x180098cbd DLSSNR_RDNA3_REG
+9974 18000b5c2:     	leaq	0x8f8a5(%rip), %rcx     # 0x18009ae6e env: DLSSNR_RDNA3_REG is obsolete and ignored (the register kernels are the only RDNA3 path)
+9984 18000b5ed:     	leaq	0x8a918(%rip), %rcx     # 0x180095f0c env: UNSUPPORTED GPU ARCHITECTURE %s: this build contains code for RDNA4 (gfx12) and RDNA3 (gfx11) only; the pass stays off
+10003 18000b63d:     	leaq	0x8a8c8(%rip), %rcx     # 0x180095f0c env: UNSUPPORTED GPU ARCHITECTURE %s: this build contains code for RDNA4 (gfx12) and RDNA3 (gfx11) only; the pass stays off
+11498 18000d0dc:     	leaq	0x8e2d8(%rip), %r9      # 0x18009b3bb ACCESS_DENIED (a submission referenced an allocation the process no longer owns: a destroyed resource)
+12135 18000db7a:     	leaq	0x8c0b8(%rip), %r8      # 0x180099c39 Unsupported GPU (%s): this build runs on Radeon RX 9000 (RDNA4) and RX 7000 (RDNA3) only.
+12153 18000dbd6:     	movups	0x8c3ae(%rip), %xmm0    # 0x180099f8b FSR is not active: enable FSR (any quality mode) in the game's graphics settings to use DLSS-NR.
+12166 18000dc1d:     	leaq	0x8c015(%rip), %r8      # 0x180099c39 Unsupported GPU (%s): this build runs on Radeon RX 9000 (RDNA4) and RX 7000 (RDNA3) only.
+14830 1800105bc:     	leaq	0x813cf(%rip), %rax     # 0x180091992 Quality
+14838 1800105e5:     	leaq	0x89a95(%rip), %rcx     # 0x18009a081 reference: NVIDIA's own arithmetic. fast: cheaper arithmetic where the difference is barely visible, about 13% faster on RX 9000; no speed effect on RX 7000.
+17656 1800130d4:     	leaq	0x83e0f(%rip), %rax     # 0x180096eea reference
+17712 1800131b0:     	leaq	0x83d33(%rip), %rdx     # 0x180096eea reference
+17736 18001321e:     	leaq	0x7e76d(%rip), %rdx     # 0x180091992 Quality
+22006 180017d36:     	leaq	0x7f4e0(%rip), %rax     # 0x18009721d register kernels, RDNA3 build
+22008 180017d44:     	leaq	0x83a65(%rip), %rcx     # 0x18009b7b0 register kernels (RDNA4)
+22010 180017d4f:     	leaq	0x825d1(%rip), %rdx     # 0x18009a327 generic kernels (DLSSNR_NO_REG / DLSSNR_SLOW_PREPOST debug path, RDNA4 only)
+25991 18001c944:     	leaq	0x7ec85(%rip), %rdx     # 0x18009b5d0 reference (the PTX arithmetic)
+25994 18001c956:     	leaq	0x769b2(%rip), %rcx     # 0x18009330f quality: %s%s
+27369 18001e454:     	leaq	0x7b31e(%rip), %rax     # 0x180099779 swin C=
+27383 18001e4a3:     	leaq	0x7b2cf(%rip), %r15     # 0x180099779 swin C=
+27397 18001e4d3:     	leaq	0x7b29f(%rip), %r15     # 0x180099779 swin C=
+31418 180023326:     	leaq	0x74329(%rip), %rcx     # 0x180097656 pre-upscale mode: the upscale description is not the head of the dispatch chain; passing the colour through untouched
+32542 180024484:     	leaq	0x75fee(%rip), %rcx     # 0x18009a479 frame-interpolation swapchain context created (type 0x%x)
+33048 180025061:     	leaq	0x5e4d0(%rip), %r8      # 0x180083538 _Z16k_swin_1h_32_fp810SwinParams
+33102 180025199:     	leaq	0x5e451(%rip), %r8      # 0x1800835f1 _Z10k_reg_copy9VarParams
+33300 180025611:     	leaq	0x5e210(%rip), %r8      # 0x180083828 _Z16k_reg_swin_chainILi256ELb0EEv11ChainParams
+33309 180025645:     	leaq	0x5e20b(%rip), %r8      # 0x180083857 _Z12k_reg_swin32ILi0ELb1EEv9VarParams
+33318 180025679:     	leaq	0x5e1fd(%rip), %r8      # 0x18008387d _Z12k_reg_swin32ILi0ELb0EEv9VarParams
+33327 1800256ad:     	leaq	0x5e1ef(%rip), %r8      # 0x1800838a3 _Z12k_reg_swin32ILi1ELb1EEv9VarParams
+33336 1800256e1:     	leaq	0x5e1e1(%rip), %r8      # 0x1800838c9 _Z12k_reg_swin32ILi1ELb0EEv9VarParams
+33345 180025715:     	leaq	0x5e1d3(%rip), %r8      # 0x1800838ef _Z12k_reg_swin32ILi2ELb1EEv9VarParams
+33354 180025749:     	leaq	0x5e1c5(%rip), %r8      # 0x180083915 _Z12k_reg_swin32ILi2ELb0EEv9VarParams
+33363 18002577d:     	leaq	0x5e1b7(%rip), %r8      # 0x18008393b _Z12k_reg_swin32ILi4ELb1EEv9VarParams
+33372 1800257b1:     	leaq	0x5e1a9(%rip), %r8      # 0x180083961 _Z12k_reg_swin32ILi4ELb0EEv9VarParams
+33381 1800257e5:     	leaq	0x5e19b(%rip), %r8      # 0x180083987 _Z12k_reg_swin32ILi5ELb1EEv9VarParams
+33390 180025819:     	leaq	0x5e18d(%rip), %r8      # 0x1800839ad _Z12k_reg_swin32ILi5ELb0EEv9VarParams
+33399 18002584d:     	leaq	0x5e17f(%rip), %r8      # 0x1800839d3 _Z12k_reg_swin32ILi8ELb1EEv9VarParams
+33408 180025881:     	leaq	0x5e171(%rip), %r8      # 0x1800839f9 _Z12k_reg_swin32ILi8ELb0EEv9VarParams
+33417 1800258b5:     	leaq	0x5e163(%rip), %r8      # 0x180083a1f _Z12k_reg_swin32ILi20ELb1EEv9VarParams
+33426 1800258e9:     	leaq	0x5e156(%rip), %r8      # 0x180083a46 _Z12k_reg_swin32ILi20ELb0EEv9VarParams
+33435 18002591d:     	leaq	0x5e149(%rip), %r8      # 0x180083a6d _Z12k_reg_swin32ILi32ELb1EEv9VarParams
+33444 180025951:     	leaq	0x5e13c(%rip), %r8      # 0x180083a94 _Z12k_reg_swin32ILi32ELb0EEv9VarParams
+33455 18002599f:     	leaq	0x5e115(%rip), %r8      # 0x180083abb _Z10k_swin_varILi32ELb1ELb1EEv9VarParams
+33466 1800259ed:     	leaq	0x5e0f0(%rip), %r8      # 0x180083ae4 _Z10k_swin_varILi32ELb1ELb0EEv9VarParams
+33499 180025ad7:     	leaq	0x5e065(%rip), %r8      # 0x180083b43 _Z16k_reg_swin_chainILi256ELb1EEv11ChainParams
+33510 180025b25:     	leaq	0x5e046(%rip), %r8      # 0x180083b72 _Z13k_reg_swin_mhILi64ELi0ELb1EEv9VarParams
+33521 180025b73:     	leaq	0x5e024(%rip), %r8      # 0x180083b9e _Z13k_reg_swin_mhILi64ELi0ELb0EEv9VarParams
+33532 180025bc1:     	leaq	0x5e002(%rip), %r8      # 0x180083bca _Z13k_reg_swin_mhILi64ELi1ELb1EEv9VarParams
+33543 180025c0f:     	leaq	0x5dfe0(%rip), %r8      # 0x180083bf6 _Z13k_reg_swin_mhILi64ELi1ELb0EEv9VarParams
+33554 180025c5d:     	leaq	0x5dfbe(%rip), %r8      # 0x180083c22 _Z13k_reg_swin_mhILi64ELi2ELb1EEv9VarParams
+33565 180025cab:     	leaq	0x5df9c(%rip), %r8      # 0x180083c4e _Z13k_reg_swin_mhILi64ELi2ELb0EEv9VarParams
+33576 180025cf9:     	leaq	0x5df7a(%rip), %r8      # 0x180083c7a _Z13k_reg_swin_mhILi64ELi4ELb1EEv9VarParams
+33587 180025d47:     	leaq	0x5df58(%rip), %r8      # 0x180083ca6 _Z13k_reg_swin_mhILi64ELi4ELb0EEv9VarParams
+33598 180025d95:     	leaq	0x5df36(%rip), %r8      # 0x180083cd2 _Z13k_reg_swin_mhILi64ELi5ELb1EEv9VarParams
+33609 180025de3:     	leaq	0x5df14(%rip), %r8      # 0x180083cfe _Z13k_reg_swin_mhILi64ELi5ELb0EEv9VarParams
+33620 180025e31:     	leaq	0x5def2(%rip), %r8      # 0x180083d2a _Z13k_reg_swin_mhILi64ELi8ELb1EEv9VarParams
+33631 180025e7f:     	leaq	0x5ded0(%rip), %r8      # 0x180083d56 _Z13k_reg_swin_mhILi64ELi8ELb0EEv9VarParams
+33642 180025ecd:     	leaq	0x5deae(%rip), %r8      # 0x180083d82 _Z13k_reg_swin_mhILi64ELi10ELb1EEv9VarParams
+33653 180025f1b:     	leaq	0x5de8d(%rip), %r8      # 0x180083daf _Z13k_reg_swin_mhILi64ELi10ELb0EEv9VarParams
+33664 180025f69:     	leaq	0x5de6c(%rip), %r8      # 0x180083ddc _Z13k_reg_swin_mhILi64ELi3ELb1EEv9VarParams
+33675 180025fb7:     	leaq	0x5de4a(%rip), %r8      # 0x180083e08 _Z13k_reg_swin_mhILi64ELi3ELb0EEv9VarParams
+33686 180026005:     	leaq	0x5de28(%rip), %r8      # 0x180083e34 _Z13k_reg_swin_mhILi128ELi0ELb1EEv9VarParams
+33697 180026053:     	leaq	0x5de07(%rip), %r8      # 0x180083e61 _Z13k_reg_swin_mhILi128ELi0ELb0EEv9VarParams
+33708 1800260a1:     	leaq	0x5dde6(%rip), %r8      # 0x180083e8e _Z13k_reg_swin_mhILi128ELi1ELb1EEv9VarParams
+33719 1800260ef:     	leaq	0x5ddc5(%rip), %r8      # 0x180083ebb _Z13k_reg_swin_mhILi128ELi1ELb0EEv9VarParams
+33730 18002613d:     	leaq	0x5dda4(%rip), %r8      # 0x180083ee8 _Z13k_reg_swin_mhILi128ELi2ELb1EEv9VarParams
+33741 18002618b:     	leaq	0x5dd83(%rip), %r8      # 0x180083f15 _Z13k_reg_swin_mhILi128ELi2ELb0EEv9VarParams
+33752 1800261d9:     	leaq	0x5dd62(%rip), %r8      # 0x180083f42 _Z13k_reg_swin_mhILi128ELi4ELb1EEv9VarParams
+33763 180026227:     	leaq	0x5dd41(%rip), %r8      # 0x180083f6f _Z13k_reg_swin_mhILi128ELi4ELb0EEv9VarParams
+33774 180026275:     	leaq	0x5dd20(%rip), %r8      # 0x180083f9c _Z13k_reg_swin_mhILi128ELi5ELb1EEv9VarParams
+33785 1800262c3:     	leaq	0x5dcff(%rip), %r8      # 0x180083fc9 _Z13k_reg_swin_mhILi128ELi5ELb0EEv9VarParams
+33796 180026311:     	leaq	0x5dcde(%rip), %r8      # 0x180083ff6 _Z13k_reg_swin_mhILi128ELi8ELb1EEv9VarParams
+33807 18002635f:     	leaq	0x5dcbd(%rip), %r8      # 0x180084023 _Z13k_reg_swin_mhILi128ELi8ELb0EEv9VarParams
+33818 1800263ad:     	leaq	0x5dc9c(%rip), %r8      # 0x180084050 _Z13k_reg_swin_mhILi128ELi10ELb1EEv9VarParams
+33829 1800263fb:     	leaq	0x5dc7c(%rip), %r8      # 0x18008407e _Z13k_reg_swin_mhILi128ELi10ELb0EEv9VarParams
+33840 180026449:     	leaq	0x5dc5c(%rip), %r8      # 0x1800840ac _Z13k_reg_swin_mhILi128ELi3ELb1EEv9VarParams
+33851 180026497:     	leaq	0x5dc3b(%rip), %r8      # 0x1800840d9 _Z13k_reg_swin_mhILi128ELi3ELb0EEv9VarParams
+33862 1800264e5:     	leaq	0x5dc1a(%rip), %r8      # 0x180084106 _Z13k_reg_swin_mhILi256ELi0ELb1EEv9VarParams
+33873 180026533:     	leaq	0x5dbf9(%rip), %r8      # 0x180084133 _Z13k_reg_swin_mhILi256ELi0ELb0EEv9VarParams
+33884 180026581:     	leaq	0x5dbd8(%rip), %r8      # 0x180084160 _Z13k_reg_swin_mhILi256ELi1ELb1EEv9VarParams
+33895 1800265cf:     	leaq	0x5dbb7(%rip), %r8      # 0x18008418d _Z13k_reg_swin_mhILi256ELi1ELb0EEv9VarParams
+33906 18002661d:     	leaq	0x5db96(%rip), %r8      # 0x1800841ba _Z13k_reg_swin_mhILi256ELi2ELb1EEv9VarParams
+33917 18002666b:     	leaq	0x5db75(%rip), %r8      # 0x1800841e7 _Z13k_reg_swin_mhILi256ELi2ELb0EEv9VarParams
+33928 1800266b9:     	leaq	0x5db54(%rip), %r8      # 0x180084214 _Z13k_reg_swin_mhILi256ELi4ELb1EEv9VarParams
+33939 180026707:     	leaq	0x5db33(%rip), %r8      # 0x180084241 _Z13k_reg_swin_mhILi256ELi4ELb0EEv9VarParams
+33950 180026755:     	leaq	0x5db12(%rip), %r8      # 0x18008426e _Z13k_reg_swin_mhILi256ELi5ELb1EEv9VarParams
+33961 1800267a3:     	leaq	0x5daf1(%rip), %r8      # 0x18008429b _Z13k_reg_swin_mhILi256ELi5ELb0EEv9VarParams
+33972 1800267f1:     	leaq	0x5dad0(%rip), %r8      # 0x1800842c8 _Z13k_reg_swin_mhILi256ELi8ELb1EEv9VarParams
+33983 18002683f:     	leaq	0x5daaf(%rip), %r8      # 0x1800842f5 _Z13k_reg_swin_mhILi256ELi8ELb0EEv9VarParams
+33994 18002688d:     	leaq	0x5da8e(%rip), %r8      # 0x180084322 _Z13k_reg_swin_mhILi256ELi10ELb1EEv9VarParams
+34005 1800268db:     	leaq	0x5da6e(%rip), %r8      # 0x180084350 _Z13k_reg_swin_mhILi256ELi10ELb0EEv9VarParams
+34016 180026929:     	leaq	0x5da4e(%rip), %r8      # 0x18008437e _Z13k_reg_swin_mhILi256ELi3ELb1EEv9VarParams
+34027 180026977:     	leaq	0x5da2d(%rip), %r8      # 0x1800843ab _Z13k_reg_swin_mhILi256ELi3ELb0EEv9VarParams
+34038 1800269c5:     	leaq	0x5da0c(%rip), %r8      # 0x1800843d8 _Z10k_swin_varILi64ELb0ELb1EEv9VarParams
+34049 180026a13:     	leaq	0x5d9e7(%rip), %r8      # 0x180084401 _Z10k_swin_varILi128ELb0ELb1EEv9VarParams
+34060 180026a61:     	leaq	0x5d9c3(%rip), %r8      # 0x18008442b _Z10k_swin_varILi256ELb0ELb1EEv9VarParams
+34071 180026aaf:     	leaq	0x5d99f(%rip), %r8      # 0x180084455 _Z10k_swin_varILi64ELb0ELb0EEv9VarParams
+34082 180026afd:     	leaq	0x5d97a(%rip), %r8      # 0x18008447e _Z10k_swin_varILi128ELb0ELb0EEv9VarParams
+34093 180026b4b:     	leaq	0x5d956(%rip), %r8      # 0x1800844a8 _Z10k_swin_varILi256ELb0ELb0EEv9VarParams
+34104 180026b99:     	leaq	0x5d932(%rip), %r8      # 0x1800844d2 _Z14k_reg_vit_ffwdILi2ELb1ELb1EEv13VitFfwdParams
+34115 180026be7:     	leaq	0x5d915(%rip), %r8      # 0x180084503 _Z14k_reg_vit_ffwdILi2ELb1ELb0EEv13VitFfwdParams
+34126 180026c35:     	leaq	0x5d8f8(%rip), %r8      # 0x180084534 _Z14k_reg_vit_ffwdILi2ELb0ELb1EEv13VitFfwdParams
+34137 180026c83:     	leaq	0x5d8db(%rip), %r8      # 0x180084565 _Z14k_reg_vit_ffwdILi2ELb0ELb0EEv13VitFfwdParams
+34148 180026cd1:     	leaq	0x5d8be(%rip), %r8      # 0x180084596 _Z14k_reg_vit_ffwdILi1ELb1ELb1EEv13VitFfwdParams
+34159 180026d1f:     	leaq	0x5d8a1(%rip), %r8      # 0x1800845c7 _Z14k_reg_vit_ffwdILi1ELb1ELb0EEv13VitFfwdParams
+34170 180026d6d:     	leaq	0x5d884(%rip), %r8      # 0x1800845f8 _Z14k_reg_vit_ffwdILi1ELb0ELb1EEv13VitFfwdParams
+34181 180026dbb:     	leaq	0x5d867(%rip), %r8      # 0x180084629 _Z14k_reg_vit_ffwdILi1ELb0ELb0EEv13VitFfwdParams
+34192 180026e09:     	leaq	0x5d84a(%rip), %r8      # 0x18008465a _Z14k_reg_vit_convILi2ELi0ELb1EEv13VitConvParams
+34203 180026e57:     	leaq	0x5d82d(%rip), %r8      # 0x18008468b _Z14k_reg_vit_convILi2ELi0ELb0EEv13VitConvParams
+34214 180026ea5:     	leaq	0x5d810(%rip), %r8      # 0x1800846bc _Z14k_reg_vit_convILi2ELi1ELb1EEv13VitConvParams
+34225 180026ef3:     	leaq	0x5d7f3(%rip), %r8      # 0x1800846ed _Z14k_reg_vit_convILi2ELi1ELb0EEv13VitConvParams
+34236 180026f41:     	leaq	0x5d7d6(%rip), %r8      # 0x18008471e _Z14k_reg_vit_convILi2ELi2ELb1EEv13VitConvParams
+34247 180026f8f:     	leaq	0x5d7b9(%rip), %r8      # 0x18008474f _Z14k_reg_vit_convILi2ELi2ELb0EEv13VitConvParams
+34258 180026fdd:     	leaq	0x5d79c(%rip), %r8      # 0x180084780 _Z14k_reg_vit_convILi2ELi4ELb1EEv13VitConvParams
+34269 18002702b:     	leaq	0x5d77f(%rip), %r8      # 0x1800847b1 _Z14k_reg_vit_convILi2ELi4ELb0EEv13VitConvParams
+34280 180027079:     	leaq	0x5d762(%rip), %r8      # 0x1800847e2 _Z14k_reg_vit_convILi1ELi0ELb1EEv13VitConvParams
+34291 1800270c7:     	leaq	0x5d745(%rip), %r8      # 0x180084813 _Z14k_reg_vit_convILi1ELi0ELb0EEv13VitConvParams
+34302 180027115:     	leaq	0x5d728(%rip), %r8      # 0x180084844 _Z14k_reg_vit_convILi1ELi1ELb1EEv13VitConvParams
+34313 180027163:     	leaq	0x5d70b(%rip), %r8      # 0x180084875 _Z14k_reg_vit_convILi1ELi1ELb0EEv13VitConvParams
+34324 1800271b1:     	leaq	0x5d6ee(%rip), %r8      # 0x1800848a6 _Z14k_reg_vit_convILi1ELi2ELb1EEv13VitConvParams
+34335 1800271ff:     	leaq	0x5d6d1(%rip), %r8      # 0x1800848d7 _Z14k_reg_vit_convILi1ELi2ELb0EEv13VitConvParams
+34346 18002724d:     	leaq	0x5d6b4(%rip), %r8      # 0x180084908 _Z14k_reg_vit_convILi1ELi4ELb1EEv13VitConvParams
+34357 18002729b:     	leaq	0x5d697(%rip), %r8      # 0x180084939 _Z14k_reg_vit_convILi1ELi4ELb0EEv13VitConvParams
+34368 1800272e9:     	leaq	0x5d67a(%rip), %r8      # 0x18008496a _Z15k_reg_vit_attn2ILb1EEv10AttnParams
+34379 180027337:     	leaq	0x5d653(%rip), %r8      # 0x180084991 _Z15k_reg_vit_attn3ILb0EEv10AttnParams
+34478 1800275f5:     	leaq	0x5d4dc(%rip), %r8      # 0x180084ad8 _Z10k_reg_headILi4EEv13HeadRegParams
+34742 180027d45:     	leaq	0x5d169(%rip), %r8      # 0x180084eb5 _Z11k_reg_decupILb1EEv14DecUpRegParams
+34753 180027d93:     	leaq	0x5d142(%rip), %r8      # 0x180084edc _Z11k_reg_decupILb0EEv14DecUpRegParams
+45078 180032117:     	leaq	0x65233(%rip), %rdx     # 0x180097351 overlay: the foreground window %p is not the swapchain window %p (root %p) but belongs to the game; keys accepted
+45099 180032180:     	leaq	0x65173(%rip), %rdx     # 0x1800972fa overlay: the swapchain window %p is a child of the foreground window %p; keys accepted
+45192 18003236b:     	leaq	0x6506d(%rip), %rdx     # 0x1800973df overlay: %s pressed while window %p of process %lu had focus (the game's swapchain window is %p); ignored
+51002 180037225:     	leaq	0x6479c(%rip), %r8      # 0x18009b9c8 chain: %u flag waits timed out (100 ms each; frame output not trustworthy)
+52026 180038590:     	leaq	0x5f31b(%rip), %rdx     # 0x1800978b2 swinch%d_C%d
+52093 1800386c4:     	leaq	0x5f1dc(%rip), %rdx     # 0x1800978a7 swin%d_C%d
+54048 18003b423:     	leaq	0x5c470(%rip), %rdx     # 0x18009789a swinup%d_C%d
+54141 18003b5c7:     	leaq	0x5c2e4(%rip), %rdx     # 0x1800978b2 swinch%d_C%d
+54194 18003b6ab:     	leaq	0x5c1f5(%rip), %rdx     # 0x1800978a7 swin%d_C%d
+55718 18003d151:     	leaq	0x5ba67(%rip), %rcx     # 0x180098bbf DLSSNR_CHAIN
+55754 18003d1f9:     	leaq	0x5bb64(%rip), %rcx     # 0x180098d64 CHAIN_GRID
+55765 18003d22a:     	leaq	0x5bb72(%rip), %rcx     # 0x180098da3 CHAIN_LDS_PAD
+56818 18003e499:     	leaq	0x5376c(%rip), %r8      # 0x180091c0c GPU architecture %s: this engine has kernels for gfx12 (RDNA4) and gfx11 (RDNA3) only
+56826 18003e4c0:     	leaq	0x56ea7(%rip), %rdx     # 0x18009536e DLSSNR_NO_REG / DLSSNR_SLOW_PREPOST select the generic kernels, which the RDNA3 (gfx11) build does not contain (the register kernels are the only RDNA3 path); unset them
+56829 18003e4cf:     	leaq	0x548b7(%rip), %rdx     # 0x180092d8d DLSSNR_CHAIN=1 (the Phase C persistent chains) exists for gfx12 only; unset it to run the RDNA3 register kernels
+56832 18003e4de:     	leaq	0x5b69a(%rip), %rdx     # 0x180099b7f DLSSNR_CHAIN=1 (the Phase C persistent chains) is not validated on the NVIDIA working extent (and hung in the 128-padded baseline too); unset it or set DLSSNR_PAD128=1
+56953 18003e6c1:     	leaq	0x533dc(%rip), %rdx     # 0x180091aa4 RDNA3 register kernels: no VRAM for the f16 weight copy
+56956 18003e6d0:     	leaq	0x58dcd(%rip), %rdx     # 0x1800974a4 RDNA3 register kernels: building the f16 weight copy failed

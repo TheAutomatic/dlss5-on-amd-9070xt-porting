@@ -1,0 +1,67 @@
+--- a/hip/wave_owned_c32.inc
++++ b/hip/wave_owned_c32.inc
+@@ -154,0 +155,11 @@
++// Default-off supply experiment: keep token-invariant attention weight fragments across four qt tiles.
++#ifndef CW_WEIGHT_CACHE
++#define CW_WEIGHT_CACHE 0 /* 1 QKV, 2 projection, 3 both */
++#endif
++#if CW_WEIGHT_CACHE
++DEV i2 cw_cached_weight(const float*w,uint offset){
++ i2 b=matrix8(w,offset);int lo=b[0],hi=b[1];
++ // Opaque register results prevent LLVM from replacing each use with a fresh potentially-aliasing load.
++ __asm__ volatile("" : "+v"(lo),"+v"(hi));return i2{lo,hi};
++}
++#endif
+@@ -164,0 +176,13 @@
++#if CW_WEIGHT_CACHE & 1
++ { // End the QKV cache lifetime before the score/AV/projection loop.
++ uint cache_lane=__builtin_amdgcn_workitem_id_x();
++#if CW_QKV_FENCE
++ __asm__ volatile("" : "+v"(cache_lane));cache_lane&=31u;
++#endif
++ uint cache_r=cache_lane&15u,cache_g=cache_lane>>4;
++ i2 qkv_weights[3][2][2];
++ _Pragma("unroll") for(uint part=0;part<3;part++)
++ _Pragma("unroll") for(uint ci=0;ci<2;ci++)
++ _Pragma("unroll") for(uint kt=0;kt<2;kt++)
++  qkv_weights[part][ci][kt]=cw_cached_weight(w,part*1024+(ci*16+cache_r)*32+kt*16+cache_g*8);
++#endif
+@@ -256 +280,7 @@
+-   f8 q[2]{};for(uint ci=0;ci<2;ci++)for(uint kt=0;kt<2;kt++){i2 b=matrix8(w,part*1024+(ci*16+qr)*32+kt*16+qg*8);q[ci]=part<2?__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,feature[kt],q[ci]):__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(feature[kt],b,q[ci]);}
++   f8 q[2]{};for(uint ci=0;ci<2;ci++)for(uint kt=0;kt<2;kt++){i2 b;
++#if CW_WEIGHT_CACHE & 1
++    b=qkv_weights[part][ci][kt];
++#else
++    b=matrix8(w,part*1024+(ci*16+qr)*32+kt*16+qg*8);
++#endif
++    q[ci]=part<2?__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,feature[kt],q[ci]):__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(feature[kt],b,q[ci]);}
+@@ -266,0 +297,15 @@
++#if CW_WEIGHT_CACHE & 1
++ }
++#endif
++#if CW_WEIGHT_CACHE & 2
++ { // Projection has a separate, shorter four-fragment cache lifetime.
++ uint cache_lane=__builtin_amdgcn_workitem_id_x();
++#if CW_LAUNDER
++ __asm__ volatile("" : "+v"(cache_lane));cache_lane&=31u;
++#endif
++ uint cache_r=cache_lane&15u,cache_g=cache_lane>>4;
++ i2 projection_weights[2][2];
++ _Pragma("unroll") for(uint ci=0;ci<2;ci++)
++ _Pragma("unroll") for(uint kt=0;kt<2;kt++)
++  projection_weights[ci][kt]=cw_cached_weight(w,3072+(ci*16+cache_r)*32+kt*16+cache_g*8);
++#endif
+@@ -284 +329,7 @@
+-   f8 acc{};for(uint kt=0;kt<2;kt++){i2 b=matrix8(w,3072+(ci*16+r)*32+kt*16+g*8);acc=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,av[kt],acc);}
++   f8 acc{};for(uint kt=0;kt<2;kt++){i2 b;
++#if CW_WEIGHT_CACHE & 2
++    b=projection_weights[ci][kt];
++#else
++    b=matrix8(w,3072+(ci*16+r)*32+kt*16+g*8);
++#endif
++    acc=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,av[kt],acc);}
+@@ -298,0 +350,4 @@
++
++#if CW_WEIGHT_CACHE & 2
++ }
++#endif

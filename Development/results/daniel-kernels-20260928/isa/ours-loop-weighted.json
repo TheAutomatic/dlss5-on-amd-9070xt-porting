@@ -1,0 +1,1871 @@
+{
+  "kernels": {
+    "c32-wave1:c32_wave1_chain": {
+      "kernel": "c32-wave1:c32_wave1_chain",
+      "static": {
+        "SMEM": 4,
+        "WAIT": 151,
+        "SALU": 101,
+        "mov": 70,
+        "VOPD": 138,
+        "VOPD_slots": 276,
+        "VALU": 544,
+        "VMEM": 52,
+        "VMEM_read_requests": 50,
+        "VMEM_read_bytes_per_lane_static": 472,
+        "WMMA": 56,
+        "pack": 84,
+        "DS": 4,
+        "VMEM_write_requests": 2,
+        "VMEM_write_bytes_per_lane_static": 16,
+        "issued_static": 1050,
+        "vector_slots": 820
+      },
+      "status": "loop-expanded path-sum upper; boundary paths summed",
+      "variants": {
+        "upper": {
+          "trips": [
+            4,
+            8,
+            4
+          ],
+          "counts": {
+            "issued_static": 5397,
+            "vector_slots": 4093,
+            "SMEM": 4,
+            "WAIT": 905,
+            "SALU": 418,
+            "mov": 142,
+            "VOPD": 695,
+            "VOPD_slots": 1390,
+            "VALU": 2703,
+            "VMEM": 320,
+            "VMEM_read_requests": 312,
+            "VMEM_read_bytes_per_lane_static": 2784,
+            "WMMA": 336,
+            "pack": 448,
+            "DS": 16,
+            "VMEM_write_requests": 8,
+            "VMEM_write_bytes_per_lane_static": 64
+          },
+          "weighted_by_tier": {
+            "900": {
+              "issued_static": 131913474,
+              "vector_slots": 100041106,
+              "SMEM": 97768,
+              "WAIT": 22120010,
+              "SALU": 10216756,
+              "mov": 3470764,
+              "VOPD": 16987190,
+              "VOPD_slots": 33974380,
+              "VALU": 66066726,
+              "VMEM": 7821440,
+              "VMEM_read_requests": 7625904,
+              "VMEM_read_bytes_per_lane_static": 68046528,
+              "WMMA": 8212512,
+              "pack": 10950016,
+              "DS": 391072,
+              "VMEM_write_requests": 195536,
+              "VMEM_write_bytes_per_lane_static": 1564288
+            },
+            "1080": {
+              "issued_static": 189380730,
+              "vector_slots": 143623370,
+              "SMEM": 140360,
+              "WAIT": 31756450,
+              "SALU": 14667620,
+              "mov": 4982780,
+              "VOPD": 24387550,
+              "VOPD_slots": 48775100,
+              "VALU": 94848270,
+              "VMEM": 11228800,
+              "VMEM_read_requests": 10948080,
+              "VMEM_read_bytes_per_lane_static": 97690560,
+              "WMMA": 11790240,
+              "pack": 15720320,
+              "DS": 561440,
+              "VMEM_write_requests": 280720,
+              "VMEM_write_bytes_per_lane_static": 2245760
+            }
+          }
+        }
+      },
+      "tiers": {
+        "900": {
+          "calls": 4,
+          "waves": 24442,
+          "groups": [
+            6161,
+            6060,
+            6161,
+            6060
+          ]
+        },
+        "1080": {
+          "calls": 4,
+          "waves": 35090,
+          "groups": [
+            8833,
+            8712,
+            8833,
+            8712
+          ]
+        }
+      }
+    },
+    "c32-wave1:c32_wave1_mapped": {
+      "kernel": "c32-wave1:c32_wave1_mapped",
+      "static": {
+        "SMEM": 3,
+        "WAIT": 147,
+        "SALU": 106,
+        "VALU": 611,
+        "VOPD": 145,
+        "VOPD_slots": 290,
+        "mov": 76,
+        "VMEM": 46,
+        "VMEM_read_requests": 44,
+        "VMEM_read_bytes_per_lane_static": 488,
+        "pack": 92,
+        "WMMA": 44,
+        "DS": 4,
+        "VMEM_write_requests": 2,
+        "VMEM_write_bytes_per_lane_static": 16,
+        "issued_static": 1106,
+        "vector_slots": 901
+      },
+      "status": "loop-expanded path-sum upper; boundary paths summed",
+      "variants": {
+        "upper": {
+          "trips": [
+            4,
+            8,
+            4
+          ],
+          "counts": {
+            "issued_static": 5671,
+            "vector_slots": 4438,
+            "SMEM": 3,
+            "WAIT": 877,
+            "SALU": 435,
+            "VALU": 3074,
+            "VOPD": 682,
+            "VOPD_slots": 1364,
+            "mov": 166,
+            "VMEM": 296,
+            "VMEM_read_requests": 288,
+            "VMEM_read_bytes_per_lane_static": 2848,
+            "pack": 480,
+            "WMMA": 288,
+            "DS": 16,
+            "VMEM_write_requests": 8,
+            "VMEM_write_bytes_per_lane_static": 64
+          },
+          "weighted_by_tier": {
+            "900": {
+              "issued_static": 68052000,
+              "vector_slots": 53256000,
+              "SMEM": 36000,
+              "WAIT": 10524000,
+              "SALU": 5220000,
+              "VALU": 36888000,
+              "VOPD": 8184000,
+              "VOPD_slots": 16368000,
+              "mov": 1992000,
+              "VMEM": 3552000,
+              "VMEM_read_requests": 3456000,
+              "VMEM_read_bytes_per_lane_static": 34176000,
+              "pack": 5760000,
+              "WMMA": 3456000,
+              "DS": 192000,
+              "VMEM_write_requests": 96000,
+              "VMEM_write_bytes_per_lane_static": 768000
+            },
+            "1080": {
+              "issued_static": 97994880,
+              "vector_slots": 76688640,
+              "SMEM": 51840,
+              "WAIT": 15154560,
+              "SALU": 7516800,
+              "VALU": 53118720,
+              "VOPD": 11784960,
+              "VOPD_slots": 23569920,
+              "mov": 2868480,
+              "VMEM": 5114880,
+              "VMEM_read_requests": 4976640,
+              "VMEM_read_bytes_per_lane_static": 49213440,
+              "pack": 8294400,
+              "WMMA": 4976640,
+              "DS": 276480,
+              "VMEM_write_requests": 138240,
+              "VMEM_write_bytes_per_lane_static": 1105920
+            }
+          }
+        }
+      },
+      "tiers": {
+        "900": {
+          "calls": 2,
+          "waves": 12000,
+          "groups": [
+            6000,
+            6000
+          ]
+        },
+        "1080": {
+          "calls": 2,
+          "waves": 17280,
+          "groups": [
+            8640,
+            8640
+          ]
+        }
+      }
+    },
+    "c32-wave1:c32_wave1_finish": {
+      "kernel": "c32-wave1:c32_wave1_finish",
+      "static": {
+        "SMEM": 5,
+        "WAIT": 431,
+        "SALU": 258,
+        "VOPD": 150,
+        "VOPD_slots": 300,
+        "mov": 117,
+        "VALU": 1402,
+        "VMEM": 85,
+        "VMEM_read_requests": 48,
+        "VMEM_read_bytes_per_lane_static": 472,
+        "WMMA": 56,
+        "pack": 242,
+        "DS": 140,
+        "VMEM_write_requests": 37,
+        "VMEM_write_bytes_per_lane_static": 148,
+        "issued_static": 2527,
+        "vector_slots": 1702
+      },
+      "status": "two mutually exclusive tail loop scenarios; nonloop alternative blocks still upper",
+      "variants": {
+        "tail16": {
+          "trips": [
+            4,
+            8,
+            4,
+            16,
+            0
+          ],
+          "counts": {
+            "issued_static": 8251,
+            "vector_slots": 5720,
+            "SMEM": 5,
+            "WAIT": 1475,
+            "SALU": 797,
+            "VOPD": 697,
+            "VOPD_slots": 1394,
+            "mov": 217,
+            "VALU": 4326,
+            "VMEM": 399,
+            "VMEM_read_requests": 304,
+            "VMEM_read_bytes_per_lane_static": 2784,
+            "WMMA": 336,
+            "pack": 640,
+            "DS": 216,
+            "VMEM_write_requests": 95,
+            "VMEM_write_bytes_per_lane_static": 380
+          },
+          "weighted_by_tier": {
+            "900": {
+              "issued_static": 50331100,
+              "vector_slots": 34892000,
+              "SMEM": 30500,
+              "WAIT": 8997500,
+              "SALU": 4861700,
+              "VOPD": 4251700,
+              "VOPD_slots": 8503400,
+              "mov": 1323700,
+              "VALU": 26388600,
+              "VMEM": 2433900,
+              "VMEM_read_requests": 1854400,
+              "VMEM_read_bytes_per_lane_static": 16982400,
+              "WMMA": 2049600,
+              "pack": 3904000,
+              "DS": 1317600,
+              "VMEM_write_requests": 579500,
+              "VMEM_write_bytes_per_lane_static": 2318000
+            },
+            "1080": {
+              "issued_static": 72278760,
+              "vector_slots": 50107200,
+              "SMEM": 43800,
+              "WAIT": 12921000,
+              "SALU": 6981720,
+              "VOPD": 6105720,
+              "VOPD_slots": 12211440,
+              "mov": 1900920,
+              "VALU": 37895760,
+              "VMEM": 3495240,
+              "VMEM_read_requests": 2663040,
+              "VMEM_read_bytes_per_lane_static": 24387840,
+              "WMMA": 2943360,
+              "pack": 5606400,
+              "DS": 1892160,
+              "VMEM_write_requests": 832200,
+              "VMEM_write_bytes_per_lane_static": 3328800
+            }
+          }
+        },
+        "tail32": {
+          "trips": [
+            4,
+            8,
+            4,
+            0,
+            32
+          ],
+          "counts": {
+            "issued_static": 9963,
+            "vector_slots": 5752,
+            "SMEM": 5,
+            "WAIT": 2291,
+            "SALU": 1661,
+            "VOPD": 697,
+            "VOPD_slots": 1394,
+            "mov": 249,
+            "VALU": 4358,
+            "VMEM": 399,
+            "VMEM_read_requests": 304,
+            "VMEM_read_bytes_per_lane_static": 2784,
+            "WMMA": 336,
+            "pack": 640,
+            "DS": 216,
+            "VMEM_write_requests": 95,
+            "VMEM_write_bytes_per_lane_static": 380
+          },
+          "weighted_by_tier": {
+            "900": {
+              "issued_static": 60774300,
+              "vector_slots": 35087200,
+              "SMEM": 30500,
+              "WAIT": 13975100,
+              "SALU": 10132100,
+              "VOPD": 4251700,
+              "VOPD_slots": 8503400,
+              "mov": 1518900,
+              "VALU": 26583800,
+              "VMEM": 2433900,
+              "VMEM_read_requests": 1854400,
+              "VMEM_read_bytes_per_lane_static": 16982400,
+              "WMMA": 2049600,
+              "pack": 3904000,
+              "DS": 1317600,
+              "VMEM_write_requests": 579500,
+              "VMEM_write_bytes_per_lane_static": 2318000
+            },
+            "1080": {
+              "issued_static": 87275880,
+              "vector_slots": 50387520,
+              "SMEM": 43800,
+              "WAIT": 20069160,
+              "SALU": 14550360,
+              "VOPD": 6105720,
+              "VOPD_slots": 12211440,
+              "mov": 2181240,
+              "VALU": 38176080,
+              "VMEM": 3495240,
+              "VMEM_read_requests": 2663040,
+              "VMEM_read_bytes_per_lane_static": 24387840,
+              "WMMA": 2943360,
+              "pack": 5606400,
+              "DS": 1892160,
+              "VMEM_write_requests": 832200,
+              "VMEM_write_bytes_per_lane_static": 3328800
+            }
+          }
+        }
+      },
+      "tiers": {
+        "900": {
+          "calls": 1,
+          "waves": 6100,
+          "groups": [
+            6100
+          ]
+        },
+        "1080": {
+          "calls": 1,
+          "waves": 8760,
+          "groups": [
+            8760
+          ]
+        }
+      }
+    },
+    "c32-wave1:c32_wave1_finish_dcrop": {
+      "kernel": "c32-wave1:c32_wave1_finish_dcrop",
+      "static": {
+        "SMEM": 5,
+        "WAIT": 366,
+        "SALU": 269,
+        "VOPD": 147,
+        "VOPD_slots": 294,
+        "mov": 104,
+        "VALU": 1025,
+        "VMEM": 71,
+        "VMEM_read_requests": 48,
+        "VMEM_read_bytes_per_lane_static": 472,
+        "WMMA": 56,
+        "pack": 167,
+        "DS": 80,
+        "VMEM_write_requests": 23,
+        "VMEM_write_bytes_per_lane_static": 92,
+        "issued_static": 2019,
+        "vector_slots": 1319
+      },
+      "status": "exclusive full vs edge; downcrop edge loop16, full downcrop unrolled; nonloop alternatives remain summed",
+      "variants": {
+        "full": {
+          "trips": [
+            4,
+            8,
+            4,
+            16,
+            0,
+            0
+          ],
+          "counts": {
+            "issued_static": 7656,
+            "vector_slots": 5305,
+            "SMEM": 5,
+            "WAIT": 1386,
+            "SALU": 781,
+            "VOPD": 693,
+            "VOPD_slots": 1386,
+            "mov": 204,
+            "VALU": 3919,
+            "VMEM": 384,
+            "VMEM_read_requests": 304,
+            "VMEM_read_bytes_per_lane_static": 2784,
+            "WMMA": 336,
+            "pack": 560,
+            "DS": 152,
+            "VMEM_write_requests": 80,
+            "VMEM_write_bytes_per_lane_static": 320
+          },
+          "weighted_by_tier": {
+            "900": {
+              "issued_static": 46701600,
+              "vector_slots": 32360500,
+              "SMEM": 30500,
+              "WAIT": 8454600,
+              "SALU": 4764100,
+              "VOPD": 4227300,
+              "VOPD_slots": 8454600,
+              "mov": 1244400,
+              "VALU": 23905900,
+              "VMEM": 2342400,
+              "VMEM_read_requests": 1854400,
+              "VMEM_read_bytes_per_lane_static": 16982400,
+              "WMMA": 2049600,
+              "pack": 3416000,
+              "DS": 927200,
+              "VMEM_write_requests": 488000,
+              "VMEM_write_bytes_per_lane_static": 1952000
+            },
+            "1080": {
+              "issued_static": 67066560,
+              "vector_slots": 46471800,
+              "SMEM": 43800,
+              "WAIT": 12141360,
+              "SALU": 6841560,
+              "VOPD": 6070680,
+              "VOPD_slots": 12141360,
+              "mov": 1787040,
+              "VALU": 34330440,
+              "VMEM": 3363840,
+              "VMEM_read_requests": 2663040,
+              "VMEM_read_bytes_per_lane_static": 24387840,
+              "WMMA": 2943360,
+              "pack": 4905600,
+              "DS": 1331520,
+              "VMEM_write_requests": 700800,
+              "VMEM_write_bytes_per_lane_static": 2803200
+            }
+          }
+        },
+        "edge": {
+          "trips": [
+            4,
+            8,
+            4,
+            0,
+            32,
+            16
+          ],
+          "counts": {
+            "issued_static": 10760,
+            "vector_slots": 5849,
+            "SMEM": 5,
+            "WAIT": 2586,
+            "SALU": 2077,
+            "VOPD": 709,
+            "VOPD_slots": 1418,
+            "mov": 236,
+            "VALU": 4431,
+            "VMEM": 400,
+            "VMEM_read_requests": 304,
+            "VMEM_read_bytes_per_lane_static": 2784,
+            "WMMA": 336,
+            "pack": 640,
+            "DS": 216,
+            "VMEM_write_requests": 96,
+            "VMEM_write_bytes_per_lane_static": 384
+          },
+          "weighted_by_tier": {
+            "900": {
+              "issued_static": 65636000,
+              "vector_slots": 35678900,
+              "SMEM": 30500,
+              "WAIT": 15774600,
+              "SALU": 12669700,
+              "VOPD": 4324900,
+              "VOPD_slots": 8649800,
+              "mov": 1439600,
+              "VALU": 27029100,
+              "VMEM": 2440000,
+              "VMEM_read_requests": 1854400,
+              "VMEM_read_bytes_per_lane_static": 16982400,
+              "WMMA": 2049600,
+              "pack": 3904000,
+              "DS": 1317600,
+              "VMEM_write_requests": 585600,
+              "VMEM_write_bytes_per_lane_static": 2342400
+            },
+            "1080": {
+              "issued_static": 94257600,
+              "vector_slots": 51237240,
+              "SMEM": 43800,
+              "WAIT": 22653360,
+              "SALU": 18194520,
+              "VOPD": 6210840,
+              "VOPD_slots": 12421680,
+              "mov": 2067360,
+              "VALU": 38815560,
+              "VMEM": 3504000,
+              "VMEM_read_requests": 2663040,
+              "VMEM_read_bytes_per_lane_static": 24387840,
+              "WMMA": 2943360,
+              "pack": 5606400,
+              "DS": 1892160,
+              "VMEM_write_requests": 840960,
+              "VMEM_write_bytes_per_lane_static": 3363840
+            }
+          }
+        }
+      },
+      "tiers": {
+        "900": {
+          "calls": 1,
+          "waves": 6100,
+          "groups": [
+            6100
+          ]
+        },
+        "1080": {
+          "calls": 1,
+          "waves": 8760,
+          "groups": [
+            8760
+          ]
+        }
+      }
+    },
+    "c32-wave1:c32_wave1_post": {
+      "kernel": "c32-wave1:c32_wave1_post",
+      "static": {
+        "SMEM": 3,
+        "WAIT": 253,
+        "SALU": 125,
+        "VALU": 874,
+        "VOPD": 221,
+        "VOPD_slots": 442,
+        "mov": 78,
+        "VMEM": 84,
+        "VMEM_read_requests": 81,
+        "VMEM_read_bytes_per_lane_static": 1028,
+        "pack": 119,
+        "WMMA": 44,
+        "DS": 10,
+        "clamp": 3,
+        "VMEM_write_requests": 3,
+        "VMEM_write_bytes_per_lane_static": 12,
+        "issued_static": 1614,
+        "vector_slots": 1316
+      },
+      "status": "loop-expanded path-sum upper; t=lane,+32,<64 implies two tail iterations",
+      "variants": {
+        "upper": {
+          "trips": [
+            4,
+            8,
+            4,
+            2
+          ],
+          "counts": {
+            "issued_static": 6801,
+            "vector_slots": 5453,
+            "SMEM": 3,
+            "WAIT": 1112,
+            "SALU": 453,
+            "VALU": 3597,
+            "VOPD": 928,
+            "VOPD_slots": 1856,
+            "mov": 172,
+            "VMEM": 388,
+            "VMEM_read_requests": 382,
+            "VMEM_read_bytes_per_lane_static": 4216,
+            "pack": 582,
+            "WMMA": 288,
+            "DS": 32,
+            "clamp": 6,
+            "VMEM_write_requests": 6,
+            "VMEM_write_bytes_per_lane_static": 24
+          },
+          "weighted_by_tier": {
+            "900": {
+              "issued_static": 165407121,
+              "vector_slots": 132622413,
+              "SMEM": 72963,
+              "WAIT": 27044952,
+              "SALU": 11017413,
+              "VALU": 87482637,
+              "VOPD": 22569888,
+              "VOPD_slots": 45139776,
+              "mov": 4183212,
+              "VMEM": 9436548,
+              "VMEM_read_requests": 9290622,
+              "VMEM_read_bytes_per_lane_static": 102537336,
+              "pack": 14154822,
+              "WMMA": 7004448,
+              "DS": 778272,
+              "clamp": 145926,
+              "VMEM_write_requests": 145926,
+              "VMEM_write_bytes_per_lane_static": 583704
+            },
+            "1080": {
+              "issued_static": 237660945,
+              "vector_slots": 190555085,
+              "SMEM": 104835,
+              "WAIT": 38858840,
+              "SALU": 15830085,
+              "VALU": 125697165,
+              "VOPD": 32428960,
+              "VOPD_slots": 64857920,
+              "mov": 6010540,
+              "VMEM": 13558660,
+              "VMEM_read_requests": 13348990,
+              "VMEM_read_bytes_per_lane_static": 147328120,
+              "pack": 20337990,
+              "WMMA": 10064160,
+              "DS": 1118240,
+              "clamp": 209670,
+              "VMEM_write_requests": 209670,
+              "VMEM_write_bytes_per_lane_static": 838680
+            }
+          }
+        }
+      },
+      "tiers": {
+        "900": {
+          "calls": 1,
+          "waves": 24321,
+          "groups": [
+            24321
+          ]
+        },
+        "1080": {
+          "calls": 1,
+          "waves": 34945,
+          "groups": [
+            34945
+          ]
+        }
+      }
+    },
+    "c32-wave1:c32_wave1_prefix": {
+      "kernel": "c32-wave1:c32_wave1_prefix",
+      "static": {
+        "SMEM": 5,
+        "WAIT": 310,
+        "SALU": 174,
+        "VOPD": 172,
+        "VOPD_slots": 344,
+        "mov": 100,
+        "VALU": 1120,
+        "VMEM": 64,
+        "VMEM_read_requests": 44,
+        "VMEM_read_bytes_per_lane_static": 512,
+        "pack": 215,
+        "DS": 75,
+        "WMMA": 48,
+        "VMEM_write_requests": 20,
+        "VMEM_write_bytes_per_lane_static": 68,
+        "issued_static": 1968,
+        "vector_slots": 1464
+      },
+      "status": "loop-expanded path-sum upper; prefix tail included",
+      "variants": {
+        "upper": {
+          "trips": [
+            4,
+            8,
+            4,
+            16
+          ],
+          "counts": {
+            "issued_static": 7992,
+            "vector_slots": 5868,
+            "SMEM": 5,
+            "WAIT": 1331,
+            "SALU": 788,
+            "VOPD": 828,
+            "VOPD_slots": 1656,
+            "mov": 235,
+            "VALU": 4212,
+            "VMEM": 368,
+            "VMEM_read_requests": 288,
+            "VMEM_read_bytes_per_lane_static": 2944,
+            "pack": 780,
+            "DS": 156,
+            "WMMA": 304,
+            "VMEM_write_requests": 80,
+            "VMEM_write_bytes_per_lane_static": 128
+          },
+          "weighted_by_tier": {
+            "900": {
+              "issued_static": 191808000,
+              "vector_slots": 140832000,
+              "SMEM": 120000,
+              "WAIT": 31944000,
+              "SALU": 18912000,
+              "VOPD": 19872000,
+              "VOPD_slots": 39744000,
+              "mov": 5640000,
+              "VALU": 101088000,
+              "VMEM": 8832000,
+              "VMEM_read_requests": 6912000,
+              "VMEM_read_bytes_per_lane_static": 70656000,
+              "pack": 18720000,
+              "DS": 3744000,
+              "WMMA": 7296000,
+              "VMEM_write_requests": 1920000,
+              "VMEM_write_bytes_per_lane_static": 3072000
+            },
+            "1080": {
+              "issued_static": 276203520,
+              "vector_slots": 202798080,
+              "SMEM": 172800,
+              "WAIT": 45999360,
+              "SALU": 27233280,
+              "VOPD": 28615680,
+              "VOPD_slots": 57231360,
+              "mov": 8121600,
+              "VALU": 145566720,
+              "VMEM": 12718080,
+              "VMEM_read_requests": 9953280,
+              "VMEM_read_bytes_per_lane_static": 101744640,
+              "pack": 26956800,
+              "DS": 5391360,
+              "WMMA": 10506240,
+              "VMEM_write_requests": 2764800,
+              "VMEM_write_bytes_per_lane_static": 4423680
+            }
+          }
+        }
+      },
+      "tiers": {
+        "900": {
+          "calls": 1,
+          "waves": 24000,
+          "groups": [
+            24000
+          ]
+        },
+        "1080": {
+          "calls": 1,
+          "waves": 34560,
+          "groups": [
+            34560
+          ]
+        }
+      }
+    },
+    "c64-wave2:c64_wave2_bi": {
+      "kernel": "c64-wave2:c64_wave2_bi",
+      "static": {
+        "SMEM": 3,
+        "WAIT": 892,
+        "SALU": 565,
+        "VALU": 1569,
+        "VOPD": 241,
+        "VOPD_slots": 482,
+        "mov": 229,
+        "VMEM": 172,
+        "VMEM_read_requests": 156,
+        "VMEM_read_bytes_per_lane_static": 1328,
+        "DS": 77,
+        "WMMA": 150,
+        "pack": 224,
+        "VMEM_write_requests": 16,
+        "VMEM_write_bytes_per_lane_static": 64,
+        "issued_static": 3669,
+        "vector_slots": 2051
+      },
+      "status": "loop-expanded path-sum upper; mutually exclusive boundary loads summed",
+      "variants": {
+        "upper": {
+          "trips": [
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "counts": {
+            "issued_static": 10878,
+            "vector_slots": 6062,
+            "SMEM": 3,
+            "WAIT": 2440,
+            "SALU": 1957,
+            "VALU": 4686,
+            "VOPD": 688,
+            "VOPD_slots": 1376,
+            "mov": 739,
+            "VMEM": 508,
+            "VMEM_read_requests": 444,
+            "VMEM_read_bytes_per_lane_static": 3920,
+            "DS": 140,
+            "WMMA": 456,
+            "pack": 704,
+            "VMEM_write_requests": 64,
+            "VMEM_write_bytes_per_lane_static": 256
+          },
+          "weighted_by_tier": {
+            "900": {
+              "issued_static": 67443600,
+              "vector_slots": 37584400,
+              "SMEM": 18600,
+              "WAIT": 15128000,
+              "SALU": 12133400,
+              "VALU": 29053200,
+              "VOPD": 4265600,
+              "VOPD_slots": 8531200,
+              "mov": 4581800,
+              "VMEM": 3149600,
+              "VMEM_read_requests": 2752800,
+              "VMEM_read_bytes_per_lane_static": 24304000,
+              "DS": 868000,
+              "WMMA": 2827200,
+              "pack": 4364800,
+              "VMEM_write_requests": 396800,
+              "VMEM_write_bytes_per_lane_static": 1587200
+            },
+            "1080": {
+              "issued_static": 96596640,
+              "vector_slots": 53830560,
+              "SMEM": 26640,
+              "WAIT": 21667200,
+              "SALU": 17378160,
+              "VALU": 41611680,
+              "VOPD": 6109440,
+              "VOPD_slots": 12218880,
+              "mov": 6562320,
+              "VMEM": 4511040,
+              "VMEM_read_requests": 3942720,
+              "VMEM_read_bytes_per_lane_static": 34809600,
+              "DS": 1243200,
+              "WMMA": 4049280,
+              "pack": 6251520,
+              "VMEM_write_requests": 568320,
+              "VMEM_write_bytes_per_lane_static": 2273280
+            }
+          }
+        }
+      },
+      "tiers": {
+        "900": {
+          "calls": 2,
+          "waves": 6200,
+          "groups": [
+            1550,
+            1550
+          ]
+        },
+        "1080": {
+          "calls": 2,
+          "waves": 8880,
+          "groups": [
+            2220,
+            2220
+          ]
+        }
+      }
+    },
+    "c64-wave2:c64_wave2_bo": {
+      "kernel": "c64-wave2:c64_wave2_bo",
+      "static": {
+        "SMEM": 3,
+        "WAIT": 708,
+        "SALU": 233,
+        "VALU": 1537,
+        "VOPD": 271,
+        "VOPD_slots": 542,
+        "mov": 121,
+        "VMEM": 168,
+        "VMEM_read_requests": 166,
+        "VMEM_read_bytes_per_lane_static": 1568,
+        "pack": 248,
+        "DS": 73,
+        "WMMA": 150,
+        "VMEM_write_requests": 2,
+        "VMEM_write_bytes_per_lane_static": 16,
+        "issued_static": 3143,
+        "vector_slots": 2079
+      },
+      "status": "loop-expanded path-sum upper; mutually exclusive boundary loads summed",
+      "variants": {
+        "upper": {
+          "trips": [
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "counts": {
+            "issued_static": 8159,
+            "vector_slots": 5445,
+            "SMEM": 3,
+            "WAIT": 1698,
+            "SALU": 701,
+            "VALU": 3949,
+            "VOPD": 748,
+            "VOPD_slots": 1496,
+            "mov": 244,
+            "VMEM": 468,
+            "VMEM_read_requests": 460,
+            "VMEM_read_bytes_per_lane_static": 4304,
+            "pack": 608,
+            "DS": 136,
+            "WMMA": 456,
+            "VMEM_write_requests": 8,
+            "VMEM_write_bytes_per_lane_static": 64
+          },
+          "weighted_by_tier": {
+            "900": {
+              "issued_static": 24477000,
+              "vector_slots": 16335000,
+              "SMEM": 9000,
+              "WAIT": 5094000,
+              "SALU": 2103000,
+              "VALU": 11847000,
+              "VOPD": 2244000,
+              "VOPD_slots": 4488000,
+              "mov": 732000,
+              "VMEM": 1404000,
+              "VMEM_read_requests": 1380000,
+              "VMEM_read_bytes_per_lane_static": 12912000,
+              "pack": 1824000,
+              "DS": 408000,
+              "WMMA": 1368000,
+              "VMEM_write_requests": 24000,
+              "VMEM_write_bytes_per_lane_static": 192000
+            },
+            "1080": {
+              "issued_static": 35246880,
+              "vector_slots": 23522400,
+              "SMEM": 12960,
+              "WAIT": 7335360,
+              "SALU": 3028320,
+              "VALU": 17059680,
+              "VOPD": 3231360,
+              "VOPD_slots": 6462720,
+              "mov": 1054080,
+              "VMEM": 2021760,
+              "VMEM_read_requests": 1987200,
+              "VMEM_read_bytes_per_lane_static": 18593280,
+              "pack": 2626560,
+              "DS": 587520,
+              "WMMA": 1969920,
+              "VMEM_write_requests": 34560,
+              "VMEM_write_bytes_per_lane_static": 276480
+            }
+          }
+        }
+      },
+      "tiers": {
+        "900": {
+          "calls": 1,
+          "waves": 3000,
+          "groups": [
+            1500
+          ]
+        },
+        "1080": {
+          "calls": 1,
+          "waves": 4320,
+          "groups": [
+            2160
+          ]
+        }
+      }
+    },
+    "c64-wave2:c64_wave2_bi_bo": {
+      "kernel": "c64-wave2:c64_wave2_bi_bo",
+      "static": {
+        "SMEM": 3,
+        "WAIT": 714,
+        "SALU": 264,
+        "VALU": 1359,
+        "VOPD": 247,
+        "VOPD_slots": 494,
+        "mov": 101,
+        "VMEM": 158,
+        "VMEM_read_requests": 156,
+        "VMEM_read_bytes_per_lane_static": 1328,
+        "DS": 77,
+        "WMMA": 150,
+        "pack": 184,
+        "VMEM_write_requests": 2,
+        "VMEM_write_bytes_per_lane_static": 16,
+        "issued_static": 2972,
+        "vector_slots": 1853
+      },
+      "status": "loop-expanded path-sum upper; mutually exclusive boundary loads summed",
+      "variants": {
+        "upper": {
+          "trips": [
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "counts": {
+            "issued_static": 8081,
+            "vector_slots": 5273,
+            "SMEM": 3,
+            "WAIT": 1728,
+            "SALU": 750,
+            "VALU": 3831,
+            "VOPD": 721,
+            "VOPD_slots": 1442,
+            "mov": 233,
+            "VMEM": 452,
+            "VMEM_read_requests": 444,
+            "VMEM_read_bytes_per_lane_static": 3920,
+            "DS": 140,
+            "WMMA": 456,
+            "pack": 544,
+            "VMEM_write_requests": 8,
+            "VMEM_write_bytes_per_lane_static": 64
+          },
+          "weighted_by_tier": {
+            "900": {
+              "issued_static": 124802964,
+              "vector_slots": 81436212,
+              "SMEM": 46332,
+              "WAIT": 26687232,
+              "SALU": 11583000,
+              "VALU": 59165964,
+              "VOPD": 11135124,
+              "VOPD_slots": 22270248,
+              "mov": 3598452,
+              "VMEM": 6980688,
+              "VMEM_read_requests": 6857136,
+              "VMEM_read_bytes_per_lane_static": 60540480,
+              "DS": 2162160,
+              "WMMA": 7042464,
+              "pack": 8401536,
+              "VMEM_write_requests": 123552,
+              "VMEM_write_bytes_per_lane_static": 988416
+            },
+            "1080": {
+              "issued_static": 178848692,
+              "vector_slots": 116702036,
+              "SMEM": 66396,
+              "WAIT": 38244096,
+              "SALU": 16599000,
+              "VALU": 84787692,
+              "VOPD": 15957172,
+              "VOPD_slots": 31914344,
+              "mov": 5156756,
+              "VMEM": 10003664,
+              "VMEM_read_requests": 9826608,
+              "VMEM_read_bytes_per_lane_static": 86757440,
+              "DS": 3098480,
+              "WMMA": 10092192,
+              "pack": 12039808,
+              "VMEM_write_requests": 177056,
+              "VMEM_write_bytes_per_lane_static": 1416448
+            }
+          }
+        }
+      },
+      "tiers": {
+        "900": {
+          "calls": 5,
+          "waves": 15444,
+          "groups": [
+            1581,
+            1530,
+            1500,
+            1581,
+            1530
+          ]
+        },
+        "1080": {
+          "calls": 5,
+          "waves": 22132,
+          "groups": [
+            2257,
+            2196,
+            2160,
+            2257,
+            2196
+          ]
+        }
+      }
+    },
+    "c64-wave2:c128_wave2_bi": {
+      "kernel": "c64-wave2:c128_wave2_bi",
+      "static": {
+        "SMEM": 3,
+        "WAIT": 1148,
+        "SALU": 562,
+        "VALU": 1741,
+        "VOPD": 240,
+        "VOPD_slots": 480,
+        "mov": 230,
+        "VMEM": 292,
+        "VMEM_read_requests": 276,
+        "VMEM_read_bytes_per_lane_static": 2288,
+        "DS": 107,
+        "WMMA": 270,
+        "pack": 224,
+        "VMEM_write_requests": 16,
+        "VMEM_write_bytes_per_lane_static": 64,
+        "issued_static": 4363,
+        "vector_slots": 2221
+      },
+      "status": "loop-expanded path-sum upper; mutually exclusive boundary loads summed",
+      "variants": {
+        "upper": {
+          "trips": [
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "counts": {
+            "issued_static": 12226,
+            "vector_slots": 6316,
+            "SMEM": 3,
+            "WAIT": 2921,
+            "SALU": 1936,
+            "VALU": 4912,
+            "VOPD": 702,
+            "VOPD_slots": 1404,
+            "mov": 746,
+            "VMEM": 796,
+            "VMEM_read_requests": 732,
+            "VMEM_read_bytes_per_lane_static": 6224,
+            "DS": 212,
+            "WMMA": 744,
+            "pack": 704,
+            "VMEM_write_requests": 64,
+            "VMEM_write_bytes_per_lane_static": 256
+          },
+          "weighted_by_tier": {
+            "900": {
+              "issued_static": 39905664,
+              "vector_slots": 20615424,
+              "SMEM": 9792,
+              "WAIT": 9534144,
+              "SALU": 6319104,
+              "VALU": 16032768,
+              "VOPD": 2291328,
+              "VOPD_slots": 4582656,
+              "mov": 2434944,
+              "VMEM": 2598144,
+              "VMEM_read_requests": 2389248,
+              "VMEM_read_bytes_per_lane_static": 20315136,
+              "DS": 691968,
+              "WMMA": 2428416,
+              "pack": 2297856,
+              "VMEM_write_requests": 208896,
+              "VMEM_write_bytes_per_lane_static": 835584
+            },
+            "1080": {
+              "issued_static": 56679736,
+              "vector_slots": 29280976,
+              "SMEM": 13908,
+              "WAIT": 13541756,
+              "SALU": 8975296,
+              "VALU": 22772032,
+              "VOPD": 3254472,
+              "VOPD_slots": 6508944,
+              "mov": 3458456,
+              "VMEM": 3690256,
+              "VMEM_read_requests": 3393552,
+              "VMEM_read_bytes_per_lane_static": 28854464,
+              "DS": 982832,
+              "WMMA": 3449184,
+              "pack": 3263744,
+              "VMEM_write_requests": 296704,
+              "VMEM_write_bytes_per_lane_static": 1186816
+            }
+          }
+        }
+      },
+      "tiers": {
+        "900": {
+          "calls": 2,
+          "waves": 3264,
+          "groups": [
+            416,
+            400
+          ]
+        },
+        "1080": {
+          "calls": 2,
+          "waves": 4636,
+          "groups": [
+            589,
+            570
+          ]
+        }
+      }
+    },
+    "c64-wave2:c128_wave2_bo": {
+      "kernel": "c64-wave2:c128_wave2_bo",
+      "static": {
+        "SMEM": 3,
+        "WAIT": 971,
+        "SALU": 230,
+        "VALU": 1704,
+        "VOPD": 272,
+        "VOPD_slots": 544,
+        "mov": 125,
+        "VMEM": 288,
+        "VMEM_read_requests": 286,
+        "VMEM_read_bytes_per_lane_static": 2528,
+        "pack": 248,
+        "DS": 103,
+        "WMMA": 270,
+        "VMEM_write_requests": 2,
+        "VMEM_write_bytes_per_lane_static": 16,
+        "issued_static": 3841,
+        "vector_slots": 2248
+      },
+      "status": "loop-expanded path-sum upper; mutually exclusive boundary loads summed",
+      "variants": {
+        "upper": {
+          "trips": [
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "counts": {
+            "issued_static": 9577,
+            "vector_slots": 5698,
+            "SMEM": 3,
+            "WAIT": 2249,
+            "SALU": 680,
+            "VALU": 4176,
+            "VOPD": 761,
+            "VOPD_slots": 1522,
+            "mov": 257,
+            "VMEM": 756,
+            "VMEM_read_requests": 748,
+            "VMEM_read_bytes_per_lane_static": 6608,
+            "pack": 608,
+            "DS": 208,
+            "WMMA": 744,
+            "VMEM_write_requests": 8,
+            "VMEM_write_bytes_per_lane_static": 64
+          },
+          "weighted_by_tier": {
+            "900": {
+              "issued_static": 14365500,
+              "vector_slots": 8547000,
+              "SMEM": 4500,
+              "WAIT": 3373500,
+              "SALU": 1020000,
+              "VALU": 6264000,
+              "VOPD": 1141500,
+              "VOPD_slots": 2283000,
+              "mov": 385500,
+              "VMEM": 1134000,
+              "VMEM_read_requests": 1122000,
+              "VMEM_read_bytes_per_lane_static": 9912000,
+              "pack": 912000,
+              "DS": 312000,
+              "WMMA": 1116000,
+              "VMEM_write_requests": 12000,
+              "VMEM_write_bytes_per_lane_static": 96000
+            },
+            "1080": {
+              "issued_static": 20686320,
+              "vector_slots": 12307680,
+              "SMEM": 6480,
+              "WAIT": 4857840,
+              "SALU": 1468800,
+              "VALU": 9020160,
+              "VOPD": 1643760,
+              "VOPD_slots": 3287520,
+              "mov": 555120,
+              "VMEM": 1632960,
+              "VMEM_read_requests": 1615680,
+              "VMEM_read_bytes_per_lane_static": 14273280,
+              "pack": 1313280,
+              "DS": 449280,
+              "WMMA": 1607040,
+              "VMEM_write_requests": 17280,
+              "VMEM_write_bytes_per_lane_static": 138240
+            }
+          }
+        }
+      },
+      "tiers": {
+        "900": {
+          "calls": 1,
+          "waves": 1500,
+          "groups": [
+            375
+          ]
+        },
+        "1080": {
+          "calls": 1,
+          "waves": 2160,
+          "groups": [
+            540
+          ]
+        }
+      }
+    },
+    "c64-wave2:c128_wave2_bi_bo": {
+      "kernel": "c64-wave2:c128_wave2_bi_bo",
+      "static": {
+        "SMEM": 3,
+        "WAIT": 974,
+        "SALU": 261,
+        "VALU": 1521,
+        "VOPD": 251,
+        "VOPD_slots": 502,
+        "mov": 102,
+        "VMEM": 278,
+        "VMEM_read_requests": 276,
+        "VMEM_read_bytes_per_lane_static": 2288,
+        "DS": 107,
+        "WMMA": 270,
+        "pack": 184,
+        "VMEM_write_requests": 2,
+        "VMEM_write_bytes_per_lane_static": 16,
+        "issued_static": 3665,
+        "vector_slots": 2023
+      },
+      "status": "loop-expanded path-sum upper; mutually exclusive boundary loads summed",
+      "variants": {
+        "upper": {
+          "trips": [
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "counts": {
+            "issued_static": 9434,
+            "vector_slots": 5527,
+            "SMEM": 3,
+            "WAIT": 2225,
+            "SALU": 729,
+            "VALU": 4035,
+            "VOPD": 746,
+            "VOPD_slots": 1492,
+            "mov": 240,
+            "VMEM": 740,
+            "VMEM_read_requests": 732,
+            "VMEM_read_bytes_per_lane_static": 6224,
+            "DS": 212,
+            "WMMA": 744,
+            "pack": 544,
+            "VMEM_write_requests": 8,
+            "VMEM_write_bytes_per_lane_static": 64
+          },
+          "weighted_by_tier": {
+            "900": {
+              "issued_static": 134038272,
+              "vector_slots": 78527616,
+              "SMEM": 42624,
+              "WAIT": 31612800,
+              "SALU": 10357632,
+              "VALU": 57329280,
+              "VOPD": 10599168,
+              "VOPD_slots": 21198336,
+              "mov": 3409920,
+              "VMEM": 10513920,
+              "VMEM_read_requests": 10400256,
+              "VMEM_read_bytes_per_lane_static": 88430592,
+              "DS": 3012096,
+              "WMMA": 10570752,
+              "pack": 7729152,
+              "VMEM_write_requests": 113664,
+              "VMEM_write_bytes_per_lane_static": 909312
+            },
+            "1080": {
+              "issued_static": 191396992,
+              "vector_slots": 112131776,
+              "SMEM": 60864,
+              "WAIT": 45140800,
+              "SALU": 14789952,
+              "VALU": 81862080,
+              "VOPD": 15134848,
+              "VOPD_slots": 30269696,
+              "mov": 4869120,
+              "VMEM": 15013120,
+              "VMEM_read_requests": 14850816,
+              "VMEM_read_bytes_per_lane_static": 126272512,
+              "DS": 4301056,
+              "WMMA": 15094272,
+              "pack": 11036672,
+              "VMEM_write_requests": 162304,
+              "VMEM_write_bytes_per_lane_static": 1298432
+            }
+          }
+        }
+      },
+      "tiers": {
+        "900": {
+          "calls": 9,
+          "waves": 14208,
+          "groups": [
+            416,
+            390,
+            400,
+            375,
+            390,
+            400,
+            375,
+            416,
+            390
+          ]
+        },
+        "1080": {
+          "calls": 9,
+          "waves": 20288,
+          "groups": [
+            589,
+            558,
+            570,
+            540,
+            558,
+            570,
+            540,
+            589,
+            558
+          ]
+        }
+      }
+    },
+    "c64-wave2:c256_attn_wave": {
+      "kernel": "c64-wave2:c256_attn_wave",
+      "static": {
+        "SMEM": 6,
+        "WAIT": 417,
+        "SALU": 317,
+        "mov": 115,
+        "VALU": 599,
+        "VMEM": 89,
+        "VMEM_read_requests": 80,
+        "VMEM_read_bytes_per_lane_static": 696,
+        "DS": 84,
+        "VOPD": 77,
+        "VOPD_slots": 154,
+        "WMMA": 58,
+        "pack": 56,
+        "VMEM_write_requests": 8,
+        "VMEM_write_bytes_per_lane_static": 32,
+        "VMEM_other_requests": 1,
+        "VMEM_other_bytes_per_lane_static": 4,
+        "issued_static": 1647,
+        "vector_slots": 753
+      },
+      "status": "conditional path-sum upper with PDL once; output ci=0,1 nested in qt4; actual spin unbounded",
+      "variants": {
+        "upper": {
+          "trips": [
+            1,
+            4,
+            4,
+            2
+          ],
+          "counts": {
+            "issued_static": 6563,
+            "vector_slots": 2822,
+            "SMEM": 6,
+            "WAIT": 1583,
+            "SALU": 1813,
+            "mov": 728,
+            "VALU": 2230,
+            "VMEM": 283,
+            "VMEM_read_requests": 218,
+            "VMEM_read_bytes_per_lane_static": 1992,
+            "DS": 120,
+            "VOPD": 296,
+            "VOPD_slots": 592,
+            "WMMA": 232,
+            "pack": 352,
+            "VMEM_write_requests": 64,
+            "VMEM_write_bytes_per_lane_static": 256,
+            "VMEM_other_requests": 1,
+            "VMEM_other_bytes_per_lane_static": 4
+          },
+          "weighted_by_tier": {
+            "900": {
+              "issued_static": 10920832,
+              "vector_slots": 4695808,
+              "SMEM": 9984,
+              "WAIT": 2634112,
+              "SALU": 3016832,
+              "mov": 1211392,
+              "VALU": 3710720,
+              "VMEM": 470912,
+              "VMEM_read_requests": 362752,
+              "VMEM_read_bytes_per_lane_static": 3314688,
+              "DS": 199680,
+              "VOPD": 492544,
+              "VOPD_slots": 985088,
+              "WMMA": 386048,
+              "pack": 585728,
+              "VMEM_write_requests": 106496,
+              "VMEM_write_bytes_per_lane_static": 425984,
+              "VMEM_other_requests": 1664,
+              "VMEM_other_bytes_per_lane_static": 6656
+            },
+            "1080": {
+              "issued_static": 15751200,
+              "vector_slots": 6772800,
+              "SMEM": 14400,
+              "WAIT": 3799200,
+              "SALU": 4351200,
+              "mov": 1747200,
+              "VALU": 5352000,
+              "VMEM": 679200,
+              "VMEM_read_requests": 523200,
+              "VMEM_read_bytes_per_lane_static": 4780800,
+              "DS": 288000,
+              "VOPD": 710400,
+              "VOPD_slots": 1420800,
+              "WMMA": 556800,
+              "pack": 844800,
+              "VMEM_write_requests": 153600,
+              "VMEM_write_bytes_per_lane_static": 614400,
+              "VMEM_other_requests": 2400,
+              "VMEM_other_bytes_per_lane_static": 9600
+            }
+          }
+        }
+      },
+      "tiers": {
+        "900": {
+          "calls": 2,
+          "waves": 1664,
+          "groups": [
+            104,
+            104
+          ]
+        },
+        "1080": {
+          "calls": 2,
+          "waves": 2400,
+          "groups": [
+            150,
+            150
+          ]
+        }
+      }
+    },
+    "c64-wave2:c256_attn_wave_bo": {
+      "kernel": "c64-wave2:c256_attn_wave_bo",
+      "static": {
+        "SMEM": 6,
+        "WAIT": 352,
+        "SALU": 189,
+        "mov": 34,
+        "VALU": 518,
+        "VMEM": 84,
+        "VMEM_read_requests": 80,
+        "VMEM_read_bytes_per_lane_static": 696,
+        "DS": 83,
+        "VOPD": 82,
+        "VOPD_slots": 164,
+        "WMMA": 58,
+        "pack": 52,
+        "VMEM_write_requests": 3,
+        "VMEM_write_bytes_per_lane_static": 24,
+        "VMEM_other_requests": 1,
+        "VMEM_other_bytes_per_lane_static": 4,
+        "issued_static": 1372,
+        "vector_slots": 682
+      },
+      "status": "conditional upper with PDL spin exactly once; actual spin unbounded",
+      "variants": {
+        "upper": {
+          "trips": [
+            1,
+            4,
+            4
+          ],
+          "counts": {
+            "issued_static": 3562,
+            "vector_slots": 1951,
+            "SMEM": 6,
+            "WAIT": 862,
+            "SALU": 483,
+            "mov": 82,
+            "VALU": 1313,
+            "VMEM": 231,
+            "VMEM_read_requests": 218,
+            "VMEM_read_bytes_per_lane_static": 1992,
+            "DS": 116,
+            "VOPD": 319,
+            "VOPD_slots": 638,
+            "WMMA": 232,
+            "pack": 208,
+            "VMEM_write_requests": 12,
+            "VMEM_write_bytes_per_lane_static": 96,
+            "VMEM_other_requests": 1,
+            "VMEM_other_bytes_per_lane_static": 4
+          },
+          "weighted_by_tier": {
+            "900": {
+              "issued_static": 41490176,
+              "vector_slots": 22725248,
+              "SMEM": 69888,
+              "WAIT": 10040576,
+              "SALU": 5625984,
+              "mov": 955136,
+              "VALU": 15293824,
+              "VMEM": 2690688,
+              "VMEM_read_requests": 2539264,
+              "VMEM_read_bytes_per_lane_static": 23202816,
+              "DS": 1351168,
+              "VOPD": 3715712,
+              "VOPD_slots": 7431424,
+              "WMMA": 2702336,
+              "pack": 2422784,
+              "VMEM_write_requests": 139776,
+              "VMEM_write_bytes_per_lane_static": 1118208,
+              "VMEM_other_requests": 11648,
+              "VMEM_other_bytes_per_lane_static": 46592
+            },
+            "1080": {
+              "issued_static": 58587776,
+              "vector_slots": 32090048,
+              "SMEM": 98688,
+              "WAIT": 14178176,
+              "SALU": 7944384,
+              "mov": 1348736,
+              "VALU": 21596224,
+              "VMEM": 3799488,
+              "VMEM_read_requests": 3585664,
+              "VMEM_read_bytes_per_lane_static": 32764416,
+              "DS": 1907968,
+              "VOPD": 5246912,
+              "VOPD_slots": 10493824,
+              "WMMA": 3815936,
+              "pack": 3421184,
+              "VMEM_write_requests": 197376,
+              "VMEM_write_bytes_per_lane_static": 1579008,
+              "VMEM_other_requests": 16448,
+              "VMEM_other_bytes_per_lane_static": 65792
+            }
+          }
+        }
+      },
+      "tiers": {
+        "900": {
+          "calls": 14,
+          "waves": 11648,
+          "groups": [
+            104,
+            104,
+            104,
+            104,
+            104,
+            104,
+            104,
+            104,
+            104,
+            104,
+            104,
+            104,
+            104,
+            104
+          ]
+        },
+        "1080": {
+          "calls": 14,
+          "waves": 16448,
+          "groups": [
+            135,
+            160,
+            144,
+            150,
+            135,
+            160,
+            144,
+            135,
+            160,
+            144,
+            150,
+            135,
+            160,
+            144
+          ]
+        }
+      }
+    }
+  },
+  "ordinary_pairs": [
+    {
+      "ours": "c32-wave1:c32_wave1_chain",
+      "daniel": "_Z12k_reg_swin32ILi0ELb0EEv9VarParams",
+      "scope": "per dispatched wave path-sum upper; grids and work coverage may differ",
+      "ours_counts": {
+        "issued_static": 5397,
+        "vector_slots": 4093,
+        "SMEM": 4,
+        "WAIT": 905,
+        "SALU": 418,
+        "mov": 142,
+        "VOPD": 695,
+        "VOPD_slots": 1390,
+        "VALU": 2703,
+        "VMEM": 320,
+        "VMEM_read_requests": 312,
+        "VMEM_read_bytes_per_lane_static": 2784,
+        "WMMA": 336,
+        "pack": 448,
+        "DS": 16,
+        "VMEM_write_requests": 8,
+        "VMEM_write_bytes_per_lane_static": 64
+      },
+      "daniel_counts": {
+        "WAIT": 374,
+        "SMEM": 4,
+        "SALU": 155,
+        "VALU": 5179,
+        "mov": 166,
+        "VOPD": 95,
+        "VOPD_slots": 190,
+        "VMEM": 129,
+        "VMEM_read_requests": 125,
+        "VMEM_read_bytes_per_lane_static": 772,
+        "pack": 2404,
+        "WMMA": 256,
+        "DS": 88,
+        "VMEM_write_requests": 4,
+        "VMEM_write_bytes_per_lane_static": 64,
+        "issued_static": 6280,
+        "vector_slots": 5369
+      },
+      "ours_minus_daniel": {
+        "SMEM": 0,
+        "VALU": -2476,
+        "pack": -1956,
+        "VOPD": 600,
+        "WAIT": 531,
+        "VOPD_slots": 1200,
+        "issued_static": -883,
+        "VMEM_read_requests": 187,
+        "VMEM": 191,
+        "mov": -24,
+        "VMEM_write_bytes_per_lane_static": 0,
+        "SALU": 263,
+        "WMMA": 80,
+        "VMEM_write_requests": 4,
+        "DS": -72,
+        "vector_slots": -1276,
+        "VMEM_read_bytes_per_lane_static": 2012
+      }
+    },
+    {
+      "ours": "c64-wave2:c64_wave2_bi_bo",
+      "daniel": "_Z13k_reg_swin_mhILi64ELi0ELb0EEv9VarParams",
+      "scope": "per dispatched wave path-sum upper; grids and work coverage may differ",
+      "ours_counts": {
+        "issued_static": 8081,
+        "vector_slots": 5273,
+        "SMEM": 3,
+        "WAIT": 1728,
+        "SALU": 750,
+        "VALU": 3831,
+        "VOPD": 721,
+        "VOPD_slots": 1442,
+        "mov": 233,
+        "VMEM": 452,
+        "VMEM_read_requests": 444,
+        "VMEM_read_bytes_per_lane_static": 3920,
+        "DS": 140,
+        "WMMA": 456,
+        "pack": 544,
+        "VMEM_write_requests": 8,
+        "VMEM_write_bytes_per_lane_static": 64
+      },
+      "daniel_counts": {
+        "WAIT": 1631,
+        "SMEM": 3,
+        "SALU": 201,
+        "VALU": 6464,
+        "mov": 422,
+        "VOPD": 99,
+        "VOPD_slots": 198,
+        "VMEM": 219,
+        "VMEM_read_requests": 211,
+        "VMEM_read_bytes_per_lane_static": 1492,
+        "DS": 156,
+        "WMMA": 416,
+        "pack": 2565,
+        "VMEM_write_requests": 8,
+        "VMEM_write_bytes_per_lane_static": 128,
+        "scratch_requests": 8,
+        "issued_static": 9189,
+        "vector_slots": 6662
+      },
+      "ours_minus_daniel": {
+        "SMEM": 0,
+        "VALU": -2633,
+        "pack": -2021,
+        "VOPD": 622,
+        "WAIT": 97,
+        "VOPD_slots": 1244,
+        "issued_static": -1108,
+        "VMEM_read_requests": 233,
+        "VMEM": 233,
+        "mov": -189,
+        "VMEM_write_bytes_per_lane_static": -64,
+        "SALU": 549,
+        "WMMA": 40,
+        "VMEM_write_requests": 0,
+        "DS": -16,
+        "vector_slots": -1389,
+        "VMEM_read_bytes_per_lane_static": 2428,
+        "scratch_requests": -8
+      }
+    }
+  ]
+}

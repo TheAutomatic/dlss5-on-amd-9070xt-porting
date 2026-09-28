@@ -1,0 +1,3650 @@
+[
+  {
+    "symbol": "_Z16k_swin_1h_32_fp810SwinParams",
+    "demangled": "k_swin_1h_32_fp8(SwinParams)",
+    "quality": "shared",
+    "family": "C32",
+    "wave_size": 32,
+    "vgpr": 71,
+    "sgpr": 25,
+    "lds_bytes": 62592,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [],
+    "host_launch_sites": [],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "helper_role": "generic fallback",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z21k_pre_block_1h_32_fp89PreParams",
+    "demangled": "k_pre_block_1h_32_fp8(PreParams)",
+    "quality": "shared",
+    "family": "C32",
+    "wave_size": 32,
+    "vgpr": 71,
+    "sgpr": 43,
+    "lds_bytes": 64640,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180037aaa"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "helper_role": "generic prefix fallback",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z22k_post_block_1h_32_fp810PostParams",
+    "demangled": "k_post_block_1h_32_fp8(PostParams)",
+    "quality": "shared",
+    "family": "C32",
+    "wave_size": 32,
+    "vgpr": 74,
+    "sgpr": 40,
+    "lds_bytes": 62592,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x18003bc10"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "helper_role": "generic post fallback",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_tin_to_fragPKhPhii",
+    "demangled": "k_tin_to_frag(unsigned char const*, unsigned char*, int, int)",
+    "quality": "shared",
+    "family": "layout/copy",
+    "wave_size": 32,
+    "vgpr": 11,
+    "sgpr": 9,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 1024,
+    "host_block_x_candidates": [],
+    "host_launch_sites": [],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "helper_role": "tin/fragment layout adapter; not assumed per-frame",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_frag_to_tinPKhPhii",
+    "demangled": "k_frag_to_tin(unsigned char const*, unsigned char*, int, int)",
+    "quality": "shared",
+    "family": "layout/copy",
+    "wave_size": 32,
+    "vgpr": 12,
+    "sgpr": 9,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 1024,
+    "host_block_x_candidates": [],
+    "host_launch_sites": [],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "helper_role": "tin/fragment layout adapter; not assumed per-frame",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z12k_w16_decodePKhPDF16_y",
+    "demangled": "k_w16_decode(unsigned char const*, _Float16*, unsigned long long)",
+    "quality": "shared",
+    "family": "initialization",
+    "wave_size": 32,
+    "vgpr": 6,
+    "sgpr": 14,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 1024,
+    "host_block_x_candidates": [
+      1024
+    ],
+    "host_launch_sites": [
+      "0x18003e650"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "helper_role": "weight f16 decoder; not per-frame body",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z10k_reg_copy9VarParams",
+    "demangled": "k_reg_copy(VarParams)",
+    "quality": "shared",
+    "family": "layout/copy",
+    "wave_size": 32,
+    "vgpr": 20,
+    "sgpr": 20,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [],
+    "host_launch_sites": [],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "helper_role": "copy helper",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z6k_ffwd10FfwdParams",
+    "demangled": "k_ffwd(FfwdParams)",
+    "quality": "shared",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 65,
+    "sgpr": 24,
+    "lds_bytes": 24576,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      1
+    ],
+    "host_launch_sites": [
+      "0x180043459"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z10k_conv_res10ConvParams",
+    "demangled": "k_conv_res(ConvParams)",
+    "quality": "shared",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 43,
+    "sgpr": 18,
+    "lds_bytes": 8192,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [],
+    "host_launch_sites": [],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z10k_qkv_attn10AttnParams",
+    "demangled": "k_qkv_attn(AttnParams)",
+    "quality": "shared",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 95,
+    "sgpr": 62,
+    "lds_bytes": 58368,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x18004448d"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z16k_tin_to_frag512PKhPhi",
+    "demangled": "k_tin_to_frag512(unsigned char const*, unsigned char*, int)",
+    "quality": "shared",
+    "family": "layout/copy",
+    "wave_size": 32,
+    "vgpr": 12,
+    "sgpr": 6,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 1024,
+    "host_block_x_candidates": [],
+    "host_launch_sites": [],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "helper_role": "tin/fragment layout adapter; not assumed per-frame",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z16k_frag512_to_tinPKhPhi",
+    "demangled": "k_frag512_to_tin(unsigned char const*, unsigned char*, int)",
+    "quality": "shared",
+    "family": "layout/copy",
+    "wave_size": 32,
+    "vgpr": 13,
+    "sgpr": 6,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 1024,
+    "host_block_x_candidates": [],
+    "host_launch_sites": [],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "helper_role": "tin/fragment layout adapter; not assumed per-frame",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z8k_expand12ExpandParams",
+    "demangled": "k_expand(ExpandParams)",
+    "quality": "shared",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 41,
+    "sgpr": 21,
+    "lds_bytes": 16384,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [],
+    "host_launch_sites": [],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "helper_role": "generic expand fallback",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_conv_splitk12ConvParams1d",
+    "demangled": "k_conv_splitk(ConvParams1d)",
+    "quality": "shared",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 82,
+    "sgpr": 31,
+    "lds_bytes": 4096,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [],
+    "host_launch_sites": [],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "helper_role": "generic split-K linear fallback",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z5k_qkv9QkvParams",
+    "demangled": "k_qkv(QkvParams)",
+    "quality": "shared",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 119,
+    "sgpr": 40,
+    "lds_bytes": 6144,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [],
+    "host_launch_sites": [],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "helper_role": "generic QKV fallback",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z11k_attention12AttnParams1d",
+    "demangled": "k_attention(AttnParams1d)",
+    "quality": "shared",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 145,
+    "sgpr": 49,
+    "lds_bytes": 28928,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [],
+    "host_launch_sites": [],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "helper_role": "generic global attention fallback",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z14k_reg1d_reduce12ConvParams1d",
+    "demangled": "k_reg1d_reduce(ConvParams1d)",
+    "quality": "shared",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 16,
+    "sgpr": 12,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [],
+    "host_launch_sites": [],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z14k_ffwd_inpview12FfwdPlParams",
+    "demangled": "k_ffwd_inpview(FfwdPlParams)",
+    "quality": "shared",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 65,
+    "sgpr": 24,
+    "lds_bytes": 24576,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      1
+    ],
+    "host_launch_sites": [
+      "0x180042f4a"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z12k_final_head10HeadParams",
+    "demangled": "k_final_head(HeadParams)",
+    "quality": "shared",
+    "family": "head",
+    "wave_size": 32,
+    "vgpr": 45,
+    "sgpr": 18,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180038d11"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z8k_repack12RepackParams",
+    "demangled": "k_repack(RepackParams)",
+    "quality": "shared",
+    "family": "ViT-repack",
+    "wave_size": 32,
+    "vgpr": 15,
+    "sgpr": 30,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 1024,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180038e94",
+      "0x18003aa34"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "helper_role": "layout conversion",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z13k_clock_probePy",
+    "demangled": "k_clock_probe(unsigned long long*)",
+    "quality": "shared",
+    "family": "diagnostic",
+    "wave_size": 32,
+    "vgpr": 5,
+    "sgpr": 13,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 1024,
+    "host_block_x_candidates": [
+      1
+    ],
+    "host_launch_sites": [
+      "0x18003bf71"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "helper_role": "clock probe",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z6k_mean10MeanParams",
+    "demangled": "k_mean(MeanParams)",
+    "quality": "shared",
+    "family": "frame-I/O",
+    "wave_size": 32,
+    "vgpr": 8,
+    "sgpr": 17,
+    "lds_bytes": 1024,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 1024,
+    "host_block_x_candidates": [],
+    "host_launch_sites": [
+      "0x180037051"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z8k_import12ImportParams",
+    "demangled": "k_import(ImportParams)",
+    "quality": "shared",
+    "family": "frame-I/O",
+    "wave_size": 32,
+    "vgpr": 21,
+    "sgpr": 18,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 1024,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180036a0d"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z8k_export12ExportParams",
+    "demangled": "k_export(ExportParams)",
+    "quality": "shared",
+    "family": "frame-I/O",
+    "wave_size": 32,
+    "vgpr": 27,
+    "sgpr": 18,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 1024,
+    "host_block_x_candidates": [],
+    "host_launch_sites": [
+      "0x180036f10"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z11k_reproject12ReprojParams",
+    "demangled": "k_reproject(ReprojParams)",
+    "quality": "shared",
+    "family": "frame-I/O",
+    "wave_size": 32,
+    "vgpr": 86,
+    "sgpr": 38,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 1024,
+    "host_block_x_candidates": [],
+    "host_launch_sites": [
+      "0x180036d33"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z11k_flag_waitPjjj",
+    "demangled": "k_flag_wait(unsigned int*, unsigned int, unsigned int)",
+    "quality": "shared",
+    "family": "frame-sync",
+    "wave_size": 32,
+    "vgpr": 4,
+    "sgpr": 9,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 1024,
+    "host_block_x_candidates": [],
+    "host_launch_sites": [],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "helper_role": "queue synchronization",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_align_probePh",
+    "demangled": "k_align_probe(unsigned char*)",
+    "quality": "shared",
+    "family": "diagnostic",
+    "wave_size": 32,
+    "vgpr": 3,
+    "sgpr": 3,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 1024,
+    "host_block_x_candidates": [],
+    "host_launch_sites": [],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "helper_role": "alignment probe",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z10k_flag_setPjjS_",
+    "demangled": "k_flag_set(unsigned int*, unsigned int, unsigned int*)",
+    "quality": "shared",
+    "family": "frame-sync",
+    "wave_size": 32,
+    "vgpr": 4,
+    "sgpr": 7,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 1024,
+    "host_block_x_candidates": [],
+    "host_launch_sites": [],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "helper_role": "queue synchronization",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z12k_reg_swin32ILi0ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin32<0, true>(VarParams)",
+    "quality": "fast",
+    "family": "C32",
+    "wave_size": 32,
+    "vgpr": 168,
+    "sgpr": 26,
+    "lds_bytes": 2048,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      32
+    ],
+    "host_launch_sites": [
+      "0x18002030c"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z12k_reg_swin32ILi0ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin32<0, false>(VarParams)",
+    "quality": "reference",
+    "family": "C32",
+    "wave_size": 32,
+    "vgpr": 163,
+    "sgpr": 26,
+    "lds_bytes": 2048,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      32
+    ],
+    "host_launch_sites": [
+      "0x180020cea"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z12k_reg_swin32ILi1ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin32<1, true>(VarParams)",
+    "quality": "fast",
+    "family": "C32",
+    "wave_size": 32,
+    "vgpr": 163,
+    "sgpr": 24,
+    "lds_bytes": 2048,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      32
+    ],
+    "host_launch_sites": [
+      "0x18002076e"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z12k_reg_swin32ILi1ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin32<1, false>(VarParams)",
+    "quality": "reference",
+    "family": "C32",
+    "wave_size": 32,
+    "vgpr": 160,
+    "sgpr": 24,
+    "lds_bytes": 2048,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      32
+    ],
+    "host_launch_sites": [
+      "0x180020c3b"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z12k_reg_swin32ILi2ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin32<2, true>(VarParams)",
+    "quality": "fast",
+    "family": "C32",
+    "wave_size": 32,
+    "vgpr": 167,
+    "sgpr": 24,
+    "lds_bytes": 2048,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      32
+    ],
+    "host_launch_sites": [
+      "0x180020540"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z12k_reg_swin32ILi2ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin32<2, false>(VarParams)",
+    "quality": "reference",
+    "family": "C32",
+    "wave_size": 32,
+    "vgpr": 162,
+    "sgpr": 24,
+    "lds_bytes": 2048,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      32
+    ],
+    "host_launch_sites": [
+      "0x180020a37"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z12k_reg_swin32ILi4ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin32<4, true>(VarParams)",
+    "quality": "fast",
+    "family": "C32",
+    "wave_size": 32,
+    "vgpr": 168,
+    "sgpr": 32,
+    "lds_bytes": 2048,
+    "scratch_bytes": 40,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      32
+    ],
+    "host_launch_sites": [
+      "0x1800206b2"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z12k_reg_swin32ILi4ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin32<4, false>(VarParams)",
+    "quality": "reference",
+    "family": "C32",
+    "wave_size": 32,
+    "vgpr": 168,
+    "sgpr": 32,
+    "lds_bytes": 2048,
+    "scratch_bytes": 40,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      32
+    ],
+    "host_launch_sites": [
+      "0x180020b8c"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z12k_reg_swin32ILi5ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin32<5, true>(VarParams)",
+    "quality": "fast",
+    "family": "C32",
+    "wave_size": 32,
+    "vgpr": 168,
+    "sgpr": 24,
+    "lds_bytes": 2048,
+    "scratch_bytes": 20,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      32
+    ],
+    "host_launch_sites": [
+      "0x1800203c8"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z12k_reg_swin32ILi5ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin32<5, false>(VarParams)",
+    "quality": "reference",
+    "family": "C32",
+    "wave_size": 32,
+    "vgpr": 168,
+    "sgpr": 24,
+    "lds_bytes": 2048,
+    "scratch_bytes": 32,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      32
+    ],
+    "host_launch_sites": [
+      "0x1800208d9"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z12k_reg_swin32ILi8ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin32<8, true>(VarParams)",
+    "quality": "fast",
+    "family": "C32",
+    "wave_size": 32,
+    "vgpr": 161,
+    "sgpr": 30,
+    "lds_bytes": 2048,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      32
+    ],
+    "host_launch_sites": [
+      "0x180020484"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z12k_reg_swin32ILi8ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin32<8, false>(VarParams)",
+    "quality": "reference",
+    "family": "C32",
+    "wave_size": 32,
+    "vgpr": 167,
+    "sgpr": 30,
+    "lds_bytes": 2048,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      32
+    ],
+    "host_launch_sites": [
+      "0x180020988"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z12k_reg_swin32ILi20ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin32<20, true>(VarParams)",
+    "quality": "fast",
+    "family": "C32",
+    "wave_size": 32,
+    "vgpr": 168,
+    "sgpr": 33,
+    "lds_bytes": 0,
+    "scratch_bytes": 36,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      32
+    ],
+    "host_launch_sites": [
+      "0x18002082a"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z12k_reg_swin32ILi20ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin32<20, false>(VarParams)",
+    "quality": "reference",
+    "family": "C32",
+    "wave_size": 32,
+    "vgpr": 168,
+    "sgpr": 33,
+    "lds_bytes": 0,
+    "scratch_bytes": 36,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      32
+    ],
+    "host_launch_sites": [
+      "0x180020d95"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z12k_reg_swin32ILi32ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin32<32, true>(VarParams)",
+    "quality": "fast",
+    "family": "C32",
+    "wave_size": 32,
+    "vgpr": 162,
+    "sgpr": 28,
+    "lds_bytes": 2048,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      32
+    ],
+    "host_launch_sites": [
+      "0x1800205f6"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z12k_reg_swin32ILi32ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin32<32, false>(VarParams)",
+    "quality": "reference",
+    "family": "C32",
+    "wave_size": 32,
+    "vgpr": 166,
+    "sgpr": 28,
+    "lds_bytes": 2048,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      32
+    ],
+    "host_launch_sites": [
+      "0x180020add"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z10k_reg_headILi4EEv13HeadRegParams",
+    "demangled": "void k_reg_head<4>(HeadRegParams)",
+    "quality": "shared",
+    "family": "head",
+    "wave_size": 32,
+    "vgpr": 81,
+    "sgpr": 12,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      16
+    ],
+    "host_launch_sites": [
+      "0x180038bc2"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z11k_reg_decupILb1EEv14DecUpRegParams",
+    "demangled": "void k_reg_decup<true>(DecUpRegParams)",
+    "quality": "fast",
+    "family": "decoder",
+    "wave_size": 32,
+    "vgpr": 90,
+    "sgpr": 19,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      8
+    ],
+    "host_launch_sites": [
+      "0x18003abdd"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z11k_reg_decupILb0EEv14DecUpRegParams",
+    "demangled": "void k_reg_decup<false>(DecUpRegParams)",
+    "quality": "reference",
+    "family": "decoder",
+    "wave_size": 32,
+    "vgpr": 131,
+    "sgpr": 19,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      8
+    ],
+    "host_launch_sites": [
+      "0x18003af36"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z14k_reg_vit_ffwdILi2ELb1ELb1EEv13VitFfwdParams",
+    "demangled": "void k_reg_vit_ffwd<2, true, true>(VitFfwdParams)",
+    "quality": "fast",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 151,
+    "sgpr": 34,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      8
+    ],
+    "host_launch_sites": [
+      "0x180043083"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z14k_reg_vit_ffwdILi2ELb1ELb0EEv13VitFfwdParams",
+    "demangled": "void k_reg_vit_ffwd<2, true, false>(VitFfwdParams)",
+    "quality": "reference",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 158,
+    "sgpr": 34,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      8
+    ],
+    "host_launch_sites": [
+      "0x18004378f"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z14k_reg_vit_ffwdILi2ELb0ELb1EEv13VitFfwdParams",
+    "demangled": "void k_reg_vit_ffwd<2, false, true>(VitFfwdParams)",
+    "quality": "fast",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 150,
+    "sgpr": 16,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      8
+    ],
+    "host_launch_sites": [
+      "0x1800435e0"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z14k_reg_vit_ffwdILi2ELb0ELb0EEv13VitFfwdParams",
+    "demangled": "void k_reg_vit_ffwd<2, false, false>(VitFfwdParams)",
+    "quality": "reference",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 157,
+    "sgpr": 16,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      8
+    ],
+    "host_launch_sites": [
+      "0x180043936"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z14k_reg_vit_ffwdILi1ELb1ELb1EEv13VitFfwdParams",
+    "demangled": "void k_reg_vit_ffwd<1, true, true>(VitFfwdParams)",
+    "quality": "fast",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 97,
+    "sgpr": 28,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      8
+    ],
+    "host_launch_sites": [
+      "0x18004316d"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z14k_reg_vit_ffwdILi1ELb1ELb0EEv13VitFfwdParams",
+    "demangled": "void k_reg_vit_ffwd<1, true, false>(VitFfwdParams)",
+    "quality": "reference",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 94,
+    "sgpr": 27,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      8
+    ],
+    "host_launch_sites": [
+      "0x180043861"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z14k_reg_vit_ffwdILi1ELb0ELb1EEv13VitFfwdParams",
+    "demangled": "void k_reg_vit_ffwd<1, false, true>(VitFfwdParams)",
+    "quality": "fast",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 97,
+    "sgpr": 13,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      8
+    ],
+    "host_launch_sites": [
+      "0x1800436be"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z14k_reg_vit_ffwdILi1ELb0ELb0EEv13VitFfwdParams",
+    "demangled": "void k_reg_vit_ffwd<1, false, false>(VitFfwdParams)",
+    "quality": "reference",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 80,
+    "sgpr": 15,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      8
+    ],
+    "host_launch_sites": [
+      "0x180043a0c"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z14k_reg_vit_convILi2ELi0ELb1EEv13VitConvParams",
+    "demangled": "void k_reg_vit_conv<2, 0, true>(VitConvParams)",
+    "quality": "fast",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 95,
+    "sgpr": 22,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      8
+    ],
+    "host_launch_sites": [
+      "0x1800215fd"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z14k_reg_vit_convILi2ELi0ELb0EEv13VitConvParams",
+    "demangled": "void k_reg_vit_conv<2, 0, false>(VitConvParams)",
+    "quality": "reference",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 132,
+    "sgpr": 22,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      8
+    ],
+    "host_launch_sites": [
+      "0x1800221b0"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z14k_reg_vit_convILi2ELi1ELb1EEv13VitConvParams",
+    "demangled": "void k_reg_vit_conv<2, 1, true>(VitConvParams)",
+    "quality": "fast",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 96,
+    "sgpr": 34,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      8
+    ],
+    "host_launch_sites": [
+      "0x180021b4b"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z14k_reg_vit_convILi2ELi1ELb0EEv13VitConvParams",
+    "demangled": "void k_reg_vit_conv<2, 1, false>(VitConvParams)",
+    "quality": "reference",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 133,
+    "sgpr": 34,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      8
+    ],
+    "host_launch_sites": [
+      "0x18002201a"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z14k_reg_vit_convILi2ELi2ELb1EEv13VitConvParams",
+    "demangled": "void k_reg_vit_conv<2, 2, true>(VitConvParams)",
+    "quality": "fast",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 98,
+    "sgpr": 31,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      8
+    ],
+    "host_launch_sites": [
+      "0x1800217eb"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z14k_reg_vit_convILi2ELi2ELb0EEv13VitConvParams",
+    "demangled": "void k_reg_vit_conv<2, 2, false>(VitConvParams)",
+    "quality": "reference",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 135,
+    "sgpr": 31,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      8
+    ],
+    "host_launch_sites": [
+      "0x180021cee"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z14k_reg_vit_convILi2ELi4ELb1EEv13VitConvParams",
+    "demangled": "void k_reg_vit_conv<2, 4, true>(VitConvParams)",
+    "quality": "fast",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 168,
+    "sgpr": 31,
+    "lds_bytes": 0,
+    "scratch_bytes": 16,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      8
+    ],
+    "host_launch_sites": [
+      "0x18002199b"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z14k_reg_vit_convILi2ELi4ELb0EEv13VitConvParams",
+    "demangled": "void k_reg_vit_conv<2, 4, false>(VitConvParams)",
+    "quality": "reference",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 168,
+    "sgpr": 31,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      8
+    ],
+    "host_launch_sites": [
+      "0x180021e84"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z14k_reg_vit_convILi1ELi0ELb1EEv13VitConvParams",
+    "demangled": "void k_reg_vit_conv<1, 0, true>(VitConvParams)",
+    "quality": "fast",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 59,
+    "sgpr": 18,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      8
+    ],
+    "host_launch_sites": [
+      "0x180021713"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z14k_reg_vit_convILi1ELi0ELb0EEv13VitConvParams",
+    "demangled": "void k_reg_vit_conv<1, 0, false>(VitConvParams)",
+    "quality": "reference",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 72,
+    "sgpr": 18,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      8
+    ],
+    "host_launch_sites": [
+      "0x18002227b"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z14k_reg_vit_convILi1ELi1ELb1EEv13VitConvParams",
+    "demangled": "void k_reg_vit_conv<1, 1, true>(VitConvParams)",
+    "quality": "fast",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 59,
+    "sgpr": 23,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      8
+    ],
+    "host_launch_sites": [
+      "0x180021c23"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z14k_reg_vit_convILi1ELi1ELb0EEv13VitConvParams",
+    "demangled": "void k_reg_vit_conv<1, 1, false>(VitConvParams)",
+    "quality": "reference",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 72,
+    "sgpr": 23,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      8
+    ],
+    "host_launch_sites": [
+      "0x1800220e5"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z14k_reg_vit_convILi1ELi2ELb1EEv13VitConvParams",
+    "demangled": "void k_reg_vit_conv<1, 2, true>(VitConvParams)",
+    "quality": "fast",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 61,
+    "sgpr": 23,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      8
+    ],
+    "host_launch_sites": [
+      "0x1800218c3"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z14k_reg_vit_convILi1ELi2ELb0EEv13VitConvParams",
+    "demangled": "void k_reg_vit_conv<1, 2, false>(VitConvParams)",
+    "quality": "reference",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 76,
+    "sgpr": 23,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      8
+    ],
+    "host_launch_sites": [
+      "0x180021db9"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z14k_reg_vit_convILi1ELi4ELb1EEv13VitConvParams",
+    "demangled": "void k_reg_vit_conv<1, 4, true>(VitConvParams)",
+    "quality": "fast",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 97,
+    "sgpr": 24,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      8
+    ],
+    "host_launch_sites": [
+      "0x180021a73"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z14k_reg_vit_convILi1ELi4ELb0EEv13VitConvParams",
+    "demangled": "void k_reg_vit_conv<1, 4, false>(VitConvParams)",
+    "quality": "reference",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 97,
+    "sgpr": 24,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 32,
+    "host_block_x_candidates": [
+      8
+    ],
+    "host_launch_sites": [
+      "0x180021f4f"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z15k_reg_vit_attn2ILb1EEv10AttnParams",
+    "demangled": "void k_reg_vit_attn2<true>(AttnParams)",
+    "quality": "fast",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 146,
+    "sgpr": 18,
+    "lds_bytes": 4096,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 64,
+    "host_block_x_candidates": [
+      64
+    ],
+    "host_launch_sites": [
+      "0x180043c5b"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z15k_reg_vit_attn3ILb0EEv10AttnParams",
+    "demangled": "void k_reg_vit_attn3<false>(AttnParams)",
+    "quality": "reference",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 116,
+    "sgpr": 29,
+    "lds_bytes": 6144,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 64,
+    "host_block_x_candidates": [
+      64
+    ],
+    "host_launch_sites": [
+      "0x180043d29"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z14k_reg1d_expandILi2ELb1EEv12ExpandParams",
+    "demangled": "void k_reg1d_expand<2, true>(ExpandParams)",
+    "quality": "fast",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 108,
+    "sgpr": 10,
+    "lds_bytes": 4096,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [],
+    "host_launch_sites": [],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z14k_reg1d_expandILi2ELb0EEv12ExpandParams",
+    "demangled": "void k_reg1d_expand<2, false>(ExpandParams)",
+    "quality": "reference",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 145,
+    "sgpr": 11,
+    "lds_bytes": 4096,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [],
+    "host_launch_sites": [],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z12k_reg1d_convILi1ELb1ELb1EEv12ConvParams1d",
+    "demangled": "void k_reg1d_conv<1, true, true>(ConvParams1d)",
+    "quality": "fast",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 83,
+    "sgpr": 40,
+    "lds_bytes": 4100,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180020f9c"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z12k_reg1d_convILi1ELb1ELb0EEv12ConvParams1d",
+    "demangled": "void k_reg1d_conv<1, true, false>(ConvParams1d)",
+    "quality": "reference",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 94,
+    "sgpr": 40,
+    "lds_bytes": 4100,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x1800213fe"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z12k_reg1d_convILi1ELb0ELb1EEv12ConvParams1d",
+    "demangled": "void k_reg1d_conv<1, false, true>(ConvParams1d)",
+    "quality": "fast",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 80,
+    "sgpr": 27,
+    "lds_bytes": 4096,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      8
+    ],
+    "host_launch_sites": [
+      "0x180021093"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z12k_reg1d_convILi1ELb0ELb0EEv12ConvParams1d",
+    "demangled": "void k_reg1d_conv<1, false, false>(ConvParams1d)",
+    "quality": "reference",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 106,
+    "sgpr": 40,
+    "lds_bytes": 4096,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      8
+    ],
+    "host_launch_sites": [
+      "0x180021251"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z12k_reg1d_convILi2ELb0ELb1EEv12ConvParams1d",
+    "demangled": "void k_reg1d_conv<2, false, true>(ConvParams1d)",
+    "quality": "fast",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 116,
+    "sgpr": 27,
+    "lds_bytes": 4096,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      4
+    ],
+    "host_launch_sites": [
+      "0x18002117b"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z12k_reg1d_convILi2ELb0ELb0EEv12ConvParams1d",
+    "demangled": "void k_reg1d_conv<2, false, false>(ConvParams1d)",
+    "quality": "reference",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 168,
+    "sgpr": 40,
+    "lds_bytes": 4096,
+    "scratch_bytes": 16,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      4
+    ],
+    "host_launch_sites": [
+      "0x180021327"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z11k_reg1d_qkvILb1ELb1EEv14Reg1dQkvParams",
+    "demangled": "void k_reg1d_qkv<true, true>(Reg1dQkvParams)",
+    "quality": "fast",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 141,
+    "sgpr": 40,
+    "lds_bytes": 4100,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180039fe0"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z11k_reg1d_qkvILb1ELb0EEv14Reg1dQkvParams",
+    "demangled": "void k_reg1d_qkv<true, false>(Reg1dQkvParams)",
+    "quality": "reference",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 139,
+    "sgpr": 40,
+    "lds_bytes": 4100,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x18003a328"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z11k_reg1d_qkvILb0ELb1EEv14Reg1dQkvParams",
+    "demangled": "void k_reg1d_qkv<false, true>(Reg1dQkvParams)",
+    "quality": "fast",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 114,
+    "sgpr": 26,
+    "lds_bytes": 4096,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      12
+    ],
+    "host_launch_sites": [
+      "0x18003a106"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z11k_reg1d_qkvILb0ELb0EEv14Reg1dQkvParams",
+    "demangled": "void k_reg1d_qkv<false, false>(Reg1dQkvParams)",
+    "quality": "reference",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 168,
+    "sgpr": 29,
+    "lds_bytes": 4096,
+    "scratch_bytes": 8,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      12
+    ],
+    "host_launch_sites": [
+      "0x18003a217"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z12k_reg1d_attnILi1ELb1EEv15Reg1dAttnParams",
+    "demangled": "void k_reg1d_attn<1, true>(Reg1dAttnParams)",
+    "quality": "fast",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 117,
+    "sgpr": 32,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 128,
+    "host_block_x_candidates": [
+      32
+    ],
+    "host_launch_sites": [
+      "0x18003a4d0"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z12k_reg1d_attnILi1ELb0EEv15Reg1dAttnParams",
+    "demangled": "void k_reg1d_attn<1, false>(Reg1dAttnParams)",
+    "quality": "reference",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 110,
+    "sgpr": 27,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 128,
+    "host_block_x_candidates": [
+      32
+    ],
+    "host_launch_sites": [
+      "0x18003a5c6"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi64ELi0ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<64, 0, true>(VarParams)",
+    "quality": "fast",
+    "family": "C64",
+    "wave_size": 32,
+    "vgpr": 169,
+    "sgpr": 26,
+    "lds_bytes": 8192,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 64,
+    "host_block_x_candidates": [
+      64
+    ],
+    "host_launch_sites": [
+      "0x18004093d"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi64ELi0ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<64, 0, false>(VarParams)",
+    "quality": "reference",
+    "family": "C64",
+    "wave_size": 32,
+    "vgpr": 164,
+    "sgpr": 24,
+    "lds_bytes": 4096,
+    "scratch_bytes": 80,
+    "metadata_max_threads": 64,
+    "host_block_x_candidates": [
+      64
+    ],
+    "host_launch_sites": [
+      "0x1800427fb"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi64ELi1ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<64, 1, true>(VarParams)",
+    "quality": "fast",
+    "family": "C64",
+    "wave_size": 32,
+    "vgpr": 168,
+    "sgpr": 20,
+    "lds_bytes": 8192,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 64,
+    "host_block_x_candidates": [
+      64
+    ],
+    "host_launch_sites": [
+      "0x18004189f"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi64ELi1ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<64, 1, false>(VarParams)",
+    "quality": "reference",
+    "family": "C64",
+    "wave_size": 32,
+    "vgpr": 158,
+    "sgpr": 18,
+    "lds_bytes": 4096,
+    "scratch_bytes": 80,
+    "metadata_max_threads": 64,
+    "host_block_x_candidates": [
+      64
+    ],
+    "host_launch_sites": [
+      "0x180042754"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi64ELi2ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<64, 2, true>(VarParams)",
+    "quality": "fast",
+    "family": "C64",
+    "wave_size": 32,
+    "vgpr": 167,
+    "sgpr": 24,
+    "lds_bytes": 8192,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 64,
+    "host_block_x_candidates": [
+      64
+    ],
+    "host_launch_sites": [
+      "0x1800415cf"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi64ELi2ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<64, 2, false>(VarParams)",
+    "quality": "reference",
+    "family": "C64",
+    "wave_size": 32,
+    "vgpr": 164,
+    "sgpr": 22,
+    "lds_bytes": 4096,
+    "scratch_bytes": 80,
+    "metadata_max_threads": 64,
+    "host_block_x_candidates": [
+      64
+    ],
+    "host_launch_sites": [
+      "0x1800424b8"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi64ELi4ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<64, 4, true>(VarParams)",
+    "quality": "fast",
+    "family": "C64",
+    "wave_size": 32,
+    "vgpr": 175,
+    "sgpr": 30,
+    "lds_bytes": 8192,
+    "scratch_bytes": 272,
+    "metadata_max_threads": 64,
+    "host_block_x_candidates": [
+      64
+    ],
+    "host_launch_sites": [
+      "0x1800413b3"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi64ELi4ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<64, 4, false>(VarParams)",
+    "quality": "reference",
+    "family": "C64",
+    "wave_size": 32,
+    "vgpr": 154,
+    "sgpr": 30,
+    "lds_bytes": 4096,
+    "scratch_bytes": 336,
+    "metadata_max_threads": 64,
+    "host_block_x_candidates": [
+      64
+    ],
+    "host_launch_sites": [
+      "0x1800422c3"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi64ELi5ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<64, 5, true>(VarParams)",
+    "quality": "fast",
+    "family": "C64",
+    "wave_size": 32,
+    "vgpr": 171,
+    "sgpr": 26,
+    "lds_bytes": 8192,
+    "scratch_bytes": 272,
+    "metadata_max_threads": 64,
+    "host_block_x_candidates": [
+      64
+    ],
+    "host_launch_sites": [
+      "0x180041467"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi64ELi5ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<64, 5, false>(VarParams)",
+    "quality": "reference",
+    "family": "C64",
+    "wave_size": 32,
+    "vgpr": 168,
+    "sgpr": 26,
+    "lds_bytes": 4096,
+    "scratch_bytes": 336,
+    "metadata_max_threads": 64,
+    "host_block_x_candidates": [
+      64
+    ],
+    "host_launch_sites": [
+      "0x18004236a"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi64ELi8ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<64, 8, true>(VarParams)",
+    "quality": "fast",
+    "family": "C64",
+    "wave_size": 32,
+    "vgpr": 178,
+    "sgpr": 28,
+    "lds_bytes": 8192,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 64,
+    "host_block_x_candidates": [
+      64
+    ],
+    "host_launch_sites": [
+      "0x180041cd7"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi64ELi8ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<64, 8, false>(VarParams)",
+    "quality": "reference",
+    "family": "C64",
+    "wave_size": 32,
+    "vgpr": 168,
+    "sgpr": 28,
+    "lds_bytes": 4096,
+    "scratch_bytes": 96,
+    "metadata_max_threads": 64,
+    "host_block_x_candidates": [
+      64
+    ],
+    "host_launch_sites": [
+      "0x180042c8c"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi64ELi10ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<64, 10, true>(VarParams)",
+    "quality": "fast",
+    "family": "C64",
+    "wave_size": 32,
+    "vgpr": 174,
+    "sgpr": 26,
+    "lds_bytes": 8192,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 64,
+    "host_block_x_candidates": [
+      64
+    ],
+    "host_launch_sites": [
+      "0x180041683"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi64ELi10ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<64, 10, false>(VarParams)",
+    "quality": "reference",
+    "family": "C64",
+    "wave_size": 32,
+    "vgpr": 168,
+    "sgpr": 24,
+    "lds_bytes": 4096,
+    "scratch_bytes": 80,
+    "metadata_max_threads": 64,
+    "host_block_x_candidates": [
+      64
+    ],
+    "host_launch_sites": [
+      "0x18004255f"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi64ELi3ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<64, 3, true>(VarParams)",
+    "quality": "fast",
+    "family": "C64",
+    "wave_size": 32,
+    "vgpr": 175,
+    "sgpr": 21,
+    "lds_bytes": 8192,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 64,
+    "host_block_x_candidates": [
+      64
+    ],
+    "host_launch_sites": [
+      "0x1800417eb"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi64ELi3ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<64, 3, false>(VarParams)",
+    "quality": "reference",
+    "family": "C64",
+    "wave_size": 32,
+    "vgpr": 168,
+    "sgpr": 18,
+    "lds_bytes": 4096,
+    "scratch_bytes": 96,
+    "metadata_max_threads": 64,
+    "host_block_x_candidates": [
+      64
+    ],
+    "host_launch_sites": [
+      "0x1800426ad"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi128ELi0ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<128, 0, true>(VarParams)",
+    "quality": "fast",
+    "family": "C128",
+    "wave_size": 32,
+    "vgpr": 192,
+    "sgpr": 26,
+    "lds_bytes": 16384,
+    "scratch_bytes": 20,
+    "metadata_max_threads": 128,
+    "host_block_x_candidates": [
+      128
+    ],
+    "host_launch_sites": [
+      "0x180040860"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi128ELi0ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<128, 0, false>(VarParams)",
+    "quality": "reference",
+    "family": "C128",
+    "wave_size": 32,
+    "vgpr": 181,
+    "sgpr": 26,
+    "lds_bytes": 16384,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 128,
+    "host_block_x_candidates": [
+      128
+    ],
+    "host_launch_sites": [
+      "0x18004221c"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi128ELi1ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<128, 1, true>(VarParams)",
+    "quality": "fast",
+    "family": "C128",
+    "wave_size": 32,
+    "vgpr": 192,
+    "sgpr": 20,
+    "lds_bytes": 16384,
+    "scratch_bytes": 16,
+    "metadata_max_threads": 128,
+    "host_block_x_candidates": [
+      128
+    ],
+    "host_launch_sites": [
+      "0x1800412ff"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi128ELi1ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<128, 1, false>(VarParams)",
+    "quality": "reference",
+    "family": "C128",
+    "wave_size": 32,
+    "vgpr": 180,
+    "sgpr": 21,
+    "lds_bytes": 16384,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 128,
+    "host_block_x_candidates": [
+      128
+    ],
+    "host_launch_sites": [
+      "0x180042175"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi128ELi2ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<128, 2, true>(VarParams)",
+    "quality": "fast",
+    "family": "C128",
+    "wave_size": 32,
+    "vgpr": 192,
+    "sgpr": 24,
+    "lds_bytes": 16384,
+    "scratch_bytes": 8,
+    "metadata_max_threads": 128,
+    "host_block_x_candidates": [
+      128
+    ],
+    "host_launch_sites": [
+      "0x1800410e3"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi128ELi2ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<128, 2, false>(VarParams)",
+    "quality": "reference",
+    "family": "C128",
+    "wave_size": 32,
+    "vgpr": 179,
+    "sgpr": 24,
+    "lds_bytes": 16384,
+    "scratch_bytes": 80,
+    "metadata_max_threads": 128,
+    "host_block_x_candidates": [
+      128
+    ],
+    "host_launch_sites": [
+      "0x180041f80"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi128ELi4ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<128, 4, true>(VarParams)",
+    "quality": "fast",
+    "family": "C128",
+    "wave_size": 32,
+    "vgpr": 175,
+    "sgpr": 30,
+    "lds_bytes": 16384,
+    "scratch_bytes": 272,
+    "metadata_max_threads": 128,
+    "host_block_x_candidates": [
+      128
+    ],
+    "host_launch_sites": [
+      "0x180040f7b"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi128ELi4ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<128, 4, false>(VarParams)",
+    "quality": "reference",
+    "family": "C128",
+    "wave_size": 32,
+    "vgpr": 186,
+    "sgpr": 32,
+    "lds_bytes": 16384,
+    "scratch_bytes": 336,
+    "metadata_max_threads": 128,
+    "host_block_x_candidates": [
+      128
+    ],
+    "host_launch_sites": [
+      "0x180041e32"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi128ELi5ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<128, 5, true>(VarParams)",
+    "quality": "fast",
+    "family": "C128",
+    "wave_size": 32,
+    "vgpr": 192,
+    "sgpr": 28,
+    "lds_bytes": 16384,
+    "scratch_bytes": 272,
+    "metadata_max_threads": 128,
+    "host_block_x_candidates": [
+      128
+    ],
+    "host_launch_sites": [
+      "0x18004102f"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi128ELi5ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<128, 5, false>(VarParams)",
+    "quality": "reference",
+    "family": "C128",
+    "wave_size": 32,
+    "vgpr": 182,
+    "sgpr": 28,
+    "lds_bytes": 16384,
+    "scratch_bytes": 336,
+    "metadata_max_threads": 128,
+    "host_block_x_candidates": [
+      128
+    ],
+    "host_launch_sites": [
+      "0x180041ed9"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi128ELi8ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<128, 8, true>(VarParams)",
+    "quality": "fast",
+    "family": "C128",
+    "wave_size": 32,
+    "vgpr": 172,
+    "sgpr": 28,
+    "lds_bytes": 16384,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 128,
+    "host_block_x_candidates": [
+      128
+    ],
+    "host_launch_sites": [
+      "0x180041737"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi128ELi8ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<128, 8, false>(VarParams)",
+    "quality": "reference",
+    "family": "C128",
+    "wave_size": 32,
+    "vgpr": 188,
+    "sgpr": 28,
+    "lds_bytes": 16384,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 128,
+    "host_block_x_candidates": [
+      128
+    ],
+    "host_launch_sites": [
+      "0x180042606"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi128ELi10ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<128, 10, true>(VarParams)",
+    "quality": "fast",
+    "family": "C128",
+    "wave_size": 32,
+    "vgpr": 192,
+    "sgpr": 26,
+    "lds_bytes": 16384,
+    "scratch_bytes": 16,
+    "metadata_max_threads": 128,
+    "host_block_x_candidates": [
+      128
+    ],
+    "host_launch_sites": [
+      "0x180041197"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi128ELi10ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<128, 10, false>(VarParams)",
+    "quality": "reference",
+    "family": "C128",
+    "wave_size": 32,
+    "vgpr": 184,
+    "sgpr": 26,
+    "lds_bytes": 16384,
+    "scratch_bytes": 80,
+    "metadata_max_threads": 128,
+    "host_block_x_candidates": [
+      128
+    ],
+    "host_launch_sites": [
+      "0x180042027"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi128ELi3ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<128, 3, true>(VarParams)",
+    "quality": "fast",
+    "family": "C128",
+    "wave_size": 32,
+    "vgpr": 173,
+    "sgpr": 20,
+    "lds_bytes": 16384,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 128,
+    "host_block_x_candidates": [
+      128
+    ],
+    "host_launch_sites": [
+      "0x18004124b"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi128ELi3ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<128, 3, false>(VarParams)",
+    "quality": "reference",
+    "family": "C128",
+    "wave_size": 32,
+    "vgpr": 187,
+    "sgpr": 24,
+    "lds_bytes": 16384,
+    "scratch_bytes": 80,
+    "metadata_max_threads": 128,
+    "host_block_x_candidates": [
+      128
+    ],
+    "host_launch_sites": [
+      "0x1800420ce"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi256ELi0ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<256, 0, true>(VarParams)",
+    "quality": "fast",
+    "family": "C256",
+    "wave_size": 32,
+    "vgpr": 192,
+    "sgpr": 26,
+    "lds_bytes": 32768,
+    "scratch_bytes": 20,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180040a1a"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi256ELi0ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<256, 0, false>(VarParams)",
+    "quality": "reference",
+    "family": "C256",
+    "wave_size": 32,
+    "vgpr": 153,
+    "sgpr": 26,
+    "lds_bytes": 32768,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180042be5"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi256ELi1ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<256, 1, true>(VarParams)",
+    "quality": "fast",
+    "family": "C256",
+    "wave_size": 32,
+    "vgpr": 192,
+    "sgpr": 20,
+    "lds_bytes": 32768,
+    "scratch_bytes": 16,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180041c23"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi256ELi1ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<256, 1, false>(VarParams)",
+    "quality": "reference",
+    "family": "C256",
+    "wave_size": 32,
+    "vgpr": 152,
+    "sgpr": 20,
+    "lds_bytes": 32768,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180042b3e"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi256ELi2ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<256, 2, true>(VarParams)",
+    "quality": "fast",
+    "family": "C256",
+    "wave_size": 32,
+    "vgpr": 192,
+    "sgpr": 24,
+    "lds_bytes": 32768,
+    "scratch_bytes": 8,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180041a07"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi256ELi2ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<256, 2, false>(VarParams)",
+    "quality": "reference",
+    "family": "C256",
+    "wave_size": 32,
+    "vgpr": 151,
+    "sgpr": 24,
+    "lds_bytes": 32768,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180042949"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi256ELi4ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<256, 4, true>(VarParams)",
+    "quality": "fast",
+    "family": "C256",
+    "wave_size": 32,
+    "vgpr": 175,
+    "sgpr": 30,
+    "lds_bytes": 32768,
+    "scratch_bytes": 272,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x18004151b"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi256ELi4ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<256, 4, false>(VarParams)",
+    "quality": "reference",
+    "family": "C256",
+    "wave_size": 32,
+    "vgpr": 159,
+    "sgpr": 30,
+    "lds_bytes": 32768,
+    "scratch_bytes": 272,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180042411"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi256ELi5ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<256, 5, true>(VarParams)",
+    "quality": "fast",
+    "family": "C256",
+    "wave_size": 32,
+    "vgpr": 192,
+    "sgpr": 28,
+    "lds_bytes": 32768,
+    "scratch_bytes": 272,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180041953"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi256ELi5ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<256, 5, false>(VarParams)",
+    "quality": "reference",
+    "family": "C256",
+    "wave_size": 32,
+    "vgpr": 155,
+    "sgpr": 28,
+    "lds_bytes": 32768,
+    "scratch_bytes": 272,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x1800428a2"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi256ELi8ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<256, 8, true>(VarParams)",
+    "quality": "fast",
+    "family": "C256",
+    "wave_size": 32,
+    "vgpr": 172,
+    "sgpr": 28,
+    "lds_bytes": 32768,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180041d8b"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi256ELi8ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<256, 8, false>(VarParams)",
+    "quality": "reference",
+    "family": "C256",
+    "wave_size": 32,
+    "vgpr": 160,
+    "sgpr": 28,
+    "lds_bytes": 32768,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180042d33"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi256ELi10ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<256, 10, true>(VarParams)",
+    "quality": "fast",
+    "family": "C256",
+    "wave_size": 32,
+    "vgpr": 192,
+    "sgpr": 26,
+    "lds_bytes": 32768,
+    "scratch_bytes": 16,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180041abb"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi256ELi10ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<256, 10, false>(VarParams)",
+    "quality": "reference",
+    "family": "C256",
+    "wave_size": 32,
+    "vgpr": 156,
+    "sgpr": 26,
+    "lds_bytes": 32768,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x1800429f0"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi256ELi3ELb1EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<256, 3, true>(VarParams)",
+    "quality": "fast",
+    "family": "C256",
+    "wave_size": 32,
+    "vgpr": 173,
+    "sgpr": 20,
+    "lds_bytes": 32768,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180041b6f"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z13k_reg_swin_mhILi256ELi3ELb0EEv9VarParams",
+    "demangled": "void k_reg_swin_mh<256, 3, false>(VarParams)",
+    "quality": "reference",
+    "family": "C256",
+    "wave_size": 32,
+    "vgpr": 159,
+    "sgpr": 20,
+    "lds_bytes": 32768,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180042a97"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z10k_swin_varILi32ELb1ELb1EEv9VarParams",
+    "demangled": "void k_swin_var<32, true, true>(VarParams)",
+    "quality": "fast",
+    "family": "C32",
+    "wave_size": 32,
+    "vgpr": 81,
+    "sgpr": 54,
+    "lds_bytes": 15616,
+    "scratch_bytes": 24,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180037c01",
+      "0x18003bd6d",
+      "0x18003ef9e",
+      "0x1800406a9"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z10k_swin_varILi64ELb0ELb1EEv9VarParams",
+    "demangled": "void k_swin_var<64, false, true>(VarParams)",
+    "quality": "fast",
+    "family": "C64",
+    "wave_size": 32,
+    "vgpr": 112,
+    "sgpr": 59,
+    "lds_bytes": 15616,
+    "scratch_bytes": 24,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180040c6b"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z10k_swin_varILi128ELb0ELb1EEv9VarParams",
+    "demangled": "void k_swin_var<128, false, true>(VarParams)",
+    "quality": "fast",
+    "family": "C128",
+    "wave_size": 32,
+    "vgpr": 112,
+    "sgpr": 57,
+    "lds_bytes": 15616,
+    "scratch_bytes": 24,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180040ae3"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z10k_swin_varILi256ELb0ELb1EEv9VarParams",
+    "demangled": "void k_swin_var<256, false, true>(VarParams)",
+    "quality": "fast",
+    "family": "C256",
+    "wave_size": 32,
+    "vgpr": 134,
+    "sgpr": 58,
+    "lds_bytes": 19200,
+    "scratch_bytes": 24,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180040df3"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z10k_swin_varILi32ELb1ELb0EEv9VarParams",
+    "demangled": "void k_swin_var<32, true, false>(VarParams)",
+    "quality": "reference",
+    "family": "C32",
+    "wave_size": 32,
+    "vgpr": 64,
+    "sgpr": 58,
+    "lds_bytes": 15616,
+    "scratch_bytes": 24,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x18003be57",
+      "0x18003c350",
+      "0x18003effe",
+      "0x180040788"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z10k_swin_varILi64ELb0ELb0EEv9VarParams",
+    "demangled": "void k_swin_var<64, false, false>(VarParams)",
+    "quality": "reference",
+    "family": "C64",
+    "wave_size": 32,
+    "vgpr": 114,
+    "sgpr": 49,
+    "lds_bytes": 15616,
+    "scratch_bytes": 24,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180040d2f"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z10k_swin_varILi128ELb0ELb0EEv9VarParams",
+    "demangled": "void k_swin_var<128, false, false>(VarParams)",
+    "quality": "reference",
+    "family": "C128",
+    "wave_size": 32,
+    "vgpr": 115,
+    "sgpr": 57,
+    "lds_bytes": 15616,
+    "scratch_bytes": 24,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180040ba7"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z10k_swin_varILi256ELb0ELb0EEv9VarParams",
+    "demangled": "void k_swin_var<256, false, false>(VarParams)",
+    "quality": "reference",
+    "family": "C256",
+    "wave_size": 32,
+    "vgpr": 136,
+    "sgpr": 48,
+    "lds_bytes": 19200,
+    "scratch_bytes": 24,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180040eb3"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z16k_reg_swin_chainILi256ELb1EEv11ChainParams",
+    "demangled": "void k_reg_swin_chain<256, true>(ChainParams)",
+    "quality": "fast",
+    "family": "C256",
+    "wave_size": 32,
+    "vgpr": 168,
+    "sgpr": 64,
+    "lds_bytes": 16388,
+    "scratch_bytes": 160,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      1
+    ],
+    "host_launch_sites": [
+      "0x18004020e"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z7k_noiseILb1EEvPDF16_iij",
+    "demangled": "void k_noise<true>(_Float16*, int, int, unsigned int)",
+    "quality": "fast",
+    "family": "frame-I/O",
+    "wave_size": 32,
+    "vgpr": 15,
+    "sgpr": 10,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 1024,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180037e09",
+      "0x18003e875",
+      "0x18003fd7d"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z7k_noiseILb0EEvPDF16_iij",
+    "demangled": "void k_noise<false>(_Float16*, int, int, unsigned int)",
+    "quality": "reference",
+    "family": "frame-I/O",
+    "wave_size": 32,
+    "vgpr": 17,
+    "sgpr": 8,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 1024,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180037f19",
+      "0x18003e96a",
+      "0x18003fe1d"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z16k_reg_swin_chainILi256ELb0EEv11ChainParams",
+    "demangled": "void k_reg_swin_chain<256, false>(ChainParams)",
+    "quality": "reference",
+    "family": "C256",
+    "wave_size": 32,
+    "vgpr": 168,
+    "sgpr": 64,
+    "lds_bytes": 16388,
+    "scratch_bytes": 96,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      1
+    ],
+    "host_launch_sites": [
+      "0x18003d1c4",
+      "0x18003e71e",
+      "0x1800402b3"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z7k_ffwd2ILb1EEv11Ffwd2Params",
+    "demangled": "void k_ffwd2<true>(Ffwd2Params)",
+    "quality": "fast",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 90,
+    "sgpr": 41,
+    "lds_bytes": 21504,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x1800432a0"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z7k_ffwd2ILb0EEv11Ffwd2Params",
+    "demangled": "void k_ffwd2<false>(Ffwd2Params)",
+    "quality": "reference",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 80,
+    "sgpr": 41,
+    "lds_bytes": 21504,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [],
+    "host_launch_sites": [
+      "0x18004337a"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z16k_conv_res_viewsILb0EEv12ConvPlParams",
+    "demangled": "void k_conv_res_views<false>(ConvPlParams)",
+    "quality": "reference",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 92,
+    "sgpr": 48,
+    "lds_bytes": 24576,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      1
+    ],
+    "host_launch_sites": [
+      "0x180043f0c",
+      "0x180044963"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z11k_conv_res2ILb1EEv11Conv2Params",
+    "demangled": "void k_conv_res2<true>(Conv2Params)",
+    "quality": "fast",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 138,
+    "sgpr": 107,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      4
+    ],
+    "host_launch_sites": [
+      "0x1800440a5"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z11k_conv_res2ILb0EEv11Conv2Params",
+    "demangled": "void k_conv_res2<false>(Conv2Params)",
+    "quality": "reference",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 202,
+    "sgpr": 107,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      4
+    ],
+    "host_launch_sites": [
+      "0x18004419c"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z11k_qkv_attn2ILb1EEv10AttnParams",
+    "demangled": "void k_qkv_attn2<true>(AttnParams)",
+    "quality": "fast",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 130,
+    "sgpr": 36,
+    "lds_bytes": 23808,
+    "scratch_bytes": 24,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180044346"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z11k_qkv_attn2ILb0EEv10AttnParams",
+    "demangled": "void k_qkv_attn2<false>(AttnParams)",
+    "quality": "reference",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 99,
+    "sgpr": 34,
+    "lds_bytes": 23808,
+    "scratch_bytes": 24,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      256
+    ],
+    "host_launch_sites": [
+      "0x180044560"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z16k_conv_res_viewsILb1EEv12ConvPlParams",
+    "demangled": "void k_conv_res_views<true>(ConvPlParams)",
+    "quality": "fast",
+    "family": "C512",
+    "wave_size": 32,
+    "vgpr": 95,
+    "sgpr": 49,
+    "lds_bytes": 24576,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      1
+    ],
+    "host_launch_sites": [
+      "0x180044843"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z9k_expand2ILi1ELb1ELb0EEv12ExpandParams",
+    "demangled": "void k_expand2<1, true, false>(ExpandParams)",
+    "quality": "reference",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 98,
+    "sgpr": 32,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      32
+    ],
+    "host_launch_sites": [
+      "0x180039098"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": true
+  },
+  {
+    "symbol": "_Z9k_expand2ILi2ELb0ELb1EEv12ExpandParams",
+    "demangled": "void k_expand2<2, false, true>(ExpandParams)",
+    "quality": "fast",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 116,
+    "sgpr": 56,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [],
+    "host_launch_sites": [],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z9k_expand2ILi2ELb0ELb0EEv12ExpandParams",
+    "demangled": "void k_expand2<2, false, false>(ExpandParams)",
+    "quality": "reference",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 165,
+    "sgpr": 70,
+    "lds_bytes": 0,
+    "scratch_bytes": 144,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      16
+    ],
+    "host_launch_sites": [
+      "0x18003928a"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z9k_expand2ILi1ELb0ELb1EEv12ExpandParams",
+    "demangled": "void k_expand2<1, false, true>(ExpandParams)",
+    "quality": "fast",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 82,
+    "sgpr": 56,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [],
+    "host_launch_sites": [],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z9k_expand2ILi1ELb0ELb0EEv12ExpandParams",
+    "demangled": "void k_expand2<1, false, false>(ExpandParams)",
+    "quality": "reference",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 94,
+    "sgpr": 32,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      32
+    ],
+    "host_launch_sites": [
+      "0x18003919f"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z11k_contract2ILb1EEv12ConvParams1d",
+    "demangled": "void k_contract2<true>(ConvParams1d)",
+    "quality": "fast",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 153,
+    "sgpr": 50,
+    "lds_bytes": 0,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      8,
+      1024
+    ],
+    "host_launch_sites": [
+      "0x18003959b",
+      "0x1800398e8"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z6k_qkv2ILb1EEv9QkvParams",
+    "demangled": "void k_qkv2<true>(QkvParams)",
+    "quality": "fast",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 74,
+    "sgpr": 16,
+    "lds_bytes": 12800,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      32
+    ],
+    "host_launch_sites": [
+      "0x18003969a"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z12k_attention2ILb1EEv12AttnParams1d",
+    "demangled": "void k_attention2<true>(AttnParams1d)",
+    "quality": "fast",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 82,
+    "sgpr": 46,
+    "lds_bytes": 19456,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      32
+    ],
+    "host_launch_sites": [
+      "0x1800397b1"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z11k_contract2ILb0EEv12ConvParams1d",
+    "demangled": "void k_contract2<false>(ConvParams1d)",
+    "quality": "reference",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 161,
+    "sgpr": 55,
+    "lds_bytes": 16384,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      8,
+      1024
+    ],
+    "host_launch_sites": [
+      "0x180039a03",
+      "0x180039d50"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z6k_qkv2ILb0EEv9QkvParams",
+    "demangled": "void k_qkv2<false>(QkvParams)",
+    "quality": "reference",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 96,
+    "sgpr": 20,
+    "lds_bytes": 12800,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      32
+    ],
+    "host_launch_sites": [
+      "0x180039b02"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z12k_attention2ILb0EEv12AttnParams1d",
+    "demangled": "void k_attention2<false>(AttnParams1d)",
+    "quality": "reference",
+    "family": "ViT",
+    "wave_size": 32,
+    "vgpr": 82,
+    "sgpr": 46,
+    "lds_bytes": 19456,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      32
+    ],
+    "host_launch_sites": [
+      "0x180039c19"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z14k_dec_upsampleILb1EEv11DecUpParams",
+    "demangled": "void k_dec_upsample<true>(DecUpParams)",
+    "quality": "fast",
+    "family": "decoder",
+    "wave_size": 32,
+    "vgpr": 39,
+    "sgpr": 20,
+    "lds_bytes": 4096,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      1
+    ],
+    "host_launch_sites": [
+      "0x18003ad11"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  },
+  {
+    "symbol": "_Z14k_dec_upsampleILb0EEv11DecUpParams",
+    "demangled": "void k_dec_upsample<false>(DecUpParams)",
+    "quality": "reference",
+    "family": "decoder",
+    "wave_size": 32,
+    "vgpr": 59,
+    "sgpr": 24,
+    "lds_bytes": 4096,
+    "scratch_bytes": 0,
+    "metadata_max_threads": 256,
+    "host_block_x_candidates": [
+      1
+    ],
+    "host_launch_sites": [
+      "0x18003ae31"
+    ],
+    "calls_per_frame": null,
+    "grid": null,
+    "status": "symbol/metadata proven; host block candidates require branch context; runtime activation unknown",
+    "in_derived_default_body": false
+  }
+]

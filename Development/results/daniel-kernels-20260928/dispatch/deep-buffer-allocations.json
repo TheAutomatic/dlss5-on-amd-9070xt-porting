@@ -1,0 +1,128 @@
+[
+  {
+    "resolution": "900-default",
+    "object_offset": "270",
+    "bytes": 851968,
+    "kind": "C512 intermediate allocation; not measured traffic",
+    "evidence": "03dc0b..dd71:16*C512*ceil(W/4)*ceil(H/4)"
+  },
+  {
+    "resolution": "900-default",
+    "object_offset": "278",
+    "bytes": 851968,
+    "kind": "C512 intermediate allocation; not measured traffic",
+    "evidence": "03dc0b..dd71:16*C512*ceil(W/4)*ceil(H/4)"
+  },
+  {
+    "resolution": "900-default",
+    "object_offset": "280",
+    "bytes": 851968,
+    "kind": "C512 intermediate allocation; not measured traffic",
+    "evidence": "03dc0b..dd71:16*C512*ceil(W/4)*ceil(H/4)"
+  },
+  {
+    "resolution": "900-default",
+    "object_offset": "288",
+    "bytes": 851968,
+    "kind": "C512 intermediate allocation; not measured traffic",
+    "evidence": "03dc0b..dd71:16*C512*ceil(W/4)*ceil(H/4)"
+  },
+  {
+    "resolution": "900-default",
+    "object_offset": "2e0",
+    "bytes": 11010048,
+    "kind": "ViT split temporary allocation; not measured traffic",
+    "evidence": "03df5b..dfba"
+  },
+  {
+    "resolution": "900-default",
+    "object_offset": "2f8",
+    "bytes": 560,
+    "kind": "ViT split synchronization allocation",
+    "evidence": "03dfc1..e030"
+  },
+  {
+    "resolution": "1080-daniel-default",
+    "object_offset": "270",
+    "bytes": 1105920,
+    "kind": "C512 intermediate allocation; not measured traffic",
+    "evidence": "03dc0b..dd71:16*C512*ceil(W/4)*ceil(H/4)"
+  },
+  {
+    "resolution": "1080-daniel-default",
+    "object_offset": "278",
+    "bytes": 1105920,
+    "kind": "C512 intermediate allocation; not measured traffic",
+    "evidence": "03dc0b..dd71:16*C512*ceil(W/4)*ceil(H/4)"
+  },
+  {
+    "resolution": "1080-daniel-default",
+    "object_offset": "280",
+    "bytes": 1105920,
+    "kind": "C512 intermediate allocation; not measured traffic",
+    "evidence": "03dc0b..dd71:16*C512*ceil(W/4)*ceil(H/4)"
+  },
+  {
+    "resolution": "1080-daniel-default",
+    "object_offset": "288",
+    "bytes": 1105920,
+    "kind": "C512 intermediate allocation; not measured traffic",
+    "evidence": "03dc0b..dd71:16*C512*ceil(W/4)*ceil(H/4)"
+  },
+  {
+    "resolution": "1080-daniel-default",
+    "object_offset": "2e0",
+    "bytes": 15728640,
+    "kind": "ViT split temporary allocation; not measured traffic",
+    "evidence": "03df5b..dfba"
+  },
+  {
+    "resolution": "1080-daniel-default",
+    "object_offset": "2f8",
+    "bytes": 800,
+    "kind": "ViT split synchronization allocation",
+    "evidence": "03dfc1..e030"
+  },
+  {
+    "resolution": "1080-matched-ours",
+    "object_offset": "270",
+    "bytes": 1105920,
+    "kind": "C512 intermediate allocation; not measured traffic",
+    "evidence": "03dc0b..dd71:16*C512*ceil(W/4)*ceil(H/4)"
+  },
+  {
+    "resolution": "1080-matched-ours",
+    "object_offset": "278",
+    "bytes": 1105920,
+    "kind": "C512 intermediate allocation; not measured traffic",
+    "evidence": "03dc0b..dd71:16*C512*ceil(W/4)*ceil(H/4)"
+  },
+  {
+    "resolution": "1080-matched-ours",
+    "object_offset": "280",
+    "bytes": 1105920,
+    "kind": "C512 intermediate allocation; not measured traffic",
+    "evidence": "03dc0b..dd71:16*C512*ceil(W/4)*ceil(H/4)"
+  },
+  {
+    "resolution": "1080-matched-ours",
+    "object_offset": "288",
+    "bytes": 1105920,
+    "kind": "C512 intermediate allocation; not measured traffic",
+    "evidence": "03dc0b..dd71:16*C512*ceil(W/4)*ceil(H/4)"
+  },
+  {
+    "resolution": "1080-matched-ours",
+    "object_offset": "2e0",
+    "bytes": 15728640,
+    "kind": "ViT split temporary allocation; not measured traffic",
+    "evidence": "03df5b..dfba"
+  },
+  {
+    "resolution": "1080-matched-ours",
+    "object_offset": "2f8",
+    "bytes": 800,
+    "kind": "ViT split synchronization allocation",
+    "evidence": "03dfc1..e030"
+  }
+]
