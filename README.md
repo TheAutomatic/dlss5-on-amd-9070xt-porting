@@ -171,6 +171,8 @@ powershell -ExecutionPolicy Bypass -File scripts\deploy_fast.ps1 -Source <lab> -
 
 ## Changelog
 
+Per-release details (what changed, effect, switches, bit-exactness, experiment folders) are in [CHANGELOG.md](CHANGELOG.md).
+
 Unless a Magpie scenario is specified, frame rates are Stellar Blade at 1920×1080 on an RX 9070 XT; "bench" is the offline test bench (network only). Every tag
 after 0.01 keeps the bit-exact reference chain as its judge (≈ 42 dB PSNR against it); "bit-exact" below means the fast
 chain's own output did not change by a single bit.

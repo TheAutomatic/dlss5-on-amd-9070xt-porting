@@ -123,6 +123,8 @@ powershell -ExecutionPolicy Bypass -File scripts\deploy_fast.ps1 -Source <lab> -
 
 ## 更新记录
 
+每一版的详细改动（改了什么、效果、开关、是否逐位、实验目录）见 [CHANGELOG.zh-CN.md](CHANGELOG.zh-CN.md)。
+
 除注明 Magpie 场景的记录外，帧率为《星刃》1920×1080、RX 9070 XT；「测试台」是只跑网络的离线程序。0.01 之后的每个 tag 都以逐位精确的参考链为裁判（对它约 42 dB PSNR）；下面写「逐位相同」指快速链自己的输出一位都没变。
 
 | 版本 | 日期 | 做了什么 | 结果 |
