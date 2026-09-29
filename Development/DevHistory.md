@@ -1132,3 +1132,9 @@ Q正式ABBA两轮，每槽1000弃200：900 8.347714→8.189269（−1.898%）、
 C256持久化基线上两轮1000弃200 ABBA，完整NativeGameFrame wall：900 8.306088→8.117038（−2.276%）、8.314973→8.132057（−2.200%）；1080 11.206715→11.038179（−1.504%）、11.199951→11.023446（−1.576%）。MAKE_RESIDENT_EVERY60全程保留，尖峰测试未混跑；逐槽原始CSV独立复算，不能把微测8倍相加当整帧收益。
 
 19:47备份后只装deep_fast-packed两份：gfx1200 1d816dc1、gfx1201 1750899d；宿主046e1a63、其他60模块与dxgi/ini/flags原SHA，总62模块。DIRECT_IO3/MAKE_RESIDENT60/SWIN_RUN1原样。备份 `D:\DLSSNR-Lab\hip-backend\vit-attention-20260929\backups\stellar-20260929-194730`；安装脚本带SHA检查/异常回滚/RestoreBackup。没发包、没启动游戏；GPU测试已结束。结果 `results/vit-attention-20260929`，脚本 `HIP/experiments/vit-attention`；三个编译宏默认0、生产recipe开1，无新用户开关。
+
+## 2026-09-29：C512最终投影M32权重共用，逐位但整网变慢，负账
+
+WorkingPlan B1 留下的未实测候选。改为不动宿主：`mh_attention_project_frag_c512` 同grid同ABI，宏 `C512_PROJ_M32`（默认0）开后每wave算两个16-token tile、共用每个K16权重片段，grid后半即返回。宏0与剑星现装模块.text/.rodata逐字节同；宏1 VGPR80→97、SGPR28→38、无LDS/spill。
+逐位：EXACT/AE各168帧＋48帧回绕与现役（C256持久化＋ViT attention新核）逐帧同，AE决策同。
+两轮ABBA：900 8.059→8.215、8.097→8.246（慢1.9%）；1080 10.983→11.042、10.972→11.044（慢0.5～0.7%）。权重在L2、不是带宽瓶颈，wave数减半把单wave WMMA链拉长一倍，900档token少吃亏更多。不收、不装。结果 `results/c512-proj-share-20260929`。
