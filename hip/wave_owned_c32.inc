@@ -159,9 +159,18 @@ DEV i2 cw_input(const unsigned char*in,uint win,uint qt,uint ci,uint width,uint 
 #ifndef CW_UP_FUSED
 #define CW_UP_FUSED 0
 #endif
+#ifndef CW_DIAG_ONLY
+#define CW_DIAG_ONLY 0 /* 1: chain residual skips the all-zero off-diagonal K16 half (6 of 12 WMMA); results/c32-diag-zero-20260925 proved the float32 bits equal for every finite E4M3 input */
+#endif
+#ifndef CW_SKIP_BYTE
+#define CW_SKIP_BYTE 0 /* 1: extra exports c32_wave1_finish_dcrop_b8 / c32_wave1_up_b8: block4 main (the C32 skip) stored as E4M3 bytes fp8(F(v)) instead of f32 F(v); F(v) is E4M3-exact, so the up reads back the same value (results/c32-align-20260930) */
+#endif
+#if CW_SKIP_BYTE && CW_TAIL_QUAD
+#error "CW_SKIP_BYTE: byte main store only on the non-quad finish tail"
+#endif
 DEV float cw_up_F(float x){uint a=bits(x)&0x7fffffffu;float c=__builtin_fminf(__builtin_fmaxf(x,-448.f),448.f);float r=__builtin_amdgcn_cvt_f32_fp8(__builtin_amdgcn_cvt_pk_fp8_f32(c,0.f,0,false),0);return a==0?0.f:r;}
 DEV float cw_up_shuffle(float v,uint lane){return __builtin_bit_cast(float,__builtin_amdgcn_ds_bpermute(lane*4,__builtin_bit_cast(int,v)));}
-template<bool Chain,bool Finish=false,bool DownCrop=false,bool Post=false,bool Prefix=false,bool Up=false>
+template<bool Chain,bool Finish=false,bool DownCrop=false,bool Post=false,bool Prefix=false,bool Up=false,bool Byte=false,bool DownByte=false>
 DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned char*out,uint windows,uint mode,uint raw,uint width,uint height,uint sx,uint sy,uint prevw,uint px,uint py,float*main=nullptr,float*down=nullptr,const unsigned char*skip=nullptr,const float*scales=nullptr,const float*color=nullptr,const float*headw=nullptr,float*rgb=nullptr,float rgbscale=0.f,const float*history=nullptr,uint seed=0,uint temporal=0,const float*upw=nullptr){fp8_sat_mode();
  constexpr uint cw_kind=Prefix?5:Post?4:Finish?(DownCrop?3:2):Chain?0:1;
  uint win=bid();if(win>=windows)return;
@@ -227,9 +236,11 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
    int x=int((win%(ww/8))*8+tok%8)-int(sx),y=int((win/(ww/8))*8+tok/8)-int(sy);
    bool valid=x>=0&&y>=0&&x<int(width)&&y<int(height);
    for(uint ci=0;ci<2;ci++){
+    unsigned long long sk=0;if constexpr(Byte){if(valid)__builtin_memcpy(&sk,__builtin_assume_aligned(skip+(uint(y)*width+uint(x))*32+ci*16+g*8,8),8);}
     CW_Q8_DECL(a);for(uint e=0;e<8;e++){
      uint c=ci*16+g*8+e;float v=0.f,t=H(cw_up_shuffle(up_totals[ci][e],lo+g*16));
-     if(valid)v=H(t+cw_up_F(reinterpret_cast<const float*>(skip)[(uint(y)*width+uint(x))*32+c])*upw[2048+c]);
+     if constexpr(Byte){if(valid)v=H(t+__builtin_amdgcn_cvt_f32_fp8(int((sk>>(8*e))&255u),0)*upw[2048+c]);}
+     else if(valid)v=H(t+cw_up_F(reinterpret_cast<const float*>(skip)[(uint(y)*width+uint(x))*32+c])*upw[2048+c]);
      // Keep raw half-valued Up output for FFN residual; quantize only its matrix operand.
      CW_Q8_SET(a,e,v);ffn[ci][e]=cw_clampf(float((_Float16)v),-448.f,448.f)*fw[8704+c];
     }CW_Q8_END(a);input[ci]=a;
@@ -259,6 +270,9 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
 #endif
   }
   if constexpr(Chain)for(uint part=0;part<3;part++)for(uint ci=0;ci<2;ci++)for(uint kt=0;kt<2;kt++){
+#if CW_DIAG_ONLY
+   if(kt!=ci)continue; /* the three residual matrices are diagonal: the off-diagonal K16 half-block is all zero */
+#endif
    i2 b=matrix8(fw,34944+((part*2+ci)*2+kt)*512+(g*16+r)*8);
    ffn[ci]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,input[kt],ffn[ci]);
   }
@@ -378,9 +392,9 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
   }
   // The quad route above emits both outputs.
 #endif
-  auto emit=[&](auto full){if(main)for(uint t=0;t<64;t++){int x=int(tx+t%8)-int(sx),y=int(ty+t/8)-int(sy);if(full||(Prefix&&CW_PREFIX_FULL_TILE)||(x>=0&&y>=0&&x<int(width)&&y<int(height))){uint dest=(uint(y)*width+uint(x))*32+c;float v=load(t);if constexpr(Prefix)reinterpret_cast<unsigned char*>(main)[dest]=static_cast<unsigned char>(cw_prefix_byte(v));else main[dest]=F(v);}}
+  auto emit=[&](auto full){if(main)for(uint t=0;t<64;t++){int x=int(tx+t%8)-int(sx),y=int(ty+t/8)-int(sy);if(full||(Prefix&&CW_PREFIX_FULL_TILE)||(x>=0&&y>=0&&x<int(width)&&y<int(height))){uint dest=(uint(y)*width+uint(x))*32+c;float v=load(t);if constexpr(Prefix)reinterpret_cast<unsigned char*>(main)[dest]=static_cast<unsigned char>(cw_prefix_byte(v));else if constexpr(Byte)reinterpret_cast<unsigned char*>(main)[dest]=static_cast<unsigned char>(fp8(F(v)));else main[dest]=F(v);}}
   if(!CW_TAIL_QUAD&&down)for(uint k=0;k<16;k++){uint t=(k/4)*16+(k%4)*2;float top=Hrtz(load(t)+load(t+1)),bottom=Hrtz(load(t+8)+load(t+9));uint x=tx+t%8,y=ty+t/8;
-   if constexpr(DownCrop){int cx=int(x/2)-int(sx/2),cy=int(y/2)-int(sy/2);if(full||(cx>=0&&cy>=0&&cx<int(width/2)&&cy<int(height/2)))down[(uint(cy)*(width/2)+uint(cx))*32+c]=F(Hrtz(Hrtz(top+bottom)*.25f));}
+   if constexpr(DownCrop){int cx=int(x/2)-int(sx/2),cy=int(y/2)-int(sy/2);if(full||(cx>=0&&cy>=0&&cx<int(width/2)&&cy<int(height/2))){float dv=F(Hrtz(Hrtz(top+bottom)*.25f));uint di=(uint(cy)*(width/2)+uint(cx))*32+c;if constexpr(DownByte)reinterpret_cast<unsigned char*>(down)[di]=static_cast<unsigned char>(fp8(dv));else down[di]=dv;}}
    else down[((y/2)*(ww/2)+x/2)*32+c]=F(Hrtz(Hrtz(top+bottom)*.25f));
   }
   };
@@ -405,9 +419,9 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
   }
   if(false)
 #endif
-  if(main)for(uint t=0;t<64;t++){int x=int(tx+t%8)-int(sx),y=int(ty+t/8)-int(sy);if((Prefix&&CW_PREFIX_FULL_TILE)||(x>=0&&y>=0&&x<int(width)&&y<int(height))){uint dest=(uint(y)*width+uint(x))*32+c;float v=load(t);if constexpr(Prefix)reinterpret_cast<unsigned char*>(main)[dest]=static_cast<unsigned char>(cw_prefix_byte(v));else main[dest]=F(v);}}
+  if(main)for(uint t=0;t<64;t++){int x=int(tx+t%8)-int(sx),y=int(ty+t/8)-int(sy);if((Prefix&&CW_PREFIX_FULL_TILE)||(x>=0&&y>=0&&x<int(width)&&y<int(height))){uint dest=(uint(y)*width+uint(x))*32+c;float v=load(t);if constexpr(Prefix)reinterpret_cast<unsigned char*>(main)[dest]=static_cast<unsigned char>(cw_prefix_byte(v));else if constexpr(Byte)reinterpret_cast<unsigned char*>(main)[dest]=static_cast<unsigned char>(fp8(F(v)));else main[dest]=F(v);}}
   if(!CW_TAIL_QUAD&&down)for(uint k=0;k<16;k++){uint t=(k/4)*16+(k%4)*2;float top=Hrtz(load(t)+load(t+1)),bottom=Hrtz(load(t+8)+load(t+9));uint x=tx+t%8,y=ty+t/8;
-   if constexpr(DownCrop){int cx=int(x/2)-int(sx/2),cy=int(y/2)-int(sy/2);if(cx>=0&&cy>=0&&cx<int(width/2)&&cy<int(height/2))down[(uint(cy)*(width/2)+uint(cx))*32+c]=F(Hrtz(Hrtz(top+bottom)*.25f));}
+   if constexpr(DownCrop){int cx=int(x/2)-int(sx/2),cy=int(y/2)-int(sy/2);if(cx>=0&&cy>=0&&cx<int(width/2)&&cy<int(height/2)){float dv=F(Hrtz(Hrtz(top+bottom)*.25f));uint di=(uint(cy)*(width/2)+uint(cx))*32+c;if constexpr(DownByte)reinterpret_cast<unsigned char*>(down)[di]=static_cast<unsigned char>(fp8(dv));else down[di]=dv;}}
    else down[((y/2)*(ww/2)+x/2)*32+c]=F(Hrtz(Hrtz(top+bottom)*.25f));
   }
  }
@@ -422,6 +436,13 @@ CW_FINISH(c32_wave1_finish_dcrop,true)
 CW_ENTRY void c32_wave1_post(const unsigned char*low,const unsigned char*skip,const float*scales,const float*fw,const float*w,const float*color,const float*headw,float*rgb,uint windows,uint width,uint height,uint sx,uint sy,float scale){cw_body<false,false,false,true>(low,fw,w,nullptr,windows,0,1,width,height,sx,sy,0,0,0,nullptr,nullptr,skip,scales,color,headw,rgb,scale);}
 CW_ENTRY void c32_wave1_prefix(const unsigned char*rgba,const float*history,const float*fw,const float*w,float*main,float*down,uint windows,uint mode,uint raw,uint width,uint height,uint seed,uint temporal){cw_body<false,true,false,false,true>(rgba,fw,w,nullptr,windows,mode,raw,width,height,0,0,0,0,0,main,down,nullptr,nullptr,nullptr,nullptr,nullptr,0.f,history,seed,temporal);}
 
+#if CW_SKIP_BYTE
+CW_ENTRY void c32_wave1_finish_dcrop_b8(const unsigned char*in,const float*fw,const float*w,unsigned char*main,float*down,uint windows,uint mode,uint raw,uint width,uint height,uint sx,uint sy,uint prevw,uint px,uint py){cw_body<true,true,true,false,false,false,true>(in,fw,w,nullptr,windows,mode,raw,width,height,sx,sy,prevw,px,py,reinterpret_cast<float*>(main),down);}
+CW_ENTRY void c32_wave1_finish_dcrop_b8d(const unsigned char*in,const float*fw,const float*w,unsigned char*main,unsigned char*down,uint windows,uint mode,uint raw,uint width,uint height,uint sx,uint sy,uint prevw,uint px,uint py){cw_body<true,true,true,false,false,false,true,true>(in,fw,w,nullptr,windows,mode,raw,width,height,sx,sy,prevw,px,py,reinterpret_cast<float*>(main),reinterpret_cast<float*>(down));}
+#endif
 #if CW_UP_FUSED
+#if CW_SKIP_BYTE
+CW_ENTRY void c32_wave1_up_b8(const unsigned char*low,const float*upw,const unsigned char*skip,const float*fw,const float*aw,unsigned char*out,uint windows,uint width,uint height,uint sx,uint sy){cw_body<false,false,false,false,false,true,true>(low,fw,aw,out,windows,0,1,width,height,sx,sy,0,0,0,nullptr,nullptr,skip,nullptr,nullptr,nullptr,nullptr,0.f,nullptr,0,0,upw);}
+#endif
 CW_ENTRY void c32_wave1_up(const unsigned char*low,const float*upw,const float*skip,const float*fw,const float*aw,unsigned char*out,uint windows,uint width,uint height,uint sx,uint sy){cw_body<false,false,false,false,false,true>(low,fw,aw,out,windows,0,1,width,height,sx,sy,0,0,0,nullptr,nullptr,reinterpret_cast<const unsigned char*>(skip),nullptr,nullptr,nullptr,nullptr,0.f,nullptr,0,0,upw);}
 #endif

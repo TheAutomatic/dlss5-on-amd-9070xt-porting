@@ -1166,3 +1166,11 @@ WorkingPlan B1 留下的未实测候选。改为不动宿主：`mh_attention_pro
 ## 2026-09-30 02:53：鬼武者 2K 质量稳定 60
 
 宿主/runtime 62803606 / be828151（0.37 + 900 去 shift_pack）。Zero 本机久玩：2K 质量（900 档）中画质稳定 60，GPU 占用 90～95%、从未满载。
+
+## 2026-09-30 03:45：C32 块 4 skip/下采样改存 E4M3 字节（逐位，两档过 0.5%，已装）
+
+对齐 Daniel `k_reg_swin32<8>/<4>`：up 与块 4 边界多出来的主要不是指令而是数据格式——块 4 的 main（只给块 66 up 当 skip）和 dcrop 下采样按 f32 存，值却是 `F(v)`（E4M3 精确、无 −0）。新导出 `c32_wave1_finish_dcrop_b8d`/`c32_wave1_up_b8`（`CW_SKIP_BYTE`）与 `mh_pool_project_c32_b8`（`HIP_POOL32_B8`），源码默认 0、配方开 1；宿主 `HIP_C32_SKIP_BYTE/DOWN_BYTE` 默认 1，按 `HasFn`＋同一 `C32UpBodyPath()` 判断回退。up 的低分辨率输入是 half 语义（Daniel 用 FP8）属有损，不追。
+
+逐位 18 组 SAME（7 用例 × EXACT/AE、AE CSV、回绕）。ABBA 900 7.9101→7.8612（0.62%）、7.9332→7.8831（0.63%）；1080 10.8614→10.7739（0.81%）、10.8828→10.7918（0.84%）。装剑星（add-on a80db313＋c32-wave1/mh-fast 两架构，flags 原样，备份 `...\c32-align-20260930\backups\stellar-20260930-034433`）；RE9 runtime fd4b2c0c（900/1080 hash 同、smoke 过）；鬼武者 runtime＋模块对齐，备份 `D:\DLSSNR-Lab\onimusha-backups\20260930-034433-c32`。`results/c32-align-20260930`。
+
+小件：C32 对角残差跳零（`CW_DIAG_ONLY`）在 wave-owned 核上重做，逐位，900/1080 各 −0.02～−0.03ms（0.22～0.28%），不过门槛；C256 FFN `HIP_FFN_PK_ACT 1` 逐位但测不出收益（激活写 hidden 逐字节是布局所致，要改得转置 expand，非小件）；ViT QKV 归一化换 bpermute 求和改变累加顺序不能逐位。三项合并 0.26～0.35%，均不收。`results/small-cuts-20260930`。

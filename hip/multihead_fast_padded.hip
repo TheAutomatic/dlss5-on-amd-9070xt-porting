@@ -326,6 +326,21 @@ FASTWAVE void mh_pool_project_production_h16w(const float* pooled,const float* w
  for(uint e=0;e<8;e++){uint p=first+g*8+e;if(p<M)output[p*N+col+rc]=(valid_width&&(p%width>=valid_width||p/width>=valid_height))?0.f:F(acc[e]);}
 }
 
+#ifndef HIP_POOL32_B8
+#define HIP_POOL32_B8 0
+#endif
+#if HIP_POOL32_B8
+// C32 twin of the h16w kernel whose pooled input is already E4M3 bytes (c32_wave1_finish_dcrop_b8d stores fp8(F(v))).
+// F(v) is E4M3-exact and never -0, so the byte equals pack()'s q8 of the f32 value: identical A fragment, 1/4 of the reads.
+FASTWAVE void mh_pool_project_c32_b8(const unsigned char* pooled,const float* weights,float* output,uint width,uint height,uint valid_width,uint valid_height,uint channels){
+ uint M=width*height,N=64,tile=__builtin_amdgcn_workgroup_id_x(),nt=4;
+ if(channels!=32||tile>=((M+15)/16)*nt)return;uint first=tile/nt*16,col=tile%nt*16,l=__builtin_amdgcn_workitem_id_x(),rc=l&15,g=l>>4;f8 acc{},sum{};
+ for(uint half=0;half<2;half++){i2 a{},b;uint p=first+rc;if(p<M)__builtin_memcpy(&a,pooled+p*32+half*16+g*8,8);__builtin_memcpy(&b,reinterpret_cast<const unsigned char*>(weights)+(col+rc)*32+half*16+g*8,8);sum=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(a,b,sum);}
+ for(uint e=0;e<8;e++)acc[e]=Hrtz(acc[e]+sum[e]);
+ for(uint e=0;e<8;e++){uint p=first+g*8+e;if(p<M)output[p*N+col+rc]=(valid_width&&(p%width>=valid_width||p/width>=valid_height))?0.f:F(acc[e]);}
+}
+#endif
+
 // Fused 2x2 pool + channel-doubling projection (host option pool_project_fused, C=64/128/256): one wave produces 16
 // pooled tokens x 64 output columns; the pooled A fragments are computed once from raw (same H/F chain as mh_pool) and
 // reused across the four column tiles, weights arrive prepacked as F16 rows (one 16-byte load per B fragment). The
