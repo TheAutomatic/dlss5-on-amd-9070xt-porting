@@ -1,0 +1,850 @@
+{
+  "reason": "Initial synthetic residual/normalization gains were incorrectly randomized at matrix amplitude; all 169 measurements discarded, 42 zero-output jobs. Replaced by matrix/bias synthesis with gain=1 and reran all169.",
+  "files": [
+    {
+      "file": "ours-073.log",
+      "sha256": "1236b8e0a47a5bfc51718c457af874ab39bb1add19f0751d471ad54634ac15ff",
+      "zero_output": false
+    },
+    {
+      "file": "ours-156.log",
+      "sha256": "edebde73c273c9aa2b930a4b8b6c3cd29590be7dab5c9dee6839eb2a5ebacfd5",
+      "zero_output": true
+    },
+    {
+      "file": "ours-012.log",
+      "sha256": "066e27193f3bb08c517e243d75af63d04244cb87aa611895943f7ccea6cd95a2",
+      "zero_output": true
+    },
+    {
+      "file": "ours-003.log",
+      "sha256": "c7e640426386163bee264f3d86afead667ea462895c83c4fd5865d1baaadb957",
+      "zero_output": true
+    },
+    {
+      "file": "ours-134.log",
+      "sha256": "9ce8821a6af6c758ffacb97c186b9c010b2b5b5ee2e2351c1e57ad821145f83f",
+      "zero_output": false
+    },
+    {
+      "file": "ours-014.log",
+      "sha256": "f7fbfff27ecf86341f41f5f1f4d47ea80e06e3c9bc5da8f1bc4bc03c3594b046",
+      "zero_output": true
+    },
+    {
+      "file": "ours-025.log",
+      "sha256": "02653a4e19a0332b0c7253ae69aabaf6a90b12aadf252a9845e0a30ea5c16c42",
+      "zero_output": false
+    },
+    {
+      "file": "ours-029.log",
+      "sha256": "75ea50010eef76d47d6fae74d2937293ae368bc463503fa78766a11b89ccfceb",
+      "zero_output": false
+    },
+    {
+      "file": "ours-011.log",
+      "sha256": "a2470fa09d554b802bafadd50cf3b5bfa3dac604eed1c6dd10709cecac6a0880",
+      "zero_output": true
+    },
+    {
+      "file": "ours-015.log",
+      "sha256": "62da9276fcfc6035ef3f07cbc5b5adb95fa5d8abaa2732747790cdc59a4c0390",
+      "zero_output": true
+    },
+    {
+      "file": "ours-138.log",
+      "sha256": "45aa8ee950438aba0327e7fa19b7ae15a50ac945d84ebe58aba9d7f1674faa55",
+      "zero_output": false
+    },
+    {
+      "file": "ours-056.log",
+      "sha256": "24271a6088d8351d23bf3f329541c9e5ada574f362c1038f8f11de08514329f9",
+      "zero_output": false
+    },
+    {
+      "file": "ours-033.log",
+      "sha256": "d58f27563a3fbbc2f6519af5e61066b124ede50bcbc7c174271d8780dbd8544e",
+      "zero_output": false
+    },
+    {
+      "file": "ours-075.log",
+      "sha256": "bcdefb0a82ac7929e9629a2bd3b52e1553e7e9f603be061b75a0a5ae42363c58",
+      "zero_output": false
+    },
+    {
+      "file": "ours-064.log",
+      "sha256": "96f5f25d88da90d3353c4bffea9af9250f27eb97b45463a745cbda164bfb431d",
+      "zero_output": false
+    },
+    {
+      "file": "ours-124.log",
+      "sha256": "c5852c50565d3d337f34d409e619baee32a16a7dc1a0649de9b7aed0f20920df",
+      "zero_output": false
+    },
+    {
+      "file": "ours-083.log",
+      "sha256": "91d81f101b4b2702785820d393bddf1b24b2536f2b2e85be619d0389931e0780",
+      "zero_output": false
+    },
+    {
+      "file": "ours-032.log",
+      "sha256": "da530d778063ad8d8fcc4384f3fa2f2f24895c0b318ea4f317d848e983883afa",
+      "zero_output": false
+    },
+    {
+      "file": "ours-095.log",
+      "sha256": "afa496878b82bc7bd5375423602e3ced23dacabe48b96c2a2c843c93906cbb46",
+      "zero_output": false
+    },
+    {
+      "file": "ours-072.log",
+      "sha256": "96af04ba29a673f7be92435a132817050aee5813e98061c7b326ead00faf652f",
+      "zero_output": false
+    },
+    {
+      "file": "ours-118.log",
+      "sha256": "f308d9397fe54a055d02a41bd45de1443e2e6fc7328c71e21474d239e6d43e47",
+      "zero_output": false
+    },
+    {
+      "file": "ours-063.log",
+      "sha256": "123296d1eb4b4bd84c7495c8b386220ee2e37243b70736c66f7ea55e43721de9",
+      "zero_output": false
+    },
+    {
+      "file": "ours-013.log",
+      "sha256": "224c3c935b87733f599431074852c1db41844c1a1e616d1905a3ff46a3a9ce3a",
+      "zero_output": true
+    },
+    {
+      "file": "ours-068.log",
+      "sha256": "fc382564f2f60b21b7b87af308c8d8ba187c74bc7c6cd8d7f9e2542a89157624",
+      "zero_output": false
+    },
+    {
+      "file": "ours-046.log",
+      "sha256": "5b59bcede7d2966c4dcabdad0b84f143e927ba6e9c4ab7295def5dfbf173ecf0",
+      "zero_output": false
+    },
+    {
+      "file": "ours-001.log",
+      "sha256": "c7e9abb97db4473d4ec2443bbfd0f60adc3f42277f733595c7935ed9167de188",
+      "zero_output": true
+    },
+    {
+      "file": "ours-154.log",
+      "sha256": "06d794c884655f8051e57242f2c35e151d3eef240d2ba1980a8cb5de758a603b",
+      "zero_output": true
+    },
+    {
+      "file": "ours-000.log",
+      "sha256": "c09cf6adab00cc36406dadf5cc936f9b781fca99fe6502aae13d638acb402963",
+      "zero_output": true
+    },
+    {
+      "file": "ours-076.log",
+      "sha256": "4bdf39a67acb09f47d3d8b4afc1a3a3a631776d23c2f314db921a499ce2d24ac",
+      "zero_output": false
+    },
+    {
+      "file": "ours-044.log",
+      "sha256": "58de7f6cf2c97a40ddd0453a77c0123d4db69d111da3079f5eb4c77da85f1317",
+      "zero_output": false
+    },
+    {
+      "file": "ours-092.log",
+      "sha256": "5a36097b528c09a86f66604b9454650d377c81a81365661283114a5ca49a9b71",
+      "zero_output": false
+    },
+    {
+      "file": "ours-004.log",
+      "sha256": "21129fdcb29170c38761b0aa894e4a1e7e9b1467713902d55de0a421ce0360bf",
+      "zero_output": true
+    },
+    {
+      "file": "ours-089.log",
+      "sha256": "3017872f05cea8ba89ba5a33f73d29321561909a6728c3b61addc43fb06b632c",
+      "zero_output": false
+    },
+    {
+      "file": "ours-034.log",
+      "sha256": "68865c073003268147ea8dab6055ccfa527eb6374a569c97a4c35cb86d9d85e8",
+      "zero_output": false
+    },
+    {
+      "file": "ours-050.log",
+      "sha256": "b819dfa1bb93a20904c181a6d5b97d606262c0afafd6c3cd0f07c1d57e149775",
+      "zero_output": false
+    },
+    {
+      "file": "ours-101.log",
+      "sha256": "6b0a272509160a1c49cf736e3f0db761a240d60a71f6e08a0b4daf3fb5f9afee",
+      "zero_output": false
+    },
+    {
+      "file": "ours-158.log",
+      "sha256": "fd6518719260ed7380bed4bc27a1db29bf42fe172dac31406a7e278238962e3f",
+      "zero_output": true
+    },
+    {
+      "file": "ours-099.log",
+      "sha256": "6e04d89662550156692dc5228ac5642636b3ba09578b254f9a9529c3bd01a07b",
+      "zero_output": false
+    },
+    {
+      "file": "ours-098.log",
+      "sha256": "9e3d875bb7c7284e6554fe7c003a11fc40d0c6bfda793ea0c4b6f0c081ba1f49",
+      "zero_output": false
+    },
+    {
+      "file": "ours-039.log",
+      "sha256": "25d93afbbe0712ffde7add1fdd4f5a3b4ea038ac6d905fa52ff7b4f168ff71b6",
+      "zero_output": false
+    },
+    {
+      "file": "ours-127.log",
+      "sha256": "325df014d5795ad2b5c81d204c2b19b001e4930ed8b6b7a0d3128bf699f75688",
+      "zero_output": false
+    },
+    {
+      "file": "ours-028.log",
+      "sha256": "b0a54bd7b85a7e89ecc135ad44c48439ad5f42c03d91580cd6bd8e5a8d4947c1",
+      "zero_output": false
+    },
+    {
+      "file": "ours-131.log",
+      "sha256": "5c80d7c811da14a1880318d1fc96bcdc1a2bcef17e775e57273866a74632de8a",
+      "zero_output": false
+    },
+    {
+      "file": "ours-019.log",
+      "sha256": "db8ffa88f302c669ae92dc690ec0ffd159b830cc47ac6e64227dc8b56dec231e",
+      "zero_output": true
+    },
+    {
+      "file": "ours-024.log",
+      "sha256": "8f0f8a4c62b79c9655334689f85510b888f289e1e289ed0318c702df29f6f55d",
+      "zero_output": true
+    },
+    {
+      "file": "ours-155.log",
+      "sha256": "a92c8a180f8022abba1314b3fbd6a2aec4c4e4fa72c414206096dac42cc3616d",
+      "zero_output": true
+    },
+    {
+      "file": "ours-055.log",
+      "sha256": "9a74d147284249f1027d7faeca30fb40dc258507bb795106192411272ee50586",
+      "zero_output": false
+    },
+    {
+      "file": "ours-010.log",
+      "sha256": "3da5d80e7fb9d7c822a236ca25e0b7e3af76e72187a5a274813787eb419263da",
+      "zero_output": false
+    },
+    {
+      "file": "ours-168.log",
+      "sha256": "7cf3dffee83464081dfac5702e724f70b0d12d2aece8b1a0a136b0788ceb44c5",
+      "zero_output": false
+    },
+    {
+      "file": "ours-005.log",
+      "sha256": "e2cfb531ed1ff0658631b0cb88f11a220049c3837db53670dc37584eff28126e",
+      "zero_output": false
+    },
+    {
+      "file": "ours-051.log",
+      "sha256": "c3f71ee574289c81dd370d6e8a805f4b71a44f1e712f6c316bde75dbef51232c",
+      "zero_output": false
+    },
+    {
+      "file": "ours-114.log",
+      "sha256": "47db8628dfa73f363b8954b41d436e65b6cc54d1b55c071f31a399643f951cf8",
+      "zero_output": false
+    },
+    {
+      "file": "ours-023.log",
+      "sha256": "b0c06bed1db451aa4a50825c21b13a3a002092a1e3ec115faca434bca3cbb0e4",
+      "zero_output": true
+    },
+    {
+      "file": "ours-002.log",
+      "sha256": "5c5100d3d6e30e6e86aeb2209547f5aa17ddd017fb7985b2527411da85b45da0",
+      "zero_output": true
+    },
+    {
+      "file": "ours-137.log",
+      "sha256": "a7cc667a17f4bef44b8cd05bcd1c56fb8f281e4b666046750f074dd03946db05",
+      "zero_output": false
+    },
+    {
+      "file": "ours-108.log",
+      "sha256": "2a2c29967ee7601ec5aaf8474d78d740cf8c6f9116c17210bfb732bbd5272001",
+      "zero_output": false
+    },
+    {
+      "file": "ours-058.log",
+      "sha256": "99f5bef4d6135202f9a1756ea259930096a9b7a8aa722195e2ac41a23c826364",
+      "zero_output": false
+    },
+    {
+      "file": "ours-070.log",
+      "sha256": "9f3c71747c6eda1be87c538efb955ede5dcc8955054e379bd9964db311a52c08",
+      "zero_output": false
+    },
+    {
+      "file": "ours-136.log",
+      "sha256": "598ed4483dfe12f03fd063b83f03eec317298d23e134a1046c9ee6805d2121dc",
+      "zero_output": false
+    },
+    {
+      "file": "ours-125.log",
+      "sha256": "a91db61f57fb5e2e8fe679a7468a659705bbb2679e8fa01e6d792d420ab1914c",
+      "zero_output": false
+    },
+    {
+      "file": "ours-116.log",
+      "sha256": "a5a7cf316cfaaecd96f2aba8473f2bc099814d13cc5d040e4f58de6a5c8aedf6",
+      "zero_output": false
+    },
+    {
+      "file": "ours-009.log",
+      "sha256": "8477ebe2a333bbc3035631223d04e2ff5f6ca983cb110a9d499ede7f945f9c7f",
+      "zero_output": false
+    },
+    {
+      "file": "ours-164.log",
+      "sha256": "98873f6e850d4b3c93103c668e9b74bb6070f8c56da779e1f3a96d6811023556",
+      "zero_output": true
+    },
+    {
+      "file": "ours-121.log",
+      "sha256": "7fcc8f4318cf119d93f54ac1df06cbed58c13335926fd253aa1d59a188821437",
+      "zero_output": false
+    },
+    {
+      "file": "ours-060.log",
+      "sha256": "80fa79493f2ccd7f81bf0167e94b7fa88f8ba21a70a1ae58a756d027e97a2c32",
+      "zero_output": false
+    },
+    {
+      "file": "ours-086.log",
+      "sha256": "1c7ba111dec745a86b5b0560fb30e292178bd73f27a227c19cf8d6625f5c89a8",
+      "zero_output": false
+    },
+    {
+      "file": "ours-018.log",
+      "sha256": "8856193a3a0cdd7826a4ce5053c0fd731137db3b7f91d77cae1d9d2a9e46012d",
+      "zero_output": true
+    },
+    {
+      "file": "ours-159.log",
+      "sha256": "ad1958879af77632b20e96947591dcd04099c8fd2bc6c0b1b3423df68ffef65a",
+      "zero_output": true
+    },
+    {
+      "file": "ours-052.log",
+      "sha256": "a2b0609f1c38bb789ea7ea435887ff914804d97df7acf3b34931b3a1f97d7d11",
+      "zero_output": false
+    },
+    {
+      "file": "ours-043.log",
+      "sha256": "222bd85c2ccc3b87ebaaed62ab0fe5158224ad04477b6f1577f44dd108fe3d40",
+      "zero_output": false
+    },
+    {
+      "file": "ours-140.log",
+      "sha256": "cc55ce8b21a0e0eb3ecbc5d62fb055a02d18e3ce697d3685b37fa5d7c55d4bd4",
+      "zero_output": false
+    },
+    {
+      "file": "ours-144.log",
+      "sha256": "0a8299683c191dde69c6daf2d83c3075c69c7d56f9c56e9f7e8c773d668a6f66",
+      "zero_output": false
+    },
+    {
+      "file": "ours-165.log",
+      "sha256": "54c6d08a7128d07340bf4b99a9139f659f1f1ec4f3bb3056c55aada97a276b47",
+      "zero_output": true
+    },
+    {
+      "file": "ours-084.log",
+      "sha256": "2251dcf8e2fed87910b2dfc80c628eaeb1b59c76c5499954bf8221900bef13f7",
+      "zero_output": false
+    },
+    {
+      "file": "ours-008.log",
+      "sha256": "ca52e37fc925ea4aa220aaa682a01b505a75119ae99a1d93e576b9a14d99d1ec",
+      "zero_output": true
+    },
+    {
+      "file": "ours-119.log",
+      "sha256": "fafc25116bcd1455fdbf3a55d04ed4c47814479f5a9d802dd29749539c106ece",
+      "zero_output": false
+    },
+    {
+      "file": "ours-153.log",
+      "sha256": "ef8b7f18a9c4e0c24443ebef2b907df0bf426e3f5c9f9a17013192d7097a7371",
+      "zero_output": true
+    },
+    {
+      "file": "ours-065.log",
+      "sha256": "51941262f65577b186fe4780f7bd8ef54229969aac180dc99771b9bcb18a7dfc",
+      "zero_output": false
+    },
+    {
+      "file": "ours-038.log",
+      "sha256": "87edeb71ca0518e14ebac97570752547110eb4c8e728fc0b91cfc6df9636839f",
+      "zero_output": false
+    },
+    {
+      "file": "ours-117.log",
+      "sha256": "bacd5a99e73776bcc932decc27cf0e30f26f36cc179aa8f56efee53cb01ee62d",
+      "zero_output": false
+    },
+    {
+      "file": "ours-150.log",
+      "sha256": "bbbfcd2d8bb5f4ded5a1039eec95f962259de3f2622dc931556db9b983549904",
+      "zero_output": true
+    },
+    {
+      "file": "ours-006.log",
+      "sha256": "5329dd914aee1a245c2f7fa06d2be33fa95b75a1726b94b1c34d337de0ec3de5",
+      "zero_output": true
+    },
+    {
+      "file": "ours-094.log",
+      "sha256": "3f301fbd98bfea54cf07e90f886c6b6695ca11cf35bf7d674a8bcccb01ce331f",
+      "zero_output": false
+    },
+    {
+      "file": "ours-142.log",
+      "sha256": "0f1ff70e3ce7c5bd83b52b9b43474ef880e0e032b15a3a8636e2879cced96dee",
+      "zero_output": false
+    },
+    {
+      "file": "ours-109.log",
+      "sha256": "939b725b0fa69bdeff0a0d13e68760ed9f6f18a9c4e8a6a435683715fe81ae1a",
+      "zero_output": false
+    },
+    {
+      "file": "ours-107.log",
+      "sha256": "b8fc250bb02d80e484a2bf08fbc72e8695bd9df795df3eda75e3f110f6c360f7",
+      "zero_output": false
+    },
+    {
+      "file": "ours-163.log",
+      "sha256": "184de1fa93ffd65deb0d684e5f49a2c96b77fdd7b05a98bfa2b427cc505cab8c",
+      "zero_output": true
+    },
+    {
+      "file": "ours-042.log",
+      "sha256": "67de2e7c9105cd5ea6764fd534e95ded3c929ba65426c1f4f36cdc641e40b8dc",
+      "zero_output": false
+    },
+    {
+      "file": "ours-031.log",
+      "sha256": "0388ce3e27eab109f5d734ddd59f3aa4a64a93cc49ad8cacbc01f14149d63237",
+      "zero_output": false
+    },
+    {
+      "file": "ours-048.log",
+      "sha256": "360e4d84c523264bf798239cdc6701e8dd0e6b812dfdcdf99e4399dc80050ea0",
+      "zero_output": false
+    },
+    {
+      "file": "ours-049.log",
+      "sha256": "07cb87a2936473133f402677fb0cc5853f555332b35d641cf48693de94661f71",
+      "zero_output": false
+    },
+    {
+      "file": "ours-016.log",
+      "sha256": "1987e5fa678abf4323847f2ca49067f6f8a5ff5e4b0f8d4859823e0eee552a6a",
+      "zero_output": false
+    },
+    {
+      "file": "ours-040.log",
+      "sha256": "610c85aa1a70f374274aac39270bbd111f6f839ec331bcea5d7da5fc4ffc4ba7",
+      "zero_output": false
+    },
+    {
+      "file": "ours-007.log",
+      "sha256": "bd3e179da12fed2e151dc5b279c9d6f842712236ec85685b0f567ac5e468ba1e",
+      "zero_output": true
+    },
+    {
+      "file": "ours-061.log",
+      "sha256": "340d84c5492d6b31296ec82b4b22e8d0c6b54cca83d1e17c21ae70ccb2d376ff",
+      "zero_output": false
+    },
+    {
+      "file": "ours-149.log",
+      "sha256": "de1c130162433da08b9da2a01db81e651dd0803ddf6262bb901e7fefba350bac",
+      "zero_output": true
+    },
+    {
+      "file": "ours-100.log",
+      "sha256": "9d48dcddb93139bd2fb72129f67cb19caa1e9159bbb53e1642f2f857f9491e4b",
+      "zero_output": false
+    },
+    {
+      "file": "ours-160.log",
+      "sha256": "f0e045d43a02691fed72e8b1058100f19fee16578786e1fec486208a0fa39063",
+      "zero_output": true
+    },
+    {
+      "file": "ours-102.log",
+      "sha256": "d737a4ccfc6199094847d01ce051878c335e749d3072e134ad2621b6ff0bdfa0",
+      "zero_output": false
+    },
+    {
+      "file": "ours-113.log",
+      "sha256": "515dec80e224d21f123705f66f1e8304cf334d73c64c9e02011e23ce436d142b",
+      "zero_output": false
+    },
+    {
+      "file": "ours-081.log",
+      "sha256": "b540b7f07505e8d830fdcc66cfa8da7d691171221e7e84ca2d8b68388c22cdce",
+      "zero_output": false
+    },
+    {
+      "file": "ours-129.log",
+      "sha256": "db6211ee46e4e236a5bff2b9ebbdee138c72eacef1a82e5d72f446c14233ef43",
+      "zero_output": false
+    },
+    {
+      "file": "ours-106.log",
+      "sha256": "7d6db9deb0ac9db39e4424f05071456e517e30d1993b9d0d999ad08bcbbfdebf",
+      "zero_output": false
+    },
+    {
+      "file": "ours-115.log",
+      "sha256": "0f066aa9c7b773593f1265d319418172062c23da63b6b476f57593e8c1b86692",
+      "zero_output": false
+    },
+    {
+      "file": "ours-074.log",
+      "sha256": "e3665fb4d39b58e3500eeb800e745452a72feb1707614869db6f0cfcfd8d39a5",
+      "zero_output": false
+    },
+    {
+      "file": "ours-166.log",
+      "sha256": "960eea76d33d54f98879af72dfda1addfd497b8c688a86848b1d0dce5ef9e969",
+      "zero_output": true
+    },
+    {
+      "file": "ours-157.log",
+      "sha256": "9ed2e48439b6811adbd44eade887b20ba79ee9216d6fb69a2a2b78513b273734",
+      "zero_output": true
+    },
+    {
+      "file": "ours-122.log",
+      "sha256": "9e3bb16b4cfbe41f23894829a3def88bb1694b05e8802dc9f381be7d413bca8b",
+      "zero_output": false
+    },
+    {
+      "file": "ours-151.log",
+      "sha256": "becf585305e4ab6b19a5ea753dfd730e6ed4661e832de2b90a86d3b784fd6159",
+      "zero_output": true
+    },
+    {
+      "file": "ours-066.log",
+      "sha256": "e09d6062d7b0b61157b3713f7732f1e94ad274194d5e7931ca2f9b89426dfe54",
+      "zero_output": false
+    },
+    {
+      "file": "ours-146.log",
+      "sha256": "8d3b37358dfbc75d638713006b7264d0a2cfc36d78a6c352ac63aff799cdc066",
+      "zero_output": true
+    },
+    {
+      "file": "ours-143.log",
+      "sha256": "dd309093e2c6df34e3462a7c6296c11d36b1db77edd91d73f11855fd0be9c146",
+      "zero_output": false
+    },
+    {
+      "file": "ours-162.log",
+      "sha256": "30b638bc3058c098a3340d4ee8159bcc32769a9afdf9286ee1ee1dec1a962b06",
+      "zero_output": true
+    },
+    {
+      "file": "ours-030.log",
+      "sha256": "6b336eb01612fd31907f29c928bb2271da5cc75d2340ec3f8dd297858df709f7",
+      "zero_output": false
+    },
+    {
+      "file": "ours-123.log",
+      "sha256": "82d8231377d9f13cd63cb745229fb568109fa82d6ea312caf356c32a3500e953",
+      "zero_output": false
+    },
+    {
+      "file": "ours-147.log",
+      "sha256": "8bbdc10d87c1893726b00e2d0f0899d9e0f9060e7de3b842cf7ad1d47d632945",
+      "zero_output": true
+    },
+    {
+      "file": "ours-069.log",
+      "sha256": "2eebb17ba4f2767cae387c765ea34d6601884ccc45f655d34ae26aa515c68606",
+      "zero_output": false
+    },
+    {
+      "file": "ours-062.log",
+      "sha256": "edb06dc150e1a0dbfefa01ced341216e6eb180fc80f3777820f288220b039a51",
+      "zero_output": false
+    },
+    {
+      "file": "ours-132.log",
+      "sha256": "294b8f25a39531854beffe5fab7c8009bdb605c03ca7ef9cdf8cad48fd50d32a",
+      "zero_output": false
+    },
+    {
+      "file": "ours-096.log",
+      "sha256": "cd88f0c3147f782ca0fdef9190d8cea96d7c4a1e0562fb0bbacd14854e83c503",
+      "zero_output": false
+    },
+    {
+      "file": "ours-022.log",
+      "sha256": "542c41f2fbce522d39bbb7b3db4303307335b610406747a12ef1ffb7bfa3139f",
+      "zero_output": true
+    },
+    {
+      "file": "ours-077.log",
+      "sha256": "110bc591799b9495576438b9e16c220720e5abb9e9eb0feebf2733503feb8e51",
+      "zero_output": false
+    },
+    {
+      "file": "ours-067.log",
+      "sha256": "6fcc4bfda7802d8200b8752873153167c588a0cbe5c3f091edf9514ba1948b30",
+      "zero_output": false
+    },
+    {
+      "file": "ours-105.log",
+      "sha256": "445382dd0b639eea3877e4e02c77eaa86ddea054fcc45ffb3227ce99194e9cde",
+      "zero_output": false
+    },
+    {
+      "file": "ours-090.log",
+      "sha256": "773c6368b4882f730d06f95168bd9f483484f1999fcd9632c41321eda3af1eb2",
+      "zero_output": false
+    },
+    {
+      "file": "ours-093.log",
+      "sha256": "216742dd1511a0d7778f4cb65a8d3148c7cd79c76265ee568e6d9e68f0741ae5",
+      "zero_output": false
+    },
+    {
+      "file": "ours-152.log",
+      "sha256": "58a8d9e6d2263f1f106cfe7a808ec0ff6aab93eb8d1fc081a62476f554037086",
+      "zero_output": true
+    },
+    {
+      "file": "ours-079.log",
+      "sha256": "1fb38cf8b6cf5ee1471dcec56425c519843fa6a4b201ab6a22e4087128806fa6",
+      "zero_output": false
+    },
+    {
+      "file": "ours-087.log",
+      "sha256": "185c938fc3d89bfd094df37c4ea232920dbc3af451c2f6ac29a710652a53720d",
+      "zero_output": false
+    },
+    {
+      "file": "ours-059.log",
+      "sha256": "d7934150f31e6b5dfdc70cd4e67bab98efece8cd24c2bb7340900e8f80fd0049",
+      "zero_output": false
+    },
+    {
+      "file": "ours-097.log",
+      "sha256": "f199bcac76a508b9041c4315ceb722b4cef507ae12b2d93dd8a31b5cbdfc9986",
+      "zero_output": false
+    },
+    {
+      "file": "ours-071.log",
+      "sha256": "a62c9d7bd27cfe498f3665be70e474d9efb53ea385774e6789262f71f3637925",
+      "zero_output": false
+    },
+    {
+      "file": "ours-120.log",
+      "sha256": "37237644eb1bb1f00025812250c7402b52418917136d013dcdba96fc7fb0272a",
+      "zero_output": false
+    },
+    {
+      "file": "ours-148.log",
+      "sha256": "144dc73c32ca0f8fd784eacec9303a9aeb9228fdeeb1a2136365dbf6eac4108c",
+      "zero_output": true
+    },
+    {
+      "file": "ours-126.log",
+      "sha256": "00762ddab4678b507d1a8cffe0db714ce062815bddb5be094f28c45fb7fdcf65",
+      "zero_output": false
+    },
+    {
+      "file": "ours-141.log",
+      "sha256": "7afadefb754e5126d48b5e730b81c0130f8ea3bff1d58f1e6fb0c9823113acb6",
+      "zero_output": false
+    },
+    {
+      "file": "ours-047.log",
+      "sha256": "5898e7bc23b895b2b7dc906da13affcfdbdfb69ccb1212c1625109b3eafc576e",
+      "zero_output": false
+    },
+    {
+      "file": "ours-037.log",
+      "sha256": "7475a9e0c50d11135b777fc7bda46a51813ce52b8d0c40d1559d534ac9faee68",
+      "zero_output": false
+    },
+    {
+      "file": "ours-053.log",
+      "sha256": "746422f8510d2c3aab7cb78d754c247471093a9d040add64f0b8acac3cd8e65e",
+      "zero_output": false
+    },
+    {
+      "file": "ours-085.log",
+      "sha256": "69cc233ef9e87cb767d09f169129e501f540b1e2bfd64d0b54604fb1ddf4466c",
+      "zero_output": false
+    },
+    {
+      "file": "ours-036.log",
+      "sha256": "d655c440ec9fa20f4493e8fc85d79c99a01ef1d05558b12aa1f2869c41cf0abc",
+      "zero_output": false
+    },
+    {
+      "file": "ours-091.log",
+      "sha256": "026f7449e6837fb4f81a07a58a038f7c9e6766b8e49ff49e90029424c886049c",
+      "zero_output": false
+    },
+    {
+      "file": "ours-130.log",
+      "sha256": "afc42592722b431a7908482b3062d35831f71a5f3ba0ca53bee5d3a4daeaaa66",
+      "zero_output": false
+    },
+    {
+      "file": "ours-082.log",
+      "sha256": "be9ec4319af66b7fbc81998a1749a08bcf34c4181a1ad789b547daa190551e4f",
+      "zero_output": false
+    },
+    {
+      "file": "ours-135.log",
+      "sha256": "6287b2fdc5002dab4cf208498619bdbbc239adbb1d7dafeca8a29e9425bea017",
+      "zero_output": false
+    },
+    {
+      "file": "ours-017.log",
+      "sha256": "28235ff672d73dec8095cdb3d59ed0266bd27faf8ce9df75aa7720b02ab40e60",
+      "zero_output": false
+    },
+    {
+      "file": "ours-110.log",
+      "sha256": "d4f2f0a9fd539a786d11580137fa30d2b40baf1ea20fc94c9b8a7bbf39139627",
+      "zero_output": false
+    },
+    {
+      "file": "ours-103.log",
+      "sha256": "c4059439b0f6ecf473fd3bb8b7466561e92525f56abb6cee11a69adc32c30765",
+      "zero_output": false
+    },
+    {
+      "file": "ours-167.log",
+      "sha256": "eb10506b5ae398f6cf1e5316a9f0be08f4bea2ae2cb95cee5dc084ae45493819",
+      "zero_output": true
+    },
+    {
+      "file": "ours-111.log",
+      "sha256": "3963a94449f98bc268f5e510bcefb419c6e736c4b57ba00d7a8a3301a32f7780",
+      "zero_output": false
+    },
+    {
+      "file": "ours-139.log",
+      "sha256": "02251bdb810ff463af9183f2c86832f11b3fd9a9514212614216682d7a556b2e",
+      "zero_output": false
+    },
+    {
+      "file": "ours-035.log",
+      "sha256": "39879c958f65056c7615b50e50024b013af55df2a4442e676a63e3f49fe829b5",
+      "zero_output": false
+    },
+    {
+      "file": "ours-145.log",
+      "sha256": "fff430bc79efe5ba8bd6e617d43dd36c8a9122a740e45db51f18619ca0e1461a",
+      "zero_output": false
+    },
+    {
+      "file": "ours-161.log",
+      "sha256": "288d3e93e80e0505b2f0068b3099f37f90738735ec0456eade1555e019a6e019",
+      "zero_output": true
+    },
+    {
+      "file": "ours-104.log",
+      "sha256": "845f99e2c9121e512db7a1f88491b307ba774d1fece64ecc929412c3bc1476ca",
+      "zero_output": false
+    },
+    {
+      "file": "ours-045.log",
+      "sha256": "4094c7ecb0d5d2cff1b2d84d97502c20ea793cc1c5d00adf01979e0c9f703f38",
+      "zero_output": false
+    },
+    {
+      "file": "ours-026.log",
+      "sha256": "9c240cca9b998867a29643ecf9e04d7697e788fe3d7b820a4c1e5060ae4f43e3",
+      "zero_output": false
+    },
+    {
+      "file": "ours-112.log",
+      "sha256": "99eac85e85081aba830e7c772f3bf9292e8ce5f0a87ea5bbfeae6e0a20f613eb",
+      "zero_output": false
+    },
+    {
+      "file": "ours-133.log",
+      "sha256": "3396a8eef28b40b62097f4727843ce484e9e856b267a4cf2895c4c86a2978912",
+      "zero_output": false
+    },
+    {
+      "file": "ours-057.log",
+      "sha256": "312128daf6c2d347bbf0d49174a87a7946848cb82522d17947203899f045605b",
+      "zero_output": false
+    },
+    {
+      "file": "ours-041.log",
+      "sha256": "7354793a6b8beabe3ba373e98aab41eeb3af7523cab22e743289d1da75379986",
+      "zero_output": false
+    },
+    {
+      "file": "ours-088.log",
+      "sha256": "c4c00beff7e9367f5a4bd10dda7de8a709196f30ce5c478a41ce66f9cf6d2e77",
+      "zero_output": false
+    },
+    {
+      "file": "ours-078.log",
+      "sha256": "32a1640f5f1b826eaa5df0288e371bf667e5d7be6be3e0c143592f8b7fa3267d",
+      "zero_output": false
+    },
+    {
+      "file": "ours-054.log",
+      "sha256": "685a1048d32b0fde002b218393ee5f5791dc21cffc479f98af40a64e520a775a",
+      "zero_output": false
+    },
+    {
+      "file": "ours-021.log",
+      "sha256": "edad245b719516cabd1536c034be1459be92647ebd75742620a1f408395c944c",
+      "zero_output": true
+    },
+    {
+      "file": "ours-027.log",
+      "sha256": "0f925eca80ab2cdb15ee77013b9ca0708cadeebbf2f29aac50a2b67eaf1aa448",
+      "zero_output": false
+    },
+    {
+      "file": "ours-080.log",
+      "sha256": "989975b5bb220c6151f6f564498e102edc8e36ad9eac158a8afdd6435f11cb07",
+      "zero_output": false
+    },
+    {
+      "file": "ours-020.log",
+      "sha256": "df50a7c68f7cb836ae5651f8c1c97556e4bc4688822f5d8b799d30c06c877bbc",
+      "zero_output": true
+    },
+    {
+      "file": "ours-128.log",
+      "sha256": "be9c193806f6402f4066997ebd824b78a0a19eb97c3a3ec3ae6f885e17b1d30a",
+      "zero_output": false
+    }
+  ]
+}

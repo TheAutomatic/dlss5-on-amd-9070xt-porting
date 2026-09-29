@@ -1,0 +1,141 @@
+{
+  "timings": [
+    {
+      "batch": "runtime-regression-C-abba1",
+      "height": 900,
+      "frames_per_slot": 1000,
+      "baseline_ms": 8.42661749999999,
+      "candidate_ms": 8.39019124999999,
+      "delta_ms": -0.03642624999999988,
+      "percent": -0.43227605857273366,
+      "slots": {
+        "0": 8.41497874999999,
+        "1": 8.38215124999999,
+        "2": 8.39823124999999,
+        "3": 8.43825624999999
+      }
+    },
+    {
+      "batch": "runtime-regression-C-abba1",
+      "height": 1080,
+      "frames_per_slot": 1000,
+      "baseline_ms": 11.362136875000001,
+      "candidate_ms": 11.224219375,
+      "delta_ms": -0.13791750000000036,
+      "percent": -1.213834171488104,
+      "slots": {
+        "0": 11.3634475,
+        "1": 11.2230325,
+        "2": 11.22540625,
+        "3": 11.36082625
+      }
+    },
+    {
+      "batch": "runtime-regression-F-abba2",
+      "height": 900,
+      "frames_per_slot": 1000,
+      "baseline_ms": 8.35801625000001,
+      "candidate_ms": 8.337249375000006,
+      "delta_ms": -0.020766875000003182,
+      "percent": -0.2484665544889686,
+      "slots": {
+        "0": 8.31024750000001,
+        "1": 8.32166625000001,
+        "2": 8.3528325,
+        "3": 8.40578500000001
+      }
+    },
+    {
+      "batch": "runtime-regression-F-abba2",
+      "height": 1080,
+      "frames_per_slot": 1000,
+      "baseline_ms": 11.3426825,
+      "candidate_ms": 11.226861249999999,
+      "delta_ms": -0.11582125000000154,
+      "percent": -1.021109865325076,
+      "slots": {
+        "0": 11.330225,
+        "1": 11.2139525,
+        "2": 11.23977,
+        "3": 11.35514
+      }
+    },
+    {
+      "batch": "runtime-regression-H-screen1",
+      "height": 900,
+      "frames_per_slot": 200,
+      "baseline_ms": 8.262205357142854,
+      "candidate_ms": 8.239770833333335,
+      "delta_ms": -0.022434523809518936,
+      "percent": -0.27153190752059464,
+      "slots": {
+        "0": 8.25922619047619,
+        "1": 8.22922023809524,
+        "2": 8.25032142857143,
+        "3": 8.26518452380952
+      }
+    },
+    {
+      "batch": "runtime-regression-H-screen1",
+      "height": 1080,
+      "frames_per_slot": 200,
+      "baseline_ms": 11.2554464285714,
+      "candidate_ms": 11.1370982142857,
+      "delta_ms": -0.11834821428569953,
+      "percent": -1.0514750795248662,
+      "slots": {
+        "0": 11.2424226190476,
+        "1": 11.1406845238095,
+        "2": 11.1335119047619,
+        "3": 11.2684702380952
+      }
+    },
+    {
+      "batch": "runtime-regression-V-screen1",
+      "height": 900,
+      "frames_per_slot": 200,
+      "baseline_ms": 8.24698214285714,
+      "candidate_ms": 8.2354494047619,
+      "delta_ms": -0.011532738095240802,
+      "percent": -0.13984191908587018,
+      "slots": {
+        "0": 8.23952976190476,
+        "1": 8.24030357142857,
+        "2": 8.23059523809523,
+        "3": 8.25443452380952
+      }
+    },
+    {
+      "batch": "runtime-regression-V-screen1",
+      "height": 1080,
+      "frames_per_slot": 200,
+      "baseline_ms": 11.24261607142855,
+      "candidate_ms": 11.215071428571399,
+      "delta_ms": -0.027544642857151302,
+      "percent": -0.24500207675998142,
+      "slots": {
+        "0": 11.2335238095238,
+        "1": 11.2150476190476,
+        "2": 11.2150952380952,
+        "3": 11.2517083333333
+      }
+    }
+  ],
+  "incomplete_timing_batches": [],
+  "candidate_frames_matching_float_fma": 192,
+  "candidate_frames_by_batch": {
+    "runtime-regression-V-screen": 12,
+    "runtime-regression-H-screen": 12,
+    "runtime-regression-C-exact": 84,
+    "runtime-regression-C-adaptive": 84
+  },
+  "game_flags_extra_matching_frames": 12,
+  "AE_pairs": 84,
+  "AE_all_fields_different": 0,
+  "AE_reuse_by_batch": {
+    "runtime-regression-C-adaptive": {
+      "0": 40,
+      "1": 44
+    }
+  }
+}

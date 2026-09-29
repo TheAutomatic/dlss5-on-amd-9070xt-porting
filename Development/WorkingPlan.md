@@ -16,7 +16,7 @@
 
 ## 正在进行
 
-- **09-29 深层任务已完成，已装剑星**：C512点运算紧凑布局，900省0.164～0.176ms、1080省0.228～0.248ms，逐位；整网198/169派发。现场add-on b5ab8c3a + c512-m32-mh双架构，DIRECT_IO=3 / MAKE_RESIDENT_EVERY=60保留，备份 `D:\DLSSNR-Lab\hip-backend\deep-layers\backups\stellar-20260929-010247`。报告 `results/deep-layers-20260929/README.md`；0.36发布包未改，等Zero本机2K原生AA EXACT复测。
+- **09-29 逐核地图及前两项已完成，已装剑星**：完整1080地图覆盖我方169/参考Daniel154派发，`results/kernel-map-20260929/README.md`。接受head分组融合＋ViT attention转置，900再省0.021～0.036ms、1080省0.116～0.138ms（1.02～1.21%），正式168帧逐位。现装add-on ba010de7，整网197/168派发；DIRECT_IO=3 / MAKE_RESIDENT_EVERY=60保留，备份 `D:\DLSSNR-Lab\hip-backend\kernel-map\backups\stellar-20260929-084855`。0.36发布包未改，等Zero本机验收；沿用“离线有提升、游戏没掉就接受”。
 
 ## Zero 的标准与取舍（为什么这样定）
 
@@ -44,10 +44,10 @@
 
 ## B. 优化候选（逐位；按"收益 × 把握"排）
 
-1. **C512 剩余派发**：1080紧凑点运算已合，族79→66（13块×5 + pool），900仍79（每块补4个尾token）；Daniel 16块×4=64，不能直接相减。单wave寄存器FFN、再并mix均逐位但慢，需新证据再开。1080有效60×36相同，但旧点运算在64×40补边域；已改为2160个紧凑token，attention原窗口保持。
-2. **ViT**：完整边界口径50对42（两边都含入口/出口repack；旧49/40口径不同）。producer P/G/Q/R及09-29消费端float打包V均逐位但慢，暂保现路。Daniel FFWD已独立launch并拿到同尺寸合成微秒账，不能当真实模型耗时。
+1. **按逐核地图排优先级**：`results/kernel-map-20260929/map-after/`，仅本轮9组更新，其余沿用同批基线。head已从pool＋project约125µs降到24.65µs；当前1080总168派发。最终C512 projection仍可研究M32权重共用，候选仅准备未GPU实测；别与此前失败的FFN M32混淆。
+2. **ViT attention仍是主要差距**：reference约22～24µs，我方新核约70～72µs。已合入score转置去LDS/barrier，但只小赚，不能把约50µs差距当已解决。QKV约49对32µs，触及FP16/FP8数学边界，维持C段待拍板；pack旧P/G/Q/R和消费端V均负账，不再重复。
 3. **HIP↔D3D 交接改 GPU 轮询**（`results/frame-breakdown-20260928` 第 4 项）：收益待测，会碰看门狗（Daniel 用 1 像素 draw 分片自旋规避）。
-4. **900 档**：本轮C512紧凑布局已省约2%，点运算26432→19552token，派发198不变；C256仍分体。Daniel900的C512 52×32/ViT448与我们50×30/400不同，不作等尺寸模型对照。
+4. **900 档**：本轮head＋ViT再省0.021～0.036ms，派发198→197；上一轮C512紧凑布局收益保留，C256仍分体。地图本轮只做1080，Daniel900的C512 52×32/ViT448与我们50×30/400不同，未来单独建图。
 5. 小件：C256 FFN 标量量化/地址开销（`results/aco-lineup-20260928` 逐条表）；ViT QKV 归一化段；C32 对角残差跳过全零 K16 半块（约 −0.1～0.2%）。
 6. 杂项：`MAKE_RESIDENT_EVERY=60` 疑似每 60 帧一次约 30ms 尖刺（p99），改 0 测一次（C.C. 令"把延迟波形拉直"）；常规 OptiScaler 包也带 ReShade 却无 ini，新用户可能见引导遮罩，下版照 Magpie 补；`validate-modules.ps1` 修路径；帧时间日志 Magpie 路线未接。
 

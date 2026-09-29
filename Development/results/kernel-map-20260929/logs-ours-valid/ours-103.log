@@ -1,0 +1,13 @@
+START,ours-103,vit_stream_qkv_frag_hin
+BUFFER,ours-103,b2,invalid=0,nonzero=1941106
+CHECK,ours-103,guards=0,invalid=0,nonzero=1941106
+TIME,ours-103,0,55.625781
+TIME,ours-103,1,51.586874
+TIME,ours-103,2,48.889846
+TIME,ours-103,3,48.837658
+TIME,ours-103,4,48.605938
+TIME,ours-103,5,48.693281
+TIME,ours-103,6,48.752658
+BUFFER,ours-103,b2,invalid=0,nonzero=1941106
+CHECK,ours-103,guards=0,invalid=0,nonzero=1941106
+RESULT,ours-103,48.837658,128,7

@@ -1050,3 +1050,12 @@ R单wave寄存器FFN、RF再并mix、V消费端float打包均12帧短筛逐位�
 ## 2026-09-29 07:53：深层紧凑布局后剑星 2K 读数未见提升
 
 宿主 b5ab8c3a、c512-m32-mh 09-29 00:57 已装。2K 原生 AA EXACT 静止：黄字 54；frame-stats 静止窗口 avg 18.56～18.60ms，与 09-28 22:50（d2290ad7）18.55～18.72ms 持平，离线预期约 −0.24ms 未兑现。待查：场景差异 / 游戏内是否实际走到新路径 / 2K 路径是否与网络部分重叠。
+
+
+## 2026-09-29 08:48：全网逐核地图，采用head分组融合H＋ViT attention转置V，已装剑星
+
+全图按位置覆盖我方169/参考Daniel154派发，323条均通过7轮median、START/RESULT及前后guard/finite/nonzero验收。首次把scale尾区也合成±1/64造成42浅层核全零，整169条批次弃掉重跑；11个同类>30%离群项再各跑两独立进程，21个TIME合中位、保留原始日志。map-before原生独立核中位数总和我方10323.528268、Daniel10204.250706，差+119.277562µs；逐位置有效面积启发式差−283.542672µs，两者均非帧时，也不能跨几何/移位/跳块推“写法优劣”。同几何首项block30/head完整组+135.16µs，后面八个ViT attention各约+47～51µs。
+
+H复用groupbody，原head pool＋FP16 projection两派发→一派发（900198→197、1080169→168），C512_HEAD_GROUP，512threads/98VGPR/29SGPR/16640LDS/private0；V只转置score片段排布，HIP_VIT_ATTN_TRANSPOSED_SCORE，72VGPR/16SGPR/LDS0/private0/barrier0，保400/640现导出及WMMA数序。短筛H900−.022435/1080−.118348ms，V−.011533/−.027545ms；组合首轮9008.42661750→8.39019125（−.03642625），108011.362136875→11.224219375（−.13791750，约−1.214%）。168帧EXACT/AE配对同；第二轮9008.35801625→8.337249375（−.020766875），108011.3426825→11.22686125（−.11582125，−1.021%）；两轮千帧弃200。168正式帧全部命中09-28 float FMA golden、无NaN/Inf，AE44复用/40刷新全部字段同；含短筛192帧同golden，另现场CODEC0配置12帧同。host五段与候选同，4份默认关/2份生产code sections一致。ViT QKV等剩余差距涉及FP16/FP8数学边界，不盲抄；P投影仅准备未测，不算第三刀。
+
+新addon ba010de7，gfx1200 deep8652c8c9/mh71fcc576、gfx1201 deep4f84494e/mh8c386562；基于b5ab8c3a，DIRECT_IO=3/MAKE_RESIDENT_EVERY=60及其他flags不动，不发包，08:48已装，备份D:\DLSSNR-Lab\hip-backend\kernel-map\backups\stellar-20260929-084855；其他56模块及受保护配置原hash，60模块与仓库/现场清单核对。RE9 runtime隔离回放末帧hash同、smoke通过，未装RE9。after地图仅刷新head＋八个attention共9组，复用我方159条/参考154条原数据，不叫全网重测；after-ours-092补两次后21样本中位，after已生成，独立派发中位数合计我方10215.678893/参考10204.250706，差+11.428187µs，面积启发式−391.392047µs。head微测约24.65µs、比旧pool6.3＋projection119省约100µs，V多数70～72µs只小赚，原对Daniel的大gap仍在。完整地图、原始日志、repeat与身份/计时证据进results/kernel-map-20260929。

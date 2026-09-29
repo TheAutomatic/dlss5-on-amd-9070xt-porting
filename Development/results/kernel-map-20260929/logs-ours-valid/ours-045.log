@@ -1,0 +1,13 @@
+START,ours-045,c512_qkv_attention_compact
+BUFFER,ours-045,b2,invalid=0,nonzero=1024081
+CHECK,ours-045,guards=0,invalid=0,nonzero=1024081
+TIME,ours-045,0,56.610156
+TIME,ours-045,1,55.162031
+TIME,ours-045,2,55.681251
+TIME,ours-045,3,53.655311
+TIME,ours-045,4,55.225626
+TIME,ours-045,5,54.785155
+TIME,ours-045,6,52.367657
+BUFFER,ours-045,b2,invalid=0,nonzero=1024081
+CHECK,ours-045,guards=0,invalid=0,nonzero=1024081
+RESULT,ours-045,55.162031,128,7

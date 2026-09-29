@@ -1,0 +1,52 @@
+{
+  "final": true,
+  "scope": "accepted-candidate partial microbenchmark refresh; NOT all-dispatch or end-to-end remeasurement",
+  "baseline_dir": "Development/results/kernel-map-20260929/map-before",
+  "baseline_summary_sha256": "a1579c660a31d7ce58f3a1097d3ba5123aff12ea0b17435c65ab1c1544d31cb0",
+  "baseline_provenance_sha256": "87f39dae13fa904427d0d60cba6ca8ff40f3cf2142554e733261103107e9a186",
+  "overlay_path": "Development/results/kernel-map-20260929/overlay.json",
+  "overlay_sha256": "0443e10ea58cfea521da8b45f33b8a4fe39de8f51c362cf1586ba026c375b5a7",
+  "new_measured_jobs": 9,
+  "refreshed_jobs_with_21_samples": [
+    "after-ours-092"
+  ],
+  "refreshed_jobs_with_7_samples": [
+    "after-ours-074",
+    "after-ours-080",
+    "after-ours-086",
+    "after-ours-098",
+    "after-ours-104",
+    "after-ours-110",
+    "after-ours-116",
+    "ours-head-group"
+  ],
+  "new_measured_groups": 9,
+  "ours_unchanged_measurements_reused": 159,
+  "daniel_unchanged_measurements_reused": 154,
+  "ours_dispatches_before": 169,
+  "ours_dispatches_after": 168,
+  "daniel_dispatches": 154,
+  "old_head_dispatches_removed": [
+    "ours-067",
+    "ours-068"
+  ],
+  "replaced_measurements": {
+    "ours-074": "after-ours-074",
+    "ours-080": "after-ours-080",
+    "ours-086": "after-ours-086",
+    "ours-092": "after-ours-092",
+    "ours-098": "after-ours-098",
+    "ours-104": "after-ours-104",
+    "ours-110": "after-ours-110",
+    "ours-116": "after-ours-116"
+  },
+  "native_totals": {
+    "ours_us": 10215.678893,
+    "daniel_us": 10204.250706,
+    "gap_us": 11.42818699999991
+  },
+  "area_estimate_totals": {
+    "daniel_us": 10607.070940411764,
+    "gap_us": -391.392047411765
+  }
+}

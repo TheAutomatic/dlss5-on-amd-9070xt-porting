@@ -1,0 +1,15 @@
+START,ours-126,split_ffn_fused_fp8_t8
+BUFFER,ours-126,b2,invalid=0,nonzero=979644
+BUFFER,ours-126,b3,invalid=0,nonzero=979644
+CHECK,ours-126,guards=0,invalid=0,nonzero=1959288
+TIME,ours-126,0,21.868750
+TIME,ours-126,1,22.595469
+TIME,ours-126,2,18.943906
+TIME,ours-126,3,17.863438
+TIME,ours-126,4,17.349843
+TIME,ours-126,5,16.994687
+TIME,ours-126,6,16.911563
+BUFFER,ours-126,b2,invalid=0,nonzero=979644
+BUFFER,ours-126,b3,invalid=0,nonzero=979644
+CHECK,ours-126,guards=0,invalid=0,nonzero=1959288
+RESULT,ours-126,17.863438,128,7

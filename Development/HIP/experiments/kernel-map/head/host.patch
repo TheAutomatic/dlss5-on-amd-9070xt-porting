@@ -1,0 +1,9 @@
+--- a/Development/HIP/hip_reference_network.h
++++ b/Development/HIP/hip_reference_network.h
+@@ -0,0 +1,3 @@
++#ifndef C512_HEAD_GROUP_HOST
++#define C512_HEAD_GROUP_HOST 0
++#endif
+@@ -414 +417 @@
+- Tensor Down(Tensor raw,U w,U h,U c,const std::string&file,bool head=false){U ow=w/2,oh=h/2,vw=0,vh=0;if(head){U rw=w/2,rh=h/2;if(w==60&&h==36){ow=32;oh=20;}else{ow=rw;oh=(rw*rh)%16?rh+1:rh;}if(ow*oh!=rw*rh){vw=rw;vh=rh;}}if(opt.pool_project_group&&(c==64||c==128||c==256)){auto out=New(size_t(ow)*oh*c*2);Run("mh_fast",("mh_pool_project_group_c"+std::to_string(c)).c_str(),size_t(ow)*oh*c*2,P(raw),PackedDsWeightFrag(file,c),P(out),ow,oh,w,vw,vh);return out;}
++ Tensor Down(Tensor raw,U w,U h,U c,const std::string&file,bool head=false){U ow=w/2,oh=h/2,vw=0,vh=0;if(head){U rw=w/2,rh=h/2;if(w==60&&h==36){ow=32;oh=20;}else{ow=rw;oh=(rw*rh)%16?rh+1:rh;}if(ow*oh!=rw*rh){vw=rw;vh=rh;}}if(opt.pool_project_group&&(c==64||c==128||c==256||(C512_HEAD_GROUP_HOST&&head&&c==512))){auto out=New(size_t(ow)*oh*c*2);Run("mh_fast",("mh_pool_project_group_c"+std::to_string(c)).c_str(),size_t(ow)*oh*c*2,P(raw),PackedDsWeightFrag(file,c),P(out),ow,oh,w,vw,vh);return out;}

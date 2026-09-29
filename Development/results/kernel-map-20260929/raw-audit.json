@@ -1,0 +1,199 @@
+{
+  "timing_slots": 32,
+  "correctness_slots": 34,
+  "all_checked_frames_finite": true,
+  "timings": [
+    {
+      "batch": "runtime-regression-V-screen1",
+      "slot": "time-900-0",
+      "mean_ms": 8.239529761904762,
+      "frames": 200
+    },
+    {
+      "batch": "runtime-regression-V-screen1",
+      "slot": "time-900-1",
+      "mean_ms": 8.240303571428571,
+      "frames": 200
+    },
+    {
+      "batch": "runtime-regression-V-screen1",
+      "slot": "time-900-2",
+      "mean_ms": 8.230595238095239,
+      "frames": 200
+    },
+    {
+      "batch": "runtime-regression-V-screen1",
+      "slot": "time-900-3",
+      "mean_ms": 8.254434523809524,
+      "frames": 200
+    },
+    {
+      "batch": "runtime-regression-V-screen1",
+      "slot": "time-1080-0",
+      "mean_ms": 11.23352380952381,
+      "frames": 200
+    },
+    {
+      "batch": "runtime-regression-V-screen1",
+      "slot": "time-1080-1",
+      "mean_ms": 11.215047619047619,
+      "frames": 200
+    },
+    {
+      "batch": "runtime-regression-V-screen1",
+      "slot": "time-1080-2",
+      "mean_ms": 11.215095238095238,
+      "frames": 200
+    },
+    {
+      "batch": "runtime-regression-V-screen1",
+      "slot": "time-1080-3",
+      "mean_ms": 11.251708333333333,
+      "frames": 200
+    },
+    {
+      "batch": "runtime-regression-H-screen1",
+      "slot": "time-900-0",
+      "mean_ms": 8.259226190476191,
+      "frames": 200
+    },
+    {
+      "batch": "runtime-regression-H-screen1",
+      "slot": "time-900-1",
+      "mean_ms": 8.229220238095238,
+      "frames": 200
+    },
+    {
+      "batch": "runtime-regression-H-screen1",
+      "slot": "time-900-2",
+      "mean_ms": 8.250321428571429,
+      "frames": 200
+    },
+    {
+      "batch": "runtime-regression-H-screen1",
+      "slot": "time-900-3",
+      "mean_ms": 8.265184523809523,
+      "frames": 200
+    },
+    {
+      "batch": "runtime-regression-H-screen1",
+      "slot": "time-1080-0",
+      "mean_ms": 11.24242261904762,
+      "frames": 200
+    },
+    {
+      "batch": "runtime-regression-H-screen1",
+      "slot": "time-1080-1",
+      "mean_ms": 11.140684523809524,
+      "frames": 200
+    },
+    {
+      "batch": "runtime-regression-H-screen1",
+      "slot": "time-1080-2",
+      "mean_ms": 11.133511904761905,
+      "frames": 200
+    },
+    {
+      "batch": "runtime-regression-H-screen1",
+      "slot": "time-1080-3",
+      "mean_ms": 11.268470238095238,
+      "frames": 200
+    },
+    {
+      "batch": "runtime-regression-C-abba1",
+      "slot": "time-900-0",
+      "mean_ms": 8.41497875,
+      "frames": 1000
+    },
+    {
+      "batch": "runtime-regression-C-abba1",
+      "slot": "time-900-1",
+      "mean_ms": 8.38215125,
+      "frames": 1000
+    },
+    {
+      "batch": "runtime-regression-C-abba1",
+      "slot": "time-900-2",
+      "mean_ms": 8.39823125,
+      "frames": 1000
+    },
+    {
+      "batch": "runtime-regression-C-abba1",
+      "slot": "time-900-3",
+      "mean_ms": 8.43825625,
+      "frames": 1000
+    },
+    {
+      "batch": "runtime-regression-C-abba1",
+      "slot": "time-1080-0",
+      "mean_ms": 11.3634475,
+      "frames": 1000
+    },
+    {
+      "batch": "runtime-regression-C-abba1",
+      "slot": "time-1080-1",
+      "mean_ms": 11.2230325,
+      "frames": 1000
+    },
+    {
+      "batch": "runtime-regression-C-abba1",
+      "slot": "time-1080-2",
+      "mean_ms": 11.22540625,
+      "frames": 1000
+    },
+    {
+      "batch": "runtime-regression-C-abba1",
+      "slot": "time-1080-3",
+      "mean_ms": 11.36082625,
+      "frames": 1000
+    },
+    {
+      "batch": "runtime-regression-F-abba2",
+      "slot": "time-900-0",
+      "mean_ms": 8.3102475,
+      "frames": 1000
+    },
+    {
+      "batch": "runtime-regression-F-abba2",
+      "slot": "time-900-1",
+      "mean_ms": 8.32166625,
+      "frames": 1000
+    },
+    {
+      "batch": "runtime-regression-F-abba2",
+      "slot": "time-900-2",
+      "mean_ms": 8.3528325,
+      "frames": 1000
+    },
+    {
+      "batch": "runtime-regression-F-abba2",
+      "slot": "time-900-3",
+      "mean_ms": 8.405785,
+      "frames": 1000
+    },
+    {
+      "batch": "runtime-regression-F-abba2",
+      "slot": "time-1080-0",
+      "mean_ms": 11.330225,
+      "frames": 1000
+    },
+    {
+      "batch": "runtime-regression-F-abba2",
+      "slot": "time-1080-1",
+      "mean_ms": 11.2139525,
+      "frames": 1000
+    },
+    {
+      "batch": "runtime-regression-F-abba2",
+      "slot": "time-1080-2",
+      "mean_ms": 11.23977,
+      "frames": 1000
+    },
+    {
+      "batch": "runtime-regression-F-abba2",
+      "slot": "time-1080-3",
+      "mean_ms": 11.35514,
+      "frames": 1000
+    }
+  ]
+}

@@ -1,0 +1,486 @@
+{
+  "c128_wave2_bi": {
+    "input_types": {
+      "0": "fp8"
+    },
+    "output_types": {
+      "3": "f32"
+    },
+    "weight_args": [
+      1,
+      2
+    ],
+    "special": "in声明float*但bi为FP8 raster；up低分辨率输入及skip都f32。"
+  },
+  "c128_wave2_bi_bo": {
+    "input_types": {
+      "0": "fp8"
+    },
+    "output_types": {
+      "3": "fp8"
+    },
+    "weight_args": [
+      1,
+      2
+    ],
+    "special": "in声明float*但bi为FP8 raster；up低分辨率输入及skip都f32。"
+  },
+  "c128_wave2_bo": {
+    "input_types": {
+      "0": "f32"
+    },
+    "output_types": {
+      "3": "fp8"
+    },
+    "weight_args": [
+      1,
+      2
+    ],
+    "special": "in声明float*但bi为FP8 raster；up低分辨率输入及skip都f32。"
+  },
+  "c128_wave2_up": {
+    "input_types": {
+      "0": "f32",
+      "12": "f32"
+    },
+    "output_types": {
+      "3": "fp8"
+    },
+    "weight_args": [
+      1,
+      2,
+      11
+    ],
+    "special": "in声明float*但bi为FP8 raster；up低分辨率输入及skip都f32。"
+  },
+  "c256_wave2_bi": {
+    "input_types": {
+      "0": "fp8"
+    },
+    "output_types": {
+      "3": "f32"
+    },
+    "weight_args": [
+      1,
+      2
+    ],
+    "special": "in声明float*但bi为FP8 raster；up低分辨率输入及skip都f32。"
+  },
+  "c256_wave2_bi_bo": {
+    "input_types": {
+      "0": "fp8"
+    },
+    "output_types": {
+      "3": "fp8"
+    },
+    "weight_args": [
+      1,
+      2
+    ],
+    "special": "in声明float*但bi为FP8 raster；up低分辨率输入及skip都f32。"
+  },
+  "c256_wave2_bo": {
+    "input_types": {
+      "0": "f32"
+    },
+    "output_types": {
+      "3": "fp8"
+    },
+    "weight_args": [
+      1,
+      2
+    ],
+    "special": "in声明float*但bi为FP8 raster；up低分辨率输入及skip都f32。"
+  },
+  "c32_wave1_chain": {
+    "input_types": {
+      "0": "fp8"
+    },
+    "output_types": {
+      "3": "fp8"
+    },
+    "weight_args": [
+      1,
+      2
+    ],
+    "special": "chain为window-major FP8；mapped反解uchar*为raster f32，raw标志不改此导出实际类型。"
+  },
+  "c32_wave1_finish": {
+    "input_types": {
+      "0": "fp8"
+    },
+    "output_types": {
+      "3": "f32",
+      "4": "f32"
+    },
+    "weight_args": [
+      1,
+      2
+    ],
+    "special": "main为raster F值仍存f32，down池化F值也f32；half仅内部residual，非输出dtype。"
+  },
+  "c32_wave1_finish_dcrop": {
+    "input_types": {
+      "0": "fp8"
+    },
+    "output_types": {
+      "3": "f32",
+      "4": "f32"
+    },
+    "weight_args": [
+      1,
+      2
+    ],
+    "special": "main为raster F值仍存f32，down池化F值也f32；half仅内部residual，非输出dtype。"
+  },
+  "c32_wave1_mapped": {
+    "input_types": {
+      "0": "f32"
+    },
+    "output_types": {
+      "3": "fp8"
+    },
+    "weight_args": [
+      1,
+      2
+    ],
+    "special": "chain为window-major FP8；mapped反解uchar*为raster f32，raw标志不改此导出实际类型。"
+  },
+  "c32_wave1_post": {
+    "input_types": {
+      "0": "f32",
+      "1": "fp8",
+      "2": "f32",
+      "5": "f32"
+    },
+    "output_types": {
+      "7": "f32"
+    },
+    "weight_args": [
+      3,
+      4,
+      6
+    ],
+    "special": "low为半分辨率32通道f32；skip高分辨率FP8；color是RGBA f32，rgb输出3float/pixel。"
+  },
+  "c32_wave1_prefix": {
+    "input_types": {
+      "0": "f32",
+      "1": "f32"
+    },
+    "output_types": {
+      "4": "fp8",
+      "5": "f32"
+    },
+    "weight_args": [
+      2,
+      3
+    ],
+    "special": "rgba0强转float*，每像素4float；history也是RGBA f32，temporal=0不读。main虽然float*实际prefix写byte，down为f32。"
+  },
+  "c32_wave1_up": {
+    "input_types": {
+      "0": "f32",
+      "2": "f32"
+    },
+    "output_types": {
+      "5": "fp8"
+    },
+    "weight_args": [
+      1,
+      3,
+      4
+    ],
+    "special": "low虽然uchar*实际f32，skip也是f32；output为window-major FP8。"
+  },
+  "c512_qkv_attention_compact": {
+    "input_types": {
+      "0": "fp8"
+    },
+    "output_types": {
+      "2": "fp8"
+    },
+    "weight_args": [
+      1
+    ],
+    "special": "input紧凑16token×512 tiled FP8；output attention padded窗口/raster FP8，按work形状检查。"
+  },
+  "c64_wave2_bi": {
+    "input_types": {
+      "0": "fp8"
+    },
+    "output_types": {
+      "3": "f32"
+    },
+    "weight_args": [
+      1,
+      2
+    ],
+    "special": "in声明float*但bi为FP8 raster；up低分辨率输入及skip都f32。"
+  },
+  "c64_wave2_bi_bo": {
+    "input_types": {
+      "0": "fp8"
+    },
+    "output_types": {
+      "3": "fp8"
+    },
+    "weight_args": [
+      1,
+      2
+    ],
+    "special": "in声明float*但bi为FP8 raster；up低分辨率输入及skip都f32。"
+  },
+  "c64_wave2_bo": {
+    "input_types": {
+      "0": "f32"
+    },
+    "output_types": {
+      "3": "fp8"
+    },
+    "weight_args": [
+      1,
+      2
+    ],
+    "special": "in声明float*但bi为FP8 raster；up低分辨率输入及skip都f32。"
+  },
+  "c64_wave2_up": {
+    "input_types": {
+      "0": "f32",
+      "12": "f32"
+    },
+    "output_types": {
+      "3": "fp8"
+    },
+    "weight_args": [
+      1,
+      2,
+      11
+    ],
+    "special": "in声明float*但bi为FP8 raster；up低分辨率输入及skip都f32。"
+  },
+  "decoder_project2x_h16w": {
+    "input_types": {
+      "0": "f32",
+      "2": "f32"
+    },
+    "output_types": {
+      "3": "f32"
+    },
+    "weight_args": [
+      1
+    ],
+    "special": "h16w仅权重half，不是输入/skip half；byteout强转输出byte。"
+  },
+  "decoder_project2x_h16w_byteout": {
+    "input_types": {
+      "0": "f32",
+      "2": "f32"
+    },
+    "output_types": {
+      "3": "fp8"
+    },
+    "weight_args": [
+      1
+    ],
+    "special": "h16w仅权重half，不是输入/skip half；byteout强转输出byte。"
+  },
+  "mh_attention_project_frag_c512": {
+    "input_types": {
+      "0": "fp8",
+      "1": "f32"
+    },
+    "output_types": {
+      "3": "f32"
+    },
+    "weight_args": [
+      2
+    ],
+    "special": "av8 FP8，feature残差f32；output裁剪后的raster f32。"
+  },
+  "mh_pool": {
+    "input_types": {
+      "0": "f32"
+    },
+    "output_types": {
+      "1": "f32"
+    },
+    "weight_args": [],
+    "special": "raw和pooled均f32；内部H/F量化不改变存储。"
+  },
+  "mh_pool_project_group_c128": {
+    "input_types": {
+      "0": "f32"
+    },
+    "output_types": {
+      "2": "f32"
+    },
+    "weight_args": [
+      1
+    ],
+    "special": "group版本融合pool，raw输入仍f32；production_h16w输入已pool f32。h16w/frag只指权重。"
+  },
+  "mh_pool_project_group_c256": {
+    "input_types": {
+      "0": "f32"
+    },
+    "output_types": {
+      "2": "f32"
+    },
+    "weight_args": [
+      1
+    ],
+    "special": "group版本融合pool，raw输入仍f32；production_h16w输入已pool f32。h16w/frag只指权重。"
+  },
+  "mh_pool_project_group_c64": {
+    "input_types": {
+      "0": "f32"
+    },
+    "output_types": {
+      "2": "f32"
+    },
+    "weight_args": [
+      1
+    ],
+    "special": "group版本融合pool，raw输入仍f32；production_h16w输入已pool f32。h16w/frag只指权重。"
+  },
+  "mh_pool_project_production_h16w": {
+    "input_types": {
+      "0": "f32"
+    },
+    "output_types": {
+      "2": "f32"
+    },
+    "weight_args": [
+      1
+    ],
+    "special": "group版本融合pool，raw输入仍f32；production_h16w输入已pool f32。h16w/frag只指权重。"
+  },
+  "split_ffn_fused_fp8_t8": {
+    "input_types": {
+      "0": "f32"
+    },
+    "output_types": {
+      "2": "f32",
+      "3": "fp8"
+    },
+    "weight_args": [
+      1
+    ],
+    "special": "同一contract值双输出；t8仅arg3 byte，arg2保留float。"
+  },
+  "split_mix_blocked_h16w_m32": {
+    "input_types": {
+      "0": "f32"
+    },
+    "output_types": {
+      "2": "f32"
+    },
+    "weight_args": [
+      1
+    ],
+    "special": "MixHalf是权重布局；输入不是FP8。"
+  },
+  "split_projection_frag": {
+    "input_types": {
+      "0": "fp8",
+      "2": "f32"
+    },
+    "output_types": {
+      "3": "f32",
+      "4": "fp8"
+    },
+    "weight_args": [
+      1
+    ],
+    "special": "contract8输入与skip f32，双输出。"
+  },
+  "vit_attention_fused_640_bytein_bout": {
+    "input_types": {
+      "0": "fp8",
+      "3": "zero"
+    },
+    "output_types": {
+      "1": "fp8"
+    },
+    "weight_args": [],
+    "special": "声明float*但ByteInput/ByteOutput都为true；gate3零。"
+  },
+  "vit_expand_blocked_fp8_frag_bytein": {
+    "input_types": {
+      "0": "fp8",
+      "6": "zero"
+    },
+    "output_types": {
+      "2": "fp8"
+    },
+    "weight_args": [
+      1
+    ],
+    "special": "输入/hidden输出都byte；gate6零。"
+  },
+  "vit_gather": {
+    "input_types": {
+      "0": "f32"
+    },
+    "output_types": {
+      "2": "f32"
+    },
+    "weight_args": [
+      1
+    ],
+    "special": "arg1为固定indices fixture，勿随机浮点初始化。"
+  },
+  "vit_pack_input": {
+    "input_types": {
+      "0": "f32",
+      "3": "zero"
+    },
+    "output_types": {
+      "1": "fp8"
+    },
+    "weight_args": [],
+    "special": "arg1 uint*实际4个FP8 packed word；gate3必须zero以执行。"
+  },
+  "vit_stream_contract_frag_hout": {
+    "input_types": {
+      "0": "fp8",
+      "2": "f32",
+      "7": "zero"
+    },
+    "output_types": {
+      "3": "half"
+    },
+    "weight_args": [
+      1
+    ],
+    "special": "hidden FP8，原输入残差f32，half-out为IEEE half位模式；gate7零。"
+  },
+  "vit_stream_project_n64_bh": {
+    "input_types": {
+      "0": "fp8",
+      "2": "half",
+      "7": "zero"
+    },
+    "output_types": {
+      "3": "f32"
+    },
+    "weight_args": [
+      1
+    ],
+    "special": "b=AV byte，h=skip half；最终输出仍f32。gate7零。"
+  },
+  "vit_stream_qkv_frag_hin": {
+    "input_types": {
+      "0": "half",
+      "4": "zero"
+    },
+    "output_types": {
+      "2": "fp8"
+    },
+    "weight_args": [
+      1
+    ],
+    "special": "hin真实half input；QKV byte out；gate4零。"
+  }
+}

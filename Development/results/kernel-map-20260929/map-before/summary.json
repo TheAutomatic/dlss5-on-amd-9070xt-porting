@@ -1,0 +1,39 @@
+{
+  "final": true,
+  "discarded_entire_batch": "logs-ours (42 zero-output jobs; no values used in final)",
+  "preview_old_explicit": false,
+  "expected_jobs": 323,
+  "valid_jobs": 323,
+  "invalid_or_missing": [],
+  "repeat_flag_count": 3,
+  "repeat_plan": [
+    "daniel-1080-daniel-default-block12",
+    "daniel-1080-daniel-default-block57",
+    "daniel.deep.1080-daniel-default.b038.ViT.1",
+    "daniel.deep.1080-daniel-default.b042.C512.2",
+    "ours-054",
+    "ours-070",
+    "ours-076",
+    "ours-082",
+    "ours-094",
+    "ours-100",
+    "ours-112"
+  ],
+  "repeat_resolved": 11,
+  "repeat_unresolved": [],
+  "count_ours": 169,
+  "count_daniel": 154,
+  "groups": 136,
+  "sum_scope": "sum of each independent-dispatch median, not end-to-end frame latency",
+  "area_scope": "sum Daniel native medians scaled per-block valid area; window quantization and post shift not corrected",
+  "native_totals": {
+    "ours_us": 10323.528268,
+    "daniel_us": 10204.250706,
+    "gap_us": 119.27756199999992
+  },
+  "area_estimate_totals": {
+    "daniel_us": 10607.070940411764,
+    "gap_us": -283.542672411765
+  },
+  "rankings_provisional": false
+}
