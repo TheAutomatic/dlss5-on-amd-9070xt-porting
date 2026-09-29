@@ -1145,3 +1145,7 @@ WorkingPlan B1 留下的未实测候选。改为不动宿主：`mh_attention_pro
 逐位216帧（EXACT/AE 168＋回绕48）SAME；两轮ABBA 900 0.42/0.51%、1080 0.74/0.81%。需宿主按160线程发射（hip_reference_network.h 加HasFn自动探测，新旧互容），违反"宿主不动只换模块"，**未装剑星、未发包**，生产配方未开。结果 `results/vit-qkv-20260929`。
 
 21:08 协调者批准换宿主：配方开W5，新add-on b77bbc3c、RE9 runtime 2c103f6e；复跑216帧SAME，一轮ABBA 900 −0.112ms(1.39%)、1080 −0.117ms(1.07%)；runtime三方hash同+smoke过。已装剑星（备份 hip-backend\vit-qkv-20260929\backups\stellar-20260929-210818，flags不变）与鬼武者（runtime两份+模块对齐剑星，备份 onimusha-backups\20260929-210818-vitqkv）。未发包。
+
+## 2026-09-29 21:28：剑星 2K 原生 AA 55～56
+
+现装宿主 b77bbc3c（深层紧凑 + 逐核地图两刀 + C256 持久化 + ViT attention 新核 + ViT QKV W5）。Zero 本机：2K 原生 AA、中画质（同之前）、EXACT **55～56**（0.36 为 54）。离线 900 约 8.5→8.0ms。

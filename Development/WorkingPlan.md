@@ -7,7 +7,7 @@
 
 - **0.36 已发布**（09-28 23:36，夸克 https://pan.quark.cn/s/e5afdaca0769 + Gofile https://gofile.io/d/Z1hWdjcB，tag 0.36 = 2a72897d）：add-on d2290ad7、RE9 runtime 7ce2bc21 + 宿主 aa3761f2（沿用）、输入 shader 5be59a41、每架构 30 模块（清单 `results/fusion-round3-20260928/package-036-checklist.md`、`HIP-SHA256SUMS`）。脚本 `tools/package-036.ps1`（下次复制它）；Magpie 包自带 `ReShade.ini`（`TutorialProgress=4`，去 Home 引导遮罩）。
 - **0.36 相对 0.35**：ACO 对齐两刀（C32 去 NaN 规范化、C64～C256 有界倒数）、**float FMA（09-28 起新逐位基准，与 0.35 不逐位，对 NVIDIA 误差持平）**、`DLSS5_DIRECT_IO`（输入直写，发布默认 1）、C256 整块融合（1080）、C512 QKV+attention 融合、C64/C128 FFN 权重复用、C32/C64/C128 上采样与首块融合、帧时间日志 `DLSS5_FRAME_STATS`。派发 214 → 1080 档 182、900 档 198。离线 900 −0.79ms（−8.5%）、1080 −1.13ms（−8.9%）。
-- **剑星本机**（EXACT 静止）：1080P 原生 AA **60**（窗口模式 DWM 60Hz 封顶，量不出提速）；**2K（2560×1440）原生 AA 54**（新标尺；C512 融合版 52～53）。
+- **剑星本机**（EXACT 静止）：1080P 原生 AA **60**（窗口模式 DWM 60Hz 封顶，量不出提速）；**2K（2560×1440）原生 AA 54**（新标尺；C512 融合版 52～53）；09-29 晚 b77bbc3c 装机后 **55～56**。
 - **各游戏现装**：
   - 剑星：add-on d2290ad7 + 0.36 模块，flags `DLSS5_DIRECT_IO=3`（含 FSR 输出直交，仅剑星现场）、`MAKE_RESIDENT_EVERY=60`、`FRAME_STATS=5`。备份 `D:\DLSSNR-Lab\hip-backend\fusion-round3\backups\stellar-20260928-220957`。
   - RE9：0.35 全套（0.36 runtime 只在包内冒烟过，未装进游戏）；中画质 2K 高质量 58～59、原生 AA 42。
