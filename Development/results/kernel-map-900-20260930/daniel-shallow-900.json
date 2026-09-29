@@ -1,0 +1,6218 @@
+[
+  {
+    "id": "daniel-900-default-block1",
+    "family": "C32",
+    "position": 1,
+    "symbol": "_Z12k_reg_swin32ILi1ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      100,
+      60,
+      1
+    ],
+    "block": [
+      32,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 49152000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 49152000
+      },
+      {
+        "id": "output",
+        "bytes": 49152000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 49152000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 8192,
+            "bytes": 96,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 11360,
+            "bytes": 8192,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 19552,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 19552,
+            "type": "f32",
+            "value": 1.0,
+            "count": 1
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 800
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 480
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 1
+      }
+    ],
+    "notes": "reference flags1; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 800,
+      "height": 480,
+      "channels": 32,
+      "shift": [
+        0,
+        0
+      ],
+      "flags": 1,
+      "phase": "encoder",
+      "waves": 6000
+    }
+  },
+  {
+    "id": "daniel-900-default-block2",
+    "family": "C32",
+    "position": 2,
+    "symbol": "_Z12k_reg_swin32ILi0ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      101,
+      61,
+      1
+    ],
+    "block": [
+      32,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 49152000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 49152000
+      },
+      {
+        "id": "output",
+        "bytes": 49152000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 49152000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 8192,
+            "bytes": 96,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 11360,
+            "bytes": 8192,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 19552,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 19552,
+            "type": "f32",
+            "value": 1.0,
+            "count": 1
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 800
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 480
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 0
+      }
+    ],
+    "notes": "reference flags0; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 800,
+      "height": 480,
+      "channels": 32,
+      "shift": [
+        -4,
+        -4
+      ],
+      "flags": 0,
+      "phase": "encoder",
+      "waves": 6161
+    }
+  },
+  {
+    "id": "daniel-900-default-block3",
+    "family": "C32",
+    "position": 3,
+    "symbol": "_Z12k_reg_swin32ILi0ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      101,
+      60,
+      1
+    ],
+    "block": [
+      32,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 49152000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 49152000
+      },
+      {
+        "id": "output",
+        "bytes": 49152000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 49152000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 8192,
+            "bytes": 96,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 11360,
+            "bytes": 8192,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 19552,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 19552,
+            "type": "f32",
+            "value": 1.0,
+            "count": 1
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 800
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 480
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 0
+      }
+    ],
+    "notes": "reference flags0; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 800,
+      "height": 480,
+      "channels": 32,
+      "shift": [
+        -4,
+        0
+      ],
+      "flags": 0,
+      "phase": "encoder",
+      "waves": 6060
+    }
+  },
+  {
+    "id": "daniel-900-default-block4",
+    "family": "C32",
+    "position": 4,
+    "symbol": "_Z12k_reg_swin32ILi4ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      100,
+      61,
+      1
+    ],
+    "block": [
+      32,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 49152000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 49152000
+      },
+      {
+        "id": "output",
+        "bytes": 49152000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 49152000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 8192,
+            "bytes": 96,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 11360,
+            "bytes": 8192,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 19552,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 19552,
+            "type": "f32",
+            "value": 1.0,
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "down_output",
+        "bytes": 24576000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 24576000
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 800
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 480
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 4
+      },
+      {
+        "offset": 56,
+        "type": "ptr",
+        "buffer": "down_output"
+      },
+      {
+        "offset": 176,
+        "type": "i32",
+        "value": 400
+      },
+      {
+        "offset": 180,
+        "type": "i32",
+        "value": 240
+      }
+    ],
+    "notes": "reference flags4; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 800,
+      "height": 480,
+      "channels": 32,
+      "shift": [
+        0,
+        -4
+      ],
+      "flags": 4,
+      "phase": "encoder",
+      "waves": 6100
+    }
+  },
+  {
+    "id": "daniel-900-default-block66",
+    "family": "C32",
+    "position": 66,
+    "symbol": "_Z12k_reg_swin32ILi8ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      100,
+      60,
+      1
+    ],
+    "block": [
+      32,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 49152000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 49152000
+      },
+      {
+        "id": "output",
+        "bytes": 49152000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 49152000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 10240,
+            "bytes": 160,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 13472,
+            "bytes": 8192,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 21664,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 21664,
+            "type": "f32",
+            "value": 1.0,
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "up_low",
+        "bytes": 24576000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 24576000
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 800
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 480
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 8
+      },
+      {
+        "offset": 48,
+        "type": "ptr",
+        "buffer": "up_low"
+      },
+      {
+        "offset": 184,
+        "type": "i32",
+        "value": 400
+      },
+      {
+        "offset": 188,
+        "type": "i32",
+        "value": 240
+      }
+    ],
+    "notes": "reference flags8; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 800,
+      "height": 480,
+      "channels": 32,
+      "shift": [
+        0,
+        0
+      ],
+      "flags": 8,
+      "phase": "decoder",
+      "waves": 6000
+    }
+  },
+  {
+    "id": "daniel-900-default-block67",
+    "family": "C32",
+    "position": 67,
+    "symbol": "_Z12k_reg_swin32ILi0ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      101,
+      61,
+      1
+    ],
+    "block": [
+      32,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 49152000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 49152000
+      },
+      {
+        "id": "output",
+        "bytes": 49152000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 49152000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 8192,
+            "bytes": 96,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 11360,
+            "bytes": 8192,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 19552,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 19552,
+            "type": "f32",
+            "value": 1.0,
+            "count": 1
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 800
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 480
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 0
+      }
+    ],
+    "notes": "reference flags0; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 800,
+      "height": 480,
+      "channels": 32,
+      "shift": [
+        -4,
+        -4
+      ],
+      "flags": 0,
+      "phase": "decoder",
+      "waves": 6161
+    }
+  },
+  {
+    "id": "daniel-900-default-block68",
+    "family": "C32",
+    "position": 68,
+    "symbol": "_Z12k_reg_swin32ILi0ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      101,
+      60,
+      1
+    ],
+    "block": [
+      32,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 49152000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 49152000
+      },
+      {
+        "id": "output",
+        "bytes": 49152000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 49152000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 8192,
+            "bytes": 96,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 11360,
+            "bytes": 8192,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 19552,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 19552,
+            "type": "f32",
+            "value": 1.0,
+            "count": 1
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 800
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 480
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 0
+      }
+    ],
+    "notes": "reference flags0; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 800,
+      "height": 480,
+      "channels": 32,
+      "shift": [
+        -4,
+        0
+      ],
+      "flags": 0,
+      "phase": "decoder",
+      "waves": 6060
+    }
+  },
+  {
+    "id": "daniel-900-default-block69",
+    "family": "C32",
+    "position": 69,
+    "symbol": "_Z12k_reg_swin32ILi2ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      100,
+      61,
+      1
+    ],
+    "block": [
+      32,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 49152000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 49152000
+      },
+      {
+        "id": "output",
+        "bytes": 49152000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 49152000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 8192,
+            "bytes": 96,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 11360,
+            "bytes": 8192,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 19552,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 19552,
+            "type": "f32",
+            "value": 1.0,
+            "count": 1
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 800
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 480
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 2
+      }
+    ],
+    "notes": "reference flags2; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 800,
+      "height": 480,
+      "channels": 32,
+      "shift": [
+        0,
+        -4
+      ],
+      "flags": 2,
+      "phase": "decoder",
+      "waves": 6100
+    }
+  },
+  {
+    "id": "daniel-900-default-block5",
+    "family": "C64",
+    "position": 5,
+    "symbol": "_Z13k_reg_swin_mhILi64ELi1ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      50,
+      30,
+      1
+    ],
+    "block": [
+      64,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 24576000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 24576000
+      },
+      {
+        "id": "output",
+        "bytes": 24576000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 24576000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 28672,
+            "bytes": 160,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 41120,
+            "bytes": 16384,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 57504,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 57504,
+            "type": "f32",
+            "value": 1.0,
+            "count": 2
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 400
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 240
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 1
+      }
+    ],
+    "notes": "reference flags1; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 400,
+      "height": 240,
+      "channels": 64,
+      "shift": [
+        0,
+        0
+      ],
+      "flags": 1,
+      "phase": "encoder",
+      "waves": 3000
+    }
+  },
+  {
+    "id": "daniel-900-default-block6",
+    "family": "C64",
+    "position": 6,
+    "symbol": "_Z13k_reg_swin_mhILi64ELi0ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      51,
+      31,
+      1
+    ],
+    "block": [
+      64,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 24576000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 24576000
+      },
+      {
+        "id": "output",
+        "bytes": 24576000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 24576000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 28672,
+            "bytes": 160,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 41120,
+            "bytes": 16384,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 57504,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 57504,
+            "type": "f32",
+            "value": 1.0,
+            "count": 2
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 400
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 240
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 0
+      }
+    ],
+    "notes": "reference flags0; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 400,
+      "height": 240,
+      "channels": 64,
+      "shift": [
+        -4,
+        -4
+      ],
+      "flags": 0,
+      "phase": "encoder",
+      "waves": 3162
+    }
+  },
+  {
+    "id": "daniel-900-default-block7",
+    "family": "C64",
+    "position": 7,
+    "symbol": "_Z13k_reg_swin_mhILi64ELi0ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      51,
+      30,
+      1
+    ],
+    "block": [
+      64,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 24576000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 24576000
+      },
+      {
+        "id": "output",
+        "bytes": 24576000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 24576000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 28672,
+            "bytes": 160,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 41120,
+            "bytes": 16384,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 57504,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 57504,
+            "type": "f32",
+            "value": 1.0,
+            "count": 2
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 400
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 240
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 0
+      }
+    ],
+    "notes": "reference flags0; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 400,
+      "height": 240,
+      "channels": 64,
+      "shift": [
+        -4,
+        0
+      ],
+      "flags": 0,
+      "phase": "encoder",
+      "waves": 3060
+    }
+  },
+  {
+    "id": "daniel-900-default-block8",
+    "family": "C64",
+    "position": 8,
+    "symbol": "_Z13k_reg_swin_mhILi64ELi4ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      50,
+      31,
+      1
+    ],
+    "block": [
+      64,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 24576000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 24576000
+      },
+      {
+        "id": "output",
+        "bytes": 24576000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 24576000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 28672,
+            "bytes": 160,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 41120,
+            "bytes": 16384,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 57504,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 57504,
+            "type": "f32",
+            "value": 1.0,
+            "count": 2
+          }
+        ]
+      },
+      {
+        "id": "down_output",
+        "bytes": 12288000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 12288000
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 400
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 240
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 4
+      },
+      {
+        "offset": 56,
+        "type": "ptr",
+        "buffer": "down_output"
+      },
+      {
+        "offset": 176,
+        "type": "i32",
+        "value": 200
+      },
+      {
+        "offset": 180,
+        "type": "i32",
+        "value": 120
+      }
+    ],
+    "notes": "reference flags4; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 400,
+      "height": 240,
+      "channels": 64,
+      "shift": [
+        0,
+        -4
+      ],
+      "flags": 4,
+      "phase": "encoder",
+      "waves": 3100
+    }
+  },
+  {
+    "id": "daniel-900-default-block62",
+    "family": "C64",
+    "position": 62,
+    "symbol": "_Z13k_reg_swin_mhILi64ELi8ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      50,
+      30,
+      1
+    ],
+    "block": [
+      64,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 24576000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 24576000
+      },
+      {
+        "id": "output",
+        "bytes": 24576000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 24576000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 36864,
+            "bytes": 256,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 49408,
+            "bytes": 16384,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 65792,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 65792,
+            "type": "f32",
+            "value": 1.0,
+            "count": 2
+          }
+        ]
+      },
+      {
+        "id": "up_low",
+        "bytes": 12288000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 12288000
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 400
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 240
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 8
+      },
+      {
+        "offset": 48,
+        "type": "ptr",
+        "buffer": "up_low"
+      },
+      {
+        "offset": 184,
+        "type": "i32",
+        "value": 200
+      },
+      {
+        "offset": 188,
+        "type": "i32",
+        "value": 120
+      }
+    ],
+    "notes": "reference flags8; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 400,
+      "height": 240,
+      "channels": 64,
+      "shift": [
+        0,
+        0
+      ],
+      "flags": 8,
+      "phase": "decoder",
+      "waves": 3000
+    }
+  },
+  {
+    "id": "daniel-900-default-block63",
+    "family": "C64",
+    "position": 63,
+    "symbol": "_Z13k_reg_swin_mhILi64ELi0ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      51,
+      31,
+      1
+    ],
+    "block": [
+      64,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 24576000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 24576000
+      },
+      {
+        "id": "output",
+        "bytes": 24576000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 24576000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 28672,
+            "bytes": 160,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 41120,
+            "bytes": 16384,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 57504,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 57504,
+            "type": "f32",
+            "value": 1.0,
+            "count": 2
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 400
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 240
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 0
+      }
+    ],
+    "notes": "reference flags0; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 400,
+      "height": 240,
+      "channels": 64,
+      "shift": [
+        -4,
+        -4
+      ],
+      "flags": 0,
+      "phase": "decoder",
+      "waves": 3162
+    }
+  },
+  {
+    "id": "daniel-900-default-block64",
+    "family": "C64",
+    "position": 64,
+    "symbol": "_Z13k_reg_swin_mhILi64ELi0ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      51,
+      30,
+      1
+    ],
+    "block": [
+      64,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 24576000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 24576000
+      },
+      {
+        "id": "output",
+        "bytes": 24576000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 24576000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 28672,
+            "bytes": 160,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 41120,
+            "bytes": 16384,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 57504,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 57504,
+            "type": "f32",
+            "value": 1.0,
+            "count": 2
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 400
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 240
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 0
+      }
+    ],
+    "notes": "reference flags0; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 400,
+      "height": 240,
+      "channels": 64,
+      "shift": [
+        -4,
+        0
+      ],
+      "flags": 0,
+      "phase": "decoder",
+      "waves": 3060
+    }
+  },
+  {
+    "id": "daniel-900-default-block65",
+    "family": "C64",
+    "position": 65,
+    "symbol": "_Z13k_reg_swin_mhILi64ELi2ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      50,
+      31,
+      1
+    ],
+    "block": [
+      64,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 24576000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 24576000
+      },
+      {
+        "id": "output",
+        "bytes": 24576000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 24576000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 28672,
+            "bytes": 160,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 41120,
+            "bytes": 16384,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 57504,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 57504,
+            "type": "f32",
+            "value": 1.0,
+            "count": 2
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 400
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 240
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 2
+      }
+    ],
+    "notes": "reference flags2; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 400,
+      "height": 240,
+      "channels": 64,
+      "shift": [
+        0,
+        -4
+      ],
+      "flags": 2,
+      "phase": "decoder",
+      "waves": 3100
+    }
+  },
+  {
+    "id": "daniel-900-default-block9",
+    "family": "C128",
+    "position": 9,
+    "symbol": "_Z13k_reg_swin_mhILi128ELi1ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      25,
+      15,
+      1
+    ],
+    "block": [
+      128,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 12288000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 12288000
+      },
+      {
+        "id": "output",
+        "bytes": 12288000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 12288000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 98304,
+            "bytes": 288,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 147744,
+            "bytes": 32768,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 180512,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 180512,
+            "type": "f32",
+            "value": 1.0,
+            "count": 4
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 200
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 120
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 1
+      }
+    ],
+    "notes": "reference flags1; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 200,
+      "height": 120,
+      "channels": 128,
+      "shift": [
+        0,
+        0
+      ],
+      "flags": 1,
+      "phase": "encoder",
+      "waves": 1500
+    }
+  },
+  {
+    "id": "daniel-900-default-block10",
+    "family": "C128",
+    "position": 10,
+    "symbol": "_Z13k_reg_swin_mhILi128ELi0ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      26,
+      16,
+      1
+    ],
+    "block": [
+      128,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 12288000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 12288000
+      },
+      {
+        "id": "output",
+        "bytes": 12288000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 12288000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 98304,
+            "bytes": 288,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 147744,
+            "bytes": 32768,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 180512,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 180512,
+            "type": "f32",
+            "value": 1.0,
+            "count": 4
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 200
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 120
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 0
+      }
+    ],
+    "notes": "reference flags0; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 200,
+      "height": 120,
+      "channels": 128,
+      "shift": [
+        -4,
+        -4
+      ],
+      "flags": 0,
+      "phase": "encoder",
+      "waves": 1664
+    }
+  },
+  {
+    "id": "daniel-900-default-block11",
+    "family": "C128",
+    "position": 11,
+    "symbol": "_Z13k_reg_swin_mhILi128ELi0ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      26,
+      15,
+      1
+    ],
+    "block": [
+      128,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 12288000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 12288000
+      },
+      {
+        "id": "output",
+        "bytes": 12288000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 12288000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 98304,
+            "bytes": 288,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 147744,
+            "bytes": 32768,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 180512,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 180512,
+            "type": "f32",
+            "value": 1.0,
+            "count": 4
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 200
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 120
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 0
+      }
+    ],
+    "notes": "reference flags0; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 200,
+      "height": 120,
+      "channels": 128,
+      "shift": [
+        -4,
+        0
+      ],
+      "flags": 0,
+      "phase": "encoder",
+      "waves": 1560
+    }
+  },
+  {
+    "id": "daniel-900-default-block12",
+    "family": "C128",
+    "position": 12,
+    "symbol": "_Z13k_reg_swin_mhILi128ELi0ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      25,
+      16,
+      1
+    ],
+    "block": [
+      128,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 12288000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 12288000
+      },
+      {
+        "id": "output",
+        "bytes": 12288000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 12288000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 98304,
+            "bytes": 288,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 147744,
+            "bytes": 32768,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 180512,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 180512,
+            "type": "f32",
+            "value": 1.0,
+            "count": 4
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 200
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 120
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 0
+      }
+    ],
+    "notes": "reference flags0; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 200,
+      "height": 120,
+      "channels": 128,
+      "shift": [
+        0,
+        -4
+      ],
+      "flags": 0,
+      "phase": "encoder",
+      "waves": 1600
+    }
+  },
+  {
+    "id": "daniel-900-default-block13",
+    "family": "C128",
+    "position": 13,
+    "symbol": "_Z13k_reg_swin_mhILi128ELi0ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      25,
+      15,
+      1
+    ],
+    "block": [
+      128,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 12288000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 12288000
+      },
+      {
+        "id": "output",
+        "bytes": 12288000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 12288000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 98304,
+            "bytes": 288,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 147744,
+            "bytes": 32768,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 180512,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 180512,
+            "type": "f32",
+            "value": 1.0,
+            "count": 4
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 200
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 120
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 0
+      }
+    ],
+    "notes": "reference flags0; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 200,
+      "height": 120,
+      "channels": 128,
+      "shift": [
+        0,
+        0
+      ],
+      "flags": 0,
+      "phase": "encoder",
+      "waves": 1500
+    }
+  },
+  {
+    "id": "daniel-900-default-block14",
+    "family": "C128",
+    "position": 14,
+    "symbol": "_Z13k_reg_swin_mhILi128ELi4ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      26,
+      16,
+      1
+    ],
+    "block": [
+      128,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 12288000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 12288000
+      },
+      {
+        "id": "output",
+        "bytes": 12288000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 12288000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 98304,
+            "bytes": 288,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 147744,
+            "bytes": 32768,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 180512,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 180512,
+            "type": "f32",
+            "value": 1.0,
+            "count": 4
+          }
+        ]
+      },
+      {
+        "id": "down_output",
+        "bytes": 6144000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 6144000
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 200
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 120
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 4
+      },
+      {
+        "offset": 56,
+        "type": "ptr",
+        "buffer": "down_output"
+      },
+      {
+        "offset": 176,
+        "type": "i32",
+        "value": 100
+      },
+      {
+        "offset": 180,
+        "type": "i32",
+        "value": 60
+      }
+    ],
+    "notes": "reference flags4; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 200,
+      "height": 120,
+      "channels": 128,
+      "shift": [
+        -4,
+        -4
+      ],
+      "flags": 4,
+      "phase": "encoder",
+      "waves": 1664
+    }
+  },
+  {
+    "id": "daniel-900-default-block56",
+    "family": "C128",
+    "position": 56,
+    "symbol": "_Z13k_reg_swin_mhILi128ELi8ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      26,
+      15,
+      1
+    ],
+    "block": [
+      128,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 12288000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 12288000
+      },
+      {
+        "id": "output",
+        "bytes": 12288000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 12288000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 131072,
+            "bytes": 512,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 180736,
+            "bytes": 32768,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 213504,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 213504,
+            "type": "f32",
+            "value": 1.0,
+            "count": 4
+          }
+        ]
+      },
+      {
+        "id": "up_low",
+        "bytes": 6144000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 6144000
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 200
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 120
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 8
+      },
+      {
+        "offset": 48,
+        "type": "ptr",
+        "buffer": "up_low"
+      },
+      {
+        "offset": 184,
+        "type": "i32",
+        "value": 100
+      },
+      {
+        "offset": 188,
+        "type": "i32",
+        "value": 60
+      }
+    ],
+    "notes": "reference flags8; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 200,
+      "height": 120,
+      "channels": 128,
+      "shift": [
+        -4,
+        0
+      ],
+      "flags": 8,
+      "phase": "decoder",
+      "waves": 1560
+    }
+  },
+  {
+    "id": "daniel-900-default-block57",
+    "family": "C128",
+    "position": 57,
+    "symbol": "_Z13k_reg_swin_mhILi128ELi0ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      25,
+      16,
+      1
+    ],
+    "block": [
+      128,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 12288000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 12288000
+      },
+      {
+        "id": "output",
+        "bytes": 12288000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 12288000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 98304,
+            "bytes": 288,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 147744,
+            "bytes": 32768,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 180512,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 180512,
+            "type": "f32",
+            "value": 1.0,
+            "count": 4
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 200
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 120
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 0
+      }
+    ],
+    "notes": "reference flags0; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 200,
+      "height": 120,
+      "channels": 128,
+      "shift": [
+        0,
+        -4
+      ],
+      "flags": 0,
+      "phase": "decoder",
+      "waves": 1600
+    }
+  },
+  {
+    "id": "daniel-900-default-block58",
+    "family": "C128",
+    "position": 58,
+    "symbol": "_Z13k_reg_swin_mhILi128ELi0ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      25,
+      15,
+      1
+    ],
+    "block": [
+      128,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 12288000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 12288000
+      },
+      {
+        "id": "output",
+        "bytes": 12288000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 12288000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 98304,
+            "bytes": 288,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 147744,
+            "bytes": 32768,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 180512,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 180512,
+            "type": "f32",
+            "value": 1.0,
+            "count": 4
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 200
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 120
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 0
+      }
+    ],
+    "notes": "reference flags0; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 200,
+      "height": 120,
+      "channels": 128,
+      "shift": [
+        0,
+        0
+      ],
+      "flags": 0,
+      "phase": "decoder",
+      "waves": 1500
+    }
+  },
+  {
+    "id": "daniel-900-default-block59",
+    "family": "C128",
+    "position": 59,
+    "symbol": "_Z13k_reg_swin_mhILi128ELi0ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      26,
+      16,
+      1
+    ],
+    "block": [
+      128,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 12288000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 12288000
+      },
+      {
+        "id": "output",
+        "bytes": 12288000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 12288000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 98304,
+            "bytes": 288,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 147744,
+            "bytes": 32768,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 180512,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 180512,
+            "type": "f32",
+            "value": 1.0,
+            "count": 4
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 200
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 120
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 0
+      }
+    ],
+    "notes": "reference flags0; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 200,
+      "height": 120,
+      "channels": 128,
+      "shift": [
+        -4,
+        -4
+      ],
+      "flags": 0,
+      "phase": "decoder",
+      "waves": 1664
+    }
+  },
+  {
+    "id": "daniel-900-default-block60",
+    "family": "C128",
+    "position": 60,
+    "symbol": "_Z13k_reg_swin_mhILi128ELi0ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      26,
+      15,
+      1
+    ],
+    "block": [
+      128,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 12288000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 12288000
+      },
+      {
+        "id": "output",
+        "bytes": 12288000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 12288000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 98304,
+            "bytes": 288,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 147744,
+            "bytes": 32768,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 180512,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 180512,
+            "type": "f32",
+            "value": 1.0,
+            "count": 4
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 200
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 120
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 0
+      }
+    ],
+    "notes": "reference flags0; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 200,
+      "height": 120,
+      "channels": 128,
+      "shift": [
+        -4,
+        0
+      ],
+      "flags": 0,
+      "phase": "decoder",
+      "waves": 1560
+    }
+  },
+  {
+    "id": "daniel-900-default-block61",
+    "family": "C128",
+    "position": 61,
+    "symbol": "_Z13k_reg_swin_mhILi128ELi2ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      25,
+      16,
+      1
+    ],
+    "block": [
+      128,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 12288000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 12288000
+      },
+      {
+        "id": "output",
+        "bytes": 12288000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 12288000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 98304,
+            "bytes": 288,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 147744,
+            "bytes": 32768,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 180512,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 180512,
+            "type": "f32",
+            "value": 1.0,
+            "count": 4
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 200
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 120
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 2
+      }
+    ],
+    "notes": "reference flags2; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 200,
+      "height": 120,
+      "channels": 128,
+      "shift": [
+        0,
+        -4
+      ],
+      "flags": 2,
+      "phase": "decoder",
+      "waves": 1600
+    }
+  },
+  {
+    "id": "daniel-900-default-block15",
+    "family": "C256",
+    "position": 15,
+    "symbol": "_Z13k_reg_swin_mhILi256ELi1ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      13,
+      8,
+      1
+    ],
+    "block": [
+      256,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 6144000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "output",
+        "bytes": 6144000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 360448,
+            "bytes": 544,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 557600,
+            "bytes": 65536,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 623136,
+            "bytes": 32,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 623136,
+            "type": "f32",
+            "value": 1.0,
+            "count": 8
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 100
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 60
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 1
+      }
+    ],
+    "notes": "reference flags1; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 100,
+      "height": 60,
+      "channels": 256,
+      "shift": [
+        0,
+        0
+      ],
+      "flags": 1,
+      "phase": "encoder",
+      "waves": 832
+    }
+  },
+  {
+    "id": "daniel-900-default-block16",
+    "family": "C256",
+    "position": 16,
+    "symbol": "_Z13k_reg_swin_mhILi256ELi0ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      13,
+      8,
+      1
+    ],
+    "block": [
+      256,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 6144000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "output",
+        "bytes": 6144000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 360448,
+            "bytes": 544,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 557600,
+            "bytes": 65536,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 623136,
+            "bytes": 32,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 623136,
+            "type": "f32",
+            "value": 1.0,
+            "count": 8
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 100
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 60
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 0
+      }
+    ],
+    "notes": "reference flags0; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 100,
+      "height": 60,
+      "channels": 256,
+      "shift": [
+        -4,
+        -4
+      ],
+      "flags": 0,
+      "phase": "encoder",
+      "waves": 832
+    }
+  },
+  {
+    "id": "daniel-900-default-block17",
+    "family": "C256",
+    "position": 17,
+    "symbol": "_Z13k_reg_swin_mhILi256ELi0ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      13,
+      8,
+      1
+    ],
+    "block": [
+      256,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 6144000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "output",
+        "bytes": 6144000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 360448,
+            "bytes": 544,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 557600,
+            "bytes": 65536,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 623136,
+            "bytes": 32,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 623136,
+            "type": "f32",
+            "value": 1.0,
+            "count": 8
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 100
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 60
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 0
+      }
+    ],
+    "notes": "reference flags0; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 100,
+      "height": 60,
+      "channels": 256,
+      "shift": [
+        -4,
+        0
+      ],
+      "flags": 0,
+      "phase": "encoder",
+      "waves": 832
+    }
+  },
+  {
+    "id": "daniel-900-default-block18",
+    "family": "C256",
+    "position": 18,
+    "symbol": "_Z13k_reg_swin_mhILi256ELi0ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      13,
+      8,
+      1
+    ],
+    "block": [
+      256,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 6144000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "output",
+        "bytes": 6144000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 360448,
+            "bytes": 544,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 557600,
+            "bytes": 65536,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 623136,
+            "bytes": 32,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 623136,
+            "type": "f32",
+            "value": 1.0,
+            "count": 8
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 100
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 60
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 0
+      }
+    ],
+    "notes": "reference flags0; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 100,
+      "height": 60,
+      "channels": 256,
+      "shift": [
+        0,
+        -4
+      ],
+      "flags": 0,
+      "phase": "encoder",
+      "waves": 832
+    }
+  },
+  {
+    "id": "daniel-900-default-block19",
+    "family": "C256",
+    "position": 19,
+    "symbol": "_Z13k_reg_swin_mhILi256ELi0ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      13,
+      8,
+      1
+    ],
+    "block": [
+      256,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 6144000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "output",
+        "bytes": 6144000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 360448,
+            "bytes": 544,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 557600,
+            "bytes": 65536,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 623136,
+            "bytes": 32,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 623136,
+            "type": "f32",
+            "value": 1.0,
+            "count": 8
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 100
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 60
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 0
+      }
+    ],
+    "notes": "reference flags0; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 100,
+      "height": 60,
+      "channels": 256,
+      "shift": [
+        0,
+        0
+      ],
+      "flags": 0,
+      "phase": "encoder",
+      "waves": 832
+    }
+  },
+  {
+    "id": "daniel-900-default-block20",
+    "family": "C256",
+    "position": 20,
+    "symbol": "_Z13k_reg_swin_mhILi256ELi0ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      13,
+      8,
+      1
+    ],
+    "block": [
+      256,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 6144000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "output",
+        "bytes": 6144000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 360448,
+            "bytes": 544,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 557600,
+            "bytes": 65536,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 623136,
+            "bytes": 32,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 623136,
+            "type": "f32",
+            "value": 1.0,
+            "count": 8
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 100
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 60
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 0
+      }
+    ],
+    "notes": "reference flags0; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 100,
+      "height": 60,
+      "channels": 256,
+      "shift": [
+        -4,
+        -4
+      ],
+      "flags": 0,
+      "phase": "encoder",
+      "waves": 832
+    }
+  },
+  {
+    "id": "daniel-900-default-block21",
+    "family": "C256",
+    "position": 21,
+    "symbol": "_Z13k_reg_swin_mhILi256ELi0ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      13,
+      8,
+      1
+    ],
+    "block": [
+      256,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 6144000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "output",
+        "bytes": 6144000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 360448,
+            "bytes": 544,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 557600,
+            "bytes": 65536,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 623136,
+            "bytes": 32,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 623136,
+            "type": "f32",
+            "value": 1.0,
+            "count": 8
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 100
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 60
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 0
+      }
+    ],
+    "notes": "reference flags0; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 100,
+      "height": 60,
+      "channels": 256,
+      "shift": [
+        -4,
+        0
+      ],
+      "flags": 0,
+      "phase": "encoder",
+      "waves": 832
+    }
+  },
+  {
+    "id": "daniel-900-default-block22",
+    "family": "C256",
+    "position": 22,
+    "symbol": "_Z13k_reg_swin_mhILi256ELi4ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      13,
+      8,
+      1
+    ],
+    "block": [
+      256,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 6144000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "output",
+        "bytes": 6144000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 360448,
+            "bytes": 544,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 557600,
+            "bytes": 65536,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 623136,
+            "bytes": 32,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 623136,
+            "type": "f32",
+            "value": 1.0,
+            "count": 8
+          }
+        ]
+      },
+      {
+        "id": "down_output",
+        "bytes": 3072000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 3072000
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 100
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 60
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 4
+      },
+      {
+        "offset": 56,
+        "type": "ptr",
+        "buffer": "down_output"
+      },
+      {
+        "offset": 176,
+        "type": "i32",
+        "value": 50
+      },
+      {
+        "offset": 180,
+        "type": "i32",
+        "value": 30
+      }
+    ],
+    "notes": "reference flags4; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 100,
+      "height": 60,
+      "channels": 256,
+      "shift": [
+        0,
+        -4
+      ],
+      "flags": 4,
+      "phase": "encoder",
+      "waves": 832
+    }
+  },
+  {
+    "id": "daniel-900-default-block48",
+    "family": "C256",
+    "position": 48,
+    "symbol": "_Z13k_reg_swin_mhILi256ELi8ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      13,
+      8,
+      1
+    ],
+    "block": [
+      256,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 6144000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "output",
+        "bytes": 6144000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 491520,
+            "bytes": 1024,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 689152,
+            "bytes": 65536,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 754688,
+            "bytes": 32,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 754688,
+            "type": "f32",
+            "value": 1.0,
+            "count": 8
+          }
+        ]
+      },
+      {
+        "id": "up_low",
+        "bytes": 3072000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 3072000
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 100
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 60
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 8
+      },
+      {
+        "offset": 48,
+        "type": "ptr",
+        "buffer": "up_low"
+      },
+      {
+        "offset": 184,
+        "type": "i32",
+        "value": 50
+      },
+      {
+        "offset": 188,
+        "type": "i32",
+        "value": 30
+      }
+    ],
+    "notes": "reference flags8; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 100,
+      "height": 60,
+      "channels": 256,
+      "shift": [
+        0,
+        0
+      ],
+      "flags": 8,
+      "phase": "decoder",
+      "waves": 832
+    }
+  },
+  {
+    "id": "daniel-900-default-block49",
+    "family": "C256",
+    "position": 49,
+    "symbol": "_Z13k_reg_swin_mhILi256ELi0ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      13,
+      8,
+      1
+    ],
+    "block": [
+      256,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 6144000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "output",
+        "bytes": 6144000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 360448,
+            "bytes": 544,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 557600,
+            "bytes": 65536,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 623136,
+            "bytes": 32,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 623136,
+            "type": "f32",
+            "value": 1.0,
+            "count": 8
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 100
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 60
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 0
+      }
+    ],
+    "notes": "reference flags0; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 100,
+      "height": 60,
+      "channels": 256,
+      "shift": [
+        -4,
+        -4
+      ],
+      "flags": 0,
+      "phase": "decoder",
+      "waves": 832
+    }
+  },
+  {
+    "id": "daniel-900-default-block50",
+    "family": "C256",
+    "position": 50,
+    "symbol": "_Z13k_reg_swin_mhILi256ELi0ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      13,
+      8,
+      1
+    ],
+    "block": [
+      256,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 6144000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "output",
+        "bytes": 6144000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 360448,
+            "bytes": 544,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 557600,
+            "bytes": 65536,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 623136,
+            "bytes": 32,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 623136,
+            "type": "f32",
+            "value": 1.0,
+            "count": 8
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 100
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 60
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 0
+      }
+    ],
+    "notes": "reference flags0; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 100,
+      "height": 60,
+      "channels": 256,
+      "shift": [
+        -4,
+        0
+      ],
+      "flags": 0,
+      "phase": "decoder",
+      "waves": 832
+    }
+  },
+  {
+    "id": "daniel-900-default-block51",
+    "family": "C256",
+    "position": 51,
+    "symbol": "_Z13k_reg_swin_mhILi256ELi0ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      13,
+      8,
+      1
+    ],
+    "block": [
+      256,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 6144000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "output",
+        "bytes": 6144000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 360448,
+            "bytes": 544,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 557600,
+            "bytes": 65536,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 623136,
+            "bytes": 32,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 623136,
+            "type": "f32",
+            "value": 1.0,
+            "count": 8
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 100
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 60
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 0
+      }
+    ],
+    "notes": "reference flags0; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 100,
+      "height": 60,
+      "channels": 256,
+      "shift": [
+        0,
+        -4
+      ],
+      "flags": 0,
+      "phase": "decoder",
+      "waves": 832
+    }
+  },
+  {
+    "id": "daniel-900-default-block52",
+    "family": "C256",
+    "position": 52,
+    "symbol": "_Z13k_reg_swin_mhILi256ELi0ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      13,
+      8,
+      1
+    ],
+    "block": [
+      256,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 6144000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "output",
+        "bytes": 6144000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 360448,
+            "bytes": 544,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 557600,
+            "bytes": 65536,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 623136,
+            "bytes": 32,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 623136,
+            "type": "f32",
+            "value": 1.0,
+            "count": 8
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 100
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 60
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 0
+      }
+    ],
+    "notes": "reference flags0; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 100,
+      "height": 60,
+      "channels": 256,
+      "shift": [
+        0,
+        0
+      ],
+      "flags": 0,
+      "phase": "decoder",
+      "waves": 832
+    }
+  },
+  {
+    "id": "daniel-900-default-block53",
+    "family": "C256",
+    "position": 53,
+    "symbol": "_Z13k_reg_swin_mhILi256ELi0ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      13,
+      8,
+      1
+    ],
+    "block": [
+      256,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 6144000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "output",
+        "bytes": 6144000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 360448,
+            "bytes": 544,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 557600,
+            "bytes": 65536,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 623136,
+            "bytes": 32,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 623136,
+            "type": "f32",
+            "value": 1.0,
+            "count": 8
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 100
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 60
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 0
+      }
+    ],
+    "notes": "reference flags0; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 100,
+      "height": 60,
+      "channels": 256,
+      "shift": [
+        -4,
+        -4
+      ],
+      "flags": 0,
+      "phase": "decoder",
+      "waves": 832
+    }
+  },
+  {
+    "id": "daniel-900-default-block54",
+    "family": "C256",
+    "position": 54,
+    "symbol": "_Z13k_reg_swin_mhILi256ELi0ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      13,
+      8,
+      1
+    ],
+    "block": [
+      256,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 6144000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "output",
+        "bytes": 6144000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 360448,
+            "bytes": 544,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 557600,
+            "bytes": 65536,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 623136,
+            "bytes": 32,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 623136,
+            "type": "f32",
+            "value": 1.0,
+            "count": 8
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 100
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 60
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 0
+      }
+    ],
+    "notes": "reference flags0; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 100,
+      "height": 60,
+      "channels": 256,
+      "shift": [
+        -4,
+        0
+      ],
+      "flags": 0,
+      "phase": "decoder",
+      "waves": 832
+    }
+  },
+  {
+    "id": "daniel-900-default-block55",
+    "family": "C256",
+    "position": 55,
+    "symbol": "_Z13k_reg_swin_mhILi256ELi2ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      13,
+      8,
+      1
+    ],
+    "block": [
+      256,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 6144000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "output",
+        "bytes": 6144000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 6144000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 360448,
+            "bytes": 544,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 557600,
+            "bytes": 65536,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 623136,
+            "bytes": 32,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 623136,
+            "type": "f32",
+            "value": 1.0,
+            "count": 8
+          }
+        ]
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 100
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 60
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": -4
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 2
+      }
+    ],
+    "notes": "reference flags2; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 100,
+      "height": 60,
+      "channels": 256,
+      "shift": [
+        0,
+        -4
+      ],
+      "flags": 2,
+      "phase": "decoder",
+      "waves": 832
+    }
+  },
+  {
+    "id": "daniel-900-default-block0",
+    "family": "C32",
+    "position": 0,
+    "symbol": "_Z12k_reg_swin32ILi20ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      200,
+      120,
+      1
+    ],
+    "block": [
+      32,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 196608000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 196608000
+      },
+      {
+        "id": "output",
+        "bytes": 196608000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 196608000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 8192,
+            "bytes": 1120,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 8192,
+            "bytes": 1024,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 12384,
+            "bytes": 8192,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 20576,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 20576,
+            "type": "f32",
+            "value": 1.0,
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "down_output",
+        "bytes": 98304000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 98304000
+      },
+      {
+        "id": "raw_rgb_float",
+        "bytes": 18432000,
+        "init": "f32",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 18432000
+      },
+      {
+        "id": "prefix_aux",
+        "bytes": 24576000,
+        "init": "f32",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 24576000
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 1600
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 960
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 20
+      },
+      {
+        "offset": 56,
+        "type": "ptr",
+        "buffer": "down_output"
+      },
+      {
+        "offset": 176,
+        "type": "i32",
+        "value": 800
+      },
+      {
+        "offset": 180,
+        "type": "i32",
+        "value": 480
+      },
+      {
+        "offset": 64,
+        "type": "ptr",
+        "buffer": "raw_rgb_float"
+      },
+      {
+        "offset": 72,
+        "type": "ptr",
+        "buffer": "prefix_aux"
+      },
+      {
+        "offset": 80,
+        "type": "f32",
+        "value": 1.0
+      },
+      {
+        "offset": 84,
+        "type": "f32",
+        "value": 0.0
+      },
+      {
+        "offset": 88,
+        "type": "f32",
+        "value": 0.0
+      },
+      {
+        "offset": 92,
+        "type": "f32",
+        "value": 0.0
+      },
+      {
+        "offset": 96,
+        "type": "f32",
+        "value": 0.0
+      },
+      {
+        "offset": 100,
+        "type": "f32",
+        "value": 0.0
+      },
+      {
+        "offset": 104,
+        "type": "u32",
+        "value": 123
+      }
+    ],
+    "notes": "reference flags20; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 1600,
+      "height": 960,
+      "channels": 32,
+      "shift": [
+        0,
+        0
+      ],
+      "flags": 20,
+      "phase": "prefix",
+      "waves": 24000
+    }
+  },
+  {
+    "id": "daniel-900-default-block70",
+    "family": "C32",
+    "position": 70,
+    "symbol": "_Z12k_reg_swin32ILi32ELb0EEv9VarParams",
+    "module": "daniel",
+    "grid": [
+      200,
+      120,
+      1
+    ],
+    "block": [
+      32,
+      1,
+      1
+    ],
+    "arg_bytes": 192,
+    "buffers": [
+      {
+        "id": "input",
+        "bytes": 196608000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 196608000
+      },
+      {
+        "id": "output",
+        "bytes": 196608000,
+        "init": "zero",
+        "value": 0,
+        "check": "fp8",
+        "check_bytes": 196608000
+      },
+      {
+        "id": "weights",
+        "bytes": 4194304,
+        "init": "fp8",
+        "value": 0.015625,
+        "check": "none",
+        "check_bytes": 4194304,
+        "segments": [
+          {
+            "offset": 8192,
+            "bytes": 208,
+            "init": "half",
+            "value": 1.0
+          },
+          {
+            "offset": 11472,
+            "bytes": 8192,
+            "init": "half",
+            "value": 0.015625
+          },
+          {
+            "offset": 19664,
+            "bytes": 16,
+            "init": "f32",
+            "value": 1.0
+          }
+        ],
+        "patches": [
+          {
+            "offset": 19664,
+            "type": "f32",
+            "value": 1.0,
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "post_rgba_output",
+        "bytes": 24576000,
+        "init": "zero",
+        "value": 0,
+        "check": "f32",
+        "check_bytes": 24576000
+      },
+      {
+        "id": "post_rgb_input",
+        "bytes": 18432000,
+        "init": "f32",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 18432000
+      },
+      {
+        "id": "post_low_feature",
+        "bytes": 49152000,
+        "init": "fp8",
+        "value": 0.25,
+        "check": "none",
+        "check_bytes": 49152000
+      }
+    ],
+    "args": [
+      {
+        "offset": 0,
+        "type": "ptr",
+        "buffer": "input"
+      },
+      {
+        "offset": 8,
+        "type": "ptr",
+        "buffer": "output"
+      },
+      {
+        "offset": 16,
+        "type": "ptr",
+        "buffer": "weights"
+      },
+      {
+        "offset": 24,
+        "type": "i32",
+        "value": 1600
+      },
+      {
+        "offset": 28,
+        "type": "i32",
+        "value": 960
+      },
+      {
+        "offset": 32,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 36,
+        "type": "i32",
+        "value": 0
+      },
+      {
+        "offset": 40,
+        "type": "i32",
+        "value": 32
+      },
+      {
+        "offset": 120,
+        "type": "ptr",
+        "buffer": "post_rgba_output"
+      },
+      {
+        "offset": 128,
+        "type": "ptr",
+        "buffer": "post_rgb_input"
+      },
+      {
+        "offset": 144,
+        "type": "f32",
+        "value": 1.0
+      },
+      {
+        "offset": 148,
+        "type": "f32",
+        "value": 0.0
+      },
+      {
+        "offset": 152,
+        "type": "u32",
+        "value": 1
+      },
+      {
+        "offset": 160,
+        "type": "ptr",
+        "buffer": "post_low_feature"
+      }
+    ],
+    "notes": "reference flags32; synthetic finite nonzero; independent inputs not model output; 4-byte-capacity feature buffers conservative, not traffic; prefix calibration identity and history disabled, post no optional history. Guard/finite smoke required before timing.",
+    "geometry": {
+      "resolution": "900-default",
+      "width": 1600,
+      "height": 960,
+      "channels": 32,
+      "shift": [
+        0,
+        0
+      ],
+      "flags": 32,
+      "phase": "post",
+      "waves": 24000
+    }
+  }
+]

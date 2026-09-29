@@ -1149,3 +1149,10 @@ WorkingPlan B1 留下的未实测候选。改为不动宿主：`mh_attention_pro
 ## 2026-09-29 21:28：剑星 2K 原生 AA 55～56
 
 现装宿主 b77bbc3c（深层紧凑 + 逐核地图两刀 + C256 持久化 + ViT attention 新核 + ViT QKV W5）。Zero 本机：2K 原生 AA、中画质（同之前）、EXACT **55～56**（0.36 为 54）。离线 900 约 8.5→8.0ms。
+
+## 2026-09-30 00:xx～02:xx：900 档逐核地图 + HIP↔D3D 交接探针（分身）
+
+**900 地图**：把 kernel-map 的 recorder patch 移植到 HEAD（recorder-v3），现役 flat-P（vit-qkv lab 31 模块）＋现役 flags 录 900/1080 各一帧（173/156 条 Run 派发；两段 C256 持久化 sp 在 Run 之外）。新增 9 个现役核类型；C256 PDL 四核消费端等待指针置 null（源码有空指针守卫）、生产端 flag 给零缓冲。Daniel 用 make-shallow/make-daniel-deep 筛 900-default（46＋108）。jobbench 7 轮中位，900 我方 173/Daniel 154/1080 我方 156 全部有效（1080 首批与交接探针同机混跑，整批作废重跑）。sp 用 HEAD 宿主加逐派发 hipEvent 估计（诊断补丁，输出 hash 不变）：事件法对每派发系统性 +43µs（173 项对照中位，p10–p90 25–54），sp 372/364 → 约 329/321µs。
+结果：我方独立核和 7258.6µs（900 wall 8.03ms），Daniel 8171.6µs（含 42/43/46 288.9）。族：C32 +233、C64 +39、C128 −132、C256 −578、C512 同结构 +182、ViT −384（形状不同）。前五：c32 prefix 655、sp 650(est)、c32 post 604、c512_qkv_attention_compact 602（13 次）、c32 chain 498。900 独有：`mh_shift_pack` 13×9.9=129µs（50×30 非整窗压紧凑布局，1080 identity 无此步）。900/1080 比例多在 0.66～0.76；c512 attention 0.85（半满窗口）、ViT attention 0.30。候选：去 shift_pack（~0.1ms、逐位把握高）＞ C32 up/边界块（+64/+47）＞ C512 FFN 三核（+143，旧负账多）。
+
+**交接探针**（`HIP/experiments/handoff-poll/handoff_probe.cpp`，同 D3D 时钟夹 HIP 段）：现行 fence 双向往返，HIP 7.4ms 时 mean 0.16～0.18ms、p50 0.12～0.16；无 HIP 对照 0.008。D3D→HIP 改 `WriteBufferImmediate`＋`hipStreamWaitValue32`：两轮 gap 7.587→7.532、7.599→7.546（−0.054ms），p99 不变差。HIP→D3D 改 `hipStreamWriteValue32`＋D3D 1 线程 compute 自旋：无界版 TDR（设备移除 0x887A0005），有界版 HIP 64MiB memset 0.03→~490ms（自旋占住调度，HIP 排不进）——Daniel 用 1 像素 draw 分片自旋就是为此。本轮两半合做未完成，按门槛（avg ≥0.1ms）不收：未改生产代码、无新开关、未装机、未发包，剑星保持 b77bbc3c。结果 `results/kernel-map-900-20260930`、`results/handoff-poll-20260930`。

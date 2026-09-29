@@ -16,6 +16,8 @@
 
 ## 正在进行
 
+- **09-30 900档逐核地图＋交接轮询探针（分身）**：900现役179派发，jobbench独立核和我方7258.6µs、Daniel900 8171.6µs（含他42/43/46的288.9µs）；落后只在C32 +233µs、C512同结构 +182µs，C128/C256/ViT都快。900独有热点 `mh_shift_pack` 13次129µs（1080整窗无此步），列为首选逐位候选（改出口/入口地址，~0.1ms）；次选C32 up/边界块（+64/+47µs）。交接往返实测0.16～0.18ms/帧；D3D→HIP改WriteBufferImmediate＋hipStreamWaitValue32省0.054ms（安全），HIP→D3D朴素自旋TDR/饿死HIP，需照Daniel分片draw——本轮不收、未改生产、未装机。结果 `results/kernel-map-900-20260930`、`results/handoff-poll-20260930`。
+
 - **09-29 ViT QKV五wave共享权重，已装剑星+鬼武者**：新导出 `vit_stream_qkv_frag_hin_w5`（配方开 `HIP_VIT_QKV_W5 1`），640单核48.8→37.0µs（Daniel 31.8，余差是他FP8+half累加，C段）。216帧逐位；ABBA 1080 +0.74/0.81/1.07%、900 +0.42/0.51/1.39%。新宿主 **b77bbc3c**（HasFn自动探测，旧模块回落），RE9 runtime **2c103f6e**。剑星备份 `D:\DLSSNR-Lab\hip-backend\vit-qkv-20260929\backups\stellar-20260929-210818`，flags不变；鬼武者runtime+模块对齐剑星，备份 `D:\DLSSNR-Lab\onimusha-backups\20260929-210818-vitqkv`。没发包、没开游戏。结果 `results/vit-qkv-20260929`。
 
 - **09-29 C512最终投影M32权重共用已交负账**：同grid两tile共用权重，216帧逐位同现役，但900慢1.85～1.93%、1080慢0.54～0.66%（wave减半、权重本在L2）。宏 `C512_PROJ_M32` 默认0留源码，不装不发包。结果 `results/c512-proj-share-20260929`。
@@ -72,8 +74,8 @@
 
 1. **按逐核地图排优先级**：`results/kernel-map-20260929/map-after/`，仅本轮9组更新，其余沿用同批基线。head已从pool＋project约125µs降到24.65µs；地图当时1080总168派发（本轮持久化后162）。最终C512 projection的M32权重共用09-29已实测负账（整网慢0.5～1.9%），别重复。
 2. **ViT attention本轮已兑现一部分差距**：640 reference22～24µs，我方约71→38µs；去掉通用half解码的不可达分支、概率成对编码、AV输出转置，整网已收2.2%/1.5%。还差约14～16µs；我方每64key V64条u8、对方8条b64，另有严格float分母/累加数学差异，未把余差唯一拆成stall周期。4wave/64key预取照搬反慢，已交账。QKV：五wave共享权重49→37µs已上线（新宿主b77bbc3c），余约5µs属FP8/half累加数学差（C段）；块重排、scale提前读、数组/CH4/CH16写法均不快，别重复；旧P/G/Q/R、消费端float打包V和入口出口gather-pack不重跑。详见 `results/vit-attention-20260929/isa-account.md`。
-3. **HIP↔D3D 交接改 GPU 轮询**（`results/frame-breakdown-20260928` 第 4 项）：收益待测，会碰看门狗（Daniel 用 1 像素 draw 分片自旋规避）。
-4. **900 档**：本轮head＋ViT再省0.021～0.036ms，派发198→197；上一轮C512紧凑布局收益保留，C256内层本轮已改持久化（900总179派发）。地图本轮只做1080，Daniel900的C512 52×32/ViT448与我们50×30/400不同，未来单独建图。
+3. **HIP↔D3D 交接改 GPU 轮询**：09-30 探针量清——往返0.16～0.18ms/帧（HIP工作7.4ms时）。D3D→HIP半边（`WriteBufferImmediate`＋`hipStreamWaitValue32`）两轮省0.054ms、p99不变差，安全但单独不够0.1ms门槛；HIP→D3D半边约0.1ms，朴素compute自旋直接TDR或把HIP饿到~490ms，必须照Daniel 1像素draw分片自旋（先在探针加mode验证不饿死）。两半合做才可能过门槛；详见 `results/handoff-poll-20260930`，探针 `HIP/experiments/handoff-poll/handoff_probe.cpp`。
+4. **900 档**：09-30 已单独建图（`results/kernel-map-900-20260930`，同jobbench方法，另附同配方1080图对比）。候选：①去掉900独有 `mh_shift_pack`（13次129µs，纯搬运，逐位把握高）；②C32 `c32_wave1_up`（188 vs Daniel 124µs）和block4 finish_dcrop＋pool（184 vs 137µs）逐条ISA对齐；③C512 FFN三核524 vs Daniel ffwd 382µs（组织方式问题，旧负账多，把握低）。持久化C256 jobbench测不了，用事件法估计（每派发系统性+43µs已扣）。
 5. 小件：C256 FFN 标量量化/地址开销（`results/aco-lineup-20260928` 逐条表）；ViT QKV 归一化段；C32 对角残差跳过全零 K16 半块（约 −0.1～0.2%）。
 6. 杂项：`MAKE_RESIDENT_EVERY=60` 疑似每 60 帧一次约 30ms 尖刺（p99），改 0 测一次（C.C. 令"把延迟波形拉直"）；常规 OptiScaler 包也带 ReShade 却无 ini，新用户可能见引导遮罩，下版照 Magpie 补；`validate-modules.ps1` 修路径；帧时间日志 Magpie 路线未接。
 

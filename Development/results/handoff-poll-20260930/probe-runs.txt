@@ -1,0 +1,23 @@
+# handoff_probe.exe <mode> <memset MiB> <iters>  (9070, 2026-09-30, GPU otherwise idle unless noted)
+# first set (idle GPU)
+mode=0 mib=64 iters=2000 n=1800 gap_mean=0.0108 gap_p50=0.0082 gap_p99=0.1033 ms
+mode=2 mib=64 iters=2000 n=1800 gap_mean=0.0190 gap_p50=0.0106 gap_p99=0.0764 hip_work_mean=0.0901 (HIP unsynced; handoff column meaningless)
+mode=1 mib=64 iters=2000 n=1800 gap_mean=0.1249 gap_p50=0.1157 gap_p99=0.1777 hip_work_mean=0.0304 handoff_mean=0.0945 handoff_p50=0.0758 handoff_p99=0.1600 ms
+mode=1 mib=1 iters=2000 n=1800 gap_mean=0.1202 gap_p50=0.1122 gap_p99=0.2344 hip_work_mean=0.0010 handoff_mean=0.1192 handoff_p50=0.1115 handoff_p99=0.2338 ms
+mode=1 mib=1024 iters=1000 n=900 gap_mean=1.8636 gap_p50=1.8545 gap_p99=2.1248 hip_work_mean=1.5225 handoff_mean=0.3411 handoff_p50=0.1438 handoff_p99=1.8730 ms
+mode=1 mib=64 iters=2000 n=1800 gap_mean=0.1269 gap_p50=0.1172 gap_p99=0.1698 hip_work_mean=0.0273 handoff_mean=0.0996 handoff_p50=0.0773 handoff_p99=0.1560 ms
+mode=1 mib=4096 iters=400 n=360 gap_mean=7.6062 gap_p50=7.5656 gap_p99=7.9374 hip_work_mean=7.4264 handoff_mean=0.1797 handoff_p50=0.1551 handoff_p99=0.2570 ms
+mode=1 mib=1024 iters=1000 n=900 gap_mean=1.8594 gap_p50=1.8522 gap_p99=2.1142 hip_work_mean=1.5073 handoff_mean=0.3521 handoff_p50=0.1457 handoff_p99=1.8726 ms
+mode=1 mib=256 iters=1500 n=1350 gap_mean=0.5554 gap_p50=0.5548 gap_p99=0.6865 hip_work_mean=0.2592 handoff_mean=0.2962 handoff_p50=0.1489 handoff_p99=0.5762 ms
+# mode 4/5 first build (unbounded spin, hipStreamWriteValue32): FAIL map hr=0x887A0005 (device removed) / hipErrorLaunchFailure -> TDR
+# mode 4 bounded spin (2^22 iters) -- NOTE ran concurrently with a jobbench batch (that batch was discarded and rerun)
+mode=4 mib=64 iters=200 gap_mean=495.1023 gap_p50=495.5969 hip_work_mean=486.7127 ms   (hipStreamWriteValue32)
+mode=4 mib=64 iters=200 gap_mean=494.8026 gap_p50=493.4354 hip_work_mean=489.2199 ms   (PROBE_MEMSET_FLAG=1, hipMemsetD32Async)
+# clean A/B, fence both ways (1) vs D3D->HIP GPU poll (3)
+mode=1 mib=4096 iters=300 n=270 gap_mean=7.5865 gap_p50=7.5792 gap_p99=7.7138 hip_work_mean=7.4084 handoff_mean=0.1781 handoff_p50=0.1174 ms
+mode=3 mib=4096 iters=300 n=270 gap_mean=7.5319 gap_p50=7.5238 gap_p99=7.6986 hip_work_mean=7.5113 ms
+mode=1 mib=64 iters=1500 n=1350 gap_mean=0.1269 gap_p50=0.1236 gap_p99=0.1838 hip_work_mean=0.0331 handoff_mean=0.0937 ms
+mode=3 mib=64 iters=1500 n=1350 gap_mean=0.0819 gap_p50=0.0813 gap_p99=0.1531 hip_work_mean=0.0278 handoff_mean=0.0541 ms
+mode=1 mib=4096 iters=300 n=270 gap_mean=7.5985 gap_p50=7.5940 gap_p99=7.7701 hip_work_mean=7.4349 handoff_mean=0.1636 ms
+mode=3 mib=4096 iters=300 n=270 gap_mean=7.5458 gap_p50=7.5390 gap_p99=7.7130 hip_work_mean=7.5248 ms
+# mode 3 hip_work is inflated (begin event is recorded before the in-queue value wait completes), so compare gap only.
