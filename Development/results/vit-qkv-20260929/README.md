@@ -1,6 +1,8 @@
-# ViT QKV 追 Daniel（逐位部分）：五wave共享权重，逐位通过，1080过门槛，但需换宿主——未装（2026-09-29）
+# ViT QKV 追 Daniel（逐位部分）：五wave共享权重，逐位通过，已随新宿主装剑星与鬼武者（2026-09-29）
 
-**结论**：新导出 `vit_stream_qkv_frag_hin_w5`（宏 `HIP_VIT_QKV_W5`，默认0）逐位同现役，整网 1080 快 0.74/0.81%（过0.5%），900 快 0.42/0.51%。**它要求宿主按160线程/新grid发射**，只换模块启用不了；按"宿主046e1a63不动"的规矩**没装剑星、没发包**，等 Zero 拍板随下一版宿主一起上。
+**更新（21:08，协调者批准换宿主）**：生产配方 vit-stream 开 `HIP_VIT_QKV_W5 1`，新 add-on 宿主 **b77bbc3c**（HEAD源码，046e1a63+本改动），RE9 runtime **2c103f6e**。配方模块 gfx1201 e727a883 / gfx1200 9d31ab5f（.text/.rodata与已测w5逐字节同）。复跑216帧全SAME；一轮ABBA 900 8.088514→7.976056（−0.112ms，1.39%）、1080 10.936476→10.819673（−0.117ms，1.07%），见 full-prod.log。RE9 runtime：旧runtime旧模块/新runtime+W5/新runtime旧模块 三者900/1080 hash同（b2980ada643da964/758674a8bbd0206d），smoke通过。剑星只换add-on+两份vit-stream、重建SHA256SUMS（62模块），flags原样（DIRECT_IO3/MAKE_RESIDENT60/SWIN_RUN1），备份 `D:\DLSSNR-Lab\hip-backend\vit-qkv-20260929\backups\stellar-20260929-210818`。鬼武者：Content与_storage_两份runtime换新，HIP模块与剑星对齐，flags不动（无新开关），备份 `D:\DLSSNR-Lab\onimusha-backups\20260929-210818-vitqkv`。没发包、没启动游戏。注：add-on同源码两次构建 .rdata 有约6KB不同（构建不确定），无法用段比对复现旧宿主。脚本 install.ps1（-RestoreStellar/-RestoreOni）、runtime-check.ps1。
+
+**原结论**：新导出 `vit_stream_qkv_frag_hin_w5`（宏 `HIP_VIT_QKV_W5`，默认0）逐位同现役，整网 1080 快 0.74/0.81%（过0.5%），900 快 0.42/0.51%。**它要求宿主按160线程/新grid发射**，只换模块启用不了；按"宿主046e1a63不动"的规矩**没装剑星、没发包**，等 Zero 拍板随下一版宿主一起上。
 
 ## 差距拆账（640 token，1080档，单核微测）
 

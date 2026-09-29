@@ -1143,3 +1143,5 @@ WorkingPlan B1 留下的未实测候选。改为不动宿主：`mh_attention_pro
 
 拆Daniel k_reg1d_qkv<0,0>：120组×256线程、每wave 32token×64列、权重进LDS、**fp8 WMMA + 每K32 half累加**，168VGPR。我方1-wave组每K16配3条b128 global读（1.5条/WMMA），主循环流水已紧，瓶颈是读取量。新导出 `vit_stream_qkv_frag_hin_w5`（宏HIP_VIT_QKV_W5默认0）：5wave同head五token tile（400/640的25/40 tile都整除5，无尾巴），权重8KB块LDS双缓冲，wave数不减，每条累加链/片段/尾部数学原样。微测640 48.8→37.0µs（Daniel 31.8）、400 32.2→26.5；数组写法/CH4/CH16都更慢，只留4寄存器CH8。只换模块的路：scale提前读、三种块重排全逐位但不快/慢5～8%。
 逐位216帧（EXACT/AE 168＋回绕48）SAME；两轮ABBA 900 0.42/0.51%、1080 0.74/0.81%。需宿主按160线程发射（hip_reference_network.h 加HasFn自动探测，新旧互容），违反"宿主不动只换模块"，**未装剑星、未发包**，生产配方未开。结果 `results/vit-qkv-20260929`。
+
+21:08 协调者批准换宿主：配方开W5，新add-on b77bbc3c、RE9 runtime 2c103f6e；复跑216帧SAME，一轮ABBA 900 −0.112ms(1.39%)、1080 −0.117ms(1.07%)；runtime三方hash同+smoke过。已装剑星（备份 hip-backend\vit-qkv-20260929\backups\stellar-20260929-210818，flags不变）与鬼武者（runtime两份+模块对齐剑星，备份 onimusha-backups\20260929-210818-vitqkv）。未发包。
