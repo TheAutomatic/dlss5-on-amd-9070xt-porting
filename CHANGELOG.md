@@ -215,15 +215,21 @@ Download: [Quark](https://pan.quark.cn/s/e5afdaca0769) · [Gofile mirror](https:
 In game (local, RX 9070 XT, EXACT, standing still): Stellar Blade 1080p native AA about 57 → 60 (at the 60 Hz windowed-mode cap); 2560×1440 native AA 52–53 after the C512 fusion, 54 final (the in-game comparison setting from now on).
 
 
-## Unreleased (09-29, persistent C256)
+## 0.37 (09-29, tag pending)
 
-- A device ready queue runs six inner C256 layers per encoder/decoder stage, preserving windows and the 0.36 float-FMA bit-exact baseline. Two offline full-frame ABBA rounds save 1.90–1.94% at 900 (about 0.16ms), 0.57–0.61% at 1080 (about 0.06–0.07ms). Dispatches: 197→179 / 168→162.
-- `DLSS5_HIP_SWIN_RUN=0` defaults off; 1 enables C256 only for compatible 900/1080 recipes. Shared RE9 parsing and all three templates updated. One new module per architecture, 31 each.
-- A roughly 100ms queue timeout triggers GPU stage replay and disables persistence for the instance; ticket rollover drains before reset. Passed 168 bit-exact frames plus 144 injected-fault/rollover frames. Installed locally in Stellar Blade with backup; in-game FPS observation pending. No 0.36 package update. See `Development/results/swin-persistent-20260929/README.md`.
+Download: pending upload (all three packages)
 
+- **Summary**: add-on b77bbc3c; 31 modules per architecture (new `swin-persistent.hsaco`); RE9 runtime 2c103f6e (host aa3761f2 unchanged); shaders identical to 0.36 (input shader 5be59a41).
+- **Bit-exact**: **fully bit-identical to 0.36** (09-28 float-FMA baseline; 7 cases, 168 EXACT/AE frames plus rollover/timeout stress frames, checked at every step). Nothing lossy.
+- **Cumulative**: network offline 900 tier about 8.5 → 8.0 ms; launches per frame 900 tier 198 → 179, 1080 tier 182 → 162. Stellar Blade 2560×1440 native AA, EXACT 54 → 55–56 (local).
+- **New switch**: `DLSS5_HIP_SWIN_RUN` (C256 persistent stage; source default 0, **set to 1 in all three release templates**; the RE9 runtime reads it too; 0 restores the previous launches).
+- **Package extras**: the regular OptiScaler package now also ships `ReShade.ini` (`TutorialProgress=4`, no Home-key tutorial overlay), like Magpie; the RE9 source archive now includes the HIP recipes' `.inc` files.
+- **Changes** (in order, each bit-identical to the step before):
 
-## Unreleased (09-29, ViT attention)
+1. **C512 compact point-wise layout**: FFN/conv run on the effective tiles only (1080 tier 160 → 135 4×4 tiles); shifting and padding moved to the attention read; windows and softmax unchanged. 900 −0.16 to −0.18 ms, 1080 −0.23 to −0.25 ms (about −2% each); 1080 launches 182 → 169. `results/deep-layers-20260929`.
+2. **Kernel-map cuts**: after a full per-kernel 1080 comparison (our 169 vs reference 154 launches), C512 head pooling + projection fused into one launch (head group fusion) and the ViT attention score layout transposed. 900 −0.02 to −0.04 ms, 1080 −0.12 to −0.14 ms (1.0–1.2%); launches 198 → 197 / 169 → 168. `results/kernel-map-20260929`.
+3. **C256 persistent stage** (`DLSS5_HIP_SWIN_RUN=1`): the six inner layers of each C256 encoder/decoder stage run from a device ready queue; a ~100 ms timeout replays the stage serially on the GPU and disables persistence for the instance, so no bad intermediate leaves the network. 900 −1.90 to −1.94% (about −0.16 ms), 1080 −0.57 to −0.61%; launches 197 → 179 / 168 → 162. `results/swin-persistent-20260929`.
+4. **New ViT attention kernel**: exact hardware widening for bounded normal halves, probabilities encoded in register pairs, denominator/AV output transposed. 640-token kernel about 71 → 38 µs; network 900 −2.20 to −2.28% (about −0.19 ms), 1080 −1.50 to −1.58% (about −0.17 ms). `results/vit-attention-20260929`.
+5. **ViT QKV, five waves sharing weights** (W5): five waves share one weight copy through LDS (8 KB double-buffered blocks), reads divided by about 5 without reducing waves; 640-token kernel 48.8 → 37.0 µs. Network 900 −0.42 to −1.39%, 1080 −0.74 to −1.07%. The new host detects the export and falls back with older modules. `results/vit-qkv-20260929`.
 
-- Preserve the 0.36 bit-exact math: use exact hardware widening for bounded normal half values, encode probabilities in pairs in registers, and transpose denominator/AV outputs to avoid repeated reciprocals. Tensor layouts, accumulation order, QKV and dispatch count stay the same.
-- On the C256-persistent baseline, two offline full-frame ABBA rounds improve 900 by 2.20–2.28% (0.18–0.19ms), 1080 by 1.50–1.58% (0.17–0.18ms). Target kernels: VGPR72→68, LDS0; only two deep_fast-packed functions change.
-- Passed 168 EXACT/AE frames plus 48 rollover frames and both RE9-backend replay tiers. Three compile macros default off in source and are enabled in the production recipe; no new user switch. Dual-architecture modules installed locally in Stellar Blade with backup, preserving host046e1a63 and settings; no package release. See `Development/results/vit-attention-20260929/README.md`.
+Not shipped (negative results): C128/C64 persistence (below the 0.5% bar, `results/swin-persistent-c128-c64-20260929`), C512 projection weight sharing (bit-exact but slower, `results/c512-proj-share-20260929`), the `MAKE_RESIDENT` spike (not reproduced offline, `results/resident-spike-20260929`). Package checklist `Development/results/package-037/checklist.md`.
