@@ -1041,3 +1041,16 @@ R单wave寄存器FFN、RF再并mix、V消费端float打包均12帧短筛逐位�
 H复用groupbody，原head pool＋FP16 projection两派发→一派发（900198→197、1080169→168），C512_HEAD_GROUP，512threads/98VGPR/29SGPR/16640LDS/private0；V只转置score片段排布，HIP_VIT_ATTN_TRANSPOSED_SCORE，72VGPR/16SGPR/LDS0/private0/barrier0，保400/640现导出及WMMA数序。短筛H900−.022435/1080−.118348ms，V−.011533/−.027545ms；组合首轮9008.42661750→8.39019125（−.03642625），108011.362136875→11.224219375（−.13791750，约−1.214%）。168帧EXACT/AE配对同；第二轮9008.35801625→8.337249375（−.020766875），108011.3426825→11.22686125（−.11582125，−1.021%）；两轮千帧弃200。168正式帧全部命中09-28 float FMA golden、无NaN/Inf，AE44复用/40刷新全部字段同；含短筛192帧同golden，另现场CODEC0配置12帧同。host五段与候选同，4份默认关/2份生产code sections一致。ViT QKV等剩余差距涉及FP16/FP8数学边界，不盲抄；P投影仅准备未测，不算第三刀。
 
 新addon ba010de7，gfx1200 deep8652c8c9/mh71fcc576、gfx1201 deep4f84494e/mh8c386562；基于b5ab8c3a，DIRECT_IO=3/MAKE_RESIDENT_EVERY=60及其他flags不动，不发包，08:48已装，备份D:\DLSSNR-Lab\hip-backend\kernel-map\backups\stellar-20260929-084855；其他56模块及受保护配置原hash，60模块与仓库/现场清单核对。RE9 runtime隔离回放末帧hash同、smoke通过，未装RE9。after地图仅刷新head＋八个attention共9组，复用我方159条/参考154条原数据，不叫全网重测；after-ours-092补两次后21样本中位，after已生成，独立派发中位数合计我方10215.678893/参考10204.250706，差+11.428187µs，面积启发式−391.392047µs。head微测约24.65µs、比旧pool6.3＋projection119省约100µs，V多数70～72µs只小赚，原对Daniel的大gap仍在。完整地图、原始日志、repeat与身份/计时证据进results/kernel-map-20260929。
+
+
+## 2026-09-29：自家 LLVM21 构建链，60 模块编过、168 帧逐位，未替换游戏
+
+按3714aaac任务单完成四项。9070驱动COMGR API/文件版本3.0，verbose及现役模块都指向AMD内部590b9320/LLVM21。公开标签实查7.0.2/7.1.1是LLVM20、7.2.4是22，纠正“ROCm7.x对应21”的预设；选择公开amd-staging第一父链引入22前最后的21提交6d585d872fbd3c594da7a3c09ac9b22eef4167f6（不能证明与内部版代码距离最近）。fork加upstream，dlss5-gfx12分支文档提交94aca371a8e1已推，无编译器优化补丁。
+
+DGX GCC13.3/CMake/Ninja，Release只AMDGPU+clang/lld，16编译/2链接，构建570秒。通过COMGR真实trace复刻Windows辅助ABI/C++14、HIP→优化BC→对象→LLD共享ELF，无SDK/设备库/fast-math；长度+内容CUID对上。脚本直接解析生产30行配方，两架构60模块全成，编译器与产物在~/work/llvm-build-dlss5-gfx12及~/work/llvm-artifacts-20260929，未入库。
+
+对现场ba010de7快照逐核比较：每架构996个导出（含重复/后备），0个函数字节相同；静态指令合计1264742→1291362（+2.10%），392个VGPR/262个SGPR元数据变，LDS/private/参数ABI均同。1080当前37活跃导出/168派发单列，未加权静态90477→91157，C128寄存器部分降、C256及部分ViT升，不据此判速度。
+
+独立目录用同一最新生产runner，仅切模块集：EXACT/AE各7×12=168候选帧，连基线336帧全读回、零NaN/Inf，两侧独立命中09-28 float FMA golden；AE84行所有字段相同、44复用/40刷新。首轮收集器frame用整数与golden文件名不一致，命名规范化后原检查器通过，hash未改。gfx1200只编译，回归只覆盖生产活跃路径。现场60模块及宿主/dxgi/INI/flags前后64项hash同，未安装/未发包/未测性能。
+
+六类首补丁候选已定位pass与IEEE边界：med3/NaN规范化、范围内修正倒数、精确half往返、有限条件mul+add0、VOPD、等待/MODE依赖；先列不写。完整逐核CSV、模块命令/hash、构建日志、336帧hash与原始回归归档在results/llvm-fork-20260929，复现tools/llvm-fork。

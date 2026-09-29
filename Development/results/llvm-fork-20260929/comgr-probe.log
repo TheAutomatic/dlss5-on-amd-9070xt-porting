@@ -1,0 +1,56 @@
+COMGR 3.0
+ISA amdgcn-amd-amdhsa--gfx1201
+assembly emitted
+COMGR kind5:
+ELF hsaco saved bytes=4080 path=D:\DLSSNR-Lab\hip-backend\llvm-fork-20260929\probe.hsaco
+amd_comgr_do_action:
+	  ActionKind: AMD_COMGR_ACTION_COMPILE_SOURCE_TO_BC
+	     IsaName: amdgcn-amd-amdhsa--gfx1201
+	     Options: "-O3" "-nogpuinc" "-nogpulib"
+	        Path:
+	    Language: AMD_COMGR_LANGUAGE_HIP
+ Comgr Branch-Commit: HEAD-590b9320a5be
+	 LLVM Commit: 590b9320a5be90e40268759c6203c01fde121e68
+    File System: Real
+    Compilation Args:  "--offload-arch=gfx1201" "-I" "C:\Users\lmxxf\AppData\Local\Temp\comgr-bcd8f9\include" "-O3" "-x" "hip" "--offload-device-only" "-cuid=2EAE5B4E183BA2651A59D01B221FA358ECEE31D48C7D569B83D447FB02F3C409" "-c" "-emit-llvm" "-fshort-wchar" "-O3" "-nogpuinc" "-nogpulib" "-nogpulib" "C:\Users\lmxxf\AppData\Local\Temp\comgr-bcd8f9\input\probe.hip" "-o" "C:\Users\lmxxf\AppData\Local\Temp\comgr-bcd8f9\output\probe.bc"
+     Driver Job Args: clang "-cc1" "-triple" "amdgcn-amd-amdhsa" "-aux-triple" "x86_64-pc-windows-msvc" "-Werror=atomic-alignment" "-emit-llvm-bc" "-emit-llvm-uselists" "-clear-ast-before-backend" "-disable-llvm-verifier" "-discard-value-names" "-main-file-name" "probe.hip" "-mrelocation-model" "pic" "-pic-level" "2" "-fhalf-no-semantic-interposition" "-mframe-pointer=none" "-relaxed-aliasing" "-fno-rounding-math" "-mconstructor-aliases" "-aux-target-cpu" "x86-64" "-fcuda-is-device" "-fno-threadsafe-statics" "-mllvm" "-amdgpu-internalize-symbols" "-fcuda-allow-variadic-functions" "-fvisibility=hidden" "-fapply-global-visibility-to-externs" "-target-cpu" "gfx1201" "-debugger-tuning=gdb" "-fdebug-compilation-dir=C:\Users\lmxxf" "-fcoverage-compilation-dir=C:\Users\lmxxf" "-resource-dir" "/lib\clang\21" "-internal-isystem" "/lib\clang\21" "-I" "C:\Users\lmxxf\AppData\Local\Temp\comgr-bcd8f9\include" "-internal-isystem" "/lib\clang\21\include" "-internal-isystem" "D:\DLSSNR-Lab\build-tools\VC\Tools\MSVC\14.44.35207\include" "-internal-isystem" "D:\DLSSNR-Lab\build-tools\VC\Tools\MSVC\14.44.35207\atlmfc\include" "-internal-isystem" "C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\ucrt" "-internal-isystem" "C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared" "-internal-isystem" "C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um" "-internal-isystem" "C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\winrt" "-internal-isystem" "C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\cppwinrt" "-internal-isystem" "/lib\clang\21\include" "-internal-isystem" "D:\DLSSNR-Lab\build-tools\VC\Tools\MSVC\14.44.35207\include" "-internal-isystem" "D:\DLSSNR-Lab\build-tools\VC\Tools\MSVC\14.44.35207\atlmfc\include" "-internal-isystem" "C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\ucrt" "-internal-isystem" "C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared" "-internal-isystem" "C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um" "-internal-isystem" "C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\winrt" "-internal-isystem" "C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\cppwinrt" "-O3" "-fdeprecated-macro" "-fno-autolink" "-ferror-limit" "19" "-fhip-new-launch-api" "--no-offloadlib" "-fwchar-type=short" "-fno-signed-wchar" "-fms-extensions" "-fms-compatibility" "-fms-compatibility-version=19.44.35229" "-std=c++14" "-fskip-odr-check-in-gmf" "-fdelayed-template-parsing" "-fcxx-exceptions" "-fexceptions" "-vectorize-loops" "-vectorize-slp" "-cuid=2EAE5B4E183BA2651A59D01B221FA358ECEE31D48C7D569B83D447FB02F3C409" "-fcuda-allow-variadic-functions" "-faddrsig" "-D__GCC_HAVE_DWARF2_CFI_ASM=1" "-o" "C:\Users\lmxxf\AppData\Local\Temp\comgr-bcd8f9\output\probe.bc" "-x" "hip" "C:\Users\lmxxf\AppData\Local\Temp\comgr-bcd8f9\input\probe.hip"
+	ReturnStatus: AMD_COMGR_STATUS_SUCCESS
+
+amd_comgr_do_action:
+	  ActionKind: AMD_COMGR_ACTION_CODEGEN_BC_TO_ASSEMBLY
+	     IsaName: amdgcn-amd-amdhsa--gfx1201
+	     Options: "-O3"
+	        Path:
+	    Language: AMD_COMGR_LANGUAGE_HIP
+ Comgr Branch-Commit: HEAD-590b9320a5be
+	 LLVM Commit: 590b9320a5be90e40268759c6203c01fde121e68
+    File System: Real
+    Compilation Args:  "-target" "amdgcn-amd-amdhsa" "-mcpu=gfx1201" "-S" "-O3" "-nogpulib" "C:\Users\lmxxf\AppData\Local\Temp\comgr-06081a\input\probe.bc" "-o" "C:\Users\lmxxf\AppData\Local\Temp\comgr-06081a\output\probe.s"
+     Driver Job Args: clang "-cc1" "-triple" "amdgcn-amd-amdhsa" "-Werror=atomic-alignment" "-S" "-clear-ast-before-backend" "-disable-llvm-verifier" "-discard-value-names" "-main-file-name" "probe.bc" "-mrelocation-model" "pic" "-pic-level" "2" "-fhalf-no-semantic-interposition" "-mframe-pointer=none" "-ffp-contract=on" "-fno-rounding-math" "-mconstructor-aliases" "-fvisibility=hidden" "-fapply-global-visibility-to-externs" "-target-cpu" "gfx1201" "-debugger-tuning=gdb" "-fdebug-compilation-dir=C:\Users\lmxxf" "-fcoverage-compilation-dir=C:\Users\lmxxf" "-resource-dir" "/lib\clang\21" "-O3" "-ferror-limit" "19" "--no-offloadlib" "-fskip-odr-check-in-gmf" "-vectorize-loops" "-vectorize-slp" "-faddrsig" "-o" "C:\Users\lmxxf\AppData\Local\Temp\comgr-06081a\output\probe.s" "-x" "ir" "C:\Users\lmxxf\AppData\Local\Temp\comgr-06081a\input\probe.bc"
+	ReturnStatus: AMD_COMGR_STATUS_SUCCESS
+
+amd_comgr_do_action:
+	  ActionKind: AMD_COMGR_ACTION_CODEGEN_BC_TO_RELOCATABLE
+	     IsaName: amdgcn-amd-amdhsa--gfx1201
+	     Options: "-O3"
+	        Path:
+	    Language: AMD_COMGR_LANGUAGE_HIP
+ Comgr Branch-Commit: HEAD-590b9320a5be
+	 LLVM Commit: 590b9320a5be90e40268759c6203c01fde121e68
+    File System: Real
+    Compilation Args:  "-target" "amdgcn-amd-amdhsa" "-mcpu=gfx1201" "-c" "-mllvm" "-amdgpu-internalize-symbols" "-O3" "-nogpulib" "C:\Users\lmxxf\AppData\Local\Temp\comgr-8cb06a\input\probe.bc" "-o" "C:\Users\lmxxf\AppData\Local\Temp\comgr-8cb06a\output\probe.o"
+     Driver Job Args: clang "-cc1" "-triple" "amdgcn-amd-amdhsa" "-Werror=atomic-alignment" "-emit-obj" "-clear-ast-before-backend" "-disable-llvm-verifier" "-discard-value-names" "-main-file-name" "probe.bc" "-mrelocation-model" "pic" "-pic-level" "2" "-fhalf-no-semantic-interposition" "-mframe-pointer=none" "-ffp-contract=on" "-fno-rounding-math" "-mconstructor-aliases" "-fvisibility=hidden" "-fapply-global-visibility-to-externs" "-target-cpu" "gfx1201" "-debugger-tuning=gdb" "-fdebug-compilation-dir=C:\Users\lmxxf" "-fcoverage-compilation-dir=C:\Users\lmxxf" "-resource-dir" "/lib\clang\21" "-O3" "-ferror-limit" "19" "--no-offloadlib" "-fskip-odr-check-in-gmf" "-vectorize-loops" "-vectorize-slp" "-mllvm" "-amdgpu-internalize-symbols" "-faddrsig" "-o" "C:\Users\lmxxf\AppData\Local\Temp\comgr-8cb06a\output\probe.o" "-x" "ir" "C:\Users\lmxxf\AppData\Local\Temp\comgr-8cb06a\input\probe.bc"
+	ReturnStatus: AMD_COMGR_STATUS_SUCCESS
+
+amd_comgr_do_action:
+	  ActionKind: AMD_COMGR_ACTION_LINK_RELOCATABLE_TO_EXECUTABLE
+	     IsaName: amdgcn-amd-amdhsa--gfx1201
+	     Options:
+	        Path:
+	    Language: AMD_COMGR_LANGUAGE_HIP
+ Comgr Branch-Commit: HEAD-590b9320a5be
+	 LLVM Commit: 590b9320a5be90e40268759c6203c01fde121e68
+    File System: Real
+    Compilation Args:  "-target" "amdgcn-amd-amdhsa" "-mcpu=gfx1201" "C:\Users\lmxxf\AppData\Local\Temp\comgr-d83587\input\probe.o" "-o" "C:\Users\lmxxf\AppData\Local\Temp\comgr-d83587\output\a.so"
+     Driver Job Args: lld "--no-undefined" "-shared" "-plugin-opt=mcpu=gfx1201" "C:\Users\lmxxf\AppData\Local\Temp\comgr-d83587\input\probe.o" "-o" "C:\Users\lmxxf\AppData\Local\Temp\comgr-d83587\output\a.so"
+	ReturnStatus: AMD_COMGR_STATUS_SUCCESS

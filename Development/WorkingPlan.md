@@ -16,6 +16,8 @@
 
 ## 正在进行
 
+- **09-29 自家 LLVM 构建链已完成**：公开 AMD LLVM21 基点 `6d585d872fbd3c594da7a3c09ac9b22eef4167f6`，DGX 原生 AMDGPU-only 构建570秒；两架构30模块全编过。gfx1201 EXACT/AE各84帧全部命中09-28 golden，AE84行全部同（44复用/40刷新）。源码脚本 `tools/llvm-fork/`，结果 `results/llvm-fork-20260929/`；fork `dlss5-gfx12` 已推 `94aca371a8e1`。机器码全有差异、资源有升有降，未测性能、未替换游戏；本轮没有优化补丁。
+
 - **09-29 逐核地图及前两项已完成，已装剑星**：完整1080地图覆盖我方169/参考Daniel154派发，`results/kernel-map-20260929/README.md`。接受head分组融合＋ViT attention转置，900再省0.021～0.036ms、1080省0.116～0.138ms（1.02～1.21%），正式168帧逐位。现装add-on ba010de7，整网197/168派发；DIRECT_IO=3 / MAKE_RESIDENT_EVERY=60保留，备份 `D:\DLSSNR-Lab\hip-backend\kernel-map\backups\stellar-20260929-084855`。0.36发布包未改，等Zero本机验收；沿用“离线有提升、游戏没掉就接受”。
 
 ## Zero 的标准与取舍（为什么这样定）
@@ -43,6 +45,8 @@
 - **网络外流水线**：拷贝不是大头（直写 IO 只省 0.02～0.05ms），剩余差距更可能在 HIP↔D3D 交接（我们共享 fence 挂起等唤醒，Daniel GPU 轮询标志）。
 
 ## B. 优化候选（逐位；按"收益 × 把握"排）
+
+**编译器支线已具备实验入口**：公开ROCm7.0/7.1仍LLVM20、7.2是LLVM22，当前采用公开AMD分支最后LLVM21基点。第一批补丁候选及实际pass入口在 `results/llvm-fork-20260929/patch-candidates.md`；优先有证明的med3/范围倒数/精确转换，先做小例和语义边界，不直接全局fast-math。现役手写优化已消掉不少机会；本轮仅打通管线，后续独立评估收益。
 
 1. **按逐核地图排优先级**：`results/kernel-map-20260929/map-after/`，仅本轮9组更新，其余沿用同批基线。head已从pool＋project约125µs降到24.65µs；当前1080总168派发。最终C512 projection仍可研究M32权重共用，候选仅准备未GPU实测；别与此前失败的FFN M32混淆。
 2. **ViT attention仍是主要差距**：reference约22～24µs，我方新核约70～72µs。已合入score转置去LDS/barrier，但只小赚，不能把约50µs差距当已解决。QKV约49对32µs，触及FP16/FP8数学边界，维持C段待拍板；pack旧P/G/Q/R和消费端V均负账，不再重复。

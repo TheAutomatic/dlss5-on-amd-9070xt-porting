@@ -1,0 +1,395 @@
+{
+  "modules": [
+    {
+      "arch": "gfx1201",
+      "module": "boundary-fast.hsaco",
+      "kernels": 14,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1201",
+      "module": "boundary_reference.hsaco",
+      "kernels": 5,
+      "same_sections": [
+        ".rodata",
+        ".note"
+      ]
+    },
+    {
+      "arch": "gfx1201",
+      "module": "c32-wave1.hsaco",
+      "kernels": 17,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1201",
+      "module": "c32_fast.hsaco",
+      "kernels": 3,
+      "same_sections": [
+        ".note"
+      ]
+    },
+    {
+      "arch": "gfx1201",
+      "module": "c32_fast_attention.hsaco",
+      "kernels": 6,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1201",
+      "module": "c32_fused_attention.hsaco",
+      "kernels": 1,
+      "same_sections": [
+        ".rodata"
+      ]
+    },
+    {
+      "arch": "gfx1201",
+      "module": "c32_fused_ffn_attention-packed.hsaco",
+      "kernels": 10,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1201",
+      "module": "c32_fused_ffn_attention.hsaco",
+      "kernels": 10,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1201",
+      "module": "c32_prefix_reference.hsaco",
+      "kernels": 10,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1201",
+      "module": "c32_tiled.hsaco",
+      "kernels": 4,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1201",
+      "module": "c32_wmma.hsaco",
+      "kernels": 6,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1201",
+      "module": "c512-m32-deep.hsaco",
+      "kernels": 77,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1201",
+      "module": "c512-m32-mh.hsaco",
+      "kernels": 91,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1201",
+      "module": "c64-wave2.hsaco",
+      "kernels": 104,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1201",
+      "module": "deep_fast-packed.hsaco",
+      "kernels": 76,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1201",
+      "module": "deep_fast.hsaco",
+      "kernels": 76,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1201",
+      "module": "deep_reference.hsaco",
+      "kernels": 16,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1201",
+      "module": "deep_wmma.hsaco",
+      "kernels": 8,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1201",
+      "module": "multihead-fast-packed.hsaco",
+      "kernels": 14,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1201",
+      "module": "multihead-fast-padded-wave-packed.hsaco",
+      "kernels": 101,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1201",
+      "module": "multihead-fast-padded-wave.hsaco",
+      "kernels": 100,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1201",
+      "module": "multihead-fast.hsaco",
+      "kernels": 14,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1201",
+      "module": "multihead-reference.hsaco",
+      "kernels": 14,
+      "same_sections": [
+        ".note"
+      ]
+    },
+    {
+      "arch": "gfx1201",
+      "module": "multihead-tiled.hsaco",
+      "kernels": 7,
+      "same_sections": [
+        ".rodata",
+        ".note"
+      ]
+    },
+    {
+      "arch": "gfx1201",
+      "module": "multihead-wmma.hsaco",
+      "kernels": 9,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1201",
+      "module": "multihead_fused_attention.hsaco",
+      "kernels": 28,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1201",
+      "module": "prefix_fast.hsaco",
+      "kernels": 4,
+      "same_sections": [
+        ".rodata"
+      ]
+    },
+    {
+      "arch": "gfx1201",
+      "module": "vit-stream.hsaco",
+      "kernels": 81,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1201",
+      "module": "vit-wide-deep.hsaco",
+      "kernels": 77,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1201",
+      "module": "wave-pointwise.hsaco",
+      "kernels": 13,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1200",
+      "module": "boundary-fast.hsaco",
+      "kernels": 14,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1200",
+      "module": "boundary_reference.hsaco",
+      "kernels": 5,
+      "same_sections": [
+        ".rodata",
+        ".note"
+      ]
+    },
+    {
+      "arch": "gfx1200",
+      "module": "c32-wave1.hsaco",
+      "kernels": 17,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1200",
+      "module": "c32_fast.hsaco",
+      "kernels": 3,
+      "same_sections": [
+        ".note"
+      ]
+    },
+    {
+      "arch": "gfx1200",
+      "module": "c32_fast_attention.hsaco",
+      "kernels": 6,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1200",
+      "module": "c32_fused_attention.hsaco",
+      "kernels": 1,
+      "same_sections": [
+        ".rodata"
+      ]
+    },
+    {
+      "arch": "gfx1200",
+      "module": "c32_fused_ffn_attention-packed.hsaco",
+      "kernels": 10,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1200",
+      "module": "c32_fused_ffn_attention.hsaco",
+      "kernels": 10,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1200",
+      "module": "c32_prefix_reference.hsaco",
+      "kernels": 10,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1200",
+      "module": "c32_tiled.hsaco",
+      "kernels": 4,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1200",
+      "module": "c32_wmma.hsaco",
+      "kernels": 6,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1200",
+      "module": "c512-m32-deep.hsaco",
+      "kernels": 77,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1200",
+      "module": "c512-m32-mh.hsaco",
+      "kernels": 91,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1200",
+      "module": "c64-wave2.hsaco",
+      "kernels": 104,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1200",
+      "module": "deep_fast-packed.hsaco",
+      "kernels": 76,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1200",
+      "module": "deep_fast.hsaco",
+      "kernels": 76,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1200",
+      "module": "deep_reference.hsaco",
+      "kernels": 16,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1200",
+      "module": "deep_wmma.hsaco",
+      "kernels": 8,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1200",
+      "module": "multihead-fast-packed.hsaco",
+      "kernels": 14,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1200",
+      "module": "multihead-fast-padded-wave-packed.hsaco",
+      "kernels": 101,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1200",
+      "module": "multihead-fast-padded-wave.hsaco",
+      "kernels": 100,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1200",
+      "module": "multihead-fast.hsaco",
+      "kernels": 14,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1200",
+      "module": "multihead-reference.hsaco",
+      "kernels": 14,
+      "same_sections": [
+        ".note"
+      ]
+    },
+    {
+      "arch": "gfx1200",
+      "module": "multihead-tiled.hsaco",
+      "kernels": 7,
+      "same_sections": [
+        ".rodata",
+        ".note"
+      ]
+    },
+    {
+      "arch": "gfx1200",
+      "module": "multihead-wmma.hsaco",
+      "kernels": 9,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1200",
+      "module": "multihead_fused_attention.hsaco",
+      "kernels": 28,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1200",
+      "module": "prefix_fast.hsaco",
+      "kernels": 4,
+      "same_sections": [
+        ".rodata"
+      ]
+    },
+    {
+      "arch": "gfx1200",
+      "module": "vit-stream.hsaco",
+      "kernels": 81,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1200",
+      "module": "vit-wide-deep.hsaco",
+      "kernels": 77,
+      "same_sections": []
+    },
+    {
+      "arch": "gfx1200",
+      "module": "wave-pointwise.hsaco",
+      "kernels": 13,
+      "same_sections": []
+    }
+  ],
+  "total_kernels": 1992,
+  "same_kernel_code": 0,
+  "differing_kernel_code": 1992
+}
