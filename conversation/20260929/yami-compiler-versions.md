@@ -4,6 +4,10 @@
 
 Zero 想知道**编译器版本对我们内核速度的影响**。排在逐核计时地图之后做（都要 9070 计时，别撞车）。
 
+## 补充（朱雀 13:36 查）
+
+9070 `System32` 里驱动同时带两个 COMGR：`amd_comgr_2.dll` = clang 20.0.0git（Compute-Mirrors 33ab2c2f），`amd_comgr_3.dll` = clang 21.0.0git（AMD-Lightning-Internal 590b9320，现役；`hip/rtc_compile.cpp` 写死加载 3 号）。**LLVM 20 那套可以直接让 `rtc_compile` 改加载 2 号编出**（接口若不兼容再退回自己编 ROCm 7.1）。
+
 ## 要做
 
 1. 在 DGX 用你的管线再编两个编译器：**LLVM 20**（ROCm 7.1 发布分支）与 **LLVM 22+**（`amd-staging` 当前 HEAD 或 ROCm 7.2 分支，写明哪个）。
