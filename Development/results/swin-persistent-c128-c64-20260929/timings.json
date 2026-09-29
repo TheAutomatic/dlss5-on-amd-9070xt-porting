@@ -1,0 +1,1090 @@
+[
+  {
+    "batch": "c1-s1-matched2",
+    "height": 900,
+    "baseline_ms": 8.259249375,
+    "candidate_ms": 8.29702125,
+    "delta_ms": 0.037771875000000676,
+    "delta_percent": 0.45732818183614743,
+    "slots": [
+      {
+        "slot": "time-900-0",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.2643175
+      },
+      {
+        "slot": "time-900-1",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.30115
+      },
+      {
+        "slot": "time-900-2",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.2928925
+      },
+      {
+        "slot": "time-900-3",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.25418125
+      }
+    ]
+  },
+  {
+    "batch": "c1-s1-matched2",
+    "height": 1080,
+    "baseline_ms": 11.144394375000001,
+    "candidate_ms": 11.143916875,
+    "delta_ms": -0.0004775000000005747,
+    "delta_percent": -0.004284665311837799,
+    "slots": [
+      {
+        "slot": "time-1080-0",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.14623625
+      },
+      {
+        "slot": "time-1080-1",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.14010625
+      },
+      {
+        "slot": "time-1080-2",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.1477275
+      },
+      {
+        "slot": "time-1080-3",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.1425525
+      }
+    ]
+  },
+  {
+    "batch": "c1-s1-matched3",
+    "height": 900,
+    "baseline_ms": 8.260881874999999,
+    "candidate_ms": 8.290099375,
+    "delta_ms": 0.02921750000000145,
+    "delta_percent": 0.35368499927861397,
+    "slots": [
+      {
+        "slot": "time-900-0",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.270195
+      },
+      {
+        "slot": "time-900-1",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.2921175
+      },
+      {
+        "slot": "time-900-2",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.28808125
+      },
+      {
+        "slot": "time-900-3",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.25156875
+      }
+    ]
+  },
+  {
+    "batch": "c1-s1-matched3",
+    "height": 1080,
+    "baseline_ms": 11.148461875,
+    "candidate_ms": 11.135681250000001,
+    "delta_ms": -0.012780624999999546,
+    "delta_percent": -0.11464025390497401,
+    "slots": [
+      {
+        "slot": "time-1080-0",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.1509125
+      },
+      {
+        "slot": "time-1080-1",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.131405
+      },
+      {
+        "slot": "time-1080-2",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.1399575
+      },
+      {
+        "slot": "time-1080-3",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.14601125
+      }
+    ]
+  },
+  {
+    "batch": "c1-s1-short",
+    "height": 900,
+    "baseline_ms": 8.133896634615384,
+    "candidate_ms": 8.191903846153846,
+    "delta_ms": 0.058007211538461334,
+    "delta_percent": 0.7131540286804183,
+    "slots": [
+      {
+        "slot": "time-900-0",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 8.122028846153846
+      },
+      {
+        "slot": "time-900-1",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 8.185548076923077
+      },
+      {
+        "slot": "time-900-2",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 8.198259615384615
+      },
+      {
+        "slot": "time-900-3",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 8.145764423076923
+      }
+    ]
+  },
+  {
+    "batch": "c1-s1-short",
+    "height": 1080,
+    "baseline_ms": 11.0704375,
+    "candidate_ms": 11.072319711538462,
+    "delta_ms": 0.0018822115384615756,
+    "delta_percent": 0.01700214231334929,
+    "slots": [
+      {
+        "slot": "time-1080-0",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 11.05860576923077
+      },
+      {
+        "slot": "time-1080-1",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 11.080086538461538
+      },
+      {
+        "slot": "time-1080-2",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 11.064552884615384
+      },
+      {
+        "slot": "time-1080-3",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 11.082269230769231
+      }
+    ]
+  },
+  {
+    "batch": "c1-s1-timing1",
+    "height": 900,
+    "baseline_ms": 8.229084375,
+    "candidate_ms": 8.28600625,
+    "delta_ms": 0.056921875000000455,
+    "delta_percent": 0.6917157779172678,
+    "slots": [
+      {
+        "slot": "time-900-0",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.2275575
+      },
+      {
+        "slot": "time-900-1",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.28997375
+      },
+      {
+        "slot": "time-900-2",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.28203875
+      },
+      {
+        "slot": "time-900-3",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.23061125
+      }
+    ]
+  },
+  {
+    "batch": "c1-s1-timing1",
+    "height": 1080,
+    "baseline_ms": 11.141820625000001,
+    "candidate_ms": 11.127725,
+    "delta_ms": -0.014095625000001277,
+    "delta_percent": -0.12651096687352759,
+    "slots": [
+      {
+        "slot": "time-1080-0",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.14401125
+      },
+      {
+        "slot": "time-1080-1",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.1250925
+      },
+      {
+        "slot": "time-1080-2",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.1303575
+      },
+      {
+        "slot": "time-1080-3",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.13963
+      }
+    ]
+  },
+  {
+    "batch": "c1-s2-matched2",
+    "height": 900,
+    "baseline_ms": 8.241156875000001,
+    "candidate_ms": 8.27316125,
+    "delta_ms": 0.032004374999997864,
+    "delta_percent": 0.3883480861416988,
+    "slots": [
+      {
+        "slot": "time-900-0",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.2439075
+      },
+      {
+        "slot": "time-900-1",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.26994375
+      },
+      {
+        "slot": "time-900-2",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.27637875
+      },
+      {
+        "slot": "time-900-3",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.23840625
+      }
+    ]
+  },
+  {
+    "batch": "c1-s2-matched2",
+    "height": 1080,
+    "baseline_ms": 11.149185625,
+    "candidate_ms": 11.1665125,
+    "delta_ms": 0.017326875000000186,
+    "delta_percent": 0.15540933286775083,
+    "slots": [
+      {
+        "slot": "time-1080-0",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.143975
+      },
+      {
+        "slot": "time-1080-1",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.162585
+      },
+      {
+        "slot": "time-1080-2",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.17044
+      },
+      {
+        "slot": "time-1080-3",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.15439625
+      }
+    ]
+  },
+  {
+    "batch": "c1-s2-matched3",
+    "height": 900,
+    "baseline_ms": 8.259248125,
+    "candidate_ms": 8.283651875,
+    "delta_ms": 0.024403750000001168,
+    "delta_percent": 0.29547181087989927,
+    "slots": [
+      {
+        "slot": "time-900-0",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.26000625
+      },
+      {
+        "slot": "time-900-1",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.2740375
+      },
+      {
+        "slot": "time-900-2",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.29326625
+      },
+      {
+        "slot": "time-900-3",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.25849
+      }
+    ]
+  },
+  {
+    "batch": "c1-s2-matched3",
+    "height": 1080,
+    "baseline_ms": 11.149169375,
+    "candidate_ms": 11.162864375,
+    "delta_ms": 0.013695000000000235,
+    "delta_percent": 0.12283426270938147,
+    "slots": [
+      {
+        "slot": "time-1080-0",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.14199
+      },
+      {
+        "slot": "time-1080-1",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.15857875
+      },
+      {
+        "slot": "time-1080-2",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.16715
+      },
+      {
+        "slot": "time-1080-3",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.15634875
+      }
+    ]
+  },
+  {
+    "batch": "c1-s2-short",
+    "height": 900,
+    "baseline_ms": 8.131209134615386,
+    "candidate_ms": 8.173735576923077,
+    "delta_ms": 0.042526442307691426,
+    "delta_percent": 0.5230026875910898,
+    "slots": [
+      {
+        "slot": "time-900-0",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 8.124879807692308
+      },
+      {
+        "slot": "time-900-1",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 8.165663461538461
+      },
+      {
+        "slot": "time-900-2",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 8.181807692307693
+      },
+      {
+        "slot": "time-900-3",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 8.137538461538462
+      }
+    ]
+  },
+  {
+    "batch": "c1-s2-short",
+    "height": 1080,
+    "baseline_ms": 11.075228365384614,
+    "candidate_ms": 11.099572115384616,
+    "delta_ms": 0.024343750000001663,
+    "delta_percent": 0.21980359408286798,
+    "slots": [
+      {
+        "slot": "time-1080-0",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 11.078105769230769
+      },
+      {
+        "slot": "time-1080-1",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 11.106158653846155
+      },
+      {
+        "slot": "time-1080-2",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 11.092985576923077
+      },
+      {
+        "slot": "time-1080-3",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 11.072350961538461
+      }
+    ]
+  },
+  {
+    "batch": "c1-s2-timing1",
+    "height": 900,
+    "baseline_ms": 8.238113125,
+    "candidate_ms": 8.275536875,
+    "delta_ms": 0.03742375000000031,
+    "delta_percent": 0.45427574776111257,
+    "slots": [
+      {
+        "slot": "time-900-0",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.2363875
+      },
+      {
+        "slot": "time-900-1",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.27195375
+      },
+      {
+        "slot": "time-900-2",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.27912
+      },
+      {
+        "slot": "time-900-3",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.23983875
+      }
+    ]
+  },
+  {
+    "batch": "c1-s2-timing1",
+    "height": 1080,
+    "baseline_ms": 11.14560125,
+    "candidate_ms": 11.166733749999999,
+    "delta_ms": 0.021132499999998444,
+    "delta_percent": 0.18960394801490477,
+    "slots": [
+      {
+        "slot": "time-1080-0",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.142765
+      },
+      {
+        "slot": "time-1080-1",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.16534375
+      },
+      {
+        "slot": "time-1080-2",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.16812375
+      },
+      {
+        "slot": "time-1080-3",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.1484375
+      }
+    ]
+  },
+  {
+    "batch": "c2-s1-matched2",
+    "height": 900,
+    "baseline_ms": 8.236184375,
+    "candidate_ms": 8.26011125,
+    "delta_ms": 0.023926874999999015,
+    "delta_percent": 0.29050922017512804,
+    "slots": [
+      {
+        "slot": "time-900-0",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.23706375
+      },
+      {
+        "slot": "time-900-1",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.25812
+      },
+      {
+        "slot": "time-900-2",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.2621025
+      },
+      {
+        "slot": "time-900-3",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.235305
+      }
+    ]
+  },
+  {
+    "batch": "c2-s1-matched2",
+    "height": 1080,
+    "baseline_ms": 11.155161875000001,
+    "candidate_ms": 11.1334,
+    "delta_ms": -0.02176187500000104,
+    "delta_percent": -0.19508345323766552,
+    "slots": [
+      {
+        "slot": "time-1080-0",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.15334
+      },
+      {
+        "slot": "time-1080-1",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.12844125
+      },
+      {
+        "slot": "time-1080-2",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.13835875
+      },
+      {
+        "slot": "time-1080-3",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.15698375
+      }
+    ]
+  },
+  {
+    "batch": "c2-s1-matched3",
+    "height": 900,
+    "baseline_ms": 8.232461875,
+    "candidate_ms": 8.26236875,
+    "delta_ms": 0.029906875,
+    "delta_percent": 0.36327984816812986,
+    "slots": [
+      {
+        "slot": "time-900-0",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.22782125
+      },
+      {
+        "slot": "time-900-1",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.262585
+      },
+      {
+        "slot": "time-900-2",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.2621525
+      },
+      {
+        "slot": "time-900-3",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.2371025
+      }
+    ]
+  },
+  {
+    "batch": "c2-s1-matched3",
+    "height": 1080,
+    "baseline_ms": 11.14046625,
+    "candidate_ms": 11.1293075,
+    "delta_ms": -0.011158749999999884,
+    "delta_percent": -0.10016412015071419,
+    "slots": [
+      {
+        "slot": "time-1080-0",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.13831625
+      },
+      {
+        "slot": "time-1080-1",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.12632875
+      },
+      {
+        "slot": "time-1080-2",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.13228625
+      },
+      {
+        "slot": "time-1080-3",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.14261625
+      }
+    ]
+  },
+  {
+    "batch": "c2-s1-short",
+    "height": 900,
+    "baseline_ms": 8.08472596153846,
+    "candidate_ms": 8.092752403846154,
+    "delta_ms": 0.00802644230769367,
+    "delta_percent": 0.09927908930837948,
+    "slots": [
+      {
+        "slot": "time-900-0",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 8.069033653846153
+      },
+      {
+        "slot": "time-900-1",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 8.093096153846155
+      },
+      {
+        "slot": "time-900-2",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 8.092408653846153
+      },
+      {
+        "slot": "time-900-3",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 8.100418269230769
+      }
+    ]
+  },
+  {
+    "batch": "c2-s1-short",
+    "height": 1080,
+    "baseline_ms": 11.029197115384616,
+    "candidate_ms": 11.022430288461539,
+    "delta_ms": -0.006766826923076508,
+    "delta_percent": -0.06135375814108057,
+    "slots": [
+      {
+        "slot": "time-1080-0",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 11.016423076923077
+      },
+      {
+        "slot": "time-1080-1",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 11.017168269230769
+      },
+      {
+        "slot": "time-1080-2",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 11.027692307692307
+      },
+      {
+        "slot": "time-1080-3",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 11.041971153846154
+      }
+    ]
+  },
+  {
+    "batch": "c2-s1-timing1",
+    "height": 900,
+    "baseline_ms": 8.185975625,
+    "candidate_ms": 8.23193875,
+    "delta_ms": 0.045963125000000105,
+    "delta_percent": 0.5614862186936964,
+    "slots": [
+      {
+        "slot": "time-900-0",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.1623475
+      },
+      {
+        "slot": "time-900-1",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.21924
+      },
+      {
+        "slot": "time-900-2",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.2446375
+      },
+      {
+        "slot": "time-900-3",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.20960375
+      }
+    ]
+  },
+  {
+    "batch": "c2-s1-timing1",
+    "height": 1080,
+    "baseline_ms": 11.119115,
+    "candidate_ms": 11.117006875,
+    "delta_ms": -0.0021081250000012375,
+    "delta_percent": -0.018959467547563502,
+    "slots": [
+      {
+        "slot": "time-1080-0",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.1143475
+      },
+      {
+        "slot": "time-1080-1",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.11417625
+      },
+      {
+        "slot": "time-1080-2",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.1198375
+      },
+      {
+        "slot": "time-1080-3",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.1238825
+      }
+    ]
+  },
+  {
+    "batch": "c2-s2-matched2",
+    "height": 900,
+    "baseline_ms": 8.25236,
+    "candidate_ms": 8.26613875,
+    "delta_ms": 0.013778750000000173,
+    "delta_percent": 0.16696738872274963,
+    "slots": [
+      {
+        "slot": "time-900-0",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.24789375
+      },
+      {
+        "slot": "time-900-1",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.26287625
+      },
+      {
+        "slot": "time-900-2",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.26940125
+      },
+      {
+        "slot": "time-900-3",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.25682625
+      }
+    ]
+  },
+  {
+    "batch": "c2-s2-matched2",
+    "height": 1080,
+    "baseline_ms": 11.149395625,
+    "candidate_ms": 11.13608625,
+    "delta_ms": -0.0133093750000004,
+    "delta_percent": -0.11937306243001711,
+    "slots": [
+      {
+        "slot": "time-1080-0",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.152495
+      },
+      {
+        "slot": "time-1080-1",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.14245125
+      },
+      {
+        "slot": "time-1080-2",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.12972125
+      },
+      {
+        "slot": "time-1080-3",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.14629625
+      }
+    ]
+  },
+  {
+    "batch": "c2-s2-matched3",
+    "height": 900,
+    "baseline_ms": 8.25173375,
+    "candidate_ms": 8.253765625,
+    "delta_ms": 0.0020318750000001273,
+    "delta_percent": 0.024623613189178606,
+    "slots": [
+      {
+        "slot": "time-900-0",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.251145
+      },
+      {
+        "slot": "time-900-1",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.25446125
+      },
+      {
+        "slot": "time-900-2",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.25307
+      },
+      {
+        "slot": "time-900-3",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.2523225
+      }
+    ]
+  },
+  {
+    "batch": "c2-s2-matched3",
+    "height": 1080,
+    "baseline_ms": 11.143134374999999,
+    "candidate_ms": 11.143719375,
+    "delta_ms": 0.0005850000000009459,
+    "delta_percent": 0.005249869384260641,
+    "slots": [
+      {
+        "slot": "time-1080-0",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.13894125
+      },
+      {
+        "slot": "time-1080-1",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.1404925
+      },
+      {
+        "slot": "time-1080-2",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.14694625
+      },
+      {
+        "slot": "time-1080-3",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.1473275
+      }
+    ]
+  },
+  {
+    "batch": "c2-s2-short",
+    "height": 900,
+    "baseline_ms": 8.118947115384616,
+    "candidate_ms": 8.17084375,
+    "delta_ms": 0.05189663461538352,
+    "delta_percent": 0.6392039987185516,
+    "slots": [
+      {
+        "slot": "time-900-0",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 8.109562500000001
+      },
+      {
+        "slot": "time-900-1",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 8.16883653846154
+      },
+      {
+        "slot": "time-900-2",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 8.172850961538462
+      },
+      {
+        "slot": "time-900-3",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 8.128331730769231
+      }
+    ]
+  },
+  {
+    "batch": "c2-s2-short",
+    "height": 1080,
+    "baseline_ms": 11.077867788461539,
+    "candidate_ms": 11.075790865384615,
+    "delta_ms": -0.0020769230769239755,
+    "delta_percent": -0.018748401015289407,
+    "slots": [
+      {
+        "slot": "time-1080-0",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 11.071326923076922
+      },
+      {
+        "slot": "time-1080-1",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 11.080264423076922
+      },
+      {
+        "slot": "time-1080-2",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 11.071317307692308
+      },
+      {
+        "slot": "time-1080-3",
+        "frames": 240,
+        "kept": 208,
+        "mean_ms": 11.084408653846154
+      }
+    ]
+  },
+  {
+    "batch": "c2-s2-timing1",
+    "height": 900,
+    "baseline_ms": 8.238029375,
+    "candidate_ms": 8.2682625,
+    "delta_ms": 0.030233125000000527,
+    "delta_percent": 0.3669946248522571,
+    "slots": [
+      {
+        "slot": "time-900-0",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.2344925
+      },
+      {
+        "slot": "time-900-1",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.2691025
+      },
+      {
+        "slot": "time-900-2",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.2674225
+      },
+      {
+        "slot": "time-900-3",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 8.24156625
+      }
+    ]
+  },
+  {
+    "batch": "c2-s2-timing1",
+    "height": 1080,
+    "baseline_ms": 11.13505,
+    "candidate_ms": 11.138823125,
+    "delta_ms": 0.003773125000000377,
+    "delta_percent": 0.03388511951001316,
+    "slots": [
+      {
+        "slot": "time-1080-0",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.13008125
+      },
+      {
+        "slot": "time-1080-1",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.14028125
+      },
+      {
+        "slot": "time-1080-2",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.137365
+      },
+      {
+        "slot": "time-1080-3",
+        "frames": 1000,
+        "kept": 800,
+        "mean_ms": 11.14001875
+      }
+    ]
+  }
+]

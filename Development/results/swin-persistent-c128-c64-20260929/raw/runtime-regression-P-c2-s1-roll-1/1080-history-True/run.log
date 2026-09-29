@@ -1,0 +1,56 @@
+seed=0 pattern=0
+input format=RGBA16_FLOAT W=1296 H=720 invalid=0 min=0 max=34.53125 luma=0.0157641119 roi_luma=0.0250669576
+adapter=AMD Radeon RX 9070 XT
+SP_PLAN c=128 first=10 layers=4 tasks=2257 initial=589 state_bytes=27100
+SP_DONE c=128 first=10 tasks=2257 base=0 ms=1.106
+SP_PLAN c=256 first=16 layers=6 tasks=893 initial=160 state_bytes=10732
+SP_DONE c=256 first=16 tasks=893 base=0 ms=0.655
+SP_PLAN c=256 first=49 layers=6 tasks=893 initial=160 state_bytes=10732
+SP_DONE c=256 first=49 tasks=893 base=0 ms=0.801
+frame=0 reset=1 wall_ms=1427.664 invalid=0 luma=0.01043502 roi=0.01611849 dark=837589 roi_dark=271139 changed_first=0 maxabs_first=0
+SP_DONE c=128 first=10 tasks=2257 base=0 ms=0.728
+SP_DONE c=256 first=16 tasks=893 base=0 ms=0.725
+SP_DONE c=256 first=49 tasks=893 base=0 ms=0.749
+frame=1 reset=0 wall_ms=20.943 invalid=0 luma=0.01103854 roi=0.01706857 dark=833391 roi_dark=268977 changed_first=3674549 maxabs_first=15.56113
+SP_DONE c=128 first=10 tasks=2257 base=0 ms=0.681
+SP_DONE c=256 first=16 tasks=893 base=0 ms=0.715
+SP_DONE c=256 first=49 tasks=893 base=0 ms=0.643
+frame=2 reset=0 wall_ms=21.276 invalid=0 luma=0.01150613 roi=0.01783123 dark=829052 roi_dark=266739 changed_first=3712159 maxabs_first=15.57192
+SP_DONE c=128 first=10 tasks=2257 base=0 ms=0.679
+SP_DONE c=256 first=16 tasks=893 base=0 ms=0.764
+SP_DONE c=256 first=49 tasks=893 base=0 ms=0.754
+frame=3 reset=0 wall_ms=24.825 invalid=0 luma=0.01178046 roi=0.01831547 dark=826913 roi_dark=265560 changed_first=3724795 maxabs_first=15.57576
+SP_DONE c=128 first=10 tasks=2257 base=0 ms=0.699
+SP_DONE c=256 first=16 tasks=893 base=0 ms=0.716
+SP_DONE c=256 first=49 tasks=893 base=0 ms=0.763
+frame=4 reset=0 wall_ms=21.556 invalid=0 luma=0.01179889 roi=0.01840152 dark=826864 roi_dark=265452 changed_first=3727565 maxabs_first=15.57611
+SP_DONE c=128 first=10 tasks=2257 base=0 ms=0.671
+SP_DONE c=256 first=16 tasks=893 base=0 ms=0.627
+SP_DONE c=256 first=49 tasks=893 base=0 ms=0.745
+frame=5 reset=0 wall_ms=20.377 invalid=0 luma=0.01195839 roi=0.01873205 dark=825887 roi_dark=264740 changed_first=3729306 maxabs_first=15.57658
+SP_DONE c=128 first=10 tasks=2257 base=0 ms=0.995
+SP_DONE c=256 first=16 tasks=893 base=0 ms=0.740
+SP_DONE c=256 first=49 tasks=893 base=0 ms=0.739
+frame=6 reset=0 wall_ms=18.962 invalid=0 luma=0.01198082 roi=0.01888853 dark=826118 roi_dark=264662 changed_first=3730016 maxabs_first=15.577
+SP_DONE c=128 first=10 tasks=2257 base=0 ms=0.656
+SP_DONE c=256 first=16 tasks=893 base=0 ms=0.682
+SP_DONE c=256 first=49 tasks=893 base=0 ms=0.645
+frame=7 reset=0 wall_ms=22.643 invalid=0 luma=0.01197875 roi=0.01896414 dark=826337 roi_dark=264756 changed_first=3730213 maxabs_first=15.57514
+SP_DONE c=128 first=10 tasks=2257 base=0 ms=0.576
+SP_DONE c=256 first=16 tasks=893 base=0 ms=0.631
+SP_DONE c=256 first=49 tasks=893 base=0 ms=0.762
+frame=8 reset=0 wall_ms=17.469 invalid=0 luma=0.01185332 roi=0.01878667 dark=826694 roi_dark=264804 changed_first=3730473 maxabs_first=15.57446
+SP_DONE c=128 first=10 tasks=2257 base=0 ms=0.678
+SP_DONE c=256 first=16 tasks=893 base=0 ms=0.725
+SP_DONE c=256 first=49 tasks=893 base=0 ms=0.763
+frame=9 reset=0 wall_ms=23.620 invalid=0 luma=0.01182334 roi=0.01881591 dark=826548 roi_dark=264677 changed_first=3730809 maxabs_first=15.57565
+SP_DONE c=128 first=10 tasks=2257 base=0 ms=0.696
+SP_DONE c=256 first=16 tasks=893 base=0 ms=0.709
+SP_DONE c=256 first=49 tasks=893 base=0 ms=0.716
+frame=10 reset=0 wall_ms=18.192 invalid=0 luma=0.01175181 roi=0.01876273 dark=827300 roi_dark=265052 changed_first=3730776 maxabs_first=15.57721
+SP_DONE c=128 first=10 tasks=2257 base=0 ms=0.704
+SP_DONE c=256 first=16 tasks=893 base=0 ms=0.692
+SP_DONE c=256 first=49 tasks=893 base=0 ms=0.736
+frame=11 reset=0 wall_ms=22.590 invalid=0 luma=0.01182221 roi=0.01893322 dark=826586 roi_dark=264783 changed_first=3730897 maxabs_first=15.57678
+SP_STATS runs=36 fallback=0 rollover=36 jobs=48516 disabled=0 errors=0
+RESULT frames=12 temporal=1 mean_wall_ms=138.343 invalid_total=0 restored_capture_every_frame=1 HDR_preserved=1

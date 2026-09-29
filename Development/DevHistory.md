@@ -1100,3 +1100,16 @@ canonical Q 7用例EXACT/AE共168候选帧命中09-28golden，AE84行同（44reu
 Q正式ABBA两轮，每槽1000弃200：900 8.347714→8.189269（−1.898%）、8.398949→8.235931（−1.941%）；1080 11.189376→11.125522（−0.571%）、11.204741→11.136764（−0.607%）。完整NativeGameFrame wall，原始CSV独立复算。不是游戏FPS。结果/静态证据/原始日志 `results/swin-persistent-20260929`，脚本 `HIP/experiments/swin-persistent`。
 
 现场旧宿主实际ba010de7（任务单b5ab8c3a已过时）；校验64项后装新046e1a63、增双架构swin-persistent模块到62份，原60、dxgi和ini均同。新DLSS5_HIP_SWIN_RUN源码/三模板默认0、剑星设1，DIRECT_IO3/MAKE_RESIDENT60保留。备份 `D:\DLSSNR-Lab\hip-backend\swin-persistent-20260929\backups\stellar-20260929-172155`，安装支持哈希校验与回滚。未发包、未启动游戏，待Zero现场观察。下一步按C128四层→C64两层评估，不自动全开。
+
+
+## 2026-09-29：C128/C64持久化四stage负账，维持C256生产配置
+
+按d7b29df2，以现装046e1a63/C256持久化为基线，独立测C128 encoder10–13/decoder57–60、C64 encoder6–7/decoder63–64。GPU直接复用上一单双架构swin-persistent泛型核，62模块与hip/SHA256SUMS全部同；隔离实验host只加小通道mask/side，C256始终两段开启，故障注入只打小通道。上采样融合首块保留，内部替代PDL、边界普通stream。
+
+每候选先7用例EXACT/AE168帧，再短ABBA及1000弃200长ABBA。先一轮对现役宿主，发现诊断host额外读SP_*变量可能污染小差值，补两轮同一exe仅切stage对照。两轮同host变化（负数快）：C128E 900+0.291/+0.363%、1080−0.195/−0.100%；C128D 900+0.167/+0.025%、1080−0.119/+0.005%；C64E 900+0.457/+0.354%、1080−0.004/−0.115%；C64D 900+0.388/+0.295%、1080+0.155/+0.123%。对现役最好单次也仅−0.127%。四段均未过额外0.5%，不收。
+
+实测整网trace基线179/162，单开任一C128为178/161，任一C64为180/163。C128 run159VGPR/16KiB LDS、C64 140/8KiB，均无spill，和普通核相同；HIP API理论占用率均25%不变。每段任务 C128 1581/2257、C64 3111/4453；C256 仅624/893。900 C256原六层12→3每边省9派发，小通道已逐层融合，C1284→3只省1、C642→3反增1，无法照搬其收益；没有把结构分析冒充stall周期测量。
+
+常规672候选帧＋压力384=1056全命中0.36 floatFMA golden，AE528行同，连基线2112帧全有限。每stage两档history×EXACT/AE做强制回绕及无诊断同步的超时重算；每12帧36次真实reset，故障每实例fallback/errors/disabled各1。encoder故障runs1、decoder runs3，确认触发的是小通道。正常计时所有实例零错误/零回退；128总计时槽（96长、32短）原始CSV独立复算。
+
+9070开工/收尾66项SHA同，剑星仍046e1a63、62模块、SWIN_RUN1仅C256、DIRECT_IO3/MAKE_RESIDENT60。未安装/新备份/发包，生产源码、RE9、配置模板不变。结果 `results/swin-persistent-c128-c64-20260929`，源码 `HIP/experiments/swin-small`；本轮交负账，不默认开C128/C64。
