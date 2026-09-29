@@ -193,7 +193,7 @@ Download: [Quark](https://pan.quark.cn/s/83e6172e6c79) · [Gofile mirror](https:
 - **Bit-exact**: all changes bit-exact against 0.34.
 - **Folders**: `results/c32-aco-20260927`, `c32-round2-20260927`, `c32-round3-20260927`, `vit-bytestream-20260927`.
 
-## 0.36 (09-28, tag 2a72897d)
+## 0.36 (09-28)
 
 Download: [Quark](https://pan.quark.cn/s/e5afdaca0769) · [Gofile mirror](https://gofile.io/d/Z1hWdjcB) (all three packages)
 
@@ -215,9 +215,9 @@ Download: [Quark](https://pan.quark.cn/s/e5afdaca0769) · [Gofile mirror](https:
 In game (local, RX 9070 XT, EXACT, standing still): Stellar Blade 1080p native AA about 57 → 60 (at the 60 Hz windowed-mode cap); 2560×1440 native AA 52–53 after the C512 fusion, 54 final (the in-game comparison setting from now on).
 
 
-## 0.37 (09-29, tag 0.37 = dc52056f)
+## 0.37 (09-29)
 
-Download (all three packages): [Quark](https://pan.quark.cn/s/7dbfdc6425fd) · [Gofile mirror](https://gofile.io/d/onqeAHST); tag 0.37 = dc52056f
+Download (all three packages): [Quark](https://pan.quark.cn/s/7dbfdc6425fd) · [Gofile mirror](https://gofile.io/d/onqeAHST)
 
 - **Summary**: add-on b77bbc3c; 31 modules per architecture (new `swin-persistent.hsaco`); RE9 runtime 2c103f6e (host aa3761f2 unchanged); shaders identical to 0.36 (input shader 5be59a41).
 - **Bit-exact**: **fully bit-identical to 0.36** (09-28 float-FMA baseline; 7 cases, 168 EXACT/AE frames plus rollover/timeout stress frames, checked at every step). Nothing lossy.

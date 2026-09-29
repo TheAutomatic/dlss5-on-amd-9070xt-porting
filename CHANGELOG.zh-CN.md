@@ -195,7 +195,7 @@
 - **逐位**：相对 0.34 全部逐位。
 - **实验目录**：`results/c32-aco-20260927`、`c32-round2-20260927`、`c32-round3-20260927`、`vit-bytestream-20260927`。
 
-## 0.36（09-28，tag 2a72897d）
+## 0.36（09-28）
 
 下载：[夸克](https://pan.quark.cn/s/e5afdaca0769) · [Gofile 镜像](https://gofile.io/d/Z1hWdjcB)（三个包）
 
@@ -217,9 +217,9 @@
 游戏内（本机，RX 9070 XT，EXACT 静止）：《剑星》1080P 原生 AA 约 57 → 60（已触窗口模式 60 Hz 上限）；2560×1440 原生 AA C512 融合后 52～53、最终 54（此后游戏内对比用这个设置）。
 
 
-## 0.37（09-29，tag 0.37 = dc52056f）
+## 0.37（09-29）
 
-下载（三个包）：[夸克](https://pan.quark.cn/s/7dbfdc6425fd) · [Gofile 镜像](https://gofile.io/d/onqeAHST)；tag 0.37 = dc52056f
+下载（三个包）：[夸克](https://pan.quark.cn/s/7dbfdc6425fd) · [Gofile 镜像](https://gofile.io/d/onqeAHST)
 
 - **汇总**：插件 b77bbc3c；每架构 31 个模块（新增 `swin-persistent.hsaco`）；RE9 runtime 2c103f6e（宿主 aa3761f2 不变）；shader 与 0.36 相同（输入 shader 5be59a41）。
 - **逐位**：**与 0.36 全部逐位相同**（09-28 float FMA 基准，7 用例 EXACT/AE 168 帧 + 回绕/超时压力帧，每一步都验），没有有损改动。
