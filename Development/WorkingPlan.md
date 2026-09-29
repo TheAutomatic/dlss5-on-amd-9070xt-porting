@@ -16,6 +16,8 @@
 
 ## 正在进行
 
+- **09-29 ViT QKV五wave共享权重：逐位通过、1080过门槛，待Zero拍板换宿主**：新导出 `vit_stream_qkv_frag_hin_w5`（宏 `HIP_VIT_QKV_W5` 默认0），640单核48.8→37.0µs（Daniel 31.8，余差主要是他FP8+half累加，C段）。216帧逐位；ABBA 900 +0.42/0.51%、1080 +0.74/0.81%。要宿主按160线程发射（`hip_reference_network.h` 已加HasFn自动探测，旧模块自动回落），故**没装剑星、没发包、生产配方未开**；启用=vit-stream配方加宏+下一版宿主。结果 `results/vit-qkv-20260929`。
+
 - **09-29 C512最终投影M32权重共用已交负账**：同grid两tile共用权重，216帧逐位同现役，但900慢1.85～1.93%、1080慢0.54～0.66%（wave减半、权重本在L2）。宏 `C512_PROJ_M32` 默认0留源码，不装不发包。结果 `results/c512-proj-share-20260929`。
 
 - **09-29 ViT attention通过，模块已装剑星**：Daniel050/051该核代码相同；reference有half归约/累积，不能当0.36同数学直接照搬。采用正常half精确widening＋寄存器成对FP8编码＋分母/AV输出转置；640单核约71→38µs，400约38→15µs。C256基线上两轮整网900省0.183～0.189ms（2.20～2.28%）、1080省0.169～0.177ms（1.50～1.58%）；168常规＋48回绕帧全golden逐位，AE108行同，RE9两档回放同。只换deep_fast-packed双架构2模块（gfx1200 1d816dc1/gfx1201 1750899d），另74导出不变；三宏源码默认0、生产配方开1，无新用户开关。剑星宿主046e1a63/其余60模块/配置SHA保留，DIRECT_IO3/MAKE_RESIDENT60/SWIN_RUN1不变；备份 `D:\DLSSNR-Lab\hip-backend\vit-attention-20260929\backups\stellar-20260929-194730`。没发包、没启动游戏；GPU测试已结束，可另排尖峰实验。结果 `results/vit-attention-20260929`。
@@ -69,7 +71,7 @@
 **编译器支线已具备实验入口**：公开ROCm7.0/7.1仍LLVM20、7.2是LLVM22，当前采用公开AMD分支最后LLVM21基点。第一批补丁候选及实际pass入口在 `results/llvm-fork-20260929/patch-candidates.md`；优先有证明的med3/范围倒数/精确转换，先做小例和语义边界，不直接全局fast-math。现役手写优化已消掉不少机会；本轮仅打通管线，后续独立评估收益。
 
 1. **按逐核地图排优先级**：`results/kernel-map-20260929/map-after/`，仅本轮9组更新，其余沿用同批基线。head已从pool＋project约125µs降到24.65µs；地图当时1080总168派发（本轮持久化后162）。最终C512 projection的M32权重共用09-29已实测负账（整网慢0.5～1.9%），别重复。
-2. **ViT attention本轮已兑现一部分差距**：640 reference22～24µs，我方约71→38µs；去掉通用half解码的不可达分支、概率成对编码、AV输出转置，整网已收2.2%/1.5%。还差约14～16µs；我方每64key V64条u8、对方8条b64，另有严格float分母/累加数学差异，未把余差唯一拆成stall周期。4wave/64key预取照搬反慢，已交账。QKV49对32µs仍在C段，本轮未碰；旧P/G/Q/R、消费端float打包V和入口出口gather-pack不重跑。详见 `results/vit-attention-20260929/isa-account.md`。
+2. **ViT attention本轮已兑现一部分差距**：640 reference22～24µs，我方约71→38µs；去掉通用half解码的不可达分支、概率成对编码、AV输出转置，整网已收2.2%/1.5%。还差约14～16µs；我方每64key V64条u8、对方8条b64，另有严格float分母/累加数学差异，未把余差唯一拆成stall周期。4wave/64key预取照搬反慢，已交账。QKV：五wave共享权重逐位候选49→37µs已测过门槛（待换宿主，见正在进行），余约5µs属FP8/half累加数学差（C段）；块重排、scale提前读、数组/CH4/CH16写法均不快，别重复；旧P/G/Q/R、消费端float打包V和入口出口gather-pack不重跑。详见 `results/vit-attention-20260929/isa-account.md`。
 3. **HIP↔D3D 交接改 GPU 轮询**（`results/frame-breakdown-20260928` 第 4 项）：收益待测，会碰看门狗（Daniel 用 1 像素 draw 分片自旋规避）。
 4. **900 档**：本轮head＋ViT再省0.021～0.036ms，派发198→197；上一轮C512紧凑布局收益保留，C256内层本轮已改持久化（900总179派发）。地图本轮只做1080，Daniel900的C512 52×32/ViT448与我们50×30/400不同，未来单独建图。
 5. 小件：C256 FFN 标量量化/地址开销（`results/aco-lineup-20260928` 逐条表）；ViT QKV 归一化段；C32 对角残差跳过全零 K16 半块（约 −0.1～0.2%）。

@@ -1138,3 +1138,8 @@ C256持久化基线上两轮1000弃200 ABBA，完整NativeGameFrame wall：900 8
 WorkingPlan B1 留下的未实测候选。改为不动宿主：`mh_attention_project_frag_c512` 同grid同ABI，宏 `C512_PROJ_M32`（默认0）开后每wave算两个16-token tile、共用每个K16权重片段，grid后半即返回。宏0与剑星现装模块.text/.rodata逐字节同；宏1 VGPR80→97、SGPR28→38、无LDS/spill。
 逐位：EXACT/AE各168帧＋48帧回绕与现役（C256持久化＋ViT attention新核）逐帧同，AE决策同。
 两轮ABBA：900 8.059→8.215、8.097→8.246（慢1.9%）；1080 10.983→11.042、10.972→11.044（慢0.5～0.7%）。权重在L2、不是带宽瓶颈，wave数减半把单wave WMMA链拉长一倍，900档token少吃亏更多。不收、不装。结果 `results/c512-proj-share-20260929`。
+
+## 2026-09-29 21:xx：ViT QKV 五wave共享权重，逐位、1080过门槛，需换宿主未装
+
+拆Daniel k_reg1d_qkv<0,0>：120组×256线程、每wave 32token×64列、权重进LDS、**fp8 WMMA + 每K32 half累加**，168VGPR。我方1-wave组每K16配3条b128 global读（1.5条/WMMA），主循环流水已紧，瓶颈是读取量。新导出 `vit_stream_qkv_frag_hin_w5`（宏HIP_VIT_QKV_W5默认0）：5wave同head五token tile（400/640的25/40 tile都整除5，无尾巴），权重8KB块LDS双缓冲，wave数不减，每条累加链/片段/尾部数学原样。微测640 48.8→37.0µs（Daniel 31.8）、400 32.2→26.5；数组写法/CH4/CH16都更慢，只留4寄存器CH8。只换模块的路：scale提前读、三种块重排全逐位但不快/慢5～8%。
+逐位216帧（EXACT/AE 168＋回绕48）SAME；两轮ABBA 900 0.42/0.51%、1080 0.74/0.81%。需宿主按160线程发射（hip_reference_network.h 加HasFn自动探测，新旧互容），违反"宿主不动只换模块"，**未装剑星、未发包**，生产配方未开。结果 `results/vit-qkv-20260929`。

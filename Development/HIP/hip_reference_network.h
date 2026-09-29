@@ -197,6 +197,8 @@ class Network {
   auto key=name+(frag?"@vit-frag":"@vit-tiled");auto it=weights.find(key);
   if(it==weights.end()){auto v=ReadWeights(opt.assets+"/"+name);if(v.size()!=WeightElements(name))throw std::runtime_error("ViT tiled weight shape");Fp8(v,{{0,size_t(rows)*cols}});if(frag)FragmentPackedMatrix(v,0,rows,cols);else TilePackedMatrix(v,0,rows,cols);it=weights.emplace(key,UploadWeight(v,key)).first;}return P(it->second);
  }
+ /* Optional export probe: modules without the symbol keep the old launch shape. */
+ bool HasFn(const std::string&m,const std::string&name){std::string key=m+":"+name;if(functions.count(key))return true;auto mi=modules.find(m);if(mi==modules.end())return false;Handle f{};if(api.hipModuleGetFunction(&f,mi->second,name.c_str()))return false;functions.emplace(key,f);return true;}
  Handle Fn(const std::string&m,const std::string&name){std::string key=m+":"+name;auto it=functions.find(key);if(it!=functions.end())return it->second;Handle f{};api.Check(api.hipModuleGetFunction(&f,modules.at(m),name.c_str()),name.c_str());functions.emplace(key,f);return f;}
  template<class...A>void Run(const char*m,const char*name,size_t n,A...args){
   U count=Count(n),threads=256;unsigned groups=0;std::string module=m,kernel=name;
@@ -258,7 +260,7 @@ class Network {
   if(module=="c512_m32_mh"&&kernel=="c512_qkv_attention_compact"){groups=count;threads=64;}
   if(vit_proj_n64_active&&module=="deep_fast"&&kernel=="vit_project_frag"&&count%1024==0){module="vit_wide_deep";kernel="vit_project_frag_n64";groups=unsigned(((count/1024+15)/16)*16);threads=32;}
   if(kernel=="vit_stream_contract_frag_hout"){module="vit_stream";groups=count/1024;threads=32;}
-  if(kernel=="vit_stream_qkv_frag_hin"){module="vit_stream";groups=count/512;threads=32;}
+  if(kernel=="vit_stream_qkv_frag_hin"){module="vit_stream";groups=count/512;threads=32;if(count%3072==0&&HasFn(module,"vit_stream_qkv_frag_hin_w5")){kernel="vit_stream_qkv_frag_hin_w5";groups=96*((count/3072/16+4)/5);threads=160;}} /* w5: five waves share one head's weights through LDS; same per-wave math */
   if(vit_stream_active&&kernel=="vit_project_frag_n64"){module="vit_stream";kernel=vit_stream_active==1?"vit_stream_project_n64_b":vit_stream_active==2?"vit_stream_project_n64_h":"vit_stream_project_n64_bh";}
   if(module=="mh_window"){groups=count;threads=256;} /* one 8x8 window per 256-thread group (c64_window_fused*) */
   if(kernel.rfind("c64_attention_project",0)==0||kernel.rfind("c128_attention_project",0)==0||kernel.rfind("c256_attention_project",0)==0){groups=count;threads=(kernel.rfind("c64_attention_project",0)==0&&kernel.compare(kernel.size()-4,4,"_w16")!=0)?256:512;}
