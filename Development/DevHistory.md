@@ -1113,3 +1113,7 @@ Q正式ABBA两轮，每槽1000弃200：900 8.347714→8.189269（−1.898%）、
 常规672候选帧＋压力384=1056全命中0.36 floatFMA golden，AE528行同，连基线2112帧全有限。每stage两档history×EXACT/AE做强制回绕及无诊断同步的超时重算；每12帧36次真实reset，故障每实例fallback/errors/disabled各1。encoder故障runs1、decoder runs3，确认触发的是小通道。正常计时所有实例零错误/零回退；128总计时槽（96长、32短）原始CSV独立复算。
 
 9070开工/收尾66项SHA同，剑星仍046e1a63、62模块、SWIN_RUN1仅C256、DIRECT_IO3/MAKE_RESIDENT60。未安装/新备份/发包，生产源码、RE9、配置模板不变。结果 `results/swin-persistent-c128-c64-20260929`，源码 `HIP/experiments/swin-small`；本轮交负账，不默认开C128/C64。
+
+## 2026-09-29 19:10：鬼武者装 C256 持久化
+
+鬼武者（RE9 路线）装 RE9 runtime 536a959a + 剑星同款 62 模块（深层紧凑 + C256 持久化），flags 只加 `DLSS5_HIP_SWIN_RUN=1`（备份 `D:\DLSSNR-Lab\onimusha-backups\20260929-185008-swinrun`）。Zero：2K 质量（900 档）中画质稳定 60 帧，GPU 占用不满 100%——新 runtime + 持久化首次真游戏跑通。
