@@ -1,0 +1,200 @@
+{
+  "gfx1200": {
+    "off_sections_same": {
+      ".text": true,
+      ".note": true,
+      ".rodata": true
+    },
+    "changed_functions": [
+      "vit_attention_fused_400_bytein_bout",
+      "vit_attention_fused_640_bytein_bout"
+    ],
+    "other_functions_same": 74,
+    "other_metadata_same": true,
+    "candidate_metadata": {
+      "vit_attention_fused_400_bytein_bout": {
+        ".args": [
+          {
+            ".address_space": "global",
+            ".offset": 0,
+            ".size": 8,
+            ".value_kind": "global_buffer"
+          },
+          {
+            ".address_space": "global",
+            ".offset": 8,
+            ".size": 8,
+            ".value_kind": "global_buffer"
+          },
+          {
+            ".offset": 16,
+            ".size": 4,
+            ".value_kind": "by_value"
+          },
+          {
+            ".address_space": "global",
+            ".offset": 24,
+            ".size": 8,
+            ".value_kind": "global_buffer"
+          }
+        ],
+        ".group_segment_fixed_size": 0,
+        ".kernarg_segment_align": 8,
+        ".kernarg_segment_size": 32,
+        ".max_flat_workgroup_size": 32,
+        ".name": "vit_attention_fused_400_bytein_bout",
+        ".private_segment_fixed_size": 0,
+        ".sgpr_count": 12,
+        ".sgpr_spill_count": 0,
+        ".symbol": "vit_attention_fused_400_bytein_bout.kd",
+        ".uniform_work_group_size": 1,
+        ".uses_dynamic_stack": false,
+        ".vgpr_count": 68,
+        ".vgpr_spill_count": 0,
+        ".wavefront_size": 32,
+        ".workgroup_processor_mode": 1
+      },
+      "vit_attention_fused_640_bytein_bout": {
+        ".args": [
+          {
+            ".address_space": "global",
+            ".offset": 0,
+            ".size": 8,
+            ".value_kind": "global_buffer"
+          },
+          {
+            ".address_space": "global",
+            ".offset": 8,
+            ".size": 8,
+            ".value_kind": "global_buffer"
+          },
+          {
+            ".offset": 16,
+            ".size": 4,
+            ".value_kind": "by_value"
+          },
+          {
+            ".address_space": "global",
+            ".offset": 24,
+            ".size": 8,
+            ".value_kind": "global_buffer"
+          }
+        ],
+        ".group_segment_fixed_size": 0,
+        ".kernarg_segment_align": 8,
+        ".kernarg_segment_size": 32,
+        ".max_flat_workgroup_size": 32,
+        ".name": "vit_attention_fused_640_bytein_bout",
+        ".private_segment_fixed_size": 0,
+        ".sgpr_count": 12,
+        ".sgpr_spill_count": 0,
+        ".symbol": "vit_attention_fused_640_bytein_bout.kd",
+        ".uniform_work_group_size": 1,
+        ".uses_dynamic_stack": false,
+        ".vgpr_count": 68,
+        ".vgpr_spill_count": 0,
+        ".wavefront_size": 32,
+        ".workgroup_processor_mode": 1
+      }
+    }
+  },
+  "gfx1201": {
+    "off_sections_same": {
+      ".text": true,
+      ".note": true,
+      ".rodata": true
+    },
+    "changed_functions": [
+      "vit_attention_fused_400_bytein_bout",
+      "vit_attention_fused_640_bytein_bout"
+    ],
+    "other_functions_same": 74,
+    "other_metadata_same": true,
+    "candidate_metadata": {
+      "vit_attention_fused_400_bytein_bout": {
+        ".args": [
+          {
+            ".address_space": "global",
+            ".offset": 0,
+            ".size": 8,
+            ".value_kind": "global_buffer"
+          },
+          {
+            ".address_space": "global",
+            ".offset": 8,
+            ".size": 8,
+            ".value_kind": "global_buffer"
+          },
+          {
+            ".offset": 16,
+            ".size": 4,
+            ".value_kind": "by_value"
+          },
+          {
+            ".address_space": "global",
+            ".offset": 24,
+            ".size": 8,
+            ".value_kind": "global_buffer"
+          }
+        ],
+        ".group_segment_fixed_size": 0,
+        ".kernarg_segment_align": 8,
+        ".kernarg_segment_size": 32,
+        ".max_flat_workgroup_size": 32,
+        ".name": "vit_attention_fused_400_bytein_bout",
+        ".private_segment_fixed_size": 0,
+        ".sgpr_count": 12,
+        ".sgpr_spill_count": 0,
+        ".symbol": "vit_attention_fused_400_bytein_bout.kd",
+        ".uniform_work_group_size": 1,
+        ".uses_dynamic_stack": false,
+        ".vgpr_count": 68,
+        ".vgpr_spill_count": 0,
+        ".wavefront_size": 32,
+        ".workgroup_processor_mode": 1
+      },
+      "vit_attention_fused_640_bytein_bout": {
+        ".args": [
+          {
+            ".address_space": "global",
+            ".offset": 0,
+            ".size": 8,
+            ".value_kind": "global_buffer"
+          },
+          {
+            ".address_space": "global",
+            ".offset": 8,
+            ".size": 8,
+            ".value_kind": "global_buffer"
+          },
+          {
+            ".offset": 16,
+            ".size": 4,
+            ".value_kind": "by_value"
+          },
+          {
+            ".address_space": "global",
+            ".offset": 24,
+            ".size": 8,
+            ".value_kind": "global_buffer"
+          }
+        ],
+        ".group_segment_fixed_size": 0,
+        ".kernarg_segment_align": 8,
+        ".kernarg_segment_size": 32,
+        ".max_flat_workgroup_size": 32,
+        ".name": "vit_attention_fused_640_bytein_bout",
+        ".private_segment_fixed_size": 0,
+        ".sgpr_count": 12,
+        ".sgpr_spill_count": 0,
+        ".symbol": "vit_attention_fused_640_bytein_bout.kd",
+        ".uniform_work_group_size": 1,
+        ".uses_dynamic_stack": false,
+        ".vgpr_count": 68,
+        ".vgpr_spill_count": 0,
+        ".wavefront_size": 32,
+        ".workgroup_processor_mode": 1
+      }
+    }
+  }
+}

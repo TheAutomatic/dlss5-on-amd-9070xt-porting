@@ -16,6 +16,8 @@
 
 ## 正在进行
 
+- **09-29 ViT attention通过，模块已装剑星**：Daniel050/051该核代码相同；reference有half归约/累积，不能当0.36同数学直接照搬。采用正常half精确widening＋寄存器成对FP8编码＋分母/AV输出转置；640单核约71→38µs，400约38→15µs。C256基线上两轮整网900省0.183～0.189ms（2.20～2.28%）、1080省0.169～0.177ms（1.50～1.58%）；168常规＋48回绕帧全golden逐位，AE108行同，RE9两档回放同。只换deep_fast-packed双架构2模块（gfx1200 1d816dc1/gfx1201 1750899d），另74导出不变；三宏源码默认0、生产配方开1，无新用户开关。剑星宿主046e1a63/其余60模块/配置SHA保留，DIRECT_IO3/MAKE_RESIDENT60/SWIN_RUN1不变；备份 `D:\DLSSNR-Lab\hip-backend\vit-attention-20260929\backups\stellar-20260929-194730`。没发包、没启动游戏；GPU测试已结束，可另排尖峰实验。结果 `results/vit-attention-20260929`。
+
 - **09-29 C128/C64持久化已交负账，不推广**：四个encoder/decoder stage逐一在C256基线上测。对现役长ABBA及两轮同host确认均未达额外0.5%；同host最好C128 encoder1080仅−0.195/−0.100%，900四段均慢。C128每段只净省1派发，C64反增1，VGPR/LDS与理论占用率不变。672常规＋384回绕/异步超时候选帧全命中0.36golden，AE528行同；每故障实例确实GPU重算一次并禁用。剑星66项SHA同，保持046e1a63/C256、DIRECT_IO3/MAKE_RESIDENT60，不装、不发包。结果 `results/swin-persistent-c128-c64-20260929`。
 
 - **09-29 C256持久化通过，已装剑星**：encoder16–21/decoder49–54各六层设备就绪队列，整网派发900 **197→179**、1080 **168→162**；两轮900快1.90/1.94%、1080快0.57/0.61%，168帧golden逐位、AE84行同，144帧回绕/超时压力同。约100ms超时后GPU串行重算并禁用本实例，不让坏中间结果出网；原型与生产七个sp函数代码/元数据同。新开关 `DLSS5_HIP_SWIN_RUN` 默认0，剑星设1；双架构各31模块，宿主 **046e1a63**，保留原60模块、DIRECT_IO=3、MAKE_RESIDENT_EVERY=60。备份 `D:\DLSSNR-Lab\hip-backend\swin-persistent-20260929\backups\stellar-20260929-172155`。RE9 runtime同步且冒烟通过，游戏未换；没发包，待Zero本机画面观察。结果 `results/swin-persistent-20260929`。
@@ -65,7 +67,7 @@
 **编译器支线已具备实验入口**：公开ROCm7.0/7.1仍LLVM20、7.2是LLVM22，当前采用公开AMD分支最后LLVM21基点。第一批补丁候选及实际pass入口在 `results/llvm-fork-20260929/patch-candidates.md`；优先有证明的med3/范围倒数/精确转换，先做小例和语义边界，不直接全局fast-math。现役手写优化已消掉不少机会；本轮仅打通管线，后续独立评估收益。
 
 1. **按逐核地图排优先级**：`results/kernel-map-20260929/map-after/`，仅本轮9组更新，其余沿用同批基线。head已从pool＋project约125µs降到24.65µs；地图当时1080总168派发（本轮持久化后162）。最终C512 projection仍可研究M32权重共用，候选仅准备未GPU实测；别与此前失败的FFN M32混淆。
-2. **ViT attention仍是主要差距**：reference约22～24µs，我方新核约70～72µs。已合入score转置去LDS/barrier，但只小赚，不能把约50µs差距当已解决。QKV约49对32µs，触及FP16/FP8数学边界，维持C段待拍板；pack旧P/G/Q/R和消费端V均负账，不再重复。
+2. **ViT attention本轮已兑现一部分差距**：640 reference22～24µs，我方约71→38µs；去掉通用half解码的不可达分支、概率成对编码、AV输出转置，整网已收2.2%/1.5%。还差约14～16µs；我方每64key V64条u8、对方8条b64，另有严格float分母/累加数学差异，未把余差唯一拆成stall周期。4wave/64key预取照搬反慢，已交账。QKV49对32µs仍在C段，本轮未碰；旧P/G/Q/R、消费端float打包V和入口出口gather-pack不重跑。详见 `results/vit-attention-20260929/isa-account.md`。
 3. **HIP↔D3D 交接改 GPU 轮询**（`results/frame-breakdown-20260928` 第 4 项）：收益待测，会碰看门狗（Daniel 用 1 像素 draw 分片自旋规避）。
 4. **900 档**：本轮head＋ViT再省0.021～0.036ms，派发198→197；上一轮C512紧凑布局收益保留，C256内层本轮已改持久化（900总179派发）。地图本轮只做1080，Daniel900的C512 52×32/ViT448与我们50×30/400不同，未来单独建图。
 5. 小件：C256 FFN 标量量化/地址开销（`results/aco-lineup-20260928` 逐条表）；ViT QKV 归一化段；C32 对角残差跳过全零 K16 半块（约 −0.1～0.2%）。

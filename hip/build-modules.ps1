@@ -45,7 +45,7 @@ $modules = @(
     @{ name = 'multihead-fast-padded-wave';         defines = @('HIP_FMED3_CLAMP 1');                        sources = @('multihead_fast_padded.hip') },
     @{ name = 'multihead_fused_attention';          defines = @('HIP_MH_RTZ_ISA 1');      sources = @('multihead_fused_attention.hip') },
     @{ name = 'deep_fast';                          defines = @();                        sources = @('deep_fast.hip') },
-    @{ name = 'deep_fast-packed';                   defines = @('HIP_VIT_ATTN_TRANSPOSED_SCORE 1','HIP_BRANCHLESS_F 1');    sources = @('deep_fast.hip') },
+    @{ name = 'deep_fast-packed';                   defines = @('HIP_VIT_ATTN_NATIVE_HALF 1','HIP_VIT_ATTN_PROB_PAIR 1','HIP_VIT_ATTN_TRANSPOSED_AV 1','HIP_VIT_ATTN_TRANSPOSED_SCORE 1','HIP_BRANCHLESS_F 1');    sources = @('deep_fast.hip') },
     @{ name = 'multihead-fast-packed';              defines = @();                        sources = @('multihead_fast.hip') },
     @{ name = 'multihead-fast-padded-wave-packed';  defines = @('C512_HEAD_GROUP 1','HIP_FFN_HOIST_RES 2','HIP_FFN_LINE_STORES 1','HIP_FMED3_CLAMP 1'); sources = @('multihead_fast_padded.hip','c512_head_group.inc') },
     @{ name = 'c32-wave1'; defines = @('CW_UP_FUSED 1','CW_ACT_FMED3 1','HIP_PREPACKED_WEIGHTS 1','CW_ROLL_HIDDEN 1','CW_ROLL_WINDOW 1','CW_VEC_INPUT 1','CW_PREFIX_SPLIT 1','CW_PACK8 1','HIP_FP8_SAT_MODE 3','CW_DIRECT_OUT 1','CW_RTZ_PAIR 1','CW_PACK_MODE_MASK 127','CW_PREFIX_DIRECT_OUT 1','CW_PREFIX_FULL_TILE 1','CW_FINISH_FULL_TILE 1'); sources = @('c32_fused_ffn_attention.hip','wave_owned_c32.inc') },

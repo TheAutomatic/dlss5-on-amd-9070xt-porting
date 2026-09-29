@@ -1,0 +1,15 @@
+START,ours-448-native,vit_probe_native
+EXACT,ours-448-native,different=0
+BUFFER,ours-448-native,output,invalid=0,nonzero=431291
+CHECK,ours-448-native,guards=0,invalid=0,nonzero=431291
+TIME,ours-448-native,0,21.932820
+TIME,ours-448-native,1,22.544531
+TIME,ours-448-native,2,21.053437
+TIME,ours-448-native,3,18.932344
+TIME,ours-448-native,4,17.828438
+TIME,ours-448-native,5,17.155468
+TIME,ours-448-native,6,17.522492
+EXACT,ours-448-native,different=0
+BUFFER,ours-448-native,output,invalid=0,nonzero=431291
+CHECK,ours-448-native,guards=0,invalid=0,nonzero=431291
+RESULT,ours-448-native,18.932344,128,7

@@ -1,0 +1,15 @@
+START,ours-400-transpose,vit_probe_transpose
+EXACT,ours-400-transpose,different=0
+BUFFER,ours-400-transpose,output,invalid=0,nonzero=386432
+CHECK,ours-400-transpose,guards=0,invalid=0,nonzero=386432
+TIME,ours-400-transpose,0,18.300781
+TIME,ours-400-transpose,1,19.130468
+TIME,ours-400-transpose,2,16.318906
+TIME,ours-400-transpose,3,16.085157
+TIME,ours-400-transpose,4,15.573907
+TIME,ours-400-transpose,5,14.854687
+TIME,ours-400-transpose,6,14.423281
+EXACT,ours-400-transpose,different=0
+BUFFER,ours-400-transpose,output,invalid=0,nonzero=386432
+CHECK,ours-400-transpose,guards=0,invalid=0,nonzero=386432
+RESULT,ours-400-transpose,16.085157,128,7

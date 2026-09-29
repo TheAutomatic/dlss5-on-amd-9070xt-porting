@@ -1117,3 +1117,18 @@ Q正式ABBA两轮，每槽1000弃200：900 8.347714→8.189269（−1.898%）、
 ## 2026-09-29 19:10：鬼武者装 C256 持久化
 
 鬼武者（RE9 路线）装 RE9 runtime 536a959a + 剑星同款 62 模块（深层紧凑 + C256 持久化），flags 只加 `DLSS5_HIP_SWIN_RUN=1`（备份 `D:\DLSSNR-Lab\onimusha-backups\20260929-185008-swinrun`）。Zero：2K 质量（900 档）中画质稳定 60 帧，GPU 占用不满 100%——新 runtime + 持久化首次真游戏跑通。
+
+
+## 2026-09-29 19:47：ViT attention逐位三刀通过，模块装剑星
+
+任务629b0555。先拆Daniel050/051 reg1d_attn<1,false>：代码字节相同，4wave/128线程组、每wave16query/head、64key一轮；Q/K blocked、V channel-major，score/P/AV寄存器化，LDS0、16个bpermute，110VGPR。reference也有QK/分母/AV的half舍入、half归约树，不能照搬成我们的float逐位路径。原约50µs是640单次attention派发差，网络每帧8次。
+
+逐段ISA抓到源码范围丢失：clamp之后概率half仅552种正normal（0x1c20..0x3e90），仍走通用from_half，NaN/Inf/denormal分支每tile重复8遍。穷举所有可达值确认精确widening；改native half→float，再用4次成对FP8编码替8次单值编码/冗余clamp/拼字，最后转置分母与AV输出，让query在lane、严格倒数8→1；原key顺序、float累加、affine和最终RTZ保持。张量布局/派发/host/QKV不变。代码5600→2944B，VGPR72→68、SGPR16→12、LDS/private0；理论occupancy仍100%（Daniel75%）。16key静态循环branch/EXEC42→1、wait/delay133→11，VMEM18与WMMA5不变。
+
+照抄head顺序、4wave分组、四tile预取及组合，逐字节过后大多持平/变慢，不上；native后再组合仍不如单wave。微测micro7同批：400 37.991→15.017µs、448对照49.850→16.550、640 70.770→37.885；552值域证明与123个独立job全记录。V=+1诊断移除V取数/地址/打包仅对该夹具逐位，640省约6～10µs，不冒充通用候选或纯带宽时间；还有约15µs对Daniel余差涉及V请求组织与half数学，未唯一归到每项stall。
+
+双架构三宏默认全0三段同现役，开1仅400/640两个bytein_bout函数变，另74函数及元数据同；生产目标函数与已测probe_pair_transpose代码/ABI元数据同。EXACT/AE168候选帧全命中0.36golden，AE84行同44reuse/40refresh；C256回绕48帧同golden、AE24行同，每12帧实际24次reset、零回退/错误。RE9同一既有runtime两套module目录，两档各12帧末hash仍b2980ada643da964/758674a8bbd0206d，未换鬼武者。
+
+C256持久化基线上两轮1000弃200 ABBA，完整NativeGameFrame wall：900 8.306088→8.117038（−2.276%）、8.314973→8.132057（−2.200%）；1080 11.206715→11.038179（−1.504%）、11.199951→11.023446（−1.576%）。MAKE_RESIDENT_EVERY60全程保留，尖峰测试未混跑；逐槽原始CSV独立复算，不能把微测8倍相加当整帧收益。
+
+19:47备份后只装deep_fast-packed两份：gfx1200 1d816dc1、gfx1201 1750899d；宿主046e1a63、其他60模块与dxgi/ini/flags原SHA，总62模块。DIRECT_IO3/MAKE_RESIDENT60/SWIN_RUN1原样。备份 `D:\DLSSNR-Lab\hip-backend\vit-attention-20260929\backups\stellar-20260929-194730`；安装脚本带SHA检查/异常回滚/RestoreBackup。没发包、没启动游戏；GPU测试已结束。结果 `results/vit-attention-20260929`，脚本 `HIP/experiments/vit-attention`；三个编译宏默认0、生产recipe开1，无新用户开关。

@@ -220,3 +220,10 @@ In game (local, RX 9070 XT, EXACT, standing still): Stellar Blade 1080p native A
 - A device ready queue runs six inner C256 layers per encoder/decoder stage, preserving windows and the 0.36 float-FMA bit-exact baseline. Two offline full-frame ABBA rounds save 1.90–1.94% at 900 (about 0.16ms), 0.57–0.61% at 1080 (about 0.06–0.07ms). Dispatches: 197→179 / 168→162.
 - `DLSS5_HIP_SWIN_RUN=0` defaults off; 1 enables C256 only for compatible 900/1080 recipes. Shared RE9 parsing and all three templates updated. One new module per architecture, 31 each.
 - A roughly 100ms queue timeout triggers GPU stage replay and disables persistence for the instance; ticket rollover drains before reset. Passed 168 bit-exact frames plus 144 injected-fault/rollover frames. Installed locally in Stellar Blade with backup; in-game FPS observation pending. No 0.36 package update. See `Development/results/swin-persistent-20260929/README.md`.
+
+
+## Unreleased (09-29, ViT attention)
+
+- Preserve the 0.36 bit-exact math: use exact hardware widening for bounded normal half values, encode probabilities in pairs in registers, and transpose denominator/AV outputs to avoid repeated reciprocals. Tensor layouts, accumulation order, QKV and dispatch count stay the same.
+- On the C256-persistent baseline, two offline full-frame ABBA rounds improve 900 by 2.20–2.28% (0.18–0.19ms), 1080 by 1.50–1.58% (0.17–0.18ms). Target kernels: VGPR72→68, LDS0; only two deep_fast-packed functions change.
+- Passed 168 EXACT/AE frames plus 48 rollover frames and both RE9-backend replay tiers. Three compile macros default off in source and are enabled in the production recipe; no new user switch. Dual-architecture modules installed locally in Stellar Blade with backup, preserving host046e1a63 and settings; no package release. See `Development/results/vit-attention-20260929/README.md`.
