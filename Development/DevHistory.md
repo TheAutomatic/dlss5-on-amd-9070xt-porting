@@ -1067,3 +1067,16 @@ LLVM22完成七组EXACT/AE、候选168帧全有限但96不同：两模式均为9
 静态对齐每架构996导出；从最新两档197/168派发筛43活跃kernel/module对，分族VALU/VOPD/WMMA/VMEM/SALU/WAIT与资源。三候选活跃核均零VGPR/SGPR spill，LDS/private不变；C128部分寄存器降，C256最高159→20的174/公开21的181/22的198。22的C512 mix静态1047→403主要含四轮尾循环：16条转换×4仍64，增加movrels/m0，不是少算六成；代表C32/C64/C128的med3/half/div-helper/setreg数量四套一致，无证据称新编译器自动修掉现有手写绕法。
 
 决定保留现役COMGR3，公开21留作补丁开发基点。现场60模块和四个宿主/配置文件64项前后hash同，没有装机/发包/混编候选。结果results/compiler-versions-20260929，复现tools/compiler-versions，构建和模块产物在~/work/compiler-versions-20260929及~/work/llvm-build-rocm724，不入仓。归档清理的只是PowerShell把字符串附加属性展开成76MB的冗余AE JSON；逐槽原始CSV保留、Python独立重算，原始ZIP与归档SHA都有。
+
+
+## 2026-09-29：LLVM21第一刀，VOPD局部前瞻逐位，但未达对驱动0.5%
+
+按c0a61968，版本锁公开LLVM21 6d585d87。在GCNCreateVOPD增加amdgpu-dlss5-vopd-lookahead=N（默认0，本轮4），只gfx1200/1201 wave32非strictfp；最终相邻配对遗漏的独立指令允许小范围前移，检查物理别名和隐式寄存器RAW/WAR/WAW，不越内存/WMMA/MFMA/MODE/同步/inline-asm/bundle，清掉移动指令旧kill。原后续waitcnt/hazard/delay重新生成等待，不改算术/内核/配方。两份MIR/FileCheck、5条RUN通过；C32/C64/deep三个真实模块197导出backend MachineVerifier通过，验证对象代码三段同实际候选。fork269832faf25b已推dlss5-gfx12，默认关。
+
+默认关off与候选P双架构各60模块。off三段60/60同原公开21；P对off两架构1992导出188函数字节同、1804变，全kernel元数据同，VGPR/SGPR/LDS/private/spill/参数/波宽均未变。当前两档trace43活跃kernel/module对多513对VOPD，后续多163条s_delay_alu/少10条s_wait_loadcnt，静态净少360。按真实groups×threads/32的调用权重列账（TOPO第四列items不能当groups），不冒充动态循环/周期账。
+
+EXACT/AE各7×12共168候选帧命中09-28 float FMA golden，连驱动基线336帧全读回/无非有限；AE84行所有字段同44复用40刷新。公共21默认关与驱动21分别两轮900/1080 ABBA，每槽1000弃200，只读首尾，共32长槽/32000计时帧原序列复算。对公共21：9008.316066→8.312584 / 8.404309→8.380732（−0.042/−0.281%），108011.215927→11.197337 / 11.245972→11.223834（−0.166/−0.197%）；对驱动21：9008.392208→8.379759 / 8.413816→8.383906（−0.148/−0.355%），108011.215111→11.218029 / 11.217114→11.234026（+0.026/+0.151%）。口径完整NativeGameFrame wall，不是纯HIP或游戏FPS。
+
+8条前瞻只编C32/C64两个gfx1201模块作静态探针：C32多2～4对，多数只净省0～3条；C64/C128部分长2～4条，C256 attention不变。未做该探针GPU回归/计时，不当候选。结论是局部后置配对接近收益递减，寄存器分配/内存/WMMA工作均未触及，不是整个编译器的上限；没有再盲删等待或扫参数。
+
+未达任一档对驱动≥0.5%，不改生产编译链、不装机/发包。现场64项hash同，off/P60份gfx1201实验模块hash同。源码脚本tools/llvm-patch1，结果results/llvm-patch1-20260929含补丁、2个lit结果、代码/元数据差异、逐帧hash/AE及32槽原始CSV。编译器构建时尚未提交，version仍94aca371，实际C++源码SHA/编译器SHA与fork提交对应另存，不混称原版编译器。

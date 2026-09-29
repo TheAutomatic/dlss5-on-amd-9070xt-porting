@@ -1,0 +1,74 @@
+[
+  {
+    "baseline": "public LLVM21",
+    "batch": "public1",
+    "height": 900,
+    "baseline_ms": 8.316066249999999,
+    "patch_ms": 8.312584375,
+    "delta_ms": -0.0034818749999985243,
+    "delta_percent": -0.041869255190196686
+  },
+  {
+    "baseline": "public LLVM21",
+    "batch": "public1",
+    "height": 1080,
+    "baseline_ms": 11.215926875000001,
+    "patch_ms": 11.197336875000001,
+    "delta_ms": -0.018589999999999662,
+    "delta_percent": -0.16574644438379638
+  },
+  {
+    "baseline": "public LLVM21",
+    "batch": "public2",
+    "height": 900,
+    "baseline_ms": 8.404309375,
+    "patch_ms": 8.380731874999999,
+    "delta_ms": -0.023577500000001805,
+    "delta_percent": -0.28054060063682495
+  },
+  {
+    "baseline": "public LLVM21",
+    "batch": "public2",
+    "height": 1080,
+    "baseline_ms": 11.2459725,
+    "patch_ms": 11.223834375,
+    "delta_ms": -0.022138125000001452,
+    "delta_percent": -0.19685380699625554
+  },
+  {
+    "baseline": "driver LLVM21",
+    "batch": "driver1",
+    "height": 900,
+    "baseline_ms": 8.3922075,
+    "patch_ms": 8.379759374999999,
+    "delta_ms": -0.012448125000000587,
+    "delta_percent": -0.14832956644602602
+  },
+  {
+    "baseline": "driver LLVM21",
+    "batch": "driver1",
+    "height": 1080,
+    "baseline_ms": 11.215110625,
+    "patch_ms": 11.21802875,
+    "delta_ms": 0.002918125000000771,
+    "delta_percent": 0.02601958284296213
+  },
+  {
+    "baseline": "driver LLVM21",
+    "batch": "driver2",
+    "height": 900,
+    "baseline_ms": 8.413815625,
+    "patch_ms": 8.383905625,
+    "delta_ms": -0.029909999999999215,
+    "delta_percent": -0.3554867533717698
+  },
+  {
+    "baseline": "driver LLVM21",
+    "batch": "driver2",
+    "height": 1080,
+    "baseline_ms": 11.21711375,
+    "patch_ms": 11.23402625,
+    "delta_ms": 0.016912500000000108,
+    "delta_percent": 0.15077407947299282
+  }
+]

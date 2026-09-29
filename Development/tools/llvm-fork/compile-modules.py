@@ -47,6 +47,8 @@ def main():
     p.add_argument('--only', nargs='*', default=[])
     p.add_argument('--jobs', type=int, default=4)
     p.add_argument('--generate-only', action='store_true')
+    p.add_argument('--backend-option', action='append', default=[],
+                   help='LLVM backend option, forwarded with -mllvm (repeatable)')
     a = p.parse_args()
     a.out.mkdir(parents=True, exist_ok=True)
     version = '' if a.generate_only else subprocess.check_output([str(a.bin / 'clang'), '--version'], text=True)
@@ -77,6 +79,8 @@ def main():
                  '-nogpuinc', '-nogpulib', str(src), '-o', str(bc)]
         back = [str(a.bin / 'clang'), '-target', 'amdgcn-amd-amdhsa', '-mcpu=' + target,
                 '-O3', '-nogpulib']
+        for option in a.backend_option:
+            back += ['-mllvm', option]
         commands = [front,
                     back + ['-S', str(bc), '-o', str(asm)],
                     back + ['-c', '-mllvm', '-amdgpu-internalize-symbols', str(bc), '-o', str(obj)],

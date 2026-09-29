@@ -1,0 +1,38 @@
+[
+  {
+    "module": "c32-wave1",
+    "kernels": 17,
+    "verify_returncode": 0,
+    "code_sections_same": {
+      ".text": true,
+      ".rodata": true,
+      ".note": true
+    },
+    "bitcode_sha256": "30faa3633e7629b45066335c0156d5ac8a7a6c2c726ab26ea6f9b17fa810f14e",
+    "verified_object_sha256": "c44213b7b145c704150f08b2d1fc50c0dd31dbb128e812cae1227ef373f60580"
+  },
+  {
+    "module": "c64-wave2",
+    "kernels": 104,
+    "verify_returncode": 0,
+    "code_sections_same": {
+      ".text": true,
+      ".rodata": true,
+      ".note": true
+    },
+    "bitcode_sha256": "985a134eaa4181e2357792505fce0f62d443b34c063fd9be6c18d35fa8132b41",
+    "verified_object_sha256": "e6b30c222b1a8e4e7d2ed78d717a8115c9111ae9c4aa0f5690d6a4401d6b3c46"
+  },
+  {
+    "module": "deep_fast-packed",
+    "kernels": 76,
+    "verify_returncode": 0,
+    "code_sections_same": {
+      ".text": true,
+      ".rodata": true,
+      ".note": true
+    },
+    "bitcode_sha256": "7719f9a3d3e5b16d8fd7046c26fe7199203f1d8f25ad14465a809223ce27f3ab",
+    "verified_object_sha256": "1c6f09623ad1a987a2dc9edc1e2bc47c6e6ab02c020a1b5fca2cc240a0969c30"
+  }
+]
