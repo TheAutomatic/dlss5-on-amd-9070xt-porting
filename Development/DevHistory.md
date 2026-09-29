@@ -1084,3 +1084,7 @@ EXACT/AE各7×12共168候选帧命中09-28 float FMA golden，连驱动基线336
 ## 2026-09-29 16:10：Daniel 0.5.1 静态对照（分身）
 
 新增 Swin 持久化 run 内核 `k_reg_swin_run<64/128/256>`（单次派发跨层 + 设备端就绪队列、100ms 超时、新 env `DLSSNR_SWIN_RUN(_ALL)`），很可能是 +6%/+8% 主体；reference 档去 swin_mh/swin32 溢出（private 336→80/0）；fast 档再削 cvt/VALU；ViT 新 `k_v1dl_*<2>` 每 wave 双倍 tile。reference 数学未变。对我们：持久化 run 是"C256 持久化已关"的新证据，可重开评估。未计时。换装脚本 `D:\DLSSNR-Lab\daniel-051\swap.ps1`。见 `results/daniel-051-20260929`。
+
+## 2026-09-29 16:40：Daniel 非原生 1080P 闪烁/变糊的静态推断
+
+群友反馈 Daniel 自 0.4.3 起非原生 1080P 闪烁变糊。静态看：他预超分时网络直接跑在任意渲染分辨率上（0.4.0 日志 1708×964），0.5.x 新增 `DLSSNR_EXTENT`/`PAD128`，默认 ceil64"原生 extent"（1080→1088），并自承部分尺寸"single-tile mode not ported"；0.4.0 基线是 PAD128——换规则的时间点与"0.4.3 起"吻合（中等证据）。另一原因：预超分无历史（history off），放大模式下 FSR 把逐帧随抖动变化的残差放大成闪烁/发软。我们只在固定几何上跑（1080=原版 1152+(-4,-4)，非 1080 缩进 720/900/1080 档），几何风险小，但 900/720 是自定几何，且预超分同样无历史（history_reset=1）——第二条风险我们也有。给 Zero 的本机对照步骤见 `results/daniel-nonnative-20260929/README.md`。
