@@ -215,7 +215,7 @@ Download: [Quark](https://pan.quark.cn/s/e5afdaca0769) · [Gofile mirror](https:
 In game (local, RX 9070 XT, EXACT, standing still): Stellar Blade 1080p native AA about 57 → 60 (at the 60 Hz windowed-mode cap); 2560×1440 native AA 52–53 after the C512 fusion, 54 final (the in-game comparison setting from now on).
 
 
-## 0.37 (09-29, tag pending)
+## 0.37 (09-29, tag 0.37 = dc52056f)
 
 Download (all three packages): [Quark](https://pan.quark.cn/s/7dbfdc6425fd) · [Gofile mirror](https://gofile.io/d/onqeAHST); tag 0.37 = dc52056f
 
