@@ -146,3 +146,6 @@ DLSS5_FRAME_STATS=0
 # directly (no 35 MB copy); 3 = also hands the decoder output to FSR directly on the pre-upscale route (RGBA16F colour, no copy back).
 # History (temporal) sessions keep the old path automatically. 0 = previous behaviour.
 DLSS5_DIRECT_IO=1
+
+# C256 internal-stage ready queue; bounded GPU recovery, opt-in.
+DLSS5_HIP_SWIN_RUN=0

@@ -1088,3 +1088,15 @@ EXACT/AE各7×12共168候选帧命中09-28 float FMA golden，连驱动基线336
 ## 2026-09-29 16:40：Daniel 非原生 1080P 闪烁/变糊的静态推断
 
 群友反馈 Daniel 自 0.4.3 起非原生 1080P 闪烁变糊。静态看：他预超分时网络直接跑在任意渲染分辨率上（0.4.0 日志 1708×964），0.5.x 新增 `DLSSNR_EXTENT`/`PAD128`，默认 ceil64"原生 extent"（1080→1088），并自承部分尺寸"single-tile mode not ported"；0.4.0 基线是 PAD128——换规则的时间点与"0.4.3 起"吻合（中等证据）。另一原因：预超分无历史（history off），放大模式下 FSR 把逐帧随抖动变化的残差放大成闪烁/发软。我们只在固定几何上跑（1080=原版 1152+(-4,-4)，非 1080 缩进 720/900/1080 档），几何风险小，但 900/720 是自定几何，且预超分同样无历史（history_reset=1）——第二条风险我们也有。给 Zero 的本机对照步骤见 `results/daniel-nonnative-20260929/README.md`。
+
+## 2026-09-29 17:21：C256持久化队列通过，带GPU恢复装剑星
+
+任务70533d96，先拆Daniel0.5.1：一WG一窗口，一次launch跨层；设备内存head/tail/依赖计数/ready queue，只有4字节host映射错误；s_sleep2、10M realtime tick约100ms。host超时路径只报警、没有找到重算；run掩码构造默认0，不能把宣传+6%归给默认持久化。旧transpose-persist只估算未实施，“以前持久化慢”实际是单层整块融合负账。
+
+实现encoder16–21/decoder49–54各六层。C256 run为154VGPR/48SGPR/32KiB LDS/private0，900每段624任务、1080 每段893任务；init/run/recover共三派发，整网197→179、168→162。每层独立输出保全原输入，超时abort后单WG无轮询逐层重算；映射错误计数让host禁用实例。队列发布release/acquire、全wave写出fence/barrier；回绕drain+clear+同步归零。内部替代PDL，边界普通stream，其它PDL保留。CPU逐段同步版慢0.485/0.685ms，换GPU条件恢复才赚。
+
+canonical Q 7用例EXACT/AE共168候选帧命中09-28golden，AE84行同（44reuse/40refresh）。异步P同168帧；压力144帧含回绕、同步诊断故障、无诊断同步故障，全同，故障确实恢复且禁用，生产sp七函数与P代码/元数据同。默认关闭/缺模块各12帧同。双架构编过，9070实跑；旧c64三段不变。RE9两档off/on12帧hash同且active1，缺模块回退同，游戏未换装。
+
+Q正式ABBA两轮，每槽1000弃200：900 8.347714→8.189269（−1.898%）、8.398949→8.235931（−1.941%）；1080 11.189376→11.125522（−0.571%）、11.204741→11.136764（−0.607%）。完整NativeGameFrame wall，原始CSV独立复算。不是游戏FPS。结果/静态证据/原始日志 `results/swin-persistent-20260929`，脚本 `HIP/experiments/swin-persistent`。
+
+现场旧宿主实际ba010de7（任务单b5ab8c3a已过时）；校验64项后装新046e1a63、增双架构swin-persistent模块到62份，原60、dxgi和ini均同。新DLSS5_HIP_SWIN_RUN源码/三模板默认0、剑星设1，DIRECT_IO3/MAKE_RESIDENT60保留。备份 `D:\DLSSNR-Lab\hip-backend\swin-persistent-20260929\backups\stellar-20260929-172155`，安装支持哈希校验与回滚。未发包、未启动游戏，待Zero现场观察。下一步按C128四层→C64两层评估，不自动全开。

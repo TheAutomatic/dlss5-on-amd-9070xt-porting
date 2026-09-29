@@ -6,7 +6,7 @@
     [string[]]$ExtraDefines = @(),
     [ValidateSet('gfx1200','gfx1201')][string[]]$Targets = @('gfx1200','gfx1201')
 )
-# Builds 29 modules per target (24 legacy, two opt-in wave-owned modules, two opt-in C512 32-token modules, one opt-in ViT
+# Builds 31 modules per target (24 legacy, two opt-in wave-owned modules, two opt-in C512 32-token modules, one opt-in ViT
 # projection 64-column module). 2026-09-26: the mh_fast row now spells out HIP_FFN_LINE_STORES 1 -- prod7/prod8 were built
 # with it (deployments/stellar-prod7-20260924, prod8/mhfast.generated.hip) but the row lacked it, so a recipe rebuild silently
 # dropped the prod7 full-line stores (bit-exact either way, -0.6/-0.7%).; by default gfx1200 and gfx1201 go into architecture subdirectories.
@@ -53,7 +53,8 @@ $modules = @(
     @{ name = 'c512-m32-mh'; defines = @('C512_COMPACT_QKV_ATTN 1','C512_FUSED_QKV_ATTN 1','HIP_PREPACKED_WEIGHTS 1','HIP_FFN_HOIST_RES 2','HIP_PDL_KERNELS 0','HIP_FMED3_CLAMP 1'); sources = @('multihead_fast_padded.hip','c512_m32_mh.inc','c512_qkv_attention_fused.inc','c512_qkv_attention_compact.inc') },
     @{ name = 'c512-m32-deep'; defines = @('HIP_PREPACKED_WEIGHTS 1','HIP_BRANCHLESS_F 1'); sources = @('deep_fast.hip','c512_m32_deep.inc') },
     @{ name = 'vit-stream'; defines = @('HIP_PREPACKED_WEIGHTS 1','HIP_BRANCHLESS_F 1','HIP_VIT_STREAM_KERNELS 1'); sources = @('deep_fast.hip','vit_stream.inc') },
-    @{ name = 'vit-wide-deep'; defines = @('HIP_PREPACKED_WEIGHTS 1','HIP_BRANCHLESS_F 1'); sources = @('deep_fast.hip','vit_wide_deep.inc') }
+    @{ name = 'vit-wide-deep'; defines = @('HIP_PREPACKED_WEIGHTS 1','HIP_BRANCHLESS_F 1'); sources = @('deep_fast.hip','vit_wide_deep.inc') },
+    @{ name = 'swin-persistent'; defines = @('W2_UP_FUSED 1','W2_FFN_QT_SMALL_MASK 3','W2_FFN_QT_BATCH 2','W2_BOUNDED_RCP 1','HIP_PREPACKED_WEIGHTS 1','HIP_FFN_HOIST_RES 2','HIP_PDL_KERNELS 0','W2_FRAGMENT_WEIGHTS 1','W2_LAUNDER_QKV 1','W2_SCHED_FENCE 1','W2_ROLL_QUERY 1','W2_HIDDEN_TILES 2','W2_PACK8 6','HIP_FMED3_CLAMP 1','W2_BYTE_INPUT_LOADS 1','W2_RTZ_PAIR 1','W2_DIRECT_COORDS 1','W2_EXPLICIT_WINDOW 1','W2_NO_EXPORTS 1','HIP_SWIN_PERSISTENT_KERNELS 1'); sources = @('multihead_fast_padded.hip','wave_owned_mh.inc','@swin-persistent-types','swin_persistent.inc') }
 )
 $outputRoot=$OutputDir
 foreach($target in $Targets){
@@ -69,7 +70,12 @@ foreach ($m in $modules) {
     $recipe = @($m.defines | Where-Object { ($_ -split '\s+')[0] -notin $extraNames })
     foreach ($d in @($ExtraDefines)+$recipe) { $text += "#define $d`n" }
     foreach ($part in $m.sources) {
-        if ($part -eq '@wave-owned-attention-body') {
+        if ($part -eq '@swin-persistent-types') {
+            $types=Join-Path $SourceDir 'swin_persistent_types.h'
+            if(!(Test-Path $types)){$types=Join-Path $SourceDir '../Development/HIP/swin_persistent_types.h'}
+            if(!(Test-Path $types)){throw 'Copy canonical Development/HIP/swin_persistent_types.h beside the HIP sources'}
+            $text += ([IO.File]::ReadAllText($types) -replace '#pragma once', '') + "`n"
+        } elseif ($part -eq '@wave-owned-attention-body') {
             $core=[IO.File]::ReadAllText((Join-Path $SourceDir 'wave_owned_mh.inc'))
             $start=$core.IndexOf(' // One wave owns all keys');$end=$core.IndexOf('#define W2_KERNEL')
             if($start -lt 0 -or $end -le $start){throw 'Wave-owned attention extraction anchors missing'}

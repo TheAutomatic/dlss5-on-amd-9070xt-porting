@@ -18,8 +18,8 @@ from pathlib import Path
 def recipe(hip):
     text = (hip / 'build-modules.ps1').read_text(encoding='utf-8-sig')
     rows = re.findall(r"@\{ name\s*=\s*'([^']+)';\s*defines\s*=\s*@\((.*?)\);\s*sources\s*=\s*@\((.*?)\)\s*\}", text)
-    if len(rows) != 30:
-        raise RuntimeError(f'Expected 30 canonical recipe rows, found {len(rows)}')
+    if not rows or len({r[0] for r in rows}) != len(rows):
+        raise RuntimeError('Empty or duplicate canonical module recipe')
     for name, defines, parts in rows:
         defs = ['HIP_ISA_HALF 1']
         if name.endswith('-packed'):
@@ -28,7 +28,10 @@ def recipe(hip):
         sources = re.findall(r"'([^']+)'", parts)
         chunks = [''.join(f'#define {d}\n' for d in defs)]
         for part in sources:
-            if part == '@wave-owned-attention-body':
+            if part == '@swin-persistent-types':
+                types = hip.parent / 'Development/HIP/swin_persistent_types.h'
+                chunks.append(types.read_text().replace('#pragma once', '') + '\n')
+            elif part == '@wave-owned-attention-body':
                 core = (hip / 'wave_owned_mh.inc').read_text()
                 start = core.index(' // One wave owns all keys')
                 end = core.index('#define W2_KERNEL')

@@ -352,12 +352,15 @@ hip_reference::Options RuntimeOptions(unsigned w, unsigned h, const std::wstring
         return any || FileExists(JoinPath(modulesDir, f));
     };
     const unsigned requestedStream=opt.vit_stream;
+    const bool requestedSwin=opt.swin_run;
     const bool requestedWave = opt.wave_owned, requestedM32 = opt.c512_m32, requestedVit = opt.vit_proj_n64;
     std::string gates;
     if (opt.wave_owned && !(has(L"c32-wave1.hsaco") && has(L"c64-wave2.hsaco")))
         opt.wave_owned = false, gates += " wave_owned:nomodule";
     if (opt.c512_m32 && !(has(L"c512-m32-mh.hsaco") && has(L"c512-m32-deep.hsaco")))
         opt.c512_m32 = false, gates += " c512_m32:nomodule";
+    if(opt.swin_run && !has(L"swin-persistent.hsaco"))
+        opt.swin_run=false, gates += " swin_run:nomodule";
     if (opt.vit_stream && !has(L"vit-stream.hsaco"))
         opt.vit_stream=0, gates += " vit_stream:nomodule";
     if (opt.vit_proj_n64 && !has(L"vit-wide-deep.hsaco"))
@@ -365,6 +368,7 @@ hip_reference::Options RuntimeOptions(unsigned w, unsigned h, const std::wstring
     if (note)
     {
         char t[256];
+        std::snprintf(t,sizeof t," swin_run=%u/%u",unsigned(requestedSwin),unsigned(hip_reference::SwinRunCompatible(opt)));gates+=t;
         std::snprintf(t,sizeof t," vit_stream=%u/%u",requestedStream,hip_reference::VitStreamCompatible(opt)?opt.vit_stream:0);gates+=t;
         std::snprintf(t, sizeof t, "wave_owned=%u/%u c512_m32=%u/%u vit_proj_n64=%u/%u pdl=%u skip=%zu",
                       unsigned(requestedWave), unsigned(hip_reference::WaveOwnedCompatible(opt)),

@@ -1,0 +1,43 @@
+seed=0 pattern=0
+input format=RGBA16_FLOAT W=1296 H=720 invalid=0 min=0 max=34.53125 luma=0.0157641119 roi_luma=0.0250669576
+adapter=AMD Radeon RX 9070 XT
+SP_PLAN c=256 first=16 layers=6 tasks=893 initial=160 state_bytes=10732
+SP_DONE c=256 first=16 tasks=893 base=0 ms=1.473
+SP_PLAN c=256 first=49 layers=6 tasks=893 initial=160 state_bytes=10732
+SP_DONE c=256 first=49 tasks=893 base=0 ms=0.652
+frame=0 reset=1 wall_ms=1191.028 invalid=0 luma=0.01043502 roi=0.01611849 dark=837589 roi_dark=271139 changed_first=0 maxabs_first=0
+SP_DONE c=256 first=16 tasks=893 base=893 ms=0.825
+SP_DONE c=256 first=49 tasks=893 base=893 ms=0.709
+frame=1 reset=1 wall_ms=14.757 invalid=0 luma=0.01058388 roi=0.01638867 dark=835523 roi_dark=269962 changed_first=3613807 maxabs_first=15.45532
+SP_DONE c=256 first=16 tasks=893 base=1786 ms=0.811
+SP_DONE c=256 first=49 tasks=893 base=1786 ms=0.692
+frame=2 reset=1 wall_ms=13.647 invalid=0 luma=0.010684 roi=0.01637147 dark=835604 roi_dark=270559 changed_first=3627304 maxabs_first=15.56181
+SP_DONE c=256 first=16 tasks=893 base=2679 ms=0.680
+SP_DONE c=256 first=49 tasks=893 base=2679 ms=0.637
+frame=3 reset=1 wall_ms=13.459 invalid=0 luma=0.0106517 roi=0.01627674 dark=834699 roi_dark=270471 changed_first=3645038 maxabs_first=15.57711
+SP_DONE c=256 first=16 tasks=893 base=3572 ms=0.702
+SP_DONE c=256 first=49 tasks=893 base=3572 ms=0.645
+frame=4 reset=1 wall_ms=14.938 invalid=0 luma=0.01058589 roi=0.016097 dark=836270 roi_dark=271564 changed_first=3651748 maxabs_first=15.57686
+SP_DONE c=256 first=16 tasks=893 base=4465 ms=0.739
+SP_DONE c=256 first=49 tasks=893 base=4465 ms=0.664
+frame=5 reset=1 wall_ms=15.576 invalid=0 luma=0.01042989 roi=0.01578035 dark=837610 roi_dark=272468 changed_first=3661487 maxabs_first=15.57282
+SP_DONE c=256 first=16 tasks=893 base=5358 ms=0.693
+SP_DONE c=256 first=49 tasks=893 base=5358 ms=0.665
+frame=6 reset=1 wall_ms=13.583 invalid=0 luma=0.01047663 roi=0.01586138 dark=837184 roi_dark=272153 changed_first=3663234 maxabs_first=15.57127
+SP_DONE c=256 first=16 tasks=893 base=6251 ms=0.651
+SP_DONE c=256 first=49 tasks=893 base=6251 ms=0.669
+frame=7 reset=1 wall_ms=13.390 invalid=0 luma=0.01059234 roi=0.01599504 dark=836009 roi_dark=271717 changed_first=3676455 maxabs_first=15.56163
+SP_DONE c=256 first=16 tasks=893 base=7144 ms=0.700
+SP_DONE c=256 first=49 tasks=893 base=7144 ms=0.657
+frame=8 reset=1 wall_ms=13.554 invalid=0 luma=0.010616 roi=0.01600573 dark=836120 roi_dark=271929 changed_first=3679397 maxabs_first=15.56401
+SP_DONE c=256 first=16 tasks=893 base=8037 ms=0.761
+SP_DONE c=256 first=49 tasks=893 base=8037 ms=0.664
+frame=9 reset=1 wall_ms=14.514 invalid=0 luma=0.01059223 roi=0.01587949 dark=835478 roi_dark=271697 changed_first=3684672 maxabs_first=15.57291
+SP_DONE c=256 first=16 tasks=893 base=8930 ms=0.722
+SP_DONE c=256 first=49 tasks=893 base=8930 ms=0.663
+frame=10 reset=1 wall_ms=14.042 invalid=0 luma=0.01058156 roi=0.01584257 dark=835152 roi_dark=271857 changed_first=3688112 maxabs_first=15.57238
+SP_DONE c=256 first=16 tasks=893 base=9823 ms=0.830
+SP_DONE c=256 first=49 tasks=893 base=9823 ms=0.985
+frame=11 reset=1 wall_ms=14.105 invalid=0 luma=0.01056144 roi=0.01571425 dark=836060 roi_dark=272365 changed_first=3690709 maxabs_first=15.57399
+SP_STATS runs=24 fallback=0 rollover=0 jobs=21432 disabled=0
+RESULT frames=12 temporal=0 mean_wall_ms=112.216 invalid_total=0 restored_capture_every_frame=1 HDR_preserved=1

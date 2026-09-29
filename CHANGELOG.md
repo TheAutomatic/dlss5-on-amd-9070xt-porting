@@ -213,3 +213,10 @@ Download: [Quark](https://pan.quark.cn/s/e5afdaca0769) · [Gofile mirror](https:
 8. **Upsample fused into the first block**: the C64/C128 and C32 upsamples merged into the next level's first block, 3 fewer launches per frame (1080 185→182, 900 201→198); 900 −0.17 to −0.18 ms, 1080 −0.25 to −0.26 ms; bit-exact. ViT and downsample candidates measured no gain and were not merged. `results/fusion-round3-20260928` (with `package-036-checklist.md`).
 
 In game (local, RX 9070 XT, EXACT, standing still): Stellar Blade 1080p native AA about 57 → 60 (at the 60 Hz windowed-mode cap); 2560×1440 native AA 52–53 after the C512 fusion, 54 final (the in-game comparison setting from now on).
+
+
+## Unreleased (09-29, persistent C256)
+
+- A device ready queue runs six inner C256 layers per encoder/decoder stage, preserving windows and the 0.36 float-FMA bit-exact baseline. Two offline full-frame ABBA rounds save 1.90–1.94% at 900 (about 0.16ms), 0.57–0.61% at 1080 (about 0.06–0.07ms). Dispatches: 197→179 / 168→162.
+- `DLSS5_HIP_SWIN_RUN=0` defaults off; 1 enables C256 only for compatible 900/1080 recipes. Shared RE9 parsing and all three templates updated. One new module per architecture, 31 each.
+- A roughly 100ms queue timeout triggers GPU stage replay and disables persistence for the instance; ticket rollover drains before reset. Passed 168 bit-exact frames plus 144 injected-fault/rollover frames. Installed locally in Stellar Blade with backup; in-game FPS observation pending. No 0.36 package update. See `Development/results/swin-persistent-20260929/README.md`.
