@@ -34,3 +34,9 @@
 3. 日志：Daniel 的 `dlssnr_on_amd.log`（看 `pre-upscale mode:`、`staging ready`、是否出现 `single-tile mode ... not ported`）；我们的 `DLSS5-AMD\logs\native-pre-upscale.txt`（render/upscale 尺寸）。
 
 注：`DLSSNR_PAD128` 是环境变量名（字符串里未见 ini 键），实测前需要确认他的 ini 是否接受；不接受就只做 a/b/c 与我们的对照。
+
+## 09-29 网友补充反馈（经 Zero 转述）
+
+- 非原生 1080 时**原生 AA 也闪**：是噪点闪烁，不糊 → 排除"FSR 放大重建失败"为主因（那条的特征是糊）。
+- **Reference 档也闪**，不只 fast 档 → 排除"fast 档硬件噪声"为主因。
+- 剩余最可能：非 1080 输入时网络跑在原版没跑过的工作尺寸/对齐上（第 1 条）。待确认：原生 1080P 是否闪。
