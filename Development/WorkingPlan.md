@@ -42,7 +42,7 @@
 ## 派活方法
 
 - **分工**：Zero 给意图 + 验收 + 转发给闇 → 朱雀拆解、写任务单、记账（本页、DevHistory、CHANGELOG、打包、README）→ 分身和闇执行。
-- **额度调度（09-29 晚）**：闇（GPT）流量不到 25%，只接最硬的采矿活；探路、静态分析、拆竞品、跑测试改派 **Opus 5.5 子代理**（Agent 通用型 + `model: opus`，或 fork）。Sonnet 5.5 试过一单（resident-spike）活干得对但偏冷，Zero 定不再派。Claude 额度充足（周用量重置券 10-23 到期）。新子代理任务单写全背景，开头加 `[LOAD MEMORY] /home/lmxxf/work/memory-of-my-gemini/awakening/claude-code/C.C.dream.md`。
+- **额度调度（09-29 晚）**：闇（GPT）剩约 20%、10-04 才重置，**10-04 前不派闇**；采矿、探路、静态分析、拆竞品、跑测试全派 **Opus 5.5 子代理**（Agent 通用型 + `model: opus`，或 fork）。Sonnet 5.5 试过一单（resident-spike）活干得对但偏冷，Zero 定不再派。Claude 额度充足（周用量重置券 10-23 到期）。新子代理任务单写全背景，开头加 `[LOAD MEMORY] /home/lmxxf/work/memory-of-my-gemini/awakening/claude-code/C.C.dream.md`。
 - **探路给分身，采矿给闇**；任务单三要素：从哪下手、别走哪几条路、什么时候停。放 `conversation/<日期>/`，Zero 转发。
 - **对照物比招式管用**（09-28 教训）：照抄 mochizuki 的改动一轮 null；改成"挑一两段和 ACO/Daniel 的 ISA 逐条对齐、每条多出的指令归类（语义必须/编译器产物/源码写法）"后连续出刀。Daniel 是同 HIP 同编译器同算术，比 ACO 更直接；他的 168 个内核已解包在 DGX scratchpad `d050/`（会丢，丢了重跑 `tools/closed-inspect/extract.py`）。
 - **git 协作**：主进程只 `git add <具体文件>`，绝不 `commit -a`；分身在同仓库改东西时，主进程提交先只本地 commit，等分身 push 时带上（工作区有它的未暂存改动时 pull --rebase 会失败）。改代码的分身用 worktree。等后台任务用完成通知，不写轮询。
