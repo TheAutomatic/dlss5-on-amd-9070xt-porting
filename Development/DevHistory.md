@@ -1156,3 +1156,9 @@ WorkingPlan B1 留下的未实测候选。改为不动宿主：`mh_attention_pro
 结果：我方独立核和 7258.6µs（900 wall 8.03ms），Daniel 8171.6µs（含 42/43/46 288.9）。族：C32 +233、C64 +39、C128 −132、C256 −578、C512 同结构 +182、ViT −384（形状不同）。前五：c32 prefix 655、sp 650(est)、c32 post 604、c512_qkv_attention_compact 602（13 次）、c32 chain 498。900 独有：`mh_shift_pack` 13×9.9=129µs（50×30 非整窗压紧凑布局，1080 identity 无此步）。900/1080 比例多在 0.66～0.76；c512 attention 0.85（半满窗口）、ViT attention 0.30。候选：去 shift_pack（~0.1ms、逐位把握高）＞ C32 up/边界块（+64/+47）＞ C512 FFN 三核（+143，旧负账多）。
 
 **交接探针**（`HIP/experiments/handoff-poll/handoff_probe.cpp`，同 D3D 时钟夹 HIP 段）：现行 fence 双向往返，HIP 7.4ms 时 mean 0.16～0.18ms、p50 0.12～0.16；无 HIP 对照 0.008。D3D→HIP 改 `WriteBufferImmediate`＋`hipStreamWaitValue32`：两轮 gap 7.587→7.532、7.599→7.546（−0.054ms），p99 不变差。HIP→D3D 改 `hipStreamWriteValue32`＋D3D 1 线程 compute 自旋：无界版 TDR（设备移除 0x887A0005），有界版 HIP 64MiB memset 0.03→~490ms（自旋占住调度，HIP 排不进）——Daniel 用 1 像素 draw 分片自旋就是为此。本轮两半合做未完成，按门槛（avg ≥0.1ms）不收：未改生产代码、无新开关、未装机、未发包，剑星保持 b77bbc3c。结果 `results/kernel-map-900-20260930`、`results/handoff-poll-20260930`。
+
+## 2026-09-30 00:30～00:45：去掉 900 档 C512 的 mh_shift_pack（分身）
+
+900 的 C512 网格 50×30=1500 不是 16 倍数，`CompactC512Body` 每块 `mh_shift_pack` 拷进补零到 1504 的缓冲（13 次 129µs）。查实 C512 块五个核全部按 token 行独立（WMMA A 行 = token；attention 只按有效 (x,y) 读写；投影 crop 跳过 y≥h），补齐行内容不影响有效输出——于是不改核，改宿主分配：Down(c256)、Up(oc512)、C512 块输出都按 16 对齐分配（`NewPad16`，bytes 仍记有效大小），`CompactC512Body` 见输入容量够就原地读，不够照旧 pack（回退）。宏 `HIP_C512_PAD16` 默认 1，诊断宏 `HIP_C512_PAD16_POISON` 把补齐行每帧写 NaN。
+
+逐位：P 与 POISON 各 7 用例 × EXACT/AE × 12 帧、AE CSV 同，Proll/Pproll 回绕 900/1080 history × 两模式同，36 组 SAME。ABBA 900 8.030→7.918（1.40%）、8.031→7.942（1.11%）；1080 +0.08%/−0.10%（噪声）。新宿主 62803606，RE9 runtime be828151（900/1080 hash 与旧 runtime 同，smoke 过）。装剑星（只换 add-on，flags 原样，备份 `...\shift-pack-900-20260930\backups\stellar-20260930-004205`）与鬼武者（runtime 两份，备份 `D:\DLSSNR-Lab\onimusha-backups\20260930-004205-shiftpack`）。未发包。结果 `results/shift-pack-900-20260930`。

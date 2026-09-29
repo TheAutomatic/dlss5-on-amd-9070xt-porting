@@ -39,6 +39,12 @@ struct Allocation {Api*api;void*ptr{};size_t bytes,capacity;bool owned=true;
  void ReleaseSparse(){for(auto&m:sparse_maps){api->hipMemUnmap(static_cast<char*>(ptr)+m.offset,m.size);api->hipMemRelease(m.handle);}sparse_maps.clear();if(ptr)api->hipMemAddressFree(ptr,sparse_reserved);ptr=nullptr;}
  ~Allocation(){if(ptr&&owned){api->hipDeviceSynchronize();if(sparse_reserved)ReleaseSparse();else api->hipFree(ptr);}}};
 using Tensor=std::shared_ptr<Allocation>;
+#ifndef HIP_C512_PAD16
+#define HIP_C512_PAD16 1 /* 2026-09-30: see NewPad16; 0 = old mh_shift_pack path (results/shift-pack-900-20260930) */
+#endif
+#ifndef HIP_C512_PAD16_POISON
+#define HIP_C512_PAD16_POISON 0
+#endif
 inline std::set<U> ParseSkipBlocks(const std::string&s){std::set<U>out;size_t p=0;while(p<s.size()){size_t q=s.find(',',p);if(q==std::string::npos)q=s.size();auto word=s.substr(p,q-p);size_t used=0;unsigned long b=std::stoul(word,&used);if(used!=word.size()||!((b>=1&&b<=30)||(b>=31&&b<=38)||(b>=40&&b<=69)))throw std::runtime_error("unsupported skipped residual block");out.insert(U(b));p=q+1;}return out;}
 // Shared by host initialization and the network options builder: do not load the
 // 192 MiB noise table when the procedural fast prefix is selected.
@@ -94,6 +100,15 @@ class Network {
  U W,H;std::function<void(const std::string&)>progress;std::function<void(const std::string&,void*,size_t)>observer;
  static U Count(size_t n){if(!n||n>std::numeric_limits<U>::max())throw std::runtime_error("HIP reference index count overflow");return U(n);}
  Tensor New(size_t n){Count(n);size_t bytes=n*4;if(opt.pooled){Tensor*best=nullptr;for(auto&t:pool)if(t.use_count()==1&&t->capacity>=bytes&&(!best||t->capacity<(*best)->capacity))best=&t;if(best){(*best)->bytes=bytes;return *best;}if(graph_capturing)throw std::runtime_error("graph capture requires warmed allocation pool");auto t=std::make_shared<Allocation>(api,bytes);pool.push_back(t);return t;}return std::make_shared<Allocation>(api,bytes);}
+ /* 2026-09-30 (HIP_C512_PAD16): C512 tensors whose token count is not a multiple of 16 (900: 50x30=1500) get a
+    buffer rounded up to 16 tokens; `bytes` stays the valid size (stage dumps unchanged). CompactC512Body then reads the
+    input in place instead of mh_shift_pack copying it into a zero-padded buffer: every C512 kernel is row-independent
+    (WMMA rows = tokens), the pad rows only reach pad rows, and attention/projection read or write valid pixels only. */
+ Tensor NewPad16(size_t valid,size_t ch){size_t pad=(valid+15)&~size_t(15);auto t=New(pad*ch);t->bytes=valid*ch*4;
+#if HIP_C512_PAD16_POISON
+  if(pad>valid)api.Check(api.hipMemsetAsync(static_cast<char*>(t->ptr)+valid*ch*4,0xff,(pad-valid)*ch*4,stream),"pad16 poison"); /* diagnostic: NaN pad rows must not change any output */
+#endif
+  return t;}
  Tensor Upload(const void*p,size_t bytes,bool persistent=false){if(!bytes||bytes%4)throw std::runtime_error("upload size");auto t=persistent?std::make_shared<Allocation>(api,bytes):New(bytes/4);api.Check(api.hipStreamSynchronize(stream),"before upload");api.Check(api.hipMemcpy(t->ptr,p,bytes,1),"upload");return t;}
  void* P(const Tensor&t){return t?t->ptr:nullptr;}
  // Packing wrappers record the byte ranges the in-place packers leave dead; UploadWeight maps only the rest when sparse_weights is on.
@@ -372,7 +387,7 @@ class Network {
  Tensor CompactC512Body(Tensor input,U w,U h,U ww,U hh,U sx,U sy,U block,bool raw){
   U valid=w*h,n=(valid+15)&~15u;
   auto compact=input;
-  if(n!=valid){compact=New(size_t(n)*512);Run("mh","mh_shift_pack",size_t(n)*512,P(input),P(compact),valid,U(1),n,U(1),U(0),U(0),U(512),U(0));}
+  if(n!=valid&&!(HIP_C512_PAD16&&input->capacity>=size_t(n)*512*4)){compact=New(size_t(n)*512);Run("mh","mh_shift_pack",size_t(n)*512,P(input),P(compact),valid,U(1),n,U(1),U(0),U(0),U(512),U(0));}
   auto mixed=New(size_t(n)*512),contract=New(size_t(n)*512),contract8=New(size_t(n)*128),ffn=New(size_t(n)*512),ffn8=New(size_t(n)*128);
   Run("c512_m32_deep","split_mix_blocked_h16w_m32",size_t((n+31)/32*32)*256,P(compact),PackedSplitFfnWeightMixHalf(Block(block,"ffwd")),P(mixed),n);
   Run("deep","split_ffn_fused_fp8_t8",size_t(n)*512,P(mixed),PackedSplitFfnWeightMixHalf(Block(block,"ffwd")),P(contract),P(contract8),n);
@@ -382,7 +397,7 @@ class Network {
   auto av=New(size_t(n)*128);
   Run("c512_m32_mh","c512_qkv_attention_compact",size_t(ww)*hh/64*16,P(ffn8),PackedMhWeightQkvFrag(Block(block,"attention"),512),P(av),w,h,ww,hh,sx,sy);
   ffn8.reset();
-  auto result=New(size_t(valid)*512);
+  auto result=HIP_C512_PAD16?NewPad16(valid,512):New(size_t(valid)*512);
   Run("mh_fast","mh_attention_project_frag_c512",size_t(n)*512,P(av),P(ffn),PackedMhWeightQkvFrag(Block(block,"attention"),512),P(result),n,U(raw?3:0),w,h,w,U(0),U(0));
   Stage("block"+std::to_string(block),result);return result;
  }
@@ -421,7 +436,7 @@ class Network {
  // Downsample projection weights [2c][c] as 16x16 f16 B fragment tiles (mh_pool_project_group_c*): tile (nt*(c/16)+kt), lane (g,rc) holds k=g*8..+8 of column nt*16+rc.
  void* PackedDsWeightFrag(const std::string&name,U c){auto key=name+"@ds-frag";auto it=weights.find(key);if(it==weights.end()){auto v=ReadWeights(opt.assets+"/"+name);if(v.size()<size_t(2)*c*c)throw std::runtime_error("downsample weight shape");size_t N=size_t(2)*c,K=c;std::vector<uint16_t>t(N*K);for(size_t nt=0;nt<N/16;nt++)for(size_t kt=0;kt<K/16;kt++)for(unsigned g=0;g<2;g++)for(unsigned rc=0;rc<16;rc++)for(unsigned e=0;e<8;e++)t[(nt*(K/16)+kt)*256+(g*16+rc)*8+e]=ExactWeightHalf(v[(nt*16+rc)*K+kt*16+g*8+e]);v.resize(size_t(c)*c);std::memcpy(v.data(),t.data(),t.size()*2);it=weights.emplace(key,UploadWeight(v,key)).first;}return P(it->second);}
  void* PackedDsWeight(const std::string&name,U c){auto key=name+"@ds-f16";auto it=weights.find(key);if(it==weights.end()){auto v=ReadWeights(opt.assets+"/"+name);if(v.size()<size_t(2)*c*c)throw std::runtime_error("downsample weight shape");v.resize(size_t(2)*c*c);PackHalfMatrix(v,size_t(2)*c*c);v.resize(size_t(c)*c);it=weights.emplace(key,UploadWeight(v,key)).first;}return P(it->second);}
- Tensor Down(Tensor raw,U w,U h,U c,const std::string&file,bool head=false){U ow=w/2,oh=h/2,vw=0,vh=0;if(head){U rw=w/2,rh=h/2;if(w==60&&h==36){ow=32;oh=20;}else{ow=rw;oh=(rw*rh)%16?rh+1:rh;}if(ow*oh!=rw*rh){vw=rw;vh=rh;}}if(opt.pool_project_group&&(c==64||c==128||c==256||(head&&c==512))){auto out=New(size_t(ow)*oh*c*2);Run("mh_fast",("mh_pool_project_group_c"+std::to_string(c)).c_str(),size_t(ow)*oh*c*2,P(raw),PackedDsWeightFrag(file,c),P(out),ow,oh,w,vw,vh);return out;}
+ Tensor Down(Tensor raw,U w,U h,U c,const std::string&file,bool head=false){U ow=w/2,oh=h/2,vw=0,vh=0;if(head){U rw=w/2,rh=h/2;if(w==60&&h==36){ow=32;oh=20;}else{ow=rw;oh=(rw*rh)%16?rh+1:rh;}if(ow*oh!=rw*rh){vw=rw;vh=rh;}}if(opt.pool_project_group&&(c==64||c==128||c==256||(head&&c==512))){auto out=(HIP_C512_PAD16&&c==256)?NewPad16(size_t(ow)*oh,512):New(size_t(ow)*oh*c*2);Run("mh_fast",("mh_pool_project_group_c"+std::to_string(c)).c_str(),size_t(ow)*oh*c*2,P(raw),PackedDsWeightFrag(file,c),P(out),ow,oh,w,vw,vh);return out;}
   if(opt.pool_project_fused&&(c==64||c==128||c==256)){if((ow*oh)%16)throw std::runtime_error("fused pool project token count");auto out=New(size_t(ow)*oh*c*2);Run("mh_fast",("mh_pool_project_fused_c"+std::to_string(c)).c_str(),size_t(ow)*oh*c*2,P(raw),PackedDsWeight(file,c),P(out),ow,oh,w,vw,vh);return out;}auto pooled=New(size_t(ow)*oh*c),out=New(size_t(ow)*oh*c*2);Run("mh","mh_pool",size_t(ow)*oh*c,P(raw),P(pooled),ow,oh,w,vw,vh,c);if(opt.pool_project_h16w&&opt.fast_mh)Run("mh_fast","mh_pool_project_production_h16w",size_t(ow)*oh*c*2,P(pooled),PackedDsWeightCast(file,c),P(out),ow,oh,vw,vh,c);else Run(opt.fast_mh?"mh_fast":"mh",opt.fast_mh?"mh_pool_project_production":"mh_pool_project",size_t(ow)*oh*c*2,P(pooled),Weight(file),P(out),ow,oh,vw,vh,c);return out;}
  Tensor adaptive_anchor_in,adaptive_anchor_out,adaptive_gain,adaptive_stats,adaptive_state;
  Tensor adaptive_image_anchor,adaptive_image_signature,adaptive_image_delta;void*adaptive_image=nullptr;
@@ -479,7 +494,7 @@ class Network {
   Run("c64_wave2",name.c_str(),size_t(ww)*hh/64,P(low),PackedFusedMhWeightFrag(Block(block,"ffn"),c),WaveOwnedAttentionWeight(Block(block,"attention"),c),P(out),w,h,ww,hh,sx,sy,U(4),PackedDecoderHalf(Block(block,"weights"),size_t(2*c)*c),P(skip));
   Stage("block"+std::to_string(block),out);return out;
  }
- Tensor Up(Tensor input,Tensor skip,U iw,U ih,U ow,U oh,U ic,U oc,const std::string&file,bool byte_out=false){if(byte_out&&(!(opt.decoder_h16w&&opt.fast_deep)||oc==32))throw std::runtime_error("decoder byte output requires quantized fast path");auto out=New(size_t(ow)*oh*oc/(byte_out?4:1));if(opt.decoder_h16w&&opt.fast_deep)Run("deep",byte_out?"decoder_project2x_h16w_byteout":"decoder_project2x_h16w",size_t(iw)*ih*oc,P(input),PackedDecoderHalf(file,size_t(ic)*oc),P(skip),P(out),iw,ih,ow,oh,ic,oc);else Run("deep","decoder_project2x",size_t(iw)*ih*oc,P(input),Weight(file),P(skip),P(out),iw,ih,ow,oh,ic,oc);return out;}
+ Tensor Up(Tensor input,Tensor skip,U iw,U ih,U ow,U oh,U ic,U oc,const std::string&file,bool byte_out=false){if(byte_out&&(!(opt.decoder_h16w&&opt.fast_deep)||oc==32))throw std::runtime_error("decoder byte output requires quantized fast path");auto out=(HIP_C512_PAD16&&oc==512&&!byte_out)?NewPad16(size_t(ow)*oh,512):New(size_t(ow)*oh*oc/(byte_out?4:1));if(opt.decoder_h16w&&opt.fast_deep)Run("deep",byte_out?"decoder_project2x_h16w_byteout":"decoder_project2x_h16w",size_t(iw)*ih*oc,P(input),PackedDecoderHalf(file,size_t(ic)*oc),P(skip),P(out),iw,ih,ow,oh,ic,oc);else Run("deep","decoder_project2x",size_t(iw)*ih*oc,P(input),Weight(file),P(skip),P(out),iw,ih,ow,oh,ic,oc);return out;}
  static U Shift(U block){static constexpr U s[]={0,3,1,2,0,3,1,2,0,3,1,2,0,3,1,2,1,2,0,3,1,2,0,3,1,2,0,3,1,2};if(block<40||block>69)throw std::runtime_error("decoder shift");return s[block-40];}
 public:
  Network(const Network&)=delete;Network&operator=(const Network&)=delete;
