@@ -217,7 +217,7 @@ In game (local, RX 9070 XT, EXACT, standing still): Stellar Blade 1080p native A
 
 ## 0.37 (09-29, tag pending)
 
-Download: pending upload (all three packages)
+Download (all three packages): [Quark](https://pan.quark.cn/s/7dbfdc6425fd) · [Gofile mirror](https://gofile.io/d/onqeAHST); tag 0.37 = dc52056f
 
 - **Summary**: add-on b77bbc3c; 31 modules per architecture (new `swin-persistent.hsaco`); RE9 runtime 2c103f6e (host aa3761f2 unchanged); shaders identical to 0.36 (input shader 5be59a41).
 - **Bit-exact**: **fully bit-identical to 0.36** (09-28 float-FMA baseline; 7 cases, 168 EXACT/AE frames plus rollover/timeout stress frames, checked at every step). Nothing lossy.

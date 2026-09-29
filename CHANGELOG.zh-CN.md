@@ -219,7 +219,7 @@
 
 ## 0.37（09-29，tag 待补）
 
-下载：待上传（三个包）
+下载（三个包）：[夸克](https://pan.quark.cn/s/7dbfdc6425fd) · [Gofile 镜像](https://gofile.io/d/onqeAHST)；tag 0.37 = dc52056f
 
 - **汇总**：插件 b77bbc3c；每架构 31 个模块（新增 `swin-persistent.hsaco`）；RE9 runtime 2c103f6e（宿主 aa3761f2 不变）；shader 与 0.36 相同（输入 shader 5be59a41）。
 - **逐位**：**与 0.36 全部逐位相同**（09-28 float FMA 基准，7 用例 EXACT/AE 168 帧 + 回绕/超时压力帧，每一步都验），没有有损改动。
