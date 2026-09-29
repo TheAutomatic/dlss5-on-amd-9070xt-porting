@@ -1162,3 +1162,7 @@ WorkingPlan B1 留下的未实测候选。改为不动宿主：`mh_attention_pro
 900 的 C512 网格 50×30=1500 不是 16 倍数，`CompactC512Body` 每块 `mh_shift_pack` 拷进补零到 1504 的缓冲（13 次 129µs）。查实 C512 块五个核全部按 token 行独立（WMMA A 行 = token；attention 只按有效 (x,y) 读写；投影 crop 跳过 y≥h），补齐行内容不影响有效输出——于是不改核，改宿主分配：Down(c256)、Up(oc512)、C512 块输出都按 16 对齐分配（`NewPad16`，bytes 仍记有效大小），`CompactC512Body` 见输入容量够就原地读，不够照旧 pack（回退）。宏 `HIP_C512_PAD16` 默认 1，诊断宏 `HIP_C512_PAD16_POISON` 把补齐行每帧写 NaN。
 
 逐位：P 与 POISON 各 7 用例 × EXACT/AE × 12 帧、AE CSV 同，Proll/Pproll 回绕 900/1080 history × 两模式同，36 组 SAME。ABBA 900 8.030→7.918（1.40%）、8.031→7.942（1.11%）；1080 +0.08%/−0.10%（噪声）。新宿主 62803606，RE9 runtime be828151（900/1080 hash 与旧 runtime 同，smoke 过）。装剑星（只换 add-on，flags 原样，备份 `...\shift-pack-900-20260930\backups\stellar-20260930-004205`）与鬼武者（runtime 两份，备份 `D:\DLSSNR-Lab\onimusha-backups\20260930-004205-shiftpack`）。未发包。结果 `results/shift-pack-900-20260930`。
+
+## 2026-09-30 02:53：鬼武者 2K 质量稳定 60
+
+宿主/runtime 62803606 / be828151（0.37 + 900 去 shift_pack）。Zero 本机久玩：2K 质量（900 档）中画质稳定 60，GPU 占用 90～95%、从未满载。
