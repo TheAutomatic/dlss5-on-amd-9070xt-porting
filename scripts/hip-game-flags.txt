@@ -147,5 +147,5 @@ DLSS5_FRAME_STATS=0
 # History (temporal) sessions keep the old path automatically. 0 = previous behaviour.
 DLSS5_DIRECT_IO=1
 
-# C256 internal-stage ready queue; bounded GPU recovery, opt-in.
-DLSS5_HIP_SWIN_RUN=0
+# C256 internal-stage ready queue; bounded GPU recovery (on by default since 0.37).
+DLSS5_HIP_SWIN_RUN=1

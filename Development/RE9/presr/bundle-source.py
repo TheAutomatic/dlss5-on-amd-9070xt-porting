@@ -7,7 +7,7 @@ out=Path('/tmp/re9-presr-source.tar.gz')
 # Refresh HIP source/build recipes too: the runtime uses the current common kernels.
 import shutil
 for p in (root/'hip').iterdir():
- if p.is_file() and p.suffix in ('.hip','.h','.cpp','.ps1','.md'):
+ if p.is_file() and p.suffix in ('.hip','.h','.inc','.cpp','.ps1','.md','.txt'):
   shutil.copyfile(p,host/'third_party/lmxxf/hip'/p.name)
 notes='''Modified RE9 OptiScaler host and lmxxf HIP runtime source.
 Upstream: https://github.com/TheAutomatic/dlss-5-amd-project/tree/release/1.9.0

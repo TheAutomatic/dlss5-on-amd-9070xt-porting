@@ -1,5 +1,8 @@
 OptiScaler-REFramework-DLSS5-AMD @VERSION@ — special RE9 pre-SR full package
 
+0.37 update
+Same new kernels as the regular package (bit-identical to 0.36; C512 compact layout, head fusion, C256 persistent stage, new ViT attention/QKV kernels; offline 900 tier about 8.5 -> 8.0 ms). The runtime honours the new DLSS5_HIP_SWIN_RUN (template 1; 0 restores the previous launches). Host unchanged.
+
 0.36 update
 Same new kernels as the regular package (float FMA activation — not bit-identical to 0.35, new baseline; fused C256/C512/C64/C128/C32 blocks; offline 900 tier about -0.79 ms, 1080 tier about -1.13 ms vs 0.35). The runtime understands DLSS5_FRAME_STATS (default 0); DLSS5_DIRECT_IO does not apply to the RE9 route. Host unchanged.
 

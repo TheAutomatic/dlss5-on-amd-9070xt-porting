@@ -1,5 +1,8 @@
 OptiScaler-REFramework-DLSS5-AMD @VERSION@ — RE9特殊前置完整包
 
+0.37 更新
+与常规包同一套新核（与 0.36 逐位相同；C512 紧凑布局、head 融合、C256 持久化、ViT attention/QKV 新核；离线 900 档约 8.5 → 8.0ms）。runtime 支持新开关 DLSS5_HIP_SWIN_RUN（模板为 1，设 0 回到原派发）。宿主不变。
+
 0.36 更新
 与常规包同一套新核（float FMA 激活——与 0.35 不逐位，为新基准；C256/C512/C64/C128/C32 块融合；离线相对 0.35：900 档约 −0.79ms、1080 档约 −1.13ms）。runtime 支持 DLSS5_FRAME_STATS（默认 0）；DLSS5_DIRECT_IO 不适用于 RE9 路线。宿主不变。
 

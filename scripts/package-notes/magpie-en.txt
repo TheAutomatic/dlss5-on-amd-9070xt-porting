@@ -1,5 +1,13 @@
 Magpie-DLSS5-AMD @VERSION@ — full portable package
 
+0.37
+All steps bit-identical to 0.36 (same output, byte for byte). Faster kernels only:
+1. C512 compact point-wise layout: the FFN/conv run on the effective tiles only; padding is applied when attention reads (about -2% on both tiers).
+2. C512 head pooling + projection fused into one launch; ViT attention score layout transposed.
+3. C256 persistent stage (DLSS5_HIP_SWIN_RUN=1, new, on in this template): the six inner layers of C256 encoder/decoder run from a device ready queue; a ~100 ms timeout replays the stage on the GPU and disables it for the session. 0 restores the previous launches.
+4. New ViT attention kernel (640 tokens about 71 -> 38 us) and ViT QKV with five waves sharing weights through LDS (about 49 -> 37 us).
+Kernel launches per frame: 900 tier 198 -> 179, 1080 tier 182 -> 162. Network offline 900 tier about 8.5 -> 8.0 ms. Stellar Blade 2560x1440 native AA, EXACT: 54 -> 55-56.
+
 0.36
 1. Leaner arithmetic (bit-identical to the previous build at each step): the C32 activation drops a redundant NaN canonicalization; the C64-C256 softmax uses a bounded reciprocal (same summation order and rounding fix-up).
 2. Float FMA activation (C32, C64-C256, ViT/C512): multiply-add contracted into one float FMA with a single rounding (NVIDIA's original also uses a single-rounding half FMA here). This changes the output slightly: 0.36 is NOT bit-identical to 0.35 (error against NVIDIA's reference is essentially unchanged); 0.36 is the new bit-exact baseline.
