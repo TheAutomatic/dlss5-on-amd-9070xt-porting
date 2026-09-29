@@ -1,0 +1,4355 @@
+{
+  "compiler": "clang version 22.0.0git (git@github.com:lmxxf/llvm-project.git f58b06dce1f9c15707c5f808fd002e18c2accf7e)\nTarget: unknown\nThread model: posix\nInstalledDir: /home/lmxxf/work/llvm-build-rocm724/bin\n",
+  "modules": [
+    {
+      "target": "gfx1201",
+      "module": "c32_prefix_reference",
+      "source_sha256": "ad9ad89c400dd4e7f9b88d9bcdfc4a736e9a9e4ac775c2f5e514457b164f9799",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "c32_reference.hip",
+        "prefix_reference.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=9F7795C4B3C1AFA1AF26BA083FE189AFE91C5F677CD0B51819660A50FA667935",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/c32_prefix_reference/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_prefix_reference.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_prefix_reference.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_prefix_reference.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_prefix_reference.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_prefix_reference.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_prefix_reference.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_prefix_reference.hsaco"
+        ]
+      ],
+      "seconds": 0.3914712187834084,
+      "sha256": "ec183fdc023aaf84e0121eff50c65fb274750ef943af8a8a2f77e37f67ab135e"
+    },
+    {
+      "target": "gfx1201",
+      "module": "multihead-reference",
+      "source_sha256": "bf6884694df670fa932f9284aa6b18479d4209c1f26c95eaa53efa021448573b",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "multihead_reference.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=804B65735DEE5428EEBC4DEB84D3589389A6170FB882AA6D1B06014296B9EBFE",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/multihead-reference/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-reference.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-reference.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-reference.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-reference.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-reference.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-reference.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-reference.hsaco"
+        ]
+      ],
+      "seconds": 0.6732191690243781,
+      "sha256": "13f1443319daae203c05033cc181fa3fe80554e7ef7848a6c3cf6f7fac29db5b"
+    },
+    {
+      "target": "gfx1201",
+      "module": "deep_reference",
+      "source_sha256": "4c296112395350f5e8cbc78896eb00b821220e90e0616d53b7c3c2ff33eaaa5d",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "deep_reference.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=1E58EFCE7B65CB8A68DDB30750861BB8AA7FF64E059A1C790633EEE73D4A08AE",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/deep_reference/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/deep_reference.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/deep_reference.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/deep_reference.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/deep_reference.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/deep_reference.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/deep_reference.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/deep_reference.hsaco"
+        ]
+      ],
+      "seconds": 0.7146598622202873,
+      "sha256": "61c114ad894322f2463f8f9a03c43f83be6f219f8a851534e1564e431b8a9ef9"
+    },
+    {
+      "target": "gfx1201",
+      "module": "boundary_reference",
+      "source_sha256": "7511beecce670f1c56a3e977317d8b58c52568117cf1273a664e2b2a6209383f",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "boundary_reference.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=BC0501A485DF5B81B8780E1FAE5AAC775A9A2D36698F1454B0ACC54E35719B42",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/boundary_reference/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/boundary_reference.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/boundary_reference.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/boundary_reference.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/boundary_reference.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/boundary_reference.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/boundary_reference.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/boundary_reference.hsaco"
+        ]
+      ],
+      "seconds": 0.21621039905585349,
+      "sha256": "3546d381327bb77963b904ae7f20dd6f93dc6808933503e9df024c05e9ad6e84"
+    },
+    {
+      "target": "gfx1201",
+      "module": "c32_wmma",
+      "source_sha256": "966e4d01f44d0378eae9390423687f8231a030285f124aede700c35acbd6f384",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "c32_wmma.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=6C2C75962A1557AA81DAAFE4FF7A53532622D954525B783DD9772A9233B1D6B8",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/c32_wmma/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_wmma.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_wmma.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_wmma.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_wmma.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_wmma.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_wmma.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_wmma.hsaco"
+        ]
+      ],
+      "seconds": 0.591248920885846,
+      "sha256": "80f71b5e7c28a5b62ac11fb6c8bc33c97a5af86eb23b7c6bf9e4209ae01bf0b4"
+    },
+    {
+      "target": "gfx1201",
+      "module": "multihead-wmma",
+      "source_sha256": "416c52fcc500008f69fcf46e103b95461674ccb2531af3291877c052faa728f7",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "multihead_wmma.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=18921DB985C646934BE94866B5AD60B77D28D7D680AF0FB0EB70D43358ED41F6",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/multihead-wmma/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-wmma.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-wmma.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-wmma.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-wmma.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-wmma.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-wmma.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-wmma.hsaco"
+        ]
+      ],
+      "seconds": 0.9335524700582027,
+      "sha256": "358210e7e78aeafef8b18bf11ae0a5714922d64b2e53160e6d95e0a4d666120f"
+    },
+    {
+      "target": "gfx1201",
+      "module": "deep_wmma",
+      "source_sha256": "bff74a671e99f9781fc252d3ceda3caf0489dfa1ae19c8a6a70e13a88adc8889",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "deep_wmma.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=FA7381EAE1A4DA4EF22834D9EE8E63F91E2E59AE06CD4C7DEE30C8DFE047FC56",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/deep_wmma/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/deep_wmma.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/deep_wmma.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/deep_wmma.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/deep_wmma.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/deep_wmma.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/deep_wmma.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/deep_wmma.hsaco"
+        ]
+      ],
+      "seconds": 0.9150773049332201,
+      "sha256": "d56cb5a9aec1c8e4a85aba6b72bec301c47074f6db72e056fa1a2dbe4111de97"
+    },
+    {
+      "target": "gfx1201",
+      "module": "wave-pointwise",
+      "source_sha256": "646c1e471d4ecd876f1d2f97b3c09f4423afa7c2e26c2559d5bed9abd0b38424",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "c32_reference.hip",
+        "wave_pointwise.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=6318B82927A426A486922E6E0E23910651A4063129A10B65BE4C28B18CD3D389",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/wave-pointwise/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/wave-pointwise.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/wave-pointwise.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/wave-pointwise.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/wave-pointwise.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/wave-pointwise.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/wave-pointwise.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/wave-pointwise.hsaco"
+        ]
+      ],
+      "seconds": 0.4371530038770288,
+      "sha256": "e6533c07d4f24ab95224f1e6ffcdb7708d788bd101d3a7a3b0d1798693758699"
+    },
+    {
+      "target": "gfx1201",
+      "module": "c32_tiled",
+      "source_sha256": "c5afd86001d884dab18a6bdda86a6ce37bb92d0bc9c434883f92360b1d7c25c5",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "c32_tiled.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=7B187BAFF61DB3B8861319B7AA085B9489CDE9FDE18DF24CE591B623957B4C22",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/c32_tiled/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_tiled.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_tiled.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_tiled.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_tiled.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_tiled.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_tiled.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_tiled.hsaco"
+        ]
+      ],
+      "seconds": 0.3287814292125404,
+      "sha256": "611f9acf0fb14469aa00a881c1ded4f1443ecee862b597107985c0c16c18875d"
+    },
+    {
+      "target": "gfx1201",
+      "module": "multihead-tiled",
+      "source_sha256": "e3d8ab3e98567c69a6ecb17eafd10eaf7210eb98e9bb393faba2d9583ca907f5",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "multihead_tiled.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=B153FCD6E022BFC6F689F4E84B5F2847F6DC2E053B5C534A2AE73967AF81FB89",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/multihead-tiled/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-tiled.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-tiled.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-tiled.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-tiled.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-tiled.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-tiled.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-tiled.hsaco"
+        ]
+      ],
+      "seconds": 0.48586594592779875,
+      "sha256": "7c51e24dcbc31f3e02a46aaf9003732335060c9e1822ffbdc72a6767f74a666a"
+    },
+    {
+      "target": "gfx1201",
+      "module": "c32_fast",
+      "source_sha256": "e53264f8f4e4b6e12b5ea06c3b6feaf312a8156ab6bdbfcdf5d450018b79f90e",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "c32_fast.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=B8AEDF1DB602B5FF7980C9E746EBB65AE857888CC3EE7CC7F712A0173C2B7CCD",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/c32_fast/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fast.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fast.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fast.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fast.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fast.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fast.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fast.hsaco"
+        ]
+      ],
+      "seconds": 0.47768436023034155,
+      "sha256": "c431b8eba7906ea42a70bd91b0dfe52fbc08608267debf1dd39155f053045f8f"
+    },
+    {
+      "target": "gfx1201",
+      "module": "c32_fast_attention",
+      "source_sha256": "49c479faa01ea23f81613d058c751e7db95c3e70b26f19946e6a71cf9630edde",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "c32_fast_attention.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=48776D4D18ED94F640F7A5BD8F6C6164301E9ACF5C61888FAF867969F5D99B18",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/c32_fast_attention/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fast_attention.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fast_attention.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fast_attention.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fast_attention.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fast_attention.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fast_attention.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fast_attention.hsaco"
+        ]
+      ],
+      "seconds": 0.3040109348949045,
+      "sha256": "a19bd72e6f94cfc23ee32af45380eeb62d06c360740ab6820c6daea7dc15a6bb"
+    },
+    {
+      "target": "gfx1201",
+      "module": "boundary-fast",
+      "source_sha256": "d73d2c88c047098d3f1f2b317e1a9a992b2ea6f4c09d608303e18c1014ed916b",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "c32_fast_attention.hip",
+        "boundary_fast.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=4D8E3C60A8AF402D1FA593978A2CFE3EBACC21E281E6B13F2459E3EAA9A5B8F5",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/boundary-fast/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/boundary-fast.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/boundary-fast.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/boundary-fast.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/boundary-fast.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/boundary-fast.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/boundary-fast.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/boundary-fast.hsaco"
+        ]
+      ],
+      "seconds": 0.40067945793271065,
+      "sha256": "a82cfe1b78712032a9deb5bea64124ccf7e6be234acb5848528698e6b2b6736b"
+    },
+    {
+      "target": "gfx1201",
+      "module": "c32_fused_attention",
+      "source_sha256": "c23626f5661751f666d0d83694817f2da7b9fbabfa7d189f380dc48c4f2bc5d4",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "c32_fused_attention_packed.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=5F35CF2B7D88E3DC0C73164A195A614C0F390C9649C82DD469AE5733EA03C252",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/c32_fused_attention/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fused_attention.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fused_attention.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fused_attention.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fused_attention.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fused_attention.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fused_attention.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fused_attention.hsaco"
+        ]
+      ],
+      "seconds": 0.5065385948400944,
+      "sha256": "b4d21de3d3af01e5c36317bbf5cc6af51e65c75a45e6a97a6b305221dd333498"
+    },
+    {
+      "target": "gfx1201",
+      "module": "c32_fused_ffn_attention",
+      "source_sha256": "ea61d1350991c26efc0aba579b3b2200c51d51b390612752c352315e0111b6bf",
+      "defines": [
+        "HIP_ISA_HALF 1",
+        "HIP_FP8_SAT_MODE 3"
+      ],
+      "sources": [
+        "c32_fused_ffn_attention.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=34D65BDEE4F3E398B34ECB970DE4D425B3F906B1FEE6B3D22C1C8FBCDF469271",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/c32_fused_ffn_attention/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fused_ffn_attention.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fused_ffn_attention.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fused_ffn_attention.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fused_ffn_attention.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fused_ffn_attention.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fused_ffn_attention.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fused_ffn_attention.hsaco"
+        ]
+      ],
+      "seconds": 4.323171112919226,
+      "sha256": "14adb389bda65111d005075423948c44e36ef082668ae5e3fb10511aa29e7593"
+    },
+    {
+      "target": "gfx1201",
+      "module": "c32_fused_ffn_attention-packed",
+      "source_sha256": "550133a685e787ed823e035bad2a48888b495b61cc208ea4cc39cc7be34758f3",
+      "defines": [
+        "HIP_ISA_HALF 1",
+        "HIP_PREPACKED_WEIGHTS 1",
+        "HIP_C32_DIAG_WEIGHTS 1",
+        "HIP_FP8_SAT_MODE 3"
+      ],
+      "sources": [
+        "c32_fused_ffn_attention.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=5E8E0F52A92ADAA34B3D492126B69CA637C4A2D5B3B3A8777620840E509865EA",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/c32_fused_ffn_attention-packed/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fused_ffn_attention-packed.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fused_ffn_attention-packed.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fused_ffn_attention-packed.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fused_ffn_attention-packed.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fused_ffn_attention-packed.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fused_ffn_attention-packed.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32_fused_ffn_attention-packed.hsaco"
+        ]
+      ],
+      "seconds": 3.421102659078315,
+      "sha256": "1331aaf672fa1e2b8f1dd871c18014d54c9f267ddfc87cb92d6d10053de9178b"
+    },
+    {
+      "target": "gfx1201",
+      "module": "prefix_fast",
+      "source_sha256": "bf331dc1f6628d0c1deee8afeec36ff038199c928d40f2555d438aacfae4583b",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "prefix_fast.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=6F17B9389F3C7265BEED4E44A223539DFEF6DCB7C390E1B083AE344A2E045006",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/prefix_fast/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/prefix_fast.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/prefix_fast.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/prefix_fast.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/prefix_fast.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/prefix_fast.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/prefix_fast.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/prefix_fast.hsaco"
+        ]
+      ],
+      "seconds": 0.8768176359590143,
+      "sha256": "7be117708286495946d53da29ad370b2b18919e04fb6ad4888cc8510e5183ba8"
+    },
+    {
+      "target": "gfx1201",
+      "module": "multihead-fast",
+      "source_sha256": "e6c041d5d0eb2da9a23477e574b463102b8dc526ddf3a92a3b6d1fd762a8dfe7",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "multihead_fast.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=E25DBD5B6E082BC249A11B7B2952F49EBD3C515A91B747C5A1DE7992B3D892CD",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/multihead-fast/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-fast.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-fast.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-fast.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-fast.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-fast.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-fast.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-fast.hsaco"
+        ]
+      ],
+      "seconds": 1.0576209567952901,
+      "sha256": "97dfdecb5098183ffb2f161bc990d37f29fda80c104611c958a75dbda720eec0"
+    },
+    {
+      "target": "gfx1201",
+      "module": "multihead-fast-padded-wave",
+      "source_sha256": "49e3619db639812adc6c1581648c551e1bae94de12f7ac07017e2a8a699129b6",
+      "defines": [
+        "HIP_ISA_HALF 1",
+        "HIP_FMED3_CLAMP 1"
+      ],
+      "sources": [
+        "multihead_fast_padded.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=E00882F2072DF674D7E5D227721858C7A8524C43A23FDADEC28E67C637F72934",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/multihead-fast-padded-wave/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-fast-padded-wave.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-fast-padded-wave.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-fast-padded-wave.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-fast-padded-wave.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-fast-padded-wave.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-fast-padded-wave.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-fast-padded-wave.hsaco"
+        ]
+      ],
+      "seconds": 11.540215878980234,
+      "sha256": "5f0032e9d71dac2c16afa011eb6a0f74e5ef0cb4562b99b8c0054708ac2a84d2"
+    },
+    {
+      "target": "gfx1201",
+      "module": "multihead_fused_attention",
+      "source_sha256": "f7de870867a6c0db232c3d8f637a3cfb4f275002252a2c9ce5d74513afb51b13",
+      "defines": [
+        "HIP_ISA_HALF 1",
+        "HIP_MH_RTZ_ISA 1"
+      ],
+      "sources": [
+        "multihead_fused_attention.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=8832C1028A3A363516E81399122F9AC2757EC07198953122C483D2F4BF780D2E",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/multihead_fused_attention/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead_fused_attention.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead_fused_attention.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead_fused_attention.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead_fused_attention.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead_fused_attention.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead_fused_attention.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead_fused_attention.hsaco"
+        ]
+      ],
+      "seconds": 4.485193812055513,
+      "sha256": "55ce4fe18c48665e1b865f1fd3f4f5d26cc40eaec390ad4dd6c7b84fc703544d"
+    },
+    {
+      "target": "gfx1201",
+      "module": "deep_fast",
+      "source_sha256": "832bab84a6081229396a54065676a95ba32f60d4b922ec05dc03019dfb87bd8f",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "deep_fast.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=08EAFAF172313086B877D4FF63F7C387EE20A16F1F96FDE00BEAEC8167FB273A",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/deep_fast/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/deep_fast.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/deep_fast.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/deep_fast.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/deep_fast.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/deep_fast.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/deep_fast.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/deep_fast.hsaco"
+        ]
+      ],
+      "seconds": 5.648173402063549,
+      "sha256": "92dbad5cb810fd1154d000c6cdb686ba0d936ee248d2aeb1a92288ce82c6dd77"
+    },
+    {
+      "target": "gfx1201",
+      "module": "deep_fast-packed",
+      "source_sha256": "d0840cdb35ad52412d8230d2c5858b741973affe55a97afdb562903fa6109679",
+      "defines": [
+        "HIP_ISA_HALF 1",
+        "HIP_PREPACKED_WEIGHTS 1",
+        "HIP_VIT_ATTN_TRANSPOSED_SCORE 1",
+        "HIP_BRANCHLESS_F 1"
+      ],
+      "sources": [
+        "deep_fast.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=1BCF28B7E40129B235B38945AFA5CFA172F75E4F1BD6B15C182D98A2A8BC4C58",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/deep_fast-packed/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/deep_fast-packed.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/deep_fast-packed.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/deep_fast-packed.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/deep_fast-packed.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/deep_fast-packed.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/deep_fast-packed.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/deep_fast-packed.hsaco"
+        ]
+      ],
+      "seconds": 5.397214069031179,
+      "sha256": "aefbc7939ba3dd5ca2d87f7b6d150e6663165c1e8530ec542372e456a5031436"
+    },
+    {
+      "target": "gfx1201",
+      "module": "multihead-fast-packed",
+      "source_sha256": "97e1217db40e05bc2986135730f12e9572ddf97e46f2b9abe167c48f67cc1dcf",
+      "defines": [
+        "HIP_ISA_HALF 1",
+        "HIP_PREPACKED_WEIGHTS 1"
+      ],
+      "sources": [
+        "multihead_fast.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=74DCA455902F465A8E3AA7DB5F0FE332C551D0CC97868E89980BC5DEB7C413D7",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/multihead-fast-packed/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-fast-packed.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-fast-packed.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-fast-packed.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-fast-packed.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-fast-packed.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-fast-packed.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-fast-packed.hsaco"
+        ]
+      ],
+      "seconds": 1.0603745458647609,
+      "sha256": "20b9f026a365821fac3b06cbad13cc4705a55f297832079a179121fc78e5c3d7"
+    },
+    {
+      "target": "gfx1201",
+      "module": "multihead-fast-padded-wave-packed",
+      "source_sha256": "2a84d9a9e8f01c3a52e08787964fbaff6d1c7301466d0e1f51610fbef6ee235b",
+      "defines": [
+        "HIP_ISA_HALF 1",
+        "HIP_PREPACKED_WEIGHTS 1",
+        "C512_HEAD_GROUP 1",
+        "HIP_FFN_HOIST_RES 2",
+        "HIP_FFN_LINE_STORES 1",
+        "HIP_FMED3_CLAMP 1"
+      ],
+      "sources": [
+        "multihead_fast_padded.hip",
+        "c512_head_group.inc"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=47DC0EE831CAF04258A469DEF9093B949A299E4DA595606AF11AE323BCB40FD1",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/multihead-fast-padded-wave-packed/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-fast-padded-wave-packed.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-fast-padded-wave-packed.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-fast-padded-wave-packed.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-fast-padded-wave-packed.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-fast-padded-wave-packed.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-fast-padded-wave-packed.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/multihead-fast-padded-wave-packed.hsaco"
+        ]
+      ],
+      "seconds": 11.872105590999126,
+      "sha256": "a641e00f995234c8274f4a3803598d241e4f74f3751380634e62a15df769d1d5"
+    },
+    {
+      "target": "gfx1201",
+      "module": "c32-wave1",
+      "source_sha256": "eb9a6c97512031d60c823d0ad628285e194df76d1c0bee21c9e4688161b7032d",
+      "defines": [
+        "HIP_ISA_HALF 1",
+        "CW_UP_FUSED 1",
+        "CW_ACT_FMED3 1",
+        "HIP_PREPACKED_WEIGHTS 1",
+        "CW_ROLL_HIDDEN 1",
+        "CW_ROLL_WINDOW 1",
+        "CW_VEC_INPUT 1",
+        "CW_PREFIX_SPLIT 1",
+        "CW_PACK8 1",
+        "HIP_FP8_SAT_MODE 3",
+        "CW_DIRECT_OUT 1",
+        "CW_RTZ_PAIR 1",
+        "CW_PACK_MODE_MASK 127",
+        "CW_PREFIX_DIRECT_OUT 1",
+        "CW_PREFIX_FULL_TILE 1",
+        "CW_FINISH_FULL_TILE 1"
+      ],
+      "sources": [
+        "c32_fused_ffn_attention.hip",
+        "wave_owned_c32.inc"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=1A550C89E025C26D5E09F3547ECBE4256A9B6F45B7D320A858B0E6B2F5EF7402",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/c32-wave1/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32-wave1.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32-wave1.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32-wave1.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32-wave1.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32-wave1.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32-wave1.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c32-wave1.hsaco"
+        ]
+      ],
+      "seconds": 4.725990644888952,
+      "sha256": "5c6b196726dac8159456ed5a3ad5fb00971e9fd9fcba34b11af6173a57101795"
+    },
+    {
+      "target": "gfx1201",
+      "module": "c64-wave2",
+      "source_sha256": "2b99230066f64f31f9469bdd9f558e38d2b504c2c3ed79c6621973f36f26efc6",
+      "defines": [
+        "HIP_ISA_HALF 1",
+        "W2_UP_FUSED 1",
+        "W2_FFN_QT_SMALL_MASK 3",
+        "W2_FFN_QT_BATCH 2",
+        "W2_BOUNDED_RCP 1",
+        "HIP_PREPACKED_WEIGHTS 1",
+        "HIP_FFN_HOIST_RES 2",
+        "HIP_PDL_KERNELS 0",
+        "W2_FRAGMENT_WEIGHTS 1",
+        "W2_LAUNDER_QKV 1",
+        "W2_SCHED_FENCE 1",
+        "W2_ROLL_QUERY 1",
+        "W2_HIDDEN_TILES 2",
+        "W2_PACK8 6",
+        "HIP_FMED3_CLAMP 1",
+        "W2_BYTE_INPUT_LOADS 1",
+        "W2_RTZ_PAIR 1",
+        "W2_DIRECT_COORDS 1"
+      ],
+      "sources": [
+        "multihead_fast_padded.hip",
+        "wave_owned_mh.inc",
+        "wave_owned_attention_setup.inc",
+        "@wave-owned-attention-body",
+        "wave_owned_attention_exports.inc"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=60D648944F30EDDE731401A11578FE494C657245BE121335D6084C46516491D6",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/c64-wave2/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c64-wave2.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c64-wave2.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c64-wave2.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c64-wave2.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c64-wave2.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c64-wave2.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c64-wave2.hsaco"
+        ]
+      ],
+      "seconds": 16.47576323384419,
+      "sha256": "f145436f951739a4adcc859a28b02432bdbd39a322d4324781485ba8ced33c7d"
+    },
+    {
+      "target": "gfx1201",
+      "module": "c512-m32-mh",
+      "source_sha256": "04e976f92648148a5e9d4fb3d55d1be50f6b96a6ea682f5dd9d8827650d82db3",
+      "defines": [
+        "HIP_ISA_HALF 1",
+        "C512_COMPACT_QKV_ATTN 1",
+        "C512_FUSED_QKV_ATTN 1",
+        "HIP_PREPACKED_WEIGHTS 1",
+        "HIP_FFN_HOIST_RES 2",
+        "HIP_PDL_KERNELS 0",
+        "HIP_FMED3_CLAMP 1"
+      ],
+      "sources": [
+        "multihead_fast_padded.hip",
+        "c512_m32_mh.inc",
+        "c512_qkv_attention_fused.inc",
+        "c512_qkv_attention_compact.inc"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=B591DBF51CD6BD5BAA1A740EA31661DDB80575D001418E46B50E180EF0719A59",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/c512-m32-mh/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c512-m32-mh.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c512-m32-mh.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c512-m32-mh.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c512-m32-mh.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c512-m32-mh.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c512-m32-mh.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c512-m32-mh.hsaco"
+        ]
+      ],
+      "seconds": 10.432161286938936,
+      "sha256": "71a6fe0160fca04c82fff77a90fda7bfb35675b302382c114a8b897ac8d71cf7"
+    },
+    {
+      "target": "gfx1201",
+      "module": "c512-m32-deep",
+      "source_sha256": "47d565fa998f0d34d1d5e614f952a1efd10d82894b5d30c9d83ee4b16ee0f43a",
+      "defines": [
+        "HIP_ISA_HALF 1",
+        "HIP_PREPACKED_WEIGHTS 1",
+        "HIP_BRANCHLESS_F 1"
+      ],
+      "sources": [
+        "deep_fast.hip",
+        "c512_m32_deep.inc"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=E5225E1E3740CD5F9C9EE87FE666E466BFCA2383FA92E2B4C026CE1A78181919",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/c512-m32-deep/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c512-m32-deep.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c512-m32-deep.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c512-m32-deep.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c512-m32-deep.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c512-m32-deep.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c512-m32-deep.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/c512-m32-deep.hsaco"
+        ]
+      ],
+      "seconds": 5.700189232127741,
+      "sha256": "a5d9ab8cd8d410e7d737349e4f0ffb33ed3fe9df55b2e366be5011a24c331f5f"
+    },
+    {
+      "target": "gfx1201",
+      "module": "vit-stream",
+      "source_sha256": "33602cc59dce4a35dd8a8281c60e156f15e2bc0c859c0b30b48ef893353eef22",
+      "defines": [
+        "HIP_ISA_HALF 1",
+        "HIP_PREPACKED_WEIGHTS 1",
+        "HIP_BRANCHLESS_F 1",
+        "HIP_VIT_STREAM_KERNELS 1"
+      ],
+      "sources": [
+        "deep_fast.hip",
+        "vit_stream.inc"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=92F21851ADA6383C5CCE33DCF8BC497BC8B5EBACDEBC93D09167036546180B9F",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/vit-stream/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/vit-stream.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/vit-stream.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/vit-stream.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/vit-stream.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/vit-stream.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/vit-stream.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/vit-stream.hsaco"
+        ]
+      ],
+      "seconds": 5.851948658004403,
+      "sha256": "366e9dce89c4420b32cc1bb3d6be8a342a671538109a702b60ec5f10367c137c"
+    },
+    {
+      "target": "gfx1201",
+      "module": "vit-wide-deep",
+      "source_sha256": "1521465d5cc82819de5b28f58251c437b90b84e64f21662dbf00daf29e4277da",
+      "defines": [
+        "HIP_ISA_HALF 1",
+        "HIP_PREPACKED_WEIGHTS 1",
+        "HIP_BRANCHLESS_F 1"
+      ],
+      "sources": [
+        "deep_fast.hip",
+        "vit_wide_deep.inc"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1201",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=B86C020485FE574719E0D00577AA63164034BA10637138179EC83D15F1292CCF",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/sources/vit-wide-deep/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/vit-wide-deep.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/vit-wide-deep.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/vit-wide-deep.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1201",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/vit-wide-deep.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/vit-wide-deep.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1201",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/vit-wide-deep.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1201/vit-wide-deep.hsaco"
+        ]
+      ],
+      "seconds": 5.741786716971546,
+      "sha256": "e645cc24272d3556adc2aa9541c44c7994b10787c05b3b25f7b630d0963f3b04"
+    },
+    {
+      "target": "gfx1200",
+      "module": "c32_prefix_reference",
+      "source_sha256": "ad9ad89c400dd4e7f9b88d9bcdfc4a736e9a9e4ac775c2f5e514457b164f9799",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "c32_reference.hip",
+        "prefix_reference.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=9F7795C4B3C1AFA1AF26BA083FE189AFE91C5F677CD0B51819660A50FA667935",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/c32_prefix_reference/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_prefix_reference.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_prefix_reference.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_prefix_reference.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_prefix_reference.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_prefix_reference.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_prefix_reference.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_prefix_reference.hsaco"
+        ]
+      ],
+      "seconds": 0.3734396679792553,
+      "sha256": "6edbb7f6d874c202ab1b50982282a853461c6b1f49fa8a6a5d472620a22c1086"
+    },
+    {
+      "target": "gfx1200",
+      "module": "multihead-reference",
+      "source_sha256": "bf6884694df670fa932f9284aa6b18479d4209c1f26c95eaa53efa021448573b",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "multihead_reference.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=804B65735DEE5428EEBC4DEB84D3589389A6170FB882AA6D1B06014296B9EBFE",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/multihead-reference/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-reference.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-reference.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-reference.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-reference.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-reference.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-reference.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-reference.hsaco"
+        ]
+      ],
+      "seconds": 0.6784599698148668,
+      "sha256": "a8822a074db3282f0508502feecba2a28c51e382dbb4ea2f007e368568a520d3"
+    },
+    {
+      "target": "gfx1200",
+      "module": "deep_reference",
+      "source_sha256": "4c296112395350f5e8cbc78896eb00b821220e90e0616d53b7c3c2ff33eaaa5d",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "deep_reference.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=1E58EFCE7B65CB8A68DDB30750861BB8AA7FF64E059A1C790633EEE73D4A08AE",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/deep_reference/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/deep_reference.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/deep_reference.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/deep_reference.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/deep_reference.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/deep_reference.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/deep_reference.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/deep_reference.hsaco"
+        ]
+      ],
+      "seconds": 0.6668625639285892,
+      "sha256": "ea0203dc745f17ada2804818df75f0a740bea3a6ee2035838224038301902589"
+    },
+    {
+      "target": "gfx1200",
+      "module": "boundary_reference",
+      "source_sha256": "7511beecce670f1c56a3e977317d8b58c52568117cf1273a664e2b2a6209383f",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "boundary_reference.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=BC0501A485DF5B81B8780E1FAE5AAC775A9A2D36698F1454B0ACC54E35719B42",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/boundary_reference/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/boundary_reference.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/boundary_reference.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/boundary_reference.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/boundary_reference.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/boundary_reference.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/boundary_reference.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/boundary_reference.hsaco"
+        ]
+      ],
+      "seconds": 0.17372931796126068,
+      "sha256": "4fe1fa0466444f2e24adfcd7a7f85dbf05a2a84298d7b7181e4fc5d3f10473c8"
+    },
+    {
+      "target": "gfx1200",
+      "module": "c32_wmma",
+      "source_sha256": "966e4d01f44d0378eae9390423687f8231a030285f124aede700c35acbd6f384",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "c32_wmma.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=6C2C75962A1557AA81DAAFE4FF7A53532622D954525B783DD9772A9233B1D6B8",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/c32_wmma/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_wmma.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_wmma.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_wmma.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_wmma.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_wmma.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_wmma.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_wmma.hsaco"
+        ]
+      ],
+      "seconds": 0.5554428121540695,
+      "sha256": "fe806d4e0191e28de11caa433a28328dc17b45b2e1e9aa6b41417a96aa502ad1"
+    },
+    {
+      "target": "gfx1200",
+      "module": "multihead-wmma",
+      "source_sha256": "416c52fcc500008f69fcf46e103b95461674ccb2531af3291877c052faa728f7",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "multihead_wmma.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=18921DB985C646934BE94866B5AD60B77D28D7D680AF0FB0EB70D43358ED41F6",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/multihead-wmma/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-wmma.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-wmma.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-wmma.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-wmma.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-wmma.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-wmma.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-wmma.hsaco"
+        ]
+      ],
+      "seconds": 0.9086054970975965,
+      "sha256": "faef790b09659eba8e8ee1159185e71b883afc6b7e0dd71778f13d60d2b24867"
+    },
+    {
+      "target": "gfx1200",
+      "module": "deep_wmma",
+      "source_sha256": "bff74a671e99f9781fc252d3ceda3caf0489dfa1ae19c8a6a70e13a88adc8889",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "deep_wmma.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=FA7381EAE1A4DA4EF22834D9EE8E63F91E2E59AE06CD4C7DEE30C8DFE047FC56",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/deep_wmma/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/deep_wmma.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/deep_wmma.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/deep_wmma.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/deep_wmma.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/deep_wmma.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/deep_wmma.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/deep_wmma.hsaco"
+        ]
+      ],
+      "seconds": 0.9025363859254867,
+      "sha256": "fc60b788ed8bc429ee78fb65dc8f47a48e788516831f7419d0919e35b35a16de"
+    },
+    {
+      "target": "gfx1200",
+      "module": "wave-pointwise",
+      "source_sha256": "646c1e471d4ecd876f1d2f97b3c09f4423afa7c2e26c2559d5bed9abd0b38424",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "c32_reference.hip",
+        "wave_pointwise.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=6318B82927A426A486922E6E0E23910651A4063129A10B65BE4C28B18CD3D389",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/wave-pointwise/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/wave-pointwise.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/wave-pointwise.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/wave-pointwise.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/wave-pointwise.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/wave-pointwise.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/wave-pointwise.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/wave-pointwise.hsaco"
+        ]
+      ],
+      "seconds": 0.4150176749099046,
+      "sha256": "b9ec2017c5dde17ade9b7630caaad9c903788d9484e11d23e19ee1dc232fa188"
+    },
+    {
+      "target": "gfx1200",
+      "module": "c32_tiled",
+      "source_sha256": "c5afd86001d884dab18a6bdda86a6ce37bb92d0bc9c434883f92360b1d7c25c5",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "c32_tiled.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=7B187BAFF61DB3B8861319B7AA085B9489CDE9FDE18DF24CE591B623957B4C22",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/c32_tiled/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_tiled.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_tiled.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_tiled.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_tiled.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_tiled.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_tiled.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_tiled.hsaco"
+        ]
+      ],
+      "seconds": 0.3335910979658365,
+      "sha256": "c2031d5c827d3f5e5a6e8c289d76b5422550e3d4b94ae2fc74325c012975ce92"
+    },
+    {
+      "target": "gfx1200",
+      "module": "multihead-tiled",
+      "source_sha256": "e3d8ab3e98567c69a6ecb17eafd10eaf7210eb98e9bb393faba2d9583ca907f5",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "multihead_tiled.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=B153FCD6E022BFC6F689F4E84B5F2847F6DC2E053B5C534A2AE73967AF81FB89",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/multihead-tiled/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-tiled.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-tiled.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-tiled.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-tiled.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-tiled.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-tiled.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-tiled.hsaco"
+        ]
+      ],
+      "seconds": 0.5187132700812072,
+      "sha256": "c2960beae0ccd7ef819387ecee2d6f8f9bf7c130d559c7c1af2147dd3374bbab"
+    },
+    {
+      "target": "gfx1200",
+      "module": "c32_fast",
+      "source_sha256": "e53264f8f4e4b6e12b5ea06c3b6feaf312a8156ab6bdbfcdf5d450018b79f90e",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "c32_fast.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=B8AEDF1DB602B5FF7980C9E746EBB65AE857888CC3EE7CC7F712A0173C2B7CCD",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/c32_fast/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fast.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fast.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fast.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fast.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fast.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fast.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fast.hsaco"
+        ]
+      ],
+      "seconds": 0.46564269391819835,
+      "sha256": "02bcd14e828d336ef91dda61c26ab0742279b99aaec5277536ddffb102d0eb03"
+    },
+    {
+      "target": "gfx1200",
+      "module": "c32_fast_attention",
+      "source_sha256": "49c479faa01ea23f81613d058c751e7db95c3e70b26f19946e6a71cf9630edde",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "c32_fast_attention.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=48776D4D18ED94F640F7A5BD8F6C6164301E9ACF5C61888FAF867969F5D99B18",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/c32_fast_attention/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fast_attention.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fast_attention.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fast_attention.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fast_attention.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fast_attention.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fast_attention.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fast_attention.hsaco"
+        ]
+      ],
+      "seconds": 0.2861150121316314,
+      "sha256": "1dae15c2329172cb6b22d7b7502b0ee3ae7d69afbbc4073ae60b61d8482c4089"
+    },
+    {
+      "target": "gfx1200",
+      "module": "boundary-fast",
+      "source_sha256": "d73d2c88c047098d3f1f2b317e1a9a992b2ea6f4c09d608303e18c1014ed916b",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "c32_fast_attention.hip",
+        "boundary_fast.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=4D8E3C60A8AF402D1FA593978A2CFE3EBACC21E281E6B13F2459E3EAA9A5B8F5",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/boundary-fast/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/boundary-fast.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/boundary-fast.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/boundary-fast.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/boundary-fast.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/boundary-fast.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/boundary-fast.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/boundary-fast.hsaco"
+        ]
+      ],
+      "seconds": 0.38560239993967116,
+      "sha256": "32753f408ffb477204e205ac321a81aa5ca0cfa1eb55e2c1bcc8351480e47dfe"
+    },
+    {
+      "target": "gfx1200",
+      "module": "c32_fused_attention",
+      "source_sha256": "c23626f5661751f666d0d83694817f2da7b9fbabfa7d189f380dc48c4f2bc5d4",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "c32_fused_attention_packed.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=5F35CF2B7D88E3DC0C73164A195A614C0F390C9649C82DD469AE5733EA03C252",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/c32_fused_attention/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fused_attention.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fused_attention.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fused_attention.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fused_attention.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fused_attention.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fused_attention.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fused_attention.hsaco"
+        ]
+      ],
+      "seconds": 0.551719362847507,
+      "sha256": "83fc7326f8365dfe3ea9893ce56e6e5dcca53ffbd6727eb60ec9d4bd91041197"
+    },
+    {
+      "target": "gfx1200",
+      "module": "c32_fused_ffn_attention",
+      "source_sha256": "ea61d1350991c26efc0aba579b3b2200c51d51b390612752c352315e0111b6bf",
+      "defines": [
+        "HIP_ISA_HALF 1",
+        "HIP_FP8_SAT_MODE 3"
+      ],
+      "sources": [
+        "c32_fused_ffn_attention.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=34D65BDEE4F3E398B34ECB970DE4D425B3F906B1FEE6B3D22C1C8FBCDF469271",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/c32_fused_ffn_attention/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fused_ffn_attention.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fused_ffn_attention.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fused_ffn_attention.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fused_ffn_attention.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fused_ffn_attention.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fused_ffn_attention.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fused_ffn_attention.hsaco"
+        ]
+      ],
+      "seconds": 4.2588687560055405,
+      "sha256": "b9b9034485f5e44b1c662d1211b96d4df65ecd7e1f4d11406c4864f06f6a0abc"
+    },
+    {
+      "target": "gfx1200",
+      "module": "c32_fused_ffn_attention-packed",
+      "source_sha256": "550133a685e787ed823e035bad2a48888b495b61cc208ea4cc39cc7be34758f3",
+      "defines": [
+        "HIP_ISA_HALF 1",
+        "HIP_PREPACKED_WEIGHTS 1",
+        "HIP_C32_DIAG_WEIGHTS 1",
+        "HIP_FP8_SAT_MODE 3"
+      ],
+      "sources": [
+        "c32_fused_ffn_attention.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=5E8E0F52A92ADAA34B3D492126B69CA637C4A2D5B3B3A8777620840E509865EA",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/c32_fused_ffn_attention-packed/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fused_ffn_attention-packed.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fused_ffn_attention-packed.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fused_ffn_attention-packed.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fused_ffn_attention-packed.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fused_ffn_attention-packed.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fused_ffn_attention-packed.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32_fused_ffn_attention-packed.hsaco"
+        ]
+      ],
+      "seconds": 3.3381292319390923,
+      "sha256": "81d704a22b41b3d3b23ddbe002fbc85515ba59f1b23ce7f5dc71ef7312aa2e9a"
+    },
+    {
+      "target": "gfx1200",
+      "module": "prefix_fast",
+      "source_sha256": "bf331dc1f6628d0c1deee8afeec36ff038199c928d40f2555d438aacfae4583b",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "prefix_fast.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=6F17B9389F3C7265BEED4E44A223539DFEF6DCB7C390E1B083AE344A2E045006",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/prefix_fast/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/prefix_fast.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/prefix_fast.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/prefix_fast.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/prefix_fast.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/prefix_fast.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/prefix_fast.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/prefix_fast.hsaco"
+        ]
+      ],
+      "seconds": 0.8996788300573826,
+      "sha256": "2b20dd229cdc5b28742f859706ab5c4232770da2ab0536810f8b29423ff224f3"
+    },
+    {
+      "target": "gfx1200",
+      "module": "multihead-fast",
+      "source_sha256": "e6c041d5d0eb2da9a23477e574b463102b8dc526ddf3a92a3b6d1fd762a8dfe7",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "multihead_fast.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=E25DBD5B6E082BC249A11B7B2952F49EBD3C515A91B747C5A1DE7992B3D892CD",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/multihead-fast/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-fast.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-fast.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-fast.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-fast.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-fast.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-fast.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-fast.hsaco"
+        ]
+      ],
+      "seconds": 1.112146375933662,
+      "sha256": "ecf0f2b77e6755e8f4071e2d27bcd47c061f41a39e323ccb91137402f650eeb2"
+    },
+    {
+      "target": "gfx1200",
+      "module": "multihead-fast-padded-wave",
+      "source_sha256": "49e3619db639812adc6c1581648c551e1bae94de12f7ac07017e2a8a699129b6",
+      "defines": [
+        "HIP_ISA_HALF 1",
+        "HIP_FMED3_CLAMP 1"
+      ],
+      "sources": [
+        "multihead_fast_padded.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=E00882F2072DF674D7E5D227721858C7A8524C43A23FDADEC28E67C637F72934",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/multihead-fast-padded-wave/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-fast-padded-wave.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-fast-padded-wave.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-fast-padded-wave.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-fast-padded-wave.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-fast-padded-wave.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-fast-padded-wave.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-fast-padded-wave.hsaco"
+        ]
+      ],
+      "seconds": 11.889264694182202,
+      "sha256": "9fe44bd3cb8b04e594ba572f4ddd82586f3b8a12834df7453611adb13d86fc24"
+    },
+    {
+      "target": "gfx1200",
+      "module": "multihead_fused_attention",
+      "source_sha256": "f7de870867a6c0db232c3d8f637a3cfb4f275002252a2c9ce5d74513afb51b13",
+      "defines": [
+        "HIP_ISA_HALF 1",
+        "HIP_MH_RTZ_ISA 1"
+      ],
+      "sources": [
+        "multihead_fused_attention.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=8832C1028A3A363516E81399122F9AC2757EC07198953122C483D2F4BF780D2E",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/multihead_fused_attention/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead_fused_attention.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead_fused_attention.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead_fused_attention.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead_fused_attention.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead_fused_attention.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead_fused_attention.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead_fused_attention.hsaco"
+        ]
+      ],
+      "seconds": 4.446706393966451,
+      "sha256": "f513ca73e422ff9317be1a463fdbc177a0cea78892cdf165ef4c4d4dfa52c7d7"
+    },
+    {
+      "target": "gfx1200",
+      "module": "deep_fast",
+      "source_sha256": "832bab84a6081229396a54065676a95ba32f60d4b922ec05dc03019dfb87bd8f",
+      "defines": [
+        "HIP_ISA_HALF 1"
+      ],
+      "sources": [
+        "deep_fast.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=08EAFAF172313086B877D4FF63F7C387EE20A16F1F96FDE00BEAEC8167FB273A",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/deep_fast/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/deep_fast.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/deep_fast.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/deep_fast.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/deep_fast.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/deep_fast.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/deep_fast.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/deep_fast.hsaco"
+        ]
+      ],
+      "seconds": 5.706135189160705,
+      "sha256": "30dd753af7669fbe2fd1c96fa459bc5ccc161cac02fed457e0144158423c6b9a"
+    },
+    {
+      "target": "gfx1200",
+      "module": "deep_fast-packed",
+      "source_sha256": "d0840cdb35ad52412d8230d2c5858b741973affe55a97afdb562903fa6109679",
+      "defines": [
+        "HIP_ISA_HALF 1",
+        "HIP_PREPACKED_WEIGHTS 1",
+        "HIP_VIT_ATTN_TRANSPOSED_SCORE 1",
+        "HIP_BRANCHLESS_F 1"
+      ],
+      "sources": [
+        "deep_fast.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=1BCF28B7E40129B235B38945AFA5CFA172F75E4F1BD6B15C182D98A2A8BC4C58",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/deep_fast-packed/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/deep_fast-packed.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/deep_fast-packed.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/deep_fast-packed.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/deep_fast-packed.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/deep_fast-packed.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/deep_fast-packed.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/deep_fast-packed.hsaco"
+        ]
+      ],
+      "seconds": 5.4261229718104005,
+      "sha256": "76c9a3144ebd4eeaa6dbbf1dd5fa91104665e4d32d4f093194a3062c777b283d"
+    },
+    {
+      "target": "gfx1200",
+      "module": "multihead-fast-packed",
+      "source_sha256": "97e1217db40e05bc2986135730f12e9572ddf97e46f2b9abe167c48f67cc1dcf",
+      "defines": [
+        "HIP_ISA_HALF 1",
+        "HIP_PREPACKED_WEIGHTS 1"
+      ],
+      "sources": [
+        "multihead_fast.hip"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=74DCA455902F465A8E3AA7DB5F0FE332C551D0CC97868E89980BC5DEB7C413D7",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/multihead-fast-packed/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-fast-packed.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-fast-packed.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-fast-packed.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-fast-packed.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-fast-packed.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-fast-packed.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-fast-packed.hsaco"
+        ]
+      ],
+      "seconds": 1.055179061833769,
+      "sha256": "3f142714b28a230d524dafe6ff50aa51b6e91f2935b78c693f116050787f75af"
+    },
+    {
+      "target": "gfx1200",
+      "module": "multihead-fast-padded-wave-packed",
+      "source_sha256": "2a84d9a9e8f01c3a52e08787964fbaff6d1c7301466d0e1f51610fbef6ee235b",
+      "defines": [
+        "HIP_ISA_HALF 1",
+        "HIP_PREPACKED_WEIGHTS 1",
+        "C512_HEAD_GROUP 1",
+        "HIP_FFN_HOIST_RES 2",
+        "HIP_FFN_LINE_STORES 1",
+        "HIP_FMED3_CLAMP 1"
+      ],
+      "sources": [
+        "multihead_fast_padded.hip",
+        "c512_head_group.inc"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=47DC0EE831CAF04258A469DEF9093B949A299E4DA595606AF11AE323BCB40FD1",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/multihead-fast-padded-wave-packed/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-fast-padded-wave-packed.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-fast-padded-wave-packed.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-fast-padded-wave-packed.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-fast-padded-wave-packed.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-fast-padded-wave-packed.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-fast-padded-wave-packed.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/multihead-fast-padded-wave-packed.hsaco"
+        ]
+      ],
+      "seconds": 11.818851368967444,
+      "sha256": "f3c96386d089cff66be0583b4fae874639fde8f902477997746181bfb8aab09c"
+    },
+    {
+      "target": "gfx1200",
+      "module": "c32-wave1",
+      "source_sha256": "eb9a6c97512031d60c823d0ad628285e194df76d1c0bee21c9e4688161b7032d",
+      "defines": [
+        "HIP_ISA_HALF 1",
+        "CW_UP_FUSED 1",
+        "CW_ACT_FMED3 1",
+        "HIP_PREPACKED_WEIGHTS 1",
+        "CW_ROLL_HIDDEN 1",
+        "CW_ROLL_WINDOW 1",
+        "CW_VEC_INPUT 1",
+        "CW_PREFIX_SPLIT 1",
+        "CW_PACK8 1",
+        "HIP_FP8_SAT_MODE 3",
+        "CW_DIRECT_OUT 1",
+        "CW_RTZ_PAIR 1",
+        "CW_PACK_MODE_MASK 127",
+        "CW_PREFIX_DIRECT_OUT 1",
+        "CW_PREFIX_FULL_TILE 1",
+        "CW_FINISH_FULL_TILE 1"
+      ],
+      "sources": [
+        "c32_fused_ffn_attention.hip",
+        "wave_owned_c32.inc"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=1A550C89E025C26D5E09F3547ECBE4256A9B6F45B7D320A858B0E6B2F5EF7402",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/c32-wave1/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32-wave1.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32-wave1.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32-wave1.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32-wave1.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32-wave1.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32-wave1.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c32-wave1.hsaco"
+        ]
+      ],
+      "seconds": 4.502694379072636,
+      "sha256": "cc7b807d70d15ec5c567672c52e9a060a86eb46aa4ebb10f9791835c38d29598"
+    },
+    {
+      "target": "gfx1200",
+      "module": "c64-wave2",
+      "source_sha256": "2b99230066f64f31f9469bdd9f558e38d2b504c2c3ed79c6621973f36f26efc6",
+      "defines": [
+        "HIP_ISA_HALF 1",
+        "W2_UP_FUSED 1",
+        "W2_FFN_QT_SMALL_MASK 3",
+        "W2_FFN_QT_BATCH 2",
+        "W2_BOUNDED_RCP 1",
+        "HIP_PREPACKED_WEIGHTS 1",
+        "HIP_FFN_HOIST_RES 2",
+        "HIP_PDL_KERNELS 0",
+        "W2_FRAGMENT_WEIGHTS 1",
+        "W2_LAUNDER_QKV 1",
+        "W2_SCHED_FENCE 1",
+        "W2_ROLL_QUERY 1",
+        "W2_HIDDEN_TILES 2",
+        "W2_PACK8 6",
+        "HIP_FMED3_CLAMP 1",
+        "W2_BYTE_INPUT_LOADS 1",
+        "W2_RTZ_PAIR 1",
+        "W2_DIRECT_COORDS 1"
+      ],
+      "sources": [
+        "multihead_fast_padded.hip",
+        "wave_owned_mh.inc",
+        "wave_owned_attention_setup.inc",
+        "@wave-owned-attention-body",
+        "wave_owned_attention_exports.inc"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=60D648944F30EDDE731401A11578FE494C657245BE121335D6084C46516491D6",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/c64-wave2/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c64-wave2.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c64-wave2.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c64-wave2.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c64-wave2.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c64-wave2.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c64-wave2.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c64-wave2.hsaco"
+        ]
+      ],
+      "seconds": 15.975515228928998,
+      "sha256": "d63905912f98e77942d64e42dd9b4ab479079ecdb1a447b4891289ec96fbd889"
+    },
+    {
+      "target": "gfx1200",
+      "module": "c512-m32-mh",
+      "source_sha256": "04e976f92648148a5e9d4fb3d55d1be50f6b96a6ea682f5dd9d8827650d82db3",
+      "defines": [
+        "HIP_ISA_HALF 1",
+        "C512_COMPACT_QKV_ATTN 1",
+        "C512_FUSED_QKV_ATTN 1",
+        "HIP_PREPACKED_WEIGHTS 1",
+        "HIP_FFN_HOIST_RES 2",
+        "HIP_PDL_KERNELS 0",
+        "HIP_FMED3_CLAMP 1"
+      ],
+      "sources": [
+        "multihead_fast_padded.hip",
+        "c512_m32_mh.inc",
+        "c512_qkv_attention_fused.inc",
+        "c512_qkv_attention_compact.inc"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=B591DBF51CD6BD5BAA1A740EA31661DDB80575D001418E46B50E180EF0719A59",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/c512-m32-mh/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c512-m32-mh.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c512-m32-mh.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c512-m32-mh.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c512-m32-mh.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c512-m32-mh.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c512-m32-mh.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c512-m32-mh.hsaco"
+        ]
+      ],
+      "seconds": 10.711375290993601,
+      "sha256": "c9e13518d2c597f1e9c0553699fb1c75c318856d96428859680ab1a0dda7247b"
+    },
+    {
+      "target": "gfx1200",
+      "module": "c512-m32-deep",
+      "source_sha256": "47d565fa998f0d34d1d5e614f952a1efd10d82894b5d30c9d83ee4b16ee0f43a",
+      "defines": [
+        "HIP_ISA_HALF 1",
+        "HIP_PREPACKED_WEIGHTS 1",
+        "HIP_BRANCHLESS_F 1"
+      ],
+      "sources": [
+        "deep_fast.hip",
+        "c512_m32_deep.inc"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=E5225E1E3740CD5F9C9EE87FE666E466BFCA2383FA92E2B4C026CE1A78181919",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/c512-m32-deep/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c512-m32-deep.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c512-m32-deep.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c512-m32-deep.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c512-m32-deep.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c512-m32-deep.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c512-m32-deep.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/c512-m32-deep.hsaco"
+        ]
+      ],
+      "seconds": 5.476570559898391,
+      "sha256": "93b104a58caa203e1c945232765c091386094ebb204e17c4f3fbf299b4e6d481"
+    },
+    {
+      "target": "gfx1200",
+      "module": "vit-stream",
+      "source_sha256": "33602cc59dce4a35dd8a8281c60e156f15e2bc0c859c0b30b48ef893353eef22",
+      "defines": [
+        "HIP_ISA_HALF 1",
+        "HIP_PREPACKED_WEIGHTS 1",
+        "HIP_BRANCHLESS_F 1",
+        "HIP_VIT_STREAM_KERNELS 1"
+      ],
+      "sources": [
+        "deep_fast.hip",
+        "vit_stream.inc"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=92F21851ADA6383C5CCE33DCF8BC497BC8B5EBACDEBC93D09167036546180B9F",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/vit-stream/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/vit-stream.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/vit-stream.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/vit-stream.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/vit-stream.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/vit-stream.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/vit-stream.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/vit-stream.hsaco"
+        ]
+      ],
+      "seconds": 6.001763541949913,
+      "sha256": "1ff81c2fab97cd6391a468870d77d549d72bf921998940b4746142e97d1fe4e3"
+    },
+    {
+      "target": "gfx1200",
+      "module": "vit-wide-deep",
+      "source_sha256": "1521465d5cc82819de5b28f58251c437b90b84e64f21662dbf00daf29e4277da",
+      "defines": [
+        "HIP_ISA_HALF 1",
+        "HIP_PREPACKED_WEIGHTS 1",
+        "HIP_BRANCHLESS_F 1"
+      ],
+      "sources": [
+        "deep_fast.hip",
+        "vit_wide_deep.inc"
+      ],
+      "commands": [
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "--target=x86_64-pc-windows-msvc",
+          "--offload-arch=gfx1200",
+          "-O3",
+          "-x",
+          "hip",
+          "--offload-device-only",
+          "-cuid=B86C020485FE574719E0D00577AA63164034BA10637138179EC83D15F1292CCF",
+          "-c",
+          "-emit-llvm",
+          "-fshort-wchar",
+          "-std=c++14",
+          "-fms-compatibility-version=19.44.35229",
+          "-nogpuinc",
+          "-nogpulib",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/sources/vit-wide-deep/probe.hip",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/vit-wide-deep.bc"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-S",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/vit-wide-deep.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/vit-wide-deep.hsaco.s"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/clang",
+          "-target",
+          "amdgcn-amd-amdhsa",
+          "-mcpu=gfx1200",
+          "-O3",
+          "-nogpulib",
+          "-c",
+          "-mllvm",
+          "-amdgpu-internalize-symbols",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/vit-wide-deep.bc",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/vit-wide-deep.o"
+        ],
+        [
+          "/home/lmxxf/work/llvm-build-rocm724/bin/ld.lld",
+          "--no-undefined",
+          "-shared",
+          "-plugin-opt=mcpu=gfx1200",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/vit-wide-deep.o",
+          "-o",
+          "/home/lmxxf/work/compiler-versions-20260929/L22/gfx1200/vit-wide-deep.hsaco"
+        ]
+      ],
+      "seconds": 5.585130557883531,
+      "sha256": "47fa55efd6b73307968826c4a67a4ee89712cd3f33305689558438421c5b30d3"
+    }
+  ]
+}

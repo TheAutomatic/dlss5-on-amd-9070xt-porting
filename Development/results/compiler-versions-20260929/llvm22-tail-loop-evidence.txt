@@ -1,0 +1,19 @@
+LLVM22 split_mix_blocked_h16w_m32; line offsets within function body
+164: s_mov_b64 s[10:11], 7
+179: .LBB76_7:                               ; =>This Inner Loop Header: Depth=1
+180: s_add_co_i32 m0, s10, -7
+185: s_add_co_i32 m0, s10, -6
+195: s_add_co_i32 m0, s10, -4
+250: s_mov_b32 m0, s10
+295: global_store_b32 v[72:73], v66, off
+302: s_add_nc_u64 s[10:11], s[10:11], 8
+306: s_cmp_lg_u32 s10, 39
+316: s_cbranch_scc1 .LBB76_7
+324: s_mov_b64 s[2:3], 7
+332: .LBB76_10:                              ; =>This Inner Loop Header: Depth=1
+334: s_add_co_i32 m0, s2, -7
+393: s_mov_b32 m0, s2
+449: global_store_b32 v[36:37], v40, off
+463: s_add_nc_u64 s[2:3], s[2:3], 8
+467: s_cmp_lg_u32 s2, 39
+477: s_cbranch_scc1 .LBB76_10

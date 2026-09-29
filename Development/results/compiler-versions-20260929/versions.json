@@ -1,0 +1,33 @@
+{
+  "driver20": {
+    "source": "Windows amd_comgr_2.dll",
+    "api": "2.9",
+    "llvm": "20.0.0git",
+    "commit": "33ab2c2f7838239f1e2e5c06432bbb8d887e8cb2",
+    "dll_sha256": "4FAD683066D49D586FFC25B648F5322C937DA4453BD82B79CDD86AE170CEEE94"
+  },
+  "driver21": {
+    "source": "Windows amd_comgr_3.dll",
+    "api": "3.0",
+    "llvm": "21.0.0git",
+    "commit": "590b9320a5be90e40268759c6203c01fde121e68",
+    "dll_sha256": "5DBB6E593536BC5CA900C294B2E1F8C6C8873014C593D0F7CC245260AE99C4D2"
+  },
+  "public21": {
+    "source": "ROCm amd-staging history",
+    "llvm": "21.0.0git",
+    "commit": "6d585d872fbd3c594da7a3c09ac9b22eef4167f6",
+    "build_seconds": 570,
+    "reused": true
+  },
+  "public22": {
+    "source": "ROCm rocm-7.2.4",
+    "llvm": "22.0.0git",
+    "commit": "f58b06dce1f9c15707c5f808fd002e18c2accf7e",
+    "build_seconds": 795
+  },
+  "source_recipe_sha256": "47fdf978594922ab03c0825a436eadf11a30a4897696fc3d54d0a63749e93b62",
+  "source_repo_commit": "ad499a81",
+  "driver_code_identity": "60/60 .text/.rodata/.note equal to installed snapshot",
+  "host_sha256": "799A47AD874F72437622F019631F25206AC249099DA83AB95FECBCF13D5BCC5F"
+}
