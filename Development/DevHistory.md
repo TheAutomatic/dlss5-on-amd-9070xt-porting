@@ -1080,3 +1080,7 @@ EXACT/AE各7×12共168候选帧命中09-28 float FMA golden，连驱动基线336
 8条前瞻只编C32/C64两个gfx1201模块作静态探针：C32多2～4对，多数只净省0～3条；C64/C128部分长2～4条，C256 attention不变。未做该探针GPU回归/计时，不当候选。结论是局部后置配对接近收益递减，寄存器分配/内存/WMMA工作均未触及，不是整个编译器的上限；没有再盲删等待或扫参数。
 
 未达任一档对驱动≥0.5%，不改生产编译链、不装机/发包。现场64项hash同，off/P60份gfx1201实验模块hash同。源码脚本tools/llvm-patch1，结果results/llvm-patch1-20260929含补丁、2个lit结果、代码/元数据差异、逐帧hash/AE及32槽原始CSV。编译器构建时尚未提交，version仍94aca371，实际C++源码SHA/编译器SHA与fork提交对应另存，不混称原版编译器。
+
+## 2026-09-29 16:10：Daniel 0.5.1 静态对照（分身）
+
+新增 Swin 持久化 run 内核 `k_reg_swin_run<64/128/256>`（单次派发跨层 + 设备端就绪队列、100ms 超时、新 env `DLSSNR_SWIN_RUN(_ALL)`），很可能是 +6%/+8% 主体；reference 档去 swin_mh/swin32 溢出（private 336→80/0）；fast 档再削 cvt/VALU；ViT 新 `k_v1dl_*<2>` 每 wave 双倍 tile。reference 数学未变。对我们：持久化 run 是"C256 持久化已关"的新证据，可重开评估。未计时。换装脚本 `D:\DLSSNR-Lab\daniel-051\swap.ps1`。见 `results/daniel-051-20260929`。
