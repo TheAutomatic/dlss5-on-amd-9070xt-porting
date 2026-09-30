@@ -1328,3 +1328,6 @@ Zero（Splashtop，只作正确性）：剑星 2K 原生 AA EXACT 55.6～56.1，
 
 ## 2026-10-01 swin-body-gap 续：块 65 字节（不收）、下采样链尾 f16（收）、Up 本体（停）
 `CW_UP_LOW_BYTES`（块 65→C32Up 读字节）19 组 SAME，但第 1 轮两档变慢、1080 合并持平，不收，宏默认 0。`W2_DOWN_HALF`+`MH_POOL_HALF_IN`：编码器 C64/C128 链尾（post 3 = Hrtz，f16 精确）存 f16，池化 `_hin` 和 Up skip `_sh`/`_lb_sh` 读 f16；原有函数 ISA 逐条不变；rebase 到 C512_FFN_ONE 之后重测 19 组 SAME，三轮 900 −0.048/−0.058/−0.048、1080 −0.085/−0.047/−0.050，合并 p99 两档都更好。收，已装剑星（add-on 7E19CC6B，c64-wave2 38FEEB70/DC8B6DE1，mh-packed 03003659/EBD1A712），鬼武者镜像模块、RE9 runtime 待发包重编。Up 首块本体的差距来自数值取舍（e4m3 投影、f16 混合），逐位做不了，停。`results/swin-body-gap-20261001` §5。
+
+## 2026-10-01 尾部 + C32 差距拆账 tail-c32-gap（光派单，子代理）
+尾部"其他"54.8 对 15.5µs 主要是分族口径：块 48 Up（35µs）在他那边折进 fswinpup256；同口径只有块 39 decoder 19.7 对 9.2µs。候选 `HIP_DEC_NT`（每 wave NT 个列块、A 只读一次，逐位）19 组 SAME，NT=4 三轮变慢、NT=2 有一轮 900 +0.0014，不收，宏默认 0。C32 +225 逐项：prefix +78（另池化 18）、post +64、chain/finish 各 +10～+20、up +17、块 4 −9；约 +200 是数值取舍（f32 激活/归一化快路径、fp8 输入），组织方式只剩池化（resample-fold 负账同法）和 up 分发（≤3µs），这轮不出刀。`results/tail-c32-gap-20261001`。

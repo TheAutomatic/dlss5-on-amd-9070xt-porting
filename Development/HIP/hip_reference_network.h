@@ -312,10 +312,11 @@ class Network {
   if(module=="c32_fast_ffn"){bool expand=kernel=="c32_ffn_expand_fast";U tokens=count/(expand?128:32);threads=expand?512:256;groups=((tokens+63)/64)*(expand?2:1);}
   if(module=="c32_fast_attention")threads=32;
   if(opt.wave&&(kernel=="c32_attn_normalize"||kernel=="c32_attn_probabilities"||kernel=="mh_normalize"||kernel=="mh_probabilities")){module="wave";kernel+="_wave";count=Count(size_t(count)*32);}
-  if((kernel=="decoder_project2x"||kernel=="decoder_project2x_h16w"||kernel=="decoder_project2x_h16w_byteout")&&(module=="deep_fast"||module=="deep_wmma")){
+  const U dec_nt=(kernel.rfind("decoder_project2x_h16w_n",0)==0||kernel.rfind("decoder_project2x_h16w_byteout_n",0)==0)?U(std::stoul(kernel.substr(kernel.rfind('_')+2))):1u; /* HIP_DEC_NT exports: NT column tiles per wave */
+  if((kernel=="decoder_project2x"||kernel=="decoder_project2x_h16w"||kernel=="decoder_project2x_h16w_byteout"||dec_nt>1)&&(module=="deep_fast"||module=="deep_wmma")){
    if constexpr(sizeof...(A)==10){auto tuple=std::make_tuple(args...);auto integer=[](auto x)->U{if constexpr(std::is_integral_v<decltype(x)>)return U(x);else return 0;};
-    const U columns=integer(std::get<9>(tuple));if(!columns||columns%16||count%columns)throw std::runtime_error("decoder tile ABI");
-    groups=Count(((size_t(count)/columns+15)/16)*(columns/16));
+    const U columns=integer(std::get<9>(tuple));if(!columns||columns%(16*dec_nt)||count%columns)throw std::runtime_error("decoder tile ABI");
+    groups=Count(((size_t(count)/columns+15)/16)*(columns/16/dec_nt));
    }else throw std::runtime_error("decoder argument count");
   }
   if(opt.wall_profile)api.Check(api.hipStreamSynchronize(stream),"wall profile drain");
@@ -547,7 +548,10 @@ class Network {
   bool ok=HasFn("mh_fast","mh_pool_project_group_c512_gout")&&HasFn("deep_fast","decoder_project2x_h16w_gin");
   if(const char*d=std::getenv("DLSS5_HIP_GATHER_FOLD_LOG"))if(*d){static bool once=false;if(!once){once=true;fprintf(stderr,"GATHER_FOLD %d\n",ok?1:0);}}
   return ok;}
- Tensor Up(Tensor input,Tensor skip,U iw,U ih,U ow,U oh,U ic,U oc,const std::string&file,bool byte_out=false){if(byte_out&&(!(opt.decoder_h16w&&opt.fast_deep)||oc==32))throw std::runtime_error("decoder byte output requires quantized fast path");auto out=(HIP_C512_PAD16&&oc==512&&!byte_out)?NewPad16(size_t(ow)*oh,512):New(size_t(ow)*oh*oc/(byte_out?4:1));if(opt.decoder_h16w&&opt.fast_deep)Run("deep",byte_out?"decoder_project2x_h16w_byteout":(gather_fold&&ic==1024&&oc==512)?"decoder_project2x_h16w_gin":"decoder_project2x_h16w",size_t(iw)*ih*oc,P(input),PackedDecoderHalf(file,size_t(ic)*oc),P(skip),P(out),iw,ih,ow,oh,ic,oc);else Run("deep","decoder_project2x",size_t(iw)*ih*oc,P(input),Weight(file),P(skip),P(out),iw,ih,ow,oh,ic,oc);return out;}
+ Tensor Up(Tensor input,Tensor skip,U iw,U ih,U ow,U oh,U ic,U oc,const std::string&file,bool byte_out=false){if(byte_out&&(!(opt.decoder_h16w&&opt.fast_deep)||oc==32))throw std::runtime_error("decoder byte output requires quantized fast path");auto out=(HIP_C512_PAD16&&oc==512&&!byte_out)?NewPad16(size_t(ow)*oh,512):New(size_t(ow)*oh*oc/(byte_out?4:1));if(opt.decoder_h16w&&opt.fast_deep){std::string dn=byte_out?"decoder_project2x_h16w_byteout":(gather_fold&&ic==1024&&oc==512)?"decoder_project2x_h16w_gin":"decoder_project2x_h16w";
+  /* 2026-10-01 tail-c32-gap: NT column tiles per wave (HIP_DEC_NT exports), same bits; widest present */
+  if(!(gather_fold&&ic==1024&&oc==512)&&((ic==1024&&oc==512&&!byte_out)||(ic==512&&oc==256&&byte_out)))for(U nt:{8u,4u,2u})if(HasFn("deep_fast",dn+"_n"+std::to_string(nt))){dn+="_n"+std::to_string(nt);break;}
+  Run("deep",dn.c_str(),size_t(iw)*ih*oc,P(input),PackedDecoderHalf(file,size_t(ic)*oc),P(skip),P(out),iw,ih,ow,oh,ic,oc);}else Run("deep","decoder_project2x",size_t(iw)*ih*oc,P(input),Weight(file),P(skip),P(out),iw,ih,ow,oh,ic,oc);return out;}
  static U Shift(U block){static constexpr U s[]={0,3,1,2,0,3,1,2,0,3,1,2,0,3,1,2,1,2,0,3,1,2,0,3,1,2,0,3,1,2};if(block<40||block>69)throw std::runtime_error("decoder shift");return s[block-40];}
 public:
  Network(const Network&)=delete;Network&operator=(const Network&)=delete;
