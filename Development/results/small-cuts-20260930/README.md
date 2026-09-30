@@ -29,3 +29,7 @@
 | 三项合并（DK） | 是 | 0.26～0.31% | 0.31～0.35% | 不过 0.5% |
 
 参考：D 叠加到已装的 C32 字节 skip 上（BD）比单 B 再省约 0.03ms，见 `../c32-align-20260930/README.md`。复现脚本同 `Development/HIP/experiments/c32-align/`（`mkset.ps1`/`bmh.ps1` 拼 flat-D/DK）。
+
+## 更新（09-30 08:01）：Zero 批准，D 已开进生产
+
+配方 c32-wave1 加 `CW_DIAG_ONLY 1`（配方直编与测过的 SD 候选 .text 两架构逐字节同）。在现役 a80db313 配方上复测（base = benchmark-P＋flat-B，候选 = 同宿主＋flat-F）：7 用例 × EXACT/AE 168 帧、AE CSV、回绕全同，18 SAME（`full-F.log`）。一轮 ABBA：900 7.823797→7.816520（−0.007ms，0.09%，本轮在噪声内），1080 10.737017→10.698926（−0.038ms，0.35%）。只换模块：宿主 a80db313、RE9 runtime fd4b2c0c 不变，flags 不动；新 c32-wave1 gfx1201 30c3d107 / gfx1200 ba026a91。备份：剑星 `D:\DLSSNR-Lab\hip-backend\c32-align-20260930\backups\stellar-20260930-080147-c32skip`，鬼武者 `D:\DLSSNR-Lab\onimusha-backups\20260930-080147-c32skip`（模块与剑星对齐）。脚本 `experiments/c32-align/install-diag.ps1`。

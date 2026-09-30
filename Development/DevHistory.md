@@ -1174,3 +1174,7 @@ WorkingPlan B1 留下的未实测候选。改为不动宿主：`mh_attention_pro
 逐位 18 组 SAME（7 用例 × EXACT/AE、AE CSV、回绕）。ABBA 900 7.9101→7.8612（0.62%）、7.9332→7.8831（0.63%）；1080 10.8614→10.7739（0.81%）、10.8828→10.7918（0.84%）。装剑星（add-on a80db313＋c32-wave1/mh-fast 两架构，flags 原样，备份 `...\c32-align-20260930\backups\stellar-20260930-034433`）；RE9 runtime fd4b2c0c（900/1080 hash 同、smoke 过）；鬼武者 runtime＋模块对齐，备份 `D:\DLSSNR-Lab\onimusha-backups\20260930-034433-c32`。`results/c32-align-20260930`。
 
 小件：C32 对角残差跳零（`CW_DIAG_ONLY`）在 wave-owned 核上重做，逐位，900/1080 各 −0.02～−0.03ms（0.22～0.28%），不过门槛；C256 FFN `HIP_FFN_PK_ACT 1` 逐位但测不出收益（激活写 hidden 逐字节是布局所致，要改得转置 expand，非小件）；ViT QKV 归一化换 bpermute 求和改变累加顺序不能逐位。三项合并 0.26～0.35%，均不收。`results/small-cuts-20260930`。
+
+## 2026-09-30 08:01：C32 对角残差跳零开进生产（Zero 批准）
+
+配方 c32-wave1 加 `CW_DIAG_ONLY 1`。在 a80db313 现役配方上 18 组 SAME（EXACT/AE 168 帧、AE CSV、回绕）；一轮 ABBA 900 −0.007ms（0.09%，噪声内）、1080 −0.038ms（0.35%）。只换 c32-wave1 两架构（30c3d107/ba026a91），宿主 a80db313 / runtime fd4b2c0c 不变；剑星、鬼武者已换，备份 `...\c32-align-20260930\backups\stellar-20260930-080147-c32skip`、`D:\DLSSNR-Lab\onimusha-backups\20260930-080147-c32skip`。`results/small-cuts-20260930`。

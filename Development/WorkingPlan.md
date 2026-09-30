@@ -17,8 +17,7 @@
 
 ## 正在进行
 
-- **下一版（0.38）待打包**：① 900 去 shift_pack（`results/shift-pack-900-20260930`）；② C32 块 4 skip/下采样存 E4M3 字节（`results/c32-align-20260930`，逐位，900 −0.05ms 0.62%、1080 −0.09ms 0.82%，改 c32-wave1＋multihead-fast-padded-wave-packed 两模块）。现装宿主 **a80db313** / RE9 runtime **fd4b2c0c**，剑星、鬼武者已装（09-30 03:44 备份）。Zero 定何时发。
-- 现成未收件：C32 对角残差跳零 `CW_DIAG_ONLY`（逐位，单独 0.22～0.28%，叠在上面再省 ~0.03ms；`results/small-cuts-20260930`），下次凑合包时可直接开。
+- **下一版（0.38）待打包**：① 900 去 shift_pack（`results/shift-pack-900-20260930`）；② C32 块 4 skip/下采样存 E4M3 字节（`results/c32-align-20260930`，逐位，900 −0.05ms 0.62%、1080 −0.09ms 0.82%，改 c32-wave1＋multihead-fast-padded-wave-packed 两模块）。③ C32 对角残差跳零 `CW_DIAG_ONLY 1`（Zero 批准，逐位，1080 约 −0.04ms；09-30 08:01 已装）。现装宿主 **a80db313** / RE9 runtime **fd4b2c0c**，剑星、鬼武者已装（09-30 03:44 备份）。Zero 定何时发。
 - 其余无在跑任务。09-29～09-30 已完成项细节见各 `results/*/README.md` 与 DevHistory。
 
 ## Zero 的标准与取舍（为什么这样定）
