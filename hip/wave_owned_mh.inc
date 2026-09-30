@@ -230,11 +230,13 @@ DEV float w2_add0(float x){
 #ifndef W2_EXPLICIT_WINDOW
 #define W2_EXPLICIT_WINDOW 0
 #endif
+/* W2_DOWN_HALF (2026-10-01, swin-body-gap): Up skip read as f16 when the encoder tail stored Hrtz(v) (f16-exact) as half. */
+template<bool Half> DEV float w2_skip(const float*skip,uint i){if constexpr(Half)return float(reinterpret_cast<const _Float16*>(skip)[i]);else return skip[i];}
 template<uint C,bool ByteIn,bool ByteOut,bool Up=false
 #if W2_EXPLICIT_WINDOW
  ,bool ExplicitWindow=false
 #endif
- ,bool W16=false,bool LowByte=false>
+ ,bool W16=false,bool LowByte=false,bool HalfOut=false,bool SkipHalf=false>
 DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_any,
  uint width,uint height,uint workw,uint workh,uint sx,uint sy,uint post,const float*upw=nullptr,const float*skip=nullptr
 #if W2_EXPLICIT_WINDOW
@@ -287,11 +289,11 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
     float t=H(w2_shuffle(totals[ci][e],low+gr*16));uint c=head*32+ci*16+gr*8+e;uint byte=0;
 #if W2_HOIST_LOADS&8
     {const bool ok=x>=0&&y>=0&&x<int(width)&&y<int(height);
-     float merged=H(t+w2_up_F(skip[(ok?(uint(y)*width+uint(x))*C:0u)+c])*upw[IC*C+c]);
+     float merged=H(t+w2_up_F(w2_skip<SkipHalf>(skip,(ok?(uint(y)*width+uint(x))*C:0u)+c))*upw[IC*C+c]);
      uint b=uint(__builtin_amdgcn_cvt_pk_fp8_f32(W2_UP_ADD0?w2_add0(merged):w2_up_F(merged),0.f,0,false))&255u;byte=ok?b:0u;}
 #else
     if(x>=0&&y>=0&&x<int(width)&&y<int(height)){
-     float merged=H(t+w2_up_F(skip[(uint(y)*width+uint(x))*C+c])*upw[IC*C+c]);
+     float merged=H(t+w2_up_F(w2_skip<SkipHalf>(skip,(uint(y)*width+uint(x))*C+c))*upw[IC*C+c]);
      byte=uint(__builtin_amdgcn_cvt_pk_fp8_f32(W2_UP_ADD0?w2_add0(merged):w2_up_F(merged),0.f,0,false))&255u;
     }
 #endif
@@ -480,6 +482,7 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
    w2_schedule();
   }
  }
+ constexpr bool W2HalfTail=HalfOut; // post-3 tail stored as f16 (Hrtz is f16-exact); attention-only copies define it false
  // One wave owns all keys and queries of a head. Existing WMMA half row-sum order is retained.
 #if W2_ROLL_QUERY
  _Pragma("clang loop unroll(disable)")
@@ -566,6 +569,7 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
    uint dest=((y-sy)*width+x-sx)*C+head*32+gr*8;
    for(uint ci=0;ci<2;ci++){
     if constexpr(ByteOut){W2_Q8_DECL(a);for(uint e=0;e<8;e++){float v=result[ci][e];W2_Q8_SET(a,e,post==0?(W2_Q8_MASK?w2_hmask(v):Hrtz(v)):v);}W2_Q8_END(a);__builtin_memcpy(reinterpret_cast<unsigned char*>(out_any)+dest+ci*16,&a,8);}
+    else if constexpr(W2HalfTail){for(uint e=0;e<8;e++){float v=result[ci][e];static_cast<_Float16*>(out_any)[dest+ci*16+e]=(_Float16)Hrtz(v);}}
     else for(uint e=0;e<8;e++){float v=result[ci][e];static_cast<float*>(out_any)[dest+ci*16+e]=post==3?Hrtz(v):post==0?F(Hrtz(v)):F(v);}
    }
   }
@@ -598,6 +602,7 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
    uint dest=((y-sy)*width+x-sx)*C+head*32+gr*8;
    for(uint ci=0;ci<2;ci++){
     if constexpr(ByteOut){W2_Q8_DECL(a);for(uint e=0;e<8;e++){float v=result[ci][e];W2_Q8_SET(a,e,post==0?(W2_Q8_MASK?w2_hmask(v):Hrtz(v)):v);}W2_Q8_END(a);__builtin_memcpy(reinterpret_cast<unsigned char*>(out_any)+dest+ci*16,&a,8);}
+    else if constexpr(W2HalfTail){for(uint e=0;e<8;e++){float v=result[ci][e];static_cast<_Float16*>(out_any)[dest+ci*16+e]=(_Float16)Hrtz(v);}}
     else for(uint e=0;e<8;e++){float v=result[ci][e];static_cast<float*>(out_any)[dest+ci*16+e]=post==3?Hrtz(v):post==0?F(Hrtz(v)):F(v);}
    }
   }
@@ -667,6 +672,21 @@ W2_UP_KERNEL_W16(c128_wave2_up_w16,128)
 #define W2_UP_KERNEL_LB(NAME,C) KERNEL __attribute__((amdgpu_flat_work_group_size(C,C))) void NAME(const float*in,const float*fw,const float*aw,void*out,uint w,uint h,uint ww,uint hh,uint sx,uint sy,uint post,const float*upw,const float*skip){swin_wave2_body<C,true,true,true,false,true>(in,fw,aw,out,w,h,ww,hh,sx,sy,post,upw,skip);}
 W2_UP_KERNEL_LB(c64_wave2_up_lb,64)
 W2_UP_KERNEL_LB(c128_wave2_up_lb,128)
+#endif
+/* W2_DOWN_HALF (2026-10-01): encoder chain tail (post 3 only: Hrtz(v), exactly an f16) stored as f16 (*_bi_ho), the pool (mh_pool_project_group_c*_hin)
+   and the fused Up's skip (*_up_sh, *_up_lb_sh) read it back as f16 -> the same float. New exports only. */
+#ifndef W2_DOWN_HALF
+#define W2_DOWN_HALF 0
+#endif
+#if W2_DOWN_HALF
+#define W2_KERNEL_HO(NAME,C) KERNEL __attribute__((amdgpu_flat_work_group_size(C,C))) void NAME(const float*in,const float*fw,const float*aw,void*out,uint w,uint h,uint ww,uint hh,uint sx,uint sy,uint post){swin_wave2_body<C,true,false,false,false,false,true>(in,fw,aw,out,w,h,ww,hh,sx,sy,post);}
+W2_KERNEL_HO(c64_wave2_bi_ho,64)
+W2_KERNEL_HO(c128_wave2_bi_ho,128)
+#define W2_UP_KERNEL_SH(NAME,C,LB) KERNEL __attribute__((amdgpu_flat_work_group_size(C,C))) void NAME(const float*in,const float*fw,const float*aw,void*out,uint w,uint h,uint ww,uint hh,uint sx,uint sy,uint post,const float*upw,const float*skip){swin_wave2_body<C,true,true,true,false,LB,false,true>(in,fw,aw,out,w,h,ww,hh,sx,sy,post,upw,skip);}
+W2_UP_KERNEL_SH(c64_wave2_up_sh,64,false)
+W2_UP_KERNEL_SH(c128_wave2_up_sh,128,false)
+W2_UP_KERNEL_SH(c64_wave2_up_lb_sh,64,true)
+W2_UP_KERNEL_SH(c128_wave2_up_lb_sh,128,true)
 #endif
 #endif
 #endif

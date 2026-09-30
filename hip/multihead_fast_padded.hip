@@ -371,12 +371,12 @@ DEV void mh_pool_project_fused_body(const float*raw,const float*w,float*output,u
 // out[t][c] = in[raster(t)][ch(c)]), so the separate vit_gather launch disappears; values unchanged, only addresses.
 DEV uint pg_tinv(uint r){return (r&~15u)|((r&7u)<<1)|((r>>3)&1u);}
 DEV uint pg_cinv(uint k){return (k&~31u)|((k>>1)&1u)|((k&1u)<<1)|((k>>4)&1u)<<2|((k>>2)&1u)<<3|((k>>3)&1u)<<4;}
-template<uint C,bool Gout=false>
+template<uint C,bool Gout=false,bool HalfIn=false>
 DEV void mh_pool_project_group_body(const float*raw,const float*wf,float*output,uint width,uint height,uint source_width,uint valid_width,uint valid_height){
  const uint M=width*height,N=2*C,S=C+8;uint tile=__builtin_amdgcn_workgroup_id_x();if(tile>=(M+15)/16)return;
  uint first=tile*16,t=__builtin_amdgcn_workitem_id_x(),wave=t/32,l=t%32,rc=l&15,g=l>>4,colg=wave*64;
  __attribute__((shared)) _Float16 pooled[16*S];
- for(uint k=0;k<16;k++){uint p=first+k,c=t;float v=0.f;if(p<M&&!(valid_width&&(p%width>=valid_width||p/width>=valid_height))){uint base=((p/width)*2*source_width+(p%width)*2)*C;float top=H(raw[base+c]+raw[base+C+c]),bottom=H(raw[base+source_width*C+c]+raw[base+(source_width+1)*C+c]);v=F(H(H(top+bottom)*.25f));}pooled[k*S+c]=(_Float16)v;}
+ for(uint k=0;k<16;k++){uint p=first+k,c=t;float v=0.f;if(p<M&&!(valid_width&&(p%width>=valid_width||p/width>=valid_height))){uint base=((p/width)*2*source_width+(p%width)*2)*C;auto rd=[&](uint i)->float{if constexpr(HalfIn)return float(reinterpret_cast<const _Float16*>(raw)[i]);else return raw[i];};float top=H(rd(base+c)+rd(base+C+c)),bottom=H(rd(base+source_width*C+c)+rd(base+(source_width+1)*C+c));v=F(H(H(top+bottom)*.25f));}pooled[k*S+c]=(_Float16)v;}
  WG_FENCE(3);__builtin_amdgcn_s_barrier();WG_FENCE(2);
  const _Float16*w16=reinterpret_cast<const _Float16*>(wf);
  f8 acc[4]{};
@@ -390,6 +390,14 @@ DEV void mh_pool_project_group_body(const float*raw,const float*wf,float*output,
 KERNEL __attribute__((amdgpu_flat_work_group_size(64,64))) void mh_pool_project_group_c64(const float*raw,const float*w,float*output,uint width,uint height,uint source_width,uint valid_width,uint valid_height){mh_pool_project_group_body<64>(raw,w,output,width,height,source_width,valid_width,valid_height);}
 KERNEL __attribute__((amdgpu_flat_work_group_size(128,128))) void mh_pool_project_group_c128(const float*raw,const float*w,float*output,uint width,uint height,uint source_width,uint valid_width,uint valid_height){mh_pool_project_group_body<128>(raw,w,output,width,height,source_width,valid_width,valid_height);}
 KERNEL __attribute__((amdgpu_flat_work_group_size(256,256))) void mh_pool_project_group_c256(const float*raw,const float*w,float*output,uint width,uint height,uint source_width,uint valid_width,uint valid_height){mh_pool_project_group_body<256>(raw,w,output,width,height,source_width,valid_width,valid_height);}
+/* MH_POOL_HALF_IN (2026-10-01, swin-body-gap): the encoder tail stored as f16 (Hrtz, f16-exact); read back as f16 -> same float. New exports only. */
+#ifndef MH_POOL_HALF_IN
+#define MH_POOL_HALF_IN 0
+#endif
+#if MH_POOL_HALF_IN
+KERNEL __attribute__((amdgpu_flat_work_group_size(64,64))) void mh_pool_project_group_c64_hin(const float*raw,const float*w,float*output,uint width,uint height,uint source_width,uint valid_width,uint valid_height){mh_pool_project_group_body<64,false,true>(raw,w,output,width,height,source_width,valid_width,valid_height);}
+KERNEL __attribute__((amdgpu_flat_work_group_size(128,128))) void mh_pool_project_group_c128_hin(const float*raw,const float*w,float*output,uint width,uint height,uint source_width,uint valid_width,uint valid_height){mh_pool_project_group_body<128,false,true>(raw,w,output,width,height,source_width,valid_width,valid_height);}
+#endif
 FASTWAVE void mh_pool_project_fused_c64(const float*raw,const float*w,float*output,uint width,uint height,uint source_width,uint valid_width,uint valid_height){mh_pool_project_fused_body<64>(raw,w,output,width,height,source_width,valid_width,valid_height);}
 FASTWAVE void mh_pool_project_fused_c128(const float*raw,const float*w,float*output,uint width,uint height,uint source_width,uint valid_width,uint valid_height){mh_pool_project_fused_body<128>(raw,w,output,width,height,source_width,valid_width,valid_height);}
 FASTWAVE void mh_pool_project_fused_c256(const float*raw,const float*w,float*output,uint width,uint height,uint source_width,uint valid_width,uint valid_height){mh_pool_project_fused_body<256>(raw,w,output,width,height,source_width,valid_width,valid_height);}

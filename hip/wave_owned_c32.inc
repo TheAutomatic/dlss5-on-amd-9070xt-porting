@@ -202,7 +202,7 @@ DEV i2 cw_input(const unsigned char*in,uint win,uint qt,uint ci,uint width,uint 
 #endif
 DEV float cw_up_F(float x){uint a=bits(x)&0x7fffffffu;float c=__builtin_fminf(__builtin_fmaxf(x,-448.f),448.f);float r=__builtin_amdgcn_cvt_f32_fp8(__builtin_amdgcn_cvt_pk_fp8_f32(c,0.f,0,false),0);return a==0?0.f:r;}
 DEV float cw_up_shuffle(float v,uint lane){return __builtin_bit_cast(float,__builtin_amdgcn_ds_bpermute(lane*4,__builtin_bit_cast(int,v)));}
-template<bool Chain,bool Finish=false,bool DownCrop=false,bool Post=false,bool Prefix=false,bool Up=false,bool Byte=false,bool DownByte=false,bool InByte=false>
+template<bool Chain,bool Finish=false,bool DownCrop=false,bool Post=false,bool Prefix=false,bool Up=false,bool Byte=false,bool DownByte=false,bool InByte=false,bool UpLowByte=false>
 DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned char*out,uint windows,uint mode,uint raw,uint width,uint height,uint sx,uint sy,uint prevw,uint px,uint py,float*main=nullptr,float*down=nullptr,const unsigned char*skip=nullptr,const float*scales=nullptr,const float*color=nullptr,const float*headw=nullptr,float*rgb=nullptr,float rgbscale=0.f,const float*history=nullptr,uint seed=0,uint temporal=0,const float*upw=nullptr){fp8_sat_mode();
  constexpr uint cw_kind=Prefix?5:Post?4:Finish?(DownCrop?3:2):Chain?0:1;
  uint win=bid();if(win>=windows)return;
@@ -215,9 +215,9 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
   int lx=(int((win%(ww/8))*8)-int(sx))/2+int(r%4),ly=(int((win/(ww/8))*8)-int(sy))/2+int(r/4);
   for(uint k=0;k<64;k+=16){h8 a{},b{};
 #if CW_HOIST_UP&1
-   {const bool ok=lx>=0&&ly>=0&&lx<int(iw)&&ly<int(ih);const uint base=ok?(uint(ly)*iw+uint(lx))*64:0u;for(uint e=0;e<8;e++){float v=reinterpret_cast<const float*>(in)[base+k+g*8+e];a[e]=ok?(_Float16)v:(_Float16)0.f;}}
+   {const bool ok=lx>=0&&ly>=0&&lx<int(iw)&&ly<int(ih);const uint base=ok?(uint(ly)*iw+uint(lx))*64:0u;for(uint e=0;e<8;e++){float v;if constexpr(UpLowByte)v=__builtin_amdgcn_cvt_f32_fp8(int(in[base+k+g*8+e]),0);else v=reinterpret_cast<const float*>(in)[base+k+g*8+e];a[e]=ok?(_Float16)v:(_Float16)0.f;}}
 #else
-   if(lx>=0&&ly>=0&&lx<int(iw)&&ly<int(ih))for(uint e=0;e<8;e++)a[e]=(_Float16)reinterpret_cast<const float*>(in)[(uint(ly)*iw+uint(lx))*64+k+g*8+e];
+   if(lx>=0&&ly>=0&&lx<int(iw)&&ly<int(ih))for(uint e=0;e<8;e++){const uint i=(uint(ly)*iw+uint(lx))*64+k+g*8+e;if constexpr(UpLowByte)a[e]=(_Float16)__builtin_amdgcn_cvt_f32_fp8(int(in[i]),0);else a[e]=(_Float16)reinterpret_cast<const float*>(in)[i];}
 #endif
    for(uint ci=0;ci<2;ci++){
     __builtin_memcpy(&b,reinterpret_cast<const _Float16*>(upw)+(ci*16+r)*64+k+g*8,16);
@@ -544,4 +544,15 @@ CW_ENTRY void c32_wave1_post_b8(const unsigned char*low,const unsigned char*skip
 CW_ENTRY void c32_wave1_up_b8(const unsigned char*low,const float*upw,const unsigned char*skip,const float*fw,const float*aw,unsigned char*out,uint windows,uint width,uint height,uint sx,uint sy){cw_body<false,false,false,false,false,true,true>(low,fw,aw,out,windows,0,1,width,height,sx,sy,0,0,0,nullptr,nullptr,skip,nullptr,nullptr,nullptr,nullptr,0.f,nullptr,0,0,upw);}
 #endif
 CW_ENTRY void c32_wave1_up(const unsigned char*low,const float*upw,const float*skip,const float*fw,const float*aw,unsigned char*out,uint windows,uint width,uint height,uint sx,uint sy){cw_body<false,false,false,false,false,true>(low,fw,aw,out,windows,0,1,width,height,sx,sy,0,0,0,nullptr,nullptr,reinterpret_cast<const unsigned char*>(skip),nullptr,nullptr,nullptr,nullptr,0.f,nullptr,0,0,upw);}
+/* CW_UP_LOW_BYTES (2026-10-01, swin-body-gap): the fused Up's low-resolution input (block 65, post 0: F(Hrtz), on the E4M3 lattice)
+   arrives as E4M3 bytes; cvt back gives the same (_Float16) operand. New exports only (*_lb); the host uses them only when present. */
+#ifndef CW_UP_LOW_BYTES
+#define CW_UP_LOW_BYTES 0
+#endif
+#if CW_UP_LOW_BYTES
+CW_ENTRY void c32_wave1_up_lb(const unsigned char*low,const float*upw,const float*skip,const float*fw,const float*aw,unsigned char*out,uint windows,uint width,uint height,uint sx,uint sy){cw_body<false,false,false,false,false,true,false,false,false,true>(low,fw,aw,out,windows,0,1,width,height,sx,sy,0,0,0,nullptr,nullptr,reinterpret_cast<const unsigned char*>(skip),nullptr,nullptr,nullptr,nullptr,0.f,nullptr,0,0,upw);}
+#if CW_SKIP_BYTE
+CW_ENTRY void c32_wave1_up_b8_lb(const unsigned char*low,const float*upw,const unsigned char*skip,const float*fw,const float*aw,unsigned char*out,uint windows,uint width,uint height,uint sx,uint sy){cw_body<false,false,false,false,false,true,true,false,false,true>(low,fw,aw,out,windows,0,1,width,height,sx,sy,0,0,0,nullptr,nullptr,skip,nullptr,nullptr,nullptr,nullptr,0.f,nullptr,0,0,upw);}
+#endif
+#endif
 #endif

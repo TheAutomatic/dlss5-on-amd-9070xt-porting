@@ -48,4 +48,5 @@ DEV void attention_wave_body(const unsigned char*normalized,const float*aw,const
  }
  w2_sync(); // Every head has consumed V before the plane becomes AV output.
 
+ constexpr bool W2HalfTail=false; (void)W2HalfTail;
 #define W2_ATTENTION_ONLY 1
