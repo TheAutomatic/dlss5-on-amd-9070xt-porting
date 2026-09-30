@@ -18,3 +18,15 @@ PROBE_SLICES=256 PROBE_ITER=128 | slice_timeouts=1 flag=300 slices=256 iter=128 
 PROBE_SLICES=8 PROBE_ITER=16384 | mode=3 mib=4096 iters=300 n=270 gap_mean=7.5045 gap_p50=7.4965 gap_p99=7.6694 hip_work_mean=7.4841 handoff_mean=0.0204 handoff_p50=-0.0066 handoff_p99=-0.0062 ms
 PROBE_SLICES=8 PROBE_ITER=16384 | slice_timeouts=1 flag=600 slices=8 iter=16384 mode=7 mib=1024 iters=600 n=540 gap_mean=1.8433 gap_p50=1.8134 gap_p99=1.8955 hip_work_mean=1.8577 handoff_mean=-0.0144 handoff_p50=-0.0191 handoff_p99=-0.0065 ms
 PROBE_SLICES=8 PROBE_ITER=16384 | mode=3 mib=1024 iters=600 n=540 gap_mean=1.8024 gap_p50=1.8043 gap_p99=1.8500 hip_work_mean=1.8059 handoff_mean=-0.0035 handoff_p50=-0.0066 handoff_p99=-0.0063 ms
+
+# production switch DLSS5_HIP_INPUT_POLL, full-frame replay ABBA (regression.ps1, 1000 frames drop 200, slots 0/3 base Qbase, 1/2 candidate; ms)
+# mode 1 (own marker list per frame):
+round=1 h=900 avg 7.8160->7.8370 (-0.0210) p50 7.8040->7.8220 p99 8.0515->8.0725 max 9.70->8.26
+round=1 h=1080 avg 10.6910->10.7188 (-0.0279) p50 10.6850->10.7085 p99 10.9475->10.9645 max 11.10->11.15
+round=2 h=900 avg 7.8172->7.8546 (-0.0373) p50 7.8080->7.8380 p99 8.0715->8.0645 max 8.16->8.27
+round=2 h=1080 avg 10.7045->10.7250 (-0.0206) p50 10.7025->10.7190 p99 10.9835->10.9780 max 11.64->11.12
+# mode 2 (marker recorded into the input-copy list):
+round=1 h=900 avg 7.8285->7.8386 (-0.0101) p50 7.8265->7.8305 p99 8.0480->8.0075 max 8.30->8.19
+round=1 h=1080 avg 10.7130->10.7414 (-0.0284) p50 10.7055->10.7365 p99 10.9570->10.9905 max 11.14->11.34
+round=2 h=900 avg 7.8551->7.8673 (-0.0121) p50 7.8515->7.8575 p99 8.0780->8.0530 max 8.21->8.14
+round=2 h=1080 avg 10.7256->10.7419 (-0.0162) p50 10.7175->10.7380 p99 11.0150->10.9955 max 12.00->12.12

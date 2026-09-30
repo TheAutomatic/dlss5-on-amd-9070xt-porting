@@ -24,7 +24,7 @@
 ## Zero 的标准与取舍（为什么这样定）
 
 - **测帧**：剑星 **2K 原生 AA + F8 EXACT**，读黄字小数（1080P 被 60Hz 封顶）。只用 9070 本机数据，**Splashtop 远程读数不作数**。比版本只用"同一位置、静止、简单画面"。网络快慢以离线 ABBA 为准；`frame-stats.txt` 由 agent 自己去 9070 取。
-- **验收（09-29）**：离线 ABBA 有提升（整网 ≥0.5%，或 avg ≥0.1ms）、游戏里没掉，就接受；不为"游戏读数没涨"追查兑现。
+- **验收（09-30 起）**：小改动只要**逐位、离线 ABBA 为正、p99 和另一档都不变差**就收，不再设 0.5% / 0.1ms 门槛（09-30 C32 对角残差跳零就是按这条收的）；游戏里没掉就行，不为"游戏读数没涨"追查兑现。
 - **逐位是硬门槛**：对 09-28 float FMA 基准（`results/float-fma-20260928/new-baseline-hashes.csv`；0.36/0.37 即此基准）一个比特都不差，7 用例、EXACT/AE、票号回绕、两档 ABBA；有反例就不改。**逐位是"对上一版"，不是"对 NVIDIA"**——之后的 fast、跳层、float FMA 都是 Zero 拍板的有记录偏离。误差逐层逐帧放大，非拍板不偏离。
 - **偏离的做法**：先核实（查 NVIDIA 原文 / 量 RMSE），Zero 批准后单独一次偏离合入，新版本成新基准，CHANGELOG 写明。
 - **稳定性不操心**：只修能复现的。**风险不换速度**：PDL 保持 1。
@@ -52,8 +52,8 @@
 地图：900 `results/kernel-map-900-20260930`（179 派发，独立核和 7258.6µs vs Daniel 8171.6µs；只在 C32 +233µs、C512 +182µs 落后）；1080 `results/kernel-map-20260929`。
 
 1. ~~C32 上采样块 / 块 4 边界~~ **09-30 已做**：大头是数据格式（skip/下采样 f32→E4M3 字节），逐位，900 0.62%、1080 0.82%，已装。余差：up 低分辨率输入 f32/half（Daniel FP8，有损，不追）、up 分发 bpermute vs 他 LDS（量小）。
-2. ~~HIP↔D3D 交接两半合做~~ **09-30 交账**（`results/handoff-gpu-20260930`）：照 Daniel 做了 1 像素 draw 分片自旋（predication），放进探针测，**比 fence 慢 0.04～0.17ms**。剩下的时间在 GPU 上下文切换上，自旋省不掉。D3D→HIP 轮询单独省 0.05～0.08ms，留着合包时用。
-3. ~~小件~~ **09-30 已交账**（`results/small-cuts-20260930`）：对角残差逐位但单独不过线（留合包）；C256 FFN 逐字节写 hidden 是布局所致，要转置 expand 才能打包（不是小件，暂不做）；ViT QKV 归一化换求和不能逐位。
+2. ~~HIP↔D3D 交接~~ **09-30 两轮交账**（`results/handoff-gpu-20260930`）：HIP→D3D draw 分片自旋在探针里比 fence 慢；D3D→HIP 轮询按新规进了生产代码（`DLSS5_HIP_INPUT_POLL`，默认 0，1/2 两种 marker 放法），逐位 18 组 SAME，但完整帧回放两档 avg 都慢 0.01～0.04ms，不收、不装。交接这条线停。
+3. ~~小件~~ **09-30 已交账**（`results/small-cuts-20260930`）：对角残差逐位，按新规已收（`CW_DIAG_ONLY 1`，09-30 08:01 装）；C256 FFN 逐字节写 hidden 是布局所致，要转置 expand 才能打包（不是小件，暂不做）；ViT QKV 归一化换求和不能逐位。
 4. **C512 FFN 链**：三核 524 vs Daniel ffwd 382µs（900）。组织方式问题，旧负账多（M32、单 wave R/RF），把握低，放后。
 5. **ViT attention 余差**：640 我方 ~38µs vs 他 22～24µs，余差涉及 V 请求组织与 half 数学，未唯一拆清；4wave/64key 预取照搬已反慢。只在有新证据时动。
 6. **产品侧（抄 mochizuki 0.0.2.4，不影响逐位）**：DXGI 颜色格式兜底表（R9G9B9E5、B8G8R8X8、R32G32B32 typeless 等）；ini 热重载；**3080 上 NGX 同口径 PSNR 对照**（给我们的偏离量一个对外可比的数）。预处理/自动曝光属有损，不抄。
@@ -68,7 +68,7 @@
 - 900 C256 新分组；C64/C128 Down 融合；去清零；C32 权重缓存。
 - ViT byte 出口/入口 gather-pack；ViT 消费端 float 打包 V；ViT attention 4wave/64key 预取；QKV 块重排、scale 提前读、CH4/CH16 写法。
 - `MAKE_RESIDENT_EVERY` 60 vs 0：离线回放无 30ms 周期尖峰（`resident-spike-20260929`），保留 60。
-- 交接 D3D→HIP 单半边（−0.05～0.08ms，未过门槛）；HIP→D3D draw 分片自旋（探针里比 fence 慢，`handoff-gpu-20260930`）。
+- HIP→D3D draw 分片自旋（探针里比 fence 慢，`handoff-gpu-20260930`）。D3D→HIP GPU 轮询（逐位，但完整帧回放两档慢 0.01～0.04ms；开关 `DLSS5_HIP_INPUT_POLL` 默认 0）。
 - 编译器：COMGR2/LLVM20 慢 3%；公开 LLVM21 持平；LLVM22 不逐位；VOPD 前瞻 ±0.3%。
 - 旧 block46 展开改 FP8 WMMA：10 个 float 元素位差，不能换。
 
