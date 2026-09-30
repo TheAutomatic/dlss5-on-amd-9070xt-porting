@@ -562,6 +562,8 @@ W2_REP_BEGIN(4)
     read from LDS once for all three (mochizuki fswin / our C512_COMPACT_FUSEQKV organization). Every accumulator sees the
     same WMMA sequence in the same kt order, normalization and stores are unchanged -> bit-exact. */
  constexpr bool W2QkvFuse=(C==64&&(W2_QKV_FUSE&1))||(C==128&&(W2_QKV_FUSE&2))||(C==256&&(W2_QKV_FUSE&4));
+ /* bit 8 (C256 only): fuse Q+K in one kt loop, V in a second (4 live accumulators instead of 6; register pressure) */
+ constexpr bool W2QkvPair=C==256&&(W2_QKV_FUSE&8);
  if constexpr(W2QkvFuse){
   constexpr uint ps=W2_DEFER_Q?1:0;
   _Pragma("unroll") for(uint qt=0;qt<4;qt++){
@@ -571,9 +573,13 @@ W2_REP_BEGIN(4)
 #endif
    uint qrc=qlane&15u,qgr=qlane>>4;
    f8 q[3][2]{};
+   _Pragma("unroll") for(uint grp=0;grp<(W2QkvPair?2u:1u);grp++)
+#if W2_QKV_FUSE&16
+   _Pragma("clang loop unroll(disable)")
+#endif
    for(uint kt=0;kt<C/16;kt++){
     i2 a=w2_load<C>(plane0,qt,kt,qlane);
-    _Pragma("unroll") for(uint part=ps;part<3;part++)_Pragma("unroll") for(uint ci=0;ci<2;ci++){
+    _Pragma("unroll") for(uint part=(W2QkvPair&&grp?2u:ps);part<(W2QkvPair&&!grp?2u:3u);part++)_Pragma("unroll") for(uint ci=0;ci<2;ci++){
      i2 b=w2_weight(aw,part*C+head*32+ci*16+qrc,C,kt*16,qgr);
      if(part<2)q[part][ci]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,a,q[part][ci]);
      else q[part][ci]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(a,b,q[part][ci]);
