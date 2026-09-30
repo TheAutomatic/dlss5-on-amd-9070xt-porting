@@ -1,0 +1,35 @@
+addon F2A9C2C4 mh 7C313587 deep C0FC04E7
+SPAN r1-h900-base exit=0 n=332 med=6.857
+SPAN r1-h900-c512_qkv_attention_compact exit=0 n=330 med=7.307
+SPAN r1-h900-split_ffn_one_w2 exit=0 n=332 med=7.388
+SPAN r1-h900-split_projection_frag exit=0 n=329 med=7.011
+SPAN r1-h900-mh_attention_project_frag_c512 exit=0 n=332 med=7.065
+SPAN r1-h1080-base exit=0 n=331 med=9.541
+SPAN r1-h1080-c512_qkv_attention_compact exit=0 n=332 med=10.009
+SPAN r1-h1080-split_ffn_one_w2 exit=0 n=332 med=9.982
+SPAN r1-h1080-split_projection_frag exit=0 n=333 med=9.755
+SPAN r1-h1080-mh_attention_project_frag_c512 exit=0 n=334 med=9.856
+SPAN r2-h900-base exit=0 n=332 med=6.917
+SPAN r2-h900-c512_qkv_attention_compact exit=0 n=330 med=7.383
+SPAN r2-h900-split_ffn_one_w2 exit=0 n=333 med=7.462
+SPAN r2-h900-split_projection_frag exit=0 n=333 med=7.04
+SPAN r2-h900-mh_attention_project_frag_c512 exit=0 n=332 med=7.115
+SPAN r2-h1080-base exit=0 n=332 med=9.6
+SPAN r2-h1080-c512_qkv_attention_compact exit=0 n=333 med=10.107
+SPAN r2-h1080-split_ffn_one_w2 exit=0 n=332 med=10.028
+SPAN r2-h1080-split_projection_frag exit=0 n=334 med=9.785
+SPAN r2-h1080-mh_attention_project_frag_c512 exit=0 n=334 med=9.834
+SPAN r3-h900-base exit=0 n=334 med=6.95
+SPAN r3-h900-c512_qkv_attention_compact exit=0 n=330 med=7.395
+SPAN r3-h900-split_ffn_one_w2 exit=0 n=332 med=7.502
+SPAN r3-h900-split_projection_frag exit=0 n=330 med=7.072
+SPAN r3-h900-mh_attention_project_frag_c512 exit=0 n=334 med=7.161
+SPAN r3-h1080-base exit=0 n=332 med=9.623
+SPAN r3-h1080-c512_qkv_attention_compact exit=0 n=333 med=10.099
+SPAN r3-h1080-split_ffn_one_w2 exit=0 n=332 med=10.013
+SPAN r3-h1080-split_projection_frag exit=0 n=328 med=9.812
+SPAN r3-h1080-mh_attention_project_frag_c512 exit=0 n=330 med=9.905
+DUP_DONE
+LOCK DROPPED
+
+[exited with code 0]
