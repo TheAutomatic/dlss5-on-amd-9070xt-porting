@@ -399,6 +399,39 @@ DEV void decoder_project2x_h16w_byteout_fixed_body(const float*in,const float*w,
  else decoder_project2x_h16w_body<false,true>(in,w,skip,out,iw,ih,ow,oh,inputs,outputs);
 }
 WAVE void decoder_project2x_h16w_byteout(const float*in,const float*w,const float*skip,float*out,uint iw,uint ih,uint ow,uint oh,uint inputs,uint outputs){if(inputs==1024&&outputs==512)decoder_project2x_h16w_byteout_fixed_body(in,w,skip,out,iw,ih,ow,oh,1024,512);else if(inputs==512&&outputs==256)decoder_project2x_h16w_byteout_fixed_body(in,w,skip,out,iw,ih,ow,oh,512,256);else if(inputs==256&&outputs==128)decoder_project2x_h16w_byteout_fixed_body(in,w,skip,out,iw,ih,ow,oh,256,128);else if(inputs==128&&outputs==64)decoder_project2x_h16w_byteout_fixed_body(in,w,skip,out,iw,ih,ow,oh,128,64);else if(inputs==64&&outputs==32)decoder_project2x_h16w_byteout_fixed_body(in,w,skip,out,iw,ih,ow,oh,64,32);else decoder_project2x_h16w_byteout_fixed_body(in,w,skip,out,iw,ih,ow,oh,inputs,outputs);}
+/* HIP_DEC_WIDE (2026-10-01, tail-c32-gap): same decoder tile and WMMA sequence; the epilogue goes through LDS so that one lane
+   owns one output pixel x 16 consecutive channels: skip read as 4 x b128, merged exactly as before (H(t+F(skip)*scale), same
+   F / fp8_add0), written as one b128 (bytes) or 4 x b128 (f32). Each element's arithmetic is unchanged -> identical bits. */
+#ifndef HIP_DEC_WIDE
+#define HIP_DEC_WIDE 0
+#endif
+#if HIP_DEC_WIDE
+template<bool FullTile,bool ByteOutput>
+DEV void decoder_project2x_h16w_wide_body(const float*in,const float*w,const float*skip,float*out,uint iw,uint ih,uint ow,uint oh,uint inputs,uint outputs){
+ uint first=bid()/(outputs/16)*16,row=bid()%(outputs/16)*16;if(first>=iw*ih)return;uint parts=inputs==1024?4:1;f8 total{};const _Float16*w16=reinterpret_cast<const _Float16*>(w);
+ for(uint p=0;p<parts;p++){f8 a{};for(uint k=p*(inputs/parts);k<(p+1)*(inputs/parts);k+=16){h8 x{},y;for(uint e=0;e<8;e++){uint j=k+gr()*8+e;x[e]=(FullTile||first+rc()<iw*ih)?(_Float16)in[(first+rc())*inputs+j]:(_Float16)0;}__builtin_memcpy(&y,w16+(row+rc())*inputs+k+gr()*8,16);a=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(x,y,a);}for(uint e=0;e<8;e++)total[e]=p?total[e]+a[e]:a[e];}
+ __attribute__((shared)) float tl[16*17];
+ for(uint e=0;e<8;e++)tl[(gr()*8+e)*17+rc()]=H(total[e]);
+ WG_FENCE(3);__builtin_amdgcn_s_barrier();WG_FENCE(2);
+ const uint lane=__builtin_amdgcn_workitem_id_x();
+ for(uint it=0;it<2;it++){const uint seg=it*32+lane,tk=seg>>2,dx=seg&1u,dy=(seg>>1)&1u,token=first+tk;
+  if(!FullTile&&token>=iw*ih)continue;uint x=(token%iw)*2+dx,y=(token/iw)*2+dy;if(x>=ow||y>=oh)continue;
+  const uint base=(y*ow+x)*outputs+row;float sk[16],sc[16];
+  __builtin_memcpy(sk,__builtin_assume_aligned(skip+base,16),64);__builtin_memcpy(sc,__builtin_assume_aligned(w+inputs*outputs+row,16),64);
+  float r[16];for(uint c=0;c<16;c++){float merged=H(tl[tk*17+c]+F(sk[c])*sc[c]);
+   if constexpr(ByteOutput)r[c]=HIP_BYTE_F_ADD0?fp8_add0(merged):F(merged);else r[c]=outputs==32?merged:F(merged);}
+  if constexpr(ByteOutput){uint wv[4];for(uint q=0;q<4;q++){uint v=0;for(uint b=0;b<4;b++)v|=(uint(__builtin_amdgcn_cvt_pk_fp8_f32(r[q*4+b],0.f,0,false))&255u)<<(8*b);wv[q]=v;}__builtin_memcpy(__builtin_assume_aligned(reinterpret_cast<unsigned char*>(out)+base,16),wv,16);}
+  else __builtin_memcpy(__builtin_assume_aligned(out+base,16),r,64);}
+}
+template<bool ByteOutput>
+DEV void decoder_project2x_h16w_wide_fixed(const float*in,const float*w,const float*skip,float*out,uint iw,uint ih,uint ow,uint oh,uint inputs,uint outputs){
+ uint first=bid()/(outputs/16)*16,n=iw*ih;
+ if(first<n&&n-first>=16)decoder_project2x_h16w_wide_body<true,ByteOutput>(in,w,skip,out,iw,ih,ow,oh,inputs,outputs);
+ else decoder_project2x_h16w_wide_body<false,ByteOutput>(in,w,skip,out,iw,ih,ow,oh,inputs,outputs);
+}
+WAVE void decoder_project2x_h16w_w(const float*in,const float*w,const float*skip,float*out,uint iw,uint ih,uint ow,uint oh,uint inputs,uint outputs){if(inputs==1024&&outputs==512)decoder_project2x_h16w_wide_fixed<false>(in,w,skip,out,iw,ih,ow,oh,1024,512);}
+WAVE void decoder_project2x_h16w_byteout_w(const float*in,const float*w,const float*skip,float*out,uint iw,uint ih,uint ow,uint oh,uint inputs,uint outputs){if(inputs==512&&outputs==256)decoder_project2x_h16w_wide_fixed<true>(in,w,skip,out,iw,ih,ow,oh,512,256);}
+#endif
 /* HIP_DEC_NT (2026-10-01, tail-c32-gap): the same decoder tile with NT output column tiles per wave (HIP_DEC_NT = bitmask of NT in {2,4,8} to export). The A fragment (16 tokens x
    16 k, f32 -> f16) is loaded and converted once and fed to NT WMMAs instead of being re-read by NT separate waves; every
    accumulator sees exactly the old k order (parts split included) and the old epilogue, so identical bits. New exports only. */
