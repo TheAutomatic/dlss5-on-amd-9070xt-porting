@@ -159,6 +159,21 @@ DEV float Hrtz(float x){uint h;float r;asm("v_cvt_pkrtz_f16_f32 %0, %1, %1":"=v"
 #else
 DEV float Hrtz(float x){uint b=bits(x),a=b&0x7fffffffu,s=(b>>16)&0x8000u;int e=int(a>>23)-127;if(a>=0x7f800000u)return from_half(s|0x7c00u|((a&0x7fffffu)?0x200u:0u));if(e>15)return from_half(s|0x7bffu);if(e<-24)return from_half(s);if(e<-14)return from_half(s|(((a&0x7fffffu)|0x800000u)>>uint(-e-1)));return from_half(s|((a>>13)-0x1c000u));}
 #endif
+// C512_F_MASK (2026-09-30, results/composite-quant-c512-20260930): F(Hrtz(x)) -> F(bits(x)&0xffffe000) at the C512 f32 exits whose x
+// is a WMMA sum from +0 of E4M3-grid products (split_ffn_fused_fp8_t8 contract; split_mix_blocked_h16w_m32, whose FP8-valued
+// inputs times half weights on a 2^-9 grid are also 2^-18 multiples). Exhaustive over all 2^32 patterns with the production
+// instructions: the float results are identical except negative 0<|x|<2^-24 (+0 vs -0) and +NaN payloads, none of which a
+// finite sum on the 2^-18 grid can produce. The half rounding is kept; only the f32->f16->f32 round trip goes.
+#ifndef C512_F_MASK
+#define C512_F_MASK 0
+#endif
+DEV float c512_hq(float x){
+#if C512_F_MASK
+ return __builtin_bit_cast(float,__builtin_bit_cast(uint,x)&0xffffe000u);
+#else
+ return Hrtz(x);
+#endif
+}
 // scores work=T*T*32; T%16=0; ex[query][head32][key].
 WAVE void vit_attention_scores_fast(const float*in,float*out,uint tokens,const uint*reuse_gate){if(reuse_gate&&reuse_gate[0])return;uint kt= tokens/16,key=(bid()%kt)*16,head=(bid()/kt)%32,first=bid()/(kt*32)*16;if(first>=tokens)return;f8 a{};for(uint k=0;k<32;k+=16){i2 x{},y{};for(uint e=0;e<8;e++){uint j=k+gr()*8+e;pack(x,e,in[(first+rc())*1024+head*32+j]);pack(y,e,in[(tokens+key+rc())*1024+head*32+j]);}a=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(x,y,a);}for(uint e=0;e<8;e++){float af=clampf(a[e]*from_half(0x2dbb)+1.708984375f,1.439453125f,1.9775390625f);uint hb=(bits(af)>>13)-0x1c000u;out[((first+gr()*8+e)*32+head)*tokens+key+rc()]=from_half(((hb<<4)+0x4000u)&65535u);}}
 // inverse SPECIAL work=T*32*16, not T*32. One wave handles16 queries for one head.
@@ -546,7 +561,7 @@ void split_ffn_fused_fp8_t8(const float*in,const float*w,float*out,unsigned char
  f8 result{};
  const uint*pw=reinterpret_cast<const uint*>(w);
  for(uint k=0;k<256;k+=16){i2 a{};__builtin_memcpy(&a,hidden+rc()*260+k+gr()*8,8);uint off=393216+g*4096+((wave*16+rc())*256+k+gr()*8)/4;i2 b={int(pw[off]),int(pw[off+1])};result=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(a,b,result);}
- for(uint e=0;e<8;e++){uint r=first+gr()*8+e,c=g*64+wave*16+rc();float v=F(Hrtz(result[e]));out[r*512+c]=v;out8[((r/16)*16+c/32)*512+(r%16)*32+c%32]=static_cast<unsigned char>(__builtin_amdgcn_cvt_pk_fp8_f32(v,0.f,0,false));}
+ for(uint e=0;e<8;e++){uint r=first+gr()*8+e,c=g*64+wave*16+rc();float v=F(c512_hq(result[e]));out[r*512+c]=v;out8[((r/16)*16+c/32)*512+(r%16)*32+c%32]=static_cast<unsigned char>(__builtin_amdgcn_cvt_pk_fp8_f32(v,0.f,0,false));}
 }
 // split_projection_blocked in the QKV-frag shape: A from the contract's E4M3 tiles, B from fragment-tiled E4M3 projection
 // weights (PackedSplitProjectionFrag), no LDS; residual H(skip*scale) and F(H(acc)) as split_projection_blocked. Also

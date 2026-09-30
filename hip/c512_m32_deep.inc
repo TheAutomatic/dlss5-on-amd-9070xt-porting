@@ -44,8 +44,8 @@ WAVE void split_mix_blocked_h16w_m32(const float*in,const float*w,float*out,uint
 #endif
  for(uint k=0;k<512;k+=16){h8 a0{},a1{};for(uint e=0;e<8;e++)a0[e]=(_Float16)in[(first+rc())*512+k+gr()*8+e];if(two)for(uint e=0;e<8;e++)a1[e]=(_Float16)in[(first+16+rc())*512+k+gr()*8+e];
   for(uint j=0;j<4;j++){h8 b;__builtin_memcpy(&b,w16+(row+j*16+rc())*512+k+gr()*8,16);acc0[j]=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(a0,b,acc0[j]);acc1[j]=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(a1,b,acc1[j]);}}
- for(uint j=0;j<4;j++)for(uint e=0;e<8;e++)out[(first+gr()*8+e)*512+row+j*16+rc()]=F(Hrtz(acc0[j][e]));
- if(two)for(uint j=0;j<4;j++)for(uint e=0;e<8;e++)out[(first+16+gr()*8+e)*512+row+j*16+rc()]=F(Hrtz(acc1[j][e]));
+ for(uint j=0;j<4;j++)for(uint e=0;e<8;e++)out[(first+gr()*8+e)*512+row+j*16+rc()]=F(c512_hq(acc0[j][e]));
+ if(two)for(uint j=0;j<4;j++)for(uint e=0;e<8;e++)out[(first+16+gr()*8+e)*512+row+j*16+rc()]=F(c512_hq(acc1[j][e]));
 }
 #ifndef C512_MIX_LDS_G
 #define C512_MIX_LDS_G 0 /* >0: add export split_mix_blocked_h16w_m32_lds (32*G threads = G waves on one 64-column row block, each wave the same 32-token tile work as split_mix_blocked_h16w_m32; half-weight 64x64 chunks staged once per group through LDS, double buffered). Same per-wave WMMA chains/K order/epilogue. grid = 8*ceil(ceil(tokens/32)/G). results/c512-ffn-lds-20260930. */
@@ -77,7 +77,7 @@ KERNEL __attribute__((amdgpu_flat_work_group_size(32*C512_MIX_LDS_G,32*C512_MIX_
 #undef MIXL_STASH
 #undef MIXL_OFF
  if(!live)return;
- for(uint j=0;j<4;j++)for(uint e=0;e<8;e++)out[(first+gr()*8+e)*512+row+j*16+rc()]=F(Hrtz(acc0[j][e]));
- if(two)for(uint j=0;j<4;j++)for(uint e=0;e<8;e++)out[(first+16+gr()*8+e)*512+row+j*16+rc()]=F(Hrtz(acc1[j][e]));
+ for(uint j=0;j<4;j++)for(uint e=0;e<8;e++)out[(first+gr()*8+e)*512+row+j*16+rc()]=F(c512_hq(acc0[j][e]));
+ if(two)for(uint j=0;j<4;j++)for(uint e=0;e<8;e++)out[(first+16+gr()*8+e)*512+row+j*16+rc()]=F(c512_hq(acc1[j][e]));
 }
 #endif

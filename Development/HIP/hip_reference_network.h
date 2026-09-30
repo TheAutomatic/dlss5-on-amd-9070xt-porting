@@ -42,6 +42,9 @@ using Tensor=std::shared_ptr<Allocation>;
 #ifndef HIP_C512_PAD16
 #define HIP_C512_PAD16 1 /* 2026-09-30: see NewPad16; 0 = old mh_shift_pack path (results/shift-pack-900-20260930) */
 #endif
+#ifndef HIP_C256_FFN_W16
+#define HIP_C256_FFN_W16 1 /* 2026-09-30: C256 FFN weights in the wide fragment layout, launched through the _w16 exports of c64-wave2 / swin-persistent when present; 0 or older modules = @ffn-frag layout + original kernels (results/c256-w16-20260930) */
+#endif
 #ifndef HIP_C32_SKIP_BYTE
 #define HIP_C32_SKIP_BYTE 1 /* 2026-09-30: block4 main (C32 skip, read only by the block66 up) as E4M3 bytes when c32-wave1 exports the _b8 pair; 0 or older modules = f32 (results/c32-align-20260930) */
 #endif
@@ -182,6 +185,8 @@ class Network {
  // FFN expand/contract/project regions as FragmentPackedMatrix tiles (mh_ffn_fused_c{64,128}_frag_*); float tails unchanged.
  void* PackedFusedMhWeightFrag(const std::string&name,U c){auto key=name+"@ffn-frag";auto it=weights.find(key);if(it==weights.end()){auto v=ReadWeights(opt.assets+"/"+name);if(v.size()!=WeightElements(name))throw std::runtime_error("fused FFN weight shape");if(opt.grouped_mh_contract)ValidateGroupedMhContract(v,c);size_t cc=size_t(c)*c;Fp8(v,{{0,4*cc},{4*cc,4*cc},{8*cc,cc}});FragmentPackedMatrix(v,0,4*c,c);FragmentPackedMatrix(v,4*cc,c,4*c);FragmentPackedMatrix(v,8*cc,c,c);it=weights.emplace(key,UploadWeight(v,key)).first;}return P(it->second);}
  // Attention weights with only the QKV rows as fragment tiles (the FFN/QKV kernel's aw); the projection region stays row-major.
+ // C256 FFN in the wide fragment layout (W2_FFN_W16), consumed only by the _w16 exports (c256_wave2*_w16, sp_*256_w16).
+ void* PackedFusedMhWeightFragW16(const std::string&name,U c){auto key=name+"@ffn-frag-w16";auto it=weights.find(key);if(it==weights.end()){auto v=ReadWeights(opt.assets+"/"+name);if(v.size()!=WeightElements(name))throw std::runtime_error("fused FFN weight shape");if(opt.grouped_mh_contract)ValidateGroupedMhContract(v,c);size_t cc=size_t(c)*c;Fp8(v,{{0,4*cc},{4*cc,4*cc},{8*cc,cc}});FragmentPackedMatrixW16(v,0,4*c,c);FragmentPackedMatrixW16(v,4*cc,c,4*c);FragmentPackedMatrixW16(v,8*cc,c,c);it=weights.emplace(key,UploadWeight(v,key)).first;}return P(it->second);}
  void* PackedMhWeightQkvFragOnly(const std::string&name,U c){auto key=name+"@qkv-frag-only";auto it=weights.find(key);if(it==weights.end()){auto v=ReadWeights(opt.assets+"/"+name);if(v.size()!=WeightElements(name))throw std::runtime_error("packed weight shape "+name);size_t cc=size_t(c)*c;Fp8(v,{{0,3*cc},{3*cc,cc}});FragmentPackedMatrix(v,0,3*size_t(c),c);it=weights.emplace(key,UploadWeight(v,key)).first;}return P(it->second);}
  void* PackedFusedMhWeight(const std::string&name,U c,bool force_tiled=false){
   if(!force_tiled&&(!opt.tiled_mh_ffn||c<TiledMin()))return PackedMhWeight(name,c,false);
@@ -420,7 +425,11 @@ class Network {
   pdl_prev={};pdl_ffn_flags=nullptr;pdl_anyorder=false;
   auto out=New(size_t(w)*h*c/(byte_out?4:1));
   std::string name="c"+std::to_string(c)+"_wave2"+(byte_in?"_bi":"")+(byte_out?"_bo":"");
-  Run("c64_wave2",name.c_str(),n/64,P(input),PackedFusedMhWeightFrag(Block(block,"ffn"),c),WaveOwnedAttentionWeight(Block(block,"attention"),c),P(out),w,h,ww,hh,sx,sy,U(raw?3:(block==48||block==55||block==61||block==65)?0:4));
+  const bool w16=HIP_C256_FFN_W16&&c==256&&HasFn("c64_wave2",name+"_w16");if(w16)name+="_w16";
+#if HIP_SWIN_PERSISTENT_DIAGNOSTICS
+  if(c==256){static bool shown=false;if(!shown){shown=true;std::printf("W2_C256 %s\n",name.c_str());}}
+#endif
+  Run("c64_wave2",name.c_str(),n/64,P(input),w16?PackedFusedMhWeightFragW16(Block(block,"ffn"),c):PackedFusedMhWeightFrag(Block(block,"ffn"),c),WaveOwnedAttentionWeight(Block(block,"attention"),c),P(out),w,h,ww,hh,sx,sy,U(raw?3:(block==48||block==55||block==61||block==65)?0:4));
   Stage("block"+std::to_string(block),out);return out;
  }
  auto packed=(identity||mapped)?input:New(size_t(n)*c);if(!identity&&!mapped)Run("mh","mh_shift_pack",size_t(n)*c,P(input),P(packed),w,h,ww,hh,sx,sy,c,U(0));Tensor ffn=New(byte_feature?size_t(n)*c/4:size_t(n)*c);Tensor producer_norm=(opt.ffn_qkv&&c<=opt.ffn_qkv_max_c&&c!=512)?New(size_t(n)*3*c/4):Tensor{};

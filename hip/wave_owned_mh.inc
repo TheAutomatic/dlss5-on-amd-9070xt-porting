@@ -107,6 +107,20 @@ DEV i2 w2_weight(const float*p,uint row,uint stride,uint k,uint group=w2_gr()){i
 #endif
  __builtin_memcpy(&a,reinterpret_cast<const unsigned char*>(p)+off,8);return a;}
 
+// W2_FFN_W16 (2026-09-30, results/c256-w16-20260930): C256 FFN weights in the wide fragment layout packed by the host
+// (FragmentPackedMatrixW16, key @ffn-frag-w16): inside each 512-byte tile a lane's two K16 fragments are adjacent, so one
+// 16-byte load feeds two WMMAs. Same bytes, same per-accumulator k order -> bit-identical. The wide read is a template flag
+// exported under new names (c256_wave2*_w16, sp_run256_w16/sp_recover256_w16); the original exports keep the old layout, so
+// old host + new module and new host + old module both stay on @ffn-frag. The host uses the _w16 names only when present.
+#ifndef W2_FFN_W16
+#define W2_FFN_W16 0
+#endif
+#if W2_FFN_W16 && (!W2_FRAGMENT_WEIGHTS || W2_FFN_QT_BATCH==0 || W2_HIDDEN_TILES%2)
+#error W2_FFN_W16 needs W2_FRAGMENT_WEIGHTS, W2_FFN_QT_BATCH and an even W2_HIDDEN_TILES
+#endif
+using w2_i4=int __attribute__((ext_vector_type(4)));
+DEV w2_i4 w2_weight16(const float*p,uint row,uint stride,uint k,uint group=w2_gr()){w2_i4 a; /* k%32==0 */
+ __builtin_memcpy(&a,reinterpret_cast<const unsigned char*>(p)+((row/16)*(stride/32)+k/32)*512+(group*16+row%16)*16,16);return a;}
 DEV void w2_bits(i2&a,uint e,uint v){a[e/4]=int(uint(a[e/4])|((v&255u)<<(8*(e%4))));}
 // W2_PACK8 (2026-09-27, results/c64-block-fused-20260927): the same E4M3 bytes as q8_fused_round, two values per
 // v_cvt_pk_fp8_f32 written straight into the fragment word. +0.f after the clamp maps -0 to +0 (the old select on |x|==0)
@@ -198,7 +212,7 @@ template<uint C,bool ByteIn,bool ByteOut,bool Up=false
 #if W2_EXPLICIT_WINDOW
  ,bool ExplicitWindow=false
 #endif
- >
+ ,bool W16=false>
 DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_any,
  uint width,uint height,uint workw,uint workh,uint sx,uint sy,uint post,const float*upw=nullptr,const float*skip=nullptr
 #if W2_EXPLICIT_WINDOW
@@ -277,6 +291,17 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
   f8 contract[B][2]{};
   _Pragma("clang loop unroll(disable)") for(uint ht=0;ht<8;ht+=T){
    f8 expanded[B][T]{};
+   if constexpr(W16&&C==256){
+    for(uint kt=0;kt<C/16;kt+=2){
+     i2 in0[B],in1[B];
+     _Pragma("unroll") for(uint qi=0;qi<B;qi++){in0[qi]=w2_load<C>(plane0,qb+qi,kt);in1[qi]=w2_load<C>(plane0,qb+qi,kt+1);}
+     _Pragma("unroll") for(uint tile=0;tile<T;tile++){
+      w2_i4 w=w2_weight16(fw,head*128+(ht+tile)*16+rc,C,kt*16);i2 b0={w[0],w[1]},b1={w[2],w[3]};
+      _Pragma("unroll") for(uint qi=0;qi<B;qi++)expanded[qi][tile]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b0,in0[qi],expanded[qi][tile]);
+      _Pragma("unroll") for(uint qi=0;qi<B;qi++)expanded[qi][tile]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b1,in1[qi],expanded[qi][tile]);
+     }
+    }
+   }else
    for(uint kt=0;kt<C/16;kt++){
     i2 inputs[B];
     _Pragma("unroll") for(uint qi=0;qi<B;qi++)inputs[qi]=w2_load<C>(plane0,qb+qi,kt);
@@ -285,6 +310,20 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
      _Pragma("unroll") for(uint qi=0;qi<B;qi++)expanded[qi][tile]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,inputs[qi],expanded[qi][tile]);
     }
    }
+   if constexpr(W16&&C==256){
+    _Pragma("unroll") for(uint tile=0;tile<T;tile+=2){
+     i2 hidden[2][B];
+     _Pragma("unroll") for(uint t2=0;t2<2;t2++)_Pragma("unroll") for(uint qi=0;qi<B;qi++){
+      W2_Q8_DECL(packed);
+      for(uint e=0;e<8;e++){float a=expanded[qi][tile+t2][e],g=clampf(a,-4.f,4.f),q=__builtin_fmaf(absf(g),-.055908203125f,.447265625f),poly=__builtin_fmaf(g,q,.89453125f);W2_Q8_SETF(packed,e,a,poly);}W2_Q8_END(packed);hidden[t2][qi]=packed;
+     }
+     for(uint ci=0;ci<2;ci++){
+      w2_i4 w=w2_weight16(fw+4*C*C,head*32+ci*16+rc,4*C,head*128+(ht+tile)*16);i2 b0={w[0],w[1]},b1={w[2],w[3]};
+      _Pragma("unroll") for(uint qi=0;qi<B;qi++)contract[qi][ci]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b0,hidden[0][qi],contract[qi][ci]);
+      _Pragma("unroll") for(uint qi=0;qi<B;qi++)contract[qi][ci]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b1,hidden[1][qi],contract[qi][ci]);
+     }
+    }
+   }else
    _Pragma("unroll") for(uint tile=0;tile<T;tile++){
     i2 hidden[B];
     _Pragma("unroll") for(uint qi=0;qi<B;qi++){
@@ -363,6 +402,13 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
 #else
   for(uint ci=0;ci<2;ci++)for(uint e=0;e<8;e++){uint c=head*32+ci*16+gr*8+e;result[ci][e]=Hrtz(input(qt*16+rc,c)*fw[9*C*C+c]);}
 #endif
+  if constexpr(W16&&C==256){
+   for(uint kt=0;kt<C/16;kt+=2){i2 a0=w2_load<C>(plane1,qt,kt),a1=w2_load<C>(plane1,qt,kt+1);for(uint ci=0;ci<2;ci++){
+    w2_i4 w=w2_weight16(fw+8*C*C,head*32+ci*16+rc,C,kt*16);i2 b0={w[0],w[1]},b1={w[2],w[3]};
+    result[ci]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b0,a0,result[ci]);
+    result[ci]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b1,a1,result[ci]);
+   }}
+  }else
   for(uint kt=0;kt<C/16;kt++)for(uint ci=0;ci<2;ci++){
    i2 a=w2_load<C>(plane1,qt,kt),b=w2_weight(fw+8*C*C,head*32+ci*16+rc,C,kt*16);
    result[ci]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,a,result[ci]);
@@ -540,6 +586,13 @@ W2_KERNEL(c256_wave2,256,false,false)
 W2_KERNEL(c256_wave2_bi,256,true,false)
 W2_KERNEL(c256_wave2_bo,256,false,true)
 W2_KERNEL(c256_wave2_bi_bo,256,true,true)
+#if W2_FFN_W16
+#define W2_KERNEL_W16(NAME,BI,BO) KERNEL __attribute__((amdgpu_flat_work_group_size(256,256))) void NAME(const float*in,const float*fw,const float*aw,void*out,uint w,uint h,uint ww,uint hh,uint sx,uint sy,uint post){swin_wave2_body<256,BI,BO,false,true>(in,fw,aw,out,w,h,ww,hh,sx,sy,post);}
+W2_KERNEL_W16(c256_wave2_w16,false,false)
+W2_KERNEL_W16(c256_wave2_bi_w16,true,false)
+W2_KERNEL_W16(c256_wave2_bo_w16,false,true)
+W2_KERNEL_W16(c256_wave2_bi_bo_w16,true,true)
+#endif
 
 #if W2_UP_FUSED
 #define W2_UP_KERNEL(NAME,C) KERNEL __attribute__((amdgpu_flat_work_group_size(C,C))) void NAME(const float*in,const float*fw,const float*aw,void*out,uint w,uint h,uint ww,uint hh,uint sx,uint sy,uint post,const float*upw,const float*skip){swin_wave2_body<C,true,true,true>(in,fw,aw,out,w,h,ww,hh,sx,sy,post,upw,skip);}

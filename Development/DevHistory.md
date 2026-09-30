@@ -1222,3 +1222,11 @@ Zero 改了验收规则：小改动只要逐位、离线 ABBA 为正、p99 和�
 ## 2026-09-30：C512 FFN 按 W5 组织（同组 wave 经 LDS 共用权重）——单核 900 变慢，停
 
 闇第 ③ 条。先拆 Daniel `k_reg_vit_ffwd`：**1 wave 一组、LDS 0、无 barrier**、80 VGPR，grid (104,8)，一核做完整 FFN，hidden 就地转 FP8 在寄存器里，FP8×FP8 WMMA 每条配一条 b64——他快在数据形态和三核合一，不在组内共享。原型只做最重的 `split_mix_blocked_h16w_m32`：G=4/2 个 wave 同组同列块，每 wave 仍 32 token，half 权重 8KB 分块双缓冲进 LDS（宏 `C512_MIX_LDS_G`，默认 0 编出 .text 与现装同）。10 组逐字节同；单核三批：900 现役 15.34µs，五个变体全慢（最好 +1.2%）；1080 20.9～21.2 → G=4 最好 19.7～20.3，批间排名不稳。权重本在 L2、A 仍是 f32 占一半以上请求，900 只 47 片摊 64 CU 不匀。按任务单停，不写宿主、不装机。`results/c512-ffn-lds-20260930`。
+
+## 2026-09-30 11:25：C256 FFN 权重 16 字节片段读取（逐位，已装）
+
+09-23 mhfast-wide-frag 搬到现役 `swin_wave2_body`：宿主 `HIP_C256_FFN_W16`（默认 1）另打 `@ffn-frag-w16` 宽片段布局，核宏 `W2_FFN_W16` 只新增 `c256_wave2*_w16`、`sp_run256_w16`/`sp_recover256_w16` 导出，宿主 `HasFn` 有才用——新宿主＋旧模块、旧宿主＋新模块都回旧行为（各 19 组 SAME）。W 19 组 SAME；持久化 `SP_PLAN ... w16=1`、非持久化 `W2_C256 c256_wave2_bo_w16` 两路实证。三轮 ABBA 900 −0.011/−0.025/−0.017ms，1080 −0.030/−0.015/+0.003ms，p99 三轮合并两档不差，收。add-on bb7ebfd1（7ca25c98＋补丁）、RE9 runtime 88b59744（900/1080 hash 同、smoke 过）、c64-wave2/swin-persistent 两架构；剑星、鬼武者已装，备份 `...\c256-w16-20260930\backups\stellar-20260930-112518-c256w16`、`D:\DLSSNR-Lab\onimusha-backups\20260930-112518-c256w16`。`results/c256-w16-20260930`。
+
+## 2026-09-30 11:37：复合量化推广 C512 `F(Hrtz(acc))`（逐位，已装）
+
+`C512_F_MASK`：mix（split_mix_blocked_h16w_m32）与 contract（split_ffn_fused_fp8_t8）出口 `F(Hrtz(x))`→`F(bits&0xffffe000)`。F 对 |x|==0 给 +0，唯一差异是负 0<|x|<2⁻²⁴（+0 vs −0）与 8191 个 +NaN；CPU/GPU 2³² 穷举 other=0、GPU 对模型 0 不符。域：contract 是 E4M3×FP8 和；mix 输入是 F 输出（E4M3），half 权重 16 块最小位 2⁻⁹（依赖权重数据），乘积都在 2⁻¹⁸ 格点。ViT 出口乘过 inv，不做。19 组 SAME；三轮 ABBA 900 −0.029/−0.011/−0.012、1080 −0.018/−0.010/−0.006ms，p99 合并不差，收。只换 c512-m32-deep/deep_fast-packed 两架构（gfx1201 6FC2F5BE/2764240B），宿主/runtime 不变；备份 `...\composite-quant-c512-20260930\backups\stellar-20260930-113745-c512mask`、`D:\DLSSNR-Lab\onimusha-backups\20260930-113745-c512mask`。`results/composite-quant-c512-20260930`。
