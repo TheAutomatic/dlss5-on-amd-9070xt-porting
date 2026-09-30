@@ -5,7 +5,7 @@
 
 ## 当前基线（0.38，09-30 发布）
 
-- **0.38 已发布**：Gofile https://gofile.io/d/wsAqRlAI （夸克待 Zero 补），tag 0.38（源码 e1b1a18c）。add-on bfba6900、RE9 runtime ade2d404、RE9 dxgi 宿主 aa3761f2（沿用）、输入 shader 5be59a41、新增 `native_format_convert.hlsl`、每架构 31 模块（相对 0.37 变 8 个）。清单 `results/package-038/checklist.md`、`HIP-SHA256SUMS`；脚本 `tools/package-038.ps1`（下次复制它）。**默认设置下与 0.37 逐位相同**；唯一有损项 `DLSS5_NETWORK_1080_ROWS=1088` 可选、模板 1152。
+- **0.38 已发布**：夸克 https://pan.quark.cn/s/6856d875bbe9 + Gofile https://gofile.io/d/lzsqfUiE，tag 0.38（源码 e1b1a18c）。add-on bfba6900、RE9 runtime ade2d404、RE9 dxgi 宿主 aa3761f2（沿用）、输入 shader 5be59a41、新增 `native_format_convert.hlsl`、每架构 31 模块（相对 0.37 变 8 个）。清单 `results/package-038/checklist.md`、`HIP-SHA256SUMS`；脚本 `tools/package-038.ps1`（下次复制它）。**默认设置下与 0.37 逐位相同**；唯一有损项 `DLSS5_NETWORK_1080_ROWS=1088` 可选、模板 1152。
 - **0.38 相对 0.37**（全逐位，详见 CHANGELOG 0.38）：900 去 C512 shift_pack、C32 块 4/prefix/post 字节化、C32 对角残差跳零、I+P+O、复合量化（W2＋C512）、C256 FFN W16、三处宽写（C32 prefix/finish、C512 t8）、C512 QKV-attention 去 F＋有界倒数、F 清理（deep_fast-packed）；新开关 `DLSS5_FORMAT_FALLBACK`、`DLSS5_HOT_RELOAD`、`DLSS5_NETWORK_1080_ROWS`。900 派发 179→162、1080 162→158。
 - **离线**（NativeGameFrame wall，1000 帧弃 200）：900 约 **7.6ms**（7.551/7.606）、1080 约 **10.4ms**（10.413/10.458）；0.37 时 8.0 / 10.8。HIP 段（不含交接）900 7.26 / 1080 10.07ms，现实理想约 4.2 / 6.0（`results/hip-roofline-20260930`）。
 - **游戏本机**：剑星/鬼武者现装 = 0.38 同网络（add-on 6d059845 / runtime 5e601d57 与发布版 168 帧＋回绕逐位同，未换成发布二进制）。剑星 flags `DIRECT_IO=3`、`MAKE_RESIDENT_EVERY=60`、`SWIN_RUN=1`、`FRAME_STATS=5`；2K 原生 AA EXACT 55～56（只作正确性参考）。RE9 仍 0.35 全套；33 号远征队 0.35 常规包。

@@ -236,7 +236,7 @@ Not shipped (negative results): C128/C64 persistence (below the 0.5% bar, `resul
 
 ## 0.38 (09-30)
 
-Download (all three packages): Quark link coming later · [Gofile mirror](https://gofile.io/d/wsAqRlAI)
+Download (all three packages): [Quark](https://pan.quark.cn/s/6856d875bbe9) · [Gofile mirror](https://gofile.io/d/lzsqfUiE)
 
 - **Bit-exact**: **with default settings fully bit-identical to 0.37** (09-28 float-FMA baseline; 7 cases, 168 EXACT/AE frames plus ticket rollover, checked at every step; the add-on and RE9 runtime shipped were rebuilt from the release source and re-checked against the installed build on the same 168 frames + rollover, all identical). The only lossy item is the opt-in `DLSS5_NETWORK_1080_ROWS=1088`, off by default.
 - **Effect** (offline full-network replay, NativeGameFrame, 1000 frames minus the first 200, ms per frame): 900 tier about **8.0 → 7.6 ms**, 1080 tier about **10.8 → 10.4 ms** (release modules measured 900 7.551/7.606, 1080 10.413/10.458, two runs, `results/hip-roofline-20260930` section 1; per-kernel map `results/kernel-map-v3-20260930`). Launches per frame: 900 tier 179 → 162, 1080 tier 162 → 158. In-game runs (Stellar Blade, Onimusha) are correctness checks only (no flicker, artefacts or crashes); frame-rate readings are not used as evidence.
