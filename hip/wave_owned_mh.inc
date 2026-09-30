@@ -291,7 +291,7 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
   f8 contract[B][2]{};
   _Pragma("clang loop unroll(disable)") for(uint ht=0;ht<8;ht+=T){
    f8 expanded[B][T]{};
-   if constexpr(W16&&C==256){
+   if constexpr(W16){
     for(uint kt=0;kt<C/16;kt+=2){
      i2 in0[B],in1[B];
      _Pragma("unroll") for(uint qi=0;qi<B;qi++){in0[qi]=w2_load<C>(plane0,qb+qi,kt);in1[qi]=w2_load<C>(plane0,qb+qi,kt+1);}
@@ -310,7 +310,7 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
      _Pragma("unroll") for(uint qi=0;qi<B;qi++)expanded[qi][tile]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,inputs[qi],expanded[qi][tile]);
     }
    }
-   if constexpr(W16&&C==256){
+   if constexpr(W16){
     _Pragma("unroll") for(uint tile=0;tile<T;tile+=2){
      i2 hidden[2][B];
      _Pragma("unroll") for(uint t2=0;t2<2;t2++)_Pragma("unroll") for(uint qi=0;qi<B;qi++){
@@ -402,7 +402,7 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
 #else
   for(uint ci=0;ci<2;ci++)for(uint e=0;e<8;e++){uint c=head*32+ci*16+gr*8+e;result[ci][e]=Hrtz(input(qt*16+rc,c)*fw[9*C*C+c]);}
 #endif
-  if constexpr(W16&&C==256){
+  if constexpr(W16){
    for(uint kt=0;kt<C/16;kt+=2){i2 a0=w2_load<C>(plane1,qt,kt),a1=w2_load<C>(plane1,qt,kt+1);for(uint ci=0;ci<2;ci++){
     w2_i4 w=w2_weight16(fw+8*C*C,head*32+ci*16+rc,C,kt*16);i2 b0={w[0],w[1]},b1={w[2],w[3]};
     result[ci]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b0,a0,result[ci]);
@@ -587,16 +587,43 @@ W2_KERNEL(c256_wave2_bi,256,true,false)
 W2_KERNEL(c256_wave2_bo,256,false,true)
 W2_KERNEL(c256_wave2_bi_bo,256,true,true)
 #if W2_FFN_W16
-#define W2_KERNEL_W16(NAME,BI,BO) KERNEL __attribute__((amdgpu_flat_work_group_size(256,256))) void NAME(const float*in,const float*fw,const float*aw,void*out,uint w,uint h,uint ww,uint hh,uint sx,uint sy,uint post){swin_wave2_body<256,BI,BO,false,true>(in,fw,aw,out,w,h,ww,hh,sx,sy,post);}
-W2_KERNEL_W16(c256_wave2_w16,false,false)
-W2_KERNEL_W16(c256_wave2_bi_w16,true,false)
-W2_KERNEL_W16(c256_wave2_bo_w16,false,true)
-W2_KERNEL_W16(c256_wave2_bi_bo_w16,true,true)
+#define W2_KERNEL_W16(NAME,C,BI,BO) KERNEL __attribute__((amdgpu_flat_work_group_size(C,C))) void NAME(const float*in,const float*fw,const float*aw,void*out,uint w,uint h,uint ww,uint hh,uint sx,uint sy,uint post){swin_wave2_body<C,BI,BO,false,true>(in,fw,aw,out,w,h,ww,hh,sx,sy,post);}
+W2_KERNEL_W16(c256_wave2_w16,256,false,false)
+W2_KERNEL_W16(c256_wave2_bi_w16,256,true,false)
+W2_KERNEL_W16(c256_wave2_bo_w16,256,false,true)
+W2_KERNEL_W16(c256_wave2_bi_bo_w16,256,true,true)
+#endif
+// W2_FFN_W16_SMALL (2026-09-30, results/w16-c64-c128-20260930): the same wide fragments for C64/C128 (bit0 C64, bit1 C128),
+// again only as new exports (c64/c128_wave2*_w16, *_wave2_up_w16); the host uses them only when present.
+#ifndef W2_FFN_W16_SMALL
+#define W2_FFN_W16_SMALL 0
+#endif
+#if W2_FFN_W16_SMALL && !W2_FFN_W16
+#error W2_FFN_W16_SMALL needs W2_FFN_W16
+#endif
+#if W2_FFN_W16_SMALL&1
+W2_KERNEL_W16(c64_wave2_w16,64,false,false)
+W2_KERNEL_W16(c64_wave2_bi_w16,64,true,false)
+W2_KERNEL_W16(c64_wave2_bo_w16,64,false,true)
+W2_KERNEL_W16(c64_wave2_bi_bo_w16,64,true,true)
+#endif
+#if W2_FFN_W16_SMALL&2
+W2_KERNEL_W16(c128_wave2_w16,128,false,false)
+W2_KERNEL_W16(c128_wave2_bi_w16,128,true,false)
+W2_KERNEL_W16(c128_wave2_bo_w16,128,false,true)
+W2_KERNEL_W16(c128_wave2_bi_bo_w16,128,true,true)
 #endif
 
 #if W2_UP_FUSED
 #define W2_UP_KERNEL(NAME,C) KERNEL __attribute__((amdgpu_flat_work_group_size(C,C))) void NAME(const float*in,const float*fw,const float*aw,void*out,uint w,uint h,uint ww,uint hh,uint sx,uint sy,uint post,const float*upw,const float*skip){swin_wave2_body<C,true,true,true>(in,fw,aw,out,w,h,ww,hh,sx,sy,post,upw,skip);}
 W2_UP_KERNEL(c64_wave2_up,64)
 W2_UP_KERNEL(c128_wave2_up,128)
+#define W2_UP_KERNEL_W16(NAME,C) KERNEL __attribute__((amdgpu_flat_work_group_size(C,C))) void NAME(const float*in,const float*fw,const float*aw,void*out,uint w,uint h,uint ww,uint hh,uint sx,uint sy,uint post,const float*upw,const float*skip){swin_wave2_body<C,true,true,true,true>(in,fw,aw,out,w,h,ww,hh,sx,sy,post,upw,skip);}
+#if W2_FFN_W16_SMALL&1
+W2_UP_KERNEL_W16(c64_wave2_up_w16,64)
+#endif
+#if W2_FFN_W16_SMALL&2
+W2_UP_KERNEL_W16(c128_wave2_up_w16,128)
+#endif
 #endif
 #endif

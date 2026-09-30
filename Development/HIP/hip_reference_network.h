@@ -45,6 +45,9 @@ using Tensor=std::shared_ptr<Allocation>;
 #ifndef HIP_C256_FFN_W16
 #define HIP_C256_FFN_W16 1 /* 2026-09-30: C256 FFN weights in the wide fragment layout, launched through the _w16 exports of c64-wave2 / swin-persistent when present; 0 or older modules = @ffn-frag layout + original kernels (results/c256-w16-20260930) */
 #endif
+#ifndef HIP_SMALL_FFN_W16
+#define HIP_SMALL_FFN_W16 1 /* 2026-09-30: the same wide FFN fragments for C64/C128 (c64/c128_wave2*_w16, *_wave2_up_w16 in c64-wave2 when built with W2_FFN_W16_SMALL); 0 or modules without them = old layout (results/w16-c64-c128-20260930) */
+#endif
 #ifndef HIP_C32_SKIP_BYTE
 #define HIP_C32_SKIP_BYTE 1 /* 2026-09-30: block4 main (C32 skip, read only by the block66 up) as E4M3 bytes when c32-wave1 exports the _b8 pair; 0 or older modules = f32 (results/c32-align-20260930) */
 #endif
@@ -434,9 +437,9 @@ class Network {
   pdl_prev={};pdl_ffn_flags=nullptr;pdl_anyorder=false;
   auto out=New(size_t(w)*h*c/(byte_out?4:1));
   std::string name="c"+std::to_string(c)+"_wave2"+(byte_in?"_bi":"")+(byte_out?"_bo":"");
-  const bool w16=HIP_C256_FFN_W16&&c==256&&HasFn("c64_wave2",name+"_w16");if(w16)name+="_w16";
+  const bool w16=(c==256?HIP_C256_FFN_W16:HIP_SMALL_FFN_W16)&&HasFn("c64_wave2",name+"_w16");if(w16)name+="_w16";
 #if HIP_SWIN_PERSISTENT_DIAGNOSTICS
-  if(c==256){static bool shown=false;if(!shown){shown=true;std::printf("W2_C256 %s\n",name.c_str());}}
+  {static bool shown[3]{};U si=c==64?0:c==128?1:2;if(!shown[si]){shown[si]=true;std::printf("W2_C%u %s\n",c,name.c_str());}}
 #endif
   Run("c64_wave2",name.c_str(),n/64,P(input),w16?PackedFusedMhWeightFragW16(Block(block,"ffn"),c):PackedFusedMhWeightFrag(Block(block,"ffn"),c),WaveOwnedAttentionWeight(Block(block,"attention"),c),P(out),w,h,ww,hh,sx,sy,U(raw?3:(block==48||block==55||block==61||block==65)?0:4));
   Stage("block"+std::to_string(block),out);return out;
@@ -519,7 +522,11 @@ class Network {
   pdl_prev={};pdl_ffn_flags=nullptr;pdl_anyorder=false;
   auto out=New(size_t(w)*h*c/4);
   std::string name="c"+std::to_string(c)+"_wave2_up";
-  Run("c64_wave2",name.c_str(),size_t(ww)*hh/64,P(low),PackedFusedMhWeightFrag(Block(block,"ffn"),c),WaveOwnedAttentionWeight(Block(block,"attention"),c),P(out),w,h,ww,hh,sx,sy,U(4),PackedDecoderHalf(Block(block,"weights"),size_t(2*c)*c),P(skip));
+  const bool w16=HIP_SMALL_FFN_W16&&HasFn("c64_wave2",name+"_w16");if(w16)name+="_w16";
+#if HIP_SWIN_PERSISTENT_DIAGNOSTICS
+  {static bool shown[2]{};if(!shown[c==128]){shown[c==128]=true;std::printf("W2_UP %s\n",name.c_str());}}
+#endif
+  Run("c64_wave2",name.c_str(),size_t(ww)*hh/64,P(low),w16?PackedFusedMhWeightFragW16(Block(block,"ffn"),c):PackedFusedMhWeightFrag(Block(block,"ffn"),c),WaveOwnedAttentionWeight(Block(block,"attention"),c),P(out),w,h,ww,hh,sx,sy,U(4),PackedDecoderHalf(Block(block,"weights"),size_t(2*c)*c),P(skip));
   Stage("block"+std::to_string(block),out);return out;
  }
  Tensor Up(Tensor input,Tensor skip,U iw,U ih,U ow,U oh,U ic,U oc,const std::string&file,bool byte_out=false){if(byte_out&&(!(opt.decoder_h16w&&opt.fast_deep)||oc==32))throw std::runtime_error("decoder byte output requires quantized fast path");auto out=(HIP_C512_PAD16&&oc==512&&!byte_out)?NewPad16(size_t(ow)*oh,512):New(size_t(ow)*oh*oc/(byte_out?4:1));if(opt.decoder_h16w&&opt.fast_deep)Run("deep",byte_out?"decoder_project2x_h16w_byteout":"decoder_project2x_h16w",size_t(iw)*ih*oc,P(input),PackedDecoderHalf(file,size_t(ic)*oc),P(skip),P(out),iw,ih,ow,oh,ic,oc);else Run("deep","decoder_project2x",size_t(iw)*ih*oc,P(input),Weight(file),P(skip),P(out),iw,ih,ow,oh,ic,oc);return out;}
