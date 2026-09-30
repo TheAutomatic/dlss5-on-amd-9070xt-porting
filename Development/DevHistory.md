@@ -1238,3 +1238,7 @@ Zero 改了验收规则：小改动只要逐位、离线 ABBA 为正、p99 和�
 ## 2026-09-30 C32 prefix/post 按算力拆账 + prefix 字节尾向量化（`results/prefix-post-arith-20260930`）
 
 按指令族×循环次数拆每窗口动态条数：prefix 7923 条（WMMA 304、VALU 4987、SALU 788、等待 680），post 6794（WMMA 288、VALU 4544）；转换族最大（prefix 1560）。热段前列是与 chain 共用的注意力/隐层/QKV（已挖过），prefix 独有的是尾部逐字节写：main 16 次循环 608 VALU＋336 SALU＋64 ds_load_u16＋64 store_b8、down 410 VALU（每值 15 条转换）。对 Daniel 同位核 `k_reg_swin32<20>`/`<32>`：他尾部 4×b128＋2×b64；其余差在他 f16 域成对算术（pk_mul/add/fma/max/min、fma_mix），属 fast 语义不照搬。`CW_PREFIX_TAIL_VEC`：lane 管 8 连续通道，ds_load_b128＋cw_pack8（MODE 饱和，与 site 2 同论证）＋8 字节写，down 用 fp8(F(x))≡fp8(x+0)（x 有限 half）。尾部 VALU 1018→514、SALU 390→71、store 80→10，但 ht 循环重排多 ~96 VALU；整核每窗口 7923→6745 条。宿主不变，19 组 SAME；三轮 ABBA 900 −0.046/−0.040/−0.040、1080 −0.065/−0.072/−0.074ms，p99 全变好，收。post 输入 Hrtz 成对（gfx12 读高半需 lshr，净 0）、掩码（域不纯）不做。装剑星 c32-wave1 3f9cdd24/00b1d536（add-on 6d059845 不变），鬼武者对齐，RE9 runtime 5e601d57 不变；备份 `...\prefix-post-arith-20260930\backups\stellar-20260930-123126-pparith`、`D:\DLSSNR-Lab\onimusha-backups\20260930-123126-pparith`。
+
+## 2026-09-30 字节写出尾巴向量化推广（tail-vec）
+
+全网扫逐通道字节尾巴：只剩 C32 `finish_dcrop_b8d`（block4）与 `finish_b8`（block69）；C64～C256、chain/mapped/up 已是每 lane 8 连续通道宽写，旧 multihead/deep 字节出口是 WMMA 列布局（需转置，非同类）。新宏 `CW_FINISH_TAIL_VEC`（配方 1）：每 lane 8 通道 ds_load_b128＋cw_pack8＋8 字节写，逐像素边界保留。逐位 19 组 SAME；三轮 900 −0.038～−0.046、1080 −0.043～−0.055ms，p99 全好。已装剑星/鬼武者，c32-wave1 8e47b814/fd8fed73，宿主与 RE9 runtime 不变。`results/tail-vec-20260930`。

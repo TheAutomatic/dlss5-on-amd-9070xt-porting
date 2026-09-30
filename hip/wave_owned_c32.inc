@@ -181,6 +181,9 @@ DEV i2 cw_input(const unsigned char*in,uint win,uint qt,uint ci,uint width,uint 
 #ifndef CW_PREFIX_TAIL_VEC
 #define CW_PREFIX_TAIL_VEC 0 /* 1: prefix byte tail (main + down bytes) stored per lane as 8-channel groups: ds_load_b128 + cw_pack8 + 8-byte store instead of 64+16 per-channel byte loops; bytes unchanged (results/prefix-post-arith-20260930) */
 #endif
+#ifndef CW_FINISH_TAIL_VEC
+#define CW_FINISH_TAIL_VEC 0 /* 1: finish_b8 / finish_dcrop_b8d byte tails (main bytes, DownCrop down bytes) per lane as 8-channel groups, same as CW_PREFIX_TAIL_VEC; bytes unchanged (results/tail-vec-20260930) */
+#endif
 #ifndef CW_UP_FUSED
 #define CW_UP_FUSED 0
 #endif
@@ -418,6 +421,29 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
     else *reinterpret_cast<float*>(reinterpret_cast<char*>(down)+(((y/2)*(ww/2)+x/2)*32+c)*4u)=F(Hrtz(Hrtz(top+bottom)*.25f));}
   }
   // The quad route above emits both outputs.
+#endif
+#if CW_FINISH_TAIL_VEC && !CW_TAIL_QUAD
+  // Byte main (and byte DownCrop down) tail, vectorised like CW_PREFIX_TAIL_VEC: lane = (pixel slot c>>2, 8-channel group c&3),
+  // one ds_load_b128 of 8 contiguous residual halves, one MODE-saturated cw_pack8, one 8-byte store; bounds tested per pixel
+  // exactly as the per-channel loop. Bytes unchanged: fp8(F(x)) == fp8(x+0) for the finite half values x held here.
+  if constexpr(Byte&&(DownByte||!DownCrop)){
+   uint cg=c&3u,sl=c>>2;
+   auto row=[&](uint t)->h8{h8 v;__builtin_memcpy(&v,__builtin_assume_aligned(residual+((t/16*2+cg/2)*32+((cg&1u)*16+t%16))*8,16),16);return v;};
+   auto emitv=[&](auto full){
+    if(main)for(uint i=0;i<8;i++){uint t=i*8+sl;int x=int(tx+t%8)-int(sx),y=int(ty+t/8)-int(sy);
+     if(full||(x>=0&&y>=0&&x<int(width)&&y<int(height))){h8 hv=row(t);float q[8];for(uint e=0;e<8;e++)q[e]=float(hv[e])+0.f;
+      i2 b=cw_pack8<0,cw_kind>(q);__builtin_memcpy(__builtin_assume_aligned(reinterpret_cast<unsigned char*>(main)+((uint(y)*width+uint(x))*32+cg*8),8),&b,8);}}
+    if constexpr(DownByte&&DownCrop)if(down)for(uint j=0;j<2;j++){uint k=j*8+sl,t=(k/4)*16+(k%4)*2;uint x=tx+t%8,y=ty+t/8;int cx=int(x/2)-int(sx/2),cy=int(y/2)-int(sy/2);
+     if(full||(cx>=0&&cy>=0&&cx<int(width/2)&&cy<int(height/2))){h8 a0=row(t),a1=row(t+1),b0=row(t+8),b1=row(t+9);float q[8];
+      for(uint e=0;e<8;e++){float top=Hrtz(float(a0[e])+float(a1[e])),bottom=Hrtz(float(b0[e])+float(b1[e]));q[e]=Hrtz(Hrtz(top+bottom)*.25f)+0.f;}
+      i2 b=cw_pack8<0,cw_kind>(q);__builtin_memcpy(__builtin_assume_aligned(reinterpret_cast<unsigned char*>(down)+((uint(cy)*(width/2)+uint(cx))*32+cg*8),8),&b,8);}}
+   };
+   if(tx>=sx&&ty>=sy&&tx+8<=width+sx&&ty+8<=height+sy&&(!DownCrop||((sx|sy)&1u)==0))emitv(cw_true{});else emitv(cw_false{});
+   if constexpr(!DownCrop)if(down)for(uint k=0;k<16;k++){uint t=(k/4)*16+(k%4)*2;float top=Hrtz(load(t)+load(t+1)),bottom=Hrtz(load(t+8)+load(t+9));uint x=tx+t%8,y=ty+t/8;
+    if constexpr(DownByte)reinterpret_cast<unsigned char*>(down)[((y/2)*(ww/2)+x/2)*32+c]=static_cast<unsigned char>(fp8(F(Hrtz(Hrtz(top+bottom)*.25f))));
+    else down[((y/2)*(ww/2)+x/2)*32+c]=F(Hrtz(Hrtz(top+bottom)*.25f));}
+   return;
+  }
 #endif
   auto emit=[&](auto full){if(main)for(uint t=0;t<64;t++){int x=int(tx+t%8)-int(sx),y=int(ty+t/8)-int(sy);if(full||(Prefix&&CW_PREFIX_FULL_TILE)||(x>=0&&y>=0&&x<int(width)&&y<int(height))){uint dest=(uint(y)*width+uint(x))*32+c;float v=load(t);if constexpr(Prefix)reinterpret_cast<unsigned char*>(main)[dest]=static_cast<unsigned char>(cw_prefix_byte(v));else if constexpr(Byte)reinterpret_cast<unsigned char*>(main)[dest]=static_cast<unsigned char>(fp8(F(v)));else main[dest]=F(v);}}
   if(!CW_TAIL_QUAD&&down)for(uint k=0;k<16;k++){uint t=(k/4)*16+(k%4)*2;float top=Hrtz(load(t)+load(t+1)),bottom=Hrtz(load(t+8)+load(t+9));uint x=tx+t%8,y=ty+t/8;
