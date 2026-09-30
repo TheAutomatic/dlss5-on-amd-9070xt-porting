@@ -233,3 +233,30 @@ Download (all three packages): [Quark](https://pan.quark.cn/s/7dbfdc6425fd) · [
 5. **ViT QKV, five waves sharing weights** (W5): five waves share one weight copy through LDS (8 KB double-buffered blocks), reads divided by about 5 without reducing waves; 640-token kernel 48.8 → 37.0 µs. Network 900 −0.42 to −1.39%, 1080 −0.74 to −1.07%. The new host detects the export and falls back with older modules. `results/vit-qkv-20260929`.
 
 Not shipped (negative results): C128/C64 persistence (below the 0.5% bar, `results/swin-persistent-c128-c64-20260929`), C512 projection weight sharing (bit-exact but slower, `results/c512-proj-share-20260929`), the `MAKE_RESIDENT` spike (not reproduced offline, `results/resident-spike-20260929`). Package checklist `Development/results/package-037/checklist.md`.
+
+## 0.38 (09-30)
+
+Download (all three packages): Quark link coming later · [Gofile mirror](https://gofile.io/d/wsAqRlAI)
+
+- **Bit-exact**: **with default settings fully bit-identical to 0.37** (09-28 float-FMA baseline; 7 cases, 168 EXACT/AE frames plus ticket rollover, checked at every step; the add-on and RE9 runtime shipped were rebuilt from the release source and re-checked against the installed build on the same 168 frames + rollover, all identical). The only lossy item is the opt-in `DLSS5_NETWORK_1080_ROWS=1088`, off by default.
+- **Effect** (offline full-network replay, NativeGameFrame, 1000 frames minus the first 200, ms per frame): 900 tier about **8.0 → 7.6 ms**, 1080 tier about **10.8 → 10.4 ms** (release modules measured 900 7.551/7.606, 1080 10.413/10.458, two runs, `results/hip-roofline-20260930` section 1; per-kernel map `results/kernel-map-v3-20260930`). Launches per frame: 900 tier 179 → 162, 1080 tier 162 → 158. In-game runs (Stellar Blade, Onimusha) are correctness checks only (no flicker, artefacts or crashes); frame-rate readings are not used as evidence.
+- **New switches**:
+  - `DLSS5_FORMAT_FALLBACK` (1 in all three templates, source default 1): colour formats that used to be rejected — R9G9B9E5, B8G8R8X8, R10G10B10A2, R32G32B32(A32), R16G16B16A16/R8G8B8A8 SNORM, B5G6R5, B5G5R5A1, B4G4R4A4 — are converted to RGBA16F by one compute pass on the regular package's pre-upscale route (new `native_format_convert.hlsl`) and then take the normal route; the RE9 runtime uses its private FP16 output route. Formats accepted before never reach the table (bit-exact). Rejected formats are logged by name. Post-upscale / Magpie / XeSS routes unchanged. 0 = original table. `results/product-fmt-reload-20260930`.
+  - `DLSS5_HOT_RELOAD` (1 in the regular/Magpie templates, source default 1; not applicable to RE9): editing `DLSS5_STRENGTH` / `DLSS5_NOTICE` / `DLSS5_SHOW_FPS` in the flags file while the game runs applies within a second; other keys still need a restart. No edit, no change.
+  - `DLSS5_NETWORK_1080_ROWS` (templates 1152 = NVIDIA geometry): **opt-in `1088`, LOSSY, off by default** — the 1080 tier computes 1088 rows, network about −0.47 ms (4.4%), about 56 dB vs 1152 over the frame, bottom 32 rows slightly worse. `results/geom-1088-20260930`.
+  - Internal host switches (default 1, normally untouched): `HIP_C512_PAD16`, `HIP_C256_FFN_W16`; they fall back to the old path with older modules or too-small buffers.
+- **Changes** (in order, each bit-identical to the step before; figures are each step's own ABBA):
+
+1. **900 tier: C512 shift_pack removed**: producers allocate 16-token-padded buffers (1500 → 1504), C512 blocks read in place, 13 `mh_shift_pack` launches gone; host only. 900 −0.09 to −0.11 ms, 1080 unchanged. `results/shift-pack-900-20260930`.
+2. **C32 block-4 skip/downsample stored as E4M3 bytes**: their values are exact E4M3 already; traffic drops to a quarter. 900 −0.05 ms (0.62%), 1080 −0.09 ms (0.82%). `results/c32-align-20260930`.
+3. **C32 diagonal residual skips all-zero halves** (`CW_DIAG_ONLY`): 1080 about −0.04 ms. `results/small-cuts-20260930`.
+4. **I+P+O**: C32 input/prefix without the half round trip; occupancy caps for C512 mix and ViT contract. 900 −0.03 ms, 1080 −0.02 to −0.03 ms. `results/small-wins-retest-20260930`.
+5. **Composite quantisation**: `FP8(Hrtz(x))` at WMMA byte exits becomes an integer bit mask, dropping the f32→f16→f32 round trip; proved over all 2³² inputs. c64-wave2/swin-persistent (`results/composite-quant-20260930`) and two C512 exits (`results/composite-quant-c512-20260930`), −0.005 to −0.03 ms each.
+6. **C256 FFN weights in 16-byte fragments**: one 16-byte load feeds two WMMAs, k order unchanged; falls back with older modules/hosts. 900 −0.01 to −0.03 ms. `results/c256-w16-20260930`.
+7. **C32 prefix down / block-69 main stored as E4M3 bytes**: 900 −0.01 to −0.02 ms, 1080 about −0.02 ms. `results/prefix-post-20260930`.
+8. **Three wide-store rewrites**: C32 prefix byte tail (900 −0.04, 1080 −0.07 ms, `results/prefix-post-arith-20260930`), C32 finish byte tails (900 −0.04, 1080 −0.05 ms, `results/tail-vec-20260930`), C512 t8 byte copies via LDS transpose (about −0.01 to −0.03 ms, `results/deep-tail-20260930`).
+9. **C512 QKV-attention: redundant F dropped + bounded reciprocal**: the extra clamps at the AV/QKV exits removed, softmax division replaced by rcp + two Newton steps; both tiers, three rounds −0.02 to −0.03 ms. `results/c512-av-f-20260930`.
+10. **F/division clean-up across the network**: only deep_fast-packed taken (900 −0.01 to −0.04, 1080 −0.01 to −0.03 ms). `results/f-sweep-20260930`.
+
+- **Package**: new `native_format_convert.hlsl`; the three flags templates carry the three switches above; add-on and RE9 runtime rebuilt from the release source (tag 0.38); RE9 host unchanged; RE9 source archive regenerated.
+- Not shipped (bit-exact but not faster everywhere, macros default 0): D3D→HIP GPU polling `DLSS5_HIP_INPUT_POLL` (`results/handoff-gpu-20260930`), C512 V transpose (`results/c512-compact-vt-20260930`), W16 for C64/C128 (`results/w16-c64-c128-20260930`), C512 FFN LDS weight sharing (`results/c512-ffn-lds-20260930`), Infinity Cache hot reuse (`results/infinity-cache-20260930`). Package checklist `Development/results/package-038/checklist.md`.

@@ -235,3 +235,30 @@
 5. **ViT QKV 五 wave 共用权重**（W5）：5 个 wave 经 LDS 共用一份权重（8 KB 块双缓冲），读取量约除以 5、wave 数不减；640 token 单核 48.8 → 37.0 µs。整网 900 −0.42～−1.39%、1080 −0.74～−1.07%。新宿主按导出自动探测，旧模块自动回落。`results/vit-qkv-20260929`。
 
 不进包的负账：C128/C64 持久化（未达 0.5% 门槛，`results/swin-persistent-c128-c64-20260929`）、C512 投影权重共用（逐位但变慢，`results/c512-proj-share-20260929`）、`MAKE_RESIDENT` 尖峰（离线未复现，`results/resident-spike-20260929`）。打包清单 `Development/results/package-037/checklist.md`。
+
+## 0.38（09-30）
+
+下载（三个包）：夸克链接稍后补 · [Gofile 镜像](https://gofile.io/d/wsAqRlAI)
+
+- **逐位**：**默认设置下与 0.37 全部逐位相同**（09-28 float FMA 基准；7 用例 EXACT/AE 168 帧 + 票号回绕，每一刀都验；打包用的插件与 RE9 runtime 从发布源码重编后，又对现装再验一遍 168 帧 + 回绕，全同）。唯一的有损项是可选开关 `DLSS5_NETWORK_1080_ROWS=1088`，默认不开。
+- **效果**（离线整网回放，NativeGameFrame，1000 帧弃 200，单帧 ms）：900 档约 **8.0 → 7.6 ms**，1080 档约 **10.8 → 10.4 ms**（发版模块实测 900 7.551/7.606、1080 10.413/10.458，两轮，`results/hip-roofline-20260930` 第 1 节；逐核地图 `results/kernel-map-v3-20260930`）。每帧派发 900 档 179 → 162、1080 档 162 → 158。游戏内只作正确性验证（《剑星》《鬼武者》不闪不花不崩），帧率读数不作为提升依据。
+- **新开关**：
+  - `DLSS5_FORMAT_FALLBACK`（三个模板为 1，源码默认 1）：原来不支持的颜色格式——R9G9B9E5、B8G8R8X8、R10G10B10A2、R32G32B32(A32)、R16G16B16A16/R8G8B8A8 SNORM、B5G6R5、B5G5R5A1、B4G4R4A4——常规包 pre-upscale 路线用一个 compute pass（新增 `native_format_convert.hlsl`）转成 RGBA16F 后走原路线；RE9 runtime 走私有 FP16 输出路线。原来支持的格式不经过这张表（逐位）。被拒的格式日志里带格式名。post-upscale / Magpie / XeSS 路线不变。设 0 = 原表。`results/product-fmt-reload-20260930`。
+  - `DLSS5_HOT_RELOAD`（常规/Magpie 模板为 1，源码默认 1；RE9 不适用）：游戏运行中改 flags 文件的 `DLSS5_STRENGTH` / `DLSS5_NOTICE` / `DLSS5_SHOW_FPS`，一秒内生效；其余键仍需重启。不改文件即无任何变化。
+  - `DLSS5_NETWORK_1080_ROWS`（模板 1152 = NVIDIA 原版几何）：**可选 `1088`，有损、默认不开**——1080 档只算 1088 行，整网约 −0.47 ms（4.4%），对 1152 全帧约 56 dB，底边 32 行略差。`results/geom-1088-20260930`。
+  - 宿主内部开关（默认 1，一般不用动）：`HIP_C512_PAD16`、`HIP_C256_FFN_W16`，缺新模块或容量不够自动回退旧路径。
+- **改了什么**（按时间，每一步都对上一步逐位；数字是各自当时的 ABBA）：
+
+1. **900 档去 C512 shift_pack**：生产者直接按 16 token 补齐分配（1500 → 1504），C512 块原地读，13 次 `mh_shift_pack` 消失；只改宿主。900 −0.09～−0.11 ms，1080 不变。`results/shift-pack-900-20260930`。
+2. **C32 块 4 跳连/下采样存 E4M3 字节**：这两个张量的值本来就是 E4M3 精确值，改存字节后读写降到 1/4。900 −0.05 ms（0.62%）、1080 −0.09 ms（0.82%）。`results/c32-align-20260930`。
+3. **C32 对角残差跳过全零半块**（`CW_DIAG_ONLY`）：1080 约 −0.04 ms。`results/small-cuts-20260930`。
+4. **I+P+O**：C32 入口/prefix 去 half 往返，C512 mix 与 ViT contract 占用上限。900 −0.03 ms、1080 −0.02～−0.03 ms。`results/small-wins-retest-20260930`。
+5. **复合量化**：`FP8(Hrtz(x))` 在 WMMA 字节出口改成整数位掩码，省 f32→f16→f32 往返；2³² 穷举证明。c64-wave2/swin-persistent（`results/composite-quant-20260930`）与 C512 两个出口（`results/composite-quant-c512-20260930`），各 −0.005～−0.03 ms。
+6. **C256 FFN 权重 16 字节片段**：一条 16 字节读喂两条 WMMA，k 顺序不变；缺模块/旧宿主自动回退。900 −0.01～−0.03 ms。`results/c256-w16-20260930`。
+7. **C32 prefix 下采样 / 块 69 主干存 E4M3 字节**：900 −0.01～−0.02 ms、1080 约 −0.02 ms。`results/prefix-post-20260930`。
+8. **三处宽写**：C32 prefix 字节尾（900 −0.04、1080 −0.07 ms，`results/prefix-post-arith-20260930`）、C32 finish 字节尾（900 −0.04、1080 −0.05 ms，`results/tail-vec-20260930`）、C512 t8 字节副本经 LDS 转置宽写（约 −0.01～−0.03 ms，`results/deep-tail-20260930`）。
+9. **C512 QKV-attention 去冗余 F + 有界倒数**：AV/QKV 出口的多余钳位删掉，softmax 除法换 rcp + 两步 Newton；两档三轮 −0.02～−0.03 ms。`results/c512-av-f-20260930`。
+10. **F/除法清理扫全网**：只收 deep_fast-packed（900 −0.01～−0.04、1080 −0.01～−0.03 ms）。`results/f-sweep-20260930`。
+
+- **包内**：新增 `native_format_convert.hlsl`；三个 flags 模板加上面三个开关；插件与 RE9 runtime 从发布源码重编（tag 0.38）；RE9 宿主不变；RE9 源码包重生。
+- 不进包的负账（逐位但不全正，宏默认 0）：D3D→HIP GPU 轮询 `DLSS5_HIP_INPUT_POLL`（`results/handoff-gpu-20260930`）、C512 V 转置（`results/c512-compact-vt-20260930`）、W16 推广 C64/C128（`results/w16-c64-c128-20260930`）、C512 FFN LDS 共用权重（`results/c512-ffn-lds-20260930`）、Infinity Cache 热复用（`results/infinity-cache-20260930`）。打包清单 `Development/results/package-038/checklist.md`。

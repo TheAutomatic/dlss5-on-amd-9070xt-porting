@@ -1,5 +1,8 @@
 OptiScaler-REFramework-DLSS5-AMD @VERSION@ — special RE9 pre-SR full package
 
+0.38 update
+Same new kernels as the regular package (default output bit-identical to 0.37; offline 900 tier about 8.0 -> 7.6 ms, 1080 tier about 10.8 -> 10.4 ms). The runtime honours DLSS5_FORMAT_FALLBACK (template 1: colour formats such as R10G10B10A2, B8G8R8X8, R32G32B32(A32) are accepted instead of rejected; 0 = off) and the optional LOSSY DLSS5_NETWORK_1080_ROWS=1088 (template 1152 = NVIDIA geometry). DLSS5_HOT_RELOAD does not apply (strength/detail are live in the OptiScaler menu). Host unchanged.
+
 0.37 update
 Same new kernels as the regular package (bit-identical to 0.36; C512 compact layout, head fusion, C256 persistent stage, new ViT attention/QKV kernels; offline 900 tier about 8.5 -> 8.0 ms). The runtime honours the new DLSS5_HIP_SWIN_RUN (template 1; 0 restores the previous launches). Host unchanged.
 
