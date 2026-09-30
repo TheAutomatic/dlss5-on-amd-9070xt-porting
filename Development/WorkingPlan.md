@@ -26,6 +26,7 @@
 - W16 推广到 C64/C128 09-30 交账：逐位（含回退与 origin/main 现路径 19 组 SAME），但 900 三轮 C64 +0.005/−0.010/+0.003、C128 −0.016/+0.004/−0.003 不全正，两个都不收、未装（宏 `W2_FFN_W16_SMALL` 默认 0，`results/w16-c64-c128-20260930`）。
 - C512 QKV-attention 去 F＋有界倒数 09-30 交账：收，已装 c512-m32-mh 0F28A38C（`results/c512-av-f-20260930`）。
 - F 清理扫全网 09-30 交账：4 组全证明、全逐位；只收 deep_fast-packed（`HIP_BYTE_F_ADD0`＋`HIP_VIT_ATTN_RCP`，900 −0.014～−0.038、1080 −0.011～−0.028ms），已装 EEC7D4A6；vit-stream/padded-wave-packed/W2 up 不全正，不收（`results/f-sweep-20260930`）。
+- **对 NVIDIA 原版同口径画质 09-30 交账**（`results/fidelity-ngx-20260930`，只量未改）：复算 mochizuki 单帧与公布值一致；1080p Style0 下全 71 块 47.43dB、发布跳块 44.26dB（他 45.56）；运动序列无公开 NVIDIA 输出未测；1440/4K 无同几何档。发现发布网络写死 Style=1（见 C 段）。
 - 交接 GPU 同步 09-30 交账（HIP→D3D 分片自旋反慢，未装）。C512 FFN W5 式 LDS 共用权重 09-30 交账（900 单核慢，停，`results/c512-ffn-lds-20260930`）。其余无在跑任务。09-29～09-30 已完成项细节见各 `results/*/README.md` 与 DevHistory。
 
 ## Zero 的标准与取舍（为什么这样定）
@@ -95,6 +96,8 @@
 - **fast 档**（Daniel 默认那套：e4m3 一次舍入、近似 rsqrt/rcp、f32 累加）：他 fast 比 reference 快约 1ms；做成 EXACT 之外单独一档。
 - **ViT QKV 改 FP8**：W5 后只剩约 5µs（整网 2～4% 是旧估计，现在远小于此），性价比已低。6b（−1.1%，PSNR 58dB）。
 - **几何**：1088 行已做成可选开关 `DLSS5_NETWORK_1080_ROWS=1088`（默认 1152 不变）：实测 −0.47ms（4.4%，ViT 网格不变所以不到估的 0.70），对 1152 约 56dB、只动行数、post 位移保持 NVIDIA 的（Daniel 还改成 0）；待 Zero 看图定是否进 0.38（`results/geom-1088-20260930`）。加档 1728×1024（画质向）未做。
+- **跳 42/43/46 取舍**（`results/fidelity-ngx-20260930`）：对 NVIDIA 原版 1080p 单帧，跳三块 47.43→44.26dB（−3.17dB，并带 +0.15/+0.23 偏亮），比 mochizuki（45.56）低 1.3dB；不跳比他高 1.9dB。要不要改默认不跳（慢多少另量）待定。
+- **Style**：预处理常量写死 Style=1（0.0078125），NVIDIA 默认/mochizuki 用 Style0，两者输出差 20dB 量级（发布模块对 NVIDIA Style0 仅 24dB）。跟 NVIDIA 默认、保持、还是做开关，待定；Style1 来源（哪个捕获）待查。
 - 不做：整网隔帧（运动拖影）；RDNA3 后端（无卡可测）。
 
 ## 产品适配与等待事项
