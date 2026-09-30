@@ -29,6 +29,13 @@
 #ifndef C512_COMPACT_RCP
 #define C512_COMPACT_RCP 0
 #endif
+// C512_COMPACT_FUSEQKV (2026-10-01, results/mochizuki-gap-20261001): Q, K and V projections in one k loop
+// (6 accumulators per token tile, as mochizuki's attn.comp NR_APARTS=1/NR_AN=6) instead of three passes that
+// each re-read the X fragments; the per-token bounds test and address are computed once, outside the loop.
+// Every accumulator sees the same WMMA sequence (gs, h order) -> bit-identical. 0 = three-pass original.
+#ifndef C512_COMPACT_FUSEQKV
+#define C512_COMPACT_FUSEQKV 0
+#endif
 #if C512_COMPACT_QKV_ATTN
 #if C512_COMPACT_WAVES != 2 && C512_COMPACT_WAVES != 4
 #error C512_COMPACT_WAVES must be 2 or 4
@@ -76,6 +83,31 @@ DEV void c5c_body(const unsigned char*in8,const float*w,unsigned char*out,uint v
  // Each wave owns QT independent 16-token tiles, sharing B-weight fragments.
  // Swapping WMMA operands transposes the result: lane row is now the token,
  // allowing serial channel normalization without a float scratch tile.
+#if C512_COMPACT_FUSEQKV
+ f8 accq[QT][6]{};
+ {
+  const unsigned char*ap[QT];bool av[QT];
+  _Pragma("unroll") for(uint t=0;t<QT;t++){
+   uint tok=(wave*QT+t)*16+row;
+   int x=int((win%(width/8))*8+tok%8)-int(sx),y=int((win/(width/8))*8+tok/8)-int(sy);
+   av[t]=x>=0&&y>=0&&x<int(validwidth)&&y<int(validheight);
+   uint p=av[t]?uint(y)*validwidth+uint(x):0u;
+   ap[t]=in8+(p/16)*16*512+(p%16)*32+half*8;
+  }
+  for(uint gs=0;gs<16;gs++)for(uint h=0;h<2;h++){
+   i2 a[QT];
+   _Pragma("unroll") for(uint t=0;t<QT;t++){a[t]=i2{};if(av[t])__builtin_memcpy(&a[t],ap[t]+gs*512+h*16,8);}
+   _Pragma("unroll") for(uint j=0;j<6;j++){
+    uint n0=(j/2)*C+head*32+(j%2)*16+row;i2 b;
+    __builtin_memcpy(&b,wb+((n0/16)*16+gs)*512+((h*2+half)*16+n0%16)*8,8);
+    _Pragma("unroll") for(uint t=0;t<QT;t++)accq[t][j]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,a[t],accq[t][j]);
+   }
+  }
+ }
+ _Pragma("unroll") for(uint part=0;part<3;part++){
+  f8 acc[QT][2];
+  _Pragma("unroll") for(uint t=0;t<QT;t++){acc[t][0]=accq[t][part*2];acc[t][1]=accq[t][part*2+1];}
+#else
  _Pragma("clang loop unroll(disable)") for(uint part=0;part<3;part++){
   f8 acc[QT][2]{};
   for(uint gs=0;gs<16;gs++)for(uint h=0;h<2;h++){
@@ -95,6 +127,7 @@ DEV void c5c_body(const unsigned char*in8,const float*w,unsigned char*out,uint v
     _Pragma("unroll") for(uint t=0;t<QT;t++)acc[t][ci]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,a[t],acc[t][ci]);
    }
   }
+#endif
   _Pragma("unroll") for(uint t=0;t<QT;t++){
    float inv=1.f;
    if(part<2){float ss=c5c_serial_norm(acc[t][0],acc[t][1]);inv=__builtin_amdgcn_rsqf(maxf(ss,6.198883056640625e-5f))*(part==0?w[4*C*C+16*4096+head]:1.f);}

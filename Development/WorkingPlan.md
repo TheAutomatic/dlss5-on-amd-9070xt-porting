@@ -10,13 +10,13 @@
   - `HIP_C512_HOIST_RES 1`（attn-project 残差初始化外提，multihead-fast-padded-wave-packed gfx1201 47F00EBA）：900 −0.022～−0.031、1080 −0.026～−0.035ms（`results/fill-cu-20260930`）。
   - `W2_HOIST_LOADS 15`（c64-wave2 48B6FA8B）＋`CW_HOIST_UP 3`（c32-wave1 020B2B0D）：合并 900 −0.043、1080 −0.066～−0.072ms（`results/hoist-loads-20260930`）。
 - **离线**：整网回放（NativeGameFrame wall，1000 帧弃 200）0.38 时 900 约 7.6 / 1080 约 10.4ms（0.37 时 8.0 / 10.8）。**HIP 段**（`DLSS5_HIP_SPAN_PROBE=1` 写进 flags 文件，不含跨 API 交接）0.38 实测 7.256 / 10.065ms（`results/hip-roofline-20260930`），减去上面三刀 ABBA 增量，现装约 **900 7.2 / 1080 10.0ms**（估算，下次地图重量）。
-- **游戏本机**：剑星/鬼武者 = 0.38 网络 + 上面三刀。剑星 flags `DIRECT_IO=3`、`MAKE_RESIDENT_EVERY=60`、`SWIN_RUN=1`、`FRAME_STATS=5`；09-30 19:43 正确性验证通过（2K 原生 AA EXACT 55.6～56.1，鬼武者 2K 质量 60）。RE9 仍 0.35 全套；33 号远征队 0.35 常规包。
+- **游戏本机**：剑星/鬼武者 = 0.38 网络 + 上面三刀 + 10-01 `C512_COMPACT_FUSEQKV`（c512-m32-mh 1201 FEEDC842）。剑星 flags `DIRECT_IO=3`、`MAKE_RESIDENT_EVERY=60`、`SWIN_RUN=1`、`FRAME_STATS=5`；09-30 19:43 正确性验证通过（2K 原生 AA EXACT 55.6～56.1，鬼武者 2K 质量 60）。RE9 仍 0.35 全套；33 号远征队 0.35 常规包。
 
 ## 竞品现状
 
 - **Daniel 0.5.1**：reference 900 逐核和 8.17ms（扣掉他跑的 42/43/46 为 7.88），我方逐核和 6.83ms（`kernel-map-900`、`hip-roofline`）。他 fast 档 1088 行＋post 位移 0（有损，不追）。换装对照 `D:\DLSSNR-Lab\daniel-050\swap.ps1 daniel|ours`。
-- **mochizuki 0.0.2.4/0.0.2.5**：网络无改动；自报 Windows 1080p 7.79ms（1088 行、未进游戏验证）/ Linux 5.60ms。口径（行数、API、计时范围）与我们未对齐，**同机同口径实测进行中**（`results/competitor-timing-20260930`）。
-- 结论：完整 1152 行、NVIDIA 位移下我们不落后；是否领先等同口径数。
+- **mochizuki 0.0.2.5（10-01 同机实测，`results/competitor-timing-20260930`、`mochizuki-gap-20261001`）**：离线网络 900 **6.02ms**、1088 行 **7.81～7.86ms**（自报 7.79 已复现）；我们 HIP span 900 7.27、1088 行 9.65、1152 行 10.05ms（10-01 FUSEQKV 前），**他快 17～19%**。逐族（900，µs，我们单核/他链内含空隙）：C512 1343/844（+499，他跑 16 块我们 13 块）、空隙约 +300（162 对 123 派发）、C32 2197/1972（+225）、C256 +107、C64 +79、C128 +74、ViT −38。
+- 结论：同几何下 mochizuki 领先，主要差在 C512 组织方式（单块 100.8 对 52.3µs）；追赶走 B 段第 0 条。
 
 ## Zero 的标准与取舍（为什么这样定）
 
@@ -46,6 +46,8 @@
 - **网络外**：交接往返 0.16～0.18ms/帧，GPU 轮询两半都试过，整帧不兑现，线停。
 
 ## B. 优化候选（逐位；按"收益 × 把握"排）
+
+0. **追 mochizuki C512（主线，`results/mochizuki-gap-20261001`）**：①已收 `C512_COMPACT_FUSEQKV`（Q/K/V 一个 k 循环，19 组 SAME，900 −0.022～−0.030、1080 −0.078～−0.094ms，10-01 已装）。②FFN 一核化（照 ffwd3：权重当 A、累加器直接当下一级 B，不用 LDS，mix 不再写 f32）上限 900 约 0.2ms。③C512 两个投影的残差改 e4m3 字节（F 之后的值，post=3 除外）上限约 0.12ms，要改宿主。④C64/C128 下采样/上采样折进相邻核，减派发。
 
 地图：`results/kernel-map-v3-20260930`（900 独立核和 6894.8µs、1080 约 9762µs；前五 sp_run256_w16、c512_qkv_attention_compact、c32 prefix/post、chain）。设计：`results/c512-vit-reorg-design-20260930`（只设计，数字引自账本）。
 

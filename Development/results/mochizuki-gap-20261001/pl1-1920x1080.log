@@ -1,0 +1,238 @@
+model pack: dlssnr.bin (599 entries)
+accumulation: fp32 (FP32 hardware)
+Swin position bias storage: fp32; FP32 logit addition
+152 steps from plan-1920x1080.txt
+152 of 152 layers have a kernel
+model pack: dlssnr.bin (599 entries)
+accumulation: fp32 (FP32 hardware)
+Swin position bias storage: fp32; FP32 logit addition
+152 steps from plan-1920x1080.txt
+152 of 152 layers have a kernel
+math profile: 3 (4096-byte activation table; baked exp bias=1)
+pre conditioning [style,tone,structure,skin,other]=[0,1,1,1,1]
+Automatic Mask: requested=1, conditioning=enabled; external ControlMask absent
+Overall Intensity: requested=1, GPU push=1, mapping=nr-delta-v1
+N-pair FP8 weight layout: 332 matrices
+persist: C=64 layers b005l0..b008l0 (4, last is DS) windows 2135 items 8349 wg 384
+persist: C=128 layers b009l0..b014l0 (6, last is DS) windows 558 items 3203 wg 256
+persist: C=256 layers b015l0..b022l0 (8, last is DS) windows 144 items 1116 wg 1116 (one per item)
+persist: C=256 layers b049l0..b055l0 (8, first is UPS) windows 144 items 1116 wg 1116 (one per item)
+persist: C=128 layers b057l0..b061l0 (6, first is UPS) windows 558 items 3202 wg 256
+persist: C=64 layers b063l0..b065l0 (4, first is UPS) windows 2135 items 8349 wg 384
+persist: 6 merged runs, 123 dispatches left
+arena reuse: unsized slot 247 (block 30) aliases value 0 (block 0 layer 0) +0
+activation arena 390.5 MB over 185 values, shared by lifetime (1047.7 MB without)
+unpacking weights from artifacts
+math profile: 3 (4096-byte activation table; baked exp bias=1)
+pre conditioning [style,tone,structure,skin,other]=[0,1,1,1,1]
+Automatic Mask: requested=1, conditioning=enabled; external ControlMask absent
+Overall Intensity: requested=1, GPU push=1, mapping=nr-delta-v1
+weight arena 169.7 MB over 153 dispatches
+N-pair FP8 weight layout: 332 matrices
+persist: C=64 layers b005l0..b008l0 (4, last is DS) windows 2135 items 8349 wg 384
+persist: C=128 layers b009l0..b014l0 (6, last is DS) windows 558 items 3203 wg 256
+persist: C=256 layers b015l0..b022l0 (8, last is DS) windows 144 items 1116 wg 1116 (one per item)
+persist: C=256 layers b049l0..b055l0 (8, first is UPS) windows 144 items 1116 wg 1116 (one per item)
+persist: C=128 layers b057l0..b061l0 (6, first is UPS) windows 558 items 3202 wg 256
+persist: C=64 layers b063l0..b065l0 (4, first is UPS) windows 2135 items 8349 wg 384
+persist: 6 merged runs, 123 dispatches left
+GPU    AMD Radeon RX 9070 XT
+allocating arenas: activation 390.8 MB, weights 170.4 MB
+[nr] activation arena through its device address: yes
+native working extent 1920x1088; source/output 1920x1080
+images in 1920x1080, out 1920x1080 (x2)
+input image: 33.2 MB host + 33.2 MB mapped staging
+uploading weights: 170.4 MB through a mapped staging buffer of the same size
+inter-dispatch barrier: execution + invalidate (no availability op)
+[nr] graph build 0.99s: plan 0.37s  weights-unpack 0.30s  arena-alloc 0.17s  input-image 0.02s  weights-upload 0.03s  noise-field 0.00s  pipelines 0.09s  arena-zero 0.00s  (22 pipelines, 1.8 MB of pipeline cache)
+
+123 dispatches, one submit: 7.770 ms  @ 0 MHz
+measurement wall 1654.411 ms, GPU total 1554.003 ms over 200 frames
+
+family/kernel                                    C     n  us each       ms   share
+CCTinlayoutFusedSwin1H/fswin32                  32     6    153.9    0.924   11.9%
+CCTinlayoutFusedPreBlockSwin1H/fswinimagepreds32     3     1    704.3    0.704    9.1%
+CCTinlayoutFusedPostBlockSwin1H/fswinimagepost32     3     1    696.3    0.696    9.0%
+CCTinlayoutFusedSwin8H/fswinpup256             256     1    602.5    0.602    7.8%
+CCTinlayoutFusedSwin8H/fswinpds256             256     1    571.7    0.572    7.4%
+CCTinlayoutFusedSwin4H/fswinpds128             128     1    484.1    0.484    6.2%
+CCTinlayoutFusedSwin2H/fswinpds64               64     1    476.5    0.477    6.1%
+CCTinlayoutFusedSwin4H/fswinpup128             128     1    464.5    0.465    6.0%
+CCTinlayoutFusedSwin2H/fswinpup64               64     1    461.7    0.462    5.9%
+CCSplitSwin16HQKVAttn/attn                     512    16     27.2    0.435    5.6%
+CCVit1DFfnContract/gemmproj                   1024     8     37.1    0.297    3.8%
+CCSplitSwin16HFfwd/ffwd3                       512    16     16.3    0.261    3.4%
+CCVit1DFfnExpand/gemmvact                     1024     8     26.5    0.212    2.7%
+CCVit1DQKV/gemmvqkvnorm                       1024     8     24.8    0.198    2.6%
+CCVit1DAttention/vitattn                      1024     8     24.6    0.197    2.5%
+CCTinlayoutFusedSwin1H/fswindsp32               32     1    182.1    0.182    2.3%
+CCTinlayoutFusedSwin1H/fswinfusedup32           32     1    174.3    0.174    2.2%
+CCSplitSwin16HFfwdProj/gemmproj                512    16     10.1    0.162    2.1%
+CCSplitSwin16HProj/gemmproj                    512    15      9.7    0.146    1.9%
+CCVit1DProjection/gemmproj                    1024     7     11.4    0.080    1.0%
+CCVit1DProjection/gemmprojt                   1024     1     12.0    0.012    0.2%
+CCSplitSwin16HProjPool/gemmpool                512     1     10.6    0.011    0.1%
+CCDecInputUpsample/gemmvqkvs                   512     1      7.7    0.008    0.1%
+CCSplitSwin16HFinalHead/gemmnores              512     1      7.4    0.007    0.1%
+CCDecInputUpsample/decups                      512     1      3.3    0.003    0.0%
+sum of the dispatches                                123             7.770
+
+the twelve dearest dispatches
+  b000l0 CCTinlayoutFusedPreBlockSwin1H C=3      704 us  fswinimagepreds32
+  b070l0 CCTinlayoutFusedPostBlockSwin1H C=3      696 us  fswinimagepost32
+  b049l0 CCTinlayoutFusedSwin8H       C=256    602 us  fswinpup256
+  b015l0 CCTinlayoutFusedSwin8H       C=256    572 us  fswinpds256
+  b009l0 CCTinlayoutFusedSwin4H       C=128    484 us  fswinpds128
+  b005l0 CCTinlayoutFusedSwin2H       C=64     477 us  fswinpds64
+  b057l0 CCTinlayoutFusedSwin4H       C=128    465 us  fswinpup128
+  b063l0 CCTinlayoutFusedSwin2H       C=64     462 us  fswinpup64
+  b004l0 CCTinlayoutFusedSwin1H       C=32     182 us  fswindsp32
+  b066l0 CCTinlayoutFusedSwin1H       C=32     174 us  fswinfusedup32
+  b067l0 CCTinlayoutFusedSwin1H       C=32     159 us  fswin32
+  b001l0 CCTinlayoutFusedSwin1H       C=32     157 us  fswin32
+
+i     kernel                           type                                   C      gx      gy    gz    groups        us     ci     co    tokens
+0     fswinimagepreds32                CCTinlayoutFusedPreBlockSwin1H         3     240     136     1     32640     704.3      3     32   2088960
+1     fswin32                          CCTinlayoutFusedSwin1H                32     120      68     1      8160     156.9     32     32    522240
+2     fswin32                          CCTinlayoutFusedSwin1H                32     121      69     1      8349     153.9     32     32    522240
+3     fswin32                          CCTinlayoutFusedSwin1H                32     121      68     1      8228     152.6     32     32    522240
+4     fswindsp32                       CCTinlayoutFusedSwin1H                32     120      69     1      8280     182.1     32     64    522240
+5     fswinpds64                       CCTinlayoutFusedSwin2H                64     384       1     1       384     476.5     64     64    130560
+6     fswinpds128                      CCTinlayoutFusedSwin4H               128     256       1     1       256     484.1    128    128     32640
+7     fswinpds256                      CCTinlayoutFusedSwin8H               256    1116       1     1      1116     571.7    256    256      8640
+8     ffwd3                            CCSplitSwin16HFfwd                   512     272       1     1       272      19.0    512    512      2560
+9     gemmproj                         CCSplitSwin16HFfwdProj               512      68       4     1       272       9.6    512    512      2560
+10    attn                             CCSplitSwin16HQKVAttn                512       8       5    16       640      27.4    512    512      2560
+11    gemmproj                         CCSplitSwin16HProj                   512      68       4     1       272       9.5    512    512      2560
+12    ffwd3                            CCSplitSwin16HFfwd                   512     272       1     1       272      16.2    512    512      2560
+13    gemmproj                         CCSplitSwin16HFfwdProj               512      68       4     1       272       9.3    512    512      2560
+14    attn                             CCSplitSwin16HQKVAttn                512       8       5    16       640      27.2    512    512      2560
+15    gemmproj                         CCSplitSwin16HProj                   512      68       4     1       272       9.6    512    512      2560
+16    ffwd3                            CCSplitSwin16HFfwd                   512     272       1     1       272      16.1    512    512      2560
+17    gemmproj                         CCSplitSwin16HFfwdProj               512      68       4     1       272      10.0    512    512      2560
+18    attn                             CCSplitSwin16HQKVAttn                512       8       5    16       640      27.1    512    512      2560
+19    gemmproj                         CCSplitSwin16HProj                   512      68       4     1       272       9.8    512    512      2560
+20    ffwd3                            CCSplitSwin16HFfwd                   512     272       1     1       272      16.3    512    512      2560
+21    gemmproj                         CCSplitSwin16HFfwdProj               512      68       4     1       272      10.2    512    512      2560
+22    attn                             CCSplitSwin16HQKVAttn                512       8       5    16       640      27.0    512    512      2560
+23    gemmproj                         CCSplitSwin16HProj                   512      68       4     1       272       9.3    512    512      2560
+24    ffwd3                            CCSplitSwin16HFfwd                   512     272       1     1       272      16.4    512    512      2560
+25    gemmproj                         CCSplitSwin16HFfwdProj               512      68       4     1       272      10.3    512    512      2560
+26    attn                             CCSplitSwin16HQKVAttn                512       8       5    16       640      27.0    512    512      2560
+27    gemmproj                         CCSplitSwin16HProj                   512      68       4     1       272       9.7    512    512      2560
+28    ffwd3                            CCSplitSwin16HFfwd                   512     272       1     1       272      16.2    512    512      2560
+29    gemmproj                         CCSplitSwin16HFfwdProj               512      68       4     1       272      10.2    512    512      2560
+30    attn                             CCSplitSwin16HQKVAttn                512       8       5    16       640      27.4    512    512      2560
+31    gemmproj                         CCSplitSwin16HProj                   512      68       4     1       272       9.3    512    512      2560
+32    ffwd3                            CCSplitSwin16HFfwd                   512     272       1     1       272      16.1    512    512      2560
+33    gemmproj                         CCSplitSwin16HFfwdProj               512      68       4     1       272      10.1    512    512      2560
+34    attn                             CCSplitSwin16HQKVAttn                512       8       5    16       640      27.3    512    512      2560
+35    gemmproj                         CCSplitSwin16HProj                   512      68       4     1       272      10.1    512    512      2560
+36    ffwd3                            CCSplitSwin16HFfwd                   512     272       1     1       272      16.4    512    512      2560
+37    gemmproj                         CCSplitSwin16HFfwdProj               512      68       4     1       272      10.2    512    512      2560
+38    attn                             CCSplitSwin16HQKVAttn                512       8       5    16       640      27.4    512    512      2560
+39    gemmpool                         CCSplitSwin16HProjPool               512      34       4     1       136      10.6    512    512      2560
+40    gemmnores                        CCSplitSwin16HFinalHead              512      10       8     1        80       7.4    512   1024       768
+41    gemmvact                         CCVit1DFfnExpand                    1024      10      16     1       160      26.8   1024   4096       640
+42    gemmproj                         CCVit1DFfnContract                  1024      20       8     1       160      37.0   4096   1024       640
+43    gemmvqkvnorm                     CCVit1DQKV                          1024      10      12     1       120      24.4   1024   1024       640
+44    vitattn                          CCVit1DAttention                    1024      20      32     1       640      24.4   1024   1024       640
+45    gemmproj                         CCVit1DProjection                   1024      20       8     1       160      11.3   1024   1024       640
+46    gemmvact                         CCVit1DFfnExpand                    1024      10      16     1       160      26.3   1024   4096       640
+47    gemmproj                         CCVit1DFfnContract                  1024      20       8     1       160      37.2   4096   1024       640
+48    gemmvqkvnorm                     CCVit1DQKV                          1024      10      12     1       120      26.0   1024   1024       640
+49    vitattn                          CCVit1DAttention                    1024      20      32     1       640      24.9   1024   1024       640
+50    gemmproj                         CCVit1DProjection                   1024      20       8     1       160      11.7   1024   1024       640
+51    gemmvact                         CCVit1DFfnExpand                    1024      10      16     1       160      26.7   1024   4096       640
+52    gemmproj                         CCVit1DFfnContract                  1024      20       8     1       160      37.6   4096   1024       640
+53    gemmvqkvnorm                     CCVit1DQKV                          1024      10      12     1       120      24.6   1024   1024       640
+54    vitattn                          CCVit1DAttention                    1024      20      32     1       640      24.9   1024   1024       640
+55    gemmproj                         CCVit1DProjection                   1024      20       8     1       160      11.4   1024   1024       640
+56    gemmvact                         CCVit1DFfnExpand                    1024      10      16     1       160      26.5   1024   4096       640
+57    gemmproj                         CCVit1DFfnContract                  1024      20       8     1       160      36.6   4096   1024       640
+58    gemmvqkvnorm                     CCVit1DQKV                          1024      10      12     1       120      24.5   1024   1024       640
+59    vitattn                          CCVit1DAttention                    1024      20      32     1       640      24.6   1024   1024       640
+60    gemmproj                         CCVit1DProjection                   1024      20       8     1       160      11.3   1024   1024       640
+61    gemmvact                         CCVit1DFfnExpand                    1024      10      16     1       160      26.4   1024   4096       640
+62    gemmproj                         CCVit1DFfnContract                  1024      20       8     1       160      36.4   4096   1024       640
+63    gemmvqkvnorm                     CCVit1DQKV                          1024      10      12     1       120      24.4   1024   1024       640
+64    vitattn                          CCVit1DAttention                    1024      20      32     1       640      24.4   1024   1024       640
+65    gemmproj                         CCVit1DProjection                   1024      20       8     1       160      11.4   1024   1024       640
+66    gemmvact                         CCVit1DFfnExpand                    1024      10      16     1       160      26.4   1024   4096       640
+67    gemmproj                         CCVit1DFfnContract                  1024      20       8     1       160      36.8   4096   1024       640
+68    gemmvqkvnorm                     CCVit1DQKV                          1024      10      12     1       120      24.9   1024   1024       640
+69    vitattn                          CCVit1DAttention                    1024      20      32     1       640      24.4   1024   1024       640
+70    gemmproj                         CCVit1DProjection                   1024      20       8     1       160      11.5   1024   1024       640
+71    gemmvact                         CCVit1DFfnExpand                    1024      10      16     1       160      26.5   1024   4096       640
+72    gemmproj                         CCVit1DFfnContract                  1024      20       8     1       160      38.7   4096   1024       640
+73    gemmvqkvnorm                     CCVit1DQKV                          1024      10      12     1       120      24.6   1024   1024       640
+74    vitattn                          CCVit1DAttention                    1024      20      32     1       640      24.4   1024   1024       640
+75    gemmproj                         CCVit1DProjection                   1024      20       8     1       160      11.3   1024   1024       640
+76    gemmvact                         CCVit1DFfnExpand                    1024      10      16     1       160      26.5   1024   4096       640
+77    gemmproj                         CCVit1DFfnContract                  1024      20       8     1       160      36.4   4096   1024       640
+78    gemmvqkvnorm                     CCVit1DQKV                          1024      10      12     1       120      25.0   1024   1024       640
+79    vitattn                          CCVit1DAttention                    1024      20      32     1       640      24.5   1024   1024       640
+80    gemmprojt                        CCVit1DProjection                   1024      20       8     1       160      12.0   1024   1024       640
+81    gemmvqkvs                        CCDecInputUpsample                   512      20       4     1        80       7.7   1024    512      2560
+82    decups                           CCDecInputUpsample                   512    2160       1     1      2160       3.3   1024    512      2560
+83    ffwd3                            CCSplitSwin16HFfwd                   512     272       1     1       272      16.1    512    512      2560
+84    gemmproj                         CCSplitSwin16HFfwdProj               512      68       4     1       272      10.4    512    512      2560
+85    attn                             CCSplitSwin16HQKVAttn                512       8       5    16       640      27.4    512    512      2560
+86    gemmproj                         CCSplitSwin16HProj                   512      68       4     1       272      10.7    512    512      2560
+87    ffwd3                            CCSplitSwin16HFfwd                   512     272       1     1       272      16.0    512    512      2560
+88    gemmproj                         CCSplitSwin16HFfwdProj               512      68       4     1       272      10.3    512    512      2560
+89    attn                             CCSplitSwin16HQKVAttn                512       8       5    16       640      27.0    512    512      2560
+90    gemmproj                         CCSplitSwin16HProj                   512      68       4     1       272       9.5    512    512      2560
+91    ffwd3                            CCSplitSwin16HFfwd                   512     272       1     1       272      16.1    512    512      2560
+92    gemmproj                         CCSplitSwin16HFfwdProj               512      68       4     1       272      10.4    512    512      2560
+93    attn                             CCSplitSwin16HQKVAttn                512       8       5    16       640      27.0    512    512      2560
+94    gemmproj                         CCSplitSwin16HProj                   512      68       4     1       272       9.5    512    512      2560
+95    ffwd3                            CCSplitSwin16HFfwd                   512     272       1     1       272      15.9    512    512      2560
+96    gemmproj                         CCSplitSwin16HFfwdProj               512      68       4     1       272      10.1    512    512      2560
+97    attn                             CCSplitSwin16HQKVAttn                512       8       5    16       640      27.0    512    512      2560
+98    gemmproj                         CCSplitSwin16HProj                   512      68       4     1       272       9.2    512    512      2560
+99    ffwd3                            CCSplitSwin16HFfwd                   512     272       1     1       272      16.0    512    512      2560
+100   gemmproj                         CCSplitSwin16HFfwdProj               512      68       4     1       272      10.3    512    512      2560
+101   attn                             CCSplitSwin16HQKVAttn                512       8       5    16       640      27.3    512    512      2560
+102   gemmproj                         CCSplitSwin16HProj                   512      68       4     1       272       9.8    512    512      2560
+103   ffwd3                            CCSplitSwin16HFfwd                   512     272       1     1       272      16.1    512    512      2560
+104   gemmproj                         CCSplitSwin16HFfwdProj               512      68       4     1       272      10.2    512    512      2560
+105   attn                             CCSplitSwin16HQKVAttn                512       8       5    16       640      27.4    512    512      2560
+106   gemmproj                         CCSplitSwin16HProj                   512      68       4     1       272      10.5    512    512      2560
+107   ffwd3                            CCSplitSwin16HFfwd                   512     272       1     1       272      15.9    512    512      2560
+108   gemmproj                         CCSplitSwin16HFfwdProj               512      68       4     1       272      10.2    512    512      2560
+109   attn                             CCSplitSwin16HQKVAttn                512       8       5    16       640      26.9    512    512      2560
+110   gemmproj                         CCSplitSwin16HProj                   512      68       4     1       272       9.7    512    512      2560
+111   ffwd3                            CCSplitSwin16HFfwd                   512     272       1     1       272      15.9    512    512      2560
+112   gemmproj                         CCSplitSwin16HFfwdProj               512      68       4     1       272      10.1    512    512      2560
+113   attn                             CCSplitSwin16HQKVAttn                512       8       5    16       640      26.9    512    512      2560
+114   gemmproj                         CCSplitSwin16HProj                   512      68       4     1       272       9.9    512    512      2560
+115   fswinpup256                      CCTinlayoutFusedSwin8H               256    1116       1     1      1116     602.5    256    256      8640
+116   fswinpup128                      CCTinlayoutFusedSwin4H               128     256       1     1       256     464.5    128    128     32640
+117   fswinpup64                       CCTinlayoutFusedSwin2H                64     384       1     1       384     461.7     64     64    130560
+118   fswinfusedup32                   CCTinlayoutFusedSwin1H                32     120      68     1      8160     174.3     64     32    130560
+119   fswin32                          CCTinlayoutFusedSwin1H                32     121      69     1      8349     158.8     32     32    522240
+120   fswin32                          CCTinlayoutFusedSwin1H                32     121      68     1      8228     154.5     32     32    522240
+121   fswin32                          CCTinlayoutFusedSwin1H                32     120      69     1      8280     146.9     32     32    522240
+122   fswinimagepost32                 CCTinlayoutFusedPostBlockSwin1H        3     241     137     1     33017     696.3     32      3    522240
+surface 0: 1920x1080 RGBA32F, 100.0% non-zero, rms 0.6946, range [0.01305, 1]
+
+family                             dispatches
+CCDecInputUpsample                      2
+CCSplitSwin16HFfwd                     16
+CCSplitSwin16HFfwdProj                 16
+CCSplitSwin16HFinalHead                 1
+CCSplitSwin16HProj                     15
+CCSplitSwin16HProjPool                  1
+CCSplitSwin16HQKVAttn                  16
+CCTinlayoutFusedPostBlockSwin1H         1
+CCTinlayoutFusedPreBlockSwin1H          1
+CCTinlayoutFusedSwin1H                  8
+CCTinlayoutFusedSwin2H                  2
+CCTinlayoutFusedSwin4H                  2
+CCTinlayoutFusedSwin8H                  2
+CCVit1DAttention                        8
+CCVit1DFfnContract                      8
+CCVit1DFfnExpand                        8
+CCVit1DProjection                       8
+CCVit1DQKV                              8
