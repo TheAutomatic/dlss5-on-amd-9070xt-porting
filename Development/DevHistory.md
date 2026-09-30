@@ -1178,3 +1178,7 @@ WorkingPlan B1 留下的未实测候选。改为不动宿主：`mh_attention_pro
 ## 2026-09-30 08:01：C32 对角残差跳零开进生产（Zero 批准）
 
 配方 c32-wave1 加 `CW_DIAG_ONLY 1`。在 a80db313 现役配方上 18 组 SAME（EXACT/AE 168 帧、AE CSV、回绕）；一轮 ABBA 900 −0.007ms（0.09%，噪声内）、1080 −0.038ms（0.35%）。只换 c32-wave1 两架构（30c3d107/ba026a91），宿主 a80db313 / runtime fd4b2c0c 不变；剑星、鬼武者已换，备份 `...\c32-align-20260930\backups\stellar-20260930-080147-c32skip`、`D:\DLSSNR-Lab\onimusha-backups\20260930-080147-c32skip`。`results/small-cuts-20260930`。
+
+## 2026-09-30 08:18：本机验收（a80db313 + C32 对齐 + 跳零）
+
+Zero：剑星 2K 原生 AA EXACT **56**（黄字 55.6～56.1，此前 55～56 偶尔 56）；鬼武者 2K 质量（900）稳定 60，GPU 约 95%。
