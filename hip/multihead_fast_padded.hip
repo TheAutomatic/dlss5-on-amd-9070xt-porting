@@ -650,7 +650,18 @@ KERNEL __attribute__((amdgpu_flat_work_group_size(512,512))) void mh_ffn_fused_c
 #define HIP_BRANCHLESS_Q8 1 /* 2026-09-17: with HIP_MH_RTZ_ISA -0.16ms, bit-exact. q8_fused_round as clamp+cvt+select (ISA: every call was a divergent branch pair, 64 per FFN+QKV kernel); same byte for every non-NaN input */
 #endif
 #if HIP_BRANCHLESS_Q8
+// f-sweep 2026-09-30: HIP_Q8_ADD0 1 -> q8(clamp(x+0)): the +0 add turns -0 into +0 exactly like the a==0 select;
+// GPU exhaustive over all 2^32 x (results/f-sweep-20260930). The add stays apart from any producer mul.
+#ifndef HIP_Q8_ADD0
+#define HIP_Q8_ADD0 0
+#endif
+#if HIP_Q8_ADD0
+DEV uint q8_fused_round(float x){
+#pragma clang fp contract(off)
+ return q8(HIP_FP8_CLAMP(x+0.f));}
+#else
 DEV uint q8_fused_round(float x){uint a=bits(x)&0x7fffffffu;uint q=q8(HIP_FP8_CLAMP(x));return a==0?0u:q;}
+#endif
 #else
 DEV uint q8_fused_round(float x){uint b=bits(x),a=b&0x7fffffffu;if(!a)return 0;if(a>=0x43e00000u)return ((b>>24)&128u)|126u;return q8(x);}
 #endif

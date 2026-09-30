@@ -205,6 +205,14 @@ DEV float w2_serial_norm(f8 lo,f8 hi){
 #endif
 // Exact deep_fast branchless F, including its signed-zero behavior.
 DEV float w2_up_F(float x){uint a=bits(x)&0x7fffffffu;float c=__builtin_fminf(__builtin_fmaxf(x,-448.f),448.f);float r=__builtin_amdgcn_cvt_f32_fp8(__builtin_amdgcn_cvt_pk_fp8_f32(c,0.f,0,false),0);return a==0?0.f:r;}
+// f-sweep 2026-09-30: W2_UP_ADD0 1 -> up output byte cvt_pk_fp8(med3(merged+0)) instead of cvt_pk_fp8(w2_up_F(merged))
+// (same byte for all 2^32 inputs, results/f-sweep-20260930).
+#ifndef W2_UP_ADD0
+#define W2_UP_ADD0 0
+#endif
+DEV float w2_add0(float x){
+#pragma clang fp contract(off)
+ return __builtin_amdgcn_fmed3f(x+0.f,-448.f,448.f);}
 #ifndef W2_EXPLICIT_WINDOW
 #define W2_EXPLICIT_WINDOW 0
 #endif
@@ -261,7 +269,7 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
     float t=H(w2_shuffle(totals[ci][e],low+gr*16));uint c=head*32+ci*16+gr*8+e;uint byte=0;
     if(x>=0&&y>=0&&x<int(width)&&y<int(height)){
      float merged=H(t+w2_up_F(skip[(uint(y)*width+uint(x))*C+c])*upw[IC*C+c]);
-     byte=uint(__builtin_amdgcn_cvt_pk_fp8_f32(w2_up_F(merged),0.f,0,false))&255u;
+     byte=uint(__builtin_amdgcn_cvt_pk_fp8_f32(W2_UP_ADD0?w2_add0(merged):w2_up_F(merged),0.f,0,false))&255u;
     }
     w2_bits(packed,e,byte);
    }

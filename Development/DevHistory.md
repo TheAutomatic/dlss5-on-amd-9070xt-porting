@@ -1263,3 +1263,6 @@ B13。`W2_FFN_W16_SMALL`（bit0 C64/bit1 C128，默认 0）只加 `c64/c128_wave
 
 ### 2026-09-30 C512 QKV-attention 去 F＋有界倒数（`results/c512-av-f-20260930`）
 候选 14 扩成一个候选：AV 出口 `c5c_fp8(c5c_F(av))`→`c5c_fp8(av)`（P·V WMMA 从 +0 累加，不会出 −0；探针 8.6e9 结果 0 个 −0，V 含 0x80 的情况也覆盖了）；QKV 出口 `q8(F(y))`→`q8(med3(y+0))`（2³² GPU＋CPU 穷举 0 处不同，mul 与 +0 之间关闭乘加合并，ISA 已核）；softmax `1.f/sum`→rcp＋两步 Newton（sum∈[1/256,624]，144M 个除数逐位）。宏 `C512_COMPACT_NOF`/`C512_COMPACT_RCP`，配方都开。compact 核 1932→1545 条。19 组 SAME；三轮 900 −0.028/−0.018/−0.029、1080 −0.028/−0.023/−0.034ms，p99 合并两档都更好，收。装剑星/鬼武者 c512-m32-mh 0F28A38C/3BDB80CC，add-on 6d059845、RE9 runtime 5e601d57 不变；备份 `...\c512-av-f-20260930\backups\stellar-20260930-150412-avf`、`D:\DLSSNR-Lab\onimusha-backups\20260930-150412-avf`。
+
+### 2026-09-30 F/往返/精确除法清理扫全网（`results/f-sweep-20260930`）
+把 c512-av-f 的清理扫遍现装 31 模块：还剩 5 处、4 组（D deep_fast-packed 的 byte_F＋decoder 字节＋ViT attention 1/sum；V vit-stream QKV byte_F；M padded-wave-packed q8_fused_round；W c64-wave2/swin-persistent up 字节）。`fp8(F(x))`→`fp8(med3(x+0))` 两种 F 各 2³² 穷举 0 差；ViT sum ⊂[1/256,2048]，rcp＋2 Newton 全区间 0 差。4 组都 19 组 SAME。三轮 ABBA：D 900 −0.014～−0.038、1080 −0.011～−0.028，合并 p99 两档更好，收（配方 `HIP_BYTE_F_ADD0 1`、`HIP_VIT_ATTN_RCP 1`，静态指令 72963→67189），已装剑星/鬼武者 deep_fast-packed EEC7D4A6/54D388A7。V（900 三轮 +0.003）、M（1080 三轮 +0.007～+0.015）、W（混）不收，宏默认 0。float 出口 F、输入侧 F(skip) 证不出/不冗余，跳过。
