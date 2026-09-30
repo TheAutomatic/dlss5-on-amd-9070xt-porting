@@ -123,3 +123,34 @@ template<bool WG64> DEV void split_mix_n2_body(const float*in,const float*w,floa
 KERNEL __attribute__((amdgpu_flat_work_group_size(64,64))) void split_mix_blocked_h16w_m32_n2(const float*in,const float*w,float*out,uint tokens){split_mix_n2_body<true>(in,w,out,tokens);}
 WAVE void split_mix_blocked_h16w_m32_n2g(const float*in,const float*w,float*out,uint tokens){split_mix_n2_body<false>(in,w,out,tokens);}
 #endif
+
+// C512_FFN_ONE (2026-10-01, results/mochizuki-gap-20261001): mix -> expand -> activation -> contract in one wave, in
+// registers, like mochizuki's ffwd3_t.comp. A wave owns one 64-channel group g and 32 tokens (grid = mix m32 grid).
+// Mix and expand run with swapped WMMA operands (weights as A), so the accumulator comes out token-per-lane, which is
+// exactly the next stage's operand layout: no LDS, no barrier, no f32 mix tensor. Per output: same operands, same K
+// order, same F(c512_hq()) / Hrtz-act-byte_F / F(c512_hq()) epilogues as split_mix_blocked_h16w_m32 +
+// split_ffn_fused_fp8_t8; only the E4M3 tiles are written (the f32 contract copy has no reader). 0 = no export.
+#ifndef C512_FFN_ONE
+#define C512_FFN_ONE 0
+#endif
+#if C512_FFN_ONE
+WAVE void split_ffn_one_m32(const float*in,const float*w,unsigned char*out8,uint tokens){
+ const uint first=bid()/8*32,g=bid()%8;if(first>=tokens)return;const bool two=first+16<tokens;
+ const _Float16*w16=reinterpret_cast<const _Float16*>(w);const _Float16*we=reinterpret_cast<const _Float16*>(w+262144)+g*16384;
+ const uint*pw=reinterpret_cast<const uint*>(w)+393216+g*4096;
+ f8 m[2][4]{};
+ for(uint k=0;k<512;k+=16){h8 a0{},a1{};for(uint e=0;e<8;e++)a0[e]=(_Float16)in[(first+rc())*512+k+gr()*8+e];if(two)for(uint e=0;e<8;e++)a1[e]=(_Float16)in[(first+16+rc())*512+k+gr()*8+e];
+  for(uint j=0;j<4;j++){h8 b;__builtin_memcpy(&b,w16+(g*64+j*16+rc())*512+k+gr()*8,16);m[0][j]=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(b,a0,m[0][j]);m[1][j]=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(b,a1,m[1][j]);}}
+ h8 x[2][4];
+ for(uint t=0;t<2;t++)for(uint j=0;j<4;j++)for(uint e=0;e<8;e++)x[t][j][e]=(_Float16)F(c512_hq(m[t][j][e]));
+ f8 r[2][4]{};
+ for(uint hb=0;hb<16;hb++){
+  f8 ex[2]{};
+  for(uint ks=0;ks<4;ks++){h8 b;__builtin_memcpy(&b,we+(hb*16+rc())*64+ks*16+gr()*8,16);ex[0]=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(b,x[0][ks],ex[0]);ex[1]=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(b,x[1][ks],ex[1]);}
+  i2 a[2];
+  for(uint t=0;t<2;t++){a[t]=i2{};for(uint e=0;e<8;e++){float v=Hrtz(ex[t][e]),gate=clampf(v,-4.f,4.f),poly=__builtin_fmaf(gate,__builtin_fmaf(absf(gate),-.055908203125f,.447265625f),.89453125f);a[t][e/4]=int(uint(a[t][e/4])|(uint(byte_F(v*poly))<<(8*(e%4))));}}
+  for(uint ob=0;ob<4;ob++){uint off=((ob*16+rc())*256+hb*16+gr()*8)/4;i2 b={int(pw[off]),int(pw[off+1])};r[0][ob]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(a[0],b,r[0][ob]);r[1][ob]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(a[1],b,r[1][ob]);}
+ }
+ for(uint t=0;t<2;t++){if(t&&!two)break;for(uint ob=0;ob<4;ob++)for(uint e=0;e<8;e++){uint rr=first+t*16+gr()*8+e,c=g*64+ob*16+rc();float v=F(c512_hq(r[t][ob][e]));out8[((rr/16)*16+c/32)*512+(rr%16)*32+c%32]=static_cast<unsigned char>(__builtin_amdgcn_cvt_pk_fp8_f32(v,0.f,0,false));}}
+}
+#endif

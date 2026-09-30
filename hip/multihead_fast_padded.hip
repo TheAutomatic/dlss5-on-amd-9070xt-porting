@@ -486,6 +486,33 @@ FASTWAVE void mh_attention_project_frag_c512(const unsigned char*av8,const float
 #endif
 }
 
+// C512_PROJ_FB8 (2026-10-01, results/mochizuki-gap-20261001): mh_attention_project_frag_c512 (HIP_C512_HOIST_RES form)
+// with the residual feature read from split_projection_frag's E4M3 tiles instead of its f32 copy. That f32 value is
+// F(H(acc)), an E4M3 value (+-0 included), so decode(byte) == the float bit for bit. 0 = no export.
+#ifndef C512_PROJ_FB8
+#define C512_PROJ_FB8 0
+#endif
+#if C512_PROJ_FB8
+FASTWAVE void mh_attention_project_frag_c512_fb8(const unsigned char*av8,const unsigned char*feat8,const float*w,float*out,uint tokens,uint post,uint cropw,uint croph,uint workw,uint sx,uint sy){
+ // Transposed WMMA (weights as A): lane = token, the 8 accumulator elements = 8 consecutive columns, so the residual is
+ // one 8-byte load from the E4M3 tile and the result 8 consecutive floats. Same products and K order per output.
+ const uint C=512;uint l=__builtin_amdgcn_workitem_id_x(),rc=l&15,g=l>>4,block=__builtin_amdgcn_workgroup_id_x(),first=block/8*16,col=block%8*64;if(first>=tokens)return;
+ const unsigned char*wb=reinterpret_cast<const unsigned char*>(w)+size_t(3)*C*C*4;const uint skip=4*C*C+(C/32)*4096+C/32;
+ const uint p=first+rc;const bool live=p<tokens;const uint pp=live?p:first;
+ f8 acc[4];
+ for(uint n=0;n<4;n++){uint c0=col+n*16+g*8;i2 fb;__builtin_memcpy(&fb,feat8+((pp/16)*16+c0/32)*512+(pp%16)*32+c0%32,8);
+  for(uint e=0;e<8;e++){float fv=__builtin_amdgcn_cvt_f32_fp8(int((uint(fb[e/4])>>(8*(e%4)))&255u),0);acc[n][e]=live?Hrtz(fv*w[skip+c0+e]):0.f;}}
+ const unsigned char*arow=av8+(first+rc)*C+g*8;
+ for(uint k=0;k<C;k+=32){uint gs=k/32;
+  for(uint h=0;h<2;h++){i2 a{};if(live)__builtin_memcpy(&a,arow+k+h*16,8);
+   for(uint n=0;n<4;n++){uint n0=col+n*16+rc;i2 b;__builtin_memcpy(&b,wb+((n0/16)*16+gs)*512+((h*2+g)*16+n0%16)*8,8);acc[n]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,a,acc[n]);}}}
+ if(!live)return;
+ for(uint n=0;n<4;n++){uint c0=col+n*16+g*8;uint dest=p*C+c0;
+  if(cropw){uint x=p%workw,y=p/workw;if(x<sx||y<sy||x>=sx+cropw||y>=sy+croph)continue;dest=((y-sy)*cropw+x-sx)*C+c0;}
+  for(uint e=0;e<8;e++){float a=acc[n][e];out[dest+e]=post==3?Hrtz(a):post==4?F(a):F(Hrtz(a));}}
+}
+#endif
+
 #ifndef C512_SPLIT_N
 #define C512_SPLIT_N 0 /* 1: add exports mh_attention_project_frag_c512_n2 (block 64, same grid) and _n2g (block 32, grid x2): each wave 16 tokens x 32 columns, per-output init/K order/epilogue as the default path. results/fill-cu-20260930. */
 #endif

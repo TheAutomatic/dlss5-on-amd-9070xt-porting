@@ -51,6 +51,12 @@ using Tensor=std::shared_ptr<Allocation>;
 #ifndef HIP_SMALL_FFN_W16
 #define HIP_SMALL_FFN_W16 1 /* 2026-09-30: the same wide FFN fragments for C64/C128 (c64/c128_wave2*_w16, *_wave2_up_w16 in c64-wave2 when built with W2_FFN_W16_SMALL); 0 or modules without them = old layout (results/w16-c64-c128-20260930) */
 #endif
+#ifndef HIP_C512_PROJ_FB8
+#define HIP_C512_PROJ_FB8 0 /* 2026-10-01: C512 attention projection reads the FFN projection's E4M3 tiles as its residual (split_projection_frag_nof32 + mh_attention_project_frag_c512_fb8, modules built with C512_PROJ_FB8) and the f32 copy is not written; 0 or older modules = f32 path (results/mochizuki-gap-20261001) */
+#endif
+#ifndef HIP_C512_FFN_ONE
+#define HIP_C512_FFN_ONE 1 /* 2026-10-01: C512 mix+FFN as one dispatch (split_ffn_one_m32 in c512-m32-deep built with C512_FFN_ONE) when the module exports it; 0 or older modules = mix + split_ffn_fused_fp8_t8 (results/mochizuki-gap-20261001) */
+#endif
 #ifndef HIP_C32_SKIP_BYTE
 #define HIP_C32_SKIP_BYTE 1 /* 2026-09-30: block4 main (C32 skip, read only by the block66 up) as E4M3 bytes when c32-wave1 exports the _b8 pair; 0 or older modules = f32 (results/c32-align-20260930) */
 #endif
@@ -267,7 +273,7 @@ class Network {
    if(kernel.rfind("vit_expand_blocked_fp8",0)==0&&kernel.size()>3&&kernel.compare(kernel.size()-3,3,"_m2")==0)groups=((count/4096+31)/32)*64;
    if(kernel=="vit_qkv_project_blocked"||kernel=="vit_qkv_project_normalize_fused"||kernel=="vit_qkv_project_normalize_fused_f16compact"||kernel=="vit_qkv_project_normalize_fused_f16compact_fp8"||kernel=="vit_qkv_project_normalize_fused_f16compact_fp8_bytein"||kernel=="vit_qkv_project_normalize_fused_f16compact_fp8_h16in"||kernel=="vit_qkv_project_normalize_fused_f16compact_fp8_frag")groups=count/512;
    if(kernel=="vit_qkv_project_normalize_fused_f16compact_fp8_h16in_n4")groups=count/1024;
-   if(kernel=="split_mix_blocked"||kernel=="split_mix_blocked_h16w"||kernel=="split_projection_blocked"||kernel=="split_projection_blocked_t8"||kernel=="split_projection_frag")groups=count/1024;
+   if(kernel=="split_mix_blocked"||kernel=="split_mix_blocked_h16w"||kernel=="split_projection_blocked"||kernel=="split_projection_blocked_t8"||kernel=="split_projection_frag"||kernel=="split_projection_frag_nof32")groups=count/1024;
    if(kernel=="split_ffn_fused"||kernel=="split_ffn_fused_fp8"||kernel=="split_ffn_fused_fp8_mix"||kernel=="split_ffn_fused_fp8_t8"){threads=128;groups=count/1024;}
    if(kernel=="vit_ffn_fused"){threads=512;groups=count/16384;}
    if(kernel=="vit_contract_combine"||kernel=="vit_pack_input"||kernel=="vit_pack_input_tiled")threads=256;
@@ -279,7 +285,7 @@ class Network {
    else if(kernel.rfind("mh_pool_project_group_c",0)==0){U c=U(std::stoul(kernel.substr(23)));threads=c;groups=(count/(2*c)+15)/16;}
    else if(kernel=="mh_qkv_normalize_wave_c512"){threads=128;groups=count/4096;}
    else if(kernel=="mh_qkv_normalize_frag_c512"){threads=32;groups=count/1024;}
-   else if(kernel=="mh_attention_project_frag_c512"){threads=32;groups=count/1024;}
+   else if(kernel=="mh_attention_project_frag_c512"||kernel=="mh_attention_project_frag_c512_fb8"){threads=32;groups=count/1024;}
    else if(kernel.rfind("mh_ffn_fused_c",0)==0){U c=U(std::stoul(kernel.substr(14)));if((c!=64&&c!=128&&c!=256)||count%(c*16))throw std::runtime_error("fused FFN dispatch shape");threads=c*2;groups=count/(c*16);}
    else if(kernel=="mh_qkv_normalize_fast"||kernel=="mh_qkv_normalize_fast_wave"||kernel=="mh_qkv_normalize_fast_wave_fp8"){threads=256;if(kernel!="mh_qkv_normalize_fast")count=Count(size_t(count)*32);}
    else if(kernel=="mh_scores_exp_fast"||kernel=="mh_probabilities_fast"||kernel=="mh_attention_av_fast"||kernel=="mh_pool_project_production"||kernel=="mh_pool_project_production_h16w"||kernel=="mh_pool_project_c32_b8")threads=32;
@@ -419,16 +425,18 @@ class Network {
   auto compact=input;
   if(n!=valid&&!(HIP_C512_PAD16&&input->capacity>=size_t(n)*512*4)){compact=New(size_t(n)*512);Run("mh","mh_shift_pack",size_t(n)*512,P(input),P(compact),valid,U(1),n,U(1),U(0),U(0),U(512),U(0));}
   auto mixed=New(size_t(n)*512),contract=New(size_t(n)*512),contract8=New(size_t(n)*128),ffn=New(size_t(n)*512),ffn8=New(size_t(n)*128);
-  Run("c512_m32_deep","split_mix_blocked_h16w_m32",size_t((n+31)/32*32)*256,P(compact),PackedSplitFfnWeightMixHalf(Block(block,"ffwd")),P(mixed),n);
-  Run("deep","split_ffn_fused_fp8_t8",size_t(n)*512,P(mixed),PackedSplitFfnWeightMixHalf(Block(block,"ffwd")),P(contract),P(contract8),n);
+  if(HIP_C512_FFN_ONE&&HasFn("c512_m32_deep","split_ffn_one_m32"))Run("c512_m32_deep","split_ffn_one_m32",size_t((n+31)/32*32)*256,P(compact),PackedSplitFfnWeightMixHalf(Block(block,"ffwd")),P(contract8),n);
+  else{Run("c512_m32_deep","split_mix_blocked_h16w_m32",size_t((n+31)/32*32)*256,P(compact),PackedSplitFfnWeightMixHalf(Block(block,"ffwd")),P(mixed),n);
+  Run("deep","split_ffn_fused_fp8_t8",size_t(n)*512,P(mixed),PackedSplitFfnWeightMixHalf(Block(block,"ffwd")),P(contract),P(contract8),n);}
   mixed.reset();
-  Run("deep","split_projection_frag",size_t(n)*512,P(contract8),PackedSplitProjectionFrag(Block(block,"ffwd-projection")),P(compact),P(ffn),P(ffn8),n);
+  const bool fb8=HIP_C512_PROJ_FB8&&HasFn("deep_fast","split_projection_frag_nof32")&&HasFn("mh_fast","mh_attention_project_frag_c512_fb8");
+  Run("deep",fb8?"split_projection_frag_nof32":"split_projection_frag",size_t(n)*512,P(contract8),PackedSplitProjectionFrag(Block(block,"ffwd-projection")),P(compact),P(ffn),P(ffn8),n);
   compact.reset();contract.reset();contract8.reset();
   auto av=New(size_t(n)*128);
   Run("c512_m32_mh","c512_qkv_attention_compact",size_t(ww)*hh/64*16,P(ffn8),PackedMhWeightQkvFrag(Block(block,"attention"),512),P(av),w,h,ww,hh,sx,sy);
-  ffn8.reset();
+  if(!fb8)ffn8.reset();
   auto result=HIP_C512_PAD16?NewPad16(valid,512):New(size_t(valid)*512);
-  Run("mh_fast","mh_attention_project_frag_c512",size_t(n)*512,P(av),P(ffn),PackedMhWeightQkvFrag(Block(block,"attention"),512),P(result),n,U(raw?3:0),w,h,w,U(0),U(0));
+  Run("mh_fast",fb8?"mh_attention_project_frag_c512_fb8":"mh_attention_project_frag_c512",size_t(n)*512,P(av),fb8?P(ffn8):P(ffn),PackedMhWeightQkvFrag(Block(block,"attention"),512),P(result),n,U(raw?3:0),w,h,w,U(0),U(0));
   Stage("block"+std::to_string(block),result);return result;
  }
 #include "swin_persistent_network.h"

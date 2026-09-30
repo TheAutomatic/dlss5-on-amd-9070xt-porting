@@ -49,3 +49,38 @@ ISA：他的 Windows 管线是 AMD 驱动里的 LLPC 编的，这次没有导出
 3. C64/C128 下采样/上采样折进相邻核，减派发数（空隙每个约 2.4µs）。
 
 复现：`Development/HIP/experiments/mochizuki-gap/`（`mzp.ps1` 跑他的逐派发计时，`fam.py` 出表，`locked.ps1` 拿 GPU 锁，setup/build/run/full/final/install/clean 沿用 hoist-loads）。lab 在 `D:\DLSSNR-Lab\hip-backend\mochizuki-gap-20261001`，mochizuki 在 `D:\DLSSNR-Lab\competitor-timing-20260930\mz`（dlssnr.bin 已重新上传）。
+
+## 5. 第二刀 `C512_FFN_ONE`：C512 mix+FFN 合成一个核（已收下并装机）
+
+- 做法：照 ffwd3 的组织。一个 wave 负责（64 通道组 g，32 个 token），网格和 mix m32 相同。mix 和 expand 都把 WMMA 操作数对调（权重当 A），累加器出来就是一个 lane 对应一个 token，正好是下一级的操作数布局。所以不用 LDS、不用屏障，也不再写 f32 mix 张量；contract 的 f32 副本本来就没人读，也不写了。
+- 两段之间的量化：mix 出口 `F(c512_hq(acc))` 算完直接转 half 当 expand 的输入（旧路径是存成 f32 再读回来转 half，读写本身不改值）。expand→act→`byte_F` 也是逐字节照搬。**寄存器里逐位复现成立。**
+- 新宏：模块宏 `C512_FFN_ONE`（`hip/c512_m32_deep.inc`，源码默认 0；c512-m32-deep 配方写 1，另加 `HIP_BYTE_F_ADD0 1`，和 deep_fast-packed 的 byte_F 口径对齐）。宿主 `HIP_C512_FFN_ONE`（默认 1，按导出存在与否回退，同 W16 的先例；旧模块走旧的两派发）。这是编译期开关，没有运行时 flag。
+- 资源：VGPR 144，private 0，无 LDS。
+- 逐位：19 组 SAME。另外，合入 swin 线 W2_UP_LOW_BYTES 之后的宿主 P3，在现装 Stellar 模块上对比"加新模块"和"不加"，也是 19 组 SAME。
+- 计时（base = flat-A 旧装，cand = flat-A + FF 模块 + 新宿主 P1；和 FUSEQKV 分开测）：
+
+|轮|900 avg（p99）|1080 avg（p99）|
+|---|---|---|
+|1|7.5582→7.4911 −0.067（7.802→7.753）|10.3952→10.3372 −0.058（10.698→10.634）|
+|2|7.6270→7.5614 −0.066（7.914→7.847）|10.3803→10.3302 −0.050（10.690→10.623）|
+|3|7.6058→7.5440 −0.062（7.833→7.762）|10.3970→10.3371 −0.060（10.721→10.646）|
+
+- 计时的时候其它子代理还在跑 rtc_compile（只占 CPU），本 lab 的 regression 空闲检查把 rtc_compile 去掉了，游戏进程和 benchmark 仍然检查。
+- 装机（10-01 03:09）：
+  - 剑星换 add-on 69A6F3C9（HEAD 源码，含 swin 线 5621334d）和两个架构的 c512-m32-deep（gfx1201 8942EB3E、gfx1200 8AD2CF90），flags 没动。
+  - 鬼武者换 RE9 runtime 5D158F68（Content 和 _storage_ 两处），模块从剑星镜像过去。
+  - 备份：`...\mochizuki-gap-20261001\backups\stellar-20261001-030939-ffnone`、`D:\DLSSNR-Lab\onimusha-backups\20261001-030939-ffnone`。
+- 两处说明：final 模块和计时用的 FF 模块代码不完全一样。原因是 deep_fast.hip 后来加了 FB8 导出，重排了代码；逐位用的是 final 模块。
+
+## 6. 第 2 项 B8（投影残差改 fp8 字节）：逐位过了，但变慢，未收
+
+- `C512_PROJ_FB8`：split_projection_frag 不写 f32 副本（`_nof32`），attention 投影改从 E4M3 tile 读残差（`_fb8`）。
+- 两版结果（base = FF + P1）：
+
+| 版本 | 逐位 | 900 三轮 ms | 1080 三轮 ms |
+|---|---|---|---|
+| v1：按字节 gather | 19 组 SAME | +0.036 / +0.009 / +0.012 | +0.146 / +0.140 / +0.149 |
+| v2：转置 WMMA，每 lane 一次 8 字节读、8 个连续 float 写 | 19 组 SAME | +0.04 | +0.20 |
+
+- 慢的量远超出这个核能解释的范围，正在查是不是宿主那边（ffn8 活得更久导致池复用变了）的问题。
+- 源码保留，模块宏默认 0、配方不开，宿主 `HIP_C512_PROJ_FB8` 默认 0。
