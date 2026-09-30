@@ -1218,3 +1218,7 @@ Zero 改了验收规则：小改动只要逐位、离线 ABBA 为正、p99 和�
 ## 2026-09-30：复合量化 FP8(Hrtz(x)) 换成整数掩码，逐位，收下装机
 
 闇提出的假设：`f32→f16(RTZ)→E4M3` 能否不经中间转换直接从 float 位算。盘点最热两处都在 `wave_owned_mh.inc`（W2 注意力字节出口 ~180M、FFN contract ~165M，按"值数×转换指令"）。half RTZ 在正规段就是截低 13 位，所以 `Q8(bits&0xffffe000)` 保留两次舍入、只省 f32→f16→f32 往返。CPU＋GPU（真实指令）全部 2³² 穷举：只在负 |x|<2⁻²⁴（符号）和 8191 个 +NaN 载荷上不同；WMMA FP8 累加值是 0 或 2⁻¹⁸ 的倍数，进不来。直接一次舍入与原式在域内有 1,032,066 处不同，half 舍入不能删。新宏 `W2_Q8_MASK`（默认 0，c64-wave2/swin-persistent 配方 1），19 组 SAME；三轮 ABBA avg 900 −0.005～−0.016、1080 −0.003～−0.022ms，p99 单轮来回跳、三轮合并不差，按新规收。剑星＋鬼武者已装（备份 `…\composite-quant-20260930\backups\stellar-20260930-104107-q8`、`onimusha-backups\20260930-104107-q8`）。C32 两处域不纯（res·w），不做。`results/composite-quant-20260930`。
+
+## 2026-09-30：C512 FFN 按 W5 组织（同组 wave 经 LDS 共用权重）——单核 900 变慢，停
+
+闇第 ③ 条。先拆 Daniel `k_reg_vit_ffwd`：**1 wave 一组、LDS 0、无 barrier**、80 VGPR，grid (104,8)，一核做完整 FFN，hidden 就地转 FP8 在寄存器里，FP8×FP8 WMMA 每条配一条 b64——他快在数据形态和三核合一，不在组内共享。原型只做最重的 `split_mix_blocked_h16w_m32`：G=4/2 个 wave 同组同列块，每 wave 仍 32 token，half 权重 8KB 分块双缓冲进 LDS（宏 `C512_MIX_LDS_G`，默认 0 编出 .text 与现装同）。10 组逐字节同；单核三批：900 现役 15.34µs，五个变体全慢（最好 +1.2%）；1080 20.9～21.2 → G=4 最好 19.7～20.3，批间排名不稳。权重本在 L2、A 仍是 f32 占一半以上请求，900 只 47 片摊 64 CU 不匀。按任务单停，不写宿主、不装机。`results/c512-ffn-lds-20260930`。
