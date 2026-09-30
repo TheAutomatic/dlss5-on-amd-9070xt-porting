@@ -33,6 +33,11 @@
 // (6 accumulators per token tile, as mochizuki's attn.comp NR_APARTS=1/NR_AN=6) instead of three passes that
 // each re-read the X fragments; the per-token bounds test and address are computed once, outside the loop.
 // Every accumulator sees the same WMMA sequence (gs, h order) -> bit-identical. 0 = three-pass original.
+// C512_COMPACT_QKV_PIPE (2026-10-01, results/mochizuki-gap-20261001): with FUSEQKV, next K step's fragments are
+// prefetched one step ahead (register double buffer). Bit-identical. 0 = off.
+#ifndef C512_COMPACT_QKV_PIPE
+#define C512_COMPACT_QKV_PIPE 0
+#endif
 #ifndef C512_COMPACT_FUSEQKV
 #define C512_COMPACT_FUSEQKV 0
 #endif
@@ -94,6 +99,20 @@ DEV void c5c_body(const unsigned char*in8,const float*w,unsigned char*out,uint v
    uint p=av[t]?uint(y)*validwidth+uint(x):0u;
    ap[t]=in8+(p/16)*16*512+(p%16)*32+half*8;
   }
+#if C512_COMPACT_QKV_PIPE
+  // Software pipeline: step s+1's A and B fragments are loaded before step s's 12 WMMAs, so a wave no longer
+  // waits one full memory latency per K step. Same fragments, same WMMA order per accumulator -> bit-identical.
+  i2 a[2][QT],b[2][6];
+  auto ld=[&](uint s,uint buf){uint gs=s/2,h=s%2;
+   _Pragma("unroll") for(uint t=0;t<QT;t++){a[buf][t]=i2{};if(av[t])__builtin_memcpy(&a[buf][t],ap[t]+gs*512+h*16,8);}
+   _Pragma("unroll") for(uint j=0;j<6;j++){uint n0=(j/2)*C+head*32+(j%2)*16+row;__builtin_memcpy(&b[buf][j],wb+((n0/16)*16+gs)*512+((h*2+half)*16+n0%16)*8,8);}};
+  ld(0,0);
+  _Pragma("unroll 2") for(uint s=0;s<32;s++){
+   const uint cur=s&1;
+   if(s+1<32)ld(s+1,cur^1);
+   _Pragma("unroll") for(uint j=0;j<6;j++)_Pragma("unroll") for(uint t=0;t<QT;t++)accq[t][j]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b[cur][j],a[cur][t],accq[t][j]);
+  }
+#else
   for(uint gs=0;gs<16;gs++)for(uint h=0;h<2;h++){
    i2 a[QT];
    _Pragma("unroll") for(uint t=0;t<QT;t++){a[t]=i2{};if(av[t])__builtin_memcpy(&a[t],ap[t]+gs*512+h*16,8);}
@@ -103,6 +122,7 @@ DEV void c5c_body(const unsigned char*in8,const float*w,unsigned char*out,uint v
     _Pragma("unroll") for(uint t=0;t<QT;t++)accq[t][j]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,a[t],accq[t][j]);
    }
   }
+#endif
  }
  _Pragma("unroll") for(uint part=0;part<3;part++){
   f8 acc[QT][2];
