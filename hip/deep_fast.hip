@@ -41,6 +41,9 @@ DEV float H(float x){return from_half(half_bits(x));}
 #ifndef HIP_NATIVE_FP8_F
 #define HIP_NATIVE_FP8_F 1
 #endif
+#ifndef C512_T8_TAIL_VEC
+#define C512_T8_TAIL_VEC 0 /* 1: split_ffn_fused_fp8_t8 / split_projection_frag tiled E4M3 copy staged in LDS, 8/16-byte stores per lane; bytes unchanged (results/deep-tail-20260930) */
+#endif
 #ifndef HIP_DEC_HOIST_SCALE
 #define HIP_DEC_HOIST_SCALE 0 /* 1: decoder_project2x_h16w skip scale read once per lane */
 #endif
@@ -561,7 +564,16 @@ void split_ffn_fused_fp8_t8(const float*in,const float*w,float*out,unsigned char
  f8 result{};
  const uint*pw=reinterpret_cast<const uint*>(w);
  for(uint k=0;k<256;k+=16){i2 a{};__builtin_memcpy(&a,hidden+rc()*260+k+gr()*8,8);uint off=393216+g*4096+((wave*16+rc())*256+k+gr()*8)/4;i2 b={int(pw[off]),int(pw[off+1])};result=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(a,b,result);}
+#if C512_T8_TAIL_VEC
+ // The workgroup's 16 tokens x 64 channels of out8 are two consecutive 512-byte tiles: stage them in LDS in the same
+ // layout, then thread t stores bytes 8t..8t+7 (one b64 instead of 8 b8 per lane). Same bytes.
+ __attribute__((shared)) unsigned char t8[1024];
+ for(uint e=0;e<8;e++){uint r=first+gr()*8+e,c=g*64+wave*16+rc();float v=F(c512_hq(result[e]));out[r*512+c]=v;uint cl=wave*16+rc();t8[(cl/32)*512+(r%16)*32+cl%32]=static_cast<unsigned char>(__builtin_amdgcn_cvt_pk_fp8_f32(v,0.f,0,false));}
+ WG_FENCE(3);__builtin_amdgcn_s_barrier();WG_FENCE(2);
+ {i2 q;__builtin_memcpy(&q,__builtin_assume_aligned(t8+tid*8,8),8);__builtin_memcpy(__builtin_assume_aligned(out8+size_t(first+g*2)*512+tid*8,8),&q,8);}
+#else
  for(uint e=0;e<8;e++){uint r=first+gr()*8+e,c=g*64+wave*16+rc();float v=F(c512_hq(result[e]));out[r*512+c]=v;out8[((r/16)*16+c/32)*512+(r%16)*32+c%32]=static_cast<unsigned char>(__builtin_amdgcn_cvt_pk_fp8_f32(v,0.f,0,false));}
+#endif
 }
 // split_projection_blocked in the QKV-frag shape: A from the contract's E4M3 tiles, B from fragment-tiled E4M3 projection
 // weights (PackedSplitProjectionFrag), no LDS; residual H(skip*scale) and F(H(acc)) as split_projection_blocked. Also
@@ -572,7 +584,15 @@ WAVE void split_projection_frag(const unsigned char*in8,const float*w,const floa
  const unsigned char*wb=reinterpret_cast<const unsigned char*>(w);const unsigned char*arow=in8+((first/16)*16)*512+rc()*32+gr()*8;
  for(uint gs=0;gs<16;gs++)for(uint h=0;h<2;h++){i2 a;__builtin_memcpy(&a,arow+gs*512+h*16,8);
   for(uint j=0;j<4;j++){uint n0=row+j*16+rc();i2 b;__builtin_memcpy(&b,wb+((n0/16)*16+gs)*512+((h*2+gr())*16+n0%16)*8,8);acc[j]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(a,b,acc[j]);}}
+#if C512_T8_TAIL_VEC
+ // 16 tokens x 64 channels = two consecutive 512-byte out8 tiles; staged in LDS, lane stores 2 x 16 contiguous bytes.
+ __attribute__((shared)) unsigned char t8[1024];
+ for(uint j=0;j<4;j++)for(uint e=0;e<8;e++){uint r=first+gr()*8+e,c=row+j*16+rc();float v=F(H(acc[j][e]));out[r*512+c]=v;uint cl=j*16+rc();t8[(cl/32)*512+(r%16)*32+cl%32]=static_cast<unsigned char>(__builtin_amdgcn_cvt_pk_fp8_f32(v,0.f,0,false));}
+ WG_FENCE(3);__builtin_amdgcn_wave_barrier();WG_FENCE(2);
+ {uint l=__builtin_amdgcn_workitem_id_x();for(uint h=0;h<2;h++){int __attribute__((ext_vector_type(4))) q;__builtin_memcpy(&q,__builtin_assume_aligned(t8+h*512+l*16,16),16);__builtin_memcpy(__builtin_assume_aligned(out8+size_t(first+row/32)*512+h*512+l*16,16),&q,16);}}
+#else
  for(uint j=0;j<4;j++)for(uint e=0;e<8;e++){uint r=first+gr()*8+e,c=row+j*16+rc();float v=F(H(acc[j][e]));out[r*512+c]=v;out8[((r/16)*16+c/32)*512+(r%16)*32+c%32]=static_cast<unsigned char>(__builtin_amdgcn_cvt_pk_fp8_f32(v,0.f,0,false));}
+#endif
 }
 WAVE void split_mix_blocked_h16w(const float*in,const float*w,float*out,uint tokens){
  uint first=bid()/8*16,row=bid()%8*64;if(first>=tokens)return;f8 acc[4]{};const _Float16*w16=reinterpret_cast<const _Float16*>(w);

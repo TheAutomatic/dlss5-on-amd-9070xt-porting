@@ -14,6 +14,9 @@
 #ifndef HIP_VIT_QKV_W5
 #define HIP_VIT_QKV_W5 0 /* 1: add export vit_stream_qkv_frag_hin_w5 (160 threads = 5 waves on one head, 5 token tiles; head weights staged once per group through LDS). Same per-wave WMMA chains/fragments/epilogue as vit_stream_qkv_frag_hin; grid = 96*ceil(tokens/80). */
 #endif
+#ifndef VIT_QKV_TAIL_VEC
+#define VIT_QKV_TAIL_VEC 0 /* 1: vit_stream_qkv_frag_hin_w5 byte tail transposed through the wave's LDS norm tile, one 16-byte store per lane; bytes unchanged (results/deep-tail-20260930) */
+#endif
 #if HIP_VIT_STREAM_KERNELS
 template<uint TM,uint TN,bool ByteAv,bool HalfSkip>
 DEV void vit_stream_project_tiles(const float*in,const float*w,const float*skip,float*out,uint tokens,const uint*reuse_gate){if(reuse_gate&&reuse_gate[0])return;
@@ -114,7 +117,17 @@ KERNEL __attribute__((amdgpu_flat_work_group_size(160,160))) void vit_stream_qkv
  }
  if(!live)return;
  const float scale=part==0?5.65625f*w[1572864+row/32]:1.f;
+#if VIT_QKV_TAIL_VEC
+ // Byte tail through the wave's own (now dead) norm tile: same byte_F per element into a 16x32 row-major LDS tile, then
+ // lane = (token lane>>1, half lane&1) stores 16 contiguous bytes (1 global b128 instead of 16 b8). Bytes unchanged.
+ {unsigned char*tb=reinterpret_cast<unsigned char*>(raw);
+  for(uint j=0;j<2;j++)for(uint e=0;e<8;e++){float v=acc[j][e];if(part<2){v*=__builtin_amdgcn_rsqf(maxf(sum[e],6.198883056640625e-5f))*scale;}tb[(gr()*8+e)*32+j*16+rc()]=byte_F(v);}
+  WG_FENCE(3);__builtin_amdgcn_wave_barrier();WG_FENCE(2);
+  uint r=lane>>1,h=lane&1u;int __attribute__((ext_vector_type(4))) q;__builtin_memcpy(&q,__builtin_assume_aligned(tb+r*32+h*16,16),16);
+  __builtin_memcpy(__builtin_assume_aligned(out+size_t(part*tokens+first+r)*1024+row+h*16,16),&q,16);}
+#else
  for(uint j=0;j<2;j++)for(uint e=0;e<8;e++){float v=acc[j][e];if(part<2){v*=__builtin_amdgcn_rsqf(maxf(sum[e],6.198883056640625e-5f))*scale;}out[(part*tokens+first+gr()*8+e)*1024+row+j*16+rc()]=byte_F(v);}
+#endif
 }
 #endif
 WAVE void vit_stream_contract_frag_hout(const float*in,const float*w,const float*skip,float*out,uint tokens,uint inputs,uint outputs,const uint*reuse_gate){if(reuse_gate&&reuse_gate[0])return;if(inputs==4096&&outputs==1024)vit_contract_blocked_body<false,false,false,true,true>(in,w,skip,out,tokens);}

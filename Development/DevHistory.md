@@ -1242,3 +1242,7 @@ Zero 改了验收规则：小改动只要逐位、离线 ABBA 为正、p99 和�
 ## 2026-09-30 字节写出尾巴向量化推广（tail-vec）
 
 全网扫逐通道字节尾巴：只剩 C32 `finish_dcrop_b8d`（block4）与 `finish_b8`（block69）；C64～C256、chain/mapped/up 已是每 lane 8 连续通道宽写，旧 multihead/deep 字节出口是 WMMA 列布局（需转置，非同类）。新宏 `CW_FINISH_TAIL_VEC`（配方 1）：每 lane 8 通道 ds_load_b128＋cw_pack8＋8 字节写，逐像素边界保留。逐位 19 组 SAME；三轮 900 −0.038～−0.046、1080 −0.043～−0.055ms，p99 全好。已装剑星/鬼武者，c32-wave1 8e47b814/fd8fed73，宿主与 RE9 runtime 不变。`results/tail-vec-20260930`。
+
+## 2026-09-30 multihead/deep 字节出口 LDS 转置宽写（deep-tail）
+
+按热度排旧"每 lane 一列"字节出口：ViT QKV w5（8 次/帧 213µs，16×b8/lane）、C512 `split_ffn_fused_fp8_t8`（13 次，8×b8）、`vit_expand_blocked_fp8_frag_bytein`（63×b8）、C256 fused FFN/QKV（9×b8）、`split_projection_frag`（13 次，32×b8）；ViT attention 生产版已是 2×b64，decoder byteout 冷。做两刀：V = QKV w5 字节先写本 wave 空闲 norm tile 再每 lane b128；S = C512 两核分块 E4M3 副本（两块相邻 512B）LDS 摆好后 b64/b128 宽写（各加 1KB LDS）。两者逐位 19 组 SAME。三轮 ABBA：V 符号不一（合并 1080 +0.005ms）不收，宏 `VIT_QKV_TAIL_VEC` 默认 0；S 六个全正（900 −0.008～−0.009、1080 −0.005～−0.028ms），合并 p99 两档变好，收 `C512_T8_TAIL_VEC 1`（deep_fast-packed 配方）。装剑星/鬼武者（deep_fast-packed 7ffaa65f/ebc7df69），宿主/runtime 不变。9070 D 盘满，清了两个已交账 lab 的帧转储。`results/deep-tail-20260930`。
