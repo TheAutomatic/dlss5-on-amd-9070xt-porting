@@ -221,6 +221,9 @@ DEV float w2_serial_norm(f8 lo,f8 hi){
 DEV float w2_up_F(float x){uint a=bits(x)&0x7fffffffu;float c=__builtin_fminf(__builtin_fmaxf(x,-448.f),448.f);float r=__builtin_amdgcn_cvt_f32_fp8(__builtin_amdgcn_cvt_pk_fp8_f32(c,0.f,0,false),0);return a==0?0.f:r;}
 // f-sweep 2026-09-30: W2_UP_ADD0 1 -> up output byte cvt_pk_fp8(med3(merged+0)) instead of cvt_pk_fp8(w2_up_F(merged))
 // (same byte for all 2^32 inputs, results/f-sweep-20260930).
+#ifndef W2_UP_VEC
+#define W2_UP_VEC 0 /* c128-c64-inchain 2026-10-01: vectorized/packed Up epilogue, bit-exact; see swin_wave2_body */
+#endif
 #ifndef W2_UP_ADD0
 #define W2_UP_ADD0 0
 #endif
@@ -283,6 +286,39 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
     totals[ci]=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(b,a,totals[ci]);
    }
   }
+#if W2_UP_VEC && defined(HIP_ISA_HALF)
+  /* W2_UP_VEC (2026-10-01, c128-c64-inchain): same values, fewer instructions in the Up epilogue.
+     H(shuffle(t)) == shuffle-of-the-f16-bits then v_cvt_f32_f16 (H is exactly those two ISA converts under HIP_ISA_HALF,
+     the shuffle is a pure move), so two f16 results travel per ds_bpermute (32 instead of 64). Skip is read as one
+     16-byte (f16) / two 16-byte (f32) vectors per (qt,ci) instead of 8 scalar loads, upw is loaded once instead of per qt.
+     The merge expression H(t+F(skip)*upw) and the byte select are written exactly as the scalar path. */
+  static_assert(sizeof(float)==4,"");
+  uint hp[2][4];
+  _Pragma("unroll") for(uint ci=0;ci<2;ci++)_Pragma("unroll") for(uint j=0;j<4;j++){uint lo,hi;
+   asm("v_cvt_f16_f32 %0, %1" : "=v"(lo) : "v"(totals[ci][2*j]));asm("v_cvt_f16_f32 %0, %1" : "=v"(hi) : "v"(totals[ci][2*j+1]));
+   hp[ci][j]=(lo&0xffffu)|(hi<<16);}
+  float uw[2][8];
+  _Pragma("unroll") for(uint ci=0;ci<2;ci++)_Pragma("unroll") for(uint e=0;e<8;e++)uw[ci][e]=upw[IC*C+head*32+ci*16+gr*8+e];
+  _Pragma("unroll") for(uint qt=0;qt<4;qt++){
+   const uint tok=qt*16+rc,low=(tok/16)*4+(tok%8)/2;const int x=x0+int(tok%8),y=y0+int(tok/8);
+   const bool ok=x>=0&&y>=0&&x<int(width)&&y<int(height);const uint base=ok?(uint(y)*width+uint(x))*C:0u;
+   _Pragma("unroll") for(uint ci=0;ci<2;ci++){
+    const uint c0=head*32+ci*16+gr*8;float sk[8];
+    if constexpr(SkipHalf){h8 v;__builtin_memcpy(&v,reinterpret_cast<const _Float16*>(skip)+base+c0,16);_Pragma("unroll") for(uint e=0;e<8;e++)sk[e]=float(v[e]);}
+    else __builtin_memcpy(sk,skip+base+c0,32);
+    i2 packed{};
+    _Pragma("unroll") for(uint j=0;j<4;j++){
+     const uint w=uint(__builtin_amdgcn_ds_bpermute(int((low+gr*16)*4),int(hp[ci][j])));
+     _Pragma("unroll") for(uint k=0;k<2;k++){const uint e=2*j+k;float t;const uint hb=k?(w>>16):(w&0xffffu);
+      asm("v_cvt_f32_f16 %0, %1" : "=v"(t) : "v"(hb));
+      float merged=H(t+w2_up_F(sk[e])*uw[ci][e]);
+      uint b=uint(__builtin_amdgcn_cvt_pk_fp8_f32(W2_UP_ADD0?w2_add0(merged):w2_up_F(merged),0.f,0,false))&255u;
+      w2_bits(packed,e,ok?b:0u);}
+    }
+    w2_store<C>(plane0,qt,head*2+ci,packed);
+   }
+  }
+#else
   for(uint qt=0;qt<4;qt++)for(uint ci=0;ci<2;ci++){
    uint tok=qt*16+rc,low=(tok/16)*4+(tok%8)/2;int x=x0+int(tok%8),y=y0+int(tok/8);i2 packed{};
    for(uint e=0;e<8;e++){
@@ -301,6 +337,7 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
    }
    w2_store<C>(plane0,qt,head*2+ci,packed);
   }
+#endif
  }else{
  // Stage original input in A fragments. Preserve the byte cast used by pack4.
  for(uint qt=0;qt<4;qt++)for(uint ci=0;ci<2;ci++){
