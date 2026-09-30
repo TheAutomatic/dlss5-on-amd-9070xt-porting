@@ -1,0 +1,39 @@
+gfx1201 ffa3 A90E13999AB85CFB8D211124175BB5AABA14604D2CB7B9D5410324B425D21B32
+SPAN ffa0-x1-r1-h900-base exit=0 n=330 med=6.871
+SPAN ffa0-x1-r1-h1080-base exit=0 n=330 med=9.53
+SPAN ffa1-x1-r1-h900-base exit=0 n=331 med=6.706
+SPAN ffa1-x1-r1-h1080-base exit=0 n=332 med=9.273
+SPAN ffa2-x1-r1-h900-base exit=0 n=332 med=6.782
+SPAN ffa2-x1-r1-h1080-base exit=0 n=330 med=9.406
+SPAN ffa3-x1-r1-h900-base exit=0 n=331 med=6.586
+SPAN ffa3-x1-r1-h1080-base exit=0 n=331 med=9.11
+SPAN ffa0-x2-r1-h900-base exit=0 n=332 med=6.889
+SPAN ffa0-x2-r1-h1080-base exit=0 n=330 med=9.541
+SPAN ffa1-x2-r1-h900-base exit=0 n=334 med=6.728
+SPAN ffa1-x2-r1-h1080-base exit=0 n=332 med=9.273
+SPAN ffa2-x2-r1-h900-base exit=0 n=331 med=6.792
+SPAN ffa2-x2-r1-h1080-base exit=0 n=330 med=9.407
+SPAN ffa3-x2-r1-h900-base exit=0 n=331 med=6.596
+SPAN ffa3-x2-r1-h1080-base exit=0 n=332 med=9.112
+SPAN ffa0-x3-r1-h900-base exit=0 n=333 med=6.904
+SPAN ffa0-x3-r1-h1080-base exit=0 n=330 med=9.55
+SPAN ffa1-x3-r1-h900-base exit=0 n=332 med=6.737
+SPAN ffa1-x3-r1-h1080-base exit=0 n=332 med=9.297
+SPAN ffa2-x3-r1-h900-base exit=0 n=330 med=6.812
+SPAN ffa2-x3-r1-h1080-base exit=0 n=333 med=9.422
+SPAN ffa3-x3-r1-h900-base exit=0 n=331 med=6.607
+SPAN ffa3-x3-r1-h1080-base exit=0 n=333 med=9.122
+
+[exited with code 0]
+installed addon F2A9C2C4 mh 7C313587 deep C0FC04E7
+cand c512-m32-deep <- ffp4 F371A350
+SAME count 19
+ffp4 1 900: avg 7.2890 -> 7.3655 (+0.0765 ms, +1.05%)  p99 7.5240 -> 7.5940
+ffp4 1 1080: avg 9.9860 -> 10.1526 (+0.1665 ms, +1.67%)  p99 10.3220 -> 10.4610
+ffp4 2 900: avg 7.3319 -> 7.3966 (+0.0647 ms, +0.88%)  p99 7.5670 -> 7.6140
+ffp4 2 1080: avg 10.0045 -> 10.1490 (+0.1445 ms, +1.44%)  p99 10.2790 -> 10.4590
+ffp4 3 900: avg 7.3343 -> 7.3951 (+0.0608 ms, +0.83%)  p99 7.5510 -> 7.6250
+ffp4 3 1080: avg 9.9929 -> 10.1685 (+0.1755 ms, +1.76%)  p99 10.2440 -> 10.4390
+LOCK DROPPED
+
+[exited with code 0]

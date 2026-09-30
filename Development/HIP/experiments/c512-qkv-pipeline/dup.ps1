@@ -1,6 +1,6 @@
 # c512-qkv-pipeline ledger: in-chain marginal cost of the 4 C512 kernels by DUP replay (no events). Host benchmark-P6 (HEAD = installed add-on source),
 # modules = Stellar installed now. (span_dup - span_base)/13 per instance. Rounds interleave base and cases. Takes gpu.lock.
-param([int]$Rounds=3,[int]$Frames=300)
+param([int]$Rounds=3,[int]$Frames=300,[string]$Mods='',[string]$Cases='base,c512_qkv_attention_compact$,split_ffn_one_w2$,split_projection_frag$,mh_attention_project_frag_c512$',[string]$Prefix='')
 $ErrorActionPreference='Stop';$root='D:\DLSSNR-Lab\hip-backend\c512-qkv-pipeline-20261001\dup';$r='D:\DLSSNR-Lab\hip-backend';$a='D:\DLSSNR-Lab\Magpie-DLSS5-AMD-0.23\DLSS5-AMD'
 $game='C:\Program Files (x86)\Steam\steamapps\common\StellarBlade\SB\Binaries\Win64';$L='D:\DLSSNR-Lab\gpu.lock';$me='c512-qkv-pipeline dup'
 $t0=Get-Date
@@ -13,9 +13,10 @@ try{
 New-Item -ItemType Directory -Force "$root\flat"|Out-Null;Copy-Item "$game\DLSS5-AMD\native-game-tiled-assets\HIP\gfx1201\*.hsaco" "$root\flat" -Force
 Copy-Item "$r\mochizuki-gap-20261001\benchmark-P6.exe" "$root\bench.exe" -Force
 "addon $((Get-FileHash "$game\dlss5-amd.addon64").Hash.Substring(0,8)) mh $((Get-FileHash "$root\flat\c512-m32-mh.hsaco").Hash.Substring(0,8)) deep $((Get-FileHash "$root\flat\c512-m32-deep.hsaco").Hash.Substring(0,8))"
-$cases=@('base','c512_qkv_attention_compact$','split_ffn_one_w2$','split_projection_frag$','mh_attention_project_frag_c512$')
+foreach($m in ($Mods -split ','|?{$_})){$mod,$b=$m -split '=';Copy-Item "D:\DLSSNR-Lab\hip-backend\c512-qkv-pipeline-20261001\build-$b\gfx1201\$mod.hsaco" "$root\flat" -Force;"mod $mod <- $b $((Get-FileHash "$root\flat\$mod.hsaco").Hash.Substring(0,8))"}
+$cases=@($Cases -split ',')
 foreach($round in 1..$Rounds){foreach($h in 900,1080){foreach($c in $cases){
- $tag="r$round-h$h-$($c.TrimEnd('$'))"
+ $tag="${Prefix}r$round-h$h-$($c.TrimEnd('$'))"
  $flags=@(Get-Content "$a\native-game-flags.txt")+@('DLSS5_HIP_MH_FEATURE_BYTE=1','DLSS5_HIP_MH_PROJ_DIAG_FB=1','DLSS5_HIP_MH_BYTE_STREAM=1','DLSS5_HIP_DECODER_BYTE=1','DLSS5_HIP_VIT_BYTE_STREAM=0','DLSS5_HIP_VIT_STREAM=3','DLSS5_HIP_MH_FFN_FRAG256=1','DLSS5_DIRECT_IO=3','DLSS5_BENCH_PLAIN=1','DLSS5_HIP_GRAPH=0','DLSS5_SHOW_FPS=0','DLSS5_PRE_UPSCALE=0',"DLSS5_NETWORK_HEIGHT=$h",'DLSS5_VIT_ADAPTIVE=0','DLSS5_VIT_ADAPTIVE_LOG=','DLSS5_RESIDUAL_SEQUENCE=0','DLSS5_RESIDUAL_RGB=0','DLSS5_HIP_PDL=1','DLSS5_HIP_WAVE_OWNED=1','DLSS5_HIP_C512_M32=1','DLSS5_HIP_VIT_PROJ_N64=1','DLSS5_HIP_SWIN_RUN=1','DLSS5_MAKE_RESIDENT_EVERY=60','DLSS5_HIP_SPAN_PROBE=1')
  if($c -ne 'base'){$flags+="DLSS5_HIP_DUP_PREFIX=$c";$flags+='DLSS5_HIP_DUP_COUNT=2';$env:DLSS5_HIP_DUP_PREFIX=$c;$env:DLSS5_HIP_DUP_COUNT='2'}else{Remove-Item Env:DLSS5_HIP_DUP_PREFIX,Env:DLSS5_HIP_DUP_COUNT -EA 0}
  $env:DLSS5_HIP_SPAN_PROBE='1'
