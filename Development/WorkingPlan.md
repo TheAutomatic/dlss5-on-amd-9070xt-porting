@@ -47,7 +47,7 @@
 
 ## B. 优化候选（逐位；按"收益 × 把握"排）
 
-0. **追 mochizuki C512（主线，`results/mochizuki-gap-20261001`）**：①已收 `C512_COMPACT_FUSEQKV`（Q/K/V 一个 k 循环，19 组 SAME，900 −0.022～−0.030、1080 −0.078～−0.094ms，10-01 已装）。②FFN 一核化（照 ffwd3：权重当 A、累加器直接当下一级 B，不用 LDS，mix 不再写 f32）上限 900 约 0.2ms。③C512 两个投影的残差改 e4m3 字节（F 之后的值，post=3 除外）上限约 0.12ms，要改宿主。④C64/C128 下采样/上采样折进相邻核，减派发。
+0. **追 mochizuki C512（主线，`results/mochizuki-gap-20261001`）**：①已收 `C512_COMPACT_FUSEQKV`；②已收 `C512_FFN_ONE`（mix+FFN 一核、寄存器传递，19 组 SAME，900 −0.062～−0.067、1080 −0.050～−0.060ms，10-01 03:09 装：add-on 69A6F3C9、RE9 runtime 5D158F68、c512-m32-deep 1201 8942EB3E）；③B8 字节残差 `C512_PROJ_FB8` 逐位但变慢（1080 +0.14～0.20），宏关着、不收。重测（三刀合计含 swin 线）HIP span 900 7.03/7.12、1152 9.78/9.80、1088 9.31/9.33ms。原计划：（Q/K/V 一个 k 循环，19 组 SAME，900 −0.022～−0.030、1080 −0.078～−0.094ms，10-01 已装）。②FFN 一核化（照 ffwd3：权重当 A、累加器直接当下一级 B，不用 LDS，mix 不再写 f32）上限 900 约 0.2ms。③C512 两个投影的残差改 e4m3 字节（F 之后的值，post=3 除外）上限约 0.12ms，要改宿主。④C64/C128 下采样/上采样折进相邻核，减派发。
 
 地图：`results/kernel-map-v3-20260930`（900 独立核和 6894.8µs、1080 约 9762µs；前五 sp_run256_w16、c512_qkv_attention_compact、c32 prefix/post、chain）。设计：`results/c512-vit-reorg-design-20260930`（只设计，数字引自账本）。
 
