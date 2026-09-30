@@ -1214,3 +1214,7 @@ Zero 改了验收规则：小改动只要逐位、离线 ABBA 为正、p99 和�
 ## 2026-09-30：旧 0.5% 门槛淘汰的小正收益件重测，I+P+O 收下装机，Q 不收
 
 按新规（逐位＋ABBA 为正＋p99/另一档不拖累）重测 mochizuki-022 的 I/P/O/C 与 c32-round3 的 Q，在现役 a80db313＋31 模块上重做为新宏（默认 0，默认编出与现装逐字节同）：`CW_INPUT_HALF 7`（post/mapped/新增 up 三处去 `float((_Float16)v)`）、`CW_PREFIX_HALF_SOURCE 1`、`C512_MIX_OCC_LDS 4096`、`VIT_CONTRACT_OCC_LDS 4096`；Q 用现存 `CW_POST_FULL_TILE`。五个候选全逐位（各 19 组 SAME）。ABBA：Q 1080 一轮 +0.0015ms 不收；O 两档两轮 −0.007～−0.019ms；I、P 单独在噪声内；C=I+P+O 900 −0.026/−0.029、1080 −0.016/−0.028ms，p99 不变差，收。配方直编 final 与候选 .text 同，再确认一轮 900 −0.030、1080 −0.016ms。只换 c32-wave1/c512-m32-deep/vit-stream 两架构（gfx1201 77d163c8/8e84f7c0/fef8a768），剑星、鬼武者已装（备份 `stellar-20260930-101608-smallwins`、`onimusha-backups\20260930-101608-smallwins`），宿主/runtime/flags 不变。补搜只多出 mhfast-wide-frag（需改宿主打包器，未重做）。详见 `results/small-wins-retest-20260930`。
+
+## 2026-09-30：复合量化 FP8(Hrtz(x)) 换成整数掩码，逐位，收下装机
+
+闇提出的假设：`f32→f16(RTZ)→E4M3` 能否不经中间转换直接从 float 位算。盘点最热两处都在 `wave_owned_mh.inc`（W2 注意力字节出口 ~180M、FFN contract ~165M，按"值数×转换指令"）。half RTZ 在正规段就是截低 13 位，所以 `Q8(bits&0xffffe000)` 保留两次舍入、只省 f32→f16→f32 往返。CPU＋GPU（真实指令）全部 2³² 穷举：只在负 |x|<2⁻²⁴（符号）和 8191 个 +NaN 载荷上不同；WMMA FP8 累加值是 0 或 2⁻¹⁸ 的倍数，进不来。直接一次舍入与原式在域内有 1,032,066 处不同，half 舍入不能删。新宏 `W2_Q8_MASK`（默认 0，c64-wave2/swin-persistent 配方 1），19 组 SAME；三轮 ABBA avg 900 −0.005～−0.016、1080 −0.003～−0.022ms，p99 单轮来回跳、三轮合并不差，按新规收。剑星＋鬼武者已装（备份 `…\composite-quant-20260930\backups\stellar-20260930-104107-q8`、`onimusha-backups\20260930-104107-q8`）。C32 两处域不纯（res·w），不做。`results/composite-quant-20260930`。

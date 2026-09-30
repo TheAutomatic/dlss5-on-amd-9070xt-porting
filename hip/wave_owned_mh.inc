@@ -84,6 +84,15 @@ template<uint C> DEV i2 w2_input_bytes(const float*in,uint win,uint tok,uint col
 using w2_h2=_Float16 __attribute__((ext_vector_type(2)));
 DEV f8 w2_rtz8(f8 x){f8 out;_Pragma("unroll") for(uint j=0;j<4;j++){uint packed;asm("v_cvt_pkrtz_f16_f32 %0, %1, %2" : "=v"(packed):"v"(x[2*j]),"v"(x[2*j+1]));w2_h2 pair=__builtin_bit_cast(w2_h2,packed);out[2*j]=float(pair[0]);out[2*j+1]=float(pair[1]);}return out;}
 #endif
+// W2_Q8_MASK (2026-09-30, results/composite-quant-20260930): at the byte sites whose value is a pure FP8xFP8 WMMA sum from +0
+// (FFN contract, attention output) Q8(Hrtz(x)) becomes Q8(bits(x)&0xffffe000): one v_and_b32 instead of v_cvt_pkrtz_f16_f32
+// + v_cvt_f32_f16. Exhaustive over all 2^32 patterns with the production instructions (+0, MODE.FP16_OVFL v_cvt_pk_fp8_f32):
+// equal bytes except negative |x|<2^-24 and 8191 +NaN payloads; a WMMA FP8 sum is 0 or a multiple of 2^-18, finite, so neither
+// reaches these sites. The half rounding itself is kept (1,032,066 in-domain inputs round differently without it).
+#ifndef W2_Q8_MASK
+#define W2_Q8_MASK 0
+#endif
+DEV float w2_hmask(float x){return __builtin_bit_cast(float,__builtin_bit_cast(uint,x)&0xffffe000u);}
 using w2_i16=int __attribute__((ext_vector_type(16)));
 DEV void w2_schedule(){
 #if W2_SCHED_FENCE
@@ -290,7 +299,11 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
   }
   _Pragma("unroll") for(uint qi=0;qi<B;qi++)for(uint ci=0;ci<2;ci++){
 #if W2_RTZ_PAIR
+#if W2_Q8_MASK
+   W2_Q8_DECL(a);for(uint e=0;e<8;e++)W2_Q8_SET(a,e,w2_hmask(contract[qi][ci][e]));W2_Q8_END(a);
+#else
    f8 rounded=w2_rtz8(contract[qi][ci]);W2_Q8_DECL(a);for(uint e=0;e<8;e++)W2_Q8_SET(a,e,rounded[e]);W2_Q8_END(a);
+#endif
 #else
    W2_Q8_DECL(a);for(uint e=0;e<8;e++)W2_Q8_SET(a,e,Hrtz(contract[qi][ci][e]));W2_Q8_END(a);
 #endif
@@ -321,7 +334,11 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
    }
   }
 #if W2_RTZ_PAIR
+#if W2_Q8_MASK
+  for(uint ci=0;ci<2;ci++){W2_Q8_DECL(a);for(uint e=0;e<8;e++)W2_Q8_SET(a,e,w2_hmask(contract[ci][e]));W2_Q8_END(a);w2_store<C>(plane1,qt,head*2+ci,a);}
+#else
   for(uint ci=0;ci<2;ci++){f8 rounded=w2_rtz8(contract[ci]);W2_Q8_DECL(a);for(uint e=0;e<8;e++)W2_Q8_SET(a,e,rounded[e]);W2_Q8_END(a);w2_store<C>(plane1,qt,head*2+ci,a);}
+#endif
 #else
   for(uint ci=0;ci<2;ci++){W2_Q8_DECL(a);for(uint e=0;e<8;e++)W2_Q8_SET(a,e,Hrtz(contract[ci][e]));W2_Q8_END(a);w2_store<C>(plane1,qt,head*2+ci,a);}
 #endif
@@ -470,7 +487,7 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
   if(full||(x>=sx&&y>=sy&&x<sx+width&&y<sy+height)){
    uint dest=((y-sy)*width+x-sx)*C+head*32+gr*8;
    for(uint ci=0;ci<2;ci++){
-    if constexpr(ByteOut){W2_Q8_DECL(a);for(uint e=0;e<8;e++){float v=result[ci][e];W2_Q8_SET(a,e,post==0?Hrtz(v):v);}W2_Q8_END(a);__builtin_memcpy(reinterpret_cast<unsigned char*>(out_any)+dest+ci*16,&a,8);}
+    if constexpr(ByteOut){W2_Q8_DECL(a);for(uint e=0;e<8;e++){float v=result[ci][e];W2_Q8_SET(a,e,post==0?(W2_Q8_MASK?w2_hmask(v):Hrtz(v)):v);}W2_Q8_END(a);__builtin_memcpy(reinterpret_cast<unsigned char*>(out_any)+dest+ci*16,&a,8);}
     else for(uint e=0;e<8;e++){float v=result[ci][e];static_cast<float*>(out_any)[dest+ci*16+e]=post==3?Hrtz(v):post==0?F(Hrtz(v)):F(v);}
    }
   }
@@ -502,7 +519,7 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
   if(x>=sx&&y>=sy&&x<sx+width&&y<sy+height){
    uint dest=((y-sy)*width+x-sx)*C+head*32+gr*8;
    for(uint ci=0;ci<2;ci++){
-    if constexpr(ByteOut){W2_Q8_DECL(a);for(uint e=0;e<8;e++){float v=result[ci][e];W2_Q8_SET(a,e,post==0?Hrtz(v):v);}W2_Q8_END(a);__builtin_memcpy(reinterpret_cast<unsigned char*>(out_any)+dest+ci*16,&a,8);}
+    if constexpr(ByteOut){W2_Q8_DECL(a);for(uint e=0;e<8;e++){float v=result[ci][e];W2_Q8_SET(a,e,post==0?(W2_Q8_MASK?w2_hmask(v):Hrtz(v)):v);}W2_Q8_END(a);__builtin_memcpy(reinterpret_cast<unsigned char*>(out_any)+dest+ci*16,&a,8);}
     else for(uint e=0;e<8;e++){float v=result[ci][e];static_cast<float*>(out_any)[dest+ci*16+e]=post==3?Hrtz(v):post==0?F(Hrtz(v)):F(v);}
    }
   }
