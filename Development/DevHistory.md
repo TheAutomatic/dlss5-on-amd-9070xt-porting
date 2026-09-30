@@ -1306,3 +1306,6 @@ Zero（Splashtop，只作正确性）：剑星 2K 原生 AA EXACT 55.6～56.1，
 
 ## 2026-10-01 D3D↔HIP 共队列可行性（光派单，子代理）
 新探针 `HIP/experiments/same-queue/switch_probe.cpp`：游戏 DIRECT 队列把显存填充交给不同执行者做 K 次往返。4096MiB K=1 over（gap−工作）：同队列 0.014；第二条 D3D COMPUTE 队列 0.21～0.28（p50 0.17～0.25）；第二条 D3D DIRECT 0.20～0.22（p50 0.16）；HIP fence 0.38（p50 0.165，长尾一帧 7.6）。K=8 斜率三者都 ≈0.09ms/往返。**交接代价是队列间同步，不是跨 API**：同一 D3D 设备换条队列一样贵，只有录进同一命令流才免。mochizuki 省掉它是因为要求 vkd3d-proton，把网络录进 vkd3d 的 VkCommandBuffer（同一 VkQueue）。路线：D3D12 compute 重写缺 WMMA/FP8 公开通路且难逐位；Vulkan 互操作在原生 D3D12 下仍两队列；HIP 共享 D3D 队列无接口。可省上限 ≈0.15～0.19ms，整帧兑现估 0.05～0.15。结论：停线，网络外的钱转去拷贝/编解码瘦身。未改生产、未装机。`results/same-queue-20261001`。
+
+## 2026-10-01 C512 跨块就绪队列（P）上限探针：负
+编码块 23–30 去掉依赖、8 条 stream 全并发（只计时，不做候选），三轮 ABBA 900 慢 0.21–0.25ms、1080 慢 0.31–0.33ms，p99 也同样变差。连理想重叠都亏，所以 P 停手，未写队列核。见 results/c512-xblock-queue-20261001。
