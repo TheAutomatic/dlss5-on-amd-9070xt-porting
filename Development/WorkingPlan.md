@@ -3,31 +3,20 @@
 > 开 session 先读这页。**这是项目唯一的"现状 + 规矩 + 为什么"**：实验过程与数据进 DevHistory.md（只追加），版本改动进 CHANGELOG（中英两份），其余一律改这页（整页重写，读一遍再重写，该删的删）。
 > 节奏：过日子式，没有 deadline。优先做有具体瓶颈证据、可逐位验证的小实验，够用就交。
 
-## 当前基线（0.37，09-29 发布）
+## 当前基线（0.38，09-30 发布）
 
-- **0.37 已发布**：夸克 https://pan.quark.cn/s/7dbfdc6425fd 、Gofile https://gofile.io/d/onqeAHST ，tag 0.37。add-on b77bbc3c、RE9 runtime 2c103f6e、RE9 dxgi 宿主 aa3761f2（沿用）、输入 shader 5be59a41、每架构 31 模块。清单 `results/package-037/checklist.md`、`HIP-SHA256SUMS`；脚本 `tools/package-037.ps1`（下次复制它）。**与 0.36 逐位相同。**
-- **0.37 相对 0.36**（全逐位）：深层紧凑、head 分组融合、C256 跨层持久化队列（`DLSS5_HIP_SWIN_RUN`，源码默认 0、三个模板写 1；约 100ms 超时 GPU 重算并禁用本实例）、ViT attention 新核、ViT QKV 五 wave 共享权重。900 派发 198→179、1080 182→162。常规 OptiScaler 包补 `ReShade.ini`；RE9 源码包补收 `hip/*.inc`。
-- **0.37 之后已装未发包**：900 档 C512 去 `mh_shift_pack`（宿主按 16 token 补齐分配，`HIP_C512_PAD16` 默认 1，容量不够自动回落 pack；不改模块）。宿主 **62803606**、RE9 runtime **be828151**。900 省 0.09～0.11ms（1.1～1.4%），1080 不变。`results/shift-pack-900-20260930`。
-- **离线**（NativeGameFrame wall，1000 帧弃 200）：900 约 **7.9ms**、1080 约 **10.8ms**（0.36 时 8.5 / 11.2）。
-- **游戏本机**：
-  - 剑星：2K 原生 AA EXACT **55～56**（1080 档，shift_pack 不影响；0.36 为 54）。add-on 62803606 + 31 模块，flags `DIRECT_IO=3`（含 FSR 输出直交，仅剑星现场）、`MAKE_RESIDENT_EVERY=60`、`SWIN_RUN=1`、`FRAME_STATS=5`。最近备份 `D:\DLSSNR-Lab\hip-backend\shift-pack-900-20260930\backups\stellar-20260930-004205`。
-  - 鬼武者：runtime be828151 + 模块与剑星对齐；**2K 质量（900 档）中画质稳定 60，GPU 90～95%、从未满载**。备份 `D:\DLSSNR-Lab\onimusha-backups\20260930-004205-shiftpack`。
-  - RE9：仍 0.35 全套（新 runtime 只做过包内冒烟）；33 号远征队 0.35 常规包；匹诺曹旧版（贴 60 不作对比）。
-- **对手**：Daniel 0.5.0/0.5.1 默认 fast 档（f32 累加、e4m3 一次舍入、近似 rsqrt/rcp）网络 9.4～10.0ms，reference 档 11.0ms；他 1080 只算 1088 行、post 位移 0（有损，不追）。mochizuki 0.0.2.4 相对 0.0.2.2 **网络零改动**，只加产品侧（`results/mochizuki-024-20260930`）；他 1080 也是 1088 行，Windows 与 Linux 自报差 48.6dB。**我们在完整 1152 行、NVIDIA 位移下已不落后。** 换装对照 `D:\DLSSNR-Lab\daniel-050\swap.ps1 daniel|ours`，看 `dlssnr_on_amd.log` 的 network 均值。
+- **0.38 已发布**：Gofile https://gofile.io/d/wsAqRlAI （夸克待 Zero 补），tag 0.38（源码 e1b1a18c）。add-on bfba6900、RE9 runtime ade2d404、RE9 dxgi 宿主 aa3761f2（沿用）、输入 shader 5be59a41、新增 `native_format_convert.hlsl`、每架构 31 模块（相对 0.37 变 8 个）。清单 `results/package-038/checklist.md`、`HIP-SHA256SUMS`；脚本 `tools/package-038.ps1`（下次复制它）。**默认设置下与 0.37 逐位相同**；唯一有损项 `DLSS5_NETWORK_1080_ROWS=1088` 可选、模板 1152。
+- **0.38 相对 0.37**（全逐位，详见 CHANGELOG 0.38）：900 去 C512 shift_pack、C32 块 4/prefix/post 字节化、C32 对角残差跳零、I+P+O、复合量化（W2＋C512）、C256 FFN W16、三处宽写（C32 prefix/finish、C512 t8）、C512 QKV-attention 去 F＋有界倒数、F 清理（deep_fast-packed）；新开关 `DLSS5_FORMAT_FALLBACK`、`DLSS5_HOT_RELOAD`、`DLSS5_NETWORK_1080_ROWS`。900 派发 179→162、1080 162→158。
+- **离线**（NativeGameFrame wall，1000 帧弃 200）：900 约 **7.6ms**（7.551/7.606）、1080 约 **10.4ms**（10.413/10.458）；0.37 时 8.0 / 10.8。HIP 段（不含交接）900 7.26 / 1080 10.07ms，现实理想约 4.2 / 6.0（`results/hip-roofline-20260930`）。
+- **游戏本机**：剑星/鬼武者现装 = 0.38 同网络（add-on 6d059845 / runtime 5e601d57 与发布版 168 帧＋回绕逐位同，未换成发布二进制）。剑星 flags `DIRECT_IO=3`、`MAKE_RESIDENT_EVERY=60`、`SWIN_RUN=1`、`FRAME_STATS=5`；2K 原生 AA EXACT 55～56（只作正确性参考）。RE9 仍 0.35 全套；33 号远征队 0.35 常规包。
+- **对手**：Daniel 0.5.x fast 档网络 9.4～10.0ms、reference 11.0ms，1088 行、post 位移 0（有损，不追）；mochizuki 0.0.2.4 网络无改动。**我们在完整 1152 行、NVIDIA 位移下已不落后**。换装对照 `D:\DLSSNR-Lab\daniel-050\swap.ps1 daniel|ours`。
 
 ## 正在进行
 
-- **下一版（0.38）待打包**：① 900 去 shift_pack（`results/shift-pack-900-20260930`）；② C32 块 4 skip/下采样存 E4M3 字节（`results/c32-align-20260930`，逐位，900 −0.05ms 0.62%、1080 −0.09ms 0.82%，改 c32-wave1＋multihead-fast-padded-wave-packed 两模块）。③ C32 对角残差跳零 `CW_DIAG_ONLY 1`（Zero 批准，逐位，1080 约 −0.04ms；09-30 08:01 已装）。④ 旧门槛淘汰件重测：I+P+O（c32 入口/prefix 去 half 往返＋C512 mix/ViT contract 占用上限，逐位，900 −0.03ms、1080 −0.02～−0.03ms，p99 不变差；Q post 内部窗口不收；09-30 10:16 已装，只换 c32-wave1/c512-m32-deep/vit-stream，`results/small-wins-retest-20260930`）。⑤ 复合量化掩码 `W2_Q8_MASK 1`（FP8(Hrtz(x))→FP8(bits&0xffffe000)，2³² 穷举＋逐位，900 −0.005～−0.016ms、1080 −0.003～−0.022ms，p99 三轮合并不差；09-30 10:41 已装，只换 c64-wave2/swin-persistent，`results/composite-quant-20260930`）。⑥ C256 FFN 权重 16 字节片段（宿主 `HIP_C256_FFN_W16`＋核 `W2_FFN_W16` 新增 `_w16` 导出，缺模块/旧宿主都回旧布局；逐位，三轮 900 −0.011～−0.025、1080 −0.030～+0.003ms，p99 合并不差；09-30 11:25 已装，`results/c256-w16-20260930`）。⑦ C512 `F(Hrtz)`→`F(mask)`（`C512_F_MASK 1`，c512-m32-deep＋deep_fast-packed；2³² 穷举＋域证明，mix 域依赖权重最小位 2⁻⁹；逐位，三轮两档全正 −0.006～−0.029ms；09-30 11:37 已装，`results/composite-quant-c512-20260930`）。⑧ C32 prefix down / block69 main 存 E4M3 字节（`CW_PREPOST_BYTE 1`＋宿主回退，逐位，三轮 900 −0.009～−0.024、1080 −0.017～−0.025ms；09-30 12:10 已装，`results/prefix-post-20260930`）。⑨ C32 prefix 字节尾向量化（`CW_PREFIX_TAIL_VEC 1`，只换 c32-wave1，宿主不变；逐位，三轮 900 −0.040～−0.046、1080 −0.065～−0.074ms，p99 全变好；09-30 12:31 已装，c32-wave1 3f9cdd24/00b1d536，`results/prefix-post-arith-20260930`）。⑩ C32 finish 字节尾向量化（`CW_FINISH_TAIL_VEC 1`，finish_b8/finish_dcrop_b8d，只换 c32-wave1；逐位，三轮 900 −0.038～−0.046、1080 −0.043～−0.055ms，p99 全变好；09-30 12:45 已装，c32-wave1 8e47b814/fd8fed73，`results/tail-vec-20260930`）。⑪ C512 t8 字节副本 LDS 转置宽写（`C512_T8_TAIL_VEC 1`，split_ffn_fused_fp8_t8＋split_projection_frag，只换 deep_fast-packed；逐位，三轮 900 −0.008～−0.009、1080 −0.005～−0.028ms，合并 p99 变好；09-30 13:09 已装，deep_fast-packed 7ffaa65f/ebc7df69，`results/deep-tail-20260930`）。现装宿主 **6d059845** / RE9 runtime **5e601d57**，剑星、鬼武者已装。**打包注意**：add-on/runtime 须从含本补丁的源码重编（6d059845 是 7ca25c98＋W16＋prefix-post 补丁编的，未含其后 1088/input-poll/产品侧提交）。Zero 定何时发。
-- **1088 行紧凑几何（可选档）09-30 交账**：`DLSS5_NETWORK_1080_ROWS=1088`，默认 1152 逐位；开时 1080 −0.47～0.48ms（4.4%），对 1152 全帧约 56dB、底边 32 行 52.5dB 略差。产物在 `D:\DLSSNR-Lab\geom1088-20260930\`，未装；**等 Zero 看 ppm 决定是否作可选档进 0.38**（`results/geom-1088-20260930`）。
-- **产品侧 09-30 交账（未装机，等 Zero 定随哪刀装/打包）**：颜色格式兜底 `DLSS5_FORMAT_FALLBACK=1`（R9G9B9E5/B8G8R8X8/R10G10B10A2/R32G32B32(A32)/SNORM/565 等转 RGBA16F，原格式逐位）＋热重载 `DLSS5_HOT_RELOAD=1`（STRENGTH/NOTICE/SHOW_FPS）。add-on 8b729f22、RE9 runtime 99c8ead9，产物 `D:\DLSSNR-Lab\product-fmt-20260930\`；**打包须新增 `native_format_convert.hlsl`**。`results/product-fmt-reload-20260930`。
-- Infinity Cache / arena 09-30 交账：宿主池已按生命周期复用，C32 单派发 141/203MB 超过 64MB MALL，热复用对照逐位但 900 慢 0.01ms，不收（`results/infinity-cache-20260930`）。
-- 9070 D 盘清理 09-30 交账：删掉已交账实验的逐位帧转储 486.7GB，D 盘约 527GiB 空闲，基准自检 168/168（`results/lab-cleanup-20260930`）。剩余两个字节出口 09-30 交账，不收（`results/deep-tail2-20260930`）。
-- **逐核地图 v3 09-30 交账**（`results/kernel-map-v3-20260930`）：现装模块两档独立核和 900 6895µs、1080 约 9762µs，整网回放 7.615 / 10.436ms。候选写入 B 段 12～14；第一个（C512 V 转置 `C512_COMPACT_VT`）逐位但不全正，不收，未装（`results/c512-compact-vt-20260930`）。
-- W16 推广到 C64/C128 09-30 交账：逐位（含回退与 origin/main 现路径 19 组 SAME），但 900 三轮 C64 +0.005/−0.010/+0.003、C128 −0.016/+0.004/−0.003 不全正，两个都不收、未装（宏 `W2_FFN_W16_SMALL` 默认 0，`results/w16-c64-c128-20260930`）。
-- C512 QKV-attention 去 F＋有界倒数 09-30 交账：收，已装 c512-m32-mh 0F28A38C（`results/c512-av-f-20260930`）。
-- F 清理扫全网 09-30 交账：4 组全证明、全逐位；只收 deep_fast-packed（`HIP_BYTE_F_ADD0`＋`HIP_VIT_ATTN_RCP`，900 −0.014～−0.038、1080 −0.011～−0.028ms），已装 EEC7D4A6；vit-stream/padded-wave-packed/W2 up 不全正，不收（`results/f-sweep-20260930`）。
-- **对 NVIDIA 原版同口径画质 09-30 交账**（`results/fidelity-ngx-20260930`，只量未改）：复算 mochizuki 单帧与公布值一致；1080p Style0 下全 71 块 47.43dB、发布跳块 44.26dB（他 45.56）；运动序列无公开 NVIDIA 输出未测；1440/4K 无同几何档。发现发布网络写死 Style=1（见 C 段）。
-- 交接 GPU 同步 09-30 交账（HIP→D3D 分片自旋反慢，未装）。C512 FFN W5 式 LDS 共用权重 09-30 交账（900 单核慢，停，`results/c512-ffn-lds-20260930`）。其余无在跑任务。09-29～09-30 已完成项细节见各 `results/*/README.md` 与 DevHistory。
+- **0.38 之后已装未发包**：C512 attn-project 残差初始化外提（`HIP_C512_HOIST_RES 1`，只换 multihead-fast-padded-wave-packed，gfx1201 47F00EBA；逐位，三轮 900 −0.022～−0.031、1080 −0.026～−0.035ms，p99 变好；09-30 22:00 装剑星/鬼武者，`results/fill-cu-20260930`）。
+- **填满度 09-30 交账**：C512/ViT 一轮全驻留，无经典尾巴（上界 0.03～0.05ms/档）；延迟型核的病根是单 wave 串行读等。N-split、mix K 流水、decoder skip 预读均逐位但不收（宏默认 0）。
+- **未决（等 Zero）**：1088 行已作为可选开关发布；产品侧兜底/热重载已发布。C 段有损项照旧待拍板。
+- 09-29～09-30 各项细节见各 `results/*/README.md` 与 DevHistory。
 
 ## Zero 的标准与取舍（为什么这样定）
 
@@ -57,6 +46,8 @@
 
 ## B. 优化候选（逐位；按"收益 × 把握"排）
 
+0. **串行读等（新线索，fill-cu）**：`s_wait_loadcnt 0` 前只有 ≤2 条读在飞的段，C64/C128 wave2 18～50 处、C32 9～33 处；照 HOIST_RES 的做法先查哪些在延迟型核里（单 WG 占比高）再动。
+
 地图：900 `results/kernel-map-900-20260930`（179 派发，独立核和 7258.6µs vs Daniel 8171.6µs；只在 C32 +233µs、C512 +182µs 落后）；1080 `results/kernel-map-20260929`。
 
 1. ~~C32 上采样块 / 块 4 边界~~ **09-30 已做**：大头是数据格式（skip/下采样 f32→E4M3 字节），逐位，900 0.62%、1080 0.82%，已装。余差：up 低分辨率输入 f32/half（Daniel FP8，有损，不追）、up 分发 bpermute vs 他 LDS（量小）。
@@ -78,6 +69,8 @@
 15. ~~同类清理扫全网~~ **09-30 已做**（`results/f-sweep-20260930`）：收 deep_fast-packed byte_F→+0＋ViT attention 有界倒数；vit-stream、padded q8_fused_round、W2 up 逐位但不全正（宏默认 0）。剩下的 F 都是 float 出口的真量化或输入侧域证不出，这条线结束。
 
 ## 已交负账（别重复，一行一条）
+
+- C512 mix/proj 按列切细（`C512_SPLIT_N`，反慢 1～3µs）、mix K 循环流水（`C512_MIX_PIPE`，mix 全量受访存限）、decoder skip 预读（`HIP_DEC_HOIST_SCALE 2`，不全正）（`fill-cu-20260930`）。
 
 - mochizuki 0.0.2.2 各路线 I/P/S/V/F/O/G/H（`mochizuki-022-20260928`）；0.0.2.4 网络无改动，无可抄。
 - C128/C64 持久化四段（最好 1080 −0.1～−0.2%，900 全慢；`swin-persistent-c128-c64-20260929`）。

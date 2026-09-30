@@ -3,6 +3,9 @@
 #endif
 // C512 split mix (half weights), 32 tokens per wave (opt-in DLSS5_HIP_C512_M32, module c512-m32-deep): each half B
 // fragment feeds two WMMAs; per-output K order and F(Hrtz()) epilogue as split_mix_blocked_h16w. results/c512-ffn-20260926.
+#ifndef C512_MIX_PIPE
+#define C512_MIX_PIPE 0 /* 1: split_mix_blocked_h16w_m32 K loop software-pipelined (next A rows + B fragments issued one step ahead); bit-identical. results/fill-cu-20260930 */
+#endif
 #ifndef C512_ZERO_PAD_900
 #define C512_ZERO_PAD_900 0
 #endif
@@ -42,8 +45,32 @@ WAVE void split_mix_blocked_h16w_m32(const float*in,const float*w,float*out,uint
   return;
  }
 #endif
+#if C512_MIX_PIPE == 2
+ // Lighter pipeline: only the two A rows (raw f32) are fetched one step ahead; B fragments stay in-step as before.
+ {using f4v=float __attribute__((ext_vector_type(4)));f4v p0[2],p1[2]{},q0[2],q1[2]{};
+  const float*ar0=in+(first+rc())*512+gr()*8,*ar1=ar0+16*512;
+  __builtin_memcpy(p0,ar0,32);if(two)__builtin_memcpy(p1,ar1,32);
+  for(uint k=0;k<512;k+=16){
+   if(k+16<512){__builtin_memcpy(q0,ar0+k+16,32);if(two)__builtin_memcpy(q1,ar1+k+16,32);}
+   h8 a0,a1;for(uint e=0;e<8;e++){a0[e]=(_Float16)p0[e/4][e%4];a1[e]=(_Float16)p1[e/4][e%4];}
+   for(uint j=0;j<4;j++){h8 b;__builtin_memcpy(&b,w16+(row+j*16+rc())*512+k+gr()*8,16);acc0[j]=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(a0,b,acc0[j]);acc1[j]=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(a1,b,acc1[j]);}
+   for(uint i=0;i<2;i++){p0[i]=q0[i];p1[i]=q1[i];}}}
+#elif C512_MIX_PIPE
+ // Software pipeline (results/fill-cu-20260930): step k+16's raw f32 A rows and the 4 B fragments are issued before
+ // step k's WMMAs, so one wave no longer waits two serial memory latencies per K step (the compiler only prefetched a0).
+ // Same values, same f32->f16 conversions, same WMMA operands and K order -> bit-identical.
+ {using f4v=float __attribute__((ext_vector_type(4)));f4v p0[2],p1[2]{},q0[2],q1[2]{};h8 bn[4],bq[4];
+  const float*ar0=in+(first+rc())*512+gr()*8,*ar1=ar0+16*512;const _Float16*wr=w16+(row+rc())*512+gr()*8;
+  __builtin_memcpy(p0,ar0,32);if(two)__builtin_memcpy(p1,ar1,32);for(uint j=0;j<4;j++)__builtin_memcpy(&bn[j],wr+j*16*512,16);
+  for(uint k=0;k<512;k+=16){
+   if(k+16<512){__builtin_memcpy(q0,ar0+k+16,32);if(two)__builtin_memcpy(q1,ar1+k+16,32);for(uint j=0;j<4;j++)__builtin_memcpy(&bq[j],wr+j*16*512+k+16,16);}
+   h8 a0,a1;for(uint e=0;e<8;e++){a0[e]=(_Float16)p0[e/4][e%4];a1[e]=(_Float16)p1[e/4][e%4];}
+   for(uint j=0;j<4;j++){acc0[j]=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(a0,bn[j],acc0[j]);acc1[j]=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(a1,bn[j],acc1[j]);}
+   for(uint i=0;i<2;i++){p0[i]=q0[i];p1[i]=q1[i];}for(uint j=0;j<4;j++)bn[j]=bq[j];}}
+#else
  for(uint k=0;k<512;k+=16){h8 a0{},a1{};for(uint e=0;e<8;e++)a0[e]=(_Float16)in[(first+rc())*512+k+gr()*8+e];if(two)for(uint e=0;e<8;e++)a1[e]=(_Float16)in[(first+16+rc())*512+k+gr()*8+e];
   for(uint j=0;j<4;j++){h8 b;__builtin_memcpy(&b,w16+(row+j*16+rc())*512+k+gr()*8,16);acc0[j]=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(a0,b,acc0[j]);acc1[j]=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(a1,b,acc1[j]);}}
+#endif
  for(uint j=0;j<4;j++)for(uint e=0;e<8;e++)out[(first+gr()*8+e)*512+row+j*16+rc()]=F(c512_hq(acc0[j][e]));
  if(two)for(uint j=0;j<4;j++)for(uint e=0;e<8;e++)out[(first+16+gr()*8+e)*512+row+j*16+rc()]=F(c512_hq(acc1[j][e]));
 }
@@ -80,4 +107,19 @@ KERNEL __attribute__((amdgpu_flat_work_group_size(32*C512_MIX_LDS_G,32*C512_MIX_
  for(uint j=0;j<4;j++)for(uint e=0;e<8;e++)out[(first+gr()*8+e)*512+row+j*16+rc()]=F(c512_hq(acc0[j][e]));
  if(two)for(uint j=0;j<4;j++)for(uint e=0;e<8;e++)out[(first+16+gr()*8+e)*512+row+j*16+rc()]=F(c512_hq(acc1[j][e]));
 }
+#endif
+#ifndef C512_SPLIT_N
+#define C512_SPLIT_N 0 /* 1: add exports split_mix_blocked_h16w_m32_n2 (block 64 = 2 waves, same grid) and _n2g (block 32, grid x2): each wave 32 tokens x 32 columns instead of 64, per-output K order/operands/epilogue unchanged. results/fill-cu-20260930. */
+#endif
+#if C512_SPLIT_N
+template<bool WG64> DEV void split_mix_n2_body(const float*in,const float*w,float*out,uint tokens){
+ const uint half=WG64?(__builtin_amdgcn_workitem_id_x()>>5):(bid()&1u),blk=WG64?bid():(bid()>>1);
+ uint first=blk/8*32,row=blk%8*64+half*32;if(first>=tokens)return;const bool two=first+16<tokens;f8 acc0[2]{},acc1[2]{};const _Float16*w16=reinterpret_cast<const _Float16*>(w);
+ for(uint k=0;k<512;k+=16){h8 a0{},a1{};for(uint e=0;e<8;e++)a0[e]=(_Float16)in[(first+rc())*512+k+gr()*8+e];if(two)for(uint e=0;e<8;e++)a1[e]=(_Float16)in[(first+16+rc())*512+k+gr()*8+e];
+  for(uint j=0;j<2;j++){h8 b;__builtin_memcpy(&b,w16+(row+j*16+rc())*512+k+gr()*8,16);acc0[j]=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(a0,b,acc0[j]);acc1[j]=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(a1,b,acc1[j]);}}
+ for(uint j=0;j<2;j++)for(uint e=0;e<8;e++)out[(first+gr()*8+e)*512+row+j*16+rc()]=F(c512_hq(acc0[j][e]));
+ if(two)for(uint j=0;j<2;j++)for(uint e=0;e<8;e++)out[(first+16+gr()*8+e)*512+row+j*16+rc()]=F(c512_hq(acc1[j][e]));
+}
+KERNEL __attribute__((amdgpu_flat_work_group_size(64,64))) void split_mix_blocked_h16w_m32_n2(const float*in,const float*w,float*out,uint tokens){split_mix_n2_body<true>(in,w,out,tokens);}
+WAVE void split_mix_blocked_h16w_m32_n2g(const float*in,const float*w,float*out,uint tokens){split_mix_n2_body<false>(in,w,out,tokens);}
 #endif

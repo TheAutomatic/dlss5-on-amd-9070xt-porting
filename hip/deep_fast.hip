@@ -357,7 +357,13 @@ WAVE void decoder_project2x(const float*in,const float*w,const float*skip,float*
 // (same values the (_Float16) cast produces), one 16-byte load per B fragment; the skip scale stays f32 at its offset.
 template<bool FullTile,bool ByteOutput=false>
 DEV void decoder_project2x_h16w_body(const float*in,const float*w,const float*skip,float*out,uint iw,uint ih,uint ow,uint oh,uint inputs,uint outputs){uint first=bid()/(outputs/16)*16,row=bid()%(outputs/16)*16;if(first>=iw*ih)return;uint parts=inputs==1024?4:1;f8 total{};const _Float16*w16=reinterpret_cast<const _Float16*>(w);for(uint p=0;p<parts;p++){f8 a{};for(uint k=p*(inputs/parts);k<(p+1)*(inputs/parts);k+=16){h8 x{},y;for(uint e=0;e<8;e++){uint j=k+gr()*8+e;x[e]=(FullTile||first+rc()<iw*ih)?(_Float16)in[(first+rc())*inputs+j]:(_Float16)0;}__builtin_memcpy(&y,w16+(row+rc())*inputs+k+gr()*8,16);a=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(x,y,a);}for(uint e=0;e<8;e++)total[e]=p?total[e]+a[e]:a[e];}
-#if HIP_DEC_HOIST_SCALE
+#if HIP_DEC_HOIST_SCALE == 2
+ // results/fill-cu-20260930: all 32 skip reads (and the lane's scale) issued before the first out[] store -- the default
+ // form re-read skip/scale behind each store (possible aliasing), 177 load->wait pairs in series. Same values/arithmetic.
+ const float ss=w[inputs*outputs+row+rc()];float sk[8][4];
+ for(uint e=0;e<8;e++){uint token=first+gr()*8+e;for(uint q=0;q<4;q++){uint dx=q&1,dy=q>>1,x=(token%iw)*2+dx,y=(token/iw)*2+dy;bool ok=(FullTile||token<iw*ih)&&x<ow&&y<oh;sk[e][q]=ok?skip[(y*ow+x)*outputs+row+rc()]:0.f;}}
+ for(uint e=0;e<8;e++){uint token=first+gr()*8+e;if(!FullTile&&token>=iw*ih)continue;float t=H(total[e]);for(uint dy=0;dy<2;dy++)for(uint dx=0;dx<2;dx++){uint x=(token%iw)*2+dx,y=(token/iw)*2+dy;if(x>=ow||y>=oh)continue;uint i=(y*ow+x)*outputs+row+rc();float merged=H(t+F(sk[e][dy*2+dx])*ss);if constexpr(ByteOutput)reinterpret_cast<unsigned char*>(out)[i]=static_cast<unsigned char>(__builtin_amdgcn_cvt_pk_fp8_f32(HIP_BYTE_F_ADD0?fp8_add0(merged):F(merged),0.f,0,false));else out[i]=outputs==32?merged:F(merged);}}}
+#elif HIP_DEC_HOIST_SCALE
  const float ss=w[inputs*outputs+row+rc()]; // skip scale once per lane (was re-read per output element behind the out[] stores)
  for(uint e=0;e<8;e++){uint token=first+gr()*8+e;if(!FullTile&&token>=iw*ih)continue;float t=H(total[e]);for(uint dy=0;dy<2;dy++)for(uint dx=0;dx<2;dx++){uint x=(token%iw)*2+dx,y=(token/iw)*2+dy;if(x>=ow||y>=oh)continue;uint i=(y*ow+x)*outputs+row+rc();float merged=H(t+F(skip[i])*ss);if constexpr(ByteOutput)reinterpret_cast<unsigned char*>(out)[i]=static_cast<unsigned char>(__builtin_amdgcn_cvt_pk_fp8_f32(HIP_BYTE_F_ADD0?fp8_add0(merged):F(merged),0.f,0,false));else out[i]=outputs==32?merged:F(merged);}}}
 #else
