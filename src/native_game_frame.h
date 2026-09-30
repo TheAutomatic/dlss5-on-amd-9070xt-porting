@@ -146,13 +146,13 @@ class NativeGameFrame {
   NativeTextOverlay fps_overlay;bool show_fps{};char fps_text[80]{};ULONGLONG fps_tick{};
   // Temporal path (optional): motion texture -> coordinates -> sampled history -> network temporal input.
   // Frame-side GPU probe (DLSS5_GAME_PROBE): pre-network passes / network / decode+copy per frame, averaged in the log.
-  NativeNetworkTimestamps probe;bool probe_on{};double probe_sum[3]{};double probe_cpu{};unsigned probe_frames{},probe_history{},probe_reset{},probe_nomotion{};
+  NativeNetworkTimestamps probe;bool probe_on{};double probe_sum[8]{};unsigned probe_parts{};double probe_cpu{};unsigned probe_frames{},probe_history{},probe_reset{},probe_nomotion{};
   NativeTemporalFeed feed;NativeTemporalCoordinates coordinates;NativeTemporalSample sampler;ID3D12Resource*reciprocals{};bool temporal{};UINT motion_w{},motion_h{};ID3D12CommandQueue*queue{};
   /* FAST PATH (DLSS5_OVERLAP=1): the network runs on its own COMPUTE queue, one frame behind. Per frame the game queue delivers the
      previous frame's result (decode + copy into this frame's target), then captures this frame (original copy, encode, motion) and
      signals; the compute queue waits for that and runs input -> network -> history -> neural. The game's next frame renders while the
      network runs. Costs one frame of latency and a 16MB copy of the original (decode composes against the frame the network saw). */
-  NativeGameSubmission compute;ID3D12CommandQueue*compute_queue{};ID3D12Resource*original_copy{};bool overlap{},have_result{};UINT64 net_value{};
+  NativeGameSubmission compute;ID3D12CommandQueue*compute_queue{};ID3D12Resource*original_copy{};bool overlap{},have_result{},io_fuse{};UINT64 net_value{};
   UINT feed_motion_width()const{return motion_w;}UINT feed_motion_height()const{return motion_h;}ID3D12CommandQueue*submit_queue()const{return queue;}
   ~Resources(){if(reciprocals)reciprocals->Release();if(original_copy)original_copy->Release();if(compute_queue)compute_queue->Release();}
  };
@@ -230,6 +230,12 @@ public:
    resources->black.Create(d,resources->network.Output(),resources->geometry.valid_width*resources->geometry.valid_height,directory);
    if(resources->temporal)resources->feed.BindNetworkOutput(resources->network.Output());
    {const wchar_t*v=_wgetenv(L"DLSS5_SHOW_FPS");const wchar_t*n=_wgetenv(L"DLSS5_NOTICE");resources->show_fps=v&&wcstoul(v,nullptr,10)!=0&&(!n||wcstoul(n,nullptr,10)>=2);if(resources->show_fps)resources->fps_overlay.Prepare(source);}
+   /* DLSS5_IO_FUSE=1 (2026-10-01, input-slim; bit-exact data movement): the decoder reads the network's f32 output buffer itself (same
+      f32->f16 rounding the neural texture store did) and the neural pass is skipped. Plain sessions only (no temporal feed, no overlap),
+      where nothing else reads the neural texture. Default 0. */
+   {const wchar_t*v=_wgetenv(L"DLSS5_IO_FUSE");resources->io_fuse=v&&wcstoul(v,nullptr,10)==1&&!resources->overlap&&!resources->temporal&&!temporal_rgb;
+    if(v&&wcscmp(v,L"0")&&wcscmp(v,L"1"))throw std::runtime_error("DLSS5_IO_FUSE must be 0 or 1");
+    if(resources->io_fuse){resources->decode.UseNeuralBuffer(resources->network.Output());NativeGameFrameStep("io_fuse",d);}}
    NativeGameFrameStep("decode",d);resources->decode.Create(d,{resources->encode.Output(),resources->neural.Output(),resources->overlap?resources->original_copy:source},directory);NativeGameFrameStep("ready",d);ready=true;
   }catch(...){failed=true;throw;}
  }
@@ -374,14 +380,14 @@ public:
      ID3D12Resource*rb=nullptr;if(SUCCEEDED(NativeCreateCommittedResource(dev,&hp,D3D12_HEAP_FLAG_NONE,&rd,D3D12_RESOURCE_STATE_COPY_DEST,nullptr,IID_PPV_ARGS(&rb)))){r.submit.Submit([&](ID3D12GraphicsCommandList*c){c->CopyBufferRegion(rb,0,r.black.RingSlot(bad),0,r.black.RingBytes());});r.submit.Flush();void*p=nullptr;D3D12_RANGE range{0,SIZE_T(r.black.RingBytes())},none{};if(SUCCEEDED(rb->Map(0,&range,&p))){if(FILE*f=_wfopen((prefix+L"-residual.f32").c_str(),L"wb")){fwrite(p,1,size_t(r.black.RingBytes()),f);fclose(f);}rb->Unmap(0,&none);}rb->Release();}
      r.black.CountDump();dump_prefix=prefix;}}
    const auto cpu_start=std::chrono::steady_clock::now();if(r.probe_on)r.probe.Reset();
-   r.submit.Submit([&](ID3D12GraphicsCommandList*c){if(r.probe_on)r.probe.Mark(c,"t0");r.encode.Record(c,{source_state},NativePaperWhite());r.input.Record(c,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE);
+   r.submit.Submit([&](ID3D12GraphicsCommandList*c){if(r.probe_on)r.probe.Mark(c,"t0");r.encode.Record(c,{source_state},NativePaperWhite());if(r.probe_on)r.probe.Mark(c,"encode");r.input.Record(c,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE);
     if(use_history){r.feed.RecordMotion(c,motion_texture);r.coordinates.Record(c);r.sampler.Record(c);r.history_guard.Record(c);}if(r.probe_on)r.probe.Mark(c,"t1");});
    if(!dump_prefix.empty()&&(use_history||(r.temporal&&r.black.enabled))){r.submit.Flush();DumpTemporalNow(dump_prefix);{char line[160];snprintf(line,sizeof line,"black_probe dumped history=%u reset=%u motion=%u",use_history?1u:0u,reset?1u:0u,motion_texture?1u:0u);if(FILE*f=_wfopen(NativeLabPath(L"logs\\native-submission-order.txt").c_str(),L"ab")){fprintf(f,"pid=%lu %s\n",GetCurrentProcessId(),line);fclose(f);}}dump_prefix.clear();}
    r.network.Run(r.submit,seed,r.temporal?use_history:temporal_enabled);
    r.submit.Submit([&](ID3D12GraphicsCommandList*c){if(r.probe_on)r.probe.Mark(c,"t2");
     if(use_history)r.smooth.Record(c);r.black.Record(c);
     if(r.temporal)r.feed.RecordHistory(c);
-    r.neural.Record(c);r.decode.Record(c,{D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,source_state});
+    if(!r.io_fuse)r.neural.Record(c);if(r.probe_on)r.probe.Mark(c,"neural");r.decode.Record(c,{D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,source_state});if(r.probe_on)r.probe.Mark(c,"decode");
     if(deliver){
     D3D12_RESOURCE_BARRIER b[2]{};for(auto&v:b)v.Type=D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
     b[0].Transition={r.decode.Output(),D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,D3D12_RESOURCE_STATE_COPY_SOURCE};
@@ -395,10 +401,11 @@ public:
     }
     if(r.probe_on){r.probe.Mark(c,"t3");r.probe.Resolve(c);}
    });r.black.Submitted(r.submit.LastValue());
-   if(r.probe_on){r.submit.Flush();std::vector<double>iv;if(r.probe.Intervals(r.submit.TimestampFrequency(),iv)&&iv.size()==3){for(int i=0;i<3;i++)r.probe_sum[i]+=iv[i];}
+   /* 2026-10-01 input-slim: finer marks (encode | input(+history) | network+handoff | neural | decode | copy+overlay), per-step µs averaged per 100 frames */
+   if(r.probe_on){r.submit.Flush();std::vector<double>iv;if(r.probe.Intervals(r.submit.TimestampFrequency(),iv)&&iv.size()<=8){r.probe_parts=unsigned(iv.size());for(size_t i=0;i<iv.size();i++)r.probe_sum[i]+=iv[i];}
     r.probe_cpu+=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-cpu_start).count();
     if(use_history)r.probe_history++;if(reset)r.probe_reset++;if(!motion_texture)r.probe_nomotion++;
-    if(++r.probe_frames%100==0){if(FILE*f=_wfopen(NativeLabPath(L"logs\\native-game-probe.txt").c_str(),L"ab")){fprintf(f,"frames=%u avg_ms pre=%.2f network=%.2f post=%.2f gpu_total=%.2f cpu_frame=%.2f history=%u reset=%u nomotion=%u\n",r.probe_frames,r.probe_sum[0]/100,r.probe_sum[1]/100,r.probe_sum[2]/100,(r.probe_sum[0]+r.probe_sum[1]+r.probe_sum[2])/100,r.probe_cpu/100,r.probe_history,r.probe_reset,r.probe_nomotion);fclose(f);}for(auto&v:r.probe_sum)v=0;r.probe_cpu=0;r.probe_history=r.probe_reset=r.probe_nomotion=0;}}
+    if(++r.probe_frames%100==0){if(FILE*f=_wfopen(NativeLabPath(L"logs\\native-game-probe.txt").c_str(),L"ab")){double t=0;for(unsigned i=0;i<r.probe_parts;i++)t+=r.probe_sum[i];fprintf(f,"frames=%u avg_us",r.probe_frames);static const char*names[]={"encode","input","network","neural","decode","copy","x6","x7"};for(unsigned i=0;i<r.probe_parts;i++)fprintf(f," %s=%.1f",names[i],r.probe_sum[i]*10);fprintf(f," gpu_total=%.1f cpu_frame_ms=%.3f history=%u reset=%u nomotion=%u\n",t*10,r.probe_cpu/100,r.probe_history,r.probe_reset,r.probe_nomotion);fclose(f);}for(auto&v:r.probe_sum)v=0;r.probe_cpu=0;r.probe_history=r.probe_reset=r.probe_nomotion=0;}}
   }catch(...){failed=true;throw;}
  }
 };
