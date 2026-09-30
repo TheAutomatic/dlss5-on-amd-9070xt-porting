@@ -1,5 +1,5 @@
 # Stellar Blade: swap the given modules (both arches) AND the add-on (host must know *_up_lb); flags untouched. Onimusha: runtime (Content + _storage_) backed up, not replaced; HIP modules mirrored from Stellar Blade.
-param([string]$RestoreStellar='',[string]$RestoreOni='',[string[]]$Modules=@('c64-wave2'))
+param([string]$RestoreStellar='',[string]$RestoreOni='',[string[]]$Modules=@('c64-wave2','multihead-fast-padded-wave-packed'))
 $ErrorActionPreference='Stop'
 $root='D:\DLSSNR-Lab\hip-backend\swin-body-gap-20261001'
 $game='C:\Program Files (x86)\Steam\steamapps\common\StellarBlade\SB\Binaries\Win64'
@@ -13,13 +13,13 @@ if($RestoreStellar){Restore $game $RestoreStellar;'RESTORED STELLAR';exit 0}
 if($RestoreOni){Restore $oni $RestoreOni;'RESTORED ONI';exit 0}
 $stamp=Get-Date -Format yyyyMMdd-HHmmss
 # ---- Stellar Blade
-if((Get-FileHash "$game\dlss5-amd.addon64").Hash -ne '6D059845017F0E60D8EFBD5819C94C09A1E6F46312150A3F35ED940CDAE20A9F'){throw 'installed add-on changed'}
+if((Get-FileHash "$game\dlss5-amd.addon64").Hash -ne '69A6F3C9F21A31F098EAD28A6EE6B0C0D8B7951F06CB6904F2D611F0F78421F5'){throw 'installed add-on changed'}
 $flags=Get-Content "$game\DLSS5-AMD\native-game-flags.txt" -Raw
 foreach($e in 'DLSS5_DIRECT_IO=3','DLSS5_MAKE_RESIDENT_EVERY=60','DLSS5_HIP_SWIN_RUN=1'){if($flags -notmatch "(?m)^\s*$e\s*$"){throw "Flag missing: $e"}}
 $hipRel='DLSS5-AMD\native-game-tiled-assets\HIP'
 $mods=@($Modules|ForEach-Object{$_ -split ','}|Where-Object{$_}|ForEach-Object{"$_.hsaco"})
 $rels=@('dlss5-amd.addon64',"$hipRel\SHA256SUMS")+@(foreach($a in 'gfx1200','gfx1201'){foreach($m in $mods){"$hipRel\$a\$m"}})
-$sb="$root\backups\stellar-$stamp-uplb";Backup $game $rels $sb
+$sb="$root\backups\stellar-$stamp-dh";Backup $game $rels $sb
 try{Idle
  foreach($a in 'gfx1200','gfx1201'){foreach($m in $mods){Copy-Item "$root\build-final\$a\$m" "$game\$hipRel\$a\$m" -Force;if((Get-FileHash "$game\$hipRel\$a\$m").Hash -ne (Get-FileHash "$root\build-final\$a\$m").Hash){throw 'module readback'}}}
  if((Sums "$game\$hipRel") -ne 62){throw 'Expected 62 modules'}
@@ -28,7 +28,7 @@ try{Idle
 }catch{Restore $game $sb;throw}
 "STELLAR backup=$sb addon=$((Get-FileHash "$game\dlss5-amd.addon64").Hash)"
 # ---- Onimusha
-$ob="D:\DLSSNR-Lab\onimusha-backups\$stamp-uplb"
+$ob="D:\DLSSNR-Lab\onimusha-backups\$stamp-dh"
 $orels=@('LmxxfNrRuntime.dll')+$(if(Test-Path "$oni\_storage_\LmxxfNrRuntime.dll"){@('_storage_\LmxxfNrRuntime.dll')}else{@()})
 $orels+=@(Get-ChildItem "$oni\$hipRel" -Recurse -File|ForEach-Object{$_.FullName.Substring($oni.Length+1)})
 Backup $oni $orels $ob

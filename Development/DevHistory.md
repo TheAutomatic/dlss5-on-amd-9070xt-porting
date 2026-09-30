@@ -1325,3 +1325,6 @@ Zero（Splashtop，只作正确性）：剑星 2K 原生 AA EXACT 55.6～56.1，
 ## 2026-10-01 ViT QKV 加宽（w5t2/w5h2）与他真实形状的大 WG（4 wave，64×256）：全部 19 SAME，三轮全慢（BIG 最接近：900 +0.03，1080 +0.065ms）；A/A 对照干净。ViT 逐位重排线收尾，剩余差距是 half 归约的数值取舍。分支 vit-1080-gap。
 
 - 10-01 续：`C512_FFN_ONE`（C512 mix→expand→act→contract 一个 wave 在寄存器里做完，WMMA 操作数对调、累加器直接当下一级的操作数，无 LDS），19 组 SAME，三轮 900 −0.067/−0.066/−0.062、1080 −0.058/−0.050/−0.060ms，收下并装（剑星 add-on 69A6F3C9 含 swin 5621334d；鬼武者 runtime 5D158F68）。`C512_PROJ_FB8`（投影残差读 E4M3 tile，不写 f32）两版都逐位但变慢（1080 +0.14～0.20），不收，宏默认 0。重测 HIP span 900 7.03/7.12、1152 9.78/9.80、1088 9.31/9.33ms。
+
+## 2026-10-01 swin-body-gap 续：块 65 字节（不收）、下采样链尾 f16（收）、Up 本体（停）
+`CW_UP_LOW_BYTES`（块 65→C32Up 读字节）19 组 SAME，但第 1 轮两档变慢、1080 合并持平，不收，宏默认 0。`W2_DOWN_HALF`+`MH_POOL_HALF_IN`：编码器 C64/C128 链尾（post 3 = Hrtz，f16 精确）存 f16，池化 `_hin` 和 Up skip `_sh`/`_lb_sh` 读 f16；原有函数 ISA 逐条不变；rebase 到 C512_FFN_ONE 之后重测 19 组 SAME，三轮 900 −0.048/−0.058/−0.048、1080 −0.085/−0.047/−0.050，合并 p99 两档都更好。收，已装剑星（add-on 7E19CC6B，c64-wave2 38FEEB70/DC8B6DE1，mh-packed 03003659/EBD1A712），鬼武者镜像模块、RE9 runtime 待发包重编。Up 首块本体的差距来自数值取舍（e4m3 投影、f16 混合），逐位做不了，停。`results/swin-body-gap-20261001` §5。
