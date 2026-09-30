@@ -1266,3 +1266,7 @@ B13。`W2_FFN_W16_SMALL`（bit0 C64/bit1 C128，默认 0）只加 `c64/c128_wave
 
 ### 2026-09-30 F/往返/精确除法清理扫全网（`results/f-sweep-20260930`）
 把 c512-av-f 的清理扫遍现装 31 模块：还剩 5 处、4 组（D deep_fast-packed 的 byte_F＋decoder 字节＋ViT attention 1/sum；V vit-stream QKV byte_F；M padded-wave-packed q8_fused_round；W c64-wave2/swin-persistent up 字节）。`fp8(F(x))`→`fp8(med3(x+0))` 两种 F 各 2³² 穷举 0 差；ViT sum ⊂[1/256,2048]，rcp＋2 Newton 全区间 0 差。4 组都 19 组 SAME。三轮 ABBA：D 900 −0.014～−0.038、1080 −0.011～−0.028，合并 p99 两档更好，收（配方 `HIP_BYTE_F_ADD0 1`、`HIP_VIT_ATTN_RCP 1`，静态指令 72963→67189），已装剑星/鬼武者 deep_fast-packed EEC7D4A6/54D388A7。V（900 三轮 +0.003）、M（1080 三轮 +0.007～+0.015）、W（混）不收，宏默认 0。float 出口 F、输入侧 F(skip) 证不出/不冗余，跳过。
+
+## 2026-09-30 19:43：正确性验证通过（0.37 后 14 刀全装）
+
+Zero（Splashtop，只作正确性）：剑星 2K 原生 AA EXACT 55.6～56.1，鬼武者 2K 质量 60、GPU 约 95%，画面无异常。
