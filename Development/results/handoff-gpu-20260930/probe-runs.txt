@@ -1,0 +1,20 @@
+# handoff_probe.exe (modes 6/7 added), 9070, 2026-09-30; env ; args = mode MiB iters
+# first runs mode 6 (HIP waits on fence, D3D draw slices), all frames timed out:
+PROBE_SLICES=64 PROBE_ITER=4096 ; 6 64 300 -> slice_timeouts=300 gap_mean=30.09 hip_work_mean=3.26 ms ; mode 1 same run gap_mean=0.126
+PROBE_MEMSET_FLAG=1 ITER 4096/512 ; 6 64 300 -> timeouts=300, gap 30.11 / 3.96 ms, hip_work 5.50 / 2.19 ms
+PROBE_PRESYNC=1 (CPU hipStreamSynchronize before D3D list) ; 6 64 100 -> timeouts=0 (flag is visible; HIP is starved while D3D spins)
+# ABBA
+PROBE_SLICES=64 PROBE_ITER=2048 | mode=1 mib=4096 iters=300 n=270 gap_mean=7.5960 gap_p50=7.5904 gap_p99=7.8420 hip_work_mean=7.3242 handoff_mean=0.2719 handoff_p50=0.1582 handoff_p99=7.4646 ms
+PROBE_SLICES=64 PROBE_ITER=2048 | mode=3 mib=4096 iters=300 n=270 gap_mean=7.5119 gap_p50=7.5022 gap_p99=7.6538 hip_work_mean=7.4909 handoff_mean=0.0211 handoff_p50=-0.0066 handoff_p99=-0.0063 ms
+PROBE_SLICES=64 PROBE_ITER=2048 | slice_timeouts=1 flag=300 slices=64 iter=2048 mode=7 mib=4096 iters=300 n=270 gap_mean=7.6138 gap_p50=7.5494 gap_p99=7.7782 hip_work_mean=7.5930 handoff_mean=0.0208 handoff_p50=-0.0072 handoff_p99=-0.0061 ms
+PROBE_SLICES=64 PROBE_ITER=2048 | slice_timeouts=1 flag=300 slices=64 iter=2048 mode=7 mib=4096 iters=300 n=270 gap_mean=7.6168 gap_p50=7.5402 gap_p99=7.8274 hip_work_mean=7.5980 handoff_mean=0.0187 handoff_p50=-0.0072 handoff_p99=-0.0061 ms
+PROBE_SLICES=64 PROBE_ITER=2048 | mode=3 mib=4096 iters=300 n=270 gap_mean=7.5118 gap_p50=7.5037 gap_p99=7.6697 hip_work_mean=7.4915 handoff_mean=0.0204 handoff_p50=-0.0066 handoff_p99=-0.0063 ms
+PROBE_SLICES=64 PROBE_ITER=2048 | mode=1 mib=4096 iters=300 n=270 gap_mean=7.5928 gap_p50=7.5866 gap_p99=7.7297 hip_work_mean=7.1280 handoff_mean=0.4648 handoff_p50=0.1596 handoff_p99=7.5934 ms
+PROBE_SLICES=64 PROBE_ITER=2048 | slice_timeouts=1 flag=1000 slices=64 iter=2048 mode=7 mib=64 iters=1000 n=900 gap_mean=0.2731 gap_p50=0.1400 gap_p99=0.6356 hip_work_mean=0.1401 handoff_mean=0.1330 handoff_p50=0.1114 handoff_p99=0.5880 ms
+PROBE_SLICES=64 PROBE_ITER=2048 | mode=3 mib=64 iters=1000 n=900 gap_mean=0.0840 gap_p50=0.0846 gap_p99=0.1170 hip_work_mean=0.0176 handoff_mean=0.0664 handoff_p50=0.0803 handoff_p99=0.1058 ms
+# slice-size variants
+PROBE_SLICES=8 PROBE_ITER=16384 | slice_timeouts=1 flag=300 slices=8 iter=16384 mode=7 mib=4096 iters=300 n=270 gap_mean=7.6474 gap_p50=7.5737 gap_p99=8.0043 hip_work_mean=7.6334 handoff_mean=0.0140 handoff_p50=-0.0185 handoff_p99=-0.0061 ms
+PROBE_SLICES=256 PROBE_ITER=128 | slice_timeouts=1 flag=300 slices=256 iter=128 mode=7 mib=4096 iters=300 n=270 gap_mean=7.6773 gap_p50=7.6603 gap_p99=7.8307 hip_work_mean=7.6589 handoff_mean=0.0183 handoff_p50=-0.0084 handoff_p99=-0.0071 ms
+PROBE_SLICES=8 PROBE_ITER=16384 | mode=3 mib=4096 iters=300 n=270 gap_mean=7.5045 gap_p50=7.4965 gap_p99=7.6694 hip_work_mean=7.4841 handoff_mean=0.0204 handoff_p50=-0.0066 handoff_p99=-0.0062 ms
+PROBE_SLICES=8 PROBE_ITER=16384 | slice_timeouts=1 flag=600 slices=8 iter=16384 mode=7 mib=1024 iters=600 n=540 gap_mean=1.8433 gap_p50=1.8134 gap_p99=1.8955 hip_work_mean=1.8577 handoff_mean=-0.0144 handoff_p50=-0.0191 handoff_p99=-0.0065 ms
+PROBE_SLICES=8 PROBE_ITER=16384 | mode=3 mib=1024 iters=600 n=540 gap_mean=1.8024 gap_p50=1.8043 gap_p99=1.8500 hip_work_mean=1.8059 handoff_mean=-0.0035 handoff_p50=-0.0066 handoff_p99=-0.0063 ms

@@ -1182,3 +1182,7 @@ WorkingPlan B1 留下的未实测候选。改为不动宿主：`mh_attention_pro
 ## 2026-09-30 08:18：本机验收（a80db313 + C32 对齐 + 跳零）
 
 Zero：剑星 2K 原生 AA EXACT **56**（黄字 55.6～56.1，此前 55～56 偶尔 56）；鬼武者 2K 质量（900）稳定 60，GPU 约 95%。
+
+## 2026-09-30：交接两半 GPU 同步——HIP→D3D 分片自旋反而更慢，交账
+
+静态拆了 Daniel 0.5.1 的 HIP→D3D 半程（`SpinDraw=1`、`PredSlices=64`、`InlineWaitMs=200` 钳 50～5000；1 像素 PS 原子读标志 + 隔几次读 abort word，predication 跳过剩下的分片；超时就把这帧标脏、显示上一帧残差，预算自适应，主机看门狗写 abort；没有退回 fence 的路径）。在探针里加了 mode 6/7。mode 6（HIP 走 fence 等）每帧都超时：D3D 一开始自旋，HIP 就排不进来（`PROBE_PRESYNC` 证明标志是可见的）。mode 7（两边都轮询）不会饿死，但 HIP 7.4ms 这档 gap 7.61～7.68ms，mode 3（仅 D3D→HIP 轮询）是 7.50～7.51，fence 双向是 7.59～7.60；p99 也更差。mode 3 下交接≈0，剩下的时间是上下文切换，自旋省不掉。D3D→HIP 轮询单独省 0.05～0.08ms，不过线。没改生产代码、没加开关、没装机、没发包；剑星 a80db313、鬼武者 fd4b2c0c 都没动。`results/handoff-gpu-20260930`。

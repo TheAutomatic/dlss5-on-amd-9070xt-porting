@@ -18,7 +18,7 @@
 ## 正在进行
 
 - **下一版（0.38）待打包**：① 900 去 shift_pack（`results/shift-pack-900-20260930`）；② C32 块 4 skip/下采样存 E4M3 字节（`results/c32-align-20260930`，逐位，900 −0.05ms 0.62%、1080 −0.09ms 0.82%，改 c32-wave1＋multihead-fast-padded-wave-packed 两模块）。③ C32 对角残差跳零 `CW_DIAG_ONLY 1`（Zero 批准，逐位，1080 约 −0.04ms；09-30 08:01 已装）。现装宿主 **a80db313** / RE9 runtime **fd4b2c0c**，剑星、鬼武者已装（09-30 03:44 备份）。Zero 定何时发。
-- 其余无在跑任务。09-29～09-30 已完成项细节见各 `results/*/README.md` 与 DevHistory。
+- 交接 GPU 同步 09-30 交账（HIP→D3D 分片自旋反慢，未装）。其余无在跑任务。09-29～09-30 已完成项细节见各 `results/*/README.md` 与 DevHistory。
 
 ## Zero 的标准与取舍（为什么这样定）
 
@@ -51,7 +51,7 @@
 地图：900 `results/kernel-map-900-20260930`（179 派发，独立核和 7258.6µs vs Daniel 8171.6µs；只在 C32 +233µs、C512 +182µs 落后）；1080 `results/kernel-map-20260929`。
 
 1. ~~C32 上采样块 / 块 4 边界~~ **09-30 已做**：大头是数据格式（skip/下采样 f32→E4M3 字节），逐位，900 0.62%、1080 0.82%，已装。余差：up 低分辨率输入 f32/half（Daniel FP8，有损，不追）、up 分发 bpermute vs 他 LDS（量小）。
-2. **HIP↔D3D 交接两半合做**：D3D→HIP（`WriteBufferImmediate`＋`hipStreamWaitValue32`）已测省 0.054ms、安全，单独未过门槛；HIP→D3D 约 0.1ms，朴素 compute 自旋 TDR / 饿死 HIP，**必须照 Daniel 1 像素 draw 分片自旋**，先在探针 `HIP/experiments/handoff-poll/handoff_probe.cpp` 加 mode 验证不饿死。两半合计预期 ~0.15ms（两档都吃），把握中，是新工程。`results/handoff-poll-20260930`。
+2. ~~HIP↔D3D 交接两半合做~~ **09-30 交账**（`results/handoff-gpu-20260930`）：照 Daniel 做了 1 像素 draw 分片自旋（predication），放进探针测，**比 fence 慢 0.04～0.17ms**。剩下的时间在 GPU 上下文切换上，自旋省不掉。D3D→HIP 轮询单独省 0.05～0.08ms，留着合包时用。
 3. ~~小件~~ **09-30 已交账**（`results/small-cuts-20260930`）：对角残差逐位但单独不过线（留合包）；C256 FFN 逐字节写 hidden 是布局所致，要转置 expand 才能打包（不是小件，暂不做）；ViT QKV 归一化换求和不能逐位。
 4. **C512 FFN 链**：三核 524 vs Daniel ffwd 382µs（900）。组织方式问题，旧负账多（M32、单 wave R/RF），把握低，放后。
 5. **ViT attention 余差**：640 我方 ~38µs vs 他 22～24µs，余差涉及 V 请求组织与 half 数学，未唯一拆清；4wave/64key 预取照搬已反慢。只在有新证据时动。
@@ -67,7 +67,7 @@
 - 900 C256 新分组；C64/C128 Down 融合；去清零；C32 权重缓存。
 - ViT byte 出口/入口 gather-pack；ViT 消费端 float 打包 V；ViT attention 4wave/64key 预取；QKV 块重排、scale 提前读、CH4/CH16 写法。
 - `MAKE_RESIDENT_EVERY` 60 vs 0：离线回放无 30ms 周期尖峰（`resident-spike-20260929`），保留 60。
-- 交接 D3D→HIP 单半边（−0.054ms，未过门槛，待与另一半合做）。
+- 交接 D3D→HIP 单半边（−0.05～0.08ms，未过门槛）；HIP→D3D draw 分片自旋（探针里比 fence 慢，`handoff-gpu-20260930`）。
 - 编译器：COMGR2/LLVM20 慢 3%；公开 LLVM21 持平；LLVM22 不逐位；VOPD 前瞻 ±0.3%。
 - 旧 block46 展开改 FP8 WMMA：10 个 float 元素位差，不能换。
 
