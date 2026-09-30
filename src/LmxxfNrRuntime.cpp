@@ -311,7 +311,8 @@ void LoadFlagsFileOnce(const std::wstring &assets)
                 // Only the network/kernel keys: codec, present and pre-upscale keys of the add-on templates
                 // (DLSS5_CODEC_SRGB, DLSS5_PRE_UPSCALE, ...) do not apply to this runtime and stay ignored.
                 const bool allowed = !key.compare(0, 10, "DLSS5_HIP_") || key == "DLSS5_SKIP_BLOCKS" ||
-                                     key == "DLSS5_FIT_LARGE" || key == "DLSS5_NETWORK_HEIGHT";
+                                     key == "DLSS5_FIT_LARGE" || key == "DLSS5_NETWORK_HEIGHT" ||
+                                     key == "DLSS5_NETWORK_1080_ROWS";
                 if (!allowed)
                     continue;
                 if (std::getenv(key.c_str()))

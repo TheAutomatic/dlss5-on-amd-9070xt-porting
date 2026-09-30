@@ -1186,3 +1186,11 @@ Zero：剑星 2K 原生 AA EXACT **56**（黄字 55.6～56.1，此前 55～56 �
 ## 2026-09-30：交接两半 GPU 同步——HIP→D3D 分片自旋反而更慢，交账
 
 静态拆了 Daniel 0.5.1 的 HIP→D3D 半程（`SpinDraw=1`、`PredSlices=64`、`InlineWaitMs=200` 钳 50～5000；1 像素 PS 原子读标志 + 隔几次读 abort word，predication 跳过剩下的分片；超时就把这帧标脏、显示上一帧残差，预算自适应，主机看门狗写 abort；没有退回 fence 的路径）。在探针里加了 mode 6/7。mode 6（HIP 走 fence 等）每帧都超时：D3D 一开始自旋，HIP 就排不进来（`PROBE_PRESYNC` 证明标志是可见的）。mode 7（两边都轮询）不会饿死，但 HIP 7.4ms 这档 gap 7.61～7.68ms，mode 3（仅 D3D→HIP 轮询）是 7.50～7.51，fence 双向是 7.59～7.60；p99 也更差。mode 3 下交接≈0，剩下的时间是上下文切换，自旋省不掉。D3D→HIP 轮询单独省 0.05～0.08ms，不过线。没改生产代码、没加开关、没装机、没发包；剑星 a80db313、鬼武者 fd4b2c0c 都没动。`results/handoff-gpu-20260930`。
+
+## 2026-09-30：1080 档紧凑几何 1088 行（可选档、有损、默认不开）
+
+Zero 同意做成选项。新开关 `DLSS5_NETWORK_1080_ROWS=1088`（默认 1152；`DLSS5_NETWORK_HEIGHT=1088` 同义固定档），1080 档按 1920×1088：1080＋8 行反射，/32 级 60×34，ViT 沿用 32×20 网格、有效 30×17，post 位移仍 3。1088=2⁶×17，与 900 档 960 同属 2⁶，各级整除，只改宿主几何门（`native_network_geometry.h`、`hip_reference_network.h` 四处、`native_post70.h`、runtime flags 白名单），模块不变。
+- 默认逐位：7 用例×EXACT/AE×12 帧＋回绕 18 组 SAME；RE9 runtime 默认 1080/900 hash 与 09-29 同。1088 快路径与 SWIN_RUN=0/WAVE_OWNED=0 旧路径逐帧同（几何处理自洽），SWIN_RUN 在 1088 下生效无回落。
+- 整网 ABBA 1152→1088：10.736→10.261（−0.474ms，4.42%）、10.764→10.283（−0.481ms，4.47%）。比估的 0.70ms 少：ViT 仍 640 token，只省 Swin/解码器的行。
+- 画质（bench 1296×720 输出，对 1152）：全帧 56～57dB（8-bit 54～55.5），最大单点 20～48/255、几十个像素、都在画面中部；底 32 行 52.5～55.6dB 略差，顶边与中部相当。
+- 与 Daniel 差异：他 1088＋post 位移 0（两处偏离），我们只动行数。产物 `D:\DLSSNR-Lab\geom1088-20260930\`（add-on aa74b20b、runtime 2d561e2d），未装、未发包。`results/geom-1088-20260930`。
