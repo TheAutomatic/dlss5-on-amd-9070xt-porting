@@ -6,6 +6,8 @@
 #include <deque>
 #include <atomic>
 #include "native_frame_stats.h"
+#include "native_format_convert.h"
+#include "native_hot_flags.h"
 
 // EXPERIMENT ONLY: the captured list must contain no consumers of the FFX output
 // after the dispatch site. This is the Stellar Blade submission contract, not a
@@ -39,6 +41,9 @@ inline const DisplaySettings&Display(){
  }();return settings;
 }
 
+/* 0.38 hot reload: DLSS5_NOTICE / DLSS5_SHOW_FPS edited in the flags file apply from the next frame (native_hot_flags.h) */
+inline unsigned NoticeNow(){const auto h=NativeHotFlags::Instance().Get();return h.notice>=0?unsigned(h.notice):Display().notice;}
+inline unsigned FpsNow(){const auto h=NativeHotFlags::Instance().Get();return h.fps>=0?unsigned(h.fps):Display().fps;}
 inline bool Async(){
  /* DLSS5_PRE_UPSCALE_ASYNC = 1 | 0 | auto. auto (the shipped template since 0.30): per-title quirk table -- engines whose FSR colour
     buffer is a transient aliased resource must submit synchronously, otherwise the deferred copy reads whatever the memory holds at
@@ -151,6 +156,7 @@ inline void ObserveWork(ID3D12GraphicsCommandList*list){
 }
 inline void Transition(ID3D12GraphicsCommandList*c,ID3D12Resource*r,D3D12_RESOURCE_STATES a,D3D12_RESOURCE_STATES b){if(!r||a==b)return;D3D12_RESOURCE_BARRIER v{};v.Type=D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;v.Transition={r,D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,a,b};c->ResourceBarrier(1,&v);}
 struct Runtime{NativeGameSubmission submit;NativeTextOverlay overlay;ID3D12Resource*low{};bool failed{};
+ NativeFormatConvert convert;bool format_logged{}; /* 0.38 colour-format fallback (formats outside NativeIsGameColor only) */
  std::deque<std::pair<UINT64,std::unique_ptr<Job>>>retired;
  double cpu_ms{};unsigned cpu_frames{};
  void Retire(){const auto done=submit.Completed();if(done==UINT64_MAX)return;while(!retired.empty()&&retired.front().first<=done)retired.pop_front();}
@@ -183,15 +189,26 @@ inline bool Process(ID3D12CommandQueue*q,Job&j){
   auto*color=static_cast<ID3D12Resource*>(d.resources[0].resource);auto*motion=static_cast<ID3D12Resource*>(d.resources[2].resource);auto cd=color->GetDesc();
   if(j.frame<=2){char m[256];snprintf(m,sizeof m,"inputs: color fmt=%u %llux%u motion fmt=%u depth fmt=%u exposure=%s reactive=%s tc=%s output fmt=%u mvscale=%g,%g jitter=%g,%g pre_exposure=%g flags=0x%x",unsigned(cd.Format),(unsigned long long)cd.Width,cd.Height,unsigned(motion->GetDesc().Format),d.resources[1].resource?unsigned(static_cast<ID3D12Resource*>(d.resources[1].resource)->GetDesc().Format):0u,d.resources[3].resource?"yes":"no",d.resources[4].resource?"yes":"no",d.resources[5].resource?"yes":"no",unsigned(static_cast<ID3D12Resource*>(d.resources[6].resource)->GetDesc().Format),d.motion_scale[0],d.motion_scale[1],d.jitter[0],d.jitter[1],d.pre_exposure,d.flags);Log(j.frame,d,m);}
   if(FitLargeFromFile())NativeFitLargeInputOverride()=true;
-  bool supported=NativeInputGeometry::Supported(d.render[0],d.render[1],NativeFitLargeInput())&&NativeIsGameColor(cd.Format)&&!(cd.Flags&D3D12_RESOURCE_FLAG_DENY_SHADER_RESOURCE);
+  /* 0.38 format fallback: a colour format outside NativeIsGameColor that the GPU reads as float is converted into a private RGBA16F
+     low-res texture (instead of the same-format copy) and from there takes the unchanged RGBA16F route; FSR is then handed that RGBA16F
+     texture. Originally accepted formats take exactly the old code (fallback_view stays UNKNOWN). */
+  DXGI_FORMAT fallback_view=NativeFallbackColor(cd.Format);
+  if(fallback_view!=DXGI_FORMAT_UNKNOWN&&Mode()==1){std::string why;if(!s->convert.Available(s->submit.Device(),&why)){if(!why.empty())Log(j.frame,d,("format fallback unavailable: "+why).c_str());fallback_view=DXGI_FORMAT_UNKNOWN;}}const DXGI_FORMAT low_format=fallback_view!=DXGI_FORMAT_UNKNOWN?DXGI_FORMAT_R16G16B16A16_FLOAT:cd.Format;
+  bool supported=NativeInputGeometry::Supported(d.render[0],d.render[1],NativeFitLargeInput())&&(NativeIsGameColor(cd.Format)||fallback_view!=DXGI_FORMAT_UNKNOWN)&&!(cd.Flags&D3D12_RESOURCE_FLAG_DENY_SHADER_RESOURCE);
+  if(!s->format_logged&&Mode()==1&&(fallback_view!=DXGI_FORMAT_UNKNOWN||!NativeIsGameColor(cd.Format))){s->format_logged=true;char m[200];
+   if(fallback_view!=DXGI_FORMAT_UNKNOWN)snprintf(m,sizeof m,"colour format %s (%u): format fallback, converted to R16G16B16A16_FLOAT (view %s)",NativeDxgiFormatName(cd.Format),unsigned(cd.Format),NativeDxgiFormatName(fallback_view));
+   else snprintf(m,sizeof m,"colour format %s (%u) rejected: not in the colour table%s; FFX only",NativeDxgiFormatName(cd.Format),unsigned(cd.Format),NativeFallbackColorView(cd.Format)==DXGI_FORMAT_UNKNOWN||NativeIsGameColor(cd.Format)?" nor the fallback table":NativeFormatFallbackOn()?" (fallback pass unavailable)":" (fallback disabled by DLSS5_FORMAT_FALLBACK=0)");
+   Log(j.frame,d,m);}
   if(Mode()==1&&supported&&!neural_oneshot.Bypassed()){
-   bool same=s->low&&s->low->GetDesc().Width==d.render[0]&&s->low->GetDesc().Height==d.render[1]&&s->low->GetDesc().Format==cd.Format;
+   bool same=s->low&&s->low->GetDesc().Width==d.render[0]&&s->low->GetDesc().Height==d.render[1]&&s->low->GetDesc().Format==low_format;
    if(!same&&s->low){if(neural_oneshot.ResetForNewSession("pre-upscale render geometry changed")){s->submit.Flush();s->low->Release();s->low=nullptr;}else supported=false;}
    if(supported&&!s->low){cd.Width=d.render[0];cd.Height=d.render[1];cd.Layout=D3D12_TEXTURE_LAYOUT_UNKNOWN;cd.Alignment=0;
+    if(fallback_view!=DXGI_FORMAT_UNKNOWN){cd.Format=low_format;cd.Flags=D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS;cd.DepthOrArraySize=1;cd.MipLevels=1;cd.SampleDesc={1,0};}
     D3D12_HEAP_PROPERTIES hp{};hp.Type=D3D12_HEAP_TYPE_DEFAULT;
     if(FAILED(NativeCreateCommittedResource(s->submit.Device(),&hp,D3D12_HEAP_FLAG_NONE,&cd,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,nullptr,IID_PPV_ARGS(&s->low))))throw std::runtime_error("private low-res allocation");}
    if(supported){
-    s->submit.Submit([&](ID3D12GraphicsCommandList*c){Transition(c,color,j.states[0],D3D12_RESOURCE_STATE_COPY_SOURCE);Transition(c,s->low,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,D3D12_RESOURCE_STATE_COPY_DEST);
+    if(fallback_view!=DXGI_FORMAT_UNKNOWN)s->submit.Submit([&](ID3D12GraphicsCommandList*c){s->convert.Record(c,color,fallback_view,j.states[0],s->low,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,d.render[0],d.render[1]);});
+    else s->submit.Submit([&](ID3D12GraphicsCommandList*c){Transition(c,color,j.states[0],D3D12_RESOURCE_STATE_COPY_SOURCE);Transition(c,s->low,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,D3D12_RESOURCE_STATE_COPY_DEST);
      D3D12_TEXTURE_COPY_LOCATION src{},dst{};src.pResource=color;src.Type=D3D12_TEXTURE_COPY_TYPE_SUBRESOURCE_INDEX;dst.pResource=s->low;dst.Type=D3D12_TEXTURE_COPY_TYPE_SUBRESOURCE_INDEX;
      D3D12_BOX box{0,0,0,d.render[0],d.render[1],1};c->CopyTextureRegion(&dst,0,0,0,&src,&box);
      Transition(c,s->low,D3D12_RESOURCE_STATE_COPY_DEST,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE);Transition(c,color,D3D12_RESOURCE_STATE_COPY_SOURCE,j.states[0]);});
@@ -204,11 +221,13 @@ inline bool Process(ID3D12CommandQueue*q,Job&j){
     }
     /* DLSS5_DIRECT_IO bit 2: FSR reads the decoder output itself (same bytes the copy would have put in low; NON_PIXEL_SHADER_RESOURCE) */
     fed=processed&&neural_oneshot.Delivered()?neural_oneshot.Delivered():s->low;
-    if(processed){d.resources[0].resource=fed;d.resources[0].width=d.render[0];d.resources[0].height=d.render[1];d.resources[0].state=4;}
+    if(processed){d.resources[0].resource=fed;d.resources[0].width=d.render[0];d.resources[0].height=d.render[1];d.resources[0].state=4;if(fallback_view!=DXGI_FORMAT_UNKNOWN)d.resources[0].format=4;/* FFX surface format R16G16B16A16_FLOAT: the private colour is RGBA16F */}
    }
   }
   if(Mode()==1&&!supported&&j.frame%100==0)Log(j.frame,d,"unsupported low-res input: FFX only");
   if(FrameStats().On())FrameStats().Frame(processed?NFS_RUN:Mode()!=1?NFS_IDLE:neural_oneshot.Bypassed()?NFS_BYPASS:!supported?NFS_UNSUPPORTED:neural_oneshot.Phase()==5?NFS_ERROR:neural_oneshot.Phase()<4?NFS_INIT:NFS_IDLE);
+  const unsigned notice=NoticeNow(); /* the overlay pipeline is built at start when NOTICE>=2; switched on by a hot reload it is built here once */
+  if(Mode()==1&&notice>=2&&Display().notice<2&&!s->overlay.Ready())s->overlay.Prepare(static_cast<ID3D12Resource*>(d.resources[6].resource));
   s->submit.Submit([&](ID3D12GraphicsCommandList*c){
    for(unsigned i=0;i<7;i++)if(j.desc.resources[i].resource){bool duplicate=false;for(unsigned k=0;k<i;k++)duplicate|=j.desc.resources[k].resource==j.desc.resources[i].resource;if(!duplicate)Transition(c,static_cast<ID3D12Resource*>(j.desc.resources[i].resource),j.states[i],replay_states[i]);}
    d.command_list=c;Guard guard;if(j.frame<5)Log(j.frame,d,"before original FFX replay");
@@ -217,8 +236,8 @@ inline bool Process(ID3D12CommandQueue*q,Job&j){
    if(processed){PrivateBarrierResource()=nullptr;Transition(c,fed,PrivateBarrierState(),D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE);}
    if(j.frame<5)Log(j.frame,d,"after original FFX replay",processed,result);
    for(unsigned i=0;i<7;i++)if(j.desc.resources[i].resource){bool duplicate=false;for(unsigned k=0;k<i;k++)duplicate|=j.desc.resources[k].resource==j.desc.resources[i].resource;if(!duplicate)Transition(c,static_cast<ID3D12Resource*>(j.desc.resources[i].resource),replay_states[i],j.states[i]);}
-   if(Mode()==1&&Display().notice>=2){
-   char text[96],fps[20]="";const double ms=neural_oneshot.AvgMs();if(Display().fps&&processed&&ms>0)snprintf(fps,sizeof fps," %.1f FPS",1000.0/ms);
+   if(Mode()==1&&notice>=2){
+   char text[96],fps[20]="";const double ms=neural_oneshot.AvgMs();if(FpsNow()&&processed&&ms>0)snprintf(fps,sizeof fps," %.1f FPS",1000.0/ms);
    const unsigned phase=neural_oneshot.Phase();const char*status=processed?"ON":phase==1?"INIT":phase==5?"ERROR":!supported?"UNSUPPORTED":"OFF";
    const char*reuse="";
 #ifdef DLSS5_USE_HIP

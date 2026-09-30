@@ -1198,3 +1198,11 @@ Zero 同意做成选项。新开关 `DLSS5_NETWORK_1080_ROWS=1088`（默认 1152
 ## 2026-09-30：D3D→HIP GPU 轮询进生产代码（新验收规则）——逐位，但整帧慢，不收
 
 Zero 改了验收规则：小改动只要逐位、离线 ABBA 为正、p99 和另一档都不变差就收，0.5% / 0.1ms 门槛取消。按新规把 D3D→HIP 这一半做进 `hip_d3d12_bridge.h`，开关 `DLSS5_HIP_INPUT_POLL`，默认 0；add-on 和 RE9 runtime 共用这份桥接头。取 1 是每帧单独提交一条 marker 列表，取 2 是把 marker 录进输入拷贝列表；两种都有启动自检和 200ms 看门狗，出问题就退回 fence。两种模式都是 18 组 SAME。但完整帧回放两档两轮 avg 都慢 0.01～0.04ms（探针里单独测省的 0.05～0.08ms 在整帧里兑现不了），所以不收、不装，模板没动，10 分钟长跑没跑。WorkingPlan 的验收段已改成新规；交接这条线停。`results/handoff-gpu-20260930`。
+
+## 2026-09-30 产品侧：颜色格式兜底 + flags 热重载（参照 mochizuki 0.0.2.4，未装机）
+
+- 兜底表 `native_format_fallback.h`（只在原表说不时才查）；add-on pre-upscale 用转换 pass `native_format_convert.hlsl` 转私有 RGBA16F 再走原路线，RE9 runtime 走 RGB9E5 的私有 FP16 路线；拒绝日志带格式名；post/Magpie/XeSS 路线不覆盖。开关 `DLSS5_FORMAT_FALLBACK`（默认 1）。
+- 热重载 `native_hot_flags.h`：STRENGTH/NOTICE/SHOW_FPS，每秒比时间戳，默认开；网络/模块类不热改；RE9 不适用。
+- 9070：HEAD vs 新宿主 168 帧（7 用例×EXACT/AE×12）全 SAME＋AE CSV 同；RE9 runtime RGBA16F 900/1080 hash 同（b2980ada/758674a8）；10 种新格式经 RE9 runtime 过整网出图，旧 runtime 全拒；转换 pass 14 格式与 CPU 解码差 ≤1 half ULP（驱动截断）。
+- 插曲：第一次跑 rt_fmt 报 native_codec_encode.hlsl not found——runtime 只在 DLL 旁 `shaders\` 找，LMXXF_SHADER_DIR 不管用；convert_smoke 初判 FAIL 是容差按 RNE 半 ULP 写的，驱动 f32→f16 存储截断，放到 1 ULP 后全过。
+- add-on 8b729f22、RE9 runtime 99c8ead9，产物 `D:\DLSSNR-Lab\product-fmt-20260930\`。详见 `results/product-fmt-reload-20260930`。

@@ -151,3 +151,11 @@ DLSS5_DIRECT_IO=1
 
 # C256 internal-stage ready queue; bounded GPU recovery (on by default since 0.37).
 DLSS5_HIP_SWIN_RUN=1
+
+# 0.38: colour-format fallback. Colour formats outside the original table that the GPU reads as float (R9G9B9E5 linear HDR,
+# B8G8R8X8, R10G10B10A2, R32G32B32(A32), SNORM, 5:6:5 ...) are converted into RGBA16F and take the usual route; formats that
+# worked before are untouched (bit-exact). A rejected format is logged by name. 0 = original table only.
+DLSS5_FORMAT_FALLBACK=1
+# 0.38: hot reload. Edits to DLSS5_STRENGTH / DLSS5_NOTICE / DLSS5_SHOW_FPS in this file apply within a second, no restart
+# (logged as event=hot_reload in logs\native-game-oneshot.txt). All other keys still need a game restart. 0 = off.
+DLSS5_HOT_RELOAD=1

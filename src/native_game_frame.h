@@ -359,7 +359,7 @@ public:
   if(!ready||failed||!target)throw std::runtime_error("frame unavailable");
   if(target==resources->original&&source_state!=target_state)throw std::runtime_error("aliased frame texture states disagree");
   auto desc=target->GetDesc();
-  if(desc.Dimension!=D3D12_RESOURCE_DIMENSION_TEXTURE2D||desc.Width!=resources->encode.Geometry().width||desc.Height!=resources->encode.Geometry().height||desc.DepthOrArraySize!=1||desc.MipLevels!=1||desc.SampleDesc.Count!=1||!NativeIsGameColor(desc.Format))throw std::runtime_error("frame target must match the initialized input geometry/format");
+  if(desc.Dimension!=D3D12_RESOURCE_DIMENSION_TEXTURE2D||desc.Width!=resources->encode.Geometry().width||desc.Height!=resources->encode.Geometry().height||desc.DepthOrArraySize!=1||desc.MipLevels!=1||desc.SampleDesc.Count!=1||!NativeIsGameColor(desc.Format))throw std::runtime_error(std::string("frame target must match the initialized input geometry/format (")+NativeDxgiFormatName(desc.Format)+" "+std::to_string(unsigned(desc.Format))+")");
   ID3D12Device*owner=nullptr;auto hr=target->GetDevice(IID_PPV_ARGS(&owner));if(FAILED(hr))throw std::runtime_error("frame target device query");bool same=NativeSameDevice(owner,resources->submit.Device());owner->Release();if(!same)throw std::runtime_error("frame target device mismatch");
   try{
    auto&r=*resources;

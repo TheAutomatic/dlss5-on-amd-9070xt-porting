@@ -674,7 +674,10 @@ const char *ColorInputProblem(const D3D12_RESOURCE_DESC &desc)
         return "MipLevels != 1";
     if (desc.SampleDesc.Count != 1)
         return "SampleDesc.Count != 1";
-    if (!(NativeIsGameColor(desc.Format) || desc.Format == DXGI_FORMAT_R9G9B9E5_SHAREDEXP))
+    // RGB9E5 (always, since 0.28) and the 0.38 fallback table (native_format_fallback.h, DLSS5_FORMAT_FALLBACK)
+    // take the private FP16 output route; the encoder's typed SRV is the format conversion.
+    if (!(NativeIsGameColor(desc.Format) || desc.Format == DXGI_FORMAT_R9G9B9E5_SHAREDEXP ||
+          NativeFallbackColor(desc.Format) != DXGI_FORMAT_UNKNOWN))
         return "unsupported DXGI format";
     if (desc.Flags & D3D12_RESOURCE_FLAG_DENY_SHADER_RESOURCE)
         return "DENY_SHADER_RESOURCE";
@@ -1000,11 +1003,11 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
         const UINT ch = cdesc.Height;
         if (const char *why = ColorInputProblem(cdesc))
         {
-            char msg[224];
+            char msg[288];
             std::snprintf(msg, sizeof msg,
-                          "PrepareFrame: colour rejected (%s): fmt=%u %llux%llu arr=%u mips=%u "
+                          "PrepareFrame: colour rejected (%s): fmt=%s(%u) %llux%llu arr=%u mips=%u "
                           "samples=%u flags=0x%x fitLarge=%d",
-                          why, unsigned(cfmt), static_cast<unsigned long long>(cdesc.Width),
+                          why, NativeDxgiFormatName(cfmt), unsigned(cfmt), static_cast<unsigned long long>(cdesc.Width),
                           static_cast<unsigned long long>(cdesc.Height), unsigned(cdesc.DepthOrArraySize),
                           unsigned(cdesc.MipLevels), unsigned(cdesc.SampleDesc.Count), unsigned(cdesc.Flags),
                           NativeFitLargeInput() ? 1 : 0);
@@ -1203,7 +1206,8 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
                 // format cannot be a UAV target and is never written, only read. Driven by the
                 // input format rather than game identity; every other format keeps its existing
                 // output route.
-                const bool privateFloatOutput = (cfmt == DXGI_FORMAT_R9G9B9E5_SHAREDEXP);
+                const bool privateFloatOutput = (cfmt == DXGI_FORMAT_R9G9B9E5_SHAREDEXP) ||
+                                                (NativeFallbackColor(cfmt) != DXGI_FORMAT_UNKNOWN);
                 enc = new NativeGameCodec();
                 session->boundExposure = bindExposure;
                 session->allocWidth = cw;
