@@ -234,7 +234,7 @@ template<uint C,bool ByteIn,bool ByteOut,bool Up=false
 #if W2_EXPLICIT_WINDOW
  ,bool ExplicitWindow=false
 #endif
- ,bool W16=false>
+ ,bool W16=false,bool LowByte=false>
 DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_any,
  uint width,uint height,uint workw,uint workh,uint sx,uint sy,uint post,const float*upw=nullptr,const float*skip=nullptr
 #if W2_EXPLICIT_WINDOW
@@ -272,9 +272,9 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
   f8 totals[2]{};
   for(uint k=0;k<IC;k+=16){h8 a{},b{};
 #if W2_HOIST_LOADS&4
-   {const bool ok=lx>=0&&ly>=0&&lx<int(iw)&&ly<int(ih);const uint base=ok?(uint(ly)*iw+uint(lx))*IC:0u;for(uint e=0;e<8;e++){float v=in[base+k+gr*8+e];a[e]=ok?(_Float16)v:(_Float16)0.f;}}
+   {const bool ok=lx>=0&&ly>=0&&lx<int(iw)&&ly<int(ih);const uint base=ok?(uint(ly)*iw+uint(lx))*IC:0u;for(uint e=0;e<8;e++){float v;if constexpr(LowByte)v=__builtin_amdgcn_cvt_f32_fp8(int(reinterpret_cast<const unsigned char*>(in)[base+k+gr*8+e]),0);else v=in[base+k+gr*8+e];a[e]=ok?(_Float16)v:(_Float16)0.f;}}
 #else
-   if(lx>=0&&ly>=0&&lx<int(iw)&&ly<int(ih))for(uint e=0;e<8;e++)a[e]=(_Float16)in[(uint(ly)*iw+uint(lx))*IC+k+gr*8+e];
+   if(lx>=0&&ly>=0&&lx<int(iw)&&ly<int(ih))for(uint e=0;e<8;e++){const uint i=(uint(ly)*iw+uint(lx))*IC+k+gr*8+e;if constexpr(LowByte)a[e]=(_Float16)__builtin_amdgcn_cvt_f32_fp8(int(reinterpret_cast<const unsigned char*>(in)[i]),0);else a[e]=(_Float16)in[i];}
 #endif
    for(uint ci=0;ci<2;ci++){
     __builtin_memcpy(&b,reinterpret_cast<const _Float16*>(upw)+(head*32+ci*16+rc)*IC+k+gr*8,16);
@@ -656,6 +656,17 @@ W2_UP_KERNEL_W16(c64_wave2_up_w16,64)
 #endif
 #if W2_FFN_W16_SMALL&2
 W2_UP_KERNEL_W16(c128_wave2_up_w16,128)
+#endif
+/* W2_UP_LOW_BYTES (2026-10-01, swin-body-gap): the fused Up reads its low-resolution input as E4M3 bytes. The producer is the
+   previous decoder chain's tail (post 0: F(Hrtz(v)), always on the E4M3 lattice), which then writes bytes instead of f32; cvt back
+   is exact, so every (_Float16) operand is unchanged. New exports only (*_up_lb); the host uses them only when present. */
+#ifndef W2_UP_LOW_BYTES
+#define W2_UP_LOW_BYTES 0
+#endif
+#if W2_UP_LOW_BYTES
+#define W2_UP_KERNEL_LB(NAME,C) KERNEL __attribute__((amdgpu_flat_work_group_size(C,C))) void NAME(const float*in,const float*fw,const float*aw,void*out,uint w,uint h,uint ww,uint hh,uint sx,uint sy,uint post,const float*upw,const float*skip){swin_wave2_body<C,true,true,true,false,true>(in,fw,aw,out,w,h,ww,hh,sx,sy,post,upw,skip);}
+W2_UP_KERNEL_LB(c64_wave2_up_lb,64)
+W2_UP_KERNEL_LB(c128_wave2_up_lb,128)
 #endif
 #endif
 #endif
