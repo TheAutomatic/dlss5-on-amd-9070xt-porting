@@ -1,0 +1,21 @@
+c32_wave1_prefix_b8d.s
+  entry          VALU    66 WMMA    0 SALU   39 wait    9 LDS    0 MEM    5 | bit/pack=8 cmp/sel=9 dual=29 int/addr=12 mov=7 trans=1
+  qt-input       VALU   816 WMMA   16 SALU   32 wait   52 LDS    4 MEM   40 | bit/pack=92 cmp/sel=104 cvt=392 dual=72 fmul/add=68 int/addr=60 mov=4 other=8 trans=16
+  ht-loop        VALU   992 WMMA  128 SALU  160 wait  224 LDS    0 MEM  128 | cmp/sel=256 cvt=128 dual=256 fmul/add=256 int/addr=96
+  qt-qkv         VALU   704 WMMA   64 SALU   80 wait   60 LDS    8 MEM   56 | bit/pack=36 cvt=352 dual=132 fmul/add=72 mov=48 trans=64
+  mid            VALU     9 WMMA    0 SALU    7 wait    4 LDS    0 MEM    0 | bit/pack=3 int/addr=6
+  attn           VALU  1380 WMMA   96 SALU   80 wait   72 LDS   16 MEM   64 | bit/pack=352 cmp/sel=128 cvt=320 dual=264 fmul/add=256 int/addr=12 mov=16 trans=32
+  tail-setup     VALU     2 WMMA    0 SALU   20 wait   10 LDS    0 MEM    0 | bit/pack=2
+  tail-main      VALU   608 WMMA    0 SALU  336 wait  160 LDS   64 MEM   64 | bit/pack=304 cmp/sel=64 cvt=128 dual=64 fmul/add=32 mov=16
+  tail-down      VALU   410 WMMA    0 SALU   34 wait   89 LDS   64 MEM   16 | bit/pack=19 cmp/sel=62 cvt=240 dual=11 fmul/add=52 mov=26
+  TOTAL {'LDS': 156, 'MEM': 373, 'SALU': 788, 'V:bit/pack': 816, 'V:cmp/sel': 623, 'V:cvt': 1560, 'V:dual': 828, 'V:fmul/add': 736, 'V:int/addr': 186, 'V:mov': 117, 'V:other': 8, 'V:trans': 113, 'VALU': 4987, 'WMMA': 304, '_n': 7923, 'other': 1, 'sched': 634, 'wait': 680}
+c32_wave1_post_b8.s
+  entry          VALU    54 WMMA    0 SALU   37 wait    9 LDS    0 MEM    3 | bit/pack=5 cmp/sel=2 dual=25 int/addr=17 mov=4 trans=1
+  qt-input       VALU   916 WMMA    0 SALU   56 wait   88 LDS    0 MEM   64 | bit/pack=140 cmp/sel=72 cvt=416 dual=176 fmul/add=40 int/addr=72
+  ht-loop        VALU   992 WMMA  128 SALU  160 wait  224 LDS    0 MEM  128 | cmp/sel=256 cvt=128 dual=256 fmul/add=256 int/addr=96
+  qt-qkv         VALU   712 WMMA   64 SALU   80 wait   60 LDS    8 MEM   56 | bit/pack=36 cvt=352 dual=124 fmul/add=88 mov=48 trans=64
+  mid            VALU     9 WMMA    0 SALU    7 wait    4 LDS    0 MEM    0 | bit/pack=3 int/addr=6
+  attn           VALU  1364 WMMA   96 SALU   80 wait   80 LDS   16 MEM   72 | bit/pack=352 cmp/sel=128 cvt=320 dual=280 fmul/add=224 int/addr=12 mov=16 trans=32
+  tail-setup     VALU    21 WMMA    0 SALU   15 wait    8 LDS    0 MEM    0 | bit/pack=5 cmp/sel=2 dual=1 int/addr=13
+  rgb-head       VALU   476 WMMA    0 SALU   14 wait   50 LDS    8 MEM   60 | bit/pack=52 cmp/sel=4 cvt=76 dual=102 fmul/add=224 int/addr=18
+  TOTAL {'LDS': 32, 'MEM': 383, 'SALU': 449, 'V:bit/pack': 593, 'V:cmp/sel': 464, 'V:cvt': 1292, 'V:dual': 964, 'V:fmul/add': 832, 'V:int/addr': 234, 'V:mov': 68, 'V:trans': 97, 'VALU': 4544, 'WMMA': 288, '_n': 6794, 'other': 1, 'sched': 574, 'wait': 523}

@@ -1,0 +1,11 @@
+T_prefix.s
+  entry          VALU    69 WMMA    0 SALU   40 wait   10 LDS    0 MEM    5 | bit/pack=9 cmp/sel=9 dual=29 int/addr=15 mov=6 trans=1
+  qt-input       VALU   824 WMMA   16 SALU   32 wait   48 LDS    4 MEM   44 | bit/pack=92 cmp/sel=100 cvt=392 dual=64 fmul/add=84 int/addr=60 mov=8 other=8 trans=16
+  ht-loop        VALU  1088 WMMA  128 SALU  160 wait  224 LDS    0 MEM  128 | cmp/sel=256 cvt=128 dual=160 fmul/add=480 int/addr=64
+  qt-qkv         VALU   744 WMMA   64 SALU   80 wait   60 LDS    8 MEM   56 | bit/pack=36 cmp/sel=28 cvt=352 dual=92 fmul/add=124 mov=48 trans=64
+  mid            VALU    13 WMMA    0 SALU    7 wait    5 LDS    0 MEM    0 | bit/pack=4 int/addr=8 mov=1
+  attn           VALU  1320 WMMA   96 SALU   80 wait   76 LDS   16 MEM   72 | bit/pack=352 cmp/sel=128 cvt=320 dual=324 fmul/add=136 int/addr=12 mov=16 trans=32
+  tail-main      VALU   204 WMMA    0 SALU   50 wait   42 LDS    8 MEM    8 | bit/pack=41 cvt=96 dual=23 fmul/add=18 int/addr=26
+  down-setup     VALU    10 WMMA    0 SALU    5 wait    2 LDS    0 MEM    0 | bit/pack=8 int/addr=2
+  tail-down      VALU   300 WMMA    0 SALU   16 wait   12 LDS    8 MEM    2 | bit/pack=42 cvt=200 dual=34 fmul/add=12 int/addr=12
+  TOTAL {'LDS': 44, 'MEM': 315, 'SALU': 470, 'V:bit/pack': 584, 'V:cmp/sel': 521, 'V:cvt': 1488, 'V:dual': 726, 'V:fmul/add': 854, 'V:int/addr': 199, 'V:mov': 79, 'V:other': 8, 'V:trans': 113, 'VALU': 4572, 'WMMA': 304, '_n': 6745, 'other': 1, 'sched': 560, 'wait': 479}

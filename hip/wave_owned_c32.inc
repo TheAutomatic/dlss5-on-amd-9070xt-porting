@@ -178,6 +178,9 @@ DEV i2 cw_input(const unsigned char*in,uint win,uint qt,uint ci,uint width,uint 
 #if CW_PREPOST_BYTE && (!CW_VEC_INPUT || CW_TAIL_QUAD)
 #error "CW_PREPOST_BYTE needs CW_VEC_INPUT and no CW_TAIL_QUAD"
 #endif
+#ifndef CW_PREFIX_TAIL_VEC
+#define CW_PREFIX_TAIL_VEC 0 /* 1: prefix byte tail (main + down bytes) stored per lane as 8-channel groups: ds_load_b128 + cw_pack8 + 8-byte store instead of 64+16 per-channel byte loops; bytes unchanged (results/prefix-post-arith-20260930) */
+#endif
 #ifndef CW_UP_FUSED
 #define CW_UP_FUSED 0
 #endif
@@ -443,6 +446,22 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
     else *reinterpret_cast<float*>(reinterpret_cast<char*>(down)+(((y/2)*(ww/2)+x/2)*32+c)*4u)=F(Hrtz(Hrtz(top+bottom)*.25f));}
   }
   if(false)
+#endif
+#if CW_PREFIX_TAIL_VEC
+  // Prefix byte tail, vectorised: lane = (pixel slot c>>2, 8-channel group c&3); one ds_load_b128 of 8 contiguous residual
+  // halves, one MODE-saturated cw_pack8 (same bytes as fp8() for the finite half values held here, the site-2 argument),
+  // one 8-byte store; 8 lanes x 4 groups cover a 256-byte pixel row. Values per byte unchanged: main fp8(v+0),
+  // down fp8(F(x)) == fp8(x+0) for finite x (F only differs at +-0, where both give 0x00).
+  if constexpr(Prefix&&DownByte&&CW_PREFIX_FULL_TILE){
+   uint cg=c&3u,sl=c>>2;
+   auto row=[&](uint t)->h8{h8 v;__builtin_memcpy(&v,__builtin_assume_aligned(residual+((t/16*2+cg/2)*32+((cg&1u)*16+t%16))*8,16),16);return v;};
+   if(main)for(uint i=0;i<8;i++){uint t=i*8+sl;h8 hv=row(t);float q[8];for(uint e=0;e<8;e++)q[e]=float(hv[e])+0.f;
+    i2 b=cw_pack8<0,cw_kind>(q);__builtin_memcpy(__builtin_assume_aligned(reinterpret_cast<unsigned char*>(main)+((ty+t/8)*width+tx+t%8)*32+cg*8,8),&b,8);}
+   if(down)for(uint j=0;j<2;j++){uint k=j*8+sl,t=(k/4)*16+(k%4)*2;h8 a0=row(t),a1=row(t+1),b0=row(t+8),b1=row(t+9);float q[8];
+    for(uint e=0;e<8;e++){float top=Hrtz(float(a0[e])+float(a1[e])),bottom=Hrtz(float(b0[e])+float(b1[e]));q[e]=Hrtz(Hrtz(top+bottom)*.25f)+0.f;}
+    uint x=tx+t%8,y=ty+t/8;i2 b=cw_pack8<0,cw_kind>(q);__builtin_memcpy(__builtin_assume_aligned(reinterpret_cast<unsigned char*>(down)+((y/2)*(ww/2)+x/2)*32+cg*8,8),&b,8);}
+   return;
+  }
 #endif
   if(main)for(uint t=0;t<64;t++){int x=int(tx+t%8)-int(sx),y=int(ty+t/8)-int(sy);if((Prefix&&CW_PREFIX_FULL_TILE)||(x>=0&&y>=0&&x<int(width)&&y<int(height))){uint dest=(uint(y)*width+uint(x))*32+c;float v=load(t);if constexpr(Prefix)reinterpret_cast<unsigned char*>(main)[dest]=static_cast<unsigned char>(cw_prefix_byte(v));else if constexpr(Byte)reinterpret_cast<unsigned char*>(main)[dest]=static_cast<unsigned char>(fp8(F(v)));else main[dest]=F(v);}}
   if(!CW_TAIL_QUAD&&down)for(uint k=0;k<16;k++){uint t=(k/4)*16+(k%4)*2;float top=Hrtz(load(t)+load(t+1)),bottom=Hrtz(load(t+8)+load(t+9));uint x=tx+t%8,y=ty+t/8;
