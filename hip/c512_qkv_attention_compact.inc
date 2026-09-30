@@ -10,6 +10,12 @@
 #ifndef C512_COMPACT_DEBUG
 #define C512_COMPACT_DEBUG 0
 #endif
+// C512_COMPACT_VT (2026-09-30, results/c512-compact-vt-20260930): V (part 2) is written to LDS transposed, [channel][token],
+// so each P*V B fragment (8 consecutive keys of one channel) is one 8-byte LDS read instead of 8 ds_load_u8 + byte inserts.
+// Same bytes, same WMMA operands -> bit-identical. 0 = original [token][channel] layout.
+#ifndef C512_COMPACT_VT
+#define C512_COMPACT_VT 0
+#endif
 #if C512_COMPACT_QKV_ATTN
 #if C512_COMPACT_WAVES != 2 && C512_COMPACT_WAVES != 4
 #error C512_COMPACT_WAVES must be 2 or 4
@@ -71,7 +77,11 @@ DEV void c5c_body(const unsigned char*in8,const float*w,unsigned char*out,uint v
    if(part<2){float ss=c5c_serial_norm(acc[t][0],acc[t][1]);inv=__builtin_amdgcn_rsqf(maxf(ss,6.198883056640625e-5f))*(part==0?w[4*C*C+16*4096+head]:1.f);}
    _Pragma("unroll 2") for(uint ci=0;ci<2;ci++){
     i2 a{};_Pragma("unroll 8") for(uint e=0;e<8;e++)c5c_bits(a,e,q8(F(acc[t][ci][e]*inv)));
-    uint tok=(wave*QT+t)*16+row;__builtin_memcpy(packed+(part*64+tok)*32+ci*16+half*8,&a,8);
+    uint tok=(wave*QT+t)*16+row;
+#if C512_COMPACT_VT
+    if(!DebugNorm&&part==2){_Pragma("unroll 8") for(uint e=0;e<8;e++)packed[128*32+(ci*16+half*8+e)*64+tok]=(unsigned char)((uint(a[e/4])>>(8*(e%4)))&255u);}else
+#endif
+    __builtin_memcpy(packed+(part*64+tok)*32+ci*16+half*8,&a,8);
    }
   }
  }
@@ -114,7 +124,11 @@ DEV void c5c_body(const unsigned char*in8,const float*w,unsigned char*out,uint v
   _Pragma("unroll 2") for(uint ci=0;ci<2;ci++){
    f8 av{};
    _Pragma("unroll 4") for(uint kt=0;kt<4;kt++){
+#if C512_COMPACT_VT
+    i2 v;__builtin_memcpy(&v,packed+128*32+(ci*16+row)*64+kt*16+half*8,8);
+#else
     i2 v{};_Pragma("unroll 8") for(uint e=0;e<8;e++)c5c_bits(v,e,packed[(128+kt*16+half*8+e)*32+ci*16+row]);
+#endif
     av=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(v,prob[kt],av);
    }
    i2 bytes{};_Pragma("unroll 8") for(uint e=0;e<8;e++)c5c_bits(bytes,e,c5c_fp8(c5c_F(av[e])));

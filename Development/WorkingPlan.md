@@ -22,6 +22,7 @@
 - **产品侧 09-30 交账（未装机，等 Zero 定随哪刀装/打包）**：颜色格式兜底 `DLSS5_FORMAT_FALLBACK=1`（R9G9B9E5/B8G8R8X8/R10G10B10A2/R32G32B32(A32)/SNORM/565 等转 RGBA16F，原格式逐位）＋热重载 `DLSS5_HOT_RELOAD=1`（STRENGTH/NOTICE/SHOW_FPS）。add-on 8b729f22、RE9 runtime 99c8ead9，产物 `D:\DLSSNR-Lab\product-fmt-20260930\`；**打包须新增 `native_format_convert.hlsl`**。`results/product-fmt-reload-20260930`。
 - Infinity Cache / arena 09-30 交账：宿主池已按生命周期复用，C32 单派发 141/203MB 超过 64MB MALL，热复用对照逐位但 900 慢 0.01ms，不收（`results/infinity-cache-20260930`）。
 - 9070 D 盘清理 09-30 交账：删掉已交账实验的逐位帧转储 486.7GB，D 盘约 527GiB 空闲，基准自检 168/168（`results/lab-cleanup-20260930`）。剩余两个字节出口 09-30 交账，不收（`results/deep-tail2-20260930`）。
+- **逐核地图 v3 09-30 交账**（`results/kernel-map-v3-20260930`）：现装模块两档独立核和 900 6895µs、1080 约 9762µs，整网回放 7.615 / 10.436ms。候选写入 B 段 12～14；第一个（C512 V 转置 `C512_COMPACT_VT`）逐位但不全正，不收，未装（`results/c512-compact-vt-20260930`）。
 - 交接 GPU 同步 09-30 交账（HIP→D3D 分片自旋反慢，未装）。C512 FFN W5 式 LDS 共用权重 09-30 交账（900 单核慢，停，`results/c512-ffn-lds-20260930`）。其余无在跑任务。09-29～09-30 已完成项细节见各 `results/*/README.md` 与 DevHistory。
 
 ## Zero 的标准与取舍（为什么这样定）
@@ -67,6 +68,10 @@
 10. ~~复合量化 FP8(Hrtz)~~ **09-30 已做**（W2 两处，`results/composite-quant-20260930`）；~~C512 `F(Hrtz(acc))`~~ **09-30 已做**（mix＋contract，`results/composite-quant-c512-20260930`）；ViT 出口乘过 inv 域不纯、C32 两处域不纯，不做。
 9. **旧门槛淘汰件**：~~I/P/O/Q 重测~~ **09-30 已做**（收 I+P+O，Q 不收，`results/small-wins-retest-20260930`）；~~C256 FFN 宽权重片段~~ **09-30 已做**（`results/c256-w16-20260930`，已装）。
 
+12. ~~C512 QKV-attention V 在 LDS 转置（`C512_COMPACT_VT`）~~ **09-30 已做**：逐位，ds_load_u8 64→0，但 900 三轮 −0.004/+0.000/+0.004 不全正，不收（宏默认 0）。
+13. **W16 宽权重片段推广到 C64/C128**（`c64/c128_wave2*`、`*_up`）：同一 `swin_wave2_body`，放宽 `W16&&C==256`；族体量 900 1.55ms / 1080 2.27ms，估 0.02～0.05ms；要改宿主（`_w16` 存在才用，照 c256-w16 回退），add-on＋RE9 runtime 重编。止损：静态 global_load 降不到 5% 或 900 三轮不全正。
+14. **C512 AV 出口去 F**（`c5c_fp8(c5c_F(av))`→`c5c_fp8(av)`）：WMMA 从 +0 累加域内无 −0，与 composite-quant 同证明；QKV 处 `q8(F(acc*inv))` 不做（可出 −0）。收益小，止损：GPU 穷举域内任何不同即停。
+
 ## 已交负账（别重复，一行一条）
 
 - mochizuki 0.0.2.2 各路线 I/P/S/V/F/O/G/H（`mochizuki-022-20260928`）；0.0.2.4 网络无改动，无可抄。
@@ -77,6 +82,7 @@
 - ViT byte 出口/入口 gather-pack；ViT 消费端 float 打包 V；ViT attention 4wave/64key 预取；QKV 块重排、scale 提前读、CH4/CH16 写法。
 - `MAKE_RESIDENT_EVERY` 60 vs 0：离线回放无 30ms 周期尖峰（`resident-spike-20260929`），保留 60。
 - HIP→D3D draw 分片自旋（探针里比 fence 慢，`handoff-gpu-20260930`）。D3D→HIP GPU 轮询（逐位，但完整帧回放两档慢 0.01～0.04ms；开关 `DLSS5_HIP_INPUT_POLL` 默认 0）。
+- C512 QKV-attention V 转置 LDS（逐位 null，`c512-compact-vt-20260930`）。
 - 编译器：COMGR2/LLVM20 慢 3%；公开 LLVM21 持平；LLVM22 不逐位；VOPD 前瞻 ±0.3%。
 - 旧 block46 展开改 FP8 WMMA：10 个 float 元素位差，不能换。
 
