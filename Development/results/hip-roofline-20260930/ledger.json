@@ -1,0 +1,150 @@
+{
+ "900": {
+  "dispatches": 162,
+  "span_median_ms": 7.256,
+  "span_mean_ms": 7.253297042164884,
+  "span_p99_ms": 7.648,
+  "wall_plain_mean_ms": [
+   7.55138625,
+   7.60598875
+  ],
+  "wall_with_probe_mean_ms": [
+   7.7454225,
+   7.72985
+  ],
+  "kernel_sum_ms": 6.826561779000003,
+  "kernel_sum_v3_ms": 6.894803,
+  "changed_modules_old_new_us": [
+   1287.0220000000002,
+   1218.7807790000002
+  ],
+  "slow_fix_us": 0,
+  "output_copy_ms": 0.0345,
+  "gap_ms": 0.39493822099999676,
+  "gap_per_dispatch_us": 2.4378902530863997,
+  "top": [
+   [
+    "sp_run256_w16(est)",
+    635.9
+   ],
+   [
+    "c32_wave1_prefix_b8d",
+    593.5
+   ],
+   [
+    "c32_wave1_post_b8",
+    587.7
+   ],
+   [
+    "c512_qkv_attention_compact",
+    536.3
+   ],
+   [
+    "c32_wave1_chain",
+    482.9
+   ],
+   [
+    "c128_wave2_bi_bo",
+    473.3
+   ],
+   [
+    "c64_wave2_bi_bo",
+    327.6
+   ],
+   [
+    "mh_attention_project_frag_c512",
+    218.0
+   ],
+   [
+    "c64_wave2_bi",
+    209.3
+   ],
+   [
+    "vit_stream_qkv_frag_hin_w5",
+    203.6
+   ],
+   [
+    "vit_stream_contract_frag_hout",
+    197.9
+   ],
+   [
+    "split_mix_blocked_h16w_m32",
+    190.0
+   ]
+  ]
+ },
+ "1080": {
+  "dispatches": 158,
+  "span_median_ms": 10.065,
+  "span_mean_ms": 10.064478535353535,
+  "span_p99_ms": 10.487,
+  "wall_plain_mean_ms": [
+   10.41251375,
+   10.4584025
+  ],
+  "wall_with_probe_mean_ms": [
+   10.58848625,
+   10.61331375
+  ],
+  "kernel_sum_ms": 9.701126270999998,
+  "kernel_sum_v3_ms": 9.970744,
+  "changed_modules_old_new_us": [
+   2075.4790000000003,
+   1803.9504640000002
+  ],
+  "slow_fix_us": -1.9108069999998634,
+  "output_copy_ms": 0.0452,
+  "gap_ms": 0.3186737290000021,
+  "gap_per_dispatch_us": 2.0169223354430517,
+  "top": [
+   [
+    "sp_run256_w16(est)",
+    879.4
+   ],
+   [
+    "c32_wave1_prefix_b8d",
+    863.2
+   ],
+   [
+    "c32_wave1_post_b8",
+    860.2
+   ],
+   [
+    "c128_wave2_bi_bo",
+    766.3
+   ],
+   [
+    "c32_wave1_chain",
+    684.4
+   ],
+   [
+    "c512_qkv_attention_compact",
+    675.6
+   ],
+   [
+    "c64_wave2_bi_bo",
+    465.7
+   ],
+   [
+    "vit_attention_fused_640_bytein_bout",
+    382.0
+   ],
+   [
+    "vit_stream_qkv_frag_hin_w5",
+    296.3
+   ],
+   [
+    "mh_attention_project_frag_c512",
+    296.2
+   ],
+   [
+    "c64_wave2_bi",
+    292.5
+   ],
+   [
+    "split_mix_blocked_h16w_m32",
+    259.0
+   ]
+  ]
+ }
+}

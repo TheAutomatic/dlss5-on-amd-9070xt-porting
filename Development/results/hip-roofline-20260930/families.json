@@ -1,0 +1,132 @@
+{
+ "900": {
+  "C32": {
+   "measured_us": 2196.6,
+   "wmma_us": 564.6,
+   "valu_us": 1216.4,
+   "mem_us": 743.4,
+   "ideal_us": 743.4,
+   "real_ideal_us": 1781.0,
+   "x_real": 1.23
+  },
+  "C64": {
+   "measured_us": 772.8,
+   "wmma_us": 233.2,
+   "valu_us": 309.2,
+   "mem_us": 159.1,
+   "ideal_us": 233.2,
+   "real_ideal_us": 542.4,
+   "x_real": 1.42
+  },
+  "C128": {
+   "measured_us": 778.0,
+   "wmma_us": 303.8,
+   "valu_us": 238.0,
+   "mem_us": 122.1,
+   "ideal_us": 303.8,
+   "real_ideal_us": 541.8,
+   "x_real": 1.44
+  },
+  "C256": {
+   "measured_us": 950.8,
+   "wmma_us": 387.6,
+   "valu_us": 167.0,
+   "mem_us": 95.3,
+   "ideal_us": 387.6,
+   "real_ideal_us": 554.6,
+   "x_real": 1.71
+  },
+  "C512": {
+   "measured_us": 1244.9,
+   "wmma_us": 336.4,
+   "valu_us": 82.9,
+   "mem_us": 78.9,
+   "ideal_us": 336.4,
+   "real_ideal_us": 419.3,
+   "x_real": 2.97
+  },
+  "ViT": {
+   "measured_us": 829.2,
+   "wmma_us": 293.7,
+   "valu_us": 21.9,
+   "mem_us": 224.1,
+   "ideal_us": 293.7,
+   "real_ideal_us": 315.6,
+   "x_real": 2.63
+  },
+  "other": {
+   "measured_us": 54.2,
+   "wmma_us": 30.7,
+   "valu_us": 0.0,
+   "mem_us": 0.0,
+   "ideal_us": 30.7,
+   "real_ideal_us": 30.7,
+   "x_real": 1.76
+  }
+ },
+ "1080": {
+  "C32": {
+   "measured_us": 3171.9,
+   "wmma_us": 811.6,
+   "valu_us": 1748.8,
+   "mem_us": 1070.4,
+   "ideal_us": 1070.4,
+   "real_ideal_us": 2560.4,
+   "x_real": 1.24
+  },
+  "C64": {
+   "measured_us": 1084.0,
+   "wmma_us": 334.3,
+   "valu_us": 443.3,
+   "mem_us": 228.9,
+   "ideal_us": 334.3,
+   "real_ideal_us": 777.6,
+   "x_real": 1.39
+  },
+  "C128": {
+   "measured_us": 1184.2,
+   "wmma_us": 433.7,
+   "valu_us": 339.8,
+   "mem_us": 174.4,
+   "ideal_us": 433.7,
+   "real_ideal_us": 773.5,
+   "x_real": 1.53
+  },
+  "C256": {
+   "measured_us": 1221.8,
+   "wmma_us": 548.7,
+   "valu_us": 236.5,
+   "mem_us": 130.2,
+   "ideal_us": 548.7,
+   "real_ideal_us": 785.2,
+   "x_real": 1.56
+  },
+  "C512": {
+   "measured_us": 1675.8,
+   "wmma_us": 423.5,
+   "valu_us": 104.4,
+   "mem_us": 93.1,
+   "ideal_us": 423.5,
+   "real_ideal_us": 527.9,
+   "x_real": 3.17
+  },
+  "ViT": {
+   "measured_us": 1307.4,
+   "wmma_us": 484.0,
+   "valu_us": 43.8,
+   "mem_us": 236.8,
+   "ideal_us": 484.0,
+   "real_ideal_us": 527.8,
+   "x_real": 2.48
+  },
+  "other": {
+   "measured_us": 54.1,
+   "wmma_us": 45.1,
+   "valu_us": 0.0,
+   "mem_us": 0.0,
+   "ideal_us": 45.1,
+   "real_ideal_us": 45.1,
+   "x_real": 1.2
+  }
+ }
+}
