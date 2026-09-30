@@ -1303,3 +1303,6 @@ Zero（Splashtop，只作正确性）：剑星 2K 原生 AA EXACT 55.6～56.1，
 
 ## 2026-10-01 mochizuki 逐族对账 + C512_COMPACT_FUSEQKV（光派单，子代理）
 用他 nr_graph 自带的 `--per-layer --dispatch-grid` 在 9070 上跑逐派发计时（900 5.90/5.92，1088 7.77ms），和 kernel-map-v3 按族对齐：900 差 C512 +499µs（单块 100.8 对 52.3，他 16 块我们 13 块）、派发空隙约 +300、C32 +225、C256 +107、C64 +79、C128 +74、ViT −38。C512 attention 的网格和 wave 数和他相同，差在他 Q/K/V 在一个 k 循环里 6 个累加器、X 只读一次，越界判断在循环外；我们分三趟。照他改成 `C512_COMPACT_FUSEQKV`：19 组 SAME，900 −0.022/−0.023/−0.030、1080 −0.078/−0.091/−0.094ms，p99 两档更好，收下，装剑星/鬼武者 c512-m32-mh（1201 FEEDC842 / 1200 9C4A4642）。下一步：C512 FFN 按 ffwd3 寄存器转置一核化；投影残差改字节。`results/mochizuki-gap-20261001`。
+
+## 2026-10-01 D3D↔HIP 共队列可行性（光派单，子代理）
+新探针 `HIP/experiments/same-queue/switch_probe.cpp`：游戏 DIRECT 队列把显存填充交给不同执行者做 K 次往返。4096MiB K=1 over（gap−工作）：同队列 0.014；第二条 D3D COMPUTE 队列 0.21～0.28（p50 0.17～0.25）；第二条 D3D DIRECT 0.20～0.22（p50 0.16）；HIP fence 0.38（p50 0.165，长尾一帧 7.6）。K=8 斜率三者都 ≈0.09ms/往返。**交接代价是队列间同步，不是跨 API**：同一 D3D 设备换条队列一样贵，只有录进同一命令流才免。mochizuki 省掉它是因为要求 vkd3d-proton，把网络录进 vkd3d 的 VkCommandBuffer（同一 VkQueue）。路线：D3D12 compute 重写缺 WMMA/FP8 公开通路且难逐位；Vulkan 互操作在原生 D3D12 下仍两队列；HIP 共享 D3D 队列无接口。可省上限 ≈0.15～0.19ms，整帧兑现估 0.05～0.15。结论：停线，网络外的钱转去拷贝/编解码瘦身。未改生产、未装机。`results/same-queue-20261001`。
