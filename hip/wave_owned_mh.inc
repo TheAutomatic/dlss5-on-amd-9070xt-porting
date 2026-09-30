@@ -221,6 +221,12 @@ DEV float w2_serial_norm(f8 lo,f8 hi){
 DEV float w2_up_F(float x){uint a=bits(x)&0x7fffffffu;float c=__builtin_fminf(__builtin_fmaxf(x,-448.f),448.f);float r=__builtin_amdgcn_cvt_f32_fp8(__builtin_amdgcn_cvt_pk_fp8_f32(c,0.f,0,false),0);return a==0?0.f:r;}
 // f-sweep 2026-09-30: W2_UP_ADD0 1 -> up output byte cvt_pk_fp8(med3(merged+0)) instead of cvt_pk_fp8(w2_up_F(merged))
 // (same byte for all 2^32 inputs, results/f-sweep-20260930).
+#ifndef W2_QKV_FUSE
+#define W2_QKV_FUSE 0 /* c128-phase: fused Q/K/V kt loop (bitmask 1 C64, 2 C128, 4 C256), bit-exact */
+#endif
+#ifndef W2_PHASE_REP
+#define W2_PHASE_REP 0 /* c128-phase 2026-10-01 timing probe only: repeat one phase of c128_wave2_bi_bo (1 FFN expand/contract, 2 mix+residual, 4 QKV, 8 attention, 16 output, 32 staging); output unchanged, never in a recipe */
+#endif
 #ifndef W2_UP_DIRECT
 #define W2_UP_DIRECT 0 /* c128-c64-inchain 2026-10-01: Up projection with high-res B columns, no shuffles; bit-exact */
 #endif
@@ -384,6 +390,15 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
 #endif /* W2_UP_DIRECT */
  }else{
  // Stage original input in A fragments. Preserve the byte cast used by pack4.
+#undef W2_REP_BEGIN
+#undef W2_REP_END
+#if W2_PHASE_REP && !defined(W2_ATTENTION_ONLY)
+#define W2_REP_BEGIN(bit) for(uint w2rep_##bit=0;w2rep_##bit<(((W2_PHASE_REP&(bit))&&C==128&&!Up&&ByteIn&&ByteOut&&!W16&&!HalfOut)?2u:1u);w2rep_##bit++){if constexpr((W2_PHASE_REP&(bit))&&C==128&&!Up&&ByteIn&&ByteOut&&!W16&&!HalfOut)__asm__ volatile("":::"memory");
+#else
+#define W2_REP_BEGIN(bit) {
+#endif
+#define W2_REP_END }
+W2_REP_BEGIN(32)
  for(uint qt=0;qt<4;qt++)for(uint ci=0;ci<2;ci++){
   i2 a{};
 #if W2_BYTE_INPUT_LOADS
@@ -393,8 +408,10 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
   for(uint e=0;e<8;e++)w2_bits(a,e,q8(input(qt*16+rc,head*32+ci*16+gr*8+e)));
   w2_store<C>(plane0,qt,head*2+ci,a);
  }
+W2_REP_END
  }
  w2_sync();
+W2_REP_BEGIN(1)
  // Each head contracts only its own 128 hidden channels. Expanded fragments never enter LDS.
 #if W2_FFN_QT_BATCH
  if constexpr(C==256 || (C==64 && (W2_FFN_QT_SMALL_MASK&1)) || (C==128 && (W2_FFN_QT_SMALL_MASK&2))){
@@ -498,7 +515,9 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
 #endif
  }
  }
+W2_REP_END
  w2_sync();
+W2_REP_BEGIN(2)
  // Cross-head FFN mixing plus the original residual. plane0 is now free for feature bytes.
  _Pragma("clang loop unroll(disable)") for(uint qt=0;qt<4;qt++){
   f8 result[2]{};
@@ -530,6 +549,7 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
   }
   for(uint ci=0;ci<2;ci++){W2_Q8_DECL(a);for(uint e=0;e<8;e++)W2_Q8_SET(a,e,result[ci][e]);W2_Q8_END(a);w2_store<C>(plane0,qt,head*2+ci,a);}
  }
+W2_REP_END
  w2_sync();
  // Q/K use A-fragment orientation. V is computed in the opposite orientation,
  // directly becoming the B fragments consumed by P*V; no V transpose/staging needed.
@@ -537,6 +557,41 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
 #if W2_ROLL_QUERY && !W2_DEFER_Q
  w2_i16 query_words{};
 #endif
+W2_REP_BEGIN(4)
+ /* W2_QKV_FUSE (2026-10-01, c128-phase; bitmask 1=C64 2=C128 4=C256): Q/K/V in one kt loop per token tile, the A fragment
+    read from LDS once for all three (mochizuki fswin / our C512_COMPACT_FUSEQKV organization). Every accumulator sees the
+    same WMMA sequence in the same kt order, normalization and stores are unchanged -> bit-exact. */
+ constexpr bool W2QkvFuse=(C==64&&(W2_QKV_FUSE&1))||(C==128&&(W2_QKV_FUSE&2))||(C==256&&(W2_QKV_FUSE&4));
+ if constexpr(W2QkvFuse){
+  constexpr uint ps=W2_DEFER_Q?1:0;
+  _Pragma("unroll") for(uint qt=0;qt<4;qt++){
+   uint qlane=w2_lane();
+#if W2_LAUNDER_QKV
+   __asm__ volatile("" : "+v"(qlane));qlane&=31u;
+#endif
+   uint qrc=qlane&15u,qgr=qlane>>4;
+   f8 q[3][2]{};
+   for(uint kt=0;kt<C/16;kt++){
+    i2 a=w2_load<C>(plane0,qt,kt,qlane);
+    _Pragma("unroll") for(uint part=ps;part<3;part++)_Pragma("unroll") for(uint ci=0;ci<2;ci++){
+     i2 b=w2_weight(aw,part*C+head*32+ci*16+qrc,C,kt*16,qgr);
+     if(part<2)q[part][ci]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,a,q[part][ci]);
+     else q[part][ci]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(a,b,q[part][ci]);
+    }
+   }
+   _Pragma("unroll") for(uint part=ps;part<3;part++){
+    float inv=1.f;
+    if(part<2){float ss=w2_serial_norm(q[part][0],q[part][1]);inv=__builtin_amdgcn_rsqf(maxf(ss,6.198883056640625e-5f))*(part==0?aw[4*C*C+(C/32)*4096+head]:1.f);}
+    for(uint ci=0;ci<2;ci++){W2_Q8_DECL(a);for(uint e=0;e<8;e++)W2_Q8_SETF(a,e,q[part][ci][e],inv);W2_Q8_END(a);
+#if W2_ROLL_QUERY && !W2_DEFER_Q
+     if(part==0){query_words[qt*4+ci*2]=a[0];query_words[qt*4+ci*2+1]=a[1];}else
+#endif
+     qkv[part][qt][ci]=a;
+    }
+   }
+   w2_schedule();
+  }
+ }else
  _Pragma("unroll") for(uint part=W2_DEFER_Q?1:0;part<3;part++){
   _Pragma("unroll 4") for(uint qt=0;qt<4;qt++){
    uint qlane=w2_lane();
@@ -563,9 +618,19 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
    w2_schedule();
   }
  }
+W2_REP_END
  constexpr bool W2SkipB8=SkipByteOut;void*const w2_sb=const_cast<float*>(skip);(void)w2_sb; // W2_SKIP_BYTE: *_bi_hob byte copy target
  constexpr bool W2HalfTail=HalfOut; // post-3 tail stored as f16 (Hrtz is f16-exact); attention-only copies define it false
  // One wave owns all keys and queries of a head. Existing WMMA half row-sum order is retained.
+#undef W2_REP_BEGIN
+#undef W2_REP_END
+#if W2_PHASE_REP && !defined(W2_ATTENTION_ONLY)
+#define W2_REP_BEGIN(bit) for(uint w2rep_##bit=0;w2rep_##bit<(((W2_PHASE_REP&(bit))&&C==128&&!Up&&ByteIn&&ByteOut&&!W16&&!HalfOut)?2u:1u);w2rep_##bit++){if constexpr((W2_PHASE_REP&(bit))&&C==128&&!Up&&ByteIn&&ByteOut&&!W16&&!HalfOut)__asm__ volatile("":::"memory");
+#else
+#define W2_REP_BEGIN(bit) {
+#endif
+#define W2_REP_END }
+W2_REP_BEGIN(8)
 #if W2_ROLL_QUERY
  _Pragma("clang loop unroll(disable)")
 #else
@@ -622,8 +687,10 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
   }
   w2_schedule();
  }
+W2_REP_END
  w2_sync();
  // All heads' AV ready; feature still lives in plane0. Preserve diagonal residual and K order.
+W2_REP_BEGIN(16)
  const unsigned char*diag=reinterpret_cast<const unsigned char*>(aw)+4*(4*C*C+(C/32)*4096+C/32+C);
 #if W2_FULL_WINDOW
  auto finish=[&](auto full){
@@ -690,6 +757,7 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
   }
  }
 #endif
+W2_REP_END
 }
 #define W2_KERNEL(NAME,C,BI,BO) KERNEL __attribute__((amdgpu_flat_work_group_size(C,C))) void NAME(const float*in,const float*fw,const float*aw,void*out,uint w,uint h,uint ww,uint hh,uint sx,uint sy,uint post){swin_wave2_body<C,BI,BO>(in,fw,aw,out,w,h,ww,hh,sx,sy,post);}
 #if !defined(W2_NO_EXPORTS) || !W2_NO_EXPORTS
