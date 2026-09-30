@@ -36,6 +36,9 @@ typedef unsigned uint;
  contiguous bytes at C=256), and the three norm parts are staged in LDS (parts 0/1 share a buffer, part 2 its own) and written row-wise:
  part 0 flushed after part 1's first barrier, parts 1/2 after one extra barrier at the end. Same bytes, same addresses: bit-exact. */
 #endif
+#ifndef MH_PAD_ZERO_VEC
+#define MH_PAD_ZERO_VEC 0 /* 1: mapped-padding zero tiles of the FFN+QKV kernels stored as 8-byte words instead of bytes; same zeros (results/deep-tail2-20260930) */
+#endif
 #ifndef HIP_FFN_TRANSPOSED_TAIL
 #define HIP_FFN_TRANSPOSED_TAIL 1 /* 2026-09-23: projection and QKV WMMAs take swapped operands so each lane holds one token row and
  8 consecutive columns (A/B fragment register layouts are identical). Residual input, out/qfeature bytes, storage.raw rows and norm
@@ -686,8 +689,14 @@ DEV void mh_ffn_qkv_body(const float*in,const float*w,unsigned char*out,uint tok
  // bias-free FFN and normalized QKV outputs. The test is workgroup-uniform.
  if constexpr((C==128||C==256)&&Mapped){
   if(first+15<sy*workw||first>=(sy+height)*workw){
+#if MH_PAD_ZERO_VEC
+   if constexpr(ByteFeature){for(uint i=tid*8;i<16*C;i+=2*C*8){unsigned long long z=0;__builtin_memcpy(__builtin_assume_aligned(out+first*C+i,8),&z,8);}}
+   else for(uint i=tid;i<16*C;i+=2*C)reinterpret_cast<float*>(out)[first*C+i]=0.f;
+   for(uint i=tid*8;i<16*3*C;i+=2*C*8){unsigned long long z=0;__builtin_memcpy(__builtin_assume_aligned(norm+first*3*C+i,8),&z,8);}
+#else
    for(uint i=tid;i<16*C;i+=2*C){if constexpr(ByteFeature)out[first*C+i]=0;else reinterpret_cast<float*>(out)[first*C+i]=0.f;}
    for(uint i=tid;i<16*3*C;i+=2*C)norm[first*3*C+i]=0;
+#endif
    return;
   }
  }

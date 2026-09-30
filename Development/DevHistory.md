@@ -1246,3 +1246,8 @@ Zero 改了验收规则：小改动只要逐位、离线 ABBA 为正、p99 和�
 ## 2026-09-30 multihead/deep 字节出口 LDS 转置宽写（deep-tail）
 
 按热度排旧"每 lane 一列"字节出口：ViT QKV w5（8 次/帧 213µs，16×b8/lane）、C512 `split_ffn_fused_fp8_t8`（13 次，8×b8）、`vit_expand_blocked_fp8_frag_bytein`（63×b8）、C256 fused FFN/QKV（9×b8）、`split_projection_frag`（13 次，32×b8）；ViT attention 生产版已是 2×b64，decoder byteout 冷。做两刀：V = QKV w5 字节先写本 wave 空闲 norm tile 再每 lane b128；S = C512 两核分块 E4M3 副本（两块相邻 512B）LDS 摆好后 b64/b128 宽写（各加 1KB LDS）。两者逐位 19 组 SAME。三轮 ABBA：V 符号不一（合并 1080 +0.005ms）不收，宏 `VIT_QKV_TAIL_VEC` 默认 0；S 六个全正（900 −0.008～−0.009、1080 −0.005～−0.028ms），合并 p99 两档变好，收 `C512_T8_TAIL_VEC 1`（deep_fast-packed 配方）。装剑星/鬼武者（deep_fast-packed 7ffaa65f/ebc7df69），宿主/runtime 不变。9070 D 盘满，清了两个已交账 lab 的帧转储。`results/deep-tail-20260930`。
+
+## 2026-09-30 下午：9070 D 盘清理 + 剩余两个字节出口（均不收）
+
+- **D 盘清理**（`results/lab-cleanup-20260930`）：hip-backend 592GB 里有 559GB 是 .f16/.ppm 逐位帧转储。删掉已交账实验子目录里的这些文件，共 486.7GB（1261 个子目录，清单见 csv），backups/assets/capture、fma 相关、deep-tail 以及 lab 根文件都没动。D 盘从 35GB 空闲变成约 527GiB。删完用现装 31 模块做了 A 对 A 全回归，168 帧对 `new-baseline-hashes.csv` 全部相同。
+- **ViT expand 字节出口 E / C256 FFN/QKV Q**（`results/deep-tail2-20260930`）：两个都是 19 组 SAME。E 在 900 三轮稳定慢约 0.012ms；Q（LINE_STORES＋填充零块宽写）在 900 三轮是 +0.010/+0.002/+0.002。都不收，不装。C256 那 9 个 b8 其实在填充零块的冷路径上，主输出早就是 b64。列布局字节出口这条线做完。

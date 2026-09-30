@@ -21,6 +21,7 @@
 - **1088 行紧凑几何（可选档）09-30 交账**：`DLSS5_NETWORK_1080_ROWS=1088`，默认 1152 逐位；开时 1080 −0.47～0.48ms（4.4%），对 1152 全帧约 56dB、底边 32 行 52.5dB 略差。产物在 `D:\DLSSNR-Lab\geom1088-20260930\`，未装；**等 Zero 看 ppm 决定是否作可选档进 0.38**（`results/geom-1088-20260930`）。
 - **产品侧 09-30 交账（未装机，等 Zero 定随哪刀装/打包）**：颜色格式兜底 `DLSS5_FORMAT_FALLBACK=1`（R9G9B9E5/B8G8R8X8/R10G10B10A2/R32G32B32(A32)/SNORM/565 等转 RGBA16F，原格式逐位）＋热重载 `DLSS5_HOT_RELOAD=1`（STRENGTH/NOTICE/SHOW_FPS）。add-on 8b729f22、RE9 runtime 99c8ead9，产物 `D:\DLSSNR-Lab\product-fmt-20260930\`；**打包须新增 `native_format_convert.hlsl`**。`results/product-fmt-reload-20260930`。
 - Infinity Cache / arena 09-30 交账：宿主池已按生命周期复用，C32 单派发 141/203MB 超过 64MB MALL，热复用对照逐位但 900 慢 0.01ms，不收（`results/infinity-cache-20260930`）。
+- 9070 D 盘清理 09-30 交账：删掉已交账实验的逐位帧转储 486.7GB，D 盘约 527GiB 空闲，基准自检 168/168（`results/lab-cleanup-20260930`）。剩余两个字节出口 09-30 交账，不收（`results/deep-tail2-20260930`）。
 - 交接 GPU 同步 09-30 交账（HIP→D3D 分片自旋反慢，未装）。C512 FFN W5 式 LDS 共用权重 09-30 交账（900 单核慢，停，`results/c512-ffn-lds-20260930`）。其余无在跑任务。09-29～09-30 已完成项细节见各 `results/*/README.md` 与 DevHistory。
 
 ## Zero 的标准与取舍（为什么这样定）
@@ -57,7 +58,7 @@
 2. ~~HIP↔D3D 交接~~ **09-30 两轮交账**（`results/handoff-gpu-20260930`）：HIP→D3D draw 分片自旋在探针里比 fence 慢；D3D→HIP 轮询按新规进了生产代码（`DLSS5_HIP_INPUT_POLL`，默认 0，1/2 两种 marker 放法），逐位 18 组 SAME，但完整帧回放两档 avg 都慢 0.01～0.04ms，不收、不装。交接这条线停。
 3. ~~小件~~ **09-30 已交账**（`results/small-cuts-20260930`）：对角残差逐位，按新规已收（`CW_DIAG_ONLY 1`，09-30 08:01 装）；C256 FFN 逐字节写 hidden 是布局所致，要转置 expand 才能打包（不是小件，暂不做）；ViT QKV 归一化换求和不能逐位。
 4. **C512 FFN 链**：三核 524 vs Daniel ffwd 382µs（900）。09-30 拆清：Daniel 是 1 wave 一组、无 LDS、三核合一、FP8 激活，差距在数据形态不在组织；W5 式 LDS 共用权重已试（900 单核慢，`results/c512-ffn-lds-20260930`）。剩下只有"mix 入口 A 变窄/三核合一 hidden 不落 global"，把握低，放后。
-5. ~~字节写出尾巴推广~~ **09-30 已做**（`results/tail-vec-20260930`）：逐通道字节尾只剩 C32 两个 finish，已向量化；C64～C256 已是宽写；旧 multihead/deep 列布局出口 **09-30 已做**（`results/deep-tail-20260930`）：C512 t8 两核 LDS 转置宽写已收；ViT QKV w5 同法逐位但 null（宏默认 0）；剩 `vit_expand_blocked_fp8_frag_bytein`（63×b8）、C256 fused FFN/QKV（9×b8）未做。
+5. ~~字节写出尾巴推广~~ **09-30 已做**（`results/tail-vec-20260930`）：逐通道字节尾只剩 C32 两个 finish，已向量化；C64～C256 已是宽写；旧 multihead/deep 列布局出口 **09-30 已做**（`results/deep-tail-20260930`）：C512 t8 两核 LDS 转置宽写已收；ViT QKV w5 同法逐位但 null（宏默认 0）；~~剩余 ViT expand（63×b8）、C256 fused FFN/QKV（9×b8，其实在填充零块冷路径）~~ **09-30 已做**，逐位但 900 不快，不收（`results/deep-tail2-20260930`）。这条线结束。
 6. **ViT attention 余差**：640 我方 ~38µs vs 他 22～24µs，余差涉及 V 请求组织与 half 数学，未唯一拆清；4wave/64key 预取照搬已反慢。只在有新证据时动。
 6. **产品侧**：~~颜色格式兜底、ini 热重载~~ **09-30 已做**（`results/product-fmt-reload-20260930`，未装）；剩 **3080 上 NGX 同口径 PSNR 对照**。预处理/自动曝光属有损，不抄。
 7. ~~Infinity Cache arena~~ **09-30 交账**：池已复用，C64 以下已在 MALL 内，C32 放不下，热复用对照 null（`results/infinity-cache-20260930`）。
@@ -97,7 +98,7 @@
 - **授权**：编译、远程实验、回归、分析由 agent 自主执行；动 GPU 前查游戏进程，游戏运行时不换文件、不跑 GPU；画质判断请 Zero。
 - **游戏进程名**：剑星 `SB-Win64-Shipping`、匹诺曹 `LOP-Win64-Shipping`、鬼武者 `OnimushaWotS`、RE9 `re9`、33 号远征队 `SandFall*`。
 - **git**：只推 297，commit 不加 Co-Authored-By；push 前 `git pull --rebase`；只 add 具体文件。
-- **9070**（`ssh amd9070`）：工作根 `D:\DLSSNR-Lab\`；`hip/build-modules.ps1`（`-ExtraDefines`、`-Only`）；`hip/compare-modules.py`；完整帧回放 `results/frame-breakdown-20260928/replay.ps1`（`DLSS5_BENCH_PLAIN=1`）；打好的包在 `D:\給網友打包\`。ssh 远端是 cmd，多条 PowerShell 分开调；`(x86)` 路径写进脚本文件。
+- **9070**（`ssh amd9070`）：工作根 `D:\DLSSNR-Lab\`；各实验交账后删掉逐位帧转储（.f16/.ppm，照 `results/lab-cleanup-20260930/clean.ps1` 做），D 盘保持 ≥100GB 空闲；`hip/build-modules.ps1`（`-ExtraDefines`、`-Only`）；`hip/compare-modules.py`；完整帧回放 `results/frame-breakdown-20260928/replay.ps1`（`DLSS5_BENCH_PLAIN=1`）；打好的包在 `D:\給網友打包\`。ssh 远端是 cmd，多条 PowerShell 分开调；`(x86)` 路径写进脚本文件。
 - **3080 游戏本**（`ssh rtx3080`）：PATH 不全，用 `powershell -EncodedCommand`；scp 不通。
 - **DGX Spark**：`~/work/aco-isa/` 有 RADV + drm-shim 假 gfx1201，离线拿 ACO ISA；LLVM fork 构建 `tools/llvm-fork/`。
 - **发布**：复制上一版 `tools/package-0xx.ps1` 改版本/哈希/变更，逐文件校验、编 44 shader 变体、压包读回；RE9 runtime 变了用 `prepare-host.py` + `bundle-source.py` 重生源码包（跑完 `git checkout Development/RE9/presr/upstream.json`）。

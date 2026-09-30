@@ -41,6 +41,9 @@ DEV float H(float x){return from_half(half_bits(x));}
 #ifndef HIP_NATIVE_FP8_F
 #define HIP_NATIVE_FP8_F 1
 #endif
+#ifndef VIT_EXPAND_TAIL_VEC
+#define VIT_EXPAND_TAIL_VEC 0 /* 1: vit_expand_blocked_body hidden bytes staged in LDS, 2 x b128 per lane; bytes unchanged (results/deep-tail2-20260930) */
+#endif
 #ifndef C512_T8_TAIL_VEC
 #define C512_T8_TAIL_VEC 0 /* 1: split_ffn_fused_fp8_t8 / split_projection_frag tiled E4M3 copy staged in LDS, 8/16-byte stores per lane; bytes unchanged (results/deep-tail-20260930) */
 #endif
@@ -424,7 +427,16 @@ DEV void vit_expand_blocked_body(const float*in,const float*w,float*out,uint tok
   else DF_PACK8_LOOP(a,in[(first+rc())*inputs+k+gr()*8+e]);
   for(uint n=0;n<4;n++){uint row=col+n*16+rc();i2 b;if constexpr(Frag)b=vit_weight_fragment_native(w,row,inputs,k);else b=vit_weight_fragment<Tiled>(w,row,inputs,k);accum[n]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(a,b,accum[n]);}
  }
+ #if VIT_EXPAND_TAIL_VEC
+ // 16 tokens x 64 hidden bytes staged row-major in LDS (same byte_F per element), then lane = (token lane>>1, half lane&1)
+ // stores 32 contiguous bytes (2 x b128 instead of 32 b8 per lane). Bytes and addresses unchanged.
+ __attribute__((shared)) unsigned char t8[1024];
+ for(uint n=0;n<4;n++)for(uint e=0;e<8;e++){float v=accum[n][e],g=clampf(v,-4.f,4.f),poly=__builtin_fmaf(g,__builtin_fmaf(absf(g),-.055908203125f,.447265625f),.89453125f);t8[(gr()*8+e)*64+n*16+rc()]=byte_F(v*poly);}
+ WG_FENCE(3);__builtin_amdgcn_wave_barrier();WG_FENCE(2);
+ {uint l=__builtin_amdgcn_workitem_id_x()%32u,r=l>>1,h=l&1u;for(uint j=0;j<2;j++){int __attribute__((ext_vector_type(4))) q;__builtin_memcpy(&q,__builtin_assume_aligned(t8+r*64+h*32+j*16,16),16);__builtin_memcpy(__builtin_assume_aligned(reinterpret_cast<unsigned char*>(out)+size_t(first+r)*outputs+col+h*32+j*16,16),&q,16);}}
+ #else
  for(uint n=0;n<4;n++)for(uint e=0;e<8;e++){float v=accum[n][e],g=clampf(v,-4.f,4.f),poly=__builtin_fmaf(g,__builtin_fmaf(absf(g),-.055908203125f,.447265625f),.89453125f);reinterpret_cast<unsigned char*>(out)[(first+gr()*8+e)*outputs+col+n*16+rc()]=byte_F(v*poly);}
+ #endif
 }
 
 // BM token tiles per wave (host option vit_expand_m4, HLSL BLOCK_M=4 shape): every weight fragment load serves BM
