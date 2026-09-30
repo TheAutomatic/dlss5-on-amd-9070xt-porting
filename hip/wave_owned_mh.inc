@@ -221,6 +221,9 @@ DEV float w2_serial_norm(f8 lo,f8 hi){
 DEV float w2_up_F(float x){uint a=bits(x)&0x7fffffffu;float c=__builtin_fminf(__builtin_fmaxf(x,-448.f),448.f);float r=__builtin_amdgcn_cvt_f32_fp8(__builtin_amdgcn_cvt_pk_fp8_f32(c,0.f,0,false),0);return a==0?0.f:r;}
 // f-sweep 2026-09-30: W2_UP_ADD0 1 -> up output byte cvt_pk_fp8(med3(merged+0)) instead of cvt_pk_fp8(w2_up_F(merged))
 // (same byte for all 2^32 inputs, results/f-sweep-20260930).
+#ifndef W2_UP_DIRECT
+#define W2_UP_DIRECT 0 /* c128-c64-inchain 2026-10-01: Up projection with high-res B columns, no shuffles; bit-exact */
+#endif
 #ifndef W2_UP_VEC
 #define W2_UP_VEC 0 /* c128-c64-inchain 2026-10-01: vectorized/packed Up epilogue, bit-exact; see swin_wave2_body */
 #endif
@@ -235,11 +238,15 @@ DEV float w2_add0(float x){
 #endif
 /* W2_DOWN_HALF (2026-10-01, swin-body-gap): Up skip read as f16 when the encoder tail stored Hrtz(v) (f16-exact) as half. */
 template<bool Half> DEV float w2_skip(const float*skip,uint i){if constexpr(Half)return float(reinterpret_cast<const _Float16*>(skip)[i]);else return skip[i];}
+/* W2_SKIP_BYTE (2026-10-01, c128-c64-inchain): the encoder tail also stores the byte of w2_up_F(Hrtz(v)) (0 for +-0, as F); the Up reads it
+   back as cvt_f32_fp8(byte) == w2_up_F(skip) and skips its own F. */
+DEV uint w2_skip_byte(float x){uint a=bits(x)&0x7fffffffu;float c=__builtin_fminf(__builtin_fmaxf(x,-448.f),448.f);uint b=uint(__builtin_amdgcn_cvt_pk_fp8_f32(c,0.f,0,false))&255u;return a==0?0u:b;}
+template<bool Byte> DEV float w2_skipF(float v){if constexpr(Byte)return v;else return w2_up_F(v);}
 template<uint C,bool ByteIn,bool ByteOut,bool Up=false
 #if W2_EXPLICIT_WINDOW
  ,bool ExplicitWindow=false
 #endif
- ,bool W16=false,bool LowByte=false,bool HalfOut=false,bool SkipHalf=false>
+ ,bool W16=false,bool LowByte=false,bool HalfOut=false,bool SkipHalf=false,bool SkipByte=false,bool SkipByteOut=false>
 DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_any,
  uint width,uint height,uint workw,uint workh,uint sx,uint sy,uint post,const float*upw=nullptr,const float*skip=nullptr
 #if W2_EXPLICIT_WINDOW
@@ -273,6 +280,41 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
  // For fused Up, even window shifts preserve disjoint 4x4 low-resolution tiles.
  if constexpr(Up){
   const uint IC=2*C;const int x0=int((win%(workw/8))*8)-int(sx),y0=int((win/(workw/8))*8)-int(sy);
+#if W2_UP_DIRECT
+  /* W2_UP_DIRECT (2026-10-01, c128-c64-inchain): the low-res projection is computed with B columns = the 16 high-res tokens
+     of each qt (column rc reads its source low token qt*4+(rc%8)/2), so each lane already holds the value the scalar path
+     shuffled in from lane low+gr*16: no ds_bpermute at all. A WMMA column depends only on its own B column (same k order,
+     same accumulator chain), so every result is bit-identical; cost is 4x the (tiny) f16 WMMA count. */
+  const uint iw=width/2,ih=height/2;
+  f8 tq[4][2]{};
+  for(uint k=0;k<IC;k+=16){h8 b[2];
+   _Pragma("unroll") for(uint ci=0;ci<2;ci++)__builtin_memcpy(&b[ci],reinterpret_cast<const _Float16*>(upw)+(head*32+ci*16+rc)*IC+k+gr*8,16);
+   _Pragma("unroll") for(uint qt=0;qt<4;qt++){
+    const uint L=qt*4+(rc%8)/2;const int lx=x0/2+int(L%4),ly=y0/2+int(L/4);h8 a{};
+    {const bool ok=lx>=0&&ly>=0&&lx<int(iw)&&ly<int(ih);const uint base=ok?(uint(ly)*iw+uint(lx))*IC:0u;for(uint e=0;e<8;e++){float v;if constexpr(LowByte)v=__builtin_amdgcn_cvt_f32_fp8(int(reinterpret_cast<const unsigned char*>(in)[base+k+gr*8+e]),0);else v=in[base+k+gr*8+e];a[e]=ok?(_Float16)v:(_Float16)0.f;}}
+    _Pragma("unroll") for(uint ci=0;ci<2;ci++)tq[qt][ci]=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(b[ci],a,tq[qt][ci]);
+   }
+  }
+  float uw[2][8];
+  _Pragma("unroll") for(uint ci=0;ci<2;ci++)_Pragma("unroll") for(uint e=0;e<8;e++)uw[ci][e]=upw[IC*C+head*32+ci*16+gr*8+e];
+  _Pragma("unroll") for(uint qt=0;qt<4;qt++){
+   const uint tok=qt*16+rc;const int x=x0+int(tok%8),y=y0+int(tok/8);
+   const bool ok=x>=0&&y>=0&&x<int(width)&&y<int(height);const uint base=ok?(uint(y)*width+uint(x))*C:0u;
+   _Pragma("unroll") for(uint ci=0;ci<2;ci++){
+    const uint c0=head*32+ci*16+gr*8;float sk[8];
+    if constexpr(SkipByte){uint wv[2];__builtin_memcpy(wv,reinterpret_cast<const unsigned char*>(skip)+base+c0,8);_Pragma("unroll") for(uint e=0;e<8;e++)sk[e]=__builtin_amdgcn_cvt_f32_fp8(int((wv[e/4]>>(8*(e%4)))&255u),0);}
+    else if constexpr(SkipHalf){h8 v;__builtin_memcpy(&v,reinterpret_cast<const _Float16*>(skip)+base+c0,16);_Pragma("unroll") for(uint e=0;e<8;e++)sk[e]=float(v[e]);}
+    else __builtin_memcpy(sk,skip+base+c0,32);
+    i2 packed{};
+    _Pragma("unroll") for(uint e=0;e<8;e++){
+     float t=H(tq[qt][ci][e]);
+     float merged=H(t+w2_skipF<SkipByte>(sk[e])*uw[ci][e]);
+     uint b=uint(__builtin_amdgcn_cvt_pk_fp8_f32(W2_UP_ADD0?w2_add0(merged):w2_up_F(merged),0.f,0,false))&255u;
+     w2_bits(packed,e,ok?b:0u);}
+    w2_store<C>(plane0,qt,head*2+ci,packed);
+   }
+  }
+#else
   const int lx=x0/2+int(rc%4),ly=y0/2+int(rc/4);const uint iw=width/2,ih=height/2;
   f8 totals[2]{};
   for(uint k=0;k<IC;k+=16){h8 a{},b{};
@@ -304,14 +346,15 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
    const bool ok=x>=0&&y>=0&&x<int(width)&&y<int(height);const uint base=ok?(uint(y)*width+uint(x))*C:0u;
    _Pragma("unroll") for(uint ci=0;ci<2;ci++){
     const uint c0=head*32+ci*16+gr*8;float sk[8];
-    if constexpr(SkipHalf){h8 v;__builtin_memcpy(&v,reinterpret_cast<const _Float16*>(skip)+base+c0,16);_Pragma("unroll") for(uint e=0;e<8;e++)sk[e]=float(v[e]);}
+    if constexpr(SkipByte){uint wv[2];__builtin_memcpy(wv,reinterpret_cast<const unsigned char*>(skip)+base+c0,8);_Pragma("unroll") for(uint e=0;e<8;e++)sk[e]=__builtin_amdgcn_cvt_f32_fp8(int((wv[e/4]>>(8*(e%4)))&255u),0);}
+    else if constexpr(SkipHalf){h8 v;__builtin_memcpy(&v,reinterpret_cast<const _Float16*>(skip)+base+c0,16);_Pragma("unroll") for(uint e=0;e<8;e++)sk[e]=float(v[e]);}
     else __builtin_memcpy(sk,skip+base+c0,32);
     i2 packed{};
     _Pragma("unroll") for(uint j=0;j<4;j++){
      const uint w=uint(__builtin_amdgcn_ds_bpermute(int((low+gr*16)*4),int(hp[ci][j])));
      _Pragma("unroll") for(uint k=0;k<2;k++){const uint e=2*j+k;float t;const uint hb=k?(w>>16):(w&0xffffu);
       asm("v_cvt_f32_f16 %0, %1" : "=v"(t) : "v"(hb));
-      float merged=H(t+w2_up_F(sk[e])*uw[ci][e]);
+      float merged=H(t+w2_skipF<SkipByte>(sk[e])*uw[ci][e]);
       uint b=uint(__builtin_amdgcn_cvt_pk_fp8_f32(W2_UP_ADD0?w2_add0(merged):w2_up_F(merged),0.f,0,false))&255u;
       w2_bits(packed,e,ok?b:0u);}
     }
@@ -325,11 +368,11 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
     float t=H(w2_shuffle(totals[ci][e],low+gr*16));uint c=head*32+ci*16+gr*8+e;uint byte=0;
 #if W2_HOIST_LOADS&8
     {const bool ok=x>=0&&y>=0&&x<int(width)&&y<int(height);
-     float merged=H(t+w2_up_F(w2_skip<SkipHalf>(skip,(ok?(uint(y)*width+uint(x))*C:0u)+c))*upw[IC*C+c]);
+     float merged=H(t+w2_skipF<SkipByte>(SkipByte?__builtin_amdgcn_cvt_f32_fp8(int(reinterpret_cast<const unsigned char*>(skip)[(ok?(uint(y)*width+uint(x))*C:0u)+c]),0):w2_skip<SkipHalf>(skip,(ok?(uint(y)*width+uint(x))*C:0u)+c))*upw[IC*C+c]);
      uint b=uint(__builtin_amdgcn_cvt_pk_fp8_f32(W2_UP_ADD0?w2_add0(merged):w2_up_F(merged),0.f,0,false))&255u;byte=ok?b:0u;}
 #else
     if(x>=0&&y>=0&&x<int(width)&&y<int(height)){
-     float merged=H(t+w2_up_F(w2_skip<SkipHalf>(skip,(uint(y)*width+uint(x))*C+c))*upw[IC*C+c]);
+     float merged=H(t+w2_skipF<SkipByte>(SkipByte?__builtin_amdgcn_cvt_f32_fp8(int(reinterpret_cast<const unsigned char*>(skip)[(uint(y)*width+uint(x))*C+c]),0):w2_skip<SkipHalf>(skip,(uint(y)*width+uint(x))*C+c))*upw[IC*C+c]);
      byte=uint(__builtin_amdgcn_cvt_pk_fp8_f32(W2_UP_ADD0?w2_add0(merged):w2_up_F(merged),0.f,0,false))&255u;
     }
 #endif
@@ -338,6 +381,7 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
    w2_store<C>(plane0,qt,head*2+ci,packed);
   }
 #endif
+#endif /* W2_UP_DIRECT */
  }else{
  // Stage original input in A fragments. Preserve the byte cast used by pack4.
  for(uint qt=0;qt<4;qt++)for(uint ci=0;ci<2;ci++){
@@ -519,6 +563,7 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
    w2_schedule();
   }
  }
+ constexpr bool W2SkipB8=SkipByteOut;void*const w2_sb=const_cast<float*>(skip);(void)w2_sb; // W2_SKIP_BYTE: *_bi_hob byte copy target
  constexpr bool W2HalfTail=HalfOut; // post-3 tail stored as f16 (Hrtz is f16-exact); attention-only copies define it false
  // One wave owns all keys and queries of a head. Existing WMMA half row-sum order is retained.
 #if W2_ROLL_QUERY
@@ -606,7 +651,7 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
    uint dest=((y-sy)*width+x-sx)*C+head*32+gr*8;
    for(uint ci=0;ci<2;ci++){
     if constexpr(ByteOut){W2_Q8_DECL(a);for(uint e=0;e<8;e++){float v=result[ci][e];W2_Q8_SET(a,e,post==0?(W2_Q8_MASK?w2_hmask(v):Hrtz(v)):v);}W2_Q8_END(a);__builtin_memcpy(reinterpret_cast<unsigned char*>(out_any)+dest+ci*16,&a,8);}
-    else if constexpr(W2HalfTail){for(uint e=0;e<8;e++){float v=result[ci][e];static_cast<_Float16*>(out_any)[dest+ci*16+e]=(_Float16)Hrtz(v);}}
+    else if constexpr(W2HalfTail){for(uint e=0;e<8;e++){float v=result[ci][e];static_cast<_Float16*>(out_any)[dest+ci*16+e]=(_Float16)Hrtz(v);}if constexpr(W2SkipB8){i2 sb{};for(uint e=0;e<8;e++)w2_bits(sb,e,w2_skip_byte(Hrtz(result[ci][e])));__builtin_memcpy(static_cast<unsigned char*>(w2_sb)+dest+ci*16,&sb,8);}}
     else for(uint e=0;e<8;e++){float v=result[ci][e];static_cast<float*>(out_any)[dest+ci*16+e]=post==3?Hrtz(v):post==0?F(Hrtz(v)):F(v);}
    }
   }
@@ -639,7 +684,7 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
    uint dest=((y-sy)*width+x-sx)*C+head*32+gr*8;
    for(uint ci=0;ci<2;ci++){
     if constexpr(ByteOut){W2_Q8_DECL(a);for(uint e=0;e<8;e++){float v=result[ci][e];W2_Q8_SET(a,e,post==0?(W2_Q8_MASK?w2_hmask(v):Hrtz(v)):v);}W2_Q8_END(a);__builtin_memcpy(reinterpret_cast<unsigned char*>(out_any)+dest+ci*16,&a,8);}
-    else if constexpr(W2HalfTail){for(uint e=0;e<8;e++){float v=result[ci][e];static_cast<_Float16*>(out_any)[dest+ci*16+e]=(_Float16)Hrtz(v);}}
+    else if constexpr(W2HalfTail){for(uint e=0;e<8;e++){float v=result[ci][e];static_cast<_Float16*>(out_any)[dest+ci*16+e]=(_Float16)Hrtz(v);}if constexpr(W2SkipB8){i2 sb{};for(uint e=0;e<8;e++)w2_bits(sb,e,w2_skip_byte(Hrtz(result[ci][e])));__builtin_memcpy(static_cast<unsigned char*>(w2_sb)+dest+ci*16,&sb,8);}}
     else for(uint e=0;e<8;e++){float v=result[ci][e];static_cast<float*>(out_any)[dest+ci*16+e]=post==3?Hrtz(v):post==0?F(Hrtz(v)):F(v);}
    }
   }
@@ -724,6 +769,18 @@ W2_UP_KERNEL_SH(c64_wave2_up_sh,64,false)
 W2_UP_KERNEL_SH(c128_wave2_up_sh,128,false)
 W2_UP_KERNEL_SH(c64_wave2_up_lb_sh,64,true)
 W2_UP_KERNEL_SH(c128_wave2_up_lb_sh,128,true)
+#ifndef W2_SKIP_BYTE
+#define W2_SKIP_BYTE 0
+#endif
+#if W2_SKIP_BYTE
+/* *_bi_hob: *_bi_ho plus a byte copy of F(Hrtz(v)) at arg 12 (passed through the body's skip slot); *_up_lb_sb: *_up_lb reading that byte skip. */
+#define W2_KERNEL_HOB(NAME,C) KERNEL __attribute__((amdgpu_flat_work_group_size(C,C))) void NAME(const float*in,const float*fw,const float*aw,void*out,uint w,uint h,uint ww,uint hh,uint sx,uint sy,uint post,void*sb){swin_wave2_body<C,true,false,false,false,false,true,false,false,true>(in,fw,aw,out,w,h,ww,hh,sx,sy,post,nullptr,static_cast<const float*>(sb));}
+W2_KERNEL_HOB(c64_wave2_bi_hob,64)
+W2_KERNEL_HOB(c128_wave2_bi_hob,128)
+#define W2_UP_KERNEL_SB(NAME,C) KERNEL __attribute__((amdgpu_flat_work_group_size(C,C))) void NAME(const float*in,const float*fw,const float*aw,void*out,uint w,uint h,uint ww,uint hh,uint sx,uint sy,uint post,const float*upw,const float*skip){swin_wave2_body<C,true,true,true,false,true,false,false,true>(in,fw,aw,out,w,h,ww,hh,sx,sy,post,upw,skip);}
+W2_UP_KERNEL_SB(c64_wave2_up_lb_sb,64)
+W2_UP_KERNEL_SB(c128_wave2_up_lb_sb,128)
+#endif
 #endif
 #endif
 #endif
