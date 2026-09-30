@@ -1311,3 +1311,6 @@ Zero（Splashtop，只作正确性）：剑星 2K 原生 AA EXACT 55.6～56.1，
 编码块 23–30 去掉依赖、8 条 stream 全并发（只计时，不做候选），三轮 ABBA 900 慢 0.21–0.25ms、1080 慢 0.31–0.33ms，p99 也同样变差。连理想重叠都亏，所以 P 停手，未写队列核。见 results/c512-xblock-queue-20261001。
 
 ## 2026-10-01 下采样折进相邻核（C64/C128，W2_DOWN_FUSED）：19 SAME，但两档三轮都慢（900 +0.05～0.08，1080 +0.12ms），不收。源码在 resample-fold 分支。见 results/resample-fold-20261001。
+
+## 2026-10-01 网络前后 D3D 段瘦身 input-slim（光派单，子代理）
+`DLSS5_GAME_PROBE` 细分打点（离线回放，串行化 GPU 时间）：encode 11.0/15.1、input 23.3/32.7、neural 15.7/22.2、decode 35.9/43.6、最终拷贝 8.3/8.3µs（900/1080）；D3D 段合计约 94/122µs，网络外那 0.3ms 的大头是交接不是 pass。做了 `DLSS5_IO_FUSE=1`：decode 直接读网络 f32 输出（f16tof32(f32tof16) 同舍入），跳过 neural pass，仅非时序、非 overlap 会话。19 组 SAME；六轮 ABBA avg 全正（900 −0.004～−0.020，1080 −0.012～−0.035），但 900 合并 p99 7.791→7.811 变差（3/6 轮），按规则不收：开关默认 0、不进模板、CONFIGURATION.md 追加一行、不装机不打包。encode 并 input、去颜色→low 拷贝估计各 ≤0.01ms，未做。`results/input-slim-20261001`。

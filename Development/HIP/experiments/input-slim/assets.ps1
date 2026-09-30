@@ -1,0 +1,7 @@
+$ErrorActionPreference='Stop';$root='D:\DLSSNR-Lab\hip-backend\input-slim-20261001'
+$g='C:\Program Files (x86)\Steam\steamapps\common\StellarBlade\SB\Binaries\Win64\DLSS5-AMD\native-game-tiled-assets'
+foreach($n in 'assets-base','assets-cand'){if(Test-Path "$root\$n"){Remove-Item "$root\$n" -Recurse -Force};New-Item -ItemType Directory "$root\$n"|Out-Null
+ Get-ChildItem $g | Where-Object {$_.Name -ne 'HIP'} | ForEach-Object {Copy-Item $_.FullName "$root\$n" -Recurse}}
+Copy-Item "$root\native_codec_decode.hlsl" "$root\assets-cand\native_codec_decode.hlsl" -Force
+(Get-ChildItem "$root\assets-base" -Recurse | Measure-Object Length -Sum).Sum
+'ASSETS_DONE'
