@@ -1,0 +1,42 @@
+900 dispatches 173 distinct act buffers 30 footprint MB 242.9 max per-dispatch touched MB 140.6 weight-arg MB 547.0 act access MB 1803 reuse<=64MB frac 0.69
+ biggest MB [46.9, 46.9, 23.7, 23.4, 23.4, 5.9, 5.9, 5.9]
+  c32        access    595MB  reuse-in-64MB 0.56
+  mh         access    262MB  reuse-in-64MB 0.91
+  split      access    245MB  reuse-in-64MB 1.00
+  c64        access    170MB  reuse-in-64MB 0.86
+  vit        access    119MB  reuse-in-64MB 1.00
+  c128       access    105MB  reuse-in-64MB 0.89
+  c256       access     27MB  reuse-in-64MB 1.00
+  c512       access     19MB  reuse-in-64MB 1.00
+  decoder    access     18MB  reuse-in-64MB 1.00
+1080 dispatches 156 distinct act buffers 19 footprint MB 291.3 max per-dispatch touched MB 202.5 weight-arg MB 542.5 act access MB 2430 reuse<=64MB frac 0.59
+ biggest MB [67.5, 67.5, 34.0, 33.8, 33.8, 8.4, 8.4, 8.4]
+  c32        access    856MB  reuse-in-64MB 0.28
+  split      access    355MB  reuse-in-64MB 1.00
+  mh         access    261MB  reuse-in-64MB 0.87
+  c64        access    253MB  reuse-in-64MB 0.87
+  vit        access    189MB  reuse-in-64MB 1.00
+  c128       access    156MB  reuse-in-64MB 0.89
+  c512       access     27MB  reuse-in-64MB 1.00
+  decoder    access     26MB  reuse-in-64MB 1.00
+  c256       access     15MB  reuse-in-64MB 1.00
+900
+  c32        disp  10  distinct-buf-MB  164.3  max-per-dispatch-MB  134.8
+  mh         disp  35  distinct-buf-MB   89.6  max-per-dispatch-MB   35.2
+  c64        disp   8  distinct-buf-MB   52.7  max-per-dispatch-MB   41.0
+  c128       disp  12  distinct-buf-MB   23.4  max-per-dispatch-MB   20.5
+  c256       disp   4  distinct-buf-MB   40.6  max-per-dispatch-MB   12.4
+  split      disp  39  distinct-buf-MB   16.2  max-per-dispatch-MB    7.3
+  c512       disp  13  distinct-buf-MB    1.5  max-per-dispatch-MB    1.5
+  vit        disp  50  distinct-buf-MB    9.0  max-per-dispatch-MB    4.7
+  decoder    disp   2  distinct-buf-MB   13.3  max-per-dispatch-MB   10.3
+1080
+  c32        disp  10  distinct-buf-MB  236.5  max-per-dispatch-MB  194.1
+  mh         disp  18  distinct-buf-MB   81.2  max-per-dispatch-MB   50.6
+  c64        disp   8  distinct-buf-MB   75.9  max-per-dispatch-MB   59.1
+  c128       disp  12  distinct-buf-MB   29.5  max-per-dispatch-MB   29.5
+  c256       disp   4  distinct-buf-MB   33.8  max-per-dispatch-MB   10.5
+  split      disp  39  distinct-buf-MB   19.0  max-per-dispatch-MB   10.5
+  c512       disp  13  distinct-buf-MB    2.1  max-per-dispatch-MB    2.1
+  vit        disp  50  distinct-buf-MB   14.4  max-per-dispatch-MB    7.5
+  decoder    disp   2  distinct-buf-MB   19.4  max-per-dispatch-MB   14.8

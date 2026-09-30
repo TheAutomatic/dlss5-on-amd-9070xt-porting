@@ -20,6 +20,7 @@
 - **下一版（0.38）待打包**：① 900 去 shift_pack（`results/shift-pack-900-20260930`）；② C32 块 4 skip/下采样存 E4M3 字节（`results/c32-align-20260930`，逐位，900 −0.05ms 0.62%、1080 −0.09ms 0.82%，改 c32-wave1＋multihead-fast-padded-wave-packed 两模块）。③ C32 对角残差跳零 `CW_DIAG_ONLY 1`（Zero 批准，逐位，1080 约 −0.04ms；09-30 08:01 已装）。现装宿主 **a80db313** / RE9 runtime **fd4b2c0c**，剑星、鬼武者已装（09-30 03:44 备份）。Zero 定何时发。
 - **1088 行紧凑几何（可选档）09-30 交账**：`DLSS5_NETWORK_1080_ROWS=1088`，默认 1152 逐位；开时 1080 −0.47～0.48ms（4.4%），对 1152 全帧约 56dB、底边 32 行 52.5dB 略差。产物在 `D:\DLSSNR-Lab\geom1088-20260930\`，未装；**等 Zero 看 ppm 决定是否作可选档进 0.38**（`results/geom-1088-20260930`）。
 - **产品侧 09-30 交账（未装机，等 Zero 定随哪刀装/打包）**：颜色格式兜底 `DLSS5_FORMAT_FALLBACK=1`（R9G9B9E5/B8G8R8X8/R10G10B10A2/R32G32B32(A32)/SNORM/565 等转 RGBA16F，原格式逐位）＋热重载 `DLSS5_HOT_RELOAD=1`（STRENGTH/NOTICE/SHOW_FPS）。add-on 8b729f22、RE9 runtime 99c8ead9，产物 `D:\DLSSNR-Lab\product-fmt-20260930\`；**打包须新增 `native_format_convert.hlsl`**。`results/product-fmt-reload-20260930`。
+- Infinity Cache / arena 09-30 交账：宿主池已按生命周期复用，C32 单派发 141/203MB 超过 64MB MALL，热复用对照逐位但 900 慢 0.01ms，不收（`results/infinity-cache-20260930`）。
 - 交接 GPU 同步 09-30 交账（HIP→D3D 分片自旋反慢，未装）。其余无在跑任务。09-29～09-30 已完成项细节见各 `results/*/README.md` 与 DevHistory。
 
 ## Zero 的标准与取舍（为什么这样定）
@@ -58,6 +59,7 @@
 4. **C512 FFN 链**：三核 524 vs Daniel ffwd 382µs（900）。组织方式问题，旧负账多（M32、单 wave R/RF），把握低，放后。
 5. **ViT attention 余差**：640 我方 ~38µs vs 他 22～24µs，余差涉及 V 请求组织与 half 数学，未唯一拆清；4wave/64key 预取照搬已反慢。只在有新证据时动。
 6. **产品侧**：~~颜色格式兜底、ini 热重载~~ **09-30 已做**（`results/product-fmt-reload-20260930`，未装）；剩 **3080 上 NGX 同口径 PSNR 对照**。预处理/自动曝光属有损，不抄。
+8. ~~Infinity Cache arena~~ **09-30 交账**：池已复用，C64 以下已在 MALL 内，C32 放不下，热复用对照 null（`results/infinity-cache-20260930`）。
 7. 杂项：`validate-modules.ps1` 修路径；帧时间日志 Magpie 路线未接；RE9 游戏内换 0.37 runtime 待 Zero 要。
 
 ## 已交负账（别重复，一行一条）

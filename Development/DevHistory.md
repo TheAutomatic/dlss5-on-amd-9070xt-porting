@@ -1206,3 +1206,7 @@ Zero 改了验收规则：小改动只要逐位、离线 ABBA 为正、p99 和�
 - 9070：HEAD vs 新宿主 168 帧（7 用例×EXACT/AE×12）全 SAME＋AE CSV 同；RE9 runtime RGBA16F 900/1080 hash 同（b2980ada/758674a8）；10 种新格式经 RE9 runtime 过整网出图，旧 runtime 全拒；转换 pass 14 格式与 CPU 解码差 ≤1 half ULP（驱动截断）。
 - 插曲：第一次跑 rt_fmt 报 native_codec_encode.hlsl not found——runtime 只在 DLL 旁 `shaders\` 找，LMXXF_SHADER_DIR 不管用；convert_smoke 初判 FAIL 是容差按 RNE 半 ULP 写的，驱动 f32→f16 存储截断，放到 1 ULP 后全过。
 - add-on 8b729f22、RE9 runtime 99c8ead9，产物 `D:\DLSSNR-Lab\product-fmt-20260930\`。详见 `results/product-fmt-reload-20260930`。
+
+## 2026-09-30：Infinity Cache / scratch arena 先量（交账，不收）
+
+宿主已有生命周期池（pooled，best-fit 复用），900/1080 只用 30/19 个激活缓冲，占 243/291MB。单派发最大读写集合 141/203MB，全在 C32，所以 arena 的下界也超过 64MB MALL。C64 以下各段复用距离已≤64MB（LRU 模型 0.86～1.00），C32 为 0.56/0.28。Windows 没有计数器，用对照实验：`HIP_POOL_HOT=1` 优先复用最近用过的空闲缓冲，逐位 18 组 SAME，ABBA 900 +0.009/+0.011ms（慢），1080 −0.007/+0.000，不收。生产代码未改，补丁留在 `experiments/infinity-cache/pool-hot.patch`；没装机。`results/infinity-cache-20260930`。
