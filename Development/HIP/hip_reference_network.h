@@ -48,6 +48,12 @@ using Tensor=std::shared_ptr<Allocation>;
 #ifndef HIP_C32_SKIP_BYTE
 #define HIP_C32_SKIP_BYTE 1 /* 2026-09-30: block4 main (C32 skip, read only by the block66 up) as E4M3 bytes when c32-wave1 exports the _b8 pair; 0 or older modules = f32 (results/c32-align-20260930) */
 #endif
+#ifndef HIP_C32_PRE_DOWN_BYTE
+#define HIP_C32_PRE_DOWN_BYTE 1 /* 2026-09-30: block0 pooled output (read only by block1) as E4M3 bytes when c32-wave1 exports c32_wave1_prefix_b8d/c32_wave1_mapped_b8; 0 or older modules = f32 (results/prefix-post-20260930) */
+#endif
+#ifndef HIP_C32_POST_LOW_BYTE
+#define HIP_C32_POST_LOW_BYTE 1 /* 2026-09-30: block69 main (read only by the fused post) as E4M3 bytes when c32-wave1 exports c32_wave1_finish_b8/c32_wave1_post_b8; 0 or older modules = f32 */
+#endif
 #ifndef HIP_C32_DOWN_BYTE
 #define HIP_C32_DOWN_BYTE 1 /* with HIP_C32_SKIP_BYTE: block4 pooled (dcrop) output also as E4M3 bytes, read by mh_pool_project_c32_b8, when both exports exist */
 #endif
@@ -74,7 +80,7 @@ inline bool SwinRunCompatible(const Options&o){
 }
 inline std::atomic<int> AdaptivePreviewState{0};
 class Network {
- bool wave_owned_active=false;bool c32_skip_byte=false;bool c512_m32_active=false;bool vit_proj_n64_active=false;unsigned vit_stream_active=0;
+ bool wave_owned_active=false;bool c32_skip_byte=false;bool c32_pre_down_byte=false;bool c32_post_low_byte=false;bool c512_m32_active=false;bool vit_proj_n64_active=false;unsigned vit_stream_active=0;
  /* ---- programmatic-dependent-launch emulation (opt.pdl; results/pdl-chain-20260925) ----
     C64/C128/C256 chain launches after the chain head go out with hipExtAnyOrderLaunch (no AQL barrier bit) and the _pdl
     kernel twins wait on / publish per-tile counters. One counter array per (kind,c,ww,hh) so every use bumps every tile
@@ -280,7 +286,7 @@ class Network {
   }
   if(module=="c32_fused"||module=="c32_fused_ffn"||module=="mh_fused"){groups=count;threads=128;}
   if(module=="c64_wave2"){groups=count;threads=kernel.rfind("c64_",0)==0?64:kernel.rfind("c128_",0)==0?128:256;}
-  if(module=="c32_wave1"&&(kernel=="c32_wave1_up"||kernel=="c32_wave1_up_b8"||kernel=="c32_wave1_finish_dcrop_b8"||kernel=="c32_wave1_finish_dcrop_b8d")){groups=count;threads=32;}
+  if(module=="c32_wave1"&&(kernel=="c32_wave1_up"||kernel=="c32_wave1_up_b8"||kernel=="c32_wave1_finish_dcrop_b8"||kernel=="c32_wave1_finish_dcrop_b8d"||kernel=="c32_wave1_prefix_b8d"||kernel=="c32_wave1_mapped_b8"||kernel=="c32_wave1_finish_b8"||kernel=="c32_wave1_post_b8")){groups=count;threads=32;}
   if(module=="c512_m32_mh"||module=="c512_m32_deep"){groups=count/1024;threads=32;}
   if(module=="c512_m32_mh"&&kernel=="c512_qkv_attention_fused"){groups=count;threads=64;}
   if(module=="c512_m32_mh"&&kernel=="c512_qkv_attention_compact"){groups=count;threads=64;}
@@ -320,6 +326,7 @@ class Network {
  C32Result C32Fast(Tensor input,U w,U h,const std::string&fw,const std::string&aw,bool need_main=true,bool need_down=true,U cropw=0,U croph=0,U sx=0,U sy=0){
   U n=w*h,windows=n/64;bool diagonal=fw=="block2-ffn.f32"||fw=="block3-ffn.f32"||fw=="block4-ffn.f32"||fw=="block67-ffn.f32"||fw=="block68-ffn.f32"||fw=="block69-ffn.f32";
   Tensor raw;bool finish_fused=opt.c32_finish_fused&&opt.fused_ffn&&opt.half_c32&&!cropw&&opt.pre_main8&&fw=="block0-ffn.f32"&&need_main&&need_down;
+  if(finish_fused&&inline_prefix&&HIP_C32_PRE_DOWN_BYTE&&wave_owned_active&&opt.raw_chain&&opt.mapped_c32&&!opt.skip_blocks.count(1)&&HasFn("c32_wave1","c32_wave1_prefix_b8d")&&HasFn("c32_wave1","c32_wave1_mapped_b8")){inline_prefix=false;c32_pre_down_byte=true;auto main=New(size_t(n)*8),down=New(size_t(n/4)*8);Run("c32_wave1","c32_wave1_prefix_b8d",windows,P(inline_rgba),P(inline_hist?inline_hist:inline_rgba),PackedC32Weight(fw,false),PackedC32Weight(aw,true),P(main),P(down),windows,U(diagonal?3:0),U(1),w,h,inline_seed,inline_temporal);inline_rgba.reset();inline_hist.reset();return {main,down,Tensor{},w,h,0,0};}
   if(finish_fused&&inline_prefix){inline_prefix=false;auto main=New(size_t(n)*8),down=New(size_t(n/4)*32);Run("c32_fused_ffn","c32_fast_ffn_attention_fused_half_prefix_finish_main8",windows,P(inline_rgba),P(inline_hist?inline_hist:inline_rgba),PackedC32Weight(fw,false),PackedC32Weight(aw,true),P(main),P(down),windows,U(diagonal?3:0),U(1),w,h,inline_seed,inline_temporal);inline_rgba.reset();inline_hist.reset();return {main,down,Tensor{},w,h,0,0};}
   if(finish_fused){auto main=New(size_t(n)*8),down=New(size_t(n/4)*32);Run("c32_fused_ffn","c32_fast_ffn_attention_fused_half_finish_main8",windows,P(input),PackedC32Weight(fw,false),PackedC32Weight(aw,true),P(main),P(down),windows,U(diagonal?3:0),U(1),w,h);return {main,down,Tensor{},w,h,0,0};}
   if(opt.fused_ffn){raw=New(size_t(n)*(opt.half_c32?16:32));if(opt.mapped_c32&&cropw){Run("c32_fused_ffn","c32_fast_ffn_attention_fused_half_mapped",windows,P(input),PackedC32Weight(fw,false),PackedC32Weight(aw,true),P(raw),windows,U(diagonal?3:0),U(1),cropw,croph,sx,sy);}else{Run("c32_fused_ffn",opt.half_c32?"c32_fast_ffn_attention_fused_half":"c32_fast_ffn_attention_fused",windows,P(input),PackedC32Weight(fw,false),PackedC32Weight(aw,true),P(raw),windows,U(diagonal?3:0),U(1));}}else{
@@ -355,9 +362,11 @@ class Network {
  C32Result C32Chain(Tensor input,const C32Result*prev,U w,U h,U shift,const std::string&fw,const std::string&aw,bool finish,bool down){
   U sx=(shift&1)?4:0,sy=(shift&2)?4:0,ww=w+2*sx,hh=h+2*sy,n=ww*hh,windows=n/64;
   if(opt.c32_finish_fused&&prev&&finish&&down&&opt.down_crop_fused&&C32SkipByte()){c32_skip_byte=true;bool db=HIP_C32_DOWN_BYTE&&opt.pool32_h16w&&opt.fast_mh&&HasFn("c32_wave1","c32_wave1_finish_dcrop_b8d")&&HasFn("mh_fast","mh_pool_project_c32_b8");auto main=New(size_t(w)*h*8),pooled=New(size_t(w/2)*(h/2)*(db?8:32));Run("c32_wave1",db?"c32_wave1_finish_dcrop_b8d":"c32_wave1_finish_dcrop_b8",windows,P(prev->raw),PackedC32Weight(fw,false),PackedC32Weight(aw,true),P(main),P(pooled),windows,U(3),U(1),w,h,sx,sy,prev->workw,prev->sx,prev->sy);C32Result r{main,pooled,Tensor{},ww,hh,sx,sy,true};r.down_byte=db;return r;}
+  if(opt.c32_finish_fused&&prev&&finish&&!down&&fw=="block69-ffn.f32"&&HIP_C32_POST_LOW_BYTE&&wave_owned_active&&opt.post_merge_fold&&opt.post_head_fused&&HasFn("c32_wave1","c32_wave1_finish_b8")&&HasFn("c32_wave1","c32_wave1_post_b8")){c32_post_low_byte=true;auto main=New(size_t(w)*h*8);Run("c32_wave1","c32_wave1_finish_b8",windows,P(prev->raw),PackedC32Weight(fw,false),PackedC32Weight(aw,true),P(main),static_cast<void*>(nullptr),windows,U(3),U(1),w,h,sx,sy,prev->workw,prev->sx,prev->sy);return {main,Tensor{},Tensor{},ww,hh,sx,sy,false};}
   if(opt.c32_finish_fused&&prev&&(finish||down)){if(finish&&down)c32_skip_byte=false;bool dcrop=opt.down_crop_fused&&down;auto main=finish?New(size_t(w)*h*32):Tensor{},pooled=down?New(dcrop?size_t(w/2)*(h/2)*32:size_t(n/4)*32):Tensor{};Run("c32_fused_ffn",dcrop?"c32_fast_ffn_attention_fused_half_chain_finish_dcrop":"c32_fast_ffn_attention_fused_half_chain_finish",windows,P(prev->raw),PackedC32Weight(fw,false),PackedC32Weight(aw,true),P(main),P(pooled),windows,U(3),U(1),w,h,sx,sy,prev->workw,prev->sx,prev->sy);return {main,pooled,Tensor{},ww,hh,sx,sy,dcrop};}
   auto raw=New(size_t(n)*16);
   if(prev)Run("c32_fused_ffn","c32_fast_ffn_attention_fused_half_chain",windows,P(prev->raw),PackedC32Weight(fw,false),PackedC32Weight(aw,true),P(raw),windows,U(3),U(1),w,h,sx,sy,prev->workw,prev->sx,prev->sy);
+  else if(c32_pre_down_byte){c32_pre_down_byte=false;Run("c32_wave1","c32_wave1_mapped_b8",windows,P(input),PackedC32Weight(fw,false),PackedC32Weight(aw,true),P(raw),windows,U(0),U(1),w,h,sx,sy);}
   else Run("c32_fused_ffn","c32_fast_ffn_attention_fused_half_mapped",windows,P(input),PackedC32Weight(fw,false),PackedC32Weight(aw,true),P(raw),windows,U(0),U(1),w,h,sx,sy);
   auto main=finish?New(size_t(w)*h*32):Tensor{},pooled=down?New(size_t(n/4)*32):Tensor{};
   if(main||pooled)Run("boundary_fast","c32_finish_crop_half",size_t(n)*32,P(raw),P(main),P(pooled),ww,hh,w,h,sx,sy);
@@ -570,7 +579,7 @@ if(opt.fast_c32){const char*f[][2]={{"c32_fast_ffn","c32_fast.hsaco"},{"c32_fast
  else
  {if(c32_skip_byte)throw std::runtime_error("byte C32 skip needs the wave-owned up");source=Up(source,skips[0],W/4,H/4,W/2,H/2,64,32,"block66-weights.f32");}skips[0].reset();c32_skip_byte=false;for(U b=c32_begin;b<=69;b++){if(opt.skip_blocks.count(b)){if(!opt.raw_chain)throw std::runtime_error("C32 skip needs the raw chain");if(b==69)SkipChainFinish(chain,W/2,H/2,false);if(chain.main)source=chain.main;continue;}chain=opt.raw_chain?C32Chain(source,chain.raw?&chain:nullptr,W/2,H/2,Shift(b),Block(b,"ffn"),Block(b,"attention"),b==69,false):C32(source,W/2,H/2,Shift(b),Block(b,"ffn"),Block(b,"attention"));source=chain.main;if(source)Stage("block"+std::to_string(b),source);}chain={};
  C32Result post{};
- if(opt.post_merge_fold){U sx=(opt.post_shift&1)?4:0,sy=(opt.post_shift&2)?4:0,ww=W+2*sx,hh=H+2*sy,windows=ww*hh/64;if(opt.post_head_fused){auto out=New(size_t(W)*H*3);Run("c32_fused_ffn","c32_post_merge_head_half",windows,P(source),P(skip0),Weight("post70-scales.f32"),PackedC32Weight("post70-ffn.f32",false),PackedC32Weight("post70-attention.f32",true),P(color),Weight("post70-head.f32"),P(out),windows,W,H,sx,sy,.03125f);source.reset();skip0.reset();Stage("block70",out);return out;}
+ if(opt.post_merge_fold){U sx=(opt.post_shift&1)?4:0,sy=(opt.post_shift&2)?4:0,ww=W+2*sx,hh=H+2*sy,windows=ww*hh/64;if(opt.post_head_fused){auto out=New(size_t(W)*H*3);const bool lowb=c32_post_low_byte;c32_post_low_byte=false;Run(lowb?"c32_wave1":"c32_fused_ffn",lowb?"c32_wave1_post_b8":"c32_post_merge_head_half",windows,P(source),P(skip0),Weight("post70-scales.f32"),PackedC32Weight("post70-ffn.f32",false),PackedC32Weight("post70-attention.f32",true),P(color),Weight("post70-head.f32"),P(out),windows,W,H,sx,sy,.03125f);source.reset();skip0.reset();Stage("block70",out);return out;}
   auto raw=New(size_t(ww)*hh*16);Run("c32_fused_ffn","c32_post_merge_fused_half",windows,P(source),P(skip0),Weight("post70-scales.f32"),PackedC32Weight("post70-ffn.f32",false),PackedC32Weight("post70-attention.f32",true),P(raw),windows,W,H,sx,sy);post={Tensor{},Tensor{},raw,ww,hh,sx,sy};source.reset();skip0.reset();}
  else{auto merged=New(size_t(W)*H*32);Run(opt.fast_c32?"boundary_fast":"boundary",opt.pre_main8?"hip_post_merge_fast_skip8":opt.fast_c32?"hip_post_merge_fast":"hip_post_merge",size_t(W)*H*32,P(source),P(skip0),Weight("post70-scales.f32"),P(merged),W,H);source.reset();skip0.reset();post=C32(merged,W,H,opt.post_shift,"post70-ffn.f32","post70-attention.f32");}
  auto out=New(size_t(W)*H*3);Run(opt.fast_c32?"boundary_fast":"boundary",opt.half_c32?"hip_post_head_fast_half":opt.fast_c32?"hip_post_head_fast":"hip_post_head_exact",size_t(W)*H*3,P(post.raw),P(color),Weight("post70-head.f32"),P(out),W,H,post.workw,post.sx,post.sy,.03125f);Stage("block70",out);return out;}
