@@ -50,6 +50,12 @@
 #ifndef C512_COMPACT_FUSEQKV
 #define C512_COMPACT_FUSEQKV 0
 #endif
+#ifndef C512_COMPACT_QKV_DEEP
+#define C512_COMPACT_QKV_DEEP 0 /* 2026-10-01: explicit D-deep fragment ring in the fused QKV loop (0 = off) */
+#endif
+#ifndef C512_COMPACT_QKV_SCHED
+#define C512_COMPACT_QKV_SCHED 0 /* with QKV_DEEP: sched_barrier around each step's WMMA group (keeps loads issued early) */
+#endif
 #if C512_COMPACT_QKV_ATTN
 #if C512_COMPACT_WAVES != 2 && C512_COMPACT_WAVES != 4
 #error C512_COMPACT_WAVES must be 2 or 4
@@ -120,6 +126,32 @@ DEV void c5c_body(const unsigned char*in8,const float*w,unsigned char*out,uint v
    const uint cur=s&1;
    if(s+1<32)ld(s+1,cur^1);
    _Pragma("unroll") for(uint j=0;j<6;j++)_Pragma("unroll") for(uint t=0;t<QT;t++)accq[t][j]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b[cur][j],a[cur][t],accq[t][j]);
+  }
+#elif C512_COMPACT_QKV_DEEP
+  // C512_COMPACT_QKV_DEEP=D (2026-10-01, results/c512-qkv-pipeline-20261001): hand software pipeline, D-deep register
+  // ring. The 32 K steps are fully unrolled; every fragment address is one of 2+6 base pointers plus a compile-time
+  // offset (immediate). Out-of-window A rows load from p=0 (a valid tile) and are zeroed by select, so no branch splits
+  // the loop; the select sits at the consuming step so it does not force an early wait. Same fragments, same WMMA order per accumulator -> bit-identical.
+  constexpr uint D=C512_COMPACT_QKV_DEEP;
+  const unsigned char*bp[6];
+  _Pragma("unroll") for(uint j=0;j<6;j++){uint n0=(j/2)*C+head*32+(j%2)*16+row;bp[j]=wb+(n0/16)*16*512+(half*16+n0%16)*8;}
+  i2 a[D][QT],b[D][6];
+  auto ld=[&](uint s){const uint gs=s/2,h=s%2,k=s%D;
+   _Pragma("unroll") for(uint t=0;t<QT;t++)__builtin_memcpy(&a[k][t],ap[t]+gs*512+h*16,8);
+   _Pragma("unroll") for(uint j=0;j<6;j++)__builtin_memcpy(&b[k][j],bp[j]+gs*512+h*256,8);};
+  _Pragma("unroll") for(uint s=0;s<D;s++)ld(s);
+  _Pragma("unroll") for(uint s=0;s<32;s++){
+   const uint k=s%D;i2 ca[QT],cb[6];
+   _Pragma("unroll") for(uint t=0;t<QT;t++)ca[t]=av[t]?a[k][t]:i2{};
+   _Pragma("unroll") for(uint j=0;j<6;j++)cb[j]=b[k][j];
+   if(s+D<32)ld(s+D);
+#if C512_COMPACT_QKV_SCHED
+   __builtin_amdgcn_sched_barrier(0);
+#endif
+   _Pragma("unroll") for(uint j=0;j<6;j++)_Pragma("unroll") for(uint t=0;t<QT;t++)accq[t][j]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(cb[j],ca[t],accq[t][j]);
+#if C512_COMPACT_QKV_SCHED
+   __builtin_amdgcn_sched_barrier(0);
+#endif
   }
 #else
 #if C512_COMPACT_QKV_UNROLL

@@ -731,7 +731,10 @@ WAVE void split_projection_frag(const unsigned char*in8,const float*w,const floa
 #define C512_PROJ_FB8 0
 #endif
 #if C512_PROJ_FB8
-WAVE void split_projection_frag_nof32(const unsigned char*in8,const float*w,const float*skip,float*out,unsigned char*out8,uint tokens){split_projection_frag_body<false>(in8,w,skip,out,out8,tokens);}
+#ifndef C512_PROJ_FB8_DIAG_W32
+#define C512_PROJ_FB8_DIAG_W32 0 /* DIAGNOSTIC: the _nof32 export still writes f32 (isolates the _fb8 reader's cost) */
+#endif
+WAVE void split_projection_frag_nof32(const unsigned char*in8,const float*w,const float*skip,float*out,unsigned char*out8,uint tokens){split_projection_frag_body<C512_PROJ_FB8_DIAG_W32!=0>(in8,w,skip,out,out8,tokens);}
 #endif
 
 WAVE void split_mix_blocked_h16w(const float*in,const float*w,float*out,uint tokens){

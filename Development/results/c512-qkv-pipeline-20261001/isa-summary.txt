@@ -1,0 +1,5 @@
+inst.hsaco: vgpr=235 sgpr=25 lds=6144 priv=0 | QKV: loads=64 imm_off=61 wmma=96 waits=48 branches=18 max_in_flight=58 wait_imm_hist=[(47, 1), (46, 1), (45, 1), (44, 1), (43, 1), (42, 1), (41, 1), (40, 1)]
+d4.hsaco: vgpr=256 sgpr=25 lds=6144 priv=240 | QKV: loads=256 imm_off=253 wmma=384 waits=194 branches=2 max_in_flight=26 wait_imm_hist=[(3, 41), (0, 34), (4, 24), (6, 21), (5, 21), (1, 17), (2, 16), (23, 3)]
+d3s.hsaco: vgpr=173 sgpr=25 lds=6144 priv=0 | QKV: loads=256 imm_off=253 wmma=384 waits=147 branches=2 max_in_flight=32 wait_imm_hist=[(31, 26), (30, 26), (27, 26), (25, 26), (24, 26), (8, 2), (12, 1), (23, 1)]
+d4s.hsaco: vgpr=189 sgpr=25 lds=6144 priv=0 | QKV: loads=256 imm_off=253 wmma=384 waits=142 branches=2 max_in_flight=40 wait_imm_hist=[(39, 24), (38, 24), (35, 24), (33, 24), (32, 24), (15, 2), (8, 2), (31, 1)]
+d5s.hsaco: vgpr=205 sgpr=25 lds=6144 priv=0 | QKV: loads=256 imm_off=253 wmma=384 waits=137 branches=2 max_in_flight=48 wait_imm_hist=[(47, 22), (46, 22), (43, 22), (41, 22), (40, 22), (14, 2), (8, 2), (39, 1)]

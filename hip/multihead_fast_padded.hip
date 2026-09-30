@@ -495,7 +495,8 @@ FASTWAVE void mh_attention_project_frag_c512(const unsigned char*av8,const float
 }
 
 // C512_PROJ_FB8 (2026-10-01, results/mochizuki-gap-20261001): mh_attention_project_frag_c512 (HIP_C512_HOIST_RES form)
-// with the residual feature read from split_projection_frag's E4M3 tiles instead of its f32 copy. That f32 value is
+// with the residual feature read from split_projection_frag's E4M3 tiles instead of its f32 copy.
+// C512_PROJ_FB8 2 (results/c512-qkv-pipeline-20261001): residual scale and output as 16-byte vector accesses. That f32 value is
 // F(H(acc)), an E4M3 value (+-0 included), so decode(byte) == the float bit for bit. 0 = no export.
 #ifndef C512_PROJ_FB8
 #define C512_PROJ_FB8 0
@@ -509,7 +510,12 @@ FASTWAVE void mh_attention_project_frag_c512_fb8(const unsigned char*av8,const u
  const uint p=first+rc;const bool live=p<tokens;const uint pp=live?p:first;
  f8 acc[4];
  for(uint n=0;n<4;n++){uint c0=col+n*16+g*8;i2 fb;__builtin_memcpy(&fb,feat8+((pp/16)*16+c0/32)*512+(pp%16)*32+c0%32,8);
+#if C512_PROJ_FB8>=2
+  float wv[8];__builtin_memcpy(wv,__builtin_assume_aligned(w+skip+c0,16),32);
+  for(uint e=0;e<8;e++){float fv=__builtin_amdgcn_cvt_f32_fp8(int((uint(fb[e/4])>>(8*(e%4)))&255u),0);acc[n][e]=live?Hrtz(fv*wv[e]):0.f;}}
+#else
   for(uint e=0;e<8;e++){float fv=__builtin_amdgcn_cvt_f32_fp8(int((uint(fb[e/4])>>(8*(e%4)))&255u),0);acc[n][e]=live?Hrtz(fv*w[skip+c0+e]):0.f;}}
+#endif
  const unsigned char*arow=av8+(first+rc)*C+g*8;
  for(uint k=0;k<C;k+=32){uint gs=k/32;
   for(uint h=0;h<2;h++){i2 a{};if(live)__builtin_memcpy(&a,arow+k+h*16,8);
@@ -517,7 +523,13 @@ FASTWAVE void mh_attention_project_frag_c512_fb8(const unsigned char*av8,const u
  if(!live)return;
  for(uint n=0;n<4;n++){uint c0=col+n*16+g*8;uint dest=p*C+c0;
   if(cropw){uint x=p%workw,y=p/workw;if(x<sx||y<sy||x>=sx+cropw||y>=sy+croph)continue;dest=((y-sy)*cropw+x-sx)*C+c0;}
+#if C512_PROJ_FB8>=2
+  // v3: 8 consecutive floats as two 16-byte stores (dest is a multiple of 8 floats) instead of 8 dword stores.
+  float v[8];for(uint e=0;e<8;e++){float a=acc[n][e];v[e]=post==3?Hrtz(a):post==4?F(a):F(Hrtz(a));}
+  __builtin_memcpy(__builtin_assume_aligned(out+dest,16),v,32);}
+#else
   for(uint e=0;e<8;e++){float a=acc[n][e];out[dest+e]=post==3?Hrtz(a):post==4?F(a):F(Hrtz(a));}}
+#endif
 }
 #endif
 
