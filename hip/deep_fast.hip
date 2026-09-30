@@ -1,3 +1,6 @@
+#ifndef VIT_CONTRACT_OCC_LDS
+#define VIT_CONTRACT_OCC_LDS 0 /* bytes of dummy LDS on vit_contract_blocked_body (occupancy cap) */
+#endif
 // Production ViT matrix math. FP8 MLP, F16 QKV, raw FP32 accumulation.
 // Flat grid ceil(output_work_items/256), block32. One block = 16 tokens x 16 channels.
 // Tokens and output channels must be divisible by16; no scalar GEMM fallback.
@@ -438,6 +441,11 @@ WAVE void vit_expand_blocked_fp8_frag_bytein_m4(const float*in,const float*w,flo
 // the F() lattice). Same MMA operands, accumulation order and rounding as the f32 body.
 template<bool Partial,bool Tiled=false,bool ByteStream=false,bool HalfOut=false,bool Frag=false>
 DEV void vit_contract_blocked_body(const float*in,const float*w,const float*skip,float*out,uint tokens){
+#if VIT_CONTRACT_OCC_LDS
+ __attribute__((shared)) volatile uint occ_pad[VIT_CONTRACT_OCC_LDS/4]; /* occupancy cap only (small-wins O); branch never taken for a real token count */
+ if(tokens==0xffffffffu){uint lane=__builtin_amdgcn_workitem_id_x();uint i=(bid()*131u+lane)%(VIT_CONTRACT_OCC_LDS/4);occ_pad[i]=i;__builtin_amdgcn_s_barrier();if(occ_pad[(i+1)%(VIT_CONTRACT_OCC_LDS/4)]==5u)out[0]=0.f;}
+#endif
+
  uint blocks=tokens,part0=Partial?bid()/blocks:0,local=Partial?bid()%blocks:bid(),first=local/16*16,col=local%16*64;
  if(first>=tokens||part0>=4)return;const uint*ip=reinterpret_cast<const uint*>(in),*wp=reinterpret_cast<const uint*>(w);f8 total[4]{};
  if constexpr(!Partial)for(uint n=0;n<4;n++)for(uint e=0;e<8;e++){uint c=col+n*16+rc();float s;if constexpr(ByteStream)s=__builtin_amdgcn_cvt_f32_fp8(int(reinterpret_cast<const unsigned char*>(skip)[(first+gr()*8+e)*1024+c]),0);else s=skip[(first+gr()*8+e)*1024+c];total[n][e]=H(s*w[4194304+c]);}

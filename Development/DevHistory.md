@@ -1210,3 +1210,7 @@ Zero 改了验收规则：小改动只要逐位、离线 ABBA 为正、p99 和�
 ## 2026-09-30：Infinity Cache / scratch arena 先量（交账，不收）
 
 宿主已有生命周期池（pooled，best-fit 复用），900/1080 只用 30/19 个激活缓冲，占 243/291MB。单派发最大读写集合 141/203MB，全在 C32，所以 arena 的下界也超过 64MB MALL。C64 以下各段复用距离已≤64MB（LRU 模型 0.86～1.00），C32 为 0.56/0.28。Windows 没有计数器，用对照实验：`HIP_POOL_HOT=1` 优先复用最近用过的空闲缓冲，逐位 18 组 SAME，ABBA 900 +0.009/+0.011ms（慢），1080 −0.007/+0.000，不收。生产代码未改，补丁留在 `experiments/infinity-cache/pool-hot.patch`；没装机。`results/infinity-cache-20260930`。
+
+## 2026-09-30：旧 0.5% 门槛淘汰的小正收益件重测，I+P+O 收下装机，Q 不收
+
+按新规（逐位＋ABBA 为正＋p99/另一档不拖累）重测 mochizuki-022 的 I/P/O/C 与 c32-round3 的 Q，在现役 a80db313＋31 模块上重做为新宏（默认 0，默认编出与现装逐字节同）：`CW_INPUT_HALF 7`（post/mapped/新增 up 三处去 `float((_Float16)v)`）、`CW_PREFIX_HALF_SOURCE 1`、`C512_MIX_OCC_LDS 4096`、`VIT_CONTRACT_OCC_LDS 4096`；Q 用现存 `CW_POST_FULL_TILE`。五个候选全逐位（各 19 组 SAME）。ABBA：Q 1080 一轮 +0.0015ms 不收；O 两档两轮 −0.007～−0.019ms；I、P 单独在噪声内；C=I+P+O 900 −0.026/−0.029、1080 −0.016/−0.028ms，p99 不变差，收。配方直编 final 与候选 .text 同，再确认一轮 900 −0.030、1080 −0.016ms。只换 c32-wave1/c512-m32-deep/vit-stream 两架构（gfx1201 77d163c8/8e84f7c0/fef8a768），剑星、鬼武者已装（备份 `stellar-20260930-101608-smallwins`、`onimusha-backups\20260930-101608-smallwins`），宿主/runtime/flags 不变。补搜只多出 mhfast-wide-frag（需改宿主打包器，未重做）。详见 `results/small-wins-retest-20260930`。

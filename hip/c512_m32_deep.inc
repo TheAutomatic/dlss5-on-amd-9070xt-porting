@@ -1,3 +1,6 @@
+#ifndef C512_MIX_OCC_LDS
+#define C512_MIX_OCC_LDS 0 /* bytes of dummy LDS on split_mix_blocked_h16w_m32 (occupancy cap) */
+#endif
 // C512 split mix (half weights), 32 tokens per wave (opt-in DLSS5_HIP_C512_M32, module c512-m32-deep): each half B
 // fragment feeds two WMMAs; per-output K order and F(Hrtz()) epilogue as split_mix_blocked_h16w. results/c512-ffn-20260926.
 #ifndef C512_ZERO_PAD_900
@@ -26,6 +29,11 @@ DEV bool c512_zero_tile(const float*in,const _Float16*w,uint first,uint row){
 }
 #endif
 WAVE void split_mix_blocked_h16w_m32(const float*in,const float*w,float*out,uint tokens){
+#if C512_MIX_OCC_LDS
+ __attribute__((shared)) volatile uint occ_pad[C512_MIX_OCC_LDS/4]; /* occupancy cap only (small-wins O); branch never taken for a real token count */
+ if(tokens==0xffffffffu){uint lane=__builtin_amdgcn_workitem_id_x();uint i=(bid()*131u+lane)%(C512_MIX_OCC_LDS/4);occ_pad[i]=i;__builtin_amdgcn_s_barrier();if(occ_pad[(i+1)%(C512_MIX_OCC_LDS/4)]==5u)out[0]=0.f;}
+#endif
+
  uint first=bid()/8*32,row=bid()%8*64;if(first>=tokens)return;const bool two=first+16<tokens;f8 acc0[4]{},acc1[4]{};const _Float16*w16=reinterpret_cast<const _Float16*>(w);
 #if C512_ZERO_PAD_900
  const bool suspect=(tokens==1792&&first>=1680)||(tokens==2240&&(first+32<=224||first>=1904));

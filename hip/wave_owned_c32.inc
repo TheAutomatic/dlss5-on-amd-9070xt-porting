@@ -1,3 +1,19 @@
+// small-wins-20260930 (from mochizuki-022 I/P): exact representation changes only; every arithmetic rounding kept, its half bits reused.
+#ifndef CW_INPUT_HALF
+#define CW_INPUT_HALF 0 /* bit0: post Hrtz value; bit1: mapped input (half/FP8 producers); bit2: Up H() value -- skip float((_Float16)v) */
+#endif
+#ifndef CW_PREFIX_HALF_SOURCE
+#define CW_PREFIX_HALF_SOURCE 0 /* prefix: keep the RTZ half bit pattern through the shuffle into the WMMA operand */
+#endif
+#if CW_PREFIX_HALF_SOURCE
+using cw_pv_t=_Float16;
+DEV cw_pv_t cw_prefix_rtz(float x){uint p;asm("v_cvt_pkrtz_f16_f32 %0, %1, %1":"=v"(p):"v"(x));return __builtin_bit_cast(_Float16,(unsigned short)p);}
+DEV cw_pv_t cw_prefix_shuffle(cw_pv_t x,uint lane){uint p=uint(__builtin_bit_cast(unsigned short,x));p=uint(__builtin_amdgcn_ds_bpermute(lane*4,int(p)));return __builtin_bit_cast(_Float16,(unsigned short)p);}
+#else
+using cw_pv_t=float;
+DEV cw_pv_t cw_prefix_rtz(float x){return Hrtz(x);}
+DEV cw_pv_t cw_prefix_shuffle(cw_pv_t x,uint lane){return __builtin_bit_cast(float,__builtin_amdgcn_ds_bpermute(lane*4,__builtin_bit_cast(int,x)));}
+#endif
 // One complete 64-token C32 window per wave; chain FP8 input/output.
 #ifndef CW_LAUNDER
 #define CW_LAUNDER 0
@@ -213,12 +229,12 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
     uint h=production_pcg((x*0x8da6b343u)^(y*0xd8163841u)^(seed*0x9e3779b9u)^0x243f6a88u);
     float u1=production_uniform(g?h*0xcaa5b80du+0x21dd796bu:h*0x2c9277b5u+0xac564b05u),u2=production_uniform(g?h*0x83232c31u+0x3463e0acu:h*0xfa6dc5f9u+0x4712a88eu);
     float rr=__builtin_amdgcn_sqrtf(-2.f*(__builtin_amdgcn_logf(u1)*.6931471805599453f)),tt=(6.283185482025146f*u2)*.15915494309189535f;
-    float gc=Hrtz(rr*__builtin_amdgcn_cosf(tt)),gs=Hrtz(rr*__builtin_amdgcn_sinf(tt));
-    float g0=__builtin_bit_cast(float,__builtin_amdgcn_ds_bpermute((r+16)*4,__builtin_bit_cast(int,gc)));
-    float red=Hrtz(Hrtz(Hrtz(rgba[rgbp*4])-.5f)*.125f),green=Hrtz(Hrtz(Hrtz(rgba[rgbp*4+1])-.5f)*.125f),blue=Hrtz(Hrtz(Hrtz(rgba[rgbp*4+2])-.5f)*.125f);
-    float hr=red,hg=green,hb=blue;
-    if(temporal){uint q=(y*width+x)*4;hr=Hrtz(Hrtz(Hrtz(history[q])-.5f)*.125f);hg=Hrtz(Hrtz(Hrtz(history[q+1])-.5f)*.125f);hb=Hrtz(Hrtz(Hrtz(history[q+2])-.5f)*.125f);}
-    const float lo[8]={gc,gs,hg,hb,g0,1,.0078125f,1},hi[8]={red,green,1,1,blue,hr,1,0};
+    cw_pv_t gc=cw_prefix_rtz(rr*__builtin_amdgcn_cosf(tt)),gs=cw_prefix_rtz(rr*__builtin_amdgcn_sinf(tt));
+    cw_pv_t g0=cw_prefix_shuffle(gc,r+16);
+    cw_pv_t red=cw_prefix_rtz(Hrtz(Hrtz(rgba[rgbp*4])-.5f)*.125f),green=cw_prefix_rtz(Hrtz(Hrtz(rgba[rgbp*4+1])-.5f)*.125f),blue=cw_prefix_rtz(Hrtz(Hrtz(rgba[rgbp*4+2])-.5f)*.125f);
+    cw_pv_t hr=red,hg=green,hb=blue;
+    if(temporal){uint q=(y*width+x)*4;hr=cw_prefix_rtz(Hrtz(Hrtz(history[q])-.5f)*.125f);hg=cw_prefix_rtz(Hrtz(Hrtz(history[q+1])-.5f)*.125f);hb=cw_prefix_rtz(Hrtz(Hrtz(history[q+2])-.5f)*.125f);}
+    const cw_pv_t lo[8]={gc,gs,hg,hb,g0,1,.0078125f,1},hi[8]={red,green,1,1,blue,hr,1,0};
     for(uint e=0;e<8;e++)a[e]=(_Float16)(g?hi[e]:lo[e]);}
 #else
    float pv[16]{};if(g==0)fused_prefix_values(reinterpret_cast<const float*>(in),history,win*64+qt*16+r,width,seed,temporal,pv);
@@ -242,7 +258,7 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
      if constexpr(Byte){if(valid)v=H(t+__builtin_amdgcn_cvt_f32_fp8(int((sk>>(8*e))&255u),0)*upw[2048+c]);}
      else if(valid)v=H(t+cw_up_F(reinterpret_cast<const float*>(skip)[(uint(y)*width+uint(x))*32+c])*upw[2048+c]);
      // Keep raw half-valued Up output for FFN residual; quantize only its matrix operand.
-     CW_Q8_SET(a,e,v);ffn[ci][e]=cw_clampf(float((_Float16)v),-448.f,448.f)*fw[8704+c];
+     CW_Q8_SET(a,e,v);ffn[ci][e]=cw_clampf((CW_INPUT_HALF&4u)?v:float((_Float16)v),-448.f,448.f)*fw[8704+c];
     }CW_Q8_END(a);input[ci]=a;
    }
   }
@@ -264,7 +280,7 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
      }else __builtin_memcpy(src,__builtin_assume_aligned(reinterpret_cast<const float*>(in)+(uint(y)*width+uint(x))*32+c0,32),32);
     }
     float res[8];__builtin_memcpy(res,__builtin_assume_aligned(fw+8704+c0,32),32);
-    CW_Q8_DECL(a);for(uint e=0;e<8;e++){float v=src[e];CW_Q8_SET(a,e,v);ffn[ci][e]=cw_clampf(float((_Float16)v),-448.f,448.f)*res[e];}CW_Q8_END(a);input[ci]=a;}
+    CW_Q8_DECL(a);for(uint e=0;e<8;e++){float v=src[e];CW_Q8_SET(a,e,v);ffn[ci][e]=cw_clampf((CW_INPUT_HALF&(Post?1u:2u))?v:float((_Float16)v),-448.f,448.f)*res[e];}CW_Q8_END(a);input[ci]=a;}
 #else
    for(uint ci=0;ci<2;ci++){CW_Q8_DECL(a);for(uint e=0;e<8;e++){uint c=ci*16+g*8+e;float v=0.f;if(valid){if constexpr(Post){uint p=uint(y)*width+uint(x),low=(uint(y)/2)*(width/2)+uint(x)/2;float high=__builtin_amdgcn_cvt_f32_fp8(int(skip[p*32+c]),0);v=Hrtz(Hrtz(reinterpret_cast<const float*>(in)[low*32+c]*scales[c])+high*scales[32+c]);}else v=reinterpret_cast<const float*>(in)[(uint(y)*width+uint(x))*32+c];}CW_Q8_SET(a,e,v);ffn[ci][e]=cw_clampf(float((_Float16)v),-448.f,448.f)*fw[8704+c];}CW_Q8_END(a);input[ci]=a;}
 #endif
