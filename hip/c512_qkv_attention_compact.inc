@@ -39,6 +39,11 @@
 #ifndef C512_COMPACT_ABLATE
 #define C512_COMPACT_ABLATE 0
 #endif
+#define C5C_PRAGMA(x) _Pragma(#x)
+#define C5C_UNROLL(n) C5C_PRAGMA(unroll n)
+#ifndef C512_COMPACT_QKV_UNROLL
+#define C512_COMPACT_QKV_UNROLL 0 /* 2026-10-01: static unroll factor of the fused QKV gs loop (0 = compiler default) */
+#endif
 #ifndef C512_COMPACT_QKV_PIPE
 #define C512_COMPACT_QKV_PIPE 0
 #endif
@@ -117,6 +122,11 @@ DEV void c5c_body(const unsigned char*in8,const float*w,unsigned char*out,uint v
    _Pragma("unroll") for(uint j=0;j<6;j++)_Pragma("unroll") for(uint t=0;t<QT;t++)accq[t][j]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b[cur][j],a[cur][t],accq[t][j]);
   }
 #else
+#if C512_COMPACT_QKV_UNROLL
+  // Deeper static unroll of the K loop so the scheduler can keep several steps of fragment loads in flight
+  // (mochizuki's attn keeps ~36 loads outstanding). Same operations and per-accumulator order -> bit-identical.
+  C5C_UNROLL(C512_COMPACT_QKV_UNROLL)
+#endif
   for(uint gs=0;gs<16;gs++)for(uint h=0;h<2;h++){
    i2 a[QT];
    _Pragma("unroll") for(uint t=0;t<QT;t++){a[t]=i2{};if(av[t])__builtin_memcpy(&a[t],ap[t]+gs*512+h*16,8);}
