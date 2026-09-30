@@ -35,6 +35,10 @@
 // Every accumulator sees the same WMMA sequence (gs, h order) -> bit-identical. 0 = three-pass original.
 // C512_COMPACT_QKV_PIPE (2026-10-01, results/mochizuki-gap-20261001): with FUSEQKV, next K step's fragments are
 // prefetched one step ahead (register double buffer). Bit-identical. 0 = off.
+// C512_COMPACT_ABLATE: DIAGNOSTIC ONLY, wrong output. bit0 = no serial Q/K norm, bit1 = stop after the QKV stage.
+#ifndef C512_COMPACT_ABLATE
+#define C512_COMPACT_ABLATE 0
+#endif
 #ifndef C512_COMPACT_QKV_PIPE
 #define C512_COMPACT_QKV_PIPE 0
 #endif
@@ -150,7 +154,7 @@ DEV void c5c_body(const unsigned char*in8,const float*w,unsigned char*out,uint v
 #endif
   _Pragma("unroll") for(uint t=0;t<QT;t++){
    float inv=1.f;
-   if(part<2){float ss=c5c_serial_norm(acc[t][0],acc[t][1]);inv=__builtin_amdgcn_rsqf(maxf(ss,6.198883056640625e-5f))*(part==0?w[4*C*C+16*4096+head]:1.f);}
+   if(part<2){float ss=(C512_COMPACT_ABLATE&1)?acc[t][0][0]:c5c_serial_norm(acc[t][0],acc[t][1]);inv=__builtin_amdgcn_rsqf(maxf(ss,6.198883056640625e-5f))*(part==0?w[4*C*C+16*4096+head]:1.f);}
    _Pragma("unroll 2") for(uint ci=0;ci<2;ci++){
     i2 a{};_Pragma("unroll 8") for(uint e=0;e<8;e++)
 #if C512_COMPACT_NOF
@@ -168,6 +172,7 @@ DEV void c5c_body(const unsigned char*in8,const float*w,unsigned char*out,uint v
   }
  }
  WG_FENCE(3);__builtin_amdgcn_s_barrier();WG_FENCE(2);
+ if constexpr((C512_COMPACT_ABLATE&2)!=0){out[tid]=packed[tid*7];return;}
  if constexpr(DebugNorm){
   for(uint i=tid;i<3*64*32;i+=NW*32){uint part=i/(64*32),tok=(i/32)%64,col=i%32,p=c5c_pixel(win,tok,width);out[(p*3+part)*512+head*32+col]=packed[i];}
   return;

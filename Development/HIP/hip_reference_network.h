@@ -300,6 +300,7 @@ class Network {
   if(module=="c64_wave2"){groups=count;threads=kernel.rfind("c64_",0)==0?64:kernel.rfind("c128_",0)==0?128:256;}
   if(module=="c32_wave1"&&(kernel=="c32_wave1_up"||kernel=="c32_wave1_up_b8"||kernel=="c32_wave1_up_lb"||kernel=="c32_wave1_up_b8_lb"||kernel=="c32_wave1_finish_dcrop_b8"||kernel=="c32_wave1_finish_dcrop_b8d"||kernel=="c32_wave1_prefix_b8d"||kernel=="c32_wave1_mapped_b8"||kernel=="c32_wave1_finish_b8"||kernel=="c32_wave1_post_b8")){groups=count;threads=32;}
   if(module=="c512_m32_mh"||module=="c512_m32_deep"){groups=count/1024;threads=32;}
+  if(kernel=="split_ffn_one_w2")threads=64;
   if(module=="c512_m32_mh"&&kernel=="c512_qkv_attention_fused"){groups=count;threads=64;}
   if(module=="c512_m32_mh"&&kernel=="c512_qkv_attention_compact"){groups=count;threads=64;}
   if(vit_proj_n64_active&&module=="deep_fast"&&kernel=="vit_project_frag"&&count%1024==0){module="vit_wide_deep";kernel="vit_project_frag_n64";groups=unsigned(((count/1024+15)/16)*16);threads=32;}
@@ -426,7 +427,8 @@ class Network {
   auto compact=input;
   if(n!=valid&&!(HIP_C512_PAD16&&input->capacity>=size_t(n)*512*4)){compact=New(size_t(n)*512);Run("mh","mh_shift_pack",size_t(n)*512,P(input),P(compact),valid,U(1),n,U(1),U(0),U(0),U(512),U(0));}
   auto mixed=New(size_t(n)*512),contract=New(size_t(n)*512),contract8=New(size_t(n)*128),ffn=New(size_t(n)*512),ffn8=New(size_t(n)*128);
-  if(HIP_C512_FFN_ONE&&HasFn("c512_m32_deep","split_ffn_one_m32"))Run("c512_m32_deep","split_ffn_one_m32",size_t((n+31)/32*32)*256,P(compact),PackedSplitFfnWeightMixHalf(Block(block,"ffwd")),P(contract8),n);
+  if(HIP_C512_FFN_ONE&&HasFn("c512_m32_deep","split_ffn_one_w2"))Run("c512_m32_deep","split_ffn_one_w2",size_t((n+31)/32*32)*256,P(compact),PackedSplitFfnWeightMixHalf(Block(block,"ffwd")),P(contract8),n);
+  else if(HIP_C512_FFN_ONE&&HasFn("c512_m32_deep","split_ffn_one_m32"))Run("c512_m32_deep","split_ffn_one_m32",size_t((n+31)/32*32)*256,P(compact),PackedSplitFfnWeightMixHalf(Block(block,"ffwd")),P(contract8),n);
   else{Run("c512_m32_deep","split_mix_blocked_h16w_m32",size_t((n+31)/32*32)*256,P(compact),PackedSplitFfnWeightMixHalf(Block(block,"ffwd")),P(mixed),n);
   Run("deep","split_ffn_fused_fp8_t8",size_t(n)*512,P(mixed),PackedSplitFfnWeightMixHalf(Block(block,"ffwd")),P(contract),P(contract8),n);}
   mixed.reset();
