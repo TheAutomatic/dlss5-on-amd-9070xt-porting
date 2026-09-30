@@ -47,6 +47,12 @@ DEV float H(float x){return from_half(half_bits(x));}
 #ifndef C512_T8_TAIL_VEC
 #define C512_T8_TAIL_VEC 0 /* 1: split_ffn_fused_fp8_t8 / split_projection_frag tiled E4M3 copy staged in LDS, 8/16-byte stores per lane; bytes unchanged (results/deep-tail-20260930) */
 #endif
+#ifndef C512_T8_NO_F32
+#define C512_T8_NO_F32 0 /* 1: split_ffn_fused_fp8_t8 skips the f32 contract store (host c512_proj_tiles: only the E4M3 tiles feed split_projection_frag; the f32 copy has no reader). results/gap-fusion-20260930 */
+#endif
+#ifndef HIP_VIT_GATHER_FOLD
+#define HIP_VIT_GATHER_FOLD 0 /* 1: export decoder_project2x_h16w_gin (inverse ViT gather folded into the A-operand address). results/gap-fusion-20260930 */
+#endif
 #ifndef HIP_DEC_HOIST_SCALE
 #define HIP_DEC_HOIST_SCALE 0 /* 1: decoder_project2x_h16w skip scale read once per lane */
 #endif
@@ -355,8 +361,13 @@ WAVE void vit_attention_av_fast(const float*in,const float*ex,const float*inv,fl
 WAVE void decoder_project2x(const float*in,const float*w,const float*skip,float*out,uint iw,uint ih,uint ow,uint oh,uint inputs,uint outputs){uint first=bid()/(outputs/16)*16,row=bid()%(outputs/16)*16;if(first>=iw*ih)return;uint parts=inputs==1024?4:1;f8 total{};for(uint p=0;p<parts;p++){f8 a{};for(uint k=p*(inputs/parts);k<(p+1)*(inputs/parts);k+=16){h8 x{},y{};for(uint e=0;e<8;e++){uint j=k+gr()*8+e;x[e]=first+rc()<iw*ih?(_Float16)in[(first+rc())*inputs+j]:(_Float16)0;y[e]=(_Float16)w[(row+rc())*inputs+j];}a=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(x,y,a);}for(uint e=0;e<8;e++)total[e]=p?total[e]+a[e]:a[e];}for(uint e=0;e<8;e++){uint token=first+gr()*8+e;if(token>=iw*ih)continue;float t=H(total[e]);for(uint dy=0;dy<2;dy++)for(uint dx=0;dx<2;dx++){uint x=(token%iw)*2+dx,y=(token/iw)*2+dy;if(x>=ow||y>=oh)continue;uint i=(y*ow+x)*outputs+row+rc();float merged=H(t+F(skip[i])*w[inputs*outputs+row+rc()]);out[i]=outputs==32?merged:F(merged);}}}
 // Prepacked-half twin of decoder_project2x (host option decoder_h16w): the [outputs][inputs] matrix arrives as RNE halves
 // (same values the (_Float16) cast produces), one 16-byte load per B fragment; the skip scale stays f32 at its offset.
-template<bool FullTile,bool ByteOutput=false>
-DEV void decoder_project2x_h16w_body(const float*in,const float*w,const float*skip,float*out,uint iw,uint ih,uint ow,uint oh,uint inputs,uint outputs){uint first=bid()/(outputs/16)*16,row=bid()%(outputs/16)*16;if(first>=iw*ih)return;uint parts=inputs==1024?4:1;f8 total{};const _Float16*w16=reinterpret_cast<const _Float16*>(w);for(uint p=0;p<parts;p++){f8 a{};for(uint k=p*(inputs/parts);k<(p+1)*(inputs/parts);k+=16){h8 x{},y;for(uint e=0;e<8;e++){uint j=k+gr()*8+e;x[e]=(FullTile||first+rc()<iw*ih)?(_Float16)in[(first+rc())*inputs+j]:(_Float16)0;}__builtin_memcpy(&y,w16+(row+rc())*inputs+k+gr()*8,16);a=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(x,y,a);}for(uint e=0;e<8;e++)total[e]=p?total[e]+a[e]:a[e];}
+// Inverse of the ViT token/channel gather (host Gather(...,true)): the ViT group output row t, channel c lands at raster
+// row vg_raster(t), channel vg_ch(c). With Gin the decoder reads the ungathered tensor through vg_tinv/vg_cinv instead of a
+// separate vit_gather launch: same f32 values in the same A slots, so identical bits.
+DEV uint vg_tinv(uint r){return (r&~15u)|((r&7u)<<1)|((r>>3)&1u);}
+DEV uint vg_cinv(uint k){return (k&~31u)|((k>>1)&1u)|((k&1u)<<1)|((k>>4)&1u)<<2|((k>>2)&1u)<<3|((k>>3)&1u)<<4;}
+template<bool FullTile,bool ByteOutput=false,bool Gin=false>
+DEV void decoder_project2x_h16w_body(const float*in,const float*w,const float*skip,float*out,uint iw,uint ih,uint ow,uint oh,uint inputs,uint outputs){uint first=bid()/(outputs/16)*16,row=bid()%(outputs/16)*16;if(first>=iw*ih)return;uint parts=inputs==1024?4:1;f8 total{};const _Float16*w16=reinterpret_cast<const _Float16*>(w);for(uint p=0;p<parts;p++){f8 a{};for(uint k=p*(inputs/parts);k<(p+1)*(inputs/parts);k+=16){h8 x{},y;for(uint e=0;e<8;e++){uint j=k+gr()*8+e;x[e]=(FullTile||first+rc()<iw*ih)?(_Float16)(Gin?in[vg_tinv(first+rc())*inputs+vg_cinv(j)]:in[(first+rc())*inputs+j]):(_Float16)0;}__builtin_memcpy(&y,w16+(row+rc())*inputs+k+gr()*8,16);a=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(x,y,a);}for(uint e=0;e<8;e++)total[e]=p?total[e]+a[e]:a[e];}
 #if HIP_DEC_HOIST_SCALE == 2
  // results/fill-cu-20260930: all 32 skip reads (and the lane's scale) issued before the first out[] store -- the default
  // form re-read skip/scale behind each store (possible aliasing), 177 load->wait pairs in series. Same values/arithmetic.
@@ -375,6 +386,12 @@ DEV void decoder_project2x_h16w_fixed_body(const float*in,const float*w,const fl
  else decoder_project2x_h16w_body<false>(in,w,skip,out,iw,ih,ow,oh,inputs,outputs);
 }
 WAVE void decoder_project2x_h16w(const float*in,const float*w,const float*skip,float*out,uint iw,uint ih,uint ow,uint oh,uint inputs,uint outputs){if(inputs==1024&&outputs==512)decoder_project2x_h16w_fixed_body(in,w,skip,out,iw,ih,ow,oh,1024,512);else if(inputs==512&&outputs==256)decoder_project2x_h16w_fixed_body(in,w,skip,out,iw,ih,ow,oh,512,256);else if(inputs==256&&outputs==128)decoder_project2x_h16w_fixed_body(in,w,skip,out,iw,ih,ow,oh,256,128);else if(inputs==128&&outputs==64)decoder_project2x_h16w_fixed_body(in,w,skip,out,iw,ih,ow,oh,128,64);else if(inputs==64&&outputs==32)decoder_project2x_h16w_fixed_body(in,w,skip,out,iw,ih,ow,oh,64,32);else decoder_project2x_h16w_fixed_body(in,w,skip,out,iw,ih,ow,oh,inputs,outputs);}
+#if HIP_VIT_GATHER_FOLD
+// ViT group -> decoder39 (1024 -> 512 only): reads the ungathered ViT output (see vg_tinv/vg_cinv).
+WAVE void decoder_project2x_h16w_gin(const float*in,const float*w,const float*skip,float*out,uint iw,uint ih,uint ow,uint oh,uint inputs,uint outputs){if(inputs!=1024||outputs!=512)return;uint first=bid()/32*16,n=iw*ih;
+ if(first<n&&n-first>=16)decoder_project2x_h16w_body<true,false,true>(in,w,skip,out,iw,ih,ow,oh,1024,512);
+ else decoder_project2x_h16w_body<false,false,true>(in,w,skip,out,iw,ih,ow,oh,1024,512);}
+#endif
 
 DEV void decoder_project2x_h16w_byteout_fixed_body(const float*in,const float*w,const float*skip,float*out,uint iw,uint ih,uint ow,uint oh,uint inputs,uint outputs){
  uint first=bid()/(outputs/16)*16,n=iw*ih;
@@ -612,11 +629,11 @@ void split_ffn_fused_fp8_t8(const float*in,const float*w,float*out,unsigned char
  // The workgroup's 16 tokens x 64 channels of out8 are two consecutive 512-byte tiles: stage them in LDS in the same
  // layout, then thread t stores bytes 8t..8t+7 (one b64 instead of 8 b8 per lane). Same bytes.
  __attribute__((shared)) unsigned char t8[1024];
- for(uint e=0;e<8;e++){uint r=first+gr()*8+e,c=g*64+wave*16+rc();float v=F(c512_hq(result[e]));out[r*512+c]=v;uint cl=wave*16+rc();t8[(cl/32)*512+(r%16)*32+cl%32]=static_cast<unsigned char>(__builtin_amdgcn_cvt_pk_fp8_f32(v,0.f,0,false));}
+ for(uint e=0;e<8;e++){uint r=first+gr()*8+e,c=g*64+wave*16+rc();float v=F(c512_hq(result[e]));if(!C512_T8_NO_F32)out[r*512+c]=v;uint cl=wave*16+rc();t8[(cl/32)*512+(r%16)*32+cl%32]=static_cast<unsigned char>(__builtin_amdgcn_cvt_pk_fp8_f32(v,0.f,0,false));}
  WG_FENCE(3);__builtin_amdgcn_s_barrier();WG_FENCE(2);
  {i2 q;__builtin_memcpy(&q,__builtin_assume_aligned(t8+tid*8,8),8);__builtin_memcpy(__builtin_assume_aligned(out8+size_t(first+g*2)*512+tid*8,8),&q,8);}
 #else
- for(uint e=0;e<8;e++){uint r=first+gr()*8+e,c=g*64+wave*16+rc();float v=F(c512_hq(result[e]));out[r*512+c]=v;out8[((r/16)*16+c/32)*512+(r%16)*32+c%32]=static_cast<unsigned char>(__builtin_amdgcn_cvt_pk_fp8_f32(v,0.f,0,false));}
+ for(uint e=0;e<8;e++){uint r=first+gr()*8+e,c=g*64+wave*16+rc();float v=F(c512_hq(result[e]));if(!C512_T8_NO_F32)out[r*512+c]=v;out8[((r/16)*16+c/32)*512+(r%16)*32+c%32]=static_cast<unsigned char>(__builtin_amdgcn_cvt_pk_fp8_f32(v,0.f,0,false));}
 #endif
 }
 // split_projection_blocked in the QKV-frag shape: A from the contract's E4M3 tiles, B from fragment-tiled E4M3 projection

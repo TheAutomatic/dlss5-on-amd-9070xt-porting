@@ -15,6 +15,7 @@
 
 - **0.38 之后已装未发包**：C512 attn-project 残差初始化外提（`HIP_C512_HOIST_RES 1`，只换 multihead-fast-padded-wave-packed，gfx1201 47F00EBA；逐位，三轮 900 −0.022～−0.031、1080 −0.026～−0.035ms，p99 变好；09-30 22:00 装剑星/鬼武者，`results/fill-cu-20260930`）。
 - **串行读等外提 09-30 交账（已装未发包）**：`W2_HOIST_LOADS 15`（c64-wave2 gfx1201 48B6FA8B）＋`CW_HOIST_UP 3`（c32-wave1 gfx1201 020B2B0D），逐位，合并三轮 900 −0.043、1080 −0.066～−0.072ms，p99 变好；22:39 装剑星/鬼武者（`results/hoist-loads-20260930`）。swin-persistent 同宏不全正，不收。
+- **压核间空隙 09-30 深夜交账（不收）**：G 两个 vit_gather 折进相邻核（−2 派发）逐位但 900 三轮全慢；T 删 C512 t8 无读者 f32 写出逐位、900 六轮全快约 −0.03ms，但 1080 一轮 +0.008、p99 不变好，不收（宏 `C512_T8_NO_F32`／`HIP_VIT_GATHER_FOLD` 默认 0）。空隙线停（`results/gap-fusion-20260930`）。
 - **填满度 09-30 交账**：C512/ViT 一轮全驻留，无经典尾巴（上界 0.03～0.05ms/档）；延迟型核的病根是单 wave 串行读等。N-split、mix K 流水、decoder skip 预读均逐位但不收（宏默认 0）。
 - **未决（等 Zero）**：1088 行已作为可选开关发布；产品侧兜底/热重载已发布。C 段有损项照旧待拍板。
 - 09-29～09-30 各项细节见各 `results/*/README.md` 与 DevHistory。
@@ -70,6 +71,8 @@
 15. ~~同类清理扫全网~~ **09-30 已做**（`results/f-sweep-20260930`）：收 deep_fast-packed byte_F→+0＋ViT attention 有界倒数；vit-stream、padded q8_fused_round、W2 up 逐位但不全正（宏默认 0）。剩下的 F 都是 float 出口的真量化或输入侧域证不出，这条线结束。
 
 ## 已交负账（别重复，一行一条）
+
+- vit_gather 折进 head Down/decoder39（`HIP_VIT_GATHER_FOLD`，900 慢）；C512 t8 去死 f32 写（`C512_T8_NO_F32`，900 快 1080 平，p99 不变好；只看 900 时可开）（`gap-fusion-20260930`）。
 
 - C512 mix/proj 按列切细（`C512_SPLIT_N`，反慢 1～3µs）、mix K 循环流水（`C512_MIX_PIPE`，mix 全量受访存限）、decoder skip 预读（`HIP_DEC_HOIST_SCALE 2`，不全正）（`fill-cu-20260930`）。
 

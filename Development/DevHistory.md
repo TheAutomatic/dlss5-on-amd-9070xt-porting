@@ -1289,3 +1289,7 @@ Zero（Splashtop，只作正确性）：剑星 2K 原生 AA EXACT 55.6～56.1，
 - 扫现装 31 模块热核的 ISA：真串行集中在条件读（每个 `if(越界) 读` = 一分支一读一等）。wave2 C64/C128 输入暂存 8 段、up 37～50 段；C32 up_b8 33 段（还有逐元素的 upw/fw 缩放 b32）；swin-persistent 同 wave2；C32 prefix/post 等多是已成批的循环体，不是真串行。
 - 收 `W2_HOIST_LOADS 15`（c64-wave2）与 `CW_HOIST_UP 3`（c32-wave1）：越界下标夹到合法地址，先读后 select。各 19 组 SAME；合并确认三轮 900 −0.043～−0.044、1080 −0.066～−0.072ms，p99 900 7.872→7.820、1080 10.747→10.690。swin-persistent 同宏 900 第 3 轮 +0.006，不收。
 - 22:39 装剑星/鬼武者（只换两个模块，add-on、flags、鬼武者 runtime 不动）。`results/hoist-loads-20260930`。
+
+## 2026-09-30 深夜：压核间空隙（gap-fusion），两刀逐位都不收
+
+列两档派发：短核 900 60 个/638µs、1080 31 个/316µs，可融合对大多已在负账（mix→FFN、ViT pack/byte 出口、C512 PDL 功耗回吐）。G：两个 vit_gather 折进 head Down 尾与 decoder39 头（−2 派发），19 SAME，900 三轮全慢 +0.004～+0.011，不收。T：C512 t8 删无读者 f32 contract 写出，19 SAME，900 六轮 −0.021～−0.036，1080 六轮有一轮 +0.008、合并 p99 +0.003，不收。宏默认 0、宿主 `HIP_VIT_GATHER_FOLD_HOST` 默认 0，未装机，派发数不变。`results/gap-fusion-20260930`。
