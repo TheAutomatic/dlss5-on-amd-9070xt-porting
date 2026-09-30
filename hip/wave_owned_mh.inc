@@ -47,6 +47,10 @@ template<uint C> DEV void w2_store(unsigned char*p,uint qt,uint ct,i2 a){__built
 #ifndef W2_BYTE_INPUT_LOADS
 #define W2_BYTE_INPUT_LOADS 0
 #endif
+#ifndef W2_HOIST_LOADS
+#define W2_HOIST_LOADS 0 /* hoist-loads 2026-09-30, bitmask; loads issued branch-free (out-of-range index clamped to an in-range one, value selected to 0 after):
+ 1 input staging (8 x b64), 2 FFN residual input bytes, 4 Up low-res input per k step, 8 Up skip reads. ISA of the conditional form: one global_load -> s_wait_loadcnt 0 per branch */
+#endif
 #ifndef W2_RTZ_PAIR
 #define W2_RTZ_PAIR 0
 #endif
@@ -71,6 +75,16 @@ template<uint C> DEV void w2_store(unsigned char*p,uint qt,uint ct,i2 a){__built
 struct w2_true{constexpr operator bool()const{return true;}};
 struct w2_false{constexpr operator bool()const{return false;}};
 DEV uint w2_canonical_byte_word(uint x){return x|(((x&0x7f7f7f7fu)+0x01010101u)&0x80808080u);}
+template<uint C> DEV i2 w2_input_bytes_nb(const float*in,uint win,uint tok,uint col,uint workw,uint width,uint height,uint sx,uint sy){
+#if W2_DIRECT_COORDS
+ int x=int((win%(workw/8))*8+tok%8)-int(sx),y=int((win/(workw/8))*8+tok/8)-int(sy);
+#else
+ uint p=w2_pixel(win,tok,workw);int x=int(p%workw)-int(sx),y=int(p/workw)-int(sy);
+#endif
+ bool ok=x>=0&&y>=0&&x<int(width)&&y<int(height);i2 a;
+ __builtin_memcpy(&a,reinterpret_cast<const unsigned char*>(in)+(ok?(uint(y)*width+uint(x))*C+col:col),8);
+ a[0]=ok?a[0]:0;a[1]=ok?a[1]:0;return a;
+}
 template<uint C> DEV i2 w2_input_bytes(const float*in,uint win,uint tok,uint col,uint workw,uint width,uint height,uint sx,uint sy){
 #if W2_DIRECT_COORDS
  int x=int((win%(workw/8))*8+tok%8)-int(sx),y=int((win/(workw/8))*8+tok/8)-int(sy);i2 a{};
@@ -257,7 +271,11 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
   const int lx=x0/2+int(rc%4),ly=y0/2+int(rc/4);const uint iw=width/2,ih=height/2;
   f8 totals[2]{};
   for(uint k=0;k<IC;k+=16){h8 a{},b{};
+#if W2_HOIST_LOADS&4
+   {const bool ok=lx>=0&&ly>=0&&lx<int(iw)&&ly<int(ih);const uint base=ok?(uint(ly)*iw+uint(lx))*IC:0u;for(uint e=0;e<8;e++){float v=in[base+k+gr*8+e];a[e]=ok?(_Float16)v:(_Float16)0.f;}}
+#else
    if(lx>=0&&ly>=0&&lx<int(iw)&&ly<int(ih))for(uint e=0;e<8;e++)a[e]=(_Float16)in[(uint(ly)*iw+uint(lx))*IC+k+gr*8+e];
+#endif
    for(uint ci=0;ci<2;ci++){
     __builtin_memcpy(&b,reinterpret_cast<const _Float16*>(upw)+(head*32+ci*16+rc)*IC+k+gr*8,16);
     totals[ci]=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(b,a,totals[ci]);
@@ -267,10 +285,16 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
    uint tok=qt*16+rc,low=(tok/16)*4+(tok%8)/2;int x=x0+int(tok%8),y=y0+int(tok/8);i2 packed{};
    for(uint e=0;e<8;e++){
     float t=H(w2_shuffle(totals[ci][e],low+gr*16));uint c=head*32+ci*16+gr*8+e;uint byte=0;
+#if W2_HOIST_LOADS&8
+    {const bool ok=x>=0&&y>=0&&x<int(width)&&y<int(height);
+     float merged=H(t+w2_up_F(skip[(ok?(uint(y)*width+uint(x))*C:0u)+c])*upw[IC*C+c]);
+     uint b=uint(__builtin_amdgcn_cvt_pk_fp8_f32(W2_UP_ADD0?w2_add0(merged):w2_up_F(merged),0.f,0,false))&255u;byte=ok?b:0u;}
+#else
     if(x>=0&&y>=0&&x<int(width)&&y<int(height)){
      float merged=H(t+w2_up_F(skip[(uint(y)*width+uint(x))*C+c])*upw[IC*C+c]);
      byte=uint(__builtin_amdgcn_cvt_pk_fp8_f32(W2_UP_ADD0?w2_add0(merged):w2_up_F(merged),0.f,0,false))&255u;
     }
+#endif
     w2_bits(packed,e,byte);
    }
    w2_store<C>(plane0,qt,head*2+ci,packed);
@@ -280,7 +304,7 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
  for(uint qt=0;qt<4;qt++)for(uint ci=0;ci<2;ci++){
   i2 a{};
 #if W2_BYTE_INPUT_LOADS
-  if constexpr(ByteIn){a=w2_input_bytes<C>(in,win,qt*16+rc,head*32+ci*16+gr*8,workw,width,height,sx,sy);a[0]=int(w2_canonical_byte_word(uint(a[0])));a[1]=int(w2_canonical_byte_word(uint(a[1])));}
+  if constexpr(ByteIn){a=(W2_HOIST_LOADS&1)?w2_input_bytes_nb<C>(in,win,qt*16+rc,head*32+ci*16+gr*8,workw,width,height,sx,sy):w2_input_bytes<C>(in,win,qt*16+rc,head*32+ci*16+gr*8,workw,width,height,sx,sy);a[0]=int(w2_canonical_byte_word(uint(a[0])));a[1]=int(w2_canonical_byte_word(uint(a[1])));}
   else
 #endif
   for(uint e=0;e<8;e++)w2_bits(a,e,q8(input(qt*16+rc,head*32+ci*16+gr*8+e)));
@@ -399,7 +423,7 @@ DEV void swin_wave2_body(const float*in,const float*fw,const float*aw,void*out_a
   for(uint ci=0;ci<2;ci++){f8 products;i2 ib{};
    if constexpr(Up){
     ib=w2_load<C>(plane0,qt,head*2+ci);
-   }else if constexpr(ByteIn&&W2_BYTE_INPUT_LOADS)ib=w2_input_bytes<C>(in,win,qt*16+rc,head*32+ci*16+gr*8,workw,width,height,sx,sy);
+   }else if constexpr(ByteIn&&W2_BYTE_INPUT_LOADS)ib=(W2_HOIST_LOADS&2)?w2_input_bytes_nb<C>(in,win,qt*16+rc,head*32+ci*16+gr*8,workw,width,height,sx,sy):w2_input_bytes<C>(in,win,qt*16+rc,head*32+ci*16+gr*8,workw,width,height,sx,sy);
    for(uint e=0;e<8;e++){uint c=head*32+ci*16+gr*8+e;float v;if constexpr(ByteIn&&W2_BYTE_INPUT_LOADS)v=__builtin_amdgcn_cvt_f32_fp8(int((uint(ib[e/4])>>(8*(e%4)))&255u),0);else v=input(qt*16+rc,c);products[e]=v*fw[9*C*C+c];}
 #if W2_RTZ_PAIR
    result[ci]=w2_rtz8(products);

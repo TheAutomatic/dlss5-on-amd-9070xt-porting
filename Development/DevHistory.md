@@ -1283,3 +1283,9 @@ Zero（Splashtop，只作正确性）：剑星 2K 原生 AA EXACT 55.6～56.1，
 - 截 grid 扫描：C512/ViT 各核一轮全驻留，无经典尾巴；延迟型核单 WG 占 45～92%，是串行链不是填满度。尾部空转上界每档 0.03～0.05ms（split_ffn、ViT qkv_w5/expand）。
 - N-split（mix/proj 每 wave 32 列）与 mix K 流水：逐位但反慢/噪声，不收。decoder skip 预读：不全正，不收。
 - 收 `HIP_C512_HOIST_RES 1`（attn-project 残差 33 对串行读等外提）：19 组 SAME，三轮 900 −0.022～−0.031、1080 −0.026～−0.035ms，p99 变好；已装剑星/鬼武者。`results/fill-cu-20260930`。
+
+## 2026-09-30 晚 hoist-loads：串行读等扫全网（朱雀子代理）
+
+- 扫现装 31 模块热核的 ISA：真串行集中在条件读（每个 `if(越界) 读` = 一分支一读一等）。wave2 C64/C128 输入暂存 8 段、up 37～50 段；C32 up_b8 33 段（还有逐元素的 upw/fw 缩放 b32）；swin-persistent 同 wave2；C32 prefix/post 等多是已成批的循环体，不是真串行。
+- 收 `W2_HOIST_LOADS 15`（c64-wave2）与 `CW_HOIST_UP 3`（c32-wave1）：越界下标夹到合法地址，先读后 select。各 19 组 SAME；合并确认三轮 900 −0.043～−0.044、1080 −0.066～−0.072ms，p99 900 7.872→7.820、1080 10.747→10.690。swin-persistent 同宏 900 第 3 轮 +0.006，不收。
+- 22:39 装剑星/鬼武者（只换两个模块，add-on、flags、鬼武者 runtime 不动）。`results/hoist-loads-20260930`。

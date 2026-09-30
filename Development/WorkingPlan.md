@@ -14,6 +14,7 @@
 ## 正在进行
 
 - **0.38 之后已装未发包**：C512 attn-project 残差初始化外提（`HIP_C512_HOIST_RES 1`，只换 multihead-fast-padded-wave-packed，gfx1201 47F00EBA；逐位，三轮 900 −0.022～−0.031、1080 −0.026～−0.035ms，p99 变好；09-30 22:00 装剑星/鬼武者，`results/fill-cu-20260930`）。
+- **串行读等外提 09-30 交账（已装未发包）**：`W2_HOIST_LOADS 15`（c64-wave2 gfx1201 48B6FA8B）＋`CW_HOIST_UP 3`（c32-wave1 gfx1201 020B2B0D），逐位，合并三轮 900 −0.043、1080 −0.066～−0.072ms，p99 变好；22:39 装剑星/鬼武者（`results/hoist-loads-20260930`）。swin-persistent 同宏不全正，不收。
 - **填满度 09-30 交账**：C512/ViT 一轮全驻留，无经典尾巴（上界 0.03～0.05ms/档）；延迟型核的病根是单 wave 串行读等。N-split、mix K 流水、decoder skip 预读均逐位但不收（宏默认 0）。
 - **未决（等 Zero）**：1088 行已作为可选开关发布；产品侧兜底/热重载已发布。C 段有损项照旧待拍板。
 - 09-29～09-30 各项细节见各 `results/*/README.md` 与 DevHistory。
@@ -46,7 +47,7 @@
 
 ## B. 优化候选（逐位；按"收益 × 把握"排）
 
-0. **串行读等（新线索，fill-cu）**：`s_wait_loadcnt 0` 前只有 ≤2 条读在飞的段，C64/C128 wave2 18～50 处、C32 9～33 处；照 HOIST_RES 的做法先查哪些在延迟型核里（单 WG 占比高）再动。
+0. ~~串行读等~~ **09-30 已做**（`results/hoist-loads-20260930`）：条件读外提收 wave2 输入暂存/up、C32 up 两刀（已装）；swin-persistent 不全正。剩下真串行只有 wave2 FFN 权重 K 循环（每拍 2 读等一次，软件流水，同 C512_MIX_PIPE 负账，把握低）。
 
 地图：900 `results/kernel-map-900-20260930`（179 派发，独立核和 7258.6µs vs Daniel 8171.6µs；只在 C32 +233µs、C512 +182µs 落后）；1080 `results/kernel-map-20260929`。
 

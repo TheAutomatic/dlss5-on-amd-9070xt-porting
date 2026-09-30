@@ -187,6 +187,10 @@ DEV i2 cw_input(const unsigned char*in,uint win,uint qt,uint ci,uint width,uint 
 #ifndef CW_UP_FUSED
 #define CW_UP_FUSED 0
 #endif
+#ifndef CW_HOIST_UP
+#define CW_HOIST_UP 0 /* hoist-loads 2026-09-30, bitmask, c32_wave1_up_b8: 1 low-res input per k step read branch-free (clamped index, select 0);
+ 2 per qt/ci the skip bytes (clamped), upw[2048+c] and fw[8704+c] for the lane's 8 channels are read up front instead of one b32 -> s_wait_loadcnt 0 per element */
+#endif
 #ifndef CW_DIAG_ONLY
 #define CW_DIAG_ONLY 0 /* 1: chain residual skips the all-zero off-diagonal K16 half (6 of 12 WMMA); results/c32-diag-zero-20260925 proved the float32 bits equal for every finite E4M3 input */
 #endif
@@ -210,7 +214,11 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
   uint ww=width+2*sx,iw=width/2,ih=height/2;
   int lx=(int((win%(ww/8))*8)-int(sx))/2+int(r%4),ly=(int((win/(ww/8))*8)-int(sy))/2+int(r/4);
   for(uint k=0;k<64;k+=16){h8 a{},b{};
+#if CW_HOIST_UP&1
+   {const bool ok=lx>=0&&ly>=0&&lx<int(iw)&&ly<int(ih);const uint base=ok?(uint(ly)*iw+uint(lx))*64:0u;for(uint e=0;e<8;e++){float v=reinterpret_cast<const float*>(in)[base+k+g*8+e];a[e]=ok?(_Float16)v:(_Float16)0.f;}}
+#else
    if(lx>=0&&ly>=0&&lx<int(iw)&&ly<int(ih))for(uint e=0;e<8;e++)a[e]=(_Float16)reinterpret_cast<const float*>(in)[(uint(ly)*iw+uint(lx))*64+k+g*8+e];
+#endif
    for(uint ci=0;ci<2;ci++){
     __builtin_memcpy(&b,reinterpret_cast<const _Float16*>(upw)+(ci*16+r)*64+k+g*8,16);
     up_totals[ci]=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(b,a,up_totals[ci]);
@@ -263,6 +271,20 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
    uint ww=width+2*sx,tok=qt*16+r,lo=(tok/16)*4+(tok%8)/2;
    int x=int((win%(ww/8))*8+tok%8)-int(sx),y=int((win/(ww/8))*8+tok/8)-int(sy);
    bool valid=x>=0&&y>=0&&x<int(width)&&y<int(height);
+#if CW_HOIST_UP&2
+   if constexpr(Byte){
+   for(uint ci=0;ci<2;ci++){
+    const uint c0=ci*16+g*8;unsigned long long sk;float uw[8],fv[8];
+    __builtin_memcpy(&sk,__builtin_assume_aligned(skip+(valid?(uint(y)*width+uint(x))*32:0u)+c0,8),8);sk=valid?sk:0ull;
+    __builtin_memcpy(uw,upw+2048+c0,32);__builtin_memcpy(fv,fw+8704+c0,32);
+    CW_Q8_DECL(a);for(uint e=0;e<8;e++){
+     float t=H(cw_up_shuffle(up_totals[ci][e],lo+g*16));
+     float m=H(t+__builtin_amdgcn_cvt_f32_fp8(int((sk>>(8*e))&255u),0)*uw[e]);float v=valid?m:0.f;
+     CW_Q8_SET(a,e,v);ffn[ci][e]=cw_clampf((CW_INPUT_HALF&4u)?v:float((_Float16)v),-448.f,448.f)*fv[e];
+    }CW_Q8_END(a);input[ci]=a;
+   }
+   }else
+#endif
    for(uint ci=0;ci<2;ci++){
     unsigned long long sk=0;if constexpr(Byte){if(valid)__builtin_memcpy(&sk,__builtin_assume_aligned(skip+(uint(y)*width+uint(x))*32+ci*16+g*8,8),8);}
     CW_Q8_DECL(a);for(uint e=0;e<8;e++){
