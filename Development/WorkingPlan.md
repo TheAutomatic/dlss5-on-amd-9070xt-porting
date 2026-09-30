@@ -70,6 +70,8 @@
 14. ~~C512 AV 出口去 F~~ **09-30 已做**（`results/c512-av-f-20260930`）：连带 QKV 出口 `q8(F(y))`→`q8(med3(y+0))`、softmax 除法换有界倒数，三处合成一个候选；穷举证明＋19 组 SAME，两档三轮全正（900 −0.018～−0.029、1080 −0.023～−0.034ms），已装。
 15. ~~同类清理扫全网~~ **09-30 已做**（`results/f-sweep-20260930`）：收 deep_fast-packed byte_F→+0＋ViT attention 有界倒数；vit-stream、padded q8_fused_round、W2 up 逐位但不全正（宏默认 0）。剩下的 F 都是 float 出口的真量化或输入侧域证不出，这条线结束。
 
+16. **C512/ViT 重组设计（09-30 只设计）**（`results/c512-vit-reorg-design-20260930`）：推荐先做 **C512 跨块就绪队列**（swin-persistent 机制搬到 C512，65→6 派发，stage 体照搬，逐位，900 预估 −0.10～−0.25ms；先做 900 编码段 23～30 原型，止损 <0.03ms 或任一轮慢）；块内 attn→proj 队列作退路；mix→ffn→proj 一核、ViT 全局栅栏排后。
+
 ## 已交负账（别重复，一行一条）
 
 - vit_gather 折进 head Down/decoder39（`HIP_VIT_GATHER_FOLD`，900 慢）；C512 t8 去死 f32 写（`C512_T8_NO_F32`，900 快 1080 平，p99 不变好；只看 900 时可开）（`gap-fusion-20260930`）。
