@@ -1314,3 +1314,5 @@ Zero（Splashtop，只作正确性）：剑星 2K 原生 AA EXACT 55.6～56.1，
 
 ## 2026-10-01 网络前后 D3D 段瘦身 input-slim（光派单，子代理）
 `DLSS5_GAME_PROBE` 细分打点（离线回放，串行化 GPU 时间）：encode 11.0/15.1、input 23.3/32.7、neural 15.7/22.2、decode 35.9/43.6、最终拷贝 8.3/8.3µs（900/1080）；D3D 段合计约 94/122µs，网络外那 0.3ms 的大头是交接不是 pass。做了 `DLSS5_IO_FUSE=1`：decode 直接读网络 f32 输出（f16tof32(f32tof16) 同舍入），跳过 neural pass，仅非时序、非 overlap 会话。19 组 SAME；六轮 ABBA avg 全正（900 −0.004～−0.020，1080 −0.012～−0.035），但 900 合并 p99 7.791→7.811 变差（3/6 轮），按规则不收：开关默认 0、不进模板、CONFIGURATION.md 追加一行、不装机不打包。encode 并 input、去颜色→low 拷贝估计各 ≤0.01ms，未做。`results/input-slim-20261001`。
+
+## 2026-10-01 ViT 1080 反转对账：900 是 400 vs 448 token 的几何假象；1080 attention +25、QKV +12µs/块。M32（两条 16-query 链共用 K/V）19 SAME 但三轮全慢（900 +0.20，1080 +0.145ms），不收；分支 vit-1080-gap。见 results/vit-1080-gap-20261001。
