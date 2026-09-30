@@ -134,6 +134,16 @@ WAVE void split_mix_blocked_h16w_m32_n2g(const float*in,const float*w,float*out,
 #define C512_FFN_ONE 0
 #endif
 #if C512_FFN_ONE
+#ifndef C512_FFN_GRIDQ
+#define C512_FFN_GRIDQ 0 /* DIAGNOSTIC: mix quantizes its f32 block input to E4M3 (F) first; 19 SAME => every C512 block input is on the E4M3 lattice */
+#endif
+#if C512_FFN_GRIDQ==2
+#define C5D_GRIDQ(v) ((v)*1.001f) /* control: must DIFF */
+#elif C512_FFN_GRIDQ
+#define C5D_GRIDQ(v) F(v)
+#else
+#define C5D_GRIDQ(v) (v)
+#endif
 template<uint NT> DEV void c512_ffn_one_body(const float*in,const float*w,unsigned char*out8,uint tokens,uint first,uint g){
  const bool two=NT==2&&first+16<tokens;
  const _Float16*w16=reinterpret_cast<const _Float16*>(w);const _Float16*we=reinterpret_cast<const _Float16*>(w+262144)+g*16384;
@@ -166,7 +176,7 @@ template<uint NT> DEV void c512_ffn_one_body(const float*in,const float*w,unsign
  }else
 #endif
  if constexpr(!(C512_FFN_ABLATE&1))
- for(uint k=0;k<512;k+=16){h8 a[NT];for(uint t=0;t<NT;t++){a[t]=h8{};if(t==0||two)for(uint e=0;e<8;e++)a[t][e]=(_Float16)in[(first+t*16+rc())*512+k+gr()*8+e];}
+ for(uint k=0;k<512;k+=16){h8 a[NT];for(uint t=0;t<NT;t++){a[t]=h8{};if(t==0||two)for(uint e=0;e<8;e++)a[t][e]=(_Float16)C5D_GRIDQ(in[(first+t*16+rc())*512+k+gr()*8+e]);}
   for(uint j=0;j<4;j++){h8 b;__builtin_memcpy(&b,w16+(g*64+j*16+rc())*512+k+gr()*8,16);for(uint t=0;t<NT;t++)m[t][j]=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(b,a[t],m[t][j]);}}
  h8 x[NT][4];
  for(uint t=0;t<NT;t++)for(uint j=0;j<4;j++)for(uint e=0;e<8;e++)x[t][j][e]=(_Float16)F(c512_hq(m[t][j][e]));
