@@ -16,6 +16,19 @@
 #ifndef C512_COMPACT_VT
 #define C512_COMPACT_VT 0
 #endif
+// C512_COMPACT_NOF (c512-av-f 2026-09-30): drop the F() in front of the two byte quantizations.
+//  QKV: q8(F(y)) == q8(med3(y+0,-448,448)) for all 2^32 y (F only turns -0 into +0; the +0 add does the same).
+//  AV : c5c_fp8(c5c_F(av)) == c5c_fp8(av) except av = -0, which the P.V WMMA chain from +0 never returns.
+//  CPU + GPU exhaustive proof: Development/results/c512-av-f-20260930. The mul and +0 are kept apart (contract off).
+#ifndef C512_COMPACT_NOF
+#define C512_COMPACT_NOF 0
+#endif
+// C512_COMPACT_RCP (same experiment): softmax 1/sum as rcp + two Newton steps instead of the IEEE divide sequence.
+//  The 64 exponent values are in [2^-14, 9.75], so sum is in [1/256, 624]; c32 norm_inverse was checked bit-for-bit
+//  against 1.f/x for every float in that interval on gfx1201 (2026-09-19) and again here (probe_r).
+#ifndef C512_COMPACT_RCP
+#define C512_COMPACT_RCP 0
+#endif
 #if C512_COMPACT_QKV_ATTN
 #if C512_COMPACT_WAVES != 2 && C512_COMPACT_WAVES != 4
 #error C512_COMPACT_WAVES must be 2 or 4
@@ -39,6 +52,16 @@ DEV float c5c_serial_norm(f8 lo,f8 hi){
 DEV float c5c_clamp(float a,float lo,float hi){float b=a>lo?a:lo;return b<hi?b:hi;}
 DEV uint c5c_fp8(float x){return uint(__builtin_amdgcn_cvt_pk_fp8_f32(__builtin_fminf(__builtin_fmaxf(x,-448.f),448.f),0.f,0,false))&255u;}
 DEV float c5c_F(float x){uint a=bits(x)&0x7fffffffu;float c=__builtin_fminf(__builtin_fmaxf(x,-448.f),448.f);float r=__builtin_amdgcn_cvt_f32_fp8(__builtin_amdgcn_cvt_pk_fp8_f32(c,0.f,0,false),0);return a==0?0.f:r;}
+DEV float c5c_inv(float x){
+#if C512_COMPACT_RCP
+ float r=__builtin_amdgcn_rcpf(x);r=__builtin_fmaf(r,__builtin_fmaf(-x,r,1.f),r);return __builtin_fmaf(r,__builtin_fmaf(-x,r,1.f),r);
+#else
+ return 1.f/x;
+#endif
+}
+DEV uint c5c_q8mz(float a,float b){
+#pragma clang fp contract(off)
+ return q8(__builtin_amdgcn_fmed3f(a*b+0.f,-448.f,448.f));}
 DEV void c5c_bits(i2&v,uint e,uint b){v[e/4]=int(uint(v[e/4])|((b&255u)<<(8*(e%4))));}
 DEV i2 c5c_load(const unsigned char*p,uint row,uint col){i2 a;__builtin_memcpy(&a,p+row*32+col,8);return a;}
 
@@ -76,7 +99,13 @@ DEV void c5c_body(const unsigned char*in8,const float*w,unsigned char*out,uint v
    float inv=1.f;
    if(part<2){float ss=c5c_serial_norm(acc[t][0],acc[t][1]);inv=__builtin_amdgcn_rsqf(maxf(ss,6.198883056640625e-5f))*(part==0?w[4*C*C+16*4096+head]:1.f);}
    _Pragma("unroll 2") for(uint ci=0;ci<2;ci++){
-    i2 a{};_Pragma("unroll 8") for(uint e=0;e<8;e++)c5c_bits(a,e,q8(F(acc[t][ci][e]*inv)));
+    i2 a{};_Pragma("unroll 8") for(uint e=0;e<8;e++)
+#if C512_COMPACT_NOF
+     c5c_bits(a,e,c5c_q8mz(acc[t][ci][e],inv));
+#else
+     c5c_bits(a,e,q8(F(acc[t][ci][e]*inv)));
+#endif
+
     uint tok=(wave*QT+t)*16+row;
 #if C512_COMPACT_VT
     if(!DebugNorm&&part==2){_Pragma("unroll 8") for(uint e=0;e<8;e++)packed[128*32+(ci*16+half*8+e)*64+tok]=(unsigned char)((uint(a[e/4])>>(8*(e%4)))&255u);}else
@@ -119,7 +148,7 @@ DEV void c5c_body(const unsigned char*in8,const float*w,unsigned char*out,uint v
   }
   i2 prob[4];
   _Pragma("unroll 4") for(uint key=0;key<4;key++){
-   i2 a{};_Pragma("unroll 8") for(uint e=0;e<8;e++){float inv=1.f/(sums[0][e]+sums[1][e]);c5c_bits(a,e,c5c_fp8(float(exponent[key][e])*inv));}prob[key]=a;
+   i2 a{};_Pragma("unroll 8") for(uint e=0;e<8;e++){float inv=c5c_inv(sums[0][e]+sums[1][e]);c5c_bits(a,e,c5c_fp8(float(exponent[key][e])*inv));}prob[key]=a;
   }
   _Pragma("unroll 2") for(uint ci=0;ci<2;ci++){
    f8 av{};
@@ -131,7 +160,13 @@ DEV void c5c_body(const unsigned char*in8,const float*w,unsigned char*out,uint v
 #endif
     av=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(v,prob[kt],av);
    }
-   i2 bytes{};_Pragma("unroll 8") for(uint e=0;e<8;e++)c5c_bits(bytes,e,c5c_fp8(c5c_F(av[e])));
+   i2 bytes{};_Pragma("unroll 8") for(uint e=0;e<8;e++)
+#if C512_COMPACT_NOF
+    c5c_bits(bytes,e,c5c_fp8(av[e]));
+#else
+    c5c_bits(bytes,e,c5c_fp8(c5c_F(av[e])));
+#endif
+
    uint tok=first+row;int x=int((win%(width/8))*8+tok%8)-int(sx),y=int((win/(width/8))*8+tok/8)-int(sy);
    if(x>=0&&y>=0&&x<int(validwidth)&&y<int(validheight)){
     uint p=uint(y)*validwidth+uint(x);__builtin_memcpy(out+p*512+head*32+ci*16+half*8,&bytes,8);
