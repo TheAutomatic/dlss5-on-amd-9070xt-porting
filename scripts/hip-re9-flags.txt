@@ -142,3 +142,8 @@ DLSS5_HIP_SWIN_RUN=1
 # worked before are untouched (bit-exact). A rejected format is logged by name. 0 = original table only.
 DLSS5_FORMAT_FALLBACK=1
 # DLSS5_HOT_RELOAD does not apply to the RE9 runtime (strength/detail are live in the OptiScaler menu).
+
+# Style (NVIDIA NGX Style control, 0/1/2). 1 = the style the original runtime used in Stellar Blade (default, as in every
+# package so far); 0 = NVIDIA's default and closest to its reference output; 2 = third style. Anything else falls back to 1.
+# Needs a game restart.
+DLSS5_STYLE=1

@@ -159,3 +159,8 @@ DLSS5_FORMAT_FALLBACK=1
 # 0.38: hot reload. Edits to DLSS5_STRENGTH / DLSS5_NOTICE / DLSS5_SHOW_FPS in this file apply within a second, no restart
 # (logged as event=hot_reload in logs\native-game-oneshot.txt). All other keys still need a game restart. 0 = off.
 DLSS5_HOT_RELOAD=1
+
+# Style (NVIDIA NGX Style control, 0/1/2). 1 = the style the original runtime used in Stellar Blade (default, as in every
+# package so far); 0 = NVIDIA's default and closest to its reference output; 2 = third style. Anything else falls back to 1.
+# Needs a game restart.
+DLSS5_STYLE=1

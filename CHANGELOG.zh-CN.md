@@ -262,3 +262,9 @@
 
 - **包内**：新增 `native_format_convert.hlsl`；三个 flags 模板加上面三个开关；插件与 RE9 runtime 从发布源码重编（tag 0.38）；RE9 宿主不变；RE9 源码包重生。
 - 不进包的负账（逐位但不全正，宏默认 0）：D3D→HIP GPU 轮询 `DLSS5_HIP_INPUT_POLL`（`results/handoff-gpu-20260930`）、C512 V 转置（`results/c512-compact-vt-20260930`）、W16 推广 C64/C128（`results/w16-c64-c128-20260930`）、C512 FFN LDS 共用权重（`results/c512-ffn-lds-20260930`）、Infinity Cache 热复用（`results/infinity-cache-20260930`）。打包清单 `Development/results/package-038/checklist.md`。
+
+## 未发布（下一版）
+
+- **新开关 `DLSS5_STYLE`**（三个模板都是 `1`，源码默认 1）：NVIDIA NGX 的 Style 控制，`0`/`1`/`2`。之前预处理里写死 Style 1（第 6 个特征 = Style/128 = 0.0078125），这是原版运行时在《剑星》里实际用的值（2026-09-06 从 NVIDIA 后端抓取，启动时 8 次调用）。现在改成 C32/prefix 模块里的一个设备常量，宿主加载模块后写入。`0` 是 NVIDIA 默认值、也是他们参考图用的设置（1080p 单帧对 NVIDIA：Style 1 是 24.06 dB，Style 0 见下）；`2` 是第三种风格。不是恰好 0/1/2 的值回落到 1。改了要重启游戏。默认 `1`：**逐位一致**（19 组），GPU 没有多余工作。`results/rebuild-baseline-20261001`。
+- **可复现构建**：add-on 和 RE9 runtime 改为固定基址、不写时间戳链接，同一份源码在哪编出来都是同一个文件（之前链接器按输出路径算基址，每次重编所有绝对地址都不同）。现装模块、add-on、runtime 已按代码段与源码逐一核对。
+- 宿主：默认宿主里去掉了一个没用上的 fast 档探测（每帧多 0.005～0.02 ms）；查不到的核函数会缓存结果。

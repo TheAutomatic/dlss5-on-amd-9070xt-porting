@@ -254,7 +254,7 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
     cw_pv_t red=cw_prefix_rtz(Hrtz(Hrtz(rgba[rgbp*4])-.5f)*.125f),green=cw_prefix_rtz(Hrtz(Hrtz(rgba[rgbp*4+1])-.5f)*.125f),blue=cw_prefix_rtz(Hrtz(Hrtz(rgba[rgbp*4+2])-.5f)*.125f);
     cw_pv_t hr=red,hg=green,hb=blue;
     if(temporal){uint q=(y*width+x)*4;hr=cw_prefix_rtz(Hrtz(Hrtz(history[q])-.5f)*.125f);hg=cw_prefix_rtz(Hrtz(Hrtz(history[q+1])-.5f)*.125f);hb=cw_prefix_rtz(Hrtz(Hrtz(history[q+2])-.5f)*.125f);}
-    const cw_pv_t lo[8]={gc,gs,hg,hb,g0,1,.0078125f,1},hi[8]={red,green,1,1,blue,hr,1,0};
+    const cw_pv_t lo[8]={gc,gs,hg,hb,g0,1,(cw_pv_t)dlss5_style_feature,1},hi[8]={red,green,1,1,blue,hr,1,0};
     for(uint e=0;e<8;e++)a[e]=(_Float16)(g?hi[e]:lo[e]);}
 #else
    float pv[16]{};if(g==0)fused_prefix_values(reinterpret_cast<const float*>(in),history,win*64+qt*16+r,width,seed,temporal,pv);
