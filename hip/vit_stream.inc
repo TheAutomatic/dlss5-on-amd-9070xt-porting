@@ -83,6 +83,10 @@ WAVE void vit_stream_qkv_frag_hin(const float*in,const float*w,unsigned char*out
 }
 
 #if HIP_VIT_QKV_W5
+#ifndef VIT_QKV_F8PROBE
+#define VIT_QKV_F8PROBE 0 /* DIAGNOSTIC (results/c512-qkv-pipeline-20261001 §10): 1 = quantize the f16 input with F() first (19 SAME => input on the E4M3 lattice); 2 = in-kernel fp8 x fp8 WMMA */
+#endif
+DEV i2 vqf_pack8(h8 v){i2 r;for(uint i=0;i<2;i++){int w=__builtin_amdgcn_cvt_pk_fp8_f32(float(v[4*i]),float(v[4*i+1]),0,false);w=__builtin_amdgcn_cvt_pk_fp8_f32(float(v[4*i+2]),float(v[4*i+3]),w,true);r[i]=w;}return r;}
 KERNEL __attribute__((amdgpu_flat_work_group_size(160,160))) void vit_stream_qkv_frag_hin_w5(const float*in,const float*w,unsigned char*out,uint tokens,const uint*reuse_gate){if(reuse_gate&&reuse_gate[0])return;
  constexpr uint CH=8;/* k16 steps per staged chunk: 2 column tiles x 8 fragments x 512B = 8KB, double buffered; the 4-register move below assumes 8 */
  __attribute__((shared)) _Float16 lds[2*2*CH*256];/* 16KB; after the K loop it holds the five per-wave 16x33 float norm tiles (10560B) */
@@ -101,8 +105,17 @@ KERNEL __attribute__((amdgpu_flat_work_group_size(160,160))) void vit_stream_qkv
   if(live)
 #pragma unroll
   for(uint kk=0;kk<CH;kk++){uint k=(kc*CH+kk)*16;h8 a{};__builtin_memcpy(&a,reinterpret_cast<const _Float16*>(in)+(first+rc())*1024+k+gr()*8,16);
+#if VIT_QKV_F8PROBE==1
+   for(uint e=0;e<8;e++)a[e]=(_Float16)F(float(a[e]));
+#endif
+#if VIT_QKV_F8PROBE==2
+   const i2 a8=vqf_pack8(a);
+#pragma unroll
+   for(uint j=0;j<2;j++){h8 b;__builtin_memcpy(&b,lds+(kc&1)*(2*CH*256)+j*(CH*256)+kk*256+lane*8,16);acc[j]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(a8,vqf_pack8(b),acc[j]);}}}
+#else
 #pragma unroll
    for(uint j=0;j<2;j++){h8 b;__builtin_memcpy(&b,lds+(kc&1)*(2*CH*256)+j*(CH*256)+kk*256+lane*8,16);acc[j]=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(a,b,acc[j]);}}}
+#endif
 #undef QKV_W5_SRC
 #undef QKV_W5_DST
 #undef QKV_W5_FETCH
@@ -129,6 +142,51 @@ KERNEL __attribute__((amdgpu_flat_work_group_size(160,160))) void vit_stream_qkv
  for(uint j=0;j<2;j++)for(uint e=0;e<8;e++){float v=acc[j][e];if(part<2){v*=__builtin_amdgcn_rsqf(maxf(sum[e],6.198883056640625e-5f))*scale;}out[(part*tokens+first+gr()*8+e)*1024+row+j*16+rc()]=byte_F(v);}
 #endif
 }
+// VIT_QKV_F8W (2026-10-01, results/c512-qkv-pipeline-20261001 §10): vit_stream_qkv_frag_hin_w5 with the QKV weights packed by the
+// host as E4M3 fragments (they are exact E4M3 values; key @qkv-fp8-frag) and fp8 x fp8 WMMA; the f16 input (F() values of the
+// contract) is converted to E4M3 exactly. Weight staging moves bytes (half the LDS/global traffic). Same products, same K order.
+#ifndef VIT_QKV_F8W
+#define VIT_QKV_F8W 0
+#endif
+#if VIT_QKV_F8W
+KERNEL __attribute__((amdgpu_flat_work_group_size(160,160))) void vit_stream_qkv_frag_hin_w5f8(const float*in,const float*w,unsigned char*out,uint tokens,const uint*reuse_gate){if(reuse_gate&&reuse_gate[0])return;
+ constexpr uint CH=8;
+ __attribute__((shared)) _Float16 lds[2*2*CH*256];/* bytes: 2 buffers x 2 column tiles x CH x 256B = 8KB used for staging; 16KB kept for the norm tiles */
+ unsigned char*l8=reinterpret_cast<unsigned char*>(lds);
+ const uint t=__builtin_amdgcn_workitem_id_x(),wv=t>>5,lane=t&31,groups=(tokens/16+4)/5,perpart=groups*32,part=bid()/perpart,local=bid()%perpart,first=(local/32*5+wv)*16,row=local%32*32;if(part>=3)return;
+ const bool live=first<tokens;
+ const unsigned char*hb=reinterpret_cast<const unsigned char*>(w)+part*1048576+(row/16)*64*256;
+ int __attribute__((ext_vector_type(4))) s0{},s1{};/* t<128 moves pieces p=t+i*128: column tile p>>7, 16B at (p&127)*16 of the chunk */
+#define F8_SRC(i) (hb+((t+(i)*128)>>7)*16384+kc*CH*256+(t&127)*16)
+#define F8_DST(i) (l8+sb*(2*CH*256)+((t+(i)*128)>>7)*(CH*256)+(t&127)*16)
+#define F8_FETCH {if(t<128){__builtin_memcpy(&s0,F8_SRC(0),16);__builtin_memcpy(&s1,F8_SRC(1),16);}}
+#define F8_STASH {if(t<128){__builtin_memcpy(F8_DST(0),&s0,16);__builtin_memcpy(F8_DST(1),&s1,16);}}
+ f8 acc[2]{};
+ {const uint kc=0;F8_FETCH}
+#pragma unroll 1
+ for(uint kc=0;kc<1024/(16*CH);kc++){{const uint sb=kc&1;F8_STASH}__builtin_amdgcn_s_barrier();if(kc+1<1024/(16*CH)){const uint kc1=kc+1;{const uint kc=kc1;F8_FETCH}}
+  if(live)
+#pragma unroll
+  for(uint kk=0;kk<CH;kk++){uint k=(kc*CH+kk)*16;h8 a{};__builtin_memcpy(&a,reinterpret_cast<const _Float16*>(in)+(first+rc())*1024+k+gr()*8,16);const i2 a8=vqf_pack8(a);
+#pragma unroll
+   for(uint j=0;j<2;j++){i2 b;__builtin_memcpy(&b,l8+(kc&1)*(2*CH*256)+j*(CH*256)+kk*256+lane*8,8);acc[j]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(a8,b,acc[j]);}}}
+#undef F8_SRC
+#undef F8_DST
+#undef F8_FETCH
+#undef F8_STASH
+ __builtin_amdgcn_s_barrier();
+ float*raw=reinterpret_cast<float*>(lds)+wv*(16*33);
+ f8 sum{};
+ if(part<2){
+  for(uint j=0;j<2;j++)for(uint e=0;e<8;e++)raw[(gr()*8+e)*33+j*16+rc()]=acc[j][e];
+  __builtin_amdgcn_s_barrier();
+  for(uint k=0;k<32;k+=16){h8 x{},ones{};for(uint e=0;e<8;e++){float v=raw[rc()*33+k+gr()*8+e];x[e]=(_Float16)(v*v);ones[e]=(_Float16)1.f;}sum=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(x,ones,sum);}
+ }
+ if(!live)return;
+ const float scale=part==0?5.65625f*w[786432+row/32]:1.f;
+ for(uint j=0;j<2;j++)for(uint e=0;e<8;e++){float v=acc[j][e];if(part<2){v*=__builtin_amdgcn_rsqf(maxf(sum[e],6.198883056640625e-5f))*scale;}out[(part*tokens+first+gr()*8+e)*1024+row+j*16+rc()]=byte_F(v);}
+}
+#endif
 #endif
 WAVE void vit_stream_contract_frag_hout(const float*in,const float*w,const float*skip,float*out,uint tokens,uint inputs,uint outputs,const uint*reuse_gate){if(reuse_gate&&reuse_gate[0])return;if(inputs==4096&&outputs==1024)vit_contract_blocked_body<false,false,false,true,true>(in,w,skip,out,tokens);}
 #endif

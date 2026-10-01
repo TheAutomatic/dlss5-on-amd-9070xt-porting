@@ -366,8 +366,25 @@ WAVE void decoder_project2x(const float*in,const float*w,const float*skip,float*
 // separate vit_gather launch: same f32 values in the same A slots, so identical bits.
 DEV uint vg_tinv(uint r){return (r&~15u)|((r&7u)<<1)|((r>>3)&1u);}
 DEV uint vg_cinv(uint k){return (k&~31u)|((k>>1)&1u)|((k&1u)<<1)|((k>>4)&1u)<<2|((k>>2)&1u)<<3|((k>>3)&1u)<<4;}
-template<bool FullTile,bool ByteOutput=false,bool Gin=false>
-DEV void decoder_project2x_h16w_body(const float*in,const float*w,const float*skip,float*out,uint iw,uint ih,uint ow,uint oh,uint inputs,uint outputs){uint first=bid()/(outputs/16)*16,row=bid()%(outputs/16)*16;if(first>=iw*ih)return;uint parts=inputs==1024?4:1;f8 total{};const _Float16*w16=reinterpret_cast<const _Float16*>(w);for(uint p=0;p<parts;p++){f8 a{};for(uint k=p*(inputs/parts);k<(p+1)*(inputs/parts);k+=16){h8 x{},y;for(uint e=0;e<8;e++){uint j=k+gr()*8+e;x[e]=(FullTile||first+rc()<iw*ih)?(_Float16)(Gin?in[vg_tinv(first+rc())*inputs+vg_cinv(j)]:in[(first+rc())*inputs+j]):(_Float16)0;}__builtin_memcpy(&y,w16+(row+rc())*inputs+k+gr()*8,16);a=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(x,y,a);}for(uint e=0;e<8;e++)total[e]=p?total[e]+a[e]:a[e];}
+#ifndef HIP_DEC_F8PROBE
+#define HIP_DEC_F8PROBE 0 /* DIAGNOSTIC (results/c512-qkv-pipeline-20261001 §11): 1 = F() the decoder A input first; 2 = in-kernel fp8 x fp8 WMMA */
+#endif
+#ifndef HIP_DEC_F8W
+#define HIP_DEC_F8W 0 /* 2026-10-01: export decoder_project2x_h16w_f8 / _byteout_f8 (E4M3 weights packed by the host, fp8 WMMA) */
+#endif
+DEV i2 dec_pack8(h8 v){i2 r;for(uint i=0;i<2;i++){int w=__builtin_amdgcn_cvt_pk_fp8_f32(float(v[4*i]),float(v[4*i+1]),0,false);w=__builtin_amdgcn_cvt_pk_fp8_f32(float(v[4*i+2]),float(v[4*i+3]),w,true);r[i]=w;}return r;}
+template<bool FullTile,bool ByteOutput=false,bool Gin=false,bool W8=false>
+DEV void decoder_project2x_h16w_body(const float*in,const float*w,const float*skip,float*out,uint iw,uint ih,uint ow,uint oh,uint inputs,uint outputs){uint first=bid()/(outputs/16)*16,row=bid()%(outputs/16)*16;if(first>=iw*ih)return;uint parts=inputs==1024?4:1;f8 total{};const _Float16*w16=reinterpret_cast<const _Float16*>(w);for(uint p=0;p<parts;p++){f8 a{};for(uint k=p*(inputs/parts);k<(p+1)*(inputs/parts);k+=16){h8 x{},y;for(uint e=0;e<8;e++){uint j=k+gr()*8+e;x[e]=(FullTile||first+rc()<iw*ih)?(_Float16)(Gin?in[vg_tinv(first+rc())*inputs+vg_cinv(j)]:in[(first+rc())*inputs+j]):(_Float16)0;}if constexpr(W8){i2 y8;__builtin_memcpy(&y8,reinterpret_cast<const unsigned char*>(w)+(row+rc())*inputs+k+gr()*8,8);a=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(dec_pack8(x),y8,a);}else{
+#if HIP_DEC_F8PROBE==1
+ for(uint e=0;e<8;e++)x[e]=(_Float16)F(float(x[e]));
+#endif
+ __builtin_memcpy(&y,w16+(row+rc())*inputs+k+gr()*8,16);
+#if HIP_DEC_F8PROBE==2
+ a=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(dec_pack8(x),dec_pack8(y),a);
+#else
+ a=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(x,y,a);
+#endif
+ }}for(uint e=0;e<8;e++)total[e]=p?total[e]+a[e]:a[e];}
 #if HIP_DEC_HOIST_SCALE == 2
  // results/fill-cu-20260930: all 32 skip reads (and the lane's scale) issued before the first out[] store -- the default
  // form re-read skip/scale behind each store (possible aliasing), 177 load->wait pairs in series. Same values/arithmetic.
@@ -399,6 +416,12 @@ DEV void decoder_project2x_h16w_byteout_fixed_body(const float*in,const float*w,
  else decoder_project2x_h16w_body<false,true>(in,w,skip,out,iw,ih,ow,oh,inputs,outputs);
 }
 WAVE void decoder_project2x_h16w_byteout(const float*in,const float*w,const float*skip,float*out,uint iw,uint ih,uint ow,uint oh,uint inputs,uint outputs){if(inputs==1024&&outputs==512)decoder_project2x_h16w_byteout_fixed_body(in,w,skip,out,iw,ih,ow,oh,1024,512);else if(inputs==512&&outputs==256)decoder_project2x_h16w_byteout_fixed_body(in,w,skip,out,iw,ih,ow,oh,512,256);else if(inputs==256&&outputs==128)decoder_project2x_h16w_byteout_fixed_body(in,w,skip,out,iw,ih,ow,oh,256,128);else if(inputs==128&&outputs==64)decoder_project2x_h16w_byteout_fixed_body(in,w,skip,out,iw,ih,ow,oh,128,64);else if(inputs==64&&outputs==32)decoder_project2x_h16w_byteout_fixed_body(in,w,skip,out,iw,ih,ow,oh,64,32);else decoder_project2x_h16w_byteout_fixed_body(in,w,skip,out,iw,ih,ow,oh,inputs,outputs);}
+#if HIP_DEC_F8W
+template<bool ByteOutput> DEV void dec_f8_fixed(const float*in,const float*w,const float*skip,float*out,uint iw,uint ih,uint ow,uint oh,uint inputs,uint outputs){uint first=bid()/(outputs/16)*16,n=iw*ih;
+ if(first<n&&n-first>=16)decoder_project2x_h16w_body<true,ByteOutput,false,true>(in,w,skip,out,iw,ih,ow,oh,inputs,outputs);else decoder_project2x_h16w_body<false,ByteOutput,false,true>(in,w,skip,out,iw,ih,ow,oh,inputs,outputs);}
+WAVE void decoder_project2x_h16w_f8(const float*in,const float*w,const float*skip,float*out,uint iw,uint ih,uint ow,uint oh,uint inputs,uint outputs){if(inputs==1024&&outputs==512)dec_f8_fixed<false>(in,w,skip,out,iw,ih,ow,oh,1024,512);else dec_f8_fixed<false>(in,w,skip,out,iw,ih,ow,oh,inputs,outputs);}
+WAVE void decoder_project2x_h16w_byteout_f8(const float*in,const float*w,const float*skip,float*out,uint iw,uint ih,uint ow,uint oh,uint inputs,uint outputs){if(inputs==512&&outputs==256)dec_f8_fixed<true>(in,w,skip,out,iw,ih,ow,oh,512,256);else dec_f8_fixed<true>(in,w,skip,out,iw,ih,ow,oh,inputs,outputs);}
+#endif
 /* HIP_DEC_WIDE (2026-10-01, tail-c32-gap): same decoder tile and WMMA sequence; the epilogue goes through LDS so that one lane
    owns one output pixel x 16 consecutive channels: skip read as 4 x b128, merged exactly as before (H(t+F(skip)*scale), same
    F / fp8_add0), written as one b128 (bytes) or 4 x b128 (f32). Each element's arithmetic is unchanged -> identical bits. */

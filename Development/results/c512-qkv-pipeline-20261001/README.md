@@ -216,3 +216,42 @@ ABBA 原始输出在 `abba.txt`。lab 目录 `D:\DLSSNR-Lab\hip-backend\c512-qkv
 2. **decoder Up39、Up48（decoder_project2x_h16w*）**：合计约 60µs，条件相同，收益小一个数量级。
 - 其余的要么输入不在格点上（池化读 Hrtz 链尾），要么 f16 只用在 softmax 求和这类数值通路上，不在候选里。
 - C512 的 QKV 和 attention 投影本来就是 fp8×fp8，没有可换的。
+
+## 10. ViT QKV F8W：三步全过，收下并装机（10-01 续）
+
+核：`vit_stream_qkv_frag_hin_w5`（模块 vit-stream，8 个 ViT 块）。A = contract 的 f16 输出（值是 F 的），B = qkv 的 f16 分片权重，经 LDS 暂存。
+
+| 步 | 内容 | 结果 |
+|---|---|---|
+| 1 | `VIT_QKV_F8PROBE 1`：A 先 F() 再进 f16 WMMA | 19 SAME（输入 100% 在格点上） |
+| 2 | `VIT_QKV_F8PROBE 2`：核内把 A、B 都转成 fp8，用 fp8×fp8 WMMA | 19 SAME（硬件累加逐位一致） |
+| 3 | `VIT_QKV_F8W 1`：新导出 `vit_stream_qkv_frag_hin_w5f8`，宿主打包 E4M3 分片（`@qkv-fp8-frag`，用 `ExactWeightFp8`），LDS 暂存字节，用量减半；宿主 `HIP_VIT_QKV_F8W` | 19 SAME（宿主 Pvd 对 P6 + 现装） |
+
+步 3 的 ABBA：
+
+| 轮 | 900 | 1080 |
+|---|---|---|
+| 1 | −0.063 | −0.036 |
+| 2 | −0.056 | −0.035 |
+| 3 | −0.053 | −0.027 |
+| 合并 p99 | 7.467→7.411 | 10.146→10.118 |
+
+**收下**。8 个块合计省约 0.055ms（900）和 0.03ms（1080），也就是每块约 7µs（900）。
+
+装机（09:13）：
+- 剑星：add-on 0D739130（这次的宿主改动，包含 ViT 和 decoder 两部分；decoder 那部分要模块有导出才会生效），vit-stream gfx1201 14619041、gfx1200 755EA442。
+  - final 模块和实测的 vq3 相比，宿主会调用的 5 个核（w5f8、contract_hout、project_n64_bh、attention_fused_400/640）逐条相同。
+  - 和现装相比，这个模块里有一个不会被调用的 `split_projection_frag` 代码排布不同，原因是共享的 deep_fast.hip 改过。
+- 鬼武者：RE9 runtime 2CB95057，模块从剑星镜像过去。
+- flags 没动。
+- 备份：`...\backups\stellar-20261001-091358-vitf8w`、`D:\DLSSNR-Lab\onimusha-backups\20261001-091358-vitf8w`。
+- RE9 回放：900 b2980ada643da964、1080 758674a8bbd0206d，三组 SAME；smoke 退出码 0，errors=0。
+
+## 11. decoder Up39/Up48 F8W：三步逐位都过，但不收
+
+核：`decoder_project2x_h16w`（Up39，1024→512）和 `_byteout`（Up48，512→256），在 deep_fast-packed 里。
+- 宏：`HIP_DEC_F8PROBE 1/2`，`HIP_DEC_F8W` 导出 `*_f8`；宿主 `PackedDecoderFp8`，`HIP_DEC_F8W` 只对这两种形状生效。
+- 三步都是 19 组 SAME。
+- 第一批 ABBA：900 **+0.029** / −0.027 / −0.029，1080 −0.027 / −0.075 / −0.033。第一轮 900 变慢，按规矩不收。
+- 同基准重测三轮全负：900 −0.016 / −0.023 / −0.027，1080 −0.020 / −0.027 / −0.019；合并 p99 两批都更好。
+- 两批合起来 6 轮里有 1 轮变慢，收益约 0.02ms。按严格口径不收，`HIP_DEC_F8W` 模块宏默认 0，配方不开。宿主逻辑已经在 add-on 里，开模块宏就能用。**收不收请朱雀/Zero 定**。
