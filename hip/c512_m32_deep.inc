@@ -144,6 +144,10 @@ WAVE void split_mix_blocked_h16w_m32_n2g(const float*in,const float*w,float*out,
 #else
 #define C5D_GRIDQ(v) (v)
 #endif
+#ifndef C512_FFN_FP8MIX
+#define C512_FFN_FP8MIX 0 /* 2026-10-01 probe: mix WMMA as fp8 x fp8 (inputs and f16 mix weights are all on the E4M3 lattice, converted in-kernel) */
+#endif
+DEV i2 c5d_pack8(h8 v){i2 r;for(uint i=0;i<2;i++){int w=__builtin_amdgcn_cvt_pk_fp8_f32(float(v[4*i]),float(v[4*i+1]),0,false);w=__builtin_amdgcn_cvt_pk_fp8_f32(float(v[4*i+2]),float(v[4*i+3]),w,true);r[i]=w;}return r;}
 template<uint NT> DEV void c512_ffn_one_body(const float*in,const float*w,unsigned char*out8,uint tokens,uint first,uint g){
  const bool two=NT==2&&first+16<tokens;
  const _Float16*w16=reinterpret_cast<const _Float16*>(w);const _Float16*we=reinterpret_cast<const _Float16*>(w+262144)+g*16384;
@@ -176,10 +180,18 @@ template<uint NT> DEV void c512_ffn_one_body(const float*in,const float*w,unsign
  }else
 #endif
  if constexpr(!(C512_FFN_ABLATE&1))
- for(uint k=0;k<512;k+=16){h8 a[NT];for(uint t=0;t<NT;t++){a[t]=h8{};if(t==0||two)for(uint e=0;e<8;e++)a[t][e]=(_Float16)C5D_GRIDQ(in[(first+t*16+rc())*512+k+gr()*8+e]);}
+ for(uint k=0;k<((C512_FFN_ABLATE&4)?256u:512u);k+=16){h8 a[NT];for(uint t=0;t<NT;t++){a[t]=h8{};if(t==0||two)for(uint e=0;e<8;e++)a[t][e]=(_Float16)C5D_GRIDQ(in[(first+t*16+rc())*512+k+gr()*8+e]);}
+#if C512_FFN_FP8MIX
+  i2 a8[NT];for(uint t=0;t<NT;t++)a8[t]=c5d_pack8(a[t]);
+  for(uint j=0;j<4;j++){h8 b;__builtin_memcpy(&b,w16+(g*64+j*16+rc())*512+k+gr()*8,16);i2 b8=c5d_pack8(b);for(uint t=0;t<NT;t++)m[t][j]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b8,a8[t],m[t][j]);}}
+#else
   for(uint j=0;j<4;j++){h8 b;__builtin_memcpy(&b,w16+(g*64+j*16+rc())*512+k+gr()*8,16);for(uint t=0;t<NT;t++)m[t][j]=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(b,a[t],m[t][j]);}}
+#endif
  h8 x[NT][4];
  for(uint t=0;t<NT;t++)for(uint j=0;j<4;j++)for(uint e=0;e<8;e++)x[t][j][e]=(_Float16)F(c512_hq(m[t][j][e]));
+#if C512_FFN_FP8MIX>=2
+ i2 x8[NT][4];for(uint t=0;t<NT;t++)for(uint j=0;j<4;j++)x8[t][j]=c5d_pack8(x[t][j]);
+#endif
  f8 r[NT][4]{};
 #if C512_FFN_PIPE
  if constexpr(NT==1&&!(C512_FFN_ABLATE&2)){
@@ -201,7 +213,11 @@ template<uint NT> DEV void c512_ffn_one_body(const float*in,const float*w,unsign
  if constexpr(!(C512_FFN_ABLATE&2))
  for(uint hb=0;hb<16;hb++){
   f8 ex[NT]{};
+#if C512_FFN_FP8MIX>=2
+  for(uint ks=0;ks<4;ks++){h8 b;__builtin_memcpy(&b,we+(hb*16+rc())*64+ks*16+gr()*8,16);i2 b8=c5d_pack8(b);for(uint t=0;t<NT;t++)ex[t]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b8,x8[t][ks],ex[t]);}
+#else
   for(uint ks=0;ks<4;ks++){h8 b;__builtin_memcpy(&b,we+(hb*16+rc())*64+ks*16+gr()*8,16);for(uint t=0;t<NT;t++)ex[t]=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(b,x[t][ks],ex[t]);}
+#endif
   i2 a[NT];
   for(uint t=0;t<NT;t++){a[t]=i2{};for(uint e=0;e<8;e++){float v=Hrtz(ex[t][e]),gate=clampf(v,-4.f,4.f),poly=__builtin_fmaf(gate,__builtin_fmaf(absf(gate),-.055908203125f,.447265625f),.89453125f);a[t][e/4]=int(uint(a[t][e/4])|(uint(byte_F(v*poly))<<(8*(e%4))));}}
   for(uint ob=0;ob<4;ob++){uint off=((ob*16+rc())*256+hb*16+gr()*8)/4;i2 b={int(pw[off]),int(pw[off+1])};for(uint t=0;t<NT;t++)r[t][ob]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(a[t],b,r[t][ob]);}
@@ -214,6 +230,35 @@ WAVE void split_ffn_one_m32(const float*in,const float*w,unsigned char*out8,uint
 // C512_FFN_ONE 2: also export split_ffn_one_w2 (same grid, 2 waves per workgroup, 16 tokens per wave): twice the waves
 // in flight for the same work; per-output operations unchanged. Host launches it with 64 threads when present.
 #if C512_FFN_ONE >= 2
+// C512_FFN_F8W (2026-10-01, results/c512-qkv-pipeline-20261001): split_ffn_one_w2f8 = split_ffn_one_w2 with the mix and expand
+// weights packed as E4M3 by the host (they are exactly E4M3 values; host packer @split-mix-fp8) and both stages on fp8 WMMA.
+// Block inputs and the expand operand are on the E4M3 lattice too, so every product/operand value equals the f16 path's;
+// measured bit-identical (results §8). Mix A: f32 -> fp8 (exact). 0 = no export.
+#ifndef C512_FFN_F8W
+#define C512_FFN_F8W 0
+#endif
+#if C512_FFN_F8W
+DEV i2 c5d_pack8f(const float*v){i2 r;for(uint i=0;i<2;i++){int w=__builtin_amdgcn_cvt_pk_fp8_f32(v[4*i],v[4*i+1],0,false);w=__builtin_amdgcn_cvt_pk_fp8_f32(v[4*i+2],v[4*i+3],w,true);r[i]=w;}return r;}
+KERNEL __attribute__((amdgpu_flat_work_group_size(64,64))) void split_ffn_one_w2f8(const float*in,const float*w,unsigned char*out8,uint tokens){
+ const uint wave=__builtin_amdgcn_workitem_id_x()/32,first=bid()/8*32+wave*16,g=bid()%8;if(first>=tokens)return;
+ const unsigned char*wm=reinterpret_cast<const unsigned char*>(w);const unsigned char*we=wm+262144*4+g*16384;
+ const uint*pw=reinterpret_cast<const uint*>(w)+393216+g*4096;
+ f8 m[4]{};
+ const float*ar=in+(first+rc())*512+gr()*8;
+ for(uint k=0;k<512;k+=16){float fa[8];__builtin_memcpy(fa,ar+k,32);i2 a=c5d_pack8f(fa);
+  for(uint j=0;j<4;j++){i2 b;__builtin_memcpy(&b,wm+(g*64+j*16+rc())*512+k+gr()*8,8);m[j]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,a,m[j]);}}
+ i2 x8[4];
+ for(uint j=0;j<4;j++){float xv[8];for(uint e=0;e<8;e++)xv[e]=F(c512_hq(m[j][e]));x8[j]=c5d_pack8f(xv);}
+ f8 r[4]{};
+ for(uint hb=0;hb<16;hb++){
+  f8 ex{};
+  for(uint ks=0;ks<4;ks++){i2 b;__builtin_memcpy(&b,we+(hb*16+rc())*64+ks*16+gr()*8,8);ex=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,x8[ks],ex);}
+  i2 a{};for(uint e=0;e<8;e++){float v=Hrtz(ex[e]),gate=clampf(v,-4.f,4.f),poly=__builtin_fmaf(gate,__builtin_fmaf(absf(gate),-.055908203125f,.447265625f),.89453125f);a[e/4]=int(uint(a[e/4])|(uint(byte_F(v*poly))<<(8*(e%4))));}
+  for(uint ob=0;ob<4;ob++){uint off=((ob*16+rc())*256+hb*16+gr()*8)/4;i2 b={int(pw[off]),int(pw[off+1])};r[ob]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(a,b,r[ob]);}
+ }
+ for(uint ob=0;ob<4;ob++)for(uint e=0;e<8;e++){uint rr=first+gr()*8+e,c=g*64+ob*16+rc();float v=F(c512_hq(r[ob][e]));out8[((rr/16)*16+c/32)*512+(rr%16)*32+c%32]=static_cast<unsigned char>(__builtin_amdgcn_cvt_pk_fp8_f32(v,0.f,0,false));}
+}
+#endif
 KERNEL __attribute__((amdgpu_flat_work_group_size(64,64))) void split_ffn_one_w2(const float*in,const float*w,unsigned char*out8,uint tokens){
  const uint wave=__builtin_amdgcn_workitem_id_x()/32,first=bid()/8*32+wave*16,g=bid()%8;if(first>=tokens)return;c512_ffn_one_body<1>(in,w,out8,tokens,first,g);}
 #endif

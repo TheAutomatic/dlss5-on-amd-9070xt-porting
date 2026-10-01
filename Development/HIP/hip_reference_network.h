@@ -51,6 +51,9 @@ using Tensor=std::shared_ptr<Allocation>;
 #ifndef HIP_SMALL_FFN_W16
 #define HIP_SMALL_FFN_W16 1 /* 2026-09-30: the same wide FFN fragments for C64/C128 (c64/c128_wave2*_w16, *_wave2_up_w16 in c64-wave2 when built with W2_FFN_W16_SMALL); 0 or modules without them = old layout (results/w16-c64-c128-20260930) */
 #endif
+#ifndef HIP_C512_FFN_F8W
+#define HIP_C512_FFN_F8W 1 /* 2026-10-01: use split_ffn_one_w2f8 (E4M3 mix/expand weights, fp8 WMMA) when c512-m32-deep exports it; bit-identical (results/c512-qkv-pipeline-20261001) */
+#endif
 #ifndef HIP_C512_PROJ_FB8
 #define HIP_C512_PROJ_FB8 0 /* 2026-10-01: C512 attention projection reads the FFN projection's E4M3 tiles as its residual (split_projection_frag_nof32 + mh_attention_project_frag_c512_fb8, modules built with C512_PROJ_FB8) and the f32 copy is not written; 0 or older modules = f32 path (results/mochizuki-gap-20261001) */
 #endif
@@ -223,6 +226,7 @@ class Network {
  }
  // Split FFN weights with the mix region also packed to RNE half (kernel split_mix_blocked_h16w); expand/contract as PackedSplitFfnWeight.
  void* PackedSplitFfnWeightMixHalf(const std::string&name){const auto key=name+"@split-mix-f16";auto it=weights.find(key);if(it==weights.end()){auto v=ReadWeights(opt.assets+"/"+name);if(v.size()!=WeightElements(name))throw std::runtime_error("split FFN weight shape");HalfR(v,0,262144);HalfExact(v,262144,131072);Fp8(v,{{393216,131072}});it=weights.emplace(key,UploadWeight(v,key)).first;}return P(it->second);}
+ void* PackedSplitFfnWeightMixFp8(const std::string&name){const auto key=name+"@split-mix-fp8";auto it=weights.find(key);if(it==weights.end()){auto v=ReadWeights(opt.assets+"/"+name);if(v.size()!=WeightElements(name))throw std::runtime_error("split FFN weight shape");Fp8(v,{{0,262144},{262144,131072},{393216,131072}});it=weights.emplace(key,UploadWeight(v,key)).first;}return P(it->second);} /* 2026-10-01: mix+expand+contract all E4M3 (exact) for split_ffn_one_w2f8 (results/c512-qkv-pipeline-20261001) */
  void* PackedSplitFfnWeight(const std::string&name){const auto key=name+"@split-expand-f16-contract-fp8";auto it=weights.find(key);if(it==weights.end()){auto v=ReadWeights(opt.assets+"/"+name);if(v.size()!=WeightElements(name))throw std::runtime_error("split FFN weight shape");HalfExact(v,262144,131072);Fp8(v,{{393216,131072}});it=weights.emplace(key,UploadWeight(v,key)).first;}return P(it->second);}
  void* PackedDeepWeight(const std::string&name,size_t matrix_elements){
   if(!opt.packed_weights||!opt.fast_deep)return Weight(name);
@@ -300,7 +304,7 @@ class Network {
   if(module=="c64_wave2"){groups=count;threads=kernel.rfind("c64_",0)==0?64:kernel.rfind("c128_",0)==0?128:256;}
   if(module=="c32_wave1"&&(kernel=="c32_wave1_up"||kernel=="c32_wave1_up_b8"||kernel=="c32_wave1_up_lb"||kernel=="c32_wave1_up_b8_lb"||kernel=="c32_wave1_finish_dcrop_b8"||kernel=="c32_wave1_finish_dcrop_b8d"||kernel=="c32_wave1_prefix_b8d"||kernel=="c32_wave1_mapped_b8"||kernel=="c32_wave1_finish_b8"||kernel=="c32_wave1_post_b8")){groups=count;threads=32;}
   if(module=="c512_m32_mh"||module=="c512_m32_deep"){groups=count/1024;threads=32;}
-  if(kernel=="split_ffn_one_w2")threads=64;
+  if(kernel=="split_ffn_one_w2"||kernel=="split_ffn_one_w2f8")threads=64;
   if(module=="c512_m32_mh"&&kernel=="c512_qkv_attention_fused"){groups=count;threads=64;}
   if(module=="c512_m32_mh"&&kernel=="c512_qkv_attention_compact"){groups=count;threads=64;}
   if(vit_proj_n64_active&&module=="deep_fast"&&kernel=="vit_project_frag"&&count%1024==0){module="vit_wide_deep";kernel="vit_project_frag_n64";groups=unsigned(((count/1024+15)/16)*16);threads=32;}
@@ -427,7 +431,8 @@ class Network {
   auto compact=input;
   if(n!=valid&&!(HIP_C512_PAD16&&input->capacity>=size_t(n)*512*4)){compact=New(size_t(n)*512);Run("mh","mh_shift_pack",size_t(n)*512,P(input),P(compact),valid,U(1),n,U(1),U(0),U(0),U(512),U(0));}
   auto mixed=New(size_t(n)*512),contract=New(size_t(n)*512),contract8=New(size_t(n)*128),ffn=New(size_t(n)*512),ffn8=New(size_t(n)*128);
-  if(HIP_C512_FFN_ONE&&HasFn("c512_m32_deep","split_ffn_one_w2"))Run("c512_m32_deep","split_ffn_one_w2",size_t((n+31)/32*32)*256,P(compact),PackedSplitFfnWeightMixHalf(Block(block,"ffwd")),P(contract8),n);
+  if(HIP_C512_FFN_ONE&&HIP_C512_FFN_F8W&&HasFn("c512_m32_deep","split_ffn_one_w2f8"))Run("c512_m32_deep","split_ffn_one_w2f8",size_t((n+31)/32*32)*256,P(compact),PackedSplitFfnWeightMixFp8(Block(block,"ffwd")),P(contract8),n);
+  else if(HIP_C512_FFN_ONE&&HasFn("c512_m32_deep","split_ffn_one_w2"))Run("c512_m32_deep","split_ffn_one_w2",size_t((n+31)/32*32)*256,P(compact),PackedSplitFfnWeightMixHalf(Block(block,"ffwd")),P(contract8),n);
   else if(HIP_C512_FFN_ONE&&HasFn("c512_m32_deep","split_ffn_one_m32"))Run("c512_m32_deep","split_ffn_one_m32",size_t((n+31)/32*32)*256,P(compact),PackedSplitFfnWeightMixHalf(Block(block,"ffwd")),P(contract8),n);
   else{Run("c512_m32_deep","split_mix_blocked_h16w_m32",size_t((n+31)/32*32)*256,P(compact),PackedSplitFfnWeightMixHalf(Block(block,"ffwd")),P(mixed),n);
   Run("deep","split_ffn_fused_fp8_t8",size_t(n)*512,P(mixed),PackedSplitFfnWeightMixHalf(Block(block,"ffwd")),P(contract),P(contract8),n);}

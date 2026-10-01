@@ -1,0 +1,48 @@
+cand c512-m32-deep <- fp8mix 00F61B46
+SAME count 19
+SPAN ffa0-y1-r1-h900-base exit=0 n=332 med=6.864
+SPAN ffa0-y1-r1-h1080-base exit=0 n=329 med=9.523
+SPAN ffa4-y1-r1-h900-base exit=0 n=330 med=6.797
+SPAN ffa4-y1-r1-h1080-base exit=0 n=330 med=9.409
+SPAN ffa1-y1-r1-h900-base exit=0 n=333 med=6.718
+SPAN ffa1-y1-r1-h1080-base exit=0 n=330 med=9.271
+SPAN ffa0-y2-r1-h900-base exit=0 n=332 med=6.905
+SPAN ffa0-y2-r1-h1080-base exit=0 n=331 med=9.538
+SPAN ffa4-y2-r1-h900-base exit=0 n=332 med=6.821
+SPAN ffa4-y2-r1-h1080-base exit=0 n=331 med=9.436
+SPAN ffa1-y2-r1-h900-base exit=0 n=331 med=6.731
+SPAN ffa1-y2-r1-h1080-base exit=0 n=330 med=9.3
+SPAN ffa0-y3-r1-h900-base exit=0 n=333 med=6.913
+SPAN ffa0-y3-r1-h1080-base exit=0 n=332 med=9.555
+SPAN ffa4-y3-r1-h900-base exit=0 n=333 med=6.846
+SPAN ffa4-y3-r1-h1080-base exit=0 n=330 med=9.452
+SPAN ffa1-y3-r1-h900-base exit=0 n=333 med=6.741
+SPAN ffa1-y3-r1-h1080-base exit=0 n=331 med=9.317
+
+[exited with code 0]
+gfx1201 fp8mix 708EF5B7E8692D512D85CB69D54A6224B37CEF42E00881BD378AD1EDBD4216E7
+gfx1201 fp8mx2 AE9DE0AC390B9C6E8D5F73B891E20C27968AEB5F36D58692382394D749B16094
+cand c512-m32-deep <- fp8mix 708EF5B7
+SAME count 0
+fp8mix 1 900: avg 7.2361 -> 7.2799 (+0.0438 ms, +0.61%)  p99 7.4370 -> 7.4840
+fp8mix 1 1080: avg 9.9698 -> 10.0273 (+0.0574 ms, +0.58%)  p99 10.2310 -> 10.2870
+fp8mix 2 900: avg 7.3383 -> 7.3736 (+0.0353 ms, +0.48%)  p99 7.5390 -> 7.5720
+fp8mix 2 1080: avg 9.9970 -> 10.0602 (+0.0631 ms, +0.63%)  p99 10.2220 -> 10.2570
+cand c512-m32-deep <- fp8mx2 AE9DE0AC
+SAME count 19
+fp8mx2 1 900: avg 7.2736 -> 7.3308 (+0.0571 ms, +0.79%)  p99 7.4690 -> 7.5240
+fp8mx2 1 1080: avg 9.9732 -> 10.0427 (+0.0695 ms, +0.70%)  p99 10.1690 -> 10.2380
+fp8mx2 2 900: avg 7.2992 -> 7.3359 (+0.0367 ms, +0.50%)  p99 7.4750 -> 7.5320
+fp8mx2 2 1080: avg 9.9760 -> 10.0413 (+0.0653 ms, +0.65%)  p99 10.1650 -> 10.2310
+
+[exited with code 0]
+cand c512-m32-deep <- f8w 1410D28F
+SAME count 19
+f8w 1 900: avg 7.2428 -> 7.2296 (-0.0132 ms, -0.18%)  p99 7.4220 -> 7.4130
+f8w 1 1080: avg 9.9417 -> 9.9114 (-0.0303 ms, -0.30%)  p99 10.1340 -> 10.0910
+f8w 2 900: avg 7.2864 -> 7.2430 (-0.0435 ms, -0.60%)  p99 7.4710 -> 7.4060
+f8w 2 1080: avg 9.9469 -> 9.9286 (-0.0183 ms, -0.18%)  p99 10.1260 -> 10.1560
+f8w 3 900: avg 7.2844 -> 7.2593 (-0.0251 ms, -0.34%)  p99 7.4720 -> 7.4410
+f8w 3 1080: avg 9.9944 -> 9.9533 (-0.0411 ms, -0.41%)  p99 10.3420 -> 10.2110
+
+[exited with code 0]
