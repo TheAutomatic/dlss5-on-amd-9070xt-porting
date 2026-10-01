@@ -1,0 +1,39 @@
+addon 0D739130 vit 14619041
+SPAN r1-h900-base exit=0 n=231 med=6.791
+SPAN r1-h900-vit_stream_qkv_frag_hin_w5f8 exit=0 n=234 med=7.016
+SPAN r1-h900-vit_attention_fused exit=0 n=232 med=6.929
+SPAN r1-h900-vit_stream_contract_frag_hout exit=0 n=232 med=7.001
+SPAN r1-h900-vit_stream_project_n64_bh exit=0 n=232 med=6.89
+SPAN r1-h900-vit_expand_blocked_fp8_frag_bytein exit=0 n=231 med=7.024
+SPAN r1-h1080-base exit=0 n=230 med=9.054
+SPAN r1-h1080-vit_stream_qkv_frag_hin_w5f8 exit=0 n=232 med=9.421
+SPAN r1-h1080-vit_attention_fused exit=0 n=233 med=9.362
+SPAN r1-h1080-vit_stream_contract_frag_hout exit=0 n=231 med=9.351
+SPAN r1-h1080-vit_stream_project_n64_bh exit=0 n=233 med=9.193
+SPAN r1-h1080-vit_expand_blocked_fp8_frag_bytein exit=0 n=230 med=9.371
+SPAN r2-h900-base exit=0 n=231 med=6.847
+SPAN r2-h900-vit_stream_qkv_frag_hin_w5f8 exit=0 n=230 med=7.07
+SPAN r2-h900-vit_attention_fused exit=0 n=230 med=6.964
+SPAN r2-h900-vit_stream_contract_frag_hout exit=0 n=231 med=7.06
+SPAN r2-h900-vit_stream_project_n64_bh exit=0 n=232 med=6.928
+SPAN r2-h900-vit_expand_blocked_fp8_frag_bytein exit=0 n=230 med=7.06
+SPAN r2-h1080-base exit=0 n=232 med=9.102
+SPAN r2-h1080-vit_stream_qkv_frag_hin_w5f8 exit=0 n=235 med=9.437
+SPAN r2-h1080-vit_attention_fused exit=0 n=232 med=9.387
+SPAN r2-h1080-vit_stream_contract_frag_hout exit=0 n=232 med=9.422
+SPAN r2-h1080-vit_stream_project_n64_bh exit=0 n=234 med=9.221
+SPAN r2-h1080-vit_expand_blocked_fp8_frag_bytein exit=0 n=232 med=9.423
+SPAN r3-h900-base exit=0 n=232 med=6.893
+SPAN r3-h900-vit_stream_qkv_frag_hin_w5f8 exit=0 n=233 med=7.085
+SPAN r3-h900-vit_attention_fused exit=0 n=231 med=6.998
+SPAN r3-h900-vit_stream_contract_frag_hout exit=0 n=234 med=7.065
+SPAN r3-h900-vit_stream_project_n64_bh exit=0 n=233 med=6.947
+SPAN r3-h900-vit_expand_blocked_fp8_frag_bytein exit=0 n=234 med=7.073
+SPAN r3-h1080-base exit=0 n=232 med=9.12
+SPAN r3-h1080-vit_stream_qkv_frag_hin_w5f8 exit=0 n=232 med=9.459
+SPAN r3-h1080-vit_attention_fused exit=0 n=231 med=9.395
+SPAN r3-h1080-vit_stream_contract_frag_hout exit=0 n=232 med=9.416
+SPAN r3-h1080-vit_stream_project_n64_bh exit=0 n=233 med=9.233
+SPAN r3-h1080-vit_expand_blocked_fp8_frag_bytein exit=0 n=229 med=9.42
+DUP_DONE
+LOCK DROPPED

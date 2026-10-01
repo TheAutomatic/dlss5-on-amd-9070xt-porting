@@ -1367,3 +1367,5 @@ U4 的 ISA 显示：每迭代发 4 步 load，但末尾等到 0，跨迭代不�
 ## 2026-10-01 晚 gap-map-evening：新差距地图 + C512_PROJ_DEEP（光派单，子代理）
 - 整网（现装逐位，宿主 HEAD）：span 900 6.81/6.88、1152 9.50/9.56、1088 9.08/9.13ms。同口径族差（900｜1088）：C512 +284｜+400、C32 +218｜+251、C128 +151｜+174、C256 +122｜+14、C64 +89｜+80、ViT +42｜+378；合计 +956｜+1354µs。C512 QKV+attn 已不落后，大头是 attention 投影（18.8 对 7.8µs/块）。
 - 前三：C512 attention 投影、ViT 1088 档 QKV+attention、C32 中间块。`C512_PROJ_DEEP`（投影 K 循环手排流水）19 SAME 但两档三轮 +0.22ms：LLVM 提前全部 B load、255 VGPR 溢出，四种写法都溢出，不收，宏默认 0。没装机。见 results/gap-map-evening-20261001。
+- 续：`C512_PROJ_WN4`（attention 投影 4 wave/WG、每 wave 16 列，wave 数 ×4，与 M32 减 wave 相反）19 SAME，但两档持平偏慢（w2 900 +0.013/+0.011/−0.004、1080 +0.018/+0.006/−0.008），不收，模块/宿主宏默认 0；这条核不是 wave 数或链长受限，线停。
+- 续：ViT 1088 DUP 回放（µs/实例 900→1088，他 900→1080）：QKV 27.9→42.4（他 23.6→24.4）、attention 14.6→35.6（他 14.8→24.4）、expand 26.6→39.6（他 22.7→26.8）、contract 37.1 已持平。我们 QKV/expand/project 随 token 线性涨（每 16-token tile 各读权重），attention 近似平方（每 16 query 扫一遍 K/V，他 32 query）；建议下一刀 attention 32-query 共用 K/V、只开 640 档。

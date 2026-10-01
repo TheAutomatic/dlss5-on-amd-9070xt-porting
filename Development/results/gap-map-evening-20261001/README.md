@@ -44,3 +44,33 @@ SP 三段（修正后）：sp_init/recover 各 ≈7.5µs，sp_run256_w16 900 307
 
 ## 文件
 `raw/`（KEV 日志）、`dispatch-*.json`、`families.json`、`table.md`、`wall.txt`、`installed.txt`、`abba-pd4.txt`。脚本 `Development/HIP/experiments/gap-map-evening/`（run.ps1、analyze.py、q.ps1、b.ps1、regression/full 带 `DLSS5_VIT_ADAPTIVE_IDLE_MS=1000000000`）。lab `D:\DLSSNR-Lab\hip-backend\gap-map-evening-20261001`。
+
+## 5. 续（光第二单）：WN4 重组 + ViT 1088 测清楚
+
+### 5.1 `C512_PROJ_WN4`：attention 投影照他改成每 WG 4 wave
+和 09-29 `C512_PROJ_M32` 的区别：M32 是两个 token tile 共用权重，**wave 数减半**、每 wave 的串行链从 64 条拉长到 128 条，在 token 少的 900 档直接变成时延。WN4 反过来：grid 不变，一个 128 线程 WG = 同样的 16 token × 64 列，**每个 wave 只管 16 列**（1 个累加器、32 条 WMMA），wave 数 ×4，串行链缩到 1/4；4 个 wave 读同一段 A（L0 共享），权重片段各读各的。初值、操作数、K 顺序、出口逐元素同 HOIST_RES 路径。
+- 模块宏 `C512_PROJ_WN4`（默认 0，新导出 `mh_attention_project_frag_c512_wn4`）；宿主 `HIP_C512_PROJ_WN4`（默认 0，开了且模块有导出才走，threads=128）。w2 = 全展开（94 VGPR，无 scratch），w1 = unroll 4。
+- w2：**19 组 SAME**；ABBA 900 +0.013/+0.011/−0.004，1080 +0.018/+0.006/−0.008ms，合并 p99 7.477→7.479、10.289→10.275。w1：900 +0.013/−0.007/−0.001，1080 +0.024/+0.033/+0.027。**持平偏慢，不收。**
+- 结论：wave 数和串行链长都不是这条核的瓶颈（M32 减 wave 变慢、WN4 加 wave 也不变快），链内 ≈11µs/块 的差多半不在核本体的组织上；剩下的可能是 f32 残差读写和前后核的衔接。这条线停。
+
+### 5.2 ViT 1088：DUP 回放（不打事件），每实例 µs，三轮中位（单轮噪声约 ±4µs）
+他的数取自 pl1 逐派发日志。注意他 900 档是 448 token，我们 400；1080 两边都是 640。
+
+| 核 | 我们 900 | 我们 1088 | 增长 | 他 900（448） | 他 1080（640） | 增长 | 1088 差 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| QKV（w5f8 / CCVit1DQKV） | 27.9 | 42.4 | ×1.52 | 23.6 | 24.4 | ×1.03 | **+18** |
+| attention（fused_400/640 / Attention） | 14.6 | 35.6 | ×2.44 | 14.8 | 24.4 | ×1.65 | **+11** |
+| expand（blocked_fp8 / FfnExpand） | 26.6 | 39.6 | ×1.49 | 22.7 | 26.8 | ×1.18 | **+13** |
+| contract | 26.2 | 37.1 | ×1.42 | 34.9 | 37.0 | ×1.06 | 0 |
+| project | 10.1 | 14.9 | ×1.48 | 10.1 | 11.3 | ×1.12 | +4 |
+
+8 块合计 1088 档约 +46µs/块 ≈ +0.37ms，和事件地图（+378）对得上。（事件地图里 900 档 expand 只有 0.7µs 是事件扣除的伪影，DUP 显示 26.6。）
+
+**token 一多我们哪里慢得快**：
+- **QKV、expand、project：我们随 token 线性涨（×1.5），他几乎不涨（×1.03～1.18）。** 他 QKV 是 120 个 WG（10 个 64-token tile × 12 个列 tile），一个 WG 的权重片段喂 4 个 16-token tile；我们 768 个 WG × 5 wave，每个 16-token tile 各读一遍权重。也就是说我们这几个核在 640 token 上已经是吞吐受限（权重请求 / WMMA 喂料随 token 线性），他还在时延区间。类别：**组织方式（token 方向的权重复用）**。注意 900 档 token 少，同样的改法在 900 上就是 M32 那种"wave 少了反而慢"的风险，所以只能按 token 数分档开（1088/1152 开，900 不开）。
+- **attention：我们近似平方增长（×2.44，1.6² = 2.56），他 ×1.65。** 我们 1280 个单 wave WG（40 个 16-query tile × 32 头），每个 wave 把整段 K/V 扫一遍；他 640 个 WG（20 个 32-query tile × 32 头），每次读进来的 K/V 喂 32 个 query。K/V 流量我们是他的 2 倍，而且随 token 平方涨。类别：**组织方式（query 方向的 K/V 复用）**。负账里的 KSPLIT（拆 key）、4wave/64key 预取都是在 key 方向动刀，没有在 query 方向合并过，这条不重复。
+- contract 已经和他持平。
+
+**建议的下一刀**（没动手）：先做 attention 的 32-query（两个 16-query tile 共用每个 K/V 片段，逐累加器顺序不变，只在 640 token 档开），1088 档估 −5～−10µs/块；然后是 QKV 的 token 方向权重复用（M32 形状，只开 1088/1152 档）。
+
+脚本：`HIP/experiments/gap-map-evening/dup-vit.ps1`（注：PowerShell 变量名不分大小写，`$cases` 会覆盖 [string] 参数 `$Cases` 把数组拼回一个串，已改名 `$caseList`；c512 那份 dup.ps1 也有同名写法，用 -File 跑默认参数时会只跑 base）。原始数据 `dup-vit-spans.txt`、`abba-wn4.txt`。

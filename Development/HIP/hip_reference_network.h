@@ -57,6 +57,9 @@ using Tensor=std::shared_ptr<Allocation>;
 #ifndef HIP_VIT_QKV_F8W
 #define HIP_VIT_QKV_F8W 1 /* 2026-10-01: ViT QKV on vit_stream_qkv_frag_hin_w5f8 (E4M3 fragments, fp8 WMMA) when vit-stream exports it; bit-identical (results/c512-qkv-pipeline-20261001 §10) */
 #endif
+#ifndef HIP_C512_PROJ_WN4
+#define HIP_C512_PROJ_WN4 0 /* 2026-10-01 gap-map-evening: 1 = C512 attention projection on mh_attention_project_frag_c512_wn4 (128-thread WG, one wave per 16-column slice) when mh_fast exports it. Bit-exact but flat/slower, not taken */
+#endif
 #ifndef HIP_C512_FFN_F8W
 #define HIP_C512_FFN_F8W 1 /* 2026-10-01: use split_ffn_one_w2f8 (E4M3 mix/expand weights, fp8 WMMA) when c512-m32-deep exports it; bit-identical (results/c512-qkv-pipeline-20261001) */
 #endif
@@ -297,6 +300,7 @@ class Network {
    else if(kernel.rfind("mh_pool_project_group_c",0)==0){U c=U(std::stoul(kernel.substr(23)));threads=c;groups=(count/(2*c)+15)/16;}
    else if(kernel=="mh_qkv_normalize_wave_c512"){threads=128;groups=count/4096;}
    else if(kernel=="mh_qkv_normalize_frag_c512"){threads=32;groups=count/1024;}
+   else if(kernel=="mh_attention_project_frag_c512"&&HIP_C512_PROJ_WN4&&HasFn(module,"mh_attention_project_frag_c512_wn4")){kernel="mh_attention_project_frag_c512_wn4";threads=128;groups=count/1024;}
    else if(kernel=="mh_attention_project_frag_c512"||kernel=="mh_attention_project_frag_c512_fb8"){threads=32;groups=count/1024;}
    else if(kernel.rfind("mh_ffn_fused_c",0)==0){U c=U(std::stoul(kernel.substr(14)));if((c!=64&&c!=128&&c!=256)||count%(c*16))throw std::runtime_error("fused FFN dispatch shape");threads=c*2;groups=count/(c*16);}
    else if(kernel=="mh_qkv_normalize_fast"||kernel=="mh_qkv_normalize_fast_wave"||kernel=="mh_qkv_normalize_fast_wave_fp8"){threads=256;if(kernel!="mh_qkv_normalize_fast")count=Count(size_t(count)*32);}

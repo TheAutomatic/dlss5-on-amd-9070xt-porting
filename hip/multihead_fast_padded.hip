@@ -530,6 +530,34 @@ FASTWAVE void mh_attention_project_frag_c512(const unsigned char*av8,const float
 #endif
 }
 
+// C512_PROJ_WN4 (2026-10-01, results/gap-map-evening-20261001): mh_attention_project_frag_c512 reorganised like mochizuki's
+// Proj (WN=4): a 128-thread workgroup = the same 16 tokens x 64 columns, each wave one 16-column slice (one accumulator,
+// 32 WMMA in the same (k32, half) order). Same grid as the 1-wave form, so 4x the waves and a 4x shorter serial chain; the
+// four waves read the same A bytes (L0-shared) and disjoint weight fragments. Init, operands, K order and epilogue per
+// output element are those of the HIP_C512_HOIST_RES path. 0 = no export (host falls back to the 1-wave kernel).
+#ifndef C512_PROJ_WN4
+#define C512_PROJ_WN4 0
+#endif
+#if C512_PROJ_WN4
+KERNEL __attribute__((amdgpu_flat_work_group_size(128,128))) void mh_attention_project_frag_c512_wn4(const unsigned char*av8,const float*feature,const float*w,float*out,uint tokens,uint post,uint cropw,uint croph,uint workw,uint sx,uint sy){
+ const uint C=512;uint t=__builtin_amdgcn_workitem_id_x(),l=t&31,n=t>>5,rc=l&15,g=l>>4,block=__builtin_amdgcn_workgroup_id_x(),first=block/8*16,col=block%8*64+n*16;if(first>=tokens)return;
+ const unsigned char*wb=reinterpret_cast<const unsigned char*>(w)+size_t(3)*C*C*4;const uint skip=4*C*C+(C/32)*4096+C/32;
+ f8 acc;
+ {float ws=w[skip+col+rc];float fv[8];for(uint e=0;e<8;e++){uint p=first+g*8+e;uint pp=p<tokens?p:first;fv[e]=feature[pp*C+col+rc];}
+  for(uint e=0;e<8;e++){uint p=first+g*8+e;acc[e]=p<tokens?Hrtz(fv[e]*ws):0.f;}}
+ const bool live=first+rc<tokens;const unsigned char*ap=av8+(live?first+rc:first)*C+g*8;
+ const uint n0=col+rc;const unsigned char*bp=wb+(n0/16)*16*512+(g*16+n0%16)*8;
+#if C512_PROJ_WN4>=2
+ _Pragma("unroll")
+#else
+ _Pragma("unroll 4")
+#endif
+ for(uint st=0;st<32;st++){const uint gs=st/2,h=st%2;i2 a,b;__builtin_memcpy(&a,ap+gs*32+h*16,8);__builtin_memcpy(&b,bp+gs*512+h*256,8);if(!live)a=i2{};acc=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(a,b,acc);}
+ for(uint e=0;e<8;e++){uint p=first+g*8+e,c=col+rc;if(p>=tokens)continue;float a=acc[e],v=post==3?Hrtz(a):post==4?F(a):F(Hrtz(a));uint dest=p*C+c;
+  if(cropw){uint x=p%workw,y=p/workw;if(x<sx||y<sy||x>=sx+cropw||y>=sy+croph)continue;dest=((y-sy)*cropw+x-sx)*C+c;}out[dest]=v;}
+}
+#endif
+
 // C512_PROJ_FB8 (2026-10-01, results/mochizuki-gap-20261001): mh_attention_project_frag_c512 (HIP_C512_HOIST_RES form)
 // with the residual feature read from split_projection_frag's E4M3 tiles instead of its f32 copy.
 // C512_PROJ_FB8 2 (results/c512-qkv-pipeline-20261001): residual scale and output as 16-byte vector accesses. That f32 value is
