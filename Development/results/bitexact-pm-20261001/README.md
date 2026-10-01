@@ -33,3 +33,32 @@ DF 今天这一批比 10-01 上午更差，DWF 也没比 DW 好：fp8 主循环�
 备份：`D:\DLSSNR-Lab\hip-backend\bitexact-pm-20261001\backups\stellar-20261001-135929-decwide`（真正的原状；13:59:29 第一次装机脚本因 `H` 与 PowerShell 别名冲突，已写入 gfx1200 一个文件后中断，已从该备份恢复并核对 0 差，再重装，第二份备份 `...-135944-decwide`）、`D:\DLSSNR-Lab\onimusha-backups\20261001-135944-decwide`、fast-tier `backups\20261001-135944-install-decwide`。
 fast-tier：`exact\` 的 deep_fast-packed 与两份 SUMS 已同步；`fast\deep_fast-packed` 也换成同一个（它原配方只有逐位的 DEC_F8W，现在 F8W 不赚）。status：两游戏 EXACT。
 配方：`hip/build-modules.ps1` deep_fast-packed 加 `HIP_DEC_WIDE 1`。
+
+## 2. 派发空档
+
+清单用 `gap-map-evening-20261001/dispatch-900.json`（153 个网络内派发；162 的口径另含网络外 D3D/交接）。逐段：
+- **C32** 5+1+…（prefix、mapped、chain×2、finish、池化；上行 up、chain×2、finish、post）：链上每个都吃上一个的整张输出，无 PDL（功耗墙理由见 gap-fusion）。池化 `mh_pool_project_c32_b8` 空档 8～10µs 最大，但"单窗口核加尾巴"已负账。
+- **C64/C128** 各 4～6 个 `_wave2` + 池化：已走 PDL（空档 1.7～1.9µs）；持久化、下采样融合负账。
+- **C256**：编码 ffn_qkv_pdl → attn_bo → `sp_init` → `sp_run256_w16` → `sp_recover` → ffn_qkv → attn → 池化；解码同型。`sp_init` 只清队列状态，**和本帧任何数据都无依赖**（每段一块独立 state，上一个使用者是上一帧）。SP_ENDS 负账。
+- **C512** 每块 4 个（ffn_one_w2f8 → projection_frag → qkv_attention_compact → attention_project），全依赖；PDL 负账（功耗）。
+- **ViT** gather + 每块 6 个（pack_input → expand → contract → qkv → attention → project）+ gather⁻¹：pack 并入投影/gather 负账（fusion-round3 P/G/Q/R、gap-fusion G）。
+- decoder 39/48：各吃前一段全部输出。
+
+唯一没有数据依赖、又不在负账里的：**解码段的 `sp_init`**。做了 `SP_INIT_PAIR`（swin-persistent 模块宏默认 0，导出 `sp_init_pair`；宿主 `HIP_SP_INIT_PAIR` 按导出自动用）：编码段的 init 一次把解码段的 state 也清好，解码段跳过自己的 sp_init，−1 派发/帧（两档都是）。解码 plan 不存在（首帧）或下次要回绕时退回原路径。
+SIP：19 组 SAME（含 SP_VALIDATE 回绕，队列置换/依赖校验过）。三轮 900 −0.001 / **+0.023** / +0.003，1080 −0.009 / −0.013 / +0.019，合并 p99 900 7.503→7.540。**不收**：省一个 ~2µs 核 + 空档在噪声以下，而模块重编带来的代码漂移（宏 0 重编 581A0CEF ≠ 现装 8911ECD3，同 deep_fast-packed 的情况）也在里面。空档这条线我这边也到头。
+
+## 3. 旧负账在新基准（DEC_WIDE 已装）复测
+T（`C512_T8_NO_F32`）已作废：FFN_ONE 之后 `split_ffn_one_w2f8` 本来就只写字节，没有那份 f32 了。挑了三件原理上该赚、当时只是小幅不赚的：
+
+| 件 | 旧账 | 900 三轮 | 1080 三轮 | 合并 p99 900 / 1080 | 判 |
+|---|---|---|---|---|---|
+| PFT `CW_POST_FULL_TILE 1`（c32-wave1） | 1080 +0.0015 | −0.003 / −0.009 / −0.003 | +0.003 / +0.004 / +0.019 | 7.504→7.480 / 10.246→10.255 | 不收（1080 三轮全慢） |
+| W16S `W2_FFN_W16_SMALL 3`（c64-wave2） | 900 一轮 +0.004 | −0.003 / −0.002 / +0.002 | −0.016 / −0.014 / +0.008 | 7.485→7.491 / 10.249→10.283 | 不收 |
+| VT `C512_COMPACT_VT 1`（c512-m32-mh） | 900 符号不一 | +0.003 / −0.006 / −0.013 | −0.013 / −0.003 / −0.003 | 7.513→7.487 / 10.273→10.271 | 不收（900 一轮 +0.003） |
+
+全部 19 组 SAME。PFT 反过来成了"900 赚 1080 亏"，VT 两档 avg 合并都负、p99 都不差，只差 900 第 1 轮 +0.003——和规则线擦边，可留作合包料。都没装。原始行 `abba-step23.txt`。
+
+## 4. 整网
+本批装进去的只有 DEC_WIDE：同口径 ABBA（wall avg，本 harness）DW 三轮合并 900 −0.026、1080 −0.032ms。按 gap-map-evening 的 span 口径估算现装约 **900 6.79～6.86、1080（1152 行）9.47～9.53ms**（未单独重测 span）。
+
+脚本 `Development/HIP/experiments/bitexact-pm/`（setup/assets/build/full/cand/go1–go4/install/rt9）。lab `D:\DLSSNR-Lab\hip-backend\bitexact-pm-20261001`，帧转储已清。

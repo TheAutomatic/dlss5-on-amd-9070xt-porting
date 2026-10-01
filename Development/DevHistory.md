@@ -1373,3 +1373,6 @@ U4 的 ISA 显示：每迭代发 4 步 load，但末尾等到 0，跨迭代不�
 
 ## 2026-10-01 下午 bitexact-pm 第 1 项：三个擦线小件（`results/bitexact-pm-20261001` §1）
 DEC_WIDE/F8W 互斥原因：宿主选了 `_w` 后 F8W 判断只认不带后缀的核名，模块也没有"宽出口+fp8 主循环"核；补 `*_w_f8` 导出与宿主判断，逐位。IO_FUSE 加宿主防呆（decode shader 不认 `NATIVE_CODEC_NEURAL_BUFFER` 就拒绝融合，实测旧 shader 19 SAME、10 次 refused）。单项三轮：IOF 过、DW 过（900 −0.005/−0.012/−0.061，1080 −0.013/−0.002/−0.081），DF 不过（900 +0.026 一轮）、DWF 不过。合包 DW+IOF 六轮 avg 五负一平，但 900 合并 p99 两批都 +0.06（IO_FUSE 老毛病），合包不收、IO_FUSE 不装。装 DW 单件：deep_fast-packed gfx1201 7FDA5868 / gfx1200 E55635E2，add-on/flags/runtime 不动，鬼武者镜像，RE9 回放 SAME，fast-tier exact/fast 同步。
+
+## 2026-10-01 下午 bitexact-pm 第 2、3 项（`results/bitexact-pm-20261001` §2–3）
+派发清单：网络内 153 派发里，只有解码段 `sp_init` 与本帧数据无依赖且不在负账。`SP_INIT_PAIR`（模块宏默认 0，宿主按导出用）编码段一次清两段 state，−1 派发：19 SAME（回绕+SP_VALIDATE），900 −0.001/+0.023/+0.003，不收。旧负账复测（DEC_WIDE 新基准）：PFT（1080 三轮全慢）、W16S（各档一轮慢）、VT（900 一轮 +0.003，其余负，p99 不差）均不收。T 已作废（FFN_ONE 后无 f32 写）。模块宏 0 重编与现装 swin-persistent/c32/c512-m32-mh 代码不同（HEAD 漂移），复测里含这部分。
