@@ -78,3 +78,10 @@ e22d15a2→HEAD 之间动宿主的提交只有 3 个（加上我的 b4807156）�
 | S2（复测） | −0.010 / −0.012 / −0.005 | **+0.014** / +0.003 / −0.004 | 7.477→7.474 / 10.244→10.242 |
 
 系统性的变慢没了（之前 6/6 正，现在 12 轮 7 负 5 正，合并 avg 两批两档 −0.009～+0.004，p99 合并都不差），但每批都有一轮 >0，**按"三轮无变慢"的字面规则不过，没装**。参考：同一宿主对自己（AA）三轮里 1080 也有 +0.010 / +0.007，这条规则对"代码相同的重装"本身就过不了——需要光/Zero 定：重装（代码等价）是否按 p99 + 合并 avg 判。
+
+## 6. 装机（16:09，光按"代码等价重装"口径批准）
+- 装：两游戏 62 模块 = `build-style`（df92ed49 源码），剑星 add-on **053C3589**、两个着色器（decode A70789A1、text_overlay 8D20C7F5），鬼武者 RE9 runtime **DC2D445E**（含 `_storage_`）；flags 不动。add-on/runtime 由 df92ed49 编，钉基址，可逐字节复现。
+- 核对（`verify.ps1`）：剑星/鬼武者 62 模块与 build-style 逐文件 0 差，SUMS 都是 FD419A3E；add-on、runtime、着色器哈希与源一致；fast-tier status 两游戏 EXACT，`exact\` SUMS 同步。
+- RE9 回放：900 old=new=fallback b2980ada…、1080 758674a8… SAME；smoke exit 0（SP errors 0）。
+- 备份：`D:\DLSSNR-Lab\hip-backend\rebuild-baseline-20261001\backups\stellar-20261001-160904-rebuild`、`D:\DLSSNR-Lab\onimusha-backups\20261001-160904-rebuild`、fast-tier `backups\20261001-160904-install-rebuild`。
+- 注意：fast-tier `fast\` 下的 c32-wave1/c64-wave2 仍是旧 fast 配方编的，没有 Style 常量；切到 fast 档时 `DLSS5_STYLE` 对 C32 预处理不生效（会静默保持 1）。

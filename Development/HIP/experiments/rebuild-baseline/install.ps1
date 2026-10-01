@@ -1,6 +1,6 @@
-# rebuild-baseline: all 62 modules from build-head + HEAD add-on / runtime / decode+overlay shaders. Derived from bitexact-pm.
+# rebuild-baseline: all 62 modules from build-style + HEAD add-on / runtime / decode+overlay shaders. Derived from bitexact-pm.
 # install.ps1 -Tag t -Modules 'deep_fast-packed,...' [-Addon <path>] [-Runtime <path>] [-DecodeShader <path>] [-AddFlags 'K=V,...']
-# Stellar: modules from build-head\<arch> (both arches), optional add-on / decode shader / flag lines; Onimusha: modules mirrored from
+# Stellar: modules from build-style\<arch> (both arches), optional add-on / decode shader / flag lines; Onimusha: modules mirrored from
 # Stellar, optional RE9 runtime. Everything touched is backed up first. Then the fast-tier exact snapshot is synced (to-exact must
 # keep the new cut): exact\<arch>\{c32-wave1,c64-wave2,deep_fast-packed} = installed, exact\<g>-SHA256SUMS / <g>-flags.txt = installed,
 # fast\<arch>\deep_fast-packed = installed deep_fast-packed when -FastDeep (its fast recipe was only the bit-exact HIP_DEC_F8W).
@@ -22,7 +22,7 @@ Copy-Item "$oni\$hip" "$ob\HIP" -Recurse;Copy-Item "$oni\LmxxfNrRuntime.dll" $ob
 $fb="$R\backups\$stamp-install-$Tag";New-Item -ItemType Directory -Force $fb|Out-Null;Copy-Item "$R\exact" "$fb\exact" -Recurse;Copy-Item "$R\fast" "$fb\fast" -Recurse
 "backups $sb | $ob | $fb"
 # ---- Stellar
-foreach($a in 'gfx1200','gfx1201'){foreach($m in $mods){$src="$root\build-head\$a\$m.hsaco";if(!(Test-Path $src)){throw "missing $src"};Copy-Item $src "$game\$hip\$a\$m.hsaco" -Force;if((Hs "$game\$hip\$a\$m.hsaco") -ne (Hs $src)){throw 'module readback'}}}
+foreach($a in 'gfx1200','gfx1201'){foreach($m in $mods){$src="$root\build-style\$a\$m.hsaco";if(!(Test-Path $src)){throw "missing $src"};Copy-Item $src "$game\$hip\$a\$m.hsaco" -Force;if((Hs "$game\$hip\$a\$m.hsaco") -ne (Hs $src)){throw 'module readback'}}}
 "stellar sums $(Sums "$game\$hip")"
 if($Addon){Copy-Item $Addon "$game\dlss5-amd.addon64" -Force}
 if($DecodeShader){Copy-Item "$DecodeShader\native_codec_decode.hlsl","$DecodeShader\native_text_overlay.hlsl" "$game\$assets\" -Force}
