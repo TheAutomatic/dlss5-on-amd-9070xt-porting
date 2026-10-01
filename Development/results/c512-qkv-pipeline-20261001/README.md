@@ -186,3 +186,33 @@ ABBA 原始输出在 `abba.txt`。lab 目录 `D:\DLSSNR-Lab\hip-backend\c512-qkv
 - 块间张量字节化，也就是 mix 直接读字节输入（§7 的 (a)），可以再省读量。
 - QKV 段、attention 投影里的 f16 WMMA 也可以用同样的思路检查。比如 attention 投影的残差 scale 和 Hrtz。
 - 这一轮到此为止。
+
+## 9. 全网 f16 WMMA 普查（静态，不动 GPU，10-01 续）
+
+方法：
+- **f16 WMMA 条数**：剑星现装 31 个 gfx1201 模块，逐核数静态的 `v_wmma_*_f16` 和 fp8 WMMA 条数（`f16k.txt`）。这是指令条数，不是动态执行次数，循环里的指令只算一次。
+- **链内耗时**：kernel-map-inchain 的逐派发 exec 减去 41.7µs 的事件开销，按核汇总。那张地图是早上 7E19CC6B 时的，之后几刀没有反映进去。
+- **权重格点**：资产目录下全部 184 个权重文件，逐元素判断是不是 E4M3 能精确表示的值（`gridcensus.txt`）。
+- **激活**：读源码看 A 操作数是谁写的、写之前有没有过 F()。
+
+**权重结论**：所有矩阵区段都是 100% 在格点上，覆盖 qkv、expand、contract、projection、ffwd、ffwd-projection、ds、decoder39、head-matrix、Up 的 weights，以及 C64～C512 attention 文件里的矩阵部分。不在格点上的只有：
+- 矩阵后面的尾部向量（scale/bias，每个文件几十到几百个值，走 f32 乘加，不进 WMMA）；
+- attention 文件里的位置偏置表；
+- C32 的 `ffn.f16` 有几个文件从下标 0 就不在格点上（block0 等）。
+
+| 核（族） | 900 链内 µs | 1080 µs | WMMA 组成（静态 f16/fp8） | 权重格点 | 激活来源 | 能否换 fp8 |
+|---|---:|---:|---|---|---|---|
+| **vit_stream_qkv_frag_hin_w5（ViT QKV ×8）** | **224** | **327** | **18 / 0，全是 f16** | qkv.f16 100% | 上一块 `vit_contract…_hout` 输出 `F(H(total))`，按 f16 存但值是 F 的；首块来自 vit_pack_input 的 E4M3 字节 | **很可能能**，源码判断是 F 写出的，要用 GRIDQ 实测确认 |
+| **decoder_project2x_h16w / _byteout（Up39、Up48）** | 60 | 63 | 37 / 0，全是 f16 | decoder39 和 block48 weights 的矩阵部分 100% | Up39 读 ViT 输出（F），Up48 读块 47 输出（F） | **很可能能**，同上要实测 |
+| mh_pool_project_group_c64/c128_hin、c256、c512（池化） | 72 | 104 | 8 / 0 | ds.f16 100% | 链尾 raw 输出，post 3 = Hrtz，是 f16 值，**不在格点上** | 否，属于有损 |
+| C32 各核（prefix/post/chain/up/finish 等） | ~2200 | ~3000 | 8～16 / 36～48，f16 是少数 | C32 ffn.f16 部分不在格点 | f16 WMMA 用在 attention 概率/和这类激活上 | 否，是数值取舍 |
+| c64/c128/c256 wave2、swin-persistent | ~2000 | ~2600 | 4 / 182～614 | 在格点 | f16 只有 ones 求和那 4 条 | 不值得 |
+| C512 QKV、两个投影 | — | — | 0 / 全 fp8 | — | — | 已经是 fp8 |
+| C512 FFN（split_ffn_one） | — | — | — | 100% | F | **已做（§8，F8W）** |
+| vit_attention_fused_* | 121 | 456 | 1 / 4 | — | f16 是求和 | 不值得 |
+
+**排名（能换 fp8 且耗时大）**：
+1. **ViT QKV（vit_stream_qkv_frag_hin_w5）**：900 档 224µs、1080 档 327µs，全是 f16 WMMA，权重在格点上，输入按源码是 F() 的输出。和 C512 FFN 的情况一样，而且量级更大。照 F8W 的套路：先 GRIDQ（核内对输入做一次 F，看 19 组是否 SAME），再做核内 fp8 转换看逐位，最后让宿主打包 fp8 权重。
+2. **decoder Up39、Up48（decoder_project2x_h16w*）**：合计约 60µs，条件相同，收益小一个数量级。
+- 其余的要么输入不在格点上（池化读 Hrtz 链尾），要么 f16 只用在 softmax 求和这类数值通路上，不在候选里。
+- C512 的 QKV 和 attention 投影本来就是 fp8×fp8，没有可换的。
