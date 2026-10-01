@@ -22,10 +22,26 @@ PSNR 逐 case（fast 配方）：900-static 53.30、900-motion 53.26（最差帧
 现基准（这台机这轮）900 7.24 → fast 7.13ms，他 6.02；1080（1088 行）fast 9.37ms，他 7.81。差距从 1.22/2.15 缩到 1.11/1.56ms。剩下的主体是 C512（+332/+492µs，组织方式）和 C32 里尚未拿的 f16 成对算术，不是 fast 开关能补的。
 
 ## 3. 注意
-- **`DLSS5_IO_FUSE=1` 在本 harness 下改了输出**：非时序 case 对现装 35 dB（只开 F8W 不开它时，F8W 逐位）。input-slim 当时判 19 SAME，可能是那次两边都开了或宿主版本不同；本轮没追，fast 配方**不带 IO_FUSE**，需要另查后再说。
+- ~~`DLSS5_IO_FUSE=1` 改了输出~~ **更正（§4）**：35 dB 是本 lab 测法错误（用了旧 decode shader），IO_FUSE 本身逐位。
 - KS 慢的原因（推断）：64 线程组 + 末尾屏障/LDS 合并的开销抵掉了链长减半；和 M32、TM 负账同向——这个核在当前占用下并行度并不缺，瓶颈另有所在。
 - `HIP_DEC_WIDE` 与 `HIP_DEC_F8W` 在宿主里互斥（`_w` 先选中后 f8 判断不成立），按派单取 F8W。
 - 现装 deep_fast-packed（EEC7D4A6）与 HEAD 源码重编（320BB15E）三段不同（同长度），本分支宏 0 与 HEAD 重编逐字节相同；其余 c32-wave1、c64-wave2、swin-persistent 宏 0 与现装逐字节相同。
 
 ## 文件
 源码：`hip/c32_fused_ffn_attention.hip`（`CW_FAST_NUM`）、`hip/multihead_fast_padded.hip` + `hip/wave_owned_mh.inc`（`W2_FAST_NUM`）、`hip/deep_fast.hip`（`HIP_VIT_ATTN_KSPLIT`，不进配方）；宿主 `Development/HIP/hip_reference_network.h`（`_ks2` 导出探测）。build-modules.ps1 配方未改：fast 档 = `-ExtraDefines 'CW_FAST_NUM 3','W2_FAST_NUM 3','HIP_DEC_F8W 1'` 重编 c32-wave1/c64-wave2/deep_fast-packed + flag `DLSS5_NETWORK_1080_ROWS=1088`。脚本 `Development/HIP/experiments/fast-tier/`；原始输出 `all{1,2,3}.log`、现装哈希 `installed.txt`。lab `D:\DLSSNR-Lab\hip-backend\fast-tier-20261001`（帧转储已删）。没装机，游戏文件没动。
+
+## 4. 续（10-01 午）：IO_FUSE 复核 + C32 f16 成对算术
+
+**IO_FUSE**：35 dB 来自本 lab 用 `input-slim\assets-base` 的旧 `native_codec_decode.hlsl`（E5BB3862，没有 `NATIVE_CODEC_NEURAL_BUFFER`）。宿主照样跳过 neural pass，旧 shader 读不到网络输出。换 `assets-cand`（0C3CAABD，与 repo 相同）复测，7 case × 12 帧**全逐位相同**；旧 shader 900-static 12/12 不同（`io.ps1`）。input-slim 的 19 SAME 是真的，那份 README 已补复核说明。IO_FUSE 可以进 fast 档，前提是 decode shader 跟着一起发；收益按 input-slim 是 900 −0.015、1080 −0.024ms，本轮没再计时。
+
+**C32 f16 成对算术**（`CW_FAST_NUM` bit2，配 bit0/1 即 `CW_FAST_NUM 7`）：隐层激活 clamp→|g|·a+b→g·q+c→v·p 全部改成 `_Float16` 二元向量（v_pk_max/min/fma/mul_f16），出来再展宽成 f32 交给 fp8 打包。
+
+| 组 | 900 三轮 ms | 1080 三轮 ms | PSNR 最差帧 / case 均值 |
+|---|---|---|---|
+| PK（`CW_FAST_NUM 7`，单项） | +0.129 / +0.136 / +0.131 | +0.179 / +0.176 / +0.204 | 52.2 / 53.1～55.5 |
+| CF 复测（`CW_FAST_NUM 3`，同一批） | −0.086 / −0.087 / −0.077 | −0.128 / −0.132 / −0.140 | （同 §1） |
+| FAST4（PK 代替 CF 的整配方） | +0.110 / +0.093 / +0.099 | −0.299 / −0.310 / −0.281 | 51.2 / 52.8～55.4 |
+
+**PK 三轮全慢**，比 f32 快路径慢约 0.22（900）/0.32ms（1080），不进。原因：在 gfx12 上，这段数据的生产者（WMMA f32 累加）和消费者（`v_cvt_pk_fp8_f32`，只吃 f32）都是 f32，没有 f16→fp8 的直通转换。成对算术前要先 pkrtz 打包，算完再把每对拆开展宽回 f32：`v_cvt_f32_f16` 没有 op_sel，高半还要多一条移位。所以每个元素反而比 f32 的 med3/fma/fma/mul 多指令。Daniel/mochizuki 赚在 `v_fma_mix`（f16 输入、f32 输出）和整段留在 f16 的长链上，我们这段结构不具备这种长链，套成对算术不赚。源码留着，宏默认 0。
+
+**fast 配方整体（不变）**：仍是 §1 的 FAST3 = `CW_FAST_NUM 3` + `W2_FAST_NUM 3`（c64-wave2）+ `HIP_DEC_F8W 1` + `NETWORK_1080_ROWS=1088`。900 −0.107～−0.113ms、1080 −0.56～−0.61ms，最差帧 51.8 dB。CF 本轮复测数（−0.08/−0.13）与第一轮一致。可选加 `DLSS5_IO_FUSE=1`（逐位，需新 decode shader）。

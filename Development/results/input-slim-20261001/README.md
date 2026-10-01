@@ -56,3 +56,7 @@ D3D 段合计（不含 network）：900 ≈94µs、1080 ≈122µs；游戏内（
 - 代码（commit 见 DevHistory）：`src/native_game_codec.h`（`UseNeuralBuffer`，root SRV t5）、`shaders/native_codec_decode.hlsl`（`NATIVE_CODEC_NEURAL_BUFFER`）、`src/native_game_frame.h`（`DLSS5_IO_FUSE`、跳过 neural pass；`DLSS5_GAME_PROBE` 细分打点）、`scripts/CONFIGURATION.md` 追加一行。模板未改；RE9 runtime 不走 NativeGameFrame，不适用。
 - 脚本 `Development/HIP/experiments/input-slim/`（setup/assets/probe/regression/full/go/go2/summarize/p99m、`gpulock.sh`）。lab `D:\DLSSNR-Lab\hip-backend\input-slim-20261001`（帧转储 6.2GB 已删）。
 - 游戏文件、装机版本未动。
+
+## 更正 / 复核（2026-10-01 午，fast-tier）
+fast-tier 第一轮在"F8W + `DLSS5_IO_FUSE=1`"组看到非时序 case 只有 35 dB，曾怀疑本文的 19 组 SAME 是假的。复核结论：**本文 SAME 是真的，35 dB 是 fast-tier 测法的错**。IO_FUSE 必须配新的 `native_codec_decode.hlsl`（带 `NATIVE_CODEC_NEURAL_BUFFER`，md5 0C3CAABD，与 repo 相同；本文 `assets-cand`）。fast-tier 用的是 `assets-base`（旧 shader E5BB3862），宿主照样跳过 neural pass，旧 shader 不认 buffer，decode 读不到网络输出。复测（fast-tier lab `io.ps1`，同宿主同模块）：新 shader + IO_FUSE 对基准 7 case × 12 帧**全逐位相同**；旧 shader + IO_FUSE 900-static 12/12 帧不同。本文的基准一侧不带 IO_FUSE（只有候选带），不存在"两边都开"的问题。
+- 由此记一条风险：IO_FUSE=1 搭配旧 decode shader 不会报错，只会悄悄出错图。若将来收它，宿主应在 shader 缺这个宏时拒绝启用，或者把 shader 和开关打包在一起发。

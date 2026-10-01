@@ -333,7 +333,15 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
 #endif
   for(uint ht=0;ht<8;ht++){
    f8 expanded{};for(uint kt=0;kt<2;kt++){i2 b=matrix8(fw+512,(ht*16+r)*32+kt*16+g*8);expanded=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,input[kt],expanded);}
+#if CW_FAST_NUM&4
+   /* FAST TIER (lossy): activation in packed half pairs (v_pk_max/min/fma/mul_f16), widened back to f32 for the fp8 pack */
+   CW_Q8_DECL(a);for(uint e=0;e<8;e+=2){using hh=_Float16 __attribute__((ext_vector_type(2)));hh v={(_Float16)expanded[e],(_Float16)expanded[e+1]};
+    hh g=__builtin_elementwise_min(__builtin_elementwise_max(v,hh{-4,-4}),hh{4,4});hh ag=__builtin_elementwise_abs(g);
+    hh q=ag*hh{(_Float16)-.055908203125f,(_Float16)-.055908203125f}+hh{(_Float16).447265625f,(_Float16).447265625f};hh p=g*q+hh{(_Float16).89453125f,(_Float16).89453125f};hh o=v*p;
+    CW_Q8_SET(a,e,float(o[0]));CW_Q8_SET(a,e+1,float(o[1]));}CW_Q8_END_SITE(a,1);
+#else
    CW_Q8_DECL(a);for(uint e=0;e<8;e++){float v=expanded[e],g=cw_act_gate(v),q=__builtin_fmaf(absf(g),-.055908203125f,.447265625f),p=__builtin_fmaf(g,q,.89453125f);CW_Q8_SET(a,e,v*p);}CW_Q8_END_SITE(a,1);
+#endif
    for(uint ci=0;ci<2;ci++){i2 b=matrix8(fw+4608,(ci*16+r)*128+ht*16+g*8);ffn[ci]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(b,a,ffn[ci]);}
   }
   i2 feature[2];for(uint ci=0;ci<2;ci++){CW_Q8_DECL(a);

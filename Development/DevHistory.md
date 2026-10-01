@@ -1361,3 +1361,4 @@ U4 的 ISA 显示：每迭代发 4 步 load，但末尾等到 0，跨迭代不�
 
 ## 2026-10-01 有损 fast 档 fast-tier（光派单，子代理，只测不装）
 新宏全默认 0（宏 0 重编与 HEAD 逐字节同）：`CW_FAST_NUM`（C32：Hrtz 恒等 + softmax 只 rcp）、`W2_FAST_NUM`（C64/C128/C256 的 H/Hrtz 恒等 + w2_inverse 只 rcp）、`HIP_VIT_ATTN_KSPLIT`（ViT attention 两 wave 拆 key，宿主按 `_ks2` 导出探测）。逐项三轮 ABBA + 对现装逐位版 PSNR（7 case×12 帧）：C32 900 −0.08～−0.12、1080 −0.13～−0.15，52.0 dB；c64-wave2 −0.02～−0.05，53.6 dB；KS 两档变慢（1080 +0.05）不进；swin-persistent 持平不进；1088 行 1080 −0.45。fast 配方（C32+c64-wave2+DEC_F8W+1088）：900 7.242→7.131（−0.11）、1080 9.956→9.366（−0.59），p99 全好，最差帧 51.8 dB。IO_FUSE 在此 harness 改输出（35 dB），不进配方，待查。对 mochizuki 差距 900 1.11、1088 行 1.56ms。`results/fast-tier-20261001`。
+- 10-01 续：IO_FUSE 的 35 dB 是 fast-tier lab 用了旧 decode shader（assets-base），换新 shader 7 case 全逐位，input-slim 的 SAME 成立（已在其 README 补复核）。C32 f16 成对激活（`CW_FAST_NUM` bit2）三轮全慢（900 +0.13、1080 +0.18，PSNR 52.2），不进：gfx12 上生产/消费都是 f32，打包拆包抵掉收益。fast 配方维持 FAST3。
