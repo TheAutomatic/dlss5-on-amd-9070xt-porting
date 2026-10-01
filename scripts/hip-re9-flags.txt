@@ -145,5 +145,6 @@ DLSS5_FORMAT_FALLBACK=1
 
 # Style (NVIDIA NGX Style control, 0/1/2). 1 = the style the original runtime used in Stellar Blade (default, as in every
 # package so far); 0 = NVIDIA's default and closest to its reference output; 2 = third style. Anything else falls back to 1.
-# Needs a game restart.
+# Needs a game restart. Read from this file by the RE9 runtime built after 0.39 (0.39's runtime ignored this line;
+# a system environment variable DLSS5_STYLE still wins over it).
 DLSS5_STYLE=1

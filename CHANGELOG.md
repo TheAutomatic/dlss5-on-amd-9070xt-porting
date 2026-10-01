@@ -272,3 +272,7 @@ Download (three packages): Quark (link pending) · Gofile mirror (link pending)
 - **Reproducible builds**: the add-on and the RE9 runtime are now linked at a fixed image base without a timestamp, so the same source gives the same file wherever it is built (before, the linker derived the base address from the output path, so every rebuild differed in all absolute addresses). The add-on and RE9 runtime in this release were rebuilt byte for byte from the release source; the 62 modules were checked against the source code section by section.
 - Host: an unused fast-tier probe compiled out of the default host (it cost 0.005-0.02 ms per frame); failed kernel lookups are cached.
 - **In the packages**: `DLSS5_STYLE=1` added to the three flags templates; add-on, RE9 runtime and 62 modules byte-identical to the Stellar Blade / Onimusha installs; RE9 host unchanged; RE9 source archive regenerated. Packaging checklist `Development/results/package-039-20261001/checklist.md`.
+
+## Unreleased
+
+- RE9 runtime: `DLSS5_STYLE` is now read from the flags file like the other network keys (0.39's runtime ignored the template line and only took it from the system environment). Default `1`: bit-identical; `0` from the file gives the same output as `0` from the environment. *Integrator note:* read once at session creation, not hot-reloaded; an environment variable of the same name wins; changes the RE9 runtime file, nothing else. `results/night-20261001`.
