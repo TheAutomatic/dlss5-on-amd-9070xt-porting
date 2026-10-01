@@ -33,9 +33,11 @@ if [ "${probe_gcc_major:-0}" -lt 13 ] && "$probe_cxx" -v 2>&1 | grep -q "Thread 
   else echo "gcc $probe_gcc_major with the win32 thread model has no std::mutex: sudo apt install g++-mingw-w64-x86-64-posix" >&2; exit 2; fi
 fi
 probe_extra_include=();[ -n "${DLSS5_EXTRA_INCLUDE:-}" ] && probe_extra_include=(-I"$DLSS5_EXTRA_INCLUDE")
+# Pinned image base + no timestamp: ld otherwise derives the base from a hash of the output path, so the same source
+# built under another path/name differs in every absolute address (2026-10-01 rebuild-baseline). 0x3480f0000 = 0.38-era installs.
 "$probe_cxx" -w -std=c++17 -O2 -shared -static -D_WIN32_WINNT=0x0A00 -DNATIVE_ORDER_NEURAL "${probe_defines[@]}" \
   "${probe_extra_include[@]}" -I"$probe_build_dir" -I"$probe_minhook_dir/include" -I"$probe_reshade_include" \
   "$probe_source_dir/../src/native_submission_order_probe.cpp" "${probe_objects[@]}" \
-  -o "$probe_output" -ld3d12 -ldxgi -ld3dcompiler -ldxguid
+  -o "$probe_output" -Wl,--image-base=0x3480f0000 -Wl,--no-insert-timestamp -ld3d12 -ldxgi -ld3dcompiler -ldxguid
 sha256sum "$probe_output"
 echo "add-on built: $probe_output"

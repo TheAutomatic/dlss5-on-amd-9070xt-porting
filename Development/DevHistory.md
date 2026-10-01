@@ -1376,3 +1376,6 @@ DEC_WIDE/F8W 互斥原因：宿主选了 `_w` 后 F8W 判断只认不带后缀�
 
 ## 2026-10-01 下午 bitexact-pm 第 2、3 项（`results/bitexact-pm-20261001` §2–3）
 派发清单：网络内 153 派发里，只有解码段 `sp_init` 与本帧数据无依赖且不在负账。`SP_INIT_PAIR`（模块宏默认 0，宿主按导出用）编码段一次清两段 state，−1 派发：19 SAME（回绕+SP_VALIDATE），900 −0.001/+0.023/+0.003，不收。旧负账复测（DEC_WIDE 新基准）：PFT（1080 三轮全慢）、W16S（各档一轮慢）、VT（900 一轮 +0.003，其余负，p99 不差）均不收。T 已作废（FFN_ONE 后无 f32 写）。模块宏 0 重编与现装 swin-persistent/c32/c512-m32-mh 代码不同（HEAD 漂移），复测里含这部分。
+
+## 2026-10-01 下午 rebuild-baseline：装机可复现性 + 统一重定基准（光派单，子代理，没装）
+按代码段比：HEAD 源码 + 配方编 62 模块，58 个与现装一致；不一致的 `deep_fast`/`vit-wide-deep`（两架构）是 09-28 旧编译、不在生产路径（共享源 deep_fast.hip 后续加默认关宏改了 `split_projection_frag` 寄存器分配）。add-on 0D739130 与 RE9 runtime 2CB95057 的代码和 e22d15a2 逐字节一致；今早"哈希对不上"真因是 MinGW ld 按输出路径哈希定 image base，已在 build-addon.sh / build-runtime.sh 钉基址 + 去时间戳（两处编译整文件同哈希）。"现装有 main 没有"的改动：无；之前"宏 0 重编≠现装"是拿文件哈希（随机 cuid）比的。现装着色器 decode / text_overlay 落后于 repo。HEAD 全量（宿主+模块+着色器）19 组 SAME，但 ABBA 六轮全慢 +0.003～+0.026ms；拆账慢在宿主（模块/着色器中性，关 SP_INIT_PAIR 仍慢，HasFn 未命中缓存后仍慢），按规则不装。整网 span 900 6.78/6.90、1152 9.47/9.55、1088 9.06/9.13ms。`results/rebuild-baseline-20261001`。

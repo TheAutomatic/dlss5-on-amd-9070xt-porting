@@ -130,7 +130,7 @@ class Network {
  friend struct LayerBenchmark;
  unsigned diagnostic_kernel_repeats=1;
 #endif
- Api api;Handle stream{};std::map<std::string,Handle>modules,functions;std::map<std::string,Tensor>weights;Options opt;
+ Api api;Handle stream{};std::map<std::string,Handle>modules,functions;std::set<std::string>missing_functions;std::map<std::string,Tensor>weights;Options opt;
  struct Timing{std::string name;Handle begin{},end{};};std::vector<Timing>timings;
  std::map<std::string,std::pair<double,unsigned>>wall_timings;
  Handle captured_graph{},graph_exec{};void*graph_input{},*graph_history{},*graph_output{};U graph_seed{};bool graph_warmed{},graph_capturing{};unsigned graph_builds{},graph_replays{};
@@ -256,7 +256,7 @@ class Network {
   if(it==weights.end()){auto v=ReadWeights(opt.assets+"/"+name);if(v.size()!=WeightElements(name))throw std::runtime_error("ViT tiled weight shape");Fp8(v,{{0,size_t(rows)*cols}});if(frag)FragmentPackedMatrix(v,0,rows,cols);else TilePackedMatrix(v,0,rows,cols);it=weights.emplace(key,UploadWeight(v,key)).first;}return P(it->second);
  }
  /* Optional export probe: modules without the symbol keep the old launch shape. */
- bool HasFn(const std::string&m,const std::string&name){std::string key=m+":"+name;if(functions.count(key))return true;auto mi=modules.find(m);if(mi==modules.end())return false;Handle f{};if(api.hipModuleGetFunction(&f,mi->second,name.c_str()))return false;functions.emplace(key,f);return true;}
+ bool HasFn(const std::string&m,const std::string&name){std::string key=m+":"+name;if(functions.count(key))return true;if(missing_functions.count(key))return false;auto mi=modules.find(m);if(mi==modules.end())return false;Handle f{};if(api.hipModuleGetFunction(&f,mi->second,name.c_str())){missing_functions.insert(key);return false;}functions.emplace(key,f);return true;} /* 2026-10-01 rebuild-baseline: misses are cached too -- per-frame probes (ViT _ks2, ...) otherwise call hipModuleGetFunction every frame (+0.01..0.02ms ABBA) */
  Handle Fn(const std::string&m,const std::string&name){std::string key=m+":"+name;auto it=functions.find(key);if(it!=functions.end())return it->second;Handle f{};api.Check(api.hipModuleGetFunction(&f,modules.at(m),name.c_str()),name.c_str());functions.emplace(key,f);return f;}
  template<class...A>void Run(const char*m,const char*name,size_t n,A...args){
   U count=Count(n),threads=256;unsigned groups=0;std::string module=m,kernel=name;
