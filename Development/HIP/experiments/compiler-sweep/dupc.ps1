@@ -1,7 +1,7 @@
 # compiler-sweep GPU pass: per case = label|module|build|kernel-prefix ; build 'inst' = installed module. For each case run base span (no dup)
 # and dup span (prefix x2) with that module swapped in. Host benchmark-S (= installed add-on source), modules = Stellar installed gfx1201.
 # Rounds interleave all cases. Takes gpu.lock; aborts on D:\DLSSNR-Lab\compiler-sweep\ABORT (set by guard.sh) or a game process.
-param([int]$Rounds=3,[int]$Frames=300,[string]$CaseFile='',[string]$Heights='900,1080',[string]$Tag='dup')
+param([int]$Rounds=3,[int]$Frames=300,[string]$CaseFile='',[string]$Heights='900,1080',[string]$Tag='dup',[string]$Overlay='')
 $ErrorActionPreference='Stop';$root="D:\DLSSNR-Lab\hip-backend\compiler-sweep-20261001\$Tag";$r='D:\DLSSNR-Lab\hip-backend';$a='D:\DLSSNR-Lab\Magpie-DLSS5-AMD-0.23\DLSS5-AMD'
 $bs='D:\DLSSNR-Lab\hip-backend\compiler-sweep-20261001';$AB='D:\DLSSNR-Lab\compiler-sweep\ABORT'
 $game='C:\Program Files (x86)\Steam\steamapps\common\StellarBlade\SB\Binaries\Win64';$L='D:\DLSSNR-Lab\gpu.lock';$me="compiler-sweep $Tag"
@@ -14,6 +14,7 @@ Test-Game
 $j=Start-Job -ScriptBlock {param($L,$me) while($true){Start-Sleep 300; if(Test-Path $L){"$me $(Get-Date -Format s) (refresh)"|Out-File -Encoding ascii $L}}} -ArgumentList $L,$me
 try{
 New-Item -ItemType Directory -Force "$root\flat","$root\inst"|Out-Null;Copy-Item "$game\DLSS5-AMD\native-game-tiled-assets\HIP\gfx1201\*.hsaco" "$root\inst" -Force
+foreach($o in ($Overlay -split ','|?{$_})){$om,$od=$o -split '=';Copy-Item "$od\$om.hsaco" "$root\inst" -Force;"overlay $om <- $od $((Get-FileHash "$root\inst\$om.hsaco").Hash.Substring(0,8))"}
 Copy-Item "$r\rebuild-baseline-20261001\benchmark-S.exe" "$root\bench.exe" -Force
 "addon $((Get-FileHash "$game\dlss5-amd.addon64").Hash.Substring(0,8))"
 $caseList=@(Get-Content $CaseFile|?{$_ -and $_ -notmatch '^#'})

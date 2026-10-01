@@ -1395,3 +1395,4 @@ DEC_WIDE/F8W 互斥原因：宿主选了 `_w` 后 F8W 判断只认不带后缀�
 - 盘点：`RTC_EXTRA_OPTS` 连写 `-mllvm=X`；配方加行字段 `opts`（`-RowOpts` 才生效）与 `-ExtraOpts`；源码挂点 `HIP_KERNEL_WPE`（默认 0）。默认构建 62/62 与现装逐条同。
 - 静态 8 模块×26 组：`waves_per_eu` 1/2/4 热核代码全不变；bottomup/topdown/itminreg/unroll 指令膨胀，部分组合溢出，淘汰。35 组上 GPU。
 - 收：c32-wave1 `-enable-post-misched=0` + max-ilp（整网 −59/−84µs），c512-m32-deep max-ilp（−10/−20µs）。合成：19 组 SAME；ABBA 900 −0.054/−0.043/−0.081，1080 −0.089/−0.091/−0.061ms，p99 7.525→7.443、10.277→10.188。只进配方（`-RowOpts`），未装机。
+- 续（10-02）：扩到全部 9 个链内模块 × 10 组（其余 22 个模块不派发，只编不测）。`-misched-postra`/igrouplp 精确求解/pre-RA 优化开关代码全不变；关 s_delay_alu/VOPD 在热模块上一律变慢（C32 关 VOPD +0.14/+0.23ms）。c64 post-RA 关（−16/−20µs）、vit-stream post-RA 关+max-ilp（−2/−14）上完整验证：19 组 SAME，但合在一起 900 合并 p99 变差，拆开各有慢轮，不收。按核细分：clang 设不了函数级 sched-strategy、post-RA 无函数级开关；而且 DUP 显示正负分在档位上、不在核上，没必要做。
