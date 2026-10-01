@@ -1,5 +1,5 @@
 # install.ps1 (next-candidate, 2026-10-02): installs D:\DLSSNR-Lab\next-candidate into Stellar Blade AND Onimusha. NOT run by the agent; Zero decides.
-# Contents: HIP\gfx1200 + HIP\gfx1201 (62 modules = main's full recipe, build-modules.ps1 -RowOpts -PrebuiltDir; only c32-wave1 / c64-wave2 (LLVM23)
+# Contents: HIP\gfx1200 + HIP\gfx1201 (62 modules = main's full recipe, build-modules.ps1 -RowOpts -PrebuiltDir; only c32-wave1 / c64-wave2 (LLVM23; c64 with HIP_BARRIER_FENCE 1)
 # and c512-m32-deep (max-ilp) differ in code from 0.39), dlss5-amd.addon64 (HEAD; byte-identical to installed 053C3589), LmxxfNrRuntime.dll
 # (HEAD 73D4C25C: + DLSS5_STYLE from the flags file). Shaders and flags unchanged.
 # Steps: refuse if a game / benchmark runs or a tier is not EXACT; verify package SHA256SUMS; back up everything touched; copy; read back;

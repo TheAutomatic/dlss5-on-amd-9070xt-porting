@@ -29,3 +29,6 @@
 注意：fast-tier `fast\` 下的 c32/c64 仍是旧 fast 配方，没随这次变。
 
 脚本：`Development/HIP/experiments/next-candidate/`（setup/go/wall/pack/install.ps1、guard.sh、README.txt）。
+
+## 更新（10-02 稍后）：c64-wave2 加 HIP_BARRIER_FENCE
+c64-wave2（两架构）改为带 `HIP_BARRIER_FENCE 1` 的 LLVM23 预编：LLVM22/23 不再在 gfx12 拆分屏障前补 `s_wait_dscnt`，裸屏障有 LDS 竞争。旧 c64 里 72 个核有这种序列，都是不派发的 mh_*；派发的核加宏前后逐条相同。19 组 SAME，ABBA 是噪声。包 SUMS 0831EAA1，旧包备份 `D:\DLSSNR-Lab\next-candidate-bak-20261002-prefence`。详见 `results/llvm23-vit-20261002` §5。

@@ -51,3 +51,12 @@ LLVM23: ds_store_2addr_b32x8              s_barrier_signal s_barrier_wait ds_loa
 ## 文件
 `bitwise.txt`（全部 19 组结果；注意 bv1 的 XH1 是"LLVM21 IR + LLVM23 后端"，bv8 的 XH1 是 vit 第 73–77 号核拼接，后者覆盖了前者的目录）、`pass7.log`（1152 行跑到第四轮，看出明显变慢后手动中止）/ `pass8.log` / `pass9.log` 及 `*-table.txt`、`full-CS7.txt`。
 脚本：`Development/HIP/experiments/llvm23-vit/`（go-bv.ps1、go-cv.ps1、dupc.ps1、go-cs.ps1、guard.sh、cases7–9、splice.py、asm.sh、fpseq.py、allops.py、icount.py、an.py）。lab：`D:\DLSSNR-Lab\hip-backend\compiler-sweep-20261001\X*`、`L23bf`、`L22bf`、`L21bf`、`L23p`、`L23ut12`。
+
+## 5. 续（同日）：审计 next-candidate 的 c32/c64，全仓清单
+扫描器 `barrier_scan.py`：反汇编里按函数线性扫，遇到 LDS 写（ds_store 等）后、`s_wait_dscnt 0`（或合并的 storecnt_dscnt/loadcnt_dscnt）前出现 `s_barrier_signal` 就记一处。不跟分支，是近似。验证：vit-stream LLVM23 能抓到 qkv_w5，LLVM21 和 LLVM23+宏 都是 0。
+
+**next-candidate**：c32-wave1（LLVM23，两架构）0 处。c64-wave2（LLVM23）72 个核有，**全是编进模块但不从这个模块派发的 mh_* 核**（宿主从 c64_wave2 只调 c*_wave2* 和 c256_attn_wave*，这 28 个核 0 处）。还是按"有一处就加"处理：配方行加 `l23defines = @('HIP_BARRIER_FENCE 1')`（只进 Linux 上的 LLVM23 预编，COMGR 不看这个字段，默认配方不变；compile-modules.py 认这个字段），两架构重编后 0 处，28 个派发核与加宏前逐条相同。
+- 19 组 SAME；ABBA（基线 = 原包配方）900 −0.002/−0.007/+0.022，1080 +0.017/−0.003/−0.004ms，合并 p99 7.445→7.452、10.151→10.117（`full-CS8.txt`）。派发代码没变，这是 A/A 噪声。
+- 没有按"不赚就退回 LLVM21"处理：这次加栅栏改的只是不派发的核，派发代码逐条相同，退回 LLVM21 会丢掉 c32/c64 那 −0.05/−0.07ms，换不来任何安全性。**包已更新**（旧包备份 `D:\DLSSNR-Lab\next-candidate-bak-20261002-prefence`，build-next 旧版 `build-next-prefence`）：c64 gfx1201 A0CAD8CB / gfx1200 B90443EE（与测过的代码逐条同，文件哈希不同是 cuid 随源码文本变），c32 不变；包 SHA256SUMS 0831EAA1，`install.ps1 -DryRun` 过；README.txt 写明原因。新预编在 lab `compiler-sweep-20261001\pre23f`。
+
+**全仓**：31 个模块用 LLVM21 和 LLVM23 各编一遍扫（`isa-scan-llvm23.txt`）。LLVM21 全部 0 处，现装配方安全。LLVM23 下有：c512-m32-deep 5、c512-m32-mh 72、c64-wave2 72、deep_fast(-packed) 5、multihead-fast(-packed) 9、multihead-fast-padded-wave(-packed) 84、multihead-tiled 7、swin-persistent 72、vit-stream 7、vit-wide-deep 5。源码层的屏障清单（启发式分"前面有没有 WG_FENCE"）在 `source-barriers.txt`：裸的集中在 multihead_fast_padded.hip 26、deep_fast.hip 15、vit_stream.inc 7 等。技术债记进 WorkingPlan。

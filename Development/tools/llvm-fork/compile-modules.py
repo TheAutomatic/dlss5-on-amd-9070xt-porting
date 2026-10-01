@@ -17,14 +17,16 @@ from pathlib import Path
 
 def recipe(hip):
     text = (hip / 'build-modules.ps1').read_text(encoding='utf-8-sig')
-    rows = re.findall(r"@\{ name\s*=\s*'([^']+)';\s*defines\s*=\s*@\((.*?)\);\s*sources\s*=\s*@\((.*?)\)\s*(?:;\s*opts\s*=\s*'([^']*)'\s*)?(?:;\s*compiler\s*=\s*'([^']*)'\s*)?\}", text)
+    rows = re.findall(r"@\{ name\s*=\s*'([^']+)';\s*defines\s*=\s*@\((.*?)\);\s*sources\s*=\s*@\((.*?)\)\s*(?:;\s*opts\s*=\s*'([^']*)'\s*)?(?:;\s*compiler\s*=\s*'([^']*)'\s*)?(?:;\s*l23defines\s*=\s*@\((.*?)\)\s*)?\}", text)
     if not rows or len({r[0] for r in rows}) != len(rows):
         raise RuntimeError('Empty or duplicate canonical module recipe')
-    for name, defines, parts, opts, compiler in rows:
+    for name, defines, parts, opts, compiler, l23defines in rows:
         defs = ['HIP_ISA_HALF 1']
         if name.endswith('-packed'):
             defs.append('HIP_PREPACKED_WEIGHTS 1')
         defs += re.findall(r"'([^']+)'", defines)
+        if compiler:  # l23defines only apply to the prebuilt (non-COMGR) rows
+            defs += re.findall(r"'([^']+)'", l23defines)
         sources = re.findall(r"'([^']+)'", parts)
         chunks = [''.join(f'#define {d}\n' for d in defs)]
         for part in sources:

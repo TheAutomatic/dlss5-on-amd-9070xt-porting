@@ -67,6 +67,9 @@
 5. **T：`C512_T8_NO_F32`**（删 C512 t8 无读者 f32 写出）：逐位，900 六轮全正（−0.021～−0.036ms），1080 一轮 +0.008、合并 p99 +0.003，按新规不收；**待 Zero 定是否破例收**（`gap-fusion`）。
 6. 余项（把握低，有新证据再动）：wave2 FFN 权重 K 循环软件流水（同 `C512_MIX_PIPE` 负账）；ViT attention 余差（V 请求组织与 half 数学，未拆清）；C32 prefix rgba/history 在 D3D 端存 RTZ half（逐位但改输入 shader）；`validate-modules.ps1` 修路径；RE9 换新 runtime 待 Zero 要。
 
+## 技术债：裸 s_barrier（2026-10-02，results/llvm23-vit-20261002 §5）
+写完 LDS 直接 `__builtin_amdgcn_s_barrier()`、没加 WG_FENCE 的地方，靠的是 LLVM21 在 gfx12 拆分屏障前白送的 `s_wait_dscnt 0`；LLVM22/23 不再送，就是 LDS 竞争。现装（LLVM21/COMGR）ISA 扫描 0 处，**默认配方不动**。任何模块换新编译器前必须带 `HIP_BARRIER_FENCE 1`（deep_fast.hip / multihead_fast_padded.hip 有宏；其他文件要补同类宏）并用 `experiments/llvm23-vit/barrier_scan.py` 扫到 0。LLVM23 下有问题的模块：c512-m32-deep 5、c512-m32-mh 72、c64-wave2 72（已加宏）、deep_fast(-packed) 5、multihead-fast(-packed) 9、multihead-fast-padded-wave(-packed) 84、multihead-tiled 7、swin-persistent 72、vit-stream 7、vit-wide-deep 5。源码清单 `source-barriers.txt`（裸：multihead_fast_padded 26、deep_fast 15、vit_stream.inc 7、c512_m32_deep.inc 2、multihead_fast/tiled/prefix_fast 各 2、multihead_fused_attention / swin_persistent.inc / wave_owned_attention_setup.inc 各 1）。根治 = 把裸屏障都换成带 WG_FENCE 的写法（默认 0 宏，LLVM21 下核对代码不变）。
+
 ## 已交负账（别重复，一行一条）
 
 - HIP↔D3D 交接两半：HIP→D3D draw 分片自旋比 fence 慢；D3D→HIP 轮询（`DLSS5_HIP_INPUT_POLL` 默认 0）逐位但整帧慢 0.01～0.04ms（`handoff-gpu`）。

@@ -15,4 +15,12 @@ Validation vs 0.39 installed (lab next-candidate-20261002; same HEAD bench host 
     900 (1152 rows):  installed 7.403/6.898, 7.435/6.926   next 7.301/6.797, 7.317/6.809
     1080 (1152 rows): installed 10.163/9.624, 10.264/9.744 next 9.988/9.460, 10.014/9.464
     1080 (1088 rows): installed 9.844/9.299, 9.794/9.286   next 9.684/9.153, 9.704/9.162
-Details: Development/results/next-candidate-20261002/README.md
+
+Update 2026-10-02 (results/llvm23-vit-20261002 section 5): c64-wave2 (both arches) rebuilt with HIP_BARRIER_FENCE 1
+  (recipe row l23defines). LLVM22/23 no longer insert s_wait_dscnt before gfx12 split barriers, so a bare s_barrier
+  after LDS writes can race. In the old LLVM23 c64-wave2, 72 kernels had ds_store -> s_barrier_signal with no wait;
+  all are mh_* kernels compiled into the module but NOT dispatched from it (the dispatched c*_wave2* / c256_attn_wave*
+  kernels had none and are instruction-identical after the fence). c32-wave1: 0 such sequences, unchanged.
+  New c64: 19 groups SAME; ABBA vs previous package 900 -0.002/-0.007/+0.022, 1080 +0.017/-0.003/-0.004 ms (A/A noise,
+  dispatched code identical). Previous package backed up to D:\DLSSNR-Lab\next-candidate-bak-20261002-prefence.
+Details: Development/results/next-candidate-20261002/README.md, Development/results/llvm23-vit-20261002/README.md
