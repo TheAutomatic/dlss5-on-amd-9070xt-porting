@@ -1,7 +1,7 @@
 # one module candidate: flat-<Set> = flat-A (installed Stellar modules) + build-<Set>\gfx1201\<Module>; 19 groups + 3 ABBA rounds
 param([string]$Set='UV',[string]$Module='c64-wave2')
 $root='D:\DLSSNR-Lab\hip-backend\c128-c64-inchain-20261001'
-& "$root\setup.ps1"
+& "$root\setup.ps1" -PinIdle
 $t=Get-Content "$root\regression.ps1" -Raw;$t=$t.Replace('|^rtc_compile','');Set-Content "$root\regression.ps1" $t
 Get-ChildItem $root -Directory -Filter 'runtime-regression-*'|Remove-Item -Recurse -Force
 New-Item -ItemType Directory -Force "$root\flat-$Set"|Out-Null;Copy-Item "$root\flat-A\*.hsaco" "$root\flat-$Set" -Force;Copy-Item "$root\build-$Set\gfx1201\$Module.hsaco" "$root\flat-$Set" -Force

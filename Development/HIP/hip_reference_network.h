@@ -488,6 +488,10 @@ class Network {
  Tensor Down(Tensor raw,U w,U h,U c,const std::string&file,bool head=false,bool half_in=false){if(half_in&&!(opt.pool_project_group&&(c==64||c==128)))throw std::runtime_error("half pool contract");U ow=w/2,oh=h/2,vw=0,vh=0;if(head){U rw=w/2,rh=h/2;if(w==60&&(h==36||h==34)){ow=32;oh=20;}else{ow=rw;oh=(rw*rh)%16?rh+1:rh;}if(ow*oh!=rw*rh){vw=rw;vh=rh;}}if(opt.pool_project_group&&(c==64||c==128||c==256||(head&&c==512))){auto out=(HIP_C512_PAD16&&c==256)?NewPad16(size_t(ow)*oh,512):New(size_t(ow)*oh*c*2);Run("mh_fast",("mh_pool_project_group_c"+std::to_string(c)+(head&&c==512&&gather_fold?"_gout":"")+(half_in?"_hin":"")).c_str(),size_t(ow)*oh*c*2,P(raw),PackedDsWeightFrag(file,c),P(out),ow,oh,w,vw,vh);return out;}
   if(opt.pool_project_fused&&(c==64||c==128||c==256)){if((ow*oh)%16)throw std::runtime_error("fused pool project token count");auto out=New(size_t(ow)*oh*c*2);Run("mh_fast",("mh_pool_project_fused_c"+std::to_string(c)).c_str(),size_t(ow)*oh*c*2,P(raw),PackedDsWeight(file,c),P(out),ow,oh,w,vw,vh);return out;}auto pooled=New(size_t(ow)*oh*c),out=New(size_t(ow)*oh*c*2);Run("mh","mh_pool",size_t(ow)*oh*c,P(raw),P(pooled),ow,oh,w,vw,vh,c);if(opt.pool_project_h16w&&opt.fast_mh)Run("mh_fast","mh_pool_project_production_h16w",size_t(ow)*oh*c*2,P(pooled),PackedDsWeightCast(file,c),P(out),ow,oh,vw,vh,c);else Run(opt.fast_mh?"mh_fast":"mh",opt.fast_mh?"mh_pool_project_production":"mh_pool_project",size_t(ow)*oh*c*2,P(pooled),Weight(file),P(out),ow,oh,vw,vh,c);return out;}
  Tensor adaptive_anchor_in,adaptive_anchor_out,adaptive_gain,adaptive_stats,adaptive_state;
+ /* DLSS5_VIT_ADAPTIVE_IDLE_MS (2026-10-01, c128-c64-inchain AE ledger): the adaptive state resets after this much wall-clock idle between
+    frames (default 500 = unchanged production behaviour). Regression bit-exact checks set it very large so a host stall cannot reset the
+    decisions and make adaptive.csv differ between otherwise identical runs. */
+ static long long AdaptiveIdleMs(){static const long long ms=[]{const char*v=std::getenv("DLSS5_VIT_ADAPTIVE_IDLE_MS");if(!v||!*v)return 500LL;char*e=nullptr;long long x=std::strtoll(v,&e,10);return (e&&!*e&&x>=0)?x:500LL;}();return ms;}
  Tensor adaptive_image_anchor,adaptive_image_signature,adaptive_image_delta;void*adaptive_image=nullptr;
  void*adaptive_prev_history=nullptr;void*adaptive_prev_input=nullptr;U adaptive_prev_seed=0;
  bool adaptive_dirty=false,adaptive_key_down=false,adaptive_user_disabled=false;U adaptive_last_mode=0,adaptive_frame=0;
@@ -502,7 +506,7 @@ class Network {
   auto param=[](const char*key,float fallback){const char*v=std::getenv(key);float f=v?std::stof(v):fallback;if(!std::isfinite(f)||f<0)throw std::runtime_error("adaptive threshold");return f;};
   float global=param("DLSS5_VIT_REUSE_GLOBAL",.22f),local=param("DLSS5_VIT_REUSE_LOCAL",1.f),image_limit=param("DLSS5_VIT_REUSE_IMAGE",.35f);
   U period=4;if(const char*v=std::getenv("DLSS5_VIT_REUSE_PERIOD"))period=U(std::stoul(v));if(period<1||period>16)throw std::runtime_error("adaptive max period1..16");
-  auto now=std::chrono::steady_clock::now();bool reset=adaptive_dirty||!adaptive_state||adaptive_n!=n||(adaptive_last.time_since_epoch().count()&&now-adaptive_last>std::chrono::milliseconds(500));adaptive_last=now;adaptive_dirty=false;
+  auto now=std::chrono::steady_clock::now();bool reset=adaptive_dirty||!adaptive_state||adaptive_n!=n||(adaptive_last.time_since_epoch().count()&&now-adaptive_last>std::chrono::milliseconds(AdaptiveIdleMs()));adaptive_last=now;adaptive_dirty=false;
   if(!adaptive_gain){
    std::vector<float>gain(1024,1.f);
    if(const char*path=std::getenv("DLSS5_VIT_REUSE_GAIN");path&&*path){auto bytes=ReadBytes(path);if(bytes.size()!=4096)throw std::runtime_error("adaptive gain shape");memcpy(gain.data(),bytes.data(),4096);}
