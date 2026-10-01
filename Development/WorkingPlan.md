@@ -81,6 +81,7 @@
 ## C. 需要 Zero 拍板（有损）
 
 - **fast 档**（Daniel 默认：e4m3 一次舍入、近似 rsqrt/rcp、f32 累加、f16 成对算术）：他 fast 比 reference 快约 1ms；做成 EXACT 之外单独一档。
+  - **10-01 已测（`results/fast-tier-20261001`，未装机，等 Zero 定）**：配方 `CW_FAST_NUM 3`+`W2_FAST_NUM 3`（c64-wave2）+`HIP_DEC_F8W 1`+`NETWORK_1080_ROWS=1088`，900 −0.11ms、1080 −0.58ms，对逐位版最差 51.8 dB、均值 52.8～55.5。KS（ViT attention 拆 key）变慢、C256 W2_FAST 持平，不进；IO_FUSE 本 harness 下 35 dB，待查。下一步候选：C32 f16 成对算术（Daniel/mochizuki 的 v_pk_*_f16）。
 - **1088 行**：已实现为可选开关 `DLSS5_NETWORK_1080_ROWS=1088`（0.38 已带，默认 1152），1080 快 4.4%（−0.47ms），对 1152 约 55～56dB，只动行数不改 post 位移（`geom-1088`）。是否改默认待定。
 - **FP8 激活**（C512 FFN hidden / ViT QKV 改 FP8，含方案 F 的有损版）：ViT QKV 现在只剩约 5µs，性价比低。
 - 画质取舍（跳 42/43/46、Style）Zero 已定不动；如将来要改另起。

@@ -184,7 +184,14 @@ DEV uint bid(){return __builtin_amdgcn_workgroup_id_x();}
 #ifndef HIP_C32_RTZ_ISA
 #define HIP_C32_RTZ_ISA 1
 #endif
-#if HIP_C32_RTZ_ISA
+// FAST TIER (lossy, 2026-10-01 fast-tier): CW_FAST_NUM bit0 = f32 activation path (Hrtz is the identity: no RTZ
+// round trip to half between f32 ops; half stores still convert), bit1 = softmax 1/sum as a single rcp (no Newton steps).
+#ifndef CW_FAST_NUM
+#define CW_FAST_NUM 0
+#endif
+#if CW_FAST_NUM&1
+DEV float Hrtz(float x){return x;}
+#elif HIP_C32_RTZ_ISA
 DEV float Hrtz(float x){uint h;float result;
  asm("v_cvt_pkrtz_f16_f32 %0, %1, %1" : "=v"(h) : "v"(x));
  asm("v_cvt_f32_f16 %0, %1" : "=v"(result) : "v"(h));
@@ -213,6 +220,9 @@ DEV uint fp8(float f){return uint(__builtin_amdgcn_cvt_pk_fp8_f32(clampf(f,-448.
 // gfx1201 exhaustive test: all 144441345 float divisors in this interval
 // match the original 1.f/x bit-for-bit (2026-09-19).
 DEV float norm_inverse(float x){float r=__builtin_amdgcn_rcpf(x);
+#if CW_FAST_NUM&2
+ return r;
+#endif
  r=__builtin_fmaf(r,__builtin_fmaf(-x,r,1.f),r);
  return __builtin_fmaf(r,__builtin_fmaf(-x,r,1.f),r);
 }

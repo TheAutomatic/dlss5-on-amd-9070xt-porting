@@ -5,7 +5,9 @@
 #define W2_BOUNDED_RCP 0
 #endif
 DEV float w2_inverse(float x){
-#if W2_BOUNDED_RCP
+#if W2_FAST_NUM&2
+ return __builtin_amdgcn_rcpf(x);
+#elif W2_BOUNDED_RCP
  float r=__builtin_amdgcn_rcpf(x);
  r=__builtin_fmaf(r,__builtin_fmaf(-x,r,1.f),r);
  return __builtin_fmaf(r,__builtin_fmaf(-x,r,1.f),r);

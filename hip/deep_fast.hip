@@ -302,6 +302,47 @@ DEV void vit_attention_transposed_score_body(const float*in,float*out,uint token
 #endif
 }
 #endif
+// FAST TIER (lossy, 2026-10-01 fast-tier): HIP_VIT_ATTN_KSPLIT 1 exports vit_attention_fused_{400,640}_bytein_bout_ks2:
+// 64-thread groups, wave w takes the w-th contiguous half of the key tiles; partial f32 sum/acc of wave 1 are added to
+// wave 0's through LDS (changes only the f32 accumulation order). Requires the transposed score/AV/prob-pair path.
+#ifndef HIP_VIT_ATTN_KSPLIT
+#define HIP_VIT_ATTN_KSPLIT 0
+#endif
+#if HIP_VIT_ATTN_KSPLIT&&HIP_VIT_ATTN_TRANSPOSED_SCORE&&HIP_VIT_ATTN_TRANSPOSED_AV&&HIP_VIT_ATTN_PROB_PAIR
+template<uint MAXT>
+DEV void vit_attention_ks2_body(const float*in,float*out,uint tokens){
+ uint head=bid()%32,first=bid()/32*16;
+ uint wv=__builtin_amdgcn_workitem_id_x()>>5,lane=__builtin_amdgcn_workitem_id_x()&31u;
+ __attribute__((shared)) float part[32*17];
+ if(first>=tokens)return;
+ const unsigned char*in8=reinterpret_cast<const unsigned char*>(in);
+ i2 q[2]{};for(uint k=0;k<32;k+=16)__builtin_memcpy(&q[k/16],in8+(first+rc())*1024+head*32+k+gr()*8,8);
+ h8 ones{};for(uint e=0;e<8;e++)ones[e]=(_Float16)1.f;
+ f8 sum{},acc[2]{};
+ uint tiles=tokens/16,half=(tiles+1)/2,k0=wv?half*16:0,k1=wv?tokens:half*16;
+ for(uint key=k0;key<k1;key+=16){f8 a{};
+  for(uint k=0;k<32;k+=16){i2 y{};__builtin_memcpy(&y,in8+(tokens+key+rc())*1024+head*32+k+gr()*8,8);a=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(y,q[k/16],a);}
+  h8 x{};i2 xb{};f8 prob{};
+  for(uint e=0;e<8;e++){
+   float af=clampf(a[e]*from_half(0x2dbb)+1.708984375f,1.439453125f,1.9775390625f);
+   uint hb=(bits(af)>>13)-0x1c000u;unsigned short u=(unsigned short)(((hb<<4)+0x4000u)&65535u);
+   union{unsigned short u;_Float16 h;}cv;cv.u=u;x[e]=cv.h;prob[e]=float(cv.h);}
+  xb[0]=__builtin_amdgcn_cvt_pk_fp8_f32(prob[0],prob[1],0,false);xb[0]=__builtin_amdgcn_cvt_pk_fp8_f32(prob[2],prob[3],xb[0],true);
+  xb[1]=__builtin_amdgcn_cvt_pk_fp8_f32(prob[4],prob[5],0,false);xb[1]=__builtin_amdgcn_cvt_pk_fp8_f32(prob[6],prob[7],xb[1],true);
+  sum=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(ones,x,sum);
+  for(uint c=0;c<2;c++){i2 y{};for(uint e=0;e<8;e++){uint vkey=key+gr()*8+e;uint b=in8[(2*tokens+vkey)*1024+head*32+c*16+rc()];y[e/4]=int(uint(y[e/4])|(b<<(8*(e%4))));}
+   acc[c]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(y,xb,acc[c]);}
+ }
+ if(wv){for(uint c=0;c<2;c++)for(uint e=0;e<8;e++)part[lane*17+c*8+e]=acc[c][e];part[lane*17+16]=sum[0];}
+ WG_FENCE(3);__builtin_amdgcn_s_barrier();WG_FENCE(2);
+ if(wv)return;
+ for(uint c=0;c<2;c++)for(uint e=0;e<8;e++)acc[c][e]+=part[lane*17+c*8+e];
+ float inv=vit_inv(sum[0]+part[lane*17+16]);
+ for(uint c=0;c<2;c++)for(uint e=0;e<8;e++)reinterpret_cast<unsigned char*>(out)[(first+rc())*1024+head*32+c*16+gr()*8+e]=byte_F(Hrtz(acc[c][e]*inv));
+}
+KERNEL __attribute__((amdgpu_flat_work_group_size(64,64))) void vit_attention_fused_400_bytein_bout_ks2(const float*in,float*out,uint tokens,const uint*reuse_gate){if(reuse_gate&&reuse_gate[0])return;vit_attention_ks2_body<400>(in,out,tokens);}
+KERNEL __attribute__((amdgpu_flat_work_group_size(64,64))) void vit_attention_fused_640_bytein_bout_ks2(const float*in,float*out,uint tokens,const uint*reuse_gate){if(reuse_gate&&reuse_gate[0])return;vit_attention_ks2_body<640>(in,out,tokens);}
+#endif
 template<uint MAXT,bool ByteInput=false,bool ByteOut=false>
 DEV void vit_attention_fused_body(const float*in,float*out,uint tokens){
  uint head=bid()%32,first=bid()/32*16;if(first>=tokens)return;
