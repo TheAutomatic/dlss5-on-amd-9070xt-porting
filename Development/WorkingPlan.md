@@ -1,4 +1,4 @@
-# 当前工作计划（覆盖式，不续写；最后更新 2026-09-30 深夜，朱雀）
+# 当前工作计划（覆盖式，不续写；最后更新 2026-10-01 晚，朱雀）
 
 > 开 session 先读这页。**这是项目唯一的"现状 + 规矩 + 为什么"**：实验过程与数据进 DevHistory.md（只追加），版本改动进 CHANGELOG（中英两份），其余一律改这页（整页重写，读一遍再重写，该删的删）。
 > 节奏：过日子式，没有 deadline。优先做有具体瓶颈证据、可逐位验证的小实验，够用就交。
@@ -9,14 +9,19 @@
 - **0.38 之后已装未发包**（剑星/鬼武者 09-30 22:00～22:39，逐位 19 组 SAME，两档三轮全正、p99 变好）：
   - `HIP_C512_HOIST_RES 1`（attn-project 残差初始化外提，multihead-fast-padded-wave-packed gfx1201 47F00EBA）：900 −0.022～−0.031、1080 −0.026～−0.035ms（`results/fill-cu-20260930`）。
   - `W2_HOIST_LOADS 15`（c64-wave2 48B6FA8B）＋`CW_HOIST_UP 3`（c32-wave1 020B2B0D）：合并 900 −0.043、1080 −0.066～−0.072ms（`results/hoist-loads-20260930`）。
-- **离线**：整网回放（NativeGameFrame wall，1000 帧弃 200）0.38 时 900 约 7.6 / 1080 约 10.4ms（0.37 时 8.0 / 10.8）。**HIP 段**（`DLSS5_HIP_SPAN_PROBE=1` 写进 flags 文件，不含跨 API 交接）0.38 实测 7.256 / 10.065ms（`results/hip-roofline-20260930`），减去上面三刀 ABBA 增量，现装约 **900 7.2 / 1080 10.0ms**（估算，下次地图重量）。
-- **游戏本机**：剑星/鬼武者 = 0.38 网络 + 上面三刀 + 10-01 `C512_COMPACT_FUSEQKV`（c512-m32-mh 1201 FEEDC842）。剑星 flags `DIRECT_IO=3`、`MAKE_RESIDENT_EVERY=60`、`SWIN_RUN=1`、`FRAME_STATS=5`；09-30 19:43 正确性验证通过（2K 原生 AA EXACT 55.6～56.1，鬼武者 2K 质量 60）。RE9 仍 0.35 全套；33 号远征队 0.35 常规包。
+- **离线（10-01 晚，现装逐位档同口径，`results/gap-map-evening-20261001`）**：HIP span 900 **6.81/6.88**、1152 行 **9.50/9.56**、1088 行 **9.08/9.13ms**；wall 900 7.33/7.41、1152 10.05/10.11、1088 9.62/9.68ms。今早（FUSEQKV 前）span 900 7.27、1152 10.05、1088 9.65 → **一天快 0.42 / 0.52 / 0.55ms（约 6%）**。0.38 时 span 7.256 / 10.065。
+- **游戏本机（逐位档）**：剑星/鬼武者 = 0.38 网络 + 09-30 三刀 + 10-01 全部逐位刀（见下条）。最后一次装机 10-01 09:13：剑星 add-on 0D739130、鬼武者 RE9 runtime 2CB95057（RE9 回放 SAME，smoke 0）。剑星 flags `DIRECT_IO=3`、`MAKE_RESIDENT_EVERY=60`、`SWIN_RUN=1`、`FRAME_STATS=5`。fast 档模块与切换脚本在 `D:\DLSSNR-Lab\fast-tier\`（`to-fast.ps1`/`to-exact.ps1`/`status.ps1`，`exact\` 是现装逐位快照，装新刀要同步它），游戏当前是逐位档。RE9 仍 0.35 全套；33 号远征队 0.35 常规包。
+- **10-01 收下并装机的逐位刀**（全部 19 组 SAME、两档三轮无变慢、p99 不差）：C512 `C512_COMPACT_FUSEQKV`、`C512_FFN_ONE`（→`2` 双 wave）、`C512_COMPACT_QKV_UNROLL 4`→`QKV_DEEP 4`+`SCHED`、`C512_FFN_F8W`（mix/expand fp8 WMMA，宿主 `HIP_C512_FFN_F8W`）；ViT `HIP_VIT_QKV_F8W`（QKV fp8 分片）；Swin 链 `W2_UP_LOW_BYTES`、`W2_DOWN_HALF`+`MH_POOL_HALF_IN`、`W2_UP_VEC`、`W2_QKV_FUSE`（C64+C128）、`W2_FFN_QT_BATCH 4`。出处：`results/mochizuki-gap-20261001`、`c512-qkv-pipeline-20261001`、`c128-c64-inchain-20261001`。未发包（下一版 0.39 的内容）。
 
 ## 竞品现状
 
 - **Daniel 0.5.1**：reference 900 逐核和 8.17ms（扣掉他跑的 42/43/46 为 7.88），我方逐核和 6.83ms（`kernel-map-900`、`hip-roofline`）。他 fast 档 1088 行＋post 位移 0（有损，不追）。换装对照 `D:\DLSSNR-Lab\daniel-050\swap.ps1 daniel|ours`。
-- **mochizuki 0.0.2.5（10-01 同机实测，`results/competitor-timing-20260930`、`mochizuki-gap-20261001`）**：离线网络 900 **6.02ms**、1088 行 **7.81～7.86ms**（自报 7.79 已复现）；我们 HIP span 900 7.27、1088 行 9.65、1152 行 10.05ms（10-01 FUSEQKV 前），**他快 17～19%**。逐族（900，µs，我们单核/他链内含空隙）：C512 1343/844（+499，他跑 16 块我们 13 块）、空隙约 +300（162 对 123 派发）、C32 2197/1972（+225）、C256 +107、C64 +79、C128 +74、ViT −38。
-- 结论：同几何下 mochizuki 领先，主要差在 C512 组织方式（单块 100.8 对 52.3µs）；追赶走 B 段第 0 条。
+- **mochizuki 0.0.2.5（10-01 同机实测，`results/competitor-timing-20260930`、`mochizuki-gap-20261001`）**：离线网络 900 **6.02ms**、1088 行 **7.81～7.86ms**（自报 7.79 已复现）。**10-01 晚我们 span 900 6.81～6.88、1088 行 9.08～9.13 → 还差 0.8 / 1.3ms（他快 12% / 14%，早上 17～19%）**。同口径逐族差（链内逐派发扣事件开销，900｜1088 µs）：C512 +284｜+400、C32 +218｜+251、C128 +151｜+174、C256 +122｜+14、C64 +89｜+80、ViT +42｜+378、其余 +50｜+58（`results/gap-map-evening-20261001`）。
+- **剩余差距的分类（10-01 晚）**：
+  - **组织方式，逐位还能追的**：基本摸到头。C512 attention 投影（+11～15µs/块）试了深流水、M32、WN4、FB8 全不赚，余差估在 f32 残差读写与链内衔接；C32 只剩块 66 up 分发（≤3µs）；C64/C128 中间块本体（链内比单核多 12～15µs/块，多半是降频）。
+  - **数值取舍（逐位做不了）**：C32（+218/+251，激活/归一化 RTZ 链与 e4m3 多次舍入，链内功耗墙再放大）；ViT 1088（+378：他 score/分母/范数 half 归约；6 个逐位重组候选全慢，`vit-1080-gap`）；C512 FFN/QKV 余差里他的 f16 累加；C64/C128/C256 他 f16 累加、e4m3 全程残差。
+  - **几何/口径**：他跑 16 块我们 13 块；900 他 448 token 我们 400；1088 行（fast 档已用）。
+  - 结论：逐位档的前沿基本到头；再往下要走 C 段有损（等 Zero 定）。
 
 ## Zero 的标准与取舍（为什么这样定）
 
@@ -47,7 +52,7 @@
 
 ## B. 优化候选（逐位；按"收益 × 把握"排）
 
-0. **追 mochizuki C512（主线，`results/mochizuki-gap-20261001`）**：①已收 `C512_COMPACT_FUSEQKV`；②已收 `C512_FFN_ONE`（mix+FFN 一核、寄存器传递，19 组 SAME，900 −0.062～−0.067、1080 −0.050～−0.060ms，10-01 03:09 装：add-on 69A6F3C9、RE9 runtime 5D158F68、c512-m32-deep 1201 8942EB3E）；③`C512_COMPACT_QKV_UNROLL 4`（照他 attn 的深流水，QKV k 循环展开 4 倍，19 组 SAME，900 −0.001～−0.012、1080 −0.008～−0.020，合并 p99 两档更好，10-01 06:19 装 c512-m32-mh 1201 8DB6EB04）；FFN 双 wave `C512_FFN_ONE 2` 按现装基准三轮全过，收下，06:43 装（add-on F2A9C2C4、RE9 runtime AEF7CE53、c512-m32-deep 1201 C0FC04E7）；整网 HIP span 900 6.95/7.00、1152 9.64/9.68、1088 9.19/9.22ms；C512 每块≈86 对他 52.3µs，总账和下一步见 results README §12，C512 线暂停；④B8 字节残差 `C512_PROJ_FB8` 逐位但变慢（1080 +0.14～0.20），宏关着、不收。重测（三刀合计含 swin 线）HIP span 900 7.03/7.12、1152 9.78/9.80、1088 9.31/9.33ms。原计划：（Q/K/V 一个 k 循环，19 组 SAME，900 −0.022～−0.030、1080 −0.078～−0.094ms，10-01 已装）。②FFN 一核化（照 ffwd3：权重当 A、累加器直接当下一级 B，不用 LDS，mix 不再写 f32）上限 900 约 0.2ms。③C512 两个投影的残差改 e4m3 字节（F 之后的值，post=3 除外）上限约 0.12ms，要改宿主。④C64/C128 下采样/上采样折进相邻核，减派发。
+0. **追 mochizuki C512（10-01 收尾）**：已收 FUSEQKV、FFN_ONE 2、QKV_UNROLL→QKV_DEEP 4+SCHED、FFN_F8W（见基线段）。C512 现在 QKV+attn 已不落后（13 块 353 对他 16 块 371µs），余差在 attention 投影 / FFN / FFN 投影，逐位组织方式候选都试过（见负账）。线停。
 
 地图：`results/kernel-map-v3-20260930`（900 独立核和 6894.8µs、1080 约 9762µs；前五 sp_run256_w16、c512_qkv_attention_compact、c32 prefix/post、chain）。设计：`results/c512-vit-reorg-design-20260930`（只设计，数字引自账本）。
 
@@ -76,14 +81,16 @@
 - 900 C256 新分组；C64/C128 Down 融合；去清零；C32 权重缓存；ViT byte gather-pack、4wave/64key 预取、QKV 块重排。
 - ViT QKV 归一化换求和（不逐位）；C256 FFN 激活打包（需转置 expand，非小件）；复合量化 C32 两处/ViT 出口（域不纯）。
 - `MAKE_RESIDENT_EVERY` 60 vs 0 无尖峰，保留 60。
-- C512 attention 投影手排流水 `C512_PROJ_DEEP`（逐位，+0.22ms，LLVM 溢出，`gap-map-evening`）。
-- C512 attention 投影 4 wave/WG `C512_PROJ_WN4`（逐位，持平偏慢，`gap-map-evening`）。
+- C512：`C512_FFN_PIPE`（逐位全慢）、B8 字节残差 `C512_PROJ_FB8`（持平）、attention 投影手排流水 `C512_PROJ_DEEP`（LLVM 溢出，+0.22ms）、`C512_PROJ_WN4`（4 wave/WG，持平偏慢）（`c512-qkv-pipeline`、`gap-map-evening`）。
+- ViT 1080：attention `HIP_VIT_ATTN_M32`（32 query 共用 K/V，1080 +0.145）、QKV `HIP_VIT_QKV_TM` 2/4、`HIP_VIT_QKV_WIDE` WT/WH/BIG（照他 64×256 形状，1080 全慢）（`vit-1080-gap`）；decoder `HIP_DEC_NT`（A 复用，NT=4 慢）（`tail-c32-gap`）。
+- Swin 链：`W2_UP_DIRECT`、`W2_SKIP_BYTE`、`W2_HIDDEN_TILES 4`、`CW_UP_LOW_BYTES`、C256 `QKV_FUSE`（VGPR 顶满）（`c128-c64-inchain`）。C32 中间块 +16µs/块 = 数值 + 链内降频放大，无逐位组织方式件（`gap-map-evening` §6）。
 - 编译器：COMGR2/LLVM20 慢 3%；公开 LLVM21 持平；LLVM22 不逐位；VOPD 前瞻 ±0.3%。旧 block46 改 FP8 WMMA 有位差。
 
 ## C. 需要 Zero 拍板（有损）
 
 - **fast 档**（Daniel 默认：e4m3 一次舍入、近似 rsqrt/rcp、f32 累加、f16 成对算术）：他 fast 比 reference 快约 1ms；做成 EXACT 之外单独一档。
-  - **10-01 已测（`results/fast-tier-20261001`，未装机，等 Zero 定）**：配方 `CW_FAST_NUM 3`+`W2_FAST_NUM 3`（c64-wave2）+`HIP_DEC_F8W 1`+`NETWORK_1080_ROWS=1088`，900 −0.11ms、1080 −0.58ms，对逐位版最差 51.8 dB、均值 52.8～55.5。KS（ViT attention 拆 key）变慢、C256 W2_FAST 持平，不进；IO_FUSE 本 harness 下 35 dB，待查。下一步候选：C32 f16 成对算术（Daniel/mochizuki 的 v_pk_*_f16）。
+  - **10-01 已测并备好试玩（`results/fast-tier-20261001`，游戏仍是逐位档，等 Zero 定）**：配方 `CW_FAST_NUM 3`（C32 f32 激活/归一化、softmax 只 rcp）+`W2_FAST_NUM 3`（c64-wave2）+`HIP_DEC_F8W 1`（逐位）+`NETWORK_1080_ROWS=1088`。三轮 ABBA 900 −0.107～−0.113ms（7.242→7.131）、1080 −0.56～−0.60ms（9.956→9.366），p99 每轮更好；对逐位版 PSNR 最差 51.8 dB、各 case 均值 52.8～55.5（对 NVIDIA 未复测）。KS（ViT attention 拆 key）变慢、C256 W2_FAST 持平、C32 f16 成对激活三轮全慢，不进。切换：`D:\DLSSNR-Lab\fast-tier\to-fast.ps1` / `to-exact.ps1` / `status.ps1`（剑星+鬼武者一起切，先备份，游戏开着拒绝执行）。
+- **逐位但没过收录规则的件（等 Zero 定要不要破例/合包）**：`DLSS5_IO_FUSE=1`（decode 直读网络 f32，跳 neural pass；六轮 avg 全正、900 p99 不过，`input-slim-20261001`，需新 add-on+shader）；`HIP_DEC_WIDE`（decoder 尾 LDS 转置行宽写，1080 −0.02 三轮全正、900 一轮 +0.007，`tail-c32-gap-20261001`）；`HIP_DEC_F8W`（decoder Up39/48 fp8，六轮一轮 900 +0.029、其余全负约 −0.02，宿主已带，`c512-qkv-pipeline-20261001` §11）；`C512_T8_NO_F32`（900 六轮正、1080 一轮 +0.008）。
 - **1088 行**：已实现为可选开关 `DLSS5_NETWORK_1080_ROWS=1088`（0.38 已带，默认 1152），1080 快 4.4%（−0.47ms），对 1152 约 55～56dB，只动行数不改 post 位移（`geom-1088`）。是否改默认待定。
 - **FP8 激活**（C512 FFN hidden / ViT QKV 改 FP8，含方案 F 的有损版）：ViT QKV 现在只剩约 5µs，性价比低。
 - 画质取舍（跳 42/43/46、Style）Zero 已定不动；如将来要改另起。
