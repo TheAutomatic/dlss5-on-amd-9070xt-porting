@@ -1,0 +1,1344 @@
+[
+{
+"i": 0,
+"module": "c32_wave1",
+"kernel": "c32_wave1_prefix_b8d",
+"grid": "32640",
+"threads": "32",
+"exec_us": 763.24,
+"step_us": 765.52
+},
+{
+"i": 1,
+"module": "c32_wave1",
+"kernel": "c32_wave1_mapped_b8",
+"grid": "8160",
+"threads": "32",
+"exec_us": 213.4,
+"step_us": 215.38000000000002
+},
+{
+"i": 2,
+"module": "c32_wave1",
+"kernel": "c32_wave1_chain",
+"grid": "8349",
+"threads": "32",
+"exec_us": 212.64,
+"step_us": 214.64
+},
+{
+"i": 3,
+"module": "c32_wave1",
+"kernel": "c32_wave1_chain",
+"grid": "8228",
+"threads": "32",
+"exec_us": 211.76,
+"step_us": 214.16
+},
+{
+"i": 4,
+"module": "c32_wave1",
+"kernel": "c32_wave1_finish_dcrop_b8d",
+"grid": "8280",
+"threads": "32",
+"exec_us": 222.28,
+"step_us": 224.39999999999998
+},
+{
+"i": 5,
+"module": "mh_fast",
+"kernel": "mh_pool_project_c32_b8",
+"grid": "32640",
+"threads": "32",
+"exec_us": 66.12,
+"step_us": 74.53999999999999
+},
+{
+"i": 6,
+"module": "c64_wave2",
+"kernel": "c64_wave2_bo",
+"grid": "2040",
+"threads": "64",
+"exec_us": 163.56,
+"step_us": 165.26000000000002
+},
+{
+"i": 7,
+"module": "c64_wave2",
+"kernel": "c64_wave2_bi_bo",
+"grid": "2135",
+"threads": "64",
+"exec_us": 164.46,
+"step_us": 166.08
+},
+{
+"i": 8,
+"module": "c64_wave2",
+"kernel": "c64_wave2_bi_bo",
+"grid": "2074",
+"threads": "64",
+"exec_us": 162.5,
+"step_us": 164.18
+},
+{
+"i": 9,
+"module": "c64_wave2",
+"kernel": "c64_wave2_bi_ho",
+"grid": "2100",
+"threads": "64",
+"exec_us": 165.20000000000002,
+"step_us": 167.1
+},
+{
+"i": 10,
+"module": "mh_fast",
+"kernel": "mh_pool_project_group_c64_hin",
+"grid": "2040",
+"threads": "64",
+"exec_us": 75.92,
+"step_us": 78.89999999999999
+},
+{
+"i": 11,
+"module": "c64_wave2",
+"kernel": "c128_wave2_bo",
+"grid": "510",
+"threads": "128",
+"exec_us": 131.22,
+"step_us": 132.8
+},
+{
+"i": 12,
+"module": "c64_wave2",
+"kernel": "c128_wave2_bi_bo",
+"grid": "558",
+"threads": "128",
+"exec_us": 135.1,
+"step_us": 136.66
+},
+{
+"i": 13,
+"module": "c64_wave2",
+"kernel": "c128_wave2_bi_bo",
+"grid": "527",
+"threads": "128",
+"exec_us": 131.36,
+"step_us": 132.98
+},
+{
+"i": 14,
+"module": "c64_wave2",
+"kernel": "c128_wave2_bi_bo",
+"grid": "540",
+"threads": "128",
+"exec_us": 132.7,
+"step_us": 134.28
+},
+{
+"i": 15,
+"module": "c64_wave2",
+"kernel": "c128_wave2_bi_bo",
+"grid": "510",
+"threads": "128",
+"exec_us": 129.22,
+"step_us": 130.82
+},
+{
+"i": 16,
+"module": "c64_wave2",
+"kernel": "c128_wave2_bi_ho",
+"grid": "558",
+"threads": "128",
+"exec_us": 137.34000000000003,
+"step_us": 139.1
+},
+{
+"i": 17,
+"module": "mh_fast",
+"kernel": "mh_pool_project_group_c128_hin",
+"grid": "510",
+"threads": "128",
+"exec_us": 65.46,
+"step_us": 67.84
+},
+{
+"i": 18,
+"module": "c64_wave2",
+"kernel": "c256_wave2_bo_w16",
+"grid": "135",
+"threads": "256",
+"exec_us": 124.8,
+"step_us": 126.92
+},
+{
+"i": 19,
+"module": "sp",
+"kernel": "sp_init",
+"grid": "10",
+"threads": "256",
+"exec_us": 43.16,
+"step_us": 48.76
+},
+{
+"i": 20,
+"module": "sp",
+"kernel": "sp_run256_w16",
+"grid": "846",
+"threads": "256",
+"exec_us": 475.09999999999997,
+"step_us": 476.92
+},
+{
+"i": 21,
+"module": "sp",
+"kernel": "sp_recover256_w16",
+"grid": "1",
+"threads": "256",
+"exec_us": 43.4,
+"step_us": 48.959999999999994
+},
+{
+"i": 22,
+"module": "c64_wave2",
+"kernel": "c256_wave2_bi_w16",
+"grid": "135",
+"threads": "256",
+"exec_us": 105.83999999999999,
+"step_us": 109.5
+},
+{
+"i": 23,
+"module": "mh_fast",
+"kernel": "mh_pool_project_group_c256",
+"grid": "128",
+"threads": "256",
+"exec_us": 58.32,
+"step_us": 61.6
+},
+{
+"i": 24,
+"module": "c512_m32_deep",
+"kernel": "split_ffn_one_w2f8",
+"grid": "512",
+"threads": "64",
+"exec_us": 69.52,
+"step_us": 71.4
+},
+{
+"i": 25,
+"module": "deep_fast",
+"kernel": "split_projection_frag",
+"grid": "1024",
+"threads": "32",
+"exec_us": 51.9,
+"step_us": 55.68
+},
+{
+"i": 26,
+"module": "c512_m32_mh",
+"kernel": "c512_qkv_attention_compact",
+"grid": "640",
+"threads": "64",
+"exec_us": 72.84,
+"step_us": 74.48
+},
+{
+"i": 27,
+"module": "mh_fast",
+"kernel": "mh_attention_project_frag_c512",
+"grid": "1024",
+"threads": "32",
+"exec_us": 62.94,
+"step_us": 66.34
+},
+{
+"i": 28,
+"module": "c512_m32_deep",
+"kernel": "split_ffn_one_w2f8",
+"grid": "512",
+"threads": "64",
+"exec_us": 69.42000000000002,
+"step_us": 71.28
+},
+{
+"i": 29,
+"module": "deep_fast",
+"kernel": "split_projection_frag",
+"grid": "1024",
+"threads": "32",
+"exec_us": 51.12,
+"step_us": 54.940000000000005
+},
+{
+"i": 30,
+"module": "c512_m32_mh",
+"kernel": "c512_qkv_attention_compact",
+"grid": "640",
+"threads": "64",
+"exec_us": 73.28,
+"step_us": 75.0
+},
+{
+"i": 31,
+"module": "mh_fast",
+"kernel": "mh_attention_project_frag_c512",
+"grid": "1024",
+"threads": "32",
+"exec_us": 62.480000000000004,
+"step_us": 65.92
+},
+{
+"i": 32,
+"module": "c512_m32_deep",
+"kernel": "split_ffn_one_w2f8",
+"grid": "512",
+"threads": "64",
+"exec_us": 70.28,
+"step_us": 72.16
+},
+{
+"i": 33,
+"module": "deep_fast",
+"kernel": "split_projection_frag",
+"grid": "1024",
+"threads": "32",
+"exec_us": 52.519999999999996,
+"step_us": 56.32
+},
+{
+"i": 34,
+"module": "c512_m32_mh",
+"kernel": "c512_qkv_attention_compact",
+"grid": "640",
+"threads": "64",
+"exec_us": 72.4,
+"step_us": 74.03999999999999
+},
+{
+"i": 35,
+"module": "mh_fast",
+"kernel": "mh_attention_project_frag_c512",
+"grid": "1024",
+"threads": "32",
+"exec_us": 62.58,
+"step_us": 66.0
+},
+{
+"i": 36,
+"module": "c512_m32_deep",
+"kernel": "split_ffn_one_w2f8",
+"grid": "512",
+"threads": "64",
+"exec_us": 70.4,
+"step_us": 72.24
+},
+{
+"i": 37,
+"module": "deep_fast",
+"kernel": "split_projection_frag",
+"grid": "1024",
+"threads": "32",
+"exec_us": 52.42,
+"step_us": 56.160000000000004
+},
+{
+"i": 38,
+"module": "c512_m32_mh",
+"kernel": "c512_qkv_attention_compact",
+"grid": "640",
+"threads": "64",
+"exec_us": 72.8,
+"step_us": 74.56
+},
+{
+"i": 39,
+"module": "mh_fast",
+"kernel": "mh_attention_project_frag_c512",
+"grid": "1024",
+"threads": "32",
+"exec_us": 62.56,
+"step_us": 65.92
+},
+{
+"i": 40,
+"module": "c512_m32_deep",
+"kernel": "split_ffn_one_w2f8",
+"grid": "512",
+"threads": "64",
+"exec_us": 70.32,
+"step_us": 72.22000000000001
+},
+{
+"i": 41,
+"module": "deep_fast",
+"kernel": "split_projection_frag",
+"grid": "1024",
+"threads": "32",
+"exec_us": 52.58,
+"step_us": 56.32
+},
+{
+"i": 42,
+"module": "c512_m32_mh",
+"kernel": "c512_qkv_attention_compact",
+"grid": "640",
+"threads": "64",
+"exec_us": 72.0,
+"step_us": 73.64
+},
+{
+"i": 43,
+"module": "mh_fast",
+"kernel": "mh_attention_project_frag_c512",
+"grid": "1024",
+"threads": "32",
+"exec_us": 62.839999999999996,
+"step_us": 66.19999999999999
+},
+{
+"i": 44,
+"module": "c512_m32_deep",
+"kernel": "split_ffn_one_w2f8",
+"grid": "512",
+"threads": "64",
+"exec_us": 70.4,
+"step_us": 72.3
+},
+{
+"i": 45,
+"module": "deep_fast",
+"kernel": "split_projection_frag",
+"grid": "1024",
+"threads": "32",
+"exec_us": 52.58,
+"step_us": 56.34
+},
+{
+"i": 46,
+"module": "c512_m32_mh",
+"kernel": "c512_qkv_attention_compact",
+"grid": "640",
+"threads": "64",
+"exec_us": 72.46,
+"step_us": 74.16
+},
+{
+"i": 47,
+"module": "mh_fast",
+"kernel": "mh_attention_project_frag_c512",
+"grid": "1024",
+"threads": "32",
+"exec_us": 62.54000000000001,
+"step_us": 65.94
+},
+{
+"i": 48,
+"module": "c512_m32_deep",
+"kernel": "split_ffn_one_w2f8",
+"grid": "512",
+"threads": "64",
+"exec_us": 70.06000000000002,
+"step_us": 71.94
+},
+{
+"i": 49,
+"module": "deep_fast",
+"kernel": "split_projection_frag",
+"grid": "1024",
+"threads": "32",
+"exec_us": 52.62,
+"step_us": 56.4
+},
+{
+"i": 50,
+"module": "c512_m32_mh",
+"kernel": "c512_qkv_attention_compact",
+"grid": "640",
+"threads": "64",
+"exec_us": 71.67999999999999,
+"step_us": 73.33999999999999
+},
+{
+"i": 51,
+"module": "mh_fast",
+"kernel": "mh_attention_project_frag_c512",
+"grid": "1024",
+"threads": "32",
+"exec_us": 63.28,
+"step_us": 66.64
+},
+{
+"i": 52,
+"module": "c512_m32_deep",
+"kernel": "split_ffn_one_w2f8",
+"grid": "512",
+"threads": "64",
+"exec_us": 70.0,
+"step_us": 71.84
+},
+{
+"i": 53,
+"module": "deep_fast",
+"kernel": "split_projection_frag",
+"grid": "1024",
+"threads": "32",
+"exec_us": 52.62,
+"step_us": 56.38
+},
+{
+"i": 54,
+"module": "c512_m32_mh",
+"kernel": "c512_qkv_attention_compact",
+"grid": "640",
+"threads": "64",
+"exec_us": 72.12,
+"step_us": 73.84
+},
+{
+"i": 55,
+"module": "mh_fast",
+"kernel": "mh_attention_project_frag_c512",
+"grid": "1024",
+"threads": "32",
+"exec_us": 61.6,
+"step_us": 64.96000000000001
+},
+{
+"i": 56,
+"module": "mh_fast",
+"kernel": "mh_pool_project_group_c512",
+"grid": "40",
+"threads": "512",
+"exec_us": 65.42,
+"step_us": 68.04
+},
+{
+"i": 57,
+"module": "deep",
+"kernel": "vit_gather",
+"grid": "2560",
+"threads": "256",
+"exec_us": 51.08,
+"step_us": 57.54
+},
+{
+"i": 58,
+"module": "deep_fast",
+"kernel": "vit_pack_input",
+"grid": "640",
+"threads": "256",
+"exec_us": 43.12,
+"step_us": 49.32
+},
+{
+"i": 59,
+"module": "deep_fast",
+"kernel": "vit_expand_blocked_fp8_frag_bytein",
+"grid": "2560",
+"threads": "32",
+"exec_us": 52.88,
+"step_us": 54.96
+},
+{
+"i": 60,
+"module": "vit_stream",
+"kernel": "vit_stream_contract_frag_hout",
+"grid": "640",
+"threads": "32",
+"exec_us": 82.38000000000001,
+"step_us": 84.34
+},
+{
+"i": 61,
+"module": "vit_stream",
+"kernel": "vit_stream_qkv_frag_hin_w5f8",
+"grid": "768",
+"threads": "160",
+"exec_us": 80.72,
+"step_us": 82.19999999999999
+},
+{
+"i": 62,
+"module": "deep_fast",
+"kernel": "vit_attention_fused_640_bytein_bout",
+"grid": "1280",
+"threads": "32",
+"exec_us": 76.75999999999999,
+"step_us": 78.41999999999999
+},
+{
+"i": 63,
+"module": "vit_stream",
+"kernel": "vit_stream_project_n64_bh",
+"grid": "640",
+"threads": "32",
+"exec_us": 53.379999999999995,
+"step_us": 55.96
+},
+{
+"i": 64,
+"module": "deep_fast",
+"kernel": "vit_pack_input",
+"grid": "640",
+"threads": "256",
+"exec_us": 46.199999999999996,
+"step_us": 51.86000000000001
+},
+{
+"i": 65,
+"module": "deep_fast",
+"kernel": "vit_expand_blocked_fp8_frag_bytein",
+"grid": "2560",
+"threads": "32",
+"exec_us": 74.58000000000001,
+"step_us": 76.77999999999999
+},
+{
+"i": 66,
+"module": "vit_stream",
+"kernel": "vit_stream_contract_frag_hout",
+"grid": "640",
+"threads": "32",
+"exec_us": 81.72,
+"step_us": 83.66000000000001
+},
+{
+"i": 67,
+"module": "vit_stream",
+"kernel": "vit_stream_qkv_frag_hin_w5f8",
+"grid": "768",
+"threads": "160",
+"exec_us": 80.69999999999999,
+"step_us": 82.13999999999999
+},
+{
+"i": 68,
+"module": "deep_fast",
+"kernel": "vit_attention_fused_640_bytein_bout",
+"grid": "1280",
+"threads": "32",
+"exec_us": 77.92,
+"step_us": 79.56
+},
+{
+"i": 69,
+"module": "vit_stream",
+"kernel": "vit_stream_project_n64_bh",
+"grid": "640",
+"threads": "32",
+"exec_us": 53.28,
+"step_us": 55.82
+},
+{
+"i": 70,
+"module": "deep_fast",
+"kernel": "vit_pack_input",
+"grid": "640",
+"threads": "256",
+"exec_us": 46.28,
+"step_us": 52.16
+},
+{
+"i": 71,
+"module": "deep_fast",
+"kernel": "vit_expand_blocked_fp8_frag_bytein",
+"grid": "2560",
+"threads": "32",
+"exec_us": 73.25999999999999,
+"step_us": 75.30000000000001
+},
+{
+"i": 72,
+"module": "vit_stream",
+"kernel": "vit_stream_contract_frag_hout",
+"grid": "640",
+"threads": "32",
+"exec_us": 81.98,
+"step_us": 83.91999999999999
+},
+{
+"i": 73,
+"module": "vit_stream",
+"kernel": "vit_stream_qkv_frag_hin_w5f8",
+"grid": "768",
+"threads": "160",
+"exec_us": 80.92,
+"step_us": 82.34
+},
+{
+"i": 74,
+"module": "deep_fast",
+"kernel": "vit_attention_fused_640_bytein_bout",
+"grid": "1280",
+"threads": "32",
+"exec_us": 77.67999999999999,
+"step_us": 79.33999999999999
+},
+{
+"i": 75,
+"module": "vit_stream",
+"kernel": "vit_stream_project_n64_bh",
+"grid": "640",
+"threads": "32",
+"exec_us": 53.220000000000006,
+"step_us": 55.72
+},
+{
+"i": 76,
+"module": "deep_fast",
+"kernel": "vit_pack_input",
+"grid": "640",
+"threads": "256",
+"exec_us": 46.04,
+"step_us": 51.78
+},
+{
+"i": 77,
+"module": "deep_fast",
+"kernel": "vit_expand_blocked_fp8_frag_bytein",
+"grid": "2560",
+"threads": "32",
+"exec_us": 73.66,
+"step_us": 75.74
+},
+{
+"i": 78,
+"module": "vit_stream",
+"kernel": "vit_stream_contract_frag_hout",
+"grid": "640",
+"threads": "32",
+"exec_us": 81.74000000000001,
+"step_us": 83.66000000000001
+},
+{
+"i": 79,
+"module": "vit_stream",
+"kernel": "vit_stream_qkv_frag_hin_w5f8",
+"grid": "768",
+"threads": "160",
+"exec_us": 80.92,
+"step_us": 82.34
+},
+{
+"i": 80,
+"module": "deep_fast",
+"kernel": "vit_attention_fused_640_bytein_bout",
+"grid": "1280",
+"threads": "32",
+"exec_us": 77.56,
+"step_us": 79.24000000000001
+},
+{
+"i": 81,
+"module": "vit_stream",
+"kernel": "vit_stream_project_n64_bh",
+"grid": "640",
+"threads": "32",
+"exec_us": 53.48,
+"step_us": 56.0
+},
+{
+"i": 82,
+"module": "deep_fast",
+"kernel": "vit_pack_input",
+"grid": "640",
+"threads": "256",
+"exec_us": 46.080000000000005,
+"step_us": 51.78
+},
+{
+"i": 83,
+"module": "deep_fast",
+"kernel": "vit_expand_blocked_fp8_frag_bytein",
+"grid": "2560",
+"threads": "32",
+"exec_us": 55.22,
+"step_us": 57.36
+},
+{
+"i": 84,
+"module": "vit_stream",
+"kernel": "vit_stream_contract_frag_hout",
+"grid": "640",
+"threads": "32",
+"exec_us": 82.19999999999999,
+"step_us": 84.12
+},
+{
+"i": 85,
+"module": "vit_stream",
+"kernel": "vit_stream_qkv_frag_hin_w5f8",
+"grid": "768",
+"threads": "160",
+"exec_us": 80.8,
+"step_us": 82.19999999999999
+},
+{
+"i": 86,
+"module": "deep_fast",
+"kernel": "vit_attention_fused_640_bytein_bout",
+"grid": "1280",
+"threads": "32",
+"exec_us": 77.30000000000001,
+"step_us": 78.96000000000001
+},
+{
+"i": 87,
+"module": "vit_stream",
+"kernel": "vit_stream_project_n64_bh",
+"grid": "640",
+"threads": "32",
+"exec_us": 53.080000000000005,
+"step_us": 55.64
+},
+{
+"i": 88,
+"module": "deep_fast",
+"kernel": "vit_pack_input",
+"grid": "640",
+"threads": "256",
+"exec_us": 45.839999999999996,
+"step_us": 51.56
+},
+{
+"i": 89,
+"module": "deep_fast",
+"kernel": "vit_expand_blocked_fp8_frag_bytein",
+"grid": "2560",
+"threads": "32",
+"exec_us": 54.760000000000005,
+"step_us": 56.72
+},
+{
+"i": 90,
+"module": "vit_stream",
+"kernel": "vit_stream_contract_frag_hout",
+"grid": "640",
+"threads": "32",
+"exec_us": 81.47999999999999,
+"step_us": 83.4
+},
+{
+"i": 91,
+"module": "vit_stream",
+"kernel": "vit_stream_qkv_frag_hin_w5f8",
+"grid": "768",
+"threads": "160",
+"exec_us": 80.61999999999999,
+"step_us": 82.08
+},
+{
+"i": 92,
+"module": "deep_fast",
+"kernel": "vit_attention_fused_640_bytein_bout",
+"grid": "1280",
+"threads": "32",
+"exec_us": 76.96,
+"step_us": 78.64
+},
+{
+"i": 93,
+"module": "vit_stream",
+"kernel": "vit_stream_project_n64_bh",
+"grid": "640",
+"threads": "32",
+"exec_us": 52.82,
+"step_us": 55.36
+},
+{
+"i": 94,
+"module": "deep_fast",
+"kernel": "vit_pack_input",
+"grid": "640",
+"threads": "256",
+"exec_us": 45.839999999999996,
+"step_us": 51.58
+},
+{
+"i": 95,
+"module": "deep_fast",
+"kernel": "vit_expand_blocked_fp8_frag_bytein",
+"grid": "2560",
+"threads": "32",
+"exec_us": 54.239999999999995,
+"step_us": 56.38
+},
+{
+"i": 96,
+"module": "vit_stream",
+"kernel": "vit_stream_contract_frag_hout",
+"grid": "640",
+"threads": "32",
+"exec_us": 81.72,
+"step_us": 83.64
+},
+{
+"i": 97,
+"module": "vit_stream",
+"kernel": "vit_stream_qkv_frag_hin_w5f8",
+"grid": "768",
+"threads": "160",
+"exec_us": 80.58000000000001,
+"step_us": 82.0
+},
+{
+"i": 98,
+"module": "deep_fast",
+"kernel": "vit_attention_fused_640_bytein_bout",
+"grid": "1280",
+"threads": "32",
+"exec_us": 76.46,
+"step_us": 78.11999999999999
+},
+{
+"i": 99,
+"module": "vit_stream",
+"kernel": "vit_stream_project_n64_bh",
+"grid": "640",
+"threads": "32",
+"exec_us": 52.8,
+"step_us": 55.36
+},
+{
+"i": 100,
+"module": "deep_fast",
+"kernel": "vit_pack_input",
+"grid": "640",
+"threads": "256",
+"exec_us": 45.699999999999996,
+"step_us": 51.36
+},
+{
+"i": 101,
+"module": "deep_fast",
+"kernel": "vit_expand_blocked_fp8_frag_bytein",
+"grid": "2560",
+"threads": "32",
+"exec_us": 53.72,
+"step_us": 55.980000000000004
+},
+{
+"i": 102,
+"module": "vit_stream",
+"kernel": "vit_stream_contract_frag_hout",
+"grid": "640",
+"threads": "32",
+"exec_us": 81.28,
+"step_us": 83.2
+},
+{
+"i": 103,
+"module": "vit_stream",
+"kernel": "vit_stream_qkv_frag_hin_w5f8",
+"grid": "768",
+"threads": "160",
+"exec_us": 80.49999999999999,
+"step_us": 81.92
+},
+{
+"i": 104,
+"module": "deep_fast",
+"kernel": "vit_attention_fused_640_bytein_bout",
+"grid": "1280",
+"threads": "32",
+"exec_us": 76.33999999999999,
+"step_us": 77.97999999999999
+},
+{
+"i": 105,
+"module": "vit_stream",
+"kernel": "vit_stream_project_n64_bh",
+"grid": "640",
+"threads": "32",
+"exec_us": 52.76,
+"step_us": 55.32
+},
+{
+"i": 106,
+"module": "deep",
+"kernel": "vit_gather",
+"grid": "2560",
+"threads": "256",
+"exec_us": 50.46,
+"step_us": 56.84
+},
+{
+"i": 107,
+"module": "deep_fast",
+"kernel": "decoder_project2x_h16w",
+"grid": "1280",
+"threads": "32",
+"exec_us": 65.04,
+"step_us": 67.91999999999999
+},
+{
+"i": 108,
+"module": "c512_m32_deep",
+"kernel": "split_ffn_one_w2f8",
+"grid": "512",
+"threads": "64",
+"exec_us": 68.68,
+"step_us": 70.6
+},
+{
+"i": 109,
+"module": "deep_fast",
+"kernel": "split_projection_frag",
+"grid": "1024",
+"threads": "32",
+"exec_us": 52.44,
+"step_us": 56.22
+},
+{
+"i": 110,
+"module": "c512_m32_mh",
+"kernel": "c512_qkv_attention_compact",
+"grid": "640",
+"threads": "64",
+"exec_us": 69.56,
+"step_us": 71.14000000000001
+},
+{
+"i": 111,
+"module": "mh_fast",
+"kernel": "mh_attention_project_frag_c512",
+"grid": "1024",
+"threads": "32",
+"exec_us": 63.66,
+"step_us": 67.06
+},
+{
+"i": 112,
+"module": "c512_m32_deep",
+"kernel": "split_ffn_one_w2f8",
+"grid": "512",
+"threads": "64",
+"exec_us": 68.48,
+"step_us": 70.34
+},
+{
+"i": 113,
+"module": "deep_fast",
+"kernel": "split_projection_frag",
+"grid": "1024",
+"threads": "32",
+"exec_us": 52.339999999999996,
+"step_us": 56.08
+},
+{
+"i": 114,
+"module": "c512_m32_mh",
+"kernel": "c512_qkv_attention_compact",
+"grid": "640",
+"threads": "64",
+"exec_us": 70.4,
+"step_us": 72.08
+},
+{
+"i": 115,
+"module": "mh_fast",
+"kernel": "mh_attention_project_frag_c512",
+"grid": "1024",
+"threads": "32",
+"exec_us": 62.64,
+"step_us": 66.04
+},
+{
+"i": 116,
+"module": "c512_m32_deep",
+"kernel": "split_ffn_one_w2f8",
+"grid": "512",
+"threads": "64",
+"exec_us": 68.32000000000001,
+"step_us": 70.2
+},
+{
+"i": 117,
+"module": "deep_fast",
+"kernel": "split_projection_frag",
+"grid": "1024",
+"threads": "32",
+"exec_us": 52.3,
+"step_us": 56.08
+},
+{
+"i": 118,
+"module": "c512_m32_mh",
+"kernel": "c512_qkv_attention_compact",
+"grid": "640",
+"threads": "64",
+"exec_us": 69.16,
+"step_us": 70.72
+},
+{
+"i": 119,
+"module": "mh_fast",
+"kernel": "mh_attention_project_frag_c512",
+"grid": "1024",
+"threads": "32",
+"exec_us": 62.62000000000001,
+"step_us": 66.02
+},
+{
+"i": 120,
+"module": "c512_m32_deep",
+"kernel": "split_ffn_one_w2f8",
+"grid": "512",
+"threads": "64",
+"exec_us": 68.2,
+"step_us": 70.04
+},
+{
+"i": 121,
+"module": "deep_fast",
+"kernel": "split_projection_frag",
+"grid": "1024",
+"threads": "32",
+"exec_us": 52.08,
+"step_us": 55.82
+},
+{
+"i": 122,
+"module": "c512_m32_mh",
+"kernel": "c512_qkv_attention_compact",
+"grid": "640",
+"threads": "64",
+"exec_us": 70.25999999999999,
+"step_us": 71.96
+},
+{
+"i": 123,
+"module": "mh_fast",
+"kernel": "mh_attention_project_frag_c512",
+"grid": "1024",
+"threads": "32",
+"exec_us": 63.56,
+"step_us": 66.98000000000002
+},
+{
+"i": 124,
+"module": "c512_m32_deep",
+"kernel": "split_ffn_one_w2f8",
+"grid": "512",
+"threads": "64",
+"exec_us": 68.68,
+"step_us": 70.52
+},
+{
+"i": 125,
+"module": "deep_fast",
+"kernel": "split_projection_frag",
+"grid": "1024",
+"threads": "32",
+"exec_us": 53.059999999999995,
+"step_us": 57.13999999999999
+},
+{
+"i": 126,
+"module": "c512_m32_mh",
+"kernel": "c512_qkv_attention_compact",
+"grid": "640",
+"threads": "64",
+"exec_us": 70.86,
+"step_us": 72.76
+},
+{
+"i": 127,
+"module": "mh_fast",
+"kernel": "mh_attention_project_frag_c512",
+"grid": "1024",
+"threads": "32",
+"exec_us": 63.16,
+"step_us": 66.94
+},
+{
+"i": 128,
+"module": "deep_fast",
+"kernel": "decoder_project2x_h16w_byteout",
+"grid": "2048",
+"threads": "32",
+"exec_us": 89.56,
+"step_us": 90.94
+},
+{
+"i": 129,
+"module": "c64_wave2",
+"kernel": "c256_wave2_bi_bo_w16",
+"grid": "135",
+"threads": "256",
+"exec_us": 117.38000000000001,
+"step_us": 119.5
+},
+{
+"i": 130,
+"module": "sp",
+"kernel": "sp_init",
+"grid": "10",
+"threads": "256",
+"exec_us": 44.28,
+"step_us": 50.08
+},
+{
+"i": 131,
+"module": "sp",
+"kernel": "sp_run256_w16",
+"grid": "846",
+"threads": "256",
+"exec_us": 452.7,
+"step_us": 454.52000000000004
+},
+{
+"i": 132,
+"module": "sp",
+"kernel": "sp_recover256_w16",
+"grid": "1",
+"threads": "256",
+"exec_us": 43.6,
+"step_us": 49.08
+},
+{
+"i": 133,
+"module": "c64_wave2",
+"kernel": "c256_wave2_bi_bo_w16",
+"grid": "135",
+"threads": "256",
+"exec_us": 94.08,
+"step_us": 96.26000000000002
+},
+{
+"i": 134,
+"module": "c64_wave2",
+"kernel": "c128_wave2_up_lb_sh",
+"grid": "527",
+"threads": "128",
+"exec_us": 147.92,
+"step_us": 149.72
+},
+{
+"i": 135,
+"module": "c64_wave2",
+"kernel": "c128_wave2_bi_bo",
+"grid": "540",
+"threads": "128",
+"exec_us": 130.64000000000001,
+"step_us": 132.36
+},
+{
+"i": 136,
+"module": "c64_wave2",
+"kernel": "c128_wave2_bi_bo",
+"grid": "510",
+"threads": "128",
+"exec_us": 127.62,
+"step_us": 129.39999999999998
+},
+{
+"i": 137,
+"module": "c64_wave2",
+"kernel": "c128_wave2_bi_bo",
+"grid": "558",
+"threads": "128",
+"exec_us": 133.0,
+"step_us": 134.8
+},
+{
+"i": 138,
+"module": "c64_wave2",
+"kernel": "c128_wave2_bi_bo",
+"grid": "527",
+"threads": "128",
+"exec_us": 129.32,
+"step_us": 131.1
+},
+{
+"i": 139,
+"module": "c64_wave2",
+"kernel": "c128_wave2_bi_bo",
+"grid": "540",
+"threads": "128",
+"exec_us": 131.56,
+"step_us": 133.32
+},
+{
+"i": 140,
+"module": "c64_wave2",
+"kernel": "c64_wave2_up_lb_sh",
+"grid": "2040",
+"threads": "64",
+"exec_us": 182.2,
+"step_us": 184.28
+},
+{
+"i": 141,
+"module": "c64_wave2",
+"kernel": "c64_wave2_bi_bo",
+"grid": "2135",
+"threads": "64",
+"exec_us": 159.22,
+"step_us": 161.11999999999998
+},
+{
+"i": 142,
+"module": "c64_wave2",
+"kernel": "c64_wave2_bi_bo",
+"grid": "2074",
+"threads": "64",
+"exec_us": 157.16,
+"step_us": 159.14000000000001
+},
+{
+"i": 143,
+"module": "c64_wave2",
+"kernel": "c64_wave2_bi",
+"grid": "2100",
+"threads": "64",
+"exec_us": 179.16,
+"step_us": 181.14000000000001,
+"artifact": -342.02
+},
+{
+"i": 144,
+"module": "c32_wave1",
+"kernel": "c32_wave1_up_b8",
+"grid": "8160",
+"threads": "32",
+"exec_us": 231.88,
+"step_us": 233.95
+},
+{
+"i": 145,
+"module": "c32_wave1",
+"kernel": "c32_wave1_chain",
+"grid": "8349",
+"threads": "32",
+"exec_us": 214.12,
+"step_us": 216.23
+},
+{
+"i": 146,
+"module": "c32_wave1",
+"kernel": "c32_wave1_chain",
+"grid": "8228",
+"threads": "32",
+"exec_us": 211.55,
+"step_us": 213.61
+},
+{
+"i": 147,
+"module": "c32_wave1",
+"kernel": "c32_wave1_finish_b8",
+"grid": "8280",
+"threads": "32",
+"exec_us": 212.73999999999998,
+"step_us": 214.84
+},
+{
+"i": 148,
+"module": "c32_wave1",
+"kernel": "c32_wave1_post_b8",
+"grid": "33017",
+"threads": "32",
+"exec_us": 799.68,
+"step_us": 799.68
+}
+]

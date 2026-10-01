@@ -76,6 +76,7 @@
 - 900 C256 新分组；C64/C128 Down 融合；去清零；C32 权重缓存；ViT byte gather-pack、4wave/64key 预取、QKV 块重排。
 - ViT QKV 归一化换求和（不逐位）；C256 FFN 激活打包（需转置 expand，非小件）；复合量化 C32 两处/ViT 出口（域不纯）。
 - `MAKE_RESIDENT_EVERY` 60 vs 0 无尖峰，保留 60。
+- C512 attention 投影手排流水 `C512_PROJ_DEEP`（逐位，+0.22ms，LLVM 溢出，`gap-map-evening`）。
 - 编译器：COMGR2/LLVM20 慢 3%；公开 LLVM21 持平；LLVM22 不逐位；VOPD 前瞻 ±0.3%。旧 block46 改 FP8 WMMA 有位差。
 
 ## C. 需要 Zero 拍板（有损）

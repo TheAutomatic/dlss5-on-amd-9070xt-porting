@@ -460,6 +460,9 @@ FASTWAVE void mh_qkv_normalize_frag_c512(const unsigned char*in8,const float*w,u
  WG_FENCE(3);__builtin_amdgcn_s_barrier();WG_FENCE(2);
  for(uint n=0;n<4;n++)for(uint e=0;e<8;e++){uint row=g*8+e,p=first+row,c=col+n*16+rc;if(p<tokens)out[p*N+c]=static_cast<unsigned char>(q8(F(acc[n][e]*raw[16*65+(n/2)*16+row])));}
 }
+#ifndef C512_PROJ_DEEP
+#define C512_PROJ_DEEP 0 /* 2026-10-01 gap-map-evening: mh_attention_project_frag_c512 K loop unrolled with a D-deep operand ring over the 32 (k32,half) steps, D=2..8; 0 = loop */
+#endif
 
 // C512 attention projection in the same shape (host option c512_proj_frag): one wave = 16 tokens x 64 output columns,
 // A = the attention's E4M3 AV bytes (8 contiguous bytes per lane per K16), B = fragment-tiled E4M3 projection weights
@@ -496,10 +499,32 @@ FASTWAVE void mh_attention_project_frag_c512(const unsigned char*av8,const float
 #else
  for(uint n=0;n<4;n++)for(uint e=0;e<8;e++){uint p=first+g*8+e,c=col+n*16+rc;acc[n][e]=p<tokens?Hrtz(feature[p*C+c]*w[skip+c]):0.f;}
 #endif
- bool live=first+rc<tokens;const unsigned char*arow=av8+(first+rc)*C+g*8;
+ bool live=first+rc<tokens;
+#if C512_PROJ_DEEP
+ // C512_PROJ_DEEP=D (gap-map-evening-20261001), same operands and per-accumulator order as the loop. Mirrors C512_COMPACT_QKV_DEEP + SCHED: 32 (gs,h) steps unrolled, a C512_PROJ_DEEP-deep register ring, every
+ // address = one of 1+4 base pointers + an immediate, dead rows read row `first` and are zeroed at the consuming step,
+ // sched_barrier around each step's WMMAs. NOT TAKEN: LLVM still hoists the B loads and chains acc[0] over all 32 steps,
+ // 255 VGPR + scratch spills; first ring form (d4) 19 SAME but +0.22ms both tiers (results/gap-map-evening-20261001).
+ {constexpr uint D=C512_PROJ_DEEP;const unsigned char*ap=av8+(live?first+rc:first)*C+g*8;const unsigned char*bp[4];
+  _Pragma("unroll") for(uint n=0;n<4;n++){uint n0=col+n*16+rc;bp[n]=wb+(n0/16)*16*512+(g*16+n0%16)*8;}
+  i2 ra[D],rb[D][4];
+  auto ld=[&](uint st){const uint gs=st/2,h=st%2,k=st%D;__builtin_memcpy(&ra[k],ap+gs*32+h*16,8);
+   _Pragma("unroll") for(uint n=0;n<4;n++)__builtin_memcpy(&rb[k][n],bp[n]+gs*512+h*256,8);};
+  _Pragma("unroll") for(uint st=0;st<D;st++)ld(st);
+  _Pragma("unroll") for(uint st=0;st<32;st++){
+   const uint k=st%D;i2 ca=live?ra[k]:i2{},cb[4];
+   _Pragma("unroll") for(uint n=0;n<4;n++)cb[n]=rb[k][n];
+   if(st+D<32)ld(st+D);
+   __asm__ volatile("" ::: "memory");__builtin_amdgcn_sched_barrier(0);
+   _Pragma("unroll") for(uint n=0;n<4;n++)acc[n]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(ca,cb[n],acc[n]);
+   __builtin_amdgcn_sched_barrier(0);
+  }}
+#else
+ const unsigned char*arow=av8+(first+rc)*C+g*8;
  for(uint k=0;k<C;k+=32){uint gs=k/32;
   for(uint h=0;h<2;h++){i2 a{};if(live)__builtin_memcpy(&a,arow+k+h*16,8);
    for(uint n=0;n<4;n++){uint n0=col+n*16+rc;i2 b;__builtin_memcpy(&b,wb+((n0/16)*16+gs)*512+((h*2+g)*16+n0%16)*8,8);acc[n]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(a,b,acc[n]);}}}
+#endif
  for(uint n=0;n<4;n++)for(uint e=0;e<8;e++){uint p=first+g*8+e,c=col+n*16+rc;if(p>=tokens)continue;float a=acc[n][e],v=post==3?Hrtz(a):post==4?F(a):F(Hrtz(a));uint dest=p*C+c;
   if(cropw){uint x=p%workw,y=p/workw;if(x<sx||y<sy||x>=sx+cropw||y>=sy+croph)continue;dest=((y-sy)*cropw+x-sx)*C+c;}out[dest]=v;}
 #endif

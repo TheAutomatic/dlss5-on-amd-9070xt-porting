@@ -1,0 +1,65 @@
+diff --git a/Development/HIP/hip_d3d12_bridge.h b/Development/HIP/hip_d3d12_bridge.h
+index ec6ba7d7..dc7bb71b 100644
+--- a/Development/HIP/hip_d3d12_bridge.h
++++ b/Development/HIP/hip_d3d12_bridge.h
+@@ -145,7 +145,7 @@ public:
+  }
+  void Create(ID3D12CommandQueue*q,Options options,const std::vector<float>&noise){
+   if(network||queue||!q)throw std::runtime_error("bridge already initialized/invalid queue");if(q->GetDesc().Type!=D3D12_COMMAND_LIST_TYPE_DIRECT&&q->GetDesc().Type!=D3D12_COMMAND_LIST_TYPE_COMPUTE)throw std::runtime_error("bridge requires DIRECT or COMPUTE queue");queue=q;queue->AddRef();Check(q->GetDevice(IID_PPV_ARGS(&device)),"queue device");pixels=size_t(options.width)*options.height;
+-  options.pooled=true;options.profile=false;options.dump_dir.clear();
++  options.pooled=true;options.profile=std::getenv("DLSS5_MAP_PROFILE")!=nullptr;options.dump_dir.clear();
+   // Pick the HIP device that is the game's D3D12 adapter. Hosts with an iGPU or a second card expose several HIP devices
+   // LUID is authoritative even when a host spoofs DXGI VendorId/Description.
+   // Name fallback requires AMD DXGI identity and exactly one HIP device without a LUID.
+diff --git a/Development/HIP/hip_reference_network.h b/Development/HIP/hip_reference_network.h
+index 49a0c6f3..273ad2b9 100644
+--- a/Development/HIP/hip_reference_network.h
++++ b/Development/HIP/hip_reference_network.h
+@@ -334,7 +334,7 @@ class Network {
+   }
+   if(opt.wall_profile)api.Check(api.hipStreamSynchronize(stream),"wall profile drain");
+   auto wall_begin=opt.wall_profile?std::chrono::steady_clock::now():std::chrono::steady_clock::time_point{};
+-  Timing timing{kernel};if(opt.profile){api.Check(api.hipEventCreate(&timing.begin),"event create");api.Check(api.hipEventCreate(&timing.end),"event create");timings.push_back(timing);api.Check(api.hipEventRecord(timing.begin,stream),"event begin");}
++  Timing timing{module+","+kernel+","+std::to_string(groups?groups:(count+255ull)/256)+","+std::to_string(threads)};if(opt.profile){api.Check(api.hipEventCreate(&timing.begin),"event create");api.Check(api.hipEventCreate(&timing.end),"event create");timings.push_back(timing);api.Check(api.hipEventRecord(timing.begin,stream),"event begin");}
+   unsigned launch_repeats=1;
+ #ifdef DLSS5_LAYER_BENCH
+   if(opt.wall_profile)launch_repeats=diagnostic_kernel_repeats;
+@@ -668,7 +668,7 @@ if(opt.fast_c32){const char*f[][2]={{"c32_fast_ffn","c32_fast.hsaco"},{"c32_fast
+  Api& Runtime(){return api;}
+  void Synchronize(){api.Check(api.hipStreamSynchronize(stream),"network completion");}
+  void Enqueue(void*rgba,void*history,void*rgb_output,U seed){if(adaptive_prev_history!=history||adaptive_prev_seed!=seed||adaptive_prev_input!=rgba){adaptive_dirty=true;adaptive_prev_history=history;adaptive_prev_seed=seed;adaptive_prev_input=rgba;}
+-  if(!rgba||!rgb_output||(!device_noise&&!opt.fast_prefix)||!opt.pooled||opt.profile||opt.wall_profile||observer||!opt.dump_dir.empty())throw std::runtime_error("device graph requires initialized noise, pooled mode and no diagnostic readbacks");
++  if(!rgba||!rgb_output||(!device_noise&&!opt.fast_prefix)||!opt.pooled||opt.wall_profile||observer||!opt.dump_dir.empty())throw std::runtime_error("device graph requires initialized noise, pooled mode and no diagnostic readbacks");
+   if(opt.graph){
+    if(!api.hipGraphLaunch)api.EnableGraphs();
+    bool same=graph_warmed&&graph_input==rgba&&graph_history==history&&graph_output==rgb_output&&graph_seed==seed;
+@@ -690,7 +690,7 @@ if(opt.fast_c32){const char*f[][2]={{"c32_fast_ffn","c32_fast.hsaco"},{"c32_fast
+  private:
+  void EnqueueRaw(void*rgba,void*history,void*rgb_output,U seed){
+   opt.seed=seed;auto color=std::make_shared<Allocation>(api,rgba,size_t(W)*H*16);auto hist=history?std::make_shared<Allocation>(api,history,size_t(W)*H*16):Tensor{};
+-  auto out=RunGraph(color,device_noise,hist);api.Check(api.hipMemcpyAsync(rgb_output,P(out),size_t(W)*H*12,3,stream),"device output copy");
++  auto out=RunGraph(color,device_noise,hist);api.Check(api.hipMemcpyAsync(rgb_output,P(out),size_t(W)*H*12,3,stream),"device output copy");if(opt.profile){api.Check(api.hipStreamSynchronize(stream),"map sync");static unsigned map_frame=0;unsigned i=0;for(size_t k=0;k<timings.size();++k){auto&t=timings[k];float e=-1,g=-1;api.Check(api.hipEventElapsedTime(&e,t.begin,t.end),"event elapsed");if(k+1<timings.size())api.Check(api.hipEventElapsedTime(&g,t.begin,timings[k+1].begin),"event step");else g=e;std::printf("KEV,%u,%u,%s,%.6f,%.6f\n",map_frame,i++,t.name.c_str(),e,g);}for(auto&t:timings){api.hipEventDestroy(t.begin);api.hipEventDestroy(t.end);}timings.clear();map_frame++;std::fflush(stdout);}
+  }
+ };
+ }
+diff --git a/Development/HIP/swin_persistent_network.h b/Development/HIP/swin_persistent_network.h
+index eed795b7..79e03209 100644
+--- a/Development/HIP/swin_persistent_network.h
++++ b/Development/HIP/swin_persistent_network.h
+@@ -111,13 +111,13 @@ Tensor SpStage(Tensor input,U w,U h,U c,U first,U layers){
+  std::printf("TOPO,sp,sp_run%u,%u,%u,%u\n",c,plan.total,plan.total,c);
+  std::printf("TOPO,sp,sp_recover%u,1,1,%u\n",c,c);
+ #endif
+- api.Check(api.hipModuleLaunchKernel(Fn("sp","sp_init"),U((3*size_t(plan.total)+255)/256),1,1,256,1,1,0,stream,args,nullptr),"SP init");
++ {Timing t{std::string("sp,")+std::string("sp_init")+","+std::to_string((3*size_t(plan.total)+255)/256)+","+std::to_string(256)};if(opt.profile){api.Check(api.hipEventCreate(&t.begin),"ev");api.Check(api.hipEventCreate(&t.end),"ev");api.Check(api.hipEventRecord(t.begin,stream),"ev");}api.Check(api.hipModuleLaunchKernel(Fn("sp","sp_init"),U((3*size_t(plan.total)+255)/256),1,1,256,1,1,0,stream,args,nullptr),"SP init");if(opt.profile){api.Check(api.hipEventRecord(t.end,stream),"ev");timings.push_back(t);}}
+  const char*sfx=plan.w16?"_w16":"";
+  std::string kernel="sp_run"+std::to_string(c)+sfx;
+  auto start=std::chrono::steady_clock::now();
+- api.Check(api.hipModuleLaunchKernel(Fn("sp",kernel),plan.total,1,1,c,1,1,0,stream,args,nullptr),"SP run");
++ {Timing t{std::string("sp,")+kernel+","+std::to_string(plan.total)+","+std::to_string(c)};if(opt.profile){api.Check(api.hipEventCreate(&t.begin),"ev");api.Check(api.hipEventCreate(&t.end),"ev");api.Check(api.hipEventRecord(t.begin,stream),"ev");}api.Check(api.hipModuleLaunchKernel(Fn("sp",kernel),plan.total,1,1,c,1,1,0,stream,args,nullptr),"SP run");if(opt.profile){api.Check(api.hipEventRecord(t.end,stream),"ev");timings.push_back(t);}}
+  std::string recovery="sp_recover"+std::to_string(c)+sfx;
+- api.Check(api.hipModuleLaunchKernel(Fn("sp",recovery),1,1,1,c,1,1,0,stream,args,nullptr),"SP bounded recovery");
++ {Timing t{std::string("sp,")+recovery+","+std::to_string(1)+","+std::to_string(c)};if(opt.profile){api.Check(api.hipEventCreate(&t.begin),"ev");api.Check(api.hipEventCreate(&t.end),"ev");api.Check(api.hipEventRecord(t.begin,stream),"ev");}api.Check(api.hipModuleLaunchKernel(Fn("sp",recovery),1,1,1,c,1,1,0,stream,args,nullptr),"SP bounded recovery");if(opt.profile){api.Check(api.hipEventRecord(t.end,stream),"ev");timings.push_back(t);}}
+  plan.next_ticket+=plan.total;sp_runs++;sp_jobs+=plan.total;
+  if(SpEnv("SP_VALIDATE")||SpEnv("SP_TRACE")){
+   api.Check(api.hipStreamSynchronize(stream),"SP diagnostic completion");
