@@ -1,0 +1,15 @@
+base|c64-wave2|inst|base
+bf-vit|vit-stream|L23bf|base
+p-vit|vit-stream|L23p|base
+f21-vit|vit-stream|L21bf|base
+ut-vit|vit-stream|L23ut12|base
+base2|c64-wave2|inst|base
+bf-mh|multihead-fast-padded-wave-packed|L23bf|base
+p-mh|multihead-fast-padded-wave-packed|L23p|base
+f21-mh|multihead-fast-padded-wave-packed|L21bf|base
+ut-mh|multihead-fast-padded-wave-packed|L23ut12|base
+base3|c64-wave2|inst|base
+dmf-r|multihead-fast-padded-wave-packed|inst|mh_ffn_fused_c256
+dmf-p|multihead-fast-padded-wave-packed|L23p|mh_ffn_fused_c256
+dmf-f21|multihead-fast-padded-wave-packed|L21bf|mh_ffn_fused_c256
+base4|c64-wave2|inst|base

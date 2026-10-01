@@ -1401,3 +1401,6 @@ DEC_WIDE/F8W 互斥原因：宿主选了 `_w` 后 F8W 判断只认不带后缀�
 
 ## 2026-10-02：下一版候选整套（next-candidate-20261002）
 main b6c508a5 全配方 62 模块（-RowOpts -PrebuiltDir；对 0.39 只 c32/c64（LLVM23）、c512-deep 变）+ HEAD add-on（=053C3589 逐字节）+ RE9 runtime 73D4C25C。对 0.39 现装：19 组 SAME；ABBA 900 −0.106/−0.125/−0.139、1080 −0.189/−0.180/−0.176ms，p99 7.455→7.332、10.347→10.143；整网 wall 900 7.40/7.44→7.30/7.32、1152 行 10.16/10.26→9.99/10.01、1088 行 9.84/9.79→9.68/9.70。包在 `D:\DLSSNR-Lab\next-candidate\`（install.ps1 带备份、两游戏同换、同步 exact 快照，-DryRun 已过）。未装机，等 Zero。
+
+## 2026-10-02：vit-stream / mh_fast 在 LLVM22/23 下不逐位的根因（llvm23-vit-20261002）
+按核拼接汇编（LLVM21 汇编里换入单个 LLVM23 核）二分：只有 `vit_stream_qkv_frag_hin_w5` 和 `mh_ffn_qkv_body` 两个 ffn c256 核出问题。原因是源码写 LDS 后用裸 `s_barrier`、没加栅栏；LLVM21 对 gfx12 拆分屏障一律补 `s_wait_dscnt 0`，LLVM22/23 不再补，别的 wave 读到还没写完的 LDS。展开、fma_mix、src2 编码、rcp_iflag 都逐项排除。新宏 `HIP_BARRIER_FENCE`（默认 0，deep_fast.hip / multihead_fast_padded.hip）给裸屏障加 WG_FENCE：LLVM23、LLVM22 都 19 组 SAME。速度：LLVM23 vit +0.11/+0.13、mh +0.37/+0.10ms（编译器本身慢，ffn c256 单份 234→848µs）；LLVM22 vit 慢，mh +3/−20µs 上完整验证 ABBA 三轮慢，不收。配方、next-candidate 不变。
