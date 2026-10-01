@@ -1385,3 +1385,8 @@ DEC_WIDE/F8W 互斥原因：宿主选了 `_w` 后 F8W 判断只认不带后缀�
 ## 2026-10-01 晚 0.39 打包（`results/package-039-20261001`）
 
 照 0.38 流程（`tools/package-039.ps1`，以 0.38 三包为底）。载荷 = 现装：add-on 053C3589、RE9 runtime DC2D445E、62 模块（SUMS FD419A3E，两游戏 0 差）；HEAD 源码重编 add-on 与 runtime 整文件逐字节相同（钉基址生效）。shader 与仓库逐文件同。模板加 `DLSS5_STYLE=1`。三包：Magpie 340,434,944 / OptiScaler 370,632,747 / REFramework 425,210,346 字节，ZIP 读回校验与 44 shader 变体通过，RE9 包内 smoke errors=0。发现：RE9 runtime 的 flags 白名单不含 `DLSS5_STYLE`，RE9 模板那行无效（默认 1 不受影响），已写进 RE9 说明与 CHANGELOG，修白名单留下版。tag 0.39 = 55966ef2。下载链接待 Zero 补。
+
+## 2026-10-01 夜：夜间队列（night-20261001）
+- RE9 runtime flags 白名单加 `DLSS5_STYLE`（runtime 73D4C25C，改前源码重编 = DC2D445E 可复现）；默认 old/new/文件 1 SAME，文件 0 = 环境变量 0（5c42d337 / b9ac12c0），smoke 0；未装机。
+- 功耗逐族 DUP×8 + ADL：功耗钉 322～328W；每周期能耗 C64/C128 最高（1.08～1.10），C32 1.04～1.06，C512 各核 0.80～0.93；降 10% 上界 C32 −0.14/−0.23ms，其余 ≤0.11；无逐位便宜候选。第一批跑到一半遇上 Zero 开游戏，作废重测（之后加了每 15 秒查游戏进程的看门狗）。
+- C512 attention 投影消融（`C512_PROJ_ABLATE`，诊断，默认 0）：核内全空只省 5.6/9.3µs/块（DUP 14.5/22.8），残差读 2.5～5，写出约 0；余差在派发衔接，线停。

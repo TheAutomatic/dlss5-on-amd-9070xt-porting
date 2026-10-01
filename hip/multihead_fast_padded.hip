@@ -463,6 +463,10 @@ FASTWAVE void mh_qkv_normalize_frag_c512(const unsigned char*in8,const float*w,u
 #ifndef C512_PROJ_DEEP
 #define C512_PROJ_DEEP 0 /* 2026-10-01 gap-map-evening: mh_attention_project_frag_c512 K loop unrolled with a D-deep operand ring over the 32 (k32,half) steps, D=2..8; 0 = loop */
 #endif
+#ifndef C512_PROJ_ABLATE
+#define C512_PROJ_ABLATE 0 /* 2026-10-01 night (diagnostic only, output WRONG when !=0): mh_attention_project_frag_c512 default path, bit 1 = residual init 0
+   (no feature/scale reads), bit 2 = no K loop (no AV/weight loads, no WMMA), bit 4 = output store only when post==99 (never). results/night-20261001 */
+#endif
 
 // C512 attention projection in the same shape (host option c512_proj_frag): one wave = 16 tokens x 64 output columns,
 // A = the attention's E4M3 AV bytes (8 contiguous bytes per lane per K16), B = fragment-tiled E4M3 projection weights
@@ -489,7 +493,9 @@ FASTWAVE void mh_attention_project_frag_c512(const unsigned char*av8,const float
  const uint C=512;uint l=__builtin_amdgcn_workitem_id_x(),rc=l&15,g=l>>4,block=__builtin_amdgcn_workgroup_id_x(),first=block/8*16,col=block%8*64;if(first>=tokens)return;
  const unsigned char*wb=reinterpret_cast<const unsigned char*>(w)+size_t(3)*C*C*4;const uint skip=4*C*C+(C/32)*4096+C/32;
  f8 acc[4];
-#if HIP_C512_HOIST_RES
+#if C512_PROJ_ABLATE&1
+ for(uint n=0;n<4;n++)for(uint e=0;e<8;e++)acc[n][e]=0.f;
+#elif HIP_C512_HOIST_RES
  // Residual init with the loads outside the per-element condition: the 4 column scales once per lane, the 32 feature
  // values with a clamped row (row `first` is always < tokens), then the select. ISA of the conditional form: every
  // element re-read w[skip+c] and waited (32 global_load + s_wait_loadcnt 0 pairs per wave).
@@ -519,6 +525,7 @@ FASTWAVE void mh_attention_project_frag_c512(const unsigned char*av8,const float
    _Pragma("unroll") for(uint n=0;n<4;n++)acc[n]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(ca,cb[n],acc[n]);
    __builtin_amdgcn_sched_barrier(0);
   }}
+#elif C512_PROJ_ABLATE&2
 #else
  const unsigned char*arow=av8+(first+rc)*C+g*8;
  for(uint k=0;k<C;k+=32){uint gs=k/32;
@@ -526,7 +533,11 @@ FASTWAVE void mh_attention_project_frag_c512(const unsigned char*av8,const float
    for(uint n=0;n<4;n++){uint n0=col+n*16+rc;i2 b;__builtin_memcpy(&b,wb+((n0/16)*16+gs)*512+((h*2+g)*16+n0%16)*8,8);acc[n]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(a,b,acc[n]);}}}
 #endif
  for(uint n=0;n<4;n++)for(uint e=0;e<8;e++){uint p=first+g*8+e,c=col+n*16+rc;if(p>=tokens)continue;float a=acc[n][e],v=post==3?Hrtz(a):post==4?F(a):F(Hrtz(a));uint dest=p*C+c;
-  if(cropw){uint x=p%workw,y=p/workw;if(x<sx||y<sy||x>=sx+cropw||y>=sy+croph)continue;dest=((y-sy)*cropw+x-sx)*C+c;}out[dest]=v;}
+  if(cropw){uint x=p%workw,y=p/workw;if(x<sx||y<sy||x>=sx+cropw||y>=sy+croph)continue;dest=((y-sy)*cropw+x-sx)*C+c;}
+#if C512_PROJ_ABLATE&4
+  if(post==99)
+#endif
+  out[dest]=v;}
 #endif
 }
 
