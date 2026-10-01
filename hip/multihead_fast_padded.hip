@@ -21,7 +21,17 @@
 #pragma clang fp reassociate(off)
 typedef unsigned uint;
 #define DEV __attribute__((device)) __attribute__((always_inline))
-#define KERNEL extern "C" __attribute__((global))
+#ifndef HIP_KERNEL_WPE
+#define HIP_KERNEL_WPE 0 /* 2026-10-01 compiler sweep (diagnostic, default 0 = no attribute): amdgpu_waves_per_eu lower bound applied to every kernel of the module */
+#endif
+#ifndef HIP_KERNEL_ATTR
+#if HIP_KERNEL_WPE
+#define HIP_KERNEL_ATTR __attribute__((amdgpu_waves_per_eu(HIP_KERNEL_WPE)))
+#else
+#define HIP_KERNEL_ATTR
+#endif
+#endif
+#define KERNEL extern "C" __attribute__((global)) HIP_KERNEL_ATTR
 #ifndef HIP_FFN_WAVE_NORM
 #define HIP_FFN_WAVE_NORM 0 /* 2026-09-23 (NOT bit-exact, default off): parts 0/1 of the QKV are computed one head (32 columns) per
  wave so the normalisation's sum of squares is 16 in-lane terms + one ds_bpermute add, with rsqrt/scale/norm bytes in registers -- no

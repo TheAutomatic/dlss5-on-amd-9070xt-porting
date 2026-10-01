@@ -1390,3 +1390,8 @@ DEC_WIDE/F8W 互斥原因：宿主选了 `_w` 后 F8W 判断只认不带后缀�
 - RE9 runtime flags 白名单加 `DLSS5_STYLE`（runtime 73D4C25C，改前源码重编 = DC2D445E 可复现）；默认 old/new/文件 1 SAME，文件 0 = 环境变量 0（5c42d337 / b9ac12c0），smoke 0；未装机。
 - 功耗逐族 DUP×8 + ADL：功耗钉 322～328W；每周期能耗 C64/C128 最高（1.08～1.10），C32 1.04～1.06，C512 各核 0.80～0.93；降 10% 上界 C32 −0.14/−0.23ms，其余 ≤0.11；无逐位便宜候选。第一批跑到一半遇上 Zero 开游戏，作废重测（之后加了每 15 秒查游戏进程的看门狗）。
 - C512 attention 投影消融（`C512_PROJ_ABLATE`，诊断，默认 0）：核内全空只省 5.6/9.3µs/块（DUP 14.5/22.8），残差读 2.5～5，写出约 0；余差在派发衔接，线停。
+
+## 2026-10-01 夜：编译器层逐位扫描（compiler-sweep-20261001）
+- 盘点：`RTC_EXTRA_OPTS` 连写 `-mllvm=X`；配方加行字段 `opts`（`-RowOpts` 才生效）与 `-ExtraOpts`；源码挂点 `HIP_KERNEL_WPE`（默认 0）。默认构建 62/62 与现装逐条同。
+- 静态 8 模块×26 组：`waves_per_eu` 1/2/4 热核代码全不变；bottomup/topdown/itminreg/unroll 指令膨胀，部分组合溢出，淘汰。35 组上 GPU。
+- 收：c32-wave1 `-enable-post-misched=0` + max-ilp（整网 −59/−84µs），c512-m32-deep max-ilp（−10/−20µs）。合成：19 组 SAME；ABBA 900 −0.054/−0.043/−0.081，1080 −0.089/−0.091/−0.061ms，p99 7.525→7.443、10.277→10.188。只进配方（`-RowOpts`），未装机。

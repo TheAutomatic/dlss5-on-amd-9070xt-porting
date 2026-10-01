@@ -8,7 +8,17 @@
 #pragma clang fp reassociate(off)
 typedef unsigned uint;
 #define DEV __attribute__((device)) __attribute__((always_inline))
-#define KERNEL extern "C" __attribute__((global))
+#ifndef HIP_KERNEL_WPE
+#define HIP_KERNEL_WPE 0 /* 2026-10-01 compiler sweep (diagnostic, default 0 = no attribute): amdgpu_waves_per_eu lower bound applied to every kernel of the module */
+#endif
+#ifndef HIP_KERNEL_ATTR
+#if HIP_KERNEL_WPE
+#define HIP_KERNEL_ATTR __attribute__((amdgpu_waves_per_eu(HIP_KERNEL_WPE)))
+#else
+#define HIP_KERNEL_ATTR
+#endif
+#endif
+#define KERNEL extern "C" __attribute__((global)) HIP_KERNEL_ATTR
 #ifndef HIP_LDS_FENCE
 #define HIP_LDS_FENCE 1 /* 2026-09-22 fence scope: workgroup fences here only publish LDS; the default "workgroup" scope made gfx12 emit global_inv (vector L0 invalidate) and wait for all outstanding global loads at every barrier. Restricting the fence to the LDS address space removes both; bit-exact, see Development/results/fence-scope-all-20260922 */
 #endif

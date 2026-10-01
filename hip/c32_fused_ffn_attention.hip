@@ -95,10 +95,20 @@ typedef unsigned uint;
 #ifndef HIP_C32_CU_MODE
 #define HIP_C32_CU_MODE 1 /* 2026-09-22: 128-thread C32 workgroups run faster with all four waves on one CU (-0.13/-0.17ms whole network on top of the fence change, bit-exact); larger MH/deep workgroups get slower in CU mode, so this is C32-only */
 #endif
-#if HIP_C32_CU_MODE
-#define KERNEL extern "C" __attribute__((global)) __attribute__((target("cumode")))
+#ifndef HIP_KERNEL_WPE
+#define HIP_KERNEL_WPE 0 /* 2026-10-01 compiler sweep (diagnostic, default 0 = no attribute): amdgpu_waves_per_eu lower bound applied to every kernel of the module */
+#endif
+#ifndef HIP_KERNEL_ATTR
+#if HIP_KERNEL_WPE
+#define HIP_KERNEL_ATTR __attribute__((amdgpu_waves_per_eu(HIP_KERNEL_WPE)))
 #else
-#define KERNEL extern "C" __attribute__((global))
+#define HIP_KERNEL_ATTR
+#endif
+#endif
+#if HIP_C32_CU_MODE
+#define KERNEL extern "C" __attribute__((global)) __attribute__((target("cumode"))) HIP_KERNEL_ATTR
+#else
+#define KERNEL extern "C" __attribute__((global)) HIP_KERNEL_ATTR
 #endif
 #if HIP_C32_TRANSPOSED_TAIL && !(HIP_C32_FOLDED_FFN && HIP_C32_REGISTER_FFN)
 #error "HIP_C32_TRANSPOSED_TAIL needs HIP_C32_FOLDED_FFN and HIP_C32_REGISTER_FFN"
