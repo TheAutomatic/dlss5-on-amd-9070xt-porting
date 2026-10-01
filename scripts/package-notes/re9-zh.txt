@@ -1,7 +1,7 @@
 OptiScaler-REFramework-DLSS5-AMD @VERSION@ — RE9特殊前置完整包
 
 0.39 更新
-与常规包同一套新核（默认与 0.38 逐位相同；离线 900 档约 7.27 → 6.8ms，1080 档约 10.05 → 9.5ms）。runtime 支持 DLSS5_STYLE（模板为 1 = 以前的风格，逐位不变；0 = NVIDIA 默认；2 = 第三种；改了要重启）。runtime 可复现构建。宿主不变。
+与常规包同一套新核（默认与 0.38 逐位相同；离线 900 档约 7.27 → 6.8ms，1080 档约 10.05 → 9.5ms）。风格仍为以前的 Style 1（逐位不变）。注意：RE9 runtime 目前不从 flags 文件读取 DLSS5_STYLE（模板里那行只是与常规包一致，改了不生效）；要试 Style 0/2 需设系统环境变量 DLSS5_STYLE 后重启游戏。runtime 可复现构建。宿主不变。
 
 0.38 更新
 与常规包同一套新核（默认与 0.37 逐位相同；离线 900 档约 8.0 → 7.6ms，1080 档约 10.8 → 10.4ms）。runtime 支持 DLSS5_FORMAT_FALLBACK（模板为 1：R10G10B10A2、B8G8R8X8、R32G32B32(A32) 等颜色格式不再被拒；设 0 关闭）和可选有损的 DLSS5_NETWORK_1080_ROWS=1088（模板 1152 = NVIDIA 原版几何）。DLSS5_HOT_RELOAD 不适用（强度/细节在 OptiScaler 菜单里本来就是实时的）。宿主不变。
