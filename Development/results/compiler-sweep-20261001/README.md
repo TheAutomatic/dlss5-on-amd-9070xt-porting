@@ -149,3 +149,19 @@ CS2 六轮都快，但 900 合并 p99 变差；拆开后各自都有慢的轮次
 - `hip/build-modules.ps1` 新增行字段 `compiler = 'llvm23'`（c32-wave1、c64-wave2）和参数 `-PrebuiltDir`。**只在 `-RowOpts` 下生效**：这两行不走 COMGR，从 `-PrebuiltDir\<arch>\<name>.hsaco` 拷；缺文件直接报错。不带 `-RowOpts` 时照旧 COMGR，c64 行重编仍与现装逐条同。
 - 预编：DGX 上 `python3 Development/tools/llvm-fork/compile-modules.py --bin ~/work/llvm-build-23/bin --target-feature=-real-true16 --row-opts --compiler-rows llvm23 --out <dir>`，两架构 4 个模块；与测过的模块逐条同。lab：`compiler-sweep-20261001\pre23`（预编）、`recipe-on3`（`-RowOpts -PrebuiltDir` 全量 62 个；与 recipe-on 只差 c32/c64 两架构共 4 个）。
 - 代价：发版构建多一步 Linux 上的 LLVM23 编译。
+
+## 8. 续（光第四单，10-02）：LLVM23 的收缩对齐 + LLVM23 下重扫调度。**这一轮没有新收的。**
+
+### 8.1 `-ffp-contract` 恢复不了逐位，前提不成立
+- vit-stream、mh_fast 用 LLVM23 加 `-ffp-contract=on/off/fast` 重编：**`on` 和 `off` 编出的代码与默认逐条相同**，`fast` 只改了 mh_fast。也就是说，现在这两个模块在 LLVM23 下本来就没有发生 mul+add 收缩，这个开关无从对齐。
+- §7.2 里看到的"多出来的 FMA"其实是 `v_fma_mix_f32 a, b, neg(0)`：f16 输入直接乘、加数是 −0，结果就是精确乘积按一次舍入，和原来的 `v_cvt_f32_f16` + `v_mul_f32` 数值上相同，不是收缩。它省掉了 16 条 mul。
+- 两版的浮点指令直方图（contract、pool c128）差别主要是循环展开倍数（LLVM21 展开 4 份，LLVM23 不展开，各类指令都 ÷4）。fp8 编码 `v_cvt_pk_fp8_f32` 两边都有，只是没用到的第三源操作数编码不同（0 对 inline 0）。**真正哪条指令改了数值没定位到**，按这一单的口径不追。
+
+### 8.2 LLVM23 下重扫调度（pass6，5 轮，基线 = 现配方：c32 LLVM23 post-RA 关+max-ilp、c64 LLVM23 默认、c512-deep COMGR max-ilp；`pass6-table.txt`，µs，900 / 1152 行）
+- **`iterative-ilp` 在 LLVM23 下让 clang 崩**（c64、swin、c512-mh、c512-deep、deep_fast 都崩，只有 c32 编得过），这些组合不测。
+- c32：默认 +49/+50、post-RA 关 +41/+53、max-ilp +18/+30、iterative-ilp +57/+92、post-RA 关+iterative-ilp +30/+34、post-RA 关+iterative-maxocc +23/+41、post-RA 关+max-memory-clause +16/+53——**现配方（post-RA 关+max-ilp）在 LLVM23 下仍是最优。**
+- c64：post-RA 关 −16/+7、max-ilp −15/+83、**post-RA 关+iterative-maxocc −16/−24**、post-RA 关+max-memory-clause −9/−17。
+- swin、c512-mh、c512-deep、deep_fast 用 LLVM23 + post-RA 关（或 + iterative-maxocc）：swin −8/+8、c512-mh −1/+8，没有比现在用 COMGR 编的版本更快；c512-deep +22/+83、deep_fast +48/+182。**拉不回来**，这四个继续用 COMGR。
+
+### 8.3 c64 post-RA 关 + iterative-maxocc 的完整验证（`full-CS6.txt`）
+19 组 SAME；ABBA 900 −0.013/**+0.020/+0.009**，1080 −0.038/−0.040/−0.023ms；合并 p99 900 7.381→**7.450**，1080 10.161→10.106。900 档有两轮变慢，p99 也变差，**不收**。配方保持 d48cdae3。

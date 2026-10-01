@@ -52,6 +52,7 @@ def main():
     p.add_argument('--generate-only', action='store_true')
     p.add_argument('--target-feature', action='append', default=[], help='e.g. -real-true16 (LLVM23 gfx12 defaults to real true16, which rejects the sources\' v_cvt_f32_f16 vN inline asm); front and back end')
     p.add_argument('--compiler-rows', default='', help="only rows tagged compiler = '<this>' (e.g. llvm23, for build-modules.ps1 -PrebuiltDir)")
+    p.add_argument('--front-option', action='append', default=[], help='extra front-end option, e.g. -ffp-contract=on')
     p.add_argument('--row-opts', action='store_true', help='also forward the recipe row opts (-mllvm=X), like build-modules.ps1 -RowOpts')
     p.add_argument('--backend-option', action='append', default=[],
                    help='LLVM backend option, forwarded with -mllvm (repeatable)')
@@ -84,7 +85,7 @@ def main():
                  '--offload-arch=' + target, '-O3', '-x', 'hip', '--offload-device-only',
                  '-cuid=' + hashlib.sha256(struct.pack('<Q', src.stat().st_size) + src.read_bytes()).hexdigest().upper(), '-c', '-emit-llvm', '-fshort-wchar',
                  '-std=c++14', '-fms-compatibility-version=19.44.35229',
-                 '-nogpuinc', '-nogpulib'] + [x for t in a.target_feature for x in ('-Xclang', '-target-feature', '-Xclang', t)] + [str(src), '-o', str(bc)]
+                 '-nogpuinc', '-nogpulib'] + list(a.front_option) + [x for t in a.target_feature for x in ('-Xclang', '-target-feature', '-Xclang', t)] + [str(src), '-o', str(bc)]
         back = [str(a.bin / 'clang'), '-target', 'amdgcn-amd-amdhsa', '-mcpu=' + target,
                 '-O3', '-nogpulib'] + [x for t in a.target_feature for x in ('-Xclang', '-target-feature', '-Xclang', t)]
         for option in list(a.backend_option) + ropts:
