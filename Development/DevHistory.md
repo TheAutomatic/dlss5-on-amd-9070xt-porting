@@ -1369,3 +1369,4 @@ U4 的 ISA 显示：每迭代发 4 步 load，但末尾等到 0，跨迭代不�
 - 前三：C512 attention 投影、ViT 1088 档 QKV+attention、C32 中间块。`C512_PROJ_DEEP`（投影 K 循环手排流水）19 SAME 但两档三轮 +0.22ms：LLVM 提前全部 B load、255 VGPR 溢出，四种写法都溢出，不收，宏默认 0。没装机。见 results/gap-map-evening-20261001。
 - 续：`C512_PROJ_WN4`（attention 投影 4 wave/WG、每 wave 16 列，wave 数 ×4，与 M32 减 wave 相反）19 SAME，但两档持平偏慢（w2 900 +0.013/+0.011/−0.004、1080 +0.018/+0.006/−0.008），不收，模块/宿主宏默认 0；这条核不是 wave 数或链长受限，线停。
 - 续：ViT 1088 DUP 回放（µs/实例 900→1088，他 900→1080）：QKV 27.9→42.4（他 23.6→24.4）、attention 14.6→35.6（他 14.8→24.4）、expand 26.6→39.6（他 22.7→26.8）、contract 37.1 已持平。我们 QKV/expand/project 随 token 线性涨（每 16-token tile 各读权重），attention 近似平方（每 16 query 扫一遍 K/V，他 32 query）；建议下一刀 attention 32-query 共用 K/V、只开 640 档。
+- 续：ViT 线收尾（§5.2 两刀即 vit-1080-gap 的 ATTN_M32 与 TM/WT/WH/BIG，已负账，无新角度）。C32 中间块 DUP（900 chain 134.2、1088 188.3µs/块）：+16µs/块 ≈ 单核本体 +10（数值：激活/归一化 RTZ 链）+ 链内降频放大 +6；组织方式只剩 up 分发 ≤3µs，不出刀。顺修 c512-qkv-pipeline/dup.ps1 的 `$cases`/`$Cases` 同名覆盖 bug。
