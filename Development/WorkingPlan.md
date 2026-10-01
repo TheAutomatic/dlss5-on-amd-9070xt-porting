@@ -88,7 +88,7 @@
 - ViT 1080：attention `HIP_VIT_ATTN_M32`（32 query 共用 K/V，1080 +0.145）、QKV `HIP_VIT_QKV_TM` 2/4、`HIP_VIT_QKV_WIDE` WT/WH/BIG（照他 64×256 形状，1080 全慢）（`vit-1080-gap`）；decoder `HIP_DEC_NT`（A 复用，NT=4 慢）（`tail-c32-gap`）。
 - Swin 链：`W2_UP_DIRECT`、`W2_SKIP_BYTE`、`W2_HIDDEN_TILES 4`、`CW_UP_LOW_BYTES`、C256 `QKV_FUSE`（VGPR 顶满）（`c128-c64-inchain`）。C32 中间块 +16µs/块 = 数值 + 链内降频放大，无逐位组织方式件（`gap-map-evening` §6）。
 - 功耗逐族（`night-20261001` §2）：板功耗钉 325W，每周期能耗 C64/C128 1.08～1.10、C32 1.04～1.06 倍均值，C512 低于均值；某族降 10% 上界 −0.04～−0.23ms，无逐位便宜件。
-- 编译器：COMGR2/LLVM20 慢 3%；公开 LLVM21 持平；LLVM22 不逐位；VOPD 前瞻 ±0.3%。按模块调度选项（10-01）：c32-wave1 关 post-RA 调度 + max-ilp、c512-m32-deep max-ilp 逐位且 −0.06/−0.08ms，进配方 `-RowOpts` 待下一版；waves_per_eu 编译器不理；其余 7 个链内模块、关 s_delay_alu/VOPD、按核细分均无收（10-02）。旧 block46 改 FP8 WMMA 有位差。
+- 编译器：COMGR2/LLVM20 慢 3%；公开 LLVM21 持平；LLVM22 不逐位；VOPD 前瞻 ±0.3%。按模块调度选项（10-01）：c32-wave1 关 post-RA 调度 + max-ilp、c512-m32-deep max-ilp 逐位且 −0.06/−0.08ms，进配方 `-RowOpts` 待下一版；waves_per_eu 编译器不理；其余 7 个链内模块、关 s_delay_alu/VOPD、按核细分均无收（10-02）；按模块换编译器：LLVM22 6/9 逐位、LLVM23 7/9 逐位（不逐位的 vit-stream/mh_fast 是 FMA 收缩），c32+c64 改用 LLVM23 再 −0.06/−0.04ms，进配方（`-RowOpts -PrebuiltDir`，DGX 预编）。旧 block46 改 FP8 WMMA 有位差。
 
 ## C. 需要 Zero 拍板（有损）
 

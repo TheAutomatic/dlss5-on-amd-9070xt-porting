@@ -100,3 +100,52 @@ c64 的 iterative-ilp 900 档为零，不收。
 | CS4：只 vit-stream | SAME | −0.023/**+0.028**/−0.005 | −0.016/−0.049/**+0.014** | 7.451→**7.542** / 10.239→10.227 |
 
 CS2 六轮都快，但 900 合并 p99 变差；拆开后各自都有慢的轮次。收益约 10～20µs，和 ABBA 的轮间噪声一个量级。**按规矩都不收**，配方保持 82ce821f。
+
+## 7. 续（光第三单，10-02）：换编译器版本，按模块逐个比
+**收一项：c32-wave1（带 post-RA 关 + max-ilp）和 c64-wave2 改用公开 LLVM 23.1.2 编**，19 组 SAME，ABBA 六轮全快。进配方（`-RowOpts -PrebuiltDir`），没装机。
+
+### 7.1 工具链
+- LLVM22 = 09-29 那份 ROCm 7.2.4（`f58b06dc`，DGX `~/work/llvm-build-rocm724`），沿用；LLVM23 = 公开 `llvmorg-23.1.2`（`85ac5602`），DGX 上新编（clang+lld，只 AMDGPU，`Development/tools/llvm-fork/build-llvm23.sh`）。
+- 编法沿用 `Development/tools/llvm-fork/compile-modules.py`（三段模仿 COMGR：源码→BC→重定位→lld 链接）。本次补了三处：认配方新的 `opts`/`compiler` 字段（原正则会把带 opts 的行漏掉）、`--row-opts`、`--target-feature`。
+- **LLVM23 的 gfx12 默认开 real-true16**，源码内联汇编 `v_cvt_f32_f16 vN, vN` 报"operands are not valid"（17078 处），要 `-Xclang -target-feature -Xclang -real-true16`（前后端都加）。
+
+### 7.2 逐位：每次只换一个模块进现装那套（`go-cv.ps1`，19 组）
+| 模块 | LLVM22 | LLVM23 |
+|---|---|---|
+| c32-wave1 | SAME（带配方选项也 SAME） | SAME（带配方选项也 SAME） |
+| c64-wave2 | SAME | SAME |
+| swin-persistent | SAME | SAME |
+| c512-m32-mh | SAME | SAME |
+| c512-m32-deep | SAME（带 max-ilp 也 SAME） | SAME（带 max-ilp 也 SAME） |
+| deep_fast-packed | SAME | SAME |
+| vit-stream | **900 静态 12/12 不同** | **900 静态 12/12 不同** |
+| mh_fast | **900 静态 12/12 不同** | **900 静态 12/12 不同** |
+| vit-wide-deep | **720 运动 1/12 不同**（前 11 组 SAME） | SAME |
+
+所以 09-29 的"LLVM22 不逐位"其实只落在 3 个模块上，其余 6 个逐位。
+
+**不逐位的粗看**（`fpops-L22-L23.txt`，只数派发到的核里的浮点指令，对照公开 21）：
+- LLVM23 是 **FMA 收缩**：`vit_stream_project_n64_bh` 的 16 条 mul + 加法变成 32 条 FMA；`mh_pool_project_group_c64/c128_hin` 各多出 2 条 FMA，加法条数也变了（81→9，展开方式不同）。
+- LLVM22 没有新增 FMA，但 vit_stream contract/project_n64 的 f32 加法条数变了（65→69、18→22），pool c128 的加法 81→19：像是**累加的展开/重排**，没追到具体哪条。
+- vit-wide-deep 派发的只有 vit_gather（不含浮点运算）；22 下 720 档那一帧差，多半是 720 档才派发的核，没追。
+
+### 7.3 链内 µs（pass5，5 轮，整网 span 去漂移，基线 = 82ce821f 配方；`pass5-table.txt`）
+| 模块 | LLVM22 900 / 1152 | LLVM23 900 / 1152 |
+|---|---|---|
+| c32-wave1 + 配方选项 | −4 / +3 | **−23 / −50** |
+| c32-wave1 不带选项（对照） | +62 / +82 | +7 / 0 |
+| c64-wave2 | −8 / +5 | **−16 / −26** |
+| swin-persistent | −7 / +11 | +1 / +21 |
+| c512-m32-mh | −8 / +7 | +2 / +4 |
+| c512-m32-deep + max-ilp | −2 / −9 | +133 / +236 |
+| deep_fast-packed | +7 / +26 | +47 / +146 |
+| vit-wide-deep | （不逐位） | +2 / +30 |
+
+### 7.4 合成与验证（基线 = 现装 + 82ce821f 的 c32/c512-deep；候选再把 c32、c64 换成 LLVM23 版；`full-CS5.txt`）
+- **19 组 SAME**。
+- ABBA：900 −0.048/−0.072/−0.066，1080 −0.061/−0.024/−0.035ms；合并 p99 900 7.460→7.405、1080 10.187→10.169。六轮全快，p99 两档都好。
+
+### 7.5 配方
+- `hip/build-modules.ps1` 新增行字段 `compiler = 'llvm23'`（c32-wave1、c64-wave2）和参数 `-PrebuiltDir`。**只在 `-RowOpts` 下生效**：这两行不走 COMGR，从 `-PrebuiltDir\<arch>\<name>.hsaco` 拷；缺文件直接报错。不带 `-RowOpts` 时照旧 COMGR，c64 行重编仍与现装逐条同。
+- 预编：DGX 上 `python3 Development/tools/llvm-fork/compile-modules.py --bin ~/work/llvm-build-23/bin --target-feature=-real-true16 --row-opts --compiler-rows llvm23 --out <dir>`，两架构 4 个模块；与测过的模块逐条同。lab：`compiler-sweep-20261001\pre23`（预编）、`recipe-on3`（`-RowOpts -PrebuiltDir` 全量 62 个；与 recipe-on 只差 c32/c64 两架构共 4 个）。
+- 代价：发版构建多一步 Linux 上的 LLVM23 编译。

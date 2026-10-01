@@ -1,0 +1,9 @@
+L22 c32-wave1 SAME=19
+L22 c64-wave2 SAME=19
+L22 swin-persistent SAME=19
+L22 c512-m32-mh SAME=19
+L22 c512-m32-deep SAME=19
+L22 vit-stream FAIL after SAME=0: Output changed 900-static-True (12/12)
+L22 multihead-fast-padded-wave-packed FAIL after SAME=0: Output changed 900-static-True (12/12)
+L22 deep_fast-packed SAME=19
+L22 vit-wide-deep FAIL after SAME=11: Output changed 720-motion-True (1/12)

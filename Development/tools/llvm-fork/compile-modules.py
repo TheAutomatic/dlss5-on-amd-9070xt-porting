@@ -17,10 +17,10 @@ from pathlib import Path
 
 def recipe(hip):
     text = (hip / 'build-modules.ps1').read_text(encoding='utf-8-sig')
-    rows = re.findall(r"@\{ name\s*=\s*'([^']+)';\s*defines\s*=\s*@\((.*?)\);\s*sources\s*=\s*@\((.*?)\)\s*\}", text)
+    rows = re.findall(r"@\{ name\s*=\s*'([^']+)';\s*defines\s*=\s*@\((.*?)\);\s*sources\s*=\s*@\((.*?)\)\s*(?:;\s*opts\s*=\s*'([^']*)'\s*)?(?:;\s*compiler\s*=\s*'([^']*)'\s*)?\}", text)
     if not rows or len({r[0] for r in rows}) != len(rows):
         raise RuntimeError('Empty or duplicate canonical module recipe')
-    for name, defines, parts in rows:
+    for name, defines, parts, opts, compiler in rows:
         defs = ['HIP_ISA_HALF 1']
         if name.endswith('-packed'):
             defs.append('HIP_PREPACKED_WEIGHTS 1')
@@ -38,7 +38,7 @@ def recipe(hip):
                 chunks.append(core[start:end] + '\n')
             else:
                 chunks.append((hip / part).read_text() + '\n')
-        yield name, ''.join(chunks), defs, sources
+        yield name, compiler, ''.join(chunks), defs, sources, [o[len('-mllvm='):] for o in opts.split() if o.startswith('-mllvm=')]
 
 
 def main():
@@ -50,6 +50,9 @@ def main():
     p.add_argument('--only', nargs='*', default=[])
     p.add_argument('--jobs', type=int, default=4)
     p.add_argument('--generate-only', action='store_true')
+    p.add_argument('--target-feature', action='append', default=[], help='e.g. -real-true16 (LLVM23 gfx12 defaults to real true16, which rejects the sources\' v_cvt_f32_f16 vN inline asm); front and back end')
+    p.add_argument('--compiler-rows', default='', help="only rows tagged compiler = '<this>' (e.g. llvm23, for build-modules.ps1 -PrebuiltDir)")
+    p.add_argument('--row-opts', action='store_true', help='also forward the recipe row opts (-mllvm=X), like build-modules.ps1 -RowOpts')
     p.add_argument('--backend-option', action='append', default=[],
                    help='LLVM backend option, forwarded with -mllvm (repeatable)')
     a = p.parse_args()
@@ -59,18 +62,20 @@ def main():
     for target in a.targets:
         if target not in ('gfx1200', 'gfx1201'):
             p.error('Only gfx1200/gfx1201 supported')
-        for name, source, defs, sources in recipe(a.hip):
+        for name, compiler, source, defs, sources, ropts in recipe(a.hip):
             if a.only and name not in a.only:
+                continue
+            if a.compiler_rows and compiler != a.compiler_rows:
                 continue
             directory = a.out / target / 'sources' / name
             directory.mkdir(parents=True, exist_ok=True)
             # COMGR always calls the translation unit probe.hip.
             src = directory / 'probe.hip'
             src.write_text(source)
-            tasks.append((target, name, src, defs, sources))
+            tasks.append((target, name, src, defs, sources, ropts if a.row_opts else []))
 
     def compile_one(task):
-        target, name, src, defs, sources = task
+        target, name, src, defs, sources, ropts = task
         dest = a.out / target
         bc, obj, asm, hsaco = [dest / (name + ext) for ext in ('.bc', '.o', '.hsaco.s', '.hsaco')]
         sha = hashlib.sha256(src.read_bytes()).hexdigest()
@@ -79,10 +84,10 @@ def main():
                  '--offload-arch=' + target, '-O3', '-x', 'hip', '--offload-device-only',
                  '-cuid=' + hashlib.sha256(struct.pack('<Q', src.stat().st_size) + src.read_bytes()).hexdigest().upper(), '-c', '-emit-llvm', '-fshort-wchar',
                  '-std=c++14', '-fms-compatibility-version=19.44.35229',
-                 '-nogpuinc', '-nogpulib', str(src), '-o', str(bc)]
+                 '-nogpuinc', '-nogpulib'] + [x for t in a.target_feature for x in ('-Xclang', '-target-feature', '-Xclang', t)] + [str(src), '-o', str(bc)]
         back = [str(a.bin / 'clang'), '-target', 'amdgcn-amd-amdhsa', '-mcpu=' + target,
-                '-O3', '-nogpulib']
-        for option in a.backend_option:
+                '-O3', '-nogpulib'] + [x for t in a.target_feature for x in ('-Xclang', '-target-feature', '-Xclang', t)]
+        for option in list(a.backend_option) + ropts:
             back += ['-mllvm', option]
         commands = [front,
                     back + ['-S', str(bc), '-o', str(asm)],

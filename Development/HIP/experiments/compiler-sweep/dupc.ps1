@@ -21,7 +21,7 @@ $caseList=@(Get-Content $CaseFile|?{$_ -and $_ -notmatch '^#'})
 foreach($round in 1..$Rounds){foreach($h in ($Heights -split ',')){foreach($cc in $caseList){$cn,$mod,$bn,$pre=$cc -split '\|'
  Test-Game
  Copy-Item "$root\inst\*.hsaco" "$root\flat" -Force
- if($bn -ne 'inst'){Copy-Item "$bs\build-$bn\gfx1201\$mod.hsaco" "$root\flat" -Force}
+ if($bn -match '^L\d'){Copy-Item "$bs\$bn\gfx1201\$mod.hsaco" "$root\flat" -Force}elseif($bn -ne 'inst'){Copy-Item "$bs\build-$bn\gfx1201\$mod.hsaco" "$root\flat" -Force}
  $tag="r$round-h$h-$cn"
  $flags=@(Get-Content "$a\native-game-flags.txt")+@('DLSS5_HIP_MH_FEATURE_BYTE=1','DLSS5_HIP_MH_PROJ_DIAG_FB=1','DLSS5_HIP_MH_BYTE_STREAM=1','DLSS5_HIP_DECODER_BYTE=1','DLSS5_HIP_VIT_BYTE_STREAM=0','DLSS5_HIP_VIT_STREAM=3','DLSS5_HIP_MH_FFN_FRAG256=1','DLSS5_DIRECT_IO=3','DLSS5_BENCH_PLAIN=1','DLSS5_HIP_GRAPH=0','DLSS5_SHOW_FPS=0','DLSS5_PRE_UPSCALE=0',"DLSS5_NETWORK_HEIGHT=$h",'DLSS5_VIT_ADAPTIVE=0','DLSS5_VIT_ADAPTIVE_LOG=','DLSS5_RESIDUAL_SEQUENCE=0','DLSS5_RESIDUAL_RGB=0','DLSS5_HIP_PDL=1','DLSS5_HIP_WAVE_OWNED=1','DLSS5_HIP_C512_M32=1','DLSS5_HIP_VIT_PROJ_N64=1','DLSS5_HIP_SWIN_RUN=1','DLSS5_MAKE_RESIDENT_EVERY=60','DLSS5_HIP_SPAN_PROBE=1','DLSS5_VIT_ADAPTIVE_IDLE_MS=1000000000','DLSS5_NETWORK_1080_ROWS=1152')
  if($pre -and $pre -ne 'base'){$flags+="DLSS5_HIP_DUP_PREFIX=$pre";$flags+='DLSS5_HIP_DUP_COUNT=2';$env:DLSS5_HIP_DUP_PREFIX=$pre;$env:DLSS5_HIP_DUP_COUNT='2'}else{Remove-Item Env:DLSS5_HIP_DUP_PREFIX,Env:DLSS5_HIP_DUP_COUNT -EA 0}
