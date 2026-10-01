@@ -16,7 +16,7 @@ DLSS 5（DLSSNR）跑在 AMD RX 9070 XT / RDNA 4 上。
 | **Magpie**（便携） | 任何游戏，不需要游戏支持超分 | Magpie 抓游戏窗口；网络接在效果组的 FSR3_SR 一项里，之后 FSR4 放大到全屏（可选 XeSS 帧生成） |
 | **OptiScaler-REFramework**（只给 RE9） | 《生化危机 9》，常规路线切不开它的命令提交 | TheAutomatic 改的 OptiScaler 宿主 + 我们的 `LmxxfNrRuntime.dll`（成对使用，别和常规包混装） |
 
-**当前版本：0.38（2026-09-30）。** 默认设置下与 0.37 **全部逐位相同**，只是更快：900 档去 C512 shift_pack、C32 多处中间张量改存 E4M3 字节并跳过全零半块、复合量化与 C512 attention 精简、C256 FFN 宽权重片段、三处字节宽写。离线整网回放 900 档约 8.0 → 7.6ms、1080 档约 10.8 → 10.4ms；每帧派发 900 档 179 → 162、1080 档 162 → 158。新开关：颜色格式兜底 `DLSS5_FORMAT_FALLBACK=1`（R10G10B10A2、B8G8R8X8 等不再被拒）、flags 热重载 `DLSS5_HOT_RELOAD=1`（强度/提示/FPS 不用重启）；可选有损 `DLSS5_NETWORK_1080_ROWS=1088`（默认 1152 不开）。下载：[夸克](https://pan.quark.cn/s/6856d875bbe9) · [Gofile 镜像](https://gofile.io/d/lzsqfUiE)（也在下面的更新记录表）。
+**当前版本：0.39（2026-10-01）。** 默认设置下与 0.38 **全部逐位相同**，只是更快：一批逐位重排的核（C512 FFN 寄存器内一 wave 完成、残差初始化与权重读取外提、解码加宽、ViT QKV/attention 合并等）。离线整网回放 900 档约 7.27 → 6.8ms、1080 档约 10.05 → 9.5ms；《剑星》2K 实测约 +1.5～2 帧。新开关 `DLSS5_STYLE=1`（NVIDIA Style 控制 0/1/2，默认 1 = 以前的风格）；add-on 与 RE9 runtime 可复现构建。下载：夸克（链接待补） · Gofile 镜像（链接待补）（也在下面的更新记录表）。
 
 **环境要求。** RDNA 4 显卡（RX 9070 XT 实测；RX 9060 的内核随包但没机器测）和带 `amdhip64_7.dll` 的 AMD 驱动（现在的正式版驱动就带）。
 不需要 HIP SDK、Agility SDK、预览版 DXC、Windows 开发人员模式。900P 下插件占显存约 1.2 GB（权重 0.6 GB、激活 0.3 GB；`DLSS5_HIP_MEMORY=1`
@@ -168,6 +168,7 @@ powershell -ExecutionPolicy Bypass -File scripts\deploy_fast.ps1 -Source <lab> -
 | 0.36 · 三个包（Magpie · OptiScaler · OptiScaler-REFramework，HIP）[夸克](https://pan.quark.cn/s/e5afdaca0769) · [Gofile 镜像](https://gofile.io/d/Z1hWdjcB) | 09-28 | 算术精简（`CW_ACT_FMED3`、`W2_BOUNDED_RCP`，`results/aco-lineup-20260928`）、float FMA 激活（`results/float-fma-20260928`，**与 0.35 不逐位，新基准**）、输入直写 `DLSS5_DIRECT_IO`（`results/zero-copy-io-20260928`）、C256/C512/C64/C128/C32 块融合（`results/c256-fusion-20260928`、`c512-fusion-20260928`、`fusion-round3-20260928`）、帧时间日志 `DLSS5_FRAME_STATS`。离线相对 0.35：900 −0.79ms、1080 −1.13ms。《剑星》1080P AA EXACT 59～60，2K AA EXACT 54。 |
 | 0.37 · 三个包（Magpie · OptiScaler · OptiScaler-REFramework，HIP）[夸克](https://pan.quark.cn/s/7dbfdc6425fd) · [Gofile 镜像](https://gofile.io/d/onqeAHST) | 09-29 | 与 0.36 逐位相同：C512 紧凑布局（`results/deep-layers-20260929`）、head 分组融合 + ViT attention 转置（`results/kernel-map-20260929`）、C256 跨层持久化 `DLSS5_HIP_SWIN_RUN=1`（`results/swin-persistent-20260929`）、ViT attention 新核（`results/vit-attention-20260929`）、ViT QKV 五 wave 共用权重（`results/vit-qkv-20260929`）。离线 900 约 8.5 → 8.0ms。《剑星》2K AA EXACT 55～56。 |
 | 0.38 · 三个包（Magpie · OptiScaler · OptiScaler-REFramework，HIP）[夸克](https://pan.quark.cn/s/6856d875bbe9) · [Gofile 镜像](https://gofile.io/d/lzsqfUiE) | 09-30 | 默认与 0.37 逐位相同：900 去 shift_pack、C32 字节化与跳全零半块、复合量化、C256 FFN W16、C512 attention 去冗余 F、三处宽写；离线 900 约 8.0 → 7.6ms、1080 约 10.8 → 10.4ms（`results/hip-roofline-20260930`）。新开关 `DLSS5_FORMAT_FALLBACK=1`、`DLSS5_HOT_RELOAD=1`；可选有损 `DLSS5_NETWORK_1080_ROWS=1088`（默认不开）。 |
+| 0.39 · 三个包（Magpie · OptiScaler · OptiScaler-REFramework，HIP）夸克（链接待补） · Gofile 镜像（链接待补） | 10-01 | 默认与 0.38 逐位相同：C512 FFN 一 wave 寄存器内完成、残差初始化/权重读取外提、解码加宽、ViT QKV/attention 合并等；离线 900 约 7.27 → 6.8ms、1080 约 10.05 → 9.5ms，《剑星》2K +1.5～2 帧。新开关 `DLSS5_STYLE=1`；add-on/runtime 可复现构建。 |
 
 ## 权重
 

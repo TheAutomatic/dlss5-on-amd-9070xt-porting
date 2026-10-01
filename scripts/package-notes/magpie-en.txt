@@ -1,5 +1,10 @@
 Magpie-DLSS5-AMD @VERSION@ — full portable package
 
+0.39
+Default output bit-identical to 0.38 (same output, byte for byte). Faster bit-exact kernels (C512 FFN done in registers by one wave, ViT QKV/attention, hoisted weight loads in C32/C64, wider decode, ...). Offline network: 900 tier about 7.27 -> 6.8 ms, 1080 tier about 10.05 -> 9.5 ms; Stellar Blade at 2K about +1.5-2 fps.
+New switch: DLSS5_STYLE=1 (NVIDIA NGX Style control, 0/1/2). 1 = the style the original runtime used in Stellar Blade and the value every earlier package had built in (default, bit-identical); 0 = NVIDIA's default, closest to its reference output; 2 = the third style. Needs a game restart.
+Reproducible add-on build: the same source gives the same file wherever it is built.
+
 0.38
 Default output bit-identical to 0.37 (same output, byte for byte). Faster kernels:
 1. 900 tier: C512 shift-pack launches removed (16-token padded allocation; falls back automatically if the buffer is too small).
