@@ -21,6 +21,20 @@ KERNEL void sp_init(SpParams p){
  if(i<3*p.total)p.state[4+i]=0;
  if(i==0){p.state[0]=p.base;p.state[1]=p.base+p.first;p.state[2]=0;p.state[3]=0;}
 }
+// SP_INIT_PAIR (2026-10-01 bitexact-pm): one launch initializes this stage's queue state AND the other C256 stage's
+// (encoder -> decoder): the decoder's state is a separate buffer whose last user is the previous frame, so its init has
+// no data dependency on anything this frame and the decoder's own sp_init dispatch goes away. Same values as two sp_init.
+#ifndef SP_INIT_PAIR
+#define SP_INIT_PAIR 0
+#endif
+#if SP_INIT_PAIR
+KERNEL void sp_init_pair(SpParams p,uint*state2,uint total2,uint base2,uint first2){
+ uint i=__builtin_amdgcn_workgroup_id_x()*256+__builtin_amdgcn_workitem_id_x();
+ if(i<3*p.total)p.state[4+i]=0;
+ if(i<3*total2)state2[4+i]=0;
+ if(i==0){p.state[0]=p.base;p.state[1]=p.base+p.first;p.state[2]=0;p.state[3]=0;state2[0]=base2;state2[1]=base2+first2;state2[2]=0;state2[3]=0;}
+}
+#endif
 template<uint C,bool W16=false> DEV void sp_run_body(SpParams p){
  const uint tid=__builtin_amdgcn_workitem_id_x(),group=__builtin_amdgcn_workgroup_id_x();
  uint *counts=p.state+4,*queue=counts+p.total,*broadcast=queue+p.total;

@@ -235,6 +235,10 @@ public:
       where nothing else reads the neural texture. Default 0. */
    {const wchar_t*v=_wgetenv(L"DLSS5_IO_FUSE");resources->io_fuse=v&&wcstoul(v,nullptr,10)==1&&!resources->overlap&&!resources->temporal&&!temporal_rgb;
     if(v&&wcscmp(v,L"0")&&wcscmp(v,L"1"))throw std::runtime_error("DLSS5_IO_FUSE must be 0 or 1");
+    /* 2026-10-01 bitexact-pm guard: an older native_codec_decode.hlsl ignores NATIVE_CODEC_NEURAL_BUFFER and would silently decode
+       garbage (fast-tier 35 dB note in results/input-slim-20261001); refuse the fusion unless the installed shader knows the macro. */
+    if(resources->io_fuse){bool knows=false;if(FILE*f=_wfopen((directory+L"\\native_codec_decode.hlsl").c_str(),L"rb")){std::string t;char b[4096];size_t n;while((n=fread(b,1,sizeof b,f))>0)t.append(b,n);fclose(f);knows=t.find("NATIVE_CODEC_NEURAL_BUFFER")!=std::string::npos;}
+     if(!knows){resources->io_fuse=false;NativeGameFrameStep("io_fuse_refused_old_decode_shader",d);}}
     if(resources->io_fuse){resources->decode.UseNeuralBuffer(resources->network.Output());NativeGameFrameStep("io_fuse",d);}}
    NativeGameFrameStep("decode",d);resources->decode.Create(d,{resources->encode.Output(),resources->neural.Output(),resources->overlap?resources->original_copy:source},directory);NativeGameFrameStep("ready",d);ready=true;
   }catch(...){failed=true;throw;}

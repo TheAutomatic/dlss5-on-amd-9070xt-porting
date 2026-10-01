@@ -7,7 +7,11 @@ struct SpPlan {
  Tensor gpu_nodes,state;
  U first=0,total=0,next_ticket=0;
  bool w16=false; // C256 through sp_run256_w16/sp_recover256_w16 with the @ffn-frag-w16 weights
+ bool pre_inited=false,pair_fn=false;U pre_base=0; // SP_INIT_PAIR: state already initialized for base pre_base by the encoder stage's sp_init_pair
 };
+#ifndef HIP_SP_INIT_PAIR
+#define HIP_SP_INIT_PAIR 1 /* 2026-10-01 bitexact-pm: use sp_init_pair when swin-persistent exports it (module macro SP_INIT_PAIR, default 0) */
+#endif
 std::map<std::tuple<U,U,U,U>,SpPlan> sp_plans;
 bool sp_disabled=false;
 void *sp_error_allocation=nullptr;std::atomic<U>*sp_error_host=nullptr;U*sp_error_device=nullptr;
@@ -48,6 +52,7 @@ SpPlan &SpGetPlan(U w,U h,U c,U first,U layers){
  }
  if(!modules.count("sp")){Handle m{};api.Check(api.LoadModule(&m,(opt.modules+"/swin-persistent.hsaco").c_str()),"SP module");modules["sp"]=m;}
  plan.w16=HIP_C256_FFN_W16&&c==256&&HasFn("sp","sp_run256_w16")&&HasFn("sp","sp_recover256_w16");
+ plan.pair_fn=HIP_SP_INIT_PAIR&&HasFn("sp","sp_init_pair");
  for(U i=0;i<layers;i++){
   U b=first+i,shift=SpShift(b),sx=(shift&1)?4:0,sy=(shift&2)?4:0,ww=(w+sx+7)&~7u,hh=(h+sy+7)&~7u;
   auto out=New(size_t(w)*h*c/4);
@@ -111,7 +116,17 @@ Tensor SpStage(Tensor input,U w,U h,U c,U first,U layers){
  std::printf("TOPO,sp,sp_run%u,%u,%u,%u\n",c,plan.total,plan.total,c);
  std::printf("TOPO,sp,sp_recover%u,1,1,%u\n",c,c);
 #endif
- api.Check(api.hipModuleLaunchKernel(Fn("sp","sp_init"),U((3*size_t(plan.total)+255)/256),1,1,256,1,1,0,stream,args,nullptr),"SP init");
+ /* SP_INIT_PAIR: the encoder stage also initializes the decoder stage's state (separate buffer, same c), when that plan exists
+    and will not roll over on its next use; the decoder stage then skips its sp_init. Otherwise the plain per-stage init. */
+ SpPlan*partner=nullptr;
+ if(plan.pair_fn&&first<40&&SpEnabled(c,true))
+  for(auto&kv:sp_plans){auto&q=kv.second;if(&q==&plan||std::get<2>(kv.first)!=c||std::get<3>(kv.first)<40||std::get<0>(kv.first)!=w||std::get<1>(kv.first)!=h)continue;
+   U ql=SpEnv("SP_TICKET_LIMIT",std::numeric_limits<U>::max());if(ql<q.total)ql=q.total;if(q.next_ticket>ql-q.total)continue;partner=&q;break;}
+ if(plan.pre_inited&&plan.pre_base==plan.next_ticket){plan.pre_inited=false;}
+ else if(partner){U*s2=static_cast<U*>(P(partner->state));U t2=partner->total,b2=partner->next_ticket,f2=partner->first;void*pargs[]={&p,&s2,&t2,&b2,&f2};
+  api.Check(api.hipModuleLaunchKernel(Fn("sp","sp_init_pair"),U((3*size_t(std::max(plan.total,t2))+255)/256),1,1,256,1,1,0,stream,pargs,nullptr),"SP init pair");
+  partner->pre_inited=true;partner->pre_base=b2;}
+ else{plan.pre_inited=false;api.Check(api.hipModuleLaunchKernel(Fn("sp","sp_init"),U((3*size_t(plan.total)+255)/256),1,1,256,1,1,0,stream,args,nullptr),"SP init");}
  const char*sfx=plan.w16?"_w16":"";
  std::string kernel="sp_run"+std::to_string(c)+sfx;
  auto start=std::chrono::steady_clock::now();

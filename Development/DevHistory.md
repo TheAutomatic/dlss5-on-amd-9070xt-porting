@@ -1370,3 +1370,6 @@ U4 的 ISA 显示：每迭代发 4 步 load，但末尾等到 0，跨迭代不�
 - 续：`C512_PROJ_WN4`（attention 投影 4 wave/WG、每 wave 16 列，wave 数 ×4，与 M32 减 wave 相反）19 SAME，但两档持平偏慢（w2 900 +0.013/+0.011/−0.004、1080 +0.018/+0.006/−0.008），不收，模块/宿主宏默认 0；这条核不是 wave 数或链长受限，线停。
 - 续：ViT 1088 DUP 回放（µs/实例 900→1088，他 900→1080）：QKV 27.9→42.4（他 23.6→24.4）、attention 14.6→35.6（他 14.8→24.4）、expand 26.6→39.6（他 22.7→26.8）、contract 37.1 已持平。我们 QKV/expand/project 随 token 线性涨（每 16-token tile 各读权重），attention 近似平方（每 16 query 扫一遍 K/V，他 32 query）；建议下一刀 attention 32-query 共用 K/V、只开 640 档。
 - 续：ViT 线收尾（§5.2 两刀即 vit-1080-gap 的 ATTN_M32 与 TM/WT/WH/BIG，已负账，无新角度）。C32 中间块 DUP（900 chain 134.2、1088 188.3µs/块）：+16µs/块 ≈ 单核本体 +10（数值：激活/归一化 RTZ 链）+ 链内降频放大 +6；组织方式只剩 up 分发 ≤3µs，不出刀。顺修 c512-qkv-pipeline/dup.ps1 的 `$cases`/`$Cases` 同名覆盖 bug。
+
+## 2026-10-01 下午 bitexact-pm 第 1 项：三个擦线小件（`results/bitexact-pm-20261001` §1）
+DEC_WIDE/F8W 互斥原因：宿主选了 `_w` 后 F8W 判断只认不带后缀的核名，模块也没有"宽出口+fp8 主循环"核；补 `*_w_f8` 导出与宿主判断，逐位。IO_FUSE 加宿主防呆（decode shader 不认 `NATIVE_CODEC_NEURAL_BUFFER` 就拒绝融合，实测旧 shader 19 SAME、10 次 refused）。单项三轮：IOF 过、DW 过（900 −0.005/−0.012/−0.061，1080 −0.013/−0.002/−0.081），DF 不过（900 +0.026 一轮）、DWF 不过。合包 DW+IOF 六轮 avg 五负一平，但 900 合并 p99 两批都 +0.06（IO_FUSE 老毛病），合包不收、IO_FUSE 不装。装 DW 单件：deep_fast-packed gfx1201 7FDA5868 / gfx1200 E55635E2，add-on/flags/runtime 不动，鬼武者镜像，RE9 回放 SAME，fast-tier exact/fast 同步。
