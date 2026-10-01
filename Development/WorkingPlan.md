@@ -89,7 +89,8 @@
 ## C. 需要 Zero 拍板（有损）
 
 - **fast 档**（Daniel 默认：e4m3 一次舍入、近似 rsqrt/rcp、f32 累加、f16 成对算术）：他 fast 比 reference 快约 1ms；做成 EXACT 之外单独一档。
-  - **10-01 已测并备好试玩（`results/fast-tier-20261001`，游戏仍是逐位档，等 Zero 定）**：配方 `CW_FAST_NUM 3`（C32 f32 激活/归一化、softmax 只 rcp）+`W2_FAST_NUM 3`（c64-wave2）+`HIP_DEC_F8W 1`（逐位）+`NETWORK_1080_ROWS=1088`。三轮 ABBA 900 −0.107～−0.113ms（7.242→7.131）、1080 −0.56～−0.60ms（9.956→9.366），p99 每轮更好；对逐位版 PSNR 最差 51.8 dB、各 case 均值 52.8～55.5（对 NVIDIA 未复测）。KS（ViT attention 拆 key）变慢、C256 W2_FAST 持平、C32 f16 成对激活三轮全慢，不进。切换：`D:\DLSSNR-Lab\fast-tier\to-fast.ps1` / `to-exact.ps1` / `status.ps1`（剑星+鬼武者一起切，先备份，游戏开着拒绝执行）。
+  - **10-01 12:50 Zero 定：先不做 fast 档。** 理由：有损项一多，不确定因素增加得快；远程看画面看不出来，就算在家，也不一定能从某个游戏里看出来。所以有损路线暂停，只做逐位优化。模块和脚本留在 lab 存档，不装、不发。
+  - **10-01 已测并备好试玩（`results/fast-tier-20261001`，游戏仍是逐位档）**：配方 `CW_FAST_NUM 3`（C32 f32 激活/归一化、softmax 只 rcp）+`W2_FAST_NUM 3`（c64-wave2）+`HIP_DEC_F8W 1`（逐位）+`NETWORK_1080_ROWS=1088`。三轮 ABBA 900 −0.107～−0.113ms（7.242→7.131）、1080 −0.56～−0.60ms（9.956→9.366），p99 每轮更好；对逐位版 PSNR 最差 51.8 dB、各 case 均值 52.8～55.5（对 NVIDIA 未复测）。KS（ViT attention 拆 key）变慢、C256 W2_FAST 持平、C32 f16 成对激活三轮全慢，不进。切换：`D:\DLSSNR-Lab\fast-tier\to-fast.ps1` / `to-exact.ps1` / `status.ps1`（剑星+鬼武者一起切，先备份，游戏开着拒绝执行）。
 - **逐位但没过收录规则的件（等 Zero 定要不要破例/合包）**：`DLSS5_IO_FUSE=1`（decode 直读网络 f32，跳 neural pass；六轮 avg 全正、900 p99 不过，`input-slim-20261001`，需新 add-on+shader）；`HIP_DEC_WIDE`（decoder 尾 LDS 转置行宽写，1080 −0.02 三轮全正、900 一轮 +0.007，`tail-c32-gap-20261001`）；`HIP_DEC_F8W`（decoder Up39/48 fp8，六轮一轮 900 +0.029、其余全负约 −0.02，宿主已带，`c512-qkv-pipeline-20261001` §11）；`C512_T8_NO_F32`（900 六轮正、1080 一轮 +0.008）。
 - **1088 行**：已实现为可选开关 `DLSS5_NETWORK_1080_ROWS=1088`（0.38 已带，默认 1152），1080 快 4.4%（−0.47ms），对 1152 约 55～56dB，只动行数不改 post 位移（`geom-1088`）。是否改默认待定。
 - **FP8 激活**（C512 FFN hidden / ViT QKV 改 FP8，含方案 F 的有损版）：ViT QKV 现在只剩约 5µs，性价比低。
