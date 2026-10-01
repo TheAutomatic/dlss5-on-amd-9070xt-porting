@@ -263,7 +263,7 @@ Download (all three packages): [Quark](https://pan.quark.cn/s/6856d875bbe9) · [
 
 ## 0.39 (10-01)
 
-Download (three packages): Quark (link pending) · Gofile mirror (link pending)
+Download (three packages): [Quark](https://pan.quark.cn/s/dea9c0ef2f95) · [Gofile mirror](https://gofile.io/d/iqtFTSpS)
 
 - **Bit-exact**: **with default settings every output is bit-identical to 0.38** (7 cases EXACT/AE 168 frames + AE decisions + 900/1080 ticket rollover, 19 groups SAME; checked for every cut and again for the installed build as a whole).
 - **Effect** (offline whole-network replay, ms per frame): 900 tier about **7.27 -> 6.8 ms**, 1080 tier about **10.05 -> 9.5 ms**. In game, Stellar Blade at 2K about **+1.5-2 fps** (55.6-56.1 -> 57-58 fps), no flicker; Onimusha fine.
