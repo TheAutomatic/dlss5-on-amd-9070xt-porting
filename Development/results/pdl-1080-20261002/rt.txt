@@ -1,0 +1,19 @@
+old runtime 77A35681
+new runtime 562F9698
+RUNTIME 720 old=88106a934af4c183 new=88106a934af4c183 exit=0/0 SAME status old pdl=1/1 new pdl=1/1
+RUNTIME 900 old=b2980ada643da964 new=b2980ada643da964 exit=0/0 SAME status old pdl=1/1 new pdl=1/1
+RUNTIME 1080 old=758674a8bbd0206d new=758674a8bbd0206d exit=0/0 SAME status old pdl=1/0 new pdl=1/1
+RT_ABBA round=1 900 old=7.053 new=7.049 delta=-0.004
+RT_ABBA round=1 1080 old=9.835 new=9.911 delta=+0.076
+RT_ABBA round=2 900 old=7.057 new=7.055 delta=-0.002
+RT_ABBA round=2 1080 old=9.878 new=9.955 delta=+0.077
+RT_ABBA round=3 900 old=7.072 new=7.061 delta=-0.011
+RT_ABBA round=3 1080 old=9.901 new=9.950 delta=+0.049
+SMOKE exit=0
+HIP rc=0 error=
+SP_STATS runs=4 fallback=0 rollover=0 jobs=2496 disabled=0 errors=0
+lmxxf_nr_gpu: ok
+RT_DONE
+LOCK DROPPED
+GO_DONE
+GUARD_DONE

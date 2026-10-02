@@ -83,7 +83,7 @@
 - C512 mix/proj 按列切细（`C512_SPLIT_N`）、mix K 循环流水（`C512_MIX_PIPE`）（`fill-cu`）。
 - f-sweep 余件：vit-stream byte_F、padded q8_fused_round、W2 up 字节（宏默认 0）。
 - 旧门槛重测 Q（`CW_POST_FULL_TILE`，1080 +0.0015）。
-- C128/C64 持久化四段；C512 最终投影 M32 权重共用（900 −1.9% 反慢）；PDL 延伸 C512（功耗墙吃回）。
+- C128/C64 持久化四段；C512 最终投影 M32 权重共用（900 −1.9% 反慢）；PDL 延伸 C512（功耗墙吃回）；1080 C256 边界 4 块改分体+PDL（+0.05～+0.08ms，`pdl-1080-20261002`）。
 - mochizuki 0.0.2.2 各路线 I/P/S/V/F/O/G/H；0.0.2.4 网络无改动，无可抄。
 - 900 C256 新分组；C64/C128 Down 融合；去清零；C32 权重缓存；ViT byte gather-pack、4wave/64key 预取、QKV 块重排。
 - ViT QKV 归一化换求和（不逐位）；C256 FFN 激活打包（需转置 expand，非小件）；复合量化 C32 两处/ViT 出口（域不纯）。
