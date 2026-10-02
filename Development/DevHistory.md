@@ -1416,3 +1416,6 @@ TheAutomatic 要网络按游戏原尺寸跑。新开关 `DLSS5_NETWORK_FREE_RES`
 
 ## 2026-10-02 net-timing 第三单：并入 TheAutomatic 的计时修法（光派单，子代理，未装机）
 桥接 `TimingEnd()` 在 record(end) 后、输出 signal 前立刻非阻塞 `hipEventQuery(end)`（success/NotReady 都收）。按他的调用顺序（等完队列再 GetTimings、再 Retire）在 9070 上**复现成功**：旧版 1080 PDL1/PDL0 1000 帧塌（<0.01ms）70/92 帧、<1ms 701/806 帧、中位 0.09/0.08ms，且队列等完仍读不到本帧；新版三档 × PDL 开关 0 塌、本帧可读。19 SAME×2、RE9 SAME、smoke 0、不调用时 ABBA 中性；开计时的 add-on E 组 +0.06～0.15ms（诊断功能，照收）。`results/net-timing-20261002` 第三单。
+
+## 2026-10-02 网络外一圈拆账 outside-net（光派单，子代理，未装机）
+两条路径按时间线拆（新宿主 `rt_outside`：D3D 时间戳 + QPC + GetTimings；add-on 用 GAME_PROBE + SPAN + wall）。1080 档网络外 GPU 只有 0.35～0.5ms：D3D pass add-on 0.12 / ABI 0.33、交接 0.15～0.3；串行宿主另有 CPU/发射/唤醒 0.1～0.25。wall−span 0.5ms = pass 0.12 + 交接 ~0.15 + CPU 侧 ~0.13。**ABI 多一次 35MB 拷贝**（runtime 从没开 DIRECT_IO）：改为输入直写（`DLSS5_DIRECT_IO` bit 1，默认 1），RecordInputs GPU 0.22→0.08ms，哈希全 SAME，流水线 ABBA 六轮全快（1080 −0.07～−0.08），串行中性；runtime 0FAD1343，收进 main，未装机。候选 `DLSS5_HIP_POST_SIGNAL_QUERY`（输出 signal 后 hipStreamQuery）add-on 19 SAME、ABBA 六轮全快、p99 好，runtime 流水线中性，宏默认 0 待定。TheAutomatic 的 17ms 是负载下的 GetTimings 本身。剑星 history=0 reset=100 是 pre-upscale 设计。新增集成方调用顺序文档 `include/LmxxfNrApi-call-order{,.zh-CN}.md`、游戏内不 Flush 测法 `ingame-probe.ps1`。`results/outside-net-20261002`。

@@ -1,6 +1,6 @@
 #pragma once
 
-/* Versioned C ABI for LmxxfNrRuntime.dll.
+/* Versioned C ABI for LmxxfNrRuntime.dll. Recommended per-frame call order: LmxxfNrApi-call-order.md (next to this header).
  * MSVC host and MinGW runtime must not share a C++ ABI. No STL, exceptions, or
  * CRT-allocated objects cross this boundary. x64 stdcall is the Windows default. */
 

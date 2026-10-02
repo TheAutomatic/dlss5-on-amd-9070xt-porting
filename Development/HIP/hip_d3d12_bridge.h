@@ -13,6 +13,9 @@
 #include "../../src/native_device_identity.h"
 #include <d3d12.h>
 #include <dxgi1_4.h>
+#ifndef DLSS5_HIP_POST_SIGNAL_QUERY
+#define DLSS5_HIP_POST_SIGNAL_QUERY 0
+#endif
 namespace hip_reference {
 // Experimental single-GPU bridge. Callers serialize frames and preserve SRV states.
 // No Agility or experimental DirectX feature enabling is used here.
@@ -259,7 +262,13 @@ private:
    auto start=std::chrono::steady_clock::now();network->Enqueue(input.mapped,temporal?history.mapped:nullptr,output.mapped,seed);
    if(timed)TimingEnd();
    if(span_probe){span_cpu=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-start).count();api.Check(api.hipEventRecord(span_end,network->Stream()),"span end");span_pending=true;}
-   hip_probe::SignalParams signal{};signal.params.fence.value=++value;api.Check(api.hipSignalExternalSemaphoresAsync(&semaphore,&signal,1,network->Stream()),"HIP output signal");Check(queue->Wait(fence,value),"D3D output wait");phase=output_recorded?Phase::OutputRecorded:Phase::HipQueued;
+   hip_probe::SignalParams signal{};signal.params.fence.value=++value;api.Check(api.hipSignalExternalSemaphoresAsync(&semaphore,&signal,1,network->Stream()),"HIP output signal");
+#if DLSS5_HIP_POST_SIGNAL_QUERY
+   /* outside-net candidate (2026-10-02, default 0 = not compiled): one non-blocking hipStreamQuery right after the output signal,
+      to make Windows HIP submit the whole batch (network + signal) now instead of when its batching decides to. */
+   {static QueryFn post_query=reinterpret_cast<QueryFn>(GetProcAddress(api.dll,"hipStreamQuery"));if(post_query)post_query(network->Stream());}
+#endif
+   Check(queue->Wait(fence,value),"D3D output wait");phase=output_recorded?Phase::OutputRecorded:Phase::HipQueued;
   }catch(...){failed=true;throw;}
  }
 public:

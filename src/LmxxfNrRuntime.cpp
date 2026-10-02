@@ -271,7 +271,7 @@ struct Job
 
 /* 2026-09-26: the RE9 package used to read only DLSS5_FIT_LARGE from native-game-flags.txt, so users could not
    switch the optimised kernels (TheAutomatic/ouco report). Now the network/kernel lines (DLSS5_HIP_*, DLSS5_SKIP_BLOCKS,
-   DLSS5_FIT_LARGE, DLSS5_NETWORK_HEIGHT, DLSS5_NETWORK_1080_ROWS, since 2026-10-01 DLSS5_STYLE, since 2026-10-02 DLSS5_NETWORK_FREE_RES) are put into the process environment once (a key already present in the
+   DLSS5_FIT_LARGE, DLSS5_NETWORK_HEIGHT, DLSS5_NETWORK_1080_ROWS, since 2026-10-01 DLSS5_STYLE, since 2026-10-02 DLSS5_NETWORK_FREE_RES and DLSS5_DIRECT_IO) are put into the process environment once (a key already present in the
    environment wins), as the regular add-on does before creating its network; LmxxfProductionOptions then applies the
    same DLSS5_HIP_* parser. The file is searched next to the DLL
    (DLSS5-AMD\native-game-flags.txt) and upwards from the assets directory. */
@@ -314,7 +314,7 @@ void LoadFlagsFileOnce(const std::wstring &assets)
                 // (DLSS5_CODEC_SRGB, DLSS5_PRE_UPSCALE, ...) do not apply to this runtime and stay ignored.
                 const bool allowed = !key.compare(0, 10, "DLSS5_HIP_") || key == "DLSS5_SKIP_BLOCKS" ||
                                      key == "DLSS5_FIT_LARGE" || key == "DLSS5_NETWORK_HEIGHT" ||
-                                     key == "DLSS5_NETWORK_1080_ROWS" || key == "DLSS5_STYLE" ||
+                                     key == "DLSS5_NETWORK_1080_ROWS" || key == "DLSS5_STYLE" || key == "DLSS5_DIRECT_IO" ||
                                      key == "DLSS5_NETWORK_FREE_RES";
                 if (!allowed)
                     continue;
@@ -690,6 +690,18 @@ const char *ColorInputProblem(const D3D12_RESOURCE_DESC &desc)
     return nullptr;
 }
 
+/* DLSS5_DIRECT_IO bit 1 (2026-10-02, results/outside-net-20261002): the RGB input pass writes the network input straight into
+   the HIP bridge's shared buffer, so RecordInputs no longer copies 35 MB (1080) into it. Same switch and default (1) as the
+   add-on; 0 restores the copy. Network input bytes are unchanged. Read once (flags file or environment). */
+bool RuntimeDirectInput()
+{
+    static const bool on = [] {
+        const char *v = std::getenv("DLSS5_DIRECT_IO");
+        return v ? (std::strtoul(v, nullptr, 10) & 1u) != 0 : true;
+    }();
+    return on;
+}
+
 void RequireSession(Session *s)
 {
     if (!s)
@@ -987,6 +999,7 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
             if (opt.graph)
                 return Fail(LMXXF_NR_FAILED, "PrepareFrame: graph must stay off");
             session->bridge = new hip_reference::D3D12Bridge();
+            if (RuntimeDirectInput()) session->bridge->RequestDirectInput();
             session->bridge->Create(session->queue, opt, {});
             if (session->timingRequested) session->bridge->EnableNetworkTiming(); /* kept across a recreate once a host asked */
             session->builtProcW=geo.processing_width; session->builtProcH=geo.processing_height;
@@ -1185,6 +1198,7 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
                 if (opt.graph)
                     return Fail(LMXXF_NR_FAILED, "PrepareFrame: graph must stay off");
                 session->bridge = new hip_reference::D3D12Bridge();
+                if (RuntimeDirectInput()) session->bridge->RequestDirectInput();
                 session->bridge->Create(session->queue, opt, {});
                 if (session->timingRequested) session->bridge->EnableNetworkTiming(); /* kept across a recreate once a host asked */
                 session->builtProcW=geo.processing_width; session->builtProcH=geo.processing_height;
@@ -1223,6 +1237,9 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
                 enc->Create(session->device, {color}, session->shaderDir, privateFloatOutput, bindExposure);
                 rgbIn = new NativeGameRgbInput();
                 rgbIn->Create(session->device, enc->Output(), session->shaderDir);
+                /* Direct input (as the add-on since 2026-09-28): the RGB input pass writes the bridge's shared buffer, no 35 MB copy. */
+                if (ID3D12Resource *direct = session->bridge->DirectInput())
+                    rgbIn->RedirectOutput(direct);
                 rgbOut = new NativeRgbTexture();
                 rgbOut->Create(session->device, session->bridge->Output(), session->shaderDir);
                 dec = new NativeGameCodec();
