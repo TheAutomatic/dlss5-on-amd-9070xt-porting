@@ -1,4 +1,4 @@
-# 当前工作计划（覆盖式，不续写；最后更新 2026-10-01 晚，朱雀）
+# 当前工作计划（覆盖式，不续写；最后更新 2026-10-02 08:00，朱雀）
 
 > 开 session 先读这页。**这是项目唯一的"现状 + 规矩 + 为什么"**：实验过程与数据进 DevHistory.md（只追加），版本改动进 CHANGELOG（中英两份），其余一律改这页（整页重写，读一遍再重写，该删的删）。
 > 节奏：过日子式，没有 deadline。优先做有具体瓶颈证据、可逐位验证的小实验，够用就交。
@@ -14,7 +14,7 @@
 - **10-01 下午 bitexact-pm 装机**：`HIP_DEC_WIDE 1`（deep_fast-packed gfx1201 7FDA5868 / gfx1200 E55635E2，模块级，add-on 0D739130 与 RE9 runtime 2CB95057 不动；19 SAME，三轮两档全负，p99 更好；fast-tier exact/fast 已同步）。IO_FUSE、DEC_F8W、DEC_WIDE+F8W 叠加（`*_w_f8`）、SP_INIT_PAIR、PFT/W16S/VT 复测均未过（`results/bitexact-pm-20261001`）。
 - **10-01 16:09 统一重定基准装机（rebuild-baseline）：现装 = df92ed49 源码 + 配方编出来的**（62 模块、add-on **053C3589**、RE9 runtime **DC2D445E**、decode A70789A1 + text_overlay 8D20C7F5 着色器；两游戏 62 模块逐文件核对 0 差，SUMS FD419A3E；add-on/runtime 已钉基址，可逐字节复现）。宿主慢点（5a7cd0ba fast 档 `_ks2` 探测）已编译掉；新开关 `DLSS5_STYLE`（0/1/2，默认 1 逐位；Style 0 对 NVIDIA 44.26/47.43 dB）。RE9 回放 old/new/fallback SAME，smoke 0；fast-tier `exact\` 已同步（`fast\` 的 c32/c64 仍是旧 fast 配方，不含 Style 常量，切 fast 档时 Style 开关对 C32 预处理不生效）。备份 `hip-backend\rebuild-baseline-20261001\backups\stellar-20261001-160904-rebuild`、`onimusha-backups\20261001-160904-rebuild`。整网（装机前同代码）span 900 6.78/6.90、1152 9.47/9.55、1088 9.06/9.13ms。`results/rebuild-baseline-20261001`。
 - **10-01 收下并装机的逐位刀**（全部 19 组 SAME、两档三轮无变慢、p99 不差）：C512 `C512_COMPACT_FUSEQKV`、`C512_FFN_ONE`（→`2` 双 wave）、`C512_COMPACT_QKV_UNROLL 4`→`QKV_DEEP 4`+`SCHED`、`C512_FFN_F8W`（mix/expand fp8 WMMA，宿主 `HIP_C512_FFN_F8W`）；ViT `HIP_VIT_QKV_F8W`（QKV fp8 分片）；Swin 链 `W2_UP_LOW_BYTES`、`W2_DOWN_HALF`+`MH_POOL_HALF_IN`、`W2_UP_VEC`、`W2_QKV_FUSE`（C64+C128）、`W2_FFN_QT_BATCH 4`。出处：`results/mochizuki-gap-20261001`、`c512-qkv-pipeline-20261001`、`c128-c64-inchain-20261001`。未发包（下一版 0.39 的内容）。
-- **10-02 下一版候选**（未装）：`D:\DLSSNR-Lab\next-candidate\`（main b6c508a5 全配方 62 模块 + add-on 053C3589 + RE9 runtime 73D4C25C），对 0.39：19 组 SAME，ABBA 900 −0.11～−0.14、1080 −0.18～−0.19ms，p99 两档都好；`install.ps1`（先 -DryRun）。见 results/next-candidate-20261002。
+- **10-02 07:59 装机 next-candidate（现装 = 这一套）**：main 全配方 62 模块（c32-wave1 LLVM23 + post-RA 关 + max-ilp：gfx1201 A1910D6A / gfx1200 AAF9BA57；c64-wave2 LLVM23 + `HIP_BARRIER_FENCE 1`：A0CAD8CB / B90443EE；c512-m32-deep max-ilp；其余同 0.39）、add-on **053C3589**（未变）、RE9 runtime **73D4C25C**。两游戏 62 模块与包逐文件 0 差，HIP SUMS **F6411153**；RE9 回放 900/1080 old/new/fallback SAME，smoke 0；fast-tier `exact\` 已同步（两份 SUMS 同 F6411153），两游戏 EXACT 档。备份 `D:\DLSSNR-Lab\stellar-backups\20261002-075914-next`、`onimusha-backups\20261002-075914-next`、`fast-tier\backups\20261002-075914-install-next`。对 0.39：19 组 SAME，ABBA 900 −0.11～−0.14、1080 −0.18～−0.19ms（`results/next-candidate-20261002`）。c64 加栅栏的原因见 `results/llvm23-vit-20261002` §5 与下方"技术债：裸 s_barrier"。发版构建要多一步 DGX 上的 LLVM23 预编（`compile-modules.py --row-opts --compiler-rows llvm23 --target-feature=-real-true16`，lab 预编 `compiler-sweep-20261001\pre23f`）。
 
 ## 竞品现状
 
