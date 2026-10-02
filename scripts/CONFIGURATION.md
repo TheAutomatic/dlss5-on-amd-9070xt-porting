@@ -9,7 +9,7 @@
 | REFramework旧后置版（≤0.27） | hip-re9-flags.txt |
 | RE9特殊前置版（0.28起） | re9-presr.ini覆盖OptiScaler.ini；网络选项在LmxxfProductionOptions.h编译 |
 
-改默认值就改相应模板，再打包。普通游戏与RE9模板以2026-09-20已测试配置校对，移除机器专属gain路径；自适应默认0、FPS默认1。Magpie保留独立色彩/历史设置并补齐当前HIP优化参数。游戏内用户修改不反向改变模板。
+模板里每个 `DLSS5_` 选项上方都带一行中文、一行英文注释（作用、默认值、逐位/有损、何时改）；各读取方只认以 `DLSS5_` 开头的行，`#` 注释行、带不带 BOM 都会被忽略，注释行须短于 255 字节。改默认值就改相应模板，再打包。普通游戏与RE9模板以2026-09-20已测试配置校对，移除机器专属gain路径；自适应默认0、FPS默认1。Magpie保留独立色彩/历史设置并补齐当前HIP优化参数。游戏内用户修改不反向改变模板。
 
 正式入口Development/tools/optiscaler-stellarblade.ps1 -Action Release、package-magpie-candidate.ps1、RE9/package-0261.ps1直接复制模板，不从旧包/运行游戏继承flags再追加。其他文件仍可使用已校验基础包。package-026.ps1向两个子脚本传递ConfigDirectory。按仓库目录运行时默认定位scripts；若单独上传脚本到Windows，须同步模板并显式传入例如 -ConfigDirectory D:\DLSSNR-Lab\release-config。缺模板报错，不回退。不要只更新远端脚本、遗漏同提交的模板。
 
