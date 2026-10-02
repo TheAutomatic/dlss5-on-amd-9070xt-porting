@@ -1423,3 +1423,6 @@ TheAutomatic 要网络按游戏原尺寸跑。新开关 `DLSS5_NETWORK_FREE_RES`
 
 ## 2026-10-02 夜 ideas-yami-ikaruga：闇/鳩三个逐位方向（光派单，子代理，未装机）
 基线现装 7FC14ECE / F6411153。① C512 FFN + FFN 投影同 WG 静态融合（`C512_FFN_PROJ_FUSE`，8 wave/WG、contract 字节留 LDS，−1 派发/块）：19 SAME，但 ABBA 三轮全慢（900 +0.09～0.10、1080 +0.11～0.21ms），WG 太少、挤在少数 CU 上；跨块那一对同形状，不做。② 地址错位（宿主 `HIP_ADDR_SKEW` 诊断，256B/4KB/64KB 级、权重/张量分开扫）：全部落在 AA 噪声（±0.05）里，无冲突信号。③ C32 Hrtz 改 builtin（`HIP_C32_RTZ_ISA 2`，让 LLVM 把加宽折成 fma_mix）：GPU 2³²×5 形式×8 常数 0 差，19 SAME，1080 三轮快，但 900 一轮 +0.037、合并 p99 变差，不收。宏都默认关。`results/ideas-yami-ikaruga-20261002`。
+
+## 2026-10-03 C32 builtin Hrtz 只给 1080 档（rtz1080，光派单，子代理，未装机）
+拆账：上轮合并 p99 只有 900 变差（7.360→7.433），1080 变好（10.106→10.062）。做法：配方加 `c32-wave1-rtz`（LLVM23，`HIP_C32_RTZ_ISA 2`），宿主 `HIP_C32_RTZ_TALL` 在 1920×1152/1088 且文件存在时把它装进 c32_wave1 键，其余几何照装 c32-wave1。c32-wave1 重编 .text 与现装同，rtz .text 与上轮候选同；路由探针证明 1080 两种行数用新核、720/900 不打开。19 组 SAME；ABBA 900 +0.009/−0.005/−0.007、1080 −0.051/−0.025/−0.039ms，p99 7.252→7.247、10.100→10.037。900 代码逐条同、+0.009 在 AA 幅度内，但按"任何一轮不能变慢"不收；代码在分支 rtz1080，部署包 `D:\DLSSNR-Lab\deployments-rtz1080-20261003`（DryRun 过）待光定。`results/ideas-yami-ikaruga-20261002` 第 4 节。

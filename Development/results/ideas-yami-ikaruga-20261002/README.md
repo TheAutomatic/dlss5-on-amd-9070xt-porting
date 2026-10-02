@@ -36,3 +36,14 @@
 
 ## 文件
 `abba-F.txt`、`abba-R-skew.txt`；源码改动：`hip/c512_m32_deep.inc`（C512_FFN_PROJ_FUSE）、`hip/c32_fused_ffn_attention.hip`（HIP_C32_RTZ_ISA 2）、`Development/HIP/hip_reference_network.h`（HIP_C512_FFN_PROJ_FUSE、HIP_ADDR_SKEW），默认值下行为不变。
+
+## 4. 续（10-03）：C32 builtin Hrtz 只给 1080 档 → 逐位、路由对，但 900 有一轮 +0.009，按规则不收
+
+- **拆账**：原始合并 p99 900 7.360→7.433（变差），1080 10.106→10.062（变好）；1080 三轮全快。变差只在 900，于是按几何分流做。
+- **实现（两个模块，宿主按几何选文件）**：配方加一行 `c32-wave1-rtz`（= c32-wave1 那一行 + `HIP_C32_RTZ_ISA 2`，同样 LLVM23 预编、带配方选项）；宿主宏 `HIP_C32_RTZ_TALL`：1920×1152 / 1920×1088 且目录里有 `c32-wave1-rtz.hsaco` 时，把它装进 `c32_wave1` 这个键，其余（900/720/自由几何/文件缺失）照旧装 `c32-wave1.hsaco`。所有导出名、调用点都不动。没选"同模块双导出名"：c32-wave1 的导出有十几个（prefix/mapped/finish/up/post 及 _b8/_lb 变体），全部加后缀改动面大。
+- **逐条**：LLVM23 重编的 c32-wave1 两架构 `.text` 与现装相同（900 就是现装文件，宿主不碰它）；c32-wave1-rtz 两架构 `.text` 与上一轮测过的 flat-R 候选相同。gfx1200 64C9CCF6、gfx1201 99B0B1E2。
+- **路由**：flat-X = 现装 + 一个垃圾 c32-wave1-rtz.hsaco。新宿主 720/900 正常跑完，1080（1152 行、1088 行）都在加载它时报 hipErrorInvalidImage；旧宿主四档都正常。即 1080 两种行数用新核，900/720 从不打开它。
+- **19 组 SAME（-PinIdle）**。
+- **ABBA（新宿主 + 现装 + rtz 文件 对 main 宿主 + 现装）**：900 **+0.009**/−0.005/−0.007，1080 −0.051/−0.025/−0.039ms；合并 p99 900 7.252→7.247，1080 10.100→10.037。1080 三轮全快、p99 变好；900 合并 p99 也没变差，但第 1 轮 +0.009。
+- **判定**：900 档的设备代码与现装逐条相同，宿主只多一次文件存在检查（构造时），+0.009 在 AA 噪声幅度内（上一轮 AA 900 +0.012）。但规则是"任何一轮不能变慢"，不开例外，**不收、未装机、代码不进 main**（留在分支 `rtz1080`）。如果光认可"900 代码逐条相同 → 900 轮按 AA 看"，包已备好：`D:\DLSSNR-Lab\deployments-rtz1080-20261003\install.ps1`（DryRun 过；带备份和 `-RestoreBackup`；两游戏同装；fast-tier 的 exact/fast 各补一份 rtz 模块，fast 那份 = fast c32-wave1，switch.ps1 认它）。装之前还要跑 RE9 runtime 回放 + smoke（runtime 40DDAD7F、add-on A1B28916 都是分支版）。
+- 脚本 `Development/HIP/experiments/rtz1080/`（setup/go/route/guard），lab `D:\DLSSNR-Lab\hip-backend\rtz1080-20261003`，部署 `Development/deployments/rtz1080-20261003`。
