@@ -61,6 +61,14 @@ next release detects this automatically.
 ≈8% less time; 0.22 padded the 900 tier to 960 rows; 0.24 introduced the pre-upscale (render-resolution) path; 0.26.1–0.28.1
 built the RE9 host/runtime route with TheAutomatic. Details per version are in the changelog.
 
+**Trading image quality for speed (optional).** The default configuration is bit-identical to NVIDIA's network. The setting below is the only lossy speed-up we recommend. Add one line to `native-game-flags.txt` (the RE9 runtime reads it too):
+
+| Setting | What it does | Gain | Quality cost |
+|---|---|---|---|
+| `DLSS5_NETWORK_1080_ROWS=1088` | Runs the 1080 tier on 1088 rows (8 mirrored rows, the geometry Daniel and mochizuki use) instead of 1152 (72 mirrored rows, NVIDIA's geometry) | About 0.45 ms less per frame at the 1080 tier (5.6% less work); 720/900 unaffected | About 53.5 dB against 1152 rows; against NVIDIA's own output it drops from 47.4 to 45.8 dB (single frame, Style 0, all 71 blocks) |
+
+Why only this one: it changes the geometry, not the numerics, so every arithmetic step stays the same. The network resets its history every frame, so differences do not accumulate over time. The cost is measured and deterministic. Other lossy options (f16 accumulation, half-precision softmax, fast activation approximations) push rounding differences through all 71 blocks, and where they surface can't be predicted in advance, so we don't offer them.
+
 ## What is in this repository
 
 | Directory | Content |
