@@ -1413,3 +1413,6 @@ TheAutomatic 要网络按游戏原尺寸跑。新开关 `DLSS5_NETWORK_FREE_RES`
 
 ## 2026-10-02 1080 档 `pdl=1/0` 查因（光派单，子代理，未改生产）
 `pdl=A/B` = 请求/实际发出过 any-order。1080 档 C256 走整块融合（fcc11736），C64/C128 两档都是整块，所以 1080 没有任何 PDL 派发，这是设计如此（add-on 也一样）。持久化接管以后 Body 里只剩 C256 15/22/48/55 这 4 块，于是重测：让这 4 块在 1080 改走分体+PDL。结果逐位一致（1080 758674a8），状态变成 1/1，但 RE9 runtime ABBA 1080 +0.076/+0.077/+0.049ms 三轮全慢，900 持平。不收，生产不动。`results/pdl-1080-20261002`。
+
+## 2026-10-02 net-timing 第三单：并入 TheAutomatic 的计时修法（光派单，子代理，未装机）
+桥接 `TimingEnd()` 在 record(end) 后、输出 signal 前立刻非阻塞 `hipEventQuery(end)`（success/NotReady 都收）。按他的调用顺序（等完队列再 GetTimings、再 Retire）在 9070 上**复现成功**：旧版 1080 PDL1/PDL0 1000 帧塌（<0.01ms）70/92 帧、<1ms 701/806 帧、中位 0.09/0.08ms，且队列等完仍读不到本帧；新版三档 × PDL 开关 0 塌、本帧可读。19 SAME×2、RE9 SAME、smoke 0、不调用时 ABBA 中性；开计时的 add-on E 组 +0.06～0.15ms（诊断功能，照收）。`results/net-timing-20261002` 第三单。

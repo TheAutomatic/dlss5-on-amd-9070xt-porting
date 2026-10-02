@@ -64,3 +64,26 @@
 需要他提供：runtime 文件哈希（是哪次编的）、Adrenalin/HIP 版本、游戏分辨率与网络档（状态行 `net=`）、调用 GetTimings 的位置/线程/频率、flags 文件全文、是否开了 SPAN_PROBE 或别的 HIP 探针、0.001 出现在启动后多久、持续多少帧。
 
 工具：`Development/HIP/experiments/net-timing/pdl.ps1`（runtime + add-on，三模板，可选 SPAN_PROBE/流水线/额外 flags 行；add-on 段依赖桥接的 `DLSS5_NET_TIMING=2` 打印，那是 v2～v4 里的诊断代码，现行桥接没有，需要时临时加）、`lockrun.ps1`、`rt_timing.cpp`（`RT_PIPE=1`）。
+
+## 第三单：并入 TheAutomatic 的修法（record(end) 后立刻非阻塞 query end）
+
+他的定位：独立后台 D3D12/HIP harness 下读数连续塌成 ~0.001ms，PDL 开关都塌；`hipEventRecord(end)` 后、外部输出 signal 前立刻 `hipEventQuery(end)` 一次（success / NotReady 都收）即修好。工作解释：Windows HIP 延迟提交/物化事件批次。
+
+**改动**：`Development/HIP/hip_d3d12_bridge.h` `TimingEnd()` 加一次 `timing_query(timing_end[k])`，非 0 且非 600 才关计时；无同步、无轮询、无新 GPU 依赖。add-on 与 runtime 共用这份桥接，一处覆盖。
+
+**复现（成功）**：`rt_timing` 加 `RT_AFTER_WAIT=1`，按他的顺序：首帧前 GetTimings 一次；每帧 EnqueueHip → 执行输出列表 → 等队列 → GetTimings → Retire（串行 ABI1 宿主）。我们之前没塌，是因为 rt_timing 在 EnqueueHip 后立即读（读的是 N-1）。1000 帧，"塌" = 原始 ms < 0.01：
+
+| 档 | 旧 PDL1：塌 / <1ms / 中位 | 旧 PDL0 | 新 PDL1 | 新 PDL0 |
+|---|---|---|---|---|
+| 720 | 0 / 0 / 4.78 | 1 / 1 / 4.80 | 0 / 0 / 4.77 | 0 / 0 / 4.81 |
+| 900 | 1 / 4 / 6.61 | 0 / 2 / 6.64 | 0 / 0 / 6.62 | 0 / 0 / 6.65 |
+| 1080 | **70 / 701 / 0.093** | **92 / 806 / 0.078** | 0 / 0 / 9.28 | 0 / 0 / 9.29 |
+
+旧版另一个现象：队列已等完，GetTimings 仍拿不到本帧（lag_mismatch 998～1000/1000，只能拿到 N-1）——end event 在 GPU 做完后仍不被视为完成，和"批次没物化"的解释一致。新版 1000/1000 拿到本帧，lag 0。默认顺序（EnqueueHip 后立即读）新版三档 lag 0、0 塌。输出哈希新旧一致（720 88106a93 / 900 b2980ada / 1080 758674a8）。
+
+**回归**（lab `net-timing-fix-20261002`，GPU 锁 + guard 看门狗，`fix-go.txt`）：
+- add-on T（计时关）：**19 组 SAME**，ABBA 合并 900 7.120→7.132、1080 9.937→9.930，中性。
+- add-on E（`DLSS5_NET_TIMING=1`）：**19 组 SAME**；ABBA 900 +0.058～+0.091、1080 +0.107～+0.151ms，**六轮全慢**（修前 E 组是中性）。即每帧那次 query 本身有成本（推测就是它促使 HIP 提前提交批次）。计时是诊断/懒开启功能，按派单照收。
+- RE9 runtime 720/900/1080 old/new SAME；rt_bench（不调 GetTimings = 永不开计时）ABBA 900 +0.003/−0.002/+0.028、1080 +0.003/−0.005/+0.013，中性；smoke exit 0，SP errors=0。
+
+运行时 old 77A35681（main 583037df）/ new A9BA5502；bench base 9F5BF87E / T 582DB1C9；rt_timing D0B90B40。未装机。脚本 `Development/HIP/experiments/net-timing-fix/`。

@@ -59,6 +59,10 @@ private:
  void TimingEnd(){ // before the output signal
   if(!timing_on)return;const unsigned k=timing_next;
   if(network->Runtime().hipEventRecord(timing_end[k],network->Stream())){TimingOff();return;}
+  /* One non-blocking query of the end event right after recording it, before the output signal (TheAutomatic,
+     2026-10-02): without it Windows HIP can leave the begin/end timestamps of a deferred batch nearly equal and spans
+     collapse to ~0.001 ms. success or hipErrorNotReady are both fine; no wait, no extra GPU dependency. */
+  {const int q=timing_query(timing_end[k]);if(q!=0&&q!=600/*hipErrorNotReady*/){TimingOff();return;}}
   timing_slot_tag[k]=timing_tag;timing_busy[k]=true;timing_next=(k+1)%kTimingSlots;
  }
  void DestroyTiming(){if(!network)return;auto&api=network->Runtime();for(unsigned k=0;k<kTimingSlots;k++){if(timing_begin[k])api.hipEventDestroy(timing_begin[k]);if(timing_end[k])api.hipEventDestroy(timing_end[k]);timing_begin[k]=timing_end[k]=nullptr;}TimingOff();}
