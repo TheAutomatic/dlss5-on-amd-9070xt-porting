@@ -69,6 +69,13 @@ int wmain(int argc, wchar_t **argv)
     Check(device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, allocA, nullptr, IID_PPV_ARGS(&listA)), "listA");
     Check(device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, allocB, nullptr, IID_PPV_ARGS(&listB)), "listB");
     listA->Close(); listB->Close();
+    /* RT_PIPE=1: game-like host, no CPU wait per frame; up to 3 frames of command lists in flight (allocator ring), GetTimings
+       read after EnqueueHip and again after Retire. The lag check then only requires a valid frame_id in [N-4, N-1]. */
+    const bool pipe = std::getenv("RT_PIPE") && !std::strcmp(std::getenv("RT_PIPE"), "1");
+    ID3D12CommandAllocator *pa[3]{}, *pb[3]{}; ID3D12GraphicsCommandList *pla[3]{}, *plb[3]{}; UINT64 pv[3]{};
+    for (int i = 0; i < 3; ++i) { Check(device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&pa[i])), "pa"); Check(device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&pb[i])), "pb");
+        Check(device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, pa[i], nullptr, IID_PPV_ARGS(&pla[i])), "pla"); Check(device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, pb[i], nullptr, IID_PPV_ARGS(&plb[i])), "plb"); pla[i]->Close(); plb[i]->Close(); }
+    unsigned tiny = 0;
     ID3D12Fence *fence = nullptr; Check(device->CreateFence(0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence)), "fence");
     HANDLE ev = CreateEventW(nullptr, FALSE, FALSE, nullptr); UINT64 fv = 0;
     auto wait = [&] { Check(queue->Signal(fence, ++fv), "signal"); Check(fence->SetEventOnCompletion(fv, ev), "evt"); if (WaitForSingleObject(ev, 30000) != WAIT_OBJECT_0) Die("timeout"); };
@@ -130,27 +137,36 @@ int wmain(int argc, wchar_t **argv)
             {
                 auto t0 = std::chrono::steady_clock::now();
                 fi.frame_id = uint64_t(r) * 100000 + f;
-                allocA->Reset(); listA->Reset(allocA, nullptr); allocB->Reset(); listB->Reset(allocB, nullptr);
+                ID3D12GraphicsCommandList *la = listA, *lb = listB; const int slot = f % 3;
+                if (pipe) { if (pv[slot] && fence->GetCompletedValue() < pv[slot]) { Check(fence->SetEventOnCompletion(pv[slot], ev), "slot evt"); WaitForSingleObject(ev, 30000); }
+                    pa[slot]->Reset(); pla[slot]->Reset(pa[slot], nullptr); pb[slot]->Reset(); plb[slot]->Reset(pb[slot], nullptr); la = pla[slot]; lb = plb[slot]; }
+                else { allocA->Reset(); listA->Reset(allocA, nullptr); allocB->Reset(); listB->Reset(allocB, nullptr); }
                 LmxxfNrJob job{}; job.struct_size = sizeof(job);
                 if (api.PrepareFrame(ctx, &fi, &job) != LMXXF_NR_OK) { char e[512]{}; api.GetLastError(e, sizeof e); std::fprintf(stderr, "PrepareFrame %ux%u: %s\n", W, H, e); return 1; }
-                if (api.RecordInputs(ctx, job.handle, listA) != LMXXF_NR_OK) Die("RecordInputs");
-                listA->Close();
-                if (api.RecordOutputs(ctx, job.handle, listB) != LMXXF_NR_OK) { char e[512]{}; api.GetLastError(e, sizeof e); std::fprintf(stderr, "RecordOutputs: %s\n", e); return 1; }
-                listB->Close();
-                exec(listA);
+                if (api.RecordInputs(ctx, job.handle, la) != LMXXF_NR_OK) Die("RecordInputs");
+                la->Close();
+                if (api.RecordOutputs(ctx, job.handle, lb) != LMXXF_NR_OK) { char e[512]{}; api.GetLastError(e, sizeof e); std::fprintf(stderr, "RecordOutputs: %s\n", e); return 1; }
+                lb->Close();
+                exec(la);
                 if (reinterpret_cast<int32_t (*)(void *, void *)>(api.EnqueueHip)(ctx, job.handle) != LMXXF_NR_OK) { char e[512]{}; api.GetLastError(e, sizeof e); std::fprintf(stderr, "EnqueueHip: %s\n", e); return 1; }
                 { LmxxfNrTimings t{}; t.struct_size = sizeof(t);
                   if (api.GetTimings(ctx, &t) != LMXXF_NR_OK) Die("GetTimings");
                   std::printf("timing frame=%llu valid=%u ms=%.3f id=%llu\n", (unsigned long long)fi.frame_id, t.valid, t.network_ms, (unsigned long long)t.frame_id);
-                  if (f > 0 && (!t.valid || t.frame_id != fi.frame_id - 1)) ++bad_lag;
+                  if (!pipe && f > 0 && (!t.valid || t.frame_id != fi.frame_id - 1)) ++bad_lag;
+                  if (pipe && f > 4 && (!t.valid || t.frame_id + 4 < fi.frame_id || t.frame_id >= fi.frame_id)) ++bad_lag;
+                  if (t.valid && t.network_ms < 1.f && f > 0) ++tiny;
                   if (t.valid && f >= frames / 4) tms.push_back(t.network_ms); }
-                exec(listB);
+                exec(lb);
                 if (api.Retire(ctx, job.handle) != LMXXF_NR_OK) Die("Retire");
-                wait();
+                if (pipe) { Check(queue->Signal(fence, ++fv), "pipe signal"); pv[slot] = fv;
+                    LmxxfNrTimings t2{}; t2.struct_size = sizeof(t2); if (api.GetTimings(ctx, &t2) != LMXXF_NR_OK) Die("GetTimings 2");
+                    if (t2.valid && t2.network_ms < 1.f) ++tiny; char st[768]{}; api.GetStatus(ctx, st, sizeof st); }
+                else wait();
                 const double ms = std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - t0).count();
                 if (f >= frames / 4) { sum += ms; ++used; }
                 out = static_cast<ID3D12Resource *>(job.private_output);
             }
+            if (pipe) wait();
             if (out)
             {
                 D3D12_RESOURCE_DESC od = out->GetDesc(); D3D12_PLACED_SUBRESOURCE_FOOTPRINT ofp{}; UINT64 ob = 0; UINT rows = 0; UINT64 rowBytes = 0;
@@ -178,8 +194,8 @@ int wmain(int argc, wchar_t **argv)
         }
     api.Drain(ctx);
     api.Destroy(ctx);
-    std::printf("lag_mismatch=%u\n", bad_lag);
+    std::printf("lag_mismatch=%u tiny_reads=%u pipe=%u\n", bad_lag, tiny, pipe ? 1u : 0u);
     std::printf("rt_timing: %s\n", bad_lag ? "LAG MISMATCH" : "ok");
-    return bad_lag ? 3 : 0;
+    return bad_lag ? 3 : tiny ? 4 : 0;
     return 0;
 }

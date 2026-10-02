@@ -44,3 +44,23 @@
 偶有单帧明显偏短：(重)建后第一帧 2.6～3.1ms（现有 `DLSS5_HIP_SPAN_PROBE` 也有同样现象，是 HIP 侧行为），常开版运行中另见过 2.93ms、0.05ms 各一次（约 1/1200）。对照：同时开 SPAN_PROBE 跑 4×400 帧，除首帧外两边都无异常值。根因没查清；头文件和 CHANGELOG 已写明"显示时取几帧中位数"。
 
 脚本：`Development/HIP/experiments/net-timing/`（setup/go/rt.ps1、guard.sh、rt_timing.cpp）。
+
+## 第二单：TheAutomatic 报 PDL=1 下 GetTimings 连续几帧 ≈0.001ms（未复现，未改代码）
+
+结论：**在 lab 里没能复现他的现象**；试的两种"修法"都比现行版本（main fe4d1d73，hipEventQuery 收割）更差，已全部撤回，桥接代码不变。只提交了排查工具。
+
+复现尝试（全部 PDL=1、SWIN_RUN=1，三个模板 `scripts/hip-{game,magpie,re9}-flags.txt`，`pdl.ps1`）：
+- runtime，现行 DLL（3103A0A7）：串行宿主 720/900/1080 各 400 帧、**流水线宿主**（`rt_timing` 新加 `RT_PIPE=1`：不逐帧等 GPU，3 帧在途，每帧读两次 + GetStatus）三模板 × 720/900/1080 各 1000 帧 → 无 <1ms 读数，帧号滞后检查全过（`pdl-repro-search.txt`）。注意 1080 档 PDL 实际不生效（状态 `pdl=1/0`），720/900 生效（`1/1`）。
+- add-on 路径（bench 宿主，诊断打印版，三模板 900 × 300 帧）：不开 SPAN_PROBE 时干净。
+- **唯一见到 ≈0.0004ms 的情形：同时开 `DLSS5_HIP_SPAN_PROBE=1`**（同一流上两对 event，探针每帧 hipEventSynchronize）：前 ~16 帧里大量 0.0004，之后正常；PDL=0 时一样（`pdl-v1v2-spanprobe.txt`、`pdl-repro-search.txt` sp 段）。探针自己同期也有 −37ms、1245ms 这种怪值。和 PDL 无关，和他的现象不是一回事——除非他那边也开了 SPAN_PROBE 或别的 event 探针。
+
+试过的修法（都撤回）：
+| 版本 | 改法 | 结果 |
+|---|---|---|
+| v3 | end event 前插普通顺序 4 字节 hipMemsetAsync（协调者思路 1）+ 改用 D3D 共享栅栏判完成后 hipEventSynchronize 收割 | E 组 ABBA +0.11～+0.16ms 六轮全慢；串行 1080 400 帧 45 帧 <2ms（低至 0.005）；19 组 SAME（`pdl-v3-memset-fencegate.txt`） |
+| v4 | 只留栅栏判完成 + hipEventSynchronize，去掉 memset | E 组仍 +0.11～+0.17ms；串行 1080 52 帧偏短、帧号滞后 39 次（`pdl-v4-fencegate.txt`） |
+→ 现行版（hipEventQuery 判完成）在同样测试下更干净、不慢。说明问题在 HIP event 完成状态/时间戳的读法上很敏感，但我们这边的组合触发不了他的那种。
+
+需要他提供：runtime 文件哈希（是哪次编的）、Adrenalin/HIP 版本、游戏分辨率与网络档（状态行 `net=`）、调用 GetTimings 的位置/线程/频率、flags 文件全文、是否开了 SPAN_PROBE 或别的 HIP 探针、0.001 出现在启动后多久、持续多少帧。
+
+工具：`Development/HIP/experiments/net-timing/pdl.ps1`（runtime + add-on，三模板，可选 SPAN_PROBE/流水线/额外 flags 行；add-on 段依赖桥接的 `DLSS5_NET_TIMING=2` 打印，那是 v2～v4 里的诊断代码，现行桥接没有，需要时临时加）、`lockrun.ps1`、`rt_timing.cpp`（`RT_PIPE=1`）。
