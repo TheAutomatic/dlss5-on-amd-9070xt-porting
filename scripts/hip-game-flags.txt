@@ -104,6 +104,8 @@ DLSS5_SKIP_BLOCKS=42,43,46
 DLSS5_NETWORK_HEIGHT=auto
 # 1080 tier rows: 1152 = NVIDIA geometry (default, bit-exact); 1088 = compact, LOSSY, not NVIDIA's geometry (faster, 1080 tier only)
 DLSS5_NETWORK_1080_ROWS=1152
+# 1 = network runs on the game's own size (padded like NVIDIA) instead of snapping to the 720/900/1080 tiers; slower above 1080p, see CONFIGURATION.md
+DLSS5_NETWORK_FREE_RES=0
 DLSS5_FIT_INPUT=1
 DLSS5_FIT_LARGE=1
 DLSS5_CODEC_SRGB=0

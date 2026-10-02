@@ -26,6 +26,7 @@ inline int Mode(){
  static int configured=[](){int mode=0;if(FILE*f=_wfopen(NativeLabPath(L"native-game-flags.txt").c_str(),L"rb")){char line[256];while(fgets(line,sizeof line,f)){size_t n=strlen(line);while(n&&(line[n-1]=='\n'||line[n-1]=='\r'||line[n-1]==' '))line[--n]=0;if(!strcmp(line,"DLSS5_PRE_UPSCALE=1"))mode=1;else if(!strcmp(line,"DLSS5_PRE_UPSCALE=2"))mode=2;else if(!strcmp(line,"DLSS5_PRE_UPSCALE=0"))mode=0;}fclose(f);}return mode;}();return configured;
 }
 inline bool Enabled(){return Mode()!=0;}
+inline bool FreeResFromFile(){static const bool v=[]{unsigned x=0;if(FILE*f=_wfopen(NativeLabPath(L"native-game-flags.txt").c_str(),L"rb")){char line[256];while(fgets(line,sizeof line,f))sscanf(line,"DLSS5_NETWORK_FREE_RES=%u",&x);fclose(f);}return x==1;}();return v;}
 inline bool FitLargeFromFile(){static const bool v=[]{unsigned x=0;if(FILE*f=_wfopen(NativeLabPath(L"native-game-flags.txt").c_str(),L"rb")){char line[256];while(fgets(line,sizeof line,f))sscanf(line,"DLSS5_FIT_LARGE=%u",&x);fclose(f);}return x==1;}();return v;}
 struct DisplaySettings {unsigned notice=2;unsigned fps=0;unsigned frame_stats=0;};
 inline const DisplaySettings&Display(){
@@ -189,12 +190,13 @@ inline bool Process(ID3D12CommandQueue*q,Job&j){
   auto*color=static_cast<ID3D12Resource*>(d.resources[0].resource);auto*motion=static_cast<ID3D12Resource*>(d.resources[2].resource);auto cd=color->GetDesc();
   if(j.frame<=2){char m[256];snprintf(m,sizeof m,"inputs: color fmt=%u %llux%u motion fmt=%u depth fmt=%u exposure=%s reactive=%s tc=%s output fmt=%u mvscale=%g,%g jitter=%g,%g pre_exposure=%g flags=0x%x",unsigned(cd.Format),(unsigned long long)cd.Width,cd.Height,unsigned(motion->GetDesc().Format),d.resources[1].resource?unsigned(static_cast<ID3D12Resource*>(d.resources[1].resource)->GetDesc().Format):0u,d.resources[3].resource?"yes":"no",d.resources[4].resource?"yes":"no",d.resources[5].resource?"yes":"no",unsigned(static_cast<ID3D12Resource*>(d.resources[6].resource)->GetDesc().Format),d.motion_scale[0],d.motion_scale[1],d.jitter[0],d.jitter[1],d.pre_exposure,d.flags);Log(j.frame,d,m);}
   if(FitLargeFromFile())NativeFitLargeInputOverride()=true;
+  if(FreeResFromFile())NativeNetworkFreeResOverride()=true;
   /* 0.38 format fallback: a colour format outside NativeIsGameColor that the GPU reads as float is converted into a private RGBA16F
      low-res texture (instead of the same-format copy) and from there takes the unchanged RGBA16F route; FSR is then handed that RGBA16F
      texture. Originally accepted formats take exactly the old code (fallback_view stays UNKNOWN). */
   DXGI_FORMAT fallback_view=NativeFallbackColor(cd.Format);
   if(fallback_view!=DXGI_FORMAT_UNKNOWN&&Mode()==1){std::string why;if(!s->convert.Available(s->submit.Device(),&why)){if(!why.empty())Log(j.frame,d,("format fallback unavailable: "+why).c_str());fallback_view=DXGI_FORMAT_UNKNOWN;}}const DXGI_FORMAT low_format=fallback_view!=DXGI_FORMAT_UNKNOWN?DXGI_FORMAT_R16G16B16A16_FLOAT:cd.Format;
-  bool supported=NativeInputGeometry::Supported(d.render[0],d.render[1],NativeFitLargeInput())&&(NativeIsGameColor(cd.Format)||fallback_view!=DXGI_FORMAT_UNKNOWN)&&!(cd.Flags&D3D12_RESOURCE_FLAG_DENY_SHADER_RESOURCE);
+  bool supported=NativeInputGeometry::Supported(d.render[0],d.render[1],NativeAdmitLargeInput())&&(NativeIsGameColor(cd.Format)||fallback_view!=DXGI_FORMAT_UNKNOWN)&&!(cd.Flags&D3D12_RESOURCE_FLAG_DENY_SHADER_RESOURCE);
   if(!s->format_logged&&Mode()==1&&(fallback_view!=DXGI_FORMAT_UNKNOWN||!NativeIsGameColor(cd.Format))){s->format_logged=true;char m[200];
    if(fallback_view!=DXGI_FORMAT_UNKNOWN)snprintf(m,sizeof m,"colour format %s (%u): format fallback, converted to R16G16B16A16_FLOAT (view %s)",NativeDxgiFormatName(cd.Format),unsigned(cd.Format),NativeDxgiFormatName(fallback_view));
    else snprintf(m,sizeof m,"colour format %s (%u) rejected: not in the colour table%s; FFX only",NativeDxgiFormatName(cd.Format),unsigned(cd.Format),NativeFallbackColorView(cd.Format)==DXGI_FORMAT_UNKNOWN||NativeIsGameColor(cd.Format)?" nor the fallback table":NativeFormatFallbackOn()?" (fallback pass unavailable)":" (fallback disabled by DLSS5_FORMAT_FALLBACK=0)");

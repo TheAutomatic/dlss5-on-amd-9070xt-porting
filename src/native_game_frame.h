@@ -29,6 +29,7 @@
    scales the codec's normalisation on both the encode and the decode side. Default 1 = previous behaviour. */
 inline float NativePaperWhite(){static const float v=[]{const wchar_t*e=_wgetenv(L"DLSS5_PAPER_WHITE");float f=e?float(wcstod(e,nullptr)):1.f;return (f>0.f&&f<=64.f)?f:1.f;}();return v;}
 class NativeHistoryGuard {
+ bool wide=false; /* DLSS5_NETWORK_FREE_RES: processing surface beyond 65535x64 pixels -> 2D dispatch */
  ID3D12Resource*warped{},*base{};ID3D12RootSignature*root{};ID3D12PipelineState*pso{};float dark{},bright{};
 public:
  bool enabled{};
@@ -39,18 +40,19 @@ public:
   warped=warped_history;warped->AddRef();base=network_base;base->AddRef();
   D3D12_ROOT_PARAMETER p[3]{};p[0].ParameterType=D3D12_ROOT_PARAMETER_TYPE_SRV;p[1].ParameterType=D3D12_ROOT_PARAMETER_TYPE_UAV;p[2].ParameterType=D3D12_ROOT_PARAMETER_TYPE_32BIT_CONSTANTS;p[2].Constants={0,0,4};
   D3D12_ROOT_SIGNATURE_DESC rd{};rd.NumParameters=3;rd.pParameters=p;ID3DBlob*blob=nullptr,*error=nullptr;if(FAILED(D3D12SerializeRootSignature(&rd,D3D_ROOT_SIGNATURE_VERSION_1,&blob,&error)))throw std::runtime_error("history guard root");if(error)error->Release();if(FAILED(d->CreateRootSignature(0,blob->GetBufferPointer(),blob->GetBufferSize(),IID_PPV_ARGS(&root))))throw std::runtime_error("history guard root signature");blob->Release();blob=nullptr;error=nullptr;
-  auto hr=CompileNativeShader(dir+L"\\native_history_guard.hlsl",nullptr,"main",&blob,&error);if(FAILED(hr)){std::string m=error?std::string((const char*)error->GetBufferPointer(),error->GetBufferSize()):"history guard compilation";if(error)error->Release();throw std::runtime_error(m);}if(error)error->Release();
+  {const auto ng=NativeCurrentNetworkGeometry();wide=UINT64(ng.processing_width)*ng.processing_height>65535ull*64;}const D3D_SHADER_MACRO wide_macros[]={{"NATIVE_WIDE_ROW","2097152"},{nullptr,nullptr}};auto hr=CompileNativeShader(dir+L"\\native_history_guard.hlsl",wide?wide_macros:nullptr,"main",&blob,&error);if(FAILED(hr)){std::string m=error?std::string((const char*)error->GetBufferPointer(),error->GetBufferSize()):"history guard compilation";if(error)error->Release();throw std::runtime_error(m);}if(error)error->Release();
   D3D12_COMPUTE_PIPELINE_STATE_DESC pd{};pd.pRootSignature=root;pd.CS={blob->GetBufferPointer(),blob->GetBufferSize()};if(FAILED(NativeCreateComputePipelineState(d,&pd,IID_PPV_ARGS(&pso))))throw std::runtime_error("history guard pipeline");blob->Release();enabled=true;
  }
  // after the sampler (warped in SRV state): transition to UAV, patch in place, back to SRV
  void Record(ID3D12GraphicsCommandList*c){
   if(!enabled)return;const auto ng=NativeCurrentNetworkGeometry();const UINT pixels=ng.processing_width*ng.processing_height;UINT words[4];std::memcpy(words,&dark,4);std::memcpy(words+1,&bright,4);words[2]=pixels;words[3]=0;
   D3D12_RESOURCE_BARRIER b{};b.Type=D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;b.Transition={warped,D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,D3D12_RESOURCE_STATE_UNORDERED_ACCESS};c->ResourceBarrier(1,&b);
-  c->SetComputeRootSignature(root);c->SetPipelineState(pso);c->SetComputeRootShaderResourceView(0,base->GetGPUVirtualAddress());c->SetComputeRootUnorderedAccessView(1,warped->GetGPUVirtualAddress());c->SetComputeRoot32BitConstants(2,4,words,0);c->Dispatch((pixels+63)/64,1,1);
+  c->SetComputeRootSignature(root);c->SetPipelineState(pso);c->SetComputeRootShaderResourceView(0,base->GetGPUVirtualAddress());c->SetComputeRootUnorderedAccessView(1,warped->GetGPUVirtualAddress());c->SetComputeRoot32BitConstants(2,4,words,0);if(wide)c->Dispatch(32768,(pixels+2097151)/2097152,1);else c->Dispatch((pixels+63)/64,1,1);
   std::swap(b.Transition.StateBefore,b.Transition.StateAfter);c->ResourceBarrier(1,&b);
  }
 };
 class NativeOutputSmooth {
+ bool wide=false; /* DLSS5_NETWORK_FREE_RES: valid surface beyond 65535x64 pixels -> 2D dispatch */
  ID3D12Resource*rgb{};ID3D12Resource*warped{};ID3D12RootSignature*root{};ID3D12PipelineState*pso{};float threshold{},strength{};
 public:
  bool enabled{};
@@ -61,14 +63,14 @@ public:
   rgb=network_rgb;rgb->AddRef();warped=warped_history;warped->AddRef();
   D3D12_ROOT_PARAMETER p[3]{};p[0].ParameterType=D3D12_ROOT_PARAMETER_TYPE_SRV;p[1].ParameterType=D3D12_ROOT_PARAMETER_TYPE_UAV;p[2].ParameterType=D3D12_ROOT_PARAMETER_TYPE_32BIT_CONSTANTS;p[2].Constants={0,0,4};
   D3D12_ROOT_SIGNATURE_DESC rd{};rd.NumParameters=3;rd.pParameters=p;ID3DBlob*blob=nullptr,*error=nullptr;if(FAILED(D3D12SerializeRootSignature(&rd,D3D_ROOT_SIGNATURE_VERSION_1,&blob,&error)))throw std::runtime_error("output smooth root");if(error)error->Release();if(FAILED(d->CreateRootSignature(0,blob->GetBufferPointer(),blob->GetBufferSize(),IID_PPV_ARGS(&root))))throw std::runtime_error("output smooth root signature");blob->Release();blob=nullptr;error=nullptr;
-  auto hr=CompileNativeShader(dir+L"\\native_output_smooth.hlsl",nullptr,"main",&blob,&error);if(FAILED(hr)){std::string m=error?std::string((const char*)error->GetBufferPointer(),error->GetBufferSize()):"output smooth compilation";if(error)error->Release();throw std::runtime_error(m);}if(error)error->Release();
+  {const auto ng=NativeCurrentNetworkGeometry();wide=UINT64(ng.valid_width)*ng.valid_height>65535ull*64;}const D3D_SHADER_MACRO wide_macros[]={{"NATIVE_WIDE_ROW","2097152"},{nullptr,nullptr}};auto hr=CompileNativeShader(dir+L"\\native_output_smooth.hlsl",wide?wide_macros:nullptr,"main",&blob,&error);if(FAILED(hr)){std::string m=error?std::string((const char*)error->GetBufferPointer(),error->GetBufferSize()):"output smooth compilation";if(error)error->Release();throw std::runtime_error(m);}if(error)error->Release();
   D3D12_COMPUTE_PIPELINE_STATE_DESC pd{};pd.pRootSignature=root;pd.CS={blob->GetBufferPointer(),blob->GetBufferSize()};if(FAILED(NativeCreateComputePipelineState(d,&pd,IID_PPV_ARGS(&pso))))throw std::runtime_error("output smooth pipeline");blob->Release();enabled=true;
  }
  // rgb is in SRV state after post70; transitioned to UAV for the pass and back. warped must be SRV-readable.
  void Record(ID3D12GraphicsCommandList*c){
   if(!enabled)return;const auto ng=NativeCurrentNetworkGeometry();const UINT pixels=ng.valid_width*ng.valid_height;UINT words[4];std::memcpy(words,&threshold,4);std::memcpy(words+1,&strength,4);words[2]=pixels;words[3]=0;
   D3D12_RESOURCE_BARRIER b{};b.Type=D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;b.Transition={rgb,D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,D3D12_RESOURCE_STATE_UNORDERED_ACCESS};c->ResourceBarrier(1,&b);
-  c->SetComputeRootSignature(root);c->SetPipelineState(pso);c->SetComputeRootShaderResourceView(0,warped->GetGPUVirtualAddress());c->SetComputeRootUnorderedAccessView(1,rgb->GetGPUVirtualAddress());c->SetComputeRoot32BitConstants(2,4,words,0);c->Dispatch((pixels+63)/64,1,1);
+  c->SetComputeRootSignature(root);c->SetPipelineState(pso);c->SetComputeRootShaderResourceView(0,warped->GetGPUVirtualAddress());c->SetComputeRootUnorderedAccessView(1,rgb->GetGPUVirtualAddress());c->SetComputeRoot32BitConstants(2,4,words,0);if(wide)c->Dispatch(32768,(pixels+2097151)/2097152,1);else c->Dispatch((pixels+63)/64,1,1);
   std::swap(b.Transition.StateBefore,b.Transition.StateAfter);c->ResourceBarrier(1,&b);
  }
 };
