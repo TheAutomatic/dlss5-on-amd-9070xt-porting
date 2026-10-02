@@ -45,3 +45,5 @@ PSNR 逐 case（fast 配方）：900-static 53.30、900-motion 53.26（最差帧
 **PK 三轮全慢**，比 f32 快路径慢约 0.22（900）/0.32ms（1080），不进。原因：在 gfx12 上，这段数据的生产者（WMMA f32 累加）和消费者（`v_cvt_pk_fp8_f32`，只吃 f32）都是 f32，没有 f16→fp8 的直通转换。成对算术前要先 pkrtz 打包，算完再把每对拆开展宽回 f32：`v_cvt_f32_f16` 没有 op_sel，高半还要多一条移位。所以每个元素反而比 f32 的 med3/fma/fma/mul 多指令。Daniel/mochizuki 赚在 `v_fma_mix`（f16 输入、f32 输出）和整段留在 f16 的长链上，我们这段结构不具备这种长链，套成对算术不赚。源码留着，宏默认 0。
 
 **fast 配方整体（不变）**：仍是 §1 的 FAST3 = `CW_FAST_NUM 3` + `W2_FAST_NUM 3`（c64-wave2）+ `HIP_DEC_F8W 1` + `NETWORK_1080_ROWS=1088`。900 −0.107～−0.113ms、1080 −0.56～−0.61ms，最差帧 51.8 dB。CF 本轮复测数（−0.08/−0.13）与第一轮一致。可选加 `DLSS5_IO_FUSE=1`（逐位，需新 decode shader）。
+
+- **10-03 更正**：fast 档已改成运行时选项 `DLSS5_FAST_NUMERIC=1`（`results/fast-numeric-option-20261003`），本目录的换模块切换脚本（`switch/`、lab `D:\DLSSNR-Lab\fast-tier`）已过时，`-Tier fast` 会拒绝执行。

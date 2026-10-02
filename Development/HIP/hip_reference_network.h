@@ -135,6 +135,12 @@ inline bool C512M32Compatible(const Options&opt){return opt.c512_m32&&opt.fast_d
 inline bool WaveOwnedCompatible(const Options&o){
  return o.wave_owned&&!o.graph&&std::none_of(o.skip_blocks.begin(),o.skip_blocks.end(),[](U b){return b<=22||(b>=48&&b<=70);})&&o.fast_c32&&o.fused_ffn&&o.packed_c32&&o.half_c32&&o.raw_chain&&o.pre_main8&&o.c32_finish_fused&&o.prefix_inline&&o.post_head_fused&&o.post_merge_fold&&o.mapped_c32&&o.fast_mh&&o.fused_mh&&o.grouped_mh_contract&&o.packed_weights&&o.mh_byte_stream&&o.mh_proj_diag_fb&&o.fp8_av&&o.fp8_normalized&&o.ffn_qkv&&o.ffn_qkv_max_c>=256&&o.mh_input_mapped&&o.mh_project_crop&&o.elide_identity_shift;
 }
+/* DLSS5_FAST_NUMERIC (2026-10-03, Zero): 1 = load the lossy fast-numeric builds of the C32 and C64/C128 wave kernels
+   (c32-wave1-fast for every tier, c64-wave2-fast: CW_FAST_NUM 3 / W2_FAST_NUM 3, f32 activation/normalisation, softmax
+   1/sum by rcp) next to the normal ones; a missing -fast file falls back to the normal module with one stderr line. Unset or 0 =
+   default, bit-exact; anything else is reported and treated as 0. Read at network creation (results/fast-numeric-option-20261003). */
+inline bool FastNumericFromEnvironment(){const char*v=std::getenv("DLSS5_FAST_NUMERIC");if(!v||!*v||!std::strcmp(v,"0"))return false;
+ if(!std::strcmp(v,"1"))return true;std::fprintf(stderr,"DLSS5_FAST_NUMERIC=%s invalid (0/1), using 0\n",v);return false;}
 /* Fixed processing geometries (tiers + the 512x512 test) and, since 2026-10-02, free ones (DLSS5_NETWORK_FREE_RES, native_network_geometry.h
    NativeNetworkGeometry::Free): both axes multiples of 128, so every level is in the 1920x1152 divisibility class; the ViT grid is
    each axis /64 rounded up to 4. Tiers keep their own (historical) grid rules; a free geometry never equals a tier. */
@@ -643,8 +649,10 @@ if(vit_stream_active){Handle m{};api.Check(api.LoadModule(&m,(opt.modules+"/vit-
 if(vit_proj_n64_active){Handle m{};api.Check(api.LoadModule(&m,(opt.modules+"/vit-wide-deep.hsaco").c_str()),"vit-wide-deep.hsaco");modules["vit_wide_deep"]=m;}
 if(wave_owned_active){
  const bool rtz_tall=HIP_C32_RTZ_TALL&&W==1920&&(H==1152||H==1088)&&std::ifstream(std::filesystem::u8path(opt.modules+"/c32-wave1-rtz.hsaco"),std::ios::binary).good();
- const char*extra[][2]={{"c64_wave2","c64-wave2.hsaco"},{"c32_wave1",rtz_tall?"c32-wave1-rtz.hsaco":"c32-wave1.hsaco"}};
- for(auto&entry:extra){Handle m{};api.Check(api.LoadModule(&m,(opt.modules+"/"+entry[1]).c_str()),entry[1]);modules[entry[0]]=m;}}
+ std::string extra[][2]={{"c64_wave2","c64-wave2"},{"c32_wave1",rtz_tall?"c32-wave1-rtz":"c32-wave1"}};
+ if(FastNumericFromEnvironment())for(auto&entry:extra){const std::string fast=(entry[0]==std::string("c32_wave1")?"c32-wave1":entry[1])+"-fast"; /* every tier: the rtz build of the fast C32 disassembles identically */
+  if(std::ifstream(std::filesystem::u8path(opt.modules+"/"+fast+".hsaco"),std::ios::binary).good())entry[1]=fast;else std::fprintf(stderr,"DLSS5_FAST_NUMERIC=1: %s.hsaco missing, using %s.hsaco\n",fast.c_str(),entry[1].c_str());}
+ for(auto&entry:extra){entry[1]+=".hsaco";Handle m{};api.Check(api.LoadModule(&m,(opt.modules+"/"+entry[1]).c_str()),entry[1].c_str());modules[entry[0]]=m;}}
 if(SwinRunCompatible(opt)){
  std::ifstream probe(std::filesystem::u8path(opt.modules+"/swin-persistent.hsaco"),std::ios::binary);
  if(!probe){opt.swin_run=false;std::fprintf(stderr,"swin_run:nomodule\n");}

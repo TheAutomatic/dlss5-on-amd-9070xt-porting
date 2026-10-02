@@ -68,6 +68,7 @@ built the RE9 host/runtime route with TheAutomatic. Details per version are in t
 | `DLSS5_SKIP_BLOCKS=42,43,46` (on in all three templates; an empty value `DLSS5_SKIP_BLOCKS=` runs all 71 blocks) | Skips ViT blocks 42, 43 and 46 | Not measured separately | Against NVIDIA's output 47.43 → 44.26 dB, plus an overall shift of about +0.15/+0.23 (1/255) (1080p single frame, Style 0) | Yes: structural, per frame, nothing carries over |
 | `DLSS5_NETWORK_1080_ROWS=1088` | Runs the 1080 tier on 1088 rows (8 mirrored rows, the geometry Daniel and mochizuki use) instead of 1152 (72 mirrored rows, NVIDIA's geometry) | About 0.45 ms less per frame at the 1080 tier (5.6% less work); 720/900 unaffected | About 54–56 dB against 1152 rows (whole frame); against NVIDIA 47.4 → 45.8 dB (single frame, Style 0, all 71 blocks) | Yes: geometry only, same arithmetic, nothing carries over |
 | `DLSS5_NETWORK_HEIGHT=900` (default `auto` picks the tier from the input height) | Runs inputs that would use the 1080 tier on the 900 tier (1600×960) | Offline whole network about 9.5 → 6.8 ms (0.39 timings of the two tiers) | Not measured (no PSNR of 900 vs 1080 or vs NVIDIA) | Yes: geometry, nothing carries over; cost not quantified |
+| `DLSS5_FAST_NUMERIC=1` (default `0`) | Fast numeric path: the C32 and C64/C128 window kernels keep activations and normalisation in f32 (dropping the half-precision rounding steps) and compute softmax 1/sum with `rcp`; the host loads the packaged `c32-wave1-fast` / `c64-wave2-fast` modules | Offline about 0.07–0.13 ms (900) and 0.09–0.10 ms (1080) less per frame | Against the bit-exact output 51.8 dB worst frame, 53.1–55.5 dB per sequence; against NVIDIA practically unchanged (block skip 44.26 → 44.23 dB, all 71 blocks 47.43 → 47.55 dB; 1080p single frame, Style 0) | No: numeric approximation, the error passes from layer to layer and can build up. Rounding differences in one block are carried into every later block, and where they surface can't be predicted; nothing carries over between frames |
 | `DLSS5_VIT_ADAPTIVE=1` (on in the regular package, off in Magpie/RE9) | Adaptive ViT reuse: when the frame changes less than a threshold, the ViT is not recomputed and the last fully computed result is reused. In game F8 toggles between it (AE) and full computation (EXACT); `=0` always computes fully | Offline whole network: moving sequence about 4.9%/6.3% faster at 900/1080, static frames about 9.0%/11.3%; Stellar Blade standing still EXACT 17.9 ms, AE 16.66 ms | A static single frame is bit-identical to EXACT; PSNR on motion against EXACT/NVIDIA not measured | Carries over frames: a result is reused for at most `DLSS5_VIT_REUSE_PERIOD` (default 4) frames. Approximate frames are never written back, so errors do not compound; it resets on recompute, mode switch, geometry change or a gap over 500 ms. Thresholds are heuristic, not guaranteed equivalent in every scene |
 
 **Fast mode** (paste into `native-game-flags.txt`, replacing lines with the same keys):
@@ -76,13 +77,14 @@ built the RE9 host/runtime route with TheAutomatic. Details per version are in t
 DLSS5_SKIP_BLOCKS=42,43,46
 DLSS5_NETWORK_1080_ROWS=1088
 DLSS5_NETWORK_HEIGHT=900
+DLSS5_FAST_NUMERIC=1
 DLSS5_VIT_ADAPTIVE=1
 DLSS5_VIT_REUSE_PERIOD=4
 ```
 
 With `NETWORK_HEIGHT=900` every input runs on the 900 tier and `1080_ROWS` no longer matters; to keep 1080-tier sharpness, drop the `NETWORK_HEIGHT` line (back to `auto`).
 
-Why only these: the first three change geometry or structure, every arithmetic step stays the same, each frame stands alone and the cost can be measured; ViT reuse works across frames, so its risk is marked separately. Other lossy options (f16 accumulation, half-precision softmax, fast activation approximations) push rounding differences through all 71 blocks, where they surface can't be predicted, and they need different modules, so we don't offer them.
+Why only these: the geometry and structure options keep every arithmetic step the same, each frame stands alone and the cost can be measured; ViT reuse works across frames, so its risk is marked separately. The fast numeric path is different: it changes the arithmetic itself, rounding differences travel through all later blocks, and where they surface can't be predicted. The measured cost is small (practically unchanged against NVIDIA), but test frames can't cover every scene, so it is off by default and left to the user. Other lossy options (f16 accumulation, half-precision softmax) are not offered.
 
 ## What is in this repository
 
