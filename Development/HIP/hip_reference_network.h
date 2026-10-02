@@ -25,10 +25,27 @@ using U=uint32_t;using Api=hip_probe::Api;using Handle=hip_probe::Handle;
 inline float Half(uint16_t h){U s=U(h&0x8000u)<<16,e=(h>>10)&31u,m=h&1023u,b;if(!e){if(!m)b=s;else{int sh=0;while(!(m&1024)){m<<=1;sh++;}b=s|(U(113-sh)<<23)|((m&1023)<<13);}}else b=s|((e==31?255:e+112)<<23)|(m<<13);float f;std::memcpy(&f,&b,4);return f;}
 inline std::vector<char> ReadBytes(const std::string&path){std::ifstream f(std::filesystem::u8path(path),std::ios::binary|std::ios::ate);if(!f)throw std::runtime_error("missing "+path);auto n=f.tellg();if(n<=0)throw std::runtime_error("empty "+path);std::vector<char>b(static_cast<size_t>(n));f.seekg(0);if(!f.read(b.data(),n))throw std::runtime_error("read "+path);return b;}
 inline std::vector<float> ReadWeights(const std::string&path){std::ifstream test(std::filesystem::u8path(path),std::ios::binary);bool full=bool(test);test.close();auto b=ReadBytes(full?path:path.substr(0,path.size()-4)+".f16");if(b.size()%(full?4:2))throw std::runtime_error("weight size "+path);std::vector<float>v(b.size()/(full?4:2));if(full)std::memcpy(v.data(),b.data(),b.size());else for(size_t i=0;i<v.size();i++){uint16_t h;std::memcpy(&h,b.data()+i*2,2);v[i]=Half(h);}return v;}
+#ifndef HIP_ADDR_SKEW
+#define HIP_ADDR_SKEW 0 /* 2026-10-02 ideas-yami-ikaruga: 1 = compile the DLSS5_HIP_ADDR_SKEW_* allocation offset scan (diagnostic) */
+#endif
 struct Allocation {Api*api;void*ptr{};size_t bytes,capacity;bool owned=true;
  // Sparse weights (Options::sparse_weights): ptr is a reserved address range of `bytes`; only `sparse_maps` (offset,size,handle) are backed. capacity = backed bytes.
  size_t sparse_reserved{};struct SparseMap{size_t offset,size;void*handle;};std::vector<SparseMap>sparse_maps;
- Allocation(Api&a,size_t n):api(&a),bytes(n),capacity(n){if(!n)throw std::runtime_error("zero HIP allocation");a.Check(a.hipMalloc(&ptr,n),"hipMalloc");}Allocation(Api&a,void*p,size_t n):api(&a),ptr(p),bytes(n),capacity(n),owned(false){}
+ #if HIP_ADDR_SKEW
+ size_t skew{};
+ // 2026-10-02 ideas-yami-ikaruga (diagnostic, default compiled out): DLSS5_HIP_ADDR_SKEW_STRIDE/_MOD/_SEED/_KIND shift the i-th
+ // plain allocation by ((i+seed)*stride)%mod bytes (kind bit0 = persistent weights, bit1 = tensors). Only physical spacing changes.
+ static size_t SkewFor(){static const size_t st=std::getenv("DLSS5_HIP_ADDR_SKEW_STRIDE")?std::strtoull(std::getenv("DLSS5_HIP_ADDR_SKEW_STRIDE"),nullptr,0):0,
+  md=std::getenv("DLSS5_HIP_ADDR_SKEW_MOD")?std::strtoull(std::getenv("DLSS5_HIP_ADDR_SKEW_MOD"),nullptr,0):0,sd=std::getenv("DLSS5_HIP_ADDR_SKEW_SEED")?std::strtoull(std::getenv("DLSS5_HIP_ADDR_SKEW_SEED"),nullptr,0):0,
+  kd=std::getenv("DLSS5_HIP_ADDR_SKEW_KIND")?std::strtoull(std::getenv("DLSS5_HIP_ADDR_SKEW_KIND"),nullptr,0):3;
+  static size_t counter[2]{};const int k=SkewPersistent()?0:1;if(!st||!md||!(kd&(1u<<k)))return 0;size_t i=counter[k]++;return ((i+sd)*st)%md/256*256;}
+ static bool&SkewPersistent(){static bool v=false;return v;}
+#endif
+ Allocation(Api&a,size_t n):api(&a),bytes(n),capacity(n){if(!n)throw std::runtime_error("zero HIP allocation");
+#if HIP_ADDR_SKEW
+  skew=SkewFor();if(skew){a.Check(a.hipMalloc(&ptr,n+skew),"hipMalloc");ptr=static_cast<char*>(ptr)+skew;return;}
+#endif
+  a.Check(a.hipMalloc(&ptr,n),"hipMalloc");}Allocation(Api&a,void*p,size_t n):api(&a),ptr(p),bytes(n),capacity(n),owned(false){}
  Allocation(Api&a,size_t n,size_t granularity,const std::vector<std::pair<size_t,size_t>>&live):api(&a),bytes(n),capacity(0){
   sparse_reserved=(n+granularity-1)/granularity*granularity;a.Check(a.hipMemAddressReserve(&ptr,sparse_reserved,granularity,nullptr,0),"hipMemAddressReserve");
   try{hip_probe::MemAllocationProp prop{};prop.type=1;prop.location.type=1;hip_probe::MemAccessDesc acc{};acc.location.type=1;acc.flags=3;
@@ -37,7 +54,13 @@ struct Allocation {Api*api;void*ptr{};size_t bytes,capacity;bool owned=true;
     sparse_maps.push_back(m);if(int e=a.hipMemSetAccess(static_cast<char*>(ptr)+m.offset,m.size,&acc,1))throw std::runtime_error("hipMemSetAccess rc="+std::to_string(e)+" offset="+std::to_string(m.offset)+" size="+std::to_string(m.size)+" reserved="+std::to_string(sparse_reserved)+" bytes="+std::to_string(n)+" maps="+std::to_string(sparse_maps.size()));capacity+=m.size;}
   }catch(...){ReleaseSparse();throw;}}
  void ReleaseSparse(){for(auto&m:sparse_maps){api->hipMemUnmap(static_cast<char*>(ptr)+m.offset,m.size);api->hipMemRelease(m.handle);}sparse_maps.clear();if(ptr)api->hipMemAddressFree(ptr,sparse_reserved);ptr=nullptr;}
- ~Allocation(){if(ptr&&owned){api->hipDeviceSynchronize();if(sparse_reserved)ReleaseSparse();else api->hipFree(ptr);}}};
+ ~Allocation(){if(ptr&&owned){api->hipDeviceSynchronize();if(sparse_reserved)ReleaseSparse();else api->hipFree(
+#if HIP_ADDR_SKEW
+  static_cast<char*>(ptr)-skew
+#else
+  ptr
+#endif
+  );}}};
 using Tensor=std::shared_ptr<Allocation>;
 #ifndef HIP_C512_PAD16
 #define HIP_C512_PAD16 1 /* 2026-09-30: see NewPad16; 0 = old mh_shift_pack path (results/shift-pack-900-20260930) */
@@ -66,6 +89,9 @@ using Tensor=std::shared_ptr<Allocation>;
 #endif
 #ifndef HIP_C512_FFN_F8W
 #define HIP_C512_FFN_F8W 1 /* 2026-10-01: use split_ffn_one_w2f8 (E4M3 mix/expand weights, fp8 WMMA) when c512-m32-deep exports it; bit-identical (results/c512-qkv-pipeline-20261001) */
+#endif
+#ifndef HIP_C512_FFN_PROJ_FUSE
+#define HIP_C512_FFN_PROJ_FUSE 0 /* 2026-10-02 ideas-yami-ikaruga: 1 = C512 FFN + FFN projection as one split_ffn_proj_fused dispatch when c512-m32-deep exports it (module C512_FFN_PROJ_FUSE); contract bytes stay in LDS */
 #endif
 #ifndef HIP_C512_PROJ_FB8
 #define HIP_C512_PROJ_FB8 0 /* 2026-10-01: C512 attention projection reads the FFN projection's E4M3 tiles as its residual (split_projection_frag_nof32 + mh_attention_project_frag_c512_fb8, modules built with C512_PROJ_FB8) and the f32 copy is not written; 0 or older modules = f32 path (results/mochizuki-gap-20261001) */
@@ -162,7 +188,13 @@ class Network {
   if(pad>valid)api.Check(api.hipMemsetAsync(static_cast<char*>(t->ptr)+valid*ch*4,0xff,(pad-valid)*ch*4,stream),"pad16 poison"); /* diagnostic: NaN pad rows must not change any output */
 #endif
   return t;}
- Tensor Upload(const void*p,size_t bytes,bool persistent=false){if(!bytes||bytes%4)throw std::runtime_error("upload size");auto t=persistent?std::make_shared<Allocation>(api,bytes):New(bytes/4);api.Check(api.hipStreamSynchronize(stream),"before upload");api.Check(api.hipMemcpy(t->ptr,p,bytes,1),"upload");return t;}
+ Tensor Upload(const void*p,size_t bytes,bool persistent=false){if(!bytes||bytes%4)throw std::runtime_error("upload size");Tensor t;if(persistent){
+#if HIP_ADDR_SKEW
+  Allocation::SkewPersistent()=true;t=std::make_shared<Allocation>(api,bytes);Allocation::SkewPersistent()=false;
+#else
+  t=std::make_shared<Allocation>(api,bytes);
+#endif
+  }else t=New(bytes/4);api.Check(api.hipStreamSynchronize(stream),"before upload");api.Check(api.hipMemcpy(t->ptr,p,bytes,1),"upload");return t;}
  void* P(const Tensor&t){return t?t->ptr:nullptr;}
  // Packing wrappers record the byte ranges the in-place packers leave dead; UploadWeight maps only the rest when sparse_weights is on.
  std::vector<std::pair<size_t,size_t>>dead;size_t sparse_granularity{};size_t sparse_logical{},sparse_backed{};unsigned sparse_dense{};
@@ -331,6 +363,7 @@ class Network {
   if(module=="c32_wave1"&&(kernel=="c32_wave1_up"||kernel=="c32_wave1_up_b8"||kernel=="c32_wave1_up_lb"||kernel=="c32_wave1_up_b8_lb"||kernel=="c32_wave1_finish_dcrop_b8"||kernel=="c32_wave1_finish_dcrop_b8d"||kernel=="c32_wave1_prefix_b8d"||kernel=="c32_wave1_mapped_b8"||kernel=="c32_wave1_finish_b8"||kernel=="c32_wave1_post_b8")){groups=count;threads=32;}
   if(module=="c512_m32_mh"||module=="c512_m32_deep"){groups=count/1024;threads=32;}
   if(kernel=="split_ffn_one_w2"||kernel=="split_ffn_one_w2f8")threads=64;
+  if(kernel=="split_ffn_proj_fused"){threads=256;groups=count/8192;}
   if(module=="c512_m32_mh"&&kernel=="c512_qkv_attention_fused"){groups=count;threads=64;}
   if(module=="c512_m32_mh"&&kernel=="c512_qkv_attention_compact"){groups=count;threads=64;}
   if(vit_proj_n64_active&&module=="deep_fast"&&kernel=="vit_project_frag"&&count%1024==0){module="vit_wide_deep";kernel="vit_project_frag_n64";groups=unsigned(((count/1024+15)/16)*16);threads=32;}
@@ -457,14 +490,16 @@ class Network {
   auto compact=input;
   if(n!=valid&&!(HIP_C512_PAD16&&input->capacity>=size_t(n)*512*4)){compact=New(size_t(n)*512);Run("mh","mh_shift_pack",size_t(n)*512,P(input),P(compact),valid,U(1),n,U(1),U(0),U(0),U(512),U(0));}
   auto mixed=New(size_t(n)*512),contract=New(size_t(n)*512),contract8=New(size_t(n)*128),ffn=New(size_t(n)*512),ffn8=New(size_t(n)*128);
-  if(HIP_C512_FFN_ONE&&HIP_C512_FFN_F8W&&HasFn("c512_m32_deep","split_ffn_one_w2f8"))Run("c512_m32_deep","split_ffn_one_w2f8",size_t((n+31)/32*32)*256,P(compact),PackedSplitFfnWeightMixFp8(Block(block,"ffwd")),P(contract8),n);
+  const bool fpf=HIP_C512_FFN_PROJ_FUSE&&HIP_C512_FFN_ONE&&HIP_C512_FFN_F8W&&!HIP_C512_PROJ_FB8&&HasFn("c512_m32_deep","split_ffn_proj_fused");
+  if(fpf)Run("c512_m32_deep","split_ffn_proj_fused",size_t(n)*512,P(compact),PackedSplitFfnWeightMixFp8(Block(block,"ffwd")),PackedSplitProjectionFrag(Block(block,"ffwd-projection")),P(ffn),P(ffn8),n);
+  else if(HIP_C512_FFN_ONE&&HIP_C512_FFN_F8W&&HasFn("c512_m32_deep","split_ffn_one_w2f8"))Run("c512_m32_deep","split_ffn_one_w2f8",size_t((n+31)/32*32)*256,P(compact),PackedSplitFfnWeightMixFp8(Block(block,"ffwd")),P(contract8),n);
   else if(HIP_C512_FFN_ONE&&HasFn("c512_m32_deep","split_ffn_one_w2"))Run("c512_m32_deep","split_ffn_one_w2",size_t((n+31)/32*32)*256,P(compact),PackedSplitFfnWeightMixHalf(Block(block,"ffwd")),P(contract8),n);
   else if(HIP_C512_FFN_ONE&&HasFn("c512_m32_deep","split_ffn_one_m32"))Run("c512_m32_deep","split_ffn_one_m32",size_t((n+31)/32*32)*256,P(compact),PackedSplitFfnWeightMixHalf(Block(block,"ffwd")),P(contract8),n);
   else{Run("c512_m32_deep","split_mix_blocked_h16w_m32",size_t((n+31)/32*32)*256,P(compact),PackedSplitFfnWeightMixHalf(Block(block,"ffwd")),P(mixed),n);
   Run("deep","split_ffn_fused_fp8_t8",size_t(n)*512,P(mixed),PackedSplitFfnWeightMixHalf(Block(block,"ffwd")),P(contract),P(contract8),n);}
   mixed.reset();
   const bool fb8=HIP_C512_PROJ_FB8&&HasFn("deep_fast","split_projection_frag_nof32")&&HasFn("mh_fast","mh_attention_project_frag_c512_fb8");
-  Run("deep",fb8?"split_projection_frag_nof32":"split_projection_frag",size_t(n)*512,P(contract8),PackedSplitProjectionFrag(Block(block,"ffwd-projection")),P(compact),P(ffn),P(ffn8),n);
+  if(!fpf)Run("deep",fb8?"split_projection_frag_nof32":"split_projection_frag",size_t(n)*512,P(contract8),PackedSplitProjectionFrag(Block(block,"ffwd-projection")),P(compact),P(ffn),P(ffn8),n);
   compact.reset();contract.reset();contract8.reset();
   auto av=New(size_t(n)*128);
   Run("c512_m32_mh","c512_qkv_attention_compact",size_t(ww)*hh/64*16,P(ffn8),PackedMhWeightQkvFrag(Block(block,"attention"),512),P(av),w,h,ww,hh,sx,sy);
