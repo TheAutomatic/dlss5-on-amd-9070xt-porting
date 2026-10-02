@@ -71,3 +71,10 @@ GAME_PROBE 每帧 Flush，只能给"各 pass 多大"。网络外真正的成本�
 - 工具：`Development/HIP/experiments/outside-net/`（rt_outside.cpp、setup/probe/rt/go.ps1、guard.sh、ingame-probe.ps1）。
 - 原始：`probe-p1.txt`（两轮拆账）、`validate-v1.txt`（哈希/ABBA/smoke/19 组）、`addon-game-probe-offline.txt`、`game-probe-stellar-20261002.txt`（Zero 游戏内）。
 - 未装机、未打包；游戏文件没动。
+
+## 6. 收刀 + 装机（同日晚，光拍板）
+- `DLSS5_HIP_POST_SIGNAL_QUERY` 改为运行时开关，默认 1（模板不写，flags/环境变量设 0 关闭），CONFIGURATION/CHANGELOG 已写。提交 87b745d1。
+- HEAD 重编：add-on **7FC14ECE**，RE9 runtime **3AF64892**；模块不动（SUMS F6411153）。
+- 对现装验证（`validate-install.txt`）：add-on 宿主（基线 = 现装源码 b6c508a5 编的 bench）**19 组 SAME**，ABBA 900 −0.033/−0.110/−0.076、1080 −0.033/−0.038/−0.035，合并 p99 7.442→7.388、10.193→10.175；RE9 runtime 对现装 73D4C25C：720/900/1080 + 原生两尺寸哈希 SAME，串行 900 −0.139/−0.070/−0.080、1080 −0.043/−0.059/−0.065，流水线 900 −0.026/−0.016/−0.012、1080 −0.108/−0.085/−0.092；smoke 0。每轮都快。
+- 已装（`install-host.ps1`）：剑星 add-on 053C3589→7FC14ECE，鬼武者 runtime（含 _storage_）73D4C25C→3AF64892；备份 `stellar-backups/onimusha-backups\20261002-204209-outside`、fast-tier `backups\20261002-204209-install-outside`；exact 快照（模块/SUMS/flags）已同步；两游戏 EXACT。装后用装机 runtime 回放 900 b2980ada / 1080 758674a8，smoke 0 errors。
+- 注：本机 add-on 重编不逐字节可复现（同一 b6c508a5 两次 5707E272/2712C1F6），按行为判；HEAD 版两次都是 7FC14ECE。

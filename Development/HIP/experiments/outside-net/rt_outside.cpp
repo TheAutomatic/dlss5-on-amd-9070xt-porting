@@ -42,9 +42,9 @@ int wmain(int argc, wchar_t **argv)
       std::printf("abi: v1-size ok (GetTimings slot untouched)\n"); }
     { LmxxfNrApi bad{}; bad.struct_size = LMXXF_NR_API_V1_SIZE - 8; if (getApi(2, &bad) == LMXXF_NR_OK) Die("GetApi accepted a wrong size"); std::printf("abi: wrong size rejected\n"); }
     LmxxfNrApi api{}; api.struct_size = sizeof(api);
-    if (getApi(2, &api) != LMXXF_NR_OK) Die("GetApi(2)");
-    if (!api.GetTimings) Die("GetTimings missing");
-    { LmxxfNrTimings t{}; t.struct_size = 8; if (api.GetTimings(nullptr, &t) == LMXXF_NR_OK) Die("GetTimings accepted a wrong size");
+    bool hasTimings = true;
+    if (getApi(2, &api) != LMXXF_NR_OK) { api = {}; api.struct_size = LMXXF_NR_API_V1_SIZE; if (getApi(2, &api) != LMXXF_NR_OK) Die("GetApi(2)"); hasTimings = false; std::printf("abi: runtime predates GetTimings (v1 table)\n"); }
+    if (hasTimings) { LmxxfNrTimings t{}; t.struct_size = 8; if (api.GetTimings(nullptr, &t) == LMXXF_NR_OK) Die("GetTimings accepted a wrong size");
       t.struct_size = sizeof(t); if (api.GetTimings(nullptr, &t) == LMXXF_NR_OK || t.valid) Die("GetTimings accepted a null context");
       std::printf("abi: full size ok, GetTimings argument checks ok\n"); }
     std::vector<std::pair<UINT, UINT>> sizes;
@@ -111,7 +111,7 @@ int wmain(int argc, wchar_t **argv)
     ID3D12Resource *tsRead = buffer(rb, 96, D3D12_RESOURCE_STATE_COPY_DEST);
     UINT64 tsfreq = 0; Check(queue->GetTimestampFrequency(&tsfreq), "ts freq"); const double tsf = double(tsfreq);
     LARGE_INTEGER qfl; QueryPerformanceFrequency(&qfl); const double qf = double(qfl.QuadPart);
-    const bool timing = !(std::getenv("OUT_TIMING") && !std::strcmp(std::getenv("OUT_TIMING"), "0"));
+    const bool timing = hasTimings && !(std::getenv("OUT_TIMING") && !std::strcmp(std::getenv("OUT_TIMING"), "0"));
     const bool lateRecord = std::getenv("OUT_LATE_RECORD") && !std::strcmp(std::getenv("OUT_LATE_RECORD"), "1");
     std::printf("outside: pipe=%d timing=%d late_record=%d tsfreq=%llu qpcfreq=%.0f\n", pipe ? 1 : 0, timing ? 1 : 0, lateRecord ? 1 : 0, (unsigned long long)tsfreq, qf);
     std::wstring modules = argv[2];

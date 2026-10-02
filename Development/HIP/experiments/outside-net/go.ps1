@@ -8,11 +8,11 @@ try{$Steps=@($Steps|%{$_ -split ","}|?{$_});$Cands=@($Cands|%{$_ -split ","}|?{$
  foreach($st in $Steps){"== $st $(Get-Date -Format T)"
   if($st -eq 'probe'){& "$root\probe.ps1" -Tag $Tag *>&1|Tee-Object "$root\probe-$Tag.txt"}
   if($st -eq 'probeaddon'){& "$root\probe.ps1" -Tag $Tag -SkipRt *>&1|Tee-Object "$root\probe-$Tag.txt"}
-  if($st -eq 'addonQ'){Get-ChildItem $root -Directory -Filter 'runtime-regression-Q-*'|Remove-Item -Recurse -Force
-   try{& "$root\full.ps1" -Set Q -Rounds 3 -CandHost Q -RollHost Qroll *> "$root\full-Q.log";'FULL Q OK'}catch{"FULL Q FAIL $_"}
-   "SAME-count Q: $((Select-String -Path "$root\full-Q.log" -Pattern '^SAME|AE CSV SAME').Count)"
-   Get-Content "$root\full-Q.log"|Select-String 'FAIL|changed|throw|Error|DIFF'|Select-Object -Last 10
-   & "$root\summarize.ps1" -Sets Q;& "$root\p99m.ps1" -Set Q}
+  if($st -in 'addonQ','addonN'){$X=$st.Substring(5);Get-ChildItem $root -Directory -Filter "runtime-regression-$X-*"|Remove-Item -Recurse -Force
+   try{& "$root\full.ps1" -Set $X -Rounds 3 -CandHost $X -RollHost "${X}roll" *> "$root\full-$X.log";"FULL $X OK"}catch{"FULL $X FAIL $_"}
+   "SAME-count $X`: $((Select-String -Path "$root\full-$X.log" -Pattern '^SAME|AE CSV SAME').Count)"
+   Get-Content "$root\full-$X.log"|Select-String 'FAIL|changed|throw|Error|DIFF'|Select-Object -Last 10
+   & "$root\summarize.ps1" -Sets $X;& "$root\p99m.ps1" -Set $X}
   if($st -eq 'rt'){& "$root\rt.ps1" -Cands $Cands *>&1|Tee-Object "$root\rt-$Tag.txt"}}
 } catch {"GO FAIL $_"} finally { Get-ChildItem $root -Recurse -Include *.f16,*.ppm -EA 0|?{$_.FullName -match 'runtime-regression|probe-'}|Remove-Item -Force -EA 0; if((Test-Path $L) -and ((Get-Content $L) -match 'outside-net')){Remove-Item $L -Force}; 'LOCK DROPPED' }
 'GO_DONE'
