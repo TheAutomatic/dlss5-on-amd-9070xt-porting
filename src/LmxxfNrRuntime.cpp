@@ -15,6 +15,7 @@
 
 #include <atomic>
 #include <mutex>
+#include <cstddef>
 #include <cstdio>
 #include <cstring>
 #include <cstdlib>
@@ -265,6 +266,7 @@ struct Job
     ID3D12Resource *sourceExposure = nullptr;
     D3D12_RESOURCE_STATES sourceExposureState = D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE;
     bool codec_passthrough = false;
+    uint64_t frame_id = 0; /* LmxxfNrFrameInfo::frame_id; tags the network timing of this frame */
 };
 
 /* 2026-09-26: the RE9 package used to read only DLSS5_FIT_LARGE from native-game-flags.txt, so users could not
@@ -421,6 +423,9 @@ struct Session
     UINT allocWidth = 0, allocHeight = 0;
     /* Count of codec+HIP teardowns triggered by geoChanged (exposure/valid/format/alloc). */
     uint32_t codecRecreates = 0;
+    /* Set by the first GetTimings call: network timing records hipEvents only from then on (always-on measured
+     * +0.01..+0.10 ms in the rt_bench ABBA, results/net-timing-20261002), and again after a HIP recreate. */
+    bool timingRequested = false;
     std::string optionsNote;
     unsigned loggedColorW=0, loggedColorH=0, loggedNetW=0, loggedNetH=0, loggedProcW=0, loggedProcH=0;
     unsigned builtProcW=0, builtProcH=0;
@@ -982,6 +987,7 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
                 return Fail(LMXXF_NR_FAILED, "PrepareFrame: graph must stay off");
             session->bridge = new hip_reference::D3D12Bridge();
             session->bridge->Create(session->queue, opt, {});
+            if (session->timingRequested) session->bridge->EnableNetworkTiming(); /* kept across a recreate once a host asked */
             session->builtProcW=geo.processing_width; session->builtProcH=geo.processing_height;
             session->hipPrepared = true;
             char geoMsg[192] {};
@@ -1179,6 +1185,7 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
                     return Fail(LMXXF_NR_FAILED, "PrepareFrame: graph must stay off");
                 session->bridge = new hip_reference::D3D12Bridge();
                 session->bridge->Create(session->queue, opt, {});
+                if (session->timingRequested) session->bridge->EnableNetworkTiming(); /* kept across a recreate once a host asked */
                 session->builtProcW=geo.processing_width; session->builtProcH=geo.processing_height;
                 session->hipPrepared = true;
                 char geoMsg[192] {};
@@ -1289,6 +1296,7 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
         session->job.codec_passthrough = (info->flags & LMXXF_NR_FRAME_FLAG_CODEC_PASSTHROUGH) != 0;
         session->colorFormat = cfmt;
         session->job.seed = 1;
+        session->job.frame_id = info->frame_id;
         session->job.state = LMXXF_NR_JOB_PREPARED;
         job->handle = &session->job;
         if (!session->decode)
@@ -1450,6 +1458,7 @@ int32_t EnqueueHip(void *context, void *job, void *command_queue)
         QueueContract(session, targetQueue);
         try
         {
+            session->bridge->SetTimingTag(j->frame_id);
             session->bridge->EnqueueAfterProducer(targetQueue, j->seed, false);
             if (j->state == LMXXF_NR_JOB_PRODUCER_SUBMITTED)
                 j->state = LMXXF_NR_JOB_NR_COMPLETE;
@@ -1652,7 +1661,7 @@ int32_t GetStatus(void *context, char *buf, uint32_t buf_chars)
         if (!buf || buf_chars == 0)
             return Fail(LMXXF_NR_INVALID_ARGUMENT, "GetStatus: empty buffer");
         auto *session = static_cast<Session *>(context);
-        char text[640] {};
+        char text[768] {};
         if (!session)
             std::snprintf(text, sizeof text, "no session");
         else if (session->failed)
@@ -1663,11 +1672,18 @@ int32_t GetStatus(void *context, char *buf, uint32_t buf_chars)
             if (session->hipPrepared && NativeNetworkGeometryResolved())
             {
                 auto geo = NativeCurrentNetworkGeometry();
+                char net[64] {};
+                const auto t = session->bridge ? session->bridge->PollNetworkTiming()
+                                               : hip_reference::D3D12Bridge::NetworkTiming{false, 0.f, 0};
+                if (t.valid)
+                    std::snprintf(net, sizeof net, " net_gpu_ms=%.2f (frame %llu)", t.ms, static_cast<unsigned long long>(t.tag));
+                else
+                    std::snprintf(net, sizeof net, session->timingRequested ? " net_gpu_ms=n/a" : " net_gpu_ms=off");
                 std::snprintf(text, sizeof text,
-                              "lmxxf modules_ok=%u hip=1 net=%ux%u color_job=%ux%u weights=%u recreates=%u %s | %s",
+                              "lmxxf modules_ok=%u hip=1 net=%ux%u color_job=%ux%u weights=%u recreates=%u%s %s | %s",
                               static_cast<unsigned>(session->hsacoCount), geo.valid_width, geo.valid_height,
                               session->job.width, session->job.height,
-                              session->weightsDir.empty() ? 0u : 1u, session->codecRecreates,
+                              session->weightsDir.empty() ? 0u : 1u, session->codecRecreates, net,
                               session->EffectiveOptionsNote().c_str(), FlagsInfo().c_str());
             }
             else
@@ -1680,6 +1696,39 @@ int32_t GetStatus(void *context, char *buf, uint32_t buf_chars)
         std::strncpy(buf, text, buf_chars - 1);
         buf[buf_chars - 1] = 0;
         SetError("");
+        return static_cast<int32_t>(LMXXF_NR_OK);
+    });
+}
+
+/* Network GPU time (LmxxfNrApi.h, LmxxfNrTimings). Non-blocking; never poisons the session. LMXXF_NR_OK with valid=0
+   when there is no measurement (no network yet, timing unavailable). Success leaves the error slot alone, so a notice
+   PrepareFrame left for the host survives an overlay calling this in between. */
+int32_t GetTimings(void *context, LmxxfNrTimings *out)
+{
+    return Guard([&] {
+        if (!out)
+            return Fail(LMXXF_NR_INVALID_ARGUMENT, "GetTimings: null out");
+        if (out->struct_size != sizeof(LmxxfNrTimings))
+            return Fail(LMXXF_NR_INVALID_ARGUMENT, "GetTimings: struct_size mismatch");
+        auto *session = static_cast<Session *>(context);
+        out->valid = 0;
+        out->network_ms = 0.f;
+        out->reserved = 0;
+        out->frame_id = 0;
+        if (!session)
+            return Fail(LMXXF_NR_INVALID_ARGUMENT, "GetTimings: null context");
+        session->timingRequested = true;
+        if (session->failed || !session->hipPrepared || !session->bridge)
+            return static_cast<int32_t>(LMXXF_NR_OK);
+        if (!session->bridge->NetworkTimingEnabled() && !session->bridge->EnableNetworkTiming())
+            return static_cast<int32_t>(LMXXF_NR_OK);
+        const auto t = session->bridge->PollNetworkTiming();
+        if (t.valid)
+        {
+            out->valid = 1;
+            out->network_ms = t.ms;
+            out->frame_id = t.tag;
+        }
         return static_cast<int32_t>(LMXXF_NR_OK);
     });
 }
@@ -1706,19 +1755,24 @@ int32_t EnqueueHipTwoArgument(void *context, void *job)
 }
 } // namespace
 
+static_assert(offsetof(LmxxfNrApi, GetTimings) == LMXXF_NR_API_V1_SIZE, "LMXXF_NR_API_V1_SIZE must end before GetTimings");
+static_assert(sizeof(LmxxfNrTimings) == 24, "LmxxfNrTimings layout");
+
 extern "C" int32_t LmxxfNrGetApi(uint32_t abi_version, LmxxfNrApi *out)
 {
     return Guard([&] {
         if (!out)
             return Fail(LMXXF_NR_INVALID_ARGUMENT, "GetApi: null out");
-        if (out->struct_size != sizeof(LmxxfNrApi))
+        /* LMXXF_NR_API_V1_SIZE = a host built before GetTimings was appended; it gets the table without it. */
+        const uint32_t size = out->struct_size;
+        if (size != sizeof(LmxxfNrApi) && size != LMXXF_NR_API_V1_SIZE)
             return Fail(LMXXF_NR_INVALID_ARGUMENT, "GetApi: struct_size mismatch");
         /* 2 = the RE9 package host (Development/RE9/presr patch bumped the header when it appended the exposure
            fields); the function table is identical and PrepareFrame accepts every FrameInfo size, so both hosts work. */
         if (abi_version != LMXXF_NR_ABI_VERSION && abi_version != 2u)
             return Fail(LMXXF_NR_UNSUPPORTED_ABI, "GetApi: unsupported abi_version");
-        std::memset(out, 0, sizeof(*out));
-        out->struct_size = sizeof(LmxxfNrApi);
+        std::memset(out, 0, size);
+        out->struct_size = size;
         out->abi_version = abi_version;
         out->QueryCapabilities = QueryCapabilities;
         out->Create = Create;
@@ -1738,6 +1792,8 @@ extern "C" int32_t LmxxfNrGetApi(uint32_t abi_version, LmxxfNrApi *out)
         out->Drain = Drain;
         out->GetStatus = GetStatus;
         out->GetLastError = GetLastError;
+        if (size >= offsetof(LmxxfNrApi, GetTimings) + sizeof(out->GetTimings))
+            out->GetTimings = GetTimings;
         SetError("");
         return static_cast<int32_t>(LMXXF_NR_OK);
     });

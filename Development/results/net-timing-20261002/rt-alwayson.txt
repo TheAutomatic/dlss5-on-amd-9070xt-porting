@@ -1,0 +1,9 @@
+RUNTIME 900 old=b2980ada643da964 new=b2980ada643da964 rt_timing=b2980ada643da964 exit=0 SAME
+RUNTIME 1080 old=758674a8bbd0206d new=758674a8bbd0206d rt_timing=758674a8bbd0206d exit=0 SAME
+RT_ABBA round=1 900 old=7.029 new=7.072 delta=+0.043
+RT_ABBA round=1 1080 old=9.900 new=9.913 delta=+0.013
+RT_ABBA round=2 900 old=7.064 new=7.113 delta=+0.048
+RT_ABBA round=2 1080 old=9.913 new=9.947 delta=+0.034
+RT_ABBA round=3 900 old=7.078 new=7.129 delta=+0.051
+RT_ABBA round=3 1080 old=9.918 new=10.019 delta=+0.102
+SMOKE exit=0

@@ -25,6 +25,9 @@ color=direct_input?bridge.DirectInput():rgb;color->AddRef();history=temporal;if(
  void RecordInputCopy(ID3D12GraphicsCommandList*c,bool use_history=false){if(use_history&&!history)throw std::runtime_error("HIP history not bound");bridge.RecordInputCopy(c,color,use_history?history:nullptr);}
  void EnqueueAfterProducer(ID3D12CommandQueue*q,UINT seed,bool use_history=false){if(use_history&&!history)throw std::runtime_error("HIP history not bound");bridge.EnqueueAfterProducer(q,seed,use_history);}
  void RecordOutputReadable(ID3D12GraphicsCommandList*c){bridge.RecordOutputReadable(c);}
+ // Network GPU timing (hip_d3d12_bridge.h): off unless enabled here or DLSS5_NET_TIMING=1; the add-on does not enable it.
+ bool EnableNetworkTiming(){return bridge.EnableNetworkTiming();}
+ hip_reference::D3D12Bridge::NetworkTiming PollNetworkTiming(){return bridge.PollNetworkTiming();}
  void NotifyOutputSubmitted(ID3D12CommandQueue*q){bridge.NotifyOutputSubmitted(q);FrameSubmitted();}
  template<class Submission>void Run(Submission&submit,UINT seed,bool use_history=false){if(use_history&&!history)throw std::runtime_error("HIP history not bound");bridge.Run(submit,color,use_history?history:nullptr,seed);FrameSubmitted();}
 private:

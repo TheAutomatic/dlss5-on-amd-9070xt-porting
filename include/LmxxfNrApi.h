@@ -109,6 +109,29 @@ typedef struct LmxxfNrJob
     void *private_output; /* ID3D12Resource* for SR; null until PrepareFrame succeeds */
 } LmxxfNrJob;
 
+/* Network GPU time (ABI growth, LMXXF_NR_ABI_VERSION unchanged; negotiated by struct_size like LmxxfNrFrameInfo).
+ * network_ms is the GPU time of the HIP neural network only: hipEvents recorded on the HIP stream after it waited for
+ * the D3D12 producer and before it signals the D3D12 consumer. It does NOT include the D3D12 input copy, the codec
+ * encode/decode passes, or the D3D12<->HIP handoff waits, so it is not comparable with D3D12 timestamp queries placed
+ * around RecordInputs/RecordOutputs (those measure the D3D12 passes only; the network does not run on that queue).
+ * Reading never blocks: the value is the most recent span that had completed when GetTimings was called, normally the
+ * previous frame (frame_id says which frame; it is LmxxfNrFrameInfo::frame_id of that frame). Frames where the adaptive
+ * ViT reuse skipped the ViT part are shorter. Passthrough/fallback frames do not run the network and are not timed.
+ * valid = 0 until a timed frame has completed, and when timing is unavailable. Timing is off until the first GetTimings
+ * call on the session (recording the events every frame measured slightly slower), so that first call returns valid = 0
+ * and later calls report frames enqueued after it; it then stays on, also across an internal HIP recreate. Rare single
+ * samples can be far too short (seen: the first frame after a (re)create, and 1 in ~1200 later frames); smooth over a
+ * few frames (median) for display. Like the other calls on a session, call it
+ * from the thread that drives the frames (or serialize it with them). */
+typedef struct LmxxfNrTimings
+{
+    uint32_t struct_size; /* sizeof(LmxxfNrTimings) */
+    uint32_t valid;       /* 1 = network_ms/frame_id hold a completed measurement */
+    float network_ms;
+    uint32_t reserved;    /* 0 */
+    uint64_t frame_id;
+} LmxxfNrTimings;
+
 typedef struct LmxxfNrApi
 {
     uint32_t struct_size;
@@ -129,7 +152,15 @@ typedef struct LmxxfNrApi
     int32_t (*Drain)(void *context);
     int32_t (*GetStatus)(void *context, char *buf, uint32_t buf_chars);
     int32_t (*GetLastError)(char *buf, uint32_t buf_chars);
+    /* Appended (struct_size growth). Present only when the caller's struct_size is sizeof(LmxxfNrApi); a host built
+     * against the older header passes LMXXF_NR_API_V1_SIZE and gets the table without it. A runtime that predates it
+     * rejects the larger struct_size with LMXXF_NR_INVALID_ARGUMENT: retry with LMXXF_NR_API_V1_SIZE and treat
+     * GetTimings as unavailable. GetStatus also appends "net_gpu_ms=X.XX (frame N)" ("off" before the first GetTimings, "n/a" before a timed frame completes). */
+    int32_t (*GetTimings)(void *context, LmxxfNrTimings *out);
 } LmxxfNrApi;
+
+/* sizeof(LmxxfNrApi) before GetTimings was appended (two uint32_t + 16 function pointers on x64). */
+#define LMXXF_NR_API_V1_SIZE 136u
 
 #ifdef _WIN32
 #ifdef LMXXF_NR_RUNTIME_EXPORTS
@@ -141,7 +172,7 @@ typedef struct LmxxfNrApi
 #define LMXXF_NR_EXPORT
 #endif
 
-/* Sole export. Caller sets out->struct_size = sizeof(LmxxfNrApi) before the call. */
+/* Sole export. Caller sets out->struct_size = sizeof(LmxxfNrApi) (or LMXXF_NR_API_V1_SIZE) before the call. */
 LMXXF_NR_EXPORT int32_t LmxxfNrGetApi(uint32_t abi_version, LmxxfNrApi *out);
 
 #ifdef __cplusplus

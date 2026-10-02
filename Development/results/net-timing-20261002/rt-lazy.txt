@@ -1,0 +1,23 @@
+old runtime 73D4C25C
+new runtime 3103A0A7
+RUNTIME 900 old=b2980ada643da964 new=b2980ada643da964 rt_timing=b2980ada643da964 exit=0 SAME
+round=0 size=1707x961 mean_ms=6.814 hash=b2980ada643da964 vram_mib=1394 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1707x961 weights=1 recreates=0 net_gpu_ms=off wave_owned=1/1 c512_m32=1/1 vit_proj_n64=1/1 p
+RUNTIME 1080 old=758674a8bbd0206d new=758674a8bbd0206d rt_timing=758674a8bbd0206d exit=0 SAME
+round=0 size=1707x961 mean_ms=9.500 hash=758674a8bbd0206d vram_mib=1367 status=lmxxf modules_ok=62 hip=1 net=1920x1080 color_job=1707x961 weights=1 recreates=0 net_gpu_ms=off wave_owned=1/1 c512_m32=1/1 vit_proj_n64=1/1 
+TIMING 720 exit=0 abi: v1-size ok (GetTimings slot untouched) | abi: wrong size rejected | abi: full size ok, GetTimings argument checks ok | abi: before first frame valid=0 ok | net_timing size=1707x961 median_ms=4.656 min_ms=4.482 max_ms=4.885 n=300 | lag_mismatch=0
+TIMING 900 exit=0 abi: v1-size ok (GetTimings slot untouched) | abi: wrong size rejected | abi: full size ok, GetTimings argument checks ok | abi: before first frame valid=0 ok | net_timing size=1707x961 median_ms=6.534 min_ms=6.243 max_ms=6.830 n=300 | lag_mismatch=0
+TIMING 1080 exit=0 abi: v1-size ok (GetTimings slot untouched) | abi: wrong size rejected | abi: full size ok, GetTimings argument checks ok | abi: before first frame valid=0 ok | net_timing size=1707x961 median_ms=9.237 min_ms=8.972 max_ms=9.537 n=300 | lag_mismatch=0
+RT_ABBA round=1 900 old=7.063 new=7.042 delta=-0.021
+RT_ABBA round=1 1080 old=9.873 new=9.885 delta=+0.012
+RT_ABBA round=2 900 old=7.084 new=7.081 delta=-0.003
+RT_ABBA round=2 1080 old=9.914 new=9.903 delta=-0.011
+RT_ABBA round=3 900 old=7.100 new=7.122 delta=+0.022
+RT_ABBA round=3 1080 old=9.923 new=9.909 delta=-0.014
+SMOKE exit=0
+HIP rc=0 error=
+SP_STATS runs=4 fallback=0 rollover=0 jobs=2496 disabled=0 errors=0
+lmxxf_nr_gpu: ok
+RT_DONE
+LOCK DROPPED
+GO_DONE
+GUARD_DONE
