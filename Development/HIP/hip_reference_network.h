@@ -99,6 +99,9 @@ using Tensor=std::shared_ptr<Allocation>;
 #ifndef HIP_C512_FFN_ONE
 #define HIP_C512_FFN_ONE 1 /* 2026-10-01: C512 mix+FFN as one dispatch (split_ffn_one_m32 in c512-m32-deep built with C512_FFN_ONE) when the module exports it; 0 or older modules = mix + split_ffn_fused_fp8_t8 (results/mochizuki-gap-20261001) */
 #endif
+#ifndef HIP_C32_RTZ_TALL
+#define HIP_C32_RTZ_TALL 1 /* 2026-10-03: 1080 tier (1920x1152 / 1920x1088) loads c32-wave1-rtz.hsaco (same recipe + HIP_C32_RTZ_ISA 2, builtin Hrtz) under the c32_wave1 key when the file exists; 900/720/free geometry and missing file = c32-wave1.hsaco. Bit-exact (2^32 check); 900 kept old because one ABBA round was slower (results/ideas-yami-ikaruga-20261002) */
+#endif
 #ifndef HIP_C32_SKIP_BYTE
 #define HIP_C32_SKIP_BYTE 1 /* 2026-09-30: block4 main (C32 skip, read only by the block66 up) as E4M3 bytes when c32-wave1 exports the _b8 pair; 0 or older modules = f32 (results/c32-align-20260930) */
 #endif
@@ -639,7 +642,8 @@ if(c512_m32_active){
 if(vit_stream_active){Handle m{};api.Check(api.LoadModule(&m,(opt.modules+"/vit-stream.hsaco").c_str()),"vit-stream.hsaco");modules["vit_stream"]=m;}
 if(vit_proj_n64_active){Handle m{};api.Check(api.LoadModule(&m,(opt.modules+"/vit-wide-deep.hsaco").c_str()),"vit-wide-deep.hsaco");modules["vit_wide_deep"]=m;}
 if(wave_owned_active){
- const char*extra[][2]={{"c64_wave2","c64-wave2.hsaco"},{"c32_wave1","c32-wave1.hsaco"}};
+ const bool rtz_tall=HIP_C32_RTZ_TALL&&W==1920&&(H==1152||H==1088)&&std::ifstream(std::filesystem::u8path(opt.modules+"/c32-wave1-rtz.hsaco"),std::ios::binary).good();
+ const char*extra[][2]={{"c64_wave2","c64-wave2.hsaco"},{"c32_wave1",rtz_tall?"c32-wave1-rtz.hsaco":"c32-wave1.hsaco"}};
  for(auto&entry:extra){Handle m{};api.Check(api.LoadModule(&m,(opt.modules+"/"+entry[1]).c_str()),entry[1]);modules[entry[0]]=m;}}
 if(SwinRunCompatible(opt)){
  std::ifstream probe(std::filesystem::u8path(opt.modules+"/swin-persistent.hsaco"),std::ios::binary);
