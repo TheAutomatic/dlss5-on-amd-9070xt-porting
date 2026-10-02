@@ -61,13 +61,28 @@ next release detects this automatically.
 ≈8% less time; 0.22 padded the 900 tier to 960 rows; 0.24 introduced the pre-upscale (render-resolution) path; 0.26.1–0.28.1
 built the RE9 host/runtime route with TheAutomatic. Details per version are in the changelog.
 
-**Trading image quality for speed (optional).** The default configuration is bit-identical to NVIDIA's network. The setting below is the only lossy speed-up we recommend. Add one line to `native-game-flags.txt` (the RE9 runtime reads it too):
+**Trading image quality for speed (optional).** All settings below are runtime switches: edit `native-game-flags.txt` (the RE9 runtime reads it too), no module swap needed. Turning all of them on gives a "fast mode". Note that the shipped templates already enable the first one (block skip) and the regular package also enables the fourth (ViT reuse), so the default configuration is not bit-identical to NVIDIA's network; turn those two off for the closest match.
 
-| Setting | What it does | Gain | Quality cost |
-|---|---|---|---|
-| `DLSS5_NETWORK_1080_ROWS=1088` | Runs the 1080 tier on 1088 rows (8 mirrored rows, the geometry Daniel and mochizuki use) instead of 1152 (72 mirrored rows, NVIDIA's geometry) | About 0.45 ms less per frame at the 1080 tier (5.6% less work); 720/900 unaffected | About 53.5 dB against 1152 rows; against NVIDIA's own output it drops from 47.4 to 45.8 dB (single frame, Style 0, all 71 blocks) |
+| Setting | What it does | Gain | Quality cost | Deterministic? |
+|---|---|---|---|---|
+| `DLSS5_SKIP_BLOCKS=42,43,46` (on in all three templates; an empty value `DLSS5_SKIP_BLOCKS=` runs all 71 blocks) | Skips ViT blocks 42, 43 and 46 | Not measured separately | Against NVIDIA's output 47.43 → 44.26 dB, plus an overall shift of about +0.15/+0.23 (1/255) (1080p single frame, Style 0) | Yes: structural, per frame, nothing carries over |
+| `DLSS5_NETWORK_1080_ROWS=1088` | Runs the 1080 tier on 1088 rows (8 mirrored rows, the geometry Daniel and mochizuki use) instead of 1152 (72 mirrored rows, NVIDIA's geometry) | About 0.45 ms less per frame at the 1080 tier (5.6% less work); 720/900 unaffected | About 53.5 dB against 1152 rows; against NVIDIA 47.4 → 45.8 dB (single frame, Style 0, all 71 blocks) | Yes: geometry only, same arithmetic, nothing carries over |
+| `DLSS5_NETWORK_HEIGHT=900` (default `auto` picks the tier from the input height) | Runs inputs that would use the 1080 tier on the 900 tier (1600×960) | Offline whole network about 9.5 → 6.8 ms (0.39 timings of the two tiers) | Not measured (no PSNR of 900 vs 1080 or vs NVIDIA) | Yes: geometry, nothing carries over; cost not quantified |
+| `DLSS5_VIT_ADAPTIVE=1` (on in the regular package, off in Magpie/RE9) | Adaptive ViT reuse: when the frame changes less than a threshold, the ViT is not recomputed and the last fully computed result is reused. In game F8 toggles between it (AE) and full computation (EXACT); `=0` always computes fully | Offline whole network: moving sequence about 4.9%/6.3% faster at 900/1080, static frames about 9.0%/11.3%; Stellar Blade standing still EXACT 17.9 ms, AE 16.66 ms | A static single frame is bit-identical to EXACT; PSNR on motion against EXACT/NVIDIA not measured | Carries over frames: a result is reused for at most `DLSS5_VIT_REUSE_PERIOD` (default 4) frames. Approximate frames are never written back, so errors do not compound; it resets on recompute, mode switch, geometry change or a gap over 500 ms. Thresholds are heuristic, not guaranteed equivalent in every scene |
 
-Why only this one: it changes the geometry, not the numerics, so every arithmetic step stays the same. The network resets its history every frame, so differences do not accumulate over time. The cost is measured and deterministic. Other lossy options (f16 accumulation, half-precision softmax, fast activation approximations) push rounding differences through all 71 blocks, and where they surface can't be predicted in advance, so we don't offer them.
+**Fast mode** (paste into `native-game-flags.txt`, replacing lines with the same keys):
+
+```
+DLSS5_SKIP_BLOCKS=42,43,46
+DLSS5_NETWORK_1080_ROWS=1088
+DLSS5_NETWORK_HEIGHT=900
+DLSS5_VIT_ADAPTIVE=1
+DLSS5_VIT_REUSE_PERIOD=4
+```
+
+With `NETWORK_HEIGHT=900` every input runs on the 900 tier and `1080_ROWS` no longer matters; to keep 1080-tier sharpness, drop the `NETWORK_HEIGHT` line (back to `auto`).
+
+Why only these: the first three change geometry or structure, every arithmetic step stays the same, each frame stands alone and the cost can be measured; ViT reuse works across frames, so its risk is marked separately. Other lossy options (f16 accumulation, half-precision softmax, fast activation approximations) push rounding differences through all 71 blocks, where they surface can't be predicted, and they need different modules, so we don't offer them.
 
 ## What is in this repository
 
