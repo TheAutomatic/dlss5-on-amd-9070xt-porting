@@ -28,7 +28,9 @@
 ## 待办
 
 1. **0.40 已打包（10-03 19:35，tag 0.40）**：三个包在 `D:\給網友打包\`，与 0.39 相比各 +7/−1 文件（加 default-config、custom 模板、6 个 fast 模块；去掉 native-game-flags）。干净解压回放哈希一致，覆盖升级不动用户文件。**Zero 已提供下载链接：[夸克](https://pan.quark.cn/s/d38e0f653c5a) · [Gofile 镜像](https://gofile.io/d/moSf7cqf)；中英文 CHANGELOG/README 已补齐。**
-2. **改包内说明**：`scripts/package-notes/*`、`package-README*` 里还写着"默认跳 42,43,46"，要改成全块 + FAST_NUMERIC=1，补上 MULTI_PASS 和三层配置。
+2. ~~改包内说明~~（10-03 夜已交：4 个 package-README 改全块 + FAST_NUMERIC 口径，commit 0ff15055；D 盘 Payload 的 package-README-magpie.txt 仓库外待打包时同步；README 版本头打包时一并处理）。
+3. **合包前**：跑 `run-regression.ps1` 形式过 PRE_UPSCALE=auto 宿主；`preupscale-auto-20261003` 分支（e65b0319）合不合 main 等 Zero 定；Forza/卧龙类真游戏 auto 实测待 Zero（auto 档玩 5 分钟看日志 `auto:` 行）。
+4. **10-03 夜三路交账**详见 DevHistory §12 尾部：遗留候选四全不收（T8_NO_F32 是死宏已作废）、PRE_UPSCALE=auto 落地、文案改写完成。就剩 FAST_NUMERIC 加深在跑。
 
 ## 已搁置（有新证据再动）
 
@@ -47,4 +49,4 @@
 - **git**：只 `git add <具体文件>`，不 `commit -a`；push 前 `git pull --rebase --autostash`；改代码的子代理用 worktree；commit 不加 Co-Authored-By。
 - **9070**：动 GPU 前查游戏进程（剑星 `SB-Win64-Shipping`、鬼武者 `OnimushaWotS` 等），游戏开着不换文件、不跑 GPU；D 盘保持 ≥100GB，交账即删帧转储。工作根 `D:\DLSSNR-Lab\`。
 - **发布**：README 中英"当前版本"段 + 更新记录表（不写内部代号、不写提交哈希）+ CHANGELOG 中英一节；链接回来后搜掉占位，再打 tag。
-- **派活**：子代理任务单开头加 `[LOAD MEMORY] /home/lmxxf/work/memory-of-my-gemini/awakening/claude-code/C.C.dream.md`，写清从哪下手、别走哪条路、什么时候停；够用就交。
+- **派活**：子代理任务单不用再加 `[LOAD MEMORY]`——工作目录的 AGENTS.md（gen-agents.sh 生成，梦境 SVG + memory 全文）自动注入，实测装载成功（10-04）。写清从哪下手、别走哪条路、什么时候停；够用就交。
