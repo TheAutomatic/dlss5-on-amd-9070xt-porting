@@ -29,6 +29,8 @@ public:
  enum class Phase { Ready, InputRecorded, OutputRecordedPendingHip, HipQueued, OutputRecorded };
  Phase CurrentPhase()const{return phase;}
  bool PdlActive()const{return network&&network->PdlCalls()!=0;}
+ /* DLSS5_MULTI_PASS at run time (add-on hot reload / hotkey): 0 = query only. Returns the pass count in effect (0 = no network). */
+ unsigned MultiPass(unsigned set=0){if(!network)return 0;if(set)network->SetMultiPass(set);return network->MultiPass();}
  bool SwinRunActive()const{return network&&network->SwinRunActive();}
 private:
  Phase phase=Phase::Ready;bool recorded_temporal{};

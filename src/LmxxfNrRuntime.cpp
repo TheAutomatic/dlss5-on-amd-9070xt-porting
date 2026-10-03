@@ -271,7 +271,7 @@ struct Job
 
 /* 2026-09-26: the RE9 package used to read only DLSS5_FIT_LARGE from native-game-flags.txt, so users could not
    switch the optimised kernels (TheAutomatic/ouco report). Now the network/kernel lines (DLSS5_HIP_*, DLSS5_SKIP_BLOCKS,
-   DLSS5_FIT_LARGE, DLSS5_NETWORK_HEIGHT, DLSS5_NETWORK_1080_ROWS, since 2026-10-01 DLSS5_STYLE, since 2026-10-02 DLSS5_NETWORK_FREE_RES and DLSS5_DIRECT_IO, since 2026-10-03 DLSS5_FAST_NUMERIC, DLSS5_MULTI_PASS and DLSS5_FRAME_STATS) are put into the process environment once (a key already present in the
+   DLSS5_FIT_LARGE, DLSS5_NETWORK_HEIGHT, DLSS5_NETWORK_1080_ROWS, since 2026-10-01 DLSS5_STYLE, since 2026-10-02 DLSS5_NETWORK_FREE_RES and DLSS5_DIRECT_IO, since 2026-10-03 DLSS5_FAST_NUMERIC, DLSS5_MULTI_PASS and DLSS5_FRAME_STATS, then DLSS5_MULTI_PASS_SKIP_BLOCKS; the MULTI_PASS hotkey is add-on only, this runtime has no hot reload) are put into the process environment once (a key already present in the
    environment wins), as the regular add-on does before creating its network; LmxxfProductionOptions then applies the
    same DLSS5_HIP_* parser. Since 2026-10-03 the three config layers (default-config.txt -> custom-config.txt -> native-game-flags.txt,
    native_config_layers.h) are merged; the folder is searched next to the DLL (DLSS5-AMD\) and upwards from the assets directory. */
@@ -311,7 +311,8 @@ void LoadFlagsFileOnce(const std::wstring &assets)
                                      key == "DLSS5_FIT_LARGE" || key == "DLSS5_NETWORK_HEIGHT" ||
                                      key == "DLSS5_NETWORK_1080_ROWS" || key == "DLSS5_STYLE" || key == "DLSS5_DIRECT_IO" ||
                                      key == "DLSS5_NETWORK_FREE_RES" || key == "DLSS5_FAST_NUMERIC" ||
-                                     key == "DLSS5_MULTI_PASS" || key == "DLSS5_FRAME_STATS";
+                                     key == "DLSS5_MULTI_PASS" || key == "DLSS5_MULTI_PASS_SKIP_BLOCKS" ||
+                                     key == "DLSS5_FRAME_STATS";
                 if (!allowed)
                     continue;
                 if (NativeConfigFind(env, key))

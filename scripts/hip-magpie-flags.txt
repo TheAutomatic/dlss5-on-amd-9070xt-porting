@@ -335,6 +335,12 @@ DLSS5_FAST_NUMERIC=1
 # 中：叠层：整个网络每帧跑 N 遍（1/2/3），上一遍的输出图当下一遍的输入；风格逐遍加强，网络耗时约 N 倍；默认 1
 # EN: Multi pass: run the whole network N times per frame (1/2/3), each pass fed the previous output; stronger style, ~N x network time; default 1
 DLSS5_MULTI_PASS=1
+# 中：叠层减负：只在第 2 遍及以后跳过的块（写法同 SKIP_BLOCKS），第 1 遍永远全网；默认空；非空即有损
+# EN: Multi-pass skip: blocks skipped only in passes 2..N (same list as SKIP_BLOCKS); pass 1 always full; default empty; LOSSY if set
+DLSS5_MULTI_PASS_SKIP_BLOCKS=
+# 中：叠层热键：游戏里按一下在 1→2→3→1 间切遍数，写回 custom-config.txt，热重载生效；默认 F9，0 关；仅 add-on
+# EN: Multi-pass hotkey: cycles passes 1->2->3->1, writes custom-config.txt, applied by hot reload; default F9, 0 = off; add-on only
+DLSS5_MULTI_PASS_HOTKEY=F9
 # 中：接受不超过 1920×1080 的非档位输入尺寸（0 则只认精确档位尺寸）；默认 1；保持默认
 # EN: Accept non-tier input sizes up to 1920x1080 (0 = exact tier sizes only); default 1; keep default
 DLSS5_FIT_INPUT=1
