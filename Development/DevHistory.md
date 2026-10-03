@@ -1550,3 +1550,7 @@ Zero报启动黑屏/有不可点击弹窗。两次启动日志显示modules_ok=7
 默认19 SAME、MP1开保护三例SAME；真/近似保护三例12帧无NaN、两例重复SAME、RE9 smoke0。100帧短ABBA新增mask+copy+blend约.25/.34ms，目的观感。先前feed死锁受控producer gate1.5秒：旧Enqueue1528.316ms/新2.005ms，解锁后正常，双feed前置准备修复实证通过。新增肤色模块与固定资源也在producer wait前准备，无核数学变化、无屏障。
 
 已装剑星 **731B8DAE**、鬼武者两处runtime **C38B8383**、76模块/SUMS **C7EA9AC8**，readback一致、exact快照同步。两游戏custom **MP3/PREDICT0/SKIN1**，native MP3；其它配置保留（剑星PRE1、鬼武者PRE0）。F9仅剑星；鬼武者重启读配置。备份 `skin-protect-20261004\backups\20261004-015944\rollback.ps1`。归档results/skin-protect-20261004，decoded-face左1x/中3x/右保护；锁释放、原始帧清理。未代启动游戏，实玩待Zero；不打包不push。
+
+## 2026-10-04 02:16 Zero要求关闭肤色保护（仅配置）
+
+Zero实玩反馈：保护开启后整体效果几乎看不出来，剑星真3约27fps，决定关保护。两游戏custom SKIN_PROTECT=0，读取实际MP3/PREDICT0并原样保留；native无skin覆盖、Machine/User无skin覆盖，默认本为0。保BOM/换行/其它行，备份skin-protect-20261004/skin-off-20261004-021602；exact仅同步native/custom配置快照，DLL/模块未动，无GPU。查询时无游戏进程，不能声称运行中新热载已确认；剑星可热载、鬼武者需重启。观感实验未满足用户，本轮关闭；27fps不能直接归于mask约.34ms，真3与此前预测3口径不同。

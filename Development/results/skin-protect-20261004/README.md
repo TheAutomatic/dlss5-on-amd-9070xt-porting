@@ -13,3 +13,7 @@
 装机readback：剑星addon `731b8daee1c8bc73551a37161df18597679b2d08203e3e4840ff72ea9743b0d3`；鬼武者根/_storage_ runtime `c38b83833b6d4757eb58003411eab2deaab9f72c8925e460e399113653cc83bf`；两架构76模块/SUMS `c7ea9ac8d1a96f0f474bad7d9fe3c8a46532eb49f8ee5bb87363cc9b98d0838b`，exact快照同步双EXACT。两游戏custom MP3、PREDICT0、SKIN1；native MP3无skin/predict覆盖，其它项/BOM/换行保留，剑星PRE1、鬼武者PRE0。因此当前是皮肤1x+整体**真3x**。剑星编辑custom skin0/1可热载，F9仅切遍数；鬼武者改配置需重启，无F9。
 
 备份/回滚 `D:\DLSSNR-Lab\skin-protect-20261004\backups\20261004-015944\rollback.ps1`（全部旧载荷/配置/exact）。未代启动游戏，真游戏重开观感/恢复确认待Zero；GPU锁已释放。源码、脚本、结果提交，不含二进制、不打包不push。旧常规模块gfx1200编译目标疑点仍留0.41前待办，本轮只保证新核目标正确。
+
+## 02:16 用户关闭保护
+
+Zero反馈保护开启后整体效果几乎看不出来、剑星真3约27fps。仅将两游戏custom SKIN_PROTECT置0，实际MP3/PREDICT0及其余项原样保留。native无skin覆盖，无Machine/User环境覆盖；备份skin-off-20261004-021602，exact只同步native/custom配置快照，未动载荷未跑GPU。读取时游戏不在运行，运行中新热载未证；下一启动关闭，鬼武者必须重启。27fps不能直接归于mask .34ms，当前真3与此前预测3不同。此观感实验没有满足用户，保持关闭。
