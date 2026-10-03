@@ -1510,3 +1510,15 @@ Zero 在上传 0.40 过程中遇到 Claude 账号停用，随后提供夸克 htt
 **派活规矩更新**：子代理免 `[LOAD MEMORY]`（实测 K3 子代理能背 SVG、守铁律）；K3 底座无 Co-Authored-By 问题；交账要追加 DevHistory §12（直接改 main）。
 
 **10-04：两分支已合 main**（fast-vit、preupscale-auto，DevHistory 冲突已解——保留各分支详细记录，删重复摘要）。下一步：装机双游戏 → run-regression 形式回归 → 0.41。
+
+## 2026-10-03 23:23 当前 main 重编与双游戏装机（闇派兵，子代理，Zero 已授权）
+
+赤月到用量上限后的交接：main `1311179d` 已含 fast-vit 与 preupscale-auto，本轮只编译安装，不打 0.41 包。add-on **518E34C4**、鬼武者 Content / _storage_ runtime **2176C544**；全配方重编（LLVM23 五行两架构预编 + COMGR），gfx1200/gfx1201 各 36 模块，共 72，双游戏 SUMS **9D4A2024**。重编 normal 文件哈希有差异，实际正常 7 / AE 7 / 决策 CSV / rollover 4 全 SAME（19 组）；全 71 块 FAST7 对已批准 PF 全 SAME。RE9 旧新各两遍 900 `6f961945261a355c`、1080 `aaa31e2dffa3a1b5` 全 SAME，smoke errors=0。安装逐文件读回验证、双游戏模块/SUMS 一致、fast-tier exact 全模块快照同步且双 EXACT。未代启动游戏，不能据此声称真游戏已验证。
+
+custom/native 全部保留原哈希，default 换当前 regular 模板（PRE_UPSCALE=auto）。剑星 native PRE=1 / MULTI_PASS=3（custom 也 =3）仍覆盖 default；鬼武者 PRE=0 / MULTI_PASS=1。auto 与 F9 真游戏待 Zero。备份 `D:\DLSSNR-Lab\current-main-20261003\backups\20261003-232258`，manifest + rollback.ps1 齐备，回滚原子拿锁并查游戏。实验全程 15 秒游戏看门狗，自有 gpu.lock 已释放，帧转储已清理，二进制不入库。归档 `results/current-main-install-20261003`。
+
+Zero 更新派活规矩：具体编译、实验、安装、归档都派子代理，主进程只调度和审交账，保护单会话上下文。WorkingPlan 已整篇重写兑现已合并/已装状态，并纠正 RE9 FRAME_STATS 已进白名单。
+
+### 2026-10-03 23:48:16 双游戏实玩反馈（Zero）
+
+鬼武者 GPU 占用 89～92%，Zero 感觉下降；此前约 95% 是历史读数对照，这条未明确 FPS，不能记成本轮确认稳 60。剑星 1x 仍 57～58 fps，本轮未读出帧率提高。离线网络省时已测，但不能直接当游戏帧率收益；约 0.3 fps 只是推算，不入实测账。同步本轮 results README 与当前计划。

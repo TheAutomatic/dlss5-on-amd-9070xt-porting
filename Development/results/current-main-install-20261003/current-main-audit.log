@@ -1,0 +1,66 @@
+C:\Program Files (x86)\Steam\steamapps\common\StellarBlade\SB\Binaries\Win64
+CONFIG default-config.txt
+
+DLSS5_SKIP_BLOCKS=
+DLSS5_FAST_NUMERIC=1
+DLSS5_MULTI_PASS=1
+DLSS5_PRE_UPSCALE=auto
+CONFIG custom-config.txt
+DLSS5_MULTI_PASS=3
+CONFIG native-game-flags.txt
+DLSS5_SKIP_BLOCKS=
+DLSS5_FAST_NUMERIC=1
+DLSS5_PRE_UPSCALE=1
+DLSS5_MULTI_PASS=3
+
+
+
+
+Path : C:\Program Files (x86)\Steam\steamapps\common\StellarBlade\SB\Binaries\Win64\dlss5-amd.addon64
+Hash : 518E34C401B51B4CF86BF0F3B7D7CA676E6FC8B0E6DF8178ED493CA7CAF2F9CB
+
+
+
+C:\XboxGames\Onimusha- Way of the Sword\Content
+CONFIG default-config.txt
+
+DLSS5_SKIP_BLOCKS=
+DLSS5_FAST_NUMERIC=1
+DLSS5_MULTI_PASS=1
+DLSS5_PRE_UPSCALE=auto
+CONFIG custom-config.txt
+CONFIG native-game-flags.txt
+DLSS5_SKIP_BLOCKS=
+DLSS5_FAST_NUMERIC=1
+DLSS5_PRE_UPSCALE=0
+DLSS5_MULTI_PASS=1
+
+
+
+
+Path : C:\XboxGames\Onimusha- Way of the Sword\Content\LmxxfNrRuntime.dll
+Hash : 2176C54484736F7F6156D525E0B1D0D7D9DA9E110F27895254FE94376E9A4F3D
+
+
+
+
+
+Path : C:\XboxGames\Onimusha- Way of the Sword\Content\_storage_\LmxxfNrRuntime.dll
+Hash : 2176C54484736F7F6156D525E0B1D0D7D9DA9E110F27895254FE94376E9A4F3D
+
+
+
+stellar : EXACT   addon 518E34C4 flags AC8CFE14 sums 9D4A2024
+   gfx1200 c32-wave1 4D458C28  c64-wave2 A3E1EBA2  deep_fast-packed B582B7F8  c32-wave1-rtz 64C9CCF6
+   gfx1201 c32-wave1 D2DDF122  c64-wave2 EB4A486E  deep_fast-packed B582B7F8  c32-wave1-rtz 99B0B1E2
+oni : EXACT   runtime 2176C544 flags 415454E3 sums 9D4A2024
+   gfx1200 c32-wave1 4D458C28  c64-wave2 A3E1EBA2  deep_fast-packed B582B7F8  c32-wave1-rtz 64C9CCF6
+   gfx1201 c32-wave1 D2DDF122  c64-wave2 EB4A486E  deep_fast-packed B582B7F8  c32-wave1-rtz 99B0B1E2
+EXACT = 正式模块（不是逐位输出）；现默认 flags：DLSS5_SKIP_BLOCKS= 全 71 块 + DLSS5_FAST_NUMERIC=1 / EXACT = release modules, not bit-exact output; default flags: all 71 blocks + FAST_NUMERIC=1
+
+Name         Used         Free
+----         ----         ----
+D    576676560896 423284310016
+
+
+AUDIT_DONE
