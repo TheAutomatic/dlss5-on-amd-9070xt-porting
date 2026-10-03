@@ -1,0 +1,27 @@
+{
+  "scope": "input preparation only, not GPU/oracle output",
+  "encoding": "unchanged encoded half, then exact half-to-float conversion",
+  "padding": "source_y=2158-y",
+  "seed": 1,
+  "style": 1,
+  "post_shift": 3,
+  "history": false,
+  "frames": [
+    {
+      "source": "/tmp/issue13-yimo/unpacked/inputs/8678.rgba16f",
+      "source_sha256": "55c3abf4bee43f0bf7154ea08dbaf19c7b5c23f93b5e46e1134aa5744c2549ba",
+      "padded_f16": "/tmp/issue13-original-tools/encoded/8678.padded.rgba16f",
+      "padded_f16_sha256": "c93dd1ed835fe45f3eb756f871daefe9b4f4400dc2072fee79a6d5e627a9f0cb",
+      "padded_f32": "/tmp/issue13-original-tools/encoded/8678.padded.rgba32f",
+      "padded_f32_sha256": "3684b4941d934aab0fc0258f64e12c00dbb0c7bc30a56cad5ca92069991ca381"
+    },
+    {
+      "source": "/tmp/issue13-yimo/unpacked/inputs/8680.rgba16f",
+      "source_sha256": "afb87cb28754f12226efb8035ae107278756a32c20ed3f5d62d81d2aeb1bcd1c",
+      "padded_f16": "/tmp/issue13-original-tools/encoded/8680.padded.rgba16f",
+      "padded_f16_sha256": "af9c9f64ac61587ce19acc4678c90eb3561bca480d8249b774bae58d0d086cfd",
+      "padded_f32": "/tmp/issue13-original-tools/encoded/8680.padded.rgba32f",
+      "padded_f32_sha256": "9cd7d7134711f00088fa13df5995ff52711a66c90cb6da714a1d9578d5d12752"
+    }
+  ]
+}

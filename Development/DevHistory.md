@@ -1558,3 +1558,11 @@ Zero实玩反馈：保护开启后整体效果几乎看不出来，剑星真3约
 ## 2026-10-04 02:19 鬼武者再试修复后的优化3x（仅配置，Zero明确要求）
 
 只鬼武者custom改MP3/PREDICT1/SKIN0，native MP3无predict/skin覆盖；其余项/BOM/换行保留，Machine/User无相关环境覆盖。根/_storage_ runtime读回均C38B8383（含已受控producer probe验证的双feed修复），SUMS C7EA9AC8/76模块，gfx1201预测核hash2E7F1437；无需重装DLL，无GPU，剑星不动。备份skin-protect-20261004/oni-predict-on-20261004-021943，oni exact配置快照同步。查询时无鬼武者进程，重新启动读配置；这是两遍+预测第三遍，皮肤保护关，实玩待Zero。可将custom MP1/PREDICT0回普通单遍，重启生效。
+
+## 2026-10-04 Issue13 独立5090原版双帧取数（闇派兵，实测完成）
+
+附件SHA通过、0评论、25文件逐项校验，CPU复算194稳定块/952569像素/HIP p9514.943205%。5090当前空闲，独立D:\DLSSNR-Oracle\issue13建direct NGX harness，旧581.15 core Init/Caps成功但Create18 OutOfDate；从官方NVIDIA libnvidia-gl615.71.09 DEB（131MiB、SHA已验）只提取配对core，未安装驱动/未改游戏，正确ABI SetFloat6/UInt4与Getter回读后Create/Eval成功。原DLL310.8 SHA E16BCF15，官方core/API报告driver616.92，实际系统驱动未升级。
+
+先API1080/seed0输出p9512.44%、对HIP仅30dB，不能当同合同oracle。原launch观测seed默认0、Style1、post(-4,-4)、proc1152/historyoff。按附件底镜像为1152、仅preblock参数seed改1，原GPU核/模型不改，执行两帧各两遍并捕获真实input texture、block70内部FP16surface转F32；入口RGBA每值同原f16→f32（maxabs0），raw/API重复均全字节同。捕获器初用normalized坐标读实际unnormalized texture、全图恒首像素，已修逐texel并撤回该误读，修前后post不变。
+
+原post同194块p95 **14.937534%**、MAE .00580405，HIP14.943205%/.00580724。HIP经原RTZ FP16存储后，每帧6220800值：8678全同、8680仅44值不同（max .00219727），不是全帧全逐位。证明此双帧放大也在独立原NVIDIA链，不支持生产优化/复用/大移植偏差为主要来源；仍是模型在当前输入合同下响应，不能判全部实机闪烁或鸣潮同源。rawpost是内部FP16存储后half→F32，未假称pre-half RGB32F。数据ZIP/size/hash在results/issue13-original-oracle-20261004/package.json，5090 D:\DLSSNR-Oracle\issue13\issue13-original-nvidia-20261004.zip；包无DLL/core/CUBIN权重，无外发评论、不push。

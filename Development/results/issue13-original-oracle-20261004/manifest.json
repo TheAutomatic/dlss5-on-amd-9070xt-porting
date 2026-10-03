@@ -1,0 +1,63 @@
+{
+  "issue": "https://github.com/lmxxf/dlss5-on-amd-9070xt-porting/issues/13",
+  "input_archive_sha256": "bfa72f1ed94ca3bd3edb46beb68e50a844439875e89b1c3ea188c15c04cfb2b3",
+  "gpu": "RTX 5090",
+  "plugin_sha256": "e16bcf15e16e13f527491cdf7845b2fe6521a738d8f7c9c721866a8496e1fc8e",
+  "plugin_version": "310.8.0.0",
+  "core_official_url": "https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/libnvidia-gl_615.71.09-2ubuntu1_amd64.deb",
+  "core_package_sha256": "feabf0ea1b3d2b65bf37e8694d8310d6183dd65570a20792fd252e30651eebd7",
+  "seed": 1,
+  "seed_note": "original API reset defaults to seed0; only preblock launch scalar c8 overridden to1; GPU math/model unchanged",
+  "style": 1,
+  "style_feature": 0.0078125,
+  "post_origin": [
+    -4,
+    -4
+  ],
+  "input_scale": 0.03125,
+  "rgb_mode": 1,
+  "processing": [
+    1152,
+    1920
+  ],
+  "valid_output": [
+    1080,
+    1920
+  ],
+  "history": false,
+  "input_note": "encoded f16->f32 exactly; padded1152 with source_y=2158-y, no codec/no flip; actual original texture capture identical top1080",
+  "output_note": "original block70 internal FP16 surface decoded to F32 RGB, before API composition; NOT pre-FP16-store RGB32F",
+  "same_input_repeated_twice": "bitwise input/rawpost/API identical; reader-normalization fix afterward did not change post output",
+  "metrics": {
+    "stable_pixels": 952569,
+    "stable_tiles": 194,
+    "original_post_p95_percent": 14.937533950805658,
+    "hip_p95_percent": 14.9432050704956,
+    "original_post_stable_pixel_mae": 0.005804046522825956,
+    "hip_stable_pixel_mae": 0.005807237699627876
+  },
+  "vs_hip_rtz_fp16": {
+    "8678_different": 0,
+    "8680_different": 44,
+    "each_values": 6220800,
+    "maxabs": 0.002197265625
+  },
+  "files": {
+    "8678.original-post.rgb32": {
+      "bytes": 24883200,
+      "sha256": "4d9fe15abf6b162284b38b5c565249afd684cde8adf971773484c4c6d30819dd"
+    },
+    "8678.input-capture.rgba32": {
+      "bytes": 33177600,
+      "sha256": "45acc0fd3e3e039df11eaf9f14ef4b1f4030cd136d92d55de49a41f17ca2871c"
+    },
+    "8680.original-post.rgb32": {
+      "bytes": 24883200,
+      "sha256": "8f07d3d47e9d0b72c6a3259c81a1219a30f2ed8cc19109b38034dcc8fbbb8a6d"
+    },
+    "8680.input-capture.rgba32": {
+      "bytes": 33177600,
+      "sha256": "fc327b96da9069e4a9603437ec4ade940281180ed3adb8cf185e950255155ed0"
+    }
+  }
+}
