@@ -3,7 +3,7 @@
 #include "native_hip_env_options.h"
 #include <string>
 
-/* Production HIP flags (HIP_FAST=1, graph off, skip 42,43,46) = the 0.31 regular package template. Since 2026-09-26 the
+/* Production HIP flags (HIP_FAST=1, graph off; no block skip since 2026-10-03, before that 42,43,46) = the 0.31 regular package template. Since 2026-09-26 the
    DLSS5_* lines of DLSS5-AMD\native-game-flags.txt are applied to the environment once (LmxxfNrRuntime.cpp,
    LoadFlagsFileOnce) and DLSS5_SKIP_BLOCKS / DLSS5_HIP_* override these defaults with the add-on's own parser
    (NativeApplyHipEnvironment), so the RE9 package is configurable the same way as the regular one. */
@@ -17,7 +17,9 @@ inline hip_reference::Options LmxxfProductionOptions(unsigned processing_w, unsi
     o.fast_vit = true;
     o.wmma = o.wave = o.tiled = o.pooled = true;
     o.graph = false;
-    o.skip_blocks = hip_reference::ParseSkipBlocks("42,43,46");
+    // 2026-10-03: no block skipped by default (all 71 blocks), like the add-on. A flags-file line "DLSS5_SKIP_BLOCKS="
+    // removes the variable (_putenv), so an empty value can only mean "no skip" if the source default is empty too.
+    // DLSS5_SKIP_BLOCKS=42,43,46 restores the old skip.
     o.modules = modules;
     o.assets = assets;
     o.fast_c32 = o.fused_c32 = o.fused_ffn = o.fast_mh = o.fused_mh = o.mh_wave = o.fast_deep =

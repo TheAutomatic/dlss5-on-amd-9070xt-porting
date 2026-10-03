@@ -306,9 +306,11 @@ DLSS5_SPLIT_STREAM8=1
 # 中：旧 DX12 网络路线（≤0.15）的内核开关，HIP 包不走该路线；默认 1；内部调优开关，保持默认
 # EN: Kernel switch of the old DX12 network route (<=0.15); default 1; HIP packages do not use it. Keep default
 DLSS5_DECODER_OUT16=1
-# 中：跳过网络块 42,43,46；默认 42,43,46；有损：对 NVIDIA 47.43→44.26 dB；结构性，每帧独立；写空值恢复全 71 块
-# EN: Skip blocks 42,43,46; default 42,43,46; LOSSY: vs NVIDIA 47.43->44.26 dB; structural, per frame. Empty value = all 71 blocks
-DLSS5_SKIP_BLOCKS=42,43,46
+# 中：跳过的网络块；默认空值 = 全 71 块都算（配合 FAST_NUMERIC=1，对 NVIDIA 47.55 dB）
+# 中：想追帧率写 42,43,46：每帧快 900 约 0.20 / 1080 约 0.32 ms，对 NVIDIA 掉约 3.3 dB（有损，结构性，每帧独立）
+# EN: Blocks to skip; default empty = all 71 blocks (with FAST_NUMERIC=1: 47.55 dB vs NVIDIA)
+# EN: For frame rate write 42,43,46: about 0.20 (900) / 0.32 (1080) ms faster, about -3.3 dB vs NVIDIA (LOSSY, structural, per frame)
+DLSS5_SKIP_BLOCKS=
 # 中：网络档位：auto 按输入选 720/900/1080；默认 auto；固定 900 有损（几何，代价未实测）；详见 CONFIGURATION.md
 # EN: Network tier: auto picks 720/900/1080 by input; default auto; fixed 900 is LOSSY (geometry, cost not measured)
 DLSS5_NETWORK_HEIGHT=auto
@@ -321,9 +323,13 @@ DLSS5_NETWORK_1080_ROWS=1152
 # EN: 1 = run at the input size instead of tiers; default 0; output changes for non-tier sizes (geometry); slower; see CONFIGURATION.md
 DLSS5_NETWORK_FREE_RES=0
 # 1 = fast numeric path: C32/C64/C128 kernels with f32 activations and rcp softmax (LOSSY, errors pass through all blocks; needs the -fast modules), see CONFIGURATION.md
-# 中：1 = 快速数值路径；默认 0；有损：对逐位输出最差帧 51.8 dB；数值近似，误差逐层传播；需 -fast 模块
-# EN: 1 = fast numeric path; default 0; LOSSY: worst frame 51.8 dB vs bit-exact; numeric approximation, carried through blocks
-DLSS5_FAST_NUMERIC=0
+# 中：1 = 快速数值路径；默认 1；有损：对逐位输出最差帧 51.8 dB（数值近似，误差逐层传播）；0 = 逐位
+# 中：选它做默认：配合全 71 块，比旧默认（跳 42,43,46）每帧只慢 900 约 0.12 / 1080 约 0.19 ms，
+# 中：对 NVIDIA 44.26→47.55 dB，运动帧偏差比跳块小约 3 dB；需 -fast 模块，缺失时自动退回
+# EN: 1 = fast numeric path; default 1; LOSSY: worst frame 51.8 dB vs bit-exact (numeric, carried through blocks); 0 = bit-exact
+# EN: Default because with all 71 blocks it is only about 0.12 (900) / 0.19 (1080) ms slower than the old default
+# EN: (skip 42,43,46) for 44.26->47.55 dB vs NVIDIA, ~3 dB less error than block skip on motion; needs -fast modules
+DLSS5_FAST_NUMERIC=1
 # 中：接受不超过 1920×1080 的非档位输入尺寸（0 则只认精确档位尺寸）；默认 1；保持默认
 # EN: Accept non-tier input sizes up to 1920x1080 (0 = exact tier sizes only); default 1; keep default
 DLSS5_FIT_INPUT=1
