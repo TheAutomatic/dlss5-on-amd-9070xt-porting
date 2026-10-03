@@ -1463,3 +1463,16 @@ B：add-on 的热重载现在也重读 `DLSS5_MULTI_PASS`，HIP 网络下一帧�
 
 ## 2026-10-03 叠层一阶外推实验（纯离线，光派单，子代理）
 问题：3 遍 f(f(f(x))) 能否用 x + k·(f(x) − x) 代替。harness 整帧导出（1296x720 解码后最终输出；x 取 `DLSS5_STRENGTH=0,0`，因为不改代码拿不到网络张量），900/1080 静止、1080 运动、1080 history 四组。sRGB 空间：y1→y3 26.5～28.4 dB，最好外推（k≈2）29.0～31.1，y2→y3 31.2～34.9；增量逐遍收缩到 0.64～0.76 倍。收益全在亮部和低频（对比度），高频只 +0.3～0.5 dB，中间调还更差；解码器 STRENGTH=k,k 外推等于不做。结论：外推介于 1 遍与 2 遍之间、比 2 遍差，替代不了叠层，最多当零成本对比度选项。详见 `results/multi-pass-extrap-20261003/README.md`。
+
+## 2026-10-03 晚 0.40 打包（`tools/package-040.ps1`，9070 `D:\DLSSNR-Lab\release-040\`，日志 package.log / verify.log）
+
+首跑 package-040（源码提交 3dc2f60b，以 0.39 三包为底，底包逐文件先校验），经 `tools/run-package-040.sh`（等游戏退出 + gpu.lock，15 秒游戏看门狗）。载荷 = 现装：add-on C511E148、RE9 runtime 1F7C12CD、宿主 aa3761f2 不变、68 模块（RE9 包 SUMS F3EFDC16，三包模块与 HIP-SHA256SUMS 逐条同）。三包 44 shader 变体通过、ZIP 读回校验通过、RE9 包内 smoke errors=0（layers=D--）。
+
+|包（`D:\給網友打包\`）|字节|SHA256|文件数|
+|---|---:|---|---:|
+|Magpie-DLSS5-AMD-0.40.zip|342,035,235|7cd2eb575dea57af7f95b0c7ed288fedc5404eff45c7aed925e538fad8d53da8|746|
+|OptiScaler-DLSS5-AMD-0.40.zip|372,232,881|c500e0fa977b624bd5f57845d8752e3b20df7402f1513a393de3f40749926506|564|
+|OptiScaler-REFramework-DLSS5-AMD-0.40.zip|426,881,198|10532d0dcd34467ec8a56666f4d8bdfe1b109f863b2f89e52d9ca1b96cf8d71a|568|
+
+清单对 0.39（`tools/verify040.ps1`）：三包一致地 +7 −1——加 `default-config.txt`、`custom-config.template.txt`（配置分层）和每架构 3 个新模块 `c32-wave1-rtz` / `c32-wave1-fast` / `c64-wave2-fast`（FAST_NUMERIC 默认 1 要用），去掉 `native-game-flags.txt`（解压覆盖不冲用户文件）；包里没有 `custom-config.txt`。其余同名文件内容变化（shader、notes、模板、二进制）不算增减。
+验证：干净解压后 RE9 回放（包内 runtime + 包内模块，无配置文件）900 6f961945261a355c、1080 aaa31e2dffa3a1b5，各两遍 exit 0 SAME；包布局 runtime-smoke exit 0。升级模拟：解开 0.39、写用户 custom-config.txt 并改 native-game-flags.txt，再把 0.40 解压覆盖，三包两文件哈希都不变，default-config 与模板到位。verify 首跑踩坑：runtime 只在 `<dll>\shaders` 等处找 native_codec_encode.hlsl（不读 LMXXF_SHADER_DIR），回放目录照 config-layers rt9 拷 fusion-round3 shader 后通过。`multi-pass-extrap-20261003` 的帧导出已在之前清空（out 0 文件，work 只剩日志），无可删。tag 0.40。下载链接待 Zero 补。
