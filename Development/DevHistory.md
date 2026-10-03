@@ -1488,3 +1488,8 @@ B：add-on 的热重载现在也重读 `DLSS5_MULTI_PASS`，HIP 网络下一帧�
 9070 验证（ssh 下）：隐藏 `cmd /c pause` 启动 2 秒 → GAME rc=0（60 秒内放行为"在跑"）；同一进程 60 秒后 → zombie ignored rc=1；`dwm`（无可见窗口但占 1313MB 显存）→ GAME rc=0；`explorer`（无窗口、显存 <200MB）→ zombie rc=1；当前真实游戏列表 → rc=1。cmd 包装形式（`>nul && (echo GAME) || ...`）两种结果都对。"有窗口阻塞"分支在 ssh 下无法直接触发，由显存分支覆盖。
 
 没改：一批老实验 .ps1 里的 `Get-Process ... {throw 'Game running'}`（deep-layers、fill-cu、c128-empty-tile 等，一次性脚本），以后复用时改调 game-check.ps1。
+
+
+## 2026-10-03 20:15：0.40 下载链接补齐（闇接手）
+
+Zero 在上传 0.40 过程中遇到 Claude 账号停用，随后提供夸克 https://pan.quark.cn/s/d38e0f653c5a 与 Gofile https://gofile.io/d/moSf7cqf。按已完成的打包记录补齐中英文 README/CHANGELOG 下载入口及 WorkingPlan；未重打包，未修改载荷。网盘内容未独立核验。

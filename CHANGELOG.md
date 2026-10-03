@@ -275,7 +275,7 @@ Download (three packages): [Quark](https://pan.quark.cn/s/dea9c0ef2f95) · [Gofi
 
 ## 0.40 (10-03)
 
-Download (three packages): links to follow.
+Download (three packages): [Quark](https://pan.quark.cn/s/d38e0f653c5a) · [Gofile mirror](https://gofile.io/d/moSf7cqf).
 
 - **Default output changed** (not bit-identical to 0.39): the templates now run all 71 blocks with fast numerics (`DLSS5_SKIP_BLOCKS=` empty, `DLSS5_FAST_NUMERIC=1`). Against NVIDIA (1080p single frame, Style 0) 44.26 → 47.55 dB and the overall colour shift is gone; offline about 0.12 ms (900) / 0.19 ms (1080) slower per frame than the old default. Writing `DLSS5_SKIP_BLOCKS=42,43,46` and `DLSS5_FAST_NUMERIC=0` gives back the 0.39 output bit for bit (every bit-exact change below was checked as 19 groups SAME against the previous build).
 - **Multi pass** (`DLSS5_MULTI_PASS=1/2/3`, default 1): the network runs 2 or 3 times per frame on its own output, for a stronger look; cost is about N times the network. **F9** in the regular and Magpie add-on cycles 1→2→3 in game and remembers the choice in `custom-config.txt`. Stellar Blade 2K, tested in game: 57 / 37 / 27 fps for 1 / 2 / 3 passes. The RE9 runtime reads the key at start (no hotkey).

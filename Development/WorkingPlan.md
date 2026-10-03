@@ -27,7 +27,7 @@
 
 ## 待办
 
-1. **0.40 已打包（10-03 19:35，tag 0.40）**：三个包在 `D:\給網友打包\`，与 0.39 相比各 +7/−1 文件（加 default-config、custom 模板、6 个 fast 模块；去掉 native-game-flags）。干净解压回放哈希一致，覆盖升级不动用户文件。**待 Zero 上传网盘后把链接填进 CHANGELOG/README。**
+1. **0.40 已打包（10-03 19:35，tag 0.40）**：三个包在 `D:\給網友打包\`，与 0.39 相比各 +7/−1 文件（加 default-config、custom 模板、6 个 fast 模块；去掉 native-game-flags）。干净解压回放哈希一致，覆盖升级不动用户文件。**Zero 已提供下载链接：[夸克](https://pan.quark.cn/s/d38e0f653c5a) · [Gofile 镜像](https://gofile.io/d/moSf7cqf)；中英文 CHANGELOG/README 已补齐。**
 2. **改包内说明**：`scripts/package-notes/*`、`package-README*` 里还写着"默认跳 42,43,46"，要改成全块 + FAST_NUMERIC=1，补上 MULTI_PASS 和三层配置。
 
 ## 已搁置（有新证据再动）

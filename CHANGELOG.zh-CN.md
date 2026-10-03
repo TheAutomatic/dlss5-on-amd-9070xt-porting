@@ -277,7 +277,7 @@
 
 ## 0.40（10-03）
 
-下载（三个包）：链接待补。
+下载（三个包）：[夸克](https://pan.quark.cn/s/d38e0f653c5a) · [Gofile 镜像](https://gofile.io/d/moSf7cqf)。
 
 - **默认输出变了**（与 0.39 不逐位）：模板改成全 71 块 + fast 数值（`DLSS5_SKIP_BLOCKS=` 空值、`DLSS5_FAST_NUMERIC=1`）。对 NVIDIA（1080p 单帧，Style 0）44.26 → 47.55 dB，整体偏色消失；离线每帧比旧默认慢约 0.12 ms（900）/ 0.19 ms（1080）。写 `DLSS5_SKIP_BLOCKS=42,43,46` 和 `DLSS5_FAST_NUMERIC=0` 就逐位回到 0.39 的输出（下面每一项逐位改动都对上一版验过 19 组 SAME）。
 - **叠层**（`DLSS5_MULTI_PASS=1/2/3`，默认 1）：网络每帧把自己的输出再跑 1～2 遍，风格更浓；耗时约为 N 倍。常规与 Magpie add-on 里按 **F9** 在 1→2→3 之间轮换，选择记进 `custom-config.txt`。《剑星》2K 实测 1/2/3 遍 57 / 37 / 27 fps。RE9 runtime 启动时读这个键（没有热键）。
