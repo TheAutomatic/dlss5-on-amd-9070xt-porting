@@ -37,7 +37,8 @@
   d3d12.dll                          ReShade 6.8 加载器（原版，未修改）
   dlss5-amd.addon64                  本移植的 DLL（.addon64 是 ReShade 的扩展名，不要改名）
   DLSS5-AMD\                         网络权重、HIP 内核、运行参数和日志目录（约 600MB）
-    native-game-flags.txt              运行参数，一行一个开关；一般不用改
+    default-config.txt                 默认配置，一行一个开关；升级会被覆盖，不要改它
+    custom-config.template.txt         个人配置模板：复制一份改名为 custom-config.txt，只写想改的那几行
     native-game-tiled-assets\          权重（.f16/.f32）、少量运行时着色器（.hlsl）、噪声表（noise.f32）
       HIP\                             24 个 gfx1201 HIP 内核（.hsaco），必须在这个位置
     logs\                              运行日志写在这里
@@ -50,7 +51,7 @@
   3. 如果该目录已有 d3d12.dll 或其他 ReShade/mod 加载器，先备份；不要在不了解的配置上直接覆盖。
      从 0.15 升级：删掉旧的 DLSS5-D3D12-721 文件夹和 DLSS5-AMD\enable-game-sdk721.txt（HIP 版不用它们），其余直接覆盖。
   4. 把本包里的全部内容（两个文件 + 一个文件夹）复制进 Win64。DLSS5-AMD 文件夹必须和 dlss5-amd.addon64 在同一目录。
-  5. 游戏设置：窗口 1600x900、AMD FSR 超分辨率（质量档）。native-game-flags.txt 里 DLSS5_NETWORK_HEIGHT=auto 按窗口自动选档（≤1280x720 用 720，≤1600x900 用 900，其余用 1080），1600x900 窗口即 900 档；左上角帧率后面显示实际档位。
+  5. 游戏设置：窗口 1600x900、AMD FSR 超分辨率（质量档）。默认配置里 DLSS5_NETWORK_HEIGHT=auto 按窗口自动选档（≤1280x720 用 720，≤1600x900 用 900，其余用 1080），1600x900 窗口即 900 档；左上角帧率后面显示实际档位。
   6. 从 Steam 正常启动。主菜单里不会有任何变化——网络只在 3D 场景开始渲染（读档之后）时接管 FSR 的超分步骤，
      第一次接管要读权重、装载内核，约 3～5 秒，这段时间画面是原生 FSR，之后自动切换。
 
@@ -62,12 +63,17 @@
 已知问题
   1. 换区、过场动画后帧率可能掉几秒，多数情况 5～30 秒内恢复；这是显存被游戏贴图挤到系统内存造成的，
      降低贴图质量或在游戏的 Engine.ini 里加 [SystemSettings] r.Streaming.PoolSize=6000 能缓解。
-  2. 本包（0.2x）默认跳过了 3 个对画质影响最小的中间块换取约 1ms（PSNR 约 41dB，肉眼看不出）。不想跳：删掉 native-game-flags.txt 里 DLSS5_SKIP_BLOCKS 那一行。
-     （0.40 起默认不跳块：全 71 块 + DLSS5_FAST_NUMERIC=1；跳块 DLSS5_SKIP_BLOCKS=42,43,46 是可选提速项，写进 custom-config.txt。）
-     性能档（可选）：把那一行改成 DLSS5_SKIP_BLOCKS=12,28,41,42,43,44,46,52,53，再跳 6 块，网络每帧再快约 0.8ms（900p 15.25 → 14.48ms，约 5%），
+  2. 默认输出：全 71 块 + 快速数值（DLSS5_SKIP_BLOCKS= 留空、DLSS5_FAST_NUMERIC=1，对 NVIDIA 原版 47.55 dB、无整体偏色）。
+     可选提速（有损）：custom-config.txt 里写 DLSS5_SKIP_BLOCKS=42,43,46，每帧快约 0.20/0.32ms（900/1080），
+     对 NVIDIA 原版约掉 3.3 dB、有整体偏色；删掉该行恢复默认。
+     性能档（可选，跳 9 块）：DLSS5_SKIP_BLOCKS=12,28,41,42,43,44,46,52,53，网络每帧再快约 0.8ms（900p 15.25 → 14.48ms，约 5%），
      代价是相对默认输出 PSNR 约 30dB（细节、暗部会有可见差别）。
-  3. 只在 1600x900 + FSR 质量档上验证过。
-  4. 与其他 ReShade 插件、帧生成、HDR 的组合未测试。
+  3. 叠层（可选）：DLSS5_MULTI_PASS=1/2/3（默认 1）把网络输出再跑 1～2 遍，风格更浓、耗时约 N 倍；游戏里按 F9 在 1→2→3 间轮换
+     （DLSS5_MULTI_PASS_HOTKEY 改键，0 关闭），选择写进 custom-config.txt。
+  4. 配置分三层：default-config.txt → custom-config.txt → 旧安装遗留的 native-game-flags.txt，后面的盖前面的；系统环境变量最高；
+     同一文件里同一项写两次取最后一行；值留空（KEY=）表示用程序内置默认。
+  5. 只在 1600x900 + FSR 质量档上验证过。
+  6. 与其他 ReShade 插件、帧生成、HDR 的组合未测试。
 
 卸载
   退出游戏后删除 d3d12.dll、dlss5-amd.addon64、DLSS5-AMD 三项，恢复自己备份的文件。

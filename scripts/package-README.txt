@@ -19,7 +19,8 @@
   dlss5-amd.addon64                  本移植的 DLL（.addon64 是 ReShade 的扩展名，不要改名）
   DLSS5-D3D12-721\                   微软 DirectX 12 Agility SDK 1.721 预览运行时（D3D12Core.dll），SM6.10 需要它
   DLSS5-AMD\                         网络权重、编译好的 shader、运行参数和日志目录（约 700MB）
-    native-game-flags.txt              运行参数，一行一个开关；一般不用改
+    default-config.txt                 默认配置，一行一个开关；升级会被覆盖，不要改它
+    custom-config.template.txt         个人配置模板：复制一份改名为 custom-config.txt，只写想改的那几行
     native-game-tiled-assets\          权重（.f16/.f32）、shader（.cso/.hlsl）、噪声表（noise.f32）
     logs\                              运行日志写在这里
   ReShade-LICENSE.txt / MinHook-LICENSE.txt   第三方组件的许可
@@ -42,10 +43,18 @@
 已知问题
   1. 换区、过场动画后帧率可能掉到 15～20 几秒，多数情况 5～30 秒内恢复；这是显存被游戏贴图挤到系统内存造成的，
      降低贴图质量或在游戏的 Engine.ini 里加 [SystemSettings] r.Streaming.PoolSize=6000 能缓解。
-  2. 本包（旧 DX12 版）默认跳过了 3 个对画质影响最小的中间块换取约 1ms（对精确链 PSNR 40.7dB，肉眼看不出）。
-     不想跳：在 native-game-flags.txt 里删掉 DLSS5_SKIP_BLOCKS 那一行。（0.40 起默认不跳块：全 71 块 + DLSS5_FAST_NUMERIC=1；跳块 DLSS5_SKIP_BLOCKS=42,43,46 是可选提速项，写进 custom-config.txt。）
+  2. 默认配置为全 71 块 + 快速数值（DLSS5_SKIP_BLOCKS= 留空、DLSS5_FAST_NUMERIC=1，对 NVIDIA 原版 47.55 dB、无整体偏色）。
+     想提速可以跳块：custom-config.txt 里写 DLSS5_SKIP_BLOCKS=42,43,46，每帧快约 0.20/0.32ms（900/1080），
+     代价是对 NVIDIA 原版约掉 3.3 dB 并有整体偏色；删掉该行即恢复默认。
   3. 只在 1920×1080 + FSR 质量档上验证过。其他分辨率可能直接不接管（画面保持原生 FSR）。
   4. 与其他 ReShade 插件、帧生成、HDR 的组合未测试。
+
+可选配置（写进 DLSS5-AMD\custom-config.txt；都是可选项，默认不用动）
+  - 跳块提速（有损）：DLSS5_SKIP_BLOCKS=42,43,46，每帧快约 0.20/0.32ms（900/1080），对 NVIDIA 原版约掉 3.3 dB、有整体偏色；删掉该行恢复默认。
+  - 快速数值（有损，默认开）：DLSS5_FAST_NUMERIC=1 对逐位版最差帧约 51.8 dB、对 NVIDIA 47.55 dB；写 0 回到逐位输出，每帧慢 0.07～0.13ms。
+  - 叠层：DLSS5_MULTI_PASS=1/2/3（默认 1）把网络输出再跑 1～2 遍，风格更浓、耗时约 N 倍；游戏里按 F9 在 1→2→3 间轮换（DLSS5_MULTI_PASS_HOTKEY 改键，0 关闭），选择写进 custom-config.txt。
+  - 配置分三层：default-config.txt → custom-config.txt → 旧安装遗留的 native-game-flags.txt，后面的盖前面的；系统环境变量最高；
+    同一文件里同一项写两次取最后一行；值留空（KEY=）表示用程序内置默认。
 
 卸载
   退出游戏后删除 d3d12.dll、dlss5-amd.addon64、DLSS5-D3D12-721、DLSS5-AMD 四项，恢复自己备份的文件。

@@ -80,13 +80,20 @@ DLSS5-AMD 0.26 · Magpie 版（HIP 后端）
 
 已知
 ----
-  - 计算档位：native-game-flags.txt 中 DLSS5_NETWORK_HEIGHT=auto——按窗口自动选档：宽高不超过 1280x720 用 720 档，不超过 1600x900 用 900 档，其余（最大 1920x1080）用 1080 档；
+  - 计算档位：配置里 DLSS5_NETWORK_HEIGHT=auto——按窗口自动选档：宽高不超过 1280x720 用 720 档，不超过 1600x900 用 900 档，其余（最大 1920x1080）用 1080 档；
     比档位小的窗口按比例贴进画布。也可写死 720/900/1080。左上角帧率数字后面显示网络实际计算的分辨率（如 1600X900）。完全退出并重启 Magpie 生效。
   - 小窗口适配默认开启（DLSS5_FIT_INPUT=1），FPS 和 XeSS 帧生成也默认开启。
   - 输入是显示用的 8 位 sRGB 图；插件按 sRGB 直通处理（DLSS5_CODEC_SRGB=1），亮度和原图一致。
   - DLSS5（第一项 FSR3）的运动向量来自 Magpie 的光流估计（AMDOF）；超过 64 像素的向量当静止处理（DLSS5_MOTION_MAX_PX）。
-  - 强度：native-game-flags.txt 里加一行 DLSS5_STRENGTH=<细节>,<颜色>（各 0～1，默认 1,1）。改完重启 Magpie 生效。
-  - 性能档（可选）：native-game-flags.txt 里 DLSS5_SKIP_BLOCKS=42,43,46 改成 DLSS5_SKIP_BLOCKS=12,28,41,42,43,44,46,52,53，网络每帧再快约 0.8ms（900p 15.25 → 14.48ms，约 5%），代价是相对默认输出 PSNR 约 30dB（细节、暗部有可见差别）。删掉这一行则不跳块，画质最高、慢约 1ms。（0.40 起默认不跳块：全 71 块 + DLSS5_FAST_NUMERIC=1；跳块 DLSS5_SKIP_BLOCKS=42,43,46 是可选提速项，写进 custom-config.txt。）
+  - 强度：配置里加一行 DLSS5_STRENGTH=<细节>,<颜色>（各 0～1，默认 1,1）。改完重启 Magpie 生效。
+  - 默认输出：全 71 块 + 快速数值（DLSS5_SKIP_BLOCKS= 留空、DLSS5_FAST_NUMERIC=1，对 NVIDIA 原版 47.55 dB、无整体偏色；个人改动写进 custom-config.txt）。
+  - 跳块提速（可选，有损）：custom-config.txt 里写 DLSS5_SKIP_BLOCKS=42,43,46，每帧快约 0.20/0.32ms（900/1080），对 NVIDIA 原版约掉 3.3 dB、有整体偏色；删掉该行恢复默认。
+    性能档（跳 9 块）：DLSS5_SKIP_BLOCKS=12,28,41,42,43,44,46,52,53，网络每帧再快约 0.8ms（900p 15.25 → 14.48ms，约 5%），
+    代价是相对默认输出 PSNR 约 30dB（细节、暗部有可见差别）。
+  - 叠层（可选）：DLSS5_MULTI_PASS=1/2/3（默认 1）把网络输出再跑 1～2 遍，风格更浓、耗时约 N 倍；按 F9 在 1→2→3 间轮换
+    （DLSS5_MULTI_PASS_HOTKEY 改键，0 关闭），选择写进 custom-config.txt。
+  - 配置分三层：default-config.txt → custom-config.txt → 旧安装遗留的 native-game-flags.txt，后面的盖前面的；系统环境变量最高；
+    同一文件里同一项写两次取最后一行；值留空（KEY=）表示用程序内置默认。
   - 停止缩放再激活，插件会重新接管（需要重新初始化）。
   - 日志：DLSS5-AMD\logs\native-game-oneshot.txt（初始化）、native-submission-order.txt（每帧观察）。
   - 屏幕提示不想要：加一行 DLSS5_NOTICE=0；帧率数字不想看：设 DLSS5_SHOW_FPS=0；整行文字（含分辨率）不想看：设 DLSS5_NOTICE=0。修改后完全退出并重启Magpie。
