@@ -271,7 +271,7 @@ struct Job
 
 /* 2026-09-26: the RE9 package used to read only DLSS5_FIT_LARGE from native-game-flags.txt, so users could not
    switch the optimised kernels (TheAutomatic/ouco report). Now the network/kernel lines (DLSS5_HIP_*, DLSS5_SKIP_BLOCKS,
-   DLSS5_FIT_LARGE, DLSS5_NETWORK_HEIGHT, DLSS5_NETWORK_1080_ROWS, since 2026-10-01 DLSS5_STYLE, since 2026-10-02 DLSS5_NETWORK_FREE_RES and DLSS5_DIRECT_IO, since 2026-10-03 DLSS5_FAST_NUMERIC) are put into the process environment once (a key already present in the
+   DLSS5_FIT_LARGE, DLSS5_NETWORK_HEIGHT, DLSS5_NETWORK_1080_ROWS, since 2026-10-01 DLSS5_STYLE, since 2026-10-02 DLSS5_NETWORK_FREE_RES and DLSS5_DIRECT_IO, since 2026-10-03 DLSS5_FAST_NUMERIC and DLSS5_MULTI_PASS) are put into the process environment once (a key already present in the
    environment wins), as the regular add-on does before creating its network; LmxxfProductionOptions then applies the
    same DLSS5_HIP_* parser. The file is searched next to the DLL
    (DLSS5-AMD\native-game-flags.txt) and upwards from the assets directory. */
@@ -315,7 +315,8 @@ void LoadFlagsFileOnce(const std::wstring &assets)
                 const bool allowed = !key.compare(0, 10, "DLSS5_HIP_") || key == "DLSS5_SKIP_BLOCKS" ||
                                      key == "DLSS5_FIT_LARGE" || key == "DLSS5_NETWORK_HEIGHT" ||
                                      key == "DLSS5_NETWORK_1080_ROWS" || key == "DLSS5_STYLE" || key == "DLSS5_DIRECT_IO" ||
-                                     key == "DLSS5_NETWORK_FREE_RES" || key == "DLSS5_FAST_NUMERIC";
+                                     key == "DLSS5_NETWORK_FREE_RES" || key == "DLSS5_FAST_NUMERIC" ||
+                                     key == "DLSS5_MULTI_PASS";
                 if (!allowed)
                     continue;
                 if (std::getenv(key.c_str()))

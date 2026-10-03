@@ -84,6 +84,14 @@ DLSS5_VIT_REUSE_PERIOD=4
 
 With `NETWORK_HEIGHT=900` every input runs on the 900 tier and `1080_ROWS` no longer matters; to keep 1080-tier sharpness, drop the `NETWORK_HEIGHT` line (back to `auto`).
 
+**Multi pass (stronger style, linear cost).** Same idea as Magpie 0.6.8's DLSSNR Multi Pass: the whole network runs N times per frame, each pass fed the previous pass's output picture, so the style gets stronger with every pass. It lives in the network layer shared by all three routes, so regular OptiScaler, Magpie and the RE9 runtime all read the same line:
+
+```
+DLSS5_MULTI_PASS=2
+```
+
+`1`/`2`/`3`, default `1` (today's single pass, output bit-identical); other values fall back to 1 with a stderr line. Network time grows linearly with the pass count: offline whole network at the 900 tier about 7.0 ms for one pass, 13.7–13.8 ms for 2, 20.4–20.6 ms for 3; at the 1080 tier about 9.8 / 19.5 / 29.0 ms. Against the single pass, 2 passes are about 38.4–39.1 dB and 3 passes about 34.2–34.7 dB (a measure of how much the style moves, not a quality loss). VRAM: one (2 passes) or two (3 passes) extra input buffers, 35.4 MB each at the 1080 tier. Every pass uses the same Style/strength (no per-pass parameters as in Magpie); adaptive ViT reuse is turned off while multi pass is on. Details in `scripts/CONFIGURATION.md` and `Development/results/multi-pass-20261003`.
+
 Why only these: the geometry and structure options keep every arithmetic step the same, each frame stands alone and the cost can be measured; ViT reuse works across frames, so its risk is marked separately. The fast numeric path is different: it changes the arithmetic itself, rounding differences travel through all later blocks, and where they surface can't be predicted. The measured cost is small (practically unchanged against NVIDIA), but test frames can't cover every scene, so it is off by default and left to the user. Other lossy options (f16 accumulation, half-precision softmax) are not offered.
 
 ## What is in this repository

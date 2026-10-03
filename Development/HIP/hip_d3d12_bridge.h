@@ -38,7 +38,8 @@ private:
  /* Network GPU timing (2026-10-02, results/net-timing-20261002; read by LmxxfNrApi GetTimings/GetStatus): kTimingSlots
     begin/end hipEvent pairs recorded on the network stream at the SPAN_PROBE points, so a span is the HIP network only
     (no D3D12 input copy/codec pass, no handoff wait). Harvested at the next Enqueue / PollNetworkTiming with hipEventQuery
-    only, never a synchronize; if the next slot's end has not completed yet that frame is simply not timed. Off until
+    only, never a synchronize; if the next slot's end has not completed yet that frame is simply not timed. With DLSS5_MULTI_PASS=N the
+    span covers all N passes (the whole per-frame network cost), not one pass. Off until
     EnableNetworkTiming() or DLSS5_NET_TIMING=1. Any HIP error here turns timing off and never fails a frame. Bytes unchanged. */
  static constexpr unsigned kTimingSlots=4;
  Handle timing_begin[kTimingSlots]{},timing_end[kTimingSlots]{};unsigned long long timing_slot_tag[kTimingSlots]{};bool timing_busy[kTimingSlots]{};
