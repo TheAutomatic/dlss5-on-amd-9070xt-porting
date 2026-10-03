@@ -324,13 +324,17 @@ DLSS5_NETWORK_1080_ROWS=1152
 # 中：1 = 按游戏原尺寸跑网络（不吸附档位）；默认 0；非档位尺寸输出改变（几何，更接近 NVIDIA）；更慢；详见 CONFIGURATION.md
 # EN: 1 = run at the input size instead of tiers; default 0; output changes for non-tier sizes (geometry); slower; see CONFIGURATION.md
 DLSS5_NETWORK_FREE_RES=0
-# 1 = fast numeric path: C32/C64/C128 kernels with f32 activations and rcp softmax (LOSSY, errors pass through all blocks; needs the -fast modules), see CONFIGURATION.md
-# 中：1 = 快速数值路径；默认 1；有损：对逐位输出最差帧 51.8 dB（数值近似，误差逐层传播）；0 = 逐位
+# 1 = fast numeric path (LOSSY, errors pass through all blocks; needs the -fast modules), see CONFIGURATION.md
+# 中：1 = 快速数值路径；默认 1；有损：对逐位输出最差帧 52.1 dB（数值近似，误差逐层传播）；0 = 逐位
+# 中：覆盖：C32/C64/C128 激活 f32 化 + softmax rcp；ViT attention 裸 rcp 分母 + epilogue 去半舍入；
+# 中：ViT contract/projection 与 C512 FFN 投影去 RNE 半舍入；缺 -fast 模块自动退回逐位
 # 中：选它做默认：配合全 71 块，比旧默认（跳 42,43,46）每帧只慢 900 约 0.12 / 1080 约 0.19 ms，
-# 中：对 NVIDIA 44.26→47.55 dB，运动帧偏差比跳块小约 3 dB；需 -fast 模块，缺失时自动退回
-# EN: 1 = fast numeric path; default 1; LOSSY: worst frame 51.8 dB vs bit-exact (numeric, carried through blocks); 0 = bit-exact
+# 中：对 NVIDIA 44.26→47.55 dB，运动帧偏差比跳块小约 3 dB（NVIDIA 数字为 c32/c64 版，ViT 加深后未重测）
+# EN: covers C32/C64/C128 f32 activations + rcp softmax; ViT attention bare-rcp denominator + no-half epilogue;
+# EN: ViT contract/projection and C512 FFN projection without the RNE half round trip; missing -fast falls back
+# EN: 1 = fast numeric path; default 1; LOSSY: worst frame 52.1 dB vs bit-exact (numeric, carried through blocks); 0 = bit-exact
 # EN: Default because with all 71 blocks it is only about 0.12 (900) / 0.19 (1080) ms slower than the old default
-# EN: (skip 42,43,46) for 44.26->47.55 dB vs NVIDIA, ~3 dB less error than block skip on motion; needs -fast modules
+# EN: (skip 42,43,46) for 44.26->47.55 dB vs NVIDIA (c32/c64-era numbers), ~3 dB less error than block skip on motion
 DLSS5_FAST_NUMERIC=1
 # 中：叠层：整个网络每帧跑 N 遍（1/2/3），上一遍的输出图当下一遍的输入；风格逐遍加强，网络耗时约 N 倍；默认 1
 # EN: Multi pass: run the whole network N times per frame (1/2/3), each pass fed the previous output; stronger style, ~N x network time; default 1
