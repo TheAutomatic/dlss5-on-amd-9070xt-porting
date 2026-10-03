@@ -28,6 +28,13 @@ DLSS 5（DLSSNR）跑在 AMD RX 9070 XT / RDNA 4 上。
 相关键见 [Development/HIP/VIT-REUSE.md](Development/HIP/VIT-REUSE.md)；F8 在它和 EXACT 之间切，要逐位输出就设 0；Magpie 和 RE9 包默认关）。
 0.32 起 RE9 runtime 也从 flags 文件读 `DLSS5_HIP_*`、`DLSS5_SKIP_BLOCKS`、`DLSS5_FIT_LARGE` 等键；宿主侧选项仍在 `OptiScaler.ini` 的 `[DlssNr]`。
 
+**三个配置文件（0.39 之后的源码版本）。** `DLSS5-AMD` 文件夹里可以有三个文件，按顺序读：`default-config.txt`（模板，随包发布，升级会覆盖）→
+`custom-config.txt`（你自己的改动，安装和升级都不动它；包里带一份 `custom-config.template.txt` 可以照着抄）→ `native-game-flags.txt`
+（旧版的单文件，已有的照常生效）。后一个文件覆盖前一个的同名项，没写的项沿用前面的值，文件不存在就跳过。系统环境变量里的 `DLSS5_*` 比三个文件都优先。
+同一文件里同一项写两次，以最后一行为准。值留空（`DLSS5_SKIP_BLOCKS=`）也会覆盖前面的文件，意思是用程序内置默认。所以只想改一项，就在
+`custom-config.txt` 里只写那一行，比如 `DLSS5_MULTI_PASS=2`。所有读设置的地方（常规与 Magpie add-on、热重载、RE9 runtime）用同一套合并规则。
+细节见 [scripts/CONFIGURATION.md](scripts/CONFIGURATION.md)。
+
 **Magpie 提示。** 包内效果组里的 `FSR3_SR` 就是 DLSS5 的入口（界面名字还是 FSR3）；这一项保持输入尺寸，后面的 FSR4 负责放大。
 AMD 光流只在第一项开，FSR4 和 XeSS 帧生成的 Optical Flow Method 选 None。`Alt+Shift+A` 启停缩放，`F6` 在所有包里都是开关网络。
 

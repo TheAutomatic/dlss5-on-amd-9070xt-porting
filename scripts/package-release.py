@@ -10,7 +10,7 @@ Layout (drop the whole folder's contents into SB\\Binaries\\Win64):
   d3d12.dll                      ReShade loader
   dlss5-amd.addon64              the addon (finds DLSS5-AMD\\ next to itself)
   DLSS5-D3D12-721\\               D3D12 Agility SDK 1.721 preview runtime (Shader Model 6.10)
-  DLSS5-AMD\\native-game-flags.txt, enable-game-sdk721.txt, continuous-every-frame.txt, temporal-history.txt, logs\\
+  DLSS5-AMD\\default-config.txt, custom-config.template.txt, enable-game-sdk721.txt, continuous-every-frame.txt, temporal-history.txt, logs\\
   DLSS5-AMD\\native-game-tiled-assets\\  weights (f16 where exact, f32 otherwise), compiled shaders, runtime shaders, noise.f32
 """
 import sys,os,shutil,hashlib,numpy as np
@@ -22,7 +22,10 @@ open(os.path.join(lab,'logs','.keep'),'w').close()
 shutil.copy(loader,os.path.join(root,'d3d12.dll'));shutil.copy(addon,os.path.join(root,'dlss5-amd.addon64'))
 shutil.copytree(core,os.path.join(root,'DLSS5-D3D12-721'))
 lines=[l for l in open(flags,encoding='utf-8').read().splitlines() if not l.startswith(('DLSS5_RESERVE_VRAM_MB','DLSS5_DEBUG_DUMPS'))]  # no-op reservation; diagnostic dumps
-open(os.path.join(lab,'native-game-flags.txt'),'w',encoding='utf-8',newline='\n').write('\n'.join(lines)+'\n')
+# 2026-10-03 config layers: the template is default-config.txt (overwritten on upgrade); the user's custom-config.txt is never shipped
+# (unzipping over an old install would replace it), only custom-config.template.txt. native-game-flags.txt is not shipped either.
+open(os.path.join(lab,'default-config.txt'),'w',encoding='utf-8',newline='\n').write('\n'.join(lines)+'\n')
+shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)),'custom-config.txt'),os.path.join(lab,'custom-config.template.txt'))
 for name,text in [('enable-game-sdk721.txt','sdk721\n'),('continuous-every-frame.txt','every-frame\n'),('temporal-history.txt','temporal\n')]:
     open(os.path.join(lab,name),'w',newline='\n').write(text)
 kept_f32=[];halves=0;total=0

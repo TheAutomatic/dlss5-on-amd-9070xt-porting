@@ -53,8 +53,10 @@ class NativeGameOneShot {
 #ifdef NATIVE_GAME_TILED_VERIFICATION
    // Runtime path selection: NAME=VALUE lines (DLSS5_* only) applied to the process
    // environment before the network is created, mirroring the validated test runner chain.
-   {unsigned applied=0;if(FILE*flags=_wfopen(NativeLabPath(L"native-game-flags.txt").c_str(),L"rb")){char line[256];while(fgets(line,sizeof line,flags)){size_t n=strlen(line);while(n&&(line[n-1]=='\n'||line[n-1]=='\r'||line[n-1]==' '))line[--n]=0;if(n<8||strncmp(line,"DLSS5_",6)||!strchr(line,'='))continue;if(!_putenv(line))applied++;}fclose(flags);}
-    Log("flags_applied",std::to_string(applied).c_str());}
+   /* Three config layers (native_config_layers.h) merged; a key already in the process environment wins and is not touched. */
+   {unsigned applied=0,kept=0,layers=0;const NativeConfig&env=NativeConfigSystemEnvironment();
+    for(const auto&e:NativeConfigLoadDir(NativeLabRoot(),&layers)){if(NativeConfigFind(env,e.key)){kept++;continue;}if(!_putenv((e.key+"="+e.value).c_str()))applied++;}
+    Log("flags_applied",(std::to_string(applied)+" layers="+std::to_string(layers)+" env_kept="+std::to_string(kept)).c_str());}
 #endif
    std::vector<float>noise;
 #ifdef DLSS5_USE_HIP

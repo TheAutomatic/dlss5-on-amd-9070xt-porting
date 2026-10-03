@@ -1,0 +1,34 @@
+FULL D FAIL Game running
+SAME-count D: 12
+LOCK DROPPED
+GO_DONE
+10:38:24 GAME -> abort
+10:38:25 game running, wait
+FULL D OK
+SAME-count D: 19
+LOCK DROPPED
+GO_DONE
+GUARD_DONE
+RT 900 old=6f961945261a355c new=6f961945261a355c [OK] oldN=ab6b7731d2fa6da9 newDN=ab6b7731d2fa6da9 [OK] newC2=22464e530cded51b mp2env=2610297544e1c36b [BAD] [C2!=DN OK] newC2N1=ab6b7731d2fa6da9 [OK] newC1E2=22464e530cded51b [BAD] | rerun SAME
+  old flags: none
+  new flags: none
+  oldN flags: D:\DLSSNR-Lab\hip-backend\config-layers-20261003\rt\runtime-oldN\DLSS5-AMD\native-game-flags.txt applied=15 env_kept=4
+  newDN flags: D:\DLSSNR-Lab\hip-backend\config-layers-20261003\rt\runtime-newDN\DLSS5-AMD layers=D-N applied=19 env_kept=4
+  newC2 flags: D:\DLSSNR-Lab\hip-backend\config-layers-20261003\rt\runtime-newC2\DLSS5-AMD layers=DC- applied=19 env_kept=4
+  newC2N1 flags: D:\DLSSNR-Lab\hip-backend\config-layers-20261003\rt\runtime-newC2N1\DLSS5-AMD layers=DCN applied=19 env_kept=4
+  mp2env flags: none
+  newC1E2 flags: D:\DLSSNR-Lab\hip-backend\config-layers-20261003\rt\runtime-newC1E2\DLSS5-AMD layers=DC- applied=18 env_kept=5
+RT 1080 old=aaa31e2dffa3a1b5 new=aaa31e2dffa3a1b5 [OK] oldN=45d9905fea25c5ad newDN=45d9905fea25c5ad [OK] newC2=f51c14f87d1b271a mp2env=b783d2c5e51e3658 [BAD] [C2!=DN OK] newC2N1=45d9905fea25c5ad [OK] newC1E2=f51c14f87d1b271a [BAD] | rerun SAME
+  old flags: none
+  new flags: none
+  oldN flags: D:\DLSSNR-Lab\hip-backend\config-layers-20261003\rt\runtime-oldN\DLSS5-AMD\native-game-flags.txt applied=15 env_kept=4
+  newDN flags: D:\DLSSNR-Lab\hip-backend\config-layers-20261003\rt\runtime-newDN\DLSS5-AMD layers=D-N applied=19 env_kept=4
+  newC2 flags: D:\DLSSNR-Lab\hip-backend\config-layers-20261003\rt\runtime-newC2\DLSS5-AMD layers=DC- applied=19 env_kept=4
+  newC2N1 flags: D:\DLSSNR-Lab\hip-backend\config-layers-20261003\rt\runtime-newC2N1\DLSS5-AMD layers=DCN applied=19 env_kept=4
+  mp2env flags: none
+  newC1E2 flags: D:\DLSSNR-Lab\hip-backend\config-layers-20261003\rt\runtime-newC1E2\DLSS5-AMD layers=DC- applied=18 env_kept=5
+SMOKE exit=0
+SP_STATS runs=4 fallback=0 rollover=0 jobs=3572 disabled=0 errors=0
+lmxxf_nr_gpu: ok
+LOCK DROPPED
+GUARD_DONE

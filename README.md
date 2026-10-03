@@ -34,6 +34,15 @@ below in Stellar Blade.
 bit-exact output; Magpie and RE9 ship it off). From 0.32 the RE9 runtime also reads `DLSS5_HIP_*`, `DLSS5_SKIP_BLOCKS`,
 `DLSS5_FIT_LARGE` and the related keys from the flags file; host-side options stay in `OptiScaler.ini` `[DlssNr]`.
 
+**Three config files (source builds after 0.39).** The `DLSS5-AMD` folder can hold three files, read in this order:
+`default-config.txt` (the template, shipped by the package, overwritten on upgrade) → `custom-config.txt` (your own changes; install and
+upgrade never touch it; the package ships `custom-config.template.txt` to copy from) → `native-game-flags.txt` (the old single file; an
+existing one keeps working). A later file overrides the same key of an earlier one, keys it does not mention keep the earlier value, and a
+missing file is skipped. A `DLSS5_*` system environment variable wins over all three files. Same key twice in one file: the last line
+wins. An empty value (`DLSS5_SKIP_BLOCKS=`) overrides the earlier files and means the program's built-in default. So to change one
+setting, put just that line into `custom-config.txt`, e.g. `DLSS5_MULTI_PASS=2`. Everything that reads settings (regular and Magpie
+add-on, hot reload, RE9 runtime) uses the same merge. Details in [scripts/CONFIGURATION.md](scripts/CONFIGURATION.md).
+
 **Magpie notes.** The `FSR3_SR` item of the bundled effect group *is* the DLSS5 entry (its UI name stays FSR3); keep it at
 input size and let the following FSR4 item upscale. Use AMD optical flow only on that first item and set Optical Flow Method
 to None for FSR4 and XeSS frame generation. `Alt+Shift+A` starts/stops scaling, `F6` toggles the network in every package.

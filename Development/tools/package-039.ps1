@@ -81,8 +81,8 @@ foreach($v in $variants){
   if(!(Test-Path "$assets\native_format_convert.hlsl")){throw 'baseline lacks native_format_convert.hlsl'};CheckHash "$assets\native_format_convert.hlsl" $convertSha
   if($v.kind -ne 're9'){
    Copy-Item $addonPath "$stage\dlss5-amd.addon64" -Force;CheckHash "$stage\dlss5-amd.addon64" $regularSha
-   $flags="$stage\DLSS5-AMD\native-game-flags.txt"
-   Copy-Item "$ConfigDirectory\$($v.flags)" $flags -Force
+   # 2026-10-03 config layers: the template ships as default-config.txt (+ custom-config.template.txt); no native-game-flags.txt in the zip
+   $flags=& "$PSScriptRoot\stage-config-layers.ps1" -Lab "$stage\DLSS5-AMD" -Template "$ConfigDirectory\$($v.flags)" -CustomTemplate "$ConfigDirectory\custom-config.txt"
    CheckHash $flags (Get-FileHash "$ConfigDirectory\$($v.flags)").Hash
    foreach($f in 'DLSS5_FIT_LARGE=1','DLSS5_HIP_PDL=1','DLSS5_HIP_WAVE_OWNED=1','DLSS5_HIP_C512_M32=1','DLSS5_HIP_VIT_PROJ_N64=1','DLSS5_NETWORK_HEIGHT=auto','DLSS5_HIP_VIT_STREAM=3','DLSS5_DIRECT_IO=1','DLSS5_FRAME_STATS=0','DLSS5_MAKE_RESIDENT_EVERY=60','DLSS5_HIP_SWIN_RUN=1','DLSS5_FORMAT_FALLBACK=1','DLSS5_HOT_RELOAD=1','DLSS5_NETWORK_1080_ROWS=1152','DLSS5_STYLE=1'){if(!(HasLine $flags $f)){throw "flags missing $f"}}
    if($v.kind -eq 'optiscaler'){
@@ -103,9 +103,8 @@ foreach($v in $variants){
    foreach($n in 're9-present.addon64','dlss5-amd.addon64','ReShade64.dll','ReShade.ini','ReShadePreset.ini','DLSS5-AMD\re9-present-mode.txt'){if(Test-Path "$stage\$n"){Remove-Item "$stage\$n" -Force}}
    CheckHash "$stage\dxgi.dll" $hostSha
    Copy-Item $runtimePath "$stage\LmxxfNrRuntime.dll" -Force;CheckHash "$stage\LmxxfNrRuntime.dll" $runtimeSha
-   # The runtime reads DLSS5-AMD\native-game-flags.txt (found by walking up from the assets directory).
-   $flags="$stage\DLSS5-AMD\native-game-flags.txt"
-   Copy-Item "$ConfigDirectory\hip-re9-flags.txt" $flags -Force
+   # The runtime reads the config layers in DLSS5-AMD\ (found by walking up from the assets directory); template = default-config.txt.
+   $flags=& "$PSScriptRoot\stage-config-layers.ps1" -Lab "$stage\DLSS5-AMD" -Template "$ConfigDirectory\hip-re9-flags.txt" -CustomTemplate "$ConfigDirectory\custom-config.txt"
    foreach($f in 'DLSS5_FIT_LARGE=1','DLSS5_HIP_WAVE_OWNED=1','DLSS5_HIP_C512_M32=1','DLSS5_HIP_VIT_PROJ_N64=1','DLSS5_NETWORK_HEIGHT=auto','DLSS5_HIP_VIT_STREAM=3','DLSS5_FRAME_STATS=0','DLSS5_VIT_ADAPTIVE=0','DLSS5_HIP_SWIN_RUN=1','DLSS5_FORMAT_FALLBACK=1','DLSS5_NETWORK_1080_ROWS=1152','DLSS5_STYLE=1'){if(!(HasLine $flags $f)){throw "re9 flags missing $f"}}
    if(Select-String -Path $flags -Pattern '^DLSS5_DIRECT_IO=' -Quiet){throw 're9 flags must not set DLSS5_DIRECT_IO'}
    $ini=[IO.File]::ReadAllText("$stage\OptiScaler.ini");$section=''

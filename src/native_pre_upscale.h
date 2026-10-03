@@ -23,21 +23,21 @@ static_assert(sizeof(Description)==432,"FFX dispatch ABI");
 static_assert(offsetof(Description,jitter)==360&&offsetof(Description,motion_scale)==368&&offsetof(Description,render)==376&&offsetof(Description,upscale)==384&&offsetof(Description,flags)==428,"FFX dispatch offsets");
 inline int Mode(){
  const wchar_t*v=_wgetenv(L"DLSS5_PRE_UPSCALE");if(v)return !wcscmp(v,L"1")?1:!wcscmp(v,L"2")?2:0;
- static int configured=[](){int mode=0;if(FILE*f=_wfopen(NativeLabPath(L"native-game-flags.txt").c_str(),L"rb")){char line[256];while(fgets(line,sizeof line,f)){size_t n=strlen(line);while(n&&(line[n-1]=='\n'||line[n-1]=='\r'||line[n-1]==' '))line[--n]=0;if(!strcmp(line,"DLSS5_PRE_UPSCALE=1"))mode=1;else if(!strcmp(line,"DLSS5_PRE_UPSCALE=2"))mode=2;else if(!strcmp(line,"DLSS5_PRE_UPSCALE=0"))mode=0;}fclose(f);}return mode;}();return configured;
+ static int configured=[](){int mode=0;for(const std::string&cfg_line:NativeConfigFileLines()){const char*line=cfg_line.c_str();{if(!strcmp(line,"DLSS5_PRE_UPSCALE=1"))mode=1;else if(!strcmp(line,"DLSS5_PRE_UPSCALE=2"))mode=2;else if(!strcmp(line,"DLSS5_PRE_UPSCALE=0"))mode=0;}}return mode;}();return configured;
 }
 inline bool Enabled(){return Mode()!=0;}
-inline bool FreeResFromFile(){static const bool v=[]{unsigned x=0;if(FILE*f=_wfopen(NativeLabPath(L"native-game-flags.txt").c_str(),L"rb")){char line[256];while(fgets(line,sizeof line,f))sscanf(line,"DLSS5_NETWORK_FREE_RES=%u",&x);fclose(f);}return x==1;}();return v;}
-inline bool FitLargeFromFile(){static const bool v=[]{unsigned x=0;if(FILE*f=_wfopen(NativeLabPath(L"native-game-flags.txt").c_str(),L"rb")){char line[256];while(fgets(line,sizeof line,f))sscanf(line,"DLSS5_FIT_LARGE=%u",&x);fclose(f);}return x==1;}();return v;}
+inline bool FreeResFromFile(){static const bool v=[]{unsigned x=0;for(const std::string&cfg_line:NativeConfigFileLines()){const char*line=cfg_line.c_str();sscanf(line,"DLSS5_NETWORK_FREE_RES=%u",&x);}return x==1;}();return v;}
+inline bool FitLargeFromFile(){static const bool v=[]{unsigned x=0;for(const std::string&cfg_line:NativeConfigFileLines()){const char*line=cfg_line.c_str();sscanf(line,"DLSS5_FIT_LARGE=%u",&x);}return x==1;}();return v;}
 struct DisplaySettings {unsigned notice=2;unsigned fps=0;unsigned frame_stats=0;};
 inline const DisplaySettings&Display(){
  // Read before the background initializer applies flags to the environment.
  static const DisplaySettings settings=[](){DisplaySettings v;
-  if(FILE*f=_wfopen(NativeLabPath(L"native-game-flags.txt").c_str(),L"rb")){
-   char line[256];while(fgets(line,sizeof line,f)){unsigned n;
+  {
+   for(const std::string&cfg_line:NativeConfigFileLines()){const char*line=cfg_line.c_str();unsigned n;
     if(sscanf(line,"DLSS5_NOTICE=%u",&n)==1)v.notice=n;
     if(sscanf(line,"DLSS5_SHOW_FPS=%u",&n)==1)v.fps=n;
     if(!strncmp(line,"DLSS5_FRAME_STATS=",18)){try{v.frame_stats=NativeFrameStatsSeconds(line+18);}catch(...){v.frame_stats=0;}}
-   }fclose(f);
+   }
   }return v;
  }();return settings;
 }
@@ -52,7 +52,7 @@ inline bool Async(){
  static const int mode=[](){
   auto parse=[](const wchar_t*v)->int{if(!v)return -1;if(!wcscmp(v,L"1"))return 1;if(!wcscmp(v,L"0"))return 0;return -1;};
   int m=parse(_wgetenv(L"DLSS5_PRE_UPSCALE_ASYNC"));
-  if(m<0){char v[16]{};if(FILE*f=_wfopen(NativeLabPath(L"native-game-flags.txt").c_str(),L"rb")){char line[256];while(fgets(line,sizeof line,f))sscanf(line,"DLSS5_PRE_UPSCALE_ASYNC=%15s",v);fclose(f);}
+  if(m<0){char v[16]{};for(const std::string&cfg_line:NativeConfigFileLines()){const char*line=cfg_line.c_str();sscanf(line,"DLSS5_PRE_UPSCALE_ASYNC=%15s",v);}
    if(!strcmp(v,"1"))m=1;else if(!strcmp(v,"0"))m=0;}
   if(m<0){wchar_t exe[MAX_PATH]{};GetModuleFileNameW(nullptr,exe,MAX_PATH);const wchar_t*base=wcsrchr(exe,L'\\');base=base?base+1:exe;
    static const wchar_t*const sync_titles[]={L"Cyberpunk2077.exe"};m=1;for(const wchar_t*t:sync_titles)if(!_wcsicmp(base,t))m=0;

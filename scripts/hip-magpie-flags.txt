@@ -1,5 +1,7 @@
 # 每个 DLSS5_ 选项上方有中英注释（详见 CONFIGURATION.md）；以 # 开头的行会被忽略。
 # Each DLSS5_ key has a zh/en comment above it (see CONFIGURATION.md); lines starting with # are ignored.
+# 中：本文件随包发布为 default-config.txt，升级会覆盖；自己的改动写进 custom-config.txt（逐行覆盖本文件，升级不动）。
+# EN: Shipped as default-config.txt and overwritten on upgrade; put your own changes in custom-config.txt (overrides per key, never overwritten).
 # 中：旧 DX12 网络路线（≤0.15）的内核开关，HIP 包不走该路线；默认 1；内部调优开关，保持默认
 # EN: Kernel switch of the old DX12 network route (<=0.15); default 1; HIP packages do not use it. Keep default
 DLSS5_TEST_BLOCKED_C32_FFN=1
