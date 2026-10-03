@@ -1442,3 +1442,14 @@ package-039 用的三个模板：`scripts/hip-game-flags.txt`（常规 141 项�
 ## 2026-10-03 叠层 DLSS5_MULTI_PASS
 
 接手中断的上一位（worktree `wt-multi-pass`，代码已写完，09:45 的宿主是最终版）；被打断那批 P3 计时和早于最终宿主的 D/E1/EX 全部重跑。做在共享网络层 `hip_reference_network.h`（`EnqueueRaw` → `MultiPassRest`），add-on / Magpie / RE9 runtime 一处生效，RE9 白名单加键，非法值退回 1。语义按"最终输出再喂入"：第 k 遍 RGB（alpha 1）当第 k+1 遍输入，历史/seed/噪声不变；网络输出本来就是工作编码下截到 [0,1] 的图，编解码往返是恒等所以省掉。hipMemcpy2DAsync 在 Windows 上超过 2^20 行静默截断，按 2^19 行分块。默认 1：19 组 SAME，显式 =1 7/7 SAME，7/0/abc 回退并报错，ABBA 900 −0.026/+0.043/+0.002、1080 +0.021/+0.005/+0.003 判中性；RE9 900 6f96…/1080 aaa3… SAME，smoke 0。2 遍 900 13.7～13.9、1080 19.5ms；3 遍 20.5～20.7 / 29.0ms；两次哈希相同、无 NaN；对单遍 38.4～39.1 / 34.2～34.7 dB；RE9 进程显存 900 +28/+75、1080 +111/+111 MiB。已装：剑星 add-on E50D6E4A、鬼武者 runtime E200E8A6，SUMS F3EFDC16 不动，flags 末尾加三行（=1），exact 快照已同步，备份 `multi-pass-backups\20261003-102714`。`results/multi-pass-20261003`。
+
+## 2026-10-03 WorkingPlan 重写时迁出
+旧 WorkingPlan 里有、DevHistory 里没有成段记录的内容，压缩存档：
+- **研究判断**：roofline（`hip-roofline-20260930`）访存不是瓶颈（纯访存下限 1.55/2.11ms），算力下限 2.16/3.09ms，计入 WMMA 与 VALU 不重叠的现实理想约 4.2/6.0ms；离理想最远 C512 ≈3 倍、ViT ≈2.5 倍。病根是单 WG 串行链不是填满度（`fill-cu`）；关小核、PDL 延伸在 325W 功耗墙下不赚；C256 持久化队列赚、C128/C64 不赚；LLVM 做不到的要源码显式写；网络外交接 0.16～0.18ms/帧，GPU 轮询整帧不兑现，线停。
+- **竞品（10-01 晚）**：mochizuki 0.0.2.5 同机 900 6.02ms、1088 行 7.81～7.86ms；Daniel 0.5.1 reference 900 逐核和 8.17ms。差距分类：组织方式逐位可追的基本摸到头；剩下是数值取舍（C32 RTZ 链/e4m3 多次舍入、ViT half 归约、f16 累加）和几何口径（他 16 块我 13 块、900 448 vs 400 token、1088 行）。
+- **未收的逐位候选（等新证据或合包）**：`C512_T8_NO_F32`（900 六轮正、1080 一轮 +0.008）；`DLSS5_IO_FUSE=1`（avg 全正，900 p99 不过）；`HIP_DEC_F8W`；`C512_COMPACT_VT`；方案 A（C512 块内 attention→aproj 队列，估 −0.05～−0.10ms）、F（mix→FFN→proj 一核，把握低）。V（ViT 屏障持久化）不做。
+- **负账索引**（细节见各 results 与上文各节）：HIP↔D3D 交接两半、Infinity Cache arena、C512 FFN LDS 共用/M32/FFN_PIPE/PROJ_FB8/PROJ_DEEP/PROJ_WN4/SPLIT_N/MIX_PIPE/跨块就绪队列、W16 推广 C64/C128、ViT QKV 尾宽写/GATHER_FOLD/ATTN_M32/QKV_TM/QKV_WIDE、C128/C64 持久化、Swin W2_UP_DIRECT/SKIP_BYTE/HIDDEN_TILES/C256 QKV_FUSE、功耗逐族、编译器（COMGR2/LLVM20 慢、LLVM22 不逐位、调度选项除已收两项外无收）、mochizuki 0.0.2.2 各路线。
+- **技术债：裸 s_barrier**（`llvm23-vit-20261002` §5）：LLVM21 对 gfx12 拆分屏障白送 `s_wait_dscnt 0`，LLVM22/23 不送。任何模块换新编译器前必须带 `HIP_BARRIER_FENCE 1` 并用 `experiments/llvm23-vit/barrier_scan.py` 扫到 0；LLVM23 下有问题的 13 个模块清单见 `source-barriers.txt`。根治 = 裸屏障全换带 WG_FENCE 的写法。
+- **Zero 历次定案**：有损路线只做用户选项；原版没量化的地方不做 FP8；PDL 保持 1；稳定性只修能复现的；1088 行保持可选。
+- **等待事项**：PR #12（TheAutomatic）等他改/拆；PRE_UPSCALE=auto、卧龙 2、自带 FSR 的游戏、网友统一宿主补丁照旧等。
+- **公众号素材**（Zero 还没说写）：一天从被反超到追平；"逐位原来是对上一版"；照抄对手 null、逐条对齐才出刀；同口径画质不跳块胜 mochizuki；roofline 说访存不卡、病根是串行链；三家都是"人 + AI"。
