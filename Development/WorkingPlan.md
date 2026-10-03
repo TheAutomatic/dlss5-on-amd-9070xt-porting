@@ -27,7 +27,7 @@
 
 ## 待办
 
-1. **打 0.40 包**，等 Zero 测完三层配置和叠层再发。包里放 `default-config.txt` + `custom-config.template.txt`，不放 custom/native（解压覆盖不伤用户文件）；改过的 `package-039.ps1` / `package-release.py` 还没实跑过，打包时首跑要核对清单。
+1. **0.40 已打包（10-03 19:35，tag 0.40）**：三个包在 `D:\給網友打包\`，与 0.39 相比各 +7/−1 文件（加 default-config、custom 模板、6 个 fast 模块；去掉 native-game-flags）。干净解压回放哈希一致，覆盖升级不动用户文件。**待 Zero 上传网盘后把链接填进 CHANGELOG/README。**
 2. **改包内说明**：`scripts/package-notes/*`、`package-README*` 里还写着"默认跳 42,43,46"，要改成全块 + FAST_NUMERIC=1，补上 MULTI_PASS 和三层配置。
 
 ## 已搁置（有新证据再动）
