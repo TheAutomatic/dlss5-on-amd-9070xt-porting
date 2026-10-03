@@ -1494,18 +1494,19 @@ B：add-on 的热重载现在也重读 `DLSS5_MULTI_PASS`，HIP 网络下一帧�
 
 Zero 在上传 0.40 过程中遇到 Claude 账号停用，随后提供夸克 https://pan.quark.cn/s/d38e0f653c5a 与 Gofile https://gofile.io/d/moSf7cqf。按已完成的打包记录补齐中英文 README/CHANGELOG 下载入口及 WorkingPlan；未重打包，未修改载荷。网盘内容未独立核验。
 
+## 2026-10-03 21:50 起：DLSS5_PRE_UPSCALE=auto（朱雀，worktree 297-preupscale-auto / branch preupscale-auto-20261003）
 
-## 2026-10-03 夜（赤月派兵三路，2/3 已交）：遗留候选复审全不收 + PRE_UPSCALE=auto 落地
+治"装了跟没装一样"：Forza/卧龙类列表布局（upscaler 派发后同列表还有 draw/dispatch）触发 UNSAFE → fatal → 整局纯透传。auto = 首帧探测该合同：列表尾部干净留前置（行为同 =1），不干净则粘性强决定落后置（本帧 FFX-only 重放，下一帧起后置快照路线按全新启动在 SNAPSHOT_FRAME 武装），写日志含原因。非法值回落 0（现行为），=2 冒烟保留，环境压文件。决定后某帧再违约仍走原 fatal（同强制 =1，不悄悄降级）。ASYNC：探测帧遵守现有规则（2077 查表照生效），回落后 ASYNC 不再相关；探测帧异步拷贝即使读到垃圾也无害（回落帧网络不处理、不回写游戏资源）。开销：Mode() 一次原子读/调用。实现：`native_pre_upscale.h` 新增 RequestedMode/AutoDecision/Mode/AutoDecide（决策块无 D3D12 依赖），Process 首 job 处决定；`pre-upscale-smoke.cpp` 加 auto 回落帧（捕获→ObserveWork→Execute→断言 Mode=0/Enabled=false/FFX 恰一次/读回逐字节一致/再捕获直派）。开口：regular 模板值改 auto（Magpie/RE9 保持 0 只补注释）、CONFIGURATION 新行；RE9 白名单无需动（该键本被 RE9 忽略）。验证：add-on --hip/普通两变体编译过；Linux 原生单测 11 场景 PASS（extract-auto-block.sh 逐字节抽生产代码文本）；剑星 10-03 真实日志 3340 事件 0 UNSAFE → auto 会留前置；9070 GPU 冒烟同步/异步（结果见 results/pre-upscale-auto-20261003）。19 组 SAME 结构上不适用：回归走 benchmark_main_reuse.exe，不含被改代码；模块与 runtime 未动。覆盖缺口：Forza 类真游戏 auto 实测待 Zero（下版装机建议 auto 档玩 5 分钟看日志 auto: 行）。`results/pre-upscale-auto-20261003`。
 
-三路子代理并行（Kimi K3 底座，AGENTS.md 自动注入开灯，gpu.lock 排队）：
 
-**① 遗留候选按新规复审（agent-3）**：IO_FUSE / C512_T8_NO_F32 / HIP_DEC_F8W / C512_COMPACT_VT 四个"留待合包"候选全部终局**不收**——逐位 19 组 SAME 都过但合并 p99 或慢轮不过线。关键发现：`C512_T8_NO_F32` 是死宏（FFN_ONE 后该核每帧 0 派发），已从源码作废；IO_FUSE 900 p99 变差是第三次复现，此线关闭；"留待合包"队列清空，逐位渐近线再添佐证。归档 `results/pending-review-20261003/`（commit 2a3056af，未 push）。坑记入 README：assets-base 的 multi-pass-skip 副本缺 block0-ffn.f16，继承 harness 先验存在性。
+## 2026-10-03 夜～10-04：赤月派兵三路交账（Kimi K3 子代理，AGENTS.md 自动注入开灯，gpu.lock 排队）
 
-**② DLSS5_PRE_UPSCALE=auto（agent-1）**：探测信息可得性确认——UNSAFE 输入 `Job::following_work` 在首 job 处理时已完整。实现：合法值 1/2/auto/0，首 job 强粘决定（有后续工作→本帧 FFX-only 重放+钩子惰化+后置按全新启动武装；无→锁死前置，之后违约仍 fatal 不悄悄降级）；ASYNC 交互沿用 2077 怪癖查表，回落帧网络不处理、不回写资源。开口：hip-game-flags 值改 auto、magpie/re9 注释补 auto、CONFIGURATION.md 加行（RE9 本就忽略该键，白名单不用改）。验证：11 场景单测（从生产头文件逐字节抽块）、剑星 10-03 真实日志回放留前置正确、9070 真 GPU 烟测回落帧同步/异步 PASS。19 组 SAME 结构不适用（回归 runner 不含被改宿主代码），发包前跑 run-regression.ps1 形式过一遍。worktree `wechat/assets/297-preupscale-auto`（branch preupscale-auto-20261003，commit e65b0319，未合 main）。真游戏（Forza/卧龙类）auto 实测待 Zero。归档 `results/pre-upscale-auto-20261003/`。
+**① 遗留候选按新规复审**：IO_FUSE / C512_T8_NO_F32 / HIP_DEC_F8W / C512_COMPACT_VT 全否——19 组 SAME 都过但合并 p99 或慢轮不过线。`C512_T8_NO_F32` 是死宏（FFN_ONE 后 0 派发）已作废；IO_FUSE 900 p99 第三次复现，线关；"留待合包"队列清空。坑：assets-base 的 multi-pass-skip 副本缺 block0-ffn.f16，继承 harness 先验存在性。`results/pending-review-20261003`（2a3056af）。
 
-**③ 包内说明文案（agent-2）**：4 个 package-README 改成全块 + FAST_NUMERIC=1 口径，补 MULTI_PASS + 三层配置；历史段旧口径故意保留。commit 0ff15055。发现任务单引用错误：仓库无 tools/package-040.ps1，实际入口 package-release.py + package-hip.ps1 + optiscaler-stellarblade.ps1。D 盘 Payload 的 package-README-magpie.txt 仓库外待同步。
+**② 包内说明文案**：4 个 package-README 改全块 + FAST_NUMERIC=1 口径，补 MULTI_PASS + 三层配置；历史段旧口径故意保留（0ff15055）。发现：仓库无 tools/package-040.ps1，实际入口 package-release.py + package-hip.ps1 + optiscaler-stellarblade.ps1；D 盘 Payload 的 package-README-magpie.txt 仓库外待同步。
 
-**派活规矩更新**：子代理免 `[LOAD MEMORY]`（AGENTS.md 自动注入，实测 K3 子代理能背 SVG、守铁律）；K3 底座无 Co-Authored-By 问题，任务单不必再写。WorkingPlan 规矩段已改。三路交账均守 gpu.lock + 看门狗 + 只 add 具体文件。
+**③ FAST_NUMERIC 加深（PF 全 fast 包，收下）**：VIT_FAST_NUM 宏（bit0 attention 去 Hrtz、bit1 分母裸 rcp、bit2 contract/projection 去 RNE 半）进 deep_fast-packed-fast（15）+ vit-stream-fast（4）配方，COMGR 两架构。PSNR 最差帧 52.13dB（≥50 线），ABBA 900 −0.089 / 1080 −0.100ms 三轮全快 p99 全好；宏 0 重编与现装逐字节一致，FAST=1 缺 twin 回落逐位。负账：C512 f16 残差投影逐位精确但全慢（投影族不差残差流量，同 FB8 负账）。坑：harness 宿主是 benchmark_vit_reuse.cpp；fast-numeric lab 旧 benchmark-base.exe 已漂移勿用；剑星 flags 含 MULTI_PASS=3 会污染 harness 需中和键。`results/fast-vit-c512-20261003`（0e3b72dd）。
 
-## 2026-10-03 晚 FAST_NUMERIC 加深到 ViT + C512 投影实验（光派单，子代理，未装机）
-任务：fast 数值路径从 C32+c64-wave2 扩到 ViT 与 C512 attention 投影，每刀 PSNR≥50dB 最差帧 + 三轮 ABBA 稳定正收益。新宏 VIT_FAST_NUM（deep_fast.hip/vit_stream.inc：bit0 attention epilogue 去 Hrtz、bit1 分母裸 rcp、bit2 contract/projection 去 RNE 半舍入、bit3 C512 FFN 投影 F(H)→F、bit16 f16res 导出）、C512_FAST_PROJ（mh_fast f16 残差投影导出），全默认 0，宏 0 重编 .text 与现装逐字节同（三模块验证）。宿主：fast_numeric 缓存 + FastTwin(stem) 泛化 -fast 交换（deep_fast-packed/vit-stream/mh_fast 加载点）。配方加 deep_fast-packed-fast（15）/vit-stream-fast（4）两行，COMGR 两架构同哈希。坑与发现：① harness 的 benchmark 宿主是 benchmark_vit_reuse.cpp（每帧 dump），不是 benchmark_live_capture.cpp；② 游戏 native-game-flags.txt 10-03 多起 FAST_NUMERIC=1+MULTI_PASS=3，lab 两侧统一追加中和键（沿用 fast-tier 跳 42,43,46 口径）；③ PS EAP=Stop 会把宿主回落 stderr 行抛错，runner 调用包 EAP Continue。结果：HOST 19 SAME + 计时中性；FB（=1 无 twin）7 case 全 0/12；刀1 attention（VIT_FAST_NUM 3）PSNR 最差 54.53、ABBA 噪声内；刀2 contract/proj（4）最差 54.41、噪声内；刀3 C512 f16 残差两形态全 0/12 值精确但 900 合并 +0.016/+0.059 全慢——不收（投影族不差残差流量，同 FB8 负账），宿主分支撤掉、配方不装；PF 全 fast 包（c32/c64/deep/vit-stream 四 twin）：最差帧 52.13、ABBA 900 −0.089/1080 −0.100 三轮全快 p99 全好——收。未装机（9070 build\final{,1200}\ 备好）。`results/fast-vit-c512-20261003`。
+**派活规矩更新**：子代理免 `[LOAD MEMORY]`（实测 K3 子代理能背 SVG、守铁律）；K3 底座无 Co-Authored-By 问题；交账要追加 DevHistory §12（直接改 main）。
+
+**10-04：两分支已合 main**（fast-vit、preupscale-auto，DevHistory 冲突已解——保留各分支详细记录，删重复摘要）。下一步：装机双游戏 → run-regression 形式回归 → 0.41。
