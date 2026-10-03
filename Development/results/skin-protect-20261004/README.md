@@ -17,3 +17,7 @@
 ## 02:16 用户关闭保护
 
 Zero反馈保护开启后整体效果几乎看不出来、剑星真3约27fps。仅将两游戏custom SKIN_PROTECT置0，实际MP3/PREDICT0及其余项原样保留。native无skin覆盖，无Machine/User环境覆盖；备份skin-off-20261004-021602，exact只同步native/custom配置快照，未动载荷未跑GPU。读取时游戏不在运行，运行中新热载未证；下一启动关闭，鬼武者必须重启。27fps不能直接归于mask .34ms，当前真3与此前预测3不同。此观感实验没有满足用户，保持关闭。
+
+## 02:19 鬼武者再试优化3x
+
+用户明确要求后，只鬼武者改MP3/PREDICT1/SKIN0；两处runtime已核C38B8383、76模块C7EA9AC8、gfx1201预测核2E7F1437，含双feed修复，无需重装载荷。剑星未动、未跑GPU；无相关Machine/User环境覆盖。配置备份oni-predict-on-20261004-021943，oni exact配置同步。重新启动读配置，实际两遍+预测第三遍，皮肤关；实玩待用户。可回custom MP1/PREDICT0再重启。

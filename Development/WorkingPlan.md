@@ -6,14 +6,14 @@
 
 - 已发布0.40；0.41未打包。fast-vit/preupscale-auto已合并。
 - **最新双游戏肤色保护版已装**：剑星addon **731B8DAE**、鬼武者根/_storage_ runtime **C38B8383**；76模块/SUMS **C7EA9AC8**，exact快照同步。
-- **Zero已关闭肤色保护**：两游戏custom **MP3/PREDICT0/SKIN0**、native MP3，其它项保留；剑星PRE1、鬼武者PRE0。当前整体真三遍。剑星配置可热载，F9仅切遍数；鬼武者重启，无F9。
+- **肤色保护均关闭**：剑星 **MP3/PREDICT0/SKIN0**（F9可再改遍数），鬼武者按Zero新要求改 **MP3/PREDICT1/SKIN0** 试修复后的优化3x；native MP3，其它项保留。鬼武者两遍+预测，需重启，无F9；剑星不动。
 - 默认normal19、MP1保护恒等、真/预测保护重复/无NaN、RE9smoke通过；脸裁图方向正确，核心m1逐位y1、m0逐位多遍。mask肤色启发式，彩光可漏/暖背景可误选。
 - 首帧双feed预准备修复受控栅栏实证旧1528ms、新2ms。Zero肤色保护实玩反馈整体效果几乎看不出来，剑星真3约27fps，02:16仅配置关保护；不能把27fps归于mask .34ms，真3与旧预测3口径不同。
 - 鬼武者此前预测版黑屏曾回滚，01:07用户确认正常；该事实保留。新肤色版备份见results/skin-protect-20261004。
 
 ## 待办
 
-1. 保持当前保护关闭；后续效果方向由Zero校准，不自行重开或调预测。当前MP3/PREDICT0不变，鬼武者重启读skin0。
+1. 保持肤色保护关闭；鬼武者修复后优化3x（MP3/PREDICT1/SKIN0）重启实玩待Zero，不以离线probe/smoke替代启动确认。可回MP1/PREDICT0普通单遍；剑星按当前配置保持，不自行改。
 2. **0.41前核查旧全模块ELF目标**：旧rtc可能忽略gfx1200参数，新预测/肤色核已正确两架构。不能只信目录标签；9070实际gfx1201当前不受另一架构疑点影响。
 3. **0.41**：核实打包入口→三包/README及CHANGELOG中英→发布核验→tag。同步README版本头及D盘Payload说明，是否收预测/肤色保护待实玩。
 4. Forza/卧龙auto日志实测、F9真按键、环境变量优先级；剑星测auto须处理native PRE1覆盖。

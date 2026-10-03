@@ -1554,3 +1554,7 @@ Zero报启动黑屏/有不可点击弹窗。两次启动日志显示modules_ok=7
 ## 2026-10-04 02:16 Zero要求关闭肤色保护（仅配置）
 
 Zero实玩反馈：保护开启后整体效果几乎看不出来，剑星真3约27fps，决定关保护。两游戏custom SKIN_PROTECT=0，读取实际MP3/PREDICT0并原样保留；native无skin覆盖、Machine/User无skin覆盖，默认本为0。保BOM/换行/其它行，备份skin-protect-20261004/skin-off-20261004-021602；exact仅同步native/custom配置快照，DLL/模块未动，无GPU。查询时无游戏进程，不能声称运行中新热载已确认；剑星可热载、鬼武者需重启。观感实验未满足用户，本轮关闭；27fps不能直接归于mask约.34ms，真3与此前预测3口径不同。
+
+## 2026-10-04 02:19 鬼武者再试修复后的优化3x（仅配置，Zero明确要求）
+
+只鬼武者custom改MP3/PREDICT1/SKIN0，native MP3无predict/skin覆盖；其余项/BOM/换行保留，Machine/User无相关环境覆盖。根/_storage_ runtime读回均C38B8383（含已受控producer probe验证的双feed修复），SUMS C7EA9AC8/76模块，gfx1201预测核hash2E7F1437；无需重装DLL，无GPU，剑星不动。备份skin-protect-20261004/oni-predict-on-20261004-021943，oni exact配置快照同步。查询时无鬼武者进程，重新启动读配置；这是两遍+预测第三遍，皮肤保护关，实玩待Zero。可将custom MP1/PREDICT0回普通单遍，重启生效。
