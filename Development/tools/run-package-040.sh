@@ -4,14 +4,14 @@
 G='SB-Win64 StellarBlade Onimusha re9.exe SandFall LOP-Win64 Magpie Aniimo'
 L='D:\DLSSNR-Lab\release-040'
 while true; do
- out=$(ssh amd9070 "tasklist | findstr /I \"$G\" >nul && (echo GAME) || (if exist D:\DLSSNR-Lab\gpu.lock (echo BUSY) else (echo package-040 %DATE% %TIME% > D:\DLSSNR-Lab\gpu.lock & echo LOCKED))")
+ out=$(ssh amd9070 "powershell -NoProfile -ExecutionPolicy Bypass -File D:\DLSSNR-Lab\game-check.ps1 \"$G\" >nul && (echo GAME) || (if exist D:\DLSSNR-Lab\gpu.lock (echo BUSY) else (echo package-040 %DATE% %TIME% > D:\DLSSNR-Lab\gpu.lock & echo LOCKED))")
  [[ $out == *LOCKED* ]] && break
  timeout 300 tail -f /dev/null
 done
 echo "$(date +%T) lock taken"
 ssh amd9070 "powershell -NoProfile -ExecutionPolicy Bypass -Command \"if('$1' -ne 'verify'){& '$L\package-040.ps1' -SourceCommit ${1:-3dc2f60b} *> '$L\package.log'; if(!\$?){exit 1}}; & '$L\verify040.ps1' *> '$L\verify.log'\"" & pid=$!
 while kill -0 $pid 2>/dev/null; do
- if ssh amd9070 "tasklist | findstr /I \"$G\"" >/dev/null 2>&1; then echo GAME_ABORT; ssh amd9070 "taskkill /F /IM rt_bench.exe & taskkill /F /IM runtime-smoke.exe & taskkill /F /IM compile_fit_shaders.exe" >/dev/null 2>&1; break; fi
+ if ssh amd9070 "powershell -NoProfile -ExecutionPolicy Bypass -File D:\DLSSNR-Lab\game-check.ps1 \"$G\"" >/dev/null 2>&1; then echo GAME_ABORT; ssh amd9070 "taskkill /F /IM rt_bench.exe & taskkill /F /IM runtime-smoke.exe & taskkill /F /IM compile_fit_shaders.exe" >/dev/null 2>&1; break; fi
  timeout 15 tail -f /dev/null
 done
 wait $pid; rc=$?

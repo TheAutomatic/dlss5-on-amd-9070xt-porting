@@ -1476,3 +1476,15 @@ B：add-on 的热重载现在也重读 `DLSS5_MULTI_PASS`，HIP 网络下一帧�
 
 清单对 0.39（`tools/verify040.ps1`）：三包一致地 +7 −1——加 `default-config.txt`、`custom-config.template.txt`（配置分层）和每架构 3 个新模块 `c32-wave1-rtz` / `c32-wave1-fast` / `c64-wave2-fast`（FAST_NUMERIC 默认 1 要用），去掉 `native-game-flags.txt`（解压覆盖不冲用户文件）；包里没有 `custom-config.txt`。其余同名文件内容变化（shader、notes、模板、二进制）不算增减。
 验证：干净解压后 RE9 回放（包内 runtime + 包内模块，无配置文件）900 6f961945261a355c、1080 aaa31e2dffa3a1b5，各两遍 exit 0 SAME；包布局 runtime-smoke exit 0。升级模拟：解开 0.39、写用户 custom-config.txt 并改 native-game-flags.txt，再把 0.40 解压覆盖，三包两文件哈希都不变，default-config 与模板到位。verify 首跑踩坑：runtime 只在 `<dll>\shaders` 等处找 native_codec_encode.hlsl（不读 LMXXF_SHADER_DIR），回放目录照 config-layers rt9 拷 fusion-round3 shader 后通过。`multi-pass-extrap-20261003` 的帧导出已在之前清空（out 0 文件，work 只剩日志），无可删。tag 0.40。下载链接待 Zero 补。
+
+## 2026-10-03 游戏进程看门狗：忽略僵尸进程（tools/game-check.ps1）
+
+起因：鬼武者退出后 `OnimushaWotS` 进程不退（18:15 起、19:23 手动杀，240MB、无窗口、不占 GPU），所有 `tasklist | findstr` 看门狗都当成游戏在跑，0.40 打包白等一小时。
+
+改法：共用 `tools/game-check.ps1`（9070 上 `D:\DLSSNR-Lab\game-check.ps1`），参数和 findstr 一样传空格分隔的进程名片段，退出码也一样（0=有游戏，1=没有），所以各脚本只把 `tasklist | findstr /I` 换成 `powershell -NoProfile -ExecutionPolicy Bypass -File D:\DLSSNR-Lab\game-check.ps1`。25 个 .sh（`tools/run-package-040.sh`、`results/multi-pass-extrap-20261003/scripts/run.sh`、`HIP/experiments/*/guard.sh|gpulock.sh`）已换。判定：有主窗口、或启动不到 60 秒、或独占显存 ≥200MB 才算游戏；否则打一行 `zombie game process ignored: <name> pid <pid>`（也写 `D:\DLSSNR-Lab\game-check.log`），不阻塞。
+
+坑：**ssh 会话里 `MainWindowHandle` 永远是 0**（非交互会话看不到桌面窗口；Get-Process 列所有进程都无窗口），只靠窗口判断会把真游戏也放行。所以加了显存兜底：`\GPU Process Memory(*)\Dedicated Usage` 计数器 ssh 下可见，游戏几个 GB，僵尸为 0。今天说的"MainWindowTitle 为空"若是 ssh 下看的，本身不说明问题。
+
+9070 验证（ssh 下）：隐藏 `cmd /c pause` 启动 2 秒 → GAME rc=0（60 秒内放行为"在跑"）；同一进程 60 秒后 → zombie ignored rc=1；`dwm`（无可见窗口但占 1313MB 显存）→ GAME rc=0；`explorer`（无窗口、显存 <200MB）→ zombie rc=1；当前真实游戏列表 → rc=1。cmd 包装形式（`>nul && (echo GAME) || ...`）两种结果都对。"有窗口阻塞"分支在 ssh 下无法直接触发，由显存分支覆盖。
+
+没改：一批老实验 .ps1 里的 `Get-Process ... {throw 'Game running'}`（deep-layers、fill-cu、c128-empty-tile 等，一次性脚本），以后复用时改调 game-check.ps1。

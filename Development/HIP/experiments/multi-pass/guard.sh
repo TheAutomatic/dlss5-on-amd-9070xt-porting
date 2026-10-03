@@ -1,7 +1,7 @@
 #!/bin/bash
 # guard.sh <remote ps1 args...> (multi-pass): wait for no game (5 min polls), run; watcher every 15 s, on a game kills bench + drops lock, reruns.
 G='SB-Win64 StellarBlade Onimusha re9.exe SandFall LOP-Win64'
-game(){ ssh amd9070 "tasklist | findstr /I \"$G\"" >/dev/null 2>&1; }
+game(){ ssh amd9070 "powershell -NoProfile -ExecutionPolicy Bypass -File D:\DLSSNR-Lab\game-check.ps1 \"$G\"" >/dev/null 2>&1; }
 while true; do
  while game; do echo "$(date +%T) game running, wait"; timeout 300 tail -f /dev/null; done
  ssh amd9070 "powershell -NoProfile -ExecutionPolicy Bypass -File $*" & pid=$!
