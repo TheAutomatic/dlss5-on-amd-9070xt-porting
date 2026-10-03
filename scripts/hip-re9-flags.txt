@@ -368,8 +368,8 @@ DLSS5_MULTI_PASS_SKIP_BLOCKS=
 # 中：编解码按 sRGB 显示图处理（Magpie 必须 1，游戏包 0）；默认 1；按包型设定，不要改；RE9 runtime 不读此键
 # EN: Codec treats input as display sRGB (Magpie 1, game packages 0); default 1; set per package, do not change; not read by the RE9 runtime
 DLSS5_CODEC_SRGB=1
-# 中：1 = 网络放在 FSR 超分之前（前置路线）；默认 0；0 = 不走前置；按包型设定，保持默认；RE9 runtime 不读此键
-# EN: 1 = network runs before the FSR upscale (pre-upscale route); default 0; set per package, keep default; not read by the RE9 runtime
+# 中：1 = 网络放在 FSR 超分之前（前置路线）；默认 0；auto = 首帧探测自动选前置/后置；按包型设定，保持默认；RE9 runtime 不读此键
+# EN: 1 = network runs before the FSR upscale (pre-upscale route); default 0; auto = first-frame probe picks pre/post; set per package, keep default; not read by the RE9 runtime
 DLSS5_PRE_UPSCALE=0
 # 中：前置路线异步提交；默认 0；auto 按游戏查表（2077 同步）；1/0 强制；不影响画面数值；RE9 runtime 不读此键
 # EN: Async submission on the pre-upscale route; default 0; auto = per-title table (Cyberpunk sync); 1/0 force; not read by the RE9 runtime

@@ -86,5 +86,33 @@ int main(int argc,char**){try{
   sync.Submit([&](ID3D12GraphicsCommandList*c){D3D12_RESOURCE_BARRIER b{};b.Type=D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;b.Transition={output,D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,D3D12_RESOURCE_STATE_UNORDERED_ACCESS,D3D12_RESOURCE_STATE_COPY_SOURCE};c->ResourceBarrier(1,&b);auto rdst=src;rdst.pResource=readback;auto rsrc=dst;rsrc.pResource=output;c->CopyTextureRegion(&rdst,0,0,0,&rsrc,nullptr);std::swap(b.Transition.StateBefore,b.Transition.StateAfter);c->ResourceBarrier(1,&b);});
   D3D12_RANGE range{0,8192};ck(readback->Map(0,&range,reinterpret_cast<void**>(&data)));unsigned bad=0;for(unsigned i=0;i<4096;i++)bad+=data[i]!=uint16_t(0x3000+frame*512+(i%256));readback->Unmap(0,&none);printf("frame=%u different=%u\n",frame,bad);if(bad)throw std::runtime_error("GPU order/output mismatch");
  }
+ /* 2026-10-03 DLSS5_PRE_UPSCALE=auto, fallback case (the Forza/Wo Long list layout): the first processed job already
+    has work after the upscaler dispatch in its list, so auto must fall back to the post-upscale route --
+    this frame replays FFX only, the hook goes inert, and a later capture passes the dispatch through direct. */
+ _wputenv(L"DLSS5_PRE_UPSCALE=auto");
+ NativePreUpscale::AutoDecision().store(0);
+ NativeBypassTestAccess::Set(neural_oneshot,false); /* capture must succeed: auto-undecided is mode 1 and a bypassed one-shot would pass through */
+ ck(alloc->Reset());ck(list->Reset(alloc,nullptr));
+ uint16_t*data2;D3D12_RANGE none2{};ck(upload->Map(0,&none2,reinterpret_cast<void**>(&data2)));for(unsigned i=0;i<4096;i++)data2[i]=uint16_t(0x3000+6*512+(i%256));upload->Unmap(0,nullptr);
+ D3D12_TEXTURE_COPY_LOCATION dst2{},src2{};dst2.pResource=input;dst2.Type=D3D12_TEXTURE_COPY_TYPE_SUBRESOURCE_INDEX;src2.pResource=upload;src2.Type=D3D12_TEXTURE_COPY_TYPE_PLACED_FOOTPRINT;src2.PlacedFootprint.Footprint={DXGI_FORMAT_R16G16B16A16_FLOAT,32,32,1,256};
+ D3D12_RESOURCE_BARRIER bar2{};bar2.Type=D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;bar2.Transition={input,D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,D3D12_RESOURCE_STATE_COPY_DEST};
+ list->ResourceBarrier(1,&bar2);list->CopyTextureRegion(&dst2,0,0,0,&src2,nullptr);std::swap(bar2.Transition.StateBefore,bar2.Transition.StateAfter);list->ResourceBarrier(1,&bar2);
+ alignas(8) unsigned char desc2[432]{};Header h2{0x10001,nullptr};memcpy(desc2,&h2,sizeof h2);memcpy(desc2+16,&list,8);
+ ResourcePayload ri2{input,2,0,32,32,1,1,0,0,4,0},ro2{output,2,0,32,32,1,1,0,0,2,0};memcpy(desc2+24,&ri2,48);memcpy(desc2+72,&ri2,48);memcpy(desc2+120,&ri2,48);memcpy(desc2+312,&ro2,48);unsigned dims2[]={32,32,32,32};memcpy(desc2+376,dims2,16);
+ void*context2=reinterpret_cast<void*>(0x5678);
+ const unsigned calls_before=ffx_calls;
+ if(!NativePreUpscale::Capture(&context2,reinterpret_cast<Header*>(desc2),list,7))throw std::runtime_error("auto did not capture the first job");
+ NativePreUpscale::ObserveWork(list); /* a draw after the dispatch in the same list: the pre-upscale contract is violated */
+ ck(list->Close());ID3D12CommandList*lists2[]={list};
+ if(!NativePreUpscale::Execute(q,1,lists2,ExecuteReal))throw std::runtime_error("auto job not intercepted");
+ if(NativePreUpscale::AutoDecision().load()!=2||NativePreUpscale::Mode()!=0||NativePreUpscale::Enabled())throw std::runtime_error("auto did not fall back to the post-upscale route");
+ if(ffx_calls!=calls_before+1)throw std::runtime_error("auto fallback frame: FFX omitted or replayed twice");
+ sync.Submit([&](ID3D12GraphicsCommandList*c){D3D12_RESOURCE_BARRIER b{};b.Type=D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;b.Transition={output,D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,D3D12_RESOURCE_STATE_UNORDERED_ACCESS,D3D12_RESOURCE_STATE_COPY_SOURCE};c->ResourceBarrier(1,&b);auto rdst=src2;rdst.pResource=readback;auto rsrc=dst2;rsrc.pResource=output;c->CopyTextureRegion(&rdst,0,0,0,&rsrc,nullptr);std::swap(b.Transition.StateBefore,b.Transition.StateAfter);c->ResourceBarrier(1,&b);});
+ D3D12_RANGE range2{0,8192};ck(readback->Map(0,&range2,reinterpret_cast<void**>(&data2)));unsigned bad2=0;for(unsigned i=0;i<4096;i++)bad2+=data2[i]!=uint16_t(0x3000+6*512+(i%256));readback->Unmap(0,&none2);printf("auto fallback frame different=%u\n",bad2);if(bad2)throw std::runtime_error("auto fallback GPU output mismatch");
+ /* after the fallback the hook is inert: the next dispatch must pass through untouched (the post route's contract). */
+ ck(alloc->Reset());ck(list->Reset(alloc,nullptr));
+ if(NativePreUpscale::Capture(&context2,reinterpret_cast<Header*>(desc2),list,8))throw std::runtime_error("hook still capturing after auto fallback");
+ if(original(&context2,reinterpret_cast<Header*>(desc2)))throw std::runtime_error("post-fallback direct FFX failed");
+ puts("PRE_UPSCALE_AUTO_FALLBACK_SMOKE_PASS");
  puts("PRE_UPSCALE_DEFER_AND_BYPASS_SMOKE_PASS");return 0;
 }catch(const std::exception&e){fprintf(stderr,"FAIL: %s\n",e.what());return 1;}}

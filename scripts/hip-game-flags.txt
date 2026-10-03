@@ -387,9 +387,9 @@ DLSS5_HIP_DECODER_BYTE=1
 # 中：内部调优开关（HIP 内核选择），保持默认；默认 1
 # EN: Internal tuning switch (HIP kernel selection); default 1; keep default
 DLSS5_HIP_MH_PROJ_DIAG_FB=1
-# 中：1 = 网络放在 FSR 超分之前（前置路线）；默认 1；0 = 不走前置；按包型设定，保持默认
-# EN: 1 = network runs before the FSR upscale (pre-upscale route); default 1; set per package, keep default
-DLSS5_PRE_UPSCALE=1
+# 中：网络接入时机：1 = FSR 超分之前（前置路线）；auto = 首帧探测，列表尾部还有后续工作则自动落后置路线；0 = 后置；默认 auto
+# EN: 1 = before the FSR upscale (pre-upscale route); auto = first-frame probe, falls back to the post route when work follows the upscaler in its list; 0 = post; default auto
+DLSS5_PRE_UPSCALE=auto
 # 中：ViT 自适应复用；默认 1；1 有损（跨帧复用，最多沿用 REUSE_PERIOD 帧），快约 5～11%；运动场景 PSNR 未实测
 # EN: ViT adaptive reuse; default 1; 1 is LOSSY (cross-frame reuse), ~5-11% faster; PSNR in motion not measured
 DLSS5_VIT_ADAPTIVE=1

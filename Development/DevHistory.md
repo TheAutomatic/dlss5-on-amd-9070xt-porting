@@ -1493,3 +1493,7 @@ B：add-on 的热重载现在也重读 `DLSS5_MULTI_PASS`，HIP 网络下一帧�
 ## 2026-10-03 20:15：0.40 下载链接补齐（闇接手）
 
 Zero 在上传 0.40 过程中遇到 Claude 账号停用，随后提供夸克 https://pan.quark.cn/s/d38e0f653c5a 与 Gofile https://gofile.io/d/moSf7cqf。按已完成的打包记录补齐中英文 README/CHANGELOG 下载入口及 WorkingPlan；未重打包，未修改载荷。网盘内容未独立核验。
+
+## 2026-10-03 21:50 起：DLSS5_PRE_UPSCALE=auto（朱雀，worktree 297-preupscale-auto / branch preupscale-auto-20261003）
+
+治"装了跟没装一样"：Forza/卧龙类列表布局（upscaler 派发后同列表还有 draw/dispatch）触发 UNSAFE → fatal → 整局纯透传。auto = 首帧探测该合同：列表尾部干净留前置（行为同 =1），不干净则粘性强决定落后置（本帧 FFX-only 重放，下一帧起后置快照路线按全新启动在 SNAPSHOT_FRAME 武装），写日志含原因。非法值回落 0（现行为），=2 冒烟保留，环境压文件。决定后某帧再违约仍走原 fatal（同强制 =1，不悄悄降级）。ASYNC：探测帧遵守现有规则（2077 查表照生效），回落后 ASYNC 不再相关；探测帧异步拷贝即使读到垃圾也无害（回落帧网络不处理、不回写游戏资源）。开销：Mode() 一次原子读/调用。实现：`native_pre_upscale.h` 新增 RequestedMode/AutoDecision/Mode/AutoDecide（决策块无 D3D12 依赖），Process 首 job 处决定；`pre-upscale-smoke.cpp` 加 auto 回落帧（捕获→ObserveWork→Execute→断言 Mode=0/Enabled=false/FFX 恰一次/读回逐字节一致/再捕获直派）。开口：regular 模板值改 auto（Magpie/RE9 保持 0 只补注释）、CONFIGURATION 新行；RE9 白名单无需动（该键本被 RE9 忽略）。验证：add-on --hip/普通两变体编译过；Linux 原生单测 11 场景 PASS（extract-auto-block.sh 逐字节抽生产代码文本）；剑星 10-03 真实日志 3340 事件 0 UNSAFE → auto 会留前置；9070 GPU 冒烟同步/异步（结果见 results/pre-upscale-auto-20261003）。19 组 SAME 结构上不适用：回归走 benchmark_main_reuse.exe，不含被改代码；模块与 runtime 未动。覆盖缺口：Forza 类真游戏 auto 实测待 Zero（下版装机建议 auto 档玩 5 分钟看日志 auto: 行）。`results/pre-upscale-auto-20261003`。
