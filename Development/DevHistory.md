@@ -1566,3 +1566,7 @@ Zero实玩反馈：保护开启后整体效果几乎看不出来，剑星真3约
 先API1080/seed0输出p9512.44%、对HIP仅30dB，不能当同合同oracle。原launch观测seed默认0、Style1、post(-4,-4)、proc1152/historyoff。按附件底镜像为1152、仅preblock参数seed改1，原GPU核/模型不改，执行两帧各两遍并捕获真实input texture、block70内部FP16surface转F32；入口RGBA每值同原f16→f32（maxabs0），raw/API重复均全字节同。捕获器初用normalized坐标读实际unnormalized texture、全图恒首像素，已修逐texel并撤回该误读，修前后post不变。
 
 原post同194块p95 **14.937534%**、MAE .00580405，HIP14.943205%/.00580724。HIP经原RTZ FP16存储后，每帧6220800值：8678全同、8680仅44值不同（max .00219727），不是全帧全逐位。证明此双帧放大也在独立原NVIDIA链，不支持生产优化/复用/大移植偏差为主要来源；仍是模型在当前输入合同下响应，不能判全部实机闪烁或鸣潮同源。rawpost是内部FP16存储后half→F32，未假称pre-half RGB32F。数据ZIP/size/hash在results/issue13-original-oracle-20261004/package.json，5090 D:\DLSSNR-Oracle\issue13\issue13-original-nvidia-20261004.zip；包无DLL/core/CUBIN权重，无外发评论、不push。
+
+## 2026-10-04 D3D↔HIP“网络快更停滞”速度研究（用户纠正不是崩溃，闇派兵）
+
+不改生产、不造TDR，正确fence协议+固定D3D timestamp列表，2帧在飞、memset64/256/2048MiB占位，各40弃4，另请求Sleep8（实CPU周期15.5ms）。旧HIP event出现负/近零计时，首扫差分弃；中间构建失败旧产物重复批也弃。补end非阻塞Query后六档有效：密集netGPU .051/.449/3.562ms、同D3D钟含HIP总区间 .146/.582/3.774、差分剩余 .095/.134/.212，占比65/23/6%；稀疏剩余 .191/.227/.237。没支持“更快必然绝对等待增长”，不否定Daniel特定宿主。差分不叫纯fence税，memset不冒称NN。outside-net输入.22→.08时串行剩余变大而流水线9.71→9.57，是CPU提交窗口真实案例；samequeue对第二D3D队列税说明不全是HIP。报告/有效CSV/hash/坏批隔离在results/d3d-hip-stall-20261004。GPU锁释放、游戏配置/二进制不动，不push。

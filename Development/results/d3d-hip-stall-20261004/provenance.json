@@ -1,0 +1,15 @@
+{
+  "binary_sha256": "bedfaa7d3f7e5fd0f57da1a9e4792187ba528f02aa9a9c9321af3ccaac63cb99",
+  "source_sha256": "667ab39afcab0530d6a526d1a9c9d8a4faffa3a4ee473f68262fc76a00a4bba8",
+  "source_base": "handoff-poll/handoff_probe.cpp; only mode1 permitted",
+  "samples": 40,
+  "drop_initial": 4,
+  "inflight": 2,
+  "hip_work": "one memset 64/256/2048 MiB; not NN",
+  "d3d_work": "fixed two timestamp command lists; no real game render",
+  "first_scan_hip_event_duration_invalid": "negative/near-zero; all handoff differences discarded",
+  "intermediate_build_failure": "compile failed on missing Api member; stale old executable ran again, batch not used; final code loads hipEventQuery dynamically",
+  "valid_batch": "query_end=1 and invalid_hip_duration=0 only",
+  "pacing": "Sleep(8) request; measured CPU wall period ~15.5ms, not exact8ms",
+  "production_changed": false
+}
