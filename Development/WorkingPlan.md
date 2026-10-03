@@ -16,14 +16,14 @@
 - `DLSS5_MULTI_PASS`（叠层，新）：1/2/3，默认 1（逐位不变），非法值回落 1。N 遍把上一遍最终 RGB 再喂入网络，耗时约 N 倍，对单遍 34～39 dB（这是想要的风格变化，不是误差）。Zero 实测剑星 3 遍 26.7 fps，画面效果很好，打算配 2 倍帧生成来玩。
 - `DLSS5_STYLE`（0/1/2，默认 1）、`DLSS5_NETWORK_FREE_RES`（默认 0，按游戏原尺寸跑）、`DLSS5_HIP_POST_SIGNAL_QUERY`（默认 1）、`DLSS5_DIRECT_IO`。详见 `scripts/CONFIGURATION.md`。
 
-## 进行中
+## 已装机待 Zero 实测
 
-- **三层配置**：default → custom → native，环境变量优先级最高。另一个子代理在做，这边不碰代码和 README。
+- **三层配置**：default-config → custom-config → native-game-flags，系统环境变量最高；同文件重复键取最后一行，空值覆盖成内置默认。装机后剑星 add-on 3C71B955、鬼武者 runtime A156339E。行为变化要写进发版说明：add-on 里环境变量现在压过文件；RE9 同文件重复键从取第一行改为取最后一行。
 
 ## 待办
 
-1. **打 0.40 包**，等 Zero 测完三层配置和叠层再发。照 `tools/package-039.ps1` 复制改。
-2. **改包内说明**：`scripts/package-notes/*`、`package-README*` 里还写着"默认跳 42,43,46"，要改成全块 + FAST_NUMERIC=1，补上 MULTI_PASS。
+1. **打 0.40 包**，等 Zero 测完三层配置和叠层再发。包里放 `default-config.txt` + `custom-config.template.txt`，不放 custom/native（解压覆盖不伤用户文件）；改过的 `package-039.ps1` / `package-release.py` 还没实跑过，打包时首跑要核对清单。
+2. **改包内说明**：`scripts/package-notes/*`、`package-README*` 里还写着"默认跳 42,43,46"，要改成全块 + FAST_NUMERIC=1，补上 MULTI_PASS 和三层配置。
 
 ## 已搁置（有新证据再动）
 
