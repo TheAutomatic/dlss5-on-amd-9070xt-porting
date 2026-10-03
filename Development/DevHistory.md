@@ -1522,3 +1522,11 @@ Zero 更新派活规矩：具体编译、实验、安装、归档都派子代理
 ### 2026-10-03 23:48:16 双游戏实玩反馈（Zero）
 
 鬼武者 GPU 占用 89～92%，Zero 感觉下降；此前约 95% 是历史读数对照，这条未明确 FPS，不能记成本轮确认稳 60。剑星 1x 仍 57～58 fps，本轮未读出帧率提高。离线网络省时已测，但不能直接当游戏帧率收益；约 0.3 fps 只是推算，不入实测账。同步本轮 results README 与当前计划。
+
+## 2026-10-04 00:30 两遍网络预测第三遍（闇派兵，Zero授权实验及装机）
+
+`MULTI_PASS_PREDICT=1` 仅MP3用两遍真实网络+局部secant预测第三遍，默认0、1x/2x不变。工作域x/y1/y2/y3导出；固定tile16、RGB共同r、epsilon平均1e-7、cos≥0.5、r截[0,1]、系数双线性平滑、输出clamp。实际GPU四例对真3为49.36–49.83dB（真2约41），history45.28、高频仍改善但暗区62→60dB与颜色误差略劣；同样本x相同而y1已变52.61dB，跨帧历史反馈已分岔，不称全面改善。真3默认19 SAME、MP2/3兼容SAME；预测五例两次SAME、无NaN；200帧一轮ABBA 900 20.05/20.14→13.59/13.61ms、1080 28.48/28.50→19.22/19.32，约省32%。RE9默认两档SAME、预测两档重复SAME、最终开预测smoke errors=0。
+
+独立预测核，无裸屏障；热载/RE9白名单/三模板默认0/CONFIGURATION同步。已装剑星 **50C453C5**、鬼武者两处runtime **DD606C1A**、74模块/SUMS **067B7DAC**，exact快照同步双EXACT（只指模块）。两游戏custom PREDICT=1、MP3，native MP3；其它项/BOM/换行保留，剑星PRE1、鬼武者PRE0。F9仍切1/2/3，PREDICT=0恢复真3；剑星热载、鬼武者重启。备份 `multi-pass-predict-20261004\backups\20261004-003039\rollback.ps1`。GPU锁释放、帧转储清理，归档 `results/multi-pass-predict-20261004`；实玩待Zero，不打包不push。
+
+编译工具坑：复用旧current-main/src/rtc_compile.exe传gfx1200却日志报ISA1201；新核改用当前源码重编rtc，两架构分别明确ISA1200/1201，hash/ELF notes已归档。0.41前查旧全模块ELF目标，别只相信配方标签，本轮未扩大重编整网；当前9070为gfx1201。
