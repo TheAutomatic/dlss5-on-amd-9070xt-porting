@@ -1,4 +1,4 @@
-# 两遍网络预测第三遍（2026-10-04，可选实验档，已装两游戏）
+# 两遍网络预测第三遍（2026-10-04，可选实验档，剑星保留、鬼武者已回滚）
 
 `DLSS5_MULTI_PASS_PREDICT=1` 仅在 `MULTI_PASS=3` 时生效：真实跑两遍，预测第三遍；默认0仍是真3遍。1x/2x不变，尊重第二遍原有skip配置。不是精确3x，不作画质承诺。add-on支持热加载，RE9需重启。日志写选项、请求遍数/实际网络遍数。
 
@@ -23,3 +23,7 @@
 安装时两游戏custom PREDICT=1、MULTI_PASS=3，native MULTI_PASS=3，其余参数及BOM/换行保留；剑星PRE=1、鬼武者PRE=0。无native PREDICT覆盖。F9仍切1/2/3；同3x对比时编辑custom的PREDICT=0/1，剑星热载、鬼武者重启。恢复0即可真3x。未代启动游戏，实玩帧率/观感由Zero校准。
 
 回滚：`D:\DLSSNR-Lab\multi-pass-predict-20261004\backups\20261004-003039\rollback.ps1`，完整原文件/配置/exact备份；最终binary patch沿用此正常版备份。锁释放、原始帧清理，统计/哈希/裁图留存，无二进制入库。新rtc从当前`hip/rtc_compile.cpp`编译，hash与新核ELF e_flags见compiler-identity.json、两份ELF notes。旧复用rtc传gfx1200却报ISA1201，新工具分别报ISA1200/1201；0.41前需核对旧常规模块全部ELF目标，本轮不重编整网（9070为gfx1201）。
+
+## 01:07 实玩失败与恢复
+
+鬼武者预测档启动首帧黑屏/不可点击弹窗，PrepareFrame与modules74初始化成功后停在pending EnqueueHip，未取得弹窗原文。游戏已自行退出时执行鬼武者专属完整回滚至2176C544/72模块/9D4A2024与原MP1配置，剑星不动。Zero01:07:13确认正常。GPU未运行、无强杀进程。失败短日志见failure，完整原日志/配置远端failure-20261004保留。热路径首次hipModuleLoad遇未提交producer fence形成同步死锁为待证假设；离线smoke没覆盖该集成场景，不能判算法失败。

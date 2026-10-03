@@ -1530,3 +1530,9 @@ Zero 更新派活规矩：具体编译、实验、安装、归档都派子代理
 独立预测核，无裸屏障；热载/RE9白名单/三模板默认0/CONFIGURATION同步。已装剑星 **50C453C5**、鬼武者两处runtime **DD606C1A**、74模块/SUMS **067B7DAC**，exact快照同步双EXACT（只指模块）。两游戏custom PREDICT=1、MP3，native MP3；其它项/BOM/换行保留，剑星PRE1、鬼武者PRE0。F9仍切1/2/3，PREDICT=0恢复真3；剑星热载、鬼武者重启。备份 `multi-pass-predict-20261004\backups\20261004-003039\rollback.ps1`。GPU锁释放、帧转储清理，归档 `results/multi-pass-predict-20261004`；实玩待Zero，不打包不push。
 
 编译工具坑：复用旧current-main/src/rtc_compile.exe传gfx1200却日志报ISA1201；新核改用当前源码重编rtc，两架构分别明确ISA1200/1201，hash/ELF notes已归档。0.41前查旧全模块ELF目标，别只相信配方标签，本轮未扩大重编整网；当前9070为gfx1201。
+
+## 2026-10-04 01:07 鬼武者预测实验首帧黑屏，专属回滚后恢复（Zero实证）
+
+Zero报启动黑屏/有不可点击弹窗。两次启动日志显示modules_ok=74、HIP初始化与PrepareFrame成功，停在首帧Record ok / pending EnqueueHip，producerSubmitted=0；没有取得弹窗原文，不能声称确切异常。读进程时游戏已退出，无需杀进程。鬼武者单独完整恢复实验前备份：根/_storage_ runtime2176C544、72模块/SUMS9D4A2024、原custom/native（MP1、无PREDICT1）；只同步oni exact SUMS/flags，剑星实验档不动。**01:07:13 Zero确认「现在鬼武者正常了」**。失败日志/配置远端保留failure-20261004，短日志归档本轮results/failure。
+
+集成假设：首次predict hipModuleLoad在MultiPassRest热路径，此前HIP已等待游戏尚未提交的producer fence；模块加载若隐式同步GPU便循环等待，bench/smoke因producer已提交没覆盖。尚未复现，不归算法本身；构造fprintf已越过PrepareFrame，因此不是已证实的stderr弹窗。下一步只准备初始化预加载/安全热切修复及编译，用户正常游玩时不占GPU不换鬼武者载荷，待空闲受控验证。
