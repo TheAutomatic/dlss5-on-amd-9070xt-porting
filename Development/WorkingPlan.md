@@ -18,7 +18,14 @@
 
 ## 已装机待 Zero 实测
 
-- **三层配置**：default-config → custom-config → native-game-flags，系统环境变量最高；同文件重复键取最后一行，空值覆盖成内置默认。装机后剑星 add-on 3C71B955、鬼武者 runtime A156339E。行为变化要写进发版说明：add-on 里环境变量现在压过文件；RE9 同文件重复键从取第一行改为取最后一行。
+- **三层配置**：default-config → custom-config → native-game-flags，系统环境变量最高；同文件重复键取最后一行，空值覆盖成内置默认。行为变化要写进发版说明：add-on 里环境变量现在压过文件；RE9 同文件重复键从取第一行改为取最后一行。
+- **叠层减负 `DLSS5_MULTI_PASS_SKIP_BLOCKS`**（第 2 遍起跳块，默认空）：结论是省不出东西。跳 42/43/46 只省 0.5 ms；跳 ViT+C512 省 14～18% 但画面变成另一种风格（偏亮低对比 / 暗部抬起），不是便宜版 3 遍。耗时都在跳不掉的 C32/C64 全分辨率块上。配置项留着，不推荐。
+- **F9 热键轮换遍数**（add-on 侧，`DLSS5_MULTI_PASS_HOTKEY` 改键、0 关闭）：写回 custom-config（native 里有同键则一并改写），热重载现在会读 MULTI_PASS。没人在真游戏里按过，待 Zero 试。
+- 当前装机：剑星 add-on **C511E148**、鬼武者 runtime **1F7C12CD**。回退 `install.ps1 -RestoreBackup 20261003-144436`（deployments-multi-pass-skip-20261003）。
+
+## 进行中
+
+- **叠层一阶外推实验**（纯离线，不改产品）：验证 y3 ≈ x + k·(y1 − x) 成立到什么程度。成立就做成 `DLSS5_MULTI_PASS_EXTRAPOLATE=k`（1 遍代价得到接近 3 遍的风格），不成立记 DevHistory。
 
 ## 待办
 
