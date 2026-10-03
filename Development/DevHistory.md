@@ -1507,13 +1507,5 @@ Zero 在上传 0.40 过程中遇到 Claude 账号停用，随后提供夸克 htt
 
 **派活规矩更新**：子代理免 `[LOAD MEMORY]`（AGENTS.md 自动注入，实测 K3 子代理能背 SVG、守铁律）；K3 底座无 Co-Authored-By 问题，任务单不必再写。WorkingPlan 规矩段已改。三路交账均守 gpu.lock + 看门狗 + 只 add 具体文件。
 
-待办变化：FAST_NUMERIC 加深（agent-0，唯一在跑）；合包前跑 run-regression.ps1 + 0.41 打包引用的 README 版本头；preupscale 分支合并与否 Zero 定。
-
-
-## 2026-10-04 凌晨：FAST_NUMERIC 加深交账（PF 全 fast 包收下，fast-vit-20261003）
-
-上一条"唯一在跑"的第三路交账。**收：PF 全 fast 包**（`DLSS5_FAST_NUMERIC=1` 语义加深，无新键）：VIT_FAST_NUM（attention 去 Hrtz/裸 rcp、contract 去 H）进 deep_fast-packed-fast（15）+ vit-stream-fast（4）两配方，COMGR 编译（避开 llvm23 的 vit 编译器惩罚）。PSNR 对逐位最差帧 52.13 dB（720-motion，≥50 线），全 case 53.0～55.6（优于只 fast c32/c64 的 51.83）；ABBA 900 −0.089、1080 −0.100ms，三轮全快、合并 p99 两档更好。宏 0 重编与现装逐字节一致，FAST=1 缺 twin 回落逐位。
-
-负账：C512 attention 投影 f16 残差逐位精确但 900 三轮全慢（与 PROJ_FB8 同构——投影族不差残差流量）；ViT QKV/expand 无刀口（已是硬件 rsqf）。踩坑：fast-numeric lab 旧 benchmark-base.exe 已漂移勿用；剑星 flags 现含 MULTI_PASS=3 会污染 harness，需中和键；harness 宿主是 benchmark_vit_reuse.cpp。
-
-worktree `wechat/assets/297-fast-vit`，commit `0e3b72dd`，未合 main。装机/合并/0.41 打包待 Zero 拍板。该分支含 DevHistory 追加（本节同步自其交账）。
+## 2026-10-03 晚 FAST_NUMERIC 加深到 ViT + C512 投影实验（光派单，子代理，未装机）
+任务：fast 数值路径从 C32+c64-wave2 扩到 ViT 与 C512 attention 投影，每刀 PSNR≥50dB 最差帧 + 三轮 ABBA 稳定正收益。新宏 VIT_FAST_NUM（deep_fast.hip/vit_stream.inc：bit0 attention epilogue 去 Hrtz、bit1 分母裸 rcp、bit2 contract/projection 去 RNE 半舍入、bit3 C512 FFN 投影 F(H)→F、bit16 f16res 导出）、C512_FAST_PROJ（mh_fast f16 残差投影导出），全默认 0，宏 0 重编 .text 与现装逐字节同（三模块验证）。宿主：fast_numeric 缓存 + FastTwin(stem) 泛化 -fast 交换（deep_fast-packed/vit-stream/mh_fast 加载点）。配方加 deep_fast-packed-fast（15）/vit-stream-fast（4）两行，COMGR 两架构同哈希。坑与发现：① harness 的 benchmark 宿主是 benchmark_vit_reuse.cpp（每帧 dump），不是 benchmark_live_capture.cpp；② 游戏 native-game-flags.txt 10-03 多起 FAST_NUMERIC=1+MULTI_PASS=3，lab 两侧统一追加中和键（沿用 fast-tier 跳 42,43,46 口径）；③ PS EAP=Stop 会把宿主回落 stderr 行抛错，runner 调用包 EAP Continue。结果：HOST 19 SAME + 计时中性；FB（=1 无 twin）7 case 全 0/12；刀1 attention（VIT_FAST_NUM 3）PSNR 最差 54.53、ABBA 噪声内；刀2 contract/proj（4）最差 54.41、噪声内；刀3 C512 f16 残差两形态全 0/12 值精确但 900 合并 +0.016/+0.059 全慢——不收（投影族不差残差流量，同 FB8 负账），宿主分支撤掉、配方不装；PF 全 fast 包（c32/c64/deep/vit-stream 四 twin）：最差帧 52.13、ABBA 900 −0.089/1080 −0.100 三轮全快 p99 全好——收。未装机（9070 build\final{,1200}\ 备好）。`results/fast-vit-c512-20261003`。

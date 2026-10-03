@@ -30,7 +30,7 @@ DEV void vit_stream_project_tiles(const float*in,const float*w,const float*skip,
  for(uint p=0;p<4;p++){f8 a[TM][TN]{};
   if(!p)
 #pragma unroll
-  for(uint t=0;t<TM;t++)for(uint j=0;j<TN;j++)if(t<live)for(uint e=0;e<8;e++)a[t][j][e]=H((HalfSkip?float(reinterpret_cast<const _Float16*>(skip)[(first+t*16+gr()*8+e)*OUT+row+j*16+rc()]):skip[(first+t*16+gr()*8+e)*OUT+row+j*16+rc()])*w[IN*OUT+row+j*16+rc()]);
+  for(uint t=0;t<TM;t++)for(uint j=0;j<TN;j++)if(t<live)for(uint e=0;e<8;e++)a[t][j][e]=VIT_FAST_H((HalfSkip?float(reinterpret_cast<const _Float16*>(skip)[(first+t*16+gr()*8+e)*OUT+row+j*16+rc()]):skip[(first+t*16+gr()*8+e)*OUT+row+j*16+rc()])*w[IN*OUT+row+j*16+rc()]);
   for(uint k=p*(IN/4);k<(p+1)*(IN/4);k+=16){i2 x[TM];
 #pragma unroll
    for(uint t=0;t<TM;t++){x[t]=i2{};if(t<live){if constexpr(ByteAv)__builtin_memcpy(&x[t],reinterpret_cast<const unsigned char*>(in)+(first+t*16+rc())*IN+k+gr()*8,8);else {DF_PACK8_LOOP(x[t],in[(first+t*16+rc())*IN+k+gr()*8+e]);}}}
@@ -43,7 +43,7 @@ DEV void vit_stream_project_tiles(const float*in,const float*w,const float*skip,
 #pragma unroll
   for(uint j=0;j<TN;j++)for(uint e=0;e<8;e++)total[t][j][e]=p?total[t][j][e]+a[t][j][e]:a[t][j][e];}
 #pragma unroll
- for(uint t=0;t<TM;t++){if(t>=live)continue;for(uint j=0;j<TN;j++)for(uint e=0;e<8;e++)out[(first+t*16+gr()*8+e)*OUT+row+j*16+rc()]=F(H(total[t][j][e]));}
+ for(uint t=0;t<TM;t++){if(t>=live)continue;for(uint j=0;j<TN;j++)for(uint e=0;e<8;e++)out[(first+t*16+gr()*8+e)*OUT+row+j*16+rc()]=F(VIT_FAST_H(total[t][j][e]));}
 }
 WAVE void vit_stream_project_n64_b(const float*in,const float*w,const float*skip,float*out,uint tokens,uint inputs,uint outputs,const uint*reuse_gate){vit_stream_project_tiles<1,4,true,false>(in,w,skip,out,tokens,reuse_gate);}
 WAVE void vit_stream_project_n64_h(const float*in,const float*w,const float*skip,float*out,uint tokens,uint inputs,uint outputs,const uint*reuse_gate){vit_stream_project_tiles<1,4,false,true>(in,w,skip,out,tokens,reuse_gate);}
