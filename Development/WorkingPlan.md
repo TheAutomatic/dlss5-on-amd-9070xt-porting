@@ -23,9 +23,7 @@
 - **F9 热键轮换遍数**（add-on 侧，`DLSS5_MULTI_PASS_HOTKEY` 改键、0 关闭）：写回 custom-config（native 里有同键则一并改写），热重载现在会读 MULTI_PASS。没人在真游戏里按过，待 Zero 试。
 - 当前装机：剑星 add-on **C511E148**、鬼武者 runtime **1F7C12CD**。回退 `install.ps1 -RestoreBackup 20261003-144436`（deployments-multi-pass-skip-20261003）。
 
-## 进行中
-
-- **叠层一阶外推实验**（纯离线，不改产品）：验证 y3 ≈ x + k·(y1 − x) 成立到什么程度。成立就做成 `DLSS5_MULTI_PASS_EXTRAPOLATE=k`（1 遍代价得到接近 3 遍的风格），不成立记 DevHistory。
+- **叠层一阶外推（10-03，离线实验，不做）**：y3 ≈ x + k·d 不成立。1 遍+外推落在 1 遍和 2 遍之间，补回的是亮部对比度和低频，高频只补回不到三分之一；逐遍增量在收缩、方向在转。`STRENGTH=2,2` 也等于没做。结论：3 遍的代价就是 3 遍，省不了。详见 `results/multi-pass-extrap-20261003/`。
 
 ## 待办
 
