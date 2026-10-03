@@ -42,8 +42,8 @@
 已知问题
   1. 换区、过场动画后帧率可能掉到 15～20 几秒，多数情况 5～30 秒内恢复；这是显存被游戏贴图挤到系统内存造成的，
      降低贴图质量或在游戏的 Engine.ini 里加 [SystemSettings] r.Streaming.PoolSize=6000 能缓解。
-  2. 本包默认跳过了 3 个对画质影响最小的中间块换取约 1ms（对精确链 PSNR 40.7dB，肉眼看不出）。
-     不想跳：在 native-game-flags.txt 里删掉 DLSS5_SKIP_BLOCKS 那一行。
+  2. 本包（旧 DX12 版）默认跳过了 3 个对画质影响最小的中间块换取约 1ms（对精确链 PSNR 40.7dB，肉眼看不出）。
+     不想跳：在 native-game-flags.txt 里删掉 DLSS5_SKIP_BLOCKS 那一行。（0.40 起默认不跳块：全 71 块 + DLSS5_FAST_NUMERIC=1；跳块 DLSS5_SKIP_BLOCKS=42,43,46 是可选提速项，写进 custom-config.txt。）
   3. 只在 1920×1080 + FSR 质量档上验证过。其他分辨率可能直接不接管（画面保持原生 FSR）。
   4. 与其他 ReShade 插件、帧生成、HDR 的组合未测试。
 

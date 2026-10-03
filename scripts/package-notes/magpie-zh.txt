@@ -1,5 +1,24 @@
 Magpie-DLSS5-AMD @VERSION@ — 完整便携包
 
+更新（0.40）
+1. 默认输出变了：全 71 块 + 快速数值（DLSS5_SKIP_BLOCKS= 留空，DLSS5_FAST_NUMERIC=1）。对 NVIDIA 原版 44.26 → 47.55 dB，偏色消失；每帧比 0.39 慢约 0.12/0.19ms（900/1080）。想要 0.39 的输出：custom-config.txt 里写 DLSS5_SKIP_BLOCKS=42,43,46 和 DLSS5_FAST_NUMERIC=0。
+2. 叠层 DLSS5_MULTI_PASS=1/2/3（默认 1）：网络把自己的输出再跑 1～2 遍，风格更浓，耗时约 N 倍。游戏里按 F9 在 1→2→3 之间轮换，下一帧生效，选择写进 custom-config.txt（native-game-flags.txt 里也写了这一项的话一并改；设了同名系统环境变量则按键无效）。改键：DLSS5_MULTI_PASS_HOTKEY（F1～F24 或键码，0 关闭）。《剑星》2K 实测 1/2/3 遍 57/37/27 fps，3 遍可以配帧生成玩。
+3. 三层配置文件，见下面“配置文件”。行为变化：系统环境变量现在压过文件（以前是文件压过环境变量）。
+4. 逐位提速：C32/C64 窗口核改 LLVM 23 编、1080 档专用 C32 等，离线每帧 900 约 −0.1ms、1080 约 −0.2ms。
+
+配置文件（0.40 起三层，同一项后面的覆盖前面的）
+1. DLSS5-AMD/default-config.txt：包里的默认配置（来自仓库模板），每次升级会被覆盖，不要改它。
+2. DLSS5-AMD/custom-config.txt：你自己的设置。包里不带这个文件，第一次用时把 custom-config.template.txt 复制一份改名为 custom-config.txt，只写想改的那几行（例如 DLSS5_MULTI_PASS=2）。安装和升级都不会碰它。
+3. DLSS5-AMD/native-game-flags.txt：旧版的单文件。老用户已有的照常生效，而且优先于 custom-config.txt；包里也不再带它，所以解压覆盖升级不会冲掉。
+系统环境变量里的 DLSS5_* 比三个文件都优先。同一文件里同一项写两次以最后一行为准；值留空（KEY=）表示用程序内置默认。
+
+有损项（都是可选的，写进 custom-config.txt）
+- 默认就开着的：DLSS5_FAST_NUMERIC=1（快速数值，对逐位输出最差帧约 51.8 dB，对 NVIDIA 基本不变；写 0 = 逐位，每帧慢 0.07～0.13ms）。
+- DLSS5_SKIP_BLOCKS=42,43,46：跳三块，每帧快 0.20/0.32ms（900/1080），对 NVIDIA 约掉 3.3 dB，有整体偏色。和 DLSS5_FAST_NUMERIC=0 一起写就是 0.39 的输出。
+- DLSS5_NETWORK_1080_ROWS=1088：1080 档快约 0.45ms，对 1152 行约 54～56 dB。
+- DLSS5_NETWORK_HEIGHT=900：本该走 1080 档的输入也压到 900 档，快约 2.7ms，画质代价未量化。
+- DLSS5_MULTI_PASS_SKIP_BLOCKS：只在叠层第 2 遍起跳块。省得少，跳多了会变成另一种风格，不推荐。
+
 更新（0.39）
 默认设置下与 0.38 逐位相同（输出一个比特不差），只是更快：一批逐位重排的新核（C512 FFN 在寄存器里一个 wave 做完、ViT QKV/attention、C32/C64 读权重外提、解码加宽等）。离线网络：900 档约 7.27 → 6.8ms，1080 档约 10.05 → 9.5ms；《剑星》2K 实测约 +1.5～2 帧。
 新开关：DLSS5_STYLE=1（NVIDIA NGX 的 Style 控制，0/1/2）。1 = 原版在《剑星》里用的风格，也是以前各版写死的值（默认，逐位不变）；0 = NVIDIA 默认、最接近其参考图；2 = 第三种风格。改了要重启游戏。
@@ -66,13 +85,13 @@ Magpie宿主与原流水线沿用0.27底包。
 5. AMD光流只在第一项使用；FSR4/XeSS后续项选None，避免额外光流导致发糊。
 
 配置
-DLSS5-AMD/native-game-flags.txt来自仓库hip-magpie-flags.txt。NETWORK_HEIGHT=auto按输入选择720/900/1080。已有跳层默认值保留，自适应复用默认关闭；F8仅在显式开启复用热键后生效。
+DLSS5-AMD/default-config.txt来自仓库hip-magpie-flags.txt。NETWORK_HEIGHT=auto按输入选择720/900/1080。默认全71块+快速数值，自适应复用默认关闭；F8仅在显式开启复用热键后生效。
 显示由DLSS5_SHOW_FPS、DLSS5_NOTICE控制；两项均设0可关闭对应显示。配置键保留完整DLSS5_前缀。
 
 内容与环境
-本包包含模型、配套DLL/shader和gfx1200/gfx1201各29个HIP模块，不是补丁。需要AMD驱动提供amdhip64_7.dll；HIP路线不依赖SM6.10预览组件。9070 XT已实测，9060系列仍需要对应硬件反馈。
+本包包含模型、配套DLL/shader和gfx1200/gfx1201各34个HIP模块，不是补丁。需要AMD驱动提供amdhip64_7.dll；HIP路线不依赖SM6.10预览组件。9070 XT已实测，9060系列仍需要对应硬件反馈。
 
 目录
-Magpie.exe及相关DLL：缩放框架；dlss5-amd.addon64：本项目接入模块；DLSS5-AMD/native-game-tiled-assets：模型、shader和HIP核；DLSS5-AMD/native-game-flags.txt：配置。
+Magpie.exe及相关DLL：缩放框架；dlss5-amd.addon64：本项目接入模块；DLSS5-AMD/native-game-tiled-assets：模型、shader和HIP核；DLSS5-AMD/default-config.txt、custom-config.template.txt：配置（见“配置文件”）。
 项目：https://github.com/lmxxf/dlss5-on-amd-9070xt-porting
 完整目录说明见仓库README。SHA256SUMS.txt可核对全包文件；各组件保留自己的许可证。

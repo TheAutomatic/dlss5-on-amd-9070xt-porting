@@ -1,5 +1,24 @@
 OptiScaler-REFramework-DLSS5-AMD @VERSION@ — RE9特殊前置完整包
 
+0.40 更新
+1. 与常规包同一套核和默认配置：全 71 块 + 快速数值（对 NVIDIA 44.26 → 47.55 dB，每帧慢约 0.12/0.19ms）；想要 0.39 的输出，custom-config.txt 里写 DLSS5_SKIP_BLOCKS=42,43,46 和 DLSS5_FAST_NUMERIC=0。
+2. 叠层 DLSS5_MULTI_PASS=1/2/3（默认 1，风格更浓，耗时约 N 倍）。RE9 runtime 没有热键，改配置后重启游戏。
+3. runtime 读三层配置文件（见下面“配置文件”），并新增从文件读 DLSS5_STYLE、DLSS5_FRAME_STATS、DLSS5_FAST_NUMERIC、DLSS5_MULTI_PASS、DLSS5_MULTI_PASS_SKIP_BLOCKS、DLSS5_NETWORK_FREE_RES（0.39 写在模板里的 DLSS5_STYLE 现在生效）。行为变化：同一文件里同一项写两次，现在取最后一行（以前取第一行）。
+4. 输入直写，少一次 35MB 拷贝；给集成方的 GetTimings。宿主 dxgi.dll 不变。
+
+配置文件（0.40 起三层，同一项后面的覆盖前面的）
+1. DLSS5-AMD/default-config.txt：包里的默认配置（来自仓库模板），每次升级会被覆盖，不要改它。
+2. DLSS5-AMD/custom-config.txt：你自己的设置。包里不带这个文件，第一次用时把 custom-config.template.txt 复制一份改名为 custom-config.txt，只写想改的那几行（例如 DLSS5_MULTI_PASS=2）。安装和升级都不会碰它。
+3. DLSS5-AMD/native-game-flags.txt：旧版的单文件。老用户已有的照常生效，而且优先于 custom-config.txt；包里也不再带它，所以解压覆盖升级不会冲掉。
+系统环境变量里的 DLSS5_* 比三个文件都优先。同一文件里同一项写两次以最后一行为准；值留空（KEY=）表示用程序内置默认。
+
+有损项（都是可选的，写进 custom-config.txt）
+- 默认就开着的：DLSS5_FAST_NUMERIC=1（快速数值，对逐位输出最差帧约 51.8 dB，对 NVIDIA 基本不变；写 0 = 逐位，每帧慢 0.07～0.13ms）。
+- DLSS5_SKIP_BLOCKS=42,43,46：跳三块，每帧快 0.20/0.32ms（900/1080），对 NVIDIA 约掉 3.3 dB，有整体偏色。和 DLSS5_FAST_NUMERIC=0 一起写就是 0.39 的输出。
+- DLSS5_NETWORK_1080_ROWS=1088：1080 档快约 0.45ms，对 1152 行约 54～56 dB。
+- DLSS5_NETWORK_HEIGHT=900：本该走 1080 档的输入也压到 900 档，快约 2.7ms，画质代价未量化。
+- DLSS5_MULTI_PASS_SKIP_BLOCKS：只在叠层第 2 遍起跳块。省得少，跳多了会变成另一种风格，不推荐。
+
 0.39 更新
 与常规包同一套新核（默认与 0.38 逐位相同；离线 900 档约 7.27 → 6.8ms，1080 档约 10.05 → 9.5ms）。风格仍为以前的 Style 1（逐位不变）。注意：RE9 runtime 目前不从 flags 文件读取 DLSS5_STYLE（模板里那行只是与常规包一致，改了不生效）；要试 Style 0/2 需设系统环境变量 DLSS5_STYLE 后重启游戏。runtime 可复现构建。宿主不变。
 
@@ -66,7 +85,7 @@ runtime 现在从 DLSS5-AMD\native-game-flags.txt 读取以下键（其余键仍
 控制与配置
 F6开关神经处理；Insert打开OptiScaler/REFramework菜单（两者默认键可能重叠）。Detail strength、Colour strength可在神经渲染菜单调节；保持0～1。调低颜色强度也会削弱彩色纹理/材质效果，不只是改变饱和度。
 配置在OptiScaler.ini的[DlssNr]，默认NrBackend=lmxxf、Enabled=true、RunBeforeSR=true、LmxxfDiagnostic=off。显示由OptiScaler菜单管理；旧addon的F7和DLSS5_SHOW_FPS/NOTICE不控制此版。
-此runtime从DLSS5-AMD\native-game-flags.txt读取DLSS5_HIP_*、DLSS5_SKIP_BLOCKS、DLSS5_FIT_LARGE、DLSS5_NETWORK_HEIGHT（见0.32更新），其余键不生效；不提供普通addon的F8复用开关；默认保留42,43,46跳层、关闭跨帧自适应复用。不要用旧0.27配置说明调整新runtime。
+此runtime从DLSS5-AMD下的三层配置文件读取DLSS5_HIP_*、DLSS5_SKIP_BLOCKS、DLSS5_FIT_LARGE、DLSS5_NETWORK_HEIGHT及0.40更新里列出的键，其余键不生效；不提供普通addon的F8/F9热键；默认全71块+快速数值、关闭跨帧自适应复用。不要用旧0.27配置说明调整新runtime。
 
 验证范围
 9070 XT数值回归、曝光倍率对照、主菜单连续运行和重启验证通过；完整游戏画质、切场景和帧生成仍需进一步实玩反馈。旧0.27曾在Xbox《鬼武者》验证，但不能据此认为本版新前置宿主也已验证该游戏。其他RE游戏/9060硬件未实测；HDR显示输出未完成验证。

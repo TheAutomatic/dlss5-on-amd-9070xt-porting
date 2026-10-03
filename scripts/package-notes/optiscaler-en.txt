@@ -1,5 +1,24 @@
 OptiScaler-DLSS5-AMD @VERSION@ — standard full game package
 
+0.40
+1. Default output changed: all 71 blocks + fast numerics (DLSS5_SKIP_BLOCKS= empty, DLSS5_FAST_NUMERIC=1). Against NVIDIA 44.26 -> 47.55 dB, no overall colour shift; about 0.12/0.19 ms (900/1080) slower per frame than 0.39. For the 0.39 output write DLSS5_SKIP_BLOCKS=42,43,46 and DLSS5_FAST_NUMERIC=0 in custom-config.txt.
+2. Multi pass DLSS5_MULTI_PASS=1/2/3 (default 1): the network runs again on its own output, stronger style, about N times the cost. In game F9 cycles 1 -> 2 -> 3 from the next frame and saves the choice in custom-config.txt (also rewrites the line in native-game-flags.txt if that file sets it; no effect if a system environment variable of the same name is set). Other key: DLSS5_MULTI_PASS_HOTKEY (F1-F24 or a key code, 0 = off). Stellar Blade 2K, in game: 57/37/27 fps for 1/2/3 passes; 3 passes pair well with frame generation.
+3. Three config files, see "Config files" below. Behaviour change: a system environment variable now wins over the files (before, the file won).
+4. Bit-exact speed-ups: C32/C64 window kernels built with LLVM 23, a dedicated C32 build for the 1080 tier and more; offline about -0.1 ms (900) / -0.2 ms (1080) per frame.
+
+Config files (three layers from 0.40; a later layer overrides the same key of an earlier one)
+1. DLSS5-AMD/default-config.txt: the package defaults (repository template). Overwritten by every upgrade; do not edit it.
+2. DLSS5-AMD/custom-config.txt: your own settings. Not shipped: copy custom-config.template.txt to custom-config.txt the first time and write only the lines you change (e.g. DLSS5_MULTI_PASS=2). Install and upgrade never touch it.
+3. DLSS5-AMD/native-game-flags.txt: the old single file. An existing one keeps working and wins over custom-config.txt; packages no longer ship it, so unpacking an upgrade over an old install leaves it alone.
+A DLSS5_* system environment variable wins over all three files. Same key twice in one file: the last line wins; an empty value (KEY=) means the built-in default.
+
+Lossy options (all optional; put them in custom-config.txt)
+- On by default: DLSS5_FAST_NUMERIC=1 (fast numerics; worst frame about 51.8 dB against the bit-exact output, essentially unchanged against NVIDIA; 0 = bit-exact, 0.07-0.13 ms slower per frame).
+- DLSS5_SKIP_BLOCKS=42,43,46: skip three blocks, 0.20/0.32 ms faster (900/1080), about -3.3 dB against NVIDIA with an overall colour shift. Together with DLSS5_FAST_NUMERIC=0 this is the 0.39 output.
+- DLSS5_NETWORK_1080_ROWS=1088: 1080 tier about 0.45 ms faster, about 54-56 dB against 1152 rows.
+- DLSS5_NETWORK_HEIGHT=900: inputs that would use the 1080 tier run at 900, about 2.7 ms faster; quality cost not measured.
+- DLSS5_MULTI_PASS_SKIP_BLOCKS: skip blocks in multi-pass passes 2..N only. Saves little; longer lists change the style. Not recommended.
+
 0.39
 Default output bit-identical to 0.38 (same output, byte for byte). Faster bit-exact kernels (C512 FFN done in registers by one wave, ViT QKV/attention, hoisted weight loads in C32/C64, wider decode, ...). Offline network: 900 tier about 7.27 -> 6.8 ms, 1080 tier about 10.05 -> 9.5 ms; Stellar Blade at 2K about +1.5-2 fps.
 New switch: DLSS5_STYLE=1 (NVIDIA NGX Style control, 0/1/2). 1 = the style the original runtime used in Stellar Blade and the value every earlier package had built in (default, bit-identical); 0 = NVIDIA's default, closest to its reference output; 2 = the third style. Needs a game restart.
@@ -61,7 +80,7 @@ The regular OptiScaler framework retains the 0.27 baseline; this is not the RE9 
 
 Exit the game, back up existing mod files, and extract ALL files beside the actual game executable (often Binaries/Win64). Select DLSS input in the game; OptiScaler routes it to FSR. Supported integration is low-resolution rendering → DLSS5 → FSR → display. Neural input is no longer size-limited: tiers are 720/900/1080 and an input at most 10% beyond a tier is fitted down into it; above 1080p it is fitted onto the 1080 tier and restored (DLSS5_FIT_LARGE=1). F6 toggles NR; F7 hides/shows the on-screen text; F8 toggles reuse/full compute; Insert opens OptiScaler; Home opens ReShade.
 
-DLSS5-AMD/native-game-flags.txt uses the repository standard template and NETWORK_HEIGHT=auto. Existing block skips remain; adaptive reuse is on (F8 switches reuse/full; set DLSS5_VIT_ADAPTIVE=0 to disable). DLSS5_SHOW_FPS and DLSS5_NOTICE control the corresponding information.
+DLSS5-AMD/default-config.txt is the repository standard template, NETWORK_HEIGHT=auto. Default is all 71 blocks + fast numerics (see "Lossy options"); adaptive reuse is on (F8 switches reuse/full; set DLSS5_VIT_ADAPTIVE=0 to disable). DLSS5_SHOW_FPS and DLSS5_NOTICE control the corresponding information.
 
 Use this route for existing supported games such as Stellar Blade, Lies of P and Cyberpunk 2077 (2.31, no configuration). RE9 uses the separate REFramework package; do not mix the two hosts/runtimes. Avoid simultaneously processing the same game through Magpie.
 

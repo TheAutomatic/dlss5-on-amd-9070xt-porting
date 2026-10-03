@@ -16,19 +16,19 @@ DLSS 5（DLSSNR）跑在 AMD RX 9070 XT / RDNA 4 上。
 | **Magpie**（便携） | 任何游戏，不需要游戏支持超分 | Magpie 抓游戏窗口；网络接在效果组的 FSR3_SR 一项里，之后 FSR4 放大到全屏（可选 XeSS 帧生成） |
 | **OptiScaler-REFramework**（只给 RE9） | 《生化危机 9》，常规路线切不开它的命令提交 | TheAutomatic 改的 OptiScaler 宿主 + 我们的 `LmxxfNrRuntime.dll`（成对使用，别和常规包混装） |
 
-**当前版本：0.39（2026-10-01）。** 默认设置下与 0.38 **全部逐位相同**，只是更快：一批逐位重排的核（C512 FFN 寄存器内一 wave 完成、残差初始化与权重读取外提、解码加宽、ViT QKV/attention 合并等）。离线整网回放 900 档约 7.27 → 6.8ms、1080 档约 10.05 → 9.5ms；《剑星》2K 实测约 +1.5～2 帧。新开关 `DLSS5_STYLE=1`（NVIDIA Style 控制 0/1/2，默认 1 = 以前的风格）；add-on 与 RE9 runtime 可复现构建。下载：[夸克](https://pan.quark.cn/s/dea9c0ef2f95) · [Gofile 镜像](https://gofile.io/d/iqtFTSpS)（也在下面的更新记录表）。
+**当前版本：0.40（2026-10-03）。** **默认输出变了**：全 71 块 + fast 数值（`DLSS5_SKIP_BLOCKS=` 空值、`DLSS5_FAST_NUMERIC=1`），对 NVIDIA 44.26 → 47.55 dB、偏色消失，每帧慢约 0.12 / 0.19 ms（900 / 1080）；写 `DLSS5_SKIP_BLOCKS=42,43,46` + `DLSS5_FAST_NUMERIC=0` 就逐位回到 0.39。新东西：叠层 `DLSS5_MULTI_PASS=1/2/3`（风格更浓，耗时约 N 倍；游戏里 F9 轮换，《剑星》2K 57 / 37 / 27 fps）、三个配置文件（`default-config.txt` → `custom-config.txt` → `native-game-flags.txt`，环境变量最高；包里不再带你的文件）、逐位提速（C32/C64 改 LLVM 23 编，1080 约 −0.2 ms）。下载：链接待补（也在下面的更新记录表）。0.39：[夸克](https://pan.quark.cn/s/dea9c0ef2f95) · [Gofile 镜像](https://gofile.io/d/iqtFTSpS)。
 
 **环境要求。** RDNA 4 显卡（RX 9070 XT 实测；RX 9060 的内核随包但没机器测）和带 `amdhip64_7.dll` 的 AMD 驱动（现在的正式版驱动就带）。
 不需要 HIP SDK、Agility SDK、预览版 DXC、Windows 开发人员模式。900P 下插件占显存约 1.2 GB（权重 0.6 GB、激活 0.3 GB；`DLSS5_HIP_MEMORY=1`
 会把明细写进 `logs\native-hip.txt`）；显存被顶满会掉帧且不恢复，《剑星》里贴图质量开"高"或更低。
 
-**配置。** 每个包带的 `DLSS5-AMD\native-game-flags.txt` 就是仓库模板（[常规](scripts/hip-game-flags.txt)、[Magpie](scripts/hip-magpie-flags.txt)、
+**配置。** 每个包带的 `DLSS5-AMD\default-config.txt`（0.40 以前是 `native-game-flags.txt`）就是仓库模板（[常规](scripts/hip-game-flags.txt)、[Magpie](scripts/hip-magpie-flags.txt)、
 [RE9](scripts/hip-re9-flags.txt)；键的说明在 [scripts/CONFIGURATION.md](scripts/CONFIGURATION.md)）。网络档位按输入自动选（两个方向都不超过某档的 110% 就用那档：
 720 到 1408×792，900 到 1760×990，其余 1080，所以 2K 质量档 1707×961 走 900；`DLSS5_NETWORK_HEIGHT` 可强制）。常规包默认开着有损的"ViT 自适应复用"（`DLSS5_VIT_ADAPTIVE=1`，
 相关键见 [Development/HIP/VIT-REUSE.md](Development/HIP/VIT-REUSE.md)；F8 在它和 EXACT 之间切，要逐位输出就设 0；Magpie 和 RE9 包默认关）。
 0.32 起 RE9 runtime 也从 flags 文件读 `DLSS5_HIP_*`、`DLSS5_SKIP_BLOCKS`、`DLSS5_FIT_LARGE` 等键；宿主侧选项仍在 `OptiScaler.ini` 的 `[DlssNr]`。
 
-**三个配置文件（0.39 之后的源码版本）。** `DLSS5-AMD` 文件夹里可以有三个文件，按顺序读：`default-config.txt`（模板，随包发布，升级会覆盖）→
+**三个配置文件（0.40 起）。** `DLSS5-AMD` 文件夹里可以有三个文件，按顺序读：`default-config.txt`（模板，随包发布，升级会覆盖）→
 `custom-config.txt`（你自己的改动，安装和升级都不动它；包里带一份 `custom-config.template.txt` 可以照着抄）→ `native-game-flags.txt`
 （旧版的单文件，已有的照常生效）。后一个文件覆盖前一个的同名项，没写的项沿用前面的值，文件不存在就跳过。系统环境变量里的 `DLSS5_*` 比三个文件都优先。
 同一文件里同一项写两次，以最后一行为准。值留空（`DLSS5_SKIP_BLOCKS=`）也会覆盖前面的文件，意思是用程序内置默认。所以只想改一项，就在
@@ -44,7 +44,7 @@ AMD 光流只在第一项开，FSR4 和 XeSS 帧生成的 Optical Flow Method �
 0.20 把推理搬到 HIP，输出逐位相同、耗时少约 8%；0.22 把 900 档补到 960 行；0.24 引入渲染分辨率上的前置路径；0.26.1～0.28.1 和 TheAutomatic
 一起做出 RE9 的宿主/runtime 路线。每一版的细节在更新记录里。
 
-**有损画质换速度（可选配置）。** 下面几项都是运行时开关，改 `native-game-flags.txt`（RE9 runtime 也认）就生效，不用换模块。全部打开就是"快速模式"。**现在的默认是"全 71 块 + fast 数值"**（`DLSS5_SKIP_BLOCKS=` 空值 + `DLSS5_FAST_NUMERIC=1`）：比以前的默认（跳 42,43,46、逐位数值）每帧慢 900 约 0.12 ms、1080 约 0.19 ms，对 NVIDIA 原版从 44.26 dB 升到 47.55 dB，偏色消失，运动画面里的偏差也比跳块小约 3 dB。跳块变成可选的提速项（下表第一行）。默认配置仍不和 NVIDIA 原版逐位一致：fast 数值有损，常规包还开着 ViT 复用；想要逐位输出，把 `DLSS5_FAST_NUMERIC` 写 0、ViT 复用关掉。
+**有损画质换速度（可选配置）。** 下面几项都是运行时开关，写进 `custom-config.txt`（RE9 runtime 也认）就生效，不用换模块。全部打开就是"快速模式"。**现在的默认是"全 71 块 + fast 数值"**（`DLSS5_SKIP_BLOCKS=` 空值 + `DLSS5_FAST_NUMERIC=1`）：比以前的默认（跳 42,43,46、逐位数值）每帧慢 900 约 0.12 ms、1080 约 0.19 ms，对 NVIDIA 原版从 44.26 dB 升到 47.55 dB，偏色消失，运动画面里的偏差也比跳块小约 3 dB。跳块变成可选的提速项（下表第一行）。默认配置仍不和 NVIDIA 原版逐位一致：fast 数值有损，常规包还开着 ViT 复用；想要逐位输出，把 `DLSS5_FAST_NUMERIC` 写 0、ViT 复用关掉。
 
 | 配置 | 作用 | 收益 | 画质代价 | 因果是否确定 |
 |---|---|---|---|---|
@@ -55,7 +55,7 @@ AMD 光流只在第一项开，FSR4 和 XeSS 帧生成的 Optical Flow Method �
 | `DLSS5_MULTI_PASS_SKIP_BLOCKS=31,32,33,34,35,36,37,38,40,41,42,43,44,45,46,47`（默认空；只在 `DLSS5_MULTI_PASS=2`/`3` 时起作用） | 叠层减负：列出的块只在第 2、3 遍跳过，第 1 遍永远跑全网。这一组是 ViT + C512 上行段；`42,43,46` 是轻量版 | 3 遍离线：900 21.1 → 18.4 ms，1080 29.8 → 25.7 ms（−13%/−14%）；`42,43,46` 只快 0.4/0.5 ms | 对**我们自己的** 3 遍全网输出（不是对 NVIDIA）：这一组 34.1～35.0 dB，`42,43,46` 43.9～46.0 dB。作参照，3 遍对 1 遍是 35.0 dB：这一组把后几遍加上的东西去掉了一大块（偏亮、对比弱），是另一种观感，不是便宜版的 3 遍 | 确定：结构性改动，每帧独立，不跨帧。省得不多，因为耗时在全分辨率的块上，那些跳不了 |
 | `DLSS5_VIT_ADAPTIVE=1`（常规包默认开，Magpie/RE9 包默认关） | ViT 自适应复用：画面变化低于阈值时跳过 ViT 重算，沿用上次真算的结果；游戏里 F8 在它（AE）和完整计算（EXACT）之间切，`=0` 永远完整计算 | 整网离线：有运动的序列 900/1080 约快 4.9%/6.3%，静止画面约 9.0%/11.3%；《剑星》站立不动 EXACT 17.9 ms，AE 16.66 ms | 静止单帧与 EXACT 逐位相同；运动场景对 EXACT/NVIDIA 的 PSNR 未实测 | 有累积风险：复用跨帧，最多沿用 `DLSS5_VIT_REUSE_PERIOD`（默认 4）帧；近似帧不回写，误差不递归叠加，重算、切换模式、几何变化或间隔超过 500 ms 时重置；阈值是启发式，不保证所有场景等价 |
 
-**快速模式**（复制进 `native-game-flags.txt`，覆盖同名行；`FAST_NUMERIC=1` 已是默认，列出来只为完整）：
+**快速模式**（复制进 `custom-config.txt`；`FAST_NUMERIC=1` 已是默认，列出来只为完整）：
 
 ```
 DLSS5_SKIP_BLOCKS=42,43,46
@@ -212,6 +212,7 @@ powershell -ExecutionPolicy Bypass -File scripts\deploy_fast.ps1 -Source <lab> -
 | 0.37 · 三个包（Magpie · OptiScaler · OptiScaler-REFramework，HIP）[夸克](https://pan.quark.cn/s/7dbfdc6425fd) · [Gofile 镜像](https://gofile.io/d/onqeAHST) | 09-29 | 与 0.36 逐位相同：C512 紧凑布局（`results/deep-layers-20260929`）、head 分组融合 + ViT attention 转置（`results/kernel-map-20260929`）、C256 跨层持久化 `DLSS5_HIP_SWIN_RUN=1`（`results/swin-persistent-20260929`）、ViT attention 新核（`results/vit-attention-20260929`）、ViT QKV 五 wave 共用权重（`results/vit-qkv-20260929`）。离线 900 约 8.5 → 8.0ms。《剑星》2K AA EXACT 55～56。 |
 | 0.38 · 三个包（Magpie · OptiScaler · OptiScaler-REFramework，HIP）[夸克](https://pan.quark.cn/s/6856d875bbe9) · [Gofile 镜像](https://gofile.io/d/lzsqfUiE) | 09-30 | 默认与 0.37 逐位相同：900 去 shift_pack、C32 字节化与跳全零半块、复合量化、C256 FFN W16、C512 attention 去冗余 F、三处宽写；离线 900 约 8.0 → 7.6ms、1080 约 10.8 → 10.4ms（`results/hip-roofline-20260930`）。新开关 `DLSS5_FORMAT_FALLBACK=1`、`DLSS5_HOT_RELOAD=1`；可选有损 `DLSS5_NETWORK_1080_ROWS=1088`（默认不开）。 |
 | 0.39 · 三个包（Magpie · OptiScaler · OptiScaler-REFramework，HIP）[夸克](https://pan.quark.cn/s/dea9c0ef2f95) · [Gofile 镜像](https://gofile.io/d/iqtFTSpS) | 10-01 | 默认与 0.38 逐位相同：C512 FFN 一 wave 寄存器内完成、残差初始化/权重读取外提、解码加宽、ViT QKV/attention 合并等；离线 900 约 7.27 → 6.8ms、1080 约 10.05 → 9.5ms，《剑星》2K +1.5～2 帧。新开关 `DLSS5_STYLE=1`；add-on/runtime 可复现构建。 |
+| 0.40 · 三个包（Magpie · OptiScaler · OptiScaler-REFramework，HIP）链接待补 | 10-03 | **默认输出变了**：全 71 块 + `DLSS5_FAST_NUMERIC=1`（对 NVIDIA 44.26 → 47.55 dB，+0.12/+0.19 ms）。叠层 `DLSS5_MULTI_PASS` + F9；三个配置文件（`default-config` → `custom-config` → `native-game-flags`，环境变量最高）；C32/C64 改 LLVM 23 等逐位提速。 |
 
 ## 权重
 
