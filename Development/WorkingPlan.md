@@ -12,7 +12,7 @@
 
 ## 待办
 
-1. **鬼武者集成修复**：准备预测核初始化预加载/安全热切，避免首帧热路径module load；待机器空闲受控检验未提交producer fence场景。当前只是机制假设，不覆盖正常旧版、不抢用户GPU。剑星同3x开/关预测观感/FPS待反馈。
+1. **鬼武者集成修复已编译未装**：两遍暖跑只分配feed0却翻至feed1，首帧首次Upload同步stream等待未提交producer；撤回moduleLoad假设。ctor/安全热切预备两feed、核/符号预加载、热点禁Upload小修已CPU编译（8A020EA6/7FEC39CF）。待空闲受控复现+输出回归，不覆盖正常旧版、不抢用户GPU。剑星新档观感/FPS待反馈。
 2. **0.41前核查全部旧模块ELF目标**：旧rtc疑似忽略gfx1200参数，新预测核已用当前rtc正确重编两架构。不能只信目录/配方标签；9070 gfx1201当前体验不阻塞。
 3. **0.41**：核实打包入口→三包/README与CHANGELOG中英→发布核验→tag。同步README版本头及D盘Payload的package-README-magpie.txt；预测是否发布待实玩校准。
 4. Forza/卧龙auto实测（日志auto:）、F9真按键、环境变量优先级。剑星native PRE1覆盖auto，测auto须处理覆盖。

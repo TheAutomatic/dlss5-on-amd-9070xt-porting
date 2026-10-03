@@ -684,7 +684,7 @@ if(opt.fast_mh){const std::string mh_stem=opt.packed_weights?(opt.mh_wave?"multi
  if(opt.pdl&&!(free_geometry&&size_t(W/4)*(H/4)/16>PDL_SLOTS)){if(opt.graph)throw std::runtime_error("pdl requires graph off");api.Load(ext_launch,"hipExtModuleLaunchKernel");api.Check(api.hipMalloc((void**)&pdl_flags,size_t(PDL_SLOTS)*PDL_RING*4),"pdl flags");api.Check(api.hipMemsetAsync(pdl_flags,0,size_t(PDL_SLOTS)*PDL_RING*4,stream),"pdl flags zero");pdl_mode=7;}
 if(opt.fast_prefix){Handle m{};api.Check(api.LoadModule(&m,(opt.modules+"/prefix_fast.hsaco").c_str()),"prefix fast module");modules["prefix_fast"]=m;}
 if(opt.fused_c32){Handle m{};api.Check(api.LoadModule(&m,(opt.modules+"/c32_fused_attention.hsaco").c_str()),"fused attention module");modules["c32_fused"]=m;}
-if(opt.fast_c32){const char*f[][2]={{"c32_fast_ffn","c32_fast.hsaco"},{"c32_fast_attention","c32_fast_attention.hsaco"},{"boundary_fast","boundary-fast.hsaco"}};for(auto&v:f){Handle m{};api.Check(api.LoadModule(&m,(opt.modules+"/"+v[1]).c_str()),v[1]);modules[v[0]]=m;}}if(opt.tiled){const char*t[][2]={{"c32_tiled","c32_tiled.hsaco"},{"mh_tiled","multihead-tiled.hsaco"}};for(auto&v:t){Handle m{};api.Check(api.LoadModule(&m,(opt.modules+"/"+v[1]).c_str()),v[1]);modules[v[0]]=m;}}if(opt.wave){Handle m{};api.Check(api.LoadModule(&m,(opt.modules+"/wave-pointwise.hsaco").c_str()),"wave module");modules["wave"]=m;}}catch(...){if(pdl_flags){api.hipStreamSynchronize(stream);api.hipFree(pdl_flags);pdl_flags=nullptr;}for(auto&m:modules)api.hipModuleUnload(m.second);api.hipStreamDestroy(stream);throw;}}
+if(opt.fast_c32){const char*f[][2]={{"c32_fast_ffn","c32_fast.hsaco"},{"c32_fast_attention","c32_fast_attention.hsaco"},{"boundary_fast","boundary-fast.hsaco"}};for(auto&v:f){Handle m{};api.Check(api.LoadModule(&m,(opt.modules+"/"+v[1]).c_str()),v[1]);modules[v[0]]=m;}}if(opt.tiled){const char*t[][2]={{"c32_tiled","c32_tiled.hsaco"},{"mh_tiled","multihead-tiled.hsaco"}};for(auto&v:t){Handle m{};api.Check(api.LoadModule(&m,(opt.modules+"/"+v[1]).c_str()),v[1]);modules[v[0]]=m;}}if(opt.wave){Handle m{};api.Check(api.LoadModule(&m,(opt.modules+"/wave-pointwise.hsaco").c_str()),"wave module");modules["wave"]=m;}if(multi_predict||std::ifstream(opt.modules+"/multi-pass-predict.hsaco").good())EnsurePredictModule();if(multi_pass>1)PrepareMultiPassFeeds();}catch(...){if(pdl_flags){api.hipStreamSynchronize(stream);api.hipFree(pdl_flags);pdl_flags=nullptr;}for(auto&m:modules)api.hipModuleUnload(m.second);api.hipStreamDestroy(stream);throw;}}
  ~Network(){api.hipStreamSynchronize(stream);SpReport();pdl_keep.clear();if(pdl_flags){api.hipFree(pdl_flags);pdl_flags=nullptr;}if(opt.graph)std::printf("graph_stats builds=%u replays=%u\n",graph_builds,graph_replays);ClearGraph();for(auto&t:timings){api.hipEventDestroy(t.begin);api.hipEventDestroy(t.end);}adaptive_image_anchor.reset();adaptive_image_signature.reset();adaptive_image_delta.reset();adaptive_anchor_in.reset();adaptive_anchor_out.reset();adaptive_gain.reset();adaptive_stats.reset();adaptive_state.reset();device_noise.reset();gather_maps[0].clear();gather_maps[1].clear();weights.clear();pool.clear();for(auto&m:modules)api.hipModuleUnload(m.second);api.hipStreamDestroy(stream);}
  void PrintMemory(){size_t bytes=0,free=0,total=0;std::set<void*>seen;auto add=[&](const Tensor&t){if(t&&t->owned&&seen.insert(t->ptr).second)bytes+=t->capacity;};for(auto&t:pool)add(t);for(auto&w:weights)add(w.second);for(auto&maps:gather_maps)for(auto&m:maps)add(m.second);add(device_noise);api.Check(api.hipMemGetInfo(&free,&total),"memory stats");std::printf("memory owned_MiB=%.1f allocations=%zu device_free_MiB=%.1f total_MiB=%.1f\n",bytes/1048576.,seen.size(),free/1048576.,total/1048576.);}
  /* DLSS5_HIP_MEMORY=1 (diagnostic): device memory by category after the pool has warmed — weights by key, pool tensors by capacity, gather maps, noise, and the runtime's free/total. */
@@ -798,7 +798,7 @@ if(opt.fast_c32){const char*f[][2]={{"c32_fast_ffn","c32_fast.hsaco"},{"c32_fast
   std::set<U> saved;const bool swap=!multi_skip.empty();if(swap){saved=opt.skip_blocks;opt.skip_blocks.insert(multi_skip.begin(),multi_skip.end());}
   struct Restore{Options&o;std::set<U>&s;bool on;~Restore(){if(on)o.skip_blocks.swap(s);}}restore{opt,saved,swap};
   if(multi_pass==3&&multi_predict){
-   if(!modules.count("mp_predict")){Handle m{};api.Check(api.LoadModule(&m,(opt.modules+"/multi-pass-predict.hsaco").c_str()),"multi-pass predictor module");modules["mp_predict"]=m;}
+   if(!modules.count("mp_predict"))throw std::runtime_error("predictor must be prepared before producer wait");
    auto first=out;auto feed=MultiPassFeed(first);auto second=RunGraph(feed,device_noise,hist);
    if(!predict_gain)predict_gain=New(size_t((W+15)/16)*((H+15)/16));auto predicted=New(size_t(W)*H*3);
    Run("mp_predict","mp_predict_gain",size_t((W+15)/16)*((H+15)/16)*32,P(original),P(first),P(second),P(predict_gain),W,H);
@@ -809,15 +809,26 @@ if(opt.fast_c32){const char*f[][2]={{"c32_fast_ffn","c32_fast.hsaco"},{"c32_fast
  public:
  /* Pass count changed at run time (add-on hot reload / hotkey, 2026-10-03). Same value = no-op. A graph is rebuilt; feed buffers
     are allocated on the next multi-pass frame (outside capture: the warm frame). */
- void SetMultiPass(U n){if(n<1||n>3||n==multi_pass)return;multi_pass=n;adaptive_dirty=true;if(opt.graph){Synchronize();ClearGraph();graph_warmed=false;}}
+ void SetMultiPass(U n){if(n<1||n>3||n==multi_pass)return;if(n>1)PrepareMultiPassFeeds();multi_pass=n;adaptive_dirty=true;if(opt.graph){Synchronize();ClearGraph();graph_warmed=false;}}
  U MultiPass()const{return multi_pass;}
- void SetMultiPassPredict(bool enabled){if(enabled==multi_predict)return;multi_predict=enabled;std::fprintf(stderr,"multi_pass_predict=%u requested_passes=%u actual_network_passes=%u\n",unsigned(multi_predict),multi_pass,multi_predict&&multi_pass==3?2:multi_pass);if(opt.graph){Synchronize();ClearGraph();graph_warmed=false;}}
+ void SetMultiPassPredict(bool enabled){if(enabled==multi_predict)return;if(enabled){EnsurePredictModule();if(multi_pass>1)PrepareMultiPassFeeds();}multi_predict=enabled;std::fprintf(stderr,"multi_pass_predict=%u requested_passes=%u actual_network_passes=%u\n",unsigned(multi_predict),multi_pass,multi_predict&&multi_pass==3?2:multi_pass);if(opt.graph){Synchronize();ClearGraph();graph_warmed=false;}}
  bool MultiPassPredict()const{return multi_predict;}
  private:
+ // Initialization and hot setters run before the bridge queues this frame's producer wait.
+ // Preparing only one feed during the two-pass warm-up leaves the alternating slot uninitialized.
+ void PrepareMultiPassFeeds(){
+  if(multi_feed[0]&&multi_feed[1])return;
+  std::vector<float>ones(size_t(W)*H*4,1.f);
+  for(auto&feed:multi_feed)if(!feed)feed=Upload(ones.data(),ones.size()*4,true);
+ }
+ void EnsurePredictModule(){
+  if(!modules.count("mp_predict")){Handle m{};api.Check(api.LoadModule(&m,(opt.modules+"/multi-pass-predict.hsaco").c_str()),"multi-pass predictor module");modules["mp_predict"]=m;}
+  Fn("mp_predict","mp_predict_gain");Fn("mp_predict","mp_predict_apply");
+ }
  Tensor MultiPassFeed(const Tensor&rgb){
   if(!memcpy2d){memcpy2d=reinterpret_cast<Memcpy2DFn>(GetProcAddress(api.dll,"hipMemcpy2DAsync"));if(!memcpy2d)throw std::runtime_error("DLSS5_MULTI_PASS needs hipMemcpy2DAsync");}
   auto&feed=multi_feed[multi_next];multi_next^=1;
-  if(!feed){if(graph_capturing)throw std::runtime_error("multi-pass feed must be allocated before graph capture");std::vector<float> ones(size_t(W)*H*4,1.f);feed=Upload(ones.data(),ones.size()*4,true);}
+  if(!feed)throw std::runtime_error("multi-pass feeds must be prepared before producer wait");
   /* hipMemcpy2DAsync on Windows silently copies at most 2^20 rows (1080/900 tiers have 2.2M/1.5M pixels): chunk at 2^19 rows. */
   const size_t n=size_t(W)*H,chunk=size_t(1)<<19;
   for(size_t o=0;o<n;o+=chunk)api.Check(memcpy2d(static_cast<char*>(P(feed))+o*16,16,static_cast<const char*>(P(rgb))+o*12,12,12,std::min(chunk,n-o),3,stream),"multi-pass feed");

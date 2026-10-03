@@ -1536,3 +1536,9 @@ Zero 更新派活规矩：具体编译、实验、安装、归档都派子代理
 Zero报启动黑屏/有不可点击弹窗。两次启动日志显示modules_ok=74、HIP初始化与PrepareFrame成功，停在首帧Record ok / pending EnqueueHip，producerSubmitted=0；没有取得弹窗原文，不能声称确切异常。读进程时游戏已退出，无需杀进程。鬼武者单独完整恢复实验前备份：根/_storage_ runtime2176C544、72模块/SUMS9D4A2024、原custom/native（MP1、无PREDICT1）；只同步oni exact SUMS/flags，剑星实验档不动。**01:07:13 Zero确认「现在鬼武者正常了」**。失败日志/配置远端保留failure-20261004，短日志归档本轮results/failure。
 
 集成假设：首次predict hipModuleLoad在MultiPassRest热路径，此前HIP已等待游戏尚未提交的producer fence；模块加载若隐式同步GPU便循环等待，bench/smoke因producer已提交没覆盖。尚未复现，不归算法本身；构造fprintf已越过PrepareFrame，因此不是已证实的stderr弹窗。下一步只准备初始化预加载/安全热切修复及编译，用户正常游玩时不占GPU不换鬼武者载荷，待空闲受控验证。
+
+## 2026-10-04 鬼武者首帧死锁小修已编译、未重装
+
+撤回上一条moduleLoad首帧假设：PrepareStagedKernels已经暖跑并加载预测核。明确缺陷是两遍+预测暖跑仅分配feed0却翻索引至1；真游戏首帧用未分配feed1，Upload内部明确同步HIP stream，而该stream已等待尚未提交producer，形成循环等待；真3暖跑已分配两feed，bench/smoke producer已提交，故漏测。真2也有同样潜伏路径。
+
+小修：ctor/安全热切提前准备两feed，热点禁Upload；核及符号初始化预加载，旧72模块默认关仍兼容。公式/HSACO不改。addon8A020EA6、runtime7FEC39CF、benchmarkA9C3EC61已CPU编译通过，仅放/tmp，**未GPU验收、未重装鬼武者**。用户回滚后正常优先，不抢GPU；待空闲受控待producer fence复现+输出回归。代码顺序/完整hash见results本轮failure/prepared-fix.md。
