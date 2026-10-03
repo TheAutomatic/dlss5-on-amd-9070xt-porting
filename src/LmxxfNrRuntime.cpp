@@ -311,7 +311,7 @@ void LoadFlagsFileOnce(const std::wstring &assets)
                                      key == "DLSS5_FIT_LARGE" || key == "DLSS5_NETWORK_HEIGHT" ||
                                      key == "DLSS5_NETWORK_1080_ROWS" || key == "DLSS5_STYLE" || key == "DLSS5_DIRECT_IO" ||
                                      key == "DLSS5_NETWORK_FREE_RES" || key == "DLSS5_FAST_NUMERIC" ||
-                                     key == "DLSS5_MULTI_PASS" || key == "DLSS5_MULTI_PASS_SKIP_BLOCKS" || key == "DLSS5_MULTI_PASS_PREDICT" ||
+                                     key == "DLSS5_MULTI_PASS" || key == "DLSS5_MULTI_PASS_SKIP_BLOCKS" || key == "DLSS5_MULTI_PASS_SKIN_PROTECT" || key == "DLSS5_MULTI_PASS_PREDICT" ||
                                      key == "DLSS5_FRAME_STATS";
                 if (!allowed)
                     continue;
@@ -376,7 +376,7 @@ hip_reference::Options RuntimeOptions(unsigned w, unsigned h, const std::wstring
                       unsigned(requestedM32), unsigned(hip_reference::C512M32Compatible(opt)),
                       unsigned(requestedVit), unsigned(hip_reference::VitProjN64Compatible(opt)),
                       unsigned(opt.pdl), opt.skip_blocks.size());
-        *note = t + gates;
+        *note = t + gates + " multi_pass=" + std::to_string(hip_reference::MultiPassFromEnvironment()) + " predict=" + std::to_string(unsigned(hip_reference::MultiPredictFromEnvironment())) + " skin=" + std::to_string(unsigned(hip_reference::MultiSkinFromEnvironment()));
     }
     return opt;
 }

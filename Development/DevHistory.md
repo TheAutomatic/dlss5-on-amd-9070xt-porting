@@ -1542,3 +1542,11 @@ Zero报启动黑屏/有不可点击弹窗。两次启动日志显示modules_ok=7
 撤回上一条moduleLoad首帧假设：PrepareStagedKernels已经暖跑并加载预测核。明确缺陷是两遍+预测暖跑仅分配feed0却翻索引至1；真游戏首帧用未分配feed1，Upload内部明确同步HIP stream，而该stream已等待尚未提交producer，形成循环等待；真3暖跑已分配两feed，bench/smoke producer已提交，故漏测。真2也有同样潜伏路径。
 
 小修：ctor/安全热切提前准备两feed，热点禁Upload；核及符号初始化预加载，旧72模块默认关仍兼容。公式/HSACO不改。addon8A020EA6、runtime7FEC39CF、benchmarkA9C3EC61已CPU编译通过，仅放/tmp，**未GPU验收、未重装鬼武者**。用户回滚后正常优先，不抢GPU；待空闲受控待producer fence复现+输出回归。代码顺序/完整hash见results本轮failure/prepared-fix.md。
+
+## 2026-10-04 01:59 肤色1x / 整体真3x保护（Zero明确不是提速，闇派兵，已装双游戏）
+
+`MULTI_PASS_SKIN_PROTECT=1` 保存第一遍y1，原工作输入x算YCbCr软椭圆，最终混合y1与多遍；核心m1/m0显式端点，非原图混3。x经paper-white/shoulder/sRGB已经显示编码，不再gamma。公开OptiShade参数参考、独立实现：中心.405/.600、半轴.09/.11、内区≤.95硬1/外到1.45羽化、chroma .02–.06、3×3max平滑；暖背景误选/彩光漏选仍属启发式。脸裁图/最终decode确认回1x，衣服背景主体保留3。CPU/GPUmask最大5.4e-7，六组m1逐位y1，非history m0逐位多遍；history跨帧反馈需同一运行比较，未声称两运行全相同。
+
+默认19 SAME、MP1开保护三例SAME；真/近似保护三例12帧无NaN、两例重复SAME、RE9 smoke0。100帧短ABBA新增mask+copy+blend约.25/.34ms，目的观感。先前feed死锁受控producer gate1.5秒：旧Enqueue1528.316ms/新2.005ms，解锁后正常，双feed前置准备修复实证通过。新增肤色模块与固定资源也在producer wait前准备，无核数学变化、无屏障。
+
+已装剑星 **731B8DAE**、鬼武者两处runtime **C38B8383**、76模块/SUMS **C7EA9AC8**，readback一致、exact快照同步。两游戏custom **MP3/PREDICT0/SKIN1**，native MP3；其它配置保留（剑星PRE1、鬼武者PRE0）。F9仅剑星；鬼武者重启读配置。备份 `skin-protect-20261004\backups\20261004-015944\rollback.ps1`。归档results/skin-protect-20261004，decoded-face左1x/中3x/右保护；锁释放、原始帧清理。未代启动游戏，实玩待Zero；不打包不push。

@@ -31,6 +31,8 @@ public:
  bool PdlActive()const{return network&&network->PdlCalls()!=0;}
  /* DLSS5_MULTI_PASS at run time (add-on hot reload / hotkey): 0 = query only. Returns the pass count in effect (0 = no network). */
  unsigned MultiPass(unsigned set=0){if(!network)return 0;if(set)network->SetMultiPass(set);return network->MultiPass();}
+ bool MultiPassSkinProtect()const{return network&&network->MultiPassSkinProtect();}
+ void MultiPassSkinProtect(bool set){if(network)network->SetMultiPassSkinProtect(set);}
  bool MultiPassPredict()const{return network&&network->MultiPassPredict();}
  void MultiPassPredict(bool set){if(network)network->SetMultiPassPredict(set);}
  bool SwinRunActive()const{return network&&network->SwinRunActive();}

@@ -1,0 +1,75 @@
+C:\Program Files (x86)\Steam\steamapps\common\StellarBlade\SB\Binaries\Win64
+CONFIG default-config.txt
+
+DLSS5_SKIP_BLOCKS=
+DLSS5_FAST_NUMERIC=1
+DLSS5_MULTI_PASS=1
+DLSS5_MULTI_PASS_SKIN_PROTECT=0
+DLSS5_MULTI_PASS_PREDICT=0
+DLSS5_PRE_UPSCALE=auto
+CONFIG custom-config.txt
+DLSS5_MULTI_PASS=3
+DLSS5_MULTI_PASS_PREDICT=0
+DLSS5_MULTI_PASS_SKIN_PROTECT=1
+CONFIG native-game-flags.txt
+DLSS5_SKIP_BLOCKS=
+DLSS5_FAST_NUMERIC=1
+DLSS5_PRE_UPSCALE=1
+DLSS5_MULTI_PASS=3
+
+
+
+
+Path : C:\Program Files (x86)\Steam\steamapps\common\StellarBlade\SB\Binaries\Win64\dlss5-amd.addon64
+Hash : 731B8DAEE1C8BC73551A37161DF18597679B2D08203E3E4840FF72EA9743B0D3
+
+
+
+C:\XboxGames\Onimusha- Way of the Sword\Content
+CONFIG default-config.txt
+
+DLSS5_SKIP_BLOCKS=
+DLSS5_FAST_NUMERIC=1
+DLSS5_MULTI_PASS=1
+DLSS5_MULTI_PASS_SKIN_PROTECT=0
+DLSS5_MULTI_PASS_PREDICT=0
+DLSS5_PRE_UPSCALE=auto
+CONFIG custom-config.txt
+DLSS5_MULTI_PASS_PREDICT=0
+DLSS5_MULTI_PASS_SKIN_PROTECT=1
+DLSS5_MULTI_PASS=3
+CONFIG native-game-flags.txt
+DLSS5_SKIP_BLOCKS=
+DLSS5_FAST_NUMERIC=1
+DLSS5_PRE_UPSCALE=0
+DLSS5_MULTI_PASS=3
+
+
+
+
+Path : C:\XboxGames\Onimusha- Way of the Sword\Content\LmxxfNrRuntime.dll
+Hash : C38B83833B6D4757EB58003411EAB2DEAAB9F72C8925E460E399113653CC83BF
+
+
+
+
+
+Path : C:\XboxGames\Onimusha- Way of the Sword\Content\_storage_\LmxxfNrRuntime.dll
+Hash : C38B83833B6D4757EB58003411EAB2DEAAB9F72C8925E460E399113653CC83BF
+
+
+
+stellar : EXACT   addon 731B8DAE flags AC8CFE14 sums C7EA9AC8
+   gfx1200 c32-wave1 4D458C28  c64-wave2 A3E1EBA2  deep_fast-packed B582B7F8  c32-wave1-rtz 64C9CCF6
+   gfx1201 c32-wave1 D2DDF122  c64-wave2 EB4A486E  deep_fast-packed B582B7F8  c32-wave1-rtz 99B0B1E2
+oni : EXACT   runtime C38B8383 flags 3517946C sums C7EA9AC8
+   gfx1200 c32-wave1 4D458C28  c64-wave2 A3E1EBA2  deep_fast-packed B582B7F8  c32-wave1-rtz 64C9CCF6
+   gfx1201 c32-wave1 D2DDF122  c64-wave2 EB4A486E  deep_fast-packed B582B7F8  c32-wave1-rtz 99B0B1E2
+EXACT = 正式模块（不是逐位输出）；现默认 flags：DLSS5_SKIP_BLOCKS= 全 71 块 + DLSS5_FAST_NUMERIC=1 / EXACT = release modules, not bit-exact output; default flags: all 71 blocks + FAST_NUMERIC=1
+
+Name         Used         Free
+----         ----         ----
+D    584052899840 415907971072
+
+
+AUDIT_DONE
