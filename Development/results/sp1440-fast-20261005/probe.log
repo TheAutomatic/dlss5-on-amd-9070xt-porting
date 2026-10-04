@@ -1,0 +1,10 @@
+SP_PLAN c=256 first=16 layers=6 tasks=1488 initial=252 state_bytes=17872 w16=1
+SP_PAIR first=16 mode=0 tasks=1488 initial=252 byte_diff=0
+SP_PAIR first=16 mode=1 tasks=1488 initial=252 byte_diff=0
+SP_PAIR first=16 mode=2 tasks=1488 initial=252 byte_diff=0
+SP_PLAN c=256 first=49 layers=6 tasks=1488 initial=252 state_bytes=17872 w16=1
+SP_PAIR first=49 mode=0 tasks=1488 initial=252 byte_diff=0
+SP_PAIR first=49 mode=1 tasks=1488 initial=252 byte_diff=0
+SP_PAIR first=49 mode=2 tasks=1488 initial=252 byte_diff=0
+SP_GATE runs=6 recovery=2 rollover=2
+SP_STATS runs=6 fallback=2 rollover=2 jobs=8928 disabled=1 errors=2
