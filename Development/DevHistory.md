@@ -1622,3 +1622,10 @@ RTX5090空闲定向捕原block0 pre-down四tile：源(832,528)/(960,544)/(0,0)/(
 新报告LUID正确选device1/gfx1201/HIP70260201，ready后prefix400；提交者仅addon变量、42flags/模块同的A/B/C，0.40/main各9错，Enqueue重绑后600+帧无错。采纳PR15一行hipSetDevice(hip_device)，既有try失败仍封闭退出，不改选卡/资源/kernel。HIP current device为TLS，但线程ID未实测，400标签也可来自lazyGetFunction而非已launch。
 
 本机HIP仅9070device0（Intel核显不进HIP）；跨线程单device查询通过、900/1080八帧对fresh基线逐位同，不作双HIP复现。候选/tmp/issue4-products/dlss5-amd.addon64 SHA a810cd5194f565be68198b1f86a5777cc62e446995fa49d355c2f5661aa37444。未装Magpie/两游戏，无配置/BIOS/驱动改动，无外发/关闭issue/push。记录results/issue4-igpu-20261004，修复来源PR15/XMoon。
+
+
+### 2026-10-04 RE9强度文件入口已补
+
+DLSS5_STRENGTH加入白名单，合法两finite数0..1覆盖宿主/menu，auto/空/缺省沿原API/default；非法回宿主报告一次，API范围不扩大。addon/Magpie0..3不改，RE9文件重启、addon约1秒热载；层序不变，剑星native auto仍覆盖custom。CPUparser及900/1080默认/API .4,.6、新file/env .7,.3盖菜单/非法回退hash检查通过，smoke通过。未改网络/math/Style/遍数。
+
+仅装鬼武者root/_storage_ runtime25A617B2，备份strength-config-20261004/backups/20261004-200004；三配置字节hash不变，未写新数值/改变现强度、MP/PRED/SKIN/geometry，剑星addon未动。results/strength-config-20261004，无push/发布。

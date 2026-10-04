@@ -443,3 +443,7 @@ DLSS5_FORMAT_FALLBACK=1
 # 中：NVIDIA Style 0/1/2：1 = 剑星原版风格；默认 1；0 = NVIDIA 默认、最接近参考输出；改了输出风格就变；需重启
 # EN: NVIDIA Style 0/1/2: 1 = Stellar Blade style; default 1; 0 = NVIDIA default, closest to reference; restart needed
 DLSS5_STYLE=1
+
+# 中：亮度/细节,颜色强度，各0..1；auto沿宿主；数值优先菜单；改文件需重启
+# EN: transfer,colour strengths, each 0..1; auto keeps host values; numeric overrides menu; file edits need restart
+DLSS5_STRENGTH=auto

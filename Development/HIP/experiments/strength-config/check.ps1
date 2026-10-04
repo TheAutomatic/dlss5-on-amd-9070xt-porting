@@ -1,0 +1,13 @@
+$ErrorActionPreference='Stop';$root=$PSScriptRoot;$lock='D:\DLSSNR-Lab\gpu.lock'
+& 'D:\DLSSNR-Lab\game-check.ps1' Stellar Onimusha Magpie Forza Cyberpunk;if($LASTEXITCODE -ne 1){throw 'game active'}
+$f=[IO.File]::Open($lock,[IO.FileMode]::CreateNew,[IO.FileAccess]::Write,[IO.FileShare]::Read);$b=[Text.Encoding]::UTF8.GetBytes('strength-config-20261004');$f.Write($b,0,$b.Length);$f.Close()
+try{$prev='D:\DLSSNR-Lab\vit-byteedge-formal-20261004';$mods="$prev\rt-new\modules";$env:LMXXF_WEIGHTS_DIR='D:\DLSSNR-Lab\zero-copy-io-20260928\assets';$results=@{}
+function Run($tag,$dll,$height,$api,$file,$envStrength){$d="$root\$tag-$height";New-Item -ItemType Directory -Force "$d\DLSS5-AMD","$d\shaders"|Out-Null;Copy-Item "$root\$dll.dll" "$d\LmxxfNrRuntime.dll" -Force;Copy-Item 'D:\DLSSNR-Lab\hip-backend\fusion-round3\shaders\*' "$d\shaders" -Force
+ [IO.File]::WriteAllLines("$d\DLSS5-AMD\default-config.txt",@('DLSS5_STRENGTH=auto','DLSS5_SKIP_BLOCKS=','DLSS5_FAST_NUMERIC=1','DLSS5_MULTI_PASS=1',"DLSS5_NETWORK_HEIGHT=$height"));[IO.File]::WriteAllText("$d\DLSS5-AMD\custom-config.txt",$(if($file){"DLSS5_STRENGTH=$file"}else{''}));if($api){$env:RT_API_STRENGTH=$api}else{Remove-Item Env:RT_API_STRENGTH -EA 0};if($envStrength){$env:DLSS5_STRENGTH=$envStrength}else{Remove-Item Env:DLSS5_STRENGTH -EA 0};$ErrorActionPreference='Continue';& "$root\rt_bench.exe" "$d\LmxxfNrRuntime.dll" $mods '1707x961' 4 1 > "$d\run.log" 2> "$d\stderr.log";$rc=$LASTEXITCODE;$ErrorActionPreference='Stop';if($rc){throw "$tag failed $rc"};$h=[regex]::Match((Get-Content "$d\run.log" -Raw),'hash=([0-9a-f]+)').Groups[1].Value;if(!$h){throw 'missing hash'};$results["$tag-$height"]=$h;"RESULT $tag $height $h";return $h}
+foreach($h in 900,1080){$a=Run 'defaultA' 'base' $h '' '' ''; $n=Run 'defaultN' 'new' $h '' '' '';if($a[-1] -ne $n[-1]){throw 'default mismatch'}
+ $a=Run 'hostA' 'base' $h '0.4,0.6' '' ''; $n=Run 'hostN' 'new' $h '0.4,0.6' '' '';if($a[-1] -ne $n[-1]){throw 'host mismatch'}
+ $expected=Run 'manualGold' 'base' $h '0.7,0.3' '' ''; $file=Run 'manualFile' 'new' $h '0.4,0.6' '0.7,0.3' ''; $env=Run 'manualEnv' 'new' $h '0.4,0.6' '0.1,0.1' '0.7,0.3';if($expected[-1] -ne $file[-1] -or $file[-1] -ne $env[-1] -or $file[-1] -eq $n[-1]){throw 'manual override not correct'}
+ $bad=Run 'invalid' 'new' $h '0.4,0.6' 'nan,0.3' '';if($bad[-1] -ne $n[-1]){throw 'invalid fallback mismatch'};'PASS height='+$h}
+$results|ConvertTo-Json|Set-Content "$root\results.json"
+$ErrorActionPreference='Continue';& 'D:\DLSSNR-Lab\re9-presr\runtime-smoke.exe' "$root\defaultN-1080\LmxxfNrRuntime.dll" $mods > "$root\smoke.log" 2> "$root\smoke.err";$rc=$LASTEXITCODE;$ErrorActionPreference='Stop';if($rc){throw 'smoke failed'};'STRENGTH_CHECK_DONE'
+}finally{Remove-Item $lock -Force}

@@ -7,6 +7,7 @@
 #include "LmxxfProductionOptions.h"
 #include "native_device_identity.h"
 #include "native_game_codec.h"
+#include "runtime_strength_config.h"
 #include "native_lab_paths.h"
 #include "native_game_rgb_input.h"
 #include "native_network_geometry.h"
@@ -305,14 +306,14 @@ void LoadFlagsFileOnce(const std::wstring &assets)
             for (const auto &e : NativeConfigLoadDir(folder, &layers))
             {
                 const std::string &key = e.key;
-                // Only the network/kernel keys: codec, present and pre-upscale keys of the add-on templates
+                // Network/kernel keys plus explicit output strength: other codec, present and pre-upscale keys of the add-on templates
                 // (DLSS5_CODEC_SRGB, DLSS5_PRE_UPSCALE, ...) do not apply to this runtime and stay ignored.
                 const bool allowed = !key.compare(0, 10, "DLSS5_HIP_") || key == "DLSS5_SKIP_BLOCKS" ||
                                      key == "DLSS5_FIT_LARGE" || key == "DLSS5_NETWORK_HEIGHT" ||
                                      key == "DLSS5_NETWORK_1080_ROWS" || key == "DLSS5_STYLE" || key == "DLSS5_DIRECT_IO" ||
                                      key == "DLSS5_NETWORK_FREE_RES" || key == "DLSS5_FAST_NUMERIC" ||
                                      key == "DLSS5_MULTI_PASS" || key == "DLSS5_MULTI_PASS_SKIP_BLOCKS" || key == "DLSS5_MULTI_PASS_SKIN_PROTECT" || key == "DLSS5_MULTI_PASS_PREDICT" ||
-                                     key == "DLSS5_FRAME_STATS";
+                                     key == "DLSS5_FRAME_STATS" || key == "DLSS5_STRENGTH";
                 if (!allowed)
                     continue;
                 if (NativeConfigFind(env, key))
@@ -959,24 +960,21 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
                 model_scale = info->model_scale;
             }
         }
-        if (!(info->flags & LMXXF_NR_FRAME_FLAG_STRENGTH))
-        {
-            if (const wchar_t *e = _wgetenv(L"DLSS5_STRENGTH"))
-            {
-                float a = 1.f, b = 1.f;
-                if (swscanf(e, L"%f,%f", &a, &b) == 2 && a >= 0.f && b >= 0.f)
-                {
-                    transfer_strength = a;
-                    color_strength = b;
-                }
-            }
-        }
         if (debug_view == 0 && _wgetenv(L"DLSS5_DEBUG_TINT") && !wcscmp(_wgetenv(L"DLSS5_DEBUG_TINT"), L"1"))
         {
             debug_view = 4; // Tint
         }
-        if (transfer_strength < 0.0f || transfer_strength > 1.0f || color_strength < 0.0f || color_strength > 1.0f)
+        if (!std::isfinite(transfer_strength) || !std::isfinite(color_strength) || transfer_strength < 0.0f || transfer_strength > 1.0f || color_strength < 0.0f || color_strength > 1.0f)
             return Fail(LMXXF_NR_INVALID_ARGUMENT, "PrepareFrame: transfer_strength and color_strength must be in [0, 1]");
+
+        // An explicit numeric user setting wins over host/menu parameters; auto preserves the host contract.
+        const auto configured = runtime_strength::Parse(_wgetenv(L"DLSS5_STRENGTH"));
+        runtime_strength::Override(configured, transfer_strength, color_strength);
+        if (configured.state == runtime_strength::State::Invalid) {
+            static std::atomic_flag warned = ATOMIC_FLAG_INIT;
+            if (!warned.test_and_set()) std::fprintf(stderr, "DLSS5_STRENGTH invalid: expected two finite values in [0,1]; using host/default strength\n");
+        }
+
 
         // Match upstream auto tier: <=1280x720 -> 720, <=1600x900 -> 900, else 1080.
         // Prefer CRT _putenv so MinGW std::getenv sees "auto" (SetEnvironmentVariable alone may not).
