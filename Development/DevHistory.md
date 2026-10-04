@@ -1615,3 +1615,10 @@ Issue13原NVIDIA现存数据已公开两包：[Gofile](https://gofile.io/d/FWpua
 RTX5090空闲定向捕原block0 pre-down四tile：源(832,528)/(960,544)/(0,0)/(1912,1072)各8×8，对应down4×4×32；真实960×576两C16平面FP8，packet+f8原GPUbuffer。每帧2次2048B相同/无NaN；先一次暖Eval取得有效launch self，提交完成后Eval外准备copy，采集hook仅GPUenqueue32行copy，不Sync/CPU等待；不另取API final。原prefix16/16→32投影在fused寄存器/LDS无独立输出，不用受控权重readout伪造。没有当前已验证修复，等待test20指纹/tile对比再修。
 
 包19241B/SHA c9dc356927a24f131f7fe9acbcb0798e7461faacce4f9a40bbaf01045276320c，https://gofile.io/d/FWpuapJe ；已回复并读回 https://github.com/lmxxf/dlss5-on-amd-9070xt-porting/issues/13#issuecomment-5977255490 。结果results/issue13-prefix-20261004/source已归档，无游戏配置/部署/驱动改动，无push。今晚鸣潮待用户观察，不替用户下载安装。
+
+
+### 2026-10-04 Issue4/PR15：Enqueue恢复HIP当前device修复已备
+
+新报告LUID正确选device1/gfx1201/HIP70260201，ready后prefix400；提交者仅addon变量、42flags/模块同的A/B/C，0.40/main各9错，Enqueue重绑后600+帧无错。采纳PR15一行hipSetDevice(hip_device)，既有try失败仍封闭退出，不改选卡/资源/kernel。HIP current device为TLS，但线程ID未实测，400标签也可来自lazyGetFunction而非已launch。
+
+本机HIP仅9070device0（Intel核显不进HIP）；跨线程单device查询通过、900/1080八帧对fresh基线逐位同，不作双HIP复现。候选/tmp/issue4-products/dlss5-amd.addon64 SHA a810cd5194f565be68198b1f86a5777cc62e446995fa49d355c2f5661aa37444。未装Magpie/两游戏，无配置/BIOS/驱动改动，无外发/关闭issue/push。记录results/issue4-igpu-20261004，修复来源PR15/XMoon。

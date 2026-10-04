@@ -21,6 +21,8 @@
 
 - **Issue13新定位已交**：原pre-down四tile独立捕获、两repeat逐byte同/无NaN，FP8存储后数据，非pre-half。小包19241B/c9dc3569已同Gofile公开，issuecomment-5977255490已回复。prefix16/16→32投影融合无独立边界，未伪造。作者test20额外偏差尚缺source/flags/模块SHA，不套最新生产，不称所有闪烁原模型；待对方可验指纹与tile再修。今晚鸣潮由用户观察，本轮不安装/部署。
 
+- **Issue4修复已备**：PR15/新报告控制A/B/C证明选卡一直device1正确，Enqueue重绑后9次400→600+帧无错。已采纳一行hipSetDevice既有try失败封闭退出；本机单HIP设备跨线程/900/1080逐位门过，不冒充双HIP复测。候选addonA810CD51在/tmp/issue4-products，未装Magpie/两游戏，不改配置/BIOS/驱动；没有对外回复/关闭issue，线程ID实证仍缺。
+
 ## 下一步
 
 1. 继续真实2k等价优化。DUP边际C32约5.325ms最大，其次C256约2.313、ViT族约2.168、C512 FFN/投影部分约1.221；这些不能相加当整网比例。只有具体结构空间才重开旧负账，不泛扫flags。
