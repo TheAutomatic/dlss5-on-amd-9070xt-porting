@@ -349,6 +349,7 @@ private:
 public:
 #if defined(DLSS5_BENCH_BRIDGE_ISOLATE) && defined(DLSS5_USE_HIP)
  // Diagnostic caller must own a quiescent frame; returned objects are borrowed.
+ auto DiagnosticNetworkTiming(){return resources->network.PollNetworkTiming();}
  hip_reference::Network& DiagnosticNetwork(){resources->submit.Flush();return resources->network.DiagnosticNetwork();}
  ID3D12Resource* DiagnosticInput(){return resources->input.PostBase();}
  ID3D12Resource* DiagnosticOutput(){return resources->network.Output();}

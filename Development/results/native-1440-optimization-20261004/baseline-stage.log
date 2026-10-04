@@ -1,0 +1,17 @@
+BASELINE single 1920x1080 wall=12.1888958333333
+SP_STATS runs=128 fallback=0 rollover=0 jobs=114304 disabled=0 errors=0
+ngx-base.exe : multi_pass=1 multi_pass_predict=0 actual_network_passes=1
+    + CategoryInfo          : NotSpecified: (multi_pass=1 mu...etwork_passes=1:String) [], RemoteException
+BASELINE single 2560x1440 wall=19.9816458333333
+SP_STATS runs=0 fallback=0 rollover=0 jobs=0 disabled=0 errors=0
+ngx-base.exe : multi_pass=1 multi_pass_predict=0 actual_network_passes=1
+    + CategoryInfo          : NotSpecified: (multi_pass=1 mu...etwork_passes=1:String) [], RemoteException
+BASELINE pred3 1920x1080 wall=22.5452708333333
+SP_STATS runs=256 fallback=0 rollover=0 jobs=228608 disabled=0 errors=0
+ngx-base.exe : multi_pass=3 multi_pass_predict=1 actual_network_passes=2
+    + CategoryInfo          : NotSpecified: (multi_pass=3 mu...etwork_passes=2:String) [], RemoteException
+BASELINE pred3 2560x1440 wall=35.9966041666667
+SP_STATS runs=0 fallback=0 rollover=0 jobs=0 disabled=0 errors=0
+ngx-base.exe : multi_pass=3 multi_pass_predict=1 actual_network_passes=2
+    + CategoryInfo          : NotSpecified: (multi_pass=3 mu...etwork_passes=2:String) [], RemoteException
+BASELINE_DONE

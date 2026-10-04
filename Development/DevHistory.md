@@ -1582,3 +1582,14 @@ C512激活LUT GPU原helper生64KiB表，65536half全byte同（含非finite）、
 ### 2026-10-04 09:50:52 鬼武者直接RGBA版实玩反馈
 
 Zero反馈「鬼武者接近49帧（900P 2k质量），3x效果不错」。现配置MP3/PREDICT1/SKIN0，实际两遍真实网络+预测第三遍；不是三遍真实计算。此前也有约49fps读数，本次未确认帧率提高，离线节省.187ms不等于实玩已读出提升。
+
+
+### 2026-10-04 原生1440 C256融合门已装；ViT960止损
+
+实际输入2560×1440/proc2560×1472/960tokens，full71 FAST1/SKIN0；只对该shape放行既有C256 wholeblock核，GPU模块/数学不改。三轮连续ABBA单遍NR frame wall17.48285→17.02935ms、p99 17.803→17.348；优化3x（两遍+预测第三遍）34.40925→33.44233、p99 34.810→33.793。纯NN GPU median分别15.96772→15.58430和32.76842→31.82376ms。wall含codec/交接/回写，不含游戏render/FSR/Present；不是已证明真2k可稳定实玩。老harness每帧读回/CPU扫图改变提交节奏，初报20/36ms保留为诊断口径、不作连续基线；同exe连续1080单遍参考wall10.13734、GPU9.28136。fixture原图来源未独立确认，motion/history是受控序列，不称新游戏抓帧。
+
+1440 FAST0/FAST1静态及受控动/history原网络11304960 float逐位同、无NaN；正常19及RE9三档九组SAME/smoke0。初用旧R对照AE720出现4帧不同，离散决策同、score略异，保留失败；旧R A/A与同HEAD新编baseline单case过，随后同源AE7/CSV+roll4过，未定位旧runner异常根因。main addon当前重编wholeSHA未复现旧装SHA，不作源码＝旧binary证明。
+
+原900/1080两轮control合并平均不慢；1080p99不差，900p99点估计14.319→14.363略高。新runner A/A尾14.378/14.380，跨批尾位置约.06ms变化覆盖差额，收为测量分辨率内等价，不声称全部p99改善。补证前已经装机，control接受过早，随后补一次A/A+control，不删旧读数。双游戏addonF1681283/runtimeF0A74F7D，76模块SUMS仍A09EE065；备份native-1440-optimization-20261004/backups/20261004-113833。所有配置字节保留：auto/FREE0；剑星3/PRED0/SKIN0，鬼武者3/PRED1/SKIN0。现质量模式900不会因本刀提速，真2k待用户NativeAA+FREE1决定。
+
+DUP边际C32约5.325ms、C256约2.313、C512 FFN/投影部分约1.221、ViT族约2.168，不相加当整网份额。960已走现融合/stream/N64/w5 QKV，新增恒960入口小筛无稳定收益；只收实验记录（原512b4872，本分支fc9a74b5），不合生产。结果results/native-1440-optimization-20261004、vit960-20261004。原输出留hash/统计后清理，未删输入/权重/附件，无push/发行包。

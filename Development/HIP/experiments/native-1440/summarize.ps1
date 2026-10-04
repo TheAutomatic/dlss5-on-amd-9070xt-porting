@@ -1,0 +1,4 @@
+$r='D:\DLSSNR-Lab\native-1440-optimization-20261004';$ans=@()
+foreach($m in 'single','pred3'){$pool=@(@(),@());$rounds=@();foreach($n in 1,2,3){$rv=@(@(),@());foreach($slot in 0..3){$p="$r\dense-$m-$n-$slot\o.csv";if(!(Test-Path $p)){continue};$v=@(Import-Csv $p|Select-Object -Skip 48|%{[double]$_.wall_ms});$side=if($slot -in 0,3){0}else{1};$pool[$side]+=$v;$rv[$side]+=$v};if($rv[0].Count -and $rv[1].Count){$rounds+=((($rv[1]|Measure-Object -Average).Average)-(($rv[0]|Measure-Object -Average).Average))}}
+$a=@();foreach($s in 0,1){$v=@($pool[$s]|Sort-Object);$a+=@{mean=($v|Measure-Object -Average).Average;p99=if($v.Count){$v[[int][math]::Ceiling($v.Count*.99)-1]}else{0};n=$v.Count}};$ans+=@{mode=$m;round_deltas=$rounds;base=$a[0];candidate=$a[1]}}
+$ans|ConvertTo-Json -Depth 5|Set-Content "$r\dense-summary.json";$ans|ConvertTo-Json -Depth 5

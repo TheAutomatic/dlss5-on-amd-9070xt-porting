@@ -1,0 +1,9 @@
+ngx-quality.exe : multi_pass=3 multi_pass_predict=1 actual_network_passes=2
+At D:\DLSSNR-Lab\native-1440-optimization-20261004\quality.ps1:6 char:470
++ ... ='Continue';& "$root\ngx-quality.exe" "$root\assets" "$d\flags.txt" " ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (multi_pass=3 mu...etwork_passes=2:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+DLSS5_FAST_NUMERIC=1: multihead-fast-padded-wave-packed-fast.hsaco missing, using multihead-fast-padded-wave-packed.hsa
+co

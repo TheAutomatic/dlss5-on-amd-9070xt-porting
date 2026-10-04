@@ -1,0 +1,3 @@
+$r='D:\DLSSNR-Lab\native-1440-optimization-20261004';$all=@()
+foreach($kind in 'AA','combined'){foreach($p in 0,1){$h=if($p){900}else{1080};$q=@(@(),@());foreach($batch in $(if($kind -eq 'AA'){'AA'}else{'control','control2'})){foreach($slot in 0..3){$file="$r\runtime-regression-C-$batch-$p\time-$h-$slot\rgb.csv";if(!(Test-Path $file)){continue};$s=if($slot -in 0,3){0}else{1};$q[$s]+=@(Import-Csv $file|Select-Object -Skip 32|%{[double]$_.wall_ms})}};$a=@();foreach($s in 0,1){$v=@($q[$s]|Sort-Object);$a+=@{mean=($v|Measure-Object -Average).Average;p99=$v[[int][math]::Ceiling($v.Count*.99)-1];n=$v.Count}};$all+=@{kind=$kind;height=$h;pred=$p;base=$a[0];candidate=$a[1]}}}
+$all|ConvertTo-Json -Depth 5|Set-Content "$r\control-final.json";$all|ConvertTo-Json -Depth 5

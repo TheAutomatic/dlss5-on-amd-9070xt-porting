@@ -1,0 +1,2 @@
+$r='D:\DLSSNR-Lab\native-1440-optimization-20261004'
+foreach($m in 'single','pred3'){foreach($side in 0,1){$v=@();foreach($n in 1,2,3){foreach($slot in $(if($side -eq 0){0,3}else{1,2})){$v+=@(Select-String "$r\dense-$m-$n-$slot\run.log" -Pattern '^NET frame=(\d+) gpu_ms=([\d.-]+)'|?{[int]$_.Matches[0].Groups[1].Value -ge 48}|%{[double]$_.Matches[0].Groups[2].Value})}};$s=@($v|Sort-Object);"NET $m $side count=$($s.Count) min=$($s[0]) median=$($s[[int]($s.Count/2)]) max=$($s[-1])"}}
