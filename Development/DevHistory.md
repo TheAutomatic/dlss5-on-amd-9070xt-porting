@@ -1629,3 +1629,8 @@ RTX5090空闲定向捕原block0 pre-down四tile：源(832,528)/(960,544)/(0,0)/(
 DLSS5_STRENGTH加入白名单，合法两finite数0..1覆盖宿主/menu，auto/空/缺省沿原API/default；非法回宿主报告一次，API范围不扩大。addon/Magpie0..3不改，RE9文件重启、addon约1秒热载；层序不变，剑星native auto仍覆盖custom。CPUparser及900/1080默认/API .4,.6、新file/env .7,.3盖菜单/非法回退hash检查通过，smoke通过。未改网络/math/Style/遍数。
 
 仅装鬼武者root/_storage_ runtime25A617B2，备份strength-config-20261004/backups/20261004-200004；三配置字节hash不变，未写新数值/改变现强度、MP/PRED/SKIN/geometry，剑星addon未动。results/strength-config-20261004，无push/发布。
+
+
+### 2026-10-04 20:09 鬼武者强度入口版实玩确认
+
+Zero反馈「鬼武者没异常跟之前一样」。当前runtime25A617B2、强度auto/原默认、MP3/PRED1/SKIN0，未提供新FPS；不把本次反馈记作提速或自定义强度数值验收。

@@ -7,3 +7,5 @@ RE9新增DLSS5_STRENGTH白名单；两个合法finite数0..1明确覆盖宿主�
 CPU parser边界/非法/继承优先通过；900/1080默认auto及API .4,.6新旧hash同；file/env .7,.3等于旧API .7,.3并确实盖宿主 .4,.6；非法nan回宿主同；smoke过。只改runtime decoder参数选择，无kernel/网络数学/Style/遍数改动。测试初模块目录/SUMS选错在Create失败，改用既有完整rt-new/modules后通过。
 
 已仅更新鬼武者root/_storage_ runtime SHA25a617b2118cf20afe98d395c41a91d3bf1d174af7116a87c8a23eacb51d6dfd；备份D:\DLSSNR-Lab\strength-config-20261004\backups\20261004-200004。default/custom/native字节hash不变，未改变现强度或MP/PRED/SKIN/geometry；剑星addon没动。未发布0.41/无push。
+
+20:09用户实玩确认：鬼武者无异常、与此前一样；保持auto/原默认、MP3/PRED1/SKIN0，没有新FPS或手调数值反馈。

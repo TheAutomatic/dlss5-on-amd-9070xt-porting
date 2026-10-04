@@ -23,7 +23,7 @@
 
 - **Issue4修复已备**：PR15/新报告控制A/B/C证明选卡一直device1正确，Enqueue重绑后9次400→600+帧无错。已采纳一行hipSetDevice既有try失败封闭退出；本机单HIP设备跨线程/900/1080逐位门过，不冒充双HIP复测。候选addonA810CD51在/tmp/issue4-products，未装Magpie/两游戏，不改配置/BIOS/驱动；没有对外回复/关闭issue，线程ID实证仍缺。
 
-- **强度文件入口已补**：RE9合法两finite数0..1盖宿主/menu，auto/空/缺省沿API/default，非法回宿主报告一次；addon/Magpie仍0..3。文件层序不改，RE9文件需重启、addon约1秒热载。默认/API/file/env900/1080 hash门及smoke过；只装鬼武者runtime25A617B2，备份strength-config-20261004/backups/20261004-200004，三配置字节不变、现强度没改。剑星native auto仍盖custom，未擅改该行。
+- **强度文件入口已补**：RE9合法两finite数0..1盖宿主/menu，auto/空/缺省沿API/default，非法回宿主报告一次；addon/Magpie仍0..3。文件层序不改，RE9文件需重启、addon约1秒热载。默认/API/file/env900/1080 hash门及smoke过；只装鬼武者runtime25A617B2，备份strength-config-20261004/backups/20261004-200004，三配置字节不变、现强度没改。剑星native auto仍盖custom，未擅改该行。20:09鬼武者实玩无异常、与此前一样，未给新FPS/手调数值反馈。
 
 ## 下一步
 
