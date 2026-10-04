@@ -1647,3 +1647,7 @@ Zero反馈「鬼武者没异常跟之前一样」。当前runtime25A617B2、强�
 ### 2026-10-04 23:06 剑星恢复快速3x配置
 
 用户反馈剑星3x约27fps。核读default/custom/native：custom为MP3/PREDICT0/SKIN0，native仅覆盖MP3；Machine/User无对应环境覆盖。本次C512模块安装保留配置hash，预测关闭早已存在，不能归因此次算子改动。按用户恢复快速3x意图仅将custom PREDICT改1，保BOM/换行及其余字节；备份`D:\DLSSNR-Lab\sword-fast3-restore-20261004-230612`。当前未查到剑星进程，下一次启动读取MP3/PREDICT1/SKIN0（两真实遍+预测第三遍），未声称已测新FPS。已有约1秒热载支持；F9仅切遍数，不切预测开关。未换载荷/跑GPU/动鬼武者。
+
+### 2026-10-04 快速3x预测默认开启
+
+按用户要求，MULTI_PASS_PREDICT共享启动/成员及addon热载默认改1，三模板/CONFIGURATION同步。缺失/空值默认开启，显式0仍真三遍，非法值仍关闭；仅MP3实际用两遍+预测，1/2不改，4/5不扩展。源码提取CPU解析与静态路径检查通过，未跑GPU/换游戏载荷，两游戏custom此前已1。0.41需重编宿主并更新模板；历史结果默认0记录保持原样。结果`results/predict-default-20261004`。

@@ -15,7 +15,7 @@
      DLSS5_NOTICE     on-screen status line (0/1/2)
      DLSS5_SHOW_FPS   FPS text in that line (0/1)
      DLSS5_MULTI_PASS pass count 1/2/3 (2026-10-03; HIP network, applied before the next network frame; invalid/absent = 1)
-     DLSS5_MULTI_PASS_PREDICT 0/1; default 0; only active with 3 passes (LOSSY)
+     DLSS5_MULTI_PASS_PREDICT 0/1; default 1; only active with 3 passes (LOSSY)
      DLSS5_MULTI_PASS_SKIN_PROTECT 0/1; default 0; skin-color heuristic blend at N>1
    Everything else (network height, skip blocks, HIP kernels/modules, FP8/wave/tiling switches, DIRECT_IO, PRE_UPSCALE, FIT_*, ASYNC,
    FRAME_STATS, FORMAT_FALLBACK) stays as read at start: those build buffers, modules or pipelines once, or change the network's
@@ -38,11 +38,11 @@ class NativeHotFlags{
   if(!NativeConfigDirHasAny(NativeLabRoot()))return;
   for(const std::string&cfg_line:NativeConfigFileLines()){const char*line=cfg_line.c_str();{unsigned n;
    if(sscanf(line,"DLSS5_NOTICE=%u",&n)==1)v.notice=int(n);if(sscanf(line,"DLSS5_SHOW_FPS=%u",&n)==1)v.fps=int(n);sscanf(line,"DLSS5_STRENGTH=%47s",strength);
-   if(!strncmp(line,"DLSS5_MULTI_PASS_PREDICT=",25)){const char*m=line+25;v.multi_pass_predict=(!*m||!strcmp(m,"0"))?0:!strcmp(m,"1")?1:(std::fprintf(stderr,"DLSS5_MULTI_PASS_PREDICT=%s invalid (0/1), using 0\n",m),0);}
+   if(!strncmp(line,"DLSS5_MULTI_PASS_PREDICT=",25)){const char*m=line+25;v.multi_pass_predict=(!*m||!strcmp(m,"1"))?1:!strcmp(m,"0")?0:(std::fprintf(stderr,"DLSS5_MULTI_PASS_PREDICT=%s invalid (0/1), using 0\n",m),0);}
    if(!strncmp(line,"DLSS5_MULTI_PASS_SKIN_PROTECT=",30)){const char*m=line+30;v.multi_pass_skin_protect=(!*m||!strcmp(m,"0"))?0:!strcmp(m,"1")?1:(std::fprintf(stderr,"DLSS5_MULTI_PASS_SKIN_PROTECT=%s invalid (0/1), using 0\n",m),0);}
    if(!strncmp(line,"DLSS5_MULTI_PASS=",17)){const char*m=line+17;v.multi_pass=(!*m||!strcmp(m,"1"))?1:!strcmp(m,"2")?2:!strcmp(m,"3")?3:(std::fprintf(stderr,"DLSS5_MULTI_PASS=%s invalid (1/2/3), using 1\n",m),1);}}}
   if(v.multi_pass<0)v.multi_pass=1; /* key gone from every layer: built-in default */
-  if(v.multi_pass_predict<0)v.multi_pass_predict=0; /* key removed: built-in default */
+  if(v.multi_pass_predict<0)v.multi_pass_predict=1; /* key removed: built-in default */
   if(v.multi_pass_skin_protect<0)v.multi_pass_skin_protect=0; /* key removed: built-in default */
   float a=1.f,b=1.f;if(sscanf(strength,"%f,%f",&a,&b)==2&&a>=0.f&&a<=3.f&&b>=0.f&&b<=3.f){v.strength=true;v.transfer=a;v.color=b;}
   values=v;

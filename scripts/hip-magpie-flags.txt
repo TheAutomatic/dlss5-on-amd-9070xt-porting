@@ -342,9 +342,9 @@ DLSS5_MULTI_PASS=1
 # 中：肤色保护：叠层>1时肤色区域保留第一遍，其余用最终遍；肤色启发式非分割；默认0
 # EN: Skin protect at MULTI_PASS>1: skin uses pass 1, elsewhere final pass; color heuristic, not segmentation; default 0
 DLSS5_MULTI_PASS_SKIN_PROTECT=0
-# 中：第三遍预测：仅叠层=3时跑两遍再局部预测第三遍；有损实验，默认0；1/2遍不变
-# EN: Predict pass 3 locally after two real passes, only with MULTI_PASS=3; LOSSY experiment; default 0; passes 1/2 unchanged
-DLSS5_MULTI_PASS_PREDICT=0
+# 中：第三遍预测：仅叠层=3时跑两遍再局部预测第三遍；有损预测，默认1；0用真3遍，1/2遍不变
+# EN: Predict pass 3 locally after two real passes, only with MULTI_PASS=3; LOSSY; default 1; 0 runs real pass 3; passes 1/2 unchanged
+DLSS5_MULTI_PASS_PREDICT=1
 # 中：叠层减负：只在第 2 遍及以后跳过的块（写法同 SKIP_BLOCKS），第 1 遍永远全网；默认空；非空即有损
 # EN: Multi-pass skip: blocks skipped only in passes 2..N (same list as SKIP_BLOCKS); pass 1 always full; default empty; LOSSY if set
 DLSS5_MULTI_PASS_SKIP_BLOCKS=

@@ -147,7 +147,7 @@ inline bool FastNumericFromEnvironment(){const char*v=std::getenv("DLSS5_FAST_NU
    (only the RGBA16F storage rounding of the encode pass is not repeated). Unset/empty/1 = one pass, the code path is unchanged; other
    values are reported and treated as 1. Read at network creation. Adaptive ViT reuse is off while N>1 (its cache is per frame, not per pass). */
 inline bool MultiSkinFromEnvironment(){const char*v=std::getenv("DLSS5_MULTI_PASS_SKIN_PROTECT");return v&&!std::strcmp(v,"1");}
-inline bool MultiPredictFromEnvironment(){const char*v=std::getenv("DLSS5_MULTI_PASS_PREDICT");return v&&!std::strcmp(v,"1");}
+inline bool MultiPredictFromEnvironment(){const char*v=std::getenv("DLSS5_MULTI_PASS_PREDICT");return !v||!*v||!std::strcmp(v,"1");}
 inline unsigned MultiPassFromEnvironment(){const char*v=std::getenv("DLSS5_MULTI_PASS");if(!v||!*v||!std::strcmp(v,"1"))return 1;
  if(!std::strcmp(v,"2"))return 2;if(!std::strcmp(v,"3"))return 3;std::fprintf(stderr,"DLSS5_MULTI_PASS=%s invalid (1/2/3), using 1\n",v);return 1;}
 /* DLSS5_MULTI_PASS_SKIP_BLOCKS (2026-10-03, results/multi-pass-skip-20261003): residual blocks skipped in passes 2..N only (same list
@@ -798,7 +798,7 @@ if(opt.fast_c32){const char*f[][2]={{"c32_fast_ffn","c32_fast.hsaco"},{"c32_fast
  U multi_pass=1;Tensor multi_feed[2];U multi_next=0;
  using Memcpy2DFn=int(*)(void*,size_t,const void*,size_t,size_t,size_t,int,Handle);Memcpy2DFn memcpy2d{};
  std::set<U> multi_skip;
- U graph_output_stride=3,skin_first_stride=3;bool multi_predict=false,multi_skin=false;Tensor predict_gain,skin_first,skin_mask,skin_result;
+ U graph_output_stride=3,skin_first_stride=3;bool multi_predict=true,multi_skin=false;Tensor predict_gain,skin_first,skin_mask,skin_result;
  __attribute__((noinline)) Tensor MultiPassRest(Tensor out,const Tensor&hist,const Tensor&original,U stride=3){
   if(multi_skin){if(!skin_first)throw std::runtime_error("skin resources must be prepared before producer wait");skin_first_stride=stride;api.Check(api.hipMemcpyAsync(P(skin_first),P(out),size_t(W)*H*stride*4,3,stream),"save first pass for skin");}
   /* passes 2..N: DLSS5_MULTI_PASS_SKIP_BLOCKS added to the configured skip set (restored after, also on a throw) */
