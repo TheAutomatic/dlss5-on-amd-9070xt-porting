@@ -5,7 +5,7 @@ DLSS 5（DLSSNR）跑在 AMD RX 9070 XT / RDNA 4 上。
 [English](README.md)
 
 把 NVIDIA DLSS 5 的神经渲染器（`nvngx_dlssnr.dll` 里那张 71 块的 Swin/ViT 网络，"DLSSNR"）从零重做到 AMD RDNA 4 上。网络逐块逆向后，
-现在以每架构 29 个 HIP 模块的形式运行（gfx1201 = RX 9070 系，gfx1200 = RX 9060 系），跑在 AMD 驱动自带的 HIP 7 运行时上。权重是 NVIDIA 的，
+现在以每架构 38 个 HIP 模块的形式运行（gfx1201 = RX 9070 系，gfx1200 = RX 9060 系），跑在 AMD 驱动自带的 HIP 7 运行时上。权重是 NVIDIA 的，
 从用户自己那份 DLL 里提取；本仓库不分发任何 NVIDIA 的东西。
 
 现在每个包的流水线都是：**游戏按它的（低）渲染分辨率出一帧 → 我们的网络处理这一帧 → 宿主的超分（FSR）放大到显示分辨率。** 三个包是三种接到这个位置的方式：
@@ -78,7 +78,7 @@ DLSS5_MULTI_PASS=2
 
 游戏里按 **F9** 在 1 → 2 → 3 → 1 遍之间轮换（常规 OptiScaler 和 Magpie add-on；`DLSS5_MULTI_PASS_HOTKEY` 可改键，写 `0` 关掉）。按键会把 `DLSS5_MULTI_PASS=N` 写进 `custom-config.txt`，热重载大约一秒内切过去，不用重启。`native-game-flags.txt` 里也有 `DLSS5_MULTI_PASS` 时（它会盖过 custom），那一行也一起改。RE9 runtime 没有热重载，只能改文件后重启。想让后几遍便宜点，用 `DLSS5_MULTI_PASS_SKIP_BLOCKS` 只在第 2 遍及以后跳块（见上表，有损）。
 
-为什么只列这几项：几何和结构类的几项每一步算术都和原来相同，每帧独立，代价可以量出来；ViT 复用是跨帧的，所以单独标了风险。快速数值路径不一样，它改的是算术本身，舍入差异会一层层传过后面的块，最后会在哪个画面冒出来事先说不清楚；离线测的代价很小（对 NVIDIA 基本不变），但测试画面覆盖不了所有场景，所以默认关，让用户自己选。其他有损做法（f16 累加、softmax 改成 half）没有做成选项。
+为什么只列这几项：几何和结构类的几项每一步算术都和原来相同，每帧独立，代价可以量出来；ViT 复用是跨帧的，所以单独标了风险。快速数值路径不一样，它改的是算术本身，舍入差异会一层层传过后面的块，最后会在哪个画面冒出来事先说不清楚；离线测的代价很小（对 NVIDIA 基本不变），但测试画面覆盖不了所有场景，当前默认为FAST_NUMERIC=1；设0可选择参考数值路径。其他有损做法（f16 累加、softmax 改成 half）没有做成选项。
 
 ## 仓库结构
 
@@ -108,33 +108,78 @@ DLSS5_MULTI_PASS=2
   残差流在块间以 E4M3 字节传递。
 - **核**（`hip/`）：所有 GEMM 都是 RDNA 4 的 WMMA 16×16×16 指令，FP8（E4M3）或 f16 操作数、f32 累加器，操作数直接从显存或 LDS 加载；
   行归约（归一化的平方和、softmax 分母）用对全 1 tile 的 WMMA 完成；量化用硬件 FP8 转换。C32 块把一个 8×8 窗口的 FFN + 注意力 + 投影
-  放在一个 128 线程组里做完，隐层激活留在寄存器；C64～C256 的注意力把指数留在寄存器；权重在初始化时预排成 WMMA 片段顺序。每架构 29 个模块（0.31 起）。
+  放在一个 128 线程组里做完，隐层激活留在寄存器；C64～C256 的注意力把指数留在寄存器；权重在初始化时预排成 WMMA 片段顺序。每架构 38 个模块（0.31 起）。
 - **游戏侧**：宿主把渲染分辨率的那一帧交给我们；codec（`shaders/native_codec_encode.hlsl`）把它编码到网络面上（任何尺寸的输入都适配到
   720/900/1080 档，镜像补边），网络在 D3D12↔HIP 共享缓冲上跑（用 fence 同步），decode 着色器把结果和原帧合成（网络只引导原分辨率画面的
   亮度和颜色）再交给宿主的超分。前置（渲染分辨率）路径里网络自己的时序历史每帧重置，时序工作由超分做；Magpie 路径没有游戏的运动向量。
   屏幕左上角有状态行（`DLSS5 ON 1707x961 -> FSR 2560x1440`、INITIALIZING、UNSUPPORTED）。
-- **数值**：一条"精确链"逐位复现 NVIDIA 的核（每步显式 f16 舍入）；发布用的快速链放宽（f32 累加、硬件舍入），用 PSNR 对精确链校验（约 42 dB）。
-  0.20 以来每一次内核改动都和上一版逐位相同，除非它的开关自己说明不是（目前只有 `HIP_FFN_WAVE_NORM`，默认关），每个候选装机前都过 12 帧 RGB hash 回归。
+- **数值**：生产快速链不等于原NVIDIA逐位真值。逐位优化相对于明确的同源基线验收；FAST_NUMERIC、自适应复用和第三遍预测等有损控制分别注明。历史0.36 FMA曾改变基线，不能声称0.20以来所有更新均逐位相同。
+
+当前源码默认`DLSS5_MULTI_PASS_PREDICT=1`：3x跑两遍真实网络再预测第三遍（有损）；显式0运行真三遍，1x/2x不变。F9只切遍数，肤色保护默认0。此为待0.41发布源码策略，已发布0.40包尚未更新。
+
+## 配置
+
+全部配置说明与默认文件入口：[配置参考 / Configuration](scripts/CONFIGURATION.md)。该页复用完整中英注释模板，说明三层优先级、强度、热载及 RE9 差异。
 
 ## 编译
 
-### 现在的包怎么编（0.35）——每个发布文件从哪来
+### 当前 HIP 源码怎么编（0.40发布后、0.41待发布）——每个发布文件从哪来
 
 | 包里的文件 | 源码 | 编法 |
 |---|---|---|
-| `dlss5-amd.addon64`（Magpie / OptiScaler 包） | `src/native_submission_order_probe.cpp` + `src/*.h`、`Development/HIP/*.h`（桥） | Linux/WSL：`bash scripts/build-addon-oneclick.sh dlss5-amd.addon64 --hip`（自动把 MinHook 和 ReShade 6.8 头文件拉到 `third_party/`；需要 `g++-mingw-w64-x86-64`）。编译结果不是逐字节可复现的，重编后按游戏内表现验收，不比 hash |
-| `DLSS5-AMD\native-game-tiled-assets\HIP\gfx1200\*.hsaco`、`...\gfx1201\*.hsaco`（0.31 起各 29 个模块，0.35 起 30 个） | `hip/*.hip`，配方 `hip/build-modules.ps1` | 任意一台装着 AMD 驱动（System32 里有 `amd_comgr_3.dll`）的 Windows：`x86_64-w64-mingw32-g++ -std=c++17 -O2 -static hip/rtc_compile.cpp -o rtc_compile.exe`，然后 `powershell -File hip\build-modules.ps1 -Compiler rtc_compile.exe -OutputDir <out>`（默认两种架构都编；`-Only <名字>` 只编一个）。编译不需要显卡；每个 `.hsaco` 旁边会落 `.hsaco.s` 汇编。两个架构约 6 分钟。每次编译都会嵌一个随机的 `__hip_cuid_…` 符号，所以重编结果别比文件 hash，用 `python3 hip/compare-modules.py <输出目录> <包>\DLSS5-AMD\native-game-tiled-assets\HIP` 比代码段；2026-09-26 全新 clone 实测 58 个里 52 个一致，另 6 个是非 packed 的后备模块 `c32_fused_ffn_attention` / `deep_fast` / `multihead-fast-padded-wave`（默认不加载），包里还是早先编的旧版 |
+| `dlss5-amd.addon64`（Magpie / OptiScaler 包） | `src/native_submission_order_probe.cpp` + `src/*.h`、`Development/HIP/*.h`（桥） | Linux/WSL：`bash scripts/build-addon-oneclick.sh dlss5-amd.addon64 --hip`（自动把 MinHook 和 ReShade 6.8 头文件拉到 `third_party/`；需要 `g++-mingw-w64-x86-64`）。当前脚本固定image base并去PE时间戳；同编译器/依赖下核hash，另验行为，不承诺跨工具链hash相同 |
+| `DLSS5-AMD\native-game-tiled-assets\HIP\gfx120{0,1}\*.hsaco`（38/架构，共76） | `hip/build-modules.ps1`及其源文件 | 按下方混合编译流程；五个LLVM23模块/架构，其余33个COMGR21；必须用`-RowOpts -PrebuiltDir`复现生产配方 |
 | `shaders/*.hlsl` 那 12 个（编解码、屏幕文字、RGB 搬运、时序座标、帧检查） | `shaders/`（历史 DX12 网络链在 `shaders/dx12-network/`） | 直接以源码随包；运行时由系统 `d3dcompiler` 编（宿主按 `#define` 选 44 个变体） |
 | RE9 包：`dxgi.dll`（改过的 OptiScaler 宿主）+ `LmxxfNrRuntime.dll` | TheAutomatic 的 fork `release/1.9.0` @ `8f71f73` + 我们在 `Development/RE9/presr/` 的补丁 | `python3 Development/RE9/presr/prepare-host.py`（需要锁定版本的宿主源码：`git clone https://github.com/TheAutomatic/dlss-5-amd-project /tmp/re9-upstream-bridge-review && git -C /tmp/re9-upstream-bridge-review checkout 8f71f73`；重写宿主/runtime 源码并把 `src/`、`shaders/`、`hip/` 拷进 `third_party/lmxxf/`），再 `bash Development/RE9/presr/build-runtime.sh`（MinGW，编 runtime 和冒烟测试）和 Windows 上跑 `build-host.ps1`（Visual Studio 2022 Build Tools：MSVC v143 + Windows SDK 10.0.26100；用 vswhere 自动找，或 `-MSBuild <路径>`）。不用 Linux 也行：每个 RE9 包都带着准备好的源码 `sources\re9-presr-source.tar.gz`，`powershell -File Development\RE9\presr\build-host.ps1 -Root <工作目录> -Archive <那个 tar.gz>` 就能编出宿主（`<工作目录>\bin\OptiScaler.dll`，发布时改名 `dxgi.dll`；2026-09-26 用 0.32 包里的源码实测：91 秒，大小与发布的 `dxgi.dll` 相同，hash 因 MSVC 时间戳不同）。上游 clone 放别处就设 `RE9_UPSTREAM=<目录>`——见 `Development/RE9/presr/README.md`；同一套源码打成 `sources/re9-presr-source.tar.gz` 随包（`bundle-source.py`） |
 | 独立的 `LmxxfNrRuntime.dll`（接口 `include/LmxxfNrApi.h`，TheAutomatic 贡献） | `src/LmxxfNrRuntime.cpp` | Linux/WSL：`bash scripts/build-runtime.sh`；Windows：`scripts\build-runtime.cmd`（要 MSYS2 UCRT64 的 g++：`pacman -S mingw-w64-ucrt-x86_64-gcc`；用别的 g++ 就设 `LMXXF_GXX`） |
-| `DLSS5-AMD\native-game-flags.txt`（包也认 `DLSS5_HIP_MODULES=<目录>`，从别处加载模块；`Development/HIP/validate-modules.ps1` 对一套模块跑逐位校验） | `scripts/hip-game-flags.txt` / `hip-magpie-flags.txt` / `hip-re9-flags.txt`（说明在 `scripts/CONFIGURATION.md`） | 直接拷 |
+| `DLSS5-AMD\default-config.txt`及`custom-config.template.txt` | [配置参考](scripts/CONFIGURATION.md)链接的三宿主模板及`scripts/custom-config.txt` | `Development/tools/stage-config-layers.ps1`复制；不打包玩家custom/native文件 |
 | 权重（`*.f16` / `*.f32`）、`noise.f32` | 不在仓库里（见"权重"） | 随包；新包从上一个完整包接着做 |
 
-打包：`Development/tools/package-035.ps1`（Windows）把上一版完整包解开、逐文件对 `SHA256SUMS.txt` 校验，换上表里变过的文件（每个都核 hash，模块还要和测试机上装着的那份相同），编一遍 fit shader，写 `release.json`、`SHA256SUMS.txt`，压 zip 再读回核对。之前的版本：`package-034.ps1` … `package-026.ps1`、`package-0281-re9.ps1`。
+打包入口目前是 `Development/tools/package-040.ps1`，用于0.40配方和已校验的基础ZIP、框架及模型资产，不是从源码自动生成全部第三方资产；0.41尚未发布，不能只改版本号就当发行验证完成。模板通过`stage-config-layers.ps1`进入default-config；该脚本不升级已安装游戏。
 
-内核出包前的验证：`Development/HIP/validate-modules.ps1`（一套模块对 golden 的逐位校验）和每个生产候选都要过的整网回归（`Development/deployments/stellar-prod6-20260923/regression-prod6.ps1`：两段输入各 12 帧 RGB hash、1000 帧计时、额外控制组）。0.20 以来仓库里每一次内核改动都和上一版逐位相同，除非它的开关自己说明不是（目前唯一的非逐位开关 `HIP_FFN_WAVE_NORM`，默认关）。
+发布前需核对双架构ELF目标和全部导出、76模块清单，以及当前同源正常19（normal/AE/roll）、相关多遍与RE9路径；数值改动开关另行标注。历史`validate-modules.ps1`及prod6脚本不覆盖所有新路径，不能当当前完整验收。
 
 内核的活是怎么组织的（给想接着做的人）：每个优化都是 `Development/HIP/experiments/<名字>/` 下的一个实验（`prepare.py` 把生产源码改成 `_pairN` 变体或模块集，`build.ps1`、`run.ps1`，有时还有 `analyze.py`），结果写在 `Development/results/<名字>-<日期>/README.md`；采用的改动变成源码里带默认值的 `HIP_*` 开关。`Development/WorkingPlan.md` 是现在在干什么，`Development/DevHistory.md` 是干过什么、为什么。
+
+### 当前混合模块构建 / Current mixed-module build
+
+Linux/WSL需要Python3、MinGW-w64 C++、git/curl；一键add-on脚本获取MinHook/ReShade 6.8头文件，默认是历史`--tiled`，现HIP必须显式`--hip`。Windows模块编译需要PowerShell和带`amd_comgr_3.dll`的AMD驱动；无需GPU执行。CPU宿主MinGW与GPU内核LLVM/COMGR是两套编译器。
+
+Linux/WSL needs Python3, MinGW-w64 C++, git/curl. The add-on helper fetches MinHook/ReShade 6.8 headers; pass `--hip` explicitly (its default is historical `--tiled`). Windows module compilation needs PowerShell and the driver's `amd_comgr_3.dll`, without executing GPU work. CPU-host MinGW is separate from the GPU compilers.
+
+LLVM23 prerequisite / 先准备公开编译器（Linux，需CMake、Ninja及C/C++编译器）：
+
+```bash
+git clone --depth 1 --branch llvmorg-23.1.2 https://github.com/llvm/llvm-project llvm-src-23
+cmake -G Ninja -S llvm-src-23/llvm -B llvm-build-23 -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=OFF -DLLVM_ENABLE_PROJECTS="clang;lld" -DLLVM_TARGETS_TO_BUILD=AMDGPU -DLLVM_INCLUDE_TESTS=OFF -DLLVM_INCLUDE_BENCHMARKS=OFF -DLLVM_INCLUDE_EXAMPLES=OFF
+cmake --build llvm-build-23 --target clang lld llvm-objdump llvm-readobj llvm-dis -j 12
+```
+
+Pass the absolute `llvm-build-23/bin` path as `--bin` below. The maintainer's [build-llvm23.sh](Development/tools/llvm-fork/build-llvm23.sh) uses the same settings but hardcodes a local work directory; the commands above do not depend on it.
+将生成的`llvm-build-23/bin`绝对路径填入下方`--bin`，不依赖维护者私有目录。
+
+```bash
+bash scripts/build-addon-oneclick.sh dlss5-amd.addon64 --hip
+bash scripts/build-runtime.sh bin
+x86_64-w64-mingw32-g++ -std=c++17 -O2 -static hip/rtc_compile.cpp -o rtc_compile.exe
+python3 Development/tools/llvm-fork/compile-modules.py --bin /path/to/llvm-23.1.2/bin --out /path/to/prebuilt --targets gfx1200 gfx1201 --compiler-rows llvm23 --row-opts --target-feature=-real-true16
+```
+
+Use an actual public LLVM23.1.2 clang/lld build in `--bin`; the script's default path is the older LLVM21 experiment, **not** LLVM23. See [compiler build notes](Development/tools/llvm-fork/README.md). The prebuild parses the canonical recipe, including its compiler-specific barrier definitions; do not hand-copy a shorter macro list. Copy `rtc_compile.exe`, the repository sources and the entire `prebuilt/gfx1200` and `prebuilt/gfx1201` folders to Windows, then run from the repository root:
+
+`--bin`必须指向实际公开LLVM23.1.2的clang/lld，脚本默认目录是旧LLVM21实验而非23。预编译自动读生产配方及屏障宏；不要手列漏宏。将当前源码编出的rtc、源码树和双架构prebuilt目录传Windows，在仓库根目录运行：
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File hip\build-modules.ps1 -Compiler .\rtc_compile.exe -OutputDir .\modules -RowOpts -PrebuiltDir C:\build\prebuilt
+```
+
+Both targets are the default. LLVM23 rows: `c32-wave1`, `c32-wave1-rtz`, `c32-wave1-fast`, `c64-wave2`, `c64-wave2-fast`. The remaining 33 rows use the driver's COMGR (current validated environment: LLVM21). Omitting `-RowOpts` compiles everything with COMGR and does **not** reproduce the selected production toolchain. `-Only` selects one exact module name; a single `-Targets gfx1201` writes modules directly under OutputDir, while both targets produce architecture subfolders. Keep architecture names when installing/staging. Use current `hip/rtc_compile.cpp`: older helpers could ignore gfx1200; audit ELF targets before release.
+
+默认双架构；上述五行LLVM23，其余33行用驱动COMGR（当前已验环境LLVM21）。不加`-RowOpts`会全走COMGR，不是生产混合配方。`-Only`只选一个精确模块名；仅一个`-Targets gfx1201`时直接写OutputDir，双架构才建子目录。安装/打包保留架构目录；旧rtc可能忽略gfx1200，必须编当前源码并核ELF目标。
+
+A source build alone is not a complete installation: supply matched framework/model/noise assets, the modules plus SHA256SUMS, and `shaders/` beside the DLL. RE9 also needs its matched prepared OptiScaler host (table above). Existing user custom/native values override updated defaults; do not silently replace them. This section documents commands, not a newly built/released package.
+
+仅源码构建不等于完整安装：还需匹配的框架/模型/noise、模块及SHA256SUMS、DLL旁shaders；RE9需匹配宿主。升级default不能覆盖玩家custom/native。本页只整理流程，没有新编译或发布。
 
 ### 历史：DX12 版（0.15 及之前）
 
@@ -203,7 +248,7 @@ powershell -ExecutionPolicy Bypass -File scripts\deploy_fast.ps1 -Source <lab> -
 | 0.28.1 · [OptiScaler-REFramework](https://pan.quark.cn/s/1375693a0d21)（HIP） | 09-22 | RE9专用完整包：真实输入超限时在HIP初始化前拒绝并保留原始超分；初始化失败安全回滚，改回有效尺寸可恢复，保护未退休帧。10组/12提交帧回归和用户初步实玩通过，宿主/runtime需配套更新；源码与TheAutomatic署名随包。 |
 | 0.29 · [Magpie](https://pan.quark.cn/s/fe1b6af36cad) · [OptiScaler](https://pan.quark.cn/s/209e04e7acaf) · [OptiScaler-REFramework](https://pan.quark.cn/s/505d38a63a85)（HIP） · 三个包的 [Google Drive 镜像](https://drive.google.com/drive/folders/1VPsX33sLTxBG4J8kJ_IzBDlkbBTCc5Eo?usp=sharing) | 09-23 | 超过1920×1080的输入不再拒绝：缩到1080档跑网络，再按原版codec方式还原到原分辨率（`DLSS5_FIT_LARGE=1`，issue #6；《剑星》2K Native AA 44fps、RE9 Native AA实测；超宽屏未实机）。共享核自0.28以来六项逐位无损优化（栅栏作用域、C32折叠FFN、字节链+向量化输入、注意力寄存器化、in16别名、FFN尾段转置）约−7%，《剑星》900P约60fps。RE9宿主不变、runtime更新。 |
 | 0.30 · 三个包（Magpie · OptiScaler · OptiScaler-REFramework，HIP）[夸克](https://pan.quark.cn/s/80a735ab9f88) · [Google Drive 镜像](https://drive.google.com/drive/folders/1pKZpLosgJXxUOZTMg_m0sbCipX9Q3WYo?usp=sharing) | 09-25 | 链上 launch 任意序 + tile 旗子（土法 programmatic dependent launch，`DLSS5_HIP_PDL=1`；逐位；900P 约 −1.6%、1080P −0.6%；`results/pdl-chain-20260925`）与 FFN 全行写（逐位，−0.6%）。《赛博朋克 2077》零配置：常规包 `OptiScaler.ini` 带 `[Inputs] EnableFfxInputs=false`，`DLSS5_PRE_UPSCALE_ASYNC=auto`（2077 同步：瞬态别名颜色缓冲），`DLSS5_STRENGTH=auto`（2077 只转亮度 1,0：在游戏 LUT 之前取网络色相会把绿色环境光变褐）。修复：切档位/分辨率后神经处理消失（FSR 上下文钉死，经 shim 销毁清不掉；重启预算只算失败）。RE9 包：同一组核，宿主/runtime 与 0.29 相同。《剑星》900P→2K 60～61、1080P→2K 47～48；2077 低画质平衡 51～52、质量 41。 |
-| 0.31 · 三个包（Magpie · OptiScaler · OptiScaler-REFramework，HIP）[夸克](https://pan.quark.cn/s/e76b8611e3cc) · [Google Drive 镜像](https://drive.google.com/drive/folders/1xtBe_XhgF9eqBlrlIQMgWcEkzm0UKHIZ?usp=sharing) | 09-26 | 档位选择：输入两轴都不超过某档 110% 时往下缩进该档（2K 质量 1707×961 → 900 档，原先放大进 1080 档）。一头一 wave 核（C32/C64/C128 整块 + C256 注意力；`DLSS5_HIP_WAVE_OWNED=1`；逐位，整网约 −6%；`results/c64-wave2-20260926`、`wave-owned-*`）；C512 QKV/mix 32 token（`DLSS5_HIP_C512_M32=1`，逐位，约 −1.3%；`results/c512-ffn-20260926`）；ViT 投影 64 列（`DLSS5_HIP_VIT_PROJ_N64=1`，逐位，1080 约 −1.8%；`results/m32-sweep-20260926`）。常规包默认 `DLSS5_VIT_ADAPTIVE=1`（静止 +3 帧，运动自动失效）。每架构 29 个模块。RE9 包：宿主/runtime 与 0.30 相同，新核随包不启用。《剑星》主菜单 2K 质量 57、2K Native AA 43～44。 |
+| 0.31 · 三个包（Magpie · OptiScaler · OptiScaler-REFramework，HIP）[夸克](https://pan.quark.cn/s/e76b8611e3cc) · [Google Drive 镜像](https://drive.google.com/drive/folders/1xtBe_XhgF9eqBlrlIQMgWcEkzm0UKHIZ?usp=sharing) | 09-26 | 档位选择：输入两轴都不超过某档 110% 时往下缩进该档（2K 质量 1707×961 → 900 档，原先放大进 1080 档）。一头一 wave 核（C32/C64/C128 整块 + C256 注意力；`DLSS5_HIP_WAVE_OWNED=1`；逐位，整网约 −6%；`results/c64-wave2-20260926`、`wave-owned-*`）；C512 QKV/mix 32 token（`DLSS5_HIP_C512_M32=1`，逐位，约 −1.3%；`results/c512-ffn-20260926`）；ViT 投影 64 列（`DLSS5_HIP_VIT_PROJ_N64=1`，逐位，1080 约 −1.8%；`results/m32-sweep-20260926`）。常规包默认 `DLSS5_VIT_ADAPTIVE=1`（静止 +3 帧，运动自动失效）。每架构 38 个模块。RE9 包：宿主/runtime 与 0.30 相同，新核随包不启用。《剑星》主菜单 2K 质量 57、2K Native AA 43～44。 |
 | 0.32 · 三个包（Magpie · OptiScaler · OptiScaler-REFramework，HIP）[夸克](https://pan.quark.cn/s/b805e071405c) · [Gofile 镜像](https://gofile.io/d/CZ67LYIc) | 09-26 | 显存池：HIP 导入的 D3D12 共享缓冲区驱动不归还，改为按档位复用（切 40 次 +3GB → 平台；`results/vram-leak-20260926`）。C32 宽读（逐位，−0.8/−0.9%；`results/c32-wave-phase-20260926`）。RE9 runtime 读 flags（`DLSS5_HIP_*`/`SKIP_BLOCKS`/`FIT_LARGE`/`NETWORK_HEIGHT`），默认开 0.31 新核，兼容老宿主两参数 `EnqueueHip`（`results/re9-runtime-flags-20260926`）；合入 PR #9。RE9 中画质 2K 高质量 54、原生 AA 38。 |
 | 0.33 · 三个包（Magpie · OptiScaler · OptiScaler-REFramework，HIP）[夸克](https://pan.quark.cn/s/6bb64e46ab67) · [Gofile 镜像](https://gofile.io/d/8yAjJX1b) | 09-27 | FP8 打包（c32-wave1 的 `CW_PACK8`、c64-wave2 的 `W2_PACK8`）：一条 `cvt_pk` 转两个值写进片段字；逐位相同，网络 900 档 10.74→9.80ms、1080 档 15.01→13.64ms（`results/c64-block-fused-20260927`、`results/pack8-20260927`）。《剑星》1080P 原生 AA、EXACT：主菜单 49～50、常见场景 53～54。黄字显示 AE/EXACT；F7 开关屏幕文字。 |
 | 0.34 · 三个包（Magpie · OptiScaler · OptiScaler-REFramework，HIP）[夸克](https://pan.quark.cn/s/4b572b0a5b81) · [Gofile 镜像](https://gofile.io/d/cfHqVzD1) | 09-27 | fmed3 clamp（`HIP_FMED3_CLAMP`、C32 `HIP_FP8_SAT_MODE 3`）与 `W2_PACK8 6`（分段 FP16_OVFL + fma(x,y,+0) 打包），逐位相同（`results/fmed3-ovfl-20260927`、`results/ovfl-census-20260927`、`results/c64-hand-asm-20260927`）；整套模块由 `hip/build-modules.ps1` 编出。PDL 计数回绕保护（`results/pdl-audit-20260927`）。RE9：宿主换队列跟随 + 看门狗（`results/onimusha-presr-20260927`），runtime 切档泄漏 35MB→0 与几何日志（`results/re9-runtime-leak-20260927`）。《剑星》1080P AA EXACT 主菜单 50～51 / 场景 54；RE9 中画质 2K 高质量 58、原生 AA 41；鬼武者 2K 质量约 60。 |

@@ -1,4 +1,22 @@
-# 发布配置来源
+# 配置参考 / Configuration reference
+
+[中文 README](../README.zh-CN.md) · [English README](../README.md)
+
+## 全部配置的默认文件 / All annotated defaults
+
+完整选项（含兼容/历史实验键）的中英文逐项说明以以下三份版本控制模板为准；发行时复制为`DLSS5-AMD/default-config.txt`。本页集中说明常用控制、优先级和宿主差异，不再复制一份全项清单。旧DX12实验键不代表当前HIP/RE9都会读取；RE9仅接受下文白名单。
+
+The complete bilingual option comments live in the templates below, staged as `DLSS5-AMD/default-config.txt`. This page explains controls and host differences. Historical DX12/test keys are not automatically active in HIP or supported by RE9.
+
+| Host / 宿主 | Annotated default / 全注释默认 |
+|---|---|
+| 普通游戏 / regular OptiScaler add-on | [hip-game-flags.txt](hip-game-flags.txt) |
+| Magpie add-on | [hip-magpie-flags.txt](hip-magpie-flags.txt) |
+| RE9专用runtime / RE9-specific runtime | [hip-re9-flags.txt](hip-re9-flags.txt) |
+
+用户在[custom模板](custom-config.txt)对应的`custom-config.txt`写覆盖项，例如`DLSS5_STRENGTH=0.7,0.3`控制亮度细节与色彩。先核native/系统环境有无更高优先级同名键。当前源码快速3x预测默认1，显式0真三遍；1x/2x不受影响，skin默认0。这是0.40发布后的源码状态，0.41尚未发布，旧包默认没有追溯改变。
+
+Write overrides in `custom-config.txt`; check higher-priority native/environment layers first. Strength `0.7,0.3` controls detail-lighting and colour separately. Current source defaults prediction to 1 only at 3 passes, with explicit 0 for real three-pass computation; skin defaults to 0. These upcoming-source defaults do not retroactively update released ZIPs.
 
 ## 三层配置文件（2026-10-03 起的源码）
 
@@ -16,26 +34,17 @@
 - 行的写法不变：去掉行尾 CR/LF/空格后，以 `DLSS5_` 开头、含 `=`、至少 8 个字符的行才算；键是第一个 `=` 之前的部分，值是之后的部分。`#` 注释、空行、中文说明都忽略；文件开头的 UTF-8 BOM 跳过；行长不再有 255 字节限制。
 - 同一文件里同一键出现两次：**最后一行为准**（add-on 一直如此；RE9 runtime 以前取第一行）。
 - 空值（`DLSS5_SKIP_BLOCKS=`）：覆盖前面的层，结果是"空"；写进环境时 `_putenv` 会删掉变量，所以等于用程序内置默认。
-- RE9 runtime 只放行白名单键（`DLSS5_HIP_*`、`SKIP_BLOCKS`、`FIT_LARGE`、`NETWORK_HEIGHT`、`NETWORK_1080_ROWS`、`STYLE`、`DIRECT_IO`、`NETWORK_FREE_RES`、`FAST_NUMERIC`、`MULTI_PASS`、`MULTI_PASS_SKIP_BLOCKS`、`MULTI_PASS_SKIN_PROTECT`、`MULTI_PASS_PREDICT`、`FRAME_STATS`），在 DLL 旁的 `DLSS5-AMD\` 或资产目录往上四层里找第一个含任一层文件的文件夹。
+- RE9 runtime 只放行白名单键（`DLSS5_HIP_*`、`SKIP_BLOCKS`、`FIT_LARGE`、`NETWORK_HEIGHT`、`NETWORK_1080_ROWS`、`STYLE`、`DIRECT_IO`、`NETWORK_FREE_RES`、`FAST_NUMERIC`、`MULTI_PASS`、`MULTI_PASS_SKIP_BLOCKS`、`MULTI_PASS_SKIN_PROTECT`、`MULTI_PASS_PREDICT`、`FRAME_STATS`、`STRENGTH`），在 DLL 旁的 `DLSS5-AMD\` 或资产目录往上四层里找第一个含任一层文件的文件夹。
 - 热重载（`DLSS5_HOT_RELOAD`）监视三个文件的修改时间，任一改动/新建/删除都会重读合并结果。叠层热键（`DLSS5_MULTI_PASS_HOTKEY`，默认 F9）写的是 `custom-config.txt`；`native-game-flags.txt` 里也有 `DLSS5_MULTI_PASS` 时连那一行一起改（否则会被它盖住），系统环境变量里有就改不动（stderr 提示）。
 - add-on 认定配置文件夹（DLL 旁 `DLSS5-AMD\`）的条件从"有 native-game-flags.txt"改为"三个文件有任意一个"。
 
 测试：`tools/test_config_layers.cpp`（Linux 原生或 mingw 编出 Windows 版都能跑，28 项）。
 
-正式新包的DLSS5-AMD/default-config.txt（0.39 及以前是 native-game-flags.txt）来自本目录的版本控制模板：
+当前默认模板见上表。RE9同样读取hip-re9-flags.txt白名单配置；re9-presr.ini是OptiScaler宿主覆盖，不代替网络文件。当前发布组装入口为`Development/tools/package-040.ps1`，通过`stage-config-layers.ps1`复制default-config和custom-config.template，不带实际玩家custom/native。`-ConfigDirectory`须指向同提交模板；0.41仍需独立打包/发行核验。注释中英两行，每行≤191字节。
 
-| 版本 | 默认模板 |
-|---|---|
-| 普通OptiScaler游戏版 | hip-game-flags.txt |
-| Magpie版 | hip-magpie-flags.txt |
-| REFramework旧后置版（≤0.27） | hip-re9-flags.txt |
-| RE9特殊前置版（0.28起） | re9-presr.ini覆盖OptiScaler.ini；网络选项在LmxxfProductionOptions.h编译 |
+## 历史配置演进 / Historical packaging notes
 
-模板里每个 `DLSS5_` 选项上方都带一行中文、一行英文注释（作用、默认值、逐位/有损、何时改）；各读取方只认以 `DLSS5_` 开头的行，`#` 注释行、带不带 BOM 都会被忽略，注释行须短于 255 字节。改默认值就改相应模板，再打包。普通游戏与RE9模板以2026-09-20已测试配置校对，移除机器专属gain路径；自适应默认0、FPS默认1。Magpie保留独立色彩/历史设置并补齐当前HIP优化参数。游戏内用户修改不反向改变模板。
-
-正式入口Development/tools/optiscaler-stellarblade.ps1 -Action Release、package-magpie-candidate.ps1、RE9/package-0261.ps1直接复制模板，不从旧包/运行游戏继承flags再追加。其他文件仍可使用已校验基础包。package-026.ps1向两个子脚本传递ConfigDirectory。按仓库目录运行时默认定位scripts；若单独上传脚本到Windows，须同步模板并显式传入例如 -ConfigDirectory D:\DLSSNR-Lab\release-config。缺模板报错，不回退。不要只更新远端脚本、遗漏同提交的模板。
-
-Release生成新包使用模板；Repack/FinalizeOnly仅重封已有stage，保留stage内配置。部署升级继续允许保留玩家现有设置，不因重新编译自动覆盖游戏。
+下面是旧包记录，不是当前默认或构建指令。
 
 Development/native-game-flags.txt是早期测试配置，scripts/game-flags.txt与magpie-flags.txt属旧DX12路线；不作为当前HIP正式发布默认值。
 
@@ -68,7 +77,7 @@ Development/native-game-flags.txt是早期测试配置，scripts/game-flags.txt�
 | `DLSS5_MULTI_PASS_SKIP_BLOCKS` | empty (regular / Magpie / RE9 templates; source default empty) | Multi-pass skip ("叠层减负"): blocks skipped **only in passes 2..N** of `DLSS5_MULTI_PASS`, same list syntax as `DLSS5_SKIP_BLOCKS` (added to it for those passes); pass 1 always runs the configured network. **LOSSY** when set. Skippable here: C32 1–4/66–69, C512 23–30/40–47, ViT 31–38; the C64/C128/C256 blocks (5–22, 48–65) cannot be skipped with the production byte-stream pipeline. With 3 passes, current default (all blocks + FAST_NUMERIC=1), offline whole network: empty 21.1 / 29.8 ms (900 / 1080); `42,43,46` 20.7 / 29.3 ms, 43.9–46.0 dB; `31,32,33,34,35,36,37,38,40,41,42,43,44,45,46,47` (ViT + C512 up) 18.4 / 25.7 ms (−13%/−14%), 34.1–35.0 dB; `23`…`38,40`…`47` (+ C512 down) 17.4 / 24.3 ms (−17%/−18%), 33.2–33.6 dB. **The dB are against our own 3-pass all-block output, not against NVIDIA**; for scale, 3 passes against 1 pass is 35.0 dB. The ViT + C512-up set takes away much of what the later passes add (lighter, less contrast; 37.5 dB from 1 pass); the deep set is about as far from 1 pass as full 3 passes, in another direction (dark areas lifted). Structural, per frame, nothing carries over; the saving is small because the cost sits in the full-resolution C32/C64 chain. No effect at `DLSS5_MULTI_PASS=1`. An unparsable list, or a block this pipeline cannot skip, is reported on stderr and treated as empty. Shared add-on / RE9 runtime option (whitelisted), read when the network is created. `Development/results/multi-pass-skip-20261003`. |
 | `DLSS5_MULTI_PASS_HOTKEY` | `F9` (regular / Magpie templates; source default F9; RE9 runtime: not applicable) | In-game key that cycles `DLSS5_MULTI_PASS` 1→2→3→1 starting from the pass count in effect. A press writes `DLSS5_MULTI_PASS=N` into `custom-config.txt` (the line replaced, else appended; the file created if missing; BOM and line ends kept) and the hot reload applies it within about a second (logged as `event=multi_pass_hotkey` and `multi_pass=N` in `logs\native-game-oneshot.txt`). Layer order still holds: if `native-game-flags.txt` also has `DLSS5_MULTI_PASS` it would win, so that line is rewritten too (stderr line); a `DLSS5_MULTI_PASS` system environment variable wins over every file (stderr line, the change does not apply). `F1`…`F24` or a virtual-key number (e.g. `0x78`); `0` = off; other values → F9 with a stderr line. Polled with `GetAsyncKeyState` once per network frame like F6/F7/F8, so it reacts while the game window is not focused too. Needs `DLSS5_HOT_RELOAD` on (default). Read once at start. Not pressed / off = bit-identical. The RE9 runtime has no hot reload and no hotkey. |
 | `DLSS5_FORMAT_FALLBACK` | `1` (0.38 templates: regular / Magpie / RE9; source default 1) | Colour-format fallback table (`src/native_format_fallback.h`, after mochizuki 0.0.2.4). Colour formats outside the original table that the GPU decodes to float through a typed SRV — R9G9B9E5_SHAREDEXP (linear HDR), B8G8R8X8 (UNORM/SRGB/TYPELESS), R10G10B10A2 (UNORM/TYPELESS), R32G32B32A32 / R32G32B32 (FLOAT/TYPELESS), R16G16B16A16_SNORM, R8G8B8A8_SNORM, B5G6R5, B5G5R5A1, B4G4R4A4 — are accepted. Add-on pre-upscale route: one compute pass (`native_format_convert.hlsl`, ships in `native-game-tiled-assets`) converts the colour into a private RGBA16F texture that takes the unchanged RGBA16F route; FSR is handed that texture. RE9 runtime: the encoder's SRV reads the format and the private FP16 output route (RGB9E5's since 0.28) is used. Formats accepted before never reach the table (bit-exact). A rejected colour is logged with its format name (`native-pre-upscale.txt` / RE9 `PrepareFrame: colour rejected`). Post-upscale / Magpie / XeSS routes are unchanged (their output is written back into the game texture). A missing shader only turns the fallback off. `0` = original table. |
-| `DLSS5_HOT_RELOAD` | `1` (0.38 regular / Magpie templates; source default 1; RE9 runtime: not applicable, strength is live in the OptiScaler menu) | At most once a second the add-on checks the last-write time of the three config files (default / custom / native, since 2026-10-03; before: native-game-flags.txt only); when any changed, `DLSS5_STRENGTH` (all add-on routes), `DLSS5_NOTICE` and `DLSS5_SHOW_FPS` (pre-upscale route's status line) and, since 2026-10-03, `DLSS5_MULTI_PASS`, `DLSS5_MULTI_PASS_PREDICT` and `DLSS5_MULTI_PASS_SKIN_PROTECT` (HIP network, before its next frame) are re-read and apply from the next frame; logged as `event=hot_reload` in `logs\native-game-oneshot.txt`. `auto`/absent keeps the start value. Network geometry, skip blocks, HIP/module/kernel switches, DIRECT_IO, PRE_UPSCALE, FIT_*, ASYNC, FRAME_STATS and FORMAT_FALLBACK are read once (they size buffers, load modules or change the network's numbers) and still need a restart. Unedited file = no change (bit-exact). `0` = never poll. |
+| `DLSS5_HOT_RELOAD` | `1` (0.38 regular / Magpie templates; source default 1; RE9 runtime: not applicable, strength is live in the OptiScaler menu) | At most once a second the add-on checks the last-write time of the three config files (default / custom / native, since 2026-10-03; before: native-game-flags.txt only); when any changed, `DLSS5_STRENGTH` (all add-on routes), `DLSS5_NOTICE` and `DLSS5_SHOW_FPS` (pre-upscale route's status line) and, since 2026-10-03, `DLSS5_MULTI_PASS`, `DLSS5_MULTI_PASS_PREDICT` and `DLSS5_MULTI_PASS_SKIN_PROTECT` (HIP network, before its next frame) are re-read and apply from the next frame; logged as `event=hot_reload` in `logs\native-game-oneshot.txt`. Strength `auto`/absent follows its startup/app default; removing a pass/prediction/skin key restores its built-in default (1/1/0), not the previous edited value. Network geometry, skip blocks, HIP/module/kernel switches, DIRECT_IO, PRE_UPSCALE, FIT_*, ASYNC, FRAME_STATS and FORMAT_FALLBACK are read once (they size buffers, load modules or change the network's numbers) and still need a restart. Unedited file = no change (bit-exact). `0` = never poll. |
 | `DLSS5_IO_FUSE` | `0` (source default; not in templates; RE9 runtime: not applicable, it does not use NativeGameFrame) | Experimental, bit-identical: the decoder reads the network's f32 RGB output buffer directly (same f32→f16 rounding) and the separate neural texture pass is skipped. Plain sessions only (no temporal/history feed, no `DLSS5_OVERLAP`); otherwise ignored. Offline −0.004～−0.035 ms/frame, but 900p p99 not better (results/input-slim-20261001), so it stays off. |
 | `DLSS5_STYLE` | `1` (all three templates; source default 1) | NVIDIA NGX Style control, `0`/`1`/`2`, passed to the preprocess step as feature 6 = Style/128 (`dlss5_style_feature` in the C32/prefix modules, set by the host after each module load). `1` is the style the original runtime used in Stellar Blade (captured 2026-09-06) and what every package so far had built in; `0` is NVIDIA's default and matches its reference output (1080p single frame, full 71 blocks 47.43 dB, release recipe 44.26 dB, against 24.06 dB with Style 1); `2` the third style. Not exactly 0/1/2 → 1. Unset or `1` → no extra HIP calls, bit-identical to before. Restart needed. Older modules without the symbol ignore it. DX12 (non-HIP) route: not applicable. RE9 runtime: read from its flags file since the build after 0.39 (0.39's runtime only took it from the system environment). **Integrator note:** read once when a session is created (with the module load), not hot-reloaded; an environment variable of the same name wins over the flags-file line; the C32/prefix modules must be 0.39 or later (older ones silently stay at Style 1), and the fast-tier c32/c64 modules in the lab are older and ignore it. |
 | `DLSS5_NET_TIMING` | unset (not in any template) | Diagnostic: `1` records hipEvents around the HIP network every frame (the same span the RE9 runtime reports through `GetTimings`/`GetStatus`, where it starts at the first `GetTimings` call). The regular add-on never reads the value back, so leave it unset there. Bytes unchanged. |

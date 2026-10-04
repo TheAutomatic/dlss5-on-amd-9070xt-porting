@@ -5,7 +5,7 @@ DLSS 5 (DLSSNR) on AMD RX 9070 XT / RDNA 4.
 [中文说明](README.zh-CN.md)
 
 A from-scratch re-implementation of NVIDIA's DLSS 5 neural renderer ("DLSSNR", the 71-block Swin/ViT network shipped in
-`nvngx_dlssnr.dll`) for AMD RDNA 4. The network was reverse-engineered block by block and now runs as 29 HIP modules per
+`nvngx_dlssnr.dll`) for AMD RDNA 4. The network was reverse-engineered block by block and now runs as 38 HIP modules per
 architecture (gfx1201 = RX 9070 series, gfx1200 = RX 9060 series) on the HIP 7 runtime that ships with the AMD driver. The
 weights are NVIDIA's, extracted from the user's own copy of the DLL; nothing of NVIDIA's is distributed here.
 
@@ -104,7 +104,7 @@ DLSS5_MULTI_PASS=2
 
 In game, **F9** cycles 1 → 2 → 3 → 1 passes (regular OptiScaler and Magpie add-on; `DLSS5_MULTI_PASS_HOTKEY` picks another key, `0` turns it off). It writes `DLSS5_MULTI_PASS=N` into `custom-config.txt` and the hot reload switches within about a second, no restart. If `native-game-flags.txt` also has a `DLSS5_MULTI_PASS` line (it would win over custom), that line is changed too. The RE9 runtime has no hot reload: change the file and restart there. To make the later passes cheaper, `DLSS5_MULTI_PASS_SKIP_BLOCKS` skips blocks in passes 2..N only (table above; lossy).
 
-Why only these: the geometry and structure options keep every arithmetic step the same, each frame stands alone and the cost can be measured; ViT reuse works across frames, so its risk is marked separately. The fast numeric path is different: it changes the arithmetic itself, rounding differences travel through all later blocks, and where they surface can't be predicted. The measured cost is small (practically unchanged against NVIDIA), but test frames can't cover every scene, so it is off by default and left to the user. Other lossy options (f16 accumulation, half-precision softmax) are not offered.
+Why only these: the geometry and structure options keep every arithmetic step the same, each frame stands alone and the cost can be measured; ViT reuse works across frames, so its risk is marked separately. The fast numeric path is different: it changes the arithmetic itself, rounding differences travel through all later blocks, and where they surface can't be predicted. The measured cost is small (practically unchanged against NVIDIA), but test frames can't cover every scene, so the current default is explicitly documented as FAST_NUMERIC=1; use 0 to request the reference-oriented arithmetic path. Other lossy options (f16 accumulation, half-precision softmax) are not offered.
 
 ## What is in this repository
 
@@ -146,37 +146,80 @@ The C host smoke test is `tools/lmxxf_zero_fallback_abi.c`. On Windows, build th
   accumulator, operands loaded straight from memory or LDS; row reductions (normalisation sums, softmax denominators) are
   WMMAs against an all-ones tile; quantisation uses the hardware FP8 casts. The C32 block runs FFN + attention + projection
   of one 8×8 window in a single 128-thread group with the hidden activations kept in registers; the C64–C256 attention keeps
-  its exponentials in registers; weights are prepacked into WMMA fragment order at initialisation. 29 modules per architecture (from 0.31).
+  its exponentials in registers; weights are prepacked into WMMA fragment order at initialisation. 38 modules per architecture (current source).
 - **Game side**: the host hands us the frame at render resolution; the codec (`shaders/native_codec_encode.hlsl`) encodes it onto
   the network surface (fitting any input size to the 720/900/1080 tier, reflected padding), the network runs on a D3D12↔HIP
   shared buffer with fences, and the decode shader composes the result with the original frame (the network steers luminance
   and colour of the full-resolution picture) before the host upscaler sees it. In the pre-upscale (render-resolution) path
   the network's own temporal history is reset every frame and the upscaler does the temporal work; the Magpie path has no
   game motion vectors. An overlay shows the state (`DLSS5 ON 1707x961 -> FSR 2560x1440`, INITIALIZING, UNSUPPORTED).
-- **Numerics**: an "exact" reference chain reproduces NVIDIA's kernels bit for bit (explicit f16 rounding at every step); the
-  shipped fast chain relaxes that (f32 accumulation, hardware rounding) and is judged against it (≈42 dB PSNR). Every kernel
-  change since 0.20 is bit-exact against the previous version unless its flag says otherwise (only `HIP_FFN_WAVE_NORM`, off
-  by default), verified by a 12-frame RGB hash regression before each candidate is installed.
+- **Numerics**: the production fast chain is not a bit-exact NVIDIA oracle. Exact optimisations are checked against an explicit same-source baseline; FAST_NUMERIC, adaptive reuse and third-pass prediction are documented numerical/approximation choices. The 0.36 FMA change also changed the baseline, so not every update since 0.20 was bit-identical.
+
+Current source defaults `DLSS5_MULTI_PASS_PREDICT=1`: 3x uses two real passes and predicts the third (lossy); explicit 0 uses real three passes. 1x/2x are unchanged. F9 changes only the count. Skin defaults to 0. These are upcoming 0.41 source settings, not an update to released 0.40 ZIPs.
+
+## Configuration
+
+See the [configuration reference / 全部配置](scripts/CONFIGURATION.md) for all annotated defaults, file precedence, strength controls, hot reload and RE9 differences.
 
 ## Building
 
-### Building the current packages (0.35) — where every shipped file comes from
+### Building current HIP sources (after 0.40; 0.41 not released) — where every shipped file comes from
 
 | Shipped file | Source | Build |
 |---|---|---|
-| `dlss5-amd.addon64` (Magpie / OptiScaler packages) | `src/native_submission_order_probe.cpp` + `src/*.h`, `Development/HIP/*.h` (bridge) | `bash scripts/build-addon-oneclick.sh dlss5-amd.addon64 --hip` on Linux/WSL (fetches MinHook + ReShade 6.8 headers into `third_party/`; needs `g++-mingw-w64-x86-64`). The build is not byte-reproducible; judge a rebuild by behaviour, not hash |
-| `DLSS5-AMD\native-game-tiled-assets\HIP\gfx1200\*.hsaco`, `...\gfx1201\*.hsaco` (29 modules each from 0.31, 30 from 0.35) | `hip/*.hip`, `hip/wave_owned_*.inc`, recipe `hip/build-modules.ps1` | on any Windows box with an AMD driver that ships `amd_comgr_3.dll`: `x86_64-w64-mingw32-g++ -std=c++17 -O2 -static hip/rtc_compile.cpp -o rtc_compile.exe`, then `powershell -File hip\build-modules.ps1 -Compiler rtc_compile.exe -OutputDir <out>` (both targets by default; `-Only <name>` for one module). No GPU is needed to compile; the assembly lands next to each `.hsaco` as `.hsaco.s`. About 6 min for both targets. Every build embeds a random `__hip_cuid_…` symbol, so compare a rebuild with `python3 hip/compare-modules.py <out> <package>\DLSS5-AMD\native-game-tiled-assets\HIP` (code sections), not by file hash; checked 2026-09-26 on a fresh clone: 52 of 58 identical, the other 6 are the non-packed fallbacks `c32_fused_ffn_attention` / `deep_fast` / `multihead-fast-padded-wave` (not loaded by default) that packages still carry from an older build |
+| `dlss5-amd.addon64` (Magpie / OptiScaler packages) | `src/native_submission_order_probe.cpp` + `src/*.h`, `Development/HIP/*.h` (bridge) | `bash scripts/build-addon-oneclick.sh dlss5-amd.addon64 --hip` on Linux/WSL (fetches MinHook + ReShade 6.8 headers into `third_party/`; needs `g++-mingw-w64-x86-64`). The current script pins the image base and removes PE timestamps; compare with the same compiler/dependencies and validate behaviour |
+| `DLSS5-AMD\native-game-tiled-assets\HIP\gfx120{0,1}\*.hsaco` (38 per architecture, 76 total) | `hip/build-modules.ps1` and its source files | Use the mixed-compiler steps below: five LLVM23 modules and 33 COMGR21 modules per architecture; `-RowOpts -PrebuiltDir` reproduces the production recipe |
 | the twelve `shaders/*.hlsl` (codec encode/decode, text overlay, RGB staging, temporal coordinates, frame checks) | `shaders/` (the historical DX12 network chain lives in `shaders/dx12-network/`) | copied as source; compiled at runtime by the system `d3dcompiler` (44 variants selected by `#define`s from the host) |
 | RE9 package: `dxgi.dll` (modified OptiScaler host) + `LmxxfNrRuntime.dll` | TheAutomatic's fork `release/1.9.0` @ `8f71f73` + our patches in `Development/RE9/presr/` | `python3 Development/RE9/presr/prepare-host.py` (needs the pinned host checkout: `git clone https://github.com/TheAutomatic/dlss-5-amd-project /tmp/re9-upstream-bridge-review && git -C /tmp/re9-upstream-bridge-review checkout 8f71f73`; rewrites the host/runtime sources and copies `src/`, `shaders/`, `hip/` into `third_party/lmxxf/`), then `bash Development/RE9/presr/build-runtime.sh` (MinGW, runtime + smoke test) and `build-host.ps1` on Windows (Visual Studio 2022 Build Tools, MSVC v143 + Windows SDK 10.0.26100; found through vswhere or `-MSBuild <path>`). Without Linux: every RE9 package carries the prepared sources as `sources\re9-presr-source.tar.gz`, so `powershell -File Development\RE9\presr\build-host.ps1 -Root <work dir> -Archive <that tar.gz>` builds the host (`<work dir>\bin\OptiScaler.dll`, shipped as `dxgi.dll`; checked 2026-09-26 from the 0.32 archive on a machine with only the Build Tools: 91 s, same size as the shipped `dxgi.dll`, hash differs by MSVC timestamps). The upstream checkout can also sit elsewhere: `RE9_UPSTREAM=<dir>` — see `Development/RE9/presr/README.md`; the same sources are shipped as `sources/re9-presr-source.tar.gz` (`bundle-source.py`) |
 | standalone `LmxxfNrRuntime.dll` (API in `include/LmxxfNrApi.h`, contributed by TheAutomatic) | `src/LmxxfNrRuntime.cpp` | `bash scripts/build-runtime.sh` (Linux/WSL MinGW), or `scripts\build-runtime.cmd` on Windows (MSYS2 UCRT64 g++, `pacman -S mingw-w64-ucrt-x86_64-gcc`; set `LMXXF_GXX` to use another g++) |
-| `DLSS5-AMD\native-game-flags.txt` (a package also honours `DLSS5_HIP_MODULES=<dir>` to load modules from elsewhere; `Development/HIP/validate-modules.ps1` runs the bit-exact checks on a module set) | `scripts/hip-game-flags.txt` / `hip-magpie-flags.txt` / `hip-re9-flags.txt` (documented in `scripts/CONFIGURATION.md`) | copied |
+| `DLSS5-AMD\default-config.txt` and `custom-config.template.txt` | Three host templates linked by the [configuration reference](scripts/CONFIGURATION.md), plus `scripts/custom-config.txt` | `Development/tools/stage-config-layers.ps1` copies them; personal custom/native files are not shipped |
 | weights (`*.f16` / `*.f32`), `noise.f32` | not in this repository (see *Weights*) | packages carry them; a fresh package is built from the previous full package |
 
-Packaging: `Development/tools/package-035.ps1` (Windows) unzips the previous full packages, verifies every file against their `SHA256SUMS.txt`, swaps in the changed files listed above (each hash-checked, the modules additionally against the copies installed on the test machine), compiles the fit shaders, writes `release.json`, `SHA256SUMS.txt` and the zip, and reads the zip back. Earlier versions: `package-034.ps1` … `package-026.ps1`, `package-0281-re9.ps1`.
+Packaging currently uses `Development/tools/package-040.ps1` with verified baseline ZIPs, framework and model assets. It describes the 0.40 assembly; 0.41 has not been released, and changing its version argument alone is not release validation. `stage-config-layers.ps1` stages defaults without overwriting installed personal settings.
 
-Validation before shipping kernels: `Development/HIP/validate-modules.ps1` (bit-exact checks of a module set against goldens) and the whole-network regression used for every production candidate (`Development/deployments/stellar-prod6-20260923/regression-prod6.ps1`: 12-frame RGB hashes on two input sequences, 1000-frame timing, extra controls) — every kernel change in this repository since 0.20 is bit-exact with the previous one unless its flag says otherwise (`HIP_FFN_WAVE_NORM`, off by default, is the only non-bit-exact switch).
+Before release, verify both ELF targets, exports and the 76-module inventory, then the current same-source normal19 (normal/AE/roll), relevant multi-pass and RE9 paths. Lossy switches are explicitly documented. Historical `validate-modules.ps1` and prod6 scripts do not cover every current path.
 
 How the kernel work is organised (for contributors): every optimisation is an experiment under `Development/HIP/experiments/<name>/` (a `prepare.py` that patches the production source into `_pairN` variants or module sets, `build.ps1`, `run.ps1`, sometimes `analyze.py`), with its result written up in `Development/results/<name>-<date>/README.md`; adopted changes become a `HIP_*` flag with the default set in the source. `Development/WorkingPlan.md` says what is being worked on; `Development/DevHistory.md` records what was done and why.
+
+### 当前混合模块构建 / Current mixed-module build
+
+Linux/WSL需要Python3、MinGW-w64 C++、git/curl；一键add-on脚本获取MinHook/ReShade 6.8头文件，默认是历史`--tiled`，现HIP必须显式`--hip`。Windows模块编译需要PowerShell和带`amd_comgr_3.dll`的AMD驱动；无需GPU执行。CPU宿主MinGW与GPU内核LLVM/COMGR是两套编译器。
+
+Linux/WSL needs Python3, MinGW-w64 C++, git/curl. The add-on helper fetches MinHook/ReShade 6.8 headers; pass `--hip` explicitly (its default is historical `--tiled`). Windows module compilation needs PowerShell and the driver's `amd_comgr_3.dll`, without executing GPU work. CPU-host MinGW is separate from the GPU compilers.
+
+LLVM23 prerequisite / 先准备公开编译器（Linux，需CMake、Ninja及C/C++编译器）：
+
+```bash
+git clone --depth 1 --branch llvmorg-23.1.2 https://github.com/llvm/llvm-project llvm-src-23
+cmake -G Ninja -S llvm-src-23/llvm -B llvm-build-23 -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=OFF -DLLVM_ENABLE_PROJECTS="clang;lld" -DLLVM_TARGETS_TO_BUILD=AMDGPU -DLLVM_INCLUDE_TESTS=OFF -DLLVM_INCLUDE_BENCHMARKS=OFF -DLLVM_INCLUDE_EXAMPLES=OFF
+cmake --build llvm-build-23 --target clang lld llvm-objdump llvm-readobj llvm-dis -j 12
+```
+
+Pass the absolute `llvm-build-23/bin` path as `--bin` below. The maintainer's [build-llvm23.sh](Development/tools/llvm-fork/build-llvm23.sh) uses the same settings but hardcodes a local work directory; the commands above do not depend on it.
+将生成的`llvm-build-23/bin`绝对路径填入下方`--bin`，不依赖维护者私有目录。
+
+```bash
+bash scripts/build-addon-oneclick.sh dlss5-amd.addon64 --hip
+bash scripts/build-runtime.sh bin
+x86_64-w64-mingw32-g++ -std=c++17 -O2 -static hip/rtc_compile.cpp -o rtc_compile.exe
+python3 Development/tools/llvm-fork/compile-modules.py --bin /path/to/llvm-23.1.2/bin --out /path/to/prebuilt --targets gfx1200 gfx1201 --compiler-rows llvm23 --row-opts --target-feature=-real-true16
+```
+
+Use an actual public LLVM23.1.2 clang/lld build in `--bin`; the script's default path is the older LLVM21 experiment, **not** LLVM23. See [compiler build notes](Development/tools/llvm-fork/README.md). The prebuild parses the canonical recipe, including its compiler-specific barrier definitions; do not hand-copy a shorter macro list. Copy `rtc_compile.exe`, the repository sources and the entire `prebuilt/gfx1200` and `prebuilt/gfx1201` folders to Windows, then run from the repository root:
+
+`--bin`必须指向实际公开LLVM23.1.2的clang/lld，脚本默认目录是旧LLVM21实验而非23。预编译自动读生产配方及屏障宏；不要手列漏宏。将当前源码编出的rtc、源码树和双架构prebuilt目录传Windows，在仓库根目录运行：
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File hip\build-modules.ps1 -Compiler .\rtc_compile.exe -OutputDir .\modules -RowOpts -PrebuiltDir C:\build\prebuilt
+```
+
+Both targets are the default. LLVM23 rows: `c32-wave1`, `c32-wave1-rtz`, `c32-wave1-fast`, `c64-wave2`, `c64-wave2-fast`. The remaining 33 rows use the driver's COMGR (current validated environment: LLVM21). Omitting `-RowOpts` compiles everything with COMGR and does **not** reproduce the selected production toolchain. `-Only` selects one exact module name; a single `-Targets gfx1201` writes modules directly under OutputDir, while both targets produce architecture subfolders. Keep architecture names when installing/staging. Use current `hip/rtc_compile.cpp`: older helpers could ignore gfx1200; audit ELF targets before release.
+
+默认双架构；上述五行LLVM23，其余33行用驱动COMGR（当前已验环境LLVM21）。不加`-RowOpts`会全走COMGR，不是生产混合配方。`-Only`只选一个精确模块名；仅一个`-Targets gfx1201`时直接写OutputDir，双架构才建子目录。安装/打包保留架构目录；旧rtc可能忽略gfx1200，必须编当前源码并核ELF目标。
+
+A source build alone is not a complete installation: supply matched framework/model/noise assets, the modules plus SHA256SUMS, and `shaders/` beside the DLL. RE9 also needs its matched prepared OptiScaler host (table above). Existing user custom/native values override updated defaults; do not silently replace them. This section documents commands, not a newly built/released package.
+
+仅源码构建不等于完整安装：还需匹配的框架/模型/noise、模块及SHA256SUMS、DLL旁shaders；RE9需匹配宿主。升级default不能覆盖玩家custom/native。本页只整理流程，没有新编译或发布。
 
 ### Historical: DX12 editions (up to 0.15)
 
