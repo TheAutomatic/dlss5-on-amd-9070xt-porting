@@ -1673,3 +1673,7 @@ Zero反馈「鬼武者没异常跟之前一样」。当前runtime25A617B2、强�
 ### 2026-10-05 最终共享RGB直写小刀
 
 借用bridge最终输出，保post/predict/skin算术，中间/history/AE私有；graph/OVERLAP/input-history地址重叠旧copy。最终每帧只消除一次，不按叠层倍乘。三档3轮320弃80全部快且p99更低，NR frame wall省900 .022218、1080 .022120、1440 .132975ms；不是FPS承诺。正常19/六组合RAW/真实overlap旧路/RE9两4帧及smoke通过；graph基线PDL互斥未追，初normal误用无逐帧导出runner已更换。装剑星3C518B60、鬼武者root/_storage_4B1852F9，配置/modules逐字hash不变，备份final-output-direct-20261005/backups/20261005-070357。锁释放，帧留hash后清理，0.41包未改。results/final-output-direct-20261005。
+
+### 2026-10-05 block4 pool→首C64字节边
+
+保持q8(F(Hrtz(sum)))与负0，producer出口f32改byte，首C64沿已有nonW16 bi_bo读取；配对HasFn缓存/缺一全旧路，32线程调度，刀1保留。首次实验漏ISA_HALF/PREPACK前缀已隔离诊断并canonical重proof，65536half及12真实pair0diff。生产双arch去proof；三档3轮均无慢轮+p99改善，平均省.01235/.01961/.04311ms，900末轮近乎平不吹显著。正常19/多遍history skin/缺export旧路/RE9两4帧smoke全过。安装8547C07F/14BAC9FA与单mh-fast-packed双arch模块，配置字节未变，备份pool64-byte-20261005/backups/20261005-073426；锁释放/帧留hash清，0.41包不动。results/pool64-byte-20261005。
