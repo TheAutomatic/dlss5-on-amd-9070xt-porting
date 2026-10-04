@@ -81,6 +81,7 @@ $modules = @(
     @{ name = 'multi-pass-skin'; defines = @(); sources = @('multi_pass_skin.hip') },
     @{ name = 'multi-pass-predict'; defines = @(); sources = @('multi_pass_predict.hip') },
     @{ name = 'swin-persistent'; defines = @('W2_UP_FUSED 1','W2_FFN_QT_SMALL_MASK 3','W2_FFN_QT_BATCH 2','W2_BOUNDED_RCP 1','HIP_PREPACKED_WEIGHTS 1','HIP_FFN_HOIST_RES 2','HIP_PDL_KERNELS 0','W2_FRAGMENT_WEIGHTS 1','W2_LAUNDER_QKV 1','W2_SCHED_FENCE 1','W2_ROLL_QUERY 1','W2_HIDDEN_TILES 2','W2_PACK8 6','HIP_FMED3_CLAMP 1','W2_BYTE_INPUT_LOADS 1','W2_RTZ_PAIR 1','W2_DIRECT_COORDS 1','W2_Q8_MASK 1','W2_FFN_W16 1','W2_EXPLICIT_WINDOW 1','W2_NO_EXPORTS 1','HIP_SWIN_PERSISTENT_KERNELS 1'); sources = @('multihead_fast_padded.hip','wave_owned_mh.inc','@swin-persistent-types','swin_persistent.inc') }
+    @{ name = 'swin-persistent-fast'; defines = @('W2_UP_FUSED 1','W2_FFN_QT_SMALL_MASK 3','W2_FFN_QT_BATCH 2','W2_BOUNDED_RCP 1','HIP_PREPACKED_WEIGHTS 1','HIP_FFN_HOIST_RES 2','HIP_PDL_KERNELS 0','W2_FRAGMENT_WEIGHTS 1','W2_LAUNDER_QKV 1','W2_SCHED_FENCE 1','W2_ROLL_QUERY 1','W2_HIDDEN_TILES 2','W2_PACK8 6','HIP_FMED3_CLAMP 1','W2_BYTE_INPUT_LOADS 1','W2_RTZ_PAIR 1','W2_DIRECT_COORDS 1','W2_Q8_MASK 1','W2_FFN_W16 1','W2_EXPLICIT_WINDOW 1','W2_NO_EXPORTS 1','HIP_SWIN_PERSISTENT_KERNELS 1','W2_FAST_NUM 3'); sources = @('multihead_fast_padded.hip','wave_owned_mh.inc','@swin-persistent-types','swin_persistent.inc') }
 )
 $outputRoot=$OutputDir
 foreach($target in $Targets){

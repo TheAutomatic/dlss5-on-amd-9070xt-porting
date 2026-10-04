@@ -1,0 +1,239 @@
+[
+  {
+    "raster": [
+      100,
+      60
+    ],
+    "shifts": [
+      3,
+      1,
+      2,
+      0,
+      3,
+      1
+    ],
+    "nodes_per_layer": [
+      104,
+      104,
+      104,
+      104,
+      104,
+      104
+    ],
+    "total": 624,
+    "initial": 104,
+    "pixel_partition_and_read_dependency_coverage": "PASS",
+    "production_child_formula_matches_intersection_oracle": "PASS",
+    "edge_degrees": [
+      {
+        "parents": {
+          "2": 91,
+          "1": 13
+        },
+        "children": {
+          "1": 13,
+          "2": 91
+        }
+      },
+      {
+        "parents": {
+          "2": 19,
+          "1": 1,
+          "4": 84
+        },
+        "children": {
+          "2": 19,
+          "4": 84,
+          "1": 1
+        }
+      },
+      {
+        "parents": {
+          "2": 91,
+          "1": 13
+        },
+        "children": {
+          "1": 13,
+          "2": 91
+        }
+      },
+      {
+        "parents": {
+          "1": 1,
+          "2": 19,
+          "4": 84
+        },
+        "children": {
+          "4": 84,
+          "2": 19,
+          "1": 1
+        }
+      },
+      {
+        "parents": {
+          "2": 91,
+          "1": 13
+        },
+        "children": {
+          "1": 13,
+          "2": 91
+        }
+      }
+    ]
+  },
+  {
+    "raster": [
+      120,
+      72
+    ],
+    "shifts": [
+      3,
+      1,
+      2,
+      0,
+      3,
+      1
+    ],
+    "nodes_per_layer": [
+      160,
+      144,
+      150,
+      135,
+      160,
+      144
+    ],
+    "total": 893,
+    "initial": 160,
+    "pixel_partition_and_read_dependency_coverage": "PASS",
+    "production_child_formula_matches_intersection_oracle": "PASS",
+    "edge_degrees": [
+      {
+        "parents": {
+          "2": 144
+        },
+        "children": {
+          "1": 32,
+          "2": 128
+        }
+      },
+      {
+        "parents": {
+          "2": 30,
+          "4": 120
+        },
+        "children": {
+          "2": 18,
+          "4": 126
+        }
+      },
+      {
+        "parents": {
+          "2": 135
+        },
+        "children": {
+          "1": 30,
+          "2": 120
+        }
+      },
+      {
+        "parents": {
+          "1": 4,
+          "2": 44,
+          "4": 112
+        },
+        "children": {
+          "4": 135
+        }
+      },
+      {
+        "parents": {
+          "2": 144
+        },
+        "children": {
+          "1": 32,
+          "2": 128
+        }
+      }
+    ]
+  },
+  {
+    "raster": [
+      160,
+      92
+    ],
+    "shifts": [
+      3,
+      1,
+      2,
+      0,
+      3,
+      1
+    ],
+    "nodes_per_layer": [
+      252,
+      252,
+      240,
+      240,
+      252,
+      252
+    ],
+    "total": 1488,
+    "initial": 252,
+    "pixel_partition_and_read_dependency_coverage": "PASS",
+    "production_child_formula_matches_intersection_oracle": "PASS",
+    "edge_degrees": [
+      {
+        "parents": {
+          "2": 231,
+          "1": 21
+        },
+        "children": {
+          "1": 21,
+          "2": 231
+        }
+      },
+      {
+        "parents": {
+          "2": 20,
+          "4": 220
+        },
+        "children": {
+          "2": 41,
+          "4": 209,
+          "1": 2
+        }
+      },
+      {
+        "parents": {
+          "2": 220,
+          "1": 20
+        },
+        "children": {
+          "1": 20,
+          "2": 220
+        }
+      },
+      {
+        "parents": {
+          "1": 2,
+          "2": 41,
+          "4": 209
+        },
+        "children": {
+          "4": 220,
+          "2": 20
+        }
+      },
+      {
+        "parents": {
+          "2": 231,
+          "1": 21
+        },
+        "children": {
+          "1": 21,
+          "2": 231
+        }
+      }
+    ]
+  }
+]
