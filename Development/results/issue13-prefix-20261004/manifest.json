@@ -1,0 +1,91 @@
+{
+  "stage": "original block0 after FFN/attention/2x pooling, stored E4M3 bytes",
+  "source_xy": [
+    [
+      832,
+      528
+    ],
+    [
+      960,
+      544
+    ],
+    [
+      0,
+      0
+    ],
+    [
+      1912,
+      1072
+    ]
+  ],
+  "down_xy": [
+    [
+      416,
+      264
+    ],
+    [
+      480,
+      272
+    ],
+    [
+      0,
+      0
+    ],
+    [
+      956,
+      536
+    ]
+  ],
+  "source_processing": [
+    1920,
+    1152
+  ],
+  "down_full_shape_hwc": [
+    576,
+    960,
+    32
+  ],
+  "raw_layout": "tile,slab,dy,dx,c16 =4x2x4x4x16",
+  "hwc_layout": "tile,dy,dx,c32 =4x4x4x32",
+  "files": {
+    "8678-1-predown.tiles.fp8": {
+      "bytes": 2048,
+      "sha256": "b8b45c79f7203db5bd15a785139814e39a2633c1304dff7fa2b5a8dcb08d6638"
+    },
+    "8678-2-predown.tiles.fp8": {
+      "bytes": 2048,
+      "sha256": "b8b45c79f7203db5bd15a785139814e39a2633c1304dff7fa2b5a8dcb08d6638"
+    },
+    "8678.predown.hwc.fp8": {
+      "bytes": 2048,
+      "sha256": "c143b7923e391cff29fd4511ffd8a15cc1e38b5d1c905155d50edb7a9114fbb4"
+    },
+    "8678.predown.hwc.f32": {
+      "bytes": 8192,
+      "sha256": "e6cab601f67f9a82c5f02a9539d6cb380f70abc98e2d474b1a46e979a7817d7e"
+    },
+    "8680-1-predown.tiles.fp8": {
+      "bytes": 2048,
+      "sha256": "c80f6a9a0b46c7fc08b0b3c3dccfd806b4851270087965bf06bc971a3d915b2a"
+    },
+    "8680-2-predown.tiles.fp8": {
+      "bytes": 2048,
+      "sha256": "c80f6a9a0b46c7fc08b0b3c3dccfd806b4851270087965bf06bc971a3d915b2a"
+    },
+    "8680.predown.hwc.fp8": {
+      "bytes": 2048,
+      "sha256": "2fb59b20c963edb4a67befd7760f1c54fe7ac26bf47ef7b6b7c31063485ba83c"
+    },
+    "8680.predown.hwc.f32": {
+      "bytes": 8192,
+      "sha256": "2c29daa05b3433b15838580367b235eb479f24dcba56ecd1b13be4d20115687c"
+    }
+  },
+  "dll_sha256": "e16bcf15e16e13f527491cdf7845b2fe6521a738d8f7c9c721866a8496e1fc8e",
+  "seed": 1,
+  "style_feature": 0.0078125,
+  "history": false,
+  "motion": false,
+  "gpu": "RTX5090",
+  "note": "prefix16 and projection32 are internal registers/LDS and are not captured"
+}

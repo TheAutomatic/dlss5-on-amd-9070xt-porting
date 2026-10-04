@@ -1606,3 +1606,12 @@ C32当前1440 prefix/post边际各约1.35ms；固定geometry/pitch入口原float
 双游戏addon3A538106/runtime2844B742，76模块SUMS8E34D5D1；仅vit-stream两row双arch更新、旧入口保留。备份vit-byteedge-formal-20261004/backups/20261004-130812，配置字节保持auto/FREE0；剑星3/PRED0/SKIN0，鬼武者3/PRED1/SKIN0，exact快照同步。无push/发行包。results/vit-byteedge-formal-20261004与vit-contract-byteedge-20261004；输出hash/统计后仅清本实验输出，不删权重/输入/附件。
 
 Issue13原NVIDIA现存数据已公开两包：[Gofile](https://gofile.io/d/FWpuapJe)，[issue回复](https://github.com/lmxxf/dlss5-on-amd-9070xt-porting/issues/13#issuecomment-5976697739)。API final保存full1920×1152 RGB32F、原post包有效1080，两阶段不可混；无GPU重跑。
+
+
+### 2026-10-04 Issue13原pre-down四tile已取并回帖
+
+最新作者test20 p95=23.315485%、每帧自身exact pre-down注入降16.327520%表明生产额外前端贡献；此前14.94%只对exact-reference近原版，不归全部闪烁于原模型。test20未给源码/commit/生效flags/模块SHA，不套79cbf484。
+
+RTX5090空闲定向捕原block0 pre-down四tile：源(832,528)/(960,544)/(0,0)/(1912,1072)各8×8，对应down4×4×32；真实960×576两C16平面FP8，packet+f8原GPUbuffer。每帧2次2048B相同/无NaN；先一次暖Eval取得有效launch self，提交完成后Eval外准备copy，采集hook仅GPUenqueue32行copy，不Sync/CPU等待；不另取API final。原prefix16/16→32投影在fused寄存器/LDS无独立输出，不用受控权重readout伪造。没有当前已验证修复，等待test20指纹/tile对比再修。
+
+包19241B/SHA c9dc356927a24f131f7fe9acbcb0798e7461faacce4f9a40bbaf01045276320c，https://gofile.io/d/FWpuapJe ；已回复并读回 https://github.com/lmxxf/dlss5-on-amd-9070xt-porting/issues/13#issuecomment-5977255490 。结果results/issue13-prefix-20261004/source已归档，无游戏配置/部署/驱动改动，无push。今晚鸣潮待用户观察，不替用户下载安装。

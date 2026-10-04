@@ -1,0 +1,19 @@
+https://github.com/lmxxf/dlss5-on-amd-9070xt-porting/issues/13#issuecomment-5977255490
+感谢独立复算。你新增的 production test20 / 自身 exact pre-down 注入结果，确实需要单独调查：**之前原 post≈14.94%的结论只说明 exact-reference 与原版接近，不能把 test20 的额外偏差或全部实机闪烁归于原模型。**
+
+已在同一 RTX5090 上做新的定向捕获，原 kernel/模型数学未修改，沿用两输入、seed1、Style1、无History的合同。取得原 **block0 完成 FFN/attention/2x pooling 后、下一块消费前的 pre-down**；每帧重复两次逐字节一致，没有NaN码。
+
+小包已加入同一[公开文件夹](https://gofile.io/d/FWpuapJe)：`issue13-original-predown-tiles-20261004.zip`，19,241字节，SHA256：
+
+`c9dc356927a24f131f7fe9acbcb0798e7461faacce4f9a40bbaf01045276320c`
+
+- 四个源8×8起点按你给出的顺序：(832,528)、(960,544)、(0,0)、(1912,1072)。对应 down 4×4起点：(416,264)、(480,272)、(0,0)、(956,536)。
+- 原 processing=1920×1152，down=960×576×32；原布局为两个 C16 平面。包内保留 `[tile,slab,dy,dx,c16]` 原byte及重排后的 `[tile,dy,dx,c32]` 文件，另有精确E4M3→float32解码。
+- **这是原生FP8存储后的阶段，不是量化前FP32。** manifest/README写明布局、坐标、参数和每文件哈希。没有重复保存 API-final。
+
+你请求的 prefix16 与16→32投影，在此原版实现里融合在同一个 pre-block kernel 的寄存器/LDS中，没有独立export或输出指针；现有launch复制钩子无法原样取得。修改权重令后层identity的受控实验，不能冒充未改原模型的中间值，因此本包没有拟造这两项。
+
+**当前还没有一条可交付的、跨片段验证过的闪烁修复。** pre-down注入定位到的是 block0组合前端；噪声计算、16→32累加/舍入、首FFN/attention/pooling都可能贡献，尚不足单指噪声。单改RNE已有好坏两种结果，也不能直接作为修复。
+
+请补充 test20 的准确 source commit/patch、实际生效flags（尤其 fast_prefix/FAST_NUMERIC、seed/Style、完整层/skip、处理尺寸）及前端模块SHA256/构建定义，最好附本次四tile的 exact/test20 pre-down。当前帖子没有这些指纹，不能假定 test20 就是我们最新生产版。先用新增原 pre-down 核对阶段/量化边界，再决定最小前端修正；不靠降强度或时间平滑掩盖现象。
+
