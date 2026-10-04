@@ -251,6 +251,7 @@ private:
   QueueContract(producer);if(temporal!=recorded_temporal)throw std::runtime_error("bridge temporal input mismatch");if(external&&network->GraphEnabled())throw std::runtime_error("staged bridge requires HIP graph off");
   auto&api=network->Runtime();
   try{
+   api.Check(api.hipSetDevice(hip_device),"select HIP device for enqueue");
    pending=true;
    if(poll_inline?(poll_recorded&&!poll_off):false){const unsigned target=poll_recorded_target,slot=target-1;poll_recorded=false;
     Check(queue->Signal(poll_fence,++poll_value),"poll marker signal");
