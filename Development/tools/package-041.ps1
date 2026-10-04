@@ -10,7 +10,7 @@ $regularSha='a3515ea003e6cbba8d5f6f271083005c1fabdcc1641d5d370b84e910e71d34cf'
 $hostSha='aa3761f2cdb0d9a4653732bd430019ff421b3ce9471fe3697b553dc6d71714a2'
 $runtimeSha='65280756ffda70cfb77641759d757a8c7238efcbaee8065c34d885bc07135bc6'
 $inputShaderSha='a9283bb7e710cec7b6115602c7135a6ca590c43dc32b40193f19b02977de80e0'
-$convertSha='35a1973fc558d7a934cc1190c91f026734405935113576c81e4c7b19c0627b90'
+$convertSha='35a1973fc558d7a934cc1190c91f026734405935113568c81e4c7b19c0627b90'
 $built="$lab\payload"
 $addonPath="$built\dlss5-amd.addon64";$runtimePath="$built\LmxxfNrRuntime.dll"
 $moduleRoot="$lab\HIP";$shaderSrc="$lab\source\shaders"
@@ -75,6 +75,7 @@ foreach($v in $variants){
   Copy-Item "$shaderSrc\*.hlsl" "$stage\shaders" -Force
   New-Item -ItemType Directory "$stage\sources\configuration" -Force|Out-Null
   foreach($n in 'CONFIGURATION.md','CONFIGURATION.zh-CN.md','hip-game-flags.txt','hip-magpie-flags.txt','hip-re9-flags.txt','custom-config.txt'){Copy-Item "$ConfigDirectory\$n" "$stage\sources\configuration\$n" -Force}
+  foreach($n in 'CONFIGURATION.md','CONFIGURATION.zh-CN.md'){$doc=[IO.File]::ReadAllText("$stage\sources\configuration\$n").Replace('../README.md','../../README.en.txt').Replace('../README.zh-CN.md','../../README.txt');WriteUtf8 "$stage\sources\configuration\$n" $doc}
   # Shader sources: every shipped .hlsl/.hlsli is refreshed from the final tree (flat in the package, dx12-network\ in the tree).
   foreach($f in Get-ChildItem $assets -File|Where-Object{$_.Extension -in '.hlsl','.hlsli'}){
    $src=Join-Path $shaderSrc $f.Name;if(!(Test-Path $src)){$src=Join-Path "$shaderSrc\dx12-network" $f.Name}
@@ -126,7 +127,7 @@ foreach($v in $variants){
    Copy-Item "$lab\HOST-LICENSE.txt" "$stage\OptiScaler-LICENSE.txt" -Force
    Copy-Item "$lab\CORE-LICENSE.txt" "$stage\DLSS5-AMD-LICENSE.txt" -Force
    WriteUtf8 "$stage\UPSTREAM-CREDITS.txt" "Modified OptiScaler host: TheAutomatic https://github.com/TheAutomatic/dlss-5-amd-project/tree/release/1.9.0 (8f71f73bfc836a37936e7cee6701750ad4e8bfec). GPL-3.0 host source is included in sources/re9-presr-source.tar.gz. HIP/core by lmxxf under its included MIT license. PR design credit: TheAutomatic.`n"
-   & "$lab\payload\runtime-smoke.exe" "$stage\LmxxfNrRuntime.dll" "$assets\HIP" 32;if($LASTEXITCODE){throw 'Staged RE9 runtime validation failed'};$gpuSmoke='passed in staged package'
+   $ErrorActionPreference='Continue'; & "$lab\payload\runtime-smoke.exe" "$stage\LmxxfNrRuntime.dll" "$assets\HIP" 32; $smokeExit=$LASTEXITCODE; $ErrorActionPreference='Stop'; if($smokeExit){throw "Staged RE9 runtime validation failed ($smokeExit)"};$gpuSmoke='passed in staged package'
   }
   foreach($lang in 'zh','en'){$text=[IO.File]::ReadAllText("$ConfigDirectory\package-notes\$($v.kind)-$lang.txt").Replace('@VERSION@',$Version);$text+=if($lang -eq 'zh'){"`n配置说明：sources/configuration/CONFIGURATION.zh-CN.md。默认1x；选择3x才用两遍真实网络+预测第三遍，PREDICT=0保留真三遍；肤色保护默认关闭。`n"}else{"`nConfiguration: sources/configuration/CONFIGURATION.md. Default is 1x; only selecting 3x uses two real passes plus prediction; PREDICT=0 selects real three passes. Skin protection is off by default.`n"};$file=if($lang -eq 'zh'){'README.txt'}else{'README.en.txt'};WriteUtf8 "$stage\$file" $text}
   if(Test-Path "$stage\build-manifest.json"){Remove-Item "$stage\build-manifest.json" -Force}

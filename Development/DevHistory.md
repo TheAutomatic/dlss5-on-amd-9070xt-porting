@@ -1661,3 +1661,7 @@ Zero反馈「鬼武者没异常跟之前一样」。当前runtime25A617B2、强�
 核当前真实脚本，更新中英文README的HIP流程：38模块/架构，五LLVM23.1.2预编译、其余COMGR21，RowOpts/PrebuiltDir、当前rtc双目标、宿主MinGW与GPU工具链、可公开复现LLVM源码构建及打包资产边界。复用scripts/CONFIGURATION.md作独立配置入口，链接三份全注释默认模板，说明预测默认1仅3x生效/显式0真三遍、skin0、强度/优先级/热载与RE9差异。已核相对文件链接、配方计数与参数；仅文档，无编译/GPU/安装/发布。
 
 配置说明按语言拆分：scripts/CONFIGURATION.md为英文，CONFIGURATION.zh-CN.md为中文；两份互链，README分别导航，保留原配置键、默认模板与优先级/宿主差异。同时完整清理两份README自然语言混写，保留构建、双架构和完整安装条件。仅文档拆分与同义翻译。
+
+### 2026-10-05 0.41三个完整包本地构建
+
+按tag0.40(c81a88bc)审全部后续改动并更新中英CHANGELOG/README与包内说明，默认仍1x(MP1/PRED1/SKIN0)，只选3x才两真实遍+预测。重编addon/runtime/当前rtc；五LLVM23+33COMGR/架构全重建，76 ELF目标与两架构导出核对通过。三组900/1080静止、720运动逐位SAME；每包44shader、全文件SHA与ZIP回读通过，RE9 staged smoke退出0/4帧errors0。更新RE9源码/重编入口，保许可、宿主配套，不混玩家custom/native。三个本地完整ZIP 342904511/373102226/427749567字节，SHA/台账见results/package-041-20261005及`/home/lmxxf/work/dlss5-release-0.41/`。未安装游戏、未上传、未打tag；gfx1200未硬件实测。打包阶段脚本SHA误替换/BOM及正常stderr包装误判已修，未完成stage不作为交付。
