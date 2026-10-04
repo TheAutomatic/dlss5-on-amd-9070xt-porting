@@ -1570,3 +1570,10 @@ Zero实玩反馈：保护开启后整体效果几乎看不出来，剑星真3约
 ## 2026-10-04 D3D↔HIP“网络快更停滞”速度研究（用户纠正不是崩溃，闇派兵）
 
 不改生产、不造TDR，正确fence协议+固定D3D timestamp列表，2帧在飞、memset64/256/2048MiB占位，各40弃4，另请求Sleep8（实CPU周期15.5ms）。旧HIP event出现负/近零计时，首扫差分弃；中间构建失败旧产物重复批也弃。补end非阻塞Query后六档有效：密集netGPU .051/.449/3.562ms、同D3D钟含HIP总区间 .146/.582/3.774、差分剩余 .095/.134/.212，占比65/23/6%；稀疏剩余 .191/.227/.237。没支持“更快必然绝对等待增长”，不否定Daniel特定宿主。差分不叫纯fence税，memset不冒称NN。outside-net输入.22→.08时串行剩余变大而流水线9.71→9.57，是CPU提交窗口真实案例；samequeue对第二D3D队列税说明不全是HIP。报告/有效CSV/hash/坏批隔离在results/d3d-hip-stall-20261004。GPU锁释放、游戏配置/二进制不动，不push。
+
+
+### 2026-10-04 多遍直接RGBA已装；C512 LUT止损
+
+非末遍post直接RGBA(alpha1)保原RGB数学，下一遍免feed搬运；预测/肤色支持first stride，旧模块缺入口回原路径。默认19及10组多遍兼容逐位SAME，RE9六组SAME+smoke0。真3 900/1080平均省.344/.446ms，预测3省.187/.171ms，三轮全快及合并p99改善。双游戏addon14244CEF/runtime29ED217A/76模块SUMS A09EE065；用户配置字节原样，备份20261004-084609，实玩待Zero。结果results/multipass-direct-rgba-20261004。
+
+C512激活LUT GPU原helper生64KiB表，65536half全byte同（含非finite）、真实w2f8两档0diff。1080三轮−.326/+.333/+.001µs，无稳定收益，停止不收生产；负账results/c512-activation-lut-20261004。
