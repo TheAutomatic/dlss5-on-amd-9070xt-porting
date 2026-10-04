@@ -12,7 +12,7 @@
 | Magpie add-on | [hip-magpie-flags.txt](hip-magpie-flags.txt) |
 | RE9专用runtime | [hip-re9-flags.txt](hip-re9-flags.txt) |
 
-用户在[custom模板](custom-config.txt)对应的`custom-config.txt`写覆盖项，例如`DLSS5_STRENGTH=0.7,0.3`控制亮度细节与色彩。先核native/系统环境有无更高优先级同名键。当前源码快速3x预测默认1，显式0真三遍；1x/2x不受影响，skin默认0。这是0.40发布后的源码状态，0.41尚未发布，旧包默认没有追溯改变。
+用户在[custom模板](custom-config.txt)对应的`custom-config.txt`写覆盖项，例如`DLSS5_STRENGTH=0.7,0.3`控制亮度细节与色彩。先核native/系统环境有无更高优先级同名键。当前源码快速3x预测默认1，显式0真三遍；1x/2x不受影响，skin默认0。这些默认随0.41包发布，旧包默认没有追溯改变。
 
 ## 三层配置文件（2026-10-03 起的源码）
 
@@ -36,7 +36,7 @@
 
 测试：`tools/test_config_layers.cpp`（Linux 原生或 mingw 编出 Windows 版都能跑，28 项）。
 
-当前默认模板见上表。RE9同样读取hip-re9-flags.txt白名单配置；re9-presr.ini是OptiScaler宿主覆盖，不代替网络文件。当前发布组装入口为`Development/tools/package-040.ps1`，通过`stage-config-layers.ps1`复制default-config和custom-config.template，不带实际玩家custom/native。`-ConfigDirectory`须指向同提交模板；0.41仍需独立打包/发行核验。注释中英两行，每行≤191字节。
+当前默认模板见上表。RE9同样读取hip-re9-flags.txt白名单配置；re9-presr.ini是OptiScaler宿主覆盖，不代替网络文件。当前发布组装入口为`Development/tools/package-040.ps1`，通过`stage-config-layers.ps1`复制default-config和custom-config.template，不带实际玩家custom/native。`-ConfigDirectory`须指向同提交模板；0.41包已完成独立打包/发行核验。注释中英两行，每行≤191字节。
 
 ## 配置项
 

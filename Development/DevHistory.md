@@ -1665,3 +1665,5 @@ Zero反馈「鬼武者没异常跟之前一样」。当前runtime25A617B2、强�
 ### 2026-10-05 0.41三个完整包本地构建
 
 按tag0.40(c81a88bc)审全部后续改动并更新中英CHANGELOG/README与包内说明，默认仍1x(MP1/PRED1/SKIN0)，只选3x才两真实遍+预测。重编addon/runtime/当前rtc；五LLVM23+33COMGR/架构全重建，76 ELF目标与两架构导出核对通过。三组900/1080静止、720运动逐位SAME；每包44shader、全文件SHA与ZIP回读通过，RE9 staged smoke退出0/4帧errors0。更新RE9源码/重编入口，保许可、宿主配套，不混玩家custom/native。三个本地完整ZIP 342904511/373102226/427749567字节，SHA/台账见results/package-041-20261005及`/home/lmxxf/work/dlss5-release-0.41/`。未安装游戏、未上传、未打tag；gfx1200未硬件实测。打包阶段脚本SHA误替换/BOM及正常stderr包装误判已修，未完成stage不作为交付。
+
+0.41用户上传完成，正式镜像：夸克https://pan.quark.cn/s/dbda3e470f8f（分享名261005-004544243）、Gofile https://gofile.io/d/YAENU0ex。已同步中英README/CHANGELOG及台账；不修改已交付ZIP/SHA，本轮不重下载，未创建GitHub release/tag。

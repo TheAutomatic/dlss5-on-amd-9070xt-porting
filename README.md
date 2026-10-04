@@ -18,7 +18,9 @@ the host upscaler (FSR) takes it to the display resolution.** Three packages, th
 | **Magpie** (portable) | any game, no upscaler support needed | Magpie captures the game window; the network runs in the FSR3_SR slot of its effect group, then FSR4 fills the screen (optional XeSS frame generation) |
 | **OptiScaler-REFramework** (RE9 only) | Resident Evil Requiem, whose command submission the regular route cannot split | TheAutomatic's modified OptiScaler host + our `LmxxfNrRuntime.dll` (matched pair; do not mix with the regular packages) |
 
-**Current release: 0.40 (2026-10-03).** **The default output changed**: all 71 blocks with fast numerics (`DLSS5_SKIP_BLOCKS=` empty, `DLSS5_FAST_NUMERIC=1`), against NVIDIA 44.26 → 47.55 dB and no overall colour shift, about 0.12 / 0.19 ms (900 / 1080) slower per frame; `DLSS5_SKIP_BLOCKS=42,43,46` + `DLSS5_FAST_NUMERIC=0` gives the 0.39 output bit for bit. New: multi pass `DLSS5_MULTI_PASS=1/2/3` (stronger style, about N times the network; F9 cycles it in game, Stellar Blade 2K 57 / 37 / 27 fps), three config files (`default-config.txt` → `custom-config.txt` → `native-game-flags.txt`, environment on top; packages no longer ship your files), and bit-exact speed-ups (LLVM 23 builds of C32/C64, 1080 −0.2 ms or so). Download: [Quark](https://pan.quark.cn/s/d38e0f653c5a) · [Gofile mirror](https://gofile.io/d/moSf7cqf). 0.39: [Quark](https://pan.quark.cn/s/dea9c0ef2f95) · [Gofile mirror](https://gofile.io/d/iqtFTSpS).
+**Current release: 0.41 (2026-10-05).** Default 1x; selecting 3x defaults to two real passes plus a predicted third (lossy). Explicit `DLSS5_MULTI_PASS_PREDICT=0` runs real three passes; skin protection defaults off. Includes first-frame/HIP-device fixes, RE9 strength configuration, exact data-flow optimisations and broader ViT/deep fast numerics. Download: [Quark](https://pan.quark.cn/s/dbda3e470f8f) · [Gofile mirror](https://gofile.io/d/YAENU0ex). See the [changelog](CHANGELOG.md).
+
+**Previous release: 0.40 (2026-10-03).** **The default output changed**: all 71 blocks with fast numerics (`DLSS5_SKIP_BLOCKS=` empty, `DLSS5_FAST_NUMERIC=1`), against NVIDIA 44.26 → 47.55 dB and no overall colour shift, about 0.12 / 0.19 ms (900 / 1080) slower per frame; `DLSS5_SKIP_BLOCKS=42,43,46` + `DLSS5_FAST_NUMERIC=0` gives the 0.39 output bit for bit. New: multi pass `DLSS5_MULTI_PASS=1/2/3` (stronger style, about N times the network; F9 cycles it in game, Stellar Blade 2K 57 / 37 / 27 fps), three config files (`default-config.txt` → `custom-config.txt` → `native-game-flags.txt`, environment on top; packages no longer ship your files), and bit-exact speed-ups (LLVM 23 builds of C32/C64, 1080 −0.2 ms or so). Download: [Quark](https://pan.quark.cn/s/d38e0f653c5a) · [Gofile mirror](https://gofile.io/d/moSf7cqf). 0.39: [Quark](https://pan.quark.cn/s/dea9c0ef2f95) · [Gofile mirror](https://gofile.io/d/iqtFTSpS).
 
 **Requirements.** An RDNA 4 GPU (RX 9070 XT tested; RX 9060 kernels included, untested) and an AMD driver that ships
 `amdhip64_7.dll` (current release drivers do). No HIP SDK, no Agility SDK, no preview DXC, no Windows Developer Mode. The
@@ -155,11 +157,11 @@ The C host smoke test is `tools/lmxxf_zero_fallback_abi.c`. On Windows, build th
   game motion vectors. An overlay shows the state (`DLSS5 ON 1707x961 -> FSR 2560x1440`, INITIALIZING, UNSUPPORTED).
 - **Numerics**: the production fast chain is not a bit-exact NVIDIA oracle. Exact optimisations are checked against an explicit same-source baseline; FAST_NUMERIC, adaptive reuse and third-pass prediction are documented numerical/approximation choices. The 0.36 FMA change also changed the baseline, so not every update since 0.20 was bit-identical.
 
-Current source defaults `DLSS5_MULTI_PASS_PREDICT=1`: 3x uses two real passes and predicts the third (lossy); explicit 0 uses real three passes. 1x/2x are unchanged. F9 changes only the count. Skin defaults to 0. These are upcoming 0.41 source settings, not an update to released 0.40 ZIPs.
+Current source defaults `DLSS5_MULTI_PASS_PREDICT=1`: 3x uses two real passes and predicts the third (lossy); explicit 0 uses real three passes. 1x/2x are unchanged. F9 changes only the count. Skin defaults to 0. These settings ship in 0.41; historical 0.40 ZIPs retain their defaults.
 
-## 0.41 local build
+## 0.41
 
-**Default 1x.** Selecting 3x defaults to two real passes plus a predicted third (lossy); explicit PREDICT=0 runs real three passes, skin=0. This local package adds the first-frame/device-binding fixes, RE9 strength file control, deeper fast numerics and bit-exact C256/ViT/C512/data-flow improvements. See [0.41 changelog](CHANGELOG.md#041-10-05-built-locally-not-published). Packages are built locally, not uploaded or tagged.
+**Default 1x.** Selecting 3x defaults to two real passes plus a predicted third (lossy); explicit PREDICT=0 runs real three passes, skin=0. This release adds the first-frame/device-binding fixes, RE9 strength file control, deeper fast numerics and bit-exact C256/ViT/C512/data-flow improvements. See [0.41 changelog](CHANGELOG.md#041-10-05). All three complete packages are available on [Quark](https://pan.quark.cn/s/dbda3e470f8f) and [Gofile](https://gofile.io/d/YAENU0ex); no GitHub release or tag has been created.
 
 ## Configuration
 
@@ -167,7 +169,7 @@ See the [configuration reference](scripts/CONFIGURATION.md) for all annotated de
 
 ## Building
 
-### Building current HIP sources (after 0.40; 0.41 not released) — where every shipped file comes from
+### Building current HIP sources (0.41) — where every shipped file comes from
 
 | Shipped file | Source | Build |
 |---|---|---|
@@ -179,7 +181,7 @@ See the [configuration reference](scripts/CONFIGURATION.md) for all annotated de
 | `DLSS5-AMD\default-config.txt` and `custom-config.template.txt` | Three host templates linked by the [configuration reference](scripts/CONFIGURATION.md), plus `scripts/custom-config.txt` | `Development/tools/stage-config-layers.ps1` copies them; personal custom/native files are not shipped |
 | weights (`*.f16` / `*.f32`), `noise.f32` | not in this repository (see *Weights*) | packages carry them; a fresh package is built from the previous full package |
 
-Packaging currently uses `Development/tools/package-041.ps1` with verified baseline ZIPs, framework and model assets. It assembles local 0.41 packages from verified 0.40 baselines; 0.41 has not been published, and changing its version argument alone is not release validation. `stage-config-layers.ps1` stages defaults without overwriting installed personal settings.
+Packaging currently uses `Development/tools/package-041.ps1` with verified baseline ZIPs, framework and model assets. It assembles local 0.41 packages from verified 0.40 baselines; 0.41 packages passed release checks; changing the version argument alone is not release validation. `stage-config-layers.ps1` stages defaults without overwriting installed personal settings.
 
 Before release, verify both ELF targets, exports and the 76-module inventory, then the current same-source normal19 (normal/AE/roll), relevant multi-pass and RE9 paths. Lossy switches are explicitly documented. Historical `validate-modules.ps1` and prod6 scripts do not cover every current path.
 
@@ -302,7 +304,7 @@ chain's own output did not change by a single bit.
 | 0.38 · all three packages (Magpie · OptiScaler · OptiScaler-REFramework, HIP): [Quark](https://pan.quark.cn/s/6856d875bbe9) · [Gofile mirror](https://gofile.io/d/lzsqfUiE) | 09-30 | Bit-identical to 0.37 by default: 900 shift_pack removed, C32 byte storage and zero-half skip, composite quantisation, C256 FFN W16, C512 attention without redundant F, three wide-store rewrites; offline 900 about 8.0 → 7.6 ms, 1080 about 10.8 → 10.4 ms (`results/hip-roofline-20260930`). New switches `DLSS5_FORMAT_FALLBACK=1`, `DLSS5_HOT_RELOAD=1`; opt-in lossy `DLSS5_NETWORK_1080_ROWS=1088` (off by default). |
 | 0.39 · all three packages (Magpie · OptiScaler · OptiScaler-REFramework, HIP): [Quark](https://pan.quark.cn/s/dea9c0ef2f95) · [Gofile mirror](https://gofile.io/d/iqtFTSpS) | 10-01 | Bit-identical to 0.38 by default: C512 FFN in registers by one wave, hoisted residual init / weight loads, wider decode, ViT QKV/attention fusion and more; offline 900 about 7.27 → 6.8 ms, 1080 about 10.05 → 9.5 ms, Stellar Blade 2K +1.5-2 fps. New switch `DLSS5_STYLE=1`; reproducible add-on/runtime builds. |
 | 0.40 · all three packages (Magpie · OptiScaler · OptiScaler-REFramework, HIP): [Quark](https://pan.quark.cn/s/d38e0f653c5a) · [Gofile mirror](https://gofile.io/d/moSf7cqf) | 10-03 | **Default output changed**: all 71 blocks + `DLSS5_FAST_NUMERIC=1` (vs NVIDIA 44.26 → 47.55 dB, +0.12/+0.19 ms). Multi pass `DLSS5_MULTI_PASS` with F9; three config files (`default-config` → `custom-config` → `native-game-flags`, environment on top); LLVM 23 C32/C64 and other bit-exact speed-ups. |
-| 0.41 (local build) | 10-05 | Default 1x; opt-in 3x uses two real passes plus prediction by default. First-frame/HIP-device fixes, RE9 strength, C256/ViT/C512 and direct-RGBA improvements; 76 modules. [Details](CHANGELOG.md#041-10-05-built-locally-not-published). No public download yet. |
+| 0.41 · [Quark](https://pan.quark.cn/s/dbda3e470f8f) · [Gofile mirror](https://gofile.io/d/YAENU0ex) | 10-05 | Default 1x; opt-in 3x uses two real passes plus prediction by default. First-frame/HIP-device fixes, RE9 strength, C256/ViT/C512 and direct-RGBA improvements; 76 modules. [Details](CHANGELOG.md#041-10-05).  |
 
 
 ## Weights

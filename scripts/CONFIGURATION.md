@@ -12,7 +12,7 @@ The complete bilingual option comments, including compatibility and historical e
 | Magpie add-on | [hip-magpie-flags.txt](hip-magpie-flags.txt) |
 | RE9-specific runtime | [hip-re9-flags.txt](hip-re9-flags.txt) |
 
-Write overrides in `custom-config.txt`, starting from the [custom template](custom-config.txt). For example, `DLSS5_STRENGTH=0.7,0.3` controls detail-lighting and colour separately. Check higher-priority native/environment layers first. Current source defaults prediction to 1 only at 3 passes, with explicit 0 for real three-pass computation; 1x/2x are unchanged and skin protection defaults to 0. These are source defaults after 0.40; 0.41 has not been released and older ZIPs have not been retroactively updated.
+Write overrides in `custom-config.txt`, starting from the [custom template](custom-config.txt). For example, `DLSS5_STRENGTH=0.7,0.3` controls detail-lighting and colour separately. Check higher-priority native/environment layers first. Current source defaults prediction to 1 only at 3 passes, with explicit 0 for real three-pass computation; 1x/2x are unchanged and skin protection defaults to 0. These defaults ship in 0.41; older ZIPs have not been retroactively updated.
 
 ## Three configuration layers (source since 2026-10-03)
 
@@ -37,7 +37,7 @@ Rules:
 
 Tests: `tools/test_config_layers.cpp` contains 28 checks, runnable natively on Linux or as a MinGW-built Windows executable.
 
-RE9 reads the whitelisted network settings from `hip-re9-flags.txt`; `re9-presr.ini` overlays the OptiScaler host and does not replace the network file. Current package assembly uses `Development/tools/package-040.ps1` and `stage-config-layers.ps1` to copy default and custom templates, never the player's actual custom/native files. `-ConfigDirectory` must point to templates from the same commit. Version 0.41 still requires separate packaging and release validation. Template comments use two lines, Chinese and English, each at most 191 bytes.
+RE9 reads the whitelisted network settings from `hip-re9-flags.txt`; `re9-presr.ini` overlays the OptiScaler host and does not replace the network file. Current package assembly uses `Development/tools/package-040.ps1` and `stage-config-layers.ps1` to copy default and custom templates, never the player's actual custom/native files. `-ConfigDirectory` must point to templates from the same commit. Version 0.41 packages passed separate packaging and release validation. Template comments use two lines, Chinese and English, each at most 191 bytes.
 
 ## Configuration controls
 

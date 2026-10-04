@@ -302,7 +302,9 @@
 - RE9 runtime：输入直写。RGB 输入 pass 直接写进 HIP 桥接的共享输入缓冲，`RecordInputs` 不再录那次 35MB（1080 档）的 `CopyBufferRegion`；与 add-on 自 09-28 起的 `DLSS5_DIRECT_IO` bit 1 同一开关、同一默认值（1）。`RecordInputs` 的 GPU 段 1080 档 0.22→0.08ms、900 档 0.10→0.06ms；流水线宿主（不逐帧等 GPU）整帧间隔六轮全快 900 −0.03～−0.04、1080 −0.07～−0.08ms；逐帧等待的串行宿主中性（那里 HIP 开始受 `EnqueueHip` 的 CPU 发核约 0.3ms 限制）。720/900/1080 与 1600×900、1920×1080 输出逐位不变，smoke 0。*集成方注意*：ABI、调用顺序、你录的列表都不用改，`RecordInputs` 只是少录一条拷贝和两个 barrier；`DLSS5_DIRECT_IO=0`（环境变量或 flags 文件）回到旧行为。另附调用顺序建议 `include/LmxxfNrApi-call-order.zh-CN.md`。`results/outside-net-20261002`。
 - RE9 runtime：`DLSS5_STYLE` 现在和其它网络键一样从 flags 文件读取（0.39 的 runtime 不读模板里这一行，只认系统环境变量）。默认 `1` 逐位不变；文件里写 `0` 与环境变量 `0` 输出相同。*集成方注意*：只在创建会话时读一次，不热重载；同名环境变量优先；只换 RE9 runtime 文件，其它不动。`results/night-20261001`。
 
-## 0.41（10-05，本地构建，尚未对外发布）
+## 0.41（10-05）
+
+下载（三个完整包）：[夸克](https://pan.quark.cn/s/dbda3e470f8f) · [Gofile 镜像](https://gofile.io/d/YAENU0ex)。
 
 默认仍为 **1x**（`DLSS5_MULTI_PASS=1`）。选择3x时，默认真实运行两遍并局部预测第三遍（**有损**）；`DLSS5_MULTI_PASS_PREDICT=0`恢复真实三遍。已有custom/native/环境覆盖保留，肤色保护默认0。
 
@@ -313,6 +315,6 @@
 - **接入修复**：`DLSS5_PRE_UPSCALE=auto`探测命令列表合同，不适用时退到后置；HIP Enqueue在调用线程重绑选定设备，正式采纳[XMoon的PR #15](https://github.com/lmxxf/dlss5-on-amd-9070xt-porting/pull/15)。贡献者核显+独显测试从九次InvalidHandle错误变为600多帧无错；本机单HIP设备检查不能代替双设备独立复现。
 - **RE9强度文件控制**：合法`DLSS5_STRENGTH=a,b`文件/环境数值（各0～1）覆盖宿主菜单亮度/色彩；auto/空/缺省继续宿主默认。add-on/Magpie仍支持0～3。不改ABI、默认强度或网络Style。RE9文件需重启，add-on强度仍可热载。`results/strength-config-20261004`。
 - **可选肤色保护**：`DLSS5_MULTI_PASS_SKIN_PROTECT=1`在肤色掩码核心保第一遍、其他区域用最终遍；只是颜色启发式，不是语义分割，暖色背景/有色灯光及history反馈有局限。用户反馈整体收益不明显，默认保持关闭。`results/skin-protect-20261004`。
-- **包与文档**：每架构38模块、合计76，五行LLVM23.1.2、其余33行驱动COMGR；重编CPU宿主、刷新RE9源码包，配置说明拆中英文并链接全部注释默认文件。发行默认MP1/PRED1/SKIN0，不塞玩家custom/native；本地打包不上传、不打tag。
+- **包与文档**：每架构38模块、合计76，五行LLVM23.1.2、其余33行驱动COMGR；重编CPU宿主、刷新RE9源码包，配置说明拆中英文并链接全部注释默认文件。发行默认MP1/PRED1/SKIN0，不塞玩家custom/native；用户已上传镜像；本次未创建GitHub release或tag。
 
 已装开发版用户读数：剑星1x约57.6fps、快速3x约37fps；鬼武者900P快速3x约49fps，与此前一样且无异常。不是同批ABBA收益证据。gfx1200只做构建/ELF核对，真机验证仍在gfx1201。

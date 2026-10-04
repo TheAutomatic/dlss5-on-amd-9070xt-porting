@@ -16,7 +16,9 @@ DLSS 5（DLSSNR）跑在 AMD RX 9070 XT / RDNA 4 上。
 | **Magpie**（便携） | 任何游戏，不需要游戏支持超分 | Magpie 抓游戏窗口；网络接在效果组的 FSR3_SR 一项里，之后 FSR4 放大到全屏（可选 XeSS 帧生成） |
 | **OptiScaler-REFramework**（只给 RE9） | 《生化危机 9》，常规路线切不开它的命令提交 | TheAutomatic 改的 OptiScaler 宿主 + 我们的 `LmxxfNrRuntime.dll`（成对使用，别和常规包混装） |
 
-**当前版本：0.40（2026-10-03）。** **默认输出变了**：全 71 块 + fast 数值（`DLSS5_SKIP_BLOCKS=` 空值、`DLSS5_FAST_NUMERIC=1`），对 NVIDIA 44.26 → 47.55 dB、偏色消失，每帧慢约 0.12 / 0.19 ms（900 / 1080）；写 `DLSS5_SKIP_BLOCKS=42,43,46` + `DLSS5_FAST_NUMERIC=0` 就逐位回到 0.39。新东西：叠层 `DLSS5_MULTI_PASS=1/2/3`（风格更浓，耗时约 N 倍；游戏里 F9 轮换，《剑星》2K 57 / 37 / 27 fps）、三个配置文件（`default-config.txt` → `custom-config.txt` → `native-game-flags.txt`，环境变量最高；包里不再带你的文件）、逐位提速（C32/C64 改 LLVM 23 编，1080 约 −0.2 ms）。下载：[夸克](https://pan.quark.cn/s/d38e0f653c5a) · [Gofile 镜像](https://gofile.io/d/moSf7cqf)。0.39：[夸克](https://pan.quark.cn/s/dea9c0ef2f95) · [Gofile 镜像](https://gofile.io/d/iqtFTSpS)。
+**当前版本：0.41（2026-10-05）。** 默认1x；选3x才默认两遍真实网络加预测第三遍（有损），显式`DLSS5_MULTI_PASS_PREDICT=0`运行真三遍，肤色保护默认0。包含首帧/HIP设备绑定修复、RE9强度文件控制及逐位数据流优化，快速数值扩展到ViT/deep。下载：[夸克](https://pan.quark.cn/s/dbda3e470f8f) · [Gofile 镜像](https://gofile.io/d/YAENU0ex)。详见[更新日志](CHANGELOG.zh-CN.md)。
+
+**历史版本：0.40（2026-10-03）。** **默认输出变了**：全 71 块 + fast 数值（`DLSS5_SKIP_BLOCKS=` 空值、`DLSS5_FAST_NUMERIC=1`），对 NVIDIA 44.26 → 47.55 dB、偏色消失，每帧慢约 0.12 / 0.19 ms（900 / 1080）；写 `DLSS5_SKIP_BLOCKS=42,43,46` + `DLSS5_FAST_NUMERIC=0` 就逐位回到 0.39。新东西：叠层 `DLSS5_MULTI_PASS=1/2/3`（风格更浓，耗时约 N 倍；游戏里 F9 轮换，《剑星》2K 57 / 37 / 27 fps）、三个配置文件（`default-config.txt` → `custom-config.txt` → `native-game-flags.txt`，环境变量最高；包里不再带你的文件）、逐位提速（C32/C64 改 LLVM 23 编，1080 约 −0.2 ms）。下载：[夸克](https://pan.quark.cn/s/d38e0f653c5a) · [Gofile 镜像](https://gofile.io/d/moSf7cqf)。0.39：[夸克](https://pan.quark.cn/s/dea9c0ef2f95) · [Gofile 镜像](https://gofile.io/d/iqtFTSpS)。
 
 **环境要求。** RDNA 4 显卡（RX 9070 XT 实测；RX 9060 的内核随包但没机器测）和带 `amdhip64_7.dll` 的 AMD 驱动（现在的正式版驱动就带）。
 不需要 HIP SDK、Agility SDK、预览版 DXC、Windows 开发人员模式。900P 下插件占显存约 1.2 GB（权重 0.6 GB、激活 0.3 GB；`DLSS5_HIP_MEMORY=1`
@@ -115,11 +117,11 @@ DLSS5_MULTI_PASS=2
   屏幕左上角有状态行（`DLSS5 ON 1707x961 -> FSR 2560x1440`、INITIALIZING、UNSUPPORTED）。
 - **数值**：生产快速链不等于原NVIDIA逐位真值。逐位优化相对于明确的同源基线验收；FAST_NUMERIC、自适应复用和第三遍预测等有损控制分别注明。历史0.36 FMA曾改变基线，不能声称0.20以来所有更新均逐位相同。
 
-当前源码默认`DLSS5_MULTI_PASS_PREDICT=1`：3x跑两遍真实网络再预测第三遍（有损）；显式0运行真三遍，1x/2x不变。F9只切遍数，肤色保护默认0。此为待0.41发布源码策略，已发布0.40包尚未更新。
+当前源码默认`DLSS5_MULTI_PASS_PREDICT=1`：3x跑两遍真实网络再预测第三遍（有损）；显式0运行真三遍，1x/2x不变。F9只切遍数，肤色保护默认0。此策略随0.41包发布；历史0.40包保持原默认。
 
-## 0.41本地构建
+## 0.41
 
-**默认1x。** 选择3x才默认两遍真实网络加预测第三遍（有损），显式PREDICT=0运行真三遍，肤色保护默认0。本地包加入首帧/设备绑定修复、RE9强度文件控制、快速数值加深及C256/ViT/C512/数据流逐位优化。详见[0.41更新日志](CHANGELOG.zh-CN.md)。只在本地构建，未上传或打tag。
+**默认1x。** 选择3x才默认两遍真实网络加预测第三遍（有损），显式PREDICT=0运行真三遍，肤色保护默认0。本地包加入首帧/设备绑定修复、RE9强度文件控制、快速数值加深及C256/ViT/C512/数据流逐位优化。详见[0.41更新日志](CHANGELOG.zh-CN.md)。三个完整包已提供[夸克](https://pan.quark.cn/s/dbda3e470f8f)和[Gofile 镜像](https://gofile.io/d/YAENU0ex)；未创建GitHub release或tag。
 
 ## 配置
 
@@ -127,7 +129,7 @@ DLSS5_MULTI_PASS=2
 
 ## 编译
 
-### 当前 HIP 源码怎么编（0.40发布后、0.41待发布）——每个发布文件从哪来
+### 当前 HIP 源码怎么编（0.40发布后、0.41）——每个发布文件从哪来
 
 | 包里的文件 | 源码 | 编法 |
 |---|---|---|
@@ -139,7 +141,7 @@ DLSS5_MULTI_PASS=2
 | `DLSS5-AMD\default-config.txt`及`custom-config.template.txt` | [配置参考](scripts/CONFIGURATION.zh-CN.md)链接的三宿主模板及`scripts/custom-config.txt` | `Development/tools/stage-config-layers.ps1`复制；不打包玩家custom/native文件 |
 | 权重（`*.f16` / `*.f32`）、`noise.f32` | 不在仓库里（见"权重"） | 随包；新包从上一个完整包接着做 |
 
-打包入口目前是 `Development/tools/package-041.ps1`，用于0.41本地构建和已校验的0.40基础ZIP、框架及模型资产，不是从源码自动生成全部第三方资产；0.41尚未发布，不能只改版本号就当发行验证完成。模板通过`stage-config-layers.ps1`进入default-config；该脚本不升级已安装游戏。
+打包入口目前是 `Development/tools/package-041.ps1`，用于0.41本地构建和已校验的0.40基础ZIP、框架及模型资产，不是从源码自动生成全部第三方资产；0.41包已完成发行校验；不能只改版本号就当发行验证完成。模板通过`stage-config-layers.ps1`进入default-config；该脚本不升级已安装游戏。
 
 发布前需核对双架构ELF目标和全部导出、76模块清单，以及当前同源正常19（normal/AE/roll）、相关多遍与RE9路径；数值改动开关另行标注。历史`validate-modules.ps1`及prod6脚本不覆盖所有新路径，不能当当前完整验收。
 
@@ -252,7 +254,7 @@ powershell -ExecutionPolicy Bypass -File scripts\deploy_fast.ps1 -Source <lab> -
 | 0.38 · 三个包（Magpie · OptiScaler · OptiScaler-REFramework，HIP）[夸克](https://pan.quark.cn/s/6856d875bbe9) · [Gofile 镜像](https://gofile.io/d/lzsqfUiE) | 09-30 | 默认与 0.37 逐位相同：900 去 shift_pack、C32 字节化与跳全零半块、复合量化、C256 FFN W16、C512 attention 去冗余 F、三处宽写；离线 900 约 8.0 → 7.6ms、1080 约 10.8 → 10.4ms（`results/hip-roofline-20260930`）。新开关 `DLSS5_FORMAT_FALLBACK=1`、`DLSS5_HOT_RELOAD=1`；可选有损 `DLSS5_NETWORK_1080_ROWS=1088`（默认不开）。 |
 | 0.39 · 三个包（Magpie · OptiScaler · OptiScaler-REFramework，HIP）[夸克](https://pan.quark.cn/s/dea9c0ef2f95) · [Gofile 镜像](https://gofile.io/d/iqtFTSpS) | 10-01 | 默认与 0.38 逐位相同：C512 FFN 一 wave 寄存器内完成、残差初始化/权重读取外提、解码加宽、ViT QKV/attention 合并等；离线 900 约 7.27 → 6.8ms、1080 约 10.05 → 9.5ms，《剑星》2K +1.5～2 帧。新开关 `DLSS5_STYLE=1`；add-on/runtime 可复现构建。 |
 | 0.40 · 三个包（Magpie · OptiScaler · OptiScaler-REFramework，HIP）[夸克](https://pan.quark.cn/s/d38e0f653c5a) · [Gofile 镜像](https://gofile.io/d/moSf7cqf) | 10-03 | **默认输出变了**：全 71 块 + `DLSS5_FAST_NUMERIC=1`（对 NVIDIA 44.26 → 47.55 dB，+0.12/+0.19 ms）。叠层 `DLSS5_MULTI_PASS` + F9；三个配置文件（`default-config` → `custom-config` → `native-game-flags`，环境变量最高）；C32/C64 改 LLVM 23 等逐位提速。 |
-| 0.41（本地构建） | 10-05 | 默认1x；选3x才默认两真实遍加预测。首帧/HIP设备修复、RE9强度、C256/ViT/C512及直接RGBA优化，76模块；[完整说明](CHANGELOG.zh-CN.md)。尚无公开下载。 |
+| 0.41 · [夸克](https://pan.quark.cn/s/dbda3e470f8f) · [Gofile 镜像](https://gofile.io/d/YAENU0ex) | 10-05 | 默认1x；选3x才默认两真实遍加预测。首帧/HIP设备修复、RE9强度、C256/ViT/C512及直接RGBA优化，76模块；[完整说明](CHANGELOG.zh-CN.md)。 |
 
 
 ## 权重
