@@ -1669,3 +1669,7 @@ Zero反馈「鬼武者没异常跟之前一样」。当前runtime25A617B2、强�
 0.41用户上传完成，正式镜像：夸克https://pan.quark.cn/s/dbda3e470f8f（分享名261005-004544243）、Gofile https://gofile.io/d/YAENU0ex。已同步中英README/CHANGELOG及台账；不修改已交付ZIP/SHA，本轮不重下载，未创建GitHub release/tag。
 
 0.41网友使用说明存于Development/docs/使用说明/0.41.md；技术审校默认1x/仅3x预测、三包安装、强度范围、优先级与RE9重启区别，表格实际渲染通过。按公众号要求下载及文档地址全部普通可复制URL，五个GitHub main目标已只读核存在。仅文稿，不修改ZIP/配置或运行实验。
+
+### 2026-10-05 最终共享RGB直写小刀
+
+借用bridge最终输出，保post/predict/skin算术，中间/history/AE私有；graph/OVERLAP/input-history地址重叠旧copy。最终每帧只消除一次，不按叠层倍乘。三档3轮320弃80全部快且p99更低，NR frame wall省900 .022218、1080 .022120、1440 .132975ms；不是FPS承诺。正常19/六组合RAW/真实overlap旧路/RE9两4帧及smoke通过；graph基线PDL互斥未追，初normal误用无逐帧导出runner已更换。装剑星3C518B60、鬼武者root/_storage_4B1852F9，配置/modules逐字hash不变，备份final-output-direct-20261005/backups/20261005-070357。锁释放，帧留hash后清理，0.41包未改。results/final-output-direct-20261005。
