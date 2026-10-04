@@ -1577,3 +1577,8 @@ Zero实玩反馈：保护开启后整体效果几乎看不出来，剑星真3约
 非末遍post直接RGBA(alpha1)保原RGB数学，下一遍免feed搬运；预测/肤色支持first stride，旧模块缺入口回原路径。默认19及10组多遍兼容逐位SAME，RE9六组SAME+smoke0。真3 900/1080平均省.344/.446ms，预测3省.187/.171ms，三轮全快及合并p99改善。双游戏addon14244CEF/runtime29ED217A/76模块SUMS A09EE065；用户配置字节原样，备份20261004-084609，实玩待Zero。结果results/multipass-direct-rgba-20261004。
 
 C512激活LUT GPU原helper生64KiB表，65536half全byte同（含非finite）、真实w2f8两档0diff。1080三轮−.326/+.333/+.001µs，无稳定收益，停止不收生产；负账results/c512-activation-lut-20261004。
+
+
+### 2026-10-04 09:50:52 鬼武者直接RGBA版实玩反馈
+
+Zero反馈「鬼武者接近49帧（900P 2k质量），3x效果不错」。现配置MP3/PREDICT1/SKIN0，实际两遍真实网络+预测第三遍；不是三遍真实计算。此前也有约49fps读数，本次未确认帧率提高，离线节省.187ms不等于实玩已读出提升。

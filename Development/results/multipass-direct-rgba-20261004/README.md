@@ -16,3 +16,5 @@
 已装双游戏，保留所有原配置字节：addon14244CEF，runtime29ED217A，76模块SUMS A09EE065。备份/rollback：`D:\DLSSNR-Lab\multipass-direct-rgba-20261004\backups\20261004-084609\rollback.ps1`。用户实玩待反馈。三c32模块各架构LLVM23重编，预测/肤色新增stride入口COMGR正确rtc编译，其余模块保留。
 
 C512 LUT另有负账：65536half含非有限值全byte同、实际FFN两档0diff；1080三轮一快一慢一平，停止，不合生产、不安装。见同级c512-activation-lut-20261004。
+
+09:50:52用户实玩反馈：鬼武者900P、2k质量接近49fps，认为3x效果不错。配置MP3/PREDICT1/SKIN0，实际两遍+预测第三遍；此前已有约49fps，本次未确认实玩帧率提高。
