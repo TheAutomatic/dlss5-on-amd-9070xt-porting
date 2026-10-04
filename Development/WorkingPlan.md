@@ -5,7 +5,7 @@
 ## 现状
 
 - 0.40已发布，0.41未打包。fast-vit/preupscale-auto、双feed首帧修复、直接RGBA已合；全部71块/FAST1。
-- 最新双游戏原生1440特化已装：剑星addonF1681283，鬼武者根/_storage_ runtimeF0A74F7D；76模块/SUMS A09EE065不变，exact模块/配置快照同步。备份native-1440-optimization-20261004/backups/20261004-113833。
+- 最新双游戏ViT字节边版已装：剑星addon3A538106，鬼武者根/_storage_ runtime2844B742；76模块/SUMS 8E34D5D1，exact模块/配置快照同步。备份vit-byteedge-formal-20261004/backups/20261004-130812。
 - 两游戏HEIGHT auto/FREE0，配置字节保留。剑星MP3/PRED0/SKIN0（F9可变遍数），鬼武者MP3/PRED1/SKIN0（两真实遍+预测第三遍，无F9/热载）；没有替用户切真2k，现质量模式仍auto900，本刀不会使现900提速。
 - 鬼武者09:50实玩900P/2k质量接近49fps、3x效果不错，未确认比此前约49提升。剑星真3旧约27fps；肤色保护观感失败已关，不将不同配置FPS混算。
 - 真1440输入2560×1440，处理2560×1472，ViT40×24=960。C256既有wholeblock融合只放行此新shape，数学/模块不变。连续三轮单遍NR frame wall17.483→17.029ms、优化3x34.409→33.442，p99均改善；纯NN GPU median15.968→15.584、32.768→31.824。不是游戏总帧时，也不说明2k已稳定可玩。
@@ -14,6 +14,10 @@
 - ViT960常量化四组byte0diff，但性能有慢轮，不收生产；C512 LUT亦无稳定收益。960现有融合/stream/N64/w5 QKV已生效，没有640慢回退。
 - Issue13已用5090独立原版核对并在issue回复：原post p9514.9375%与HIP14.9432%接近，RTZ后0/44值不同；这是模型当前输入响应，非所有实机闪烁根因。原post FP16不能称pre-half oracle。
 - D3D↔HIP速度研究收刀：固定交接占比上升不等于绝对等待必增；CPU提交窗口已有实证。坏HIP event批弃用，不重开崩溃研究。
+
+- **本轮现算子小步收刀**：C32固定1440原float同但有慢轮，停止不合；ViT已量化contract由half载体改byte，QKV直读、投影decode，AE缓存仍F32。构造期三配对cap齐备才选，缺一整体旧half回退，warmup预分配/预载；正常19/1440raw/三multiSkin/RE9九组与fallback皆过。
+- **新同批single收益**：900/1080/1440省.053/.093/.125ms（约.7～.9%），三轮全快且合并p99不差；1440当前同批17.104→16.980ms。不和旧17.029跨批累加，不推游戏FPS。
+- **Issue13现存包上传已完成**：https://gofile.io/d/FWpuapJe ，issuecomment-5976697739；API final full1152与原post有效1080明确区分，无重跑。
 
 ## 下一步
 

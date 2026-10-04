@@ -1,0 +1,8 @@
+$ErrorActionPreference='Stop';$root=$PSScriptRoot;$prev='D:\DLSSNR-Lab\hip-backend\free-res-20261002';$lock='D:\DLSSNR-Lab\gpu.lock'
+& 'D:\DLSSNR-Lab\game-check.ps1' Stellar Onimusha Magpie Forza Cyberpunk;if($LASTEXITCODE -ne 1){throw 'game active'}
+$f=[IO.File]::Open($lock,[IO.FileMode]::CreateNew,[IO.FileAccess]::Write,[IO.FileShare]::Read);$b=[Text.Encoding]::UTF8.GetBytes('vit-byteedge-formal-20261004');$f.Write($b,0,$b.Length);$f.Close()
+try{$prev='D:\DLSSNR-Lab\hip-backend\free-res-20261002';$base=@(Get-Content "$root\preflight-N\flags.txt"|?{$_ -notmatch '^DLSS5_MULTI_PASS'})
+$env:BENCH_W='2560';$env:BENCH_H='1440';$env:BENCH_RAW_OUTPUT='1'
+foreach($mode in @(@{n='900-pred3';res='1600x900';mp=3;pred=1;skin=0},@{n='1080-predskin';res='1920x1080';mp=3;pred=1;skin=1},@{n='1440-trueskin';res='2560x1440';mp=3;pred=0;skin=1})){$wh=$mode.res.Split('x');$env:BENCH_W=$wh[0];$env:BENCH_H=$wh[1];foreach($side in 'A','N'){$d="$root\modes-$($mode.n)-$side";New-Item -ItemType Directory -Force $d|Out-Null;[IO.File]::WriteAllLines("$d\flags.txt",$base+@("DLSS5_MULTI_PASS=$($mode.mp)","DLSS5_MULTI_PASS_PREDICT=$($mode.pred)","DLSS5_MULTI_PASS_SKIN_PROTECT=$($mode.skin)"));$ErrorActionPreference='Continue';& "$root\ngx-N.exe" "$root\assets" "$d\flags.txt" "$prev\in\in-$($mode.res).f16" "$d\o" 4 1 "$root\flat-$side" 0 0 1 0 > "$d\run.log" 2> "$d\stderr.log";$rc=$LASTEXITCODE;$ErrorActionPreference='Stop';if($rc){throw 'mode failed'}};$hs=@('A','N'|%{(Get-FileHash "$root\modes-$($mode.n)-$_\o.raw.f32").Hash});if($hs[0] -ne $hs[1]){throw 'mode raw mismatch'};"MODE_RAW_SAME $($mode.n)"}
+}finally{if((Test-Path $lock) -and (Get-Content $lock -Raw).Trim() -eq 'vit-byteedge-formal-20261004'){Remove-Item $lock -Force}}
+'MODES_DONE'

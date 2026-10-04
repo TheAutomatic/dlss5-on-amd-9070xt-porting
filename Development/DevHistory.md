@@ -1593,3 +1593,16 @@ Zero反馈「鬼武者接近49帧（900P 2k质量），3x效果不错」。现�
 原900/1080两轮control合并平均不慢；1080p99不差，900p99点估计14.319→14.363略高。新runner A/A尾14.378/14.380，跨批尾位置约.06ms变化覆盖差额，收为测量分辨率内等价，不声称全部p99改善。补证前已经装机，control接受过早，随后补一次A/A+control，不删旧读数。双游戏addonF1681283/runtimeF0A74F7D，76模块SUMS仍A09EE065；备份native-1440-optimization-20261004/backups/20261004-113833。所有配置字节保留：auto/FREE0；剑星3/PRED0/SKIN0，鬼武者3/PRED1/SKIN0。现质量模式900不会因本刀提速，真2k待用户NativeAA+FREE1决定。
 
 DUP边际C32约5.325ms、C256约2.313、C512 FFN/投影部分约1.221、ViT族约2.168，不相加当整网份额。960已走现融合/stream/N64/w5 QKV，新增恒960入口小筛无稳定收益；只收实验记录（原512b4872，本分支fc9a74b5），不合生产。结果results/native-1440-optimization-20261004、vit960-20261004。原输出留hash/统计后清理，未删输入/权重/附件，无push/发行包。
+
+
+### 2026-10-04 ViT已量化contract字节边已装；C32小刀止损
+
+C32当前1440 prefix/post边际各约1.35ms；固定geometry/pitch入口原float同、默认0执行section同，prefix/post少74/48指令，但三轮−.00961/+.00226/−.02536ms有慢轮，停止不收生产。原型patch/results/c32-small-20261004留负账。
+
+只收ViT已量化边：F的E4M3值直接保存byte，w5 QKV省half→float→FP8重编码，投影skip精确decode，AE缓存仍F32。65536half与254有限FP8码proof同，NaN码域外差异如实留；真实三核tuple/正常19/AE CSV/1440受控动history/3multiSkin样本/缺一入口整体fallback/RE9九组smoke均同。初始化三HasFn缓存，warmup覆盖新byte容量，不在producer等待后新增Upload/moduleLoad/sync。初手写拼接漏inc报500，经预检改canonical row构建，错误未安装。peer源c00ac6dc已合为0e98456c。
+
+同批single三档三轮各1440样本：900 avg7.39185→7.33849ms、p99 7.674→7.660；1080 10.29676→10.20419、p99 10.625→10.516；1440 17.10425→16.97973、p99 17.409→17.280。省.053/.093/.125ms，约.7～.9%；wall含codec/交接/回写，不是游戏总帧时，也不与旧批累计百分比。
+
+双游戏addon3A538106/runtime2844B742，76模块SUMS8E34D5D1；仅vit-stream两row双arch更新、旧入口保留。备份vit-byteedge-formal-20261004/backups/20261004-130812，配置字节保持auto/FREE0；剑星3/PRED0/SKIN0，鬼武者3/PRED1/SKIN0，exact快照同步。无push/发行包。results/vit-byteedge-formal-20261004与vit-contract-byteedge-20261004；输出hash/统计后仅清本实验输出，不删权重/输入/附件。
+
+Issue13原NVIDIA现存数据已公开两包：[Gofile](https://gofile.io/d/FWpuapJe)，[issue回复](https://github.com/lmxxf/dlss5-on-amd-9070xt-porting/issues/13#issuecomment-5976697739)。API final保存full1920×1152 RGB32F、原post包有效1080，两阶段不可混；无GPU重跑。
