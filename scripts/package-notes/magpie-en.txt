@@ -1,5 +1,9 @@
 Magpie-DLSS5-AMD @VERSION@ — full portable package
 
+0.41
+Default remains 1x. Selecting 3x defaults to two real passes plus a predicted third (lossy); DLSS5_MULTI_PASS_PREDICT=0 restores real three passes. Prediction leaves 1x/2x unchanged; skin defaults off. Adds first-frame preallocation, HIP device binding, RE9 strength configuration and bit-exact kernel improvements. Extended FAST_NUMERIC itself changes 1x/2x arithmetic. Existing custom/native overrides remain. See sources/configuration/CONFIGURATION.md.
+
+The following 0.40 notes are historical, not a new-package FPS/timing promise.
 0.40
 1. Default output changed: all 71 blocks + fast numerics (DLSS5_SKIP_BLOCKS= empty, DLSS5_FAST_NUMERIC=1). Against NVIDIA 44.26 -> 47.55 dB, no overall colour shift; about 0.12/0.19 ms (900/1080) slower per frame than 0.39. For the 0.39 output write DLSS5_SKIP_BLOCKS=42,43,46 and DLSS5_FAST_NUMERIC=0 in custom-config.txt.
 2. Multi pass DLSS5_MULTI_PASS=1/2/3 (default 1): the network runs again on its own output, stronger style, about N times the cost. In game F9 cycles 1 -> 2 -> 3 from the next frame and saves the choice in custom-config.txt (also rewrites the line in native-game-flags.txt if that file sets it; no effect if a system environment variable of the same name is set). Other key: DLSS5_MULTI_PASS_HOTKEY (F1-F24 or a key code, 0 = off). Stellar Blade 2K, in game: 57/37/27 fps for 1/2/3 passes; 3 passes pair well with frame generation.

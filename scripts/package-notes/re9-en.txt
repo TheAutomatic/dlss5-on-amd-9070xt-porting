@@ -1,5 +1,9 @@
 OptiScaler-REFramework-DLSS5-AMD @VERSION@ — special RE9 pre-SR full package
 
+0.41
+Default remains 1x. Selecting 3x defaults to two real passes plus a predicted third (lossy); DLSS5_MULTI_PASS_PREDICT=0 restores real three passes. Prediction leaves 1x/2x unchanged; skin defaults off. Adds first-frame preallocation, HIP device binding, RE9 strength configuration and bit-exact kernel improvements. Extended FAST_NUMERIC itself changes 1x/2x arithmetic. Existing custom/native overrides remain. See sources/configuration/CONFIGURATION.md.
+
+The following 0.40 notes are historical, not a new-package FPS/timing promise.
 0.40 update
 1. Same kernels and default configuration as the regular package: all 71 blocks + fast numerics (against NVIDIA 44.26 -> 47.55 dB, about 0.12/0.19 ms slower per frame); for the 0.39 output write DLSS5_SKIP_BLOCKS=42,43,46 and DLSS5_FAST_NUMERIC=0 in custom-config.txt.
 2. Multi pass DLSS5_MULTI_PASS=1/2/3 (default 1, stronger style, about N times the cost). The RE9 runtime has no hotkey; edit the config and restart the game.

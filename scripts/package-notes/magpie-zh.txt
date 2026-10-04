@@ -1,5 +1,9 @@
 Magpie-DLSS5-AMD @VERSION@ — 完整便携包
 
+0.41
+默认仍为1x。选择3x时默认两遍真实网络加预测第三遍（有损）；DLSS5_MULTI_PASS_PREDICT=0恢复真三遍，1x/2x不受预测影响，肤色保护默认关闭。新增首帧预分配、HIP设备重绑、RE9强度文件控制和逐位算子优化；FAST_NUMERIC加深本身会改变1x/2x数值。已有custom/native覆盖保留。配置说明见sources/configuration/CONFIGURATION.zh-CN.md。
+
+以下是历史0.40说明，FPS/耗时不是本次整包性能承诺。
 更新（0.40）
 1. 默认输出变了：全 71 块 + 快速数值（DLSS5_SKIP_BLOCKS= 留空，DLSS5_FAST_NUMERIC=1）。对 NVIDIA 原版 44.26 → 47.55 dB，偏色消失；每帧比 0.39 慢约 0.12/0.19ms（900/1080）。想要 0.39 的输出：custom-config.txt 里写 DLSS5_SKIP_BLOCKS=42,43,46 和 DLSS5_FAST_NUMERIC=0。
 2. 叠层 DLSS5_MULTI_PASS=1/2/3（默认 1）：网络把自己的输出再跑 1～2 遍，风格更浓，耗时约 N 倍。游戏里按 F9 在 1→2→3 之间轮换，下一帧生效，选择写进 custom-config.txt（native-game-flags.txt 里也写了这一项的话一并改；设了同名系统环境变量则按键无效）。改键：DLSS5_MULTI_PASS_HOTKEY（F1～F24 或键码，0 关闭）。《剑星》2K 实测 1/2/3 遍 57/37/27 fps，3 遍可以配帧生成玩。

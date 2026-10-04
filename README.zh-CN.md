@@ -117,6 +117,10 @@ DLSS5_MULTI_PASS=2
 
 当前源码默认`DLSS5_MULTI_PASS_PREDICT=1`：3x跑两遍真实网络再预测第三遍（有损）；显式0运行真三遍，1x/2x不变。F9只切遍数，肤色保护默认0。此为待0.41发布源码策略，已发布0.40包尚未更新。
 
+## 0.41本地构建
+
+**默认1x。** 选择3x才默认两遍真实网络加预测第三遍（有损），显式PREDICT=0运行真三遍，肤色保护默认0。本地包加入首帧/设备绑定修复、RE9强度文件控制、快速数值加深及C256/ViT/C512/数据流逐位优化。详见[0.41更新日志](CHANGELOG.zh-CN.md)。只在本地构建，未上传或打tag。
+
 ## 配置
 
 全部配置说明与默认文件入口：[配置参考](scripts/CONFIGURATION.zh-CN.md)。该页复用完整中英注释模板，说明三层优先级、强度、热载及 RE9 差异。
@@ -135,7 +139,7 @@ DLSS5_MULTI_PASS=2
 | `DLSS5-AMD\default-config.txt`及`custom-config.template.txt` | [配置参考](scripts/CONFIGURATION.zh-CN.md)链接的三宿主模板及`scripts/custom-config.txt` | `Development/tools/stage-config-layers.ps1`复制；不打包玩家custom/native文件 |
 | 权重（`*.f16` / `*.f32`）、`noise.f32` | 不在仓库里（见"权重"） | 随包；新包从上一个完整包接着做 |
 
-打包入口目前是 `Development/tools/package-040.ps1`，用于0.40配方和已校验的基础ZIP、框架及模型资产，不是从源码自动生成全部第三方资产；0.41尚未发布，不能只改版本号就当发行验证完成。模板通过`stage-config-layers.ps1`进入default-config；该脚本不升级已安装游戏。
+打包入口目前是 `Development/tools/package-041.ps1`，用于0.41本地构建和已校验的0.40基础ZIP、框架及模型资产，不是从源码自动生成全部第三方资产；0.41尚未发布，不能只改版本号就当发行验证完成。模板通过`stage-config-layers.ps1`进入default-config；该脚本不升级已安装游戏。
 
 发布前需核对双架构ELF目标和全部导出、76模块清单，以及当前同源正常19（normal/AE/roll）、相关多遍与RE9路径；数值改动开关另行标注。历史`validate-modules.ps1`及prod6脚本不覆盖所有新路径，不能当当前完整验收。
 
@@ -248,6 +252,8 @@ powershell -ExecutionPolicy Bypass -File scripts\deploy_fast.ps1 -Source <lab> -
 | 0.38 · 三个包（Magpie · OptiScaler · OptiScaler-REFramework，HIP）[夸克](https://pan.quark.cn/s/6856d875bbe9) · [Gofile 镜像](https://gofile.io/d/lzsqfUiE) | 09-30 | 默认与 0.37 逐位相同：900 去 shift_pack、C32 字节化与跳全零半块、复合量化、C256 FFN W16、C512 attention 去冗余 F、三处宽写；离线 900 约 8.0 → 7.6ms、1080 约 10.8 → 10.4ms（`results/hip-roofline-20260930`）。新开关 `DLSS5_FORMAT_FALLBACK=1`、`DLSS5_HOT_RELOAD=1`；可选有损 `DLSS5_NETWORK_1080_ROWS=1088`（默认不开）。 |
 | 0.39 · 三个包（Magpie · OptiScaler · OptiScaler-REFramework，HIP）[夸克](https://pan.quark.cn/s/dea9c0ef2f95) · [Gofile 镜像](https://gofile.io/d/iqtFTSpS) | 10-01 | 默认与 0.38 逐位相同：C512 FFN 一 wave 寄存器内完成、残差初始化/权重读取外提、解码加宽、ViT QKV/attention 合并等；离线 900 约 7.27 → 6.8ms、1080 约 10.05 → 9.5ms，《剑星》2K +1.5～2 帧。新开关 `DLSS5_STYLE=1`；add-on/runtime 可复现构建。 |
 | 0.40 · 三个包（Magpie · OptiScaler · OptiScaler-REFramework，HIP）[夸克](https://pan.quark.cn/s/d38e0f653c5a) · [Gofile 镜像](https://gofile.io/d/moSf7cqf) | 10-03 | **默认输出变了**：全 71 块 + `DLSS5_FAST_NUMERIC=1`（对 NVIDIA 44.26 → 47.55 dB，+0.12/+0.19 ms）。叠层 `DLSS5_MULTI_PASS` + F9；三个配置文件（`default-config` → `custom-config` → `native-game-flags`，环境变量最高）；C32/C64 改 LLVM 23 等逐位提速。 |
+| 0.41（本地构建） | 10-05 | 默认1x；选3x才默认两真实遍加预测。首帧/HIP设备修复、RE9强度、C256/ViT/C512及直接RGBA优化，76模块；[完整说明](CHANGELOG.zh-CN.md)。尚无公开下载。 |
+
 
 ## 权重
 

@@ -1,5 +1,9 @@
 OptiScaler-REFramework-DLSS5-AMD @VERSION@ — RE9特殊前置完整包
 
+0.41
+默认仍为1x。选择3x时默认两遍真实网络加预测第三遍（有损）；DLSS5_MULTI_PASS_PREDICT=0恢复真三遍，1x/2x不受预测影响，肤色保护默认关闭。新增首帧预分配、HIP设备重绑、RE9强度文件控制和逐位算子优化；FAST_NUMERIC加深本身会改变1x/2x数值。已有custom/native覆盖保留。配置说明见sources/configuration/CONFIGURATION.zh-CN.md。
+
+以下是历史0.40说明，FPS/耗时不是本次整包性能承诺。
 0.40 更新
 1. 与常规包同一套核和默认配置：全 71 块 + 快速数值（对 NVIDIA 44.26 → 47.55 dB，每帧慢约 0.12/0.19ms）；想要 0.39 的输出，custom-config.txt 里写 DLSS5_SKIP_BLOCKS=42,43,46 和 DLSS5_FAST_NUMERIC=0。
 2. 叠层 DLSS5_MULTI_PASS=1/2/3（默认 1，风格更浓，耗时约 N 倍）。RE9 runtime 没有热键，改配置后重启游戏。

@@ -157,6 +157,10 @@ The C host smoke test is `tools/lmxxf_zero_fallback_abi.c`. On Windows, build th
 
 Current source defaults `DLSS5_MULTI_PASS_PREDICT=1`: 3x uses two real passes and predicts the third (lossy); explicit 0 uses real three passes. 1x/2x are unchanged. F9 changes only the count. Skin defaults to 0. These are upcoming 0.41 source settings, not an update to released 0.40 ZIPs.
 
+## 0.41 local build
+
+**Default 1x.** Selecting 3x defaults to two real passes plus a predicted third (lossy); explicit PREDICT=0 runs real three passes, skin=0. This local package adds the first-frame/device-binding fixes, RE9 strength file control, deeper fast numerics and bit-exact C256/ViT/C512/data-flow improvements. See [0.41 changelog](CHANGELOG.md#041-10-05-built-locally-not-published). Packages are built locally, not uploaded or tagged.
+
 ## Configuration
 
 See the [configuration reference](scripts/CONFIGURATION.md) for all annotated defaults, file precedence, strength controls, hot reload and RE9 differences.
@@ -175,7 +179,7 @@ See the [configuration reference](scripts/CONFIGURATION.md) for all annotated de
 | `DLSS5-AMD\default-config.txt` and `custom-config.template.txt` | Three host templates linked by the [configuration reference](scripts/CONFIGURATION.md), plus `scripts/custom-config.txt` | `Development/tools/stage-config-layers.ps1` copies them; personal custom/native files are not shipped |
 | weights (`*.f16` / `*.f32`), `noise.f32` | not in this repository (see *Weights*) | packages carry them; a fresh package is built from the previous full package |
 
-Packaging currently uses `Development/tools/package-040.ps1` with verified baseline ZIPs, framework and model assets. It describes the 0.40 assembly; 0.41 has not been released, and changing its version argument alone is not release validation. `stage-config-layers.ps1` stages defaults without overwriting installed personal settings.
+Packaging currently uses `Development/tools/package-041.ps1` with verified baseline ZIPs, framework and model assets. It assembles local 0.41 packages from verified 0.40 baselines; 0.41 has not been published, and changing its version argument alone is not release validation. `stage-config-layers.ps1` stages defaults without overwriting installed personal settings.
 
 Before release, verify both ELF targets, exports and the 76-module inventory, then the current same-source normal19 (normal/AE/roll), relevant multi-pass and RE9 paths. Lossy switches are explicitly documented. Historical `validate-modules.ps1` and prod6 scripts do not cover every current path.
 
@@ -298,6 +302,8 @@ chain's own output did not change by a single bit.
 | 0.38 · all three packages (Magpie · OptiScaler · OptiScaler-REFramework, HIP): [Quark](https://pan.quark.cn/s/6856d875bbe9) · [Gofile mirror](https://gofile.io/d/lzsqfUiE) | 09-30 | Bit-identical to 0.37 by default: 900 shift_pack removed, C32 byte storage and zero-half skip, composite quantisation, C256 FFN W16, C512 attention without redundant F, three wide-store rewrites; offline 900 about 8.0 → 7.6 ms, 1080 about 10.8 → 10.4 ms (`results/hip-roofline-20260930`). New switches `DLSS5_FORMAT_FALLBACK=1`, `DLSS5_HOT_RELOAD=1`; opt-in lossy `DLSS5_NETWORK_1080_ROWS=1088` (off by default). |
 | 0.39 · all three packages (Magpie · OptiScaler · OptiScaler-REFramework, HIP): [Quark](https://pan.quark.cn/s/dea9c0ef2f95) · [Gofile mirror](https://gofile.io/d/iqtFTSpS) | 10-01 | Bit-identical to 0.38 by default: C512 FFN in registers by one wave, hoisted residual init / weight loads, wider decode, ViT QKV/attention fusion and more; offline 900 about 7.27 → 6.8 ms, 1080 about 10.05 → 9.5 ms, Stellar Blade 2K +1.5-2 fps. New switch `DLSS5_STYLE=1`; reproducible add-on/runtime builds. |
 | 0.40 · all three packages (Magpie · OptiScaler · OptiScaler-REFramework, HIP): [Quark](https://pan.quark.cn/s/d38e0f653c5a) · [Gofile mirror](https://gofile.io/d/moSf7cqf) | 10-03 | **Default output changed**: all 71 blocks + `DLSS5_FAST_NUMERIC=1` (vs NVIDIA 44.26 → 47.55 dB, +0.12/+0.19 ms). Multi pass `DLSS5_MULTI_PASS` with F9; three config files (`default-config` → `custom-config` → `native-game-flags`, environment on top); LLVM 23 C32/C64 and other bit-exact speed-ups. |
+| 0.41 (local build) | 10-05 | Default 1x; opt-in 3x uses two real passes plus prediction by default. First-frame/HIP-device fixes, RE9 strength, C256/ViT/C512 and direct-RGBA improvements; 76 modules. [Details](CHANGELOG.md#041-10-05-built-locally-not-published). No public download yet. |
+
 
 ## Weights
 

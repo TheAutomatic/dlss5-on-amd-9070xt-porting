@@ -302,6 +302,17 @@
 - RE9 runtime：输入直写。RGB 输入 pass 直接写进 HIP 桥接的共享输入缓冲，`RecordInputs` 不再录那次 35MB（1080 档）的 `CopyBufferRegion`；与 add-on 自 09-28 起的 `DLSS5_DIRECT_IO` bit 1 同一开关、同一默认值（1）。`RecordInputs` 的 GPU 段 1080 档 0.22→0.08ms、900 档 0.10→0.06ms；流水线宿主（不逐帧等 GPU）整帧间隔六轮全快 900 −0.03～−0.04、1080 −0.07～−0.08ms；逐帧等待的串行宿主中性（那里 HIP 开始受 `EnqueueHip` 的 CPU 发核约 0.3ms 限制）。720/900/1080 与 1600×900、1920×1080 输出逐位不变，smoke 0。*集成方注意*：ABI、调用顺序、你录的列表都不用改，`RecordInputs` 只是少录一条拷贝和两个 barrier；`DLSS5_DIRECT_IO=0`（环境变量或 flags 文件）回到旧行为。另附调用顺序建议 `include/LmxxfNrApi-call-order.zh-CN.md`。`results/outside-net-20261002`。
 - RE9 runtime：`DLSS5_STYLE` 现在和其它网络键一样从 flags 文件读取（0.39 的 runtime 不读模板里这一行，只认系统环境变量）。默认 `1` 逐位不变；文件里写 `0` 与环境变量 `0` 输出相同。*集成方注意*：只在创建会话时读一次，不热重载；同名环境变量优先；只换 RE9 runtime 文件，其它不动。`results/night-20261001`。
 
-## 0.41（准备中）
+## 0.41（10-05，本地构建，尚未对外发布）
 
-- `DLSS5_FAST_NUMERIC` 加深（模板仍默认 `1`；有损）：`-fast` 模块族扩展到 ViT 和 deep——`vit-stream-fast.hsaco`（ViT attention：分母裸 rcp、epilogue 去 RTZ 半舍入；contract + projection 去 RNE 半舍入）与 `deep_fast-packed-fast.hsaco`（C512 FFN 投影同款数值；decoder 及其余逐字节不变）。宿主把 `-fast 交换泛化到这些模块；缺失仍退回正常模块 + 一行 stderr；没有 -fast 文件时 =1 逐位。离线 ABBA（两边同跳 42,43,46，与此前 fast-tier 同口径）：900 −0.094/−0.083/−0.090、1080 −0.076/−0.105/−0.119 ms/帧，三轮全快、合并 p99 两档更好；对逐位输出最差帧 52.1 dB（720-motion），各序列 53.0～55.6 dB。宿主补丁自身中性（19 组 SAME）。C512 attention 投影 f16 残差变体（生产端把残差写成精确半、投影读半）**逐位精确**但两形态都慢（900 合并 +0.016 / +0.059 ms）——投影族不差残差流量，不装，代码留宏内。ViT QKV/expand 没有可省的舍入往返（已是硬件 rsqf / 直接 byte_F）。*集成注意：* 每架构多 2 个模块文件（两架构合计包和 SHA256SUMS 各 +4）；对 NVIDIA 的 44.26→47.55 dB 是 c32/c64 版测的，ViT 加深版未重测。`results/fast-vit-c512-20261003`。
+默认仍为 **1x**（`DLSS5_MULTI_PASS=1`）。选择3x时，默认真实运行两遍并局部预测第三遍（**有损**）；`DLSS5_MULTI_PASS_PREDICT=0`恢复真实三遍。已有custom/native/环境覆盖保留，肤色保护默认0。
+
+- **快速数值扩展**：FAST_NUMERIC=1现在也选ViT/deep快速模块，1x/2x算术也会变，不与0.40默认逐位相同。900/1080离线三轮ABBA均快，约每帧省0.09/0.10ms（两边均沿用跳42,43,46的历史测试合同）；对正常路径最差帧52.1dB、序列53.0～55.6dB。此前对NVIDIA的44.26→47.55dB只测了C32/C64版，未重测加深版。`results/fast-vit-c512-20261003`。
+- **快速3x预测**：两遍真实网络后，用RGB共同局部拟合预测第三遍，不声称与NVIDIA精确相同。实际GPU输出对本项目真三遍：四个样本49.36～49.83dB、history45.28dB；history暗部/色彩可能略差。首遍回灌/预测/肤色资源在producer等待前准备，修复鬼武者首帧同步上传等待死锁。add-on预测支持热载，RE9改文件需重启。`results/multi-pass-predict-20261004`。
+- **逐位数据流优化**：多遍中间post直接写RGBA供下一遍；ViT已量化contract边用FP8字节直送QKV/投影；活跃C512 FFN不再重复解码和打包相同FP8码。最后一刀C512同批单遍900/1080/1440省约0.023/0.042/0.103ms，三轮ABBA均快、合并p99改善。不同实验收益不相加，不承诺整包FPS涨幅。`results/multipass-direct-rgba-20261004`、`results/vit-byteedge-formal-20261004`、`results/c512-direct-whole-20261004`。
+- **原生1440P**：真实2560×1472处理面启用已有C256整块融合，不降分辨率；该实验同批单遍墙钟17.483→17.029ms、快速3x墙钟34.409→33.442ms，不含游戏渲染/FSR/Present。自由分辨率功能本身0.40已有。`results/native-1440-optimization-20261004`。
+- **接入修复**：`DLSS5_PRE_UPSCALE=auto`探测命令列表合同，不适用时退到后置；HIP Enqueue在调用线程重绑选定设备，正式采纳[XMoon的PR #15](https://github.com/lmxxf/dlss5-on-amd-9070xt-porting/pull/15)。贡献者核显+独显测试从九次InvalidHandle错误变为600多帧无错；本机单HIP设备检查不能代替双设备独立复现。
+- **RE9强度文件控制**：合法`DLSS5_STRENGTH=a,b`文件/环境数值（各0～1）覆盖宿主菜单亮度/色彩；auto/空/缺省继续宿主默认。add-on/Magpie仍支持0～3。不改ABI、默认强度或网络Style。RE9文件需重启，add-on强度仍可热载。`results/strength-config-20261004`。
+- **可选肤色保护**：`DLSS5_MULTI_PASS_SKIN_PROTECT=1`在肤色掩码核心保第一遍、其他区域用最终遍；只是颜色启发式，不是语义分割，暖色背景/有色灯光及history反馈有局限。用户反馈整体收益不明显，默认保持关闭。`results/skin-protect-20261004`。
+- **包与文档**：每架构38模块、合计76，五行LLVM23.1.2、其余33行驱动COMGR；重编CPU宿主、刷新RE9源码包，配置说明拆中英文并链接全部注释默认文件。发行默认MP1/PRED1/SKIN0，不塞玩家custom/native；本地打包不上传、不打tag。
+
+已装开发版用户读数：剑星1x约57.6fps、快速3x约37fps；鬼武者900P快速3x约49fps，与此前一样且无异常。不是同批ABBA收益证据。gfx1200只做构建/ELF核对，真机验证仍在gfx1201。
