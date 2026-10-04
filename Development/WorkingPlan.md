@@ -5,7 +5,7 @@
 ## 现状
 
 - 0.40已发布，0.41未打包。fast-vit/preupscale-auto、双feed首帧修复、直接RGBA已合；全部71块/FAST1。
-- 最新双游戏ViT字节边版已装：剑星addon3A538106，鬼武者根/_storage_ runtime25A617B2（仅强度配置入口更新）；76模块/SUMS 8E34D5D1，exact模块/配置快照同步。备份vit-byteedge-formal-20261004/backups/20261004-130812。
+- 最新双游戏ViT字节边版已装：剑星addon3A538106，鬼武者根/_storage_ runtime25A617B2（仅强度配置入口更新）；76模块/SUMS 98960584，exact模块/配置快照同步。备份vit-byteedge-formal-20261004/backups/20261004-130812。
 - 两游戏HEIGHT auto/FREE0，配置字节保留。剑星MP3/PRED0/SKIN0（F9可变遍数），鬼武者MP3/PRED1/SKIN0（两真实遍+预测第三遍，无F9/热载）；没有替用户切真2k，现质量模式仍auto900，本刀不会使现900提速。
 - 鬼武者09:50实玩900P/2k质量接近49fps、3x效果不错，未确认比此前约49提升。剑星真3旧约27fps；肤色保护观感失败已关，不将不同配置FPS混算。
 - 真1440输入2560×1440，处理2560×1472，ViT40×24=960。C256既有wholeblock融合只放行此新shape，数学/模块不变。连续三轮单遍NR frame wall17.483→17.029ms、优化3x34.409→33.442，p99均改善；纯NN GPU median15.968→15.584、32.768→31.824。不是游戏总帧时，也不说明2k已稳定可玩。
@@ -24,6 +24,8 @@
 - **Issue4修复已备**：PR15/新报告控制A/B/C证明选卡一直device1正确，Enqueue重绑后9次400→600+帧无错。已采纳一行hipSetDevice既有try失败封闭退出；本机单HIP设备跨线程/900/1080逐位门过，不冒充双HIP复测。候选addonA810CD51在/tmp/issue4-products，未装Magpie/两游戏，不改配置/BIOS/驱动；没有对外回复/关闭issue，线程ID实证仍缺。
 
 - **强度文件入口已补**：RE9合法两finite数0..1盖宿主/menu，auto/空/缺省沿API/default，非法回宿主报告一次；addon/Magpie仍0..3。文件层序不改，RE9文件需重启、addon约1秒热载。默认/API/file/env900/1080 hash门及smoke过；只装鬼武者runtime25A617B2，备份strength-config-20261004/backups/20261004-200004，三配置字节不变、现强度没改。剑星native auto仍盖custom，未擅改该行。20:09鬼武者实玩无异常、与此前一样，未给新FPS/手调数值反馈。
+
+- **C512 direct pack组合3已装**：w2f8两个byte出口去F解码/重编码，保原舍入/累加，单项慢轮拒。normal19/1440raw/multiSkin/RE9九组smoke均过；single900/1080/1440同批省.023/.042/.103ms，三轮全快+p99不差。仅双arch模块+SUMS98960584改，host/config不动，鬼武者25A仍在；备份c512-direct-whole-20261004/backups/20261004-210325，实玩待用户。不乘微核层数/跨批累计收益。
 
 ## 下一步
 

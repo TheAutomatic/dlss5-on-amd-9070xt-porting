@@ -1634,3 +1634,12 @@ DLSS5_STRENGTH加入白名单，合法两finite数0..1覆盖宿主/menu，auto/�
 ### 2026-10-04 20:09 鬼武者强度入口版实玩确认
 
 Zero反馈「鬼武者没异常跟之前一样」。当前runtime25A617B2、强度auto/原默认、MP3/PRED1/SKIN0，未提供新FPS；不把本次反馈记作提速或自定义强度数值验收。
+
+
+### 2026-10-04 C512 w2f8 direct pack组合3已装
+
+活跃mix/contract byte出口省F→decode→同码pack，保c512_hq/Hrtz/激活/K序，入口ar及外部compact residual不动。单mix/单tail慢轮拒，只收组合3；码域proof/27组真实FFN同、macro0双archsection同。正常19/AE CSV/1440受控动history原float/multiSkin/RE9九组smoke通过。
+
+同058 fresh host、只模块的single三档三轮各1440样本：900 avg7.33046→7.30709ms、p99 7.677→7.624；1080 10.19529→10.15365、p99 10.521→10.475；1440 16.97888→16.87560、p99 17.300→17.225。省.023/.042/.103ms，三轮无慢/尾不差，不乘微核层数、不跨批累计FPS。
+
+双游戏仅c512-m32-deep双arch+SUMS98960584/76模块更新，host/config字节保持，鬼武者仍25A617B2；备份c512-direct-whole-20261004/backups/20261004-210325，exact同步。结果results/c512-direct-whole-20261004及c512-direct-pack-20261004，输出留hash再清，不删权重，无push/发行包。
