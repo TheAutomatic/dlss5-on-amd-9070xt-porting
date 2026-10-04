@@ -23,7 +23,7 @@ DLSS 5（DLSSNR）跑在 AMD RX 9070 XT / RDNA 4 上。
 会把明细写进 `logs\native-hip.txt`）；显存被顶满会掉帧且不恢复，《剑星》里贴图质量开"高"或更低。
 
 **配置。** 每个包带的 `DLSS5-AMD\default-config.txt`（0.40 以前是 `native-game-flags.txt`）就是仓库模板（[常规](scripts/hip-game-flags.txt)、[Magpie](scripts/hip-magpie-flags.txt)、
-[RE9](scripts/hip-re9-flags.txt)；键的说明在 [scripts/CONFIGURATION.md](scripts/CONFIGURATION.md)）。网络档位按输入自动选（两个方向都不超过某档的 110% 就用那档：
+[RE9](scripts/hip-re9-flags.txt)；键的说明在 [scripts/CONFIGURATION.zh-CN.md](scripts/CONFIGURATION.zh-CN.md)）。网络档位按输入自动选（两个方向都不超过某档的 110% 就用那档：
 720 到 1408×792，900 到 1760×990，其余 1080，所以 2K 质量档 1707×961 走 900；`DLSS5_NETWORK_HEIGHT` 可强制）。常规包默认开着有损的"ViT 自适应复用"（`DLSS5_VIT_ADAPTIVE=1`，
 相关键见 [Development/HIP/VIT-REUSE.md](Development/HIP/VIT-REUSE.md)；F8 在它和 EXACT 之间切，要逐位输出就设 0；Magpie 和 RE9 包默认关）。
 0.32 起 RE9 runtime 也从 flags 文件读 `DLSS5_HIP_*`、`DLSS5_SKIP_BLOCKS`、`DLSS5_FIT_LARGE` 等键；宿主侧选项仍在 `OptiScaler.ini` 的 `[DlssNr]`。
@@ -33,7 +33,7 @@ DLSS 5（DLSSNR）跑在 AMD RX 9070 XT / RDNA 4 上。
 （旧版的单文件，已有的照常生效）。后一个文件覆盖前一个的同名项，没写的项沿用前面的值，文件不存在就跳过。系统环境变量里的 `DLSS5_*` 比三个文件都优先。
 同一文件里同一项写两次，以最后一行为准。值留空（`DLSS5_SKIP_BLOCKS=`）也会覆盖前面的文件，意思是用程序内置默认。所以只想改一项，就在
 `custom-config.txt` 里只写那一行，比如 `DLSS5_MULTI_PASS=2`。所有读设置的地方（常规与 Magpie add-on、热重载、RE9 runtime）用同一套合并规则。
-细节见 [scripts/CONFIGURATION.md](scripts/CONFIGURATION.md)。
+细节见 [scripts/CONFIGURATION.zh-CN.md](scripts/CONFIGURATION.zh-CN.md)。
 
 **Magpie 提示。** 包内效果组里的 `FSR3_SR` 就是 DLSS5 的入口（界面名字还是 FSR3）；这一项保持输入尺寸，后面的 FSR4 负责放大。
 AMD 光流只在第一项开，FSR4 和 XeSS 帧生成的 Optical Flow Method 选 None。`Alt+Shift+A` 启停缩放，`F6` 在所有包里都是开关网络。
@@ -74,7 +74,7 @@ DLSS5_VIT_REUSE_PERIOD=4
 DLSS5_MULTI_PASS=2
 ```
 
-可选 `1`/`2`/`3`，默认 `1`（就是现在的单遍，输出逐位不变）；其它值退回 1 并在 stderr 写一行。网络耗时按遍数线性涨：离线整网 900 档单遍约 7.0 ms，2 层约 13.7～13.8 ms、3 层约 20.4～20.6 ms；1080 档单遍约 9.8 ms，2 层约 19.5 ms、3 层约 29.0 ms。和单遍输出比，2 层约 38.4～39.1 dB、3 层约 34.2～34.7 dB（这不是画质损失的读数，是风格加强了多少）。显存多一块（2 层）或两块（3 层）输入缓冲，1080 档每块 35.4 MB。每一遍用同一组 Style/强度（没有 Magpie 那种逐遍参数）；开叠层时 ViT 自适应复用自动关闭。细节见 `scripts/CONFIGURATION.md` 和 `Development/results/multi-pass-20261003`。
+可选 `1`/`2`/`3`，默认 `1`（就是现在的单遍，输出逐位不变）；其它值退回 1 并在 stderr 写一行。网络耗时按遍数线性涨：离线整网 900 档单遍约 7.0 ms，2 层约 13.7～13.8 ms、3 层约 20.4～20.6 ms；1080 档单遍约 9.8 ms，2 层约 19.5 ms、3 层约 29.0 ms。和单遍输出比，2 层约 38.4～39.1 dB、3 层约 34.2～34.7 dB（这不是画质损失的读数，是风格加强了多少）。显存多一块（2 层）或两块（3 层）输入缓冲，1080 档每块 35.4 MB。每一遍用同一组 Style/强度（没有 Magpie 那种逐遍参数）；开叠层时 ViT 自适应复用自动关闭。细节见 `scripts/CONFIGURATION.zh-CN.md` 和 `Development/results/multi-pass-20261003`。
 
 游戏里按 **F9** 在 1 → 2 → 3 → 1 遍之间轮换（常规 OptiScaler 和 Magpie add-on；`DLSS5_MULTI_PASS_HOTKEY` 可改键，写 `0` 关掉）。按键会把 `DLSS5_MULTI_PASS=N` 写进 `custom-config.txt`，热重载大约一秒内切过去，不用重启。`native-game-flags.txt` 里也有 `DLSS5_MULTI_PASS` 时（它会盖过 custom），那一行也一起改。RE9 runtime 没有热重载，只能改文件后重启。想让后几遍便宜点，用 `DLSS5_MULTI_PASS_SKIP_BLOCKS` 只在第 2 遍及以后跳块（见上表，有损）。
 
@@ -119,7 +119,7 @@ DLSS5_MULTI_PASS=2
 
 ## 配置
 
-全部配置说明与默认文件入口：[配置参考 / Configuration](scripts/CONFIGURATION.md)。该页复用完整中英注释模板，说明三层优先级、强度、热载及 RE9 差异。
+全部配置说明与默认文件入口：[配置参考](scripts/CONFIGURATION.zh-CN.md)。该页复用完整中英注释模板，说明三层优先级、强度、热载及 RE9 差异。
 
 ## 编译
 
@@ -132,7 +132,7 @@ DLSS5_MULTI_PASS=2
 | `shaders/*.hlsl` 那 12 个（编解码、屏幕文字、RGB 搬运、时序座标、帧检查） | `shaders/`（历史 DX12 网络链在 `shaders/dx12-network/`） | 直接以源码随包；运行时由系统 `d3dcompiler` 编（宿主按 `#define` 选 44 个变体） |
 | RE9 包：`dxgi.dll`（改过的 OptiScaler 宿主）+ `LmxxfNrRuntime.dll` | TheAutomatic 的 fork `release/1.9.0` @ `8f71f73` + 我们在 `Development/RE9/presr/` 的补丁 | `python3 Development/RE9/presr/prepare-host.py`（需要锁定版本的宿主源码：`git clone https://github.com/TheAutomatic/dlss-5-amd-project /tmp/re9-upstream-bridge-review && git -C /tmp/re9-upstream-bridge-review checkout 8f71f73`；重写宿主/runtime 源码并把 `src/`、`shaders/`、`hip/` 拷进 `third_party/lmxxf/`），再 `bash Development/RE9/presr/build-runtime.sh`（MinGW，编 runtime 和冒烟测试）和 Windows 上跑 `build-host.ps1`（Visual Studio 2022 Build Tools：MSVC v143 + Windows SDK 10.0.26100；用 vswhere 自动找，或 `-MSBuild <路径>`）。不用 Linux 也行：每个 RE9 包都带着准备好的源码 `sources\re9-presr-source.tar.gz`，`powershell -File Development\RE9\presr\build-host.ps1 -Root <工作目录> -Archive <那个 tar.gz>` 就能编出宿主（`<工作目录>\bin\OptiScaler.dll`，发布时改名 `dxgi.dll`；2026-09-26 用 0.32 包里的源码实测：91 秒，大小与发布的 `dxgi.dll` 相同，hash 因 MSVC 时间戳不同）。上游 clone 放别处就设 `RE9_UPSTREAM=<目录>`——见 `Development/RE9/presr/README.md`；同一套源码打成 `sources/re9-presr-source.tar.gz` 随包（`bundle-source.py`） |
 | 独立的 `LmxxfNrRuntime.dll`（接口 `include/LmxxfNrApi.h`，TheAutomatic 贡献） | `src/LmxxfNrRuntime.cpp` | Linux/WSL：`bash scripts/build-runtime.sh`；Windows：`scripts\build-runtime.cmd`（要 MSYS2 UCRT64 的 g++：`pacman -S mingw-w64-ucrt-x86_64-gcc`；用别的 g++ 就设 `LMXXF_GXX`） |
-| `DLSS5-AMD\default-config.txt`及`custom-config.template.txt` | [配置参考](scripts/CONFIGURATION.md)链接的三宿主模板及`scripts/custom-config.txt` | `Development/tools/stage-config-layers.ps1`复制；不打包玩家custom/native文件 |
+| `DLSS5-AMD\default-config.txt`及`custom-config.template.txt` | [配置参考](scripts/CONFIGURATION.zh-CN.md)链接的三宿主模板及`scripts/custom-config.txt` | `Development/tools/stage-config-layers.ps1`复制；不打包玩家custom/native文件 |
 | 权重（`*.f16` / `*.f32`）、`noise.f32` | 不在仓库里（见"权重"） | 随包；新包从上一个完整包接着做 |
 
 打包入口目前是 `Development/tools/package-040.ps1`，用于0.40配方和已校验的基础ZIP、框架及模型资产，不是从源码自动生成全部第三方资产；0.41尚未发布，不能只改版本号就当发行验证完成。模板通过`stage-config-layers.ps1`进入default-config；该脚本不升级已安装游戏。
@@ -141,13 +141,11 @@ DLSS5_MULTI_PASS=2
 
 内核的活是怎么组织的（给想接着做的人）：每个优化都是 `Development/HIP/experiments/<名字>/` 下的一个实验（`prepare.py` 把生产源码改成 `_pairN` 变体或模块集，`build.ps1`、`run.ps1`，有时还有 `analyze.py`），结果写在 `Development/results/<名字>-<日期>/README.md`；采用的改动变成源码里带默认值的 `HIP_*` 开关。`Development/WorkingPlan.md` 是现在在干什么，`Development/DevHistory.md` 是干过什么、为什么。
 
-### 当前混合模块构建 / Current mixed-module build
+### 当前混合模块构建
 
 Linux/WSL需要Python3、MinGW-w64 C++、git/curl；一键add-on脚本获取MinHook/ReShade 6.8头文件，默认是历史`--tiled`，现HIP必须显式`--hip`。Windows模块编译需要PowerShell和带`amd_comgr_3.dll`的AMD驱动；无需GPU执行。CPU宿主MinGW与GPU内核LLVM/COMGR是两套编译器。
 
-Linux/WSL needs Python3, MinGW-w64 C++, git/curl. The add-on helper fetches MinHook/ReShade 6.8 headers; pass `--hip` explicitly (its default is historical `--tiled`). Windows module compilation needs PowerShell and the driver's `amd_comgr_3.dll`, without executing GPU work. CPU-host MinGW is separate from the GPU compilers.
-
-LLVM23 prerequisite / 先准备公开编译器（Linux，需CMake、Ninja及C/C++编译器）：
+先准备公开LLVM23编译器（Linux，需要CMake、Ninja及C/C++编译器）：
 
 ```bash
 git clone --depth 1 --branch llvmorg-23.1.2 https://github.com/llvm/llvm-project llvm-src-23
@@ -155,8 +153,7 @@ cmake -G Ninja -S llvm-src-23/llvm -B llvm-build-23 -DCMAKE_BUILD_TYPE=Release -
 cmake --build llvm-build-23 --target clang lld llvm-objdump llvm-readobj llvm-dis -j 12
 ```
 
-Pass the absolute `llvm-build-23/bin` path as `--bin` below. The maintainer's [build-llvm23.sh](Development/tools/llvm-fork/build-llvm23.sh) uses the same settings but hardcodes a local work directory; the commands above do not depend on it.
-将生成的`llvm-build-23/bin`绝对路径填入下方`--bin`，不依赖维护者私有目录。
+维护者的[build-llvm23.sh](Development/tools/llvm-fork/build-llvm23.sh)使用同样参数，但写死了本地工作目录；上述命令不依赖该目录。将生成的`llvm-build-23/bin`绝对路径填入下方`--bin`。
 
 ```bash
 bash scripts/build-addon-oneclick.sh dlss5-amd.addon64 --hip
@@ -165,26 +162,19 @@ x86_64-w64-mingw32-g++ -std=c++17 -O2 -static hip/rtc_compile.cpp -o rtc_compile
 python3 Development/tools/llvm-fork/compile-modules.py --bin /path/to/llvm-23.1.2/bin --out /path/to/prebuilt --targets gfx1200 gfx1201 --compiler-rows llvm23 --row-opts --target-feature=-real-true16
 ```
 
-Use an actual public LLVM23.1.2 clang/lld build in `--bin`; the script's default path is the older LLVM21 experiment, **not** LLVM23. See [compiler build notes](Development/tools/llvm-fork/README.md). The prebuild parses the canonical recipe, including its compiler-specific barrier definitions; do not hand-copy a shorter macro list. Copy `rtc_compile.exe`, the repository sources and the entire `prebuilt/gfx1200` and `prebuilt/gfx1201` folders to Windows, then run from the repository root:
-
-`--bin`必须指向实际公开LLVM23.1.2的clang/lld，脚本默认目录是旧LLVM21实验而非23。预编译自动读生产配方及屏障宏；不要手列漏宏。将当前源码编出的rtc、源码树和双架构prebuilt目录传Windows，在仓库根目录运行：
+`--bin`必须指向公开LLVM23.1.2的clang/lld，默认路径属于旧LLVM21实验而非23，见[编译器构建记录](Development/tools/llvm-fork/README.md)。预编译直接解析生产配方，包括专用屏障宏，不要手列删减宏。把当前源码编出的rtc_compile.exe、源码树和完整prebuilt/gfx1200、prebuilt/gfx1201目录传到Windows，再从仓库根目录运行：
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File hip\build-modules.ps1 -Compiler .\rtc_compile.exe -OutputDir .\modules -RowOpts -PrebuiltDir C:\build\prebuilt
 ```
 
-Both targets are the default. LLVM23 rows: `c32-wave1`, `c32-wave1-rtz`, `c32-wave1-fast`, `c64-wave2`, `c64-wave2-fast`. The remaining 33 rows use the driver's COMGR (current validated environment: LLVM21). Omitting `-RowOpts` compiles everything with COMGR and does **not** reproduce the selected production toolchain. `-Only` selects one exact module name; a single `-Targets gfx1201` writes modules directly under OutputDir, while both targets produce architecture subfolders. Keep architecture names when installing/staging. Use current `hip/rtc_compile.cpp`: older helpers could ignore gfx1200; audit ELF targets before release.
+默认构建双架构。LLVM23五行：`c32-wave1`、`c32-wave1-rtz`、`c32-wave1-fast`、`c64-wave2`、`c64-wave2-fast`；其余33行用驱动COMGR（当前已验环境为LLVM21）。省略`-RowOpts`会全走COMGR，不能复现生产工具链。`-Only`仅选一个精确模块名；只选`-Targets gfx1201`时直接写OutputDir，双架构才创建子目录。安装/打包保留架构目录，使用当前hip/rtc_compile.cpp；旧辅助程序可能忽略gfx1200，发布前核ELF目标。
 
-默认双架构；上述五行LLVM23，其余33行用驱动COMGR（当前已验环境LLVM21）。不加`-RowOpts`会全走COMGR，不是生产混合配方。`-Only`只选一个精确模块名；仅一个`-Targets gfx1201`时直接写OutputDir，双架构才建子目录。安装/打包保留架构目录；旧rtc可能忽略gfx1200，必须编当前源码并核ELF目标。
-
-A source build alone is not a complete installation: supply matched framework/model/noise assets, the modules plus SHA256SUMS, and `shaders/` beside the DLL. RE9 also needs its matched prepared OptiScaler host (table above). Existing user custom/native values override updated defaults; do not silently replace them. This section documents commands, not a newly built/released package.
-
-仅源码构建不等于完整安装：还需匹配的框架/模型/noise、模块及SHA256SUMS、DLL旁shaders；RE9需匹配宿主。升级default不能覆盖玩家custom/native。本页只整理流程，没有新编译或发布。
+仅源码构建不是完整安装：还需匹配的框架/模型/noise资产、模块及SHA256SUMS和DLL旁shaders。RE9另需匹配的OptiScaler宿主（见上表）。玩家custom/native覆盖更新后的default，不要静默替换。此处只记录命令，没有新构建或发行。
 
 ### 历史：DX12 版（0.15 及之前）
 
 **现在的包不需要下面任何东西**（0.20 起是 HIP 后端：不要预览版 DXC、不要 Agility SDK、不要开发人员模式）。留着是因为 `shaders/` 里那套 DX12 wave-matrix 实现仍是逐位参考链，也是这个移植的历史。
-
 
 需要：Linux 上的 `x86_64-w64-mingw32-g++`（交叉编译）；Windows + RDNA 4 显卡 + 暴露 D3D12 wave matrix（linalg
 tier 10）的驱动；Shader Model 6.10 预览版 `dxc`（带 `dx/linalg.h`）；ReShade 6.8 插件头文件；MinHook 源码。

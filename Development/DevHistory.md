@@ -1659,3 +1659,5 @@ Zero反馈「鬼武者没异常跟之前一样」。当前runtime25A617B2、强�
 ### 2026-10-04 README编译与配置文档校对
 
 核当前真实脚本，更新中英文README的HIP流程：38模块/架构，五LLVM23.1.2预编译、其余COMGR21，RowOpts/PrebuiltDir、当前rtc双目标、宿主MinGW与GPU工具链、可公开复现LLVM源码构建及打包资产边界。复用scripts/CONFIGURATION.md作独立配置入口，链接三份全注释默认模板，说明预测默认1仅3x生效/显式0真三遍、skin0、强度/优先级/热载与RE9差异。已核相对文件链接、配方计数与参数；仅文档，无编译/GPU/安装/发布。
+
+配置说明按语言拆分：scripts/CONFIGURATION.md为英文，CONFIGURATION.zh-CN.md为中文；两份互链，README分别导航，保留原配置键、默认模板与优先级/宿主差异。同时完整清理两份README自然语言混写，保留构建、双架构和完整安装条件。仅文档拆分与同义翻译。

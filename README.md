@@ -2,7 +2,7 @@
 
 DLSS 5 (DLSSNR) on AMD RX 9070 XT / RDNA 4.
 
-[中文说明](README.zh-CN.md)
+[Simplified Chinese](README.zh-CN.md)
 
 A from-scratch re-implementation of NVIDIA's DLSS 5 neural renderer ("DLSSNR", the 71-block Swin/ViT network shipped in
 `nvngx_dlssnr.dll`) for AMD RDNA 4. The network was reverse-engineered block by block and now runs as 38 HIP modules per
@@ -159,7 +159,7 @@ Current source defaults `DLSS5_MULTI_PASS_PREDICT=1`: 3x uses two real passes an
 
 ## Configuration
 
-See the [configuration reference / 全部配置](scripts/CONFIGURATION.md) for all annotated defaults, file precedence, strength controls, hot reload and RE9 differences.
+See the [configuration reference](scripts/CONFIGURATION.md) for all annotated defaults, file precedence, strength controls, hot reload and RE9 differences.
 
 ## Building
 
@@ -181,13 +181,11 @@ Before release, verify both ELF targets, exports and the 76-module inventory, th
 
 How the kernel work is organised (for contributors): every optimisation is an experiment under `Development/HIP/experiments/<name>/` (a `prepare.py` that patches the production source into `_pairN` variants or module sets, `build.ps1`, `run.ps1`, sometimes `analyze.py`), with its result written up in `Development/results/<name>-<date>/README.md`; adopted changes become a `HIP_*` flag with the default set in the source. `Development/WorkingPlan.md` says what is being worked on; `Development/DevHistory.md` records what was done and why.
 
-### 当前混合模块构建 / Current mixed-module build
-
-Linux/WSL需要Python3、MinGW-w64 C++、git/curl；一键add-on脚本获取MinHook/ReShade 6.8头文件，默认是历史`--tiled`，现HIP必须显式`--hip`。Windows模块编译需要PowerShell和带`amd_comgr_3.dll`的AMD驱动；无需GPU执行。CPU宿主MinGW与GPU内核LLVM/COMGR是两套编译器。
+### Current mixed-module build
 
 Linux/WSL needs Python3, MinGW-w64 C++, git/curl. The add-on helper fetches MinHook/ReShade 6.8 headers; pass `--hip` explicitly (its default is historical `--tiled`). Windows module compilation needs PowerShell and the driver's `amd_comgr_3.dll`, without executing GPU work. CPU-host MinGW is separate from the GPU compilers.
 
-LLVM23 prerequisite / 先准备公开编译器（Linux，需CMake、Ninja及C/C++编译器）：
+LLVM23 prerequisite (Linux; CMake, Ninja and a C/C++ compiler required):
 
 ```bash
 git clone --depth 1 --branch llvmorg-23.1.2 https://github.com/llvm/llvm-project llvm-src-23
@@ -196,7 +194,6 @@ cmake --build llvm-build-23 --target clang lld llvm-objdump llvm-readobj llvm-di
 ```
 
 Pass the absolute `llvm-build-23/bin` path as `--bin` below. The maintainer's [build-llvm23.sh](Development/tools/llvm-fork/build-llvm23.sh) uses the same settings but hardcodes a local work directory; the commands above do not depend on it.
-将生成的`llvm-build-23/bin`绝对路径填入下方`--bin`，不依赖维护者私有目录。
 
 ```bash
 bash scripts/build-addon-oneclick.sh dlss5-amd.addon64 --hip
@@ -207,24 +204,17 @@ python3 Development/tools/llvm-fork/compile-modules.py --bin /path/to/llvm-23.1.
 
 Use an actual public LLVM23.1.2 clang/lld build in `--bin`; the script's default path is the older LLVM21 experiment, **not** LLVM23. See [compiler build notes](Development/tools/llvm-fork/README.md). The prebuild parses the canonical recipe, including its compiler-specific barrier definitions; do not hand-copy a shorter macro list. Copy `rtc_compile.exe`, the repository sources and the entire `prebuilt/gfx1200` and `prebuilt/gfx1201` folders to Windows, then run from the repository root:
 
-`--bin`必须指向实际公开LLVM23.1.2的clang/lld，脚本默认目录是旧LLVM21实验而非23。预编译自动读生产配方及屏障宏；不要手列漏宏。将当前源码编出的rtc、源码树和双架构prebuilt目录传Windows，在仓库根目录运行：
-
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File hip\build-modules.ps1 -Compiler .\rtc_compile.exe -OutputDir .\modules -RowOpts -PrebuiltDir C:\build\prebuilt
 ```
 
 Both targets are the default. LLVM23 rows: `c32-wave1`, `c32-wave1-rtz`, `c32-wave1-fast`, `c64-wave2`, `c64-wave2-fast`. The remaining 33 rows use the driver's COMGR (current validated environment: LLVM21). Omitting `-RowOpts` compiles everything with COMGR and does **not** reproduce the selected production toolchain. `-Only` selects one exact module name; a single `-Targets gfx1201` writes modules directly under OutputDir, while both targets produce architecture subfolders. Keep architecture names when installing/staging. Use current `hip/rtc_compile.cpp`: older helpers could ignore gfx1200; audit ELF targets before release.
 
-默认双架构；上述五行LLVM23，其余33行用驱动COMGR（当前已验环境LLVM21）。不加`-RowOpts`会全走COMGR，不是生产混合配方。`-Only`只选一个精确模块名；仅一个`-Targets gfx1201`时直接写OutputDir，双架构才建子目录。安装/打包保留架构目录；旧rtc可能忽略gfx1200，必须编当前源码并核ELF目标。
-
 A source build alone is not a complete installation: supply matched framework/model/noise assets, the modules plus SHA256SUMS, and `shaders/` beside the DLL. RE9 also needs its matched prepared OptiScaler host (table above). Existing user custom/native values override updated defaults; do not silently replace them. This section documents commands, not a newly built/released package.
-
-仅源码构建不等于完整安装：还需匹配的框架/模型/noise、模块及SHA256SUMS、DLL旁shaders；RE9需匹配宿主。升级default不能覆盖玩家custom/native。本页只整理流程，没有新编译或发布。
 
 ### Historical: DX12 editions (up to 0.15)
 
 **None of the following is needed for the current packages** (HIP backend since 0.20: no preview DXC, no Agility SDK, no developer mode). It is kept for the DX12 wave-matrix implementation in `shaders/`, which remains the bit-exact reference chain and the history of the port.
-
 
 Requirements: Linux / WSL with `x86_64-w64-mingw32-g++` (cross build), Windows with an RDNA 4 GPU and a driver exposing
 D3D12 wave matrices (linalg tier 10), the Shader Model 6.10 preview `dxc` (with `dx/linalg.h`), ReShade 6.8 add-on
