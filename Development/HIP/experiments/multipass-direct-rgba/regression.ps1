@@ -35,24 +35,3 @@ if(!$TimingOnly){
  }
 }
 if(!$CorrectnessOnly){foreach($h in $Heights){foreach($slot in 0..3){One "time-$h-$slot" $h $TimingSequence ($slot -in 1,2) $TimingFrames}}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
