@@ -3,10 +3,11 @@ $root='D:\DLSSNR-Lab\pool64-byte-20261005';$lock='D:\DLSSNR-Lab\gpu.lock';$owner
 if([IO.DriveInfo]::new('D:\').AvailableFreeSpace -lt 100GB){throw 'D free<100GB'}
 & D:\DLSSNR-Lab\game-check.ps1 'SB-Win64 Onimusha re9.exe SandFall Magpie';if($LASTEXITCODE -ne 1){throw 'Game running/check failure'}
 $f=[IO.File]::Open($lock,[IO.FileMode]::CreateNew,[IO.FileAccess]::Write,[IO.FileShare]::Read);$b=[Text.Encoding]::UTF8.GetBytes("$owner $(Get-Date -Format s)");$f.Write($b,0,$b.Length);$f.Close()
+$env:DLSS5_MULTI_PASS='1';$env:DLSS5_MULTI_PASS_PREDICT='0';$env:DLSS5_MULTI_PASS_SKIN_PROTECT='0';$env:DLSS5_FAST_NUMERIC='1'
 $p=$null
 try {
  & D:\DLSSNR-Lab\game-check.ps1 'SB-Win64 Onimusha re9.exe SandFall Magpie';if($LASTEXITCODE -ne 1){throw 'Game started before probe'}
- $p=Start-Process -FilePath "$root\pool64-probe.exe" -ArgumentList @('D:\DLSSNR-Lab\hip-backend\fast-numeric-20261003\assets-base',"$root\HIP", "$root\HIP\c64-wave2.hsaco") -WorkingDirectory $root -PassThru -RedirectStandardOutput "$root\probe.log" -RedirectStandardError "$root\probe.err"
+ $p=Start-Process -FilePath "$root\pool64-probe.exe" -ArgumentList @('D:\DLSSNR-Lab\zero-copy-io-20260928\assets',"$root\HIP\gfx1201", "$root\HIP\gfx1201\c64-wave2-fast.hsaco") -WorkingDirectory $root -PassThru -RedirectStandardOutput "$root\probe.log" -RedirectStandardError "$root\probe.err"
  $retainedHandle=$p.Handle;$last=Get-Date;$started=$last
  while(!$p.WaitForExit(250)) {
   if(((Get-Date)-$started).TotalSeconds -ge 15){Stop-Process -Id $p.Id -Force;throw '15s probe watchdog; stopped probe only'}

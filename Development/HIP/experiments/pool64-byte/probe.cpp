@@ -14,9 +14,9 @@ static bool Check(Network&n,const char*wave){
  auto x=n.Upload(input.data(),input.size()),f=n.New(size_t(M)*64),bytes=n.New(size_t(M)*16),fo=n.New(size_t(M)*16),bo=n.New(size_t(M)*16);
  void*px0=n.P(x),*pw0=n.PackedDsWeightCast("block4-ds.f32",32),*pf=n.P(f);U z0=0;void*baseargs[]={&px0,&pw0,&pf,&w,&h,&z0,&z0,&c};launch("mh_pool_project_c32_b8",((M+15)/16)*4,32,baseargs);
  void*px=n.P(x),*pw=n.PackedDsWeightCast("block4-ds.f32",32),*pb=n.P(bytes);U zero=0;void*poolargs[]={&px,&pw,&pb,&w,&h,&zero,&zero,&c};launch("mh_pool_project_c32_b8_out8",((M+15)/16)*4,32,poolargs);
- auto fw=n.PackedFusedMhWeightFragW16("block5-ffn.f32",64),aw=n.WaveOwnedAttentionWeight("block5-attention.f32",64);
- n.Run("c64_wave2","c64_wave2_bo_w16",ww*hh/64,n.P(f),fw,aw,n.P(fo),w,h,ww,hh,sx,sy,post);
- n.Run("c64_wave2","c64_wave2_bi_bo_w16",ww*hh/64,n.P(bytes),fw,aw,n.P(bo),w,h,ww,hh,sx,sy,post);n.Synchronize();
+ auto fw=n.PackedFusedMhWeightFrag("block5-ffn.f32",64),aw=n.WaveOwnedAttentionWeight("block5-attention.f32",64);
+ n.Run("c64_wave2","c64_wave2_bo",ww*hh/64,n.P(f),fw,aw,n.P(fo),w,h,ww,hh,sx,sy,post);
+ n.Run("c64_wave2","c64_wave2_bi_bo",ww*hh/64,n.P(bytes),fw,aw,n.P(bo),w,h,ww,hh,sx,sy,post);n.Synchronize();
  std::vector<unsigned char>oa(size_t(M)*64),ob(oa.size());n.api.Check(n.api.hipMemcpy(oa.data(),n.P(fo),oa.size(),2),"pair old");n.api.Check(n.api.hipMemcpy(ob.data(),n.P(bo),ob.size(),2),"pair new");diff=0;for(size_t i=0;i<oa.size();i++)diff+=oa[i]!=ob[i];printf("PAIR %ux%u pattern=%u byte_diff=%zu\n",w,h,pattern,diff);if(diff)return false;
  }
  return true;
