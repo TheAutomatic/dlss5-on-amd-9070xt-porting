@@ -1643,3 +1643,7 @@ Zero反馈「鬼武者没异常跟之前一样」。当前runtime25A617B2、强�
 同058 fresh host、只模块的single三档三轮各1440样本：900 avg7.33046→7.30709ms、p99 7.677→7.624；1080 10.19529→10.15365、p99 10.521→10.475；1440 16.97888→16.87560、p99 17.300→17.225。省.023/.042/.103ms，三轮无慢/尾不差，不乘微核层数、不跨批累计FPS。
 
 双游戏仅c512-m32-deep双arch+SUMS98960584/76模块更新，host/config字节保持，鬼武者仍25A617B2；备份c512-direct-whole-20261004/backups/20261004-210325，exact同步。结果results/c512-direct-whole-20261004及c512-direct-pack-20261004，输出留hash再清，不删权重，无push/发行包。
+
+### 2026-10-04 23:06 剑星恢复快速3x配置
+
+用户反馈剑星3x约27fps。核读default/custom/native：custom为MP3/PREDICT0/SKIN0，native仅覆盖MP3；Machine/User无对应环境覆盖。本次C512模块安装保留配置hash，预测关闭早已存在，不能归因此次算子改动。按用户恢复快速3x意图仅将custom PREDICT改1，保BOM/换行及其余字节；备份`D:\DLSSNR-Lab\sword-fast3-restore-20261004-230612`。当前未查到剑星进程，下一次启动读取MP3/PREDICT1/SKIN0（两真实遍+预测第三遍），未声称已测新FPS。已有约1秒热载支持；F9仅切遍数，不切预测开关。未换载荷/跑GPU/动鬼武者。
