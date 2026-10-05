@@ -24,6 +24,12 @@
 - 既往实玩剑星 1x 约57.6fps、快速3x约37fps；鬼武者900P快速3x约49fps、强度更新后无异常。均为用户观察，未提供三刀后的同场景 ABBA/FPS 验证。
 - PR15 已正式 merge 8a6c7bc1，保留贡献者作者；Enqueue 入口恢复已选 HIP device，0.41 已含。RE9 强度文件数字覆盖已含；auto/缺省继续尊重宿主参数。中英文 README/配置页与公众号使用说明已完成。
 
+## 临时0.41-a交付（用户授权，正式0.41不动）
+
+- 默认off的regular FFX pre-upscale MP1 history可选分支已接实际游戏框架，key为TEMPORAL_HISTORY_EXPERIMENT；MV_UNJITTERED=1是显式试验前提，未检测context flag。MP1/AE0/graph0/skin0/overlap0限制，旧prefix/smooth/history路径不混用；首/reset/缺MV/曝光变/gap与F9→MP3回旧Body/seed0，回1先cold。
+- 720/1080 core独立gate与off/cold/hot门逐位0diff finite，actualFrame720 metadata门通过。参考gate短GPU均1080约9.15→14.18ms（+5.03ms），明确临时质量试验成本，无FPS保证；无真实roof改善结论。源码freeze1a22ee96，结果history-trial-041a-20261006。
+- regular临时ZIP正在隔离构建，保三刀，新3模块/架构共6。未安装本机、未改玩家配置；RE9/Magpie不假称支持实验。stock gfx1200发现27行错target，打包前按source/recipe identity复用官方041正确target或canonical定向重编，保pool字节与SPfast导出；不能带错target交付。source identity核验stock-recipe-identity.json。后续网友试包与优化按用户安排进行。
+
 ## 第一优先：建筑房顶闪烁（受控阶段已闭环，真实场景待验证）
 
 用户优先序校准：仍先处理闪烁。下列真实输入与场景验证缺口是当前主线；本轮未新跑实验。
@@ -41,15 +47,15 @@
 
 本阶段新完成：history-contract-20261006已确认私有D3D包装映射、post先读旧history再保存有效blend、内部RGBA16F的受控RTZ；temporal-replay-contract-20261006隔离store对四组原gold float-bit0。实际codec/input/motion/coordinate shader转码两次hash相同/finite/mirror同，direct-UV prepared MP1三路×两seed×两帧12行baseline/repeat byte0；CPU租约/manifest/receipt门与完整Windows链接已过。真实源采集入口b439efc6/adbb2bf2仅CPU完整链接与保守source-write/alias/thread守门，未安装/GPU采集；Mode2 FFX-only无同期NR闪最终输出，timing_valid=false。
 
-下一步必须取得真实连续场景源并核资源身份、effective flags/modules、color/MV/exposure与jitter/depth合同。已备统一manifest封存与explicit recipe→原codec→direct-UV prepared-index工具链；保留seed=null、upscale[0,0]与未核identity为blocker，不填曝光1、不猜方向。当前converter direct raw FFX fit未跑FSR，仅受控replay；真实画质、遮挡/拖影/反光稳定性仍未验证，MP3分遍/共享history未定。原型默认off，生产/玩家配置/载荷不改；本阶段不继续追加synthetic案例代替真实证据。
+下一步必须取得真实连续场景源并核资源身份、effective flags/modules、color/MV/exposure与jitter/depth合同。已备统一manifest封存与explicit recipe→原codec→direct-UV prepared-index工具链；保留seed=null、upscale[0,0]与未核identity为blocker，不填曝光1、不猜方向。离线converter direct raw FFX fit未跑FSR，仅受控replay；新regular入口按已有生产FSR/codec接metadata，真实画质、遮挡/拖影/反光稳定性仍未验证，MP3分遍/共享history未定。新临时分支默认off，现装生产/玩家配置/载荷不改；本阶段不继续追加synthetic案例代替真实证据。
 
 ## 第二优先：解释mochizuki差距（备用CPU工作；新实验未执行）
 
 闪烁仍为第一优先；等待真实连续源期间可继续只读CPU锁账与准备，优化GPU实验按闪烁主线安排。
 
-1. **锁账与同步纯网络对照**：当前0.41＋三刀/full71/FAST0与FAST1，对锁定mochi0.0.2.5旧exe/SPV/plan/effective宏/源/模型与输入。当前本地mochi4f62a8a不是旧测速d1185d2，缺资产明说。固定valid/proc/token/有效块、MP1/PRED0/SKIN0/AE0、Style/seed/history；统一GPU边界与D2D口径。纯Network现分支CPU chrono＋逐帧sync不是GPU timing，保同步加GPU事件；无逐核事件、首尾读回。旧差距与事件均摊/DUP仅诊断，不认精确贡献。
-2. **提交交叉对照**：先每帧同步；pool复用/PDL keep/SP代际安全审核通过后才1→8→500批量，不能直接删sync。GPU均值与CPU吞吐分别列，同实现输出逐位不变；错误/坏事件/增长即止。
-3. **同HIP16-query数学阶梯**：FAST0/当前FAST1→仅score halfFMA/位图→64key half分母树→配方确认后的AV截断/half末端。当前分母/AV为f32累加。每步数值、资源、整网平均/p99独立记账；新增状态/资源不能称纯数学，有损研究不部署，B/C无收益不自动D。仅显著资源变化才复查旧M32交互。
+1. **锁账与同步纯网络对照**：当前0.41＋三刀/full71/FAST0与FAST1，对锁定mochi0.0.2.5旧exe/SPV/plan/effective宏/源/模型与输入。当前本地mochi4f62a8a不是旧测速d1185d2；现已找回旧源码、70资产与逐帧chunk1默认锁证，撤回旧“一次提交500帧”误读与0.1～0.3ms猜额。固定valid/proc/token/有效块、MP1/PRED0/SKIN0/AE0、Style/seed/history；统一GPU边界与D2D口径。纯Network现分支CPU chrono＋逐帧sync不是GPU timing，保同步加GPU事件；无逐核事件、首尾读回。旧差距与事件均摊/DUP仅诊断，不认精确贡献。
+2. **提交交叉对照**：先每帧同步；pool复用/PDL keep/SP代际安全审核通过后才1→8→500新诊断批量，不能直接删sync。GPU均值与CPU吞吐分别列，同实现输出逐位不变；错误/坏事件/增长即止。
+3. **同HIP16-query数学阶梯**：FAST0/当前FAST1→仅score halfFMA/位图→64key half分母树→仅确认后的最终half/context乘half inverse（旧有效NR_ACC_F16=0，不试对手未启用的每块AV截断）。当前分母/AV为f32累加。每步数值、资源、整网平均/p99独立记账；新增状态/资源不能称纯数学，有损研究不部署，B/C无收益不自动D。仅显著资源变化才复查旧M32交互。
 4. **局部ISA排程**：新热点账证明等待段后再做，不预估收益。跨层窗口≤4父子依赖，不能简单寄存器跨层，暂无新候选；旧全空消融是整网边际并改变下游，不是本体上界；8streams负账不泛化为所有队列严格上界，不重开旧线。
 
 具体证据、最小实验门与止损见results/mochizuki-gap-audit-20261006。闪烁主线及以下两项已止负账继续保留。

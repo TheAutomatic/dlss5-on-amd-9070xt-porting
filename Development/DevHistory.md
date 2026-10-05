@@ -1739,3 +1739,10 @@ CPU DAG覆盖/need≤4/1488tasks证明、同FAST3新SPtwin真实段正常recover
 恢复/tmp/claude-1000/ct/mz的d1185d25141b1714d7837151b6fa782e6427568b真实旧源码（tracked clean），local旧up/mz与9070competitor-timing-20260930/mz共70资产逐SHA同，七日志也同；旧exe8ad3ac1c…/model2b41c888…和三plan/48网络SPV/markers齐，不升级HEAD/不改旧资产。glslang16.5+quad+NR_Q32_DIRECT1隔离CPU复编48/48SPV逐字节同，C32 direct0不同；有效宏已锁。
 
 撤回09-30竞品报告及本日早先审计“mochi500帧一次提交”的假定：d1185d2 nr_graph.cpp:3921默认chunk1，runner按单pass submit→fencewait；actual旧exe反汇编r9指向字面1/r8指向--chunk，旧mz2未指定chunk。打印“123dispatches, one submit”指单pass固定文案，不代表500pass合批。0.1～0.3ms提交差估额不能继续解释旧差距；未来batch仅新控制诊断。发现旧CLIgradient/style0与我GameCodec冻结HDR不同输入/控制，noise-field在对手build一次计算而我prefix逐帧计算；900 ViT448对400、旧跳块C51213对16亦须重摆。noise旧09-19消融0.0175/0.02975ms负账保留，当前组织虽变也不先称缓存必赚。完整source/recipe/48重编/remote/local manifest/原七log/actualexe反汇编证据见results/mochi-old-lock-20261006。无新GPU轮/配置/安装或push；下一步同encoded fixture、full71 FAST0/1 MP1AE0historyoff同步纯网络短账。
+
+
+### 2026-10-06 0.41-a默认关闭history接入及旧对账校准
+
+用户授权regular临时包给网友试，未授权本机现装变更。源码freeze1a22ee96：regular FFX pre-upscale MP1可选fullgate，TEMPORAL_HISTORY_EXPERIMENT默认off、MV_UNJITTERED1为显式实验前提；有效internal blend RTZ/alpha1历史，bridgeUV carrier固定8B，warmup失效，热MP3旧Body seed0、回1cold。720/1080 core first/reset/hot/off及独立gate全部bit0 finite；实际Frame720缺MV/曝光变/gap等cold门bit0。参考gate1080最短8帧GPU均9.1459→14.1795ms，明确+5.03ms成本，无质量/FPS承诺。regular84模块包仍在隔离stage；stock gfx1200发现27错target，打包按当前canonical与041 identity修正，不复制错误target。canonical source/defines/compiler/opts比对ab8e3e82：29row完全同，10row变化/新增（包含post tap/poolbyte/include变化/SPfast），report在history-trial-041a-20261006。未装游戏、配置与正式041不动。
+
+按mochi-old-lock-20261006/9d94c9e3完整旧source/exe/70资产锁证，旧500帧一次submit说法是打印文案误读，实际默认chunk1逐帧submit+fence wait；0.1～0.3ms提交猜额撤回，不能解释旧差。48网络SPV同toolchain重编bit同，C32 direct/quad1及ViT NR_ACC_F16=0已锁，不归因AV每块half截断。WorkingPlan与早先审计报告同步校准，旧历史正文保留并追加纠正。
