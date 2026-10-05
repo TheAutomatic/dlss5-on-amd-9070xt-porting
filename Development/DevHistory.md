@@ -1715,3 +1715,8 @@ CPU DAG覆盖/need≤4/1488tasks证明、同FAST3新SPtwin真实段正常recover
 ### 2026-10-06 用户优先序校准：先处理闪烁
 
 用户明确仍优先建筑房顶闪烁。WorkingPlan将真实时序/反光场景验证恢复第一优先，mochizuki差距对账列第二优先，等待真实连续源期间只读CPU锁账作备用工作；保留已归档优化规划与负账。研究报告同步注明主线优先级。本次仅改文档排序与说明，未新跑实验、未改生产/游戏配置或载荷、未发布。
+
+
+### 2026-10-06 闪烁下一步：原history身份与写入链审计
+
+只读审计后补计划：先CPU沿backend vtable/cuGetProcAddress已有hook核texture/array/external-memory/context绑定、创建descriptor，匹配post history+0x58/motion+0x60，追保存rawRGB/blendRGB/编码。observe_temporal.inc on_launch在真实launch前查context，null不能证明资源不存在；私有接口需走D3D资源包装映射，不自行切/建context试私有handle。实验warp.hip:57的f16 RNE→f32为自定policy；live_capture冻结同输入/zeroMV、sequence合成及submission probe单次snapshot不构成连续真实color/MV/depth/jitter/exposure源。先CPU接口/元数据审计，再受控GPU取内容，真实场景仍待连续源。本次仅补文档，未新跑GPU实验或改生产。

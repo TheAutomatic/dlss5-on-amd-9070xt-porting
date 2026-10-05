@@ -39,6 +39,8 @@
 9. 原post16×16 closed/zeroMV/+1px/对角亚像素gold与软件5tap/严格gate全float-bit0；head24576控制特征半码0差。AMD SIG最大3ULP差已量化，实验严格用NV half域表。原型保rawΣ×reciprocal的融合减RGB顺序，F64 head仍参考实现。均值/同geometry波动分开；18行1080合成数据不显示普遍抑波动，不宣称闪修。
 10. 未改默认、未装游戏、未改0.41包。尚需真实连续输入/MV/jitter/exposure/reset与真实反光/遮挡拖影验证、原内部history内容/格式、MP3各遍历史规划；仅保留实验原型，不把跳块当无损方案。结果见results/temporal-sequence-20261005及post-history-gate-20261005。该缺真实源不阻碍独立优化；本轮已按顺序完成下面两项裁决。
 
+下一步先做CPU接口/元数据审计：沿backend vtable、cuGetProcAddress已有hook追原history资源身份、创建descriptor与写入链，核texture/array/external-memory/context绑定，并匹配post history+0x58、motion+0x60。observe_temporal.inc的on_launch在真实launch前查context，null不能证明资源不存在；私有接口走D3D资源包装映射，不自行切/建context试私有handle。确认保存的是rawRGB、blendRGB还是编码历史；warp.hip:57的f16 RNE→f32仅是自定policy。当前live_capture冻结输入/zeroMV、sequence合成及submission probe单次snapshot均不构成连续color/MV/depth/jitter/exposure源。CPU审计后再规划受控GPU取内容，真实场景仍需连续源；本次不新增GPU工作或生产修改。
+
 ## 第二优先：解释mochizuki差距（备用CPU工作；新实验未执行）
 
 闪烁仍为第一优先；等待真实连续源期间可继续只读CPU锁账与准备，优化GPU实验按闪烁主线安排。
