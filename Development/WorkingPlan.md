@@ -1,6 +1,6 @@
 # 当前工作计划
 
-更新：2026-10-06。此文件整份重写，保存当前状态与尚未完成事项；历史过程见 DevHistory.md。
+更新：2026-10-06（只读优化差距审计后）。此文件整份重写，保存当前状态与尚未完成事项；历史过程见 DevHistory.md。
 
 ## 工作规矩
 
@@ -24,7 +24,16 @@
 - 既往实玩剑星 1x 约57.6fps、快速3x约37fps；鬼武者900P快速3x约49fps、强度更新后无异常。均为用户观察，未提供三刀后的同场景 ABBA/FPS 验证。
 - PR15 已正式 merge 8a6c7bc1，保留贡献者作者；Enqueue 入口恢复已选 HIP device，0.41 已含。RE9 强度文件数字覆盖已含；auto/缺省继续尊重宿主参数。中英文 README/配置页与公众号使用说明已完成。
 
-## 第一项：建筑房顶闪烁（受控阶段已闭环，真实场景待验证）
+## 当前优先顺序：解释mochizuki差距（本轮仅研究与规划，未执行新实验）
+
+1. **锁账与同步纯网络对照**：当前0.41＋三刀/full71/FAST0与FAST1，对锁定mochi0.0.2.5旧exe/SPV/plan/effective宏/源/模型与输入。当前本地mochi4f62a8a不是旧测速d1185d2，缺资产明说。固定valid/proc/token/有效块、MP1/PRED0/SKIN0/AE0、Style/seed/history；统一GPU边界与D2D口径。纯Network现分支CPU chrono＋逐帧sync不是GPU timing，保同步加GPU事件；无逐核事件、首尾读回。旧差距与事件均摊/DUP仅诊断，不认精确贡献。
+2. **提交交叉对照**：先每帧同步；pool复用/PDL keep/SP代际安全审核通过后才1→8→500批量，不能直接删sync。GPU均值与CPU吞吐分别列，同实现输出逐位不变；错误/坏事件/增长即止。
+3. **同HIP16-query数学阶梯**：FAST0/当前FAST1→仅score halfFMA/位图→64key half分母树→配方确认后的AV截断/half末端。当前分母/AV为f32累加。每步数值、资源、整网平均/p99独立记账；新增状态/资源不能称纯数学，有损研究不部署，B/C无收益不自动D。仅显著资源变化才复查旧M32交互。
+4. **局部ISA排程**：新热点账证明等待段后再做，不预估收益。跨层窗口≤4父子依赖，不能简单寄存器跨层，暂无新候选；旧全空消融是整网边际并改变下游，不是本体上界；8streams负账不泛化为所有队列严格上界，不重开旧线。
+
+具体证据、最小实验门与止损见results/mochizuki-gap-audit-20261006。以下独立质量事项与两项已止负账继续保留。
+
+## 建筑房顶闪烁（受控阶段已闭环，真实场景待验证）
 
 1. 当前证据：111.mp4 是约4.11秒、119帧、29fps的竖幅拍屏最终画面，没有原始网络输入、MV/depth或开关 A/B。不能伪造网络复现或由视频直接归因 HIP。
 2. 重新跟踪同一房顶表面后确认局部亮度反复。1.586/1.621/1.690 秒 roof Y=96.6/116.2/98.1，UI=79.78/79.87/81.55；第一步 roof 跳变明显大于参考 UI。最初关注人物运动/草地而暗示静物稳定已纠正。拍屏曝光、透视、游戏自身 TAA/高光仍有混杂。
@@ -37,13 +46,13 @@
 9. 原post16×16 closed/zeroMV/+1px/对角亚像素gold与软件5tap/严格gate全float-bit0；head24576控制特征半码0差。AMD SIG最大3ULP差已量化，实验严格用NV half域表。原型保rawΣ×reciprocal的融合减RGB顺序，F64 head仍参考实现。均值/同geometry波动分开；18行1080合成数据不显示普遍抑波动，不宣称闪修。
 10. 未改默认、未装游戏、未改0.41包。尚需真实连续输入/MV/jitter/exposure/reset与真实反光/遮挡拖影验证、原内部history内容/格式、MP3各遍历史规划；仅保留实验原型，不把跳块当无损方案。结果见results/temporal-sequence-20261005及post-history-gate-20261005。该缺真实源不阻碍独立优化；本轮已按顺序完成下面两项裁决。
 
-## 第二项：ViT960 contract 大 tile（静态负账，已止）
+## ViT960 contract 大 tile（静态负账，已止）
 
 - 与旧 attention 恒960常量化不同：尝试两wave各16tokens共享64列K512 FP8权重32KiB LDS，保四K1024 partial、skip、FAST_H与byte出口原顺序。
 - canonical双arch实际baseline208VGPR/0spill/0private/4KiB LDS；候选256VGPR/171spill/688B private每thread/32KiB LDS。静态门直接拒，不跑GPU、不给上游微核数字作整网承诺、不扫更多tile参数。
 - 候选仅保实验源码与ISA资源/hash，生产未改、未安装。记录main64257116，results/vit-contract960-20261005。无新瓶颈证据不重开。
 
-## 第三项：小请求晚批复用（真实1440短筛负账，已止）
+## 小请求晚批复用（真实1440短筛负账，已止）
 
 - 默认0实验宏；≤8MiB请求只在原use_count1/足够capacity集合再排近期possible-use块，包含较大capacity。用logical launch-batch：连续DUP一批、SP init/run/recovery一批；非launch P可多延迟，不能当物理GPU完成/精确lastuse。graph旁路，PDL引用条件不变，不提前复用/释放。CPU七case过。
 - 同源A0/A1、相同当前39/gfx1201模块，实际valid2560×1440/proc2560×1472/960token，full71/FAST1/MP1/PRED0/SKIN0/AE0。完整框架连续首尾读回、160帧/槽弃80：首ABBA A15.680819→B15.742244ms，慢0.061425ms，两B槽均慢于两A；raw全SHA相同。
