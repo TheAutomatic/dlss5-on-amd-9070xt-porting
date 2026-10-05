@@ -1,0 +1,14 @@
+INTEGRATED_CHECK first float_bitdiff=0 nonfinite=0
+INTEGRATED_CHECK reset float_bitdiff=0 nonfinite=0
+INTEGRATED_CHECK hot_MP3_old_body_seed0 float_bitdiff=0 nonfinite=0
+INTEGRATED_CHECK return_MP1_cold float_bitdiff=0 nonfinite=0
+INTEGRATED_CHECK hot_flag_off_old_body_seed0 float_bitdiff=0 nonfinite=0
+INTEGRATED_CHECK independent_first float_bitdiff=0 nonfinite=0
+INTEGRATED_CHECK independent_prefix_fullgate float_bitdiff=0 nonfinite=0
+HISTORY_COST shape=1280x720 proc_h=768 side=off gpu_mean_8frames_ms=4.779305 diagnostic_only=1
+HISTORY_COST shape=1280x720 proc_h=768 side=on gpu_mean_8frames_ms=7.080775 diagnostic_only=1
+INTEGRATED_PASS first/reset/hotMP3/off/independent_gate/finite; synthetic source not quality proof
+SP_STATS runs=0 fallback=0 rollover=0 jobs=0 disabled=0 errors=0
+SP_STATS runs=0 fallback=0 rollover=0 jobs=0 disabled=0 errors=0
+SP_STATS runs=0 fallback=0 rollover=0 jobs=0 disabled=0 errors=0
+

@@ -35,6 +35,7 @@ public:
  void MultiPassSkinProtect(bool set){if(network)network->SetMultiPassSkinProtect(set);}
  bool MultiPassPredict()const{return network&&network->MultiPassPredict();}
  void MultiPassPredict(bool set){if(network)network->SetMultiPassPredict(set);}
+ bool ExperimentalTemporalActive()const{return network&&network->ExperimentalTemporalActive();}
  bool SwinRunActive()const{return network&&network->SwinRunActive();}
 private:
  Phase phase=Phase::Ready;bool recorded_temporal{};
@@ -177,7 +178,7 @@ private:
    return false;
   }
  }
- void InputContract(ID3D12Resource*r){if(!r||r->GetDesc().Dimension!=D3D12_RESOURCE_DIMENSION_BUFFER||r->GetDesc().Width<pixels*16)throw std::runtime_error("bridge input capacity");ID3D12Device*owner{};Check(r->GetDevice(IID_PPV_ARGS(&owner)),"input device");bool same=NativeSameDevice(owner,device);owner->Release();if(!same)throw std::runtime_error("bridge input device mismatch");}
+ void InputContract(ID3D12Resource*r,size_t bytes_per_pixel=16){if(!r||r->GetDesc().Dimension!=D3D12_RESOURCE_DIMENSION_BUFFER||r->GetDesc().Width<pixels*bytes_per_pixel)throw std::runtime_error("bridge input capacity");ID3D12Device*owner{};Check(r->GetDevice(IID_PPV_ARGS(&owner)),"input device");bool same=NativeSameDevice(owner,device);owner->Release();if(!same)throw std::runtime_error("bridge input device mismatch");}
 public:
  std::string architecture,adapter_name,module_directory,device_match;int runtime_version{};
  D3D12Bridge()=default;D3D12Bridge(const D3D12Bridge&)=delete;D3D12Bridge&operator=(const D3D12Bridge&)=delete;
@@ -236,11 +237,11 @@ private:
   ID3D12Device*owner{};Check(c->GetDevice(IID_PPV_ARGS(&owner)),"command list device");bool same=NativeSameDevice(owner,device);owner->Release();if(!same)throw std::runtime_error("bridge command list device mismatch");
  }
  void RecordInput(ID3D12GraphicsCommandList*c,ID3D12Resource*rgba,ID3D12Resource*temporal,bool external){
-  Require(Phase::Ready);if(external&&network->GraphEnabled())throw std::runtime_error("staged bridge requires HIP graph off");ListContract(c);InputContract(rgba);if(temporal)InputContract(temporal);
+  Require(Phase::Ready);if(external&&network->GraphEnabled())throw std::runtime_error("staged bridge requires HIP graph off");ListContract(c);InputContract(rgba);if(temporal)InputContract(temporal,network->ExperimentalTemporalConfigured()?8:16);
   phase=Phase::InputRecorded;recorded_temporal=temporal!=nullptr;
   try{
-   auto copy=[&](ID3D12Resource*src,Shared&dst){Barrier(c,src,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,D3D12_RESOURCE_STATE_COPY_SOURCE);Barrier(c,dst.resource,D3D12_RESOURCE_STATE_COMMON,D3D12_RESOURCE_STATE_COPY_DEST);c->CopyBufferRegion(dst.resource,0,src,0,pixels*16);Barrier(c,dst.resource,D3D12_RESOURCE_STATE_COPY_DEST,D3D12_RESOURCE_STATE_COMMON);Barrier(c,src,D3D12_RESOURCE_STATE_COPY_SOURCE,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE);};
-   if(!(direct_input&&rgba==input.resource))copy(rgba,input);/* direct: the producer already wrote input and left it in COMMON */if(temporal)copy(temporal,history);if(readable)Barrier(c,output.resource,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,D3D12_RESOURCE_STATE_COMMON);readable=false;
+   auto copy=[&](ID3D12Resource*src,Shared&dst,size_t bytes_per_pixel=16){Barrier(c,src,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,D3D12_RESOURCE_STATE_COPY_SOURCE);Barrier(c,dst.resource,D3D12_RESOURCE_STATE_COMMON,D3D12_RESOURCE_STATE_COPY_DEST);c->CopyBufferRegion(dst.resource,0,src,0,pixels*bytes_per_pixel);Barrier(c,dst.resource,D3D12_RESOURCE_STATE_COPY_DEST,D3D12_RESOURCE_STATE_COMMON);Barrier(c,src,D3D12_RESOURCE_STATE_COPY_SOURCE,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE);};
+   if(!(direct_input&&rgba==input.resource))copy(rgba,input);/* direct: the producer already wrote input and left it in COMMON */if(temporal)copy(temporal,history,network->ExperimentalTemporalConfigured()?8:16);if(readable)Barrier(c,output.resource,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,D3D12_RESOURCE_STATE_COMMON);readable=false;
    poll_recorded=false;if(poll&&poll_inline&&!poll_off){ID3D12GraphicsCommandList2*c2{};if(SUCCEEDED(c->QueryInterface(IID_PPV_ARGS(&c2)))){poll_recorded_target=poll_frame%kPollSlots+1;D3D12_WRITEBUFFERIMMEDIATE_PARAMETER wp{flag.resource->GetGPUVirtualAddress(),poll_recorded_target};D3D12_WRITEBUFFERIMMEDIATE_MODE wm=D3D12_WRITEBUFFERIMMEDIATE_MODE_MARKER_OUT;c2->WriteBufferImmediate(1,&wp,&wm);c2->Release();poll_recorded=true;}}
   }catch(...){failed=true;throw;}
  }
@@ -289,7 +290,7 @@ public:
   Require(Phase::Ready);
   if(pending||value||readable||network->GraphEnabled())throw std::runtime_error("bridge preparation requires fresh graph-off session");
   auto&api=network->Runtime();
-  try{api.Check(api.hipMemsetAsync(input.mapped,0,pixels*16,network->Stream()),"prepare input");network->Enqueue(input.mapped,nullptr,output.mapped,1);network->Synchronize();}
+  try{api.Check(api.hipMemsetAsync(input.mapped,0,pixels*16,network->Stream()),"prepare input");network->Enqueue(input.mapped,nullptr,output.mapped,1);network->InvalidateExperimentalHistory();network->Synchronize();}
   catch(...){failed=true;throw;}
  }
  void RecordInputCopy(ID3D12GraphicsCommandList*c,ID3D12Resource*rgba,ID3D12Resource*temporal=nullptr){RecordInput(c,rgba,temporal,true);}

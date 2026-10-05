@@ -1,0 +1,20 @@
+SP_PLAN c=256 first=16 layers=6 tasks=893 initial=160 state_bytes=10732 w16=1
+SP_PLAN c=256 first=49 layers=6 tasks=893 initial=160 state_bytes=10732 w16=1
+SP_PLAN c=256 first=16 layers=6 tasks=893 initial=160 state_bytes=10732 w16=1
+SP_PLAN c=256 first=49 layers=6 tasks=893 initial=160 state_bytes=10732 w16=1
+INTEGRATED_CHECK first float_bitdiff=0 nonfinite=0
+INTEGRATED_CHECK reset float_bitdiff=0 nonfinite=0
+INTEGRATED_CHECK hot_MP3_old_body_seed0 float_bitdiff=0 nonfinite=0
+INTEGRATED_CHECK return_MP1_cold float_bitdiff=0 nonfinite=0
+INTEGRATED_CHECK hot_flag_off_old_body_seed0 float_bitdiff=0 nonfinite=0
+SP_PLAN c=256 first=16 layers=6 tasks=893 initial=160 state_bytes=10732 w16=1
+SP_PLAN c=256 first=49 layers=6 tasks=893 initial=160 state_bytes=10732 w16=1
+INTEGRATED_CHECK independent_first float_bitdiff=0 nonfinite=0
+INTEGRATED_CHECK independent_prefix_fullgate float_bitdiff=0 nonfinite=0
+HISTORY_COST shape=1920x1080 proc_h=1152 side=off gpu_mean_8frames_ms=9.145890 diagnostic_only=1
+HISTORY_COST shape=1920x1080 proc_h=1152 side=on gpu_mean_8frames_ms=14.179483 diagnostic_only=1
+INTEGRATED_PASS first/reset/hotMP3/off/independent_gate/finite; synthetic source not quality proof
+SP_STATS runs=4 fallback=0 rollover=0 jobs=3572 disabled=0 errors=0
+SP_STATS runs=40 fallback=0 rollover=0 jobs=35720 disabled=0 errors=0
+SP_STATS runs=30 fallback=0 rollover=0 jobs=26790 disabled=0 errors=0
+

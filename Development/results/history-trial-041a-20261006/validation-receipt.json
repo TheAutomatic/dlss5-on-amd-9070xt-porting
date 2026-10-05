@@ -1,0 +1,29 @@
+{
+  "source_kind": "synthetic legal RGBA16F + zeroMV, explicit FFX-like metadata; not a game reproduction",
+  "scope": "regular FFX pre-upscale MP1 temporary trial; defaults off, no local deployment",
+  "source_sha256": {
+    "Development/HIP/hip_reference_network.h": "144cdf947ea23a01b3322c826d5013f6d2370464cb6520a22f36af1caf575ffc",
+    "Development/HIP/hip_d3d12_bridge.h": "47c9660c4c8a370bb5e05b6765dbcdaf96c976f33d221209091a3fef99e71d4d",
+    "src/native_hip_network.h": "c13b539966cfdd405fdd05177c7dc86ac66d8c623aed20c3b78be696c549f22e",
+    "src/native_experimental_history.h": "de8c1922d5c548799f84bf93277b48cd7cf13d7bc7e204b50f8419eb959730aa",
+    "src/native_game_frame.h": "e12263f8e5b8d2a979a3c8df8a7fb56f1d5d289082ccf05ac8522a02d2d5726a",
+    "src/native_game_oneshot.h": "3f5c5cc4f2a94a7fc19cbc43a8c0b46d20f69e8d646473bbd506104456a76562",
+    "src/native_pre_upscale.h": "8046ed65cdddac88c2c02c24647278f4271833a44d55b9e35eb48b7878231f69",
+    "src/native_temporal_experiment.h": "957cc08e37364ed78875f881d3e7917484d98c6adb8a0ac18c38e09184926293"
+  },
+  "gpu_720": "first/reset/hot_MP3_seed0/return_MP1_cold/flag_off/independent_prefix_fullgate float_bitdiff0 finite",
+  "gpu_1080": "same core contract0diff finite",
+  "actual_Frame_720": "first/reset/missingMV/next_cold/exposure_change/frame_gap/MP3_to_MP1 cold0diff",
+  "gpu_cost_short_8frames": {
+    "720_off_ms": 4.779305,
+    "720_on_ms": 7.080775,
+    "1080_off_ms": 9.14589,
+    "1080_on_ms": 14.179483,
+    "diagnostic_only": true
+  },
+  "MV_unjittered": "explicit assumption admission1, not detected context flag",
+  "depth_gate": false,
+  "game_visual_fix_verified": false,
+  "player_files_modified": false,
+  "formal_041_changed": false
+}
