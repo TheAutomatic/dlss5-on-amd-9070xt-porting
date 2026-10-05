@@ -1,0 +1,84 @@
+[
+  {
+    "path": "/tmp/dlss5-041a-export-review/gfx1201/c32-wave1-temporal.hsaco",
+    "sha256": "def430f726ff73a2bab88cc6c0c18a3a941a228a6d2430f34092ff895c28cd78",
+    "expected_exports": {
+      "c32_wave1_post_b8": true,
+      "c32_wave1_post_b8_features": true
+    },
+    "target": [
+      "amdgcn-amd-amdhsa-unknown-gfx1201"
+    ],
+    "matches_trial_receipt": true,
+    "scope": "static exports/target only; no gfx1200 hardware run"
+  },
+  {
+    "path": "/tmp/dlss5-041a-export-review/gfx1201/temporal-history.hsaco",
+    "sha256": "67bee76edcfb140c11b36c1628fc4f9b53bee9ac373fd64907b808b32a2a642a",
+    "expected_exports": {
+      "temporal_warp_uv": true,
+      "temporal_store": true,
+      "hip_gate_head": true,
+      "hip_gate_resolve": true
+    },
+    "target": [
+      "amdgcn-amd-amdhsa--gfx1201"
+    ],
+    "matches_trial_receipt": true,
+    "scope": "static exports/target only; no gfx1200 hardware run"
+  },
+  {
+    "path": "/tmp/dlss5-041a-export-review/gfx1201/c32-wave1-temporal-fast.hsaco",
+    "sha256": "f46b8af25841a9878ce34544f4b3465f71da36fec9f08f48ad33b48f08c1ee52",
+    "expected_exports": {
+      "c32_wave1_post_b8": true,
+      "c32_wave1_post_b8_features": true
+    },
+    "target": [
+      "amdgcn-amd-amdhsa-unknown-gfx1201"
+    ],
+    "matches_trial_receipt": true,
+    "scope": "static exports/target only; no gfx1200 hardware run"
+  },
+  {
+    "path": "/tmp/dlss5-041a-export-review/gfx1200/c32-wave1-temporal.hsaco",
+    "sha256": "7a41d599ad83502d72e058afc3b279fa5da58102bdaeb1a09754151a16f86522",
+    "expected_exports": {
+      "c32_wave1_post_b8": true,
+      "c32_wave1_post_b8_features": true
+    },
+    "target": [
+      "amdgcn-amd-amdhsa-unknown-gfx1200"
+    ],
+    "matches_trial_receipt": true,
+    "scope": "static exports/target only; no gfx1200 hardware run"
+  },
+  {
+    "path": "/tmp/dlss5-041a-export-review/gfx1200/temporal-history.hsaco",
+    "sha256": "f5fa3afd46b20f6c3034aa333c8686f1602f892ae73bb8ff25bf1c5ee0162dcc",
+    "expected_exports": {
+      "temporal_warp_uv": true,
+      "temporal_store": true,
+      "hip_gate_head": true,
+      "hip_gate_resolve": true
+    },
+    "target": [
+      "amdgcn-amd-amdhsa--gfx1200"
+    ],
+    "matches_trial_receipt": true,
+    "scope": "static exports/target only; no gfx1200 hardware run"
+  },
+  {
+    "path": "/tmp/dlss5-041a-export-review/gfx1200/c32-wave1-temporal-fast.hsaco",
+    "sha256": "1dc409ddc4987d64c35ded69b03de329b9516d3dee2e5d5911504bd390bf26cc",
+    "expected_exports": {
+      "c32_wave1_post_b8": true,
+      "c32_wave1_post_b8_features": true
+    },
+    "target": [
+      "amdgcn-amd-amdhsa-unknown-gfx1200"
+    ],
+    "matches_trial_receipt": true,
+    "scope": "static exports/target only; no gfx1200 hardware run"
+  }
+]

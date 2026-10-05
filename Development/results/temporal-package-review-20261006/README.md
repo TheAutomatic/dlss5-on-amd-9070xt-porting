@@ -45,3 +45,13 @@ FFX默认要求motion不含jitter；JITTER_CANCELLATION是**context创建flag**�
 - 默认OFF、缺assets/无metadata/未声明MV前提与独立旧baseline exact；配套新模块/asset hash、gfx1200/gfx1201目标与输出默认隔离。
 - 新regular游戏bridge完整首帧/重复/reset/缺MV/曝光跳变/尺寸变化；MP1→2/3→1当前帧fallback及回来cold；支持Normal与FAST两种模块。
 - 不用现有隔离sequence的通过记录替代新bridge这一门。实际GPU/包验收结论应另附结果路径，未交账前本文件只给源级“已修/范围限制”的结论。
+
+## 冻结后的静态exports补核
+
+只读取双架构六个新ELF，SHA全部匹配history-trial receipt。C32两twin都有原post_b8和独立post_b8_features；history模块有warp_uv/store/head/resolve四入口；note实际目标分别gfx1200/gfx1201，见late-export-check.json。没有由目标字符串推真机gfx1200通过。
+
+冷stock不混extras由constructor的opt.experimental_temporal门选择模块stem；默认off/缺metadata不选择实验twin和asset。已经配置twin但热切换inactive时，feature_tap_active=false，执行twin里原post_b8出口并走oldBody seed0；implementation独立720/1080 core门记录first/reset/hotMP3/回1cold/flagoff逐float-bit0（../history-trial-041a-20261006），不是我重复GPU运行。额外资源分配单位与UVcopyfootprint的修正已保留。
+
+## Legacy marker与OFF纯空间修正审查
+
+最后包复查发现041旧temporal-history.txt会让OFF走prefix-only构造，并把guard/smooth的0字符串送进旧逗号parser。修正脚本off/on都备份移除marker，first backup跨off/on/off保留、restore按SHA和存在性恢复原marker及两层config。OFF Requested0不转experimental metadata；marker缺→Initialize legacy temporal_on=false→Frame不创建旧sampler/guard/smooth，所以0不会再解析成逗号参数。ON仍由新exp/显式unjittered/FFX metadata启动，不依赖marker。用户必须通过脚本切换并重启；只复制两新flags无法保证移除旧marker。此处为只读源级审查，未新增GPU。

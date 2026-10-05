@@ -1,0 +1,20 @@
+{
+  "source_commit": "1a22ee96 core freeze + readonly benchmark caller",
+  "timing": "events around Enqueue, StreamSynchronize each frame, CPU chrono separate",
+  "source": {
+    "wechat/assets/297/Development/HIP/experiments/sync-network-gap-20261006/benchmark.cpp": "abde6cb9e1c6867ccbfdc75bdd3cf3b986a236ecb6bbaed9fe36c02e9c37fd75",
+    "wechat/assets/297/Development/HIP/experiments/sync-network-gap-20261006/run.ps1": "a439c25f7632992966f41850d34e08ba3fffc8eb473f270afe4e65e3f60a799e",
+    "wechat/assets/297/Development/HIP/experiments/sync-network-gap-20261006/prepare_fixture.py": "3fb0aec3eaa2d0f46dbdd97172e649fa03b8e45b6738b1f373231f93ff7ef2fd"
+  },
+  "exe_sha256": "c439a67d0e5f947665ee0d84313ee74a71c8f3a192d5f51a2462d0f66d118a9b",
+  "factory_sha256": "7e7d709539165f241febcf36678a56887cc21e6c9fceea8925ef4600c3cfb3ee",
+  "factory_origin": {
+    "source": "src/native_hip_network.h initial options through NativeApplyHipEnvironment",
+    "source_sha256": "c13b539966cfdd405fdd05177c7dc86ac66d8c623aed20c3b78be696c549f22e",
+    "generated_sha256": "7e7d709539165f241febcf36678a56887cc21e6c9fceea8925ef4600c3cfb3ee"
+  },
+  "flags": {
+    "fast1.flags": "ef6c769c2cacb773c95a1c1f9f8797314339f75b1dcd6dd7a707e88e125d782b",
+    "fast0.flags": "637c3a2ac3377bb31001f06d16173886af610f8bd113f0000896fb13e9ca1005"
+  }
+}

@@ -1746,3 +1746,12 @@ CPU DAG覆盖/need≤4/1488tasks证明、同FAST3新SPtwin真实段正常recover
 用户授权regular临时包给网友试，未授权本机现装变更。源码freeze1a22ee96：regular FFX pre-upscale MP1可选fullgate，TEMPORAL_HISTORY_EXPERIMENT默认off、MV_UNJITTERED1为显式实验前提；有效internal blend RTZ/alpha1历史，bridgeUV carrier固定8B，warmup失效，热MP3旧Body seed0、回1cold。720/1080 core first/reset/hot/off及独立gate全部bit0 finite；实际Frame720缺MV/曝光变/gap等cold门bit0。参考gate1080最短8帧GPU均9.1459→14.1795ms，明确+5.03ms成本，无质量/FPS承诺。regular84模块包仍在隔离stage；stock gfx1200发现27错target，打包按当前canonical与041 identity修正，不复制错误target。canonical source/defines/compiler/opts比对ab8e3e82：29row完全同，10row变化/新增（包含post tap/poolbyte/include变化/SPfast），report在history-trial-041a-20261006。未装游戏、配置与正式041不动。
 
 按mochi-old-lock-20261006/9d94c9e3完整旧source/exe/70资产锁证，旧500帧一次submit说法是打印文案误读，实际默认chunk1逐帧submit+fence wait；0.1～0.3ms提交猜额撤回，不能解释旧差。48网络SPV同toolchain重编bit同，C32 direct/quad1及ViT NR_ACC_F16=0已锁，不归因AV每块half截断。WorkingPlan与早先审计报告同步校准，旧历史正文保留并追加纠正。
+
+
+### 2026-10-06 当前900共同encoded输入同步纯NN首账
+
+原子单队列受控首两ABBA：F0/M/M/F0与F1/M/M/F1，各80暖160测。当前core1a22ee96/staged普通stock39，full71/MP1/PRED0/SKIN0/AE0/graph0/historyoff、Style1/seed0；旧mochi锁d1185d2/8ad3ac1c…、显式chunk1。共同half-exact encoded synthetic gradient1600×900，我HIP按1798-y镜像到底1600×960；M --in-image格式RGBA32F/NEAREST、不运行runtime_encode，CPUvalid/pad逐位证明。并非真实游戏源。
+
+GPU均值FAST0我6.706866对M6.017463、差0.689404ms；FAST1我6.628813对M6.028481、差0.600331ms。CPU均值另列6.884184/6.142481与6.790059/6.156988，不用CPU中位减GPU均值。四HIP160CSV全正/finite、首尾0bitdiff且同FAST跨processSHA同；M四slot RGBA全finite/alpha1/SHA同。剩余差距未因果拆清：900 ViT400对448、noise预生成/逐帧、Vulkan复用commandbuffer/HIP逐帧host发dispatch、output padding/存储与数学均未完全同。HIPwarm后首raw短idle使前5略高，160均值比后155高0.007～0.011ms；正式表不扣、不刷新轮，无真实clock锁频证明。
+
+首次启动被packager rtc_compile门拦（未GPU/未lock），等自然退出再运行；D411GB实际写/cache、无正常游戏结束，15秒game watchdog。两ABBA即止，旧mochi元数据无改/锁释放；只清自身raw输出并保输入/weights/原logs/model/SPV与全SHA，本地/tmp保raw。报告/scripts/CSV/普通module与asset SHA见results/sync-network-gap-20261006。未安装玩家载荷或动配置，不把三刀跨批相加/FPS承诺。另独立静态核双arch六history新ELF的目标/export/SHA与receipt同；legacy marker off/on都移除、首backup跨切换恢复的源审见results/temporal-package-review-20261006，未新增GPU。
