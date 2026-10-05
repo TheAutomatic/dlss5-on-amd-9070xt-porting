@@ -202,8 +202,8 @@ DEV i2 cw_input(const unsigned char*in,uint win,uint qt,uint ci,uint width,uint 
 #endif
 DEV float cw_up_F(float x){uint a=bits(x)&0x7fffffffu;float c=__builtin_fminf(__builtin_fmaxf(x,-448.f),448.f);float r=__builtin_amdgcn_cvt_f32_fp8(__builtin_amdgcn_cvt_pk_fp8_f32(c,0.f,0,false),0);return a==0?0.f:r;}
 DEV float cw_up_shuffle(float v,uint lane){return __builtin_bit_cast(float,__builtin_amdgcn_ds_bpermute(lane*4,__builtin_bit_cast(int,v)));}
-template<bool Chain,bool Finish=false,bool DownCrop=false,bool Post=false,bool Prefix=false,bool Up=false,bool Byte=false,bool DownByte=false,bool InByte=false,bool UpLowByte=false,bool PostRGBA=false>
-DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned char*out,uint windows,uint mode,uint raw,uint width,uint height,uint sx,uint sy,uint prevw,uint px,uint py,float*main=nullptr,float*down=nullptr,const unsigned char*skip=nullptr,const float*scales=nullptr,const float*color=nullptr,const float*headw=nullptr,float*rgb=nullptr,float rgbscale=0.f,const float*history=nullptr,uint seed=0,uint temporal=0,const float*upw=nullptr){fp8_sat_mode();
+template<bool Chain,bool Finish=false,bool DownCrop=false,bool Post=false,bool Prefix=false,bool Up=false,bool Byte=false,bool DownByte=false,bool InByte=false,bool UpLowByte=false,bool PostRGBA=false,bool PostTap=false>
+DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned char*out,uint windows,uint mode,uint raw,uint width,uint height,uint sx,uint sy,uint prevw,uint px,uint py,float*main=nullptr,float*down=nullptr,const unsigned char*skip=nullptr,const float*scales=nullptr,const float*color=nullptr,const float*headw=nullptr,float*rgb=nullptr,float rgbscale=0.f,const float*history=nullptr,uint seed=0,uint temporal=0,const float*upw=nullptr,_Float16*post_features=nullptr){fp8_sat_mode();
  constexpr uint cw_kind=Prefix?5:Post?4:Finish?(DownCrop?3:2):Chain?0:1;
  uint win=bid();if(win>=windows)return;
  __attribute__((shared)) _Float16 residual[4*2*32*8];
@@ -409,6 +409,7 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
   auto emit=[&](auto full){
   for(uint t=lane;t<64;t+=32){int x=int(tx+t%8)-int(sx),y=int(ty+t/8)-int(sy);if(full||(x>=0&&y>=0&&x<int(width)&&y<int(height))){
    uint p=uint(y)*width+uint(x);float sums[3]{};
+   if constexpr(PostTap)for(uint c=0;c<32;c++)post_features[p*32+c]=residual[((t/16*2+c/16)*32+(c%16/8*16+t%16))*8+c%8];
 #if CW_POST_HEAD_VEC
    for(uint cg=0;cg<4;cg++){h8 fs;float hr[8],hg[8],hb[8];uint c=cg*8;
     __builtin_memcpy(&fs,residual+((t/16*2+c/16)*32+(c%16/8*16+t%16))*8,16);
@@ -431,6 +432,7 @@ DEV void cw_body(const unsigned char*in,const float*fw,const float*w,unsigned ch
   uint lane=__builtin_amdgcn_workitem_id_x(),ww=width+2*sx,tx=(win%(ww/8))*8,ty=(win/(ww/8))*8;
   for(uint t=lane;t<64;t+=32){int x=int(tx+t%8)-int(sx),y=int(ty+t/8)-int(sy);if(x>=0&&y>=0&&x<int(width)&&y<int(height)){
    uint p=uint(y)*width+uint(x);float sums[3]{};
+   if constexpr(PostTap)for(uint c=0;c<32;c++)post_features[p*32+c]=residual[((t/16*2+c/16)*32+(c%16/8*16+t%16))*8+c%8];
    for(uint c=0;c<32;c++){float f=float(residual[((t/16*2+c/16)*32+(c%16/8*16+t%16))*8+c%8]);sums[0]+=f*headw[c];sums[1]+=f*headw[32+c];sums[2]+=f*headw[64+c];}
    for(uint c=0;c<3;c++){float acc=Hrtz(sums[c]),centered=color[p*4+c]*.125f-.0625f,v=(acc*rgbscale+centered)*8.f+.5f;rgb[p*(PostRGBA?4:3)+c]=cw_clampf(v,0.f,1.f);}if constexpr(PostRGBA)rgb[p*4+3]=1.f;
   }}
@@ -547,6 +549,9 @@ CW_ENTRY void c32_wave1_mapped_b8(const unsigned char*in,const float*fw,const fl
 CW_ENTRY void c32_wave1_finish_b8(const unsigned char*in,const float*fw,const float*w,unsigned char*main,float*down,uint windows,uint mode,uint raw,uint width,uint height,uint sx,uint sy,uint prevw,uint px,uint py){cw_body<true,true,false,false,false,false,true>(in,fw,w,nullptr,windows,mode,raw,width,height,sx,sy,prevw,px,py,reinterpret_cast<float*>(main),down);}
 CW_ENTRY void c32_wave1_post_b8(const unsigned char*low,const unsigned char*skip,const float*scales,const float*fw,const float*w,const float*color,const float*headw,float*rgb,uint windows,uint width,uint height,uint sx,uint sy,float scale){cw_body<false,false,false,true,false,false,false,false,true>(low,fw,w,nullptr,windows,0,1,width,height,sx,sy,0,0,0,nullptr,nullptr,skip,scales,color,headw,rgb,scale);}
 CW_ENTRY void c32_wave1_post_b8_rgba(const unsigned char*low,const unsigned char*skip,const float*scales,const float*fw,const float*w,const float*color,const float*headw,float*rgb,uint windows,uint width,uint height,uint sx,uint sy,float scale){cw_body<false,false,false,true,false,false,false,false,true,false,true>(low,fw,w,nullptr,windows,0,1,width,height,sx,sy,0,0,0,nullptr,nullptr,skip,scales,color,headw,rgb,scale);}
+// Diagnostic/paired tap: final post features before the head. Old RGB ABI and arithmetic stay intact.
+CW_ENTRY void c32_wave1_post_b8_features(const unsigned char*low,const unsigned char*skip,const float*scales,const float*fw,const float*w,const float*color,const float*headw,float*rgb,uint windows,uint width,uint height,uint sx,uint sy,float scale,_Float16*features){cw_body<false,false,false,true,false,false,false,false,true,false,false,true>(low,fw,w,nullptr,windows,0,1,width,height,sx,sy,0,0,0,nullptr,nullptr,skip,scales,color,headw,rgb,scale,nullptr,0,0,nullptr,features);}
+
 #endif
 #if CW_UP_FUSED
 #if CW_SKIP_BYTE
