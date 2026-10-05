@@ -70,3 +70,36 @@ upscale [0,0] uses context max size, not a guessed output geometry.
 
 A scene-matched capture is still required. CPU build success is not a successful
 GPU capture, a complete temporal replay, or a repaired roof.
+
+## Additional source-identity gates (CPU audited; GPU proof still absent)
+
+The producer list is submitted separately by NativePreUpscale::Execute; the
+capture copy is enqueued before any later lists in that same batch. Mode2 itself
+only logs following work, so the isolated capture additionally rejects any
+post-dispatch draw/dispatch/copy/resolve/clear/indirect operation and any aliasing
+barrier. A sticky observer rejects multiple CPU submission threads once ARM is
+present; it does not lock or serialize game submissions. Sources from unsupported
+unobserved command paths/other queues remain unverified. No manifest promotes
+source_identity_verified to true on the basis of compilation alone. Mode2 replay
+continues when capture rejects; the experiment does not fail the game.
+
+## Explicit conversion plan
+
+`prepare_replay.py MANIFEST_SEALED RECIPE_JSON NEW_PLAN_DIRECTORY CONVERTER_EXE SHADER_ASSET_DIRECTORY --windows-source CAPTURE_ROOT --windows-output OUTPUT_ROOT --windows-assets SHADER_ROOT`
+
+The recipe must state controlled_replay_only=true, pre_exposure_policy=captured,
+motion_scale_policy=captured, jitter_policy=preserve_metadata_not_applied,
+depth_policy=preserved_not_applied and network_seed_policy=fixed0 or frame_index.
+settings must explicitly supply the five network/codec environment keys and
+exposure_scale/transfer_strength/color_strength/paper_white/motion_sign/use_exposure
+listed by the tool. No exposure, motion sign, Windows path or seed is guessed.
+It creates per-frame converter configs and receipt.json binding original raw
+SHA, manifest, recipe, shaders and converter executable. It runs no GPU, copies
+no captures, and does not upgrade unresolved source/semantic contracts. The
+receipt's experiment_seed is separate from the capture's unknown source_seed.
+
+Conversion configs also request `<frame>-coordinates.uv32f`, the original
+NativeTemporalCoordinates UV output. Replay must consume that UV directly;
+`<frame>-motion.xy32f` is diagnostic only. Converting UV to pixel motion and back
+introduces measurable floating-point error even for zero motion, so that
+round-trip is excluded from the replay contract.
