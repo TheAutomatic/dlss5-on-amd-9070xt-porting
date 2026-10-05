@@ -1,6 +1,6 @@
 # 当前工作计划
 
-更新：2026-10-05。此文件整份重写，保存当前状态与尚未完成事项；历史过程见 DevHistory.md。
+更新：2026-10-06。此文件整份重写，保存当前状态与尚未完成事项；历史过程见 DevHistory.md。
 
 ## 工作规矩
 
@@ -35,19 +35,20 @@
 7. mochi ReShade History 默认1；History0仅关闭 post blend，prefix history 与 seed推进仍存在。低层 API 默认不同；网友所谓另一家未具名，默认状态未独立核实。
 8. 已完成默认关闭的MP1实验：纯空间、prefix-only、prefix+gate三路，固定seed0/逐帧seed拆因子。小合法NN48行、valid1920×1080/proc1152合成NN18行全finite；off/first/reset对独立当前基线0字节差，自重复0字节差。仅有效RGB存历史，padding镜像/后处理有效区分离。首批继承模板AE1已隔离为diagnostic；正确VIT_ADAPTIVE=0重测过。
 9. 原post16×16 closed/zeroMV/+1px/对角亚像素gold与软件5tap/严格gate全float-bit0；head24576控制特征半码0差。AMD SIG最大3ULP差已量化，实验严格用NV half域表。原型保rawΣ×reciprocal的融合减RGB顺序，F64 head仍参考实现。均值/同geometry波动分开；18行1080合成数据不显示普遍抑波动，不宣称闪修。
-10. 未改默认、未装游戏、未改0.41包。尚需真实连续输入/MV/jitter/exposure/reset与真实反光/遮挡拖影验证、原内部history内容/格式、MP3各遍历史规划；仅保留实验原型，不把跳块当无损方案。结果见results/temporal-sequence-20261005及post-history-gate-20261005。该缺真实源不阻碍下一独立优化，已按顺序转第二项。
+10. 未改默认、未装游戏、未改0.41包。尚需真实连续输入/MV/jitter/exposure/reset与真实反光/遮挡拖影验证、原内部history内容/格式、MP3各遍历史规划；仅保留实验原型，不把跳块当无损方案。结果见results/temporal-sequence-20261005及post-history-gate-20261005。该缺真实源不阻碍独立优化；本轮已按顺序完成下面两项裁决。
 
-## 第二项：ViT960 contract 大 tile（当前CPU原型准备）
+## 第二项：ViT960 contract 大 tile（静态负账，已止）
 
-- 与已否的 attention 恒960常量化不同，研究当前 contract_frag_bout 的16token×64列 wave tile；参考 mochi ≥768 token的大 tile路径，保 K1024四段边界、每段累加顺序、skip初始化、FAST_H及 FP8/正负零合同。
-- 当前该核约208 VGPR。首选两wave各16tokens共享同64列K512 FP8权重（32KiB LDS），不直接单wave增加acc；四K1024 partial边界/各lane原顺序不变。先核寄存器、LDS与barrier成本，不能用上游44.7→40.4µs微核数字许诺整网收益。
-- 新导出限定960 token、配对 HasFn 缺失整体旧路回退；400/640不变。先真实 contract/QKV/projection tuple 逐位，再短微核与整网筛；无稳定收益即止。
+- 与旧 attention 恒960常量化不同：尝试两wave各16tokens共享64列K512 FP8权重32KiB LDS，保四K1024 partial、skip、FAST_H与byte出口原顺序。
+- canonical双arch实际baseline208VGPR/0spill/0private/4KiB LDS；候选256VGPR/171spill/688B private每thread/32KiB LDS。静态门直接拒，不跑GPU、不给上游微核数字作整网承诺、不扫更多tile参数。
+- 候选仅保实验源码与ISA资源/hash，生产未改、未安装。记录main64257116，results/vit-contract960-20261005。无新瓶颈证据不重开。
 
-## 第三优先：小 buffer 延迟复用（尚未实验）
+## 第三项：小请求晚批复用（真实1440短筛负账，已止）
 
-- 当前 Network::New best-fit 可立即复用；研究≤8MiB buffer晚一个 dispatch复用的 cold-age策略，与 mochi Vulkan案例区分，HIP收益待测。
-- 必须明确 shared_ptr池的租约/最后消费、PDL keep、graph、跨 stream寿命，不能把对象析构误当用户归还；限制额外显存与 CPU开销。
-- 第二项结束后才实施有界 A/B；不重写整个 allocator，不凭上游投影局部耗时承诺整网改善。
+- 默认0实验宏；≤8MiB请求只在原use_count1/足够capacity集合再排近期possible-use块，包含较大capacity。用logical launch-batch：连续DUP一批、SP init/run/recovery一批；非launch P可多延迟，不能当物理GPU完成/精确lastuse。graph旁路，PDL引用条件不变，不提前复用/释放。CPU七case过。
+- 同源A0/A1、相同当前39/gfx1201模块，实际valid2560×1440/proc2560×1472/960token，full71/FAST1/MP1/PRED0/SKIN0/AE0。完整框架连续首尾读回、160帧/槽弃80：首ABBA A15.680819→B15.742244ms，慢0.061425ms，两B槽均慢于两A；raw全SHA相同。
+- 策略实际命中recent_rejects34560/进程。按门立即止，不刷剩余轮、不跑无意义正常19/额外档、不改生产/安装。candidate.patch、CPU模型、CSV/hash齐；自己实验raw清理，weights/输入未动，锁已释放。main661c41a9，results/pool-coldage-20261006。
+- 上述三项本轮均有具体结论；用户游戏载荷/config与0.41发布ZIP/tag不变。闪烁真实场景仍待连续源/实玩，不写已修复。
 
 ## 其他未完成事项与限制
 

@@ -1703,3 +1703,5 @@ CPU DAG覆盖/need≤4/1488tasks证明、同FAST3新SPtwin真实段正常recover
 2026-10-05：完整读取旧 WorkingPlan 与近期记录后整份重写，纠正0.41已发布/tag及三刀已装状态，保留Issue13版本缺口、Issue4双设备验证、gfx1200真机/720 oracle等未完成项。下一顺序为建筑房顶闪烁时序合同诊断、ViT960 contract大tile、小buffer延迟复用；当前post导出缺少原row6门控权重已列为CPU核验项。此阶段只整理计划，未运行GPU、未改默认/游戏配置或上传包。
 
 2026-10-05：MP1时序默认关闭实验完成受控闭环：原5090合法两Eval核Reset/seed/history绑定；恢复遗漏row6 gate，原head24576半码0差，SIG跨vendor最大3ULP已量化、严格实验用NV表。原post四小gold（含对角亚像素）与软件warp/gate全float-bit0；AE0三路小NN48行＋valid1080/proc1152合成NN18行无NaN、off/reset独立基线及自重复0字节差。首批误继承AE1留diagnostic，不作质量结论。合成亮度并非普遍更稳，未称修复房顶视频；原内部history格式/内容与真实连续源仍待验证。无游戏部署/默认或0.41包变更，按顺序转ViT960大tile。5090数据/缓存全C（D源只读、极小锁例外），9070仍D，实际写入盘≥100GB。results/temporal-sequence-20261005。
+
+2026-10-06：按既定顺序完成两项无损候选裁决。ViT960 contract两wave共享K512 FP8权重：canonical双arch baseline208VGPR/无spill，candidate256VGPR/171spill/688B private每thread，静态门拒、不GPU、不调更多tile（main64257116）。小请求≤8MiB晚一logical批复用：graph旁路/PDLrefs不动，CPU七case过；真实1440/proc1472/960tokens完整框架首ABBA A15.680819、B15.742244ms，慢0.061425，两B槽均慢于A，raw全SHA同，立即止、不收生产/安装（main661c41a9）。候选patch/源/CSV/hash已留，自身raw清理、锁释放，不删weights/输入。此前MP1时序受控阶段有原语/三路闭环但无真实视频源、合成波动不普遍改善，仍默认off、不称闪修。三项具体结论已记，当前游戏配置/载荷与0.41 ZIP/tag不变。
