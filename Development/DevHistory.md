@@ -1701,3 +1701,5 @@ CPU DAG覆盖/need≤4/1488tasks证明、同FAST3新SPtwin真实段正常recover
 源码核对：31–38均为完整ViT FFN＋全图attention＋残差块，不是奇偶shift或功能交替，37没有特殊源码角色。网友skip干预提供该段的定位线索，但去掉反光不等于保留反光并稳定时序；尚不作根因/修复定论，默认与游戏配置未改。
 
 2026-10-05：完整读取旧 WorkingPlan 与近期记录后整份重写，纠正0.41已发布/tag及三刀已装状态，保留Issue13版本缺口、Issue4双设备验证、gfx1200真机/720 oracle等未完成项。下一顺序为建筑房顶闪烁时序合同诊断、ViT960 contract大tile、小buffer延迟复用；当前post导出缺少原row6门控权重已列为CPU核验项。此阶段只整理计划，未运行GPU、未改默认/游戏配置或上传包。
+
+2026-10-05：MP1时序默认关闭实验完成受控闭环：原5090合法两Eval核Reset/seed/history绑定；恢复遗漏row6 gate，原head24576半码0差，SIG跨vendor最大3ULP已量化、严格实验用NV表。原post四小gold（含对角亚像素）与软件warp/gate全float-bit0；AE0三路小NN48行＋valid1080/proc1152合成NN18行无NaN、off/reset独立基线及自重复0字节差。首批误继承AE1留diagnostic，不作质量结论。合成亮度并非普遍更稳，未称修复房顶视频；原内部history格式/内容与真实连续源仍待验证。无游戏部署/默认或0.41包变更，按顺序转ViT960大tile。5090数据/缓存全C（D源只读、极小锁例外），9070仍D，实际写入盘≥100GB。results/temporal-sequence-20261005。

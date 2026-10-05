@@ -7,7 +7,7 @@
 - 具体编译、实验、安装、归档交子代理；主进程只调度与审交账。
 - 有人提 PR，能合入就尽量合入。
 - DevHistory 只追加；WorkingPlan 整份重写。公开记录只写客观工程事实。
-- 单队列使用 GPU：先 game-check、原子 gpu.lock、15 秒游戏看门狗，D 盘至少 100GB。游戏运行时不抢 GPU、不换载荷、不结束正常游戏；继续独立 CPU 工作。
+- 单队列使用 GPU：先 game-check、原子 gpu.lock、15 秒游戏看门狗，实验实际写入/缓存盘至少 100GB（9070仍用D；5090本次小探针用C，D数据只读、共享锁极小例外）。游戏运行时不抢 GPU、不换载荷、不结束正常游戏；继续独立 CPU 工作。
 - 无损候选保持 K 累加顺序、舍入、FP8 编解码、NaN 与正负零合同。先小筛，有可靠收益才进正式门；慢轮或尾延迟退步不刷轮掩盖。
 - 性能使用连续 TimingOnly、首尾读回，中间不扫描图像；坏事件负值批隔离。微核与 DUP 边际不相加当整网或 FPS。
 - 默认不变、配置逐字保留；安装前备份、安装后 readback 与 exact 快照同步。短记录后及时提交，不 push、不改外层仓、不擅发布。
@@ -24,23 +24,23 @@
 - 既往实玩剑星 1x 约57.6fps、快速3x约37fps；鬼武者900P快速3x约49fps、强度更新后无异常。均为用户观察，未提供三刀后的同场景 ABBA/FPS 验证。
 - PR15 已正式 merge 8a6c7bc1，保留贡献者作者；Enqueue 入口恢复已选 HIP device，0.41 已含。RE9 强度文件数字覆盖已含；auto/缺省继续尊重宿主参数。中英文 README/配置页与公众号使用说明已完成。
 
-## 第一优先：建筑房顶亮度闪烁与时序合同
+## 第一项：建筑房顶闪烁（受控阶段已闭环，真实场景待验证）
 
 1. 当前证据：111.mp4 是约4.11秒、119帧、29fps的竖幅拍屏最终画面，没有原始网络输入、MV/depth或开关 A/B。不能伪造网络复现或由视频直接归因 HIP。
 2. 重新跟踪同一房顶表面后确认局部亮度反复。1.586/1.621/1.690 秒 roof Y=96.6/116.2/98.1，UI=79.78/79.87/81.55；第一步 roof 跳变明显大于参考 UI。最初关注人物运动/草地而暗示静物稳定已纠正。拍屏曝光、透视、游戏自身 TAA/高光仍有混杂。
 3. 网友场景线索尚未独立复验：跳32–36、38部分抑闪；全跳31–38房顶反光基本消失；40后块对该反光无影响；31–38单跳任意一个仍闪；奇偶各跳4块分别抑中间/边缘。31–38实际均为同形完整全局 ViT，无奇偶 shift，37没有特殊结构。删除反光不等于保留反光并稳定时序，跳块不是无损修复。
 4. 尚待确认网友使用 `DLSS5_SKIP_BLOCKS`（全遍）还是 `DLSS5_MULTI_PASS_SKIP_BLOCKS`（第二遍以后）；不猜。该缺口不阻碍独立时序代码分析。
 5. 当前原生 pre 路径每帧 reset=true/seed0；可有 prefix history 输入，但没有原版 motion 重投影与门控 post history。OUTPUT_SMOOTH 是独立近似，不能代称完整原时序。
-6. 新确认资产缺口：当前 post70-head.f32 仅 RGB 的3×32；原生16×32权重中 row6 为非零 history gate，但现 unpack 只导出 row0/2/4。原 blend half=0.73974609375。应独立导出 gate 的32 float，保旧 RGB96不变；先核原 PTX 的归约、sigmoid、舍入与 blend 合同，不能仅打开宿主 history 就称补全。
+6. 新确认资产缺口：当前 post70-head.f32 仅 RGB 的3×32；原生16×32权重中 row6 为非零 history gate，但现 unpack 只导出 row0/2/4。原 blend half=0.73974609375。已独立恢复 gate32、保RGB96不变；原SASS确认两K16 HMMA.F16及SIG/blend/FFMA合同。真实5090两Eval确认Reset1→0、seed0→1与history/MV空→非空。标准CUDA查询当前context为空，原私有history格式/内容仍待直接确认。
 7. mochi ReShade History 默认1；History0仅关闭 post blend，prefix history 与 seed推进仍存在。低层 API 默认不同；网友所谓另一家未具名，默认状态未独立核实。
-8. 顺序执行：先 CPU 核输入/输出颜色域、MV单位符号、采样坐标、depth/disocclusion、reset/resize/epoch与各遍历史；准备合法可重放输入与元数据。分三组：纯空间、仅 prefix history、完整前后时序。固定seed0与逐帧seed另拆因子，不把 seed变化归于 history。
-9. 评价分开记录房顶亮度波动与平均反光强度，同时检查色度、静态背景、运动/遮挡拖影与 reset/resize。原视频仅提供观测；受控序列来源须明确真实 capture 或合成测试，不能称已复现原游戏。
-10. 有明确因果证据才做小修/可选实验；未经验证不改默认、不部署波动修复、不把跳块当默认方案。第一项取得具体结论后才进入下项。
+8. 已完成默认关闭的MP1实验：纯空间、prefix-only、prefix+gate三路，固定seed0/逐帧seed拆因子。小合法NN48行、valid1920×1080/proc1152合成NN18行全finite；off/first/reset对独立当前基线0字节差，自重复0字节差。仅有效RGB存历史，padding镜像/后处理有效区分离。首批继承模板AE1已隔离为diagnostic；正确VIT_ADAPTIVE=0重测过。
+9. 原post16×16 closed/zeroMV/+1px/对角亚像素gold与软件5tap/严格gate全float-bit0；head24576控制特征半码0差。AMD SIG最大3ULP差已量化，实验严格用NV half域表。原型保rawΣ×reciprocal的融合减RGB顺序，F64 head仍参考实现。均值/同geometry波动分开；18行1080合成数据不显示普遍抑波动，不宣称闪修。
+10. 未改默认、未装游戏、未改0.41包。尚需真实连续输入/MV/jitter/exposure/reset与真实反光/遮挡拖影验证、原内部history内容/格式、MP3各遍历史规划；仅保留实验原型，不把跳块当无损方案。结果见results/temporal-sequence-20261005及post-history-gate-20261005。该缺真实源不阻碍下一独立优化，已按顺序转第二项。
 
-## 第二优先：ViT960 contract 大 tile（尚未实验）
+## 第二项：ViT960 contract 大 tile（当前CPU原型准备）
 
 - 与已否的 attention 恒960常量化不同，研究当前 contract_frag_bout 的16token×64列 wave tile；参考 mochi ≥768 token的大 tile路径，保 K1024四段边界、每段累加顺序、skip初始化、FAST_H及 FP8/正负零合同。
-- 当前该核约208 VGPR，扩大 token tile 有超过256寄存器/溢出风险；先审生命周期与静态资源，不能用上游44.7→40.4µs微核数字许诺本项目整网收益。
+- 当前该核约208 VGPR。首选两wave各16tokens共享同64列K512 FP8权重（32KiB LDS），不直接单wave增加acc；四K1024 partial边界/各lane原顺序不变。先核寄存器、LDS与barrier成本，不能用上游44.7→40.4µs微核数字许诺整网收益。
 - 新导出限定960 token、配对 HasFn 缺失整体旧路回退；400/640不变。先真实 contract/QKV/projection tuple 逐位，再短微核与整网筛；无稳定收益即止。
 
 ## 第三优先：小 buffer 延迟复用（尚未实验）
