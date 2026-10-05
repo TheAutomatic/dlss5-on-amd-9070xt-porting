@@ -1,0 +1,199 @@
+{
+  "commit": "d1185d25141b1714d7837151b6fa782e6427568b",
+  "tracked_status": "",
+  "root": "/tmp/claude-1000/ct/mz",
+  "files": {
+    "windows/build/arch/rdna4.sh": {
+      "sha256": "b87cf09296a39b2c629dcf4a84d8e3e30f1119f831e9b00e6c801878a4de0de2",
+      "bytes": 1127
+    },
+    "windows/build/assemble_product_data.sh": {
+      "sha256": "92a591dd306df485b12805b3bf88c0c5cf1322df37842a0feb982beb4dea51a7",
+      "bytes": 1662
+    },
+    "windows/build/build_network.py": {
+      "sha256": "5a31dfd5058d65f5e134cab2b83c09fd17efed48056a0bb46c72bed99670dd5b",
+      "bytes": 5336
+    },
+    "windows/build/build_optiscaler_nr.sh": {
+      "sha256": "1fa99ef1548158d16a347546b5224640ba5fbf459c04ea346266c5a452befba6",
+      "bytes": 9988
+    },
+    "windows/build/build_package.sh": {
+      "sha256": "b5e4a3d767f3891fe0672ab1b0f833f96933bb7acee55d6f17da50349347c4a9",
+      "bytes": 11832
+    },
+    "windows/build/build_vulkan_loader.sh": {
+      "sha256": "36d8980916b6af5dc7868c83543884474086078334916601ee696cbed9e50596",
+      "bytes": 2207
+    },
+    "windows/build/generate_device_chain.py": {
+      "sha256": "e292d43e229878a98e1cdd9e7ae9b69df85538b4c20e0c9b40ed8a1b7a4d2fd4",
+      "bytes": 1659
+    },
+    "windows/build/quad_quant_glsl.py": {
+      "sha256": "68e05fe0b7795dd5ec5b46aa35fbef2b39d34a69c84a040bb689e8551a852d08",
+      "bytes": 8936
+    },
+    "windows/build/spirv_precise.py": {
+      "sha256": "99513591a4203fca777a2cbb698416cb54091a21d2029d6b27b39ebdc75672ca",
+      "bytes": 2214
+    },
+    "windows/build/unroll_glsl.py": {
+      "sha256": "0a38a16e74250a89570ba22a261f5b638aed15e3e235a1d0c5643a28b53d1b5a",
+      "bytes": 7122
+    },
+    "windows/build/version.sh": {
+      "sha256": "ae62dcc5a16707254af530427d9b7215ee5544daad8ef0225a3cd5ff715784ce",
+      "bytes": 663
+    },
+    "windows/shaders/rdna4/attn.comp": {
+      "sha256": "c517d4a18119042bbbe2031e1516132f083f80ed262db32fd025b1c40ccb8c9b",
+      "bytes": 75858
+    },
+    "windows/shaders/rdna4/decoder_upsample.comp": {
+      "sha256": "3b0d997a1387cdf4a26c3d037ddaebb254240f45f122033a919c3aeb2786d50e",
+      "bytes": 3855
+    },
+    "windows/shaders/rdna4/ffwd3_t.comp": {
+      "sha256": "0232ac1b4e7e6c85b066dceeb7472fdf1875fa171f78d7f5be60058c1b985ff1",
+      "bytes": 17610
+    },
+    "windows/shaders/rdna4/fswin_t.comp": {
+      "sha256": "3c1b9b6283b42020514a5c5510e56579ec65a715f923228fd9fe665836d8cac4",
+      "bytes": 155782
+    },
+    "windows/shaders/rdna4/gemm1x1.comp": {
+      "sha256": "fdbf90efb2e8ad5b209663ec53bddb8573e60fd56d0bd34a383ebe95e5fb1da5",
+      "bytes": 76718
+    },
+    "windows/shaders/rdna4/include/attn_qkv_epi.glsl": {
+      "sha256": "d3c58e591c4b782abb1678594b8a7dd39f762366ceac1c0ac5e965bbbd1e46b1",
+      "bytes": 4004
+    },
+    "windows/shaders/rdna4/include/coherent_act.glsl": {
+      "sha256": "2c20818d305450341004cb9e24c191bf290aaba8fa462137df4f880f785c6bdb",
+      "bytes": 4402
+    },
+    "windows/shaders/rdna4/include/coopmm.glsl": {
+      "sha256": "e4065b0092369c951842e0ad05280421f12bef675d9ee903aa91cf6fec838585",
+      "bytes": 40369
+    },
+    "windows/shaders/rdna4/include/fswin_body.glsl": {
+      "sha256": "32bf0b4ad4aeca4957846012b9bc1cb7d54627a3677e05d59672c74ac027fde0",
+      "bytes": 126987
+    },
+    "windows/shaders/rdna4/include/image_input.glsl": {
+      "sha256": "b460b0e0db82dfd52e7ea04515f925c4f6c1b8053cfbec20495dc4ea62b23356",
+      "bytes": 8230
+    },
+    "windows/shaders/rdna4/include/image_noise.glsl": {
+      "sha256": "29e308e0f9ae7a6fe228b933814fada1167f2706af065e6e403da8add33b05c1",
+      "bytes": 1008
+    },
+    "windows/shaders/rdna4/include/nr_chain.glsl": {
+      "sha256": "7b092704187f65ea399d01778c8876ea99b6b935922a6c8e74fbe51a28bdf40b",
+      "bytes": 3632
+    },
+    "windows/shaders/rdna4/include/nr_prof.glsl": {
+      "sha256": "531b4cda66f866aa0e874ac259a3b92823e221dd6fdaa4a54261c2cf5011e0d9",
+      "bytes": 2193
+    },
+    "windows/shaders/rdna4/include/occ_pad.glsl": {
+      "sha256": "81878d2f80bd6459cc6b0268836a5cc5889646e0a15bc5d407c39be9905fccb5",
+      "bytes": 1021
+    },
+    "windows/shaders/rdna4/include/swin_math.glsl": {
+      "sha256": "923586c2316e6cc7e1ab069f5b01e5804d2257dfef99544ea9924b753c477f30",
+      "bytes": 6653
+    },
+    "windows/shaders/rdna4/include/temporal_history.glsl": {
+      "sha256": "c467ff5fe489bfc0b6fa9b1bca742a8216f57606a048a370f9edbc7251eff3fe",
+      "bytes": 2606
+    },
+    "windows/shaders/rdna4/include/vit_attn_vt_chunk.glsl": {
+      "sha256": "e97085d26a3a03f2b67b6ed0f6a7b30336b44fb300ffa2b7ed4b2b618cb3e818",
+      "bytes": 8670
+    },
+    "windows/shaders/rdna4/noise_field.comp": {
+      "sha256": "46a199e1385beac03573a40dc2527e7512763fd33e644290883223299fcb1f1f",
+      "bytes": 1295
+    },
+    "windows/shaders/rdna4/pipelines.json": {
+      "sha256": "ab5157bd67a2a486c1172560ffb5978cd5fdd08529dfbfd2d74a096776715dfa",
+      "bytes": 28814
+    },
+    "windows/shaders/rdna4/repack_tokens.comp": {
+      "sha256": "4511f76b2a62329eedd121e2cee97cec8e34b6ed3fd14f969bc66f72252b07dd",
+      "bytes": 2033
+    },
+    "windows/shaders/rdna4/upsample_view.comp": {
+      "sha256": "98b7c773a9043f88ce443dbd6111132614ccc0749fdea01aba23e5f7ab8da3fc",
+      "bytes": 2891
+    },
+    "windows/shaders/rdna4/vit_attn.comp": {
+      "sha256": "1c384b6e9569dc31b24407086a7d957e9009f31ec433278bfd3024e454f91156",
+      "bytes": 42584
+    },
+    "windows/src/core/nr_activation_lut.hpp": {
+      "sha256": "cf289d3fed9bba211fa5b7b49e0699aa2eaf168c4c180f654acb8f4806def193",
+      "bytes": 25930
+    },
+    "windows/src/core/nr_device_features.hpp": {
+      "sha256": "e3677d0efe8900fd3ee4c9fd0403b7469a4127c4a3eb7c478a17fa73a368c291",
+      "bytes": 4004
+    },
+    "windows/src/core/nr_frame.txt": {
+      "sha256": "7e00807181c1f8ad62abe64087cb65a3993ec25f45d423e4c3def48e27c1cb80",
+      "bytes": 16680
+    },
+    "windows/src/core/nr_graph.cpp": {
+      "sha256": "d923cc7caf0606230e02faade51d5a60ce690574c95d1dabbd3da63011f83ac2",
+      "bytes": 332715
+    },
+    "windows/src/core/nr_log.hpp": {
+      "sha256": "5dc4777e41ba25268c75dc7c739c7cb2dafdac23fd56a1ffa2dce398a2931057",
+      "bytes": 2729
+    },
+    "windows/src/core/nr_native_plan.cpp": {
+      "sha256": "2146e00db84cc3ff0f0f2bb1b7b14589ccc7e5dac08dc4d10eae272370e14059",
+      "bytes": 3998
+    },
+    "windows/src/core/nr_native_plan.hpp": {
+      "sha256": "0a2f3f32d2c04c054a4c41cbe3ffaa282693dcd8ad5a7946fd02b217f863b75f",
+      "bytes": 417
+    },
+    "windows/src/core/nr_native_plan_data.hpp": {
+      "sha256": "e7327c0615a46ef94762e41ea4919c60c3f029f0b90e58b603e879ca8ce1f4ad",
+      "bytes": 22137
+    },
+    "windows/src/core/nr_runtime.cpp": {
+      "sha256": "c62de58a33322a38b5fedcd1a963a48a570fa72456f44b424467eb7e5c391e1a",
+      "bytes": 126669
+    },
+    "windows/src/core/nr_runtime.hpp": {
+      "sha256": "580ab3d175cc90e9a0681574ed666a30b350b54bef6e8f034fd35fd686c2ff8a",
+      "bytes": 20726
+    },
+    "windows/src/core/nr_runtime_dispatch.hpp": {
+      "sha256": "13f40b179dfc53811ba98c1136df16a63f2fdee127651d578514fde803d3612c",
+      "bytes": 2253
+    },
+    "windows/src/core/nr_shader_manifest.hpp": {
+      "sha256": "6049466bae2ec2cf5d53df69e50ecadd6b31ffe92132c4d49e1625f242137ec5",
+      "bytes": 3349
+    },
+    "windows/src/core/nrvk.hpp": {
+      "sha256": "91c044efc7cb069fa412c39441c92b53360f6f0e317470478b7060458e17af98",
+      "bytes": 67198
+    },
+    "windows/src/core/telemetry.hpp": {
+      "sha256": "9c0f9d9f791aaed5fc52280a81aa55ac976ce76d5f3b5a0db5df8fb9a897fb2d",
+      "bytes": 3128
+    },
+    "windows/src/core/tinlayout.hpp": {
+      "sha256": "913437acef687c43c7f28b8033ee13fa5ea83323615f0d54aa55db7f9716f0bd",
+      "bytes": 10749
+    }
+  }
+}

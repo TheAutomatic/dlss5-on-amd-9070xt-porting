@@ -1732,3 +1732,10 @@ CPU DAG覆盖/need≤4/1488tasks证明、同FAST3新SPtwin真实段正常recover
 ### 2026-10-06 MP1原型RTZ修正与实际codec回放工具链
 
 按history-contract原CUBIN HALF4受控gold，隔离temporal_store由RNE改显式RTZ，保存内部gate-blend有效RGB/alpha1；该错误只在未部署原型，不能归因现装游戏闪烁。9070四组closed/zeroMV/+1px/亚像素store对原gold float-bit0。新增共享MP1租约状态与CPU first/reset/resize/failure/missingMV双policy门；missingMV合同与MP3分遍/共享仍未定。实际NativeGameCodec/RgbInput/TemporalFeed/Coordinates shader转换synthetic1280×720单帧重复两次hash同/finite/alpha1/proc768 mirror同；UV转pixel位移会有6.1e-5残差，prepared改直接UV入口避免往返。prepared三路×两seed×两帧12行finite、独立baseline/repeat byte0，不作质量/性能结论。统一real-sequence manifest封存/显式recipe与converted receipt/index接线，保留seed null、upscale0和source identity未核为blocker；raw FFX directfit未跑FSR、jitter/depth未应用的范围显式记录。采集入口b439efc6/adbb2bf2只CPU链接与保守守门、未GPU采集/部署。GPU实验使用原子锁/game-check/15s看门狗/D约412GB，未遇游戏、锁释放；生产默认/玩家配置/现装载荷/0.41包不改。results/temporal-replay-contract-20261006保留CSV/日志/SHA/receipt，WorkingPlan更新；真实连续roof源仍pending，本阶段停止增加合成案例。
+
+
+### 2026-10-06 旧mochi0.0.2.5完整资产锁定与提交口径纠正
+
+恢复/tmp/claude-1000/ct/mz的d1185d25141b1714d7837151b6fa782e6427568b真实旧源码（tracked clean），local旧up/mz与9070competitor-timing-20260930/mz共70资产逐SHA同，七日志也同；旧exe8ad3ac1c…/model2b41c888…和三plan/48网络SPV/markers齐，不升级HEAD/不改旧资产。glslang16.5+quad+NR_Q32_DIRECT1隔离CPU复编48/48SPV逐字节同，C32 direct0不同；有效宏已锁。
+
+撤回09-30竞品报告及本日早先审计“mochi500帧一次提交”的假定：d1185d2 nr_graph.cpp:3921默认chunk1，runner按单pass submit→fencewait；actual旧exe反汇编r9指向字面1/r8指向--chunk，旧mz2未指定chunk。打印“123dispatches, one submit”指单pass固定文案，不代表500pass合批。0.1～0.3ms提交差估额不能继续解释旧差距；未来batch仅新控制诊断。发现旧CLIgradient/style0与我GameCodec冻结HDR不同输入/控制，noise-field在对手build一次计算而我prefix逐帧计算；900 ViT448对400、旧跳块C51213对16亦须重摆。noise旧09-19消融0.0175/0.02975ms负账保留，当前组织虽变也不先称缓存必赚。完整source/recipe/48重编/remote/local manifest/原七log/actualexe反汇编证据见results/mochi-old-lock-20261006。无新GPU轮/配置/安装或push；下一步同encoded fixture、full71 FAST0/1 MP1AE0historyoff同步纯网络短账。

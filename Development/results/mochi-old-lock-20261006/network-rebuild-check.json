@@ -1,0 +1,297 @@
+{
+  "source_commit": "d1185d25141b1714d7837151b6fa782e6427568b",
+  "NR_Q32_DIRECT": "1",
+  "QUAD": true,
+  "seconds": 10.23607365693897,
+  "checks": [
+    {
+      "pipeline": "attn",
+      "rebuild_sha256": "2b5c7152666df3d68e31a53881cb71f0f6bb2637c3055ad0ffb81f297a5b1ccc",
+      "old_sha256": "2b5c7152666df3d68e31a53881cb71f0f6bb2637c3055ad0ffb81f297a5b1ccc",
+      "equal": true
+    },
+    {
+      "pipeline": "decups",
+      "rebuild_sha256": "4c76d6b701942b709632dc35a671724a8ce0614e7cd442a4df06bfb4d63ea5c7",
+      "old_sha256": "4c76d6b701942b709632dc35a671724a8ce0614e7cd442a4df06bfb4d63ea5c7",
+      "equal": true
+    },
+    {
+      "pipeline": "ffwd3",
+      "rebuild_sha256": "a050a139bfd7864cb453de9617d024d7fa8f103f4df6001e3e7439177ef7e71b",
+      "old_sha256": "a050a139bfd7864cb453de9617d024d7fa8f103f4df6001e3e7439177ef7e71b",
+      "equal": true
+    },
+    {
+      "pipeline": "ffwd3w",
+      "rebuild_sha256": "a59b53e0b34494de718298d4efc9e2c57f3efd01b102648885b7dcfddf446d56",
+      "old_sha256": "a59b53e0b34494de718298d4efc9e2c57f3efd01b102648885b7dcfddf446d56",
+      "equal": true
+    },
+    {
+      "pipeline": "fswin128",
+      "rebuild_sha256": "8c920ed427607ae2de0b714e8ec53ef5c941114e8f10637181ecf175e919dab9",
+      "old_sha256": "8c920ed427607ae2de0b714e8ec53ef5c941114e8f10637181ecf175e919dab9",
+      "equal": true
+    },
+    {
+      "pipeline": "fswin256",
+      "rebuild_sha256": "e950c4d49495f1a91a2472c720838fcaf4402eb8c73ad8a6cc970cd82c60539d",
+      "old_sha256": "e950c4d49495f1a91a2472c720838fcaf4402eb8c73ad8a6cc970cd82c60539d",
+      "equal": true
+    },
+    {
+      "pipeline": "fswin32",
+      "rebuild_sha256": "82381cd856907bccd9bcae23e89ba34549ec8fa1f1f273ee17270b075670e678",
+      "old_sha256": "82381cd856907bccd9bcae23e89ba34549ec8fa1f1f273ee17270b075670e678",
+      "equal": true
+    },
+    {
+      "pipeline": "fswin64",
+      "rebuild_sha256": "2ebbcef26ca258e327c6a89234a9b20b2b82360b0405cf6c9871d366126ad2be",
+      "old_sha256": "2ebbcef26ca258e327c6a89234a9b20b2b82360b0405cf6c9871d366126ad2be",
+      "equal": true
+    },
+    {
+      "pipeline": "fswinds128",
+      "rebuild_sha256": "3807d5fead61dfa68b88f76a55b6e8ce153da9b8d03d320bda90541bf8a9693a",
+      "old_sha256": "3807d5fead61dfa68b88f76a55b6e8ce153da9b8d03d320bda90541bf8a9693a",
+      "equal": true
+    },
+    {
+      "pipeline": "fswinds256",
+      "rebuild_sha256": "06cb9ca883ef0c0e5c3f9560fb6d2f18767151b9612a4759e55d9686d4dfe84e",
+      "old_sha256": "06cb9ca883ef0c0e5c3f9560fb6d2f18767151b9612a4759e55d9686d4dfe84e",
+      "equal": true
+    },
+    {
+      "pipeline": "fswinds32",
+      "rebuild_sha256": "24dad179b6d13689131d739708064922c18941c6c55dcc69aae134fbcb831067",
+      "old_sha256": "24dad179b6d13689131d739708064922c18941c6c55dcc69aae134fbcb831067",
+      "equal": true
+    },
+    {
+      "pipeline": "fswinds64",
+      "rebuild_sha256": "c671438a3d6ddadd9940925e5e560f44ea3dacd12b889995f9de49f0f3ea5fac",
+      "old_sha256": "c671438a3d6ddadd9940925e5e560f44ea3dacd12b889995f9de49f0f3ea5fac",
+      "equal": true
+    },
+    {
+      "pipeline": "fswindsp128",
+      "rebuild_sha256": "40cbfc3fc3cb6141c5072e854fc8ff7b391668418889c78001ecefe0da183227",
+      "old_sha256": "40cbfc3fc3cb6141c5072e854fc8ff7b391668418889c78001ecefe0da183227",
+      "equal": true
+    },
+    {
+      "pipeline": "fswindsp256",
+      "rebuild_sha256": "f04eb2538891e23a799e29ec8a6e9af77234aad273c0d8c27a69b2196a43c375",
+      "old_sha256": "f04eb2538891e23a799e29ec8a6e9af77234aad273c0d8c27a69b2196a43c375",
+      "equal": true
+    },
+    {
+      "pipeline": "fswindsp32",
+      "rebuild_sha256": "a22003dcb23f60a2282cf973538d727689f9119fe04f19d98a1316520a1d294a",
+      "old_sha256": "a22003dcb23f60a2282cf973538d727689f9119fe04f19d98a1316520a1d294a",
+      "equal": true
+    },
+    {
+      "pipeline": "fswindsp64",
+      "rebuild_sha256": "f73066e429f5fe7d4aaa27775d40c7e2195aaa5bd99aff96fa817e1d01ec98e7",
+      "old_sha256": "f73066e429f5fe7d4aaa27775d40c7e2195aaa5bd99aff96fa817e1d01ec98e7",
+      "equal": true
+    },
+    {
+      "pipeline": "fswinfusedup128",
+      "rebuild_sha256": "d262d408b50f1a2fb49fc87b69073b7d5077cf72bd4c09359ba264ae7bbdeafe",
+      "old_sha256": "d262d408b50f1a2fb49fc87b69073b7d5077cf72bd4c09359ba264ae7bbdeafe",
+      "equal": true
+    },
+    {
+      "pipeline": "fswinfusedup256",
+      "rebuild_sha256": "7fd61946b428c196359493cc30820243da64770f3a4ab12fe556efb7d156fb4b",
+      "old_sha256": "7fd61946b428c196359493cc30820243da64770f3a4ab12fe556efb7d156fb4b",
+      "equal": true
+    },
+    {
+      "pipeline": "fswinfusedup32",
+      "rebuild_sha256": "ec38fc3acf408d29fda0b19e2e1238b116ad6342eeb14c42fdc5bc0c4dbbc031",
+      "old_sha256": "ec38fc3acf408d29fda0b19e2e1238b116ad6342eeb14c42fdc5bc0c4dbbc031",
+      "equal": true
+    },
+    {
+      "pipeline": "fswinfusedup64",
+      "rebuild_sha256": "4577fe2d1da6e0c83d063ebb80ba494f54cdec409ac304df76126c4acdee6782",
+      "old_sha256": "4577fe2d1da6e0c83d063ebb80ba494f54cdec409ac304df76126c4acdee6782",
+      "equal": true
+    },
+    {
+      "pipeline": "fswinimagepost32",
+      "rebuild_sha256": "d6fcad51d747838b4ad2b9aaea4a2ef7606a493576e6795ef93e13b31863d255",
+      "old_sha256": "d6fcad51d747838b4ad2b9aaea4a2ef7606a493576e6795ef93e13b31863d255",
+      "equal": true
+    },
+    {
+      "pipeline": "fswinimagepreds32",
+      "rebuild_sha256": "dd7d9948811b650ccf8b4f4212c5e02f6c036747f75246915de2d2bf40a9366b",
+      "old_sha256": "dd7d9948811b650ccf8b4f4212c5e02f6c036747f75246915de2d2bf40a9366b",
+      "equal": true
+    },
+    {
+      "pipeline": "fswinp128",
+      "rebuild_sha256": "4ca84a2db33fabbf6e0f17ce2f85d9b11a36e3958ebc58a0f3de2e05e57f3050",
+      "old_sha256": "4ca84a2db33fabbf6e0f17ce2f85d9b11a36e3958ebc58a0f3de2e05e57f3050",
+      "equal": true
+    },
+    {
+      "pipeline": "fswinp256",
+      "rebuild_sha256": "261129b2e0236e1e40b28d4277f708f8cca9a17aa629f9a07f2b3dadebc94580",
+      "old_sha256": "261129b2e0236e1e40b28d4277f708f8cca9a17aa629f9a07f2b3dadebc94580",
+      "equal": true
+    },
+    {
+      "pipeline": "fswinp64",
+      "rebuild_sha256": "9d9bf3589c8d1af8cd5e7cdf59737c140b9db5270053b8b6b17648586f4f272a",
+      "old_sha256": "9d9bf3589c8d1af8cd5e7cdf59737c140b9db5270053b8b6b17648586f4f272a",
+      "equal": true
+    },
+    {
+      "pipeline": "fswinpds128",
+      "rebuild_sha256": "be0b6d62447277ae5ac3c7ce2567a857885a2aea9e05d7d781d5b8e32063aad4",
+      "old_sha256": "be0b6d62447277ae5ac3c7ce2567a857885a2aea9e05d7d781d5b8e32063aad4",
+      "equal": true
+    },
+    {
+      "pipeline": "fswinpds256",
+      "rebuild_sha256": "891b39f889312d10496681545dce056dca3746d76ea1edd5b861415451b61e0f",
+      "old_sha256": "891b39f889312d10496681545dce056dca3746d76ea1edd5b861415451b61e0f",
+      "equal": true
+    },
+    {
+      "pipeline": "fswinpds64",
+      "rebuild_sha256": "affd3ce75e847180eb31c9ceb76c3d0bc0d66b7d08aae2e4ff9340c82bb3bf4c",
+      "old_sha256": "affd3ce75e847180eb31c9ceb76c3d0bc0d66b7d08aae2e4ff9340c82bb3bf4c",
+      "equal": true
+    },
+    {
+      "pipeline": "fswinpup128",
+      "rebuild_sha256": "6abc90549939efea11b17d576935a20de8258c1543320d3ecd888bb913b1424d",
+      "old_sha256": "6abc90549939efea11b17d576935a20de8258c1543320d3ecd888bb913b1424d",
+      "equal": true
+    },
+    {
+      "pipeline": "fswinpup256",
+      "rebuild_sha256": "c7929ee178d66bcb7e6849a201fed85d78b34f49e3a30762da4e65088bfc4a88",
+      "old_sha256": "c7929ee178d66bcb7e6849a201fed85d78b34f49e3a30762da4e65088bfc4a88",
+      "equal": true
+    },
+    {
+      "pipeline": "fswinpup64",
+      "rebuild_sha256": "14c55b766950b8ca10d77c36d2cc30b923611e4c352b76387c1f91e2976cad2c",
+      "old_sha256": "14c55b766950b8ca10d77c36d2cc30b923611e4c352b76387c1f91e2976cad2c",
+      "equal": true
+    },
+    {
+      "pipeline": "gemmnores",
+      "rebuild_sha256": "de97e04788842807d4285663566f99f172a8a9a8ae8fae5596d5a3c56bc7e573",
+      "old_sha256": "de97e04788842807d4285663566f99f172a8a9a8ae8fae5596d5a3c56bc7e573",
+      "equal": true
+    },
+    {
+      "pipeline": "gemmpool",
+      "rebuild_sha256": "acedc812c019bc939ba3a29918897afe2d6b5e6a096896f0b5c14ca442fe42cd",
+      "old_sha256": "acedc812c019bc939ba3a29918897afe2d6b5e6a096896f0b5c14ca442fe42cd",
+      "equal": true
+    },
+    {
+      "pipeline": "gemmproj",
+      "rebuild_sha256": "282ddfdabe89e32722440d6c3e7c5040bdc32a3576e6ab41dd68681038b2883a",
+      "old_sha256": "282ddfdabe89e32722440d6c3e7c5040bdc32a3576e6ab41dd68681038b2883a",
+      "equal": true
+    },
+    {
+      "pipeline": "gemmprojc",
+      "rebuild_sha256": "942b5094d1bbcf8a6891cfea3da187a523238b9a8a183680c7d71bfbb373d20a",
+      "old_sha256": "942b5094d1bbcf8a6891cfea3da187a523238b9a8a183680c7d71bfbb373d20a",
+      "equal": true
+    },
+    {
+      "pipeline": "gemmprojt",
+      "rebuild_sha256": "60add0f4171f5b536c6acb1e68d9d2d9df22b741bb5a8912dfaf5a929164b24d",
+      "old_sha256": "60add0f4171f5b536c6acb1e68d9d2d9df22b741bb5a8912dfaf5a929164b24d",
+      "equal": true
+    },
+    {
+      "pipeline": "gemmprojw",
+      "rebuild_sha256": "19b4735fd7243d7c8c4887b61a38c0002b225097551f7805607cc3502a2e960e",
+      "old_sha256": "19b4735fd7243d7c8c4887b61a38c0002b225097551f7805607cc3502a2e960e",
+      "equal": true
+    },
+    {
+      "pipeline": "gemmvact",
+      "rebuild_sha256": "c48c1619dde7995664f7b0e6e34c4bd51abf0d6b20cac70b65daf186b01efbdb",
+      "old_sha256": "c48c1619dde7995664f7b0e6e34c4bd51abf0d6b20cac70b65daf186b01efbdb",
+      "equal": true
+    },
+    {
+      "pipeline": "gemmvnores",
+      "rebuild_sha256": "2673696c16192b12b43f657d5af8296cc793271c89d7f6506cbc88c9dfc3dca4",
+      "old_sha256": "2673696c16192b12b43f657d5af8296cc793271c89d7f6506cbc88c9dfc3dca4",
+      "equal": true
+    },
+    {
+      "pipeline": "gemmvproj",
+      "rebuild_sha256": "bb826429d6c42ad33c04e9b155388e2b449e1758757791319fde62c9c661e4ba",
+      "old_sha256": "bb826429d6c42ad33c04e9b155388e2b449e1758757791319fde62c9c661e4ba",
+      "equal": true
+    },
+    {
+      "pipeline": "gemmvqkv",
+      "rebuild_sha256": "6e9276d09df30369a695dcf99e8409e87de262154bbd59990702a668af123088",
+      "old_sha256": "6e9276d09df30369a695dcf99e8409e87de262154bbd59990702a668af123088",
+      "equal": true
+    },
+    {
+      "pipeline": "gemmvqkvnorm",
+      "rebuild_sha256": "7e3251e0d1cddac21a28f55578c40be707e864327222d64d82dfca16ab9aa0eb",
+      "old_sha256": "7e3251e0d1cddac21a28f55578c40be707e864327222d64d82dfca16ab9aa0eb",
+      "equal": true
+    },
+    {
+      "pipeline": "gemmvqkvs",
+      "rebuild_sha256": "aa6b67205d970c51648e6faf9863b4e2810a17ec42a527c5049f1238c07ff762",
+      "old_sha256": "aa6b67205d970c51648e6faf9863b4e2810a17ec42a527c5049f1238c07ff762",
+      "equal": true
+    },
+    {
+      "pipeline": "noisefield",
+      "rebuild_sha256": "fa081910e73356ed916ae30b059105e39aff5bb46e0468e0f910337e1544704a",
+      "old_sha256": "fa081910e73356ed916ae30b059105e39aff5bb46e0468e0f910337e1544704a",
+      "equal": true
+    },
+    {
+      "pipeline": "repack",
+      "rebuild_sha256": "aabb4fe82f5ffb2356ab18ccd6bdd261c65a1d9b863c4c4bbc77f9a5dc0bdb2c",
+      "old_sha256": "aabb4fe82f5ffb2356ab18ccd6bdd261c65a1d9b863c4c4bbc77f9a5dc0bdb2c",
+      "equal": true
+    },
+    {
+      "pipeline": "upsview",
+      "rebuild_sha256": "885a4dfe29ae0c945acd20aa5ecf672354c1273ade603d572aa3c54ff994bd4d",
+      "old_sha256": "885a4dfe29ae0c945acd20aa5ecf672354c1273ade603d572aa3c54ff994bd4d",
+      "equal": true
+    },
+    {
+      "pipeline": "vitattn",
+      "rebuild_sha256": "8993390ab9316895daf19c3c9ba669b984301c4a1624e87901fbcbf2e46634b1",
+      "old_sha256": "8993390ab9316895daf19c3c9ba669b984301c4a1624e87901fbcbf2e46634b1",
+      "equal": true
+    },
+    {
+      "pipeline": "vitattnnobda",
+      "rebuild_sha256": "3f02ccb627ae6d75e727253a8d1c021fc41c6aed4ed8651a40f5eff698b60fee",
+      "old_sha256": "3f02ccb627ae6d75e727253a8d1c021fc41c6aed4ed8651a40f5eff698b60fee",
+      "equal": true
+    }
+  ],
+  "all_equal": true
+}
