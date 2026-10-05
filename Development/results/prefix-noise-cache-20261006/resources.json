@@ -1,0 +1,78 @@
+{
+  "c32-wave1": {
+    "c32_wave1_prefix_b8d": {
+      "vgpr_count": 128,
+      "sgpr_count": 48,
+      "group_segment_fixed_size": 4096,
+      "private_segment_fixed_size": 0,
+      "kernarg_segment_size": 76,
+      "max_flat_workgroup_size": 32,
+      "vgpr_spill_count": 0
+    },
+    "c32_wave1_prefix_b8d_noise": {
+      "vgpr_count": 127,
+      "sgpr_count": 48,
+      "group_segment_fixed_size": 4096,
+      "private_segment_fixed_size": 0,
+      "kernarg_segment_size": 88,
+      "max_flat_workgroup_size": 32,
+      "vgpr_spill_count": 0
+    },
+    "cw_prefix_noise_build": {
+      "vgpr_count": 10,
+      "sgpr_count": 12,
+      "group_segment_fixed_size": 0,
+      "private_segment_fixed_size": 0,
+      "kernarg_segment_size": 20,
+      "max_flat_workgroup_size": 32,
+      "vgpr_spill_count": 0
+    },
+    "cw_prefix_noise_gold": {
+      "vgpr_count": 10,
+      "sgpr_count": 12,
+      "group_segment_fixed_size": 0,
+      "private_segment_fixed_size": 0,
+      "kernarg_segment_size": 20,
+      "max_flat_workgroup_size": 32,
+      "vgpr_spill_count": 0
+    }
+  },
+  "c32-wave1-fast": {
+    "c32_wave1_prefix_b8d": {
+      "vgpr_count": 128,
+      "sgpr_count": 48,
+      "group_segment_fixed_size": 4096,
+      "private_segment_fixed_size": 0,
+      "kernarg_segment_size": 76,
+      "max_flat_workgroup_size": 32,
+      "vgpr_spill_count": 0
+    },
+    "c32_wave1_prefix_b8d_noise": {
+      "vgpr_count": 127,
+      "sgpr_count": 48,
+      "group_segment_fixed_size": 4096,
+      "private_segment_fixed_size": 0,
+      "kernarg_segment_size": 88,
+      "max_flat_workgroup_size": 32,
+      "vgpr_spill_count": 0
+    },
+    "cw_prefix_noise_build": {
+      "vgpr_count": 10,
+      "sgpr_count": 12,
+      "group_segment_fixed_size": 0,
+      "private_segment_fixed_size": 0,
+      "kernarg_segment_size": 20,
+      "max_flat_workgroup_size": 32,
+      "vgpr_spill_count": 0
+    },
+    "cw_prefix_noise_gold": {
+      "vgpr_count": 10,
+      "sgpr_count": 12,
+      "group_segment_fixed_size": 0,
+      "private_segment_fixed_size": 0,
+      "kernarg_segment_size": 20,
+      "max_flat_workgroup_size": 32,
+      "vgpr_spill_count": 0
+    }
+  }
+}

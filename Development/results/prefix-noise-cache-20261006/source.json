@@ -1,0 +1,84 @@
+{
+  "base_source": "9cc39dfa0ba7efe92f326d06e5cce38b0bad42098992d1456f2018a3f5ca7683",
+  "host_base_source": "144cdf947ea23a01b3322c826d5013f6d2370464cb6520a22f36af1caf575ffc",
+  "rows": [
+    {
+      "name": "c32-wave1",
+      "compiler": "llvm23",
+      "defines": [
+        "HIP_ISA_HALF 1",
+        "CW_UP_FUSED 1",
+        "CW_ACT_FMED3 1",
+        "HIP_PREPACKED_WEIGHTS 1",
+        "CW_ROLL_HIDDEN 1",
+        "CW_ROLL_WINDOW 1",
+        "CW_VEC_INPUT 1",
+        "CW_PREFIX_SPLIT 1",
+        "CW_PACK8 1",
+        "HIP_FP8_SAT_MODE 3",
+        "CW_DIRECT_OUT 1",
+        "CW_RTZ_PAIR 1",
+        "CW_PACK_MODE_MASK 127",
+        "CW_PREFIX_DIRECT_OUT 1",
+        "CW_PREFIX_FULL_TILE 1",
+        "CW_FINISH_FULL_TILE 1",
+        "CW_SKIP_BYTE 1",
+        "CW_DIAG_ONLY 1",
+        "CW_INPUT_HALF 7",
+        "CW_PREFIX_HALF_SOURCE 1",
+        "CW_PREPOST_BYTE 1",
+        "CW_PREFIX_TAIL_VEC 1",
+        "CW_FINISH_TAIL_VEC 1",
+        "CW_HOIST_UP 3"
+      ],
+      "backend_opts": [
+        "-enable-post-misched=0",
+        "-amdgpu-sched-strategy=max-ilp"
+      ],
+      "source_sha256": "96802668d9eccff95d1b1c680f0cdc3ec242469202d4c25f3b8ede6c9b6f21a6",
+      "current_source_sha256": "11c2555b046f6ae7bf86000551068ff42a2d61cae1936c1cea218dc935a7eb68"
+    },
+    {
+      "name": "c32-wave1-fast",
+      "compiler": "llvm23",
+      "defines": [
+        "HIP_ISA_HALF 1",
+        "CW_UP_FUSED 1",
+        "CW_ACT_FMED3 1",
+        "HIP_PREPACKED_WEIGHTS 1",
+        "CW_ROLL_HIDDEN 1",
+        "CW_ROLL_WINDOW 1",
+        "CW_VEC_INPUT 1",
+        "CW_PREFIX_SPLIT 1",
+        "CW_PACK8 1",
+        "HIP_FP8_SAT_MODE 3",
+        "CW_DIRECT_OUT 1",
+        "CW_RTZ_PAIR 1",
+        "CW_PACK_MODE_MASK 127",
+        "CW_PREFIX_DIRECT_OUT 1",
+        "CW_PREFIX_FULL_TILE 1",
+        "CW_FINISH_FULL_TILE 1",
+        "CW_SKIP_BYTE 1",
+        "CW_DIAG_ONLY 1",
+        "CW_INPUT_HALF 7",
+        "CW_PREFIX_HALF_SOURCE 1",
+        "CW_PREPOST_BYTE 1",
+        "CW_PREFIX_TAIL_VEC 1",
+        "CW_FINISH_TAIL_VEC 1",
+        "CW_HOIST_UP 3",
+        "CW_FAST_NUM 3"
+      ],
+      "backend_opts": [
+        "-enable-post-misched=0",
+        "-amdgpu-sched-strategy=max-ilp"
+      ],
+      "source_sha256": "120ef4ea2e03e8f7ca85bbfcf0cb4ba0c59ceaa2d9db5e01a59005fd86015547",
+      "current_source_sha256": "6aad248cccc3e7c044bff0fced046b3749be32a6ee10aa9db05d558589efa7bd"
+    }
+  ],
+  "noise_arithmetic_original": "    uint h=production_pcg((x*0x8da6b343u)^(y*0xd8163841u)^(seed*0x9e3779b9u)^0x243f6a88u);\n    float u1=production_uniform(g?h*0xcaa5b80du+0x21dd796bu:h*0x2c9277b5u+0xac564b05u),u2=production_uniform(g?h*0x83232c31u+0x3463e0acu:h*0xfa6dc5f9u+0x4712a88eu);\n    float rr=__builtin_amdgcn_sqrtf(-2.f*(__builtin_amdgcn_logf(u1)*.6931471805599453f)),tt=(6.283185482025146f*u2)*.15915494309189535f;\n    cw_pv_t gc=cw_prefix_rtz(rr*__builtin_amdgcn_cosf(tt)),gs=cw_prefix_rtz(rr*__builtin_amdgcn_sinf(tt));\n",
+  "cache_layout": "raster uint2 / half4(g1,g2,g0,+0)",
+  "cache_bytes_per_pixel": 8,
+  "noise_depends_on": "x,y,seed plus fixed compiler/helper; RGB/history/style/exposure are never cached",
+  "host_extra_conservative_keys": "geometry, seed0, style float bits, explicit preExposure float bits, explicit reset epoch; unprovided context is baseline fallback"
+}
