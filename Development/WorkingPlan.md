@@ -1,63 +1,61 @@
-# 当前工作计划（2026-10-04，朱雀）
+# 当前工作计划
 
-> 只许整篇重写；历史进DevHistory，只追加。够用就交。
+更新：2026-10-05。此文件整份重写，保存当前状态与尚未完成事项；历史过程见 DevHistory.md。
 
-## 现状
+## 工作规矩
 
-- 0.40已发布，0.41未打包。fast-vit/preupscale-auto、双feed首帧修复、直接RGBA已合；全部71块/FAST1。
-- 最新双游戏ViT字节边版已装：剑星addon698A23A4，鬼武者根/_storage_ runtime634FAF45（最终输出直写；配置/模块不变）；开发安装78模块（原76不变+两SPfast，0.41发行包仍76），exact模块/配置快照同步。备份vit-byteedge-formal-20261004/backups/20261004-130812。
-- 两游戏HEIGHT auto/FREE0，配置字节保留。剑星MP3/PRED1/SKIN0（23:06恢复快速3x；F9只变遍数，不变预测），鬼武者MP3/PRED1/SKIN0（两真实遍+预测第三遍，无F9/热载）；没有替用户切真2k，现质量模式仍auto900，本刀不会使现900提速。
-- 鬼武者09:50实玩900P/2k质量接近49fps、3x效果不错，未确认比此前约49提升。剑星恢复快速3x后用户实测1x约57.6fps、快速3x约37fps，确认恢复；鬼武者900P快速3x约49fps，与此前一样且无异常。用户读数不是同批ABBA，不作为本轮算子FPS收益；肤色保护观感失败已关，不将不同配置FPS混算。
-- 真1440输入2560×1440，处理2560×1472，ViT40×24=960。C256既有wholeblock融合只放行此新shape，数学/模块不变。连续三轮单遍NR frame wall17.483→17.029ms、优化3x34.409→33.442，p99均改善；纯NN GPU median15.968→15.584、32.768→31.824。不是游戏总帧时，也不说明2k已稳定可玩。
-- 初报20/36ms是每帧读回/CPU扫图的诊断口径，撤回作连续基线；连续1080单遍同exe参考wall10.137、GPU9.281。fixture原图来源未独立确认，运动/history是受控序列。
-- 1440 FAST0/FAST1原网络逐位同、无NaN，正常19/RE9九组SAME+smoke0。旧R AE720一次异常保留未定位；同HEAD对齐baseline/AE CSV完整通过。原档control平均不慢，900p99仍略高但A/A跨批尾位置幅度覆盖，按测量分辨率内等价记录，不声称每项p99都降。
-- ViT960常量化四组byte0diff，但性能有慢轮，不收生产；C512 LUT亦无稳定收益。960现有融合/stream/N64/w5 QKV已生效，没有640慢回退。
-- Issue13已用5090独立原版核对并在issue回复：原post p9514.9375%与HIP14.9432%接近，RTZ后0/44值不同；这是模型当前输入响应，非所有实机闪烁根因。原post FP16不能称pre-half oracle。
-- D3D↔HIP速度研究收刀：固定交接占比上升不等于绝对等待必增；CPU提交窗口已有实证。坏HIP event批弃用，不重开崩溃研究。
-
-- **本轮现算子小步收刀**：C32固定1440原float同但有慢轮，停止不合；ViT已量化contract由half载体改byte，QKV直读、投影decode，AE缓存仍F32。构造期三配对cap齐备才选，缺一整体旧half回退，warmup预分配/预载；正常19/1440raw/三multiSkin/RE9九组与fallback皆过。
-- **新同批single收益**：900/1080/1440省.053/.093/.125ms（约.7～.9%），三轮全快且合并p99不差；1440当前同批17.104→16.980ms。不和旧17.029跨批累加，不推游戏FPS。
-- **Issue13现存包上传已完成**：https://gofile.io/d/FWpuapJe ，issuecomment-5976697739；API final full1152与原post有效1080明确区分，无重跑。
-
-- **Issue13新定位已交**：原pre-down四tile独立捕获、两repeat逐byte同/无NaN，FP8存储后数据，非pre-half。小包19241B/c9dc3569已同Gofile公开，issuecomment-5977255490已回复。prefix16/16→32投影融合无独立边界，未伪造。作者test20额外偏差尚缺source/flags/模块SHA，不套最新生产，不称所有闪烁原模型；待对方可验指纹与tile再修。今晚鸣潮由用户观察，本轮不安装/部署。
-
-- **Issue4修复已备**：PR15/新报告控制A/B/C证明选卡一直device1正确，Enqueue重绑后9次400→600+帧无错。已采纳一行hipSetDevice既有try失败封闭退出；本机单HIP设备跨线程/900/1080逐位门过，不冒充双HIP复测。候选addonA810CD51在/tmp/issue4-products，未装Magpie/两游戏，不改配置/BIOS/驱动；没有对外回复/关闭issue，线程ID实证仍缺。
-
-- **强度文件入口已补**：RE9合法两finite数0..1盖宿主/menu，auto/空/缺省沿API/default，非法回宿主报告一次；addon/Magpie仍0..3。文件层序不改，RE9文件需重启、addon约1秒热载。默认/API/file/env900/1080 hash门及smoke过；只装鬼武者runtime634FAF45，备份strength-config-20261004/backups/20261004-200004，三配置字节不变、现强度没改。剑星native auto仍盖custom，未擅改该行。20:09鬼武者实玩无异常、与此前一样，未给新FPS/手调数值反馈。
-
-- **C512 direct pack组合3已装**：w2f8两个byte出口去F解码/重编码，保原舍入/累加，单项慢轮拒。normal19/1440raw/multiSkin/RE9九组smoke均过；single900/1080/1440同批省.023/.042/.103ms，三轮全快+p99不差。仅双arch模块+SUMS98960584改，host/config不动，鬼武者25A仍在；备份c512-direct-whole-20261004/backups/20261004-210325，实玩待用户。不乘微核层数/跨批累计收益。
-
-## 下一步
-
-1. 继续真实2k等价优化。DUP边际C32约5.325ms最大，其次C256约2.313、ViT族约2.168、C512 FFN/投影部分约1.221；这些不能相加当整网比例。只有具体结构空间才重开旧负账，不泛扫flags。
-2. SwinRun1440目前不支持，奇数/半tile行要先审producer依赖与尾部合同，不能只解除gate。ViT960常量化与LUT已止损；不做未授权有损低分辨率替代2k。
-3. 真2k实玩由Zero决定：游戏NativeAA输入2560×1440并设NETWORK_FREE_RES=1，重启确保读取；不悄改现900配置，不以离线NR成本推FPS。当前优化3x仍两遍+预测。
-4. 0.41已用当前rtc全重编，76 ELF目标与双arch导出通过；五LLVM23.1.2行保留，其余33COMGR21/arch。gfx1200仅构建/静态核验，不能替代该硬件实测。
-5. 0.41中英CHANGELOG/README、三完整包已本地构建并全文件核验；路径`/home/lmxxf/work/dlss5-release-0.41/`，台账results/package-041-20261005。默认1x/仅3x预测/skin0，未安装、未上传、未tag；对外发布须另按授权。Forza/卧龙auto实玩；剑星auto须注意native PRE1覆盖。RE9 FRAME_STATS有白名单，无热载/热键。
-6. 旧R AE720异常有新证据再查；不以未定位旧runner解释新bug，不重复完整优化研究。720几何仍缺原NVIDIA参考；内存缓涨未复现不修。
-
-## 新一轮三刀顺序
-
-- 刀1最终共享RGB直写已收/双游戏装好，三档省.022/.022/.133ms且3轮/p99过；默认1x/预测仅3x/skin0不变。graph、overlap及地址重叠旧copy，所有模块不动，0.41已上传ZIP不变。
-- 刀2block4 pool→首C64 byte边已收/安装，保q8(F(Hrtz(sum)))及负0、旧nonW16路径；三档省.012/.020/.043ms、3轮/p99过，正常19/多遍/缺export/RE9过。配置保留，备份pool64-byte-20261005/backups/20261005-073426。
-- 刀3已收/安装：仅1440 FAST1同math SP-fast，CPU DAG/真实段正常recoverrollover0diff，1440三轮省.089ms+p99过；FAST0/graph/缺twin旧Body、旧900/1080normalSP不变。原76module完全same+双arch twin到78，配置保留，备份sp1440-fast-20261005/backups/20261005-080146。三刀完成不将跨批收益相加为FPS，0.41公开包不变。
-
-## 默认配置
-
-- 快速3x预测默认1，显式0保留真三遍；仅MP3启用，1/2不变。共享启动/成员和热载、三模板已同步；CPU检查通过，现装两游戏custom已1。0.41本地包已重编宿主并采用新模板；现装游戏载荷本轮未换。
-
-## 后续待验证
-
-- 网友称“两家”默认开temporal history、关闭会闪烁，对象和默认尚未独立核实；同seed/输入/分辨率对照开关并结合issue13核验，不预定因果。用户同意后续研究mochi ViT大tile/小buffer延迟复用，目前仅记录、暂不实现或改默认。
-
-## 规矩
-
+- 具体编译、实验、安装、归档交子代理；主进程只调度与审交账。
 - 有人提 PR，能合入就尽量合入。
+- DevHistory 只追加；WorkingPlan 整份重写。公开记录只写客观工程事实。
+- 单队列使用 GPU：先 game-check、原子 gpu.lock、15 秒游戏看门狗，D 盘至少 100GB。游戏运行时不抢 GPU、不换载荷、不结束正常游戏；继续独立 CPU 工作。
+- 无损候选保持 K 累加顺序、舍入、FP8 编解码、NaN 与正负零合同。先小筛，有可靠收益才进正式门；慢轮或尾延迟退步不刷轮掩盖。
+- 性能使用连续 TimingOnly、首尾读回，中间不扫描图像；坏事件负值批隔离。微核与 DUP 边际不相加当整网或 FPS。
+- 默认不变、配置逐字保留；安装前备份、安装后 readback 与 exact 快照同步。短记录后及时提交，不 push、不改外层仓、不擅发布。
 
-- 具体编译/实验/安装/归档派子代理；主进程只调度审交账，保护上下文。DevHistory追加，WorkingPlan整篇重写。
-- 默认正常19逐位门；新等价刀目标档三轮ABBA，无慢轮且合并p99不差。旧档identity仍需control/AA证据，不能凭小读数自行判通过；噪声判断与实际点估计均留档。
-- 性能TimingOnly仅首末检查，避免每帧读回/CPU扫图改变提交节奏；区分纯NN GPU、NR frame wall、完整游戏帧时，不相加独立核时间、不拿离线ms当游戏FPS。
-- 不改默认几何/求和/量化/跳块；原未量化域不做FP8，有损需用户授权并独立可选说明代价。
-- 新键同步白名单/三模板中英注释≤191字节/CONFIGURATION；初始化资源与module在producer等待前准备，不在热路径Upload/moduleLoad/sync。
-- GPU前game-check+原子gpu.lock，15秒看门狗；游戏开不抢GPU/换文件、不杀正常游玩。D盘≥100GB，原输出hash/统计后清理，不删权重/附件、不入库二进制。
-- git只add具体相关文件，不Co-Authored-By，不自行push、不动外层仓；发版前按授权另走发布核验。
+## 已完成的发布与当前安装
+
+- 0.40 基线 tag 为 c81a88bc。0.41 已构建、三包验证并交付；台账提交 523723fd，二进制源码标记 ab8e3e82。正式 annotated tag `0.41` 指向 523723fdb3fa5b322beb1cc9dcfd3f8183eaf334，已仅推该 tag。
+- 0.41 三包在 `/home/lmxxf/work/dlss5-release-0.41/` 与 Windows `D:\給網友打包`，SHA256SUMS/发布台账齐全。镜像已记录于 70ebd402：夸克 https://pan.quark.cn/s/dbda3e470f8f ，Gofile https://gofile.io/d/YAENU0ex 。已上传 ZIP 不再修改。
+- 发布默认为 MULTI_PASS=1、MULTI_PASS_PREDICT=1、SKIN_PROTECT=0。预测只在选择 3x 时执行两遍真实网络并预测第三遍；显式 PREDICT=0 为真实三遍，1x/2x 不受影响。
+- 发布包为 38 模块/架构、共 76；每架构五行公开 LLVM23.1.2，其余 COMGR LLVM21，双架构 ELF 目标已核。旧 rtc 忽略目标的问题已通过当前源码重编工具与目标检查处理，不再列为待发布阻碍。
+- 发布后的三刀已完成：76750a80 最终 RGB 共享输出免一次 copy；9bbd3749 block4 pool→首 C64 字节边；c756f296 仅真实 1440/FAST1 的同数学 SP-fast 持久队列。各自数值、正式平均/p99及必要宿主兼容门通过，收益不能跨批相加为 FPS 承诺。
+- 当前双游戏已装第三刀：剑星 addon 698A23A4，鬼武者根及 _storage_ runtime 634FAF45；开发载荷共 78 模块（旧 76 不变，新增双架构 SP-fast），与已发布 0.41 的 76 区分。最新回滚脚本：`D:\DLSSNR-Lab\sp1440-fast-20261005\backups\20261005-080146\rollback.ps1`。
+- 当前玩家配置与发布默认不同：剑星、鬼武者均 MP3/PREDICT1/SKIN0，HEIGHT=auto/FREE_RES=0，强度未改。剑星 F9 只切 1/2/3 遍数；文件约 1 秒热载。鬼武者无 F9、无文件热载，修改需重启。
+- 既往实玩剑星 1x 约57.6fps、快速3x约37fps；鬼武者900P快速3x约49fps、强度更新后无异常。均为用户观察，未提供三刀后的同场景 ABBA/FPS 验证。
+- PR15 已正式 merge 8a6c7bc1，保留贡献者作者；Enqueue 入口恢复已选 HIP device，0.41 已含。RE9 强度文件数字覆盖已含；auto/缺省继续尊重宿主参数。中英文 README/配置页与公众号使用说明已完成。
+
+## 第一优先：建筑房顶亮度闪烁与时序合同
+
+1. 当前证据：111.mp4 是约4.11秒、119帧、29fps的竖幅拍屏最终画面，没有原始网络输入、MV/depth或开关 A/B。不能伪造网络复现或由视频直接归因 HIP。
+2. 重新跟踪同一房顶表面后确认局部亮度反复。1.586/1.621/1.690 秒 roof Y=96.6/116.2/98.1，UI=79.78/79.87/81.55；第一步 roof 跳变明显大于参考 UI。最初关注人物运动/草地而暗示静物稳定已纠正。拍屏曝光、透视、游戏自身 TAA/高光仍有混杂。
+3. 网友场景线索尚未独立复验：跳32–36、38部分抑闪；全跳31–38房顶反光基本消失；40后块对该反光无影响；31–38单跳任意一个仍闪；奇偶各跳4块分别抑中间/边缘。31–38实际均为同形完整全局 ViT，无奇偶 shift，37没有特殊结构。删除反光不等于保留反光并稳定时序，跳块不是无损修复。
+4. 尚待确认网友使用 `DLSS5_SKIP_BLOCKS`（全遍）还是 `DLSS5_MULTI_PASS_SKIP_BLOCKS`（第二遍以后）；不猜。该缺口不阻碍独立时序代码分析。
+5. 当前原生 pre 路径每帧 reset=true/seed0；可有 prefix history 输入，但没有原版 motion 重投影与门控 post history。OUTPUT_SMOOTH 是独立近似，不能代称完整原时序。
+6. 新确认资产缺口：当前 post70-head.f32 仅 RGB 的3×32；原生16×32权重中 row6 为非零 history gate，但现 unpack 只导出 row0/2/4。原 blend half=0.73974609375。应独立导出 gate 的32 float，保旧 RGB96不变；先核原 PTX 的归约、sigmoid、舍入与 blend 合同，不能仅打开宿主 history 就称补全。
+7. mochi ReShade History 默认1；History0仅关闭 post blend，prefix history 与 seed推进仍存在。低层 API 默认不同；网友所谓另一家未具名，默认状态未独立核实。
+8. 顺序执行：先 CPU 核输入/输出颜色域、MV单位符号、采样坐标、depth/disocclusion、reset/resize/epoch与各遍历史；准备合法可重放输入与元数据。分三组：纯空间、仅 prefix history、完整前后时序。固定seed0与逐帧seed另拆因子，不把 seed变化归于 history。
+9. 评价分开记录房顶亮度波动与平均反光强度，同时检查色度、静态背景、运动/遮挡拖影与 reset/resize。原视频仅提供观测；受控序列来源须明确真实 capture 或合成测试，不能称已复现原游戏。
+10. 有明确因果证据才做小修/可选实验；未经验证不改默认、不部署波动修复、不把跳块当默认方案。第一项取得具体结论后才进入下项。
+
+## 第二优先：ViT960 contract 大 tile（尚未实验）
+
+- 与已否的 attention 恒960常量化不同，研究当前 contract_frag_bout 的16token×64列 wave tile；参考 mochi ≥768 token的大 tile路径，保 K1024四段边界、每段累加顺序、skip初始化、FAST_H及 FP8/正负零合同。
+- 当前该核约208 VGPR，扩大 token tile 有超过256寄存器/溢出风险；先审生命周期与静态资源，不能用上游44.7→40.4µs微核数字许诺本项目整网收益。
+- 新导出限定960 token、配对 HasFn 缺失整体旧路回退；400/640不变。先真实 contract/QKV/projection tuple 逐位，再短微核与整网筛；无稳定收益即止。
+
+## 第三优先：小 buffer 延迟复用（尚未实验）
+
+- 当前 Network::New best-fit 可立即复用；研究≤8MiB buffer晚一个 dispatch复用的 cold-age策略，与 mochi Vulkan案例区分，HIP收益待测。
+- 必须明确 shared_ptr池的租约/最后消费、PDL keep、graph、跨 stream寿命，不能把对象析构误当用户归还；限制额外显存与 CPU开销。
+- 第二项结束后才实施有界 A/B；不重写整个 allocator，不凭上游投影局部耗时承诺整网改善。
+
+## 其他未完成事项与限制
+
+- Issue13：独立5090原版 exact合同双帧 p95约14.94%已闭环，原入口一致、原post FP16 surface已抓。不能据此解释所有 production闪烁。Test20报告23.315485%、注入各自 exact pre-down降16.327520%，但其源码/commit/effective flags/module SHA尚缺；取得指纹后再定位。prefix16/投影32是原核寄存器/LDS中间值，不能用CPU仿写冒充未改原模型输出。公开数据与tiny pre-down包在 https://gofile.io/d/FWpuapJe 。
+- Issue4：贡献者双HIP设备 A/B/C证明入口绑定修复；本机只有一个HIP设备，真实双设备与线程ID验证仍缺。LUID选择本已正确，400标签可能来自懒 GetFunction而非launch，不泛称跨adapter问题。issue未擅关闭。
+- gfx1200：模块目标头已核，真实对应硬件运行仍待；不拿gfx1201验证代替。720几何独立NVIDIA oracle仍待。
+- AE720旧runner曾漂移；同HEAD fresh基线正常/AE/CSV/roll已过，旧产物异常未定位。无新具体证据不扩大重查。
+- 真2K FREE_RES=1真实游戏观感/整帧成本待玩家选择；当前FREE0，不悄然把900配置切2K。HDR、FG、长期运动/遮挡质量不能由少帧离线门推广。
+- PRE_UPSCALE auto 的 Forza/WoLong实玩待确认；剑星 native PRE1仍覆盖auto。剑星 native STRENGTH=auto覆盖custom数值的层级需设置时明确，不能擅改层级规则。
+- 内存增长尚未复现；D3D/HIP固定交接税与占比已有研究，不推普遍速度越快必停滞或HIP无解，不开展新TDR试验。
+- 已封存负账：C512 LUT、C32固定几何、ViT960 attention常量化、其他LLVM23行盲扫、IO_FUSE尾延迟、无效C512_T8宏、DEC_F8W/COMPACT路线。只有新瓶颈证据才重开；已收 directRGBA、ViT byteedge、C512 directpack、1440融合及三刀不重复当新候选。
