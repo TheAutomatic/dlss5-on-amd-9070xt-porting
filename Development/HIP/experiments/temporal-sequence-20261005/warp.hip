@@ -39,12 +39,7 @@ DEV void axis(float uv,uint extent,const uint*table,float*pos,float*weight){
  pos[0]=clampv(center-1.f,.5f,float(extent)-.5f);pos[1]=clampv(p,.5f,float(extent)-.5f);pos[2]=clampv(center+2.f,.5f,float(extent)-.5f);
  weight[0]=left;weight[1]=middle;weight[2]=right;
 }
-KERNEL void temporal_warp(const V4*history,const V2*motion,V4*prefix,V4*raw,const uint*rcptable,uint width,uint valid_h,uint proc_h){
- uint i=__builtin_amdgcn_workgroup_id_x()*256+__builtin_amdgcn_workitem_id_x();if(i>=width*proc_h)return;
- uint x=i%width,y=i/width;uint vy=y<valid_h?y:2*valid_h-y-2;
- V2 mv=motion[vy*width+x];float ux=(float(x)+.5f)*(1.f/float(width)),uy=(float(vy)+.5f)*(1.f/float(valid_h));
- ux=float(__builtin_fma(double(mv.x),double(1.f/float(width)),double(ux)));
- uy=float(__builtin_fma(double(mv.y),double(1.f/float(valid_h)),double(uy)));
+DEV void warp_pixel(const V4*history,V4*prefix,V4*raw,const uint*rcptable,uint width,uint valid_h,uint i,float ux,float uy){
  float px[3],py[3],wx[3],wy[3];axis(ux,width,rcptable,px,wx);axis(uy,valid_h,rcptable,py,wy);
  float weights[5]={wx[1]*wy[0],wx[0]*wy[1],wx[1]*wy[1],wx[1]*wy[2],wx[2]*wy[1]};
  V3 values[5]={fetch(history,px[1],py[0],width,valid_h),fetch(history,px[0],py[1],width,valid_h),fetch(history,px[1],py[1],width,valid_h),fetch(history,px[1],py[2],width,valid_h),fetch(history,px[2],py[1],width,valid_h)};
@@ -54,8 +49,31 @@ KERNEL void temporal_warp(const V4*history,const V2*motion,V4*prefix,V4*raw,cons
  // Prefix consumes normalized history. Post keeps raw sum+reciprocal for its original fused subtraction.
  prefix[i]={result.x*reciprocal,result.y*reciprocal,result.z*reciprocal,1.f};raw[i]={result.x,result.y,result.z,reciprocal};
 }
+KERNEL void temporal_warp(const V4*history,const V2*motion,V4*prefix,V4*raw,const uint*rcptable,uint width,uint valid_h,uint proc_h){
+ uint i=__builtin_amdgcn_workgroup_id_x()*256+__builtin_amdgcn_workitem_id_x();if(i>=width*proc_h)return;
+ uint x=i%width,y=i/width;uint vy=y<valid_h?y:2*valid_h-y-2;
+ V2 mv=motion[vy*width+x];float ux=(float(x)+.5f)*(1.f/float(width)),uy=(float(vy)+.5f)*(1.f/float(valid_h));
+ ux=float(__builtin_fma(double(mv.x),double(1.f/float(width)),double(ux)));
+ uy=float(__builtin_fma(double(mv.y),double(1.f/float(valid_h)),double(uy)));
+ warp_pixel(history,prefix,raw,rcptable,width,valid_h,i,ux,uy);
+}
+KERNEL void temporal_warp_uv(const V4*history,const V2*coordinates,V4*prefix,V4*raw,const uint*rcptable,uint width,uint valid_h,uint proc_h){
+ uint i=__builtin_amdgcn_workgroup_id_x()*256+__builtin_amdgcn_workitem_id_x();if(i>=width*proc_h)return;
+ V2 uv=coordinates[i];warp_pixel(history,prefix,raw,rcptable,width,valid_h,i,uv.x,uv.y);
+}
+
+DEV float store_rtz(float x){
+ uint b=__builtin_bit_cast(uint,x),a=b&0x7fffffffu,sign=(b>>16)&0x8000u;int e=int(a>>23)-127;uint h;
+ if(a>=0x7f800000u)h=sign|0x7c00u|((a&0x7fffffu)?0x200u:0u);
+ else if(e>15)h=sign|0x7bffu;
+ else if(e<-24)h=sign;
+ else if(e<-14)h=sign|(((a&0x7fffffu)|0x800000u)>>uint(-e-1));
+ else h=sign|((a>>13)-0x1c000u);
+ union{unsigned short u;_Float16 h;}cv;cv.u=(unsigned short)h;return float(cv.h);
+}
 KERNEL void temporal_store(const float*rgb,V4*history,uint width,uint valid_h){
  uint i=__builtin_amdgcn_workgroup_id_x()*256+__builtin_amdgcn_workitem_id_x();if(i>=width*valid_h)return;
- // Explicit experimental history policy: f16 RNE texels in an f32 buffer, not a claim about private API descriptor.
- history[i]={float((_Float16)rgb[i*3]),float((_Float16)rgb[i*3+1]),float((_Float16)rgb[i*3+2]),1.f};
+ // Original post HALF4 surface gold establishes RTZ for controlled finite blend values.
+ // Keep the same valid RGB + alpha1 working-domain history, represented here as widened half.
+ history[i]={store_rtz(rgb[i*3]),store_rtz(rgb[i*3+1]),store_rtz(rgb[i*3+2]),1.f};
 }

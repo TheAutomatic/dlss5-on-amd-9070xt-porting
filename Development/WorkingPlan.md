@@ -33,13 +33,15 @@
 3. 网友场景线索尚未独立复验：跳32–36、38部分抑闪；全跳31–38房顶反光基本消失；40后块对该反光无影响；31–38单跳任意一个仍闪；奇偶各跳4块分别抑中间/边缘。31–38实际均为同形完整全局 ViT，无奇偶 shift，37没有特殊结构。删除反光不等于保留反光并稳定时序，跳块不是无损修复。
 4. 尚待确认网友使用 `DLSS5_SKIP_BLOCKS`（全遍）还是 `DLSS5_MULTI_PASS_SKIP_BLOCKS`（第二遍以后）；不猜。该缺口不阻碍独立时序代码分析。
 5. 当前原生 pre 路径每帧 reset=true/seed0；可有 prefix history 输入，但没有原版 motion 重投影与门控 post history。OUTPUT_SMOOTH 是独立近似，不能代称完整原时序。
-6. 新确认资产缺口：当前 post70-head.f32 仅 RGB 的3×32；原生16×32权重中 row6 为非零 history gate，但现 unpack 只导出 row0/2/4。原 blend half=0.73974609375。已独立恢复 gate32、保RGB96不变；原SASS确认两K16 HMMA.F16及SIG/blend/FFMA合同。真实5090两Eval确认Reset1→0、seed0→1与history/MV空→非空。标准CUDA查询当前context为空，原私有history格式/内容仍待直接确认。
+6. 新确认资产缺口：当前 post70-head.f32 仅 RGB 的3×32；原生16×32权重中 row6 为非零 history gate，但现 unpack 只导出 row0/2/4。原 blend half=0.73974609375。已独立恢复 gate32、保RGB96不变；原SASS确认两K16 HMMA.F16及SIG/blend/FFMA合同。真实5090两Eval确认Reset1→0、seed0→1与history/MV空→非空。标准CUDA查询当前context为空不代表资源不存在；10-06沿私有资源包装映射已确认有效history1920×1080 RGBA16F/alpha1，与原post内部blend输出逐half相同，API final解码域不同。
 7. mochi ReShade History 默认1；History0仅关闭 post blend，prefix history 与 seed推进仍存在。低层 API 默认不同；网友所谓另一家未具名，默认状态未独立核实。
-8. 已完成默认关闭的MP1实验：纯空间、prefix-only、prefix+gate三路，固定seed0/逐帧seed拆因子。小合法NN48行、valid1920×1080/proc1152合成NN18行全finite；off/first/reset对独立当前基线0字节差，自重复0字节差。仅有效RGB存历史，padding镜像/后处理有效区分离。首批继承模板AE1已隔离为diagnostic；正确VIT_ADAPTIVE=0重测过。
+8. 已完成默认关闭的MP1实验：纯空间、prefix-only、prefix+gate三路，固定seed0/逐帧seed拆因子。小合法NN48行、valid1920×1080/proc1152合成NN18行全finite；off/first/reset对独立当前基线0字节差，自重复0字节差。仅有效RGB存历史，padding镜像/后处理有效区分离。10-06原HALF4 surface gold确认RTZ，隔离store从RNE改显式RTZ；该RNE缺陷只在实验原型，不是生产闪烁已证实归因。首批继承模板AE1已隔离为diagnostic；正确VIT_ADAPTIVE=0重测过。
 9. 原post16×16 closed/zeroMV/+1px/对角亚像素gold与软件5tap/严格gate全float-bit0；head24576控制特征半码0差。AMD SIG最大3ULP差已量化，实验严格用NV half域表。原型保rawΣ×reciprocal的融合减RGB顺序，F64 head仍参考实现。均值/同geometry波动分开；18行1080合成数据不显示普遍抑波动，不宣称闪修。
-10. 未改默认、未装游戏、未改0.41包。尚需真实连续输入/MV/jitter/exposure/reset与真实反光/遮挡拖影验证、原内部history内容/格式、MP3各遍历史规划；仅保留实验原型，不把跳块当无损方案。结果见results/temporal-sequence-20261005及post-history-gate-20261005。该缺真实源不阻碍独立优化；本轮已按顺序完成下面两项裁决。
+10. 未改默认、未装游戏、未改0.41包。尚需真实连续输入/MV/jitter/exposure/reset与真实反光/遮挡拖影验证、MP3各遍历史规划；仅保留实验原型，不把跳块当无损方案。结果见results/temporal-sequence-20261005及post-history-gate-20261005。该缺真实源不阻碍独立优化；本轮已按顺序完成下面两项裁决。
 
-下一步先做CPU接口/元数据审计：沿backend vtable、cuGetProcAddress已有hook追原history资源身份、创建descriptor与写入链，核texture/array/external-memory/context绑定，并匹配post history+0x58、motion+0x60。observe_temporal.inc的on_launch在真实launch前查context，null不能证明资源不存在；私有接口走D3D资源包装映射，不自行切/建context试私有handle。确认保存的是rawRGB、blendRGB还是编码历史；warp.hip:57的f16 RNE→f32仅是自定policy。当前live_capture冻结输入/zeroMV、sequence合成及submission probe单次snapshot均不构成连续color/MV/depth/jitter/exposure源。CPU审计后再规划受控GPU取内容，真实场景仍需连续源；本次不新增GPU工作或生产修改。
+本阶段新完成：history-contract-20261006已确认私有D3D包装映射、post先读旧history再保存有效blend、内部RGBA16F的受控RTZ；temporal-replay-contract-20261006隔离store对四组原gold float-bit0。实际codec/input/motion/coordinate shader转码两次hash相同/finite/mirror同，direct-UV prepared MP1三路×两seed×两帧12行baseline/repeat byte0；CPU租约/manifest/receipt门与完整Windows链接已过。真实源采集入口b439efc6/adbb2bf2仅CPU完整链接与保守source-write/alias/thread守门，未安装/GPU采集；Mode2 FFX-only无同期NR闪最终输出，timing_valid=false。
+
+下一步必须取得真实连续场景源并核资源身份、effective flags/modules、color/MV/exposure与jitter/depth合同。已备统一manifest封存与explicit recipe→原codec→direct-UV prepared-index工具链；保留seed=null、upscale[0,0]与未核identity为blocker，不填曝光1、不猜方向。当前converter direct raw FFX fit未跑FSR，仅受控replay；真实画质、遮挡/拖影/反光稳定性仍未验证，MP3分遍/共享history未定。原型默认off，生产/玩家配置/载荷不改；本阶段不继续追加synthetic案例代替真实证据。
 
 ## 第二优先：解释mochizuki差距（备用CPU工作；新实验未执行）
 

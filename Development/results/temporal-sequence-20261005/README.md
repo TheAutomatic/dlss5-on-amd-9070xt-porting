@@ -27,3 +27,5 @@ AE0/full71/FAST_NUMERIC1受控整网：小合法512×512→640×360/proc384的3�
 prepare_options.py从当前NativeHipNetwork初始化代码生成同源Options；prepare.py生成显式合成元数据。sequence.cpp与run_sequence.ps1完成小gold→三路→valid1080门，CPU多行命令及本任务脚本均落文件。全GPU窗口依次执行、游戏检查/原子锁/15s看门狗，实验结束锁已释放。
 
 真实连续帧/MV与jitter/exposure/reset信息、原内部history内容/格式、遮挡拖影/真实反光稳定性仍待验证；目前只MP1，不把共享history直接用于MP3。无新用户开关或安装。下一步按计划转独立无损ViT960大tile，再小buffer晚复用。
+
+2026-10-06合同校准：以上f16RNE历史policy是当时实验事实，已由原CUBIN HALF4 gold证伪；隔离store现改显式RTZ/内部blend域，direct-UV prepared replay工具链已过受控门。见../history-contract-20261006与../temporal-replay-contract-20261006；真实闪烁仍未验证，生产未改。
