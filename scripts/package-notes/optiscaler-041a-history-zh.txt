@@ -14,13 +14,12 @@
 5. 再重启游戏，在同一位置重复。两次测试使用相同的 1x、关闭自适应等设置，只有实验开关不同。
 
 不要只用 F9 切到 1x：从 3x 启动的会话没有建立实验历史，需要关游戏后重新启动。
-脚本先备份 custom-config.txt 和已有的 native-game-flags.txt，再同步其中的测试键，
-其余设置保留。遇到进程、用户或系统环境变量覆盖会明确拒绝；不要跳过提示强行测试。
-备份位于 DLSS5-AMD/history-test-backups，receipt.json 记录原文件是否存在和 SHA。
-结束后可运行同一脚本 -Mode restore -BackupReceipt <备份目录中的 receipt.json>。
-它验证当前文件与备份 SHA，再恢复原文件或删除本轮新建的 custom-config.txt。
-连续切换会产生多份备份，按最近到最早逐次恢复；最早一份是测试前的配置。
-恢复会拒绝覆盖测试后另行编辑过的文件，可自行对照备份处理。
+脚本先保存最初的 custom/native 配置与旧 temporal-history.txt 标记，再同步测试键。
+两档都会移走旧标记，避免旧近似时序干扰：OFF 是受控 pureSpatial 基线，不是正式0.41
+所有 legacy 配置的逐字重现。其余配置值、BOM 和换行保留；环境优先覆盖会明确拒绝。
+off→on→off 不覆盖最初备份。测试结束退出游戏后，运行同一脚本 -Mode restore，
+一次恢复原配置和旧标记；原来没有的测试配置会删除。原文件/备份SHA或存在性改变时拒绝覆盖。
+最初备份路径每次都会打印，位于 DLSS5-AMD/history-test-backups。
 
 确认开关真的生效
 查看 DLSS5-AMD/logs/temporal-history-experiment.txt、native-game-oneshot.txt 与 native-hip.txt。
