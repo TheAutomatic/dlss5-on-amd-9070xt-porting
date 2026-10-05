@@ -42,6 +42,8 @@ def make_sequence(out, full=False):
     manifest={'source':'procedural synthetic; not game data or 111.mp4 input',
               'network_inference_valid_shape':full,
               'color_domain':'encoded sRGB-like working-domain RGB, alpha1; no output decoding',
+              'style':1,'style_feature':0.0078125,'passes':1,'skin_protect':0,
+              'strength':[1.0,1.0],'jitter':[0.0,0.0],
               'motion':'current-to-previous displacement, valid-network pixels, negative x for right-moving object',
               'motion_conversion':'previous_uv=(pixel_center+motion)/valid_extent',
               'depth':'synthetic linear visibility marker, near=.3/far=.8; not a game depth contract',
