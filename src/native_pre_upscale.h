@@ -243,8 +243,14 @@ inline bool Process(ID3D12CommandQueue*q,Job&j){
     const bool wants=neural_oneshot.WantsFrame();const unsigned ph=neural_oneshot.Phase();
     if(wants||ph==0||ph==5){
      if(ph==0||ph==5){NativeMotionVectorScale()[0]=d.motion_scale[0];NativeMotionVectorScale()[1]=d.motion_scale[1];if(Display().notice>=2)s->overlay.Prepare(static_cast<ID3D12Resource*>(d.resources[6].resource));}
-     /* reset=true means the network never samples motion/history in this prototype. */
-     neural_oneshot.OnSubmitted(q,s->low,motion,true,d.resources[2].width,d.resources[2].height,d.render[0],d.render[1],D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,true,true);
+     // Experimental MP1 history admits only this FFX pre-upscale source; legacy remains reset/seed0.
+     NativeTemporalFrameMetadata metadata{};metadata.ffx_pre=true;metadata.frame_id=j.frame;metadata.dispatch_flags=d.flags;
+     metadata.motion_scale[0]=d.motion_scale[0];metadata.motion_scale[1]=d.motion_scale[1];metadata.jitter[0]=d.jitter[0];metadata.jitter[1]=d.jitter[1];metadata.pre_exposure=d.pre_exposure;
+     const bool history_request=NativeTemporalExperimentRequested();const auto md=motion->GetDesc();
+     const bool history_metadata=history_request&&NativeTemporalExperimentUnjittered()&&metadata.Valid()&&(md.Format==DXGI_FORMAT_R16G16_FLOAT||md.Format==DXGI_FORMAT_R32G32_FLOAT);
+     if(history_metadata)s->submit.Submit([&](ID3D12GraphicsCommandList*c){Transition(c,motion,j.states[2],D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE);});
+     neural_oneshot.OnSubmitted(q,s->low,motion,history_metadata?d.reset:true,d.resources[2].width,d.resources[2].height,d.render[0],d.render[1],D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,true,true,history_metadata?&metadata:nullptr);
+     if(history_metadata)s->submit.Submit([&](ID3D12GraphicsCommandList*c){Transition(c,motion,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,j.states[2]);});
      processed=wants&&neural_oneshot.Phase()==4;
     }
     /* DLSS5_DIRECT_IO bit 2: FSR reads the decoder output itself (same bytes the copy would have put in low; NON_PIXEL_SHADER_RESOURCE) */
