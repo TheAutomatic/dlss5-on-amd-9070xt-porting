@@ -1,0 +1,34 @@
+[
+  {
+    "tag": "eval=0 kernel=cc_tinlayout_fused_pre_block_swin_1h_32_1_ds_fp8 grid=240,144,1 bytes=264",
+    "bytes": 264,
+    "color": "0x7fa00008801",
+    "history": "0x0",
+    "motion": "0x0",
+    "seed_u32_c8": 0
+  },
+  {
+    "tag": "eval=0 kernel=cc_tinlayout_fused_post_block_swin_1h_32_fp8 grid=241,145,1 bytes=184",
+    "bytes": 184,
+    "surface": "0x8803",
+    "history": "0x0",
+    "motion": "0x0",
+    "word70": 1
+  },
+  {
+    "tag": "eval=1 kernel=cc_tinlayout_fused_pre_block_swin_1h_32_1_ds_fp8 grid=240,144,1 bytes=264",
+    "bytes": 264,
+    "color": "0x7fa00008801",
+    "history": "0x7f800008808",
+    "motion": "0x7fa00008809",
+    "seed_u32_c8": 1
+  },
+  {
+    "tag": "eval=1 kernel=cc_tinlayout_fused_post_block_swin_1h_32_fp8 grid=241,145,1 bytes=184",
+    "bytes": 184,
+    "surface": "0x8803",
+    "history": "0x7f800008808",
+    "motion": "0x7fa00008809",
+    "word70": 1
+  }
+]

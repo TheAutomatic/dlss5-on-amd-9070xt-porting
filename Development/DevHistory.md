@@ -1720,3 +1720,10 @@ CPU DAG覆盖/need≤4/1488tasks证明、同FAST3新SPtwin真实段正常recover
 ### 2026-10-06 闪烁下一步：原history身份与写入链审计
 
 只读审计后补计划：先CPU沿backend vtable/cuGetProcAddress已有hook核texture/array/external-memory/context绑定、创建descriptor，匹配post history+0x58/motion+0x60，追保存rawRGB/blendRGB/编码。observe_temporal.inc on_launch在真实launch前查context，null不能证明资源不存在；私有接口需走D3D资源包装映射，不自行切/建context试私有handle。实验warp.hip:57的f16 RNE→f32为自定policy；live_capture冻结同输入/zeroMV、sequence合成及submission probe单次snapshot不构成连续真实color/MV/depth/jitter/exposure源。先CPU接口/元数据审计，再受控GPU取内容，真实场景仍待连续源。本次仅补文档，未新跑GPU实验或改生产。
+
+
+### 2026-10-06 原版history资源与post FP16写入合同取证
+
+子代理隔离5090原版两Eval（Reset1→0/seed0→1，Issue13既有8678/8680输入，非111.mp4）全部SUCCESS。沿原backend GetTex/GetSurface返回值直接关联D3D12Resource/GetDesc，不强切context：原history为1920×1080 RGBA16F，post另写RGBA16F surface0x8803；后段保存到history surface0x8805并生成独立API RGBA32F。第二Eval读上一帧同一history资源0x7f800008808，pre/post共用该history和独立RG16F MV。每帧history与post输出8294400half码0diff/alpha1；与API final half化RGB分别6191925/6189007码不同，history不是API最终输出域。仅清第二Eval post packet+58/+60、prefix/seed/input其余不动的控制组，首帧0diff、第二帧RGB3077213half变化，证明正常history确实包含有效post blend。
+
+发现隔离MP1实验存储舍入错误：原CUBIN在blend后SUST.P格式化写，无显式F2F；同核同输入输出FLOAT4/HALF4对照，zeroMV/+1px各1024值RNE差496/RTZ0diff，亚像素RNE差576/RTZ0diff。有限正RGB工作域原post HALF surface实际RTZ，不能沿实验默认RNE。已交集成代理修隔离temporal_store，非生产部署/默认修改，也不称房顶已修。八份4KiB可重放gold、source/build/cubin/输入/SHA、真实绑定与读回log、大型raw外置hash见results/history-contract-20261006。完整探针只在hook外完成读回和原state恢复，故不计性能；C盘约784GB写cache，D旧源51文件元数据无变，锁释放/无游戏结束。真实连续源、后续Reset/缺MV/曝光变化与MP3政策仍缺，本阶段不追加重复SIG/head/warp门。
