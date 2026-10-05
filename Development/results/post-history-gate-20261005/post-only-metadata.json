@@ -1,0 +1,23 @@
+{
+  "scope": "original CUBIN controlled16 full rectangle; self-created FLOAT4 half-exact texels, not actual API internal texture descriptor parity",
+  "zero_gate_three_cases_float_bitdiff": 0,
+  "subpixel_diagonal": "(+.25,+.375) gold only; warp parity pending",
+  "outputs": {
+    "one-pixel-motion-output.f32": {
+      "bytes": 4096,
+      "sha256": "dd253758c9ac0781c86739b4a536888a66fbacc8b8e5a292e6f8cb686fa01a72"
+    },
+    "zero-motion-output.f32": {
+      "bytes": 4096,
+      "sha256": "3e8fe651bb34ec09625c6a859cb81a9513c47e1f6c7f390c9f544c27df3fda53"
+    },
+    "subpixel-diagonal-output.f32": {
+      "bytes": 4096,
+      "sha256": "a81c94edcd0079ed99c45baf0340d60e4b54553e7c1537786d8962f4e399fd56"
+    },
+    "closed-history-output.f32": {
+      "bytes": 4096,
+      "sha256": "0b7847ec9df99a4886bdb742187abb4ea9a9290d37cc24f3f7548d81d7eb277e"
+    }
+  }
+}

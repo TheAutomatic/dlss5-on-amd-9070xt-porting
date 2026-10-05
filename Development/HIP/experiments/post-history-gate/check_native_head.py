@@ -12,5 +12,5 @@ f=np.fromfile(a.features,'<f2').astype(np.float32).reshape(-1,32);w=np.fromfile(
 g=aligned(f[:,:16],w[:,:16],np.zeros((len(f),1),np.float32));g=aligned(f[:,16:],w[:,16:],g).astype('<f2').reshape(-1)
 g.tofile(a.output);d={'scope':'two HMMA.F16 chunks model, pending native proof','tokens':len(f),'finite':bool(np.isfinite(g).all()),'logit_min':float(g.min()),'logit_max':float(g.max())}
 if a.native:
- n=np.fromfile(a.native,'<f2');assert n.shape==g.shape;d.update(native_half_bitdiff=int(np.count_nonzero(n.view('<u2')!=g.view('<u2'))),max_abs=float(np.max(abs(n.astype(np.float32)-g.astype(np.float32)))))
+ n=np.fromfile(a.native,'<f2');assert n.shape==g.shape;d['scope']='native HMMA primitive comparison on controlled post-operator features';d.update(native_half_bitdiff=int(np.count_nonzero(n.view('<u2')!=g.view('<u2'))),max_abs=float(np.max(abs(n.astype(np.float32)-g.astype(np.float32)))))
 print(json.dumps(d,indent=2))
