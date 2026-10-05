@@ -1710,3 +1710,8 @@ CPU DAG覆盖/need≤4/1488tasks证明、同FAST3新SPtwin真实段正常recover
 ### 2026-10-06 mochizuki差距只读审计与后续规划
 
 三路子代理只读研究后归档results/mochizuki-gap-audit-20261006；未跑GPU/SSH实验、编译、安装、改配置或发布。当前全71/FAST1与0.41后三刀尚无刷新竞品对照；旧事件均摊与DUP保留诊断，不作为精确族贡献。纯Network分支使用CPU chrono＋逐帧StreamSynchronize，后续先保同步加GPU端计时；批量前审pool/PDL/SP代际。当前本地mochi4f62a8a不同于旧测速d1185d2，后续先锁旧exe/SPV/plan/effective宏/源/模型与输入和边界，缺资产明确报告。规划同HIP16query数学阶梯（FAST0/当前FAST1、score halfFMA/位图、64key half分母树、确认后的AV截断/half末端）；每步数值/资源/整网门独立，有损仅研究不部署。当前分母half输入/f32累加、AV FP8输入/f32累加。只有显著资源变化才复查旧M32交互，新热点证明等待后才局部ISA排程。跨层≤4父子依赖暂无新候选；旧全空消融不是本体上界，8streams负账不泛化为所有队列上界。WorkingPlan新增上述优先顺序，保留发布/当前安装、真实时序与Issue限制、两项已止负账。
+
+
+### 2026-10-06 用户优先序校准：先处理闪烁
+
+用户明确仍优先建筑房顶闪烁。WorkingPlan将真实时序/反光场景验证恢复第一优先，mochizuki差距对账列第二优先，等待真实连续源期间只读CPU锁账作备用工作；保留已归档优化规划与负账。研究报告同步注明主线优先级。本次仅改文档排序与说明，未新跑实验、未改生产/游戏配置或载荷、未发布。
