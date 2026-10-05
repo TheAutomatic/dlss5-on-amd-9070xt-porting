@@ -1677,3 +1677,7 @@ Zero反馈「鬼武者没异常跟之前一样」。当前runtime25A617B2、强�
 ### 2026-10-05 block4 pool→首C64字节边
 
 保持q8(F(Hrtz(sum)))与负0，producer出口f32改byte，首C64沿已有nonW16 bi_bo读取；配对HasFn缓存/缺一全旧路，32线程调度，刀1保留。首次实验漏ISA_HALF/PREPACK前缀已隔离诊断并canonical重proof，65536half及12真实pair0diff。生产双arch去proof；三档3轮均无慢轮+p99改善，平均省.01235/.01961/.04311ms，900末轮近乎平不吹显著。正常19/多遍history skin/缺export旧路/RE9两4帧smoke全过。安装8547C07F/14BAC9FA与单mh-fast-packed双arch模块，配置字节未变，备份pool64-byte-20261005/backups/20261005-073426；锁释放/帧留hash清，0.41包不动。results/pool64-byte-20261005。
+
+### 2026-10-05 真实1440 FAST3持久队列
+
+CPU DAG覆盖/need≤4/1488tasks证明、同FAST3新SPtwin真实段正常recover/rollover六组0diff。仅1440 FAST1启用，FAST0/graph/缺twin全旧Body，旧900/1080normalSP不动，plan预加载在构造期。1440三轮全部快，省.089376ms，p99 16.832→16.748；七few RAW/RE9 1440单遍与预测3各4帧真命中SAME、smoke过。安装698A23A4/634FAF45，原76module逐hash不变+双arch twin到78，配置hash不变，保刀1/2。备份sp1440-fast-20261005/backups/20261005-080146，锁释放/帧hash后清，0.41已上传ZIP不动。results/sp1440-fast-20261005。

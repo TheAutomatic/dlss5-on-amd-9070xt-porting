@@ -169,13 +169,17 @@ inline std::set<U> MultiPassSkipFromEnvironment(){const char*v=std::getenv("DLSS
    each axis /64 rounded up to 4. Tiers keep their own (historical) grid rules; a free geometry never equals a tier. */
 inline bool TierGeometry(U w,U h){return (w==512&&h==512)||(w==1920&&h==1152)||(w==1920&&h==1088)||(w==1280&&h==768)||(w==1600&&h==1024)||(w==1600&&h==960);}
 inline bool FreeGeometry(U w,U h){return !TierGeometry(w,h)&&w%64==0&&h%64==0&&w>=320&&h>=320&&w<=8192&&h<=8192;} /* the shipped rule only makes multiples of 128; 64 is reachable through the DLSS5_NETWORK_FREE_PAD diagnostic */
+#ifndef HIP_SP_1440
+#define HIP_SP_1440 1
+#endif
+inline bool Sp1440Geometry(const Options&o){return o.width==2560&&o.height==1472;}
 inline bool SwinRunCompatible(const Options&o){
  return o.swin_run&&o.pooled&&WaveOwnedCompatible(o)&&
-  ((o.width==1600&&o.height==960)||(o.width==1920&&(o.height==1152||o.height==1088)));
+  ((o.width==1600&&o.height==960)||(o.width==1920&&(o.height==1152||o.height==1088))||(HIP_SP_1440&&Sp1440Geometry(o)));
 }
 inline std::atomic<int> AdaptivePreviewState{0};
 class Network {
- bool final_direct_compatible=false;bool pool64_byte_available=false;
+ bool sp1440_ready=false;bool final_direct_compatible=false;bool pool64_byte_available=false;
  bool vit_contract_byte_edge=false; // paired exact representation of an already E4M3-valued edge
  bool free_geometry=false; /* DLSS5_NETWORK_FREE_RES geometry (FreeGeometry): generic ViT grid, no 640-token cap */
  bool wave_owned_active=false;bool c32_skip_byte=false;bool c32_pre_down_byte=false;bool c32_post_low_byte=false;bool c512_m32_active=false;bool vit_proj_n64_active=false;unsigned vit_stream_active=0;bool fast_numeric=false; /* DLSS5_FAST_NUMERIC (cached at construction): load the lossy *-fast module twins where present */
@@ -691,8 +695,14 @@ if(wave_owned_active){
  for(auto&entry:extra)entry[1]=FastTwin(entry[0]==std::string("c32_wave1")?"c32-wave1":entry[1]); /* c32: the rtz build of the fast C32 disassembles identically, so the twin stem is always c32-wave1 */
  for(auto&entry:extra){entry[1]+=".hsaco";Handle m{};api.Check(api.LoadModule(&m,(opt.modules+"/"+entry[1]).c_str()),entry[1].c_str());modules[entry[0]]=m;}}
 if(SwinRunCompatible(opt)){
- std::ifstream probe(std::filesystem::u8path(opt.modules+"/swin-persistent.hsaco"),std::ios::binary);
- if(!probe){opt.swin_run=false;std::fprintf(stderr,"swin_run:nomodule\n");}
+ const bool new1440=Sp1440Geometry(opt);const std::string file=new1440&&fast_numeric?"swin-persistent-fast.hsaco":"swin-persistent.hsaco";
+ if(new1440&&(!fast_numeric||opt.graph||observer||!opt.dump_dir.empty())){opt.swin_run=false;}
+ else if(!std::ifstream(std::filesystem::u8path(opt.modules+"/"+file),std::ios::binary).good()){opt.swin_run=false;std::fprintf(stderr,"swin_run:nomodule %s\n",file.c_str());}
+ else if(new1440){Handle m{};api.Check(api.LoadModule(&m,(opt.modules+"/"+file).c_str()),"1440 SP math-paired module");modules["sp"]=m;
+  sp1440_ready=HasFn("sp","sp_init")&&HasFn("sp","sp_run256_w16")&&HasFn("sp","sp_recover256_w16");
+  if(!sp1440_ready){opt.swin_run=false;std::fprintf(stderr,"swin1440:missing paired exports, old Body fallback\n");}
+  else{SpGetPlan(W/16,H/16,256,16,6);SpGetPlan(W/16,H/16,256,49,6);std::fprintf(stderr,"swin1440_ready=1 module=%s fast_numeric=%u\n",file.c_str(),unsigned(fast_numeric));}
+ }
 }
 if(opt.fused_mh){Handle m{};api.Check(api.LoadModule(&m,(opt.modules+"/multihead_fused_attention.hsaco").c_str()),"fused MH attention module");modules["mh_fused"]=m;}
 if(opt.mh_window_fused){Handle m{};api.Check(api.LoadModule(&m,(opt.modules+"/c64-window-fused.hsaco").c_str()),"C64 window fused module");modules["mh_window"]=m;}
