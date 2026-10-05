@@ -49,6 +49,13 @@
 
 下一步必须取得真实连续场景源并核资源身份、effective flags/modules、color/MV/exposure与jitter/depth合同。已备统一manifest封存与explicit recipe→原codec→direct-UV prepared-index工具链；保留seed=null、upscale[0,0]与未核identity为blocker，不填曝光1、不猜方向。离线converter direct raw FFX fit未跑FSR，仅受控replay；新regular入口按已有生产FSR/codec接metadata，真实画质、遮挡/拖影/反光稳定性仍未验证，MP3分遍/共享history未定。新临时分支默认off，现装生产/玩家配置/载荷不改；本阶段不继续追加synthetic案例代替真实证据。
 
+## 持续优化目标：同shape/full71追平或超过mochi
+
+- 当前1088/640共同编码输入首对账FAST1约8.8808ms、mochi7.8672ms，差1.0136ms；FAST0差1.1428ms。生产1152与mochi1088异proc另列，不选有利小窗口作完成判据。
+- 16-query数学阶梯B（仅score halfFMA/map）及C（加64key half树）原语gold0diff、双arch无spill，但同1088整网首ABBA B平均+0.00761ms，C+0.03643ms且p99变差。不收，不D、不旧M32扩扫；52.20/52.63dB仅对当前FAST1一份synthetic输出，非NVIDIA oracle。ISA显示Bscalar转换往返、C更多halfadd/shuffle，不能判纯数学无解。结果vit-math-stair-20261006。
+- 当前低扰动stage只探C51223–30/ViT31–38一pair，ordered/pdl_calls0、raw同；插桩反使total快约0.16/0.11ms，不能认精确族贡献。stage raw约0.63/1.28ms只是该环境范围，不均摊/强制和。下一C512起点提交节奏控制：无pair/空pair/非blocking query/匹配CPU delay，保GPU总span与CPUwall、同raw，先小ABBA。结果sparse-stage-20261006。
+- 对手actual packed half score少转换，B2由独立代理按ISA立项，复用有限gold；不和C组合盲扫。当前默认、临时history包及用户配置不因上述研究变更。
+
 ## 第二优先：解释mochizuki差距（备用CPU工作；新实验未执行）
 
 闪烁仍为第一优先；等待真实连续源期间可继续只读CPU锁账与准备，优化GPU实验按闪烁主线安排。

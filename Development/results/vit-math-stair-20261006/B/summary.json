@@ -1,0 +1,39 @@
+{
+  "1088": {
+    "slots": [
+      {
+        "slot": 0,
+        "mean_ms": 8.898064875,
+        "p99_ms": 9.0505548,
+        "frames": 160
+      },
+      {
+        "slot": 1,
+        "mean_ms": 8.915196875,
+        "p99_ms": 9.1331354,
+        "frames": 160
+      },
+      {
+        "slot": 2,
+        "mean_ms": 8.906003875,
+        "p99_ms": 9.1066972,
+        "frames": 160
+      },
+      {
+        "slot": 3,
+        "mean_ms": 8.9079135,
+        "p99_ms": 9.165778,
+        "frames": 160
+      }
+    ],
+    "avg_delta_ms": 0.007611187499998451,
+    "p99_delta_ms": -0.015198399999999168,
+    "B_slots_each_faster_than_both_A": false,
+    "fidelity_vs_current_A": {
+      "peak1_psnr_db": 52.196534262535515,
+      "maxabs": 0.03481680154800415,
+      "finite": true
+    },
+    "scope": "actualfull71 sameinput/nohistory; relative currentA not NVIDIA oracle"
+  }
+}

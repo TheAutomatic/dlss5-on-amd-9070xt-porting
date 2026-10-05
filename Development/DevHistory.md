@@ -1755,3 +1755,10 @@ CPU DAG覆盖/need≤4/1488tasks证明、同FAST3新SPtwin真实段正常recover
 GPU均值FAST0我6.706866对M6.017463、差0.689404ms；FAST1我6.628813对M6.028481、差0.600331ms。CPU均值另列6.884184/6.142481与6.790059/6.156988，不用CPU中位减GPU均值。四HIP160CSV全正/finite、首尾0bitdiff且同FAST跨processSHA同；M四slot RGBA全finite/alpha1/SHA同。剩余差距未因果拆清：900 ViT400对448、noise预生成/逐帧、Vulkan复用commandbuffer/HIP逐帧host发dispatch、output padding/存储与数学均未完全同。HIPwarm后首raw短idle使前5略高，160均值比后155高0.007～0.011ms；正式表不扣、不刷新轮，无真实clock锁频证明。
 
 首次启动被packager rtc_compile门拦（未GPU/未lock），等自然退出再运行；D411GB实际写/cache、无正常游戏结束，15秒game watchdog。两ABBA即止，旧mochi元数据无改/锁释放；只清自身raw输出并保输入/weights/原logs/model/SPV与全SHA，本地/tmp保raw。报告/scripts/CSV/普通module与asset SHA见results/sync-network-gap-20261006。未安装玩家载荷或动配置，不把三刀跨批相加/FPS承诺。另独立静态核双arch六history新ELF的目标/export/SHA与receipt同；legacy marker off/on都移除、首backup跨切换恢复的源审见results/temporal-package-review-20261006，未新增GPU。
+
+
+### 2026-10-06 ViT数学阶梯B/C负账与稀疏stage扰动线索
+
+当前FAST1 canonical深核隔离B只half score FMA/map，C再64key半分母树、保16query/原FP32 QK/AV。真GPU独立gold161795score及64query×400/640 denominator全部halfcode0diff；双archA/B68VGPR、C62，无LDS/private/spill。1088/640 full71/MP1/AE0/history0首ABBA：B平均+0.007611ms、p99−0.015198，C+0.036425/p99+0.028335且两C均慢，按门不收、不D、不旧M32扩扫。raw有限/自重复bit0，单共同synthetic相对A PSNR52.20/52.63dB；无性能候选不扩画质/900刷轮。实际640 ISA A/B/C WMMA5/5/4、VMEM22同、VALU216/228/247、bpermute0/0/4；Bscalar转换/floatclamp往返与C更多halfadd/shuffle是执行组织代价，不判纯数学更贵，62VGPR不认已提高occupancy。结果vit-math-stair-20261006。
+
+随后隔离当前host在C51223–30或ViT31–38仅一pair，保常规totalpair；无插/C512/无插/ViT/无插五slot，整个执行pdl_calls0/ordered，raw同finite。无插约8.901/8.898/8.918ms，插C512 total8.741、插ViT8.794ms，stage raw0.6305/1.2796ms；明显负扰动约1.8/1.3%，不均摊修正为真实族份额。下一仅C512起点无pair/空pair/nonblockingquery/匹配CPUdelay，检提交节奏而非直接收插桩刀。初smallrunner误用PS$args造成Usage、修arguments后通过；sparse隔离header重复include由复制EnvOptions一致入口修正，非GPU数学失败。所有GPU按单队列lock/gamecheck/15s看门狗/D约409GB，释放后交下家；生产/玩家配置/安装/正式包不改。
