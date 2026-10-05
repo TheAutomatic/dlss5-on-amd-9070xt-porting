@@ -1681,3 +1681,7 @@ Zero反馈「鬼武者没异常跟之前一样」。当前runtime25A617B2、强�
 ### 2026-10-05 真实1440 FAST3持久队列
 
 CPU DAG覆盖/need≤4/1488tasks证明、同FAST3新SPtwin真实段正常recover/rollover六组0diff。仅1440 FAST1启用，FAST0/graph/缺twin全旧Body，旧900/1080normalSP不动，plan预加载在构造期。1440三轮全部快，省.089376ms，p99 16.832→16.748；七few RAW/RE9 1440单遍与预测3各4帧真命中SAME、smoke过。安装698A23A4/634FAF45，原76module逐hash不变+双arch twin到78，配置hash不变，保刀1/2。备份sp1440-fast-20261005/backups/20261005-080146，锁释放/帧hash后清，0.41已上传ZIP不动。results/sp1440-fast-20261005。
+
+### 2026-10-05 待验证线索：history与闪烁
+
+网友反馈：“好像还是必须得搞个temporal history，那两家默认都开着，不开就是会闪烁”。“两家”未明确指认，默认开关事实未独立核实，仅作为线索；不能据此认定history必需或闪烁原因已定。后续同seed/输入/分辨率对照history开关，结合issue13现有证据核验。用户同意后续研究mochi ViT大tile与小buffer延迟复用，本轮先记录不实现；未改默认、测试GPU、编译、安装或外发。
