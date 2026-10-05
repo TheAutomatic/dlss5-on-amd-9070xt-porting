@@ -1,0 +1,486 @@
+{
+  "pass": true,
+  "scope": "CPU lifecycle/metadata only; no NN or native warp parity claim",
+  "timeline": [
+    {
+      "route": "spatial",
+      "seed_mode": "fixed0",
+      "frame": 0,
+      "history": false,
+      "seed": 0,
+      "generation": 1,
+      "read_slot": null,
+      "write_slot": 1
+    },
+    {
+      "route": "spatial",
+      "seed_mode": "fixed0",
+      "frame": 1,
+      "history": false,
+      "seed": 0,
+      "generation": 1,
+      "read_slot": null,
+      "write_slot": 0
+    },
+    {
+      "route": "spatial",
+      "seed_mode": "fixed0",
+      "frame": 2,
+      "history": false,
+      "seed": 0,
+      "generation": 1,
+      "read_slot": null,
+      "write_slot": 1
+    },
+    {
+      "route": "spatial",
+      "seed_mode": "fixed0",
+      "frame": 3,
+      "history": false,
+      "seed": 0,
+      "generation": 1,
+      "read_slot": null,
+      "write_slot": 0
+    },
+    {
+      "route": "spatial",
+      "seed_mode": "fixed0",
+      "frame": 4,
+      "history": false,
+      "seed": 0,
+      "generation": 2,
+      "read_slot": null,
+      "write_slot": 1
+    },
+    {
+      "route": "spatial",
+      "seed_mode": "fixed0",
+      "frame": 5,
+      "history": false,
+      "seed": 0,
+      "generation": 2,
+      "read_slot": null,
+      "write_slot": 0
+    },
+    {
+      "route": "spatial",
+      "seed_mode": "fixed0",
+      "frame": 6,
+      "history": false,
+      "seed": 0,
+      "generation": 3,
+      "read_slot": null,
+      "write_slot": 1
+    },
+    {
+      "route": "spatial",
+      "seed_mode": "fixed0",
+      "frame": 7,
+      "history": false,
+      "seed": 0,
+      "generation": 3,
+      "read_slot": null,
+      "write_slot": 0
+    },
+    {
+      "route": "spatial",
+      "seed_mode": "counter-reset-on-epoch",
+      "frame": 0,
+      "history": false,
+      "seed": 0,
+      "generation": 1,
+      "read_slot": null,
+      "write_slot": 1
+    },
+    {
+      "route": "spatial",
+      "seed_mode": "counter-reset-on-epoch",
+      "frame": 1,
+      "history": false,
+      "seed": 1,
+      "generation": 1,
+      "read_slot": null,
+      "write_slot": 0
+    },
+    {
+      "route": "spatial",
+      "seed_mode": "counter-reset-on-epoch",
+      "frame": 2,
+      "history": false,
+      "seed": 2,
+      "generation": 1,
+      "read_slot": null,
+      "write_slot": 1
+    },
+    {
+      "route": "spatial",
+      "seed_mode": "counter-reset-on-epoch",
+      "frame": 3,
+      "history": false,
+      "seed": 3,
+      "generation": 1,
+      "read_slot": null,
+      "write_slot": 0
+    },
+    {
+      "route": "spatial",
+      "seed_mode": "counter-reset-on-epoch",
+      "frame": 4,
+      "history": false,
+      "seed": 0,
+      "generation": 2,
+      "read_slot": null,
+      "write_slot": 1
+    },
+    {
+      "route": "spatial",
+      "seed_mode": "counter-reset-on-epoch",
+      "frame": 5,
+      "history": false,
+      "seed": 1,
+      "generation": 2,
+      "read_slot": null,
+      "write_slot": 0
+    },
+    {
+      "route": "spatial",
+      "seed_mode": "counter-reset-on-epoch",
+      "frame": 6,
+      "history": false,
+      "seed": 0,
+      "generation": 3,
+      "read_slot": null,
+      "write_slot": 1
+    },
+    {
+      "route": "spatial",
+      "seed_mode": "counter-reset-on-epoch",
+      "frame": 7,
+      "history": false,
+      "seed": 1,
+      "generation": 3,
+      "read_slot": null,
+      "write_slot": 0
+    },
+    {
+      "route": "prefix-only",
+      "seed_mode": "fixed0",
+      "frame": 0,
+      "history": false,
+      "seed": 0,
+      "generation": 1,
+      "read_slot": null,
+      "write_slot": 1
+    },
+    {
+      "route": "prefix-only",
+      "seed_mode": "fixed0",
+      "frame": 1,
+      "history": true,
+      "seed": 0,
+      "generation": 1,
+      "read_slot": 1,
+      "write_slot": 0
+    },
+    {
+      "route": "prefix-only",
+      "seed_mode": "fixed0",
+      "frame": 2,
+      "history": true,
+      "seed": 0,
+      "generation": 1,
+      "read_slot": 0,
+      "write_slot": 1
+    },
+    {
+      "route": "prefix-only",
+      "seed_mode": "fixed0",
+      "frame": 3,
+      "history": true,
+      "seed": 0,
+      "generation": 1,
+      "read_slot": 1,
+      "write_slot": 0
+    },
+    {
+      "route": "prefix-only",
+      "seed_mode": "fixed0",
+      "frame": 4,
+      "history": false,
+      "seed": 0,
+      "generation": 2,
+      "read_slot": null,
+      "write_slot": 1
+    },
+    {
+      "route": "prefix-only",
+      "seed_mode": "fixed0",
+      "frame": 5,
+      "history": false,
+      "seed": 0,
+      "generation": 2,
+      "read_slot": null,
+      "write_slot": 0
+    },
+    {
+      "route": "prefix-only",
+      "seed_mode": "fixed0",
+      "frame": 6,
+      "history": false,
+      "seed": 0,
+      "generation": 3,
+      "read_slot": null,
+      "write_slot": 1
+    },
+    {
+      "route": "prefix-only",
+      "seed_mode": "fixed0",
+      "frame": 7,
+      "history": true,
+      "seed": 0,
+      "generation": 3,
+      "read_slot": 1,
+      "write_slot": 0
+    },
+    {
+      "route": "prefix-only",
+      "seed_mode": "counter-reset-on-epoch",
+      "frame": 0,
+      "history": false,
+      "seed": 0,
+      "generation": 1,
+      "read_slot": null,
+      "write_slot": 1
+    },
+    {
+      "route": "prefix-only",
+      "seed_mode": "counter-reset-on-epoch",
+      "frame": 1,
+      "history": true,
+      "seed": 1,
+      "generation": 1,
+      "read_slot": 1,
+      "write_slot": 0
+    },
+    {
+      "route": "prefix-only",
+      "seed_mode": "counter-reset-on-epoch",
+      "frame": 2,
+      "history": true,
+      "seed": 2,
+      "generation": 1,
+      "read_slot": 0,
+      "write_slot": 1
+    },
+    {
+      "route": "prefix-only",
+      "seed_mode": "counter-reset-on-epoch",
+      "frame": 3,
+      "history": true,
+      "seed": 3,
+      "generation": 1,
+      "read_slot": 1,
+      "write_slot": 0
+    },
+    {
+      "route": "prefix-only",
+      "seed_mode": "counter-reset-on-epoch",
+      "frame": 4,
+      "history": false,
+      "seed": 0,
+      "generation": 2,
+      "read_slot": null,
+      "write_slot": 1
+    },
+    {
+      "route": "prefix-only",
+      "seed_mode": "counter-reset-on-epoch",
+      "frame": 5,
+      "history": false,
+      "seed": 1,
+      "generation": 2,
+      "read_slot": null,
+      "write_slot": 0
+    },
+    {
+      "route": "prefix-only",
+      "seed_mode": "counter-reset-on-epoch",
+      "frame": 6,
+      "history": false,
+      "seed": 0,
+      "generation": 3,
+      "read_slot": null,
+      "write_slot": 1
+    },
+    {
+      "route": "prefix-only",
+      "seed_mode": "counter-reset-on-epoch",
+      "frame": 7,
+      "history": true,
+      "seed": 1,
+      "generation": 3,
+      "read_slot": 1,
+      "write_slot": 0
+    },
+    {
+      "route": "prefix+native-gated-post (gate arithmetic pending oracle)",
+      "seed_mode": "fixed0",
+      "frame": 0,
+      "history": false,
+      "seed": 0,
+      "generation": 1,
+      "read_slot": null,
+      "write_slot": 1
+    },
+    {
+      "route": "prefix+native-gated-post (gate arithmetic pending oracle)",
+      "seed_mode": "fixed0",
+      "frame": 1,
+      "history": true,
+      "seed": 0,
+      "generation": 1,
+      "read_slot": 1,
+      "write_slot": 0
+    },
+    {
+      "route": "prefix+native-gated-post (gate arithmetic pending oracle)",
+      "seed_mode": "fixed0",
+      "frame": 2,
+      "history": true,
+      "seed": 0,
+      "generation": 1,
+      "read_slot": 0,
+      "write_slot": 1
+    },
+    {
+      "route": "prefix+native-gated-post (gate arithmetic pending oracle)",
+      "seed_mode": "fixed0",
+      "frame": 3,
+      "history": true,
+      "seed": 0,
+      "generation": 1,
+      "read_slot": 1,
+      "write_slot": 0
+    },
+    {
+      "route": "prefix+native-gated-post (gate arithmetic pending oracle)",
+      "seed_mode": "fixed0",
+      "frame": 4,
+      "history": false,
+      "seed": 0,
+      "generation": 2,
+      "read_slot": null,
+      "write_slot": 1
+    },
+    {
+      "route": "prefix+native-gated-post (gate arithmetic pending oracle)",
+      "seed_mode": "fixed0",
+      "frame": 5,
+      "history": false,
+      "seed": 0,
+      "generation": 2,
+      "read_slot": null,
+      "write_slot": 0
+    },
+    {
+      "route": "prefix+native-gated-post (gate arithmetic pending oracle)",
+      "seed_mode": "fixed0",
+      "frame": 6,
+      "history": false,
+      "seed": 0,
+      "generation": 3,
+      "read_slot": null,
+      "write_slot": 1
+    },
+    {
+      "route": "prefix+native-gated-post (gate arithmetic pending oracle)",
+      "seed_mode": "fixed0",
+      "frame": 7,
+      "history": true,
+      "seed": 0,
+      "generation": 3,
+      "read_slot": 1,
+      "write_slot": 0
+    },
+    {
+      "route": "prefix+native-gated-post (gate arithmetic pending oracle)",
+      "seed_mode": "counter-reset-on-epoch",
+      "frame": 0,
+      "history": false,
+      "seed": 0,
+      "generation": 1,
+      "read_slot": null,
+      "write_slot": 1
+    },
+    {
+      "route": "prefix+native-gated-post (gate arithmetic pending oracle)",
+      "seed_mode": "counter-reset-on-epoch",
+      "frame": 1,
+      "history": true,
+      "seed": 1,
+      "generation": 1,
+      "read_slot": 1,
+      "write_slot": 0
+    },
+    {
+      "route": "prefix+native-gated-post (gate arithmetic pending oracle)",
+      "seed_mode": "counter-reset-on-epoch",
+      "frame": 2,
+      "history": true,
+      "seed": 2,
+      "generation": 1,
+      "read_slot": 0,
+      "write_slot": 1
+    },
+    {
+      "route": "prefix+native-gated-post (gate arithmetic pending oracle)",
+      "seed_mode": "counter-reset-on-epoch",
+      "frame": 3,
+      "history": true,
+      "seed": 3,
+      "generation": 1,
+      "read_slot": 1,
+      "write_slot": 0
+    },
+    {
+      "route": "prefix+native-gated-post (gate arithmetic pending oracle)",
+      "seed_mode": "counter-reset-on-epoch",
+      "frame": 4,
+      "history": false,
+      "seed": 0,
+      "generation": 2,
+      "read_slot": null,
+      "write_slot": 1
+    },
+    {
+      "route": "prefix+native-gated-post (gate arithmetic pending oracle)",
+      "seed_mode": "counter-reset-on-epoch",
+      "frame": 5,
+      "history": false,
+      "seed": 1,
+      "generation": 2,
+      "read_slot": null,
+      "write_slot": 0
+    },
+    {
+      "route": "prefix+native-gated-post (gate arithmetic pending oracle)",
+      "seed_mode": "counter-reset-on-epoch",
+      "frame": 6,
+      "history": false,
+      "seed": 0,
+      "generation": 3,
+      "read_slot": null,
+      "write_slot": 1
+    },
+    {
+      "route": "prefix+native-gated-post (gate arithmetic pending oracle)",
+      "seed_mode": "counter-reset-on-epoch",
+      "frame": 7,
+      "history": true,
+      "seed": 1,
+      "generation": 3,
+      "read_slot": 1,
+      "write_slot": 0
+    }
+  ]
+}
