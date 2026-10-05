@@ -1,11 +1,29 @@
-# 房顶闪烁：受控时序准备
+# 房顶闪烁：默认关闭的 MP1 时序实验
 
-本阶段只有 CPU 合同/生命周期检查，尚无完整时序网络结果，未改生产默认或游戏载荷。
+本阶段完成受控数学与整网接口闭环，**未证明修复111.mp4、未部署、未改默认/用户配置/0.41 ZIP**。视频只有拍屏最终输出，真实连续网络输入/MV/depth尚缺。
 
-111.mp4 为拍屏最终合成，不能恢复原输入/MV/depth。prepare.py 明确生成合成输入：固定背景、右移物体、已知 current→previous 位移和人工深度，含静止、运动、显式 reset、缺失 motion、resize。小尺寸 CPU 版不作为可运行整网 shape；`--full` 可生成1920×1080/proc1152和2560×1440/proc1472样本，仍不是该游戏复现。
+## 原版合同
 
-CPU 检查：三路（空间、prefix history、完整时序的生命周期占位）×两种 seed 策略×8帧通过。验证 first/reset/resize/missing-MV 不读历史、读写槽分离、跨队列未完成禁止发布、底镜像与运动符号。这里没有用固定 blend 假装原版 gate，也没有证明 native warp 数学一致。
+真实5090复用此前成功的core615/nvngx.dll（SHA52A68ACC…）与310.8插件；首Reset1、次Reset0的合法1920×1080两Eval全部SUCCESS。原pre seed0→1、Style1/128；history/motion首为空、次非空，pre/post同history/MV handle。post计算网格1152但valid1080；history transform74..88与motion8c..a0为[0,0,1920,1080,1/1920,1/1080]，70恒1。
 
-当前源码事实：pre-upscale 强制 reset=true；已有 NativeGameFrame 在同队列按 input/warp→NN→history 发布顺序工作，但完整原 post gate 未接。post-head96仅RGB，原row6门控被 unpack 丢弃；原gate是两段HMMA.F16后原生EX2/RCP及blend，而非随意f32点积。门控原语与采样合同由独立原版oracle对拍后，才接 MP1 三路网络测试。OUTPUT_SMOOTH不作为该实现。
+首次误用不同根目录core615.dll（SHA172FAEDF…）导致Create PlatformError，已按旧成功载荷修正；该失败不是时序算法错误。5090 D余79GiB且本项目仅1.23GiB，未移非项目文件；经调度裁定本探针输出/NGXdata/cwd/TEMP/TMP/cache全C（余730GiB），D只读输入/DLL、仅共享锁极小例外。成功探针前后D数据元数据无变化。
 
-待完成：原gate特征独立出口、原语/warp对拍、三路相同帧与seed的真实网络回放、亮度波动和平均反光强度分别评估、遮挡/拖影与时延。MP3各遍历史独立性另规划；本阶段不触碰用户MP3配置。
+单次在原launch回调查询标准CUDA descriptor：cuCtxGetCurrent返回SUCCESS但context=null，未切换/创建上下文；**原私有history texture实际格式/内容仍未直接确认**。外部输入colorRGBA16F、MVRG16F、depthR32F/valid1080是本harness创建事实，不能冒称内部descriptor。受控原post gold用自建half-exact FLOAT4/线性clamp纹理，scope见post-history-gate结果。
+
+原gate row6独立恢复、两K16 HMMA半精度模型对24576受控真实posttap特征0半码差。AMD SIG原语有限half63488码中11033码不同、最大3ULP/1.1920929e-7，不能称NV逐位；严格实验使用5090生成65536码表（262144B，SHA394394a5258bad437495d68076be75d8413fa0ed5b752400e3947c332437b850）。表保在本地/tmp/post-history-gate-original与5090 C实验目录，源码可重生成。
+
+## 软件 warp 与整网闭环
+
+warp.hip沿既有native_temporal_sample合同保21bit UV、8bit采样权重与舍入；prefix得到normalizedRGBA，post保raw五tapΣ和reciprocal，执行原FFMA(recip,Σ,-RGB)后门控FFMA，不能先归一化再减RGB。原CUBIN16×16 closed/zeroMV/+1px/对角(+.25,+.375)四组gold，对本软件warp＋严格gate全float-bit0。
+
+原RGB96/旧导出保留；新half32特征tap默认false，限MP1/skin0/graph0，构造期HasFn与buffer预分配。原post两个旧导出机器码同；三个prefix只有新增descriptor引起的PC相对常量地址变化，保留原始差异记录，未写全模块byte同。GPU特征驻留，不每帧拉141MB。valid历史仅存blend后有效RGB，实验明确f16RNE→f32存储政策（尚不是已查明原API格式）；prefix padding镜像，post只混valid，pad原RGB保留。
+
+AE0/full71/FAST_NUMERIC1受控整网：小合法512×512→640×360/proc384的3路×2seed×8帧48行；合法1920×1080/proc1152三路×2seed×3帧18行。空间、prefix-only、prefix+完整gate各自独立history；first/reset/missingMV/resize失效保护。66行finite，off/first/reset对独立当前基线0字节差；history-enabled同输入/seed自重复0字节差。首批误清不存在键而继承模板AE1已隔离为diagnostic，未据它推时序质量。
+
+平均亮度与同geometry/epoch波动分别留CSV/summary；**不普遍改善**：1080三帧计数seed背景范围空间0.000321、prefix0.001303、full0.002134（0..1工作域）。初期history反馈/合成内容与真实房顶不同，不能据少帧宣称治闪，也不把减反光当稳定。诊断wall含冷加载/读回，非性能门或FPS；F64 head仍是参考原型，未称生产高性能。
+
+## 复跑与剩余工作
+
+prepare_options.py从当前NativeHipNetwork初始化代码生成同源Options；prepare.py生成显式合成元数据。sequence.cpp与run_sequence.ps1完成小gold→三路→valid1080门，CPU多行命令及本任务脚本均落文件。全GPU窗口依次执行、游戏检查/原子锁/15s看门狗，实验结束锁已释放。
+
+真实连续帧/MV与jitter/exposure/reset信息、原内部history内容/格式、遮挡拖影/真实反光稳定性仍待验证；目前只MP1，不把共享history直接用于MP3。无新用户开关或安装。下一步按计划转独立无损ViT960大tile，再小buffer晚复用。
