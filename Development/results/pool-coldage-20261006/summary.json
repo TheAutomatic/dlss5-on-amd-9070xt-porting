@@ -1,0 +1,26 @@
+{
+  "base_commit": "7b3be712",
+  "scope": "macro0/macro1 same-source, old model/module math unchanged; Frame wall TimingOnly, no middle scan; benchmark no temporal config when history0",
+  "source_sha256": "960d89c3f4a88c9b38a3a9cf4868be02cc4a40c4daf7dc0acb2348027eb93b3e",
+  "patch_sha256": "39f7e613475d165dbc3681fed67c15811528e2dc797828ee336059c138a06a69",
+  "raw_output_sha256": "b7d5c89017e7a3a6b0073a663e4977b9bcd7477428125444d4027dfb21da392d",
+  "A_wall_ms": 15.68081875,
+  "B_wall_ms": 15.74224375,
+  "delta_ms": 0.061425,
+  "decision": "negative first short ABBA; stop no production merge/installation, no parameter search",
+  "frames_per_slot": 160,
+  "warmup_drop": 80,
+  "geometry": {
+    "valid": [
+      2560,
+      1440
+    ],
+    "processing": [
+      2560,
+      1472
+    ],
+    "vit_tokens": 960
+  },
+  "flags": "full71 FAST_NUMERIC1 MP1 PRED0 SKIN0 VIT_ADAPTIVE0 graph0 FREE_RES1",
+  "input": "existing free-res-20261002/in/in-2560x1440.f16; reused fixture, no new game capture"
+}

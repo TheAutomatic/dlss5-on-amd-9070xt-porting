@@ -1,0 +1,99 @@
+diff --git a/Development/HIP/hip_reference_network.h b/Development/HIP/hip_reference_network.h
+index b242732f..781986cf 100644
+--- a/Development/HIP/hip_reference_network.h
++++ b/Development/HIP/hip_reference_network.h
+@@ -28,7 +28,13 @@ inline std::vector<float> ReadWeights(const std::string&path){std::ifstream test
+ #ifndef HIP_ADDR_SKEW
+ #define HIP_ADDR_SKEW 0 /* 2026-10-02 ideas-yami-ikaruga: 1 = compile the DLSS5_HIP_ADDR_SKEW_* allocation offset scan (diagnostic) */
+ #endif
++#ifndef HIP_POOL_COLD_BATCH
++#define HIP_POOL_COLD_BATCH 0 // Experimental cache-selection heuristic, not a completion fence.
++#endif
+ struct Allocation {Api*api;void*ptr{};size_t bytes,capacity;bool owned=true;
++#if HIP_POOL_COLD_BATCH
++ bool cold_pooled=false;uint64_t cold_possible_batch=0;
++#endif
+  // Sparse weights (Options::sparse_weights): ptr is a reserved address range of `bytes`; only `sparse_maps` (offset,size,handle) are backed. capacity = backed bytes.
+  size_t sparse_reserved{};struct SparseMap{size_t offset,size;void*handle;};std::vector<SparseMap>sparse_maps;
+  #if HIP_ADDR_SKEW
+@@ -214,10 +220,32 @@ class Network {
+  Handle captured_graph{},graph_exec{};void*graph_input{},*graph_history{},*graph_output{};U graph_seed{};bool graph_warmed{},graph_capturing{};unsigned graph_builds{},graph_replays{};
+  void ClearGraph(){if(graph_exec){api.hipGraphExecDestroy(graph_exec);graph_exec=nullptr;}if(captured_graph){api.hipGraphDestroy(captured_graph);captured_graph=nullptr;}}
+  std::vector<Tensor>pool;Tensor device_noise;std::map<U,Tensor>gather_maps[2];
++#if HIP_POOL_COLD_BATCH
++ uint64_t cold_batch=0,cold_rejected=0,cold_reused=0;bool cold_disabled=false;
++#endif
++ void ColdAdvanceBatch(){
++#if HIP_POOL_COLD_BATCH
++  if(!opt.graph&&!cold_disabled){if(cold_batch==std::numeric_limits<uint64_t>::max())cold_disabled=true;else ++cold_batch;}
++#endif
++ }
++ bool ColdEligible(const Tensor&t,size_t requested){
++#if HIP_POOL_COLD_BATCH
++  if(!opt.graph&&!cold_disabled&&requested<=8u*1024u*1024u&&t->cold_possible_batch&&t->cold_possible_batch>=cold_batch){++cold_rejected;return false;}
++#endif
++  return true;
++ }
+  Tensor temporal_features;bool temporal_feature_tap_active=false;
+  U W,H;std::function<void(const std::string&)>progress;std::function<void(const std::string&,void*,size_t)>observer;
+  static U Count(size_t n){if(!n||n>std::numeric_limits<U>::max())throw std::runtime_error("HIP reference index count overflow");return U(n);}
+- Tensor New(size_t n){Count(n);size_t bytes=n*4;if(opt.pooled){Tensor*best=nullptr;for(auto&t:pool)if(t.use_count()==1&&t->capacity>=bytes&&(!best||t->capacity<(*best)->capacity))best=&t;if(best){(*best)->bytes=bytes;return *best;}if(graph_capturing)throw std::runtime_error("graph capture requires warmed allocation pool");auto t=std::make_shared<Allocation>(api,bytes);pool.push_back(t);return t;}return std::make_shared<Allocation>(api,bytes);}
++ Tensor New(size_t n){Count(n);size_t bytes=n*4;if(opt.pooled){Tensor*best=nullptr;for(auto&t:pool)if(t.use_count()==1&&t->capacity>=bytes&&ColdEligible(t,bytes)&&(!best||t->capacity<(*best)->capacity))best=&t;if(best){(*best)->bytes=bytes;
++#if HIP_POOL_COLD_BATCH
++ ++cold_reused;
++#endif
++ return *best;}if(graph_capturing)throw std::runtime_error("graph capture requires warmed allocation pool");auto t=std::make_shared<Allocation>(api,bytes);
++#if HIP_POOL_COLD_BATCH
++ t->cold_pooled=true;
++#endif
++ pool.push_back(t);return t;}return std::make_shared<Allocation>(api,bytes);}
+  /* 2026-09-30 (HIP_C512_PAD16): C512 tensors whose token count is not a multiple of 16 (900: 50x30=1500) get a
+     buffer rounded up to 16 tokens; `bytes` stays the valid size (stage dumps unchanged). CompactC512Body then reads the
+     input in place instead of mh_shift_pack copying it into a zero-padded buffer: every C512 kernel is row-independent
+@@ -234,7 +262,11 @@ class Network {
+   t=std::make_shared<Allocation>(api,bytes);
+ #endif
+   }else t=New(bytes/4);api.Check(api.hipStreamSynchronize(stream),"before upload");api.Check(api.hipMemcpy(t->ptr,p,bytes,1),"upload");return t;}
+- void* P(const Tensor&t){return t?t->ptr:nullptr;}
++ void* P(const Tensor&t){
++#if HIP_POOL_COLD_BATCH
++ if(t&&t->cold_pooled&&!opt.graph&&!cold_disabled)t->cold_possible_batch=cold_batch==std::numeric_limits<uint64_t>::max()?cold_batch:cold_batch+1;
++#endif
++ return t?t->ptr:nullptr;}
+  // Packing wrappers record the byte ranges the in-place packers leave dead; UploadWeight maps only the rest when sparse_weights is on.
+  std::vector<std::pair<size_t,size_t>>dead;size_t sparse_granularity{};size_t sparse_logical{},sparse_backed{};unsigned sparse_dense{};
+  void Fp8(std::vector<float>&v,const std::vector<std::pair<size_t,size_t>>&regions){PackWeightRegions(v,regions);for(auto&r:regions)dead.push_back({r.first*4+r.second,(r.first+r.second)*4});}
+@@ -440,7 +472,7 @@ class Network {
+ #ifdef HIP_SWIN_PERSISTENT_TRACE
+   std::printf("TOPO,%s,%s,%u,%u,%u\n",module.c_str(),kernel.c_str(),count,unsigned(groups?groups:(count+255ull)/256),threads);
+ #endif
+-  void*reuse_gate_arg=adaptive_active?P(adaptive_state):nullptr;void*argv[]={static_cast<void*>(&args)...,static_cast<void*>(&reuse_gate_arg)};unsigned repeats_here=launch_repeats*((!opt.dup_prefix.empty()&&(opt.dup_prefix.back()=='$'?kernel==opt.dup_prefix.substr(0,opt.dup_prefix.size()-1):kernel.rfind(opt.dup_prefix,0)==0))?opt.dup_count:1u);for(unsigned repeat=0;repeat<repeats_here;repeat++){unsigned gg=unsigned(groups?groups:(count+255ull)/256);if(pdl_anyorder){++pdl_calls;api.Check(ext_launch(Fn(module,kernel),gg*threads,1,1,threads,1,1,0,stream,argv,nullptr,nullptr,nullptr,1u/*hipExtAnyOrderLaunch*/),name);}else api.Check(api.hipModuleLaunchKernel(Fn(module,kernel),gg,1,1,threads,1,1,0,stream,argv,nullptr),name);}if(opt.profile)api.Check(api.hipEventRecord(timing.end,stream),"event end");if(!opt.pooled)api.Check(api.hipStreamSynchronize(stream),name);
++  void*reuse_gate_arg=adaptive_active?P(adaptive_state):nullptr;void*argv[]={static_cast<void*>(&args)...,static_cast<void*>(&reuse_gate_arg)};unsigned repeats_here=launch_repeats*((!opt.dup_prefix.empty()&&(opt.dup_prefix.back()=='$'?kernel==opt.dup_prefix.substr(0,opt.dup_prefix.size()-1):kernel.rfind(opt.dup_prefix,0)==0))?opt.dup_count:1u);for(unsigned repeat=0;repeat<repeats_here;repeat++){unsigned gg=unsigned(groups?groups:(count+255ull)/256);if(pdl_anyorder){++pdl_calls;api.Check(ext_launch(Fn(module,kernel),gg*threads,1,1,threads,1,1,0,stream,argv,nullptr,nullptr,nullptr,1u/*hipExtAnyOrderLaunch*/),name);}else api.Check(api.hipModuleLaunchKernel(Fn(module,kernel),gg,1,1,threads,1,1,0,stream,argv,nullptr),name);}ColdAdvanceBatch();if(opt.profile)api.Check(api.hipEventRecord(timing.end,stream),"event end");if(!opt.pooled)api.Check(api.hipStreamSynchronize(stream),name);
+   if(opt.wall_profile){api.Check(api.hipStreamSynchronize(stream),"wall profile completion");auto&entry=wall_timings[kernel];entry.first+=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-wall_begin).count()/launch_repeats;++entry.second;}
+  }
+  void Stage(const std::string&name,const Tensor&t){if(progress)progress(name);if(observer){Synchronize();observer(name,P(t),t->bytes);}if(opt.dump_dir.empty()||(!opt.dump_only.empty()&&(","+opt.dump_only+",").find(","+name+",")==std::string::npos))return;api.Check(api.hipStreamSynchronize(stream),"before dump");std::vector<char>b(t->bytes);api.Check(api.hipMemcpy(b.data(),P(t),b.size(),2),"stage dump");std::ofstream f(opt.dump_dir+"/"+name+".f32",std::ios::binary);if(!f.write(b.data(),b.size()))throw std::runtime_error("stage dump write");}
+@@ -725,7 +757,11 @@ if(opt.temporal_feature_tap){
+  temporal_feature_tap_active=true;
+ }
+ if(wave_owned_active)HasFn("c32_wave1","c32_wave1_post_b8_rgba");if(multi_predict||std::ifstream(opt.modules+"/multi-pass-predict.hsaco").good())EnsurePredictModule();if(multi_pass>1)PrepareMultiPassFeeds();if(multi_skin)PrepareSkin();}catch(...){if(pdl_flags){api.hipStreamSynchronize(stream);api.hipFree(pdl_flags);pdl_flags=nullptr;}for(auto&m:modules)api.hipModuleUnload(m.second);api.hipStreamDestroy(stream);throw;}}
+- ~Network(){api.hipStreamSynchronize(stream);temporal_features.reset();SpReport();pdl_keep.clear();if(pdl_flags){api.hipFree(pdl_flags);pdl_flags=nullptr;}if(opt.graph)std::printf("graph_stats builds=%u replays=%u\n",graph_builds,graph_replays);ClearGraph();for(auto&t:timings){api.hipEventDestroy(t.begin);api.hipEventDestroy(t.end);}adaptive_image_anchor.reset();adaptive_image_signature.reset();adaptive_image_delta.reset();adaptive_anchor_in.reset();adaptive_anchor_out.reset();adaptive_gain.reset();adaptive_stats.reset();adaptive_state.reset();device_noise.reset();gather_maps[0].clear();gather_maps[1].clear();weights.clear();pool.clear();for(auto&m:modules)api.hipModuleUnload(m.second);api.hipStreamDestroy(stream);}
++ ~Network(){api.hipStreamSynchronize(stream);
++#if HIP_POOL_COLD_BATCH
++ std::fprintf(stderr,"POOL_COLD logical_batches=%llu recent_rejects=%llu reuse=%llu graph_guard=%u disabled=%u\n",(unsigned long long)cold_batch,(unsigned long long)cold_rejected,(unsigned long long)cold_reused,unsigned(opt.graph),unsigned(cold_disabled));
++#endif
++temporal_features.reset();SpReport();pdl_keep.clear();if(pdl_flags){api.hipFree(pdl_flags);pdl_flags=nullptr;}if(opt.graph)std::printf("graph_stats builds=%u replays=%u\n",graph_builds,graph_replays);ClearGraph();for(auto&t:timings){api.hipEventDestroy(t.begin);api.hipEventDestroy(t.end);}adaptive_image_anchor.reset();adaptive_image_signature.reset();adaptive_image_delta.reset();adaptive_anchor_in.reset();adaptive_anchor_out.reset();adaptive_gain.reset();adaptive_stats.reset();adaptive_state.reset();device_noise.reset();gather_maps[0].clear();gather_maps[1].clear();weights.clear();pool.clear();for(auto&m:modules)api.hipModuleUnload(m.second);api.hipStreamDestroy(stream);}
+  void PrintMemory(){size_t bytes=0,free=0,total=0;std::set<void*>seen;auto add=[&](const Tensor&t){if(t&&t->owned&&seen.insert(t->ptr).second)bytes+=t->capacity;};for(auto&t:pool)add(t);for(auto&w:weights)add(w.second);for(auto&maps:gather_maps)for(auto&m:maps)add(m.second);add(device_noise);api.Check(api.hipMemGetInfo(&free,&total),"memory stats");std::printf("memory owned_MiB=%.1f allocations=%zu device_free_MiB=%.1f total_MiB=%.1f\n",bytes/1048576.,seen.size(),free/1048576.,total/1048576.);}
+  /* DLSS5_HIP_MEMORY=1 (diagnostic): device memory by category after the pool has warmed — weights by key, pool tensors by capacity, gather maps, noise, and the runtime's free/total. */
+  void MemoryReport(FILE*f){std::set<void*>seen;size_t wsum=0,psum=0,gsum=0,nsum=0;std::vector<std::pair<size_t,std::string>>w,p;
+diff --git a/Development/HIP/swin_persistent_network.h b/Development/HIP/swin_persistent_network.h
+index 546a40a6..fd7bd3ea 100644
+--- a/Development/HIP/swin_persistent_network.h
++++ b/Development/HIP/swin_persistent_network.h
+@@ -133,6 +133,7 @@ Tensor SpStage(Tensor input,U w,U h,U c,U first,U layers){
+  api.Check(api.hipModuleLaunchKernel(Fn("sp",kernel),plan.total,1,1,c,1,1,0,stream,args,nullptr),"SP run");
+  std::string recovery="sp_recover"+std::to_string(c)+sfx;
+  api.Check(api.hipModuleLaunchKernel(Fn("sp",recovery),1,1,1,c,1,1,0,stream,args,nullptr),"SP bounded recovery");
++ ColdAdvanceBatch(); // Treat init/run/recovery as one logical use batch, not separate cooling opportunities.
+  plan.next_ticket+=plan.total;sp_runs++;sp_jobs+=plan.total;
+  if(SpEnv("SP_VALIDATE")||SpEnv("SP_TRACE")){
+   api.Check(api.hipStreamSynchronize(stream),"SP diagnostic completion");

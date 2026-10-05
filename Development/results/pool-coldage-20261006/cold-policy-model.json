@@ -1,0 +1,14 @@
+{
+  "scope": "allocation-selection CPU semantics only; not GPU lifetime/completion proof",
+  "candidate_patch": "/tmp/297-vit-contract-host/Development/HIP/experiments/pool-coldage-20261006/candidate.patch",
+  "passed": 7,
+  "cases": {
+    "never_used_stamp_zero": "PASS",
+    "two_physical_launches_one_batch_then_one_intervening_batch": "PASS",
+    "nonlaunch_P_conservatively_overdelays": "PASS",
+    "shared_refs_and_PDL_refs_preserved": "PASS",
+    "graph_bypasses_stamping_counter_and_cold_filter": "PASS",
+    "recent_large_capacity_rejected_for_small_request_only": "PASS",
+    "uint64_saturates_then_next_advance_disables_without_wrap": "PASS"
+  }
+}
