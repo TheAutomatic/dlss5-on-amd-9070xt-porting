@@ -173,3 +173,6 @@
 
 - APP三轮正式合并门f7a48855实际完成（37548/65206/52791）：pooled wall mean−0.070848/p99−0.09415ms，24首末F16rawsamefinite、candidateGraph160与161DAG过。**R2/R3 B2自身p99退步必须保**：R2B2p99=10.304040/max11.745ms，R3B2p99=10.022260；pooled candidate max11.745>control10.182。不是allslot尾改善、无未来不卡顿保证/生产接受，原cold/drift/top5/max全保。纯NN4ef收益不相加。
 - 新productbaseline小12HDR gold源审PASS（graph0-product-baseline-review/e45afd81）：sameFrame/codec/HDR/PDL0NET0，EagerAuto实际枚举2对ReplayOff0，错role/ReplayAuto拒。Auto逐ordinary检查真实driver/caps/CreateOk1/active/accepted+1和record_ok；Off create/recordcalls0。普通Enq计数排capturehost记录，warm计数动态不假Record12；新PRED1请求MP1实际inactive，新exe/profile非旧PRED0freeze。CPU后验gold成本不自动当perf公平，后perf需静态hot路径源审；GPU/性能/部署未新增。
+
+- productbaseline12HDR actual60494/ee3919ba已PASS：Auto2 driver_validated1/caps1/Create1，ordinary15=warm4+12−1、RecordOk/accepted/site15、reject0/PDLcalls0，cleanupDestroyDrain1；ReplayOff普通warm4+Graph12且Create/Record0/161DAG。两独立Frame12stepF16bit0finite，是真auto对offgraph资源/输出门而非性能。旧gold每NN后验检查不对称，未用其wall判快慢。
+- 下一quietproductperf待actual新源审：原O2benchmark/同HDR/NET0PDL0 EagerAuto2对ReplayOff0，只移gold热后验检查；nativePulseScope/真实EventRecord逻辑不改，setup与末CPUcounters核RecordAccepted=warm+frames−1、no newHIPquery/逐帧打印。源未到不复旧gold，不承诺APP新baseline收益/生产；sharedamend禁，纯/APP/marker收益不相加。

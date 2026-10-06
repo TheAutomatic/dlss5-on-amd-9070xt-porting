@@ -1988,3 +1988,8 @@ root认可900正式均值改善/第三轮p99在1µs实际计时内未分辨退�
 - f7a48855实际三APP轮通过原合并mean/p99 gate，pooled−0.070848/−0.09415ms、24F16rawsamefinite/Graph160；R2/R3B2自身p99坏、R2max11.745ms高于pooledcontrolmax10.182真实保，不能写所有slot尾改善/未来无卡顿/已生产。原实验commit被sharedamend竞态后root CAS恢复，8168仅独立文档；审者不amend、也未改实验数据。
 - 新actualproduct e45源只读小12gold PASS：Auto2 genuineCreate1/drivercaps/accepted+1/record_ok门对Replay0全无create/record，ordinary排captureTraversal并包含真实setupwarm，noHIPquery/每frame打印；PRED1在MP1未执行数学predict、codeprofile新freeze不冒旧PRED0。后验CPUcountergold不替性能公平源门。
 - 本次仅源审/归档/计划同步，无GPU/远程扰动/构建/修改候选/现装配置；性能收益不相加、不扣独立Mgap、未部署。
+
+### 2026-10-06 actualproduct baseline资源/12HDR门ee3919ba
+
+- 60494权威actualPASS：Auto2 validateddriver/caps1/Create1、ordinary15(4warm+12−1)/RecordAccepted15/site15/reject0/PDL0及DestroyDrain1；Off普通4warm+图12/CreateRecord0/161DAG。12HDRF16输出两侧bit0finite，不冒requestedauto已启，也不将capturehost遍历算执行。
+- 该gold热后验诊断不对称、不计性能。Root只CPU准备quiet性能新source，移诊断不改nativePulseScope/Record，setup/末countertrue门与NET0/原Frame框架保持；源到再审，审者无新增GPU/remote扰动/noamend/现装配置改动。
