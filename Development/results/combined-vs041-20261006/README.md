@@ -1,0 +1,15 @@
+# Original0.41 vs current core APP preparation and first fallback cell
+
+Original0.41 source annotatedtag523723fd, samefunctionalSRCasffecb5c1freeze/ab8e3e82binaryrecipe. LocalofficialOptiScaler041ZIP SHA verifiedagainstreleaseledger, assets461 andgfx1201modules38 recoveredunaltered, notuse041plus3knivesasoldbaseline. BothsourceframescompiledsameMinGW C++17/O2/static originalbenchmark_vit_reuse.cpp (CPPsha identical), noTiminggetter/shadow/pulseexperimentalhost. Currentcorefrozen3c58d97a, productionfreezeDLLruntime8198.../addonab5d... separatelyrecorded; reconstructedAPP executable is notshippingDLLorfullgameFPS. Productioncompatpending atfirstcell, notclaimedcomplete.
+
+Bothsides use exactsameoriginal041codec/weights/noiseassetdirectory andsame1296×720HDRinput, byteSHAlocked. Modulebundlesdistinct:04138; current43physicalhsaco=39stockpostrelease+3inactiveexperimentaltemporaltwins+H900optional, withtemporaloff. Firstmanifestalsoincludednonloadedtemporal-history.hsaco.s; initial96653failedbeforeGPU/lock becauseonlyhsacostaged. Keptfailure, correctedmanifesttoactual43loadableELFs; notfailedperformancebatch.
+
+APPboundary samefullNativeGameFrame originalcodec/bridge/NN/decode/copy/emptyconsumerflush afterrestorerflush, excludesgamerender/FSR/Present. NET_TIMING0/allprobe0/inputpoll0, retainordinarypost_signalquery.160firstscreen discard80,firstframeoutsidewallreadbeforesteadysample, nointermediateimage scan,cold kept. Allfourframefirst/last SHAequal/finite. Clockactualµsquantizedaspreviousaudit.
+
+Plannedfourcells900/1152×MP1/MP3PRED1(userdefault);MP1PRED1predictioninactive,MP3PRED1twoactualpassespluspredictedthird. Honly900MP1/graph0/nonexperimental;MP3cannotborrowitsMP1gain. Pulseeligibility mustmatchactualeffectiveproductionpolicy, notrequestedauto. Eachcellperroundmergedavg/p99/raw reported, do notaddindividualH/pulsegains. PRED0trueMP3 is differentoptionaldiagnostic, notsubstituteforuserMP3.
+
+Firstcell78164exit0/LOCK_RELEASED (startedbeforequeued-steeringarrived, rootallowedfinish):900MP1PRED1 A0416.995250/current6.922850/current6.917325/A0417.015575ms80steady/slot. Mergedavg−0.085325ms,p99−0.068420ms. Coldframe0 1379.723/1381.677/1210.164/1219.013ms retained, notsteadymetric. Onebatchonly,noformalcombinedacceptance.
+
+ActualcurrentstderrHscope1loaded1/norm900 selected. Pulseplatformgfx1201/runtime70260201/driverquery0validated1/cap1/full26profileall1, but requestedauto/initialized0/active0/init_reject_mask256 andcreate/record/destroy0. PRED1inactiveatMP1 wasstillvetoedbyproductionpolicy. Thus thisiseffectiveH+postreleasefallback vs041, **not H+pulsecompletegain**. DirectproductioncounterlogestablishesRecord0, notjustrequestedsetting. No extraGPUcounter/getters inserted.
+
+Rootorderedkeepvalidfallbackcell; measurementCPUrevisesrequestedpredict/effectiveactivepredicateandwillissuefreshfreeze. Otherthreecellsremainunrun, scriptfail-closedmanifestuntilnewfreeze; nochanginguserPREDtocircumventeligibility. Noinstall/defaultconfiguration/releaseZIP/push. Artifactslargeoutsiderepo /tmp/combined-vs041-20261006 andisolatedDlab. Freshcombinationcandidate source/model/codec/fullprofile/hash/actualscope mustbe relocked.

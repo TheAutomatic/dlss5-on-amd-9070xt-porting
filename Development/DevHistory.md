@@ -1867,3 +1867,8 @@ B数学同域表达式消除half→float clamp→half往返，COMGR21真实640 V
 root认可900正式均值改善/第三轮p99在1µs实际计时内未分辨退步后进入兼容；1152负账原路保留。隔离route95048常规14×12帧raw0/AE CSV同，SP累计前提macroDIAGNOSTICS0忽略Env未触发；编专用rollhost diagnostics1并26675仅Remaining四真实roll>0/逐帧0，14+4+AE aggregate常规19真完成。seed37/65535、missing、宏0ghost、合法normal25 loadstatus0单缺postfeatures整体回old、MP2/3/FAST0与非900shape均0/finite/actualselected日志过。
 
 正式源码25c2df78新增唯一c32fastnorm900 row＋CW_NORM_HOIST default0与constructoroptionalroute，只FAST1/1600×960MP1graph0nonexp，26完整ABI整体fallback；Fn独立H/base cachekey支持热返旧。dualarch新row3sections同已测H/1200CPU正例，旧1201fast宏0机器同stock；生产O2host3码段同已验shim。正式payload96667四cold六帧对照0，初hot-envsetter不走NativeHotFlags未触发记录保留；仅52001改用真正Cycle/force_reload/既有poll selfownedconfig，Fn日志H mp1→base mp3→H mp1/六帧raw0，热门真闭环。不装机/发包/push/no moreHperf，pulse组合后需新测不能加收益。完整源码/载荷SHA/caseCSV/有效回落ABI/未触发解释见results/c32-norm-hoist-compat-20261006，WorkingPlan由integrator统一。
+
+
+### 2026-10-06 正式041原件恢复与current组合首cell实际fallback
+
+原OptiScaler041ZIP对release-ledger SHA同，tag523723fd原core/38gfx1201模块/461codec与模型资产隔离恢复，相关SRC同ffecb5c1freeze。两core同原benchmark CPP/O2/NET0，当前freeze3c58；共用原041codec/weights/HDR输入。96653 manifest误含非加载.hsaco.s前置fail/noGPU/no锁，修实际43hsaco后78164有效900MP1PRED1单batch四槽结束释放，首末raw同/finite。80steady A6.995250/current6.922850/current6.917325/A7.015575ms，avg−0.085325/p99−0.068420，cold初始1.2～1.38s全保。现场Hscope真on，但productionPulse requestedauto、initmask256、active0、Create/Record/Destroy0，MP1下inactivePRED1仍被policy拒；因此只有效currentfallback(H+既往三刀)对041，不能称完整H+Pulse收益。root要求保数据、CPU校正effective预测门并新freeze再其余900/1152×用户MP3PRED1，不换PRED0规避、不加独立收益，不GPU补轮/不发布完工。完整源/载荷/manifest/字段/CSV见results/combined-vs041-20261006。
