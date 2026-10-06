@@ -1848,3 +1848,9 @@ B数学同域表达式消除half→float clamp→half往返，COMGR21真实640 V
 - 实际90051314数据门 cold/warm/改真实HDR(+shift7/gain1.01)+seed7/return，A/B5帧逐位0finite，candidateRecord5成功/PDL20/firstprefix2/currentanyorder0/资源balance；MP3initMask128零events，legacyhistory冷首Record1后mask1回退，对应全raw0finite。非自然时序质量结论。
 - sameO2NET0scope真on90028126 mean−0.092794/p99−0.19514ms，115281547 −0.092088/−0.12544ms，160弃80；两B均快，各Record160成功160/createDestroy1/siteAccepted160，diagnosticouterAPI0、原postquery160；900PDL640、1152PDL0，raw同finite。均exit0/LOCK_RELEASED给H900compat，尚未正式/默认收，不与H收益相加。
 - H900计时裁决采用f38c3cb4：1us原计时量化、round3p99插值+0.14us保留不改/不抹数，低于分辨率且全三roundpooledp99−74.58us、controls漂移35–48us，根进程裁测量内持平进900-only兼容；1152+73.99us仍负。此方法不是随意增加容差，不称三轮全部p99负。整体追平目标未完成。
+
+### 2026-10-06 trueAPP单marker正式round1双档
+
+- 完全同e30ad811数据/首筛源码与O2NET0 exe、原Stock/PDL1/full71，none/on/on/none320弃80：900mean−0.081840/p99−0.11964ms；1152mean−0.090679/p99−0.05103ms。两档each两B均快，两侧对应raw同finite；candidateRecord/siteattempt/accepted320(CreateDestroy1/drain1)，80warm+240steady无额外NNwarmup，所有outertiming/span/poll APIs0、正常post_query320；900PDL1280/firstprefix2，1152PDL0。
+- 95590/92559各exit0/LOCK_RELEASED，给H900compat准备队列。必要round2/3尚未执行，本轮未提前默认收。独立当前execlockasm确认gettimeofday1us量化，同f38c3cb4原样端点/插值方法；现p99负变化119.64/51.03us明显高于分辨率，不借GPU分项。原cold samples全部保留。
+- ordered-boundary-app各formalround1目录CSV/log/SHA、clock-contract/asm归档；goal未完成，不与Hprefix结果相加，无配置/安装/ZIP/push。

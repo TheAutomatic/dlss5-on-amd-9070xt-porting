@@ -57,7 +57,7 @@
 - 同batchT/U没有支持untimed优于timed。正式timedpair三round900平均/p99均正，1152平均均正但round3 p99+0.08934ms，按门不收、不刷samevariant；当前没有足够新生产优化，900仍差约0.6ms、同1088差1.01ms。旧logger无tag只可受限分布关联，不据NET尾下降就定CPU全因果。
 - 无guard旧single900prototype首筛mean/p99正（different source）；safe1152首筛也正但旧记录计数缺。**更正：safe900formal旧stderr有frame-scope-fallback；APP900新权威计数Create1/Destroy1/Record0，均不是有效pulse性能试验，撤回正式性能负账归类。** 原CSV/平均/p99保留作normalNN/资源条件观察，不认single Record慢。
 - APP900初计数Record0是错误lifetimePDL veto导致fallback，不是性能负账。独立primary审6ecf9a0c确认Body22→普通Down(c256)→固定marker的有序边界；隔离仅在真实该Down普通Run返回后flag+当前selectorfalse放宽，PDL1不改，不推广任意位置。实际900 cold/warm/改HDR+seed7/return Record5/PDL>0/bit0finite，MP3与history-used回退门过。
-- 真on APP O2/NET0同exe首screen：900mean−0.09279/p99−0.19514ms、1152−0.09209/−0.12544ms，两侧candidateRecord160/160与createDestroy1平衡，诊断outerAPIs0，原postquery160。900lifetimePDL640/firstprefix2、1152PDL0，raw同finite。尚未收；H900compat窗口后同candidate正式900round1→即时stats→1152round1，再必要轮逐判，不盲三轮，不与H效果相加。
+- 真on APP O2/NET0同exe首screen：900mean−0.09279/p99−0.19514ms、1152−0.09209/−0.12544ms，两侧candidateRecord160/160与createDestroy1平衡，诊断outerAPIs0，原postquery160。900lifetimePDL640/firstprefix2、1152PDL0，raw同finite。真正formalround1双档已过：900mean−0.08184/p99−0.11964ms，1152−0.09068/−0.05103ms，实际Record320(80warm+240steady)/API资源/PDL边界/bit0finite全过；原cold全部保留。独立反汇编同1us计时源，微小插值正号按原端点/控制漂移完整交根进程，不自设容差或舍负号。尚未收；H900compat若ready先窗口，再必要round2/3各轮即时scope/stat gate，不盲三轮、不与H效果相加。
 
 - C32原fragment轴已纠正，不再把原布局误判列向。保两WMMA/原矩阵布局仅rsqrt hoist独立unit/prefix/fullraw0、occupancy16，1088首screen约−0.0611ms，actualAPP900三formal平均全正；round3p99+0.000140ms原值保留，MinGW计时1us量化/np分位数插值使0.14us低于分辨率，三轮pooledp99−0.07458ms、control漂移35–48us。根进程据f38c3cb4裁该轮测量内持平，只进900兼容，不能写每轮p99全负；1152首p99+0.07399ms仍负、不能放行。全目标未完成，不与pulse收益相加、不混数学与提交。B2/C2短筛无足够稳定收益不收。
 

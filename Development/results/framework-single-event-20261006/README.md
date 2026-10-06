@@ -65,3 +65,16 @@ SameO2/NET0/Stock39/full71/HDRcalleroneABBA160discard80pergeometry (noGetTimings
 |1080/proc1152|−0.092088|−0.12544|160/160 bothB|0|
 
 BothB means lower than bothA eachscope. APIcreate/destroy1 balanced, drain1, sitevisits/attempts/accepted160,reject0; timerCreate/Record/Query/span/poll0 andnormalpost_signalquery160. First/lastrawSHAsame/finite. Sessions28126/81547exit0/LOCK_RELEASED; queuegivenH900compat. NoNETGPUcomponentexistsinthisAPPcondition. AllCSV/log/rawSHA/source/exe receipts underordered-boundary-app. Firstscreenonly, defaultnotadopted; noadditionofindependentHnormgain. Necessaryformalnextsamecandidate320discard80oneABBAroundthenimmediatemean/p99/RecordN/raw review, rejectinvalidscopebeforeperformanceclassification. Previouspseudo-on allocations/fallbacklogsremainseparate.
+
+## TrueAPP formal round1, two geometries
+
+Same frozenO2/NET0source/exe asdata/firstscreens,320frames discard80,actualacceptedRecord320 (warm80+steady240; noextraNNwarmup). 90095590exit0/115292559exit0,LOCK_RELEASED each; currentNNbaseline unchanged, noHnormmodules mixed.
+
+|scope|wallmean delta ms|mergedp99 delta ms|PDL lifetime|all scope/data/resource gates|
+|---|---:|---:|---:|---|
+|900/proc960|−0.081840|−0.11964|1280|pass|
+|1080/proc1152|−0.090679|−0.05103|0|pass|
+
+EachbothBmeansbelowbothA; Record/siteattempts/accepted320, createDestroy1 balanced/drain1, nooutertimer/poll/Span; defaultpost_query320 retained. First/lastraw sameSHA/finite. Allcoldsamples retained; the aboveonly240steady eachslot. Clockdisassembly independentlyshowsstd::chrono::steady_clock::nowcallsgettimeofday, then(sec*1e6+usec)*1000: resolution1us; p99 useslinearinterpolation, noarbitrarynegative-rounding/tolerance. Currentp99changes119.64/51.03us clearlyexceedthatfloor. If laterdelta liesbelowresolution, preserveexactsign/endpoints/control drift and letrootreview; do notautomaticallyinfertrue-tailregression orhiddenacceptance.
+
+Necessaryround2/3remainoneABBA thenimmediateparser/stats, onlyaftereachvalidgate. H900compat queue firstifready. No default/installation/ZIP modification, no goalcompletion claim. Method fields andrawCSV/logs inordered-boundary-app rounddirectories; noequivalentGPUcomponentinventedforNET0.

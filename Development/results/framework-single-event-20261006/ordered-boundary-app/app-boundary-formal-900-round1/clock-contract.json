@@ -1,0 +1,7 @@
+{
+  "source": "same exe disassembly steady_clock::now 0x140199130 calls gettimeofday; (sec*1e6+tv_usec)*1000 returns ns",
+  "quantization_us": 1,
+  "maximum_observed_distance_to_integer_us": 0.0,
+  "measurement_method": "keep raw sample and np linear p99; do not round delta sign; report per-slot drift/pooled tails for root decision when delta below real quantization; no arbitrary epsilon",
+  "scope": "CPUwall, no GPUtiming"
+}
