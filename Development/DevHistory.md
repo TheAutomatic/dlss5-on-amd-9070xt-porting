@@ -1819,3 +1819,9 @@ B数学同域表达式消除half→float clamp→half往返，COMGR21真实640 V
 - 实际safelease/HIPadapter同exe正式900none/on/on/none320弃80，A7.093942/7.135950、B7.121513/7.150271ms，平均+0.020946ms、合并p99+0.10405ms；matchingNET平均+0.015632/p99+0.009636ms。1280/1280tag当帧匹配，allrawbit0/finite，无记录错配借口。
 - 按门首轮即止，不跑1152formal/剩余轮/normal19/计时off重刷，不默认收。旧throwprototype900与safe1152positive首屏如实保留，各自source分列；不能把跨源码/批次初筛覆盖当前正式负账。当前O1/NET_TIMING1条件不推canonicalO2/默认游戏计时off。
 - session42446exit0/LOCK_RELEASED，results/framework-single-event-20261006/formal-safe900-round1原CSV/tag日志/hash及largest-wallframes归档。玩家现装/config/ZIP未动。下一优化按根进程排独立normhoist门，不将两个未收候选相加。
+
+### 2026-10-06 校准pulse诊断与实际APP条件（CPU准备）
+
+- 已正式负账仅O1/NET_TIMING1条件；不能据此判APP无效，也不能拿旧positive首屏判APP有效。paired/single诊断线仍封存，无GPU重刷。根进程随后要求准备一次必要实际APP条件，等独立HnormAPP双档门后再决定执行。
+- prepare_app恢复原NativeGameFrame benchmark loop、canonicalO2/static、NET_TIMING0/allprobes0，完全无GetTimings/GetStatus/Poll/SetTag；禁lazy-enable诊断入口。保原directIO/async/inputpoll0与默认post_signal_streamquery。新增普通CPU计数并退出打印pulseCreate/Record/Destroy及outertimerAPI数，未新增query/sync。O2完整链接0，实际counter版本adapter/leaseCPU ASAN/UBSAN faulttests过，toolingparser能拒非零诊断query，非GPU/质量实验。
+- 权威原O2/HDR/fullFrame/模块overlay参数已交math代理做HnormAPP主测；本代理没有上传或执行APPpulse，以免扰正在GPU窗口。app-cpu-preparation.json绑定source/exeSHA，玩家配置/载荷/ZIP未改。
