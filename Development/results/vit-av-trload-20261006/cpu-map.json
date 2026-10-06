@@ -1,0 +1,11 @@
+{
+  "payloadSHA": "72139f30a7250e4fd7a5e4112261ed46c5bf0790fae93fd1bc0365578c9fe2d4",
+  "raw_bytes": 1966080,
+  "base": 1327328,
+  "lane_read_row": "floor(lane/8)*4+(lane&3)",
+  "lane_read_col": "(lane&4)?8:0",
+  "output_byte_e_source_lane": "floor((lane/16*8+e)/4)*8+((lane/16*8+e)%4)+floor((lane%16)/8)*4",
+  "output_byte_e_source_offset": "lane%8",
+  "hypothesis": "Mesa load-transpose source/destination mapping; verified address equality CPU, hardware gold required",
+  "distinct_byte_codes": 204
+}
