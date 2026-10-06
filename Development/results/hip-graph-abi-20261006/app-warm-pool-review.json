@@ -1,0 +1,32 @@
+{
+  "scope": "CPUreadonly warmedpool rejection mechanism and boundedwarm source; noGPU",
+  "original70977_failure": "root-reported capture warmedallocationpool rejection, noGraphExec; concrete requestedbytes/owner notlogged inoriginalfailure",
+  "warm_prepare_correction": "OriginalFrameAPP didnotcallRuntime-onlyPrepareStaged(seed1); priorassumptionwithdrawn",
+  "local_warm_tensor": "helperEnqueue returnsbeforecapture; eager/lastFn vectorscontainHandle only",
+  "persistent_pool_owners": "SpGetPlan usesNew for6outputs+gpu_nodes+stateperplan;2plans16strongheldpoolTensor allocations; mayconsumeearliertransientcapacities",
+  "known_requested_SP_shapes_1152": {
+    "layeroutput_bytes": 2211840,
+    "nodes893_bytes": 28576,
+    "state_bytes": 10732
+  },
+  "exact_failure_shape_proven": false,
+  "allocator_rule": "use_count==1 &&capacity>=requestedbytes;smallestcapacityfit;capturemissfailsbeforealloc",
+  "new_snapshot_gate": [
+    "Api.hipMalloccalls+success",
+    "Uploadcounter",
+    "Fnmisscounter",
+    "Planmisscounter",
+    "pool/weights/modules/functions/plans/gathermaps sizes",
+    "SProllovers",
+    "sameactualFnsequence"
+  ],
+  "warm_release": "Enqueue+sync completesinsidescope;noheldwarmoutputTensor",
+  "termination": "2consecutive fullystable iterations then capture;80upperbound failure, not performancewarm count",
+  "limits": "driverinternalgraphalloc andhostmalloc notgenericzeroallocationclaim; mappedSPerrorsinitcoveredPlanmiss/fixedwarmedplans; HasFn failedprobe notindividuallycounted",
+  "new_miss_design": "reqbytes+poolcapacity/ref/SPowner+lastactualFn toproveconcreteowner; notguess80",
+  "source_SHA": {
+    "hip_reference_network.h": "ffadb6c34abf191b03b03bab2943c86b2da46ca1bc8fb73249a3855402eea5d8",
+    "hip_api.h": "a02b0bd87d52ee23b1b6e671d881afccbf467ae49547dbffa1d55389fd7cdeda",
+    "swin_persistent_network.h": "de5b445e2f9fdbdbe846fe2bf8ee7b3ea0d47feaa152191122f85748b3e03221"
+  }
+}
