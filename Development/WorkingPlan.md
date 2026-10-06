@@ -159,3 +159,5 @@
 
 - 三轮samework纯NN formal已完成：pooledGPU mean−0.090802/p99−0.130112ms，wall−0.100691/−0.098590（4efbcf46），每轮均值/尾与正确性过，未加刷轮。它是固定1088/currentmath/SP161的队列组织收益，不和APPpulse/H相加、不直接扣独立Mgap，不GoalComplete。
 - 下一actualAPP graph prototype仅CPU待源（aad9ce62应用scope）：1152 menuHDR原codec/D3D-HIP交接，MP1AE0historyoffseed0/PDL0/pulse0/NET0，两mode同条件；只capture neural Enqueue，pre/post/外sync在外，Frame/map/pool/模块和graph owner全持，captured后不PrepareFrame/eager以免变内部指针。先changedHDR同独立原Framegold，实际APP速度/生产/长期回放未验，源落地后独立审，不空转旧门/不GPU。
+
+- actualAPP1152 prototype源已落且独立CPU审PASS（graph0-app-source-review）：原Frame/codec不改，Bridge生产者wait→仅neuralLabHelper→signal/consumerwait，初realframe eagerseed0warm/capture/initialreplay返回前完成调用，无互等环（overlap0）。捕后Prepare拒/onlyGraphLaunch、mappedptr固定、Frame/Bridge/Net各自owner保持，closegraph在Release进口buffers之前。现在只授权paired12step seq2 HDRF16 gold/NET0同条件，源审不等actualAPP gold或速度/生产接受；首帧setup/日志不可当性能。

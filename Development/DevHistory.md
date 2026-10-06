@@ -1960,3 +1960,8 @@ root认可900正式均值改善/第三轮p99在1µs实际计时内未分辨退�
 
 - 4efbcf46执行者R3/49361权威PASS：GPUmean/p99−0.096417/−0.123420ms，wall−0.100059/−0.07079。三必要轮各自均值/尾/raw153ac过，pooledGPU−0.090802/−0.130112、wall−0.100691/−0.098590，36raw读数包含共同setup，setupcapture/instantiate单列。固定1088SP161同数学scope已有可重复收益，非APP/生产接受，也不从独立M1.046差简单扣掉。
 - Root启动实际APP1152原menuHDR/codec/interop图CPU原型，独立审者待真实源才核maps/Frame/pool寿命、pre/post外capture、NET0条件与changedHDR独立Framegold；不运行GPU、不预认APP收益或长期图支持，不改现装/config/ZIP。
+
+### 2026-10-06 实际APP codec/interop图插点只读审
+
+- 对/tmp/graph0-app实际5文件核源/哈希，Bridge wait272→LabEnq275→signal278/consumerwait282，图只neural161强DAG，原codec/外sync在外；firstzero seed1 prepare捕前、real seed0warm同步等待已submitproducer，初replay回helper前调用，不形成当前overlap0同frame互等。
+- captured后Prepare拒且onlyGraphLaunch，mappedin/out/frame固定、Style1cached；Frame/Bridge进口资源与Netweights/pool/SP backing到close保持，Bridge先closeexec/graph再Release进口/删Net。sourcePASS仅paired12 HDR seq2/spatialreset/nohistory同scope，不泛hot/resize/长期/性能/生产。审者无GPU/构建/修改candidate，报告graph0-app-source-review；硬件gold待执行者交账。
