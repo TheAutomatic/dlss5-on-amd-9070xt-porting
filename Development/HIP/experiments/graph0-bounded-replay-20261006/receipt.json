@@ -1,0 +1,24 @@
+{
+  "phase": "CPU only bounded repeat/changed-input preparation; no GPU authorized",
+  "baseline_single_replay_result": "03ef727f/72596 hardware bit0",
+  "source_sha256": "57b4a1e7c263add73b5d5beeb746f4071323656bc9fb572981c9485e3221e660",
+  "build_session": 99569,
+  "headers": "same isolated single-replay headers, fixedgraph0/PDL0/pulse0/SPcacheguards",
+  "controlled_change": "Typedencoded f32 RGBA working-domain source, valid1920x1080 R checkerboard +/-0.015625; G/B/A and processed padding remain unchanged. This is controlled data, not real temporal input/exposure experiment.",
+  "gates": [
+    "Capture exact161stronglyordered original functions once",
+    "CapturedNetwork never Enqueue again after capture",
+    "three graph launches sameinput each poison/sync/full153ac exact+finite",
+    "copy changedbytes into same stableinputGPU ptr",
+    "independent ReferenceNetwork same opt/module/math/seed0, own plans/pool and separate output; captured node backing untouched",
+    "fourth graphlaunch poison/sync versus independent reference fullbit0/finite and different from original",
+    "graph and all input/output/plans/pool/weights/moduleholders alive until drain+execdestroy+graphdestroy"
+  ],
+  "limits": [
+    "Four launches not rollover/forced-recovery/unbounded lifetime proof",
+    "No performance/PALsubmission count evidence",
+    "Additional ReferenceNetwork allocations may fail capacity prerequisite; no fallback results assumed"
+  ],
+  "build_terminal": "99569 exit0",
+  "exe_sha256": "be52c2acf3480751aada205e7cc0ff972102d29fbbed269b52e285d3192db899"
+}
