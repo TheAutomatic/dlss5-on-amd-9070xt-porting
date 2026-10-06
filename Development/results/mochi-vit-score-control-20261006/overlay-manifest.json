@@ -1,0 +1,399 @@
+{
+  "recursive_files": 65,
+  "recursive_SPVs": 60,
+  "changed": [
+    "g_vitattn.spv"
+  ],
+  "rows": [
+    {
+      "path": "accumulation.txt",
+      "oldSHA": "c61d8746e033cb40245abde9b1f432d12d8cc691f4a97d97ec674279325b7b6c",
+      "newSHA": "c61d8746e033cb40245abde9b1f432d12d8cc691f4a97d97ec674279325b7b6c",
+      "bytes": 5
+    },
+    {
+      "path": "coherent-act.txt",
+      "oldSHA": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "newSHA": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    {
+      "path": "g_attn.spv",
+      "oldSHA": "2b5c7152666df3d68e31a53881cb71f0f6bb2637c3055ad0ffb81f297a5b1ccc",
+      "newSHA": "2b5c7152666df3d68e31a53881cb71f0f6bb2637c3055ad0ffb81f297a5b1ccc",
+      "bytes": 830384
+    },
+    {
+      "path": "g_decups.spv",
+      "oldSHA": "4c76d6b701942b709632dc35a671724a8ce0614e7cd442a4df06bfb4d63ea5c7",
+      "newSHA": "4c76d6b701942b709632dc35a671724a8ce0614e7cd442a4df06bfb4d63ea5c7",
+      "bytes": 10772
+    },
+    {
+      "path": "g_ffwd3.spv",
+      "oldSHA": "a050a139bfd7864cb453de9617d024d7fa8f103f4df6001e3e7439177ef7e71b",
+      "newSHA": "a050a139bfd7864cb453de9617d024d7fa8f103f4df6001e3e7439177ef7e71b",
+      "bytes": 41520
+    },
+    {
+      "path": "g_ffwd3w.spv",
+      "oldSHA": "a59b53e0b34494de718298d4efc9e2c57f3efd01b102648885b7dcfddf446d56",
+      "newSHA": "a59b53e0b34494de718298d4efc9e2c57f3efd01b102648885b7dcfddf446d56",
+      "bytes": 49468
+    },
+    {
+      "path": "g_fswin128.spv",
+      "oldSHA": "8c920ed427607ae2de0b714e8ec53ef5c941114e8f10637181ecf175e919dab9",
+      "newSHA": "8c920ed427607ae2de0b714e8ec53ef5c941114e8f10637181ecf175e919dab9",
+      "bytes": 677292
+    },
+    {
+      "path": "g_fswin256.spv",
+      "oldSHA": "e950c4d49495f1a91a2472c720838fcaf4402eb8c73ad8a6cc970cd82c60539d",
+      "newSHA": "e950c4d49495f1a91a2472c720838fcaf4402eb8c73ad8a6cc970cd82c60539d",
+      "bytes": 945004
+    },
+    {
+      "path": "g_fswin32.spv",
+      "oldSHA": "82381cd856907bccd9bcae23e89ba34549ec8fa1f1f273ee17270b075670e678",
+      "newSHA": "82381cd856907bccd9bcae23e89ba34549ec8fa1f1f273ee17270b075670e678",
+      "bytes": 2176272
+    },
+    {
+      "path": "g_fswin64.spv",
+      "oldSHA": "2ebbcef26ca258e327c6a89234a9b20b2b82360b0405cf6c9871d366126ad2be",
+      "newSHA": "2ebbcef26ca258e327c6a89234a9b20b2b82360b0405cf6c9871d366126ad2be",
+      "bytes": 550436
+    },
+    {
+      "path": "g_fswinds128.spv",
+      "oldSHA": "3807d5fead61dfa68b88f76a55b6e8ce153da9b8d03d320bda90541bf8a9693a",
+      "newSHA": "3807d5fead61dfa68b88f76a55b6e8ce153da9b8d03d320bda90541bf8a9693a",
+      "bytes": 759972
+    },
+    {
+      "path": "g_fswinds256.spv",
+      "oldSHA": "06cb9ca883ef0c0e5c3f9560fb6d2f18767151b9612a4759e55d9686d4dfe84e",
+      "newSHA": "06cb9ca883ef0c0e5c3f9560fb6d2f18767151b9612a4759e55d9686d4dfe84e",
+      "bytes": 1055404
+    },
+    {
+      "path": "g_fswinds32.spv",
+      "oldSHA": "24dad179b6d13689131d739708064922c18941c6c55dcc69aae134fbcb831067",
+      "newSHA": "24dad179b6d13689131d739708064922c18941c6c55dcc69aae134fbcb831067",
+      "bytes": 511228
+    },
+    {
+      "path": "g_fswinds64.spv",
+      "oldSHA": "c671438a3d6ddadd9940925e5e560f44ea3dacd12b889995f9de49f0f3ea5fac",
+      "newSHA": "c671438a3d6ddadd9940925e5e560f44ea3dacd12b889995f9de49f0f3ea5fac",
+      "bytes": 633116
+    },
+    {
+      "path": "g_fswindsp128.spv",
+      "oldSHA": "40cbfc3fc3cb6141c5072e854fc8ff7b391668418889c78001ecefe0da183227",
+      "newSHA": "40cbfc3fc3cb6141c5072e854fc8ff7b391668418889c78001ecefe0da183227",
+      "bytes": 825220
+    },
+    {
+      "path": "g_fswindsp256.spv",
+      "oldSHA": "f04eb2538891e23a799e29ec8a6e9af77234aad273c0d8c27a69b2196a43c375",
+      "newSHA": "f04eb2538891e23a799e29ec8a6e9af77234aad273c0d8c27a69b2196a43c375",
+      "bytes": 1129644
+    },
+    {
+      "path": "g_fswindsp32.spv",
+      "oldSHA": "a22003dcb23f60a2282cf973538d727689f9119fe04f19d98a1316520a1d294a",
+      "newSHA": "a22003dcb23f60a2282cf973538d727689f9119fe04f19d98a1316520a1d294a",
+      "bytes": 561520
+    },
+    {
+      "path": "g_fswindsp64.spv",
+      "oldSHA": "f73066e429f5fe7d4aaa27775d40c7e2195aaa5bd99aff96fa817e1d01ec98e7",
+      "newSHA": "f73066e429f5fe7d4aaa27775d40c7e2195aaa5bd99aff96fa817e1d01ec98e7",
+      "bytes": 687516
+    },
+    {
+      "path": "g_fswinfusedup128.spv",
+      "oldSHA": "d262d408b50f1a2fb49fc87b69073b7d5077cf72bd4c09359ba264ae7bbdeafe",
+      "newSHA": "d262d408b50f1a2fb49fc87b69073b7d5077cf72bd4c09359ba264ae7bbdeafe",
+      "bytes": 914148
+    },
+    {
+      "path": "g_fswinfusedup256.spv",
+      "oldSHA": "7fd61946b428c196359493cc30820243da64770f3a4ab12fe556efb7d156fb4b",
+      "newSHA": "7fd61946b428c196359493cc30820243da64770f3a4ab12fe556efb7d156fb4b",
+      "bytes": 1236968
+    },
+    {
+      "path": "g_fswinfusedup32.spv",
+      "oldSHA": "ec38fc3acf408d29fda0b19e2e1238b116ad6342eeb14c42fdc5bc0c4dbbc031",
+      "newSHA": "ec38fc3acf408d29fda0b19e2e1238b116ad6342eeb14c42fdc5bc0c4dbbc031",
+      "bytes": 628600
+    },
+    {
+      "path": "g_fswinfusedup64.spv",
+      "oldSHA": "4577fe2d1da6e0c83d063ebb80ba494f54cdec409ac304df76126c4acdee6782",
+      "newSHA": "4577fe2d1da6e0c83d063ebb80ba494f54cdec409ac304df76126c4acdee6782",
+      "bytes": 747716
+    },
+    {
+      "path": "g_fswinimagepost32.spv",
+      "oldSHA": "d6fcad51d747838b4ad2b9aaea4a2ef7606a493576e6795ef93e13b31863d255",
+      "newSHA": "d6fcad51d747838b4ad2b9aaea4a2ef7606a493576e6795ef93e13b31863d255",
+      "bytes": 705036
+    },
+    {
+      "path": "g_fswinimagepreds32.spv",
+      "oldSHA": "dd7d9948811b650ccf8b4f4212c5e02f6c036747f75246915de2d2bf40a9366b",
+      "newSHA": "dd7d9948811b650ccf8b4f4212c5e02f6c036747f75246915de2d2bf40a9366b",
+      "bytes": 553400
+    },
+    {
+      "path": "g_fswinp128.spv",
+      "oldSHA": "4ca84a2db33fabbf6e0f17ce2f85d9b11a36e3958ebc58a0f3de2e05e57f3050",
+      "newSHA": "4ca84a2db33fabbf6e0f17ce2f85d9b11a36e3958ebc58a0f3de2e05e57f3050",
+      "bytes": 731864
+    },
+    {
+      "path": "g_fswinp256.spv",
+      "oldSHA": "261129b2e0236e1e40b28d4277f708f8cca9a17aa629f9a07f2b3dadebc94580",
+      "newSHA": "261129b2e0236e1e40b28d4277f708f8cca9a17aa629f9a07f2b3dadebc94580",
+      "bytes": 5211400
+    },
+    {
+      "path": "g_fswinp64.spv",
+      "oldSHA": "9d9bf3589c8d1af8cd5e7cdf59737c140b9db5270053b8b6b17648586f4f272a",
+      "newSHA": "9d9bf3589c8d1af8cd5e7cdf59737c140b9db5270053b8b6b17648586f4f272a",
+      "bytes": 585932
+    },
+    {
+      "path": "g_fswinpds128.spv",
+      "oldSHA": "be0b6d62447277ae5ac3c7ce2567a857885a2aea9e05d7d781d5b8e32063aad4",
+      "newSHA": "be0b6d62447277ae5ac3c7ce2567a857885a2aea9e05d7d781d5b8e32063aad4",
+      "bytes": 4415552
+    },
+    {
+      "path": "g_fswinpds256.spv",
+      "oldSHA": "891b39f889312d10496681545dce056dca3746d76ea1edd5b861415451b61e0f",
+      "newSHA": "891b39f889312d10496681545dce056dca3746d76ea1edd5b861415451b61e0f",
+      "bytes": 5935800
+    },
+    {
+      "path": "g_fswinpds64.spv",
+      "oldSHA": "affd3ce75e847180eb31c9ceb76c3d0bc0d66b7d08aae2e4ff9340c82bb3bf4c",
+      "newSHA": "affd3ce75e847180eb31c9ceb76c3d0bc0d66b7d08aae2e4ff9340c82bb3bf4c",
+      "bytes": 3578308
+    },
+    {
+      "path": "g_fswinpup128.spv",
+      "oldSHA": "6abc90549939efea11b17d576935a20de8258c1543320d3ecd888bb913b1424d",
+      "newSHA": "6abc90549939efea11b17d576935a20de8258c1543320d3ecd888bb913b1424d",
+      "bytes": 4916768
+    },
+    {
+      "path": "g_fswinpup256.spv",
+      "oldSHA": "c7929ee178d66bcb7e6849a201fed85d78b34f49e3a30762da4e65088bfc4a88",
+      "newSHA": "c7929ee178d66bcb7e6849a201fed85d78b34f49e3a30762da4e65088bfc4a88",
+      "bytes": 6801616
+    },
+    {
+      "path": "g_fswinpup64.spv",
+      "oldSHA": "14c55b766950b8ca10d77c36d2cc30b923611e4c352b76387c1f91e2976cad2c",
+      "newSHA": "14c55b766950b8ca10d77c36d2cc30b923611e4c352b76387c1f91e2976cad2c",
+      "bytes": 3966548
+    },
+    {
+      "path": "g_gemmnores.spv",
+      "oldSHA": "de97e04788842807d4285663566f99f172a8a9a8ae8fae5596d5a3c56bc7e573",
+      "newSHA": "de97e04788842807d4285663566f99f172a8a9a8ae8fae5596d5a3c56bc7e573",
+      "bytes": 58708
+    },
+    {
+      "path": "g_gemmpool.spv",
+      "oldSHA": "acedc812c019bc939ba3a29918897afe2d6b5e6a096896f0b5c14ca442fe42cd",
+      "newSHA": "acedc812c019bc939ba3a29918897afe2d6b5e6a096896f0b5c14ca442fe42cd",
+      "bytes": 60200
+    },
+    {
+      "path": "g_gemmproj.spv",
+      "oldSHA": "282ddfdabe89e32722440d6c3e7c5040bdc32a3576e6ab41dd68681038b2883a",
+      "newSHA": "282ddfdabe89e32722440d6c3e7c5040bdc32a3576e6ab41dd68681038b2883a",
+      "bytes": 169964
+    },
+    {
+      "path": "g_gemmprojc.spv",
+      "oldSHA": "942b5094d1bbcf8a6891cfea3da187a523238b9a8a183680c7d71bfbb373d20a",
+      "newSHA": "942b5094d1bbcf8a6891cfea3da187a523238b9a8a183680c7d71bfbb373d20a",
+      "bytes": 171316
+    },
+    {
+      "path": "g_gemmprojt.spv",
+      "oldSHA": "60add0f4171f5b536c6acb1e68d9d2d9df22b741bb5a8912dfaf5a929164b24d",
+      "newSHA": "60add0f4171f5b536c6acb1e68d9d2d9df22b741bb5a8912dfaf5a929164b24d",
+      "bytes": 171644
+    },
+    {
+      "path": "g_gemmprojw.spv",
+      "oldSHA": "19b4735fd7243d7c8c4887b61a38c0002b225097551f7805607cc3502a2e960e",
+      "newSHA": "19b4735fd7243d7c8c4887b61a38c0002b225097551f7805607cc3502a2e960e",
+      "bytes": 184676
+    },
+    {
+      "path": "g_gemmvact.spv",
+      "oldSHA": "c48c1619dde7995664f7b0e6e34c4bd51abf0d6b20cac70b65daf186b01efbdb",
+      "newSHA": "c48c1619dde7995664f7b0e6e34c4bd51abf0d6b20cac70b65daf186b01efbdb",
+      "bytes": 62264
+    },
+    {
+      "path": "g_gemmvnores.spv",
+      "oldSHA": "2673696c16192b12b43f657d5af8296cc793271c89d7f6506cbc88c9dfc3dca4",
+      "newSHA": "2673696c16192b12b43f657d5af8296cc793271c89d7f6506cbc88c9dfc3dca4",
+      "bytes": 42872
+    },
+    {
+      "path": "g_gemmvproj.spv",
+      "oldSHA": "bb826429d6c42ad33c04e9b155388e2b449e1758757791319fde62c9c661e4ba",
+      "newSHA": "bb826429d6c42ad33c04e9b155388e2b449e1758757791319fde62c9c661e4ba",
+      "bytes": 43508
+    },
+    {
+      "path": "g_gemmvqkv.spv",
+      "oldSHA": "6e9276d09df30369a695dcf99e8409e87de262154bbd59990702a668af123088",
+      "newSHA": "6e9276d09df30369a695dcf99e8409e87de262154bbd59990702a668af123088",
+      "bytes": 59140
+    },
+    {
+      "path": "g_gemmvqkvnorm.spv",
+      "oldSHA": "7e3251e0d1cddac21a28f55578c40be707e864327222d64d82dfca16ab9aa0eb",
+      "newSHA": "7e3251e0d1cddac21a28f55578c40be707e864327222d64d82dfca16ab9aa0eb",
+      "bytes": 64920
+    },
+    {
+      "path": "g_gemmvqkvs.spv",
+      "oldSHA": "aa6b67205d970c51648e6faf9863b4e2810a17ec42a527c5049f1238c07ff762",
+      "newSHA": "aa6b67205d970c51648e6faf9863b4e2810a17ec42a527c5049f1238c07ff762",
+      "bytes": 166756
+    },
+    {
+      "path": "g_noisefield.spv",
+      "oldSHA": "fa081910e73356ed916ae30b059105e39aff5bb46e0468e0f910337e1544704a",
+      "newSHA": "fa081910e73356ed916ae30b059105e39aff5bb46e0468e0f910337e1544704a",
+      "bytes": 5868
+    },
+    {
+      "path": "g_repack.spv",
+      "oldSHA": "aabb4fe82f5ffb2356ab18ccd6bdd261c65a1d9b863c4c4bbc77f9a5dc0bdb2c",
+      "newSHA": "aabb4fe82f5ffb2356ab18ccd6bdd261c65a1d9b863c4c4bbc77f9a5dc0bdb2c",
+      "bytes": 3916
+    },
+    {
+      "path": "g_upsview.spv",
+      "oldSHA": "885a4dfe29ae0c945acd20aa5ecf672354c1273ade603d572aa3c54ff994bd4d",
+      "newSHA": "885a4dfe29ae0c945acd20aa5ecf672354c1273ade603d572aa3c54ff994bd4d",
+      "bytes": 6304
+    },
+    {
+      "path": "g_vitattn.spv",
+      "oldSHA": "8993390ab9316895daf19c3c9ba669b984301c4a1624e87901fbcbf2e46634b1",
+      "newSHA": "1a6d2b5f46dfacba6ccf4568d9c92f5a0a5d9547e8f81f71f0bc728921fbacae",
+      "bytes": 33564
+    },
+    {
+      "path": "g_vitattnnobda.spv",
+      "oldSHA": "3f02ccb627ae6d75e727253a8d1c021fc41c6aed4ed8651a40f5eff698b60fee",
+      "newSHA": "3f02ccb627ae6d75e727253a8d1c021fc41c6aed4ed8651a40f5eff698b60fee",
+      "bytes": 32464
+    },
+    {
+      "path": "runtime/cascade_blur.spv",
+      "oldSHA": "e1fe1ea0461f67da4e6e9c57f69125f1a4a88599ba3deeea7a48e7f5e54d441a",
+      "newSHA": "e1fe1ea0461f67da4e6e9c57f69125f1a4a88599ba3deeea7a48e7f5e54d441a",
+      "bytes": 2728
+    },
+    {
+      "path": "runtime/cascade_feed.spv",
+      "oldSHA": "0dae3eb0d4c95799704cbb47a926bcd5665a07b464e41f64e4c03466f484eecc",
+      "newSHA": "0dae3eb0d4c95799704cbb47a926bcd5665a07b464e41f64e4c03466f484eecc",
+      "bytes": 4548
+    },
+    {
+      "path": "runtime/cascade_lograt.spv",
+      "oldSHA": "62e04181f5f469747365de9132ad4db7c1eec14366542d1e010a1de5ff471f67",
+      "newSHA": "62e04181f5f469747365de9132ad4db7c1eec14366542d1e010a1de5ff471f67",
+      "bytes": 3720
+    },
+    {
+      "path": "runtime/runtime_alpha.spv",
+      "oldSHA": "389bd793e24d6c3a34c82f067d611c3ee190771882d1458dc57128a553523088",
+      "newSHA": "389bd793e24d6c3a34c82f067d611c3ee190771882d1458dc57128a553523088",
+      "bytes": 2484
+    },
+    {
+      "path": "runtime/runtime_depth.spv",
+      "oldSHA": "b087dec8c29831a80da5c3a81aaed93beed1184ba83b60ffb3b36c018455148d",
+      "newSHA": "b087dec8c29831a80da5c3a81aaed93beed1184ba83b60ffb3b36c018455148d",
+      "bytes": 2700
+    },
+    {
+      "path": "runtime/runtime_encode.spv",
+      "oldSHA": "39dcd29e419b0fabd325b23c9ad4e10c5817577c0afa64e9dc1df1d56716ef01",
+      "newSHA": "39dcd29e419b0fabd325b23c9ad4e10c5817577c0afa64e9dc1df1d56716ef01",
+      "bytes": 3740
+    },
+    {
+      "path": "runtime/runtime_prep.spv",
+      "oldSHA": "f4e142b9a55e6b6179ef93e4205d6cba2d92eb379bea7751b65993b3f31bafc5",
+      "newSHA": "f4e142b9a55e6b6179ef93e4205d6cba2d92eb379bea7751b65993b3f31bafc5",
+      "bytes": 34836
+    },
+    {
+      "path": "runtime/runtime_transfer.spv",
+      "oldSHA": "efd839a430e302878651c77844df80a8a561701d0a510af61c4cf9686e8966b3",
+      "newSHA": "efd839a430e302878651c77844df80a8a561701d0a510af61c4cf9686e8966b3",
+      "bytes": 22720
+    },
+    {
+      "path": "shader-constants.txt",
+      "oldSHA": "d3c50cbcd1e1c56676c186050b9dcabb24bfbfdf05183dec1aba0881be5037ea",
+      "newSHA": "d3c50cbcd1e1c56676c186050b9dcabb24bfbfdf05183dec1aba0881be5037ea",
+      "bytes": 443
+    },
+    {
+      "path": "swin-bias-storage.txt",
+      "oldSHA": "c61d8746e033cb40245abde9b1f432d12d8cc691f4a97d97ec674279325b7b6c",
+      "newSHA": "c61d8746e033cb40245abde9b1f432d12d8cc691f4a97d97ec674279325b7b6c",
+      "bytes": 5
+    },
+    {
+      "path": "temporal/motion_estimate.spv",
+      "oldSHA": "a8dcb31e12f305d24bda56c6e2af35c7184ee7cc16f839dd271f3aff042bfdf8",
+      "newSHA": "a8dcb31e12f305d24bda56c6e2af35c7184ee7cc16f839dd271f3aff042bfdf8",
+      "bytes": 14004
+    },
+    {
+      "path": "temporal/motion_luma.spv",
+      "oldSHA": "c447e242026ecaa04e79bd0255df31cd47844844f153f894c15f43909ee98b61",
+      "newSHA": "c447e242026ecaa04e79bd0255df31cd47844844f153f894c15f43909ee98b61",
+      "bytes": 4144
+    },
+    {
+      "path": "temporal/shader-constants.txt",
+      "oldSHA": "d3c50cbcd1e1c56676c186050b9dcabb24bfbfdf05183dec1aba0881be5037ea",
+      "newSHA": "d3c50cbcd1e1c56676c186050b9dcabb24bfbfdf05183dec1aba0881be5037ea",
+      "bytes": 443
+    },
+    {
+      "path": "temporal/temporal_post_fp32.spv",
+      "oldSHA": "a085bfe11550ae3dfc16a897212acaa65bf0fb50efe4acadc2a46a357e12e1d8",
+      "newSHA": "a085bfe11550ae3dfc16a897212acaa65bf0fb50efe4acadc2a46a357e12e1d8",
+      "bytes": 744148
+    },
+    {
+      "path": "temporal/temporal_pre_fp32.spv",
+      "oldSHA": "6bbcbe5021ee7458e51312b3be74efa4aa1ab06a9ac4bc0744e6a4e5723150d8",
+      "newSHA": "6bbcbe5021ee7458e51312b3be74efa4aa1ab06a9ac4bc0744e6a4e5723150d8",
+      "bytes": 561612
+    }
+  ]
+}

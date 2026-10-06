@@ -1,0 +1,60 @@
+{
+  "locked_commit": "d1185d25141b1714d7837151b6fa782e6427568b",
+  "defines": [
+    "NR_COHERENT_ACT=0",
+    "NR_C=1024",
+    "NR_HEADS=32",
+    "NR_VWAVES=1",
+    "NR_KC=64",
+    "NR_QT=32",
+    "NR_VTRANS=1",
+    "NR_VPRENORMALIZED=1",
+    "NR_VPACKED_DEN=1",
+    "NR_VSPLIT_TAIL=1",
+    "NR_VQCLAMP=1",
+    "NR_VADDR=1",
+    "NR_VKMAN=1",
+    "NR_VOUT_VEC=1",
+    "NR_QUANT_EXPLICIT=1",
+    "NR_QPAD=0",
+    "NR_VBDA=1",
+    "NR_VKPERM=1"
+  ],
+  "NR_Q32_DIRECT": "1",
+  "old_locked_SPV_sha": "8993390ab9316895daf19c3c9ba669b984301c4a1624e87901fbcbf2e46634b1",
+  "old_reproduced": true,
+  "checks": [
+    {
+      "side": "old",
+      "source_sha": "1c384b6e9569dc31b24407086a7d957e9009f31ec433278bfd3024e454f91156",
+      "SPV_sha": "8993390ab9316895daf19c3c9ba669b984301c4a1624e87901fbcbf2e46634b1",
+      "compile_command": [
+        "/tmp/claude-1000/ct/mz/toolchain/glslang/bin/glslang",
+        "-V",
+        "--target-env",
+        "vulkan1.3",
+        "-I/tmp/claude-1000/ct/mz/windows/shaders/rdna4/include",
+        "-o",
+        "/tmp/mochi-vit-score-control-20261006/old.spv",
+        "/tmp/mochi-vit-score-control-20261006/old.pre.comp"
+      ]
+    },
+    {
+      "side": "new",
+      "source_sha": "6598b7c896c46299a1e234acc57715a55834a94982bcec628bc0f97fcdabd992",
+      "SPV_sha": "1a6d2b5f46dfacba6ccf4568d9c92f5a0a5d9547e8f81f71f0bc728921fbacae",
+      "compile_command": [
+        "/tmp/claude-1000/ct/mz/toolchain/glslang/bin/glslang",
+        "-V",
+        "--target-env",
+        "vulkan1.3",
+        "-I/tmp/claude-1000/ct/mz/windows/shaders/rdna4/include",
+        "-o",
+        "/tmp/mochi-vit-score-control-20261006/new.spv",
+        "/tmp/mochi-vit-score-control-20261006/new.pre.comp"
+      ]
+    }
+  ],
+  "scope": "only nr_vit_exp2 HALFscore\u2192preciseF32mul/add/truncmap; effective HALF64den unchanged, noF32K16denclaim;QB2/layout/driver/AV/exit unchanged",
+  "GPU_not_run": true
+}
