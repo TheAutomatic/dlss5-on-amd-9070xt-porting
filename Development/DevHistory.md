@@ -1836,3 +1836,8 @@ B数学同域表达式消除half→float clamp→half往返，COMGR21真实640 V
 ### 2026-10-06 Hnorm真实APP900三formal严格尾门失败
 
 原O2/NET_TIMING0/真实1296×720 HDR完整NativeGameFrame，stock/H，320帧弃80，每轮ABBA原cold/全CSV/raw保留。R1 14321 mean−0.0449291667/p99−0.11656ms过，R2 57250 −0.0492479167/−0.07877过，R3 89525 mean−0.0451625但p99+0.000140ms(+0.14µs)严格门fail立即止，不舍入0/不临时容差/不刷/不挑槽。全部first/last frame SHA相同/finite/invalid0，三轮exit0锁释放。现有native-hip日志最终四pid明确fast1/wave_owned_active1/processing1600×960/hip_device0/modulesA,H,H,A，Factory FastTwin c32-wave1与H实际文件/exports/source锁同，非pulse伪on/非coldcallee；genericMH缺fasttwin是双方stock原路。三轮均值改善真实记录但验收未完成；900normal19/history/normalRTZGPU回归没启动，1152短p99负账保持，不收生产/不称全目标完成。见results/c32-norm-hoist-framework-20261006/formal-summary与active-route原日志。
+
+
+### 2026-10-06 H900 p99 CPU测量分辨率校准
+
+不新性能轮/不改CSV/不改临时容差，审三formal原数据与实际O2exe。steady_clock::now实际gettimeofday→getntptimeofday，以µs值乘1000成名义ns；原CSV壁时全部整数µs。轻CPU同compiler probe min/gcd1000ns，QPF10MHz/100ns另读但不是此walltimer路径。R3+.14µs是exactDecimal插值非float误差：A475/476序统计7255/7326µs，H7269/7274，权重.21，端点差+14/−52合成+.14。低于1µs实际量化，仅正号不能证明真实尾退步；解释为测量层未分辨/兼容0，非无限future统计等价。控制A3−A0 p99三轮−35.74/+47.76/+43.31µs；三轮全1440/arm pooledp99A7333.44/H7258.86µs，差−74.58，不用pooled静默替旧逐轮门。旧按严格正号停是真历史；root据新误差证据决定能否继续900兼容门。1152+73.99µs独立负账不随此放过。原表/时钟反汇编/QPF/CSV SHA见results/c32-norm-hoist-stat-audit-20261006。
