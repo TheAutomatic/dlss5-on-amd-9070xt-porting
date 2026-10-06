@@ -1,0 +1,204 @@
+[
+  {
+    "tag": "eval=0 kernel=cc_tinlayout_fused_pre_block_swin_1h_32_1_ds_fp8 grid=240,144,1 bytes=264",
+    "bytes": 264,
+    "sha256": "0142e987cc18af111e781f4333892c9ec87857c94f7ec5f88cf6a79930e7a101",
+    "seed": 0,
+    "style": 0.0078125,
+    "color": "0x7fa00008801",
+    "history": "0x0",
+    "motion": "0x0",
+    "texture_extent": [
+      1920,
+      1080
+    ]
+  },
+  {
+    "tag": "eval=0 kernel=cc_tinlayout_fused_post_block_swin_1h_32_fp8 grid=241,145,1 bytes=184",
+    "bytes": 184,
+    "sha256": "4f7db6e601a8b69a69131328cb3f47b07bdec4e53eea3caac2c68efe890fd484",
+    "history58": "0x0",
+    "motion60": "0x0",
+    "word70": 1,
+    "color38": "0x7fa00008801",
+    "color_transform": [
+      0.0,
+      0.0,
+      1920.0,
+      1080.0,
+      0.0005208333604969084,
+      0.0009259259095415473
+    ],
+    "raw_words_74_b4": {
+      "0x74": {
+        "hex": "0x0",
+        "float": 0.0
+      },
+      "0x78": {
+        "hex": "0x0",
+        "float": 0.0
+      },
+      "0x7c": {
+        "hex": "0x0",
+        "float": 0.0
+      },
+      "0x80": {
+        "hex": "0x0",
+        "float": 0.0
+      },
+      "0x84": {
+        "hex": "0x0",
+        "float": 0.0
+      },
+      "0x88": {
+        "hex": "0x0",
+        "float": 0.0
+      },
+      "0x8c": {
+        "hex": "0x0",
+        "float": 0.0
+      },
+      "0x90": {
+        "hex": "0x0",
+        "float": 0.0
+      },
+      "0x94": {
+        "hex": "0x0",
+        "float": 0.0
+      },
+      "0x98": {
+        "hex": "0x0",
+        "float": 0.0
+      },
+      "0x9c": {
+        "hex": "0x0",
+        "float": 0.0
+      },
+      "0xa0": {
+        "hex": "0x0",
+        "float": 0.0
+      },
+      "0xa4": {
+        "hex": "0x3a088889",
+        "float": 0.0005208333604969084
+      },
+      "0xa8": {
+        "hex": "0x3a72b9d6",
+        "float": 0.0009259259095415473
+      },
+      "0xac": {
+        "hex": "0x780",
+        "float": 2.6904930515036488e-42
+      },
+      "0xb0": {
+        "hex": "0x438",
+        "float": 1.5134023414708024e-42
+      },
+      "0xb4": {
+        "hex": "0x0",
+        "float": 0.0
+      }
+    }
+  },
+  {
+    "tag": "eval=1 kernel=cc_tinlayout_fused_pre_block_swin_1h_32_1_ds_fp8 grid=240,144,1 bytes=264",
+    "bytes": 264,
+    "sha256": "b84546f376f84e9c877a7a65f389b9c67944b91e3140d7d689111428bb3d0b74",
+    "seed": 1,
+    "style": 0.0078125,
+    "color": "0x7fa00008801",
+    "history": "0x7f800008808",
+    "motion": "0x7fa00008809",
+    "texture_extent": [
+      1920,
+      1080
+    ]
+  },
+  {
+    "tag": "eval=1 kernel=cc_tinlayout_fused_post_block_swin_1h_32_fp8 grid=241,145,1 bytes=184",
+    "bytes": 184,
+    "sha256": "c38cf5dba3b41df23fa5fff6a631617dc7a8e1ca5c228a178ea4029900ee29a6",
+    "history58": "0x7f800008808",
+    "motion60": "0x7fa00008809",
+    "word70": 1,
+    "color38": "0x7fa00008801",
+    "color_transform": [
+      0.0,
+      0.0,
+      1920.0,
+      1080.0,
+      0.0005208333604969084,
+      0.0009259259095415473
+    ],
+    "raw_words_74_b4": {
+      "0x74": {
+        "hex": "0x0",
+        "float": 0.0
+      },
+      "0x78": {
+        "hex": "0x0",
+        "float": 0.0
+      },
+      "0x7c": {
+        "hex": "0x44f00000",
+        "float": 1920.0
+      },
+      "0x80": {
+        "hex": "0x44870000",
+        "float": 1080.0
+      },
+      "0x84": {
+        "hex": "0x3a088889",
+        "float": 0.0005208333604969084
+      },
+      "0x88": {
+        "hex": "0x3a72b9d6",
+        "float": 0.0009259259095415473
+      },
+      "0x8c": {
+        "hex": "0x0",
+        "float": 0.0
+      },
+      "0x90": {
+        "hex": "0x0",
+        "float": 0.0
+      },
+      "0x94": {
+        "hex": "0x44f00000",
+        "float": 1920.0
+      },
+      "0x98": {
+        "hex": "0x44870000",
+        "float": 1080.0
+      },
+      "0x9c": {
+        "hex": "0x3a088889",
+        "float": 0.0005208333604969084
+      },
+      "0xa0": {
+        "hex": "0x3a72b9d6",
+        "float": 0.0009259259095415473
+      },
+      "0xa4": {
+        "hex": "0x3a088889",
+        "float": 0.0005208333604969084
+      },
+      "0xa8": {
+        "hex": "0x3a72b9d6",
+        "float": 0.0009259259095415473
+      },
+      "0xac": {
+        "hex": "0x780",
+        "float": 2.6904930515036488e-42
+      },
+      "0xb0": {
+        "hex": "0x438",
+        "float": 1.5134023414708024e-42
+      },
+      "0xb4": {
+        "hex": "0x0",
+        "float": 0.0
+      }
+    }
+  }
+]

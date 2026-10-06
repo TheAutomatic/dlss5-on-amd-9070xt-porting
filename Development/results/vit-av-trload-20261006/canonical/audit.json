@@ -1,0 +1,39 @@
+{
+  "rows": {
+    "old": {
+      "SHA": "11a25ae3fea75f83763ab6d5729c4f426dabda11299d1be6092d142b810e27b8",
+      "target_resources": {
+        ".vgpr_count": 68,
+        ".sgpr_count": 12,
+        ".group_segment_fixed_size": 0,
+        ".private_segment_fixed_size": 0,
+        ".vgpr_spill_count": 0,
+        ".sgpr_spill_count": 0
+      },
+      "TR": 0,
+      "u8": 16,
+      "EXEC_writes": []
+    },
+    "new": {
+      "SHA": "965f9348f3f689a4b63e33140a75e5649dbdff604e6a6a7edcae8e830847b36f",
+      "target_resources": {
+        ".vgpr_count": 62,
+        ".sgpr_count": 10,
+        ".group_segment_fixed_size": 0,
+        ".private_segment_fixed_size": 0,
+        ".vgpr_spill_count": 0,
+        ".sgpr_spill_count": 0
+      },
+      "TR": 2,
+      "u8": 0,
+      "EXEC_writes": []
+    }
+  },
+  "export_count": 78,
+  "missing_exports": [],
+  "ABI_differences": {},
+  "changed_functions_including_padding": [
+    "vit_attention_fused_640_bytein_bout"
+  ],
+  "target_only_source_guard": "MAXT640&&ByteInput&&ByteOut"
+}

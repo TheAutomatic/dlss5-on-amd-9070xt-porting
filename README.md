@@ -2,10 +2,10 @@
 
 DLSS 5 (DLSSNR) on AMD RX 9070 XT / RDNA 4.
 
-[中文说明](README.zh-CN.md)
+[Simplified Chinese](README.zh-CN.md)
 
 A from-scratch re-implementation of NVIDIA's DLSS 5 neural renderer ("DLSSNR", the 71-block Swin/ViT network shipped in
-`nvngx_dlssnr.dll`) for AMD RDNA 4. The network was reverse-engineered block by block and now runs as 29 HIP modules per
+`nvngx_dlssnr.dll`) for AMD RDNA 4. The network was reverse-engineered block by block and now runs as 38 HIP modules per
 architecture (gfx1201 = RX 9070 series, gfx1200 = RX 9060 series) on the HIP 7 runtime that ships with the AMD driver. The
 weights are NVIDIA's, extracted from the user's own copy of the DLL; nothing of NVIDIA's is distributed here.
 
@@ -18,7 +18,9 @@ the host upscaler (FSR) takes it to the display resolution.** Three packages, th
 | **Magpie** (portable) | any game, no upscaler support needed | Magpie captures the game window; the network runs in the FSR3_SR slot of its effect group, then FSR4 fills the screen (optional XeSS frame generation) |
 | **OptiScaler-REFramework** (RE9 only) | Resident Evil Requiem, whose command submission the regular route cannot split | TheAutomatic's modified OptiScaler host + our `LmxxfNrRuntime.dll` (matched pair; do not mix with the regular packages) |
 
-**Current release: 0.35 (2026-09-27).** Three bit-exact C32 rounds (duplicate FP8 round trips removed, RTZ/LDS stores vectorized, per-segment saturation mode, full-window fast paths in prefix/finish) and a ViT byte stream (`DLSS5_HIP_VIT_STREAM=3`, new `vit-stream` module: attention output goes to the projection as bytes; works with adaptive reuse). Network offline 900 tier about 9.3 ms, 1080 tier about 12.75 ms. Stellar Blade 1080p native AA EXACT common scenes about 56.7 (0.34: 54); RE9 medium 2K Quality 58–59, native AA 42. Download: [Quark](https://pan.quark.cn/s/83e6172e6c79) · [Gofile mirror](https://gofile.io/d/NnF4GitT) (also in the changelog below).
+**Current release: 0.41 (2026-10-05).** Default 1x; selecting 3x defaults to two real passes plus a predicted third (lossy). Explicit `DLSS5_MULTI_PASS_PREDICT=0` runs real three passes; skin protection defaults off. Includes first-frame/HIP-device fixes, RE9 strength configuration, exact data-flow optimisations and broader ViT/deep fast numerics. Download: [Quark](https://pan.quark.cn/s/dbda3e470f8f) · [Gofile mirror](https://gofile.io/d/YAENU0ex). See the [changelog](CHANGELOG.md).
+
+**Previous release: 0.40 (2026-10-03).** **The default output changed**: all 71 blocks with fast numerics (`DLSS5_SKIP_BLOCKS=` empty, `DLSS5_FAST_NUMERIC=1`), against NVIDIA 44.26 → 47.55 dB and no overall colour shift, about 0.12 / 0.19 ms (900 / 1080) slower per frame; `DLSS5_SKIP_BLOCKS=42,43,46` + `DLSS5_FAST_NUMERIC=0` gives the 0.39 output bit for bit. New: multi pass `DLSS5_MULTI_PASS=1/2/3` (stronger style, about N times the network; F9 cycles it in game, Stellar Blade 2K 57 / 37 / 27 fps), three config files (`default-config.txt` → `custom-config.txt` → `native-game-flags.txt`, environment on top; packages no longer ship your files), and bit-exact speed-ups (LLVM 23 builds of C32/C64, 1080 −0.2 ms or so). Download: [Quark](https://pan.quark.cn/s/d38e0f653c5a) · [Gofile mirror](https://gofile.io/d/moSf7cqf). 0.39: [Quark](https://pan.quark.cn/s/dea9c0ef2f95) · [Gofile mirror](https://gofile.io/d/iqtFTSpS).
 
 **Requirements.** An RDNA 4 GPU (RX 9070 XT tested; RX 9060 kernels included, untested) and an AMD driver that ships
 `amdhip64_7.dll` (current release drivers do). No HIP SDK, no Agility SDK, no preview DXC, no Windows Developer Mode. The
@@ -26,13 +28,22 @@ add-on takes ≈1.2 GB of VRAM at 900p (0.6 GB weights, 0.3 GB activations; `DLS
 `logs\native-hip.txt`); if VRAM is exhausted the frame rate drops and does not recover, so keep texture quality at "High" or
 below in Stellar Blade.
 
-**Configuration.** Each package ships the repository template as `DLSS5-AMD\native-game-flags.txt`
+**Configuration.** Each package ships the repository template as `DLSS5-AMD\default-config.txt` (before 0.40: `native-game-flags.txt`)
 ([regular](scripts/hip-game-flags.txt), [Magpie](scripts/hip-magpie-flags.txt), [RE9](scripts/hip-re9-flags.txt); keys are explained in
 [scripts/CONFIGURATION.md](scripts/CONFIGURATION.md)). The network tier follows the input (an input within 110% of a tier on both axes uses it: 720 up to 1408×792,
 900 up to 1760×990, else 1080, so 2K Quality 1707×961 runs at 900; `DLSS5_NETWORK_HEIGHT` forces one). The regular package turns on a lossy *adaptive ViT reuse* by default
 (`DLSS5_VIT_ADAPTIVE=1`, keys in [Development/HIP/VIT-REUSE.md](Development/HIP/VIT-REUSE.md); F8 toggles it and EXACT, set 0 for
 bit-exact output; Magpie and RE9 ship it off). From 0.32 the RE9 runtime also reads `DLSS5_HIP_*`, `DLSS5_SKIP_BLOCKS`,
 `DLSS5_FIT_LARGE` and the related keys from the flags file; host-side options stay in `OptiScaler.ini` `[DlssNr]`.
+
+**Three config files (0.40 and later).** The `DLSS5-AMD` folder can hold three files, read in this order:
+`default-config.txt` (the template, shipped by the package, overwritten on upgrade) → `custom-config.txt` (your own changes; install and
+upgrade never touch it; the package ships `custom-config.template.txt` to copy from) → `native-game-flags.txt` (the old single file; an
+existing one keeps working). A later file overrides the same key of an earlier one, keys it does not mention keep the earlier value, and a
+missing file is skipped. A `DLSS5_*` system environment variable wins over all three files. Same key twice in one file: the last line
+wins. An empty value (`DLSS5_SKIP_BLOCKS=`) overrides the earlier files and means the program's built-in default. So to change one
+setting, put just that line into `custom-config.txt`, e.g. `DLSS5_MULTI_PASS=2`. Everything that reads settings (regular and Magpie
+add-on, hot reload, RE9 runtime) uses the same merge. Details in [scripts/CONFIGURATION.md](scripts/CONFIGURATION.md).
 
 **Magpie notes.** The `FSR3_SR` item of the bundled effect group *is* the DLSS5 entry (its UI name stays FSR3); keep it at
 input size and let the following FSR4 item upscale. Use AMD optical flow only on that first item and set Optical Flow Method
@@ -60,6 +71,42 @@ next release detects this automatically.
 `shaders/dx12-network/`, still the bit-exact reference chain). 0.20 moved inference to HIP with bit-identical output and
 ≈8% less time; 0.22 padded the 900 tier to 960 rows; 0.24 introduced the pre-upscale (render-resolution) path; 0.26.1–0.28.1
 built the RE9 host/runtime route with TheAutomatic. Details per version are in the changelog.
+
+**Trading image quality for speed (optional).** All settings below are runtime switches: write them into `custom-config.txt` (the RE9 runtime reads it too), no module swap needed. Turning all of them on gives a "fast mode". **The default is now "all 71 blocks + fast numerics"** (`DLSS5_SKIP_BLOCKS=` empty + `DLSS5_FAST_NUMERIC=1`): compared with the previous default (skip 42,43,46, bit-exact numerics) about 0.12 ms (900) / 0.19 ms (1080) slower per frame, 44.26 → 47.55 dB against NVIDIA, the colour shift is gone, and on motion the error is about 3 dB smaller than with the block skip. Block skip is now an optional speed-up (first row below). The default is still not bit-identical to NVIDIA's network: the fast numerics are lossy and the regular package also enables ViT reuse; for bit-exact output set `DLSS5_FAST_NUMERIC=0` and turn ViT reuse off.
+
+| Setting | What it does | Gain | Quality cost | Deterministic? |
+|---|---|---|---|---|
+| `DLSS5_SKIP_BLOCKS=42,43,46` (default empty = all 71 blocks; the previous default, now an optional speed-up) | Skips ViT blocks 42, 43 and 46 | About 0.20 ms (900) / 0.32 ms (1080) less per frame | About −3.3 dB against NVIDIA (47.43 → 44.26 dB with bit-exact numerics), plus an overall shift of about +0.15/+0.23 (1/255) (1080p single frame, Style 0) | Yes: structural, per frame, nothing carries over |
+| `DLSS5_NETWORK_1080_ROWS=1088` | Runs the 1080 tier on 1088 rows (8 mirrored rows, the geometry Daniel and mochizuki use) instead of 1152 (72 mirrored rows, NVIDIA's geometry) | About 0.45 ms less per frame at the 1080 tier (5.6% less work); 720/900 unaffected | About 54–56 dB against 1152 rows (whole frame); against NVIDIA 47.4 → 45.8 dB (single frame, Style 0, all 71 blocks) | Yes: geometry only, same arithmetic, nothing carries over |
+| `DLSS5_NETWORK_HEIGHT=900` (default `auto` picks the tier from the input height) | Runs inputs that would use the 1080 tier on the 900 tier (1600×960) | Offline whole network about 9.5 → 6.8 ms (0.39 timings of the two tiers) | Not measured (no PSNR of 900 vs 1080 or vs NVIDIA) | Yes: geometry, nothing carries over; cost not quantified |
+| `DLSS5_FAST_NUMERIC=1` (on in all three templates; `0` = bit-exact) | Fast numeric path: the C32 and C64/C128 window kernels keep activations and normalisation in f32 (dropping the half-precision rounding steps) and compute softmax 1/sum with `rcp`; the host loads the packaged `c32-wave1-fast` / `c64-wave2-fast` modules | Offline about 0.07–0.13 ms (900) and 0.09–0.10 ms (1080) less per frame | Against the bit-exact output 51.8 dB worst frame, 53.1–55.5 dB per sequence; against NVIDIA practically unchanged (block skip 44.26 → 44.23 dB, all 71 blocks 47.43 → 47.55 dB; 1080p single frame, Style 0) | No: numeric approximation, the error passes from layer to layer and can build up. Rounding differences in one block are carried into every later block, and where they surface can't be predicted; nothing carries over between frames |
+| `DLSS5_MULTI_PASS_SKIP_BLOCKS=31,32,33,34,35,36,37,38,40,41,42,43,44,45,46,47` (default empty; only with `DLSS5_MULTI_PASS=2`/`3`) | Multi-pass skip: the listed blocks are skipped in passes 2 and 3 only; pass 1 always runs the full network. This list = ViT + C512 up; `42,43,46` is the light version | 3 passes, offline: 900 21.1 → 18.4 ms, 1080 29.8 → 25.7 ms (−13%/−14%); `42,43,46` only −0.4/−0.5 ms | Against **our own** 3-pass full-network output (not NVIDIA): this list 34.1–35.0 dB, `42,43,46` 43.9–46.0 dB. For scale, 3 passes vs 1 pass is 35.0 dB: this list takes away much of what the extra passes add (lighter, less contrast), so it is a different look rather than a cheaper 3 passes | Yes: structural, per frame, nothing carries over. The saving is small because the cost is in the full-resolution blocks, which cannot be skipped |
+| `DLSS5_VIT_ADAPTIVE=1` (on in the regular package, off in Magpie/RE9) | Adaptive ViT reuse: when the frame changes less than a threshold, the ViT is not recomputed and the last fully computed result is reused. In game F8 toggles between it (AE) and full computation (EXACT); `=0` always computes fully | Offline whole network: moving sequence about 4.9%/6.3% faster at 900/1080, static frames about 9.0%/11.3%; Stellar Blade standing still EXACT 17.9 ms, AE 16.66 ms | A static single frame is bit-identical to EXACT; PSNR on motion against EXACT/NVIDIA not measured | Carries over frames: a result is reused for at most `DLSS5_VIT_REUSE_PERIOD` (default 4) frames. Approximate frames are never written back, so errors do not compound; it resets on recompute, mode switch, geometry change or a gap over 500 ms. Thresholds are heuristic, not guaranteed equivalent in every scene |
+
+**Fast mode** (paste into `custom-config.txt`; `FAST_NUMERIC=1` is already the default, listed for completeness):
+
+```
+DLSS5_SKIP_BLOCKS=42,43,46
+DLSS5_NETWORK_1080_ROWS=1088
+DLSS5_NETWORK_HEIGHT=900
+DLSS5_FAST_NUMERIC=1
+DLSS5_VIT_ADAPTIVE=1
+DLSS5_VIT_REUSE_PERIOD=4
+```
+
+With `NETWORK_HEIGHT=900` every input runs on the 900 tier and `1080_ROWS` no longer matters; to keep 1080-tier sharpness, drop the `NETWORK_HEIGHT` line (back to `auto`).
+
+**Multi pass (stronger style, linear cost).** Same idea as Magpie 0.6.8's DLSSNR Multi Pass: the whole network runs N times per frame, each pass fed the previous pass's output picture, so the style gets stronger with every pass. It lives in the network layer shared by all three routes, so regular OptiScaler, Magpie and the RE9 runtime all read the same line:
+
+```
+DLSS5_MULTI_PASS=2
+```
+
+`1`/`2`/`3`, default `1` (today's single pass, output bit-identical); other values fall back to 1 with a stderr line. Network time grows linearly with the pass count: offline whole network at the 900 tier about 7.0 ms for one pass, 13.7–13.8 ms for 2, 20.4–20.6 ms for 3; at the 1080 tier about 9.8 / 19.5 / 29.0 ms. Against the single pass, 2 passes are about 38.4–39.1 dB and 3 passes about 34.2–34.7 dB (a measure of how much the style moves, not a quality loss). VRAM: one (2 passes) or two (3 passes) extra input buffers, 35.4 MB each at the 1080 tier. Every pass uses the same Style/strength (no per-pass parameters as in Magpie); adaptive ViT reuse is turned off while multi pass is on. Details in `scripts/CONFIGURATION.md` and `Development/results/multi-pass-20261003`.
+
+In game, **F9** cycles 1 → 2 → 3 → 1 passes (regular OptiScaler and Magpie add-on; `DLSS5_MULTI_PASS_HOTKEY` picks another key, `0` turns it off). It writes `DLSS5_MULTI_PASS=N` into `custom-config.txt` and the hot reload switches within about a second, no restart. If `native-game-flags.txt` also has a `DLSS5_MULTI_PASS` line (it would win over custom), that line is changed too. The RE9 runtime has no hot reload: change the file and restart there. To make the later passes cheaper, `DLSS5_MULTI_PASS_SKIP_BLOCKS` skips blocks in passes 2..N only (table above; lossy).
+
+Why only these: the geometry and structure options keep every arithmetic step the same, each frame stands alone and the cost can be measured; ViT reuse works across frames, so its risk is marked separately. The fast numeric path is different: it changes the arithmetic itself, rounding differences travel through all later blocks, and where they surface can't be predicted. The measured cost is small (practically unchanged against NVIDIA), but test frames can't cover every scene, so the current default is explicitly documented as FAST_NUMERIC=1; use 0 to request the reference-oriented arithmetic path. Other lossy options (f16 accumulation, half-precision softmax) are not offered.
 
 ## What is in this repository
 
@@ -101,42 +148,79 @@ The C host smoke test is `tools/lmxxf_zero_fallback_abi.c`. On Windows, build th
   accumulator, operands loaded straight from memory or LDS; row reductions (normalisation sums, softmax denominators) are
   WMMAs against an all-ones tile; quantisation uses the hardware FP8 casts. The C32 block runs FFN + attention + projection
   of one 8×8 window in a single 128-thread group with the hidden activations kept in registers; the C64–C256 attention keeps
-  its exponentials in registers; weights are prepacked into WMMA fragment order at initialisation. 29 modules per architecture (from 0.31).
+  its exponentials in registers; weights are prepacked into WMMA fragment order at initialisation. 38 modules per architecture (current source).
 - **Game side**: the host hands us the frame at render resolution; the codec (`shaders/native_codec_encode.hlsl`) encodes it onto
   the network surface (fitting any input size to the 720/900/1080 tier, reflected padding), the network runs on a D3D12↔HIP
   shared buffer with fences, and the decode shader composes the result with the original frame (the network steers luminance
   and colour of the full-resolution picture) before the host upscaler sees it. In the pre-upscale (render-resolution) path
   the network's own temporal history is reset every frame and the upscaler does the temporal work; the Magpie path has no
   game motion vectors. An overlay shows the state (`DLSS5 ON 1707x961 -> FSR 2560x1440`, INITIALIZING, UNSUPPORTED).
-- **Numerics**: an "exact" reference chain reproduces NVIDIA's kernels bit for bit (explicit f16 rounding at every step); the
-  shipped fast chain relaxes that (f32 accumulation, hardware rounding) and is judged against it (≈42 dB PSNR). Every kernel
-  change since 0.20 is bit-exact against the previous version unless its flag says otherwise (only `HIP_FFN_WAVE_NORM`, off
-  by default), verified by a 12-frame RGB hash regression before each candidate is installed.
+- **Numerics**: the production fast chain is not a bit-exact NVIDIA oracle. Exact optimisations are checked against an explicit same-source baseline; FAST_NUMERIC, adaptive reuse and third-pass prediction are documented numerical/approximation choices. The 0.36 FMA change also changed the baseline, so not every update since 0.20 was bit-identical.
+
+Current source defaults `DLSS5_MULTI_PASS_PREDICT=1`: 3x uses two real passes and predicts the third (lossy); explicit 0 uses real three passes. 1x/2x are unchanged. F9 changes only the count. Skin defaults to 0. These settings ship in 0.41; historical 0.40 ZIPs retain their defaults.
+
+## 0.41
+
+**Default 1x.** Selecting 3x defaults to two real passes plus a predicted third (lossy); explicit PREDICT=0 runs real three passes, skin=0. This release adds the first-frame/device-binding fixes, RE9 strength file control, deeper fast numerics and bit-exact C256/ViT/C512/data-flow improvements. See [0.41 changelog](CHANGELOG.md#041-10-05). All three complete packages are available on [Quark](https://pan.quark.cn/s/dbda3e470f8f) and [Gofile](https://gofile.io/d/YAENU0ex); no GitHub release or tag has been created.
+
+## Configuration
+
+See the [configuration reference](scripts/CONFIGURATION.md) for all annotated defaults, file precedence, strength controls, hot reload and RE9 differences.
 
 ## Building
 
-### Building the current packages (0.35) — where every shipped file comes from
+### Building current HIP sources (0.41) — where every shipped file comes from
 
 | Shipped file | Source | Build |
 |---|---|---|
-| `dlss5-amd.addon64` (Magpie / OptiScaler packages) | `src/native_submission_order_probe.cpp` + `src/*.h`, `Development/HIP/*.h` (bridge) | `bash scripts/build-addon-oneclick.sh dlss5-amd.addon64 --hip` on Linux/WSL (fetches MinHook + ReShade 6.8 headers into `third_party/`; needs `g++-mingw-w64-x86-64`). The build is not byte-reproducible; judge a rebuild by behaviour, not hash |
-| `DLSS5-AMD\native-game-tiled-assets\HIP\gfx1200\*.hsaco`, `...\gfx1201\*.hsaco` (29 modules each from 0.31, 30 from 0.35) | `hip/*.hip`, `hip/wave_owned_*.inc`, recipe `hip/build-modules.ps1` | on any Windows box with an AMD driver that ships `amd_comgr_3.dll`: `x86_64-w64-mingw32-g++ -std=c++17 -O2 -static hip/rtc_compile.cpp -o rtc_compile.exe`, then `powershell -File hip\build-modules.ps1 -Compiler rtc_compile.exe -OutputDir <out>` (both targets by default; `-Only <name>` for one module). No GPU is needed to compile; the assembly lands next to each `.hsaco` as `.hsaco.s`. About 6 min for both targets. Every build embeds a random `__hip_cuid_…` symbol, so compare a rebuild with `python3 hip/compare-modules.py <out> <package>\DLSS5-AMD\native-game-tiled-assets\HIP` (code sections), not by file hash; checked 2026-09-26 on a fresh clone: 52 of 58 identical, the other 6 are the non-packed fallbacks `c32_fused_ffn_attention` / `deep_fast` / `multihead-fast-padded-wave` (not loaded by default) that packages still carry from an older build |
+| `dlss5-amd.addon64` (Magpie / OptiScaler packages) | `src/native_submission_order_probe.cpp` + `src/*.h`, `Development/HIP/*.h` (bridge) | `bash scripts/build-addon-oneclick.sh dlss5-amd.addon64 --hip` on Linux/WSL (fetches MinHook + ReShade 6.8 headers into `third_party/`; needs `g++-mingw-w64-x86-64`). The current script pins the image base and removes PE timestamps; compare with the same compiler/dependencies and validate behaviour |
+| `DLSS5-AMD\native-game-tiled-assets\HIP\gfx120{0,1}\*.hsaco` (38 per architecture, 76 total) | `hip/build-modules.ps1` and its source files | Use the mixed-compiler steps below: five LLVM23 modules and 33 COMGR21 modules per architecture; `-RowOpts -PrebuiltDir` reproduces the production recipe |
 | the twelve `shaders/*.hlsl` (codec encode/decode, text overlay, RGB staging, temporal coordinates, frame checks) | `shaders/` (the historical DX12 network chain lives in `shaders/dx12-network/`) | copied as source; compiled at runtime by the system `d3dcompiler` (44 variants selected by `#define`s from the host) |
 | RE9 package: `dxgi.dll` (modified OptiScaler host) + `LmxxfNrRuntime.dll` | TheAutomatic's fork `release/1.9.0` @ `8f71f73` + our patches in `Development/RE9/presr/` | `python3 Development/RE9/presr/prepare-host.py` (needs the pinned host checkout: `git clone https://github.com/TheAutomatic/dlss-5-amd-project /tmp/re9-upstream-bridge-review && git -C /tmp/re9-upstream-bridge-review checkout 8f71f73`; rewrites the host/runtime sources and copies `src/`, `shaders/`, `hip/` into `third_party/lmxxf/`), then `bash Development/RE9/presr/build-runtime.sh` (MinGW, runtime + smoke test) and `build-host.ps1` on Windows (Visual Studio 2022 Build Tools, MSVC v143 + Windows SDK 10.0.26100; found through vswhere or `-MSBuild <path>`). Without Linux: every RE9 package carries the prepared sources as `sources\re9-presr-source.tar.gz`, so `powershell -File Development\RE9\presr\build-host.ps1 -Root <work dir> -Archive <that tar.gz>` builds the host (`<work dir>\bin\OptiScaler.dll`, shipped as `dxgi.dll`; checked 2026-09-26 from the 0.32 archive on a machine with only the Build Tools: 91 s, same size as the shipped `dxgi.dll`, hash differs by MSVC timestamps). The upstream checkout can also sit elsewhere: `RE9_UPSTREAM=<dir>` — see `Development/RE9/presr/README.md`; the same sources are shipped as `sources/re9-presr-source.tar.gz` (`bundle-source.py`) |
 | standalone `LmxxfNrRuntime.dll` (API in `include/LmxxfNrApi.h`, contributed by TheAutomatic) | `src/LmxxfNrRuntime.cpp` | `bash scripts/build-runtime.sh` (Linux/WSL MinGW), or `scripts\build-runtime.cmd` on Windows (MSYS2 UCRT64 g++, `pacman -S mingw-w64-ucrt-x86_64-gcc`; set `LMXXF_GXX` to use another g++) |
-| `DLSS5-AMD\native-game-flags.txt` (a package also honours `DLSS5_HIP_MODULES=<dir>` to load modules from elsewhere; `Development/HIP/validate-modules.ps1` runs the bit-exact checks on a module set) | `scripts/hip-game-flags.txt` / `hip-magpie-flags.txt` / `hip-re9-flags.txt` (documented in `scripts/CONFIGURATION.md`) | copied |
+| `DLSS5-AMD\default-config.txt` and `custom-config.template.txt` | Three host templates linked by the [configuration reference](scripts/CONFIGURATION.md), plus `scripts/custom-config.txt` | `Development/tools/stage-config-layers.ps1` copies them; personal custom/native files are not shipped |
 | weights (`*.f16` / `*.f32`), `noise.f32` | not in this repository (see *Weights*) | packages carry them; a fresh package is built from the previous full package |
 
-Packaging: `Development/tools/package-035.ps1` (Windows) unzips the previous full packages, verifies every file against their `SHA256SUMS.txt`, swaps in the changed files listed above (each hash-checked, the modules additionally against the copies installed on the test machine), compiles the fit shaders, writes `release.json`, `SHA256SUMS.txt` and the zip, and reads the zip back. Earlier versions: `package-034.ps1` … `package-026.ps1`, `package-0281-re9.ps1`.
+Packaging currently uses `Development/tools/package-041.ps1` with verified baseline ZIPs, framework and model assets. It assembles local 0.41 packages from verified 0.40 baselines; 0.41 packages passed release checks; changing the version argument alone is not release validation. `stage-config-layers.ps1` stages defaults without overwriting installed personal settings.
 
-Validation before shipping kernels: `Development/HIP/validate-modules.ps1` (bit-exact checks of a module set against goldens) and the whole-network regression used for every production candidate (`Development/deployments/stellar-prod6-20260923/regression-prod6.ps1`: 12-frame RGB hashes on two input sequences, 1000-frame timing, extra controls) — every kernel change in this repository since 0.20 is bit-exact with the previous one unless its flag says otherwise (`HIP_FFN_WAVE_NORM`, off by default, is the only non-bit-exact switch).
+Before release, verify both ELF targets, exports and the 76-module inventory, then the current same-source normal19 (normal/AE/roll), relevant multi-pass and RE9 paths. Lossy switches are explicitly documented. Historical `validate-modules.ps1` and prod6 scripts do not cover every current path.
 
 How the kernel work is organised (for contributors): every optimisation is an experiment under `Development/HIP/experiments/<name>/` (a `prepare.py` that patches the production source into `_pairN` variants or module sets, `build.ps1`, `run.ps1`, sometimes `analyze.py`), with its result written up in `Development/results/<name>-<date>/README.md`; adopted changes become a `HIP_*` flag with the default set in the source. `Development/WorkingPlan.md` says what is being worked on; `Development/DevHistory.md` records what was done and why.
+
+### Current mixed-module build
+
+Linux/WSL needs Python3, MinGW-w64 C++, git/curl. The add-on helper fetches MinHook/ReShade 6.8 headers; pass `--hip` explicitly (its default is historical `--tiled`). Windows module compilation needs PowerShell and the driver's `amd_comgr_3.dll`, without executing GPU work. CPU-host MinGW is separate from the GPU compilers.
+
+LLVM23 prerequisite (Linux; CMake, Ninja and a C/C++ compiler required):
+
+```bash
+git clone --depth 1 --branch llvmorg-23.1.2 https://github.com/llvm/llvm-project llvm-src-23
+cmake -G Ninja -S llvm-src-23/llvm -B llvm-build-23 -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=OFF -DLLVM_ENABLE_PROJECTS="clang;lld" -DLLVM_TARGETS_TO_BUILD=AMDGPU -DLLVM_INCLUDE_TESTS=OFF -DLLVM_INCLUDE_BENCHMARKS=OFF -DLLVM_INCLUDE_EXAMPLES=OFF
+cmake --build llvm-build-23 --target clang lld llvm-objdump llvm-readobj llvm-dis -j 12
+```
+
+Pass the absolute `llvm-build-23/bin` path as `--bin` below. The maintainer's [build-llvm23.sh](Development/tools/llvm-fork/build-llvm23.sh) uses the same settings but hardcodes a local work directory; the commands above do not depend on it.
+
+```bash
+bash scripts/build-addon-oneclick.sh dlss5-amd.addon64 --hip
+bash scripts/build-runtime.sh bin
+x86_64-w64-mingw32-g++ -std=c++17 -O2 -static hip/rtc_compile.cpp -o rtc_compile.exe
+python3 Development/tools/llvm-fork/compile-modules.py --bin /path/to/llvm-23.1.2/bin --out /path/to/prebuilt --targets gfx1200 gfx1201 --compiler-rows llvm23 --row-opts --target-feature=-real-true16
+```
+
+Use an actual public LLVM23.1.2 clang/lld build in `--bin`; the script's default path is the older LLVM21 experiment, **not** LLVM23. See [compiler build notes](Development/tools/llvm-fork/README.md). The prebuild parses the canonical recipe, including its compiler-specific barrier definitions; do not hand-copy a shorter macro list. Copy `rtc_compile.exe`, the repository sources and the entire `prebuilt/gfx1200` and `prebuilt/gfx1201` folders to Windows, then run from the repository root:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File hip\build-modules.ps1 -Compiler .\rtc_compile.exe -OutputDir .\modules -RowOpts -PrebuiltDir C:\build\prebuilt
+```
+
+Both targets are the default. LLVM23 rows: `c32-wave1`, `c32-wave1-rtz`, `c32-wave1-fast`, `c64-wave2`, `c64-wave2-fast`. The remaining 33 rows use the driver's COMGR (current validated environment: LLVM21). Omitting `-RowOpts` compiles everything with COMGR and does **not** reproduce the selected production toolchain. `-Only` selects one exact module name; a single `-Targets gfx1201` writes modules directly under OutputDir, while both targets produce architecture subfolders. Keep architecture names when installing/staging. Use current `hip/rtc_compile.cpp`: older helpers could ignore gfx1200; audit ELF targets before release.
+
+A source build alone is not a complete installation: supply matched framework/model/noise assets, the modules plus SHA256SUMS, and `shaders/` beside the DLL. RE9 also needs its matched prepared OptiScaler host (table above). Existing user custom/native values override updated defaults; do not silently replace them. This section documents commands, not a newly built/released package.
 
 ### Historical: DX12 editions (up to 0.15)
 
 **None of the following is needed for the current packages** (HIP backend since 0.20: no preview DXC, no Agility SDK, no developer mode). It is kept for the DX12 wave-matrix implementation in `shaders/`, which remains the bit-exact reference chain and the history of the port.
-
 
 Requirements: Linux / WSL with `x86_64-w64-mingw32-g++` (cross build), Windows with an RDNA 4 GPU and a driver exposing
 D3D12 wave matrices (linalg tier 10), the Shader Model 6.10 preview `dxc` (with `dx/linalg.h`), ReShade 6.8 add-on
@@ -170,6 +254,8 @@ powershell -ExecutionPolicy Bypass -File scripts\deploy_fast.ps1 -Source <lab> -
 ```
 
 ## Changelog
+
+Per-release details (what changed, effect, switches, bit-exactness, experiment folders) are in [CHANGELOG.md](CHANGELOG.md).
 
 Unless a Magpie scenario is specified, frame rates are Stellar Blade at 1920×1080 on an RX 9070 XT; "bench" is the offline test bench (network only). Every tag
 after 0.01 keeps the bit-exact reference chain as its judge (≈ 42 dB PSNR against it); "bit-exact" below means the fast
@@ -212,7 +298,14 @@ chain's own output did not change by a single bit.
 | 0.32 · all three packages (Magpie · OptiScaler · OptiScaler-REFramework, HIP) on [Quark](https://pan.quark.cn/s/b805e071405c) · [Gofile mirror](https://gofile.io/d/CZ67LYIc) | 09-26 | Shared-buffer pool: the driver never returns imported D3D12 shared buffers, now reused per tier (40 switches +3 GB → flat; `results/vram-leak-20260926`). C32 vector input reads (bit-exact, −0.8/−0.9%). RE9 runtime reads flags (`DLSS5_HIP_*`/`SKIP_BLOCKS`/`FIT_LARGE`/`NETWORK_HEIGHT`), 0.31 kernels on by default, compatible with the old host's two-argument `EnqueueHip` (`results/re9-runtime-flags-20260926`); PR #9 merged. RE9 medium 2K Quality 54, native AA 38. |
 | 0.33 · all three packages (Magpie · OptiScaler · OptiScaler-REFramework, HIP) on [Quark](https://pan.quark.cn/s/6bb64e46ab67) · [Gofile mirror](https://gofile.io/d/8yAjJX1b) | 09-27 | FP8 packing (`CW_PACK8` in c32-wave1, `W2_PACK8` in c64-wave2): one `cvt_pk` converts two values into the fragment word; bit-exact, network 900 10.74→9.80 ms, 1080 15.01→13.64 ms (`results/c64-block-fused-20260927`, `results/pack8-20260927`). Stellar Blade 1080p native AA, EXACT: main menu 49–50, common scenes 53–54. Status line shows AE/EXACT; F7 toggles the on-screen text. |
 | 0.34 · all three packages (Magpie · OptiScaler · OptiScaler-REFramework, HIP) on [Quark](https://pan.quark.cn/s/4b572b0a5b81) · [Gofile mirror](https://gofile.io/d/cfHqVzD1) | 09-27 | fmed3 clamps (`HIP_FMED3_CLAMP`, C32 `HIP_FP8_SAT_MODE 3`) and `W2_PACK8 6` (segmented FP16_OVFL + fma(x,y,+0) packing), bit-exact (`results/fmed3-ovfl-20260927`, `results/ovfl-census-20260927`, `results/c64-hand-asm-20260927`); full module set from `hip/build-modules.ps1`. PDL counter rollover guard (`results/pdl-audit-20260927`). RE9: host queue-follow + watchdog (`results/onimusha-presr-20260927`), runtime resize leak 35 MB → 0 and geometry log (`results/re9-runtime-leak-20260927`). Stellar Blade 1080p AA EXACT menu 50–51 / scenes 54; RE9 medium 2K Quality 58, native AA 41; Onimusha 2K Quality about 60. |
-| 0.35 · all three packages (Magpie · OptiScaler · OptiScaler-REFramework, HIP) on [Quark](https://pan.quark.cn/s/83e6172e6c79) · [Gofile mirror](https://gofile.io/d/NnF4GitT) | 09-27 | C32 rounds 1–3 by Yami (`CW_DIRECT_OUT`, `CW_RTZ_PAIR`, `CW_PACK_MODE_MASK`, `CW_PREFIX_DIRECT_OUT`, `CW_PREFIX_FULL_TILE`, finish full-window path; `results/c32-aco-20260927`, `c32-round2-20260927`, `c32-round3-20260927`) and the ViT byte stream (`DLSS5_HIP_VIT_STREAM`, `results/vit-bytestream-20260927`); 30 modules per architecture. All bit-exact against 0.34. Stellar Blade 1080p AA EXACT about 56.7; RE9 medium 2K Quality 58–59, native AA 42. |
+| 0.35 · all three packages (Magpie · OptiScaler · OptiScaler-REFramework, HIP) on [Quark](https://pan.quark.cn/s/83e6172e6c79) · [Gofile mirror](https://gofile.io/d/NnF4GitT) | 09-27 | C32 rounds 1–3 (`CW_DIRECT_OUT`, `CW_RTZ_PAIR`, `CW_PACK_MODE_MASK`, `CW_PREFIX_DIRECT_OUT`, `CW_PREFIX_FULL_TILE`, finish full-window path; `results/c32-aco-20260927`, `c32-round2-20260927`, `c32-round3-20260927`) and the ViT byte stream (`DLSS5_HIP_VIT_STREAM`, `results/vit-bytestream-20260927`); 30 modules per architecture. All bit-exact against 0.34. Stellar Blade 1080p AA EXACT about 56.7; RE9 medium 2K Quality 58–59, native AA 42. |
+| 0.36 · all three packages (Magpie · OptiScaler · OptiScaler-REFramework, HIP) on [Quark](https://pan.quark.cn/s/e5afdaca0769) · [Gofile mirror](https://gofile.io/d/Z1hWdjcB) | 09-28 | Leaner arithmetic (`CW_ACT_FMED3`, `W2_BOUNDED_RCP`, `results/aco-lineup-20260928`), float FMA activation (`results/float-fma-20260928`, **not bit-identical to 0.35, new baseline**), direct input write `DLSS5_DIRECT_IO` (`results/zero-copy-io-20260928`), fused C256/C512/C64/C128/C32 blocks (`results/c256-fusion-20260928`, `c512-fusion-20260928`, `fusion-round3-20260928`), frame-time log `DLSS5_FRAME_STATS`. Offline vs 0.35: 900 −0.79 ms, 1080 −1.13 ms. Stellar Blade 1080p AA EXACT 59–60, 2K AA EXACT 54. |
+| 0.37 · all three packages (Magpie · OptiScaler · OptiScaler-REFramework, HIP) on [Quark](https://pan.quark.cn/s/7dbfdc6425fd) · [Gofile mirror](https://gofile.io/d/onqeAHST) | 09-29 | Bit-identical to 0.36: C512 compact layout (`results/deep-layers-20260929`), head group fusion + transposed ViT attention (`results/kernel-map-20260929`), C256 persistent stage `DLSS5_HIP_SWIN_RUN=1` (`results/swin-persistent-20260929`), new ViT attention kernel (`results/vit-attention-20260929`), ViT QKV five-wave weight sharing (`results/vit-qkv-20260929`). Offline 900 about 8.5 → 8.0 ms. Stellar Blade 2K AA EXACT 55–56. |
+| 0.38 · all three packages (Magpie · OptiScaler · OptiScaler-REFramework, HIP): [Quark](https://pan.quark.cn/s/6856d875bbe9) · [Gofile mirror](https://gofile.io/d/lzsqfUiE) | 09-30 | Bit-identical to 0.37 by default: 900 shift_pack removed, C32 byte storage and zero-half skip, composite quantisation, C256 FFN W16, C512 attention without redundant F, three wide-store rewrites; offline 900 about 8.0 → 7.6 ms, 1080 about 10.8 → 10.4 ms (`results/hip-roofline-20260930`). New switches `DLSS5_FORMAT_FALLBACK=1`, `DLSS5_HOT_RELOAD=1`; opt-in lossy `DLSS5_NETWORK_1080_ROWS=1088` (off by default). |
+| 0.39 · all three packages (Magpie · OptiScaler · OptiScaler-REFramework, HIP): [Quark](https://pan.quark.cn/s/dea9c0ef2f95) · [Gofile mirror](https://gofile.io/d/iqtFTSpS) | 10-01 | Bit-identical to 0.38 by default: C512 FFN in registers by one wave, hoisted residual init / weight loads, wider decode, ViT QKV/attention fusion and more; offline 900 about 7.27 → 6.8 ms, 1080 about 10.05 → 9.5 ms, Stellar Blade 2K +1.5-2 fps. New switch `DLSS5_STYLE=1`; reproducible add-on/runtime builds. |
+| 0.40 · all three packages (Magpie · OptiScaler · OptiScaler-REFramework, HIP): [Quark](https://pan.quark.cn/s/d38e0f653c5a) · [Gofile mirror](https://gofile.io/d/moSf7cqf) | 10-03 | **Default output changed**: all 71 blocks + `DLSS5_FAST_NUMERIC=1` (vs NVIDIA 44.26 → 47.55 dB, +0.12/+0.19 ms). Multi pass `DLSS5_MULTI_PASS` with F9; three config files (`default-config` → `custom-config` → `native-game-flags`, environment on top); LLVM 23 C32/C64 and other bit-exact speed-ups. |
+| 0.41 · [Quark](https://pan.quark.cn/s/dbda3e470f8f) · [Gofile mirror](https://gofile.io/d/YAENU0ex) | 10-05 | Default 1x; opt-in 3x uses two real passes plus prediction by default. First-frame/HIP-device fixes, RE9 strength, C256/ViT/C512 and direct-RGBA improvements; 76 modules. [Details](CHANGELOG.md#041-10-05).  |
+
 
 ## Weights
 
@@ -224,7 +317,7 @@ per-block notes), which document the layouts but are not a polished pipeline. No
 ## Authors
 
 Kien — direction, game integration, testing. The reverse engineering, kernels and optimization were
-written with AI collaborators (Claude, GPT); the working notes in `Development/` are theirs. Write-ups (Chinese): [WeChat, DLSS5 series](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzYzMzMwNzk0NA==&action=getalbum&album_id=4687269655390453762#wechat_redirect). Resume / 简历: [here](https://github.com/lmxxf/ai-theorys-study/blob/main/resume/README.md).
+written with AI collaborators (Claude, GPT); the working notes in `Development/` are theirs. Write-ups (Chinese): [WeChat, DLSS5 series](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzYzMzMwNzk0NA==&action=getalbum&album_id=4687269655390453762#wechat_redirect).
 
 ## License
 

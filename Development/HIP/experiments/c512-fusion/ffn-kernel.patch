@@ -1,0 +1,71 @@
+--- a/hip/deep_fast.hip
++++ b/hip/deep_fast.hip
+@@ -1,3 +1,9 @@
++#ifndef C512_T8_M32
++#define C512_T8_M32 0
++#endif
++#ifndef C512_T8_SKIP_FLOAT_OUT
++#define C512_T8_SKIP_FLOAT_OUT 0
++#endif
+ // Production ViT matrix math. FP8 MLP, F16 QKV, raw FP32 accumulation.
+ // Flat grid ceil(output_work_items/256), block32. One block = 16 tokens x 16 channels.
+ // Tokens and output channels must be divisible by16; no scalar GEMM fallback.
+@@ -438,6 +444,44 @@
+ // split_ffn_fused_fp8 with a second E4M3 tiled store of F(Hrtz(result)) for split_projection_frag (host option c512_proj_tiles).
+ KERNEL __attribute__((amdgpu_flat_work_group_size(128,128)))
+ void split_ffn_fused_fp8_t8(const float*in,const float*w,float*out,unsigned char*out8,uint tokens){
++#if C512_T8_M32
++ uint block=bid(),first=(block/8)*32,g=block%8,tid=__builtin_amdgcn_workitem_id_x(),wave=tid/32;
++ if(first>=tokens)return;
++ __attribute__((shared)) unsigned char hidden[2][16*260];
++ f8 expanded[2][4]{};
++ // Each tile keeps the same j/K arithmetic; only the weight fragment is shared across independent tiles.
++ for(uint j=0;j<4;j++)for(uint k=0;k<64;k+=16){
++  h8 b{};__builtin_memcpy(&b,reinterpret_cast<const _Float16*>(w+262144)+g*16384+(wave*64+j*16+rc())*64+k+gr()*8,16);
++  _Pragma("unroll") for(uint m=0;m<2;m++){
++   h8 a{};uint row=first+m*16+rc();
++   if(row<tokens)for(uint e=0;e<8;e++)a[e]=(_Float16)in[row*512+g*64+k+gr()*8+e];
++   expanded[m][j]=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(a,b,expanded[m][j]);
++  }
++ }
++ _Pragma("unroll") for(uint m=0;m<2;m++)for(uint j=0;j<4;j++)for(uint e=0;e<8;e++){
++  float v=Hrtz(expanded[m][j][e]),gate=clampf(v,-4.f,4.f),poly=__builtin_fmaf(gate,__builtin_fmaf(absf(gate),-.055908203125f,.447265625f),.89453125f);
++  hidden[m][(gr()*8+e)*260+wave*64+j*16+rc()]=byte_F(v*poly);
++ }
++ __builtin_amdgcn_s_barrier();
++ f8 result[2]{};const uint*pw=reinterpret_cast<const uint*>(w);
++ for(uint k=0;k<256;k+=16){
++  uint off=393216+g*4096+((wave*16+rc())*256+k+gr()*8)/4;i2 b={int(pw[off]),int(pw[off+1])};
++  _Pragma("unroll") for(uint m=0;m<2;m++){
++   i2 a{};__builtin_memcpy(&a,hidden[m]+rc()*260+k+gr()*8,8);
++   result[m]=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(a,b,result[m]);
++  }
++ }
++ _Pragma("unroll") for(uint m=0;m<2;m++)for(uint e=0;e<8;e++){
++  uint r=first+m*16+gr()*8+e,c=g*64+wave*16+rc();float v=F(Hrtz(result[m][e]));
++  if(r<tokens){
++#if !C512_T8_SKIP_FLOAT_OUT
++   out[r*512+c]=v;
++#endif
++   out8[((r/16)*16+c/32)*512+(r%16)*32+c%32]=static_cast<unsigned char>(__builtin_amdgcn_cvt_pk_fp8_f32(v,0.f,0,false));
++  }
++ }
++#else
++
+  uint block=bid(),first=(block/8)*16,g=block%8,tid=__builtin_amdgcn_workitem_id_x(),wave=tid/32;
+  if(first>=tokens)return;
+  __attribute__((shared)) unsigned char hidden[16*260];
+@@ -448,7 +492,12 @@
+  f8 result{};
+  const uint*pw=reinterpret_cast<const uint*>(w);
+  for(uint k=0;k<256;k+=16){i2 a{};__builtin_memcpy(&a,hidden+rc()*260+k+gr()*8,8);uint off=393216+g*4096+((wave*16+rc())*256+k+gr()*8)/4;i2 b={int(pw[off]),int(pw[off+1])};result=__builtin_amdgcn_wmma_f32_16x16x16_fp8_fp8_w32_gfx12(a,b,result);}
+- for(uint e=0;e<8;e++){uint r=first+gr()*8+e,c=g*64+wave*16+rc();float v=F(Hrtz(result[e]));out[r*512+c]=v;out8[((r/16)*16+c/32)*512+(r%16)*32+c%32]=static_cast<unsigned char>(__builtin_amdgcn_cvt_pk_fp8_f32(v,0.f,0,false));}
++ for(uint e=0;e<8;e++){uint r=first+gr()*8+e,c=g*64+wave*16+rc();float v=F(Hrtz(result[e]));
++#if !C512_T8_SKIP_FLOAT_OUT
++ out[r*512+c]=v;
++#endif
++ out8[((r/16)*16+c/32)*512+(r%16)*32+c%32]=static_cast<unsigned char>(__builtin_amdgcn_cvt_pk_fp8_f32(v,0.f,0,false));}
++#endif
+ }
+ // split_projection_blocked in the QKV-frag shape: A from the contract's E4M3 tiles, B from fragment-tiled E4M3 projection
+ // weights (PackedSplitProjectionFrag), no LDS; residual H(skip*scale) and F(H(acc)) as split_projection_blocked. Also

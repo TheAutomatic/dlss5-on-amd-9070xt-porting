@@ -1,0 +1,382 @@
+{
+  "c32-wave1:c32_wave1_chain": {
+    "900": {
+      "calls": 4,
+      "waves": 24442
+    },
+    "1080": {
+      "calls": 4,
+      "waves": 35090
+    }
+  },
+  "c32-wave1:c32_wave1_mapped": {
+    "900": {
+      "calls": 2,
+      "waves": 12000
+    },
+    "1080": {
+      "calls": 2,
+      "waves": 17280
+    }
+  },
+  "c32-wave1:c32_wave1_finish": {
+    "900": {
+      "calls": 1,
+      "waves": 6100
+    },
+    "1080": {
+      "calls": 1,
+      "waves": 8760
+    }
+  },
+  "c32-wave1:c32_wave1_finish_dcrop": {
+    "900": {
+      "calls": 1,
+      "waves": 6100
+    },
+    "1080": {
+      "calls": 1,
+      "waves": 8760
+    }
+  },
+  "c32-wave1:c32_wave1_post": {
+    "900": {
+      "calls": 1,
+      "waves": 24321
+    },
+    "1080": {
+      "calls": 1,
+      "waves": 34945
+    }
+  },
+  "c32-wave1:c32_wave1_prefix": {
+    "900": {
+      "calls": 1,
+      "waves": 24000
+    },
+    "1080": {
+      "calls": 1,
+      "waves": 34560
+    }
+  },
+  "c64-wave2:c64_wave2_bi": {
+    "900": {
+      "calls": 2,
+      "waves": 6200
+    },
+    "1080": {
+      "calls": 2,
+      "waves": 8880
+    }
+  },
+  "c64-wave2:c64_wave2_bo": {
+    "900": {
+      "calls": 1,
+      "waves": 3000
+    },
+    "1080": {
+      "calls": 1,
+      "waves": 4320
+    }
+  },
+  "c64-wave2:c64_wave2_bi_bo": {
+    "900": {
+      "calls": 5,
+      "waves": 15444
+    },
+    "1080": {
+      "calls": 5,
+      "waves": 22132
+    }
+  },
+  "c64-wave2:c128_wave2_bi": {
+    "900": {
+      "calls": 2,
+      "waves": 3264
+    },
+    "1080": {
+      "calls": 2,
+      "waves": 4636
+    }
+  },
+  "c64-wave2:c128_wave2_bo": {
+    "900": {
+      "calls": 1,
+      "waves": 1500
+    },
+    "1080": {
+      "calls": 1,
+      "waves": 2160
+    }
+  },
+  "c64-wave2:c128_wave2_bi_bo": {
+    "900": {
+      "calls": 9,
+      "waves": 14208
+    },
+    "1080": {
+      "calls": 9,
+      "waves": 20288
+    }
+  },
+  "c64-wave2:c256_attn_wave": {
+    "900": {
+      "calls": 2,
+      "waves": 1664
+    },
+    "1080": {
+      "calls": 2,
+      "waves": 2400
+    }
+  },
+  "c64-wave2:c256_attn_wave_bo": {
+    "900": {
+      "calls": 14,
+      "waves": 11648
+    },
+    "1080": {
+      "calls": 14,
+      "waves": 16448
+    }
+  },
+  "vit-stream:vit_stream_project_n64_bh": {
+    "900": {
+      "calls": 8,
+      "waves": 3200
+    },
+    "1080": {
+      "calls": 8,
+      "waves": 5120
+    }
+  },
+  "vit-stream:vit_stream_qkv_frag_hin": {
+    "900": {
+      "calls": 8,
+      "waves": 19200
+    },
+    "1080": {
+      "calls": 8,
+      "waves": 30720
+    }
+  },
+  "vit-stream:vit_stream_contract_frag_hout": {
+    "900": {
+      "calls": 8,
+      "waves": 3200
+    },
+    "1080": {
+      "calls": 8,
+      "waves": 5120
+    }
+  },
+  "c512-m32-deep:split_mix_blocked_h16w_m32": {
+    "900": {
+      "calls": 13,
+      "waves": 6608
+    },
+    "1080": {
+      "calls": 13,
+      "waves": 8320
+    }
+  },
+  "multihead-fast-padded-wave-packed:mh_pool_project_production_h16w": {
+    "900": {
+      "calls": 2,
+      "waves": 25600
+    },
+    "1080": {
+      "calls": 2,
+      "waves": 37120
+    }
+  },
+  "multihead-fast-padded-wave-packed:mh_pool_project_group_c64": {
+    "900": {
+      "calls": 1,
+      "waves": 3000
+    },
+    "1080": {
+      "calls": 1,
+      "waves": 4320
+    }
+  },
+  "multihead-fast-padded-wave-packed:mh_pool_project_group_c128": {
+    "900": {
+      "calls": 1,
+      "waves": 1500
+    },
+    "1080": {
+      "calls": 1,
+      "waves": 2160
+    }
+  },
+  "multihead-fast-padded-wave-packed:mh_pool_project_group_c256": {
+    "900": {
+      "calls": 1,
+      "waves": 752
+    },
+    "1080": {
+      "calls": 1,
+      "waves": 1080
+    }
+  },
+  "multihead-fast-padded-wave-packed:mh_attention_project_frag_c512": {
+    "900": {
+      "calls": 13,
+      "waves": 13216
+    },
+    "1080": {
+      "calls": 13,
+      "waves": 16640
+    }
+  },
+  "multihead-fast-padded-wave-packed:mh_ffn_fused_c256_frag_project_g128_qkv_bytein_fb_pdl": {
+    "1080": {
+      "calls": 3,
+      "waves": 25920
+    }
+  },
+  "multihead-fast-padded-wave-packed:mh_ffn_fused_c256_frag_project_g128_qkv_fb_pdl": {
+    "1080": {
+      "calls": 1,
+      "waves": 8640
+    }
+  },
+  "multihead-fast-padded-wave-packed:mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl": {
+    "900": {
+      "calls": 15,
+      "waves": 99840
+    },
+    "1080": {
+      "calls": 12,
+      "waves": 116224
+    }
+  },
+  "multihead-fast-padded-wave-packed:mh_ffn_fused_c256_frag_project_mapped_g128_qkv_fb_pdl": {
+    "900": {
+      "calls": 1,
+      "waves": 6656
+    }
+  },
+  "deep_reference:vit_gather": {
+    "900": {
+      "calls": 2,
+      "waves": 25600
+    },
+    "1080": {
+      "calls": 2,
+      "waves": 40960
+    }
+  },
+  "deep_fast-packed:vit_attention_fused_400_bytein_bout": {
+    "900": {
+      "calls": 8,
+      "waves": 6400
+    }
+  },
+  "deep_fast-packed:vit_attention_fused_640_bytein_bout": {
+    "1080": {
+      "calls": 8,
+      "waves": 10240
+    }
+  },
+  "deep_fast-packed:decoder_project2x_h16w": {
+    "900": {
+      "calls": 2,
+      "waves": 12800
+    },
+    "1080": {
+      "calls": 2,
+      "waves": 18560
+    }
+  },
+  "deep_fast-packed:decoder_project2x_h16w_byteout": {
+    "900": {
+      "calls": 3,
+      "waves": 10504
+    },
+    "1080": {
+      "calls": 3,
+      "waves": 15120
+    }
+  },
+  "deep_fast-packed:vit_pack_input": {
+    "900": {
+      "calls": 8,
+      "waves": 25600
+    },
+    "1080": {
+      "calls": 8,
+      "waves": 40960
+    }
+  },
+  "deep_fast-packed:vit_expand_blocked_fp8_frag_bytein": {
+    "900": {
+      "calls": 8,
+      "waves": 12800
+    },
+    "1080": {
+      "calls": 8,
+      "waves": 20480
+    }
+  },
+  "deep_fast-packed:split_ffn_fused_fp8_t8": {
+    "900": {
+      "calls": 13,
+      "waves": 52864
+    },
+    "1080": {
+      "calls": 13,
+      "waves": 66560
+    }
+  },
+  "deep_fast-packed:split_projection_frag": {
+    "900": {
+      "calls": 13,
+      "waves": 13216
+    },
+    "1080": {
+      "calls": 13,
+      "waves": 16640
+    }
+  },
+  "multihead-reference:mh_shift_pack": {
+    "900": {
+      "calls": 13,
+      "waves": 422912
+    },
+    "1080": {
+      "calls": 13,
+      "waves": 532480
+    }
+  },
+  "multihead-reference:mh_pool": {
+    "900": {
+      "calls": 1,
+      "waves": 6400
+    },
+    "1080": {
+      "calls": 1,
+      "waves": 10240
+    }
+  },
+  "c512-m32-mh:mh_qkv_normalize_frag_c512_m32": {
+    "900": {
+      "calls": 13,
+      "waves": 19824
+    },
+    "1080": {
+      "calls": 13,
+      "waves": 24960
+    }
+  },
+  "multihead_fused_attention:mh_attention_fused_fp8_out": {
+    "900": {
+      "calls": 13,
+      "waves": 26432
+    },
+    "1080": {
+      "calls": 13,
+      "waves": 33280
+    }
+  }
+}

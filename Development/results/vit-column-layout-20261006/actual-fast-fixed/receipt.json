@@ -1,0 +1,25 @@
+{
+  "compile_handle": 96842,
+  "compile_exit": 0,
+  "host_compile_handle": 19642,
+  "host_compile_exit": 0,
+  "gpu_handle": 56065,
+  "gpu_exit": 0,
+  "lock_released": true,
+  "all4wholeNNraw_same_currentA153ac": true,
+  "repeat_finite": true,
+  "actual_target_calls_per2frames": {
+    "producer": 16,
+    "consumer": 16
+  },
+  "effective_filenames": [
+    "vit-stream-fast.hsaco",
+    "deep_fast-packed-fast.hsaco"
+  ],
+  "baseline_producerSHA": "877eaf122f827af6e00824582f5ca918b5d61499d4ad7c7cde7ab6e422516a57",
+  "candidate_producerSHA": "03de16af1b01d57ce77ba6411e649852b6affef8a640f17597ec2f7422d7fb84",
+  "candidate_consumerSHA": "38da9a34c803ccef0a3f0623418db06b4eb18d29b61f22d5e629922ff60514cf",
+  "normal_producer_not_replaced": true,
+  "whole_hostSHA": "f45da9ce54f09f41230dc5fa4a5a9d9325c8d088eda276b4678f522b9ab78a44",
+  "runtime_headerSHA": "75b5055ea191eecd2f3756fcaf89dcf63d8fa849566027dbee08816cbdcc2b73"
+}

@@ -1,0 +1,26 @@
+{
+  "phase": "quiet actualproduct performance CPUprepare only noGPU",
+  "validated_gold": "ee3919ba actualAutoCreate1Record15 vsOffGraph12/raw12F16samefinite",
+  "build": "14232 O2static terminalexit0",
+  "exe_sha256": "f40ce5497a7b6fdc27595a4b8a26f539ee28685563c9ba48e1040e6e1809b4e0",
+  "source_sha256": {
+    "benchmark.cpp": "a36f7661ac66016e4f784e8bd985b2eeb79645f2f0934037c7043a4611d43f4c",
+    "hip_reference_network.h": "82ea8830e1597d456a465e2a6c577766d5e4238f01eaef64205a24261f403c30",
+    "hip_d3d12_bridge.h": "5814ed60a6424f6580b7253d48fb38dd0689788f5a169f191ec28dfeec5885e4",
+    "native_hip_network.h": "d352e32756b3e0043d6fb460f555d62dbef81a3a51c7f45c1d801b7fb9326f69",
+    "hip_api.h": "a02b0bd87d52ee23b1b6e671d881afccbf467ae49547dbffa1d55389fd7cdeda"
+  },
+  "benchmark_original_byte_sha256": "a36f7661ac66016e4f784e8bd985b2eeb79645f2f0934037c7043a4611d43f4c",
+  "roles": "samePDL0 EagerAuto2 versusReplayOff0, originalSubmitPulse nativeScope/Record unchanged; noReplayAuto",
+  "hot_cost": "postEnqueue heavydriver/caps/RecordDelta goldchecks removed. Ordinarycounter increment perEnqueue andselectedFramecount bothroles; Graphcounter increment matching onehotpath; no newHIPquery/getenv/fprintf/Fntrace",
+  "actualproof": "setup trueDriver/caps/Create1/warmacceptedRecord; final expectedAutoordinary=actualWarmN+actualselectedFrames\u22121 equalsRecordOk/accepted; ReplayGraphCalls=selectedFrames pulseCreateRecord0; failures rejectcase",
+  "sampling": "original160totaldiscard80\u219280steady, first/lastreadbackoutsideelapsed; all160wallpositivefinite parserguard",
+  "scope": "actual1152currentmodules/originalHDRfixed contentF1MP1PRED1inactiveAE0noneHistseed0resettrueNET0overlap0",
+  "setup": "bothcoldstablewarm\u226480/twoallcounterstable warmFn; capture+DAG/instantiate separatelogs discardedwithFrame0",
+  "limits": [
+    "No actualquiet perf result until CPUreview androotGPUqueue",
+    "Currentproduct policycomparisonPDL0 not fullPDL1production baseline",
+    "Separatehistoricalbenefitsnotadded/oldMgapnotrewritten",
+    "No default/userconfig/runtimeDLL/package/install/push"
+  ]
+}

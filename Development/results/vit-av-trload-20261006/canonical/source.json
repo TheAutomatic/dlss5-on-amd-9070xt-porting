@@ -1,0 +1,22 @@
+{
+  "row": "deep_fast-packed-fast",
+  "compiler": "COMGR",
+  "defines": [
+    "HIP_ISA_HALF 1",
+    "HIP_DEC_WIDE 1",
+    "HIP_VIT_ATTN_NATIVE_HALF 1",
+    "HIP_VIT_ATTN_PROB_PAIR 1",
+    "HIP_VIT_ATTN_TRANSPOSED_AV 1",
+    "HIP_VIT_ATTN_TRANSPOSED_SCORE 1",
+    "HIP_BRANCHLESS_F 1",
+    "C512_F_MASK 1",
+    "C512_T8_TAIL_VEC 1",
+    "HIP_BYTE_F_ADD0 1",
+    "HIP_VIT_ATTN_RCP 1",
+    "VIT_FAST_NUM 15"
+  ],
+  "opts": [],
+  "oldSHA": "bbbe7ce7713396a3d6204a37344159ef453aa60153034d2642783d33d65ebb4d",
+  "newSHA": "b995247a068fa4129c4060777f60534b5c6659432f8953ef81c79d66f7765df9",
+  "scope": "sole V load inside production transposed-score body MAXT640/ByteInput/ByteOut; other specializations remain old, Q/K/P/den/AV/WMMA/store/producer unchanged"
+}

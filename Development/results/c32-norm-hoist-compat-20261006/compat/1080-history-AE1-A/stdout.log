@@ -1,0 +1,20 @@
+seed=0 pattern=0
+input format=RGBA16_FLOAT W=1296 H=720 invalid=0 min=0 max=34.53125 luma=0.0157641119 roi_luma=0.0250669576
+adapter=AMD Radeon RX 9070 XT
+SP_PLAN c=256 first=16 layers=6 tasks=893 initial=160 state_bytes=10732 w16=1
+SP_PLAN c=256 first=49 layers=6 tasks=893 initial=160 state_bytes=10732 w16=1
+frame=0 reset=1 wall_ms=1289.011 invalid=0 luma=0.01307101 roi=0.01974189 dark=806206 roi_dark=258238 changed_first=0 maxabs_first=0
+frame=1 reset=0 wall_ms=15.413 invalid=0 luma=0.01356019 roi=0.02048357 dark=803068 roi_dark=256785 changed_first=3675373 maxabs_first=31.11097
+frame=2 reset=0 wall_ms=18.723 invalid=0 luma=0.01371399 roi=0.02077799 dark=802792 roi_dark=256726 changed_first=3711498 maxabs_first=30.52728
+frame=3 reset=0 wall_ms=21.584 invalid=0 luma=0.01356904 roi=0.02072058 dark=803130 roi_dark=256660 changed_first=3724138 maxabs_first=30.51456
+frame=4 reset=0 wall_ms=17.403 invalid=0 luma=0.01353769 roi=0.02080002 dark=803459 roi_dark=256707 changed_first=3726864 maxabs_first=30.99895
+frame=5 reset=0 wall_ms=18.812 invalid=0 luma=0.01368831 roi=0.02116061 dark=801741 roi_dark=255656 changed_first=3728686 maxabs_first=30.15041
+frame=6 reset=0 wall_ms=18.137 invalid=0 luma=0.01364877 roi=0.02114506 dark=801842 roi_dark=255781 changed_first=3729447 maxabs_first=30.29637
+frame=7 reset=0 wall_ms=17.102 invalid=0 luma=0.01360062 roi=0.02118887 dark=802323 roi_dark=256008 changed_first=3729830 maxabs_first=34.08915
+frame=8 reset=0 wall_ms=27.342 invalid=0 luma=0.01362439 roi=0.02132712 dark=802399 roi_dark=256063 changed_first=3730059 maxabs_first=31.1843
+frame=9 reset=0 wall_ms=18.141 invalid=0 luma=0.01356802 roi=0.02131745 dark=802412 roi_dark=255883 changed_first=3730275 maxabs_first=31.21735
+frame=10 reset=0 wall_ms=18.070 invalid=0 luma=0.01337567 roi=0.02108234 dark=803704 roi_dark=256719 changed_first=3730423 maxabs_first=29.88741
+frame=11 reset=0 wall_ms=17.995 invalid=0 luma=0.0132702 roi=0.02098835 dark=804425 roi_dark=257219 changed_first=3730658 maxabs_first=29.67133
+SP_STATS runs=24 fallback=0 rollover=0 jobs=21432 disabled=0 errors=0
+RESULT frames=12 temporal=1 mean_wall_ms=124.811 invalid_total=0 restored_capture_every_frame=1 HDR_preserved=1
+

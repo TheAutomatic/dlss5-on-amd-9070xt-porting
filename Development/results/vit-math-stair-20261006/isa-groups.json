@@ -1,0 +1,87 @@
+{
+  "A": {
+    "scope": "static640kernel ISA instruction sites, not dynamic per-frame cycles or actual occupancy",
+    "groups": {
+      "WMMA": 5,
+      "DS_BPERMUTE": 0,
+      "VMEM": 22,
+      "VALU": 216,
+      "SALU": 31,
+      "WAIT": 46
+    },
+    "selected": {
+      "v_lshl_add_u32": 2,
+      "s_add_nc_u64": 1,
+      "v_add_co_u32": 3,
+      "v_add_co_ci_u32_e64": 3,
+      "v_add_nc_u32_e32": 9,
+      "s_add_co_i32": 1,
+      "s_addk_co_i32": 1,
+      "v_wmma_f32_16x16x16_fp8_fp8": 4,
+      "v_dual_add_f32": 7,
+      "v_add_f32_e32": 11,
+      "v_add_nc_u16": 8,
+      "v_cvt_f32_f16_e32": 8,
+      "v_cvt_pk_fp8_f32": 20,
+      "v_wmma_f32_16x16x16_f16": 1
+    }
+  },
+  "B": {
+    "scope": "static640kernel ISA instruction sites, not dynamic per-frame cycles or actual occupancy",
+    "groups": {
+      "WMMA": 5,
+      "DS_BPERMUTE": 0,
+      "VMEM": 22,
+      "VALU": 228,
+      "SALU": 32,
+      "WAIT": 43
+    },
+    "selected": {
+      "v_lshl_add_u32": 2,
+      "s_add_nc_u64": 1,
+      "v_add_co_u32": 3,
+      "v_add_co_ci_u32_e64": 3,
+      "v_add_nc_u32_e32": 9,
+      "s_add_co_i32": 1,
+      "s_addk_co_i32": 1,
+      "v_wmma_f32_16x16x16_fp8_fp8": 4,
+      "v_cvt_f16_f32_e32": 16,
+      "v_fmaak_f16": 8,
+      "v_cvt_f32_f16_e32": 16,
+      "v_cvt_pk_fp8_f32": 20,
+      "v_wmma_f32_16x16x16_f16": 1,
+      "v_dual_add_f32": 4,
+      "v_add_f32_e32": 8
+    }
+  },
+  "C": {
+    "scope": "static640kernel ISA instruction sites, not dynamic per-frame cycles or actual occupancy",
+    "groups": {
+      "WMMA": 4,
+      "DS_BPERMUTE": 4,
+      "VMEM": 22,
+      "VALU": 247,
+      "SALU": 43,
+      "WAIT": 57
+    },
+    "selected": {
+      "s_add_nc_u64": 1,
+      "v_add_co_u32": 3,
+      "v_add_co_ci_u32_e64": 3,
+      "v_lshl_add_u32": 2,
+      "v_add_nc_u32_e32": 9,
+      "s_add_co_i32": 2,
+      "s_addk_co_i32": 1,
+      "v_wmma_f32_16x16x16_fp8_fp8": 4,
+      "v_cvt_f16_f32_e32": 16,
+      "v_fmaak_f16": 8,
+      "v_cvt_f32_f16_e32": 17,
+      "ds_bpermute_b32": 4,
+      "v_pk_add_f16": 11,
+      "v_cvt_pk_fp8_f32": 20,
+      "v_add_f16_e32": 2,
+      "v_dual_add_f32": 3,
+      "v_add_f32_e32": 7
+    }
+  }
+}

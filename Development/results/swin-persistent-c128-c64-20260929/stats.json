@@ -1,0 +1,882 @@
+[
+  {
+    "batch": "c1-s1-a0",
+    "slot": "900-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 52308,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s1-a0",
+    "slot": "1080-static-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 74868,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s1-a0",
+    "slot": "720-motion-True",
+    "runs": 0,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 0,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s1-a0",
+    "slot": "1080-motion-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 74868,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s1-a0",
+    "slot": "900-static-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 52308,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s1-a0",
+    "slot": "1080-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 74868,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s1-a0",
+    "slot": "900-motion-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 52308,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s1-a1",
+    "slot": "900-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 52308,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s1-a1",
+    "slot": "1080-static-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 74868,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s1-a1",
+    "slot": "720-motion-True",
+    "runs": 0,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 0,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s1-a1",
+    "slot": "1080-motion-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 74868,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s1-a1",
+    "slot": "900-static-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 52308,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s1-a1",
+    "slot": "1080-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 74868,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s1-a1",
+    "slot": "900-motion-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 52308,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s1-roll-0",
+    "slot": "900-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 36,
+    "jobs": 52308,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s1-roll-0",
+    "slot": "1080-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 36,
+    "jobs": 74868,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s1-roll-1",
+    "slot": "900-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 36,
+    "jobs": 52308,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s1-roll-1",
+    "slot": "1080-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 36,
+    "jobs": 74868,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s1-timeout-0",
+    "slot": "900-history-True",
+    "runs": 1,
+    "fallback": 1,
+    "rollover": 0,
+    "jobs": 3111,
+    "disabled": 1,
+    "errors": 1
+  },
+  {
+    "batch": "c1-s1-timeout-0",
+    "slot": "1080-history-True",
+    "runs": 1,
+    "fallback": 1,
+    "rollover": 0,
+    "jobs": 4453,
+    "disabled": 1,
+    "errors": 1
+  },
+  {
+    "batch": "c1-s1-timeout-1",
+    "slot": "900-history-True",
+    "runs": 1,
+    "fallback": 1,
+    "rollover": 0,
+    "jobs": 3111,
+    "disabled": 1,
+    "errors": 1
+  },
+  {
+    "batch": "c1-s1-timeout-1",
+    "slot": "1080-history-True",
+    "runs": 1,
+    "fallback": 1,
+    "rollover": 0,
+    "jobs": 4453,
+    "disabled": 1,
+    "errors": 1
+  },
+  {
+    "batch": "c1-s2-a0",
+    "slot": "900-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 52308,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s2-a0",
+    "slot": "1080-static-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 74868,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s2-a0",
+    "slot": "720-motion-True",
+    "runs": 0,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 0,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s2-a0",
+    "slot": "1080-motion-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 74868,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s2-a0",
+    "slot": "900-static-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 52308,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s2-a0",
+    "slot": "1080-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 74868,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s2-a0",
+    "slot": "900-motion-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 52308,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s2-a1",
+    "slot": "900-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 52308,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s2-a1",
+    "slot": "1080-static-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 74868,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s2-a1",
+    "slot": "720-motion-True",
+    "runs": 0,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 0,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s2-a1",
+    "slot": "1080-motion-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 74868,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s2-a1",
+    "slot": "900-static-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 52308,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s2-a1",
+    "slot": "1080-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 74868,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s2-a1",
+    "slot": "900-motion-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 52308,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s2-roll-0",
+    "slot": "900-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 36,
+    "jobs": 52308,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s2-roll-0",
+    "slot": "1080-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 36,
+    "jobs": 74868,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s2-roll-1",
+    "slot": "900-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 36,
+    "jobs": 52308,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s2-roll-1",
+    "slot": "1080-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 36,
+    "jobs": 74868,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c1-s2-timeout-0",
+    "slot": "900-history-True",
+    "runs": 3,
+    "fallback": 1,
+    "rollover": 0,
+    "jobs": 4359,
+    "disabled": 1,
+    "errors": 1
+  },
+  {
+    "batch": "c1-s2-timeout-0",
+    "slot": "1080-history-True",
+    "runs": 3,
+    "fallback": 1,
+    "rollover": 0,
+    "jobs": 6239,
+    "disabled": 1,
+    "errors": 1
+  },
+  {
+    "batch": "c1-s2-timeout-1",
+    "slot": "900-history-True",
+    "runs": 3,
+    "fallback": 1,
+    "rollover": 0,
+    "jobs": 4359,
+    "disabled": 1,
+    "errors": 1
+  },
+  {
+    "batch": "c1-s2-timeout-1",
+    "slot": "1080-history-True",
+    "runs": 3,
+    "fallback": 1,
+    "rollover": 0,
+    "jobs": 6239,
+    "disabled": 1,
+    "errors": 1
+  },
+  {
+    "batch": "c2-s1-a0",
+    "slot": "900-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 33948,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s1-a0",
+    "slot": "1080-static-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 48516,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s1-a0",
+    "slot": "720-motion-True",
+    "runs": 0,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 0,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s1-a0",
+    "slot": "1080-motion-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 48516,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s1-a0",
+    "slot": "900-static-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 33948,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s1-a0",
+    "slot": "1080-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 48516,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s1-a0",
+    "slot": "900-motion-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 33948,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s1-a1",
+    "slot": "900-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 33948,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s1-a1",
+    "slot": "1080-static-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 48516,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s1-a1",
+    "slot": "720-motion-True",
+    "runs": 0,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 0,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s1-a1",
+    "slot": "1080-motion-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 48516,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s1-a1",
+    "slot": "900-static-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 33948,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s1-a1",
+    "slot": "1080-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 48516,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s1-a1",
+    "slot": "900-motion-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 33948,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s1-roll-0",
+    "slot": "900-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 36,
+    "jobs": 33948,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s1-roll-0",
+    "slot": "1080-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 36,
+    "jobs": 48516,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s1-roll-1",
+    "slot": "900-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 36,
+    "jobs": 33948,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s1-roll-1",
+    "slot": "1080-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 36,
+    "jobs": 48516,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s1-timeout-0",
+    "slot": "900-history-True",
+    "runs": 1,
+    "fallback": 1,
+    "rollover": 0,
+    "jobs": 1581,
+    "disabled": 1,
+    "errors": 1
+  },
+  {
+    "batch": "c2-s1-timeout-0",
+    "slot": "1080-history-True",
+    "runs": 1,
+    "fallback": 1,
+    "rollover": 0,
+    "jobs": 2257,
+    "disabled": 1,
+    "errors": 1
+  },
+  {
+    "batch": "c2-s1-timeout-1",
+    "slot": "900-history-True",
+    "runs": 1,
+    "fallback": 1,
+    "rollover": 0,
+    "jobs": 1581,
+    "disabled": 1,
+    "errors": 1
+  },
+  {
+    "batch": "c2-s1-timeout-1",
+    "slot": "1080-history-True",
+    "runs": 1,
+    "fallback": 1,
+    "rollover": 0,
+    "jobs": 2257,
+    "disabled": 1,
+    "errors": 1
+  },
+  {
+    "batch": "c2-s2-a0",
+    "slot": "900-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 33948,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s2-a0",
+    "slot": "1080-static-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 48516,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s2-a0",
+    "slot": "720-motion-True",
+    "runs": 0,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 0,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s2-a0",
+    "slot": "1080-motion-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 48516,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s2-a0",
+    "slot": "900-static-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 33948,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s2-a0",
+    "slot": "1080-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 48516,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s2-a0",
+    "slot": "900-motion-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 33948,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s2-a1",
+    "slot": "900-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 33948,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s2-a1",
+    "slot": "1080-static-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 48516,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s2-a1",
+    "slot": "720-motion-True",
+    "runs": 0,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 0,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s2-a1",
+    "slot": "1080-motion-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 48516,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s2-a1",
+    "slot": "900-static-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 33948,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s2-a1",
+    "slot": "1080-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 48516,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s2-a1",
+    "slot": "900-motion-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 0,
+    "jobs": 33948,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s2-roll-0",
+    "slot": "900-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 36,
+    "jobs": 33948,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s2-roll-0",
+    "slot": "1080-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 36,
+    "jobs": 48516,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s2-roll-1",
+    "slot": "900-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 36,
+    "jobs": 33948,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s2-roll-1",
+    "slot": "1080-history-True",
+    "runs": 36,
+    "fallback": 0,
+    "rollover": 36,
+    "jobs": 48516,
+    "disabled": 0,
+    "errors": 0
+  },
+  {
+    "batch": "c2-s2-timeout-0",
+    "slot": "900-history-True",
+    "runs": 3,
+    "fallback": 1,
+    "rollover": 0,
+    "jobs": 2829,
+    "disabled": 1,
+    "errors": 1
+  },
+  {
+    "batch": "c2-s2-timeout-0",
+    "slot": "1080-history-True",
+    "runs": 3,
+    "fallback": 1,
+    "rollover": 0,
+    "jobs": 4043,
+    "disabled": 1,
+    "errors": 1
+  },
+  {
+    "batch": "c2-s2-timeout-1",
+    "slot": "900-history-True",
+    "runs": 3,
+    "fallback": 1,
+    "rollover": 0,
+    "jobs": 2829,
+    "disabled": 1,
+    "errors": 1
+  },
+  {
+    "batch": "c2-s2-timeout-1",
+    "slot": "1080-history-True",
+    "runs": 3,
+    "fallback": 1,
+    "rollover": 0,
+    "jobs": 4043,
+    "disabled": 1,
+    "errors": 1
+  }
+]

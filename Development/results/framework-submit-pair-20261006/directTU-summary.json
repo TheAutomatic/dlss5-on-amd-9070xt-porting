@@ -1,0 +1,82 @@
+{
+  "900": {
+    "rows": [
+      {
+        "slot": 0,
+        "route": "T",
+        "wall_mean": 7.023320833333334,
+        "wall_p99": 7.34232,
+        "gpu_mean": 6.495054251041667,
+        "gpu_p99": 6.6878506449
+      },
+      {
+        "slot": 1,
+        "route": "U",
+        "wall_mean": 7.026108333333334,
+        "wall_p99": 7.36293,
+        "gpu_mean": 6.501416083583333,
+        "gpu_p99": 6.692528146099999
+      },
+      {
+        "slot": 2,
+        "route": "U",
+        "wall_mean": 7.026458333333333,
+        "wall_p99": 7.36447,
+        "gpu_mean": 6.5077543435416665,
+        "gpu_p99": 6.6715276326
+      },
+      {
+        "slot": 3,
+        "route": "T",
+        "wall_mean": 7.0453833333333336,
+        "wall_p99": 7.37671,
+        "gpu_mean": 6.506164501124999,
+        "gpu_p99": 6.6782238383
+      }
+    ],
+    "UminusT_avg": -0.008068750000000513,
+    "UminusT_p99": 0.006580000000000474,
+    "gpu_UminusT": 0.003975837479165634,
+    "scope": "sameEXE samebatch sameHDR/currentFAST1/full71 320frames discard80 directTU"
+  },
+  "1080": {
+    "rows": [
+      {
+        "slot": 0,
+        "route": "T",
+        "wall_mean": 9.7646,
+        "wall_p99": 10.03869,
+        "gpu_mean": 9.1345909875,
+        "gpu_p99": 9.319668586599999
+      },
+      {
+        "slot": 1,
+        "route": "U",
+        "wall_mean": 9.780312499999999,
+        "wall_p99": 10.11867,
+        "gpu_mean": 9.147231416125003,
+        "gpu_p99": 9.3515165138
+      },
+      {
+        "slot": 2,
+        "route": "U",
+        "wall_mean": 9.790612500000002,
+        "wall_p99": 10.05683,
+        "gpu_mean": 9.161739070916667,
+        "gpu_p99": 9.3823077194
+      },
+      {
+        "slot": 3,
+        "route": "T",
+        "wall_mean": 9.788141666666666,
+        "wall_p99": 10.05683,
+        "gpu_mean": 9.173638916249997,
+        "gpu_p99": 9.371551887199999
+      }
+    ],
+    "UminusT_avg": 0.009091666666666498,
+    "UminusT_p99": 0.04424000000000028,
+    "gpu_UminusT": 0.0003702916458365735,
+    "scope": "sameEXE samebatch sameHDR/currentFAST1/full71 320frames discard80 directTU"
+  }
+}

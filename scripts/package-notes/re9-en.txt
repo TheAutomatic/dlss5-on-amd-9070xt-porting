@@ -1,5 +1,40 @@
 OptiScaler-REFramework-DLSS5-AMD @VERSION@ — special RE9 pre-SR full package
 
+0.41
+Default remains 1x. Selecting 3x defaults to two real passes plus a predicted third (lossy); DLSS5_MULTI_PASS_PREDICT=0 restores real three passes. Prediction leaves 1x/2x unchanged; skin defaults off. Adds first-frame preallocation, HIP device binding, RE9 strength configuration and bit-exact kernel improvements. Extended FAST_NUMERIC itself changes 1x/2x arithmetic. Existing custom/native overrides remain. See sources/configuration/CONFIGURATION.md.
+
+The following 0.40 notes are historical, not a new-package FPS/timing promise.
+0.40 update
+1. Same kernels and default configuration as the regular package: all 71 blocks + fast numerics (against NVIDIA 44.26 -> 47.55 dB, about 0.12/0.19 ms slower per frame); for the 0.39 output write DLSS5_SKIP_BLOCKS=42,43,46 and DLSS5_FAST_NUMERIC=0 in custom-config.txt.
+2. Multi pass DLSS5_MULTI_PASS=1/2/3 (default 1, stronger style, about N times the cost). The RE9 runtime has no hotkey; edit the config and restart the game.
+3. The runtime reads the three config files (see "Config files" below) and now also takes DLSS5_STYLE, DLSS5_FRAME_STATS, DLSS5_FAST_NUMERIC, DLSS5_MULTI_PASS, DLSS5_MULTI_PASS_SKIP_BLOCKS and DLSS5_NETWORK_FREE_RES from them (the DLSS5_STYLE line of the 0.39 template now works). Behaviour change: a key written twice in one file now takes the last line (before, the first).
+4. Direct input (one 35 MB copy less); GetTimings for integrators. Host dxgi.dll unchanged.
+
+Config files (three layers from 0.40; a later layer overrides the same key of an earlier one)
+1. DLSS5-AMD/default-config.txt: the package defaults (repository template). Overwritten by every upgrade; do not edit it.
+2. DLSS5-AMD/custom-config.txt: your own settings. Not shipped: copy custom-config.template.txt to custom-config.txt the first time and write only the lines you change (e.g. DLSS5_MULTI_PASS=2). Install and upgrade never touch it.
+3. DLSS5-AMD/native-game-flags.txt: the old single file. An existing one keeps working and wins over custom-config.txt; packages no longer ship it, so unpacking an upgrade over an old install leaves it alone.
+A DLSS5_* system environment variable wins over all three files. Same key twice in one file: the last line wins; an empty value (KEY=) means the built-in default.
+
+Lossy options (all optional; put them in custom-config.txt)
+- On by default: DLSS5_FAST_NUMERIC=1 (fast numerics; worst frame about 51.8 dB against the bit-exact output, essentially unchanged against NVIDIA; 0 = bit-exact, 0.07-0.13 ms slower per frame).
+- DLSS5_SKIP_BLOCKS=42,43,46: skip three blocks, 0.20/0.32 ms faster (900/1080), about -3.3 dB against NVIDIA with an overall colour shift. Together with DLSS5_FAST_NUMERIC=0 this is the 0.39 output.
+- DLSS5_NETWORK_1080_ROWS=1088: 1080 tier about 0.45 ms faster, about 54-56 dB against 1152 rows.
+- DLSS5_NETWORK_HEIGHT=900: inputs that would use the 1080 tier run at 900, about 2.7 ms faster; quality cost not measured.
+- DLSS5_MULTI_PASS_SKIP_BLOCKS: skip blocks in multi-pass passes 2..N only. Saves little; longer lists change the style. Not recommended.
+
+0.39 update
+Same new kernels as the regular package (default output bit-identical to 0.38; offline 900 tier about 7.27 -> 6.8 ms, 1080 tier about 10.05 -> 9.5 ms). Style stays the previous Style 1 (bit-identical). Note: the RE9 runtime does not read DLSS5_STYLE from the flags file yet (the template line only mirrors the regular package; editing it has no effect); to try Style 0/2 set the system environment variable DLSS5_STYLE and restart the game. Reproducible runtime build. Host unchanged.
+
+0.38 update
+Same new kernels as the regular package (default output bit-identical to 0.37; offline 900 tier about 8.0 -> 7.6 ms, 1080 tier about 10.8 -> 10.4 ms). The runtime honours DLSS5_FORMAT_FALLBACK (template 1: colour formats such as R10G10B10A2, B8G8R8X8, R32G32B32(A32) are accepted instead of rejected; 0 = off) and the optional LOSSY DLSS5_NETWORK_1080_ROWS=1088 (template 1152 = NVIDIA geometry). DLSS5_HOT_RELOAD does not apply (strength/detail are live in the OptiScaler menu). Host unchanged.
+
+0.37 update
+Same new kernels as the regular package (bit-identical to 0.36; C512 compact layout, head fusion, C256 persistent stage, new ViT attention/QKV kernels; offline 900 tier about 8.5 -> 8.0 ms). The runtime honours the new DLSS5_HIP_SWIN_RUN (template 1; 0 restores the previous launches). Host unchanged.
+
+0.36 update
+Same new kernels as the regular package (float FMA activation — not bit-identical to 0.35, new baseline; fused C256/C512/C64/C128/C32 blocks; offline 900 tier about -0.79 ms, 1080 tier about -1.13 ms vs 0.35). The runtime understands DLSS5_FRAME_STATS (default 0); DLSS5_DIRECT_IO does not apply to the RE9 route. Host unchanged.
+
 0.35 update
 Same new kernels as the regular package (three C32 rounds + ViT byte stream); the runtime honours DLSS5_HIP_VIT_STREAM (template default 3, falls back when the module is missing). Host unchanged.
 
@@ -48,7 +83,7 @@ Select DLSS in game. Start with2K/Balanced and frame generation off; test frame 
 
 F6 toggles NR. Insert opens OptiScaler/REFramework (their default keys can overlap). Use the neural menu to adjust Detail strength/Colour strength, keeping both in0..1. Reducing Colour strength also suppresses coloured texture/material changes, not just saturation.
 
-Settings are in OptiScaler.ini [DlssNr]: NrBackend=lmxxf, Enabled=true, RunBeforeSR=true, LmxxfDiagnostic=off. Information overlays use OptiScaler controls. Old addon F7 and DLSS5_SHOW_FPS/NOTICE do not control this runtime. DLSS5_HIP_*, DLSS5_SKIP_BLOCKS, DLSS5_FIT_LARGE and DLSS5_NETWORK_HEIGHT are read from DLSS5-AMD\native-game-flags.txt (see 0.32; other keys have no effect); no standard-addon F8 reuse control. Default skipped blocks42,43,46 remain; adaptive reuse is off.
+Settings are in OptiScaler.ini [DlssNr]: NrBackend=lmxxf, Enabled=true, RunBeforeSR=true, LmxxfDiagnostic=off. Information overlays use OptiScaler controls. Old addon F7 and DLSS5_SHOW_FPS/NOTICE do not control this runtime. DLSS5_HIP_*, DLSS5_SKIP_BLOCKS, DLSS5_FIT_LARGE, DLSS5_NETWORK_HEIGHT and the keys listed in the 0.40 update are read from the three config files in DLSS5-AMD (other keys have no effect); no standard-addon F8/F9 hotkeys. Default: all 71 blocks + fast numerics; adaptive reuse is off.
 
 RX9070XT numerical/exposure tests, menu rendering and repeated startup have passed. Full gameplay, scene changes and frame generation still need further feedback. Previous0.27 Xbox Onimusha validation does NOT validate this new host. Other RE games/gfx1200 hardware/HDR display output remain unverified.
 

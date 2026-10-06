@@ -1,0 +1,62 @@
+{
+  "gfx1200": {
+    "production_vs_candidate": {
+      "a": "/tmp/c256-fusion/production/gfx1200/c64-wave2.hsaco",
+      "b": "/tmp/c256-fusion/build-B-gfx1200/c64-wave2.hsaco",
+      "equal": {
+        ".note": true,
+        ".rodata": true,
+        ".text": true
+      },
+      "section_sha256": {
+        ".note": "a5636c28819910b23c666e730c59bfa338d231f1c31f36dbfe9645c7d0e87290",
+        ".rodata": "0aa6bc01a7408635daaf1a7ff8706f3e30ff7aa3d033b00ac03ae8d1b8eea498",
+        ".text": "c493846d3675f36ef7e0071e5b4a42a725a55880f2c3410b1b34d17e611f5c90"
+      }
+    },
+    "macros_off_vs_baseline": {
+      "a": "/tmp/c256-fusion/build-Z-gfx1200/c64-wave2.hsaco",
+      "b": "/tmp/c256-fusion/baseline-gfx1200/c64-wave2.hsaco",
+      "equal": {
+        ".note": true,
+        ".rodata": true,
+        ".text": true
+      },
+      "section_sha256": {
+        ".note": "eb63777d1e974df56f66ac7261d018f9e2a62dbeef5dec716dee0afde331b8e3",
+        ".rodata": "2c5cf4a390d7b5c16790da16a7155d3c01b331b2677bf80f5c59846f69ab1dcb",
+        ".text": "729422cba15402da53aa6cc3d256d4f6c88cf1d8a26bbf35c24b528d5bd36464"
+      }
+    }
+  },
+  "gfx1201": {
+    "production_vs_candidate": {
+      "a": "/tmp/c256-fusion/production/gfx1201/c64-wave2.hsaco",
+      "b": "/tmp/c256-fusion/build-B-gfx1201/c64-wave2.hsaco",
+      "equal": {
+        ".note": true,
+        ".rodata": true,
+        ".text": true
+      },
+      "section_sha256": {
+        ".note": "37d6c4355c06229800c1f18fdd2fa84d2b2f00c8b5f163998062772db17650e0",
+        ".rodata": "0aa6bc01a7408635daaf1a7ff8706f3e30ff7aa3d033b00ac03ae8d1b8eea498",
+        ".text": "c493846d3675f36ef7e0071e5b4a42a725a55880f2c3410b1b34d17e611f5c90"
+      }
+    },
+    "macros_off_vs_baseline": {
+      "a": "/tmp/c256-fusion/build-Z-gfx1201/c64-wave2.hsaco",
+      "b": "/tmp/daniel-kernels/build-Z/c64-wave2.hsaco",
+      "equal": {
+        ".note": true,
+        ".rodata": true,
+        ".text": true
+      },
+      "section_sha256": {
+        ".note": "0bf2ae60699057acf43b91b5e7f0357155ab7232e8c8ceaa2747afaa93d7eb0e",
+        ".rodata": "2c5cf4a390d7b5c16790da16a7155d3c01b331b2677bf80f5c59846f69ab1dcb",
+        ".text": "729422cba15402da53aa6cc3d256d4f6c88cf1d8a26bbf35c24b528d5bd36464"
+      }
+    }
+  }
+}

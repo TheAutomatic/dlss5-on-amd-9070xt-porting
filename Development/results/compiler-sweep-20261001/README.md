@@ -1,0 +1,167 @@
+# 编译器层面逐位提速扫描（2026-10-01 夜，光派单）
+
+不改数学，只改调度/寄存器分配。结论：**c32-wave1 关掉 post-RA 调度 + max-ilp、c512-m32-deep 用 max-ilp**，19 组 SAME，ABBA 两档六轮全快（约 −0.06/−0.08ms）。只进 main 配方，默认不生效（`-RowOpts`），没装机。
+
+## 1. 构建方式盘点
+- 编译器：`D:\DLSSNR-Lab\build-0927\rtc_compile.exe`（驱动 `amd_comgr_3.dll`，LLVM21）。环境变量 `RTC_EXTRA_OPTS` 把额外选项追加到前端和 codegen 两段；**`-mllvm` 必须写成连写的 `-mllvm=X`**，分开写 COMGR 会把后面的 `-nogpulib` 当成 LLVM 选项报错（09-16 就踩过，本次复现）。
+- 配方 `hip/build-modules.ps1`：31 个模块各一行（defines + 源文件拼接）。本次加了两样：
+  - 行字段 `opts`（只在 `-RowOpts` 时生效），以及 `-ExtraOpts`（实验用，追加到所有模块）。不带这两个开关时 `RTC_EXTRA_OPTS` 被清空，**31×2 模块与现装逐条相同**（compare-modules，62/62）。
+  - 源码挂点 `HIP_KERNEL_WPE`（`multihead_fast_padded.hip`/`deep_fast.hip`/`c32_fused_ffn_attention.hip`，默认 0 = 不加属性）：给模块里每个 kernel 加 `amdgpu_waves_per_eu(N)`。粒度是模块，不是单核。
+- LLVM21 可用的相关隐藏选项见 `llvm21-options.txt`（`-mllvm=--help-hidden` 导出）。**没有 `-amdgpu-schedule-metric`**，只有 `-amdgpu-schedule-metric-bias`；`-amdgpu-sched-strategy` 取 max-ilp / max-memory-clause / iterative-ilp / iterative-minreg / iterative-maxocc。`-misched-postra-direction=bidirectional` 在这版编不过（8 个模块全 FAIL）。
+
+## 2. 静态筛选（gfx1201，8 个热模块 × 26 组选项，`static.txt`，脚本 `isa_stat.py`）
+热核取 gap-map-evening 的 1088/900 同口径前 20（c128/c64 wave2、sp_run256、C32 七核、C512 QKV/FFN/投影、ViT contract/QKV/attention/expand、split_projection、mh_ffn c256）。
+- **`waves_per_eu` 1/2/4 对所有热核代码逐条不变**（20/20 SAME），6/8 只动了 3～4 个小核：这些核的 VGPR 已经在它们的占用率档位里，提示只能放宽，编译器不理——和 09 月 C32 的结论一致。
+- `nohirp`/`nolowocc`/`relaxocc`/`trackers` 只改动零星几个核；`trackers` 把 vit_stream contract 压到 183 VGPR，GPU 上 +161/+194µs，淘汰。
+- 淘汰（静态）：`bottomup`、`topdown`、`itminreg`（指令数 +10～20%、s_delay_alu 翻倍）；`unroll600/1200`（C32 指令 +20～30%）；`nounrollpart`（vit contract 出 160B scratch）；`ilp` 在 c512-m32-mh 上溢出 1 个 VGPR + 8B scratch、`topdown` 在 mh_ffn_c256 上溢出 13 个，均不上 GPU。
+- 进 GPU：35 个模块×选项组合。
+
+## 3. 链内 µs（`dupc.ps1`，宿主 benchmark-S、现装剑星 gfx1201 模块，每组 300 帧弃 60，SPAN 中位；按两侧 base 线性去漂移）
+第一轮（3 轮，整网 span 变化，µs；`pass1-table.txt`）挑出的：
+
+| 模块 | 选项 | 900 | 1152 行 |
+|---|---|---:|---:|
+| c32-wave1 | post-RA 调度关（`-enable-post-misched=0`） | −53 | −80 |
+| c32-wave1 | max-ilp | −22 | −16 |
+| c32-wave1 | iterative-ilp | −13 | −22 |
+| c512-m32-deep | max-ilp | −6 | −29 |
+| c64-wave2 | iterative-ilp | −9 | −11 |
+| deep_fast-packed | max-ilp | +11 | −36（不稳） |
+| multihead-fast-padded | max-ilp / iterative-ilp / relaxocc | +89 / +70 / +107 | 小 |
+| vit-stream | trackers | +161 | +194 |
+
+第二轮（5 轮，`pass2-table.txt`），DUP 列是该族在链内的单份成本（DUP×2 − base）：
+
+| 模块 | 选项 | 整网 900 | 整网 1152 | DUP 900（inst→新） | DUP 1152 |
+|---|---|---:|---:|---|---|
+| c32-wave1 | post-RA 关 | −52 | −74 | 全族 2260→2153（−107） | 3233→3086（−147） |
+| c32-wave1 | post-RA 关 + max-ilp | **−59** | **−84** | | |
+| c32-wave1 | post-RA 关 + iterative-ilp | −55 | −68（一轮 +3） | | |
+| c64-wave2 | iterative-ilp | −1 | −16 | c128_wave2_bi_bo 608→608 | 857→831 |
+| c64-wave2 | post-RA 关 + iterative-ilp | −4 | −3 | | |
+| c512-m32-deep | max-ilp | **−10** | **−20** | split_ffn_one 503→505 | 404→353（≈−4/块） |
+| c512-m32-deep | post-RA 关 + max-ilp | +4 | −26 | | |
+| deep_fast-packed | max-ilp / post-RA 关 | −1 / +3 | −9 / +58 | | |
+
+c64 的 iterative-ilp 900 档为零，不收。
+
+## 4. 合成配方与验证（`full-CS.txt`）
+配方 `-RowOpts`：c32-wave1 = `-mllvm=-enable-post-misched=0 -mllvm=-amdgpu-sched-strategy=max-ilp`，c512-m32-deep = `-mllvm=-amdgpu-sched-strategy=max-ilp`。两架构 62 模块编过；与默认构建相比只这 2×2 个模块变（gfx1201 c32 12B60775、c512-deep FE9A1A0B），其余 58 个逐条相同。
+候选 = 现装 31 模块 + 这两个（c128-c64-inchain 的回归脚本，`go-cs.ps1`）：
+- **19 组 SAME**（7 用例×EXACT/AE×12 帧 + AE CSV + 900/1080 回绕，`-PinIdle`）。
+- ABBA 三轮：900 −0.054/−0.043/−0.081，1080 −0.089/−0.091/−0.061ms；合并 p99 900 7.525→7.443、1080 10.277→10.188。六轮全快。
+
+静态上看到的（机制未逐条拆）：C32 关掉 post-RA 调度后 s_delay_alu 少 20～40%（prefix 114→81、mapped 69→43）、VOPD 略多（mapped 158→176）；max-ilp 在 split_ffn_one 上用 96→116 VGPR（占用率 16→12）换掉一半 s_wait（113→55）。都只换指令顺序和寄存器，没新增 FMA 收缩——哈希为证。
+
+## 5. 没收的、负账
+- `waves_per_eu`：热核编译器不理（见 §2）。
+- 全局开选项（09-16 已证 max-ilp 全局 +0.74ms）——收益全在按模块挑。
+- mh_fast / vit-stream / swin / c512-m32-mh：没有一组不慢或不持平。
+
+## 文件
+`static.txt`、`pass1.log`/`pass2.log`（原始 SPAN）、`pass1-table.txt`/`pass2-table.txt`、`full-CS.txt`、`llvm21-options.txt`。脚本 `Development/HIP/experiments/compiler-sweep/`（sb.ps1 单模块构建、sweep.ps1 静态扫、isa_stat.py、dupc.ps1 链内测、an.py 去漂移、go-cs.ps1 全流程、guard.sh 游戏看门狗）。lab `D:\DLSSNR-Lab\hip-backend\compiler-sweep-20261001`（recipe-off / recipe-on 两套 62 模块）。**未装机。**
+
+## 6. 续（光第二单，10-02）：扩到全部模块、按核细分、post-RA 周边开关
+基线 = 82ce821f 配方（c32/c512-deep 已带选项，`dupc.ps1 -Overlay`）。**这一轮没有新收的。**
+
+### 6.1 扫哪些模块
+31 个模块里链内只派发 9 个（gap-map 派发表：c32-wave1、c64-wave2、swin-persistent、vit-stream、mh_fast、deep_fast-packed、c512-m32-mh、c512-m32-deep、vit-wide-deep）；另外 22 个是参考/旧路径模块，生产链里不跑，改了也不影响计时，只编不测。9 个模块 × 10 组选项（在 `-RowOpts` 之上叠加），两架构都编过（`sweep2.ps1`，`static2.txt`）。
+- `-misched-postra`、`-amdgpu-igrouplp-exact-solver`、`-amdgpu-enable-pre-ra-optimizations=0`：9 个模块代码逐条不变，直接淘汰（源码里的 sched_barrier 不构成 igrouplp 调度组，精确求解器没东西可解）。
+- 溢出：c512-m32-mh 和 vit-wide-deep 在 post-RA 关 + max-ilp / iterative-ilp 下溢出 11～94 个 VGPR，不上 GPU。
+
+### 6.2 链内 µs（pass3 三轮，`pass3-table.txt`；整网 span 去漂移，900 / 1152 行）
+| 模块 | post-RA 关 | post-RA 关 + max-ilp | 关 s_delay_alu | 关 VOPD | 关 partial-reg 改写 |
+|---|---|---|---|---|---|
+| c32-wave1（已带配方） | – | – | +68 / +117 | +143 / +225 | −1 / +1 |
+| c64-wave2 | **−16 / −20** | −24 / +62 | +54 / +89 | +23 / +63 | −3 / +8 |
+| swin-persistent | +4 / +12 | −3 / −13 | −1 / −2 | −1 / +5 | 0 / +5 |
+| vit-stream | +3 / −15 | **−2 / −14** | +4 / −9 | −2 / +46 | −3 / +32 |
+| mh_fast | +4 / −8 | +86 / −12 | +27 / +48 | +2 / +7 | −4 / −4 |
+| deep_fast-packed | +4 / +36 | +6 / −20 | +6 / +41 | +7 / +47 | +3 / −9 |
+| c512-m32-mh | −2 / −5 | 溢出 | +9 / +13 | +16 / +23 | +4 / 0 |
+| c512-m32-deep（已带 max-ilp） | +3 / +9 | −1 / −4 | +14 / +8 | +14 / −1 | +13 / −10 |
+| vit-wide-deep | +2 / 0 | 溢出 | −3 / +5 | −8 / 0 | +10 / −18 |
+
+`s_delay_alu` 和 VOPD 关掉在热模块上一律变慢（C32 关 VOPD +0.14/+0.23ms），说明这两样现在是正贡献，post-RA 周边没有可挖的。
+
+### 6.3 按核细分（pass4 五轮 DUP，`pass4-table.txt`）
+- 能不能做：LLVM21 有函数级属性 `"amdgpu-sched-strategy"`（`GCNTargetMachine::createMachineScheduler` 读它），但 **clang 没有任何源码属性能设它**，只能在 bitcode 上改，驱动机上没有 LLVM 工具，配方就得多一步 Linux 环节；**post-RA 调度没有函数级开关**。拆模块要改宿主（kernel→模块是写死的 `modules["vit_stream"]`），等于换宿主。
+- 有没有必要：DUP 显示这几处"有的快有的慢"**分的是档位，不是核**：
+  - c64-wave2 post-RA 关 + max-ilp：c128_wave2_bi_bo 和 c64_wave2_bi_bo **两核都是** 900 省、1152 亏（模块级 −19 / +57）。
+  - mh_fast max-ilp：attention 投影和 ffn_c256 **两核都是** 900 慢（投影 DUP 183→264+76 基线）、1152 持平。
+  - vit-stream：contract/QKV 两核同向，差都在噪声内。
+  同一个核同时服务两档，编译期选项分不开 token 数，所以按核细分在这几个模块上没有收益，没做。
+
+### 6.4 完整验证（基线 = 现装 + 82ce821f 的 c32/c512-deep）
+| 候选 | 19 组 | ABBA 900 三轮 | ABBA 1080 三轮 | 合并 p99 900 / 1080 |
+|---|---|---|---|---|
+| CS2：c64 post-RA 关 + vit-stream post-RA 关+max-ilp | SAME | −0.017/−0.026/−0.008 | −0.007/−0.013/−0.025 | 7.437→**7.492** / 10.162→10.154 |
+| CS3：只 c64 | SAME | **+0.024**/+0.001/−0.015 | −0.031/−0.007/−0.026 | 7.440→**7.482** / 10.231→10.170 |
+| CS4：只 vit-stream | SAME | −0.023/**+0.028**/−0.005 | −0.016/−0.049/**+0.014** | 7.451→**7.542** / 10.239→10.227 |
+
+CS2 六轮都快，但 900 合并 p99 变差；拆开后各自都有慢的轮次。收益约 10～20µs，和 ABBA 的轮间噪声一个量级。**按规矩都不收**，配方保持 82ce821f。
+
+## 7. 续（光第三单，10-02）：换编译器版本，按模块逐个比
+**收一项：c32-wave1（带 post-RA 关 + max-ilp）和 c64-wave2 改用公开 LLVM 23.1.2 编**，19 组 SAME，ABBA 六轮全快。进配方（`-RowOpts -PrebuiltDir`），没装机。
+
+### 7.1 工具链
+- LLVM22 = 09-29 那份 ROCm 7.2.4（`f58b06dc`，DGX `~/work/llvm-build-rocm724`），沿用；LLVM23 = 公开 `llvmorg-23.1.2`（`85ac5602`），DGX 上新编（clang+lld，只 AMDGPU，`Development/tools/llvm-fork/build-llvm23.sh`）。
+- 编法沿用 `Development/tools/llvm-fork/compile-modules.py`（三段模仿 COMGR：源码→BC→重定位→lld 链接）。本次补了三处：认配方新的 `opts`/`compiler` 字段（原正则会把带 opts 的行漏掉）、`--row-opts`、`--target-feature`。
+- **LLVM23 的 gfx12 默认开 real-true16**，源码内联汇编 `v_cvt_f32_f16 vN, vN` 报"operands are not valid"（17078 处），要 `-Xclang -target-feature -Xclang -real-true16`（前后端都加）。
+
+### 7.2 逐位：每次只换一个模块进现装那套（`go-cv.ps1`，19 组）
+| 模块 | LLVM22 | LLVM23 |
+|---|---|---|
+| c32-wave1 | SAME（带配方选项也 SAME） | SAME（带配方选项也 SAME） |
+| c64-wave2 | SAME | SAME |
+| swin-persistent | SAME | SAME |
+| c512-m32-mh | SAME | SAME |
+| c512-m32-deep | SAME（带 max-ilp 也 SAME） | SAME（带 max-ilp 也 SAME） |
+| deep_fast-packed | SAME | SAME |
+| vit-stream | **900 静态 12/12 不同** | **900 静态 12/12 不同** |
+| mh_fast | **900 静态 12/12 不同** | **900 静态 12/12 不同** |
+| vit-wide-deep | **720 运动 1/12 不同**（前 11 组 SAME） | SAME |
+
+所以 09-29 的"LLVM22 不逐位"其实只落在 3 个模块上，其余 6 个逐位。
+
+**不逐位的粗看**（`fpops-L22-L23.txt`，只数派发到的核里的浮点指令，对照公开 21）：
+- LLVM23 是 **FMA 收缩**：`vit_stream_project_n64_bh` 的 16 条 mul + 加法变成 32 条 FMA；`mh_pool_project_group_c64/c128_hin` 各多出 2 条 FMA，加法条数也变了（81→9，展开方式不同）。
+- LLVM22 没有新增 FMA，但 vit_stream contract/project_n64 的 f32 加法条数变了（65→69、18→22），pool c128 的加法 81→19：像是**累加的展开/重排**，没追到具体哪条。
+- vit-wide-deep 派发的只有 vit_gather（不含浮点运算）；22 下 720 档那一帧差，多半是 720 档才派发的核，没追。
+
+### 7.3 链内 µs（pass5，5 轮，整网 span 去漂移，基线 = 82ce821f 配方；`pass5-table.txt`）
+| 模块 | LLVM22 900 / 1152 | LLVM23 900 / 1152 |
+|---|---|---|
+| c32-wave1 + 配方选项 | −4 / +3 | **−23 / −50** |
+| c32-wave1 不带选项（对照） | +62 / +82 | +7 / 0 |
+| c64-wave2 | −8 / +5 | **−16 / −26** |
+| swin-persistent | −7 / +11 | +1 / +21 |
+| c512-m32-mh | −8 / +7 | +2 / +4 |
+| c512-m32-deep + max-ilp | −2 / −9 | +133 / +236 |
+| deep_fast-packed | +7 / +26 | +47 / +146 |
+| vit-wide-deep | （不逐位） | +2 / +30 |
+
+### 7.4 合成与验证（基线 = 现装 + 82ce821f 的 c32/c512-deep；候选再把 c32、c64 换成 LLVM23 版；`full-CS5.txt`）
+- **19 组 SAME**。
+- ABBA：900 −0.048/−0.072/−0.066，1080 −0.061/−0.024/−0.035ms；合并 p99 900 7.460→7.405、1080 10.187→10.169。六轮全快，p99 两档都好。
+
+### 7.5 配方
+- `hip/build-modules.ps1` 新增行字段 `compiler = 'llvm23'`（c32-wave1、c64-wave2）和参数 `-PrebuiltDir`。**只在 `-RowOpts` 下生效**：这两行不走 COMGR，从 `-PrebuiltDir\<arch>\<name>.hsaco` 拷；缺文件直接报错。不带 `-RowOpts` 时照旧 COMGR，c64 行重编仍与现装逐条同。
+- 预编：DGX 上 `python3 Development/tools/llvm-fork/compile-modules.py --bin ~/work/llvm-build-23/bin --target-feature=-real-true16 --row-opts --compiler-rows llvm23 --out <dir>`，两架构 4 个模块；与测过的模块逐条同。lab：`compiler-sweep-20261001\pre23`（预编）、`recipe-on3`（`-RowOpts -PrebuiltDir` 全量 62 个；与 recipe-on 只差 c32/c64 两架构共 4 个）。
+- 代价：发版构建多一步 Linux 上的 LLVM23 编译。
+
+## 8. 续（光第四单，10-02）：LLVM23 的收缩对齐 + LLVM23 下重扫调度。**这一轮没有新收的。**
+
+### 8.1 `-ffp-contract` 恢复不了逐位，前提不成立
+- vit-stream、mh_fast 用 LLVM23 加 `-ffp-contract=on/off/fast` 重编：**`on` 和 `off` 编出的代码与默认逐条相同**，`fast` 只改了 mh_fast。也就是说，现在这两个模块在 LLVM23 下本来就没有发生 mul+add 收缩，这个开关无从对齐。
+- §7.2 里看到的"多出来的 FMA"其实是 `v_fma_mix_f32 a, b, neg(0)`：f16 输入直接乘、加数是 −0，结果就是精确乘积按一次舍入，和原来的 `v_cvt_f32_f16` + `v_mul_f32` 数值上相同，不是收缩。它省掉了 16 条 mul。
+- 两版的浮点指令直方图（contract、pool c128）差别主要是循环展开倍数（LLVM21 展开 4 份，LLVM23 不展开，各类指令都 ÷4）。fp8 编码 `v_cvt_pk_fp8_f32` 两边都有，只是没用到的第三源操作数编码不同（0 对 inline 0）。**真正哪条指令改了数值没定位到**，按这一单的口径不追。
+
+### 8.2 LLVM23 下重扫调度（pass6，5 轮，基线 = 现配方：c32 LLVM23 post-RA 关+max-ilp、c64 LLVM23 默认、c512-deep COMGR max-ilp；`pass6-table.txt`，µs，900 / 1152 行）
+- **`iterative-ilp` 在 LLVM23 下让 clang 崩**（c64、swin、c512-mh、c512-deep、deep_fast 都崩，只有 c32 编得过），这些组合不测。
+- c32：默认 +49/+50、post-RA 关 +41/+53、max-ilp +18/+30、iterative-ilp +57/+92、post-RA 关+iterative-ilp +30/+34、post-RA 关+iterative-maxocc +23/+41、post-RA 关+max-memory-clause +16/+53——**现配方（post-RA 关+max-ilp）在 LLVM23 下仍是最优。**
+- c64：post-RA 关 −16/+7、max-ilp −15/+83、**post-RA 关+iterative-maxocc −16/−24**、post-RA 关+max-memory-clause −9/−17。
+- swin、c512-mh、c512-deep、deep_fast 用 LLVM23 + post-RA 关（或 + iterative-maxocc）：swin −8/+8、c512-mh −1/+8，没有比现在用 COMGR 编的版本更快；c512-deep +22/+83、deep_fast +48/+182。**拉不回来**，这四个继续用 COMGR。
+
+### 8.3 c64 post-RA 关 + iterative-maxocc 的完整验证（`full-CS6.txt`）
+19 组 SAME；ABBA 900 −0.013/**+0.020/+0.009**，1080 −0.038/−0.040/−0.023ms；合并 p99 900 7.381→**7.450**，1080 10.161→10.106。900 档有两轮变慢，p99 也变差，**不收**。配方保持 d48cdae3。

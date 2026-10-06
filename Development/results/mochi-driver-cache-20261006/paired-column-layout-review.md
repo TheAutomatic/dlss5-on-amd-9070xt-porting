@@ -1,0 +1,11 @@
+# Paired640 three-plane column-tile layout independent review
+
+Actualsource/tmp/vit-column-layout-20261006/{producer,consumer}/{old,new}.hip read-onlydiff checked. Produceronlyvit_stream_qkv_frag_bin_w5f8 runtime640 outputchanges: originalv,rsq/normscale/multiply/byte_F stayinorder, pack8then2b64. Consumeronly640bytein_bout changesQ/KloadstoTR andVtodirect64; QK/score/den/AVoperandorder/rounding/outputstore unchangedcurrentA16. NoM32/halfscoredenmix.
+
+B(p,t,c)=p*N*1024+(t/16)*16384+(c/16)*256+(c%16)*16+t%16. Producerfirst,row16alignedstorefirst*1024+(row+j16)*16+rc*16+g8+e isexactB foroldt=first+g8+e,c=row+j16+rc. CPUenumerated3×640×1024 completebijection1966080bytes, min0/max1966079; plane655360. This isphysicalcolumn-majorwithin16tile, unlikeactualMo token-majorrowstride16 andold9/23V-onlylayout.
+
+TRreadr=(lane/8)*4+(lane&3),readc=(lane&4)?8:0 oncolumn-tile makesQ/Kfragmentbyte(token=tile+rc,channel=head32+k+g8+e), identicaloldnativeFP8Q/K. Vdirect64 atkey*1024+(head32+c16)*16+rc*16+g8 returnsbyte(token=key+g8+e,channel=head32+c16+rc), identicaloldAVoperand. Matrixbase256aligned,pNplane655360,individualTR/direct/store8aligned. Sourceproof reusesknownTRlanecontract; newpairedhardwareoperandgoldstillmandatory, notCPUmodel-as-hardwaregold.
+
+ConsumeractualnewISA4TR/noEXECwrites;6globalb64 includesnewVplusoldQKfallback,16u8 remainsfallback runtimebranch. Producer2b64plus16b8fallback, noDSbpermute. Producerhasoriginalconditionalinput-load EXECrestore;640 exact8WGgroups×5querywaves covers40full16token tiles, allquerieslive, so neitherclaimwholeproducerunconditionalnorintroducenewpartialwaveTR. Consumerfirst/key/runtime640 areuniform, all40keytilescomplete. Non640producerelseoldAoS, consumerother77exports and640runtimeelseoldbranch unchanged. Resourcesmallerdoesnotprovespeed.
+
+Formatmustbepaired: experimentaldouble-moduleSHApreflight +same640activeproducer/consumerfunction/ABI/layoutscope sufficesforunit/wholegold. Oneproducerchanged/consumerold orreversewouldmisdecode. Oldsamefunctionnames meanHasFnalone cannotidentifyformat. Futuredeploymentwouldneedpairedatomicselection/formatmarker orlockedidentityandwholefallback, butnotrequiredtofinishisolatedbytegold now. Othermode/hotreload/allMPproductioncompat remainsoutofscope, no inventeddefaultacceptance. Noproduction/GPU/sourceeditsbyreviewer.

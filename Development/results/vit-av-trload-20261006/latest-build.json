@@ -1,0 +1,62 @@
+{
+  "probe": {
+    "commands": [
+      [
+        "/home/lmxxf/work/llvm-build-23/bin/clang",
+        "--target=x86_64-pc-windows-msvc",
+        "--offload-arch=gfx1201",
+        "-O3",
+        "-x",
+        "hip",
+        "--offload-device-only",
+        "-cuid=1EAFD3CE0DFA5B78782DA2E592C75A43DCB57CE98BE923DF6F20E0BB75B4F3D2",
+        "-c",
+        "-emit-llvm",
+        "-fshort-wchar",
+        "-std=c++14",
+        "-fms-compatibility-version=19.44.35229",
+        "-nogpuinc",
+        "-nogpulib",
+        "-Xclang",
+        "-target-feature",
+        "-Xclang",
+        "-real-true16",
+        "/tmp/vit-av-trload-20261006/probe.hip",
+        "-o",
+        "/tmp/vit-av-trload-20261006/probe-canonical.bc"
+      ],
+      [
+        "/home/lmxxf/work/llvm-build-23/bin/clang",
+        "-target",
+        "amdgcn-amd-amdhsa",
+        "-mcpu=gfx1201",
+        "-O3",
+        "-nogpulib",
+        "-Xclang",
+        "-target-feature",
+        "-Xclang",
+        "-real-true16",
+        "-mllvm",
+        "-enable-post-misched=0",
+        "-mllvm",
+        "-amdgpu-sched-strategy=max-ilp",
+        "-c",
+        "-mllvm",
+        "-amdgpu-internalize-symbols",
+        "/tmp/vit-av-trload-20261006/probe-canonical.bc",
+        "-o",
+        "/tmp/vit-av-trload-20261006/probe-canonical.o"
+      ],
+      [
+        "/home/lmxxf/work/llvm-build-23/bin/ld.lld",
+        "--no-undefined",
+        "-shared",
+        "-plugin-opt=mcpu=gfx1201",
+        "/tmp/vit-av-trload-20261006/probe-canonical.o",
+        "-o",
+        "/tmp/vit-av-trload-20261006/probe-canonical.hsaco"
+      ]
+    ],
+    "sha256": "d43344ccc914238bb996aad2f7a99998459004beefae8026b7973dc7aea74519"
+  }
+}

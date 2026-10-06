@@ -153,8 +153,8 @@ static void log(const char*kind,void*list,void*queue,unsigned value=0){
  }ReleaseSRWLockExclusive(&lock);
 }
 /* Read before initialization: the usual environment flags are applied by the background loader. */
-static bool fit_small_input(){static const bool enabled=[]{unsigned v=0;if(FILE*f=_wfopen(NativeLabPath(L"native-game-flags.txt").c_str(),L"rb")){char line[256];while(fgets(line,sizeof line,f))sscanf(line,"DLSS5_FIT_INPUT=%u",&v);fclose(f);}return v==1;}();return enabled;}
-static bool fit_large_input(){static const bool enabled=[]{unsigned v=0;if(FILE*f=_wfopen(NativeLabPath(L"native-game-flags.txt").c_str(),L"rb")){char line[256];while(fgets(line,sizeof line,f))sscanf(line,"DLSS5_FIT_LARGE=%u",&v);fclose(f);}if(v==1)NativeFitLargeInputOverride()=true;return v==1;}();return enabled;}
+static bool fit_small_input(){static const bool enabled=[]{unsigned v=0;for(const std::string&cfg_line:NativeConfigFileLines()){const char*line=cfg_line.c_str();sscanf(line,"DLSS5_FIT_INPUT=%u",&v);}return v==1;}();return enabled;}
+static bool fit_large_input(){static const bool enabled=[]{unsigned v=0;for(const std::string&cfg_line:NativeConfigFileLines()){const char*line=cfg_line.c_str();sscanf(line,"DLSS5_FIT_LARGE=%u",&v);}if(v==1)NativeFitLargeInputOverride()=true;return v==1;}();return enabled;}
 static bool supported_input(unsigned w,unsigned h){return (w==1920&&h==1080)||(fit_small_input()&&NativeInputGeometry::Supported(w,h,fit_large_input()));}
 static std::atomic<void**>fit_context{nullptr};
 using DestroyContext=uint32_t(*)(void**,const void*);
@@ -263,7 +263,7 @@ static uint32_t dispatch_core(void**context,const Header*h,Dispatch orig){
 #ifdef NATIVE_ORDER_NEURAL
  /* on-screen notice (native_text_overlay.h): why the picture is not changing -- the input is not 1920x1080 (the network only knows that
     size; the hook never arms), the network is still initializing, or its initialization failed (developer mode off, wrong driver...) */
- static const unsigned notice_mode=[]{unsigned v=2;if(FILE*f=_wfopen(NativeLabPath(L"native-game-flags.txt").c_str(),L"rb")){char line[256];while(fgets(line,sizeof line,f)){unsigned x;if(sscanf(line,"DLSS5_NOTICE=%u",&x)==1)v=x;}fclose(f);}return v;}();
+ static const unsigned notice_mode=[]{unsigned v=2;for(const std::string&cfg_line:NativeConfigFileLines()){const char*line=cfg_line.c_str();{unsigned x;if(sscanf(line,"DLSS5_NOTICE=%u",&x)==1)v=x;}}return v;}();
  D3D12_RESOURCE_STATES declared_state{};const bool state_known=output_bytes==sizeof(output)&&ffx_state_to_d3d12(output.state,declared_state);
  if(output_bytes==sizeof(output)&&!state_known){static std::atomic<bool>logged{false};if(!logged.exchange(true))if(FILE*f=_wfopen(NativeLabPath(L"logs\\native-game-oneshot.txt").c_str(),L"ab")){fprintf(f,"pid=%lu tick=%llu event=output_state_unknown detail=the upscaler declares its output in ffx state %u, which the hook cannot map to a D3D12 state; please report this line\n",GetCurrentProcessId(),GetTickCount64(),output.state);fclose(f);}}
  if(notice_mode&&output_bytes==sizeof(output)&&output.resource&&state_known&&list){
@@ -279,7 +279,7 @@ static uint32_t dispatch_core(void**context,const Header*h,Dispatch orig){
 #ifdef NATIVE_ORDER_SNAPSHOT
  /* DLSS5_SNAPSHOT_FRAME=<n> in native-game-flags.txt (read here directly: the flag file is applied to the environment only when the network
     initializes, which is what this frame triggers): the upscaler frame that arms the network. Default 120 (the game build); 1 for Magpie. */
- static const unsigned snapshot_frame=[]{unsigned v=120;if(FILE*f=_wfopen(NativeLabPath(L"native-game-flags.txt").c_str(),L"rb")){char line[256];while(fgets(line,sizeof line,f)){unsigned x;if(sscanf(line,"DLSS5_SNAPSHOT_FRAME=%u",&x)==1&&x>=1)v=x;}fclose(f);}return v;}();
+ static const unsigned snapshot_frame=[]{unsigned v=120;for(const std::string&cfg_line:NativeConfigFileLines()){const char*line=cfg_line.c_str();{unsigned x;if(sscanf(line,"DLSS5_SNAPSHOT_FRAME=%u",&x)==1&&x>=1)v=x;}}return v;}();
  bool request=n==snapshot_frame;
 #ifdef NATIVE_ORDER_NEURAL
  /* idle (first time, or after a session reset) and failed states re-arm from the snapshot frame on; the first arming is still exactly snapshot_frame */
@@ -327,8 +327,8 @@ static int xess_execute(void*ctx,ID3D12GraphicsCommandList*list,const XessExecut
  int result=original_xess(ctx,list,p);log("xess_end",list,nullptr,unsigned(result));
  /* 2026-09-18: the same contract as the FFX path (it used to be the Rise of the Ronin one: exactly 1920x1080, armed once at frame 120, no
     on-screen notice) -- any supported input size, re-armed from the snapshot frame on while idle/failed, the notice text on the XeSS output. */
- static const unsigned xess_snapshot_frame=[]{unsigned v=120;if(FILE*f=_wfopen(NativeLabPath(L"native-game-flags.txt").c_str(),L"rb")){char line[256];while(fgets(line,sizeof line,f)){unsigned x;if(sscanf(line,"DLSS5_SNAPSHOT_FRAME=%u",&x)==1&&x>=1)v=x;}fclose(f);}return v;}();
- static const unsigned xess_notice_mode=[]{unsigned v=2;if(FILE*f=_wfopen(NativeLabPath(L"native-game-flags.txt").c_str(),L"rb")){char line[256];while(fgets(line,sizeof line,f)){unsigned x;if(sscanf(line,"DLSS5_NOTICE=%u",&x)==1)v=x;}fclose(f);}return v;}();
+ static const unsigned xess_snapshot_frame=[]{unsigned v=120;for(const std::string&cfg_line:NativeConfigFileLines()){const char*line=cfg_line.c_str();{unsigned x;if(sscanf(line,"DLSS5_SNAPSHOT_FRAME=%u",&x)==1&&x>=1)v=x;}}return v;}();
+ static const unsigned xess_notice_mode=[]{unsigned v=2;for(const std::string&cfg_line:NativeConfigFileLines()){const char*line=cfg_line.c_str();{unsigned x;if(sscanf(line,"DLSS5_NOTICE=%u",&x)==1)v=x;}}return v;}();
  const bool size_ok=supported_input(unsigned(od.Width),od.Height);
  if(xess_notice_mode&&list){
   static std::atomic<bool>size_logged{false};char notice[80]{};
@@ -375,7 +375,7 @@ static void STDMETHODCALLTYPE execute_native(ID3D12CommandQueue*q,UINT count,ID3
     output. The armed list is matched by identity anywhere in the batch, on any thread, up to two upscaler calls behind; the batch is
     executed in two halves with the network between them, so the refined frame is what the rest of the batch reads. Off = the
     Stellar Blade contract (same thread, last list of the batch, network after the whole batch). */
- static const bool split_submit=[]{unsigned v=0;if(FILE*f=_wfopen(NativeLabPath(L"native-game-flags.txt").c_str(),L"rb")){char line[256];while(fgets(line,sizeof line,f)){unsigned x;if(sscanf(line,"DLSS5_SPLIT_SUBMIT=%u",&x)==1)v=x;}fclose(f);}return v!=0;}();
+ static const bool split_submit=[]{unsigned v=0;for(const std::string&cfg_line:NativeConfigFileLines()){const char*line=cfg_line.c_str();{unsigned x;if(sscanf(line,"DLSS5_SPLIT_SUBMIT=%u",&x)==1)v=x;}}return v!=0;}();
  if(split_submit&&!snapshot_active&&lists&&count&&count<=64){
   PendingSnapshot job{};UINT at=count;
   {std::lock_guard<std::mutex>guard(snapshot_mutex);
@@ -483,7 +483,7 @@ static DWORD WINAPI worker(void*){
  /* DLSS5_UPSCALER=ffx|xess also from native-game-flags.txt (2026-09-18: Black Myth: Wukong ships FFX dlls but links its FSR3 upscaler
     statically, so the FFX hook never fires there; the XeSS path is the one to take). The environment variable still wins. */
  bool only_xess=false; /* an explicit xess choice ignores the FFX dlls even when they are loaded (Wukong loads them at start-up for frame generation) */
- if(FILE*f=_wfopen(NativeLabPath(L"native-game-flags.txt").c_str(),L"rb")){char line[256];while(fgets(line,sizeof line,f)){char v[8]{};if(sscanf(line,"DLSS5_UPSCALER=%7s",v)==1){if(!strcmp(v,"ffx")){wait_ffx=true;only_xess=false;}else if(!strcmp(v,"xess")){wait_ffx=false;only_xess=true;}}}fclose(f);}
+ for(const std::string&cfg_line:NativeConfigFileLines()){const char*line=cfg_line.c_str();{char v[8]{};if(sscanf(line,"DLSS5_UPSCALER=%7s",v)==1){if(!strcmp(v,"ffx")){wait_ffx=true;only_xess=false;}else if(!strcmp(v,"xess")){wait_ffx=false;only_xess=true;}}}}
  if(const wchar_t*u=_wgetenv(L"DLSS5_UPSCALER")){if(!wcscmp(u,L"ffx")){wait_ffx=true;only_xess=false;}else if(!wcscmp(u,L"xess")){wait_ffx=false;only_xess=true;}}
  /* weights into memory while we wait for the upscaler dll / the user's hotkey (see NativePrefetchWeights) */
  {std::wstring assets=NativeLabPath(L"native-game-tiled-assets");if(GetFileAttributesW(assets.c_str())!=INVALID_FILE_ATTRIBUTES)NativePrefetchWeights(assets);}
@@ -537,7 +537,7 @@ static DWORD WINAPI worker(void*){
 static bool on_create_device(reshade::api::device_api api,uint32_t&){
 #if defined(NATIVE_ORDER_NEURAL)&&NATIVE_HAVE_SDKLAYERS
  if(api==reshade::api::device_api::d3d12&&NativePreUpscale::Enabled()){
-  unsigned enable=0;if(FILE*f=_wfopen(NativeLabPath(L"native-game-flags.txt").c_str(),L"rb")){char line[256];while(fgets(line,sizeof line,f))sscanf(line,"DLSS5_PRE_UPSCALE_DEBUG=%u",&enable);fclose(f);}
+  unsigned enable=0;for(const std::string&cfg_line:NativeConfigFileLines()){const char*line=cfg_line.c_str();sscanf(line,"DLSS5_PRE_UPSCALE_DEBUG=%u",&enable);}
   if(enable){
    /* This machine has the matching SDK layers in the old diagnostic Agility directory, not in Windows. */
    static bool sdk_attempted=false;if(!sdk_attempted){sdk_attempted=true;
@@ -580,7 +580,7 @@ static ID3D12Resource*reserved_vram=nullptr;
 void NativeReleaseReservedVram(){if(reserved_vram){reserved_vram->Release();reserved_vram=nullptr;if(FILE*f=_wfopen(NativeLabPath(L"logs\\native-submission-order.txt").c_str(),L"ab")){fprintf(f,"pid=%lu reserved_vram_released\n",GetCurrentProcessId());fclose(f);}}}
 static void on_init_device(reshade::api::device*device){
  if(!device||device->get_api()!=reshade::api::device_api::d3d12||reserved_vram)return;
- unsigned long mb=0;if(FILE*flags=_wfopen(NativeLabPath(L"native-game-flags.txt").c_str(),L"rb")){char line[256];while(fgets(line,sizeof line,flags))if(!strncmp(line,"DLSS5_RESERVE_VRAM_MB=",22))mb=strtoul(line+22,nullptr,10);fclose(flags);}
+ unsigned long mb=0;for(const std::string&cfg_line:NativeConfigFileLines()){const char*line=cfg_line.c_str();if(!strncmp(line,"DLSS5_RESERVE_VRAM_MB=",22))mb=strtoul(line+22,nullptr,10);}
  if(!mb)return;auto*d=reinterpret_cast<ID3D12Device*>(device->get_native());
  D3D12_HEAP_PROPERTIES hp{};hp.Type=D3D12_HEAP_TYPE_DEFAULT;D3D12_RESOURCE_DESC rd{};rd.Dimension=D3D12_RESOURCE_DIMENSION_BUFFER;rd.Width=UINT64(mb)<<20;rd.Height=1;rd.DepthOrArraySize=rd.MipLevels=1;rd.SampleDesc.Count=1;rd.Layout=D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
  HRESULT hr=d->CreateCommittedResource(&hp,D3D12_HEAP_FLAG_NONE,&rd,D3D12_RESOURCE_STATE_COMMON,nullptr,IID_PPV_ARGS(&reserved_vram));

@@ -1,0 +1,4 @@
+measurement_job_id,dispatch_id,kernel,class,class_n,median_us,class_median_us,ratio,reason,log_path
+ours-082,O083,vit_pack_input,a6649e5554f9d931,8,5.100313,3.796094,1.3435686787524228,same launch/scalar ABI >30% from peer median; pointed tensor contents may differ,Development/results/kernel-map-20260929/logs-ours-valid/ours-082.log
+ours-088,O089,vit_pack_input,a6649e5554f9d931,8,5.0775,3.796094,1.3375590804653414,same launch/scalar ABI >30% from peer median; pointed tensor contents may differ,Development/results/kernel-map-20260929/logs-ours-valid/ours-088.log
+ours-100,O101,vit_pack_input,a6649e5554f9d931,8,5.349219,3.796094,1.409137655706102,same launch/scalar ABI >30% from peer median; pointed tensor contents may differ,Development/results/kernel-map-20260929/logs-ours-valid/ours-100.log

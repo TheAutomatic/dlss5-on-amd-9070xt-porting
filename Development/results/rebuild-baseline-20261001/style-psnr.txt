@@ -1,0 +1,5 @@
+1920x1080 mochizuki psnr=45.56 ssim=0.99605 | input psnr=26.44
+1920x1080 s0-rel.f16 psnr=44.26 ssim=0.99555 mean_diff=[ 0.148  0.228 -0.02 ] within1=62.6% vs_mochizuki=43.25
+1920x1080 s0-full.f16 psnr=47.43 ssim=0.99630 mean_diff=[-0.024  0.053  0.089] within1=76.9% vs_mochizuki=45.61
+1920x1080 s1-rel.f16 psnr=24.06 ssim=0.92374 mean_diff=[2.679 1.763 0.364] within1=0.3% vs_mochizuki=24.03
+1920x1080 s2-rel.f16 psnr=24.79 ssim=0.93991 mean_diff=[ 0.121 -0.964 -0.931] within1=0.8% vs_mochizuki=24.76

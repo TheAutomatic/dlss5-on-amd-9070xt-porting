@@ -1,0 +1,10 @@
+{
+  "source": "/tmp/graph0-bounded-replay-20261006/benchmark.cpp",
+  "SHA": "57b4a1e7c263add73b5d5beeb746f4071323656bc9fb572981c9485e3221e660",
+  "scope": "three requested gates only; no GPU/build/shared edits",
+  "result": "PASS current bounded diagnostic scope; no hardblock",
+  "captured_net_after_capture": "no Enqueue; line33 referenceNet separate",
+  "changed_input": "RGBA32F16Bstride; firstRGB R valid1080 +/-1/64; sameGPUin pointer; others/padding untouched",
+  "reference_ownership": "separateNetwork stream/weights/pool/SPplans; reference drain then destructor inside scope; noDeviceReset/CtxDestroy",
+  "graph_borrowed_lifetime": "perreplay drain; graphExec/graph destroyedline35 beforeexternalin/outfree38; Owner destructor beforeNetwork; faildrain exitsprocess"
+}

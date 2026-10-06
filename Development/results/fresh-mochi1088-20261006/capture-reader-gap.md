@@ -1,0 +1,7 @@
+# Actual capture reader scope and installed tooling audit
+
+Offline read-capture-index.py315c835c parsed /tmp/fullnn-spm-20261006/trace.rgp. FourSqttData version5/uncompressed/header40bytes, data2136544/2135744/2131648/2129856bytes. CodeObject/COLoadEvent/PsoCorrelation exist, buttheseare not executionorderlists. CapturecontainsSQTT andSPM, notSPMonly. CurrentSPMreader plusindexinventory cannotdecode dispatchsequence.
+
+Read-onlyremoteinstalledpackageinventory: RadeonGPUProfiler.exe GUI,RDP/RDS CLI,RGA/rga/rgd/rtda andcompiler utilities; noRGPDump oridentifiedheadlessRGPeventCSV/JSONexport tool found. Installedhelp/rgp/_sources textsearchforcommandline/CSV/json/export exposedpipelinebinary export, noteventsequenceexport. This is tool/discoveryscope, notproofthatGUIhasnocopyfacility. NoRGP GUI launched ornewcapture begunbyreviewer.
+
+LocalMesa ac_sqtt.h352–390 specifies12B eventmarker and24B event-with-dims;527–547 specifies12B pipelinebind marker carrying api_pso_hash. Theseare payloadstructures, notgfx12SQTTtoken-stream framingdecoder. ExactSQTTuserdata recordboundaries/markerordering must be decoded before correlating eventcommand ids andpipelinebind APIhash throughPsoCorrelation/codeobjects. Nakedbytesearchorcodeobjectname listing cannotestablish dispatchorder. Currentmissingartifact is theactualtoken/eventdecoder (orexistingRGPeventexport) pluslabelledHIPAPI-reference sequence;31928 onlycountlog remainsinsufficientnamehash source. NoCPUinventedsequence andnoGPU/toolinstallation.

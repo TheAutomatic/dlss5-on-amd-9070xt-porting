@@ -1,0 +1,7 @@
+#include "hip_api.h"
+#include <cmath>
+using namespace hip_probe;
+int main(int argc,char**argv){try{if(argc!=3)throw std::runtime_error("inverse_gold MODULE OUTDIR");Api a(7);a.Check(a.hipInit(0),"init");a.Check(a.hipSetDevice(0),"device");Handle m{},q{},f{};void*out{};a.Check(a.LoadModule(&m,argv[1]),"module");a.Check(a.hipStreamCreate(&q),"stream");a.Check(a.hipModuleGetFunction(&f,m,"c512_den_inverse_gold"),"function");a.Check(a.hipMalloc(&out,2816*4),"output");
+ for(unsigned fixture=0;fixture<8;fixture++){void*args[]={&out,&fixture};a.Check(a.hipModuleLaunchKernel(f,1,1,1,32,1,1,0,q,args,nullptr),"launch");a.Check(a.hipStreamSynchronize(q),"completion");std::vector<unsigned>w(2816);a.Check(a.hipMemcpy(w.data(),out,w.size()*4,2),"readback");std::ofstream(std::string(argv[2])+"/fixture"+std::to_string(fixture)+".u32",std::ios::binary).write((char*)w.data(),w.size()*4);size_t ed=0,iv=0,pr=0,invalid=0;for(unsigned i=0;i<256;i++){ed+=w[i]!=w[i/8*8];iv+=w[256+i]!=w[512+i];float x,y;memcpy(&x,&w[i],4);memcpy(&y,&w[256+i],4);invalid+=!std::isfinite(x)||!std::isfinite(y);}for(unsigned i=0;i<1024;i++)pr+=w[768+i]!=w[1792+i];printf("INVERSE_GOLD fixture=%u den_e_diff=%zu inverse_bits_diff=%zu prob_byte_diff=%zu invalid=%zu\n",fixture,ed,iv,pr,invalid);if(ed||iv||pr||invalid)throw std::runtime_error("inverse gold failed");}
+ a.hipFree(out);a.hipStreamDestroy(q);a.hipModuleUnload(m);return 0;
+ }catch(const std::exception&e){fprintf(stderr,"INVERSE_GOLD_FAIL %s\n",e.what());return 1;}}

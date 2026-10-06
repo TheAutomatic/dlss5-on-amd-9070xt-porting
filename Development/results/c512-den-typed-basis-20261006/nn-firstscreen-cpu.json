@@ -1,0 +1,13 @@
+{
+  "local_build_handle": 38715,
+  "exit_code": 0,
+  "GPU_started": false,
+  "build": "x86_64-w64-mingw32-g++ -O2 -std=c++17 -static -I/tmp/c512-den-actual-20261006 -IDevelopment/HIP benchmark1088.cpp -o benchmark1088.exe",
+  "files": {
+    "benchmark1088.cpp": "5df4d328aaedfb791f8fcffac30f8fb780ffc7d2bee8980cf9c3cdcc3fe68a74",
+    "benchmark1088.exe": "c4749fe11d5dfe2a6d162b53dc15c91cfeb0a9dff3d7ae1812f39732b61ae48b",
+    "hip_reference_network.h": "93c71818f2af22b72ed435572ab6e6018945f46a3037e749ed2702b03af46082",
+    "native_hip_env_options.h": "8c312bfee52553e4d8f137a5d138c0422375c4e34a1dc8280563bfd63afb7792",
+    "production_options.generated.h": "7e7d709539165f241febcf36678a56887cc21e6c9fceea8925ef4600c3cfb3ee"
+  }
+}

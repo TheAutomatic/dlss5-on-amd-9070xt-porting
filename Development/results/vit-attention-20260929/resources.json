@@ -1,0 +1,230 @@
+{
+  "gfx1200": {
+    "vit_attention_fused_640_bytein_bout": {
+      ".vgpr_count": 72,
+      ".sgpr_count": 16,
+      ".group_segment_fixed_size": 0,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0
+    },
+    "vit_probe_g1_u1_h0": {
+      ".vgpr_count": 70,
+      ".sgpr_count": 16,
+      ".group_segment_fixed_size": 0,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0
+    },
+    "vit_probe_g1_u1_h1": {
+      ".vgpr_count": 70,
+      ".sgpr_count": 16,
+      ".group_segment_fixed_size": 0,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0
+    },
+    "vit_probe_g4_u1_h1": {
+      ".vgpr_count": 71,
+      ".sgpr_count": 15,
+      ".group_segment_fixed_size": 0,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0
+    },
+    "vit_probe_g1_u4_h0": {
+      ".vgpr_count": 109,
+      ".sgpr_count": 17,
+      ".group_segment_fixed_size": 0,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0
+    },
+    "vit_probe_g4_u4_h1": {
+      ".vgpr_count": 110,
+      ".sgpr_count": 16,
+      ".group_segment_fixed_size": 0,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0
+    },
+    "vit_probe_native_g1_u1_h0": {
+      ".vgpr_count": 72,
+      ".sgpr_count": 13,
+      ".group_segment_fixed_size": 0,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0
+    },
+    "vit_probe_native_g1_u4_h0": {
+      ".vgpr_count": 106,
+      ".sgpr_count": 17,
+      ".group_segment_fixed_size": 0,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0
+    },
+    "vit_probe_native_g4_u4_h1": {
+      ".vgpr_count": 107,
+      ".sgpr_count": 16,
+      ".group_segment_fixed_size": 0,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0
+    },
+    "vit_probe_native": {
+      ".vgpr_count": 74,
+      ".sgpr_count": 13,
+      ".group_segment_fixed_size": 0,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0
+    },
+    "vit_probe_native_constv": {
+      ".vgpr_count": 63,
+      ".sgpr_count": 13,
+      ".group_segment_fixed_size": 0,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0
+    },
+    "vit_probe_pair": {
+      ".vgpr_count": 68,
+      ".sgpr_count": 13,
+      ".group_segment_fixed_size": 0,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0
+    },
+    "vit_probe_transpose": {
+      ".vgpr_count": 74,
+      ".sgpr_count": 12,
+      ".group_segment_fixed_size": 0,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0
+    },
+    "vit_probe_pair_transpose": {
+      ".vgpr_count": 68,
+      ".sgpr_count": 12,
+      ".group_segment_fixed_size": 0,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0
+    }
+  },
+  "gfx1201": {
+    "vit_attention_fused_640_bytein_bout": {
+      ".vgpr_count": 72,
+      ".sgpr_count": 16,
+      ".group_segment_fixed_size": 0,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0
+    },
+    "vit_probe_g1_u1_h0": {
+      ".vgpr_count": 70,
+      ".sgpr_count": 16,
+      ".group_segment_fixed_size": 0,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0
+    },
+    "vit_probe_g1_u1_h1": {
+      ".vgpr_count": 70,
+      ".sgpr_count": 16,
+      ".group_segment_fixed_size": 0,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0
+    },
+    "vit_probe_g4_u1_h1": {
+      ".vgpr_count": 71,
+      ".sgpr_count": 15,
+      ".group_segment_fixed_size": 0,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0
+    },
+    "vit_probe_g1_u4_h0": {
+      ".vgpr_count": 109,
+      ".sgpr_count": 17,
+      ".group_segment_fixed_size": 0,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0
+    },
+    "vit_probe_g4_u4_h1": {
+      ".vgpr_count": 110,
+      ".sgpr_count": 16,
+      ".group_segment_fixed_size": 0,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0
+    },
+    "vit_probe_native_g1_u1_h0": {
+      ".vgpr_count": 72,
+      ".sgpr_count": 13,
+      ".group_segment_fixed_size": 0,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0
+    },
+    "vit_probe_native_g1_u4_h0": {
+      ".vgpr_count": 106,
+      ".sgpr_count": 17,
+      ".group_segment_fixed_size": 0,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0
+    },
+    "vit_probe_native_g4_u4_h1": {
+      ".vgpr_count": 107,
+      ".sgpr_count": 16,
+      ".group_segment_fixed_size": 0,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0
+    },
+    "vit_probe_native": {
+      ".vgpr_count": 74,
+      ".sgpr_count": 13,
+      ".group_segment_fixed_size": 0,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0
+    },
+    "vit_probe_native_constv": {
+      ".vgpr_count": 63,
+      ".sgpr_count": 13,
+      ".group_segment_fixed_size": 0,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0
+    },
+    "vit_probe_pair": {
+      ".vgpr_count": 68,
+      ".sgpr_count": 13,
+      ".group_segment_fixed_size": 0,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0
+    },
+    "vit_probe_transpose": {
+      ".vgpr_count": 74,
+      ".sgpr_count": 12,
+      ".group_segment_fixed_size": 0,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0
+    },
+    "vit_probe_pair_transpose": {
+      ".vgpr_count": 68,
+      ".sgpr_count": 12,
+      ".group_segment_fixed_size": 0,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0
+    }
+  }
+}

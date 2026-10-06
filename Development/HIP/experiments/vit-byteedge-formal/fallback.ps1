@@ -1,0 +1,9 @@
+$ErrorActionPreference='Stop';$root=$PSScriptRoot;$lock='D:\DLSSNR-Lab\gpu.lock'
+& 'D:\DLSSNR-Lab\game-check.ps1' Stellar Onimusha Magpie Forza Cyberpunk;if($LASTEXITCODE -ne 1){throw 'game active'}
+$f=[IO.File]::Open($lock,[IO.FileMode]::CreateNew,[IO.FileAccess]::Write,[IO.FileShare]::Read);$b=[Text.Encoding]::UTF8.GetBytes('vit-byteedge-formal-20261004');$f.Write($b,0,$b.Length);$f.Close()
+try{$prev='D:\DLSSNR-Lab\native-1440-optimization-20261004';New-Item -ItemType Directory -Force "$root\assets","$root\flat-A","$root\flat-N"|Out-Null;Copy-Item "$prev\assets\*" "$root\assets" -Recurse -Force;Copy-Item "$prev\flat\*" "$root\flat-A" -Recurse -Force;Copy-Item "$prev\flat\*" "$root\flat-N" -Recurse -Force;Copy-Item "$root\HIP\gfx1201\*.hsaco" "$root\flat-N" -Force
+$base=@(Get-Content "$prev\dense-single-1-0\flags.txt"|?{$_ -notmatch '^DLSS5_LAB_|^DLSS5_MULTI_PASS'});$env:BENCH_W='2560';$env:BENCH_H='1440';$env:BENCH_RAW_OUTPUT='1'
+Copy-Item "$root\flat-N" "$root\flat-partial" -Recurse -Force;foreach($n in 'vit-stream','vit-stream-fast'){Copy-Item "$root\$n-partial.hsaco" "$root\flat-partial\$n.hsaco" -Force}
+$d="$root\fallback";New-Item -ItemType Directory -Force $d|Out-Null;Copy-Item "$root\preflight-N\flags.txt" "$d\flags.txt";$ErrorActionPreference='Continue';& "$root\ngx-N.exe" "$root\assets" "$d\flags.txt" 'D:\DLSSNR-Lab\hip-backend\free-res-20261002\in\in-2560x1440.f16' "$d\o" 4 0 "$root\flat-partial" 0 0 1 0 > "$d\run.log" 2> "$d\stderr.log";$rc=$LASTEXITCODE;$ErrorActionPreference='Stop';if($rc){throw 'fallback failed'}
+if(!(Select-String "$d\stderr.log" -Pattern 'vit_contract_byte_edge=0')){throw 'partial gate active'};if((Get-FileHash "$root\preflight-A\o.raw.f32").Hash -ne (Get-FileHash "$d\o.raw.f32").Hash){throw 'fallback raw mismatch'};'PARTIAL_FALLBACK_RAW_SAME'
+}finally{if((Get-Content $lock -Raw).Trim() -eq 'vit-byteedge-formal-20261004'){Remove-Item $lock -Force}}

@@ -1,0 +1,24 @@
+{
+  "source": "llvm-objdump fast prefix; drop physical PC/hex comment only",
+  "stock_ops": 1517,
+  "patched_ops": 1517,
+  "changed_lines": [
+    [
+      104,
+      "s_add_co_u32 s14, s14, 0xfffbabe0",
+      "s_add_co_u32 s14, s14, 0xfffbaaa0"
+    ]
+  ],
+  "interpretation": "Only s_getpc-relative style symbol offset changes; identical instruction scheduling/registers, original-prefix .note equal; dlss5_style_feature4bytes identical despite changed absolute symbol/code addresses.",
+  "FAST0": {
+    "stock_ops": 1608,
+    "patched_ops": 1608,
+    "changed_lines": [
+      [
+        104,
+        "s_add_co_u32 s14, s14, 0xfffb9da0",
+        "s_add_co_u32 s14, s14, 0xfffb9ca0"
+      ]
+    ]
+  }
+}

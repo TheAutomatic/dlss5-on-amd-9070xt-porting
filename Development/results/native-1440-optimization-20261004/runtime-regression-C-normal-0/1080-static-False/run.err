@@ -1,0 +1,7 @@
+benchmark-A.exe : multi_pass=1 multi_pass_predict=0 actual_network_passes=1
+At D:\DLSSNR-Lab\native-1440-optimization-20261004\regression.ps1:22 char:37
++ ... 'Continue'; & $runner $assets "$dir\flags.txt" "$r\live-menu-before.f ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (multi_pass=1 mu...etwork_passes=1:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+

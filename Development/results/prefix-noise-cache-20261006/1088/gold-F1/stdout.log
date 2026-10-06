@@ -1,0 +1,14 @@
+NOISE_HALF_GOLD seed=0 bytes=16711680 bitdiff=0 negative_zero=0 layout=raster_g1_g2_g0_pad
+NOISE_HALF_GOLD seed=1 bytes=16711680 bitdiff=0 negative_zero=1 layout=raster_g1_g2_g0_pad
+NOISE_HALF_GOLD seed=4294967295 bytes=16711680 bitdiff=0 negative_zero=0 layout=raster_g1_g2_g0_pad
+PREFIX_GOLD temporal=0 exposure=1 reset_epoch=0 main_down_bitdiff=0
+PREFIX_GOLD temporal=0 exposure=1 reset_epoch=1 main_down_bitdiff=0
+PREFIX_GOLD temporal=0 exposure=2 reset_epoch=0 main_down_bitdiff=0
+PREFIX_GOLD temporal=0 exposure=2 reset_epoch=1 main_down_bitdiff=0
+PREFIX_GOLD temporal=1 exposure=1 reset_epoch=0 main_down_bitdiff=0
+PREFIX_GOLD temporal=1 exposure=1 reset_epoch=1 main_down_bitdiff=0
+PREFIX_GOLD temporal=1 exposure=2 reset_epoch=0 main_down_bitdiff=0
+PREFIX_GOLD temporal=1 exposure=2 reset_epoch=1 main_down_bitdiff=0
+PREFIX_NOISE_CACHE enabled=1 ready=0 builds=8 hits=0 fallback=1 bytes=16711680 seed0_only=1 cached_rgb_history_style=0
+SP_STATS runs=0 fallback=0 rollover=0 jobs=0 disabled=0 errors=0
+

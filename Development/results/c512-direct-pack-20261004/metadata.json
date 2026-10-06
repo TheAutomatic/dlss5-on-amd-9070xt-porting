@@ -1,0 +1,256 @@
+{
+  "baseline_commit": "058ec7c1",
+  "scope": "scalar/pair half domain proof + actual block23 FFN with synthetic dynamic FP8-grid input; not full-frame",
+  "source_equivalence": {
+    "F_body_same_as_all_2pow32_f_sweep": true,
+    "fp8_add0_body_same_as_all_2pow32_f_sweep": true,
+    "previous_probe_source_sha256": "f0289cedb533666582dba7f373eac14e64cc8dafc52e7b1caed25bda7b3cb68f",
+    "current_deep_source_sha256": "fbac9487dfc277448b9e102cb5b952f066cf023d06ca82d5814b6a2544e5a91a",
+    "preserved_compound_c512_hq": "{#ifC512_F_MASKreturn__builtin_bit_cast(float,__builtin_bit_cast(uint,x)&0xffffe000u);#elsereturnHrtz(x);#endif}",
+    "generated_sha256": {
+      "base.generated.hip": "fa148b8d4bb8e233ba3c6acc2b6df9bb024aa1d6d5f7e984ee7864cc7e960310",
+      "1.generated.hip": "f6f96ab46fc47303af420e7651cd74060d24c4f1a65daea82af44ae4d9e487c0",
+      "2.generated.hip": "96d50425ecf4f451d6e9188a1716b4a177fa36c442a930146cab0dcf66c33267",
+      "3.generated.hip": "ccf0e6396b0702ae3da9306174d7c830cb05a946879b7c78c89b39de9b5382c7",
+      "0.generated.hip": "0457f229736ce20e466cd00e90e9340539cffdc262603495f2351e57d798e23c"
+    }
+  },
+  "half_scalar_byte_diff": 0,
+  "half_pair_byte_diff": 0,
+  "scalar_checked_bytes": 65536,
+  "pair_checked_bytes": 524288,
+  "actual_kernel_comparisons": 27,
+  "actual_kernel_diff": 0,
+  "input_sha256": {
+    "1504-pattern0": "5113630460a1a9b63f6beb25f9014662b4aba5a2274d594adccc5575d65c8acc",
+    "1504-pattern1": "ac16e5f52a1086f1153564bc4d1fdb340f1879aee122160cc5a47e51760ed874",
+    "1504-pattern2": "f313eef37837361c4bde94de1c4ecdfaa30131255de2c419b2db6754af56d09e",
+    "2160-pattern0": "f68ad57fdf211747c70d7b6cd6b8164c0e10e438a2289134cbdb6a319cfe7230",
+    "2160-pattern1": "a83947bf021e701fde65fb788ca032b58c9d525fb86a49b6ade3fa9637a564dc",
+    "2160-pattern2": "0fbc75e577971426dd867ea0ea28801bef14a29e566f5564231d66dde3b26cd3",
+    "3680-pattern0": "534eb43affd9ab47baf6e080d985d739239ef4085c4d0b979e9ccd24660d0c74",
+    "3680-pattern1": "1dacb3d9147d5cb8e661ce01f02da98a6f5e2de7de05b064b52f598f34b17a29",
+    "3680-pattern2": "be231c0b616d0f64254991772650d0df34506a5548e252c47f4fca9742fe30ed"
+  },
+  "source_weight_f16_sha256": "8a2ddc670d85f5ce32f2c749610c22e855f3876b2a673b0f5fdf91d3662e09ee",
+  "macro0_proof": {
+    "gfx1200": {
+      "macro0_sections_equal": {
+        ".text": true,
+        ".rodata": true,
+        ".note": true
+      },
+      "sha256": {
+        "2.hsaco": "199c6840cf0b8a85d73ce60fd7d9b7cf340a32aca06af15f29655102e3997201",
+        "0.hsaco": "ff030506e08ed6dfb6c26f6ad844485374d057461c8a5826cee936a406b1af34",
+        "base.hsaco": "66cb69a953d5938a78c9f214d835ee08b6798e5a79fe7e6e73088f46a5a244e1",
+        "3.hsaco": "f15eb7008ffdc4ab7a71925ebcb72e6737608d0f3263ee17a0c91b6f199efaf4",
+        "1.hsaco": "b46e18a1e332710bcfee73b56dee9ddfedad65bc5bf0275730cef0040d2aed42"
+      },
+      "elf_flags": {
+        "2.hsaco": "0x48",
+        "0.hsaco": "0x48",
+        "base.hsaco": "0x48",
+        "3.hsaco": "0x48",
+        "1.hsaco": "0x48"
+      }
+    },
+    "gfx1201": {
+      "macro0_sections_equal": {
+        ".text": true,
+        ".rodata": true,
+        ".note": true
+      },
+      "sha256": {
+        "2.hsaco": "08239cb115495372c93d3694ec07805a36eaa152de3d1e5ed49a91df13b33a53",
+        "0.hsaco": "7275c5fdfe5e0292bb1f7b06eaeab209db9db9df69ab9d5179eaf1b1fcbb410c",
+        "base.hsaco": "9a9bec8ace2fa3b9d59e41141d380fe6dd457caa6a904225692070494d0e7af9",
+        "3.hsaco": "22aab7dec4bf2b965b97232e5f1dbcf0a2574ff4c12d654e0d2c338b0bf133fb",
+        "1.hsaco": "937ceee52844f64bd62c3f0218c697b5fa3a1b692b793b47aff09aaa8f924bc5"
+      },
+      "elf_flags": {
+        "2.hsaco": "0x4e",
+        "0.hsaco": "0x4e",
+        "base.hsaco": "0x4e",
+        "3.hsaco": "0x4e",
+        "1.hsaco": "0x4e"
+      }
+    }
+  },
+  "isa": {
+    "base": {
+      "lines": 964,
+      "pack": 136,
+      "decode": 64,
+      "vgpr": 116,
+      "sgpr": 42,
+      "spill": 0,
+      "wmma": 24
+    },
+    "0": {
+      "lines": 964,
+      "pack": 136,
+      "decode": 64,
+      "vgpr": 116,
+      "sgpr": 42,
+      "spill": 0,
+      "wmma": 24
+    },
+    "1": {
+      "lines": 819,
+      "pack": 104,
+      "decode": 32,
+      "vgpr": 116,
+      "sgpr": 38,
+      "spill": 0,
+      "wmma": 24
+    },
+    "2": {
+      "lines": 801,
+      "pack": 104,
+      "decode": 32,
+      "vgpr": 116,
+      "sgpr": 42,
+      "spill": 0,
+      "wmma": 24
+    },
+    "3": {
+      "lines": 657,
+      "pack": 72,
+      "decode": 0,
+      "vgpr": 116,
+      "sgpr": 13,
+      "spill": 0,
+      "wmma": 24
+    }
+  },
+  "decision": "individual1/2 rejected for slow rounds; combined3 passes all three shape short rounds, pending full-network formal gate",
+  "paired_round_deltas": [
+    {
+      "tokens": 1504,
+      "pair": 1,
+      "delta_event_us": [
+        0.19643299999999897,
+        1.4557360000000017,
+        -0.13683300000000287
+      ],
+      "delta_wall_us": [
+        -0.759999999999998,
+        1.345000000000006,
+        0.09833350000000252
+      ]
+    },
+    {
+      "tokens": 1504,
+      "pair": 2,
+      "delta_event_us": [
+        0.143269999999994,
+        0.6247674999999973,
+        0.2527369999999962
+      ],
+      "delta_wall_us": [
+        0.33666649999999976,
+        0.5433335000000028,
+        0.375
+      ]
+    },
+    {
+      "tokens": 1504,
+      "pair": 3,
+      "delta_event_us": [
+        -3.3630369999999985,
+        -1.0501005000000063,
+        -1.9850674999999995
+      ],
+      "delta_wall_us": [
+        -3.6733329999999995,
+        -0.8033335000000008,
+        -2.1950000000000003
+      ]
+    },
+    {
+      "tokens": 2160,
+      "pair": 1,
+      "delta_event_us": [
+        -0.04225050000000152,
+        -0.21133350000000206,
+        -0.28079899999999824
+      ],
+      "delta_wall_us": [
+        -0.05166650000000317,
+        -0.5733334999999968,
+        -0.3083330000000011
+      ]
+    },
+    {
+      "tokens": 2160,
+      "pair": 2,
+      "delta_event_us": [
+        -0.07540000000000191,
+        -0.475598999999999,
+        0.3045669999999987
+      ],
+      "delta_wall_us": [
+        -0.06333300000000008,
+        -0.6666665000000016,
+        0.3200005000000026
+      ]
+    },
+    {
+      "tokens": 2160,
+      "pair": 3,
+      "delta_event_us": [
+        -0.2310984999999981,
+        -1.2231655000000003,
+        -0.2403669999999991
+      ],
+      "delta_wall_us": [
+        0.02833299999999994,
+        -1.064999499999999,
+        -0.24666649999999635
+      ]
+    },
+    {
+      "tokens": 3680,
+      "pair": 1,
+      "delta_event_us": [
+        -0.29173649999999895,
+        -0.4691980000000058,
+        0.06686799999999948
+      ],
+      "delta_wall_us": [
+        -0.05999999999999517,
+        -0.3783329999999978,
+        0.23666649999999834
+      ]
+    },
+    {
+      "tokens": 3680,
+      "pair": 2,
+      "delta_event_us": [
+        0.06686799999999948,
+        -0.35316849999999533,
+        -0.5115009999999955
+      ],
+      "delta_wall_us": [
+        -0.15166649999999748,
+        -0.44999999999999574,
+        -0.46333299999999866
+      ]
+    },
+    {
+      "tokens": 3680,
+      "pair": 3,
+      "delta_event_us": [
+        -0.5006669999999929,
+        -0.6436674999999923,
+        -0.590399000000005
+      ],
+      "delta_wall_us": [
+        -0.5233330000000009,
+        -0.6500005000000044,
+        -0.37000000000000455
+      ]
+    }
+  ]
+}

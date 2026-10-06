@@ -1,0 +1,45 @@
+{
+  "handle": 30879,
+  "exit": 0,
+  "lock_released": true,
+  "reference": "OLD not NV",
+  "layout": "1088x1920xRGB3 float32 normalized; valid rows1080 padding8",
+  "validRGB": {
+    "values": 6220800,
+    "changed_fraction": 0.999988425925926,
+    "changed_pixel_fraction": 1.0,
+    "MAE": 0.001689132110669887,
+    "max": 0.033540308475494385,
+    "PSNR_peak1_db": 52.71317323848696,
+    "quantiles": {
+      "0.5": 0.0012748241424560547,
+      "0.9": 0.0036096572875976562,
+      "0.99": 0.007451951801776879,
+      "0.999": 0.012245685756206826
+    },
+    "finite": true,
+    "RMSE": 0.0023138826948429525
+  },
+  "paddingRGB": {
+    "values": 46080,
+    "changed_fraction": 0.9999782986111111,
+    "changed_pixel_fraction": 1.0,
+    "MAE": 0.003248792148143467,
+    "max": 0.028695613145828247,
+    "PSNR_peak1_db": 47.21506311043466,
+    "quantiles": {
+      "0.5": 0.0024898797273635864,
+      "0.9": 0.0069900572299957265,
+      "0.99": 0.013424657881259912,
+      "0.999": 0.02048853272199634
+    },
+    "finite": true,
+    "RMSE": 0.004357594804662396
+  },
+  "raw_sha": {
+    "whole-old/first.rgb32f": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1",
+    "whole-old/last.rgb32f": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1",
+    "whole-new/first.rgb32f": "933e2a5f6b4e9b1f2616bf38ea15a2a4f31c4f11e0f081dc395f2b5c95e43da9",
+    "whole-new/last.rgb32f": "933e2a5f6b4e9b1f2616bf38ea15a2a4f31c4f11e0f081dc395f2b5c95e43da9"
+  }
+}

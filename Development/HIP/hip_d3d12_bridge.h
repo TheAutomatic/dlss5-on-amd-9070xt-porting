@@ -6,6 +6,8 @@
 #include <cstdlib>
 #include <mutex>
 #include <vector>
+#include <atomic>
+#include <thread>
 #include <filesystem>
 #include "hip_reference_network.h"
 #include "../../src/native_device_identity.h"
@@ -20,15 +22,116 @@ class D3D12Bridge {
  HANDLE fence_handle{},event{};Handle semaphore{};Shared input,history,output;UINT64 value{};size_t pixels{};bool readable{},pending{},failed{};
  ID3D12Resource* zero_upload{};ID3D12CommandAllocator* clear_alloc{};ID3D12GraphicsCommandList* clear_cmd{};
  size_t zero_upload_bytes{};bool clear_submission_unconfirmed{};
+ /* Direct input (2026-09-28): the host producer writes the network input straight into the shared buffer (UAV) and leaves it in
+    COMMON; RecordInput then skips the 35 MB D3D12 copy. Requested before Create; the bytes the network reads are unchanged. */
+ bool direct_input{};
 public:
  enum class Phase { Ready, InputRecorded, OutputRecordedPendingHip, HipQueued, OutputRecorded };
  Phase CurrentPhase()const{return phase;}
  bool PdlActive()const{return network&&network->PdlCalls()!=0;}
+ /* DLSS5_MULTI_PASS at run time (add-on hot reload / hotkey): 0 = query only. Returns the pass count in effect (0 = no network). */
+ unsigned MultiPass(unsigned set=0){if(!network)return 0;if(set)network->SetMultiPass(set);return network->MultiPass();}
+ bool MultiPassSkinProtect()const{return network&&network->MultiPassSkinProtect();}
+ void MultiPassSkinProtect(bool set){if(network)network->SetMultiPassSkinProtect(set);}
+ bool MultiPassPredict()const{return network&&network->MultiPassPredict();}
+ void MultiPassPredict(bool set){if(network)network->SetMultiPassPredict(set);}
+ bool ExperimentalTemporalActive()const{return network&&network->ExperimentalTemporalActive();}
+ bool SwinRunActive()const{return network&&network->SwinRunActive();}
 private:
  Phase phase=Phase::Ready;bool recorded_temporal{};
  /* DLSS5_HIP_SPAN_PROBE=1 (diagnostic): hipEvents recorded after the input wait and before the output signal give the
     GPU span of one network enqueue; the previous frame's span and its CPU enqueue time are printed at the next Run. */
  Handle span_begin{},span_end{};bool span_probe{},span_pending{};double span_cpu{};
+ /* Network GPU timing (2026-10-02, results/net-timing-20261002; read by LmxxfNrApi GetTimings/GetStatus): kTimingSlots
+    begin/end hipEvent pairs recorded on the network stream at the SPAN_PROBE points, so a span is the HIP network only
+    (no D3D12 input copy/codec pass, no handoff wait). Harvested at the next Enqueue / PollNetworkTiming with hipEventQuery
+    only, never a synchronize; if the next slot's end has not completed yet that frame is simply not timed. With DLSS5_MULTI_PASS=N the
+    span covers all N passes (the whole per-frame network cost), not one pass. Off until
+    EnableNetworkTiming() or DLSS5_NET_TIMING=1. Any HIP error here turns timing off and never fails a frame. Bytes unchanged. */
+ static constexpr unsigned kTimingSlots=4;
+ Handle timing_begin[kTimingSlots]{},timing_end[kTimingSlots]{};unsigned long long timing_slot_tag[kTimingSlots]{};bool timing_busy[kTimingSlots]{};
+ bool timing_on{};unsigned timing_next{},timing_oldest{};unsigned long long timing_tag{},timing_last_tag{};float timing_last_ms{};bool timing_valid{};
+ using EventQueryFn=int(*)(Handle);EventQueryFn timing_query{};EventQueryFn post_query{};
+ void TimingOff(){timing_on=false;for(unsigned k=0;k<kTimingSlots;k++)timing_busy[k]=false;}
+ void HarvestTiming(){
+  if(!timing_on)return;auto&api=network->Runtime();
+  for(unsigned n=0;n<kTimingSlots;n++){const unsigned k=timing_oldest;if(!timing_busy[k])return;
+   const int q=timing_query(timing_end[k]);if(q==600/*hipErrorNotReady*/)return;if(q!=0){TimingOff();return;}
+   float ms=-1;if(api.hipEventElapsedTime(&ms,timing_begin[k],timing_end[k])==0&&ms>=0&&ms<1e6f){timing_last_ms=ms;timing_last_tag=timing_slot_tag[k];timing_valid=true;}
+   timing_busy[k]=false;timing_oldest=(k+1)%kTimingSlots;}
+ }
+ bool TimingBegin(){ // after the input wait; returns true when this frame is being timed
+  if(!timing_on)return false;HarvestTiming();if(!timing_on||timing_busy[timing_next])return false;
+  if(network->Runtime().hipEventRecord(timing_begin[timing_next],network->Stream())){TimingOff();return false;}return true;
+ }
+ void TimingEnd(){ // before the output signal
+  if(!timing_on)return;const unsigned k=timing_next;
+  if(network->Runtime().hipEventRecord(timing_end[k],network->Stream())){TimingOff();return;}
+  /* One non-blocking query of the end event right after recording it, before the output signal (TheAutomatic,
+     2026-10-02): without it Windows HIP can leave the begin/end timestamps of a deferred batch nearly equal and spans
+     collapse to ~0.001 ms. success or hipErrorNotReady are both fine; no wait, no extra GPU dependency. */
+  {const int q=timing_query(timing_end[k]);if(q!=0&&q!=600/*hipErrorNotReady*/){TimingOff();return;}}
+  timing_slot_tag[k]=timing_tag;timing_busy[k]=true;timing_next=(k+1)%kTimingSlots;
+ }
+ void DestroyTiming(){if(!network)return;auto&api=network->Runtime();for(unsigned k=0;k<kTimingSlots;k++){if(timing_begin[k])api.hipEventDestroy(timing_begin[k]);if(timing_end[k])api.hipEventDestroy(timing_end[k]);timing_begin[k]=timing_end[k]=nullptr;}TimingOff();}
+public:
+ /* Starts network timing (idempotent). false = unavailable (no hipEventQuery export or event creation failed); frames are unaffected. */
+ bool EnableNetworkTiming(){
+  if(timing_on)return true;if(!network||failed)return false;auto&api=network->Runtime();
+  if(!timing_query)timing_query=reinterpret_cast<EventQueryFn>(GetProcAddress(api.dll,"hipEventQuery"));if(!timing_query)return false;
+  for(unsigned k=0;k<kTimingSlots;k++){if(!timing_begin[k]&&api.hipEventCreate(&timing_begin[k])){DestroyTiming();return false;}if(!timing_end[k]&&api.hipEventCreate(&timing_end[k])){DestroyTiming();return false;}}
+  timing_next=timing_oldest=0;timing_on=true;return true;
+ }
+ bool NetworkTimingEnabled()const{return timing_on;}
+ /* Tag stored with the next timed enqueue (the RE9 runtime passes LmxxfNrFrameInfo::frame_id). */
+ void SetTimingTag(unsigned long long tag){timing_tag=tag;}
+ /* Non-blocking: collects every completed span, then returns the most recent one. valid=false until one has completed. */
+ struct NetworkTiming{bool valid;float ms;unsigned long long tag;};
+ NetworkTiming PollNetworkTiming(){if(network&&!failed)HarvestTiming();return {timing_valid,timing_last_ms,timing_last_tag};}
+private:
+ /* DLSS5_HIP_INPUT_POLL=1 (2026-09-30, results/handoff-gpu-20260930): the D3D->HIP half of the handoff waits on the GPU instead of
+    through the shared fence. The queue runs a pre-recorded list whose only command is WriteBufferImmediate(MARKER_OUT) of a slot
+    value into a small shared buffer, and the HIP stream waits with hipStreamWaitValue32(EQ) in its command processor. Slot values
+    cycle 1..8; frame n+1's marker is behind the queue's wait on frame n's HIP output, so the EQ wait cannot miss. The HIP->D3D half
+    keeps the fence (a D3D-side spin was measured slower). Safety: a start-up self-check (marker -> wait must pass within 200 ms)
+    and a watchdog thread: if a marker has completed on the D3D side but the HIP wait behind it has not passed within 200 ms, the
+    watchdog writes the value from a separate HIP stream, and every later frame goes back to the fence path. Bytes unchanged. */
+ static constexpr unsigned kPollSlots=8;
+ bool poll{},poll_inline{},poll_recorded{};unsigned poll_recorded_target{};std::atomic<bool> poll_off{false},poll_stop{false};Shared flag;ID3D12Fence*poll_fence{};UINT64 poll_value{};unsigned poll_frame{};
+ ID3D12CommandAllocator*poll_alloc[kPollSlots]{};ID3D12GraphicsCommandList*poll_list[kPollSlots]{};UINT64 poll_done[kPollSlots]{};Handle poll_evt[kPollSlots]{};
+ using WaitValueFn=int(*)(Handle,void*,unsigned,unsigned,unsigned);using MemsetD32Fn=int(*)(void*,int,size_t,Handle);using QueryFn=int(*)(Handle);
+ WaitValueFn wait_value{};MemsetD32Fn memset_d32{};QueryFn event_query{},stream_query{};Handle poll_rescue{};std::thread poll_watch;
+ std::mutex poll_mutex;struct PollArmed{bool armed{};UINT64 d3d{};Handle evt{};unsigned target{};};PollArmed poll_armed;
+ void PollRescue(unsigned target,const char*why){auto&api=network->Runtime();memset_d32(flag.mapped,int(target),1,poll_rescue);api.hipStreamSynchronize(poll_rescue);poll_off=true;fprintf(stderr,"hip_input_poll: %s; released slot %u from a side stream, fence path from now on\n",why,target);}
+ void PollWatch(){
+  auto seen=std::chrono::steady_clock::time_point{};UINT64 seen_d3d=0;
+  while(!poll_stop&&!poll_off){
+   std::this_thread::sleep_for(std::chrono::milliseconds(20));PollArmed a;{std::lock_guard<std::mutex> l(poll_mutex);a=poll_armed;}
+   if(!a.armed||poll_fence->GetCompletedValue()<a.d3d||event_query(a.evt)==0){seen_d3d=0;continue;}
+   if(seen_d3d!=a.d3d){seen_d3d=a.d3d;seen=std::chrono::steady_clock::now();continue;}
+   if(std::chrono::steady_clock::now()-seen>std::chrono::milliseconds(200)){PollRescue(a.target,"GPU wait did not see the D3D marker within 200 ms");break;}
+  }
+ }
+ void SetupPoll(){
+  auto&api=network->Runtime();auto load=[&](auto&f,const char*n){f=reinterpret_cast<std::remove_reference_t<decltype(f)>>(GetProcAddress(api.dll,n));if(!f)throw std::runtime_error(std::string("missing HIP export ")+n);};
+  load(wait_value,"hipStreamWaitValue32");load(memset_d32,"hipMemsetD32Async");load(event_query,"hipEventQuery");load(stream_query,"hipStreamQuery");
+  Share(flag,65536);api.Check(api.hipStreamCreate(&poll_rescue),"poll rescue stream");api.Check(api.hipMemsetAsync(flag.mapped,0,65536,network->Stream()),"poll flag clear");api.Check(api.hipStreamSynchronize(network->Stream()),"poll flag clear sync");
+  Check(device->CreateFence(0,D3D12_FENCE_FLAG_NONE,IID_PPV_ARGS(&poll_fence)),"poll fence");const auto type=queue->GetDesc().Type;
+  for(unsigned k=0;k<kPollSlots;k++){Check(device->CreateCommandAllocator(type,IID_PPV_ARGS(&poll_alloc[k])),"poll allocator");Check(device->CreateCommandList(0,type,poll_alloc[k],nullptr,IID_PPV_ARGS(&poll_list[k])),"poll list");
+   ID3D12GraphicsCommandList2*c2{};Check(poll_list[k]->QueryInterface(IID_PPV_ARGS(&c2)),"poll list2");D3D12_WRITEBUFFERIMMEDIATE_PARAMETER wp{flag.resource->GetGPUVirtualAddress(),k+1};D3D12_WRITEBUFFERIMMEDIATE_MODE wm=D3D12_WRITEBUFFERIMMEDIATE_MODE_MARKER_OUT;c2->WriteBufferImmediate(1,&wp,&wm);c2->Release();Check(poll_list[k]->Close(),"poll list close");api.Check(api.hipEventCreate(&poll_evt[k]),"poll event");}
+  // self-check: slot 1 marker -> HIP wait must pass
+  ID3D12CommandList*l[]={poll_list[0]};queue->ExecuteCommandLists(1,l);Check(queue->Signal(poll_fence,++poll_value),"poll self-check signal");api.Check(wait_value(network->Stream(),flag.mapped,1,1,0xffffffffu),"poll self-check wait");
+  auto t0=std::chrono::steady_clock::now();bool ok=false;while(std::chrono::steady_clock::now()-t0<std::chrono::milliseconds(200)){if(stream_query(network->Stream())==0){ok=true;break;}Sleep(1);}
+  if(!ok)PollRescue(1,"self-check: GPU wait did not see the D3D marker");
+  api.Check(api.hipStreamSynchronize(network->Stream()),"poll self-check sync");api.Check(api.hipMemsetAsync(flag.mapped,0,4,network->Stream()),"poll flag reset");api.Check(api.hipStreamSynchronize(network->Stream()),"poll flag reset sync");
+  if(poll_fence->GetCompletedValue()<poll_value){Check(poll_fence->SetEventOnCompletion(poll_value,event),"poll self-check event");if(WaitForSingleObject(event,30000)!=WAIT_OBJECT_0)throw std::runtime_error("poll self-check timeout");}
+  if(poll_off)return;poll=true;poll_watch=std::thread([this]{PollWatch();});fprintf(stderr,"hip_input_poll enabled\n");
+ }
+ void TeardownPoll(){
+  poll_stop=true;if(poll_watch.joinable())poll_watch.join();auto&api=network->Runtime();
+  for(unsigned k=0;k<kPollSlots;k++){if(poll_list[k])poll_list[k]->Release();if(poll_alloc[k])poll_alloc[k]->Release();if(poll_evt[k])api.hipEventDestroy(poll_evt[k]);}
+  if(poll_rescue)api.hipStreamDestroy(poll_rescue);if(poll_fence)poll_fence->Release();Release(flag);
+ }
  static void Check(HRESULT h,const char*what){if(FAILED(h))throw std::runtime_error(std::string(what)+" HRESULT="+std::to_string(unsigned(h)));}
  static void Barrier(ID3D12GraphicsCommandList*c,ID3D12Resource*r,D3D12_RESOURCE_STATES before,D3D12_RESOURCE_STATES after){if(before==after)return;D3D12_RESOURCE_BARRIER b{};b.Type=D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;b.Transition={r,D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,before,after};c->ResourceBarrier(1,&b);}
  /* 2026-09-26: the AMD HIP driver never returns a D3D12 buffer that was imported (hipImportExternalMemory) and mapped, even after
@@ -75,7 +178,7 @@ private:
    return false;
   }
  }
- void InputContract(ID3D12Resource*r){if(!r||r->GetDesc().Dimension!=D3D12_RESOURCE_DIMENSION_BUFFER||r->GetDesc().Width<pixels*16)throw std::runtime_error("bridge input capacity");ID3D12Device*owner{};Check(r->GetDevice(IID_PPV_ARGS(&owner)),"input device");bool same=NativeSameDevice(owner,device);owner->Release();if(!same)throw std::runtime_error("bridge input device mismatch");}
+ void InputContract(ID3D12Resource*r,size_t bytes_per_pixel=16){if(!r||r->GetDesc().Dimension!=D3D12_RESOURCE_DIMENSION_BUFFER||r->GetDesc().Width<pixels*bytes_per_pixel)throw std::runtime_error("bridge input capacity");ID3D12Device*owner{};Check(r->GetDevice(IID_PPV_ARGS(&owner)),"input device");bool same=NativeSameDevice(owner,device);owner->Release();if(!same)throw std::runtime_error("bridge input device mismatch");}
 public:
  std::string architecture,adapter_name,module_directory,device_match;int runtime_version{};
  D3D12Bridge()=default;D3D12Bridge(const D3D12Bridge&)=delete;D3D12Bridge&operator=(const D3D12Bridge&)=delete;
@@ -83,15 +186,15 @@ public:
  // This also lets wrappers retain their input references until consumers retire.
  bool WaitForSubmittedWork()noexcept{
   if(phase!=Phase::Ready||clear_submission_unconfirmed)return false;
-  if(network&&network->Runtime().hipStreamSynchronize(network->Stream()))return false;
+  if(network&&(network->Runtime().hipSetDevice(hip_device)||network->Runtime().hipStreamSynchronize(network->Stream())))return false;
   if(pending&&queue&&fence){auto target=++value;if(FAILED(queue->Signal(fence,target))||FAILED(fence->SetEventOnCompletion(target,event))||WaitForSingleObject(event,30000)!=WAIT_OBJECT_0||fence->GetCompletedValue()<target)return false;}
   if(device&&FAILED(device->GetDeviceRemovedReason()))return false;
   pending=false;return true;
  }
  ~D3D12Bridge(){
-  if(!WaitForSubmittedWork())return;
+  if(!WaitForSubmittedWork()||(network&&!network->CloseSubmitPulse()))return;
   if(clear_cmd)clear_cmd->Release();if(clear_alloc)clear_alloc->Release();if(zero_upload)zero_upload->Release();
-  if(network){Release(input);Release(history);Release(output);if(semaphore)network->Runtime().hipDestroyExternalSemaphore(semaphore);delete network;}
+  if(network){DestroyTiming();TeardownPoll();Release(input);Release(history);Release(output);if(semaphore)network->Runtime().hipDestroyExternalSemaphore(semaphore);delete network;}
   if(fence_handle)CloseHandle(fence_handle);if(event)CloseHandle(event);if(fence)fence->Release();if(queue)queue->Release();if(device)device->Release();
  }
  void Create(ID3D12CommandQueue*q,Options options,const std::vector<float>&noise){
@@ -100,7 +203,7 @@ public:
   // Pick the HIP device that is the game's D3D12 adapter. Hosts with an iGPU or a second card expose several HIP devices
   // LUID is authoritative even when a host spoofs DXGI VendorId/Description.
   // Name fallback requires AMD DXGI identity and exactly one HIP device without a LUID.
-  IDXGIFactory4*factory{};IDXGIAdapter1*adapter{};Check(CreateDXGIFactory1(IID_PPV_ARGS(&factory)),"factory");auto hr=factory->EnumAdapterByLuid(device->GetAdapterLuid(),IID_PPV_ARGS(&adapter));factory->Release();Check(hr,"D3D adapter");DXGI_ADAPTER_DESC1 desc{};adapter->GetDesc1(&desc);adapter->Release();char dname[256]{};WideCharToMultiByte(CP_UTF8,0,desc.Description,-1,dname,256,nullptr,nullptr);
+  IDXGIFactory4*factory{};IDXGIAdapter1*adapter{};Check(CreateDXGIFactory1(IID_PPV_ARGS(&factory)),"factory");auto hr=factory->EnumAdapterByLuid(device->GetAdapterLuid(),IID_PPV_ARGS(&adapter));factory->Release();Check(hr,"D3D adapter");DXGI_ADAPTER_DESC1 desc{};adapter->GetDesc1(&desc);LARGE_INTEGER pulse_driver{};const HRESULT pulse_driver_status=adapter->CheckInterfaceSupport(__uuidof(IDXGIDevice),&pulse_driver);adapter->Release();char dname[256]{};WideCharToMultiByte(CP_UTF8,0,desc.Description,-1,dname,256,nullptr,nullptr);
   {Api probe(options.runtime);probe.Check(probe.hipInit(0),"hipInit");probe.Check(probe.hipRuntimeGetVersion(&runtime_version),"runtime version");int count{};probe.Check(probe.hipGetDeviceCount(&count),"device count");int chosen=-1,name_match=-1,name_matches=0;std::string seen;const LUID wanted=device->GetAdapterLuid();for(int i=0;i<count;i++){char hname[256]{};if(probe.hipDeviceGetName(hname,256,i))continue;auto prop=probe.Properties(i);bool has_luid=false;for(char c:prop.luid)has_luid|=c!=0;if(has_luid&&!memcmp(prop.luid,&wanted,sizeof wanted)){chosen=i;device_match="luid";}if(!has_luid&&desc.VendorId==0x1002&&!strcmp(dname,hname)){name_match=i;name_matches++;}if(!seen.empty())seen+=" | ";seen+=std::to_string(i)+":"+hname+":"+prop.gcnArchName;}
    if(chosen<0&&name_matches==1){chosen=name_match;device_match="name";}
    if(chosen<0)throw std::runtime_error(std::string("no HIP device matches D3D12 adapter '")+dname+"' (HIP devices: "+(seen.empty()?"none":seen)+")");options.device=unsigned(chosen);hip_device=chosen;auto props=probe.Properties(chosen);architecture=std::string(props.gcnArchName,strnlen(props.gcnArchName,sizeof props.gcnArchName));architecture=architecture.substr(0,architecture.find(':'));adapter_name=dname;
@@ -113,9 +216,20 @@ probe.Check(probe.hipSetDevice(chosen),"select device");size_t total=0;if(probe.
   }
   module_directory=options.modules;
   network=new Network(std::move(options));auto&api=network->Runtime();
-  Share(input,pixels*16);Share(history,pixels*16);Share(output,pixels*12,true);Check(device->CreateFence(0,D3D12_FENCE_FLAG_SHARED,IID_PPV_ARGS(&fence)),"shared fence");Check(device->CreateSharedHandle(fence,nullptr,GENERIC_ALL,nullptr,&fence_handle),"fence handle");hip_probe::SemaphoreDesc sd{};sd.type=4;sd.handle.win32.handle=fence_handle;api.Check(api.hipImportExternalSemaphore(&semaphore,&sd),"import fence");event=CreateEventW(nullptr,FALSE,FALSE,nullptr);if(!event)throw std::runtime_error("bridge completion event");if(const char*v=std::getenv("DLSS5_HIP_SPAN_PROBE"))span_probe=!strcmp(v,"1");if(span_probe){api.Check(api.hipEventCreate(&span_begin),"span begin event");api.Check(api.hipEventCreate(&span_end),"span end event");fprintf(stderr,"hip_span probe enabled\n");}network->SetNoise(noise);
+  Share(input,pixels*16,direct_input);Share(history,pixels*16);Share(output,pixels*12,true);Check(device->CreateFence(0,D3D12_FENCE_FLAG_SHARED,IID_PPV_ARGS(&fence)),"shared fence");Check(device->CreateSharedHandle(fence,nullptr,GENERIC_ALL,nullptr,&fence_handle),"fence handle");hip_probe::SemaphoreDesc sd{};sd.type=4;sd.handle.win32.handle=fence_handle;api.Check(api.hipImportExternalSemaphore(&semaphore,&sd),"import fence");event=CreateEventW(nullptr,FALSE,FALSE,nullptr);if(!event)throw std::runtime_error("bridge completion event");if(const char*v=std::getenv("DLSS5_HIP_SPAN_PROBE"))span_probe=!strcmp(v,"1");if(span_probe){api.Check(api.hipEventCreate(&span_begin),"span begin event");api.Check(api.hipEventCreate(&span_end),"span end event");fprintf(stderr,"hip_span probe enabled\n");}network->SetNoise(noise);
+  {const char*v=std::getenv("DLSS5_HIP_POST_SIGNAL_QUERY");if(!(v&&!strcmp(v,"0")))post_query=reinterpret_cast<EventQueryFn>(GetProcAddress(api.dll,"hipStreamQuery"));}
+  if(const char*v=std::getenv("DLSS5_NET_TIMING");v&&!strcmp(v,"1"))EnableNetworkTiming();
+  if(const char*v=std::getenv("DLSS5_HIP_INPUT_POLL")){if(strcmp(v,"0")&&strcmp(v,"1")&&strcmp(v,"2"))throw std::runtime_error("DLSS5_HIP_INPUT_POLL must be 0, 1 or 2");poll_inline=!strcmp(v,"2");if(strcmp(v,"0")){try{SetupPoll();}catch(const std::exception&e){poll=false;poll_off=true;fprintf(stderr,"hip_input_poll unavailable (%s); fence path\n",e.what());}}}
+  // Performance scope fingerprint from the actual validated RX9070XT driver.
+  // A missing/changed fingerprint falls back to old NN in auto mode.
+  const bool pulse_arch=architecture=="gfx1201";
+  const bool pulse_validated=SUCCEEDED(pulse_driver_status)&&static_cast<unsigned long long>(pulse_driver.QuadPart)==0x00200000791f0800ull;
+  std::fprintf(stderr,"submit_pulse device_scope arch=%s runtime=%d driver_query=%08x driver=%016llx validated=%u\n",architecture.c_str(),runtime_version,unsigned(pulse_driver_status),static_cast<unsigned long long>(pulse_driver.QuadPart),unsigned(pulse_validated));
+  network->pulse_bridge_diagnostics=timing_on||span_probe||poll||poll_inline;network->ConfigureSubmitPulse(pulse_arch,pulse_validated);
  }
  ID3D12Resource*Output()const{return output.resource;}
+ void RequestDirectInput(){if(network)throw std::runtime_error("direct input must be requested before Create");direct_input=true;}
+ ID3D12Resource*DirectInput()const{return direct_input?input.resource:nullptr;}
  size_t free_at_create{};int hip_device=-1;/* HIP device index chosen for the D3D12 adapter */
  void MemoryReport(FILE*f){if(!network)return;network->Runtime().hipStreamSynchronize(network->Stream());std::fprintf(f,"hip_memory device_free_before_network_MiB=%.1f shared input_MiB=%.1f history_MiB=%.1f output_MiB=%.1f\n",free_at_create/1048576.,pixels*16/1048576.,pixels*16/1048576.,pixels*12/1048576.);network->MemoryReport(f);}
  bool PdlRequested()const{return network?network->PdlRequested():false;}
@@ -132,11 +246,12 @@ private:
   ID3D12Device*owner{};Check(c->GetDevice(IID_PPV_ARGS(&owner)),"command list device");bool same=NativeSameDevice(owner,device);owner->Release();if(!same)throw std::runtime_error("bridge command list device mismatch");
  }
  void RecordInput(ID3D12GraphicsCommandList*c,ID3D12Resource*rgba,ID3D12Resource*temporal,bool external){
-  Require(Phase::Ready);if(external&&network->GraphEnabled())throw std::runtime_error("staged bridge requires HIP graph off");ListContract(c);InputContract(rgba);if(temporal)InputContract(temporal);
+  Require(Phase::Ready);if(external&&network->GraphEnabled())throw std::runtime_error("staged bridge requires HIP graph off");ListContract(c);InputContract(rgba);if(temporal)InputContract(temporal,network->ExperimentalTemporalConfigured()?8:16);
   phase=Phase::InputRecorded;recorded_temporal=temporal!=nullptr;
   try{
-   auto copy=[&](ID3D12Resource*src,Shared&dst){Barrier(c,src,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,D3D12_RESOURCE_STATE_COPY_SOURCE);Barrier(c,dst.resource,D3D12_RESOURCE_STATE_COMMON,D3D12_RESOURCE_STATE_COPY_DEST);c->CopyBufferRegion(dst.resource,0,src,0,pixels*16);Barrier(c,dst.resource,D3D12_RESOURCE_STATE_COPY_DEST,D3D12_RESOURCE_STATE_COMMON);Barrier(c,src,D3D12_RESOURCE_STATE_COPY_SOURCE,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE);};
-   copy(rgba,input);if(temporal)copy(temporal,history);if(readable)Barrier(c,output.resource,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,D3D12_RESOURCE_STATE_COMMON);readable=false;
+   auto copy=[&](ID3D12Resource*src,Shared&dst,size_t bytes_per_pixel=16){Barrier(c,src,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,D3D12_RESOURCE_STATE_COPY_SOURCE);Barrier(c,dst.resource,D3D12_RESOURCE_STATE_COMMON,D3D12_RESOURCE_STATE_COPY_DEST);c->CopyBufferRegion(dst.resource,0,src,0,pixels*bytes_per_pixel);Barrier(c,dst.resource,D3D12_RESOURCE_STATE_COPY_DEST,D3D12_RESOURCE_STATE_COMMON);Barrier(c,src,D3D12_RESOURCE_STATE_COPY_SOURCE,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE);};
+   if(!(direct_input&&rgba==input.resource))copy(rgba,input);/* direct: the producer already wrote input and left it in COMMON */if(temporal)copy(temporal,history,network->ExperimentalTemporalConfigured()?8:16);if(readable)Barrier(c,output.resource,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,D3D12_RESOURCE_STATE_COMMON);readable=false;
+   poll_recorded=false;if(poll&&poll_inline&&!poll_off){ID3D12GraphicsCommandList2*c2{};if(SUCCEEDED(c->QueryInterface(IID_PPV_ARGS(&c2)))){poll_recorded_target=poll_frame%kPollSlots+1;D3D12_WRITEBUFFERIMMEDIATE_PARAMETER wp{flag.resource->GetGPUVirtualAddress(),poll_recorded_target};D3D12_WRITEBUFFERIMMEDIATE_MODE wm=D3D12_WRITEBUFFERIMMEDIATE_MODE_MARKER_OUT;c2->WriteBufferImmediate(1,&wp,&wm);c2->Release();poll_recorded=true;}}
   }catch(...){failed=true;throw;}
  }
  void Enqueue(ID3D12CommandQueue*producer,U seed,bool temporal,bool external){
@@ -146,11 +261,28 @@ private:
   QueueContract(producer);if(temporal!=recorded_temporal)throw std::runtime_error("bridge temporal input mismatch");if(external&&network->GraphEnabled())throw std::runtime_error("staged bridge requires HIP graph off");
   auto&api=network->Runtime();
   try{
-   pending=true;Check(queue->Signal(fence,++value),"D3D input signal");hip_probe::WaitParams wait{};wait.params.fence.value=value;api.Check(api.hipWaitExternalSemaphoresAsync(&semaphore,&wait,1,network->Stream()),"HIP input wait");
+   api.Check(api.hipSetDevice(hip_device),"select HIP device for enqueue");
+   pending=true;network->pulse_bridge_diagnostics=timing_on||span_probe||poll||poll_inline;
+   if(poll_inline?(poll_recorded&&!poll_off):false){const unsigned target=poll_recorded_target,slot=target-1;poll_recorded=false;
+    Check(queue->Signal(poll_fence,++poll_value),"poll marker signal");
+    api.Check(wait_value(network->Stream(),flag.mapped,target,1/*EQ*/,0xffffffffu),"HIP input poll wait");api.Check(api.hipEventRecord(poll_evt[slot],network->Stream()),"poll event");
+    {std::lock_guard<std::mutex> lk(poll_mutex);poll_armed={true,poll_value,poll_evt[slot],target};}poll_frame++;}
+   else if(poll&&!poll_inline&&!poll_off){const unsigned slot=poll_frame%kPollSlots,target=slot+1;
+    if(poll_done[slot]&&poll_fence->GetCompletedValue()<poll_done[slot]){Check(poll_fence->SetEventOnCompletion(poll_done[slot],event),"poll slot event");if(WaitForSingleObject(event,30000)!=WAIT_OBJECT_0)throw std::runtime_error("poll slot reuse timeout");}
+    ID3D12CommandList*l[]={poll_list[slot]};queue->ExecuteCommandLists(1,l);Check(queue->Signal(poll_fence,++poll_value),"poll marker signal");poll_done[slot]=poll_value;
+    api.Check(wait_value(network->Stream(),flag.mapped,target,1/*EQ*/,0xffffffffu),"HIP input poll wait");api.Check(api.hipEventRecord(poll_evt[slot],network->Stream()),"poll event");
+    {std::lock_guard<std::mutex> lk(poll_mutex);poll_armed={true,poll_value,poll_evt[slot],target};}poll_frame++;}
+   else{Check(queue->Signal(fence,++value),"D3D input signal");hip_probe::WaitParams wait{};wait.params.fence.value=value;api.Check(api.hipWaitExternalSemaphoresAsync(&semaphore,&wait,1,network->Stream()),"HIP input wait");}
    if(span_probe){if(span_pending){float ms=-1;int sync=api.hipEventSynchronize(span_end),status=api.hipEventElapsedTime(&ms,span_begin,span_end);fprintf(stderr,"hip_span gpu_ms=%.3f cpu_enqueue_ms=%.3f sync=%d status=%d\n",ms,span_cpu,sync,status);span_pending=false;}api.Check(api.hipEventRecord(span_begin,network->Stream()),"span begin");}
+   const bool timed=TimingBegin();
    auto start=std::chrono::steady_clock::now();network->Enqueue(input.mapped,temporal?history.mapped:nullptr,output.mapped,seed);
+   if(timed)TimingEnd();
    if(span_probe){span_cpu=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-start).count();api.Check(api.hipEventRecord(span_end,network->Stream()),"span end");span_pending=true;}
-   hip_probe::SignalParams signal{};signal.params.fence.value=++value;api.Check(api.hipSignalExternalSemaphoresAsync(&semaphore,&signal,1,network->Stream()),"HIP output signal");Check(queue->Wait(fence,value),"D3D output wait");phase=output_recorded?Phase::OutputRecorded:Phase::HipQueued;
+   hip_probe::SignalParams signal{};signal.params.fence.value=++value;api.Check(api.hipSignalExternalSemaphoresAsync(&semaphore,&signal,1,network->Stream()),"HIP output signal");
+   /* DLSS5_HIP_POST_SIGNAL_QUERY (outside-net 2026-10-02, default 1; 0 = off): one non-blocking hipStreamQuery right after the output
+      signal so Windows HIP submits the whole batch (network + signal) now. Bytes unchanged; add-on ABBA -0.01..-0.12 ms. */
+   if(post_query)post_query(network->Stream());
+   Check(queue->Wait(fence,value),"D3D output wait");phase=output_recorded?Phase::OutputRecorded:Phase::HipQueued;
   }catch(...){failed=true;throw;}
  }
 public:
@@ -167,7 +299,7 @@ public:
   Require(Phase::Ready);
   if(pending||value||readable||network->GraphEnabled())throw std::runtime_error("bridge preparation requires fresh graph-off session");
   auto&api=network->Runtime();
-  try{api.Check(api.hipMemsetAsync(input.mapped,0,pixels*16,network->Stream()),"prepare input");network->Enqueue(input.mapped,nullptr,output.mapped,1);network->Synchronize();}
+  try{api.Check(api.hipSetDevice(hip_device),"select HIP owner for preparation");api.Check(api.hipMemsetAsync(input.mapped,0,pixels*16,network->Stream()),"prepare input");network->Enqueue(input.mapped,nullptr,output.mapped,1);network->InvalidateExperimentalHistory();network->Synchronize();}
   catch(...){failed=true;throw;}
  }
  void RecordInputCopy(ID3D12GraphicsCommandList*c,ID3D12Resource*rgba,ID3D12Resource*temporal=nullptr){RecordInput(c,rgba,temporal,true);}

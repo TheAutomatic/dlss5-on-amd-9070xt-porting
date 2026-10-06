@@ -1,0 +1,63 @@
+{
+  "rows": 8,
+  "tokens": 640,
+  "full_chunks": 10,
+  "probability_code_domain": "1c20..3e90 step16, all positive normal half",
+  "reference": "exact binary64 additions followed by half-RNE, operations sequenced from natural key identities, not implementation shuffle layout",
+  "checks": [
+    {
+      "tree_half": 2.578125,
+      "sequential_half": 2.5078125,
+      "different_from_sequential": true
+    },
+    {
+      "tree_half": 1050.0,
+      "sequential_half": 1016.5,
+      "different_from_sequential": true
+    },
+    {
+      "tree_half": 525.5,
+      "sequential_half": 536.5,
+      "different_from_sequential": true
+    },
+    {
+      "tree_half": 178.5,
+      "sequential_half": 177.0,
+      "different_from_sequential": true
+    },
+    {
+      "tree_half": 178.625,
+      "sequential_half": 177.375,
+      "different_from_sequential": true
+    },
+    {
+      "tree_half": 133.625,
+      "sequential_half": 130.75,
+      "different_from_sequential": true
+    },
+    {
+      "tree_half": 171.875,
+      "sequential_half": 169.75,
+      "different_from_sequential": true
+    },
+    {
+      "tree_half": 151.25,
+      "sequential_half": 149.875,
+      "different_from_sequential": true
+    }
+  ],
+  "files": {
+    "denominator-8.f16": {
+      "bytes": 16,
+      "sha256": "bdd180a25b0b73542edba760246d25cb0a91b55a247570a6492e45350b71ac89"
+    },
+    "denominator-8x10-prefix.f16": {
+      "bytes": 160,
+      "sha256": "4e44ddee56a75405df09acf31d69842d718114272f3be11cdc17b087b8b576a6"
+    },
+    "probability-8x640.f16": {
+      "bytes": 10240,
+      "sha256": "0ac0c59eca5a9ea8e5bfa3bd3b1dfb66a27c3b911521c3658619c0a58aec340a"
+    }
+  }
+}

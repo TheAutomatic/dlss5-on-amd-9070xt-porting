@@ -1,0 +1,810 @@
+{
+  "Z": {
+    "c256_wave2": {
+      "trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "loop_path_sum_upper": {
+        "SMEM": 3,
+        "vector_slots": 6223,
+        "WAIT": 3378,
+        "SALU": 1887,
+        "VALU": 5217,
+        "VOPD": 503,
+        "VMEM": 1388,
+        "VMEM_read_bytes_per_lane": 11216,
+        "DS": 352,
+        "DS_write_bytes_per_lane": 256,
+        "DS_read_bytes_per_lane": 4672,
+        "WMMA": 1320,
+        "VMEM_write_bytes_per_lane": 256,
+        "issued": 14048
+      },
+      "ffn_ht_loop_executed": {
+        "SMEM": 0,
+        "vector_slots": 1600,
+        "WAIT": 816,
+        "SALU": 112,
+        "VALU": 1312,
+        "VOPD": 144,
+        "VMEM": 576,
+        "VMEM_read_bytes_per_lane": 4608,
+        "DS": 128,
+        "DS_write_bytes_per_lane": 0,
+        "DS_read_bytes_per_lane": 2048,
+        "WMMA": 576,
+        "VMEM_write_bytes_per_lane": 0,
+        "issued": 3664
+      },
+      "loop_headers": [
+        ".LBB96_2:                               ; =>This Loop Header: Depth=1",
+        ".LBB96_3:                               ;   Parent Loop BB96_2 Depth=1",
+        ".LBB96_6:                               ; =>This Inner Loop Header: Depth=1",
+        ".LBB96_8:                               ; =>This Inner Loop Header: Depth=1",
+        ".LBB96_12:                              ; =>This Inner Loop Header: Depth=1"
+      ],
+      "note": "FFN ht body is straight nested math; whole kernel sums mutually exclusive boundary paths, hence upper, not measured runtime."
+    },
+    "c256_wave2_bi": {
+      "trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "loop_path_sum_upper": {
+        "SMEM": 3,
+        "vector_slots": 6040,
+        "WAIT": 3333,
+        "SALU": 1936,
+        "VALU": 5082,
+        "VOPD": 479,
+        "VMEM": 1372,
+        "VMEM_read_bytes_per_lane": 10832,
+        "DS": 356,
+        "DS_write_bytes_per_lane": 256,
+        "DS_read_bytes_per_lane": 4672,
+        "WMMA": 1320,
+        "VMEM_write_bytes_per_lane": 256,
+        "issued": 13881
+      },
+      "ffn_ht_loop_executed": {
+        "SMEM": 0,
+        "vector_slots": 1584,
+        "WAIT": 800,
+        "SALU": 112,
+        "VALU": 1328,
+        "VOPD": 128,
+        "VMEM": 576,
+        "VMEM_read_bytes_per_lane": 4608,
+        "DS": 128,
+        "DS_write_bytes_per_lane": 0,
+        "DS_read_bytes_per_lane": 2048,
+        "WMMA": 576,
+        "VMEM_write_bytes_per_lane": 0,
+        "issued": 3648
+      },
+      "loop_headers": [
+        ".LBB97_18:                              ; =>This Loop Header: Depth=1",
+        ".LBB97_19:                              ;   Parent Loop BB97_18 Depth=1",
+        ".LBB97_23:                              ; =>This Inner Loop Header: Depth=1",
+        ".LBB97_28:                              ; =>This Inner Loop Header: Depth=1",
+        ".LBB97_32:                              ; =>This Inner Loop Header: Depth=1"
+      ],
+      "note": "FFN ht body is straight nested math; whole kernel sums mutually exclusive boundary paths, hence upper, not measured runtime."
+    },
+    "c256_wave2_bo": {
+      "trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "loop_path_sum_upper": {
+        "SMEM": 3,
+        "vector_slots": 5434,
+        "WAIT": 2667,
+        "SALU": 680,
+        "VALU": 4348,
+        "VOPD": 543,
+        "VMEM": 1332,
+        "VMEM_read_bytes_per_lane": 11216,
+        "DS": 352,
+        "DS_write_bytes_per_lane": 256,
+        "DS_read_bytes_per_lane": 4672,
+        "WMMA": 1320,
+        "VMEM_write_bytes_per_lane": 64,
+        "issued": 11245
+      },
+      "ffn_ht_loop_executed": {
+        "SMEM": 0,
+        "vector_slots": 1600,
+        "WAIT": 816,
+        "SALU": 112,
+        "VALU": 1312,
+        "VOPD": 144,
+        "VMEM": 576,
+        "VMEM_read_bytes_per_lane": 4608,
+        "DS": 128,
+        "DS_write_bytes_per_lane": 0,
+        "DS_read_bytes_per_lane": 2048,
+        "WMMA": 576,
+        "VMEM_write_bytes_per_lane": 0,
+        "issued": 3664
+      },
+      "loop_headers": [
+        ".LBB98_2:                               ; =>This Loop Header: Depth=1",
+        ".LBB98_3:                               ;   Parent Loop BB98_2 Depth=1",
+        ".LBB98_6:                               ; =>This Inner Loop Header: Depth=1",
+        ".LBB98_8:                               ; =>This Inner Loop Header: Depth=1",
+        ".LBB98_12:                              ; =>This Inner Loop Header: Depth=1"
+      ],
+      "note": "FFN ht body is straight nested math; whole kernel sums mutually exclusive boundary paths, hence upper, not measured runtime."
+    },
+    "c256_wave2_bi_bo": {
+      "trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "loop_path_sum_upper": {
+        "SMEM": 3,
+        "vector_slots": 5251,
+        "WAIT": 2622,
+        "SALU": 729,
+        "VALU": 4213,
+        "VOPD": 519,
+        "VMEM": 1316,
+        "VMEM_read_bytes_per_lane": 10832,
+        "DS": 356,
+        "DS_write_bytes_per_lane": 256,
+        "DS_read_bytes_per_lane": 4672,
+        "WMMA": 1320,
+        "VMEM_write_bytes_per_lane": 64,
+        "issued": 11078
+      },
+      "ffn_ht_loop_executed": {
+        "SMEM": 0,
+        "vector_slots": 1584,
+        "WAIT": 800,
+        "SALU": 112,
+        "VALU": 1328,
+        "VOPD": 128,
+        "VMEM": 576,
+        "VMEM_read_bytes_per_lane": 4608,
+        "DS": 128,
+        "DS_write_bytes_per_lane": 0,
+        "DS_read_bytes_per_lane": 2048,
+        "WMMA": 576,
+        "VMEM_write_bytes_per_lane": 0,
+        "issued": 3648
+      },
+      "loop_headers": [
+        ".LBB99_18:                              ; =>This Loop Header: Depth=1",
+        ".LBB99_19:                              ;   Parent Loop BB99_18 Depth=1",
+        ".LBB99_23:                              ; =>This Inner Loop Header: Depth=1",
+        ".LBB99_28:                              ; =>This Inner Loop Header: Depth=1",
+        ".LBB99_32:                              ; =>This Inner Loop Header: Depth=1"
+      ],
+      "note": "FFN ht body is straight nested math; whole kernel sums mutually exclusive boundary paths, hence upper, not measured runtime."
+    }
+  },
+  "B": {
+    "c256_wave2": {
+      "trips": [
+        2,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "loop_path_sum_upper": {
+        "SMEM": 3,
+        "vector_slots": 6610,
+        "WAIT": 3346,
+        "SALU": 1996,
+        "VALU": 4872,
+        "VOPD": 869,
+        "VMEM": 1100,
+        "VMEM_read_bytes_per_lane": 8912,
+        "DS": 352,
+        "DS_write_bytes_per_lane": 256,
+        "DS_read_bytes_per_lane": 4672,
+        "WMMA": 1320,
+        "VMEM_write_bytes_per_lane": 256,
+        "issued": 13858
+      },
+      "ffn_ht_loop_executed": {
+        "SMEM": 0,
+        "vector_slots": 2104,
+        "WAIT": 848,
+        "SALU": 224,
+        "VALU": 1544,
+        "VOPD": 280,
+        "VMEM": 288,
+        "VMEM_read_bytes_per_lane": 2304,
+        "DS": 128,
+        "DS_write_bytes_per_lane": 0,
+        "DS_read_bytes_per_lane": 2048,
+        "WMMA": 576,
+        "VMEM_write_bytes_per_lane": 0,
+        "issued": 3888
+      },
+      "loop_headers": [
+        ".LBB96_2:                               ; =>This Loop Header: Depth=1",
+        ".LBB96_3:                               ;   Parent Loop BB96_2 Depth=1",
+        ".LBB96_4:                               ;   Parent Loop BB96_2 Depth=1",
+        ".LBB96_8:                               ; =>This Inner Loop Header: Depth=1",
+        ".LBB96_10:                              ; =>This Inner Loop Header: Depth=1",
+        ".LBB96_14:                              ; =>This Inner Loop Header: Depth=1"
+      ],
+      "note": "FFN ht body is straight nested math; whole kernel sums mutually exclusive boundary paths, hence upper, not measured runtime."
+    },
+    "c256_wave2_bi": {
+      "trips": [
+        2,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "loop_path_sum_upper": {
+        "SMEM": 3,
+        "vector_slots": 6439,
+        "WAIT": 3307,
+        "SALU": 2045,
+        "VALU": 4835,
+        "VOPD": 802,
+        "VMEM": 1084,
+        "VMEM_read_bytes_per_lane": 8528,
+        "DS": 356,
+        "DS_write_bytes_per_lane": 256,
+        "DS_read_bytes_per_lane": 4672,
+        "WMMA": 1320,
+        "VMEM_write_bytes_per_lane": 256,
+        "issued": 13752
+      },
+      "ffn_ht_loop_executed": {
+        "SMEM": 0,
+        "vector_slots": 2104,
+        "WAIT": 840,
+        "SALU": 224,
+        "VALU": 1608,
+        "VOPD": 248,
+        "VMEM": 288,
+        "VMEM_read_bytes_per_lane": 2304,
+        "DS": 128,
+        "DS_write_bytes_per_lane": 0,
+        "DS_read_bytes_per_lane": 2048,
+        "WMMA": 576,
+        "VMEM_write_bytes_per_lane": 0,
+        "issued": 3912
+      },
+      "loop_headers": [
+        ".LBB97_18:                              ; =>This Loop Header: Depth=1",
+        ".LBB97_19:                              ;   Parent Loop BB97_18 Depth=1",
+        ".LBB97_20:                              ;   Parent Loop BB97_18 Depth=1",
+        ".LBB97_25:                              ; =>This Inner Loop Header: Depth=1",
+        ".LBB97_30:                              ; =>This Inner Loop Header: Depth=1",
+        ".LBB97_34:                              ; =>This Inner Loop Header: Depth=1"
+      ],
+      "note": "FFN ht body is straight nested math; whole kernel sums mutually exclusive boundary paths, hence upper, not measured runtime."
+    },
+    "c256_wave2_bo": {
+      "trips": [
+        2,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "loop_path_sum_upper": {
+        "SMEM": 3,
+        "vector_slots": 5821,
+        "WAIT": 2667,
+        "SALU": 789,
+        "VALU": 4003,
+        "VOPD": 909,
+        "VMEM": 1044,
+        "VMEM_read_bytes_per_lane": 8912,
+        "DS": 352,
+        "DS_write_bytes_per_lane": 256,
+        "DS_read_bytes_per_lane": 4672,
+        "WMMA": 1320,
+        "VMEM_write_bytes_per_lane": 64,
+        "issued": 11087
+      },
+      "ffn_ht_loop_executed": {
+        "SMEM": 0,
+        "vector_slots": 2104,
+        "WAIT": 848,
+        "SALU": 224,
+        "VALU": 1544,
+        "VOPD": 280,
+        "VMEM": 288,
+        "VMEM_read_bytes_per_lane": 2304,
+        "DS": 128,
+        "DS_write_bytes_per_lane": 0,
+        "DS_read_bytes_per_lane": 2048,
+        "WMMA": 576,
+        "VMEM_write_bytes_per_lane": 0,
+        "issued": 3888
+      },
+      "loop_headers": [
+        ".LBB98_2:                               ; =>This Loop Header: Depth=1",
+        ".LBB98_3:                               ;   Parent Loop BB98_2 Depth=1",
+        ".LBB98_4:                               ;   Parent Loop BB98_2 Depth=1",
+        ".LBB98_8:                               ; =>This Inner Loop Header: Depth=1",
+        ".LBB98_10:                              ; =>This Inner Loop Header: Depth=1",
+        ".LBB98_14:                              ; =>This Inner Loop Header: Depth=1"
+      ],
+      "note": "FFN ht body is straight nested math; whole kernel sums mutually exclusive boundary paths, hence upper, not measured runtime."
+    },
+    "c256_wave2_bi_bo": {
+      "trips": [
+        2,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "loop_path_sum_upper": {
+        "SMEM": 3,
+        "vector_slots": 5650,
+        "WAIT": 2628,
+        "SALU": 838,
+        "VALU": 3966,
+        "VOPD": 842,
+        "VMEM": 1028,
+        "VMEM_read_bytes_per_lane": 8528,
+        "DS": 356,
+        "DS_write_bytes_per_lane": 256,
+        "DS_read_bytes_per_lane": 4672,
+        "WMMA": 1320,
+        "VMEM_write_bytes_per_lane": 64,
+        "issued": 10981
+      },
+      "ffn_ht_loop_executed": {
+        "SMEM": 0,
+        "vector_slots": 2104,
+        "WAIT": 840,
+        "SALU": 224,
+        "VALU": 1608,
+        "VOPD": 248,
+        "VMEM": 288,
+        "VMEM_read_bytes_per_lane": 2304,
+        "DS": 128,
+        "DS_write_bytes_per_lane": 0,
+        "DS_read_bytes_per_lane": 2048,
+        "WMMA": 576,
+        "VMEM_write_bytes_per_lane": 0,
+        "issued": 3912
+      },
+      "loop_headers": [
+        ".LBB99_18:                              ; =>This Loop Header: Depth=1",
+        ".LBB99_19:                              ;   Parent Loop BB99_18 Depth=1",
+        ".LBB99_20:                              ;   Parent Loop BB99_18 Depth=1",
+        ".LBB99_25:                              ; =>This Inner Loop Header: Depth=1",
+        ".LBB99_30:                              ; =>This Inner Loop Header: Depth=1",
+        ".LBB99_34:                              ; =>This Inner Loop Header: Depth=1"
+      ],
+      "note": "FFN ht body is straight nested math; whole kernel sums mutually exclusive boundary paths, hence upper, not measured runtime."
+    }
+  },
+  "BL": {
+    "c256_wave2": {
+      "trips": [
+        2,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "loop_path_sum_upper": {
+        "SMEM": 3,
+        "vector_slots": 6596,
+        "WAIT": 3392,
+        "SALU": 1975,
+        "VALU": 4790,
+        "VOPD": 903,
+        "VMEM": 1100,
+        "VMEM_read_bytes_per_lane": 8912,
+        "DS": 364,
+        "DS_write_bytes_per_lane": 320,
+        "DS_read_bytes_per_lane": 4736,
+        "WMMA": 1320,
+        "VMEM_write_bytes_per_lane": 256,
+        "issued": 13847
+      },
+      "ffn_ht_loop_executed": {
+        "SMEM": 0,
+        "vector_slots": 2104,
+        "WAIT": 848,
+        "SALU": 224,
+        "VALU": 1544,
+        "VOPD": 280,
+        "VMEM": 288,
+        "VMEM_read_bytes_per_lane": 2304,
+        "DS": 128,
+        "DS_write_bytes_per_lane": 0,
+        "DS_read_bytes_per_lane": 2048,
+        "WMMA": 576,
+        "VMEM_write_bytes_per_lane": 0,
+        "issued": 3888
+      },
+      "loop_headers": [
+        ".LBB96_2:                               ; =>This Loop Header: Depth=1",
+        ".LBB96_3:                               ;   Parent Loop BB96_2 Depth=1",
+        ".LBB96_4:                               ;   Parent Loop BB96_2 Depth=1",
+        ".LBB96_8:                               ; =>This Inner Loop Header: Depth=1",
+        ".LBB96_10:                              ; =>This Inner Loop Header: Depth=1",
+        ".LBB96_14:                              ; =>This Inner Loop Header: Depth=1"
+      ],
+      "note": "FFN ht body is straight nested math; whole kernel sums mutually exclusive boundary paths, hence upper, not measured runtime."
+    },
+    "c256_wave2_bi": {
+      "trips": [
+        2,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "loop_path_sum_upper": {
+        "SMEM": 3,
+        "vector_slots": 6425,
+        "WAIT": 3359,
+        "SALU": 2024,
+        "VALU": 4849,
+        "VOPD": 788,
+        "VMEM": 1084,
+        "VMEM_read_bytes_per_lane": 8528,
+        "DS": 368,
+        "DS_write_bytes_per_lane": 320,
+        "DS_read_bytes_per_lane": 4736,
+        "WMMA": 1320,
+        "VMEM_write_bytes_per_lane": 256,
+        "issued": 13795
+      },
+      "ffn_ht_loop_executed": {
+        "SMEM": 0,
+        "vector_slots": 2104,
+        "WAIT": 840,
+        "SALU": 224,
+        "VALU": 1608,
+        "VOPD": 248,
+        "VMEM": 288,
+        "VMEM_read_bytes_per_lane": 2304,
+        "DS": 128,
+        "DS_write_bytes_per_lane": 0,
+        "DS_read_bytes_per_lane": 2048,
+        "WMMA": 576,
+        "VMEM_write_bytes_per_lane": 0,
+        "issued": 3912
+      },
+      "loop_headers": [
+        ".LBB97_18:                              ; =>This Loop Header: Depth=1",
+        ".LBB97_19:                              ;   Parent Loop BB97_18 Depth=1",
+        ".LBB97_20:                              ;   Parent Loop BB97_18 Depth=1",
+        ".LBB97_25:                              ; =>This Inner Loop Header: Depth=1",
+        ".LBB97_30:                              ; =>This Inner Loop Header: Depth=1",
+        ".LBB97_34:                              ; =>This Inner Loop Header: Depth=1"
+      ],
+      "note": "FFN ht body is straight nested math; whole kernel sums mutually exclusive boundary paths, hence upper, not measured runtime."
+    },
+    "c256_wave2_bo": {
+      "trips": [
+        2,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "loop_path_sum_upper": {
+        "SMEM": 3,
+        "vector_slots": 5807,
+        "WAIT": 2713,
+        "SALU": 768,
+        "VALU": 3923,
+        "VOPD": 942,
+        "VMEM": 1044,
+        "VMEM_read_bytes_per_lane": 8912,
+        "DS": 364,
+        "DS_write_bytes_per_lane": 320,
+        "DS_read_bytes_per_lane": 4736,
+        "WMMA": 1320,
+        "VMEM_write_bytes_per_lane": 64,
+        "issued": 11077
+      },
+      "ffn_ht_loop_executed": {
+        "SMEM": 0,
+        "vector_slots": 2104,
+        "WAIT": 848,
+        "SALU": 224,
+        "VALU": 1544,
+        "VOPD": 280,
+        "VMEM": 288,
+        "VMEM_read_bytes_per_lane": 2304,
+        "DS": 128,
+        "DS_write_bytes_per_lane": 0,
+        "DS_read_bytes_per_lane": 2048,
+        "WMMA": 576,
+        "VMEM_write_bytes_per_lane": 0,
+        "issued": 3888
+      },
+      "loop_headers": [
+        ".LBB98_2:                               ; =>This Loop Header: Depth=1",
+        ".LBB98_3:                               ;   Parent Loop BB98_2 Depth=1",
+        ".LBB98_4:                               ;   Parent Loop BB98_2 Depth=1",
+        ".LBB98_8:                               ; =>This Inner Loop Header: Depth=1",
+        ".LBB98_10:                              ; =>This Inner Loop Header: Depth=1",
+        ".LBB98_14:                              ; =>This Inner Loop Header: Depth=1"
+      ],
+      "note": "FFN ht body is straight nested math; whole kernel sums mutually exclusive boundary paths, hence upper, not measured runtime."
+    },
+    "c256_wave2_bi_bo": {
+      "trips": [
+        2,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "loop_path_sum_upper": {
+        "SMEM": 3,
+        "vector_slots": 5636,
+        "WAIT": 2680,
+        "SALU": 817,
+        "VALU": 3982,
+        "VOPD": 827,
+        "VMEM": 1028,
+        "VMEM_read_bytes_per_lane": 8528,
+        "DS": 368,
+        "DS_write_bytes_per_lane": 320,
+        "DS_read_bytes_per_lane": 4736,
+        "WMMA": 1320,
+        "VMEM_write_bytes_per_lane": 64,
+        "issued": 11025
+      },
+      "ffn_ht_loop_executed": {
+        "SMEM": 0,
+        "vector_slots": 2104,
+        "WAIT": 840,
+        "SALU": 224,
+        "VALU": 1608,
+        "VOPD": 248,
+        "VMEM": 288,
+        "VMEM_read_bytes_per_lane": 2304,
+        "DS": 128,
+        "DS_write_bytes_per_lane": 0,
+        "DS_read_bytes_per_lane": 2048,
+        "WMMA": 576,
+        "VMEM_write_bytes_per_lane": 0,
+        "issued": 3912
+      },
+      "loop_headers": [
+        ".LBB99_18:                              ; =>This Loop Header: Depth=1",
+        ".LBB99_19:                              ;   Parent Loop BB99_18 Depth=1",
+        ".LBB99_20:                              ;   Parent Loop BB99_18 Depth=1",
+        ".LBB99_25:                              ; =>This Inner Loop Header: Depth=1",
+        ".LBB99_30:                              ; =>This Inner Loop Header: Depth=1",
+        ".LBB99_34:                              ; =>This Inner Loop Header: Depth=1"
+      ],
+      "note": "FFN ht body is straight nested math; whole kernel sums mutually exclusive boundary paths, hence upper, not measured runtime."
+    }
+  },
+  "L": {
+    "c256_wave2": {
+      "trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "loop_path_sum_upper": {
+        "SMEM": 3,
+        "vector_slots": 6209,
+        "WAIT": 3387,
+        "SALU": 1866,
+        "VALU": 5189,
+        "VOPD": 510,
+        "VMEM": 1388,
+        "VMEM_read_bytes_per_lane": 11216,
+        "DS": 364,
+        "DS_write_bytes_per_lane": 320,
+        "DS_read_bytes_per_lane": 4736,
+        "WMMA": 1320,
+        "VMEM_write_bytes_per_lane": 256,
+        "issued": 14027
+      },
+      "ffn_ht_loop_executed": {
+        "SMEM": 0,
+        "vector_slots": 1600,
+        "WAIT": 784,
+        "SALU": 112,
+        "VALU": 1408,
+        "VOPD": 96,
+        "VMEM": 576,
+        "VMEM_read_bytes_per_lane": 4608,
+        "DS": 128,
+        "DS_write_bytes_per_lane": 0,
+        "DS_read_bytes_per_lane": 2048,
+        "WMMA": 576,
+        "VMEM_write_bytes_per_lane": 0,
+        "issued": 3680
+      },
+      "loop_headers": [
+        ".LBB96_2:                               ; =>This Loop Header: Depth=1",
+        ".LBB96_3:                               ;   Parent Loop BB96_2 Depth=1",
+        ".LBB96_6:                               ; =>This Inner Loop Header: Depth=1",
+        ".LBB96_8:                               ; =>This Inner Loop Header: Depth=1",
+        ".LBB96_12:                              ; =>This Inner Loop Header: Depth=1"
+      ],
+      "note": "FFN ht body is straight nested math; whole kernel sums mutually exclusive boundary paths, hence upper, not measured runtime."
+    },
+    "c256_wave2_bi": {
+      "trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "loop_path_sum_upper": {
+        "SMEM": 3,
+        "vector_slots": 6026,
+        "WAIT": 3361,
+        "SALU": 1915,
+        "VALU": 4990,
+        "VOPD": 518,
+        "VMEM": 1372,
+        "VMEM_read_bytes_per_lane": 10832,
+        "DS": 368,
+        "DS_write_bytes_per_lane": 320,
+        "DS_read_bytes_per_lane": 4736,
+        "WMMA": 1320,
+        "VMEM_write_bytes_per_lane": 256,
+        "issued": 13847
+      },
+      "ffn_ht_loop_executed": {
+        "SMEM": 0,
+        "vector_slots": 1584,
+        "WAIT": 784,
+        "SALU": 112,
+        "VALU": 1360,
+        "VOPD": 112,
+        "VMEM": 576,
+        "VMEM_read_bytes_per_lane": 4608,
+        "DS": 128,
+        "DS_write_bytes_per_lane": 0,
+        "DS_read_bytes_per_lane": 2048,
+        "WMMA": 576,
+        "VMEM_write_bytes_per_lane": 0,
+        "issued": 3648
+      },
+      "loop_headers": [
+        ".LBB97_18:                              ; =>This Loop Header: Depth=1",
+        ".LBB97_19:                              ;   Parent Loop BB97_18 Depth=1",
+        ".LBB97_23:                              ; =>This Inner Loop Header: Depth=1",
+        ".LBB97_28:                              ; =>This Inner Loop Header: Depth=1",
+        ".LBB97_32:                              ; =>This Inner Loop Header: Depth=1"
+      ],
+      "note": "FFN ht body is straight nested math; whole kernel sums mutually exclusive boundary paths, hence upper, not measured runtime."
+    },
+    "c256_wave2_bo": {
+      "trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "loop_path_sum_upper": {
+        "SMEM": 3,
+        "vector_slots": 5420,
+        "WAIT": 2676,
+        "SALU": 659,
+        "VALU": 4322,
+        "VOPD": 549,
+        "VMEM": 1332,
+        "VMEM_read_bytes_per_lane": 11216,
+        "DS": 364,
+        "DS_write_bytes_per_lane": 320,
+        "DS_read_bytes_per_lane": 4736,
+        "WMMA": 1320,
+        "VMEM_write_bytes_per_lane": 64,
+        "issued": 11225
+      },
+      "ffn_ht_loop_executed": {
+        "SMEM": 0,
+        "vector_slots": 1600,
+        "WAIT": 784,
+        "SALU": 112,
+        "VALU": 1408,
+        "VOPD": 96,
+        "VMEM": 576,
+        "VMEM_read_bytes_per_lane": 4608,
+        "DS": 128,
+        "DS_write_bytes_per_lane": 0,
+        "DS_read_bytes_per_lane": 2048,
+        "WMMA": 576,
+        "VMEM_write_bytes_per_lane": 0,
+        "issued": 3680
+      },
+      "loop_headers": [
+        ".LBB98_2:                               ; =>This Loop Header: Depth=1",
+        ".LBB98_3:                               ;   Parent Loop BB98_2 Depth=1",
+        ".LBB98_6:                               ; =>This Inner Loop Header: Depth=1",
+        ".LBB98_8:                               ; =>This Inner Loop Header: Depth=1",
+        ".LBB98_12:                              ; =>This Inner Loop Header: Depth=1"
+      ],
+      "note": "FFN ht body is straight nested math; whole kernel sums mutually exclusive boundary paths, hence upper, not measured runtime."
+    },
+    "c256_wave2_bi_bo": {
+      "trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "loop_path_sum_upper": {
+        "SMEM": 3,
+        "vector_slots": 5237,
+        "WAIT": 2650,
+        "SALU": 708,
+        "VALU": 4123,
+        "VOPD": 557,
+        "VMEM": 1316,
+        "VMEM_read_bytes_per_lane": 10832,
+        "DS": 368,
+        "DS_write_bytes_per_lane": 320,
+        "DS_read_bytes_per_lane": 4736,
+        "WMMA": 1320,
+        "VMEM_write_bytes_per_lane": 64,
+        "issued": 11045
+      },
+      "ffn_ht_loop_executed": {
+        "SMEM": 0,
+        "vector_slots": 1584,
+        "WAIT": 784,
+        "SALU": 112,
+        "VALU": 1360,
+        "VOPD": 112,
+        "VMEM": 576,
+        "VMEM_read_bytes_per_lane": 4608,
+        "DS": 128,
+        "DS_write_bytes_per_lane": 0,
+        "DS_read_bytes_per_lane": 2048,
+        "WMMA": 576,
+        "VMEM_write_bytes_per_lane": 0,
+        "issued": 3648
+      },
+      "loop_headers": [
+        ".LBB99_18:                              ; =>This Loop Header: Depth=1",
+        ".LBB99_19:                              ;   Parent Loop BB99_18 Depth=1",
+        ".LBB99_23:                              ; =>This Inner Loop Header: Depth=1",
+        ".LBB99_28:                              ; =>This Inner Loop Header: Depth=1",
+        ".LBB99_32:                              ; =>This Inner Loop Header: Depth=1"
+      ],
+      "note": "FFN ht body is straight nested math; whole kernel sums mutually exclusive boundary paths, hence upper, not measured runtime."
+    }
+  }
+}

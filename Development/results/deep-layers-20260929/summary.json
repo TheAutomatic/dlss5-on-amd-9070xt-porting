@@ -1,0 +1,209 @@
+{
+  "timings": [
+    {
+      "batch": "runtime-regression-C-abba1",
+      "height": 900,
+      "frames_per_slot": 1000,
+      "baseline_ms": 8.519428125000001,
+      "candidate_ms": 8.355299375000005,
+      "delta_ms": -0.16412874999999616,
+      "percent": -1.9265230904215946,
+      "slots": {
+        "0": 8.48186375,
+        "1": 8.34564750000001,
+        "2": 8.36495125,
+        "3": 8.5569925
+      }
+    },
+    {
+      "batch": "runtime-regression-C-abba1",
+      "height": 1080,
+      "frames_per_slot": 1000,
+      "baseline_ms": 11.57260625,
+      "candidate_ms": 11.344371875,
+      "delta_ms": -0.22823437499999955,
+      "percent": -1.9721951137843252,
+      "slots": {
+        "0": 11.56159125,
+        "1": 11.34959375,
+        "2": 11.33915,
+        "3": 11.58362125
+      }
+    },
+    {
+      "batch": "runtime-regression-C-screen1",
+      "height": 900,
+      "frames_per_slot": 200,
+      "baseline_ms": 8.335979166666664,
+      "candidate_ms": 8.168690476190475,
+      "delta_ms": -0.16728869047618922,
+      "percent": -2.0068271181042707,
+      "slots": {
+        "0": 8.32430357142857,
+        "1": 8.17738690476191,
+        "2": 8.15999404761904,
+        "3": 8.34765476190476
+      }
+    },
+    {
+      "batch": "runtime-regression-C-screen1",
+      "height": 1080,
+      "frames_per_slot": 200,
+      "baseline_ms": 11.428901785714299,
+      "candidate_ms": 11.162163690476198,
+      "delta_ms": -0.2667380952381002,
+      "percent": -2.3338908693004368,
+      "slots": {
+        "0": 11.4202797619048,
+        "1": 11.1506369047619,
+        "2": 11.1736904761905,
+        "3": 11.4375238095238
+      }
+    },
+    {
+      "batch": "runtime-regression-P-abba2",
+      "height": 900,
+      "frames_per_slot": 1000,
+      "baseline_ms": 8.51362375,
+      "candidate_ms": 8.338009374999995,
+      "delta_ms": -0.17561437500000565,
+      "percent": -2.0627453145319663,
+      "slots": {
+        "0": 8.47973,
+        "1": 8.32295625,
+        "2": 8.35306249999999,
+        "3": 8.5475175
+      }
+    },
+    {
+      "batch": "runtime-regression-P-abba2",
+      "height": 1080,
+      "frames_per_slot": 1000,
+      "baseline_ms": 11.587955625,
+      "candidate_ms": 11.33980375,
+      "delta_ms": -0.24815187499999958,
+      "percent": -2.1414638011266973,
+      "slots": {
+        "0": 11.57158,
+        "1": 11.33822,
+        "2": 11.3413875,
+        "3": 11.60433125
+      }
+    },
+    {
+      "batch": "runtime-regression-R-screen1",
+      "height": 900,
+      "frames_per_slot": 200,
+      "baseline_ms": 8.353690476190476,
+      "candidate_ms": 8.55324107142857,
+      "delta_ms": 0.19955059523809382,
+      "percent": 2.3887717148109555,
+      "slots": {
+        "0": 8.34291666666667,
+        "1": 8.54425595238095,
+        "2": 8.56222619047619,
+        "3": 8.36446428571428
+      }
+    },
+    {
+      "batch": "runtime-regression-R-screen1",
+      "height": 1080,
+      "frames_per_slot": 200,
+      "baseline_ms": 11.4453541666667,
+      "candidate_ms": 11.7101964285714,
+      "delta_ms": 0.2648422619047004,
+      "percent": 2.3139717482576705,
+      "slots": {
+        "0": 11.4361785714286,
+        "1": 11.7119226190476,
+        "2": 11.7084702380952,
+        "3": 11.4545297619048
+      }
+    },
+    {
+      "batch": "runtime-regression-RF-screen1",
+      "height": 900,
+      "frames_per_slot": 200,
+      "baseline_ms": 8.40070535714286,
+      "candidate_ms": 8.541297619047619,
+      "delta_ms": 0.14059226190475904,
+      "percent": 1.6735768715566035,
+      "slots": {
+        "0": 8.37880357142857,
+        "1": 8.54117261904762,
+        "2": 8.54142261904762,
+        "3": 8.42260714285715
+      }
+    },
+    {
+      "batch": "runtime-regression-RF-screen1",
+      "height": 1080,
+      "frames_per_slot": 200,
+      "baseline_ms": 11.4525,
+      "candidate_ms": 11.7514375,
+      "delta_ms": 0.2989374999999992,
+      "percent": 2.6102379393145636,
+      "slots": {
+        "0": 11.4453095238095,
+        "1": 11.7532619047619,
+        "2": 11.7496130952381,
+        "3": 11.4596904761905
+      }
+    },
+    {
+      "batch": "runtime-regression-V-screen1",
+      "height": 900,
+      "frames_per_slot": 200,
+      "baseline_ms": 8.37791964285714,
+      "candidate_ms": 8.52527678571429,
+      "delta_ms": 0.14735714285714963,
+      "percent": 1.7588751043080775,
+      "slots": {
+        "0": 8.37072619047619,
+        "1": 8.52483333333334,
+        "2": 8.52572023809524,
+        "3": 8.38511309523809
+      }
+    },
+    {
+      "batch": "runtime-regression-V-screen1",
+      "height": 1080,
+      "frames_per_slot": 200,
+      "baseline_ms": 11.45631547619045,
+      "candidate_ms": 11.79336011904765,
+      "delta_ms": 0.33704464285719915,
+      "percent": 2.941998616899788,
+      "slots": {
+        "0": 11.4488333333333,
+        "1": 11.8062023809524,
+        "2": 11.7805178571429,
+        "3": 11.4637976190476
+      }
+    }
+  ],
+  "incomplete_timing_batches": [],
+  "candidate_frames_matching_float_fma": 384,
+  "candidate_frames_by_batch": {
+    "runtime-regression-C-screen": 12,
+    "runtime-regression-V-screen": 12,
+    "runtime-regression-R-screen": 12,
+    "runtime-regression-RF-screen": 12,
+    "runtime-regression-C-exact": 84,
+    "runtime-regression-C-adaptive": 84,
+    "runtime-regression-P-exact": 84,
+    "runtime-regression-P-adaptive": 84
+  },
+  "game_flags_extra_matching_frames": 12,
+  "AE_pairs": 168,
+  "AE_all_fields_different": 0,
+  "AE_reuse_by_batch": {
+    "runtime-regression-C-adaptive": {
+      "0": 40,
+      "1": 44
+    },
+    "runtime-regression-P-adaptive": {
+      "0": 40,
+      "1": 44
+    }
+  }
+}

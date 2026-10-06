@@ -1,0 +1,16 @@
+diff --git a/Development/HIP/hip_reference_network.h b/Development/HIP/hip_reference_network.h
+index eab07b7e..ea4c8ef5 100644
+--- a/Development/HIP/hip_reference_network.h
++++ b/Development/HIP/hip_reference_network.h
+@@ -476,8 +476,9 @@ class Network {
+ #include "swin_persistent_network.h"
+  Tensor Body(Tensor input,U w,U h,U c,U shift,U block,bool raw,bool byte_in=false,bool byte_out=false,bool half_out=false,Tensor*skip_b8=nullptr){if(PdlChainHead(block))pdl_prev={};pdl_ffn_flags=nullptr;if(opt.skip_blocks.count(block)){Stage("block"+std::to_string(block),input);return input;}U sx=(shift&1)?4:0,sy=(shift&2)?4:0,ww=(w+sx+7)&~7u,hh=(h+sy+7)&~7u,n=ww*hh;
+  if(c==512&&c512_m32_active&&opt.fast_deep&&opt.packed_weights&&opt.split_mix_h16w&&!opt.split_mix_fused&&opt.split_ffn_fused&&opt.c512_proj_tiles&&opt.c512_qkv_frag&&opt.c512_proj_frag&&opt.fp8_av&&opt.fused_mh&&opt.fp8_normalized&&!byte_in&&!byte_out&&ww%8==0&&hh%8==0)return CompactC512Body(input,w,h,ww,hh,sx,sy,block,raw);
+- const bool identity=opt.elide_identity_shift&&!sx&&!sy&&ww==w&&hh==h;bool mapped=opt.mh_input_mapped&&c!=512&&!identity;const bool byte_feature=(opt.mh_byte_stream||opt.mh_feature_byte)&&c!=512;if((byte_in||byte_out)&&!byte_feature)throw std::runtime_error("byte residual stream requires the mh_byte_stream C64/128/256 path");if(byte_in&&!(identity||mapped))throw std::runtime_error("byte block input requires mapped/identity FFN input");if(byte_out&&(raw||!(identity||opt.mh_project_crop)))throw std::runtime_error("byte block output requires a lattice output on the crop/identity path");if(wave_owned_active&&(c==64||c==128||(c==256&&opt.width==1920&&(opt.height==1152||opt.height==1088)))){
+-  // C256 whole-block fusion wins at 1080; retain the split PDL path at smaller tiers.
++ const bool identity=opt.elide_identity_shift&&!sx&&!sy&&ww==w&&hh==h;bool mapped=opt.mh_input_mapped&&c!=512&&!identity;const bool byte_feature=(opt.mh_byte_stream||opt.mh_feature_byte)&&c!=512;if((byte_in||byte_out)&&!byte_feature)throw std::runtime_error("byte residual stream requires the mh_byte_stream C64/128/256 path");if(byte_in&&!(identity||mapped))throw std::runtime_error("byte block input requires mapped/identity FFN input");if(byte_out&&(raw||!(identity||opt.mh_project_crop)))throw std::runtime_error("byte block output requires a lattice output on the crop/identity path");if(wave_owned_active&&(c==64||c==128||(c==256&&opt.width==1920&&(opt.height==1152||opt.height==1088)&&!SpEnabled(256,block>=40)))){
++  // C256 whole-block fusion wins at 1080 when all 16 C256 blocks run through Body; with the C256 persistent queue (SWIN_RUN) only
++  // the 4 boundary blocks are left and the split PDL path is faster there (results/pdl-1080-20261002). Smaller tiers: split PDL.
+   if(!(identity||mapped)||!opt.grouped_mh_contract||!opt.packed_weights||!byte_feature||!opt.mh_proj_diag_fb)throw std::runtime_error("wave-owned block input contract");
+   pdl_prev={};pdl_ffn_flags=nullptr;pdl_anyorder=false;
+   if(half_out&&(!raw||byte_out||!byte_in||c==256))throw std::runtime_error("half tail contract");

@@ -1,0 +1,573 @@
+== probe ÏÂÎç 06:34:51
+ADDON base-900-1 W exit=0 wall_mean=7.01956000000001 wall_med=7.017
+ADDON base-900-1 P exit=0 wall_med=7.195 span_med=6.666 cpu_enqueue_med=0.343 | 
+ADDON base-1080-1 W exit=0 wall_mean=9.86290125 wall_med=9.857
+ADDON base-1080-1 P exit=0 wall_med=10.034 span_med=9.461 cpu_enqueue_med=0.319 | 
+ADDON Q-900-1 W exit=0 wall_mean=6.9789425 wall_med=6.965
+ADDON Q-900-1 P exit=0 wall_med=7.046 span_med=6.595 cpu_enqueue_med=0.338 | 
+ADDON Q-1080-1 W exit=0 wall_mean=9.88387250000001 wall_med=9.875
+ADDON Q-1080-1 P exit=0 wall_med=9.882 span_med=9.387 cpu_enqueue_med=0.317 | 
+ADDON base-900-2 W exit=0 wall_mean=7.1070775 wall_med=7.107
+ADDON base-900-2 P exit=0 wall_med=7.239 span_med=6.739 cpu_enqueue_med=0.345 | 
+ADDON base-1080-2 W exit=0 wall_mean=9.90389875000001 wall_med=9.9
+ADDON base-1080-2 P exit=0 wall_med=10.099 span_med=9.528 cpu_enqueue_med=0.32 | 
+ADDON Q-900-2 W exit=0 wall_mean=7.0458325 wall_med=7.031
+ADDON Q-900-2 P exit=0 wall_med=7.109 span_med=6.653 cpu_enqueue_med=0.342 | 
+ADDON Q-1080-2 W exit=0 wall_mean=9.90254999999999 wall_med=9.9
+ADDON Q-1080-2 P exit=0 wall_med=9.918 span_med=9.408 cpu_enqueue_med=0.318 | 
+RT rt-base-serial-t1-1 exit=0
+  outside size=1600x900 cpu_prepare med=0.0198 mean=0.0200 p10=0.0154 p90=0.0222 n=300
+  outside size=1600x900 cpu_record med=0.0242 mean=0.0242 p10=0.0190 p90=0.0259 n=300
+  outside size=1600x900 launch_latency med=3.0175 mean=3.0205 p10=3.0117 p90=3.0285 n=300
+  outside size=1600x900 gpu_inputs med=0.1012 mean=0.1013 p10=0.1002 p90=0.1021 n=300
+  outside size=1600x900 gap_in_out med=6.8446 mean=6.8613 p10=6.7660 p90=6.9746 n=300
+  outside size=1600x900 hip_net med=6.6000 mean=6.5993 p10=6.5231 p90=6.6782 n=300
+  outside size=1600x900 handoff med=0.2452 mean=0.2619 p10=0.1832 p90=0.3460 n=300
+  outside size=1600x900 gpu_outputs med=0.0696 mean=0.0698 p10=0.0694 p90=0.0700 n=300
+  outside size=1600x900 wake_latency med=-2.9228 mean=-2.8931 p10=-2.9333 p90=-2.8142 n=300
+  outside size=1600x900 cpu_enqueue med=0.3320 mean=0.3261 p10=0.2815 p90=0.3569 n=300
+  outside size=1600x900 lb_submit_after_ts1 med=-2.7847 mean=-2.7909 p10=-2.8382 p90=-2.7549 n=300
+  outside size=1600x900 wall med=7.1763 mean=7.2170 p10=7.0849 p90=7.3779 n=300
+  round=0 size=1600x900 mean_ms=7.228 hash=626b87531bb84f40 vram_mib=1391 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1600x900 weights=1 recreates=0 net_gpu_ms=6.56 (frame 399) wave_owned=1/
+  outside size=1920x1080 cpu_prepare med=0.0227 mean=0.0230 p10=0.0200 p90=0.0241 n=300
+  outside size=1920x1080 cpu_record med=0.0256 mean=0.0266 p10=0.0232 p90=0.0285 n=300
+  outside size=1920x1080 launch_latency med=3.0175 mean=3.0299 p10=3.0134 p90=3.0886 n=300
+  outside size=1920x1080 gpu_inputs med=0.2203 mean=0.2213 p10=0.2185 p90=0.2250 n=300
+  outside size=1920x1080 gap_in_out med=9.5281 mean=9.5389 p10=9.4358 p90=9.6438 n=300
+  outside size=1920x1080 hip_net med=9.3068 mean=9.2987 p10=9.1875 p90=9.4121 n=300
+  outside size=1920x1080 handoff med=0.2122 mean=0.2402 p10=0.1644 p90=0.3525 n=300
+  outside size=1920x1080 gpu_outputs med=0.1089 mean=0.1090 p10=0.1084 p90=0.1095 n=300
+  outside size=1920x1080 wake_latency med=-2.8373 mean=-2.8447 p10=-2.9311 p90=-2.7854 n=300
+  outside size=1920x1080 cpu_enqueue med=0.3205 mean=0.3230 p10=0.3051 p90=0.3483 n=300
+  outside size=1920x1080 lb_submit_after_ts1 med=-2.9136 mean=-2.9229 p10=-2.9847 p90=-2.8839 n=300
+  outside size=1920x1080 wall med=10.1115 mean=10.1186 p10=9.9927 p90=10.2446 n=300
+  round=0 size=1920x1080 mean_ms=10.131 hash=63104e9d7f15a0de vram_mib=1732 status=lmxxf modules_ok=62 hip=1 net=1920x1080 color_job=1920x1080 weights=1 recreates=1 net_gpu_ms=9.28 (frame 399) wave_owne
+RT rt-D-serial-t1-1 exit=0
+  outside size=1600x900 cpu_prepare med=0.0213 mean=0.0202 p10=0.0154 p90=0.0225 n=300
+  outside size=1600x900 cpu_record med=0.0223 mean=0.0219 p10=0.0174 p90=0.0237 n=300
+  outside size=1600x900 launch_latency med=3.0169 mean=3.0179 p10=3.0045 p90=3.0260 n=300
+  outside size=1600x900 gpu_inputs med=0.0564 mean=0.0563 p10=0.0559 p90=0.0568 n=300
+  outside size=1600x900 gap_in_out med=6.9332 mean=6.9400 p10=6.8377 p90=7.0508 n=300
+  outside size=1600x900 hip_net med=6.6690 mean=6.6692 p10=6.5877 p90=6.7541 n=300
+  outside size=1600x900 handoff med=0.2699 mean=0.2709 p10=0.1954 p90=0.3513 n=300
+  outside size=1600x900 gpu_outputs med=0.0700 mean=0.0702 p10=0.0698 p90=0.0704 n=300
+  outside size=1600x900 wake_latency med=-2.9206 mean=-2.8870 p10=-2.9339 p90=-2.8121 n=300
+  outside size=1600x900 cpu_enqueue med=0.3780 mean=0.3623 p10=0.3075 p90=0.3939 n=300
+  outside size=1600x900 lb_submit_after_ts1 med=-2.6921 mean=-2.7070 p10=-2.7666 p90=-2.6676 n=300
+  outside size=1600x900 wall med=7.2371 mean=7.2520 p10=7.1068 p90=7.4135 n=300
+  round=0 size=1600x900 mean_ms=7.263 hash=626b87531bb84f40 vram_mib=1391 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1600x900 weights=1 recreates=0 net_gpu_ms=6.76 (frame 399) wave_owned=1/
+  outside size=1920x1080 cpu_prepare med=0.0226 mean=0.0225 p10=0.0199 p90=0.0235 n=300
+  outside size=1920x1080 cpu_record med=0.0224 mean=0.0230 p10=0.0205 p90=0.0234 n=300
+  outside size=1920x1080 launch_latency med=3.0174 mean=3.0306 p10=3.0107 p90=3.0867 n=300
+  outside size=1920x1080 gpu_inputs med=0.0845 mean=0.0849 p10=0.0840 p90=0.0857 n=300
+  outside size=1920x1080 gap_in_out med=9.6297 mean=9.6286 p10=9.5178 p90=9.7333 n=300
+  outside size=1920x1080 hip_net med=9.3336 mean=9.3243 p10=9.2063 p90=9.4361 n=300
+  outside size=1920x1080 handoff med=0.3067 mean=0.3043 p10=0.2121 p90=0.3918 n=300
+  outside size=1920x1080 gpu_outputs med=0.1138 mean=0.1139 p10=0.1132 p90=0.1147 n=300
+  outside size=1920x1080 wake_latency med=-2.8359 mean=-2.8451 p10=-2.9298 p90=-2.7950 n=300
+  outside size=1920x1080 cpu_enqueue med=0.3317 mean=0.3319 p10=0.3177 p90=0.3478 n=300
+  outside size=1920x1080 lb_submit_after_ts1 med=-2.7664 mean=-2.7786 p10=-2.8360 p90=-2.7479 n=300
+  outside size=1920x1080 wall med=10.0702 mean=10.0728 p10=9.9421 p90=10.1967 n=300
+  round=0 size=1920x1080 mean_ms=10.085 hash=63104e9d7f15a0de vram_mib=1732 status=lmxxf modules_ok=62 hip=1 net=1920x1080 color_job=1920x1080 weights=1 recreates=1 net_gpu_ms=9.26 (frame 399) wave_owne
+RT rt-DQ-serial-t1-1 exit=0
+  outside size=1600x900 cpu_prepare med=0.0214 mean=0.0201 p10=0.0154 p90=0.0221 n=300
+  outside size=1600x900 cpu_record med=0.0219 mean=0.0214 p10=0.0173 p90=0.0229 n=300
+  outside size=1600x900 launch_latency med=3.0174 mean=3.0194 p10=3.0058 p90=3.0285 n=300
+  outside size=1600x900 gpu_inputs med=0.0564 mean=0.0564 p10=0.0558 p90=0.0568 n=300
+  outside size=1600x900 gap_in_out med=6.9236 mean=6.9212 p10=6.8206 p90=7.0153 n=300
+  outside size=1600x900 hip_net med=6.6430 mean=6.6436 p10=6.5675 p90=6.7254 n=300
+  outside size=1600x900 handoff med=0.2730 mean=0.2776 p10=0.1989 p90=0.3626 n=300
+  outside size=1600x900 gpu_outputs med=0.0703 mean=0.0703 p10=0.0700 p90=0.0706 n=300
+  outside size=1600x900 wake_latency med=-2.9176 mean=-2.8843 p10=-2.9336 p90=-2.8134 n=300
+  outside size=1600x900 cpu_enqueue med=0.3430 mean=0.3275 p10=0.2728 p90=0.3640 n=300
+  outside size=1600x900 lb_submit_after_ts1 med=-2.7273 mean=-2.7434 p10=-2.8027 p90=-2.6989 n=300
+  outside size=1600x900 wall med=7.2338 mean=7.2371 p10=7.0891 p90=7.3836 n=300
+  round=0 size=1600x900 mean_ms=7.248 hash=626b87531bb84f40 vram_mib=1391 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1600x900 weights=1 recreates=0 net_gpu_ms=6.68 (frame 399) wave_owned=1/
+  outside size=1920x1080 cpu_prepare med=0.0227 mean=0.0229 p10=0.0199 p90=0.0247 n=300
+  outside size=1920x1080 cpu_record med=0.0226 mean=0.0238 p10=0.0204 p90=0.0254 n=300
+  outside size=1920x1080 launch_latency med=3.0169 mean=3.0289 p10=3.0061 p90=3.0902 n=300
+  outside size=1920x1080 gpu_inputs med=0.0844 mean=0.0847 p10=0.0840 p90=0.0855 n=300
+  outside size=1920x1080 gap_in_out med=9.6310 mean=9.6281 p10=9.5161 p90=9.7374 n=300
+  outside size=1920x1080 hip_net med=9.3259 mean=9.3253 p10=9.2260 p90=9.4315 n=300
+  outside size=1920x1080 handoff med=0.3047 mean=0.3028 p10=0.2053 p90=0.3967 n=300
+  outside size=1920x1080 gpu_outputs med=0.1139 mean=0.1142 p10=0.1135 p90=0.1149 n=300
+  outside size=1920x1080 wake_latency med=-2.8364 mean=-2.8477 p10=-2.9308 p90=-2.7948 n=300
+  outside size=1920x1080 cpu_enqueue med=0.3233 mean=0.3258 p10=0.2982 p90=0.3457 n=300
+  outside size=1920x1080 lb_submit_after_ts1 med=-2.7740 mean=-2.7827 p10=-2.8404 p90=-2.7499 n=300
+  outside size=1920x1080 wall med=10.0756 mean=10.0694 p10=9.9223 p90=10.2167 n=300
+  round=0 size=1920x1080 mean_ms=10.082 hash=63104e9d7f15a0de vram_mib=1732 status=lmxxf modules_ok=62 hip=1 net=1920x1080 color_job=1920x1080 weights=1 recreates=1 net_gpu_ms=9.40 (frame 399) wave_owne
+RT rt-base-serial-t0-1 exit=0
+  outside size=1600x900 cpu_prepare med=0.0217 mean=0.0248 p10=0.0156 p90=0.0448 n=300
+  outside size=1600x900 cpu_record med=0.0250 mean=0.0246 p10=0.0188 p90=0.0271 n=300
+  outside size=1600x900 launch_latency med=3.0346 mean=3.0331 p10=3.0172 p90=3.0449 n=300
+  outside size=1600x900 gpu_inputs med=0.1014 mean=0.1014 p10=0.1003 p90=0.1024 n=300
+  outside size=1600x900 gap_in_out med=6.6877 mean=6.6993 p10=6.6198 p90=6.7987 n=300
+  outside size=1600x900 gpu_outputs med=0.0698 mean=0.0699 p10=0.0696 p90=0.0702 n=300
+  outside size=1600x900 wake_latency med=-2.9117 mean=-2.8799 p10=-2.9332 p90=-2.8073 n=300
+  outside size=1600x900 cpu_enqueue med=0.3531 mean=0.3570 p10=0.2895 p90=0.4237 n=300
+  outside size=1600x900 lb_submit_after_ts1 med=-2.7719 mean=-2.7716 p10=-2.8452 p90=-2.6975 n=300
+  outside size=1600x900 wall med=7.0861 mean=7.0864 p10=6.9597 p90=7.2275 n=300
+  round=0 size=1600x900 mean_ms=7.098 hash=626b87531bb84f40 vram_mib=1391 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1600x900 weights=1 recreates=0 net_gpu_ms=off wave_owned=1/1 c512_m32=1/
+  outside size=1920x1080 cpu_prepare med=0.0230 mean=0.0254 p10=0.0214 p90=0.0351 n=300
+  outside size=1920x1080 cpu_record med=0.0258 mean=0.0274 p10=0.0248 p90=0.0295 n=300
+  outside size=1920x1080 launch_latency med=3.0363 mean=3.0436 p10=3.0174 p90=3.1073 n=300
+  outside size=1920x1080 gpu_inputs med=0.2202 mean=0.2210 p10=0.2187 p90=0.2235 n=300
+  outside size=1920x1080 gap_in_out med=9.3604 mean=9.3717 p10=9.2940 p90=9.4734 n=300
+  outside size=1920x1080 gpu_outputs med=0.1091 mean=0.1093 p10=0.1087 p90=0.1098 n=300
+  outside size=1920x1080 wake_latency med=-2.8333 mean=-2.8432 p10=-2.9271 p90=-2.7948 n=300
+  outside size=1920x1080 cpu_enqueue med=0.3586 mean=0.3634 p10=0.3249 p90=0.4147 n=300
+  outside size=1920x1080 lb_submit_after_ts1 med=-2.8784 mean=-2.8883 p10=-2.9691 p90=-2.8256 n=300
+  outside size=1920x1080 wall med=9.9594 mean=9.9700 p10=9.8578 p90=10.0855 n=300
+  round=0 size=1920x1080 mean_ms=9.982 hash=63104e9d7f15a0de vram_mib=1732 status=lmxxf modules_ok=62 hip=1 net=1920x1080 color_job=1920x1080 weights=1 recreates=1 net_gpu_ms=off wave_owned=1/1 c512_m32
+RT rt-D-serial-t0-1 exit=0
+  outside size=1600x900 cpu_prepare med=0.0215 mean=0.0242 p10=0.0164 p90=0.0432 n=300
+  outside size=1600x900 cpu_record med=0.0222 mean=0.0224 p10=0.0179 p90=0.0250 n=300
+  outside size=1600x900 launch_latency med=3.0329 mean=3.0308 p10=3.0165 p90=3.0445 n=300
+  outside size=1600x900 gpu_inputs med=0.0564 mean=0.0565 p10=0.0559 p90=0.0569 n=300
+  outside size=1600x900 gap_in_out med=6.7598 mean=6.7717 p10=6.6992 p90=6.8726 n=300
+  outside size=1600x900 gpu_outputs med=0.0702 mean=0.0704 p10=0.0698 p90=0.0705 n=300
+  outside size=1600x900 wake_latency med=-2.9176 mean=-2.8816 p10=-2.9343 p90=-2.8089 n=300
+  outside size=1600x900 cpu_enqueue med=0.3955 mean=0.3987 p10=0.3287 p90=0.4620 n=300
+  outside size=1600x900 lb_submit_after_ts1 med=-2.6826 mean=-2.6821 p10=-2.7599 p90=-2.6133 n=300
+  outside size=1600x900 wall med=7.0968 mean=7.1076 p10=6.9902 p90=7.2502 n=300
+  round=0 size=1600x900 mean_ms=7.119 hash=626b87531bb84f40 vram_mib=1391 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1600x900 weights=1 recreates=0 net_gpu_ms=off wave_owned=1/1 c512_m32=1/
+  outside size=1920x1080 cpu_prepare med=0.0227 mean=0.0270 p10=0.0213 p90=0.0454 n=300
+  outside size=1920x1080 cpu_record med=0.0226 mean=0.0237 p10=0.0206 p90=0.0248 n=300
+  outside size=1920x1080 launch_latency med=3.0358 mean=3.0435 p10=3.0160 p90=3.1119 n=300
+  outside size=1920x1080 gpu_inputs med=0.0844 mean=0.0846 p10=0.0840 p90=0.0854 n=300
+  outside size=1920x1080 gap_in_out med=9.4404 mean=9.4476 p10=9.3648 p90=9.5531 n=300
+  outside size=1920x1080 gpu_outputs med=0.1140 mean=0.1141 p10=0.1135 p90=0.1150 n=300
+  outside size=1920x1080 wake_latency med=-2.8369 mean=-2.8524 p10=-2.9318 p90=-2.8006 n=300
+  outside size=1920x1080 cpu_enqueue med=0.3622 mean=0.3651 p10=0.3261 p90=0.4110 n=300
+  outside size=1920x1080 lb_submit_after_ts1 med=-2.7600 mean=-2.7565 p10=-2.8194 p90=-2.6951 n=300
+  outside size=1920x1080 wall med=9.9029 mean=9.9030 p10=9.7816 p90=10.0122 n=300
+  round=0 size=1920x1080 mean_ms=9.915 hash=63104e9d7f15a0de vram_mib=1732 status=lmxxf modules_ok=62 hip=1 net=1920x1080 color_job=1920x1080 weights=1 recreates=1 net_gpu_ms=off wave_owned=1/1 c512_m32
+RT rt-DQ-serial-t0-1 exit=0
+  outside size=1600x900 cpu_prepare med=0.0214 mean=0.0202 p10=0.0146 p90=0.0222 n=300
+  outside size=1600x900 cpu_record med=0.0219 mean=0.0212 p10=0.0161 p90=0.0228 n=300
+  outside size=1600x900 launch_latency med=3.0352 mean=3.0327 p10=3.0177 p90=3.0451 n=300
+  outside size=1600x900 gpu_inputs med=0.0564 mean=0.0564 p10=0.0559 p90=0.0569 n=300
+  outside size=1600x900 gap_in_out med=6.7135 mean=6.7128 p10=6.6522 p90=6.7665 n=300
+  outside size=1600x900 gpu_outputs med=0.0703 mean=0.0704 p10=0.0700 p90=0.0706 n=300
+  outside size=1600x900 wake_latency med=-2.9234 mean=-2.9071 p10=-2.9352 p90=-2.8315 n=300
+  outside size=1600x900 cpu_enqueue med=0.3392 mean=0.3217 p10=0.2644 p90=0.3543 n=300
+  outside size=1600x900 lb_submit_after_ts1 med=-2.7498 mean=-2.7625 p10=-2.8191 p90=-2.7217 n=300
+  outside size=1600x900 wall med=7.0128 mean=7.0200 p10=6.9325 p90=7.1145 n=300
+  round=0 size=1600x900 mean_ms=7.030 hash=626b87531bb84f40 vram_mib=1391 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1600x900 weights=1 recreates=0 net_gpu_ms=off wave_owned=1/1 c512_m32=1/
+  outside size=1920x1080 cpu_prepare med=0.0227 mean=0.0234 p10=0.0189 p90=0.0276 n=300
+  outside size=1920x1080 cpu_record med=0.0234 mean=0.0247 p10=0.0194 p90=0.0292 n=300
+  outside size=1920x1080 launch_latency med=3.0385 mean=3.0529 p10=3.0175 p90=3.1269 n=300
+  outside size=1920x1080 gpu_inputs med=0.0844 mean=0.0847 p10=0.0840 p90=0.0854 n=300
+  outside size=1920x1080 gap_in_out med=9.4243 mean=9.4279 p10=9.3307 p90=9.5257 n=300
+  outside size=1920x1080 gpu_outputs med=0.1140 mean=0.1141 p10=0.1135 p90=0.1148 n=300
+  outside size=1920x1080 wake_latency med=-2.9318 mean=-2.8939 p10=-2.9350 p90=-2.8025 n=300
+  outside size=1920x1080 cpu_enqueue med=0.3196 mean=0.3310 p10=0.2883 p90=0.4059 n=300
+  outside size=1920x1080 lb_submit_after_ts1 med=-2.7940 mean=-2.7992 p10=-2.8791 p90=-2.7245 n=300
+  outside size=1920x1080 wall med=9.8065 mean=9.8478 p10=9.7267 p90=10.0022 n=300
+  round=0 size=1920x1080 mean_ms=9.858 hash=63104e9d7f15a0de vram_mib=1732 status=lmxxf modules_ok=62 hip=1 net=1920x1080 color_job=1920x1080 weights=1 recreates=1 net_gpu_ms=off wave_owned=1/1 c512_m32
+RT rt-base-pipe-t1-1 exit=0
+  outside size=1600x900 cpu_prepare med=6.6306 mean=6.6322 p10=6.5224 p90=6.7361 n=297
+  outside size=1600x900 cpu_record med=0.0256 mean=0.0248 p10=0.0168 p90=0.0279 n=297
+  outside size=1600x900 launch_latency med=16.7734 mean=16.7767 p10=16.6690 p90=16.8835 n=297
+  outside size=1600x900 gpu_inputs med=0.1010 mean=0.1011 p10=0.1002 p90=0.1021 n=297
+  outside size=1600x900 gap_in_out med=6.7932 mean=6.7951 p10=6.7186 p90=6.8563 n=297
+  outside size=1600x900 gpu_outputs med=0.0698 mean=0.0699 p10=0.0696 p90=0.0702 n=297
+  outside size=1600x900 cpu_enqueue med=0.3321 mean=0.3033 p10=0.2216 p90=0.3456 n=297
+  outside size=1600x900 lb_submit_after_ts1 med=-16.5582 mean=-16.5699 p10=-16.7404 p90=-16.4300 n=297
+  outside size=1600x900 wall med=6.9677 mean=6.9764 p10=6.8837 p90=7.0730 n=299
+  round=0 size=1600x900 mean_ms=6.976 hash=626b87531bb84f40 vram_mib=1392 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1600x900 weights=1 recreates=0 net_gpu_ms=6.61 (frame 399) wave_owned=1/
+  outside size=1920x1080 cpu_prepare med=9.5639 mean=9.5683 p10=9.4492 p90=9.6856 n=297
+  outside size=1920x1080 cpu_record med=0.0260 mean=0.0271 p10=0.0244 p90=0.0284 n=297
+  outside size=1920x1080 launch_latency med=22.6196 mean=22.6334 p10=22.4772 p90=22.7980 n=297
+  outside size=1920x1080 gpu_inputs med=0.2202 mean=0.2212 p10=0.2185 p90=0.2246 n=297
+  outside size=1920x1080 gap_in_out med=9.5762 mean=9.5788 p10=9.4760 p90=9.6786 n=297
+  outside size=1920x1080 gpu_outputs med=0.1091 mean=0.1093 p10=0.1085 p90=0.1098 n=297
+  outside size=1920x1080 cpu_enqueue med=0.3039 mean=0.3075 p10=0.2983 p90=0.3223 n=297
+  outside size=1920x1080 lb_submit_after_ts1 med=-22.5312 mean=-22.5425 p10=-22.7021 p90=-22.3873 n=297
+  outside size=1920x1080 wall med=9.9174 mean=9.9204 p10=9.7973 p90=10.0449 n=299
+  round=0 size=1920x1080 mean_ms=9.920 hash=63104e9d7f15a0de vram_mib=1733 status=lmxxf modules_ok=62 hip=1 net=1920x1080 color_job=1920x1080 weights=1 recreates=1 net_gpu_ms=9.31 (frame 399) wave_owned
+RT rt-D-pipe-t1-1 exit=0
+  outside size=1600x900 cpu_prepare med=6.5470 mean=6.5500 p10=6.4279 p90=6.6635 n=297
+  outside size=1600x900 cpu_record med=0.0221 mean=0.0220 p10=0.0157 p90=0.0245 n=297
+  outside size=1600x900 launch_latency med=16.6891 mean=16.6764 p10=16.5217 p90=16.8090 n=297
+  outside size=1600x900 gpu_inputs med=0.0561 mean=0.0562 p10=0.0557 p90=0.0567 n=297
+  outside size=1600x900 gap_in_out med=6.7862 mean=6.7865 p10=6.7048 p90=6.8679 n=297
+  outside size=1600x900 gpu_outputs med=0.0703 mean=0.0704 p10=0.0700 p90=0.0707 n=297
+  outside size=1600x900 cpu_enqueue med=0.3599 mean=0.3342 p10=0.2554 p90=0.3784 n=297
+  outside size=1600x900 lb_submit_after_ts1 med=-16.3984 mean=-16.3939 p10=-16.5733 p90=-16.2036 n=297
+  outside size=1600x900 wall med=6.9185 mean=6.9226 p10=6.8207 p90=7.0258 n=299
+  round=0 size=1600x900 mean_ms=6.923 hash=626b87531bb84f40 vram_mib=1392 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1600x900 weights=1 recreates=0 net_gpu_ms=6.50 (frame 399) wave_owned=1/
+  outside size=1920x1080 cpu_prepare med=9.4115 mean=9.4171 p10=9.2786 p90=9.5476 n=297
+  outside size=1920x1080 cpu_record med=0.0225 mean=0.0234 p10=0.0209 p90=0.0238 n=297
+  outside size=1920x1080 launch_latency med=22.3501 mean=22.3488 p10=22.1952 p90=22.4943 n=297
+  outside size=1920x1080 gpu_inputs med=0.0840 mean=0.0844 p10=0.0836 p90=0.0853 n=297
+  outside size=1920x1080 gap_in_out med=9.5578 mean=9.5646 p10=9.4579 p90=9.6762 n=297
+  outside size=1920x1080 gpu_outputs med=0.1142 mean=0.1145 p10=0.1136 p90=0.1151 n=297
+  outside size=1920x1080 cpu_enqueue med=0.3149 mean=0.3164 p10=0.3082 p90=0.3325 n=297
+  outside size=1920x1080 lb_submit_after_ts1 med=-22.1070 mean=-22.1125 p10=-22.2598 p90=-21.9531 n=297
+  outside size=1920x1080 wall med=9.7682 mean=9.7738 p10=9.6389 p90=9.8976 n=299
+  round=0 size=1920x1080 mean_ms=9.774 hash=63104e9d7f15a0de vram_mib=1733 status=lmxxf modules_ok=62 hip=1 net=1920x1080 color_job=1920x1080 weights=1 recreates=1 net_gpu_ms=9.35 (frame 399) wave_owned
+RT rt-DQ-pipe-t1-1 exit=0
+  outside size=1600x900 cpu_prepare med=6.5957 mean=6.5957 p10=6.4870 p90=6.6991 n=297
+  outside size=1600x900 cpu_record med=0.0219 mean=0.0222 p10=0.0162 p90=0.0237 n=297
+  outside size=1600x900 launch_latency med=16.7065 mean=16.7001 p10=16.5705 p90=16.8179 n=297
+  outside size=1600x900 gpu_inputs med=0.0561 mean=0.0562 p10=0.0557 p90=0.0566 n=297
+  outside size=1600x900 gap_in_out med=6.7962 mean=6.7984 p10=6.7125 p90=6.8873 n=297
+  outside size=1600x900 gpu_outputs med=0.0704 mean=0.0706 p10=0.0700 p90=0.0707 n=297
+  outside size=1600x900 cpu_enqueue med=0.3282 mean=0.3017 p10=0.2260 p90=0.3429 n=297
+  outside size=1600x900 lb_submit_after_ts1 med=-16.4590 mean=-16.4503 p10=-16.5894 p90=-16.2956 n=297
+  outside size=1600x900 wall med=6.9298 mean=6.9355 p10=6.8352 p90=7.0369 n=299
+  round=0 size=1600x900 mean_ms=6.935 hash=626b87531bb84f40 vram_mib=1392 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1600x900 weights=1 recreates=0 net_gpu_ms=6.64 (frame 399) wave_owned=1/
+  outside size=1920x1080 cpu_prepare med=9.4075 mean=9.4134 p10=9.2891 p90=9.5121 n=297
+  outside size=1920x1080 cpu_record med=0.0226 mean=0.0235 p10=0.0213 p90=0.0245 n=297
+  outside size=1920x1080 launch_latency med=22.3427 mean=22.3402 p10=22.2009 p90=22.4794 n=297
+  outside size=1920x1080 gpu_inputs med=0.0842 mean=0.0843 p10=0.0838 p90=0.0852 n=297
+  outside size=1920x1080 gap_in_out med=9.5576 mean=9.5623 p10=9.4606 p90=9.6599 n=297
+  outside size=1920x1080 gpu_outputs med=0.1140 mean=0.1142 p10=0.1135 p90=0.1150 n=297
+  outside size=1920x1080 cpu_enqueue med=0.3141 mean=0.3173 p10=0.3096 p90=0.3347 n=297
+  outside size=1920x1080 lb_submit_after_ts1 med=-22.1030 mean=-22.1028 p10=-22.2418 p90=-21.9685 n=297
+  outside size=1920x1080 wall med=9.7703 mean=9.7711 p10=9.6427 p90=9.8806 n=299
+  round=0 size=1920x1080 mean_ms=9.771 hash=63104e9d7f15a0de vram_mib=1733 status=lmxxf modules_ok=62 hip=1 net=1920x1080 color_job=1920x1080 weights=1 recreates=1 net_gpu_ms=9.33 (frame 399) wave_owned
+RT rt-base-pipe-t0-1 exit=0
+  outside size=1600x900 cpu_prepare med=6.3885 mean=6.3845 p10=6.2822 p90=6.4757 n=297
+  outside size=1600x900 cpu_record med=0.0246 mean=0.0242 p10=0.0174 p90=0.0282 n=297
+  outside size=1600x900 launch_latency med=16.3913 mean=16.3915 p10=16.2995 p90=16.4911 n=297
+  outside size=1600x900 gpu_inputs med=0.1012 mean=0.1015 p10=0.1002 p90=0.1023 n=297
+  outside size=1600x900 gap_in_out med=6.5976 mean=6.6009 p10=6.5666 p90=6.6376 n=297
+  outside size=1600x900 gpu_outputs med=0.0699 mean=0.0699 p10=0.0696 p90=0.0702 n=297
+  outside size=1600x900 cpu_enqueue med=0.3564 mean=0.3590 p10=0.2924 p90=0.4164 n=297
+  outside size=1600x900 lb_submit_after_ts1 med=-16.1247 mean=-16.1288 p10=-16.2610 p90=-15.9923 n=297
+  outside size=1600x900 wall med=6.7751 mean=6.7842 p10=6.6777 p90=6.9068 n=299
+  round=0 size=1600x900 mean_ms=6.784 hash=626b87531bb84f40 vram_mib=1392 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1600x900 weights=1 recreates=0 net_gpu_ms=off wave_owned=1/1 c512_m32=1/
+  outside size=1920x1080 cpu_prepare med=9.3109 mean=9.3106 p10=9.2093 p90=9.4001 n=297
+  outside size=1920x1080 cpu_record med=0.0263 mean=0.0276 p10=0.0249 p90=0.0291 n=297
+  outside size=1920x1080 launch_latency med=22.2056 mean=22.2148 p10=22.1331 p90=22.3112 n=297
+  outside size=1920x1080 gpu_inputs med=0.2204 mean=0.2217 p10=0.2187 p90=0.2245 n=297
+  outside size=1920x1080 gap_in_out med=9.3684 mean=9.3747 p10=9.3221 p90=9.4276 n=297
+  outside size=1920x1080 gpu_outputs med=0.1092 mean=0.1094 p10=0.1086 p90=0.1100 n=297
+  outside size=1920x1080 cpu_enqueue med=0.3556 mean=0.3598 p10=0.3256 p90=0.4048 n=297
+  outside size=1920x1080 lb_submit_after_ts1 med=-22.0670 mean=-22.0714 p10=-22.1754 p90=-21.9712 n=297
+  outside size=1920x1080 wall med=9.7174 mean=9.7173 p10=9.6089 p90=9.8285 n=299
+  round=0 size=1920x1080 mean_ms=9.717 hash=63104e9d7f15a0de vram_mib=1733 status=lmxxf modules_ok=62 hip=1 net=1920x1080 color_job=1920x1080 weights=1 recreates=1 net_gpu_ms=off wave_owned=1/1 c512_m32
+RT rt-D-pipe-t0-1 exit=0
+  outside size=1600x900 cpu_prepare med=6.3200 mean=6.3203 p10=6.2135 p90=6.4246 n=297
+  outside size=1600x900 cpu_record med=0.0222 mean=0.0217 p10=0.0147 p90=0.0236 n=297
+  outside size=1600x900 launch_latency med=16.3248 mean=16.3244 p10=16.2339 p90=16.4120 n=297
+  outside size=1600x900 gpu_inputs med=0.0562 mean=0.0563 p10=0.0558 p90=0.0568 n=297
+  outside size=1600x900 gap_in_out med=6.6112 mean=6.6109 p10=6.5765 p90=6.6433 n=297
+  outside size=1600x900 gpu_outputs med=0.0704 mean=0.0705 p10=0.0701 p90=0.0708 n=297
+  outside size=1600x900 cpu_enqueue med=0.3939 mean=0.3915 p10=0.3063 p90=0.4589 n=297
+  outside size=1600x900 lb_submit_after_ts1 med=-15.9829 mean=-15.9845 p10=-16.1340 p90=-15.8452 n=297
+  outside size=1600x900 wall med=6.7483 mean=6.7495 p10=6.6422 p90=6.8655 n=299
+  round=0 size=1600x900 mean_ms=6.750 hash=626b87531bb84f40 vram_mib=1392 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1600x900 weights=1 recreates=0 net_gpu_ms=off wave_owned=1/1 c512_m32=1/
+  outside size=1920x1080 cpu_prepare med=9.1628 mean=9.1677 p10=9.0697 p90=9.2521 n=297
+  outside size=1920x1080 cpu_record med=0.0226 mean=0.0237 p10=0.0211 p90=0.0248 n=297
+  outside size=1920x1080 launch_latency med=21.9339 mean=21.9344 p10=21.8451 p90=22.0217 n=297
+  outside size=1920x1080 gpu_inputs med=0.0843 mean=0.0846 p10=0.0839 p90=0.0853 n=297
+  outside size=1920x1080 gap_in_out med=9.3646 mean=9.3675 p10=9.3174 p90=9.4188 n=297
+  outside size=1920x1080 gpu_outputs med=0.1142 mean=0.1143 p10=0.1137 p90=0.1150 n=297
+  outside size=1920x1080 cpu_enqueue med=0.3687 mean=0.3681 p10=0.3352 p90=0.4132 n=297
+  outside size=1920x1080 lb_submit_after_ts1 med=-21.6431 mean=-21.6458 p10=-21.7437 p90=-21.5378 n=297
+  outside size=1920x1080 wall med=9.5730 mean=9.5780 p10=9.4581 p90=9.6906 n=299
+  round=0 size=1920x1080 mean_ms=9.578 hash=63104e9d7f15a0de vram_mib=1733 status=lmxxf modules_ok=62 hip=1 net=1920x1080 color_job=1920x1080 weights=1 recreates=1 net_gpu_ms=off wave_owned=1/1 c512_m32
+RT rt-DQ-pipe-t0-1 exit=0
+  outside size=1600x900 cpu_prepare med=6.4388 mean=6.4348 p10=6.3440 p90=6.5280 n=297
+  outside size=1600x900 cpu_record med=0.0221 mean=0.0237 p10=0.0186 p90=0.0269 n=297
+  outside size=1600x900 launch_latency med=16.3710 mean=16.3712 p10=16.2788 p90=16.4539 n=297
+  outside size=1600x900 gpu_inputs med=0.0562 mean=0.0563 p10=0.0558 p90=0.0568 n=297
+  outside size=1600x900 gap_in_out med=6.6324 mean=6.6383 p10=6.5801 p90=6.6960 n=297
+  outside size=1600x900 gpu_outputs med=0.0703 mean=0.0705 p10=0.0700 p90=0.0707 n=297
+  outside size=1600x900 cpu_enqueue med=0.3221 mean=0.2993 p10=0.2268 p90=0.3310 n=297
+  outside size=1600x900 lb_submit_after_ts1 med=-16.1172 mean=-16.1238 p10=-16.2362 p90=-16.0096 n=297
+  outside size=1600x900 wall med=6.7754 mean=6.7761 p10=6.6872 p90=6.8683 n=299
+  round=0 size=1600x900 mean_ms=6.776 hash=626b87531bb84f40 vram_mib=1392 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1600x900 weights=1 recreates=0 net_gpu_ms=off wave_owned=1/1 c512_m32=1/
+  outside size=1920x1080 cpu_prepare med=9.2285 mean=9.2332 p10=9.1394 p90=9.3250 n=297
+  outside size=1920x1080 cpu_record med=0.0227 mean=0.0235 p10=0.0207 p90=0.0248 n=297
+  outside size=1920x1080 launch_latency med=21.9445 mean=21.9588 p10=21.8519 p90=22.0661 n=297
+  outside size=1920x1080 gpu_inputs med=0.0842 mean=0.0845 p10=0.0837 p90=0.0852 n=297
+  outside size=1920x1080 gap_in_out med=9.3666 mean=9.3727 p10=9.3075 p90=9.4329 n=297
+  outside size=1920x1080 gpu_outputs med=0.1143 mean=0.1146 p10=0.1138 p90=0.1152 n=297
+  outside size=1920x1080 cpu_enqueue med=0.3044 mean=0.3082 p10=0.2991 p90=0.3246 n=297
+  outside size=1920x1080 lb_submit_after_ts1 med=-21.7176 mean=-21.7305 p10=-21.8493 p90=-21.6213 n=297
+  outside size=1920x1080 wall med=9.5788 mean=9.5825 p10=9.4847 p90=9.6802 n=299
+  round=0 size=1920x1080 mean_ms=9.582 hash=63104e9d7f15a0de vram_mib=1733 status=lmxxf modules_ok=62 hip=1 net=1920x1080 color_job=1920x1080 weights=1 recreates=1 net_gpu_ms=off wave_owned=1/1 c512_m32
+RT rt-base-serial-t1-2 exit=0
+  outside size=1600x900 cpu_prepare med=0.0208 mean=0.0195 p10=0.0140 p90=0.0222 n=300
+  outside size=1600x900 cpu_record med=0.0248 mean=0.0237 p10=0.0180 p90=0.0262 n=300
+  outside size=1600x900 launch_latency med=3.0177 mean=3.0202 p10=3.0057 p90=3.0300 n=300
+  outside size=1600x900 gpu_inputs med=0.1013 mean=0.1013 p10=0.1003 p90=0.1024 n=300
+  outside size=1600x900 gap_in_out med=6.8566 mean=6.8566 p10=6.7556 p90=6.9655 n=300
+  outside size=1600x900 hip_net med=6.5958 mean=6.5985 p10=6.5227 p90=6.6754 n=300
+  outside size=1600x900 handoff med=0.2502 mean=0.2582 p10=0.1888 p90=0.3350 n=300
+  outside size=1600x900 gpu_outputs med=0.0698 mean=0.0700 p10=0.0695 p90=0.0701 n=300
+  outside size=1600x900 wake_latency med=-2.9226 mean=-2.8925 p10=-2.9337 p90=-2.8140 n=300
+  outside size=1600x900 cpu_enqueue med=0.3334 mean=0.3233 p10=0.2683 p90=0.3576 n=300
+  outside size=1600x900 lb_submit_after_ts1 med=-2.7851 mean=-2.7934 p10=-2.8518 p90=-2.7507 n=300
+  outside size=1600x900 wall med=7.1890 mean=7.2111 p10=7.0731 p90=7.3713 n=300
+  round=0 size=1600x900 mean_ms=7.222 hash=626b87531bb84f40 vram_mib=1391 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1600x900 weights=1 recreates=0 net_gpu_ms=6.55 (frame 399) wave_owned=1/
+  outside size=1920x1080 cpu_prepare med=0.0226 mean=0.0219 p10=0.0193 p90=0.0234 n=300
+  outside size=1920x1080 cpu_record med=0.0253 mean=0.0255 p10=0.0226 p90=0.0262 n=300
+  outside size=1920x1080 launch_latency med=3.0176 mean=3.0258 p10=3.0062 p90=3.0581 n=300
+  outside size=1920x1080 gpu_inputs med=0.2204 mean=0.2213 p10=0.2188 p90=0.2241 n=300
+  outside size=1920x1080 gap_in_out med=9.5394 mean=9.5429 p10=9.4392 p90=9.6354 n=300
+  outside size=1920x1080 hip_net med=9.3060 mean=9.3034 p10=9.1957 p90=9.4031 n=300
+  outside size=1920x1080 handoff med=0.2130 mean=0.2395 p10=0.1671 p90=0.3438 n=300
+  outside size=1920x1080 gpu_outputs med=0.1088 mean=0.1090 p10=0.1084 p90=0.1096 n=300
+  outside size=1920x1080 wake_latency med=-2.8454 mean=-2.8614 p10=-2.9319 p90=-2.8012 n=300
+  outside size=1920x1080 cpu_enqueue med=0.3248 mean=0.3224 p10=0.2887 p90=0.3435 n=300
+  outside size=1920x1080 lb_submit_after_ts1 med=-2.9099 mean=-2.9190 p10=-2.9651 p90=-2.8935 n=300
+  outside size=1920x1080 wall med=10.0903 mean=10.0991 p10=9.9719 p90=10.2225 n=300
+  round=0 size=1920x1080 mean_ms=10.111 hash=63104e9d7f15a0de vram_mib=1732 status=lmxxf modules_ok=62 hip=1 net=1920x1080 color_job=1920x1080 weights=1 recreates=1 net_gpu_ms=9.28 (frame 399) wave_owne
+RT rt-D-serial-t1-2 exit=0
+  outside size=1600x900 cpu_prepare med=0.0221 mean=0.0212 p10=0.0134 p90=0.0247 n=300
+  outside size=1600x900 cpu_record med=0.0230 mean=0.0225 p10=0.0157 p90=0.0251 n=300
+  outside size=1600x900 launch_latency med=3.0175 mean=3.0213 p10=3.0111 p90=3.0311 n=300
+  outside size=1600x900 gpu_inputs med=0.0563 mean=0.0563 p10=0.0558 p90=0.0568 n=300
+  outside size=1600x900 gap_in_out med=6.9916 mean=6.9817 p10=6.8466 p90=7.0852 n=300
+  outside size=1600x900 hip_net med=6.6968 mean=6.6973 p10=6.6115 p90=6.7904 n=300
+  outside size=1600x900 handoff med=0.2774 mean=0.2844 p10=0.2181 p90=0.3444 n=300
+  outside size=1600x900 gpu_outputs med=0.0702 mean=0.0703 p10=0.0700 p90=0.0706 n=300
+  outside size=1600x900 wake_latency med=-2.8559 mean=-2.8673 p10=-2.9251 p90=-2.8180 n=300
+  outside size=1600x900 cpu_enqueue med=0.4306 mean=0.4071 p10=0.2988 p90=0.4944 n=300
+  outside size=1600x900 lb_submit_after_ts1 med=-2.6391 mean=-2.6648 p10=-2.7823 p90=-2.5749 n=300
+  outside size=1600x900 wall med=7.3599 mean=7.3190 p10=7.1137 p90=7.4638 n=300
+  round=0 size=1600x900 mean_ms=7.330 hash=626b87531bb84f40 vram_mib=1391 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1600x900 weights=1 recreates=0 net_gpu_ms=6.68 (frame 399) wave_owned=1/
+  outside size=1920x1080 cpu_prepare med=0.0235 mean=0.0243 p10=0.0227 p90=0.0265 n=300
+  outside size=1920x1080 cpu_record med=0.0234 mean=0.0249 p10=0.0226 p90=0.0267 n=300
+  outside size=1920x1080 launch_latency med=3.0179 mean=3.0374 p10=3.0137 p90=3.1006 n=300
+  outside size=1920x1080 gpu_inputs med=0.0844 mean=0.0847 p10=0.0840 p90=0.0856 n=300
+  outside size=1920x1080 gap_in_out med=9.6749 mean=9.6721 p10=9.5586 p90=9.7837 n=300
+  outside size=1920x1080 hip_net med=9.3459 mean=9.3351 p10=9.2263 p90=9.4343 n=300
+  outside size=1920x1080 handoff med=0.3185 mean=0.3370 p10=0.2762 p90=0.4391 n=300
+  outside size=1920x1080 gpu_outputs med=0.1138 mean=0.1140 p10=0.1132 p90=0.1146 n=300
+  outside size=1920x1080 wake_latency med=-2.8430 mean=-2.8374 p10=-2.8656 p90=-2.7793 n=300
+  outside size=1920x1080 cpu_enqueue med=0.3394 mean=0.3517 p10=0.3328 p90=0.3945 n=300
+  outside size=1920x1080 lb_submit_after_ts1 med=-2.7591 mean=-2.7648 p10=-2.8352 p90=-2.7065 n=300
+  outside size=1920x1080 wall med=10.1138 mean=10.1349 p10=10.0180 p90=10.2971 n=300
+  round=0 size=1920x1080 mean_ms=10.148 hash=63104e9d7f15a0de vram_mib=1732 status=lmxxf modules_ok=62 hip=1 net=1920x1080 color_job=1920x1080 weights=1 recreates=1 net_gpu_ms=9.39 (frame 399) wave_owne
+RT rt-DQ-serial-t1-2 exit=0
+  outside size=1600x900 cpu_prepare med=0.0202 mean=0.0194 p10=0.0146 p90=0.0218 n=300
+  outside size=1600x900 cpu_record med=0.0218 mean=0.0209 p10=0.0163 p90=0.0225 n=300
+  outside size=1600x900 launch_latency med=3.0181 mean=3.0210 p10=3.0072 p90=3.0307 n=300
+  outside size=1600x900 gpu_inputs med=0.0564 mean=0.0564 p10=0.0559 p90=0.0568 n=300
+  outside size=1600x900 gap_in_out med=6.9007 mean=6.9082 p10=6.8097 p90=7.0128 n=300
+  outside size=1600x900 hip_net med=6.6369 mean=6.6411 p10=6.5669 p90=6.7160 n=300
+  outside size=1600x900 handoff med=0.2567 mean=0.2671 p10=0.1902 p90=0.3634 n=300
+  outside size=1600x900 gpu_outputs med=0.0703 mean=0.0705 p10=0.0700 p90=0.0706 n=300
+  outside size=1600x900 wake_latency med=-2.9222 mean=-2.8924 p10=-2.9337 p90=-2.8138 n=300
+  outside size=1600x900 cpu_enqueue med=0.3406 mean=0.3261 p10=0.2686 p90=0.3631 n=300
+  outside size=1600x900 lb_submit_after_ts1 med=-2.7358 mean=-2.7465 p10=-2.8104 p90=-2.7019 n=300
+  outside size=1600x900 wall med=7.1984 mean=7.2172 p10=7.0788 p90=7.3880 n=300
+  round=0 size=1600x900 mean_ms=7.228 hash=626b87531bb84f40 vram_mib=1391 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1600x900 weights=1 recreates=0 net_gpu_ms=6.69 (frame 399) wave_owned=1/
+  outside size=1920x1080 cpu_prepare med=0.0226 mean=0.0225 p10=0.0197 p90=0.0240 n=300
+  outside size=1920x1080 cpu_record med=0.0225 mean=0.0232 p10=0.0206 p90=0.0240 n=300
+  outside size=1920x1080 launch_latency med=3.0173 mean=3.0260 p10=3.0055 p90=3.0568 n=300
+  outside size=1920x1080 gpu_inputs med=0.0844 mean=0.0847 p10=0.0840 p90=0.0856 n=300
+  outside size=1920x1080 gap_in_out med=9.6374 mean=9.6385 p10=9.5346 p90=9.7441 n=300
+  outside size=1920x1080 hip_net med=9.3374 mean=9.3307 p10=9.2221 p90=9.4352 n=300
+  outside size=1920x1080 handoff med=0.3069 mean=0.3078 p10=0.2196 p90=0.4020 n=300
+  outside size=1920x1080 gpu_outputs med=0.1140 mean=0.1141 p10=0.1134 p90=0.1148 n=300
+  outside size=1920x1080 wake_latency med=-2.8384 mean=-2.8501 p10=-2.9321 p90=-2.7958 n=300
+  outside size=1920x1080 cpu_enqueue med=0.3248 mean=0.3252 p10=0.2982 p90=0.3465 n=300
+  outside size=1920x1080 lb_submit_after_ts1 med=-2.7734 mean=-2.7806 p10=-2.8179 p90=-2.7505 n=300
+  outside size=1920x1080 wall med=10.0712 mean=10.0735 p10=9.9289 p90=10.2019 n=300
+  round=0 size=1920x1080 mean_ms=10.086 hash=63104e9d7f15a0de vram_mib=1732 status=lmxxf modules_ok=62 hip=1 net=1920x1080 color_job=1920x1080 weights=1 recreates=1 net_gpu_ms=9.36 (frame 399) wave_owne
+RT rt-base-serial-t0-2 exit=0
+  outside size=1600x900 cpu_prepare med=0.0217 mean=0.0255 p10=0.0140 p90=0.0473 n=300
+  outside size=1600x900 cpu_record med=0.0248 mean=0.0245 p10=0.0169 p90=0.0300 n=300
+  outside size=1600x900 launch_latency med=3.0360 mean=3.0358 p10=3.0173 p90=3.0512 n=300
+  outside size=1600x900 gpu_inputs med=0.1012 mean=0.1013 p10=0.1003 p90=0.1022 n=300
+  outside size=1600x900 gap_in_out med=6.6829 mean=6.6936 p10=6.6153 p90=6.7904 n=300
+  outside size=1600x900 gpu_outputs med=0.0698 mean=0.0698 p10=0.0696 p90=0.0701 n=300
+  outside size=1600x900 wake_latency med=-2.9149 mean=-2.8825 p10=-2.9341 p90=-2.8164 n=300
+  outside size=1600x900 cpu_enqueue med=0.3578 mean=0.3602 p10=0.2901 p90=0.4197 n=300
+  outside size=1600x900 lb_submit_after_ts1 med=-2.7683 mean=-2.7708 p10=-2.8456 p90=-2.6991 n=300
+  outside size=1600x900 wall med=7.0779 mean=7.0808 p10=6.9563 p90=7.2165 n=300
+  round=0 size=1600x900 mean_ms=7.092 hash=626b87531bb84f40 vram_mib=1391 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1600x900 weights=1 recreates=0 net_gpu_ms=off wave_owned=1/1 c512_m32=1/
+  outside size=1920x1080 cpu_prepare med=0.0230 mean=0.0265 p10=0.0226 p90=0.0431 n=300
+  outside size=1920x1080 cpu_record med=0.0257 mean=0.0271 p10=0.0245 p90=0.0295 n=300
+  outside size=1920x1080 launch_latency med=3.0299 mean=3.0383 p10=3.0168 p90=3.0834 n=300
+  outside size=1920x1080 gpu_inputs med=0.2203 mean=0.2212 p10=0.2184 p90=0.2242 n=300
+  outside size=1920x1080 gap_in_out med=9.3402 mean=9.3565 p10=9.2830 p90=9.4560 n=300
+  outside size=1920x1080 gpu_outputs med=0.1087 mean=0.1088 p10=0.1082 p90=0.1093 n=300
+  outside size=1920x1080 wake_latency med=-2.8299 mean=-2.8407 p10=-2.9254 p90=-2.7874 n=300
+  outside size=1920x1080 cpu_enqueue med=0.3584 mean=0.3604 p10=0.3252 p90=0.4075 n=300
+  outside size=1920x1080 lb_submit_after_ts1 med=-2.8739 mean=-2.8836 p10=-2.9504 p90=-2.8344 n=300
+  outside size=1920x1080 wall med=9.9347 mean=9.9523 p10=9.8406 p90=10.0822 n=300
+  round=0 size=1920x1080 mean_ms=9.964 hash=63104e9d7f15a0de vram_mib=1732 status=lmxxf modules_ok=62 hip=1 net=1920x1080 color_job=1920x1080 weights=1 recreates=1 net_gpu_ms=off wave_owned=1/1 c512_m32
+RT rt-D-serial-t0-2 exit=0
+  outside size=1600x900 cpu_prepare med=0.0217 mean=0.0275 p10=0.0152 p90=0.0504 n=300
+  outside size=1600x900 cpu_record med=0.0223 mean=0.0219 p10=0.0160 p90=0.0245 n=300
+  outside size=1600x900 launch_latency med=3.0351 mean=3.0334 p10=3.0167 p90=3.0494 n=300
+  outside size=1600x900 gpu_inputs med=0.0564 mean=0.0564 p10=0.0559 p90=0.0570 n=300
+  outside size=1600x900 gap_in_out med=6.7613 mean=6.7662 p10=6.6788 p90=6.8741 n=300
+  outside size=1600x900 gpu_outputs med=0.0701 mean=0.0701 p10=0.0698 p90=0.0704 n=300
+  outside size=1600x900 wake_latency med=-2.9163 mean=-2.8835 p10=-2.9344 p90=-2.8160 n=300
+  outside size=1600x900 cpu_enqueue med=0.3938 mean=0.3904 p10=0.3108 p90=0.4598 n=300
+  outside size=1600x900 lb_submit_after_ts1 med=-2.6914 mean=-2.6932 p10=-2.7789 p90=-2.6116 n=300
+  outside size=1600x900 wall med=7.1034 mean=7.1047 p10=6.9699 p90=7.2405 n=300
+  round=0 size=1600x900 mean_ms=7.117 hash=626b87531bb84f40 vram_mib=1391 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1600x900 weights=1 recreates=0 net_gpu_ms=off wave_owned=1/1 c512_m32=1/
+  outside size=1920x1080 cpu_prepare med=0.0228 mean=0.0269 p10=0.0209 p90=0.0455 n=300
+  outside size=1920x1080 cpu_record med=0.0225 mean=0.0239 p10=0.0208 p90=0.0260 n=300
+  outside size=1920x1080 launch_latency med=3.0318 mean=3.0383 p10=3.0161 p90=3.0626 n=300
+  outside size=1920x1080 gpu_inputs med=0.0844 mean=0.0848 p10=0.0840 p90=0.0857 n=300
+  outside size=1920x1080 gap_in_out med=9.4608 mean=9.4713 p10=9.3793 p90=9.5776 n=300
+  outside size=1920x1080 gpu_outputs med=0.1140 mean=0.1142 p10=0.1135 p90=0.1150 n=300
+  outside size=1920x1080 wake_latency med=-2.8357 mean=-2.8490 p10=-2.9291 p90=-2.7966 n=300
+  outside size=1920x1080 cpu_enqueue med=0.3635 mean=0.3702 p10=0.3315 p90=0.4173 n=300
+  outside size=1920x1080 lb_submit_after_ts1 med=-2.7471 mean=-2.7473 p10=-2.8048 p90=-2.6897 n=300
+  outside size=1920x1080 wall med=9.9244 mean=9.9250 p10=9.8038 p90=10.0429 n=300
+  round=0 size=1920x1080 mean_ms=9.937 hash=63104e9d7f15a0de vram_mib=1732 status=lmxxf modules_ok=62 hip=1 net=1920x1080 color_job=1920x1080 weights=1 recreates=1 net_gpu_ms=off wave_owned=1/1 c512_m32
+RT rt-DQ-serial-t0-2 exit=0
+  outside size=1600x900 cpu_prepare med=0.0199 mean=0.0187 p10=0.0126 p90=0.0220 n=300
+  outside size=1600x900 cpu_record med=0.0216 mean=0.0204 p10=0.0140 p90=0.0229 n=300
+  outside size=1600x900 launch_latency med=3.0346 mean=3.0321 p10=3.0158 p90=3.0471 n=300
+  outside size=1600x900 gpu_inputs med=0.0564 mean=0.0565 p10=0.0559 p90=0.0570 n=300
+  outside size=1600x900 gap_in_out med=6.7086 mean=6.7029 p10=6.6324 p90=6.7675 n=300
+  outside size=1600x900 gpu_outputs med=0.0703 mean=0.0703 p10=0.0700 p90=0.0707 n=300
+  outside size=1600x900 wake_latency med=-2.9256 mean=-2.9058 p10=-2.9356 p90=-2.8059 n=300
+  outside size=1600x900 cpu_enqueue med=0.3271 mean=0.3105 p10=0.2408 p90=0.3509 n=300
+  outside size=1600x900 lb_submit_after_ts1 med=-2.7573 mean=-2.7733 p10=-2.8492 p90=-2.7230 n=300
+  outside size=1600x900 wall med=6.9992 mean=7.0074 p10=6.9055 p90=7.1328 n=300
+  round=0 size=1600x900 mean_ms=7.016 hash=626b87531bb84f40 vram_mib=1391 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1600x900 weights=1 recreates=0 net_gpu_ms=off wave_owned=1/1 c512_m32=1/
+  outside size=1920x1080 cpu_prepare med=0.0227 mean=0.0232 p10=0.0208 p90=0.0245 n=300
+  outside size=1920x1080 cpu_record med=0.0226 mean=0.0237 p10=0.0215 p90=0.0255 n=300
+  outside size=1920x1080 launch_latency med=3.0322 mean=3.0392 p10=3.0155 p90=3.0832 n=300
+  outside size=1920x1080 gpu_inputs med=0.0844 mean=0.0847 p10=0.0839 p90=0.0851 n=300
+  outside size=1920x1080 gap_in_out med=9.4171 mean=9.4173 p10=9.3607 p90=9.4774 n=300
+  outside size=1920x1080 gpu_outputs med=0.1141 mean=0.1143 p10=0.1137 p90=0.1149 n=300
+  outside size=1920x1080 wake_latency med=-2.8300 mean=-2.8471 p10=-2.9324 p90=-2.7795 n=300
+  outside size=1920x1080 cpu_enqueue med=0.3249 mean=0.3270 p10=0.3142 p90=0.3486 n=300
+  outside size=1920x1080 lb_submit_after_ts1 med=-2.7816 mean=-2.7906 p10=-2.8376 p90=-2.7559 n=300
+  outside size=1920x1080 wall med=9.8782 mean=9.8703 p10=9.7574 p90=9.9646 n=300
+  round=0 size=1920x1080 mean_ms=9.881 hash=63104e9d7f15a0de vram_mib=1732 status=lmxxf modules_ok=62 hip=1 net=1920x1080 color_job=1920x1080 weights=1 recreates=1 net_gpu_ms=off wave_owned=1/1 c512_m32
+RT rt-base-pipe-t1-2 exit=0
+  outside size=1600x900 cpu_prepare med=6.6297 mean=6.6293 p10=6.5291 p90=6.7229 n=297
+  outside size=1600x900 cpu_record med=0.0247 mean=0.0242 p10=0.0197 p90=0.0262 n=297
+  outside size=1600x900 launch_latency med=16.7695 mean=16.7663 p10=16.6168 p90=16.8883 n=297
+  outside size=1600x900 gpu_inputs med=0.1011 mean=0.1011 p10=0.1000 p90=0.1021 n=297
+  outside size=1600x900 gap_in_out med=6.7936 mean=6.7896 p10=6.6986 p90=6.8722 n=297
+  outside size=1600x900 gpu_outputs med=0.0699 mean=0.0699 p10=0.0696 p90=0.0702 n=297
+  outside size=1600x900 cpu_enqueue med=0.3257 mean=0.3014 p10=0.2314 p90=0.3387 n=297
+  outside size=1600x900 lb_submit_after_ts1 med=-16.5746 mean=-16.5616 p10=-16.6977 p90=-16.3923 n=297
+  outside size=1600x900 wall med=6.9733 mean=6.9708 p10=6.8700 p90=7.0637 n=299
+  round=0 size=1600x900 mean_ms=6.971 hash=626b87531bb84f40 vram_mib=1392 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1600x900 weights=1 recreates=0 net_gpu_ms=6.66 (frame 399) wave_owned=1/
+  outside size=1920x1080 cpu_prepare med=9.5624 mean=9.5626 p10=9.4562 p90=9.6668 n=297
+  outside size=1920x1080 cpu_record med=0.0256 mean=0.0265 p10=0.0231 p90=0.0279 n=297
+  outside size=1920x1080 launch_latency med=22.6339 mean=22.6313 p10=22.4754 p90=22.7903 n=297
+  outside size=1920x1080 gpu_inputs med=0.2201 mean=0.2210 p10=0.2184 p90=0.2241 n=297
+  outside size=1920x1080 gap_in_out med=9.5726 mean=9.5729 p10=9.4749 p90=9.6584 n=297
+  outside size=1920x1080 gpu_outputs med=0.1091 mean=0.1093 p10=0.1086 p90=0.1099 n=297
+  outside size=1920x1080 cpu_enqueue med=0.3062 mean=0.3070 p10=0.2953 p90=0.3264 n=297
+  outside size=1920x1080 lb_submit_after_ts1 med=-22.5410 mean=-22.5407 p10=-22.7005 p90=-22.3905 n=297
+  outside size=1920x1080 wall med=9.9125 mean=9.9129 p10=9.8018 p90=10.0302 n=299
+  round=0 size=1920x1080 mean_ms=9.913 hash=63104e9d7f15a0de vram_mib=1733 status=lmxxf modules_ok=62 hip=1 net=1920x1080 color_job=1920x1080 weights=1 recreates=1 net_gpu_ms=9.25 (frame 399) wave_owned
+RT rt-D-pipe-t1-2 exit=0
+  outside size=1600x900 cpu_prepare med=6.5554 mean=6.5532 p10=6.4440 p90=6.6594 n=297
+  outside size=1600x900 cpu_record med=0.0222 mean=0.0222 p10=0.0175 p90=0.0237 n=297
+  outside size=1600x900 launch_latency med=16.6958 mean=16.6838 p10=16.5223 p90=16.8110 n=297
+  outside size=1600x900 gpu_inputs med=0.0561 mean=0.0561 p10=0.0556 p90=0.0567 n=297
+  outside size=1600x900 gap_in_out med=6.7958 mean=6.7926 p10=6.6946 p90=6.8793 n=297
+  outside size=1600x900 gpu_outputs med=0.0704 mean=0.0704 p10=0.0700 p90=0.0707 n=297
+  outside size=1600x900 cpu_enqueue med=0.3641 mean=0.3387 p10=0.2633 p90=0.3828 n=297
+  outside size=1600x900 lb_submit_after_ts1 med=-16.4120 mean=-16.3969 p10=-16.5413 p90=-16.2217 n=297
+  outside size=1600x900 wall med=6.9272 mean=6.9293 p10=6.8220 p90=7.0289 n=299
+  round=0 size=1600x900 mean_ms=6.929 hash=626b87531bb84f40 vram_mib=1392 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1600x900 weights=1 recreates=0 net_gpu_ms=6.54 (frame 399) wave_owned=1/
+  outside size=1920x1080 cpu_prepare med=9.4073 mean=9.4136 p10=9.2785 p90=9.5417 n=297
+  outside size=1920x1080 cpu_record med=0.0224 mean=0.0233 p10=0.0207 p90=0.0243 n=297
+  outside size=1920x1080 launch_latency med=22.3261 mean=22.3389 p10=22.1683 p90=22.5116 n=297
+  outside size=1920x1080 gpu_inputs med=0.0842 mean=0.0845 p10=0.0838 p90=0.0852 n=297
+  outside size=1920x1080 gap_in_out med=9.5479 mean=9.5602 p10=9.4596 p90=9.6700 n=297
+  outside size=1920x1080 gpu_outputs med=0.1141 mean=0.1143 p10=0.1135 p90=0.1150 n=297
+  outside size=1920x1080 cpu_enqueue med=0.3146 mean=0.3160 p10=0.3045 p90=0.3327 n=297
+  outside size=1920x1080 lb_submit_after_ts1 med=-22.0958 mean=-22.1030 p10=-22.2755 p90=-21.9212 n=297
+  outside size=1920x1080 wall med=9.7605 mean=9.7701 p10=9.6470 p90=9.9091 n=299
+  round=0 size=1920x1080 mean_ms=9.770 hash=63104e9d7f15a0de vram_mib=1733 status=lmxxf modules_ok=62 hip=1 net=1920x1080 color_job=1920x1080 weights=1 recreates=1 net_gpu_ms=9.48 (frame 399) wave_owned
+RT rt-DQ-pipe-t1-2 exit=0
+  outside size=1600x900 cpu_prepare med=6.6073 mean=6.6058 p10=6.5060 p90=6.7183 n=297
+  outside size=1600x900 cpu_record med=0.0218 mean=0.0220 p10=0.0159 p90=0.0244 n=297
+  outside size=1600x900 launch_latency med=16.7272 mean=16.7247 p10=16.5883 p90=16.8605 n=297
+  outside size=1600x900 gpu_inputs med=0.0561 mean=0.0561 p10=0.0557 p90=0.0566 n=297
+  outside size=1600x900 gap_in_out med=6.8122 mean=6.8101 p10=6.7119 p90=6.8968 n=297
+  outside size=1600x900 gpu_outputs med=0.0703 mean=0.0704 p10=0.0700 p90=0.0706 n=297
+  outside size=1600x900 cpu_enqueue med=0.3263 mean=0.3020 p10=0.2248 p90=0.3423 n=297
+  outside size=1600x900 lb_submit_after_ts1 med=-16.4809 mean=-16.4744 p10=-16.6116 p90=-16.3320 n=297
+  outside size=1600x900 wall med=6.9403 mean=6.9461 p10=6.8351 p90=7.0667 n=299
+  round=0 size=1600x900 mean_ms=6.946 hash=626b87531bb84f40 vram_mib=1392 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1600x900 weights=1 recreates=0 net_gpu_ms=6.61 (frame 399) wave_owned=1/
+  outside size=1920x1080 cpu_prepare med=9.4196 mean=9.4279 p10=9.2881 p90=9.5658 n=297
+  outside size=1920x1080 cpu_record med=0.0243 mean=0.0279 p10=0.0229 p90=0.0386 n=297
+  outside size=1920x1080 launch_latency med=22.3782 mean=22.4051 p10=22.2444 p90=22.5845 n=297
+  outside size=1920x1080 gpu_inputs med=0.0842 mean=0.0844 p10=0.0837 p90=0.0853 n=297
+  outside size=1920x1080 gap_in_out med=9.5800 mean=9.6023 p10=9.5000 p90=9.7327 n=297
+  outside size=1920x1080 gpu_outputs med=0.1142 mean=0.1145 p10=0.1135 p90=0.1151 n=297
+  outside size=1920x1080 cpu_enqueue med=0.3234 mean=0.3352 p10=0.3111 p90=0.3821 n=297
+  outside size=1920x1080 lb_submit_after_ts1 med=-22.1300 mean=-22.1495 p10=-22.3383 p90=-21.9659 n=297
+  outside size=1920x1080 wall med=9.7933 mean=9.8113 p10=9.6840 p90=9.9548 n=299
+  round=0 size=1920x1080 mean_ms=9.811 hash=63104e9d7f15a0de vram_mib=1733 status=lmxxf modules_ok=62 hip=1 net=1920x1080 color_job=1920x1080 weights=1 recreates=1 net_gpu_ms=9.44 (frame 399) wave_owned
+RT rt-base-pipe-t0-2 exit=0
+  outside size=1600x900 cpu_prepare med=6.3498 mean=6.3376 p10=6.2162 p90=6.4377 n=297
+  outside size=1600x900 cpu_record med=0.0269 mean=0.0290 p10=0.0231 p90=0.0380 n=297
+  outside size=1600x900 launch_latency med=16.3859 mean=16.3876 p10=16.3129 p90=16.4636 n=297
+  outside size=1600x900 gpu_inputs med=0.1010 mean=0.1010 p10=0.0998 p90=0.1021 n=297
+  outside size=1600x900 gap_in_out med=6.5994 mean=6.6013 p10=6.5665 p90=6.6370 n=297
+  outside size=1600x900 gpu_outputs med=0.0698 mean=0.0699 p10=0.0696 p90=0.0702 n=297
+  outside size=1600x900 cpu_enqueue med=0.3871 mean=0.3978 p10=0.3137 p90=0.4731 n=297
+  outside size=1600x900 lb_submit_after_ts1 med=-16.0874 mean=-16.0849 p10=-16.2155 p90=-15.9597 n=297
+  outside size=1600x900 wall med=6.7865 mean=6.7836 p10=6.6478 p90=6.9144 n=299
+  round=0 size=1600x900 mean_ms=6.784 hash=626b87531bb84f40 vram_mib=1392 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1600x900 weights=1 recreates=0 net_gpu_ms=off wave_owned=1/1 c512_m32=1/
+  outside size=1920x1080 cpu_prepare med=9.2993 mean=9.2948 p10=9.1843 p90=9.3991 n=297
+  outside size=1920x1080 cpu_record med=0.0261 mean=0.0280 p10=0.0250 p90=0.0309 n=297
+  outside size=1920x1080 launch_latency med=22.2002 mean=22.1965 p10=22.1005 p90=22.2857 n=297
+  outside size=1920x1080 gpu_inputs med=0.2203 mean=0.2213 p10=0.2188 p90=0.2243 n=297
+  outside size=1920x1080 gap_in_out med=9.3618 mean=9.3666 p10=9.3154 p90=9.4217 n=297
+  outside size=1920x1080 gpu_outputs med=0.1089 mean=0.1092 p10=0.1085 p90=0.1096 n=297
+  outside size=1920x1080 cpu_enqueue med=0.3562 mean=0.3671 p10=0.3274 p90=0.4294 n=297
+  outside size=1920x1080 lb_submit_after_ts1 med=-22.0464 mean=-22.0457 p10=-22.1630 p90=-21.9270 n=297
+  outside size=1920x1080 wall med=9.7014 mean=9.7090 p10=9.5693 p90=9.8472 n=299
+  round=0 size=1920x1080 mean_ms=9.709 hash=63104e9d7f15a0de vram_mib=1733 status=lmxxf modules_ok=62 hip=1 net=1920x1080 color_job=1920x1080 weights=1 recreates=1 net_gpu_ms=off wave_owned=1/1 c512_m32
+RT rt-D-pipe-t0-2 exit=0
+  outside size=1600x900 cpu_prepare med=6.3109 mean=6.3108 p10=6.2116 p90=6.4133 n=297
+  outside size=1600x900 cpu_record med=0.0225 mean=0.0228 p10=0.0169 p90=0.0251 n=297
+  outside size=1600x900 launch_latency med=16.3247 mean=16.3257 p10=16.2444 p90=16.4129 n=297
+  outside size=1600x900 gpu_inputs med=0.0562 mean=0.0563 p10=0.0558 p90=0.0568 n=297
+  outside size=1600x900 gap_in_out med=6.6147 mean=6.6155 p10=6.5790 p90=6.6512 n=297
+  outside size=1600x900 gpu_outputs med=0.0704 mean=0.0704 p10=0.0700 p90=0.0707 n=297
+  outside size=1600x900 cpu_enqueue med=0.3965 mean=0.4036 p10=0.3287 p90=0.4671 n=297
+  outside size=1600x900 lb_submit_after_ts1 med=-15.9625 mean=-15.9733 p10=-16.1076 p90=-15.8548 n=297
+  outside size=1600x900 wall med=6.7522 mean=6.7545 p10=6.6491 p90=6.8590 n=299
+  round=0 size=1600x900 mean_ms=6.754 hash=626b87531bb84f40 vram_mib=1392 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1600x900 weights=1 recreates=0 net_gpu_ms=off wave_owned=1/1 c512_m32=1/
+  outside size=1920x1080 cpu_prepare med=9.1497 mean=9.1469 p10=9.0433 p90=9.2407 n=297
+  outside size=1920x1080 cpu_record med=0.0226 mean=0.0243 p10=0.0218 p90=0.0261 n=297
+  outside size=1920x1080 launch_latency med=21.9166 mean=21.9162 p10=21.8383 p90=22.0022 n=297
+  outside size=1920x1080 gpu_inputs med=0.0842 mean=0.0846 p10=0.0838 p90=0.0852 n=297
+  outside size=1920x1080 gap_in_out med=9.3554 mean=9.3574 p10=9.3060 p90=9.4094 n=297
+  outside size=1920x1080 gpu_outputs med=0.1140 mean=0.1141 p10=0.1135 p90=0.1148 n=297
+  outside size=1920x1080 cpu_enqueue med=0.3822 mean=0.3770 p10=0.3346 p90=0.4298 n=297
+  outside size=1920x1080 lb_submit_after_ts1 med=-21.6161 mean=-21.6186 p10=-21.7265 p90=-21.5115 n=297
+  outside size=1920x1080 wall med=9.5647 mean=9.5665 p10=9.4437 p90=9.6858 n=299
+  round=0 size=1920x1080 mean_ms=9.567 hash=63104e9d7f15a0de vram_mib=1733 status=lmxxf modules_ok=62 hip=1 net=1920x1080 color_job=1920x1080 weights=1 recreates=1 net_gpu_ms=off wave_owned=1/1 c512_m32
+RT rt-DQ-pipe-t0-2 exit=0
+  outside size=1600x900 cpu_prepare med=6.4336 mean=6.4362 p10=6.3407 p90=6.5362 n=297
+  outside size=1600x900 cpu_record med=0.0222 mean=0.0233 p10=0.0175 p90=0.0263 n=297
+  outside size=1600x900 launch_latency med=16.3808 mean=16.3822 p10=16.2886 p90=16.4722 n=297
+  outside size=1600x900 gpu_inputs med=0.0562 mean=0.0563 p10=0.0558 p90=0.0568 n=297
+  outside size=1600x900 gap_in_out med=6.6356 mean=6.6429 p10=6.5862 p90=6.7070 n=297
+  outside size=1600x900 gpu_outputs med=0.0704 mean=0.0704 p10=0.0701 p90=0.0707 n=297
+  outside size=1600x900 cpu_enqueue med=0.3222 mean=0.3030 p10=0.2255 p90=0.3454 n=297
+  outside size=1600x900 lb_submit_after_ts1 med=-16.1249 mean=-16.1312 p10=-16.2490 p90=-16.0109 n=297
+  outside size=1600x900 wall med=6.7763 mean=6.7803 p10=6.6926 p90=6.8778 n=299
+  round=0 size=1600x900 mean_ms=6.780 hash=626b87531bb84f40 vram_mib=1392 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1600x900 weights=1 recreates=0 net_gpu_ms=off wave_owned=1/1 c512_m32=1/
+  outside size=1920x1080 cpu_prepare med=9.2337 mean=9.2392 p10=9.1527 p90=9.3282 n=297
+  outside size=1920x1080 cpu_record med=0.0225 mean=0.0234 p10=0.0207 p90=0.0238 n=297
+  outside size=1920x1080 launch_latency med=21.9599 mean=21.9699 p10=21.8666 p90=22.0666 n=297
+  outside size=1920x1080 gpu_inputs med=0.0841 mean=0.0844 p10=0.0837 p90=0.0853 n=297
+  outside size=1920x1080 gap_in_out med=9.3701 mean=9.3764 p10=9.3109 p90=9.4417 n=297
+  outside size=1920x1080 gpu_outputs med=0.1142 mean=0.1145 p10=0.1136 p90=0.1151 n=297
+  outside size=1920x1080 cpu_enqueue med=0.3043 mean=0.3061 p10=0.2980 p90=0.3174 n=297
+  outside size=1920x1080 lb_submit_after_ts1 med=-21.7303 mean=-21.7437 p10=-21.8434 p90=-21.6373 n=297
+  outside size=1920x1080 wall med=9.5818 mean=9.5862 p10=9.4920 p90=9.6737 n=299
+  round=0 size=1920x1080 mean_ms=9.586 hash=63104e9d7f15a0de vram_mib=1733 status=lmxxf modules_ok=62 hip=1 net=1920x1080 color_job=1920x1080 weights=1 recreates=1 net_gpu_ms=off wave_owned=1/1 c512_m32
+PROBE_DONE
+LOCK DROPPED
+GO_DONE
+GUARD_DONE

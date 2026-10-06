@@ -1,0 +1,92 @@
+{
+  "session": 37548,
+  "exit_code": 0,
+  "lock_released": true,
+  "source_commit": "e05173fe",
+  "exe_sha256": "ed4b8af1bd57b3172eab5c37202c4804e0944f94529a7e9c2d1a9046c4c485ad",
+  "source_review": "measurement finalsourcefairnessPASS; whole160walltiming parser validity required andpassed",
+  "input_hdr_sha256": "fa3c18735ac5f105903614a18a9b1475966b9afd9dd4aeb0cd9cad7bc759ec9b",
+  "contract": "originalO2copiedFrame HDRfixedcontent actualvalid1920x1080proc1152/F1MP1AE0histoffseed0resetTruePDL0pulse0NET0overlap0/opt.graphfalse",
+  "samples": "160totaldiscard80\u219280steady/slot; ABBAeager/replay/replay/eager",
+  "cold": "Frame0commonwarmsettle4actualstablewarm; replaycapture+validation/instantiate costslogsingle; excluded allfirst80",
+  "actual_graph_calls": [
+    0,
+    160,
+    160,
+    0
+  ],
+  "actual_steady_lab_record": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "candidate_DAG": "161Kernel160edgesstrongorderedactualFn match",
+  "raws": [
+    {
+      "slot": 0,
+      "edge": "o-first",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "bytes": 7464960,
+      "invalid_half": 0
+    },
+    {
+      "slot": 0,
+      "edge": "o",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "bytes": 7464960,
+      "invalid_half": 0
+    },
+    {
+      "slot": 1,
+      "edge": "o-first",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "bytes": 7464960,
+      "invalid_half": 0
+    },
+    {
+      "slot": 1,
+      "edge": "o",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "bytes": 7464960,
+      "invalid_half": 0
+    },
+    {
+      "slot": 2,
+      "edge": "o-first",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "bytes": 7464960,
+      "invalid_half": 0
+    },
+    {
+      "slot": 2,
+      "edge": "o",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "bytes": 7464960,
+      "invalid_half": 0
+    },
+    {
+      "slot": 3,
+      "edge": "o-first",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "bytes": 7464960,
+      "invalid_half": 0
+    },
+    {
+      "slot": 3,
+      "edge": "o",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "bytes": 7464960,
+      "invalid_half": 0
+    }
+  ],
+  "framewall_boundary": "originalProcessSubmittedFrame andexistingemptyconsumerFlush, pre/postcodec+externalfences+originalpostsignalquery included; gameRender/FSR/Present excluded",
+  "statistics": "all160rows finite>0 required, frameindex0..159/reset1, checkedonlyfirstlast; steadylinearpooledp99 at0.99*(n-1), no filtering",
+  "result": "singlefirstscreenPASS mean\u2212.074325/p99\u2212.075180ms; eachBmean faster than bothA; controlp99drift\u2212.073240 preserved",
+  "limits": [
+    "No NET timers/actual networkGPUtime collected; wall only APP interface boundary",
+    "SingleAPPround not productionacceptance or wholecompetitorgoal",
+    "No productionPDL1/pulseAuto comparison; cannot add separatepure/H/pulse gains",
+    "No newround/installation/default/config/package/push"
+  ]
+}

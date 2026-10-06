@@ -1,0 +1,310 @@
+{
+  "note": "Conservative textual same-source MOV pairs; heuristic only, ignores loop multiplicity; LLVM register legality remains mandatory; trace columns are items, groups, threads; weighting uses groups (column 5), not items.",
+  "rows": [
+    {
+      "module": "c32-wave1",
+      "kernel": "c32_wave1_chain",
+      "mov_pair_opportunities": 1,
+      "waves1080": 35090,
+      "static_pairs_times_waves": 35090
+    },
+    {
+      "module": "c512-m32-mh",
+      "kernel": "c512_qkv_attention_compact",
+      "mov_pair_opportunities": 2,
+      "waves1080": 16640,
+      "static_pairs_times_waves": 33280
+    },
+    {
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "mov_pair_opportunities": 2,
+      "waves1080": 7072,
+      "static_pairs_times_waves": 14144
+    },
+    {
+      "module": "deep_fast-packed",
+      "kernel": "split_projection_frag",
+      "mov_pair_opportunities": 1,
+      "waves1080": 14040,
+      "static_pairs_times_waves": 14040
+    },
+    {
+      "module": "vit-stream",
+      "kernel": "vit_stream_contract_frag_hout",
+      "mov_pair_opportunities": 1,
+      "waves1080": 5120,
+      "static_pairs_times_waves": 5120
+    },
+    {
+      "module": "deep_fast-packed",
+      "kernel": "decoder_project2x_h16w_byteout",
+      "mov_pair_opportunities": 2,
+      "waves1080": 2160,
+      "static_pairs_times_waves": 4320
+    },
+    {
+      "module": "deep_fast-packed",
+      "kernel": "decoder_project2x_h16w",
+      "mov_pair_opportunities": 2,
+      "waves1080": 1280,
+      "static_pairs_times_waves": 2560
+    }
+  ],
+  "samples": [
+    {
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "sequence": [
+        [
+          "v_mov_b32_e32",
+          "v46, v65"
+        ],
+        [
+          "v_cvt_f32_fp8_e32",
+          "v44, v44"
+        ],
+        [
+          "v_med3_num_f32",
+          "v45, v45, s1, 0x43e00000"
+        ],
+        [
+          "s_wait_alu",
+          "0xf1ff"
+        ],
+        [
+          "v_cndmask_b32_e64",
+          "v43, 0, v43, s0"
+        ],
+        [
+          "v_mov_b32_e32",
+          "v47, v65"
+        ]
+      ]
+    },
+    {
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "sequence": [
+        [
+          "v_mov_b32_e32",
+          "v27, v65"
+        ],
+        [
+          "v_cvt_pk_rtz_f16_f32_e32",
+          "v17, v18, v18"
+        ],
+        [
+          "v_cvt_f32_f16_e32",
+          "v18, v17"
+        ],
+        [
+          "v_max_num_f32_e32",
+          "v28, v18, v18"
+        ],
+        [
+          "v_med3_num_f32",
+          "v29, v16, s1, 0x43e00000"
+        ],
+        [
+          "v_mov_b32_e32",
+          "v30, v65"
+        ]
+      ]
+    },
+    {
+      "module": "deep_fast-packed",
+      "kernel": "decoder_project2x_h16w",
+      "sequence": [
+        [
+          "v_mov_b32_e32",
+          "v15, v10"
+        ],
+        [
+          "s_movk_i32",
+          "s1, 0xf0"
+        ],
+        [
+          "v_mov_b32_e32",
+          "v14, v10"
+        ]
+      ]
+    },
+    {
+      "module": "deep_fast-packed",
+      "kernel": "decoder_project2x_h16w",
+      "sequence": [
+        [
+          "v_mov_b32_e32",
+          "v23, v18"
+        ],
+        [
+          "s_movk_i32",
+          "s1, 0x1f0"
+        ],
+        [
+          "v_mov_b32_e32",
+          "v22, v18"
+        ]
+      ]
+    },
+    {
+      "module": "deep_fast-packed",
+      "kernel": "decoder_project2x_h16w_byteout",
+      "sequence": [
+        [
+          "v_mov_b32_e32",
+          "v15, v10"
+        ],
+        [
+          "s_movk_i32",
+          "s1, 0xf0"
+        ],
+        [
+          "v_mov_b32_e32",
+          "v14, v10"
+        ]
+      ]
+    },
+    {
+      "module": "deep_fast-packed",
+      "kernel": "decoder_project2x_h16w_byteout",
+      "sequence": [
+        [
+          "v_mov_b32_e32",
+          "v23, v18"
+        ],
+        [
+          "s_movk_i32",
+          "s1, 0x1f0"
+        ],
+        [
+          "v_mov_b32_e32",
+          "v22, v18"
+        ]
+      ]
+    },
+    {
+      "module": "deep_fast-packed",
+      "kernel": "split_projection_frag",
+      "sequence": [
+        [
+          "v_mov_b32_e32",
+          "v32, v33"
+        ],
+        [
+          "v_lshlrev_b32_e32",
+          "v58, 9, v37"
+        ],
+        [
+          "v_cvt_pk_fp8_f32",
+          "v48, v26, 0"
+        ],
+        [
+          "v_cvt_f16_f32_e32",
+          "v26, v27"
+        ],
+        [
+          "v_mov_b32_e32",
+          "v53, v33"
+        ]
+      ]
+    },
+    {
+      "module": "c32-wave1",
+      "kernel": "c32_wave1_chain",
+      "sequence": [
+        [
+          "v_mov_b32_e32",
+          "v5, v84"
+        ],
+        [
+          "v_or_b32_e32",
+          "v21, v86, v85"
+        ],
+        [
+          "v_mov_b32_e32",
+          "v14, v84"
+        ]
+      ]
+    },
+    {
+      "module": "c512-m32-mh",
+      "kernel": "c512_qkv_attention_compact",
+      "sequence": [
+        [
+          "v_mov_b32_e32",
+          "v12, 0"
+        ],
+        [
+          "v_perm_b32",
+          "v9, v9, v24, 0xc0c0500"
+        ],
+        [
+          "v_cvt_f32_fp8_e32",
+          "v10, v10"
+        ],
+        [
+          "v_mov_b32_e32",
+          "v19, 0"
+        ]
+      ]
+    },
+    {
+      "module": "c512-m32-mh",
+      "kernel": "c512_qkv_attention_compact",
+      "sequence": [
+        [
+          "v_mov_b32_e32",
+          "v37, v73"
+        ],
+        [
+          "v_perm_b32",
+          "v30, v30, v33, 0xc0c0500"
+        ],
+        [
+          "v_lshlrev_b32_e32",
+          "v33, 16, v38"
+        ],
+        [
+          "v_med3_num_f32",
+          "v26, v26, s21, 0x43e00000"
+        ],
+        [
+          "v_mov_b32_e32",
+          "v36, v73"
+        ]
+      ]
+    },
+    {
+      "module": "vit-stream",
+      "kernel": "vit_stream_contract_frag_hout",
+      "sequence": [
+        [
+          "v_mov_b32_e32",
+          "v13, 0"
+        ],
+        [
+          "v_cvt_f32_fp8_e32",
+          "v11, v11"
+        ],
+        [
+          "s_wait_alu",
+          "0xfffd"
+        ],
+        [
+          "v_cndmask_b32_e32",
+          "v8, 0, v8, vcc_lo"
+        ],
+        [
+          "v_med3_num_f32",
+          "v12, v12, s0, 0x43e00000"
+        ],
+        [
+          "v_mov_b32_e32",
+          "v14, 0"
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1424 @@
+{
+  "gates": {
+    "SystemInfo_exactsame": true,
+    "derived31_definitions_exactsame": true,
+    "gpuperfexp_exactsame": true,
+    "spm_interval_same": true,
+    "pci_same": true
+  },
+  "traces": {
+    "HIP": {
+      "traceSHA": "a58ca4016ca5d1bf59323c0d59b9b6123dd156fef7c49628fd30d278e003e636",
+      "SystemInfo": {
+        "version": {
+          "major": 2,
+          "minor": 0
+        },
+        "devdriver": {
+          "version": {
+            "major": 42
+          }
+        },
+        "os": {
+          "type": "Windows",
+          "name": "Windows 11 Pro",
+          "description": "26100.6.amd64fre.ge_release_flt.260716-1700",
+          "hostname": "desktop-2026",
+          "memory": {
+            "physical": 50974298112,
+            "swap": 54195523584,
+            "name": "DDR5"
+          },
+          "config": {
+            "windows": {
+              "etwSupport": {
+                "isSupported": true,
+                "hasPermission": true,
+                "statusCode": 0,
+                "needsRegistryOrUserGroup": true
+              }
+            }
+          }
+        },
+        "driver": {
+          "name": "AMD Windows",
+          "description": "AMD Windows Driver",
+          "packagingVersion": "26.10.07.02-260720a-202641E-AMD-Software-Adrenalin-Edition",
+          "packagingDate": "260720",
+          "softwareVersion": "26.10.07.02"
+        },
+        "drivers": [
+          {
+            "name": "Advanced Micro Devices, Inc.",
+            "description": "",
+            "packagingVersion": "26.10.07.02-260720a-202641E-AMD-Software-Adrenalin-Edition",
+            "packagingDate": "260720",
+            "softwareVersion": "26.10.07.02"
+          }
+        ],
+        "cpus": [
+          {
+            "name": "Intel(R) Core(TM) Ultra 7 270K Plus",
+            "virtualization": "disabled",
+            "deviceId": "CPU0",
+            "cpuId": "Intel64 Family 6 Model 198 Stepping 2",
+            "architecture": "x64",
+            "speed": {
+              "max": 3700
+            },
+            "numPhysicalCores": 24,
+            "numLogicalCores": 24,
+            "vendorId": "GenuineIntel",
+            "cpuTimeClockFreq": 10000000
+          }
+        ],
+        "gpus": [
+          {
+            "name": "AMD Radeon RX 9070 XT",
+            "pci": {
+              "bus": 4,
+              "device": 0,
+              "function": 0
+            },
+            "asic": {
+              "gpuIndex": 0,
+              "gpuCounterFreq": 100000000,
+              "numShaderEngines": 4,
+              "numShaderArraysPerEngine": 2,
+              "numCus": 64,
+              "cuMask": [
+                [
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255
+                ]
+              ],
+              "engineClockHz": {
+                "min": 500000000,
+                "max": 2520000000
+              },
+              "ids": {
+                "gfxEngine": 13,
+                "family": 152,
+                "eRev": 81,
+                "revision": 192,
+                "device": 30032,
+                "subsystem": 606344280,
+                "vendor": 4098,
+                "luid": "657b010000000000"
+              }
+            },
+            "memory": {
+              "type": "Gddr6",
+              "memOpsPerClock": 16,
+              "busBitWidth": 256,
+              "bandwidthBytesPerSec": 644608000000,
+              "memClockHz": {
+                "min": 96000000,
+                "max": 1259000000
+              },
+              "heaps": {
+                "local": {
+                  "physicalAddress": 0,
+                  "size": 17095983104
+                },
+                "invisible": {
+                  "physicalAddress": 17095983104,
+                  "size": 0
+                }
+              },
+              "excludedVaRanges": [
+                {
+                  "base": 0,
+                  "size": 4096
+                },
+                {
+                  "base": 140737488355328,
+                  "size": 18446462598732840959
+                }
+              ]
+            },
+            "bigSw": {
+              "major": 2023,
+              "minor": 0,
+              "misc": 33413048
+            },
+            "driverIndex": 0
+          }
+        ]
+      },
+      "system_jsonSHA": "1d1bdf7ef4424b1d688f5dcfcd0585798161f8ae6c0559ce073b9133aebbc1f0",
+      "AsicInfoSHA": "a663f5ff5d51e66b595be4b8095194a8928f4b1e9e3e5643d80ad6f5a21f655e",
+      "api_data": "0800000000000000",
+      "derived_definitions": [
+        {
+          "index": 0,
+          "name": "Instruction cache hit",
+          "kind": 3,
+          "unit": 1,
+          "references": [
+            1,
+            2,
+            3
+          ],
+          "description": "The percentage of read requests made that hit the data in the Instruction cache. The Instruction cache supplies shader code to an executing shader. Each request is 64 bytes in size. Value range: 0% (no hit) to 100% (optimal)."
+        },
+        {
+          "index": 1,
+          "name": "Requests",
+          "kind": 0,
+          "unit": 5,
+          "references": [],
+          "description": "The number of read requests made to the Instruction cache. The Instruction cache supplies shader code to an executing shader. Each request is 64 bytes in size."
+        },
+        {
+          "index": 2,
+          "name": "Hits",
+          "kind": 0,
+          "unit": 5,
+          "references": [],
+          "description": "The number of read requests which result in a cache hit from the Instruction cache. The Instruction cache supplies shader code to an executing shader. Each request is 64 bytes in size."
+        },
+        {
+          "index": 3,
+          "name": "Misses",
+          "kind": 0,
+          "unit": 5,
+          "references": [],
+          "description": "The number of read requests which result in a cache miss from the Instruction cache. The Instruction cache supplies shader code to an executing shader. Each request is 64 bytes in size."
+        },
+        {
+          "index": 4,
+          "name": "Scalar cache hit",
+          "kind": 3,
+          "unit": 1,
+          "references": [
+            5,
+            6,
+            7
+          ],
+          "description": "The percentage of read requests made from executing shader code that hit the data in the Scalar cache. The Scalar cache contains data that does not vary in each thread across the wavefront. Each request is 64 bytes in size. Value range: 0% (no hit) to 100% (optimal)."
+        },
+        {
+          "index": 5,
+          "name": "Requests",
+          "kind": 0,
+          "unit": 5,
+          "references": [],
+          "description": "The number of read requests made from executing shader code to the Scalar cache. The Scalar cache contains data that does not vary in each thread across the wavefront. Each request is 64 bytes in size."
+        },
+        {
+          "index": 6,
+          "name": "Hits",
+          "kind": 0,
+          "unit": 5,
+          "references": [],
+          "description": "The number of read requests made from executing shader code which result in a cache hit from the Scalar cache. The Scalar cache contains data that does not vary in each thread across the wavefront. Each request is 64 bytes in size."
+        },
+        {
+          "index": 7,
+          "name": "Misses",
+          "kind": 0,
+          "unit": 5,
+          "references": [],
+          "description": "The number of read requests made from executing shader code which result in a cache miss from the Scalar cache. The Scalar cache contains data that does not vary in each thread across the wavefront. Each request is 64 bytes in size."
+        },
+        {
+          "index": 8,
+          "name": "L0 cache hit",
+          "kind": 3,
+          "unit": 1,
+          "references": [
+            9,
+            10,
+            13
+          ],
+          "description": "The percentage of read requests that hit the data in the L0 cache. The L0 cache contains vector data, which is data that may vary in each thread across the wavefront. Each request is 128 bytes in size. Value range: 0% (no hit) to 100% (optimal)."
+        },
+        {
+          "index": 9,
+          "name": "Requests",
+          "kind": 0,
+          "unit": 5,
+          "references": [],
+          "description": "The number of read requests made to the L0 cache. The L0 cache contains vector data, which is data that may vary in each thread across the wavefront. Each request is 128 bytes in size."
+        },
+        {
+          "index": 10,
+          "name": "Hits",
+          "kind": 0,
+          "unit": 5,
+          "references": [],
+          "description": "The number of read requests which result in a cache hit from the L0 cache. The L0 cache contains vector data, which is data that may vary in each thread across the wavefront. Each request is 128 bytes in size."
+        },
+        {
+          "index": 11,
+          "name": "Ray-box tests",
+          "kind": 0,
+          "unit": 5,
+          "references": [],
+          "description": "The number of ray box intersection tests."
+        },
+        {
+          "index": 12,
+          "name": "Write size",
+          "kind": 0,
+          "unit": 4,
+          "references": [],
+          "description": "The total bytes written to the video memory. This is measured with all extra fetches and any cache or memory effects taken into account."
+        },
+        {
+          "index": 13,
+          "name": "Misses",
+          "kind": 0,
+          "unit": 5,
+          "references": [],
+          "description": "The number of read requests which result in a cache miss from the L0 cache. The L0 cache contains vector data, which is data that may vary in each thread across the wavefront. Each request is 128 bytes in size."
+        },
+        {
+          "index": 14,
+          "name": "L2 cache hit",
+          "kind": 3,
+          "unit": 1,
+          "references": [
+            15,
+            16,
+            17
+          ],
+          "description": "The percentage of read or write requests that hit the data in the L2 cache. The L2 cache is shared by many blocks across the GPU, including the Command Processor, Geometry Engine, all WGPs, all Render Backends, and others. Each request is 128 bytes in size. Value range: 0% (no hit) to 100% (optimal)."
+        },
+        {
+          "index": 15,
+          "name": "Requests",
+          "kind": 0,
+          "unit": 5,
+          "references": [],
+          "description": "The number of read or write requests made to the L2 cache. The L2 cache is shared by many blocks across the GPU, including the Command Processor, Geometry Engine, all WGPs, all Render Backends, and others. Each request is 128 bytes in size."
+        },
+        {
+          "index": 16,
+          "name": "Hits",
+          "kind": 0,
+          "unit": 5,
+          "references": [],
+          "description": "The number of read or write requests which result in a cache hit from the L2 cache. The L2 cache is shared by many blocks across the GPU, including the Command Processor, Geometry Engine, all WGPs, all Render Backends, and others. Each request is 128 bytes in size."
+        },
+        {
+          "index": 17,
+          "name": "Misses",
+          "kind": 0,
+          "unit": 5,
+          "references": [],
+          "description": "The number of read or write requests which result in a cache miss from the L2 cache. The L2 cache is shared by many blocks across the GPU, including the Command Processor, Geometry Engine, all WGPs, all Render Backends, and others. Each request is 128 bytes in size."
+        },
+        {
+          "index": 18,
+          "name": "Ray-triangle tests",
+          "kind": 0,
+          "unit": 5,
+          "references": [],
+          "description": "The number of ray triangle intersection tests."
+        },
+        {
+          "index": 19,
+          "name": "LDS Bank Conflict",
+          "kind": 2,
+          "unit": 1,
+          "references": [
+            20,
+            21
+          ],
+          "description": "The percentage of GPUTime LDS is stalled by bank conflicts. Value range: 0% (optimal) to 100% (bad)."
+        },
+        {
+          "index": 20,
+          "name": "Gpu Busy Cycles",
+          "kind": 0,
+          "unit": 2,
+          "references": [],
+          "description": "Number of GPU cycles that the GPU command processor was busy."
+        },
+        {
+          "index": 21,
+          "name": "LDS Busy Cycles",
+          "kind": 0,
+          "unit": 2,
+          "references": [],
+          "description": "Number of GPU cycles the LDS is stalled by bank conflicts. Value range: 0 (optimal) to GPUBusyCycles (bad)."
+        },
+        {
+          "index": 22,
+          "name": "Memory unit busy",
+          "kind": 2,
+          "unit": 1,
+          "references": [
+            20,
+            24
+          ],
+          "description": "The percentage of GPUTime the memory unit is active. The result includes the stall time (MemUnitStalled). This is measured with all extra fetches and writes and any cache or memory effects taken into account. Value range: 0% to 100% (fetch-bound)."
+        },
+        {
+          "index": 23,
+          "name": "Memory unit stalled",
+          "kind": 2,
+          "unit": 1,
+          "references": [
+            20,
+            25
+          ],
+          "description": "The percentage of GPUTime the memory unit is stalled. Try reducing the number or size of fetches and writes if possible. Value range: 0% (optimal) to 100% (bad)."
+        },
+        {
+          "index": 24,
+          "name": "Memory unit busy cycles",
+          "kind": 0,
+          "unit": 2,
+          "references": [],
+          "description": "Number of GPU cycles the memory unit is active. The result includes the stall time (MemUnitStalledCycles). This is measured with all extra fetches and writes and any cache or memory effects taken into account."
+        },
+        {
+          "index": 25,
+          "name": "Memory unit stalled cycles",
+          "kind": 0,
+          "unit": 2,
+          "references": [],
+          "description": "Number of GPU cycles the memory unit is stalled."
+        },
+        {
+          "index": 26,
+          "name": "Write unit stalled",
+          "kind": 2,
+          "unit": 1,
+          "references": [
+            20,
+            27
+          ],
+          "description": "The percentage of GPUTime the Write unit is stalled. Value range: 0% to 100% (bad)."
+        },
+        {
+          "index": 27,
+          "name": "Write unit stalled cycles",
+          "kind": 0,
+          "unit": 2,
+          "references": [],
+          "description": "Number of GPU cycles the Write unit is stalled."
+        },
+        {
+          "index": 28,
+          "name": "Fetch size",
+          "kind": 0,
+          "unit": 4,
+          "references": [],
+          "description": "The total bytes fetched from the video memory. This is measured with all extra fetches and any cache or memory effects taken into account."
+        },
+        {
+          "index": 29,
+          "name": "Local video memory bytes",
+          "kind": 0,
+          "unit": 4,
+          "references": [],
+          "description": "Number of bytes read from or written to the Infinity Cache (if available) or local video memory"
+        },
+        {
+          "index": 30,
+          "name": "PCIe bytes",
+          "kind": 0,
+          "unit": 4,
+          "references": [],
+          "description": "Number of bytes sent and received over the PCIe bus"
+        }
+      ],
+      "gpuperfexp_config": {
+        "sqtt": {
+          "enabled": true,
+          "memoryLimitInMb": 75,
+          "enableInstructionTokens": false,
+          "enableExecPopTokens": false,
+          "seMask": 1
+        },
+        "spm": {
+          "enabled": true,
+          "perfCounters": [
+            [
+              49,
+              4095,
+              302
+            ],
+            [
+              49,
+              4095,
+              303
+            ],
+            [
+              49,
+              4095,
+              304
+            ],
+            [
+              49,
+              4095,
+              326
+            ],
+            [
+              49,
+              4095,
+              327
+            ],
+            [
+              49,
+              4095,
+              328
+            ],
+            [
+              10,
+              4095,
+              9
+            ],
+            [
+              10,
+              4095,
+              17
+            ],
+            [
+              38,
+              4095,
+              3
+            ],
+            [
+              38,
+              4095,
+              42
+            ],
+            [
+              9,
+              4095,
+              116
+            ],
+            [
+              9,
+              4095,
+              117
+            ],
+            [
+              9,
+              4095,
+              118
+            ],
+            [
+              49,
+              4095,
+              288
+            ],
+            [
+              0,
+              4095,
+              24
+            ],
+            [
+              5,
+              4095,
+              39
+            ],
+            [
+              5,
+              4095,
+              47
+            ],
+            [
+              8,
+              4095,
+              15
+            ],
+            [
+              10,
+              4095,
+              39
+            ],
+            [
+              38,
+              4095,
+              122
+            ],
+            [
+              38,
+              4095,
+              146
+            ],
+            [
+              38,
+              4095,
+              147
+            ],
+            [
+              38,
+              4095,
+              148
+            ],
+            [
+              38,
+              4095,
+              149
+            ],
+            [
+              38,
+              4095,
+              150
+            ],
+            [
+              38,
+              4095,
+              151
+            ],
+            [
+              38,
+              4095,
+              113
+            ],
+            [
+              38,
+              4095,
+              114
+            ],
+            [
+              38,
+              4095,
+              115
+            ],
+            [
+              38,
+              4095,
+              116
+            ],
+            [
+              38,
+              4095,
+              117
+            ],
+            [
+              38,
+              4095,
+              118
+            ],
+            [
+              54,
+              4095,
+              3
+            ],
+            [
+              54,
+              4095,
+              4
+            ],
+            [
+              55,
+              4095,
+              1
+            ],
+            [
+              55,
+              4095,
+              2
+            ]
+          ],
+          "sampleFrequency": 4096,
+          "memoryLimitInMb": 128
+        }
+      },
+      "controller": {
+        "name": "renderop",
+        "config": {
+          "enabled": true,
+          "renderOpMode": "dispatch",
+          "numPrepRenderOps": 0,
+          "captureRenderOpCount": 483,
+          "captureMode": "absolute",
+          "preparationStartRenderOp": 13042
+        }
+      },
+      "sample_count": 17326,
+      "spm_header": {
+        "pci": 262144,
+        "flags": 0,
+        "interval": 4096,
+        "counter_count": 1227
+      },
+      "timestamps": {
+        "first": 12950968849554,
+        "last": 12950971839238,
+        "delta": 2989684,
+        "min_diff": 160,
+        "max_diff": 524,
+        "most_common_diffs": [
+          [
+            168,
+            3693
+          ],
+          [
+            172,
+            3580
+          ],
+          [
+            164,
+            3402
+          ],
+          [
+            176,
+            2031
+          ],
+          [
+            184,
+            1508
+          ],
+          [
+            180,
+            1390
+          ],
+          [
+            160,
+            807
+          ],
+          [
+            188,
+            590
+          ]
+        ],
+        "strictly_increasing": true,
+        "time_ms_IF_GPU_COUNTER_DOMAIN_CONFIRMED": 29.89684
+      },
+      "ClockCalibration_v2_raw_3u64": [
+        262144,
+        1294901186537,
+        12950973972291
+      ],
+      "ratios": {
+        "Instruction cache hit": 99.3438215040721,
+        "Scalar cache hit": 92.70748130290252,
+        "L0 cache hit": 77.29483207431296,
+        "L2 cache hit": 96.82736248391797,
+        "LDS Bank Conflict": 0.0,
+        "Memory unit busy": 89.81580577785076,
+        "Memory unit stalled": 20.34889772069971,
+        "Write unit stalled": 0.9440681201793715
+      },
+      "raw_ratio_check_max_error": 1.4210854715202004e-14
+    },
+    "M": {
+      "traceSHA": "5abadb430fe241bd38e27194eff31e742245d891615139b2ca0b66e8ade56950",
+      "SystemInfo": {
+        "version": {
+          "major": 2,
+          "minor": 0
+        },
+        "devdriver": {
+          "version": {
+            "major": 42
+          }
+        },
+        "os": {
+          "type": "Windows",
+          "name": "Windows 11 Pro",
+          "description": "26100.6.amd64fre.ge_release_flt.260716-1700",
+          "hostname": "desktop-2026",
+          "memory": {
+            "physical": 50974298112,
+            "swap": 54195523584,
+            "name": "DDR5"
+          },
+          "config": {
+            "windows": {
+              "etwSupport": {
+                "isSupported": true,
+                "hasPermission": true,
+                "statusCode": 0,
+                "needsRegistryOrUserGroup": true
+              }
+            }
+          }
+        },
+        "driver": {
+          "name": "AMD Windows",
+          "description": "AMD Windows Driver",
+          "packagingVersion": "26.10.07.02-260720a-202641E-AMD-Software-Adrenalin-Edition",
+          "packagingDate": "260720",
+          "softwareVersion": "26.10.07.02"
+        },
+        "drivers": [
+          {
+            "name": "Advanced Micro Devices, Inc.",
+            "description": "",
+            "packagingVersion": "26.10.07.02-260720a-202641E-AMD-Software-Adrenalin-Edition",
+            "packagingDate": "260720",
+            "softwareVersion": "26.10.07.02"
+          }
+        ],
+        "cpus": [
+          {
+            "name": "Intel(R) Core(TM) Ultra 7 270K Plus",
+            "virtualization": "disabled",
+            "deviceId": "CPU0",
+            "cpuId": "Intel64 Family 6 Model 198 Stepping 2",
+            "architecture": "x64",
+            "speed": {
+              "max": 3700
+            },
+            "numPhysicalCores": 24,
+            "numLogicalCores": 24,
+            "vendorId": "GenuineIntel",
+            "cpuTimeClockFreq": 10000000
+          }
+        ],
+        "gpus": [
+          {
+            "name": "AMD Radeon RX 9070 XT",
+            "pci": {
+              "bus": 4,
+              "device": 0,
+              "function": 0
+            },
+            "asic": {
+              "gpuIndex": 0,
+              "gpuCounterFreq": 100000000,
+              "numShaderEngines": 4,
+              "numShaderArraysPerEngine": 2,
+              "numCus": 64,
+              "cuMask": [
+                [
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255
+                ]
+              ],
+              "engineClockHz": {
+                "min": 500000000,
+                "max": 2520000000
+              },
+              "ids": {
+                "gfxEngine": 13,
+                "family": 152,
+                "eRev": 81,
+                "revision": 192,
+                "device": 30032,
+                "subsystem": 606344280,
+                "vendor": 4098,
+                "luid": "657b010000000000"
+              }
+            },
+            "memory": {
+              "type": "Gddr6",
+              "memOpsPerClock": 16,
+              "busBitWidth": 256,
+              "bandwidthBytesPerSec": 644608000000,
+              "memClockHz": {
+                "min": 96000000,
+                "max": 1259000000
+              },
+              "heaps": {
+                "local": {
+                  "physicalAddress": 0,
+                  "size": 17095983104
+                },
+                "invisible": {
+                  "physicalAddress": 17095983104,
+                  "size": 0
+                }
+              },
+              "excludedVaRanges": [
+                {
+                  "base": 0,
+                  "size": 4096
+                },
+                {
+                  "base": 140737488355328,
+                  "size": 18446462598732840959
+                }
+              ]
+            },
+            "bigSw": {
+              "major": 2023,
+              "minor": 0,
+              "misc": 33413048
+            },
+            "driverIndex": 0
+          }
+        ]
+      },
+      "system_jsonSHA": "1d1bdf7ef4424b1d688f5dcfcd0585798161f8ae6c0559ce073b9133aebbc1f0",
+      "AsicInfoSHA": "a663f5ff5d51e66b595be4b8095194a8928f4b1e9e3e5643d80ad6f5a21f655e",
+      "api_data": "0400000000000000",
+      "derived_definitions": [
+        {
+          "index": 0,
+          "name": "Instruction cache hit",
+          "kind": 3,
+          "unit": 1,
+          "references": [
+            1,
+            2,
+            3
+          ],
+          "description": "The percentage of read requests made that hit the data in the Instruction cache. The Instruction cache supplies shader code to an executing shader. Each request is 64 bytes in size. Value range: 0% (no hit) to 100% (optimal)."
+        },
+        {
+          "index": 1,
+          "name": "Requests",
+          "kind": 0,
+          "unit": 5,
+          "references": [],
+          "description": "The number of read requests made to the Instruction cache. The Instruction cache supplies shader code to an executing shader. Each request is 64 bytes in size."
+        },
+        {
+          "index": 2,
+          "name": "Hits",
+          "kind": 0,
+          "unit": 5,
+          "references": [],
+          "description": "The number of read requests which result in a cache hit from the Instruction cache. The Instruction cache supplies shader code to an executing shader. Each request is 64 bytes in size."
+        },
+        {
+          "index": 3,
+          "name": "Misses",
+          "kind": 0,
+          "unit": 5,
+          "references": [],
+          "description": "The number of read requests which result in a cache miss from the Instruction cache. The Instruction cache supplies shader code to an executing shader. Each request is 64 bytes in size."
+        },
+        {
+          "index": 4,
+          "name": "Scalar cache hit",
+          "kind": 3,
+          "unit": 1,
+          "references": [
+            5,
+            6,
+            7
+          ],
+          "description": "The percentage of read requests made from executing shader code that hit the data in the Scalar cache. The Scalar cache contains data that does not vary in each thread across the wavefront. Each request is 64 bytes in size. Value range: 0% (no hit) to 100% (optimal)."
+        },
+        {
+          "index": 5,
+          "name": "Requests",
+          "kind": 0,
+          "unit": 5,
+          "references": [],
+          "description": "The number of read requests made from executing shader code to the Scalar cache. The Scalar cache contains data that does not vary in each thread across the wavefront. Each request is 64 bytes in size."
+        },
+        {
+          "index": 6,
+          "name": "Hits",
+          "kind": 0,
+          "unit": 5,
+          "references": [],
+          "description": "The number of read requests made from executing shader code which result in a cache hit from the Scalar cache. The Scalar cache contains data that does not vary in each thread across the wavefront. Each request is 64 bytes in size."
+        },
+        {
+          "index": 7,
+          "name": "Misses",
+          "kind": 0,
+          "unit": 5,
+          "references": [],
+          "description": "The number of read requests made from executing shader code which result in a cache miss from the Scalar cache. The Scalar cache contains data that does not vary in each thread across the wavefront. Each request is 64 bytes in size."
+        },
+        {
+          "index": 8,
+          "name": "L0 cache hit",
+          "kind": 3,
+          "unit": 1,
+          "references": [
+            9,
+            10,
+            13
+          ],
+          "description": "The percentage of read requests that hit the data in the L0 cache. The L0 cache contains vector data, which is data that may vary in each thread across the wavefront. Each request is 128 bytes in size. Value range: 0% (no hit) to 100% (optimal)."
+        },
+        {
+          "index": 9,
+          "name": "Requests",
+          "kind": 0,
+          "unit": 5,
+          "references": [],
+          "description": "The number of read requests made to the L0 cache. The L0 cache contains vector data, which is data that may vary in each thread across the wavefront. Each request is 128 bytes in size."
+        },
+        {
+          "index": 10,
+          "name": "Hits",
+          "kind": 0,
+          "unit": 5,
+          "references": [],
+          "description": "The number of read requests which result in a cache hit from the L0 cache. The L0 cache contains vector data, which is data that may vary in each thread across the wavefront. Each request is 128 bytes in size."
+        },
+        {
+          "index": 11,
+          "name": "Ray-box tests",
+          "kind": 0,
+          "unit": 5,
+          "references": [],
+          "description": "The number of ray box intersection tests."
+        },
+        {
+          "index": 12,
+          "name": "Write size",
+          "kind": 0,
+          "unit": 4,
+          "references": [],
+          "description": "The total bytes written to the video memory. This is measured with all extra fetches and any cache or memory effects taken into account."
+        },
+        {
+          "index": 13,
+          "name": "Misses",
+          "kind": 0,
+          "unit": 5,
+          "references": [],
+          "description": "The number of read requests which result in a cache miss from the L0 cache. The L0 cache contains vector data, which is data that may vary in each thread across the wavefront. Each request is 128 bytes in size."
+        },
+        {
+          "index": 14,
+          "name": "L2 cache hit",
+          "kind": 3,
+          "unit": 1,
+          "references": [
+            15,
+            16,
+            17
+          ],
+          "description": "The percentage of read or write requests that hit the data in the L2 cache. The L2 cache is shared by many blocks across the GPU, including the Command Processor, Geometry Engine, all WGPs, all Render Backends, and others. Each request is 128 bytes in size. Value range: 0% (no hit) to 100% (optimal)."
+        },
+        {
+          "index": 15,
+          "name": "Requests",
+          "kind": 0,
+          "unit": 5,
+          "references": [],
+          "description": "The number of read or write requests made to the L2 cache. The L2 cache is shared by many blocks across the GPU, including the Command Processor, Geometry Engine, all WGPs, all Render Backends, and others. Each request is 128 bytes in size."
+        },
+        {
+          "index": 16,
+          "name": "Hits",
+          "kind": 0,
+          "unit": 5,
+          "references": [],
+          "description": "The number of read or write requests which result in a cache hit from the L2 cache. The L2 cache is shared by many blocks across the GPU, including the Command Processor, Geometry Engine, all WGPs, all Render Backends, and others. Each request is 128 bytes in size."
+        },
+        {
+          "index": 17,
+          "name": "Misses",
+          "kind": 0,
+          "unit": 5,
+          "references": [],
+          "description": "The number of read or write requests which result in a cache miss from the L2 cache. The L2 cache is shared by many blocks across the GPU, including the Command Processor, Geometry Engine, all WGPs, all Render Backends, and others. Each request is 128 bytes in size."
+        },
+        {
+          "index": 18,
+          "name": "Ray-triangle tests",
+          "kind": 0,
+          "unit": 5,
+          "references": [],
+          "description": "The number of ray triangle intersection tests."
+        },
+        {
+          "index": 19,
+          "name": "LDS Bank Conflict",
+          "kind": 2,
+          "unit": 1,
+          "references": [
+            20,
+            21
+          ],
+          "description": "The percentage of GPUTime LDS is stalled by bank conflicts. Value range: 0% (optimal) to 100% (bad)."
+        },
+        {
+          "index": 20,
+          "name": "Gpu Busy Cycles",
+          "kind": 0,
+          "unit": 2,
+          "references": [],
+          "description": "Number of GPU cycles that the GPU command processor was busy."
+        },
+        {
+          "index": 21,
+          "name": "LDS Busy Cycles",
+          "kind": 0,
+          "unit": 2,
+          "references": [],
+          "description": "Number of GPU cycles the LDS is stalled by bank conflicts. Value range: 0 (optimal) to GPUBusyCycles (bad)."
+        },
+        {
+          "index": 22,
+          "name": "Memory unit busy",
+          "kind": 2,
+          "unit": 1,
+          "references": [
+            20,
+            24
+          ],
+          "description": "The percentage of GPUTime the memory unit is active. The result includes the stall time (MemUnitStalled). This is measured with all extra fetches and writes and any cache or memory effects taken into account. Value range: 0% to 100% (fetch-bound)."
+        },
+        {
+          "index": 23,
+          "name": "Memory unit stalled",
+          "kind": 2,
+          "unit": 1,
+          "references": [
+            20,
+            25
+          ],
+          "description": "The percentage of GPUTime the memory unit is stalled. Try reducing the number or size of fetches and writes if possible. Value range: 0% (optimal) to 100% (bad)."
+        },
+        {
+          "index": 24,
+          "name": "Memory unit busy cycles",
+          "kind": 0,
+          "unit": 2,
+          "references": [],
+          "description": "Number of GPU cycles the memory unit is active. The result includes the stall time (MemUnitStalledCycles). This is measured with all extra fetches and writes and any cache or memory effects taken into account."
+        },
+        {
+          "index": 25,
+          "name": "Memory unit stalled cycles",
+          "kind": 0,
+          "unit": 2,
+          "references": [],
+          "description": "Number of GPU cycles the memory unit is stalled."
+        },
+        {
+          "index": 26,
+          "name": "Write unit stalled",
+          "kind": 2,
+          "unit": 1,
+          "references": [
+            20,
+            27
+          ],
+          "description": "The percentage of GPUTime the Write unit is stalled. Value range: 0% to 100% (bad)."
+        },
+        {
+          "index": 27,
+          "name": "Write unit stalled cycles",
+          "kind": 0,
+          "unit": 2,
+          "references": [],
+          "description": "Number of GPU cycles the Write unit is stalled."
+        },
+        {
+          "index": 28,
+          "name": "Fetch size",
+          "kind": 0,
+          "unit": 4,
+          "references": [],
+          "description": "The total bytes fetched from the video memory. This is measured with all extra fetches and any cache or memory effects taken into account."
+        },
+        {
+          "index": 29,
+          "name": "Local video memory bytes",
+          "kind": 0,
+          "unit": 4,
+          "references": [],
+          "description": "Number of bytes read from or written to the Infinity Cache (if available) or local video memory"
+        },
+        {
+          "index": 30,
+          "name": "PCIe bytes",
+          "kind": 0,
+          "unit": 4,
+          "references": [],
+          "description": "Number of bytes sent and received over the PCIe bus"
+        }
+      ],
+      "gpuperfexp_config": {
+        "sqtt": {
+          "enabled": true,
+          "memoryLimitInMb": 75,
+          "enableInstructionTokens": false,
+          "enableExecPopTokens": false,
+          "seMask": 1
+        },
+        "spm": {
+          "enabled": true,
+          "perfCounters": [
+            [
+              49,
+              4095,
+              302
+            ],
+            [
+              49,
+              4095,
+              303
+            ],
+            [
+              49,
+              4095,
+              304
+            ],
+            [
+              49,
+              4095,
+              326
+            ],
+            [
+              49,
+              4095,
+              327
+            ],
+            [
+              49,
+              4095,
+              328
+            ],
+            [
+              10,
+              4095,
+              9
+            ],
+            [
+              10,
+              4095,
+              17
+            ],
+            [
+              38,
+              4095,
+              3
+            ],
+            [
+              38,
+              4095,
+              42
+            ],
+            [
+              9,
+              4095,
+              116
+            ],
+            [
+              9,
+              4095,
+              117
+            ],
+            [
+              9,
+              4095,
+              118
+            ],
+            [
+              49,
+              4095,
+              288
+            ],
+            [
+              0,
+              4095,
+              24
+            ],
+            [
+              5,
+              4095,
+              39
+            ],
+            [
+              5,
+              4095,
+              47
+            ],
+            [
+              8,
+              4095,
+              15
+            ],
+            [
+              10,
+              4095,
+              39
+            ],
+            [
+              38,
+              4095,
+              122
+            ],
+            [
+              38,
+              4095,
+              146
+            ],
+            [
+              38,
+              4095,
+              147
+            ],
+            [
+              38,
+              4095,
+              148
+            ],
+            [
+              38,
+              4095,
+              149
+            ],
+            [
+              38,
+              4095,
+              150
+            ],
+            [
+              38,
+              4095,
+              151
+            ],
+            [
+              38,
+              4095,
+              113
+            ],
+            [
+              38,
+              4095,
+              114
+            ],
+            [
+              38,
+              4095,
+              115
+            ],
+            [
+              38,
+              4095,
+              116
+            ],
+            [
+              38,
+              4095,
+              117
+            ],
+            [
+              38,
+              4095,
+              118
+            ],
+            [
+              54,
+              4095,
+              3
+            ],
+            [
+              54,
+              4095,
+              4
+            ],
+            [
+              55,
+              4095,
+              1
+            ],
+            [
+              55,
+              4095,
+              2
+            ]
+          ],
+          "sampleFrequency": 4096,
+          "memoryLimitInMb": 128
+        }
+      },
+      "controller": {
+        "name": "renderop",
+        "config": {
+          "enabled": true,
+          "renderOpMode": "dispatch",
+          "numPrepRenderOps": 0,
+          "captureRenderOpCount": 369,
+          "captureMode": "absolute",
+          "preparationStartRenderOp": 9842
+        }
+      },
+      "sample_count": 16496,
+      "spm_header": {
+        "pci": 262144,
+        "flags": 0,
+        "interval": 4096,
+        "counter_count": 1227
+      },
+      "timestamps": {
+        "first": 12956712246394,
+        "last": 12956715104586,
+        "delta": 2858192,
+        "min_diff": 160,
+        "max_diff": 492,
+        "most_common_diffs": [
+          [
+            168,
+            3444
+          ],
+          [
+            172,
+            3243
+          ],
+          [
+            164,
+            3022
+          ],
+          [
+            176,
+            2095
+          ],
+          [
+            180,
+            1528
+          ],
+          [
+            184,
+            1079
+          ],
+          [
+            188,
+            1033
+          ],
+          [
+            160,
+            636
+          ]
+        ],
+        "strictly_increasing": true,
+        "time_ms_IF_GPU_COUNTER_DOMAIN_CONFIRMED": 28.58192
+      },
+      "ClockCalibration_v2_raw_3u64": [
+        262144,
+        1295475583280,
+        12956718145547
+      ],
+      "ratios": {
+        "Instruction cache hit": 65.14299624798599,
+        "Scalar cache hit": 96.75922024244522,
+        "L0 cache hit": 75.16264911976178,
+        "L2 cache hit": 95.39201971000946,
+        "LDS Bank Conflict": 0.5015886803704437,
+        "Memory unit busy": 90.2049638181319,
+        "Memory unit stalled": 12.922486582555642,
+        "Write unit stalled": 0.7170830965383189
+      },
+      "raw_ratio_check_max_error": 1.4210854715202004e-14
+    }
+  },
+  "interpretation": "same provider/device/config and same raw denominators permits observed-window ratio contrast; frame phase,actual shaderclock,SPM loss,ClockCalibration named schema not established; no perframe/DRAM bandwidth or bottleneck attribution"
+}

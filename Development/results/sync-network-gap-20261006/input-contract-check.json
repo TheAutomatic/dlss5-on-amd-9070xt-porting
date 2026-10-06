@@ -1,0 +1,10 @@
+{
+  "valid_bytes": 23040000,
+  "proc_bytes": 24576000,
+  "half_exact": true,
+  "valid_bit_equal": true,
+  "bottom_mirror_bit_equal": true,
+  "mochi_sampler": "VK_FORMAT_R32G32B32A32_SFLOAT; NEAREST; normalized; MIRRORED_REPEAT",
+  "mochi_no_encode": "CLI only upload(blob) then graph; runtime_encode.comp is a separate runtime pass not included here",
+  "all_finite": true
+}

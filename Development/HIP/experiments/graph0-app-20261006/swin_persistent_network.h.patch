@@ -1,0 +1,11 @@
+--- /tmp/graph0-single-replay-20261006/swin_persistent_network.h
++++ isolated/swin_persistent_network.h
+@@ -41,7 +41,7 @@
+  auto key=std::make_tuple(w,h,c,first);auto it=sp_plans.find(key);
+  if(it!=sp_plans.end())return it->second;
+  if(graph_capturing)throw std::runtime_error("capture SP plan cache miss");
+- SpPlan plan;plan.offsets.push_back(0);plan.next_ticket=SpEnv("SP_TICKET_START");
++ lab_plan_misses++;SpPlan plan;plan.offsets.push_back(0);plan.next_ticket=SpEnv("SP_TICKET_START");
+  if(layers>8)throw std::runtime_error("SP layer limit");
+  if(!sp_error_allocation){
+   int(*device_pointer)(void**,void*,unsigned)=nullptr;

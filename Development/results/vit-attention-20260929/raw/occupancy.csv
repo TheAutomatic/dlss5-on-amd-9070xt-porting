@@ -1,0 +1,9 @@
+device=AMD Radeon RX 9070 XT mp=32 max_threads=2048
+module,kernel,threads,blocks_per_mp,theoretical_percent
+flat-A/deep_fast-packed.hsaco,vit_attention_fused_640_bytein_bout,32,64,100
+flat-P/deep_fast-packed.hsaco,vit_attention_fused_640_bytein_bout,32,64,100
+probe/gfx1201/probe.hsaco,vit_probe_g4_u4_h1,128,12,75
+probe/gfx1201/probe.hsaco,vit_probe_native_g4_u4_h1,128,12,75
+probe/gfx1201/probe.hsaco,vit_probe_native_constv,32,64,100
+daniel-050.hsaco,_Z12k_reg1d_attnILi1ELb0EEv15Reg1dAttnParams,128,12,75
+daniel-051.hsaco,_Z12k_reg1d_attnILi1ELb0EEv15Reg1dAttnParams,128,12,75

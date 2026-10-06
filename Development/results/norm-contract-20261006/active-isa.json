@@ -1,0 +1,30 @@
+{
+  "c32_wave1_mapped_b8": {
+    "instructions": 1030,
+    "VALU_nonWMMA": 703,
+    "WMMA_f16": 8,
+    "WMMA_fp8": 36,
+    "DSbpermute": 0
+  },
+  "c32_wave1_prefix_b8d": {
+    "instructions": 1517,
+    "VALU_nonWMMA": 964,
+    "WMMA_f16": 12,
+    "WMMA_fp8": 36,
+    "DSbpermute": 1
+  },
+  "c32_wave1_post_b8": {
+    "instructions": 1524,
+    "VALU_nonWMMA": 995,
+    "WMMA_f16": 8,
+    "WMMA_fp8": 36,
+    "DSbpermute": 0
+  },
+  "c32_wave1_post_b8_rgba": {
+    "instructions": 1528,
+    "VALU_nonWMMA": 981,
+    "WMMA_f16": 8,
+    "WMMA_fp8": 36,
+    "DSbpermute": 0
+  }
+}

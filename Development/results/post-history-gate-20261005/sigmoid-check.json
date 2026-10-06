@@ -1,0 +1,17 @@
+{
+  "native_sha256": "394394a5258bad437495d68076be75d8413fa0ed5b752400e3947c332437b850",
+  "finite_half_codes": 63488,
+  "finite_half_bitdiff": 11033,
+  "max_abs": 1.1920928955078125e-07,
+  "max_ulp": 3,
+  "nonfinite_half_bitdiff": 2046,
+  "NaN_code_count": 2046,
+  "native_NaN_bits": [
+    "0x7fffffff"
+  ],
+  "native_zero_and_negative_zero": 0.5,
+  "native_positive_inf": 1,
+  "native_negative_inf": 0,
+  "actual_controlled_logit_sig_bitdiff": 0,
+  "strict_plan": "native65536 scalar table indexed by validated half logit; AMD EXP2/RCP is an explicit approx and cannot be labelled bit-exact"
+}

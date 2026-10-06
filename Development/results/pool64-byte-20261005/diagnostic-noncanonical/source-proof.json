@@ -1,0 +1,13 @@
+{
+  "sha256": "541273adfa5a8ceda48d9a3a3ee3ebc4230ee7816a5ff51aa6cde5d6bb69497c",
+  "defines": [
+    "MH_POOL_HALF_IN 1",
+    "C512_HEAD_GROUP 1",
+    "HIP_C512_HOIST_RES 1",
+    "HIP_FFN_HOIST_RES 2",
+    "HIP_FFN_LINE_STORES 1",
+    "HIP_FMED3_CLAMP 1",
+    "HIP_POOL32_B8 1"
+  ],
+  "proof": "GPU pending; CPU representation only complete"
+}

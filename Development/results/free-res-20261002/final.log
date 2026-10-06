@@ -1,0 +1,66 @@
+RUN tag=fin-F res=1920x1080 free=1 style=1 skip=42,43,46 exit=0 wall_med=11.157 span_med=-1 n_span=0 sha=AE7E311887F45054
+RUN tag=fin-T res=1920x1080 free=0 style=1 skip=42,43,46 exit=0 wall_med=11.224 span_med=-1 n_span=0 sha=AE7E311887F45054
+RUN tag=fin-F res=1280x720 free=1 style=1 skip=42,43,46 exit=0 wall_med=5.894 span_med=-1 n_span=0 sha=0CEB007B3A128092
+RUN tag=fin-T res=1280x720 free=0 style=1 skip=42,43,46 exit=0 wall_med=5.654 span_med=-1 n_span=0 sha=BD98DB1D5B761501
+RUN tag=fin-F res=1706x960 free=1 style=1 skip=42,43,46 exit=0 wall_med=8.795 span_med=-1 n_span=0 sha=3B42EEB1254DF37F
+RUN tag=fin-T res=1706x960 free=0 style=1 skip=42,43,46 exit=0 wall_med=8.338 span_med=-1 n_span=0 sha=E8D4DF339D4150E7
+RUN tag=fin-F res=1366x768 free=1 style=1 skip=42,43,46 exit=0 wall_med=6.169 span_med=-1 n_span=0 sha=857BB7B7047628B7
+RUN tag=fin-T res=1366x768 free=0 style=1 skip=42,43,46 exit=0 wall_med=5.732 span_med=-1 n_span=0 sha=9054B470CD36840B
+RUN tag=fin-F res=1600x900 free=1 style=1 skip=42,43,46 exit=0 wall_med=8.02 span_med=-1 n_span=0 sha=41003B3B7DFD638F
+RUN tag=fin-T res=1600x900 free=0 style=1 skip=42,43,46 exit=0 wall_med=8.319 span_med=-1 n_span=0 sha=41003B3B7DFD638F
+RUN tag=fin-F res=2560x1440 free=1 style=1 skip=42,43,46 exit=0 wall_med=18.553 span_med=-1 n_span=0 sha=CE73450359867F2F
+RUN tag=fin-T res=2560x1440 free=0 style=1 skip=42,43,46 exit=0 wall_med=11.727 span_med=-1 n_span=0 sha=4D7057929240FC96
+RUN tag=fin-F res=3440x1440 free=1 style=1 skip=42,43,46 exit=0 wall_med=24.719 span_med=-1 n_span=0 sha=DE7339D2B59E0B07
+RUN tag=fin-T res=3440x1440 free=0 style=1 skip=42,43,46 exit=0 wall_med=12.216 span_med=-1 n_span=0 sha=C9BAEE0EB01796EE
+RUN tag=fin-F res=3840x2160 free=1 style=1 skip=42,43,46 exit=0 wall_med=39.691 span_med=-1 n_span=0 sha=40176C2CAE4D9607
+RUN tag=fin-T res=3840x2160 free=0 style=1 skip=42,43,46 exit=0 wall_med=12.949 span_med=-1 n_span=0 sha=CE671BFCB458F57E
+LOCK DROPPED
+RUN tag=finslow-F res=1920x1080 free=1 style=1 skip=42,43,46 exit=0 wall_med=-1 span_med=-1 n_span=0 sha=AE7E311887F45054
+RUN tag=finslow-F res=1280x720 free=1 style=1 skip=42,43,46 exit=0 wall_med=-1 span_med=-1 n_span=0 sha=0CEB007B3A128092
+RUN tag=finslow-F res=1706x960 free=1 style=1 skip=42,43,46 exit=0 wall_med=-1 span_med=-1 n_span=0 sha=3B42EEB1254DF37F
+RUN tag=finslow-F res=1366x768 free=1 style=1 skip=42,43,46 exit=0 wall_med=-1 span_med=-1 n_span=0 sha=857BB7B7047628B7
+RUN tag=finslow-F res=1600x900 free=1 style=1 skip=42,43,46 exit=0 wall_med=-1 span_med=-1 n_span=0 sha=41003B3B7DFD638F
+RUN tag=finslow-F res=2560x1440 free=1 style=1 skip=42,43,46 exit=0 wall_med=-1 span_med=-1 n_span=0 sha=CE73450359867F2F
+RUN tag=finslow-F res=3440x1440 free=1 style=1 skip=42,43,46 exit=0 wall_med=-1 span_med=-1 n_span=0 sha=DE7339D2B59E0B07
+RUN tag=finslow-F res=3840x2160 free=1 style=1 skip=42,43,46 exit=0 wall_med=-1 span_med=-1 n_span=0 sha=40176C2CAE4D9607
+LOCK DROPPED
+RUN tag=finnv8-F res=1920x1080 free=1 style=0 skip=42,43,46 exit=0 wall_med=-1 span_med=-1 n_span=0 sha=76915EC57671D840
+RUN tag=finnv8-F res=2560x1440 free=1 style=0 skip=42,43,46 exit=0 wall_med=-1 span_med=-1 n_span=0 sha=E02F32B9C74C4F4B
+RUN tag=finnv8-F res=3840x2160 free=1 style=0 skip=42,43,46 exit=0 wall_med=-1 span_med=-1 n_span=0 sha=2A395E925BC6018D
+LOCK DROPPED
+RUN tag=finnv4-F res=1920x1080 free=1 style=0 skip=none exit=0 wall_med=-1 span_med=-1 n_span=0 sha=299209532C8B1BFB
+RUN tag=finnv4-F res=2560x1440 free=1 style=0 skip=none exit=0 wall_med=-1 span_med=-1 n_span=0 sha=29A4D94858B7A5BB
+RUN tag=finnv4-F res=3840x2160 free=1 style=0 skip=none exit=0 wall_med=-1 span_med=-1 n_span=0 sha=D84653A3FD317079
+LOCK DROPPED
+FULL F OK
+SAME-count F: 19
+F 1 900: avg 7.1360 -> 7.1269 (-0.0092 ms, -0.13%)  p99 7.4240 -> 7.3680
+F 1 1080: avg 9.8433 -> 9.8397 (-0.0037 ms, -0.04%)  p99 10.1240 -> 10.1490
+F 2 900: avg 7.1330 -> 7.1564 (+0.0234 ms, +0.33%)  p99 7.3710 -> 7.4300
+F 2 1080: avg 9.9012 -> 9.8529 (-0.0484 ms, -0.49%)  p99 10.2240 -> 10.1400
+F 3 900: avg 7.1495 -> 7.1351 (-0.0144 ms, -0.20%)  p99 7.3850 -> 7.3680
+F 3 1080: avg 9.8484 -> 9.8737 (+0.0253 ms, +0.26%)  p99 10.1290 -> 10.1640
+F 900 merged: avg 7.1395 -> 7.1395  p99 7.4000 -> 7.4100
+F 1080 merged: avg 9.8643 -> 9.8554  p99 10.1830 -> 10.1510
+old runtime 3103A0A7
+new runtime 77A35681
+RUNTIME 900 old=b2980ada643da964 new=b2980ada643da964 new+shaders=b2980ada643da964 exit=0/0/0 SAME
+RUNTIME 1080 old=758674a8bbd0206d new=758674a8bbd0206d new+shaders=758674a8bbd0206d exit=0/0/0 SAME
+FREE 1707x961 exit=0/0 hash=b88f854b9ba5a4c1 repeat=SAME  
+FREE 1920x1080 exit=0/0 hash=63104e9d7f15a0de repeat=SAME  vs1080 SAME
+FREE 2560x1440 exit=0/0 hash=009603593a360396 repeat=SAME  
+FREE 3440x1440 exit=0/0 hash=4a6616411c549658 repeat=SAME  
+RT_ABBA round=1 900 old=7.075 new=7.081 delta=+0.006
+RT_ABBA round=1 1080 old=9.863 new=9.876 delta=+0.014
+RT_ABBA round=2 900 old=7.089 new=7.089 delta=-0.001
+RT_ABBA round=2 1080 old=9.895 new=9.915 delta=+0.020
+RT_ABBA round=3 900 old=7.098 new=7.109 delta=+0.011
+RT_ABBA round=3 1080 old=9.906 new=9.913 delta=+0.008
+SMOKE exit=0
+HIP rc=0 error=
+SP_STATS runs=4 fallback=0 rollover=0 jobs=2496 disabled=0 errors=0
+lmxxf_nr_gpu: ok
+RT_DONE
+LOCK DROPPED
+GO_DONE
+GUARD_DONE

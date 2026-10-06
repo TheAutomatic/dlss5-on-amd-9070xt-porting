@@ -1,0 +1,64 @@
+	scratch_store_b32 off, v3, off                             // 00000018DABC: ED06807C 01800000 00000000
+	scratch_store_b32 off, v4, off offset:4                    // 00000018DAC8: ED06807C 02000000 00000400
+	scratch_store_b32 off, v3, off offset:8                    // 00000018DAD4: ED06807C 01800000 00000800
+	scratch_store_b32 off, v1, off offset:12                   // 00000018DAE0: ED06807C 00800000 00000C00
+	scratch_store_b32 off, v5, off offset:16                   // 00000018DAEC: ED06807C 02800000 00001000
+	scratch_store_b32 off, v2, off offset:20                   // 00000018DAF8: ED06807C 01000000 00001400
+	scratch_store_b32 off, v103, off offset:24                 // 00000018DB04: ED06807C 33800000 00001800
+	scratch_store_b128 off, v[2:5], off offset:64              // 00000018DCE4: ED07407C 01000000 00004000
+	scratch_store_b128 off, v[6:9], off offset:80              // 00000018DCF0: ED07407C 03000000 00005000
+	scratch_store_b128 off, v[10:13], off offset:96            // 00000018DCFC: ED07407C 05000000 00006000
+	scratch_store_b128 off, v[14:17], off offset:112           // 00000018DD08: ED07407C 07000000 00007000
+	scratch_store_b128 off, v[18:21], off offset:128           // 00000018DD14: ED07407C 09000000 00008000
+	scratch_store_b128 off, v[22:25], off offset:144           // 00000018DD20: ED07407C 0B000000 00009000
+	scratch_store_b128 off, v[26:29], off offset:160           // 00000018DD4C: ED07407C 0D000000 0000A000
+	scratch_store_b64 off, v[46:47], off offset:176            // 00000018DD58: ED06C07C 17000000 0000B000
+	scratch_store_b32 off, v1, off offset:28                   // 00000018DD64: ED06807C 00800000 00001C00
+	scratch_store_b32 off, v1, off offset:32                   // 00000018DD70: ED06807C 00800000 00002000
+	scratch_store_b32 off, v1, off offset:36                   // 00000018DD7C: ED06807C 00800000 00002400
+	scratch_store_b32 off, v1, off offset:40                   // 00000018DD88: ED06807C 00800000 00002800
+	scratch_store_b32 off, v1, off offset:44                   // 00000018DD94: ED06807C 00800000 00002C00
+	scratch_store_b32 off, v1, off offset:48                   // 00000018DDA0: ED06807C 00800000 00003000
+	scratch_store_b32 off, v1, off offset:52                   // 00000018DDAC: ED06807C 00800000 00003400
+	scratch_store_b32 off, v1, off offset:56                   // 00000018DDB8: ED06807C 00800000 00003800
+	scratch_load_b32 v65, off, off offset:24                   // 00000018E114: ED05007C 00000041 00001800
+	scratch_load_b32 v65, off, off offset:24                   // 00000018F440: ED05007C 00000041 00001800
+	scratch_load_b32 v4, off, off offset:8                     // 00000018FB44: ED05007C 00000004 00000800
+	scratch_load_b32 v5, off, off offset:20                    // 00000018FB50: ED05007C 00000005 00001400
+	scratch_load_b32 v20, off, off offset:24                   // 00000018FB5C: ED05007C 00000014 00001800
+	scratch_load_b32 v6, off, off offset:16                    // 00000018FB68: ED05007C 00000006 00001000
+	scratch_load_b32 v7, off, off offset:12                    // 00000018FB74: ED05007C 00000007 00000C00
+	scratch_load_b32 v8, off, off                              // 00000018FB80: ED05007C 00000008 00000000
+	scratch_load_b32 v9, off, off offset:4                     // 00000018FB8C: ED05007C 00000009 00000400
+	scratch_load_b32 v17, off, off offset:24                   // 0000001942C8: ED05007C 00000011 00001800
+	scratch_load_b32 v17, off, off offset:24                   // 000000194EC0: ED05007C 00000011 00001800
+	scratch_load_b32 v116, off, off offset:8                   // 000000194FC8: ED05007C 00000074 00000800
+	scratch_load_b32 v117, off, off offset:20                  // 000000195070: ED05007C 00000075 00001400
+	scratch_load_b32 v118, off, off offset:24                  // 00000019509C: ED05007C 00000076 00001800
+	scratch_load_b32 v119, off, off offset:12                  // 0000001950A8: ED05007C 00000077 00000C00
+	scratch_load_b32 v120, off, off offset:16                  // 0000001950B4: ED05007C 00000078 00001000
+	scratch_load_b32 v121, off, off                            // 0000001950E0: ED05007C 00000079 00000000
+	scratch_load_b32 v122, off, off offset:4                   // 0000001950EC: ED05007C 0000007A 00000400
+	scratch_load_b128 v[21:24], off, s4 offset:56              // 000000195FAC: ED05C004 00000015 00003800
+	scratch_load_b32 v19, off, off offset:8                    // 00000019605C: ED05007C 00000013 00000800
+	scratch_load_b32 v20, off, off offset:20                   // 000000196068: ED05007C 00000014 00001400
+	scratch_load_b32 v17, off, off offset:24                   // 000000196074: ED05007C 00000011 00001800
+	scratch_load_b32 v18, off, off offset:12                   // 000000196080: ED05007C 00000012 00000C00
+	scratch_load_b32 v20, off, off offset:16                   // 000000196164: ED05007C 00000014 00001000
+	scratch_load_b32 v22, off, off                             // 00000019619C: ED05007C 00000016 00000000
+	scratch_load_b32 v23, off, off offset:4                    // 0000001961C4: ED05007C 00000017 00000400
+	scratch_load_b32 v1, off, off offset:28                    // 00000019629C: ED05007C 00000001 00001C00
+	scratch_load_b32 v2, off, off offset:32                    // 0000001962A8: ED05007C 00000002 00002000
+	scratch_load_b32 v3, off, off offset:36                    // 0000001962B4: ED05007C 00000003 00002400
+	scratch_load_b32 v4, off, off offset:40                    // 0000001962C0: ED05007C 00000004 00002800
+	scratch_load_b32 v5, off, off offset:44                    // 0000001962CC: ED05007C 00000005 00002C00
+	scratch_load_b32 v6, off, off offset:48                    // 0000001962D8: ED05007C 00000006 00003000
+	scratch_load_b32 v7, off, off offset:52                    // 0000001962E4: ED05007C 00000007 00003400
+	scratch_load_b32 v8, off, off offset:56                    // 0000001962F0: ED05007C 00000008 00003800
+	scratch_load_b32 v26, off, off offset:24                   // 000000196390: ED05007C 0000001A 00001800
+	scratch_load_b32 v0, off, off offset:8                     // 0000001966B4: ED05007C 00000000 00000800
+	scratch_load_b32 v2, off, off offset:20                    // 0000001966C0: ED05007C 00000002 00001400
+	scratch_load_b32 v3, off, off offset:16                    // 0000001966CC: ED05007C 00000003 00001000
+	scratch_load_b32 v15, off, off offset:12                   // 0000001966D8: ED05007C 0000000F 00000C00
+	scratch_load_b32 v38, off, off                             // 0000001966E4: ED05007C 00000026 00000000
+	scratch_load_b32 v39, off, off offset:4                    // 0000001966F0: ED05007C 00000027 00000400

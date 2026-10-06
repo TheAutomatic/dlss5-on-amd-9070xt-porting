@@ -1,0 +1,10 @@
+variant,kernel,group_segment_fixed_size,max_flat_workgroup_size,private_segment_fixed_size,sgpr_count,vgpr_count,vgpr_spill_count,SMEM,WAIT,SALU,VALU,VOPD,VMEM,DS,WMMA,vector_slots
+build-D-gfx1201,c128_wave2_down,16384,128,0,27,160,0,4,1575,926,2502,335,332,156,298,3172
+build-D-gfx1201,c64_wave2_down,8192,64,0,32,139,0,4,1331,931,2388,323,212,124,170,3034
+build-P-gfx1201,vit_stream_project_n64_bh_pack,0,32,0,15,120,0,5,113,36,466,95,120,,16,656
+build-P-gfx1201,vit_stream_gather_pack,0,256,0,10,16,0,2,23,4,38,2,7,,,42
+build-Q-gfx1201,vit_stream_project_n64_bh_pack,0,32,0,15,120,0,5,123,36,426,99,120,,16,624
+build-Q-gfx1201,vit_stream_gather_pack,0,256,0,10,16,0,2,23,4,38,2,7,,,42
+build-T-gfx1201,c32_wave1_up,4096,32,0,26,154,0,4,351,174,940,176,102,20,52,1292
+build-U-gfx1201,c64_wave2_up,8192,64,0,92,140,0,4,1835,542,3538,372,308,146,178,4282
+build-U-gfx1201,c128_wave2_up,16384,128,0,87,160,0,4,2025,527,3615,373,404,178,294,4361

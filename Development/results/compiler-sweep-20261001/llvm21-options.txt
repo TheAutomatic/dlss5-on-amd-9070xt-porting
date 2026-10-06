@@ -1,0 +1,140 @@
+  --amdgpu-any-address-space-out-arguments                                   - Replace pointer out arguments with struct returns for non-private address space
+  --amdgpu-asan-instrument-lds                                               - Run asan instrumentation on LDS instructions lowered to global memory
+  --amdgpu-assume-dynamic-stack-object-size=<uint>                           - Assumed extra stack use if there are any variable sized objects (in bytes)
+  --amdgpu-assume-external-call-stack-size=<uint>                            - Assumed stack use of any external call (in bytes)
+  --amdgpu-atomic-optimizer-strategy=<value>                                 - Select DPP or Iterative strategy for scan
+  --amdgpu-attributor-enable                                                 - Enable AMDGPUAttributorPass
+  --amdgpu-bypass-slow-div                                                   - Skip 64-bit divide for dynamic 32-bit values
+  --amdgpu-dce-in-ra                                                         - Enable machine DCE inside regalloc
+  --amdgpu-disable-clustered-low-occupancy-reschedule                        - Disable clustered low occupancy rescheduling for ILP scheduling stage.
+  --amdgpu-disable-loop-alignment                                            - Do not align and prefetch loops
+  --amdgpu-disable-unclustered-high-rp-reschedule                            - Disable unclustered high register pressure reduction scheduling stage.
+  --amdgpu-dpp-combine                                                       - Enable DPP combiner
+  --amdgpu-dump-hsa-metadata                                                 - Dump AMDGPU HSA Metadata
+  --amdgpu-early-ifcvt                                                       - Run early if-conversion
+  --amdgpu-early-inline-all                                                  - Inline all functions early
+  --amdgpu-enable-delay-alu                                                  - Enable s_delay_alu insertion
+  --amdgpu-enable-hipstdpar                                                  - Enable HIP Standard Parallelism Offload support
+  --amdgpu-enable-image-intrinsic-optimizer                                  - Enable image intrinsic optimizer pass
+  --amdgpu-enable-lower-module-lds                                           - Enable lower module lds pass
+  --amdgpu-enable-merge-m0                                                   - Merge and hoist M0 initializations
+  --amdgpu-enable-pre-ra-optimizations                                       - Enable Pre-RA optimizations pass
+  --amdgpu-enable-promote-kernel-arguments                                   - Enable promotion of flat kernel pointer arguments to global
+  --amdgpu-enable-remove-incompatible-functions                              - Enable removal of functions when theyuse features not supported by the target GPU
+  --amdgpu-enable-rewrite-partial-reg-uses                                   - Enable rewrite partial reg uses pass
+  --amdgpu-enable-sw-lower-lds                                               - Enable lowering of lds to global memory pass and asan instrument resulting IR.
+  --amdgpu-enable-vopd                                                       - Enable VOPD, dual issue of VALU in wave32
+  --amdgpu-function-calls                                                    - Enable AMDGPU function call support
+  --amdgpu-igrouplp-exact-solver                                             - Whether to use the exponential time solver to fit the instructions to the pipeline as closely as possible.
+  --amdgpu-igrouplp-exact-solver-cost-heur                                   - Whether to use the cost heuristic to make choices as we traverse the search space using the exact solver. Defaulted to on, and if turned off, we will use the node order -- attempting to put the later nodes in the later sched groups. Experimentally, results are mixed, so this should be set on a case-by-case basis.
+  --amdgpu-igrouplp-exact-solver-cutoff=<uint>                               - The maximum number of scheduling group conflicts which we attempt to solve with the exponential time exact solver. Problem sizes greater than this willbe solved by the less accurate greedy algorithm. Selecting solver by size is superseded by manually selecting the solver (e.g. by amdgpu-igrouplp-exact-solver
+  --amdgpu-igrouplp-exact-solver-max-branches=<ulong>                        - The amount of branches that we are willing to explore withthe exact algorithm before giving up.
+  --amdgpu-indirect-access-weight=<uint>                                     - Indirect access memory instruction weight
+  --amdgpu-indirect-call-specialization-threshold=<uint>                     - A threshold controls whether an indirect call will be specialized
+  --amdgpu-inline-arg-alloca-cost=<uint>                                     - Cost of alloca argument
+  --amdgpu-inline-arg-alloca-cutoff=<uint>                                   - Maximum alloca size to use for inline cost
+  --amdgpu-inline-max-bb=<ulong>                                             - Maximum number of BBs allowed in a function after inlining (compile time constraint)
+  --amdgpu-internalize-symbols                                               - Enable elimination of non-kernel functions and unused globals
+  --amdgpu-ir-lower-kernel-arguments                                         - Lower kernel argument loads in IR pass
+  --amdgpu-kernarg-preload-count=<uint>                                      - How many kernel arguments to preload onto SGPRs
+  --amdgpu-large-stride-threshold=<uint>                                     - Large stride memory access threshold
+  --amdgpu-large-stride-weight=<uint>                                        - Large stride memory access weight
+  --amdgpu-limit-wave-threshold=<uint>                                       - Kernel limit wave threshold in %
+  --amdgpu-link-time-closed-world                                            - Whether has closed-world assumption at link time
+  --amdgpu-load-store-vectorizer                                             - Enable load store vectorizer
+  --amdgpu-long-branch-factor=<number>                                       - Factor to apply to what qualifies as a long branch to reserve a pair of scalar registers. If this value is 0 the long branch registers are never reserved. As this value grows the greater chance the branch distance will fall within the threshold and the registers will be marked to be reserved. We lean towards always reserving a register for  long jumps
+  --amdgpu-loop-prefetch                                                     - Enable loop data prefetch on AMDGPU
+  --amdgpu-lower-global-ctor-dtor                                            - Lower GPU ctor / dtors to globals on the device.
+  --amdgpu-lower-module-lds-strategy=<value>                                 - Specify lowering strategy for function LDS access:
+  --amdgpu-max-memory-clause=<uint>                                          - Maximum length of a memory clause, instructions
+  --amdgpu-max-return-arg-num-regs=<uint>                                    - Approximately limit number of return registers for replacing out arguments
+  --amdgpu-membound-threshold=<uint>                                         - Function mem bound threshold in %
+  --amdgpu-memcpy-loop-unroll=<uint>                                         - Unroll factor (affecting 4x32-bit operations) to use for memory operations when lowering memcpy as a loop
+  --amdgpu-mfma-padding-ratio=<uint>                                         - Fill a percentage of the latency between neighboring MFMA with s_nops.
+  --amdgpu-mode-register                                                     - Enable mode register pass
+  --amdgpu-module-splitting-large-threshold=<number>                         - when max depth is reached and we can no longer branch out, this value determines if a function is worth merging into an already existing partition to reduce code duplication. This is a factor of the ideal partition size, e.g. 2.0 means we consider the function for merging if its cost (including its callees) is 2x the size of an ideal partition.
+  --amdgpu-module-splitting-max-depth=<uint>                                 - maximum search depth. 0 forces a greedy approach. warning: the algorithm is up to O(2^N), where N is the max depth.
+  --amdgpu-module-splitting-merge-threshold=<number>                         - when a function is considered for merging into a partition that already contains some of its callees, do the merge if at least n% of the code it can reach is already present inside the partition; e.g. 0.7 means only merge >70%
+  --amdgpu-module-splitting-no-externalize-address-taken                     - disables externalization of functions whose addresses are taken
+  --amdgpu-module-splitting-no-externalize-globals                           - disables externalization of global variable with local linkage; may cause globals to be duplicated which increases binary size
+  --amdgpu-module-splitting-print-module-dotcfg=<string>                     - output file to write out the dotgraph representation of the input module
+  --amdgpu-module-splitting-print-partition-summaries=<string>               - output file to write out a summary of the partitions created for each module
+  --amdgpu-nsa-threshold=<uint>                                              - Number of addresses from which to enable MIMG NSA.
+  --amdgpu-opt-exec-mask-pre-ra                                              - Run pre-RA exec mask optimizations
+  --amdgpu-opt-vgpr-liverange                                                - Enable VGPR liverange optimizations for if-else structure
+  --amdgpu-prealloc-sgpr-spill-vgprs                                         - 
+  --amdgpu-prelink                                                           - Enable pre-link mode optimizations
+  --amdgpu-print-rp-downward                                                 - Use GCNDownwardRPTracker for GCNRegPressurePrinter pass
+  --amdgpu-promote-alloca-to-vector-limit=<uint>                             - Maximum byte size to consider promote alloca to vector
+  --amdgpu-promote-alloca-to-vector-max-regs=<uint>                          - Maximum vector size (in 32b registers) to use when promoting alloca
+  --amdgpu-promote-alloca-to-vector-vgpr-ratio=<uint>                        - Ratio of VGPRs to budget for promoting alloca to vectors
+  --amdgpu-reassign-regs                                                     - Enable register reassign optimizations on gfx10+
+  --amdgpu-scalar-ir-passes                                                  - Enable scalar IR passes
+  --amdgpu-scalarize-global-loads                                            - Enable global load scalarization
+  --amdgpu-sched-strategy=<string>                                           - Select custom AMDGPU scheduling strategy.
+  --amdgpu-schedule-metric-bias=<uint>                                       - Sets the bias which adds weight to occupancy vs latency. Set it to 100 to chase the occupancy only.
+  --amdgpu-schedule-relaxed-occupancy                                        - Relax occupancy targets for kernels which are memory bound (amdgpu-membound-threshold), or Wave Limited (amdgpu-limit-wave-threshold).
+  --amdgpu-sdwa-peephole                                                     - Enable SDWA peepholer
+  --amdgpu-set-wave-priority                                                 - Adjust wave priority
+  --amdgpu-set-wave-priority-valu-insts-threshold=<uint>                     - VALU instruction count threshold for adjusting wave priority
+  --amdgpu-sgpr-hazard-boundary-cull                                         - Cull hazards on function boundaries
+  --amdgpu-sgpr-hazard-mem-wait-cull                                         - Cull hazards on memory waits
+  --amdgpu-sgpr-hazard-mem-wait-cull-threshold=<uint>                        - Number of tracked SGPRs before initiating hazard cull on memory wait
+  --amdgpu-sgpr-hazard-wait                                                  - Enable required s_wait_alu on SGPR hazards
+  --amdgpu-simplify-libcall                                                  - Enable amdgpu library simplifications
+  --amdgpu-stress-function-calls                                             - Force all functions to be noinline
+  --amdgpu-super-align-lds-globals                                           - Increase alignment of LDS if it is not on align boundary
+  --amdgpu-unroll-max-block-to-analyze=<uint>                                - Inner loop block size threshold to analyze in unroll for AMDGPU
+  --amdgpu-unroll-runtime-local                                              - Allow runtime unroll for AMDGPU if local memory used in a loop
+  --amdgpu-unroll-threshold-if=<uint>                                        - Unroll threshold increment for AMDGPU for each if statement inside loop
+  --amdgpu-unroll-threshold-local=<uint>                                     - Unroll threshold for AMDGPU if local memory used in a loop
+  --amdgpu-unroll-threshold-private=<uint>                                   - Unroll threshold for AMDGPU if private memory used in a loop
+  --amdgpu-use-aa-in-codegen                                                 - Enable the use of AA during codegen.
+  --amdgpu-use-amdgpu-trackers                                               - Use the AMDGPU specific RPTrackers during scheduling
+  --amdgpu-use-divergent-register-indexing                                   - Use indirect register addressing for divergent indexes
+  --amdgpu-use-native[=<string>]                                               - Comma separated list of functions to replace with native, or all
+  --amdgpu-verify-hsa-metadata                                               - Verify AMDGPU HSA Metadata
+  --amdgpu-vgpr-index-mode                                                   - Use GPR indexing mode instead of movrel for vector indexing
+  --amdgpu-waitcnt-forcezero                                                 - Force all waitcnt instrs to be emitted as s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
+  --amdgpu-waitcnt-load-forcezero                                            - Force all waitcnt load counters to wait until 0
+  --enable-post-misched                                                      - Enable the post-ra machine instruction scheduling pass.
+  --enable-post-pgo-loop-rotation                                            - Run the loop rotation transformation after PGO instrumentation
+  --misched=<value>                                                          - Machine instruction scheduler to use
+  --misched-cluster                                                          - Enable memop clustering.
+  --misched-cyclicpath                                                       - Enable cyclic critical path analysis.
+  --misched-dcpl                                                             - Print critical path length to stdout
+  --misched-fusion                                                           - Enable scheduling for macro fusion.
+  --misched-limit=<uint>                                                     - Limit ready list to N instructions
+  --misched-postra                                                           - Run MachineScheduler post regalloc (independent of preRA sched)
+  --misched-postra-direction=<value>                                         - Post reg-alloc list scheduling direction
+  --misched-prera-direction=<value>                                          - Pre reg-alloc list scheduling direction
+  --misched-regpressure                                                      - Enable register pressure scheduling.
+  --misched-resource-cutoff=<uint>                                           - Number of intervals to track
+  --unroll-allow-loop-nests-peeling                                          - Allows loop nests to be peeled.
+  --unroll-allow-partial                                                     - Allows loops to be partially unrolled until -unroll-threshold loop size is reached.
+  --unroll-allow-peeling                                                     - Allows loops to be peeled when the dynamic trip count is known to be low.
+  --unroll-allow-remainder                                                   - Allow generation of a loop remainder (extra iterations) when unrolling a loop.
+  --unroll-and-jam-count=<uint>                                              - Use this unroll count for all loops including those with unroll_and_jam_count pragma values, for testing purposes
+  --unroll-and-jam-threshold=<uint>                                          - Threshold to use for inner loop when doing unroll and jam.
+  --unroll-count=<uint>                                                      - Use this unroll count for all loops including those with unroll_count pragma values, for testing purposes
+  --unroll-force-peel-count=<uint>                                           - Force a peel count regardless of profiling information.
+  --unroll-full-max-count=<uint>                                             - Set the max unroll count for full unrolling, for testing purposes
+  --unroll-max-count=<uint>                                                  - Set the max unroll count for partial and runtime unrolling, fortesting purposes
+  --unroll-max-iteration-count-to-analyze=<uint>                             - Don't allow loop unrolling to simulate more than this number of iterations when checking full unroll profitability
+  --unroll-max-percent-threshold-boost=<uint>                                - The maximum 'boost' (represented as a percentage >= 100) applied to the threshold when aggressively unrolling a loop due to the dynamic cost savings. If completely unrolling a loop will reduce the total runtime from X to Y, we boost the loop unroll threshold to DefaultThreshold*std::min(MaxPercentThresholdBoost, X/Y). This limit avoids excessive code bloat.
+  --unroll-max-upperbound=<uint>                                             - The max of trip count upper bound that is considered in unrolling
+  --unroll-optsize-threshold=<uint>                                          - The cost threshold for loop unrolling when optimizing for size
+  --unroll-partial-threshold=<uint>                                          - The cost threshold for partial loop unrolling
+  --unroll-peel-count=<uint>                                                 - Set the unroll peeling count, for testing purposes
+  --unroll-peel-max-count=<uint>                                             - Max average trip count which will cause loop peeling.
+  --unroll-remainder                                                         - Allow the loop remainder to be unrolled.
+  --unroll-revisit-child-loops                                               - Enqueue and re-visit child loops in the loop PM after unrolling. This shouldn't typically be needed as child loops (or their clones) were already visited.
+  --unroll-runtime                                                           - Unroll loops with run-time trip counts
+  --unroll-runtime-epilog                                                    - Allow runtime unrolled loops to be unrolled with epilog instead of prolog.
+  --unroll-runtime-multi-exit                                                - Allow runtime unrolling for loops with multiple exits, when epilog is generated
+  --unroll-runtime-other-exit-predictable                                    - Assume the non latch exit block to be predictable
+  --unroll-threshold=<uint>                                                  - The cost threshold for loop unrolling
+  --unroll-threshold-aggressive=<uint>                                       - Threshold (max size of unrolled loop) to use in aggressive (O3) optimizations
+  --unroll-threshold-default=<uint>                                          - Default threshold (max size of unrolled loop), used in all but O3 optimizations
+  --unroll-verify-domtree                                                    - Verify domtree after unrolling
+  --unroll-verify-loopinfo                                                   - Verify loopinfo after unrolling

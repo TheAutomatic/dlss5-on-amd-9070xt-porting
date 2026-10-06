@@ -1,0 +1,86 @@
+{
+  "gfx1200 c512-m32-mh defaults_off": {
+    "a": "/tmp/c512-fusion/default-off/gfx1200/c512-m32-mh.hsaco",
+    "b": "/tmp/c512-fusion/baseline-gfx1200/c512-m32-mh.hsaco",
+    "equal": {
+      ".note": true,
+      ".rodata": true,
+      ".text": true
+    },
+    "section_sha256": {
+      ".note": "010a190ad62435699b9225c5f69a1fd1433d7d25aa72b5b7968839a45da11438",
+      ".rodata": "ff9bfa2d4c45af7bcd750933a5ea41d3a605c8e9c4dcf7721f72f6507dff1bf6",
+      ".text": "c2366311c5d291ae32539dc66834a52a0fc8101738cfdbd4f6c5cda0c4110291"
+    }
+  },
+  "gfx1200 c64-wave2 defaults_off": {
+    "a": "/tmp/c512-fusion/default-off/gfx1200/c64-wave2.hsaco",
+    "b": "/tmp/c512-fusion/baseline-gfx1200/c64-wave2.hsaco",
+    "equal": {
+      ".note": true,
+      ".rodata": true,
+      ".text": true
+    },
+    "section_sha256": {
+      ".note": "a5636c28819910b23c666e730c59bfa338d231f1c31f36dbfe9645c7d0e87290",
+      ".rodata": "0aa6bc01a7408635daaf1a7ff8706f3e30ff7aa3d033b00ac03ae8d1b8eea498",
+      ".text": "c493846d3675f36ef7e0071e5b4a42a725a55880f2c3410b1b34d17e611f5c90"
+    }
+  },
+  "gfx1201 c512-m32-mh defaults_off": {
+    "a": "/tmp/c512-fusion/default-off/gfx1201/c512-m32-mh.hsaco",
+    "b": "/tmp/c512-fusion/flat-A/c512-m32-mh.hsaco",
+    "equal": {
+      ".note": true,
+      ".rodata": true,
+      ".text": true
+    },
+    "section_sha256": {
+      ".note": "66fd4475f380616806115e7b527d41a228a075502027ea0b1c89056be2ce98fb",
+      ".rodata": "ff9bfa2d4c45af7bcd750933a5ea41d3a605c8e9c4dcf7721f72f6507dff1bf6",
+      ".text": "c2366311c5d291ae32539dc66834a52a0fc8101738cfdbd4f6c5cda0c4110291"
+    }
+  },
+  "gfx1201 c64-wave2 defaults_off": {
+    "a": "/tmp/c512-fusion/default-off/gfx1201/c64-wave2.hsaco",
+    "b": "/tmp/c512-fusion/flat-A/c64-wave2.hsaco",
+    "equal": {
+      ".note": true,
+      ".rodata": true,
+      ".text": true
+    },
+    "section_sha256": {
+      ".note": "37d6c4355c06229800c1f18fdd2fa84d2b2f00c8b5f163998062772db17650e0",
+      ".rodata": "0aa6bc01a7408635daaf1a7ff8706f3e30ff7aa3d033b00ac03ae8d1b8eea498",
+      ".text": "c493846d3675f36ef7e0071e5b4a42a725a55880f2c3410b1b34d17e611f5c90"
+    }
+  },
+  "gfx1201 c512-m32-mh production_vs_test": {
+    "a": "/tmp/c512-fusion/production/gfx1201/c512-m32-mh.hsaco",
+    "b": "/tmp/c512-fusion/build-F-gfx1201/c512-m32-mh.hsaco",
+    "equal": {
+      ".note": true,
+      ".rodata": true,
+      ".text": true
+    },
+    "section_sha256": {
+      ".note": "2e5e87c1a936e65303d6584955c1d18f740dc4bee898a26d44a8be57375efc0c",
+      ".rodata": "4af4e5416249e52d4612e918b01ba3fb81d99588043ac5277136cab22abbc14c",
+      ".text": "a6a14de96c65f8414ca36d212747639e4a0796efc950ca085e12b405997e2492"
+    }
+  },
+  "gfx1201 c64-wave2 production_vs_test": {
+    "a": "/tmp/c512-fusion/production/gfx1201/c64-wave2.hsaco",
+    "b": "/tmp/c512-fusion/build-Sboth-gfx1201/c64-wave2.hsaco",
+    "equal": {
+      ".note": true,
+      ".rodata": true,
+      ".text": true
+    },
+    "section_sha256": {
+      ".note": "7bf4e3d7d3c0c77cc4595ecd72695d14846823537720efe9574fe22f1dca3a65",
+      ".rodata": "c4cce49adb8bf53908b73f05f2dad3abc490c667940adafb73144db1ff6482ba",
+      ".text": "b5360fefa09ccc4301c6add9acee78ed111b292dfa0351c2bc9a8d864b4fc043"
+    }
+  }
+}

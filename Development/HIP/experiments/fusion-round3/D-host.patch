@@ -1,0 +1,25 @@
+--- a/Development/HIP/hip_reference_network.h
++++ b/Development/HIP/hip_reference_network.h
+@@ -386,0 +387,11 @@
++#ifndef W2_DOWN_FUSED_HOST
++#define W2_DOWN_FUSED_HOST 0
++#endif
++ Tensor BodyDown(Tensor input,U w,U h,U c,U shift,U block,Tensor&skip){
++  U sx=(shift&1)?4:0,sy=(shift&2)?4:0,ww=(w+sx+7)&~7u,hh=(h+sy+7)&~7u;
++  pdl_prev={};pdl_ffn_flags=nullptr;pdl_anyorder=false;
++  skip=New(size_t(w)*h*c);auto down=New(size_t(w/2)*(h/2)*2*c);
++  std::string name="c"+std::to_string(c)+"_wave2_down";
++  Run("c64_wave2",name.c_str(),size_t(ww)*hh/64,P(input),PackedFusedMhWeightFrag(Block(block,"ffn"),c),WaveOwnedAttentionWeight(Block(block,"attention"),c),P(skip),w,h,ww,hh,sx,sy,U(3),PackedDsWeightFrag(Block(block,"ds"),c),P(down));
++  Stage("block"+std::to_string(block),skip);return down;
++ }
+@@ -476 +487,9 @@
+- U starts[]={5,9,15},counts[]={4,6,8},channels[]={64,128,256};for(U g=0;g<3;g++){U w=W/(4u<<g),h=H/(4u<<g);for(U j=0;j<counts[g];j++)source=Body(source,w,h,channels[g],shifts[j],starts[g]+j,j+1==counts[g],opt.mh_byte_stream&&j>0,opt.mh_byte_stream&&j+1<counts[g]);skips[g+1]=source;source=Down(source,w,h,channels[g],Block(starts[g]+counts[g]-1,"ds"));}
++ U starts[]={5,9,15},counts[]={4,6,8},channels[]={64,128,256};for(U g=0;g<3;g++){U w=W/(4u<<g),h=H/(4u<<g);bool fused_down=false;
++ for(U j=0;j<counts[g];j++){
++#if W2_DOWN_FUSED_HOST
++  if(g<2&&j+1==counts[g]&&wave_owned_active&&opt.mh_byte_stream&&opt.pool_project_group&&opt.packed_weights&&opt.grouped_mh_contract&&opt.mh_proj_diag_fb&&opt.mh_input_mapped&&opt.mh_project_crop&&!opt.skip_blocks.count(starts[g]+j)&&w%2==0&&h%2==0){source=BodyDown(source,w,h,channels[g],shifts[j],starts[g]+j,skips[g+1]);fused_down=true;}
++  else
++#endif
++  source=Body(source,w,h,channels[g],shifts[j],starts[g]+j,j+1==counts[g],opt.mh_byte_stream&&j>0,opt.mh_byte_stream&&j+1<counts[g]);
++ }
++ if(!fused_down){skips[g+1]=source;source=Down(source,w,h,channels[g],Block(starts[g]+counts[g]-1,"ds"));}}

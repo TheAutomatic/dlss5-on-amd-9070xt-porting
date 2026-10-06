@@ -1,0 +1,422 @@
+[
+    {
+        "arch":  "gfx1200",
+        "module":  "boundary-fast.hsaco",
+        "baseline":  "71AFC8157C410D849B57A9823FEB7A7107013306AE6F9ADB55C51EB2A5888C6F",
+        "installed":  "71AFC8157C410D849B57A9823FEB7A7107013306AE6F9ADB55C51EB2A5888C6F",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "boundary_reference.hsaco",
+        "baseline":  "693547DEC3C6E47900ABA1E85F220304F2BFB19313F2B1D7403561F46CF3D6CF",
+        "installed":  "693547DEC3C6E47900ABA1E85F220304F2BFB19313F2B1D7403561F46CF3D6CF",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "c32-wave1.hsaco",
+        "baseline":  "834C709516314091E45A1BE7A3E266F84D1AF96B81388009E3967B3801D15522",
+        "installed":  "834C709516314091E45A1BE7A3E266F84D1AF96B81388009E3967B3801D15522",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "c32_fast.hsaco",
+        "baseline":  "8653D22BA443EC412CAC9643EB6D20D4DEC3CE084B907A480551B4E2810EE08A",
+        "installed":  "8653D22BA443EC412CAC9643EB6D20D4DEC3CE084B907A480551B4E2810EE08A",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "c32_fast_attention.hsaco",
+        "baseline":  "169DE549AA946CBBA505260DE2D7A0B228ED93F2E2806D005F874C4009C18B6C",
+        "installed":  "169DE549AA946CBBA505260DE2D7A0B228ED93F2E2806D005F874C4009C18B6C",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "c32_fused_attention.hsaco",
+        "baseline":  "2B66DEB6C8C17BDE5E27734F49D205DA2651222A860A9183D5F1B88B41F893A6",
+        "installed":  "2B66DEB6C8C17BDE5E27734F49D205DA2651222A860A9183D5F1B88B41F893A6",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "c32_fused_ffn_attention-packed.hsaco",
+        "baseline":  "07E05314DE428A51546C2A4DDED86F5BE43DEB7C223F76611D9DBDEEC90A1FF3",
+        "installed":  "07E05314DE428A51546C2A4DDED86F5BE43DEB7C223F76611D9DBDEEC90A1FF3",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "c32_fused_ffn_attention.hsaco",
+        "baseline":  "B1E75A18CF2E7EF1F43AF334E4257191F96CD390F7B243ACEBC4196671F87E43",
+        "installed":  "B1E75A18CF2E7EF1F43AF334E4257191F96CD390F7B243ACEBC4196671F87E43",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "c32_prefix_reference.hsaco",
+        "baseline":  "6C465595B7D997A011C92D7C1BE7EE505BFA7AE6ED40F4AF522A0E0C8153610E",
+        "installed":  "6C465595B7D997A011C92D7C1BE7EE505BFA7AE6ED40F4AF522A0E0C8153610E",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "c32_tiled.hsaco",
+        "baseline":  "9A2B98313A62611FEE3AB230DCD44AC794C1CBB1A2CCCC3598939612CA8A995A",
+        "installed":  "9A2B98313A62611FEE3AB230DCD44AC794C1CBB1A2CCCC3598939612CA8A995A",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "c32_wmma.hsaco",
+        "baseline":  "576AFA15B5E76B2FF10EEC95FF585E60AB8B7055F0F3EE3DF41478A3FEEF46A7",
+        "installed":  "576AFA15B5E76B2FF10EEC95FF585E60AB8B7055F0F3EE3DF41478A3FEEF46A7",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "c512-m32-deep.hsaco",
+        "baseline":  "53DCE0DADBF47CEA31D7F223E3E093417493D39D22667F95B25FD39CD5AD03E4",
+        "installed":  "53DCE0DADBF47CEA31D7F223E3E093417493D39D22667F95B25FD39CD5AD03E4",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "c512-m32-mh.hsaco",
+        "baseline":  "66E653708E40FE50F74EF994E11949710E8733300377CA456F84903F356DCBF6",
+        "installed":  "66E653708E40FE50F74EF994E11949710E8733300377CA456F84903F356DCBF6",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "c64-wave2.hsaco",
+        "baseline":  "9A0FDA18327D6AB87D6CE8FE126D6BC656EB3F3C4F1EE2CE30F8138A978CB347",
+        "installed":  "9A0FDA18327D6AB87D6CE8FE126D6BC656EB3F3C4F1EE2CE30F8138A978CB347",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "deep_fast-packed.hsaco",
+        "baseline":  "0C549E41D36525A6C704F4B2204307D45294703CC7B5DFB797BF649EB1725E46",
+        "installed":  "0C549E41D36525A6C704F4B2204307D45294703CC7B5DFB797BF649EB1725E46",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "deep_fast.hsaco",
+        "baseline":  "8A29B962EAD72A4988273A19C024A27103D2E4A9E31EE86BA3718B46AE8C5FF8",
+        "installed":  "8A29B962EAD72A4988273A19C024A27103D2E4A9E31EE86BA3718B46AE8C5FF8",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "deep_reference.hsaco",
+        "baseline":  "C2779CDFF408360721E5CD1312D945AE1951CFFC955893821EFD75724C67852E",
+        "installed":  "C2779CDFF408360721E5CD1312D945AE1951CFFC955893821EFD75724C67852E",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "deep_wmma.hsaco",
+        "baseline":  "6B708483D0A9FCEE96967862E92AA5895BE969AB2316749EB5860CFE39BE0AF1",
+        "installed":  "6B708483D0A9FCEE96967862E92AA5895BE969AB2316749EB5860CFE39BE0AF1",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "multihead-fast-packed.hsaco",
+        "baseline":  "8F0EC5D8B1B86776A294DE79B62F7507BA00059F158565D876D6E3AA9FC56ED7",
+        "installed":  "8F0EC5D8B1B86776A294DE79B62F7507BA00059F158565D876D6E3AA9FC56ED7",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "multihead-fast-padded-wave-packed.hsaco",
+        "baseline":  "2CD0F21150F00C398EBDFF78523C49E1047D8C7963FAD15C426B8B185E5A3325",
+        "installed":  "2CD0F21150F00C398EBDFF78523C49E1047D8C7963FAD15C426B8B185E5A3325",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "multihead-fast-padded-wave.hsaco",
+        "baseline":  "2CB99D4A815E9B67F569C8828F277C09ECE7971B36CA371B2BD48D10B009DBF8",
+        "installed":  "2CB99D4A815E9B67F569C8828F277C09ECE7971B36CA371B2BD48D10B009DBF8",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "multihead-fast.hsaco",
+        "baseline":  "F0CEB8562242BDD8ED56F0DDD72D60F965D71AA33A34AB037D04758ECFC0308C",
+        "installed":  "F0CEB8562242BDD8ED56F0DDD72D60F965D71AA33A34AB037D04758ECFC0308C",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "multihead-reference.hsaco",
+        "baseline":  "4B02890CAAD85A42C185180CFD65B5051CD01D8402F8EC21536D9779BA3144D6",
+        "installed":  "4B02890CAAD85A42C185180CFD65B5051CD01D8402F8EC21536D9779BA3144D6",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "multihead-tiled.hsaco",
+        "baseline":  "10AA32A6735464D21F37E197423942E7D33333C667B035F8300B9819A8FCC88E",
+        "installed":  "10AA32A6735464D21F37E197423942E7D33333C667B035F8300B9819A8FCC88E",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "multihead-wmma.hsaco",
+        "baseline":  "8C1A097BFA170EBA0C0CE51E44CC8F6F7521E2B64D6EFF3E07230DEB64D419AD",
+        "installed":  "8C1A097BFA170EBA0C0CE51E44CC8F6F7521E2B64D6EFF3E07230DEB64D419AD",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "multihead_fused_attention.hsaco",
+        "baseline":  "5B1CAD8F5B5061FBDF9D26C98C68785F4A57E359BFDAAB6B0A330E51F59DB10B",
+        "installed":  "5B1CAD8F5B5061FBDF9D26C98C68785F4A57E359BFDAAB6B0A330E51F59DB10B",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "prefix_fast.hsaco",
+        "baseline":  "34AF1CA2602F9B0267294D2A4E3E7A4F2C7C218EF879966824A7B3D7D46E62C0",
+        "installed":  "34AF1CA2602F9B0267294D2A4E3E7A4F2C7C218EF879966824A7B3D7D46E62C0",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "vit-stream.hsaco",
+        "baseline":  "0C9171EE9AE08CF8FEC44186F29EAE451455E2D3573B3CA8297DC06F4E77CB4D",
+        "installed":  "0C9171EE9AE08CF8FEC44186F29EAE451455E2D3573B3CA8297DC06F4E77CB4D",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "vit-wide-deep.hsaco",
+        "baseline":  "D5AACCE44BD31EB33A6ADAB34B08907A46BD3BE49198CD6E2A3630F7C44FA8E5",
+        "installed":  "D5AACCE44BD31EB33A6ADAB34B08907A46BD3BE49198CD6E2A3630F7C44FA8E5",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1200",
+        "module":  "wave-pointwise.hsaco",
+        "baseline":  "1CFF01355F32152834286C303D38EFD05628757C6D4E0FD7F1C0A0F3DB9E701F",
+        "installed":  "1CFF01355F32152834286C303D38EFD05628757C6D4E0FD7F1C0A0F3DB9E701F",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "boundary-fast.hsaco",
+        "baseline":  "40FA66062ECA6BBE654E480944783C27B9BD93970696E1FFCA9BBC8773CA9700",
+        "installed":  "40FA66062ECA6BBE654E480944783C27B9BD93970696E1FFCA9BBC8773CA9700",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "boundary_reference.hsaco",
+        "baseline":  "1B1A514743924D43542ED9AC30E4CA50EC6E84E62D2BAFAB1960AAF061E0ADC8",
+        "installed":  "1B1A514743924D43542ED9AC30E4CA50EC6E84E62D2BAFAB1960AAF061E0ADC8",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "c32-wave1.hsaco",
+        "baseline":  "1753400C0BD0A812DB7CFFD3106EB554E9DEA2D22D36357BCF08C23845F15847",
+        "installed":  "1753400C0BD0A812DB7CFFD3106EB554E9DEA2D22D36357BCF08C23845F15847",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "c32_fast.hsaco",
+        "baseline":  "3D3B7E40B917CB1E31E9D3FE46CB59840BFE45DE1C9E51BF9845B0DECF3A48D3",
+        "installed":  "3D3B7E40B917CB1E31E9D3FE46CB59840BFE45DE1C9E51BF9845B0DECF3A48D3",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "c32_fast_attention.hsaco",
+        "baseline":  "B3ABD5620764F5A5BA4D86FB439E0A57688E346AFDD5945F6F1D9067DA6D032C",
+        "installed":  "B3ABD5620764F5A5BA4D86FB439E0A57688E346AFDD5945F6F1D9067DA6D032C",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "c32_fused_attention.hsaco",
+        "baseline":  "5091D35E5AC53E4A8D16DE2F5FB1C8C057159C72D6605FAEB5A5CA7DAA65AACD",
+        "installed":  "5091D35E5AC53E4A8D16DE2F5FB1C8C057159C72D6605FAEB5A5CA7DAA65AACD",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "c32_fused_ffn_attention-packed.hsaco",
+        "baseline":  "0289229BE526219C6033E6E8383C0C6E076995DC2E14DACFD370A1F73F893337",
+        "installed":  "0289229BE526219C6033E6E8383C0C6E076995DC2E14DACFD370A1F73F893337",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "c32_fused_ffn_attention.hsaco",
+        "baseline":  "3AD918864E3292E3560B0129D5B6AFDE64A8DB669056FBE9FE62A59B274556F3",
+        "installed":  "3AD918864E3292E3560B0129D5B6AFDE64A8DB669056FBE9FE62A59B274556F3",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "c32_prefix_reference.hsaco",
+        "baseline":  "B3835EDEB77C51FE199E5F1F45BDEEF2F5E2F2550DCA42D826FB6B63FF373D6D",
+        "installed":  "B3835EDEB77C51FE199E5F1F45BDEEF2F5E2F2550DCA42D826FB6B63FF373D6D",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "c32_tiled.hsaco",
+        "baseline":  "6E7DB748FBD492CD566F208A1AA3B7E48A42A9C0D8B31022148469BB46D01E8F",
+        "installed":  "6E7DB748FBD492CD566F208A1AA3B7E48A42A9C0D8B31022148469BB46D01E8F",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "c32_wmma.hsaco",
+        "baseline":  "4D239CA134400EE2B42C60F99DC24202F9A4FD38C21A471C01A98217DF04B294",
+        "installed":  "4D239CA134400EE2B42C60F99DC24202F9A4FD38C21A471C01A98217DF04B294",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "c512-m32-deep.hsaco",
+        "baseline":  "A738C644123ECD3C83A02A1D474668C863C3612D346AB204589AF5F52CF43842",
+        "installed":  "A738C644123ECD3C83A02A1D474668C863C3612D346AB204589AF5F52CF43842",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "c512-m32-mh.hsaco",
+        "baseline":  "0AE5641B48C2D60929642C656922B6D77EAFFED127D50BBAD4183B4E541A5B66",
+        "installed":  "0AE5641B48C2D60929642C656922B6D77EAFFED127D50BBAD4183B4E541A5B66",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "c64-wave2.hsaco",
+        "baseline":  "F60EAEE8024E8FCA752407C95F0A5537B9B5154C5561C3ACA5BD437BA620A0C0",
+        "installed":  "F60EAEE8024E8FCA752407C95F0A5537B9B5154C5561C3ACA5BD437BA620A0C0",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "deep_fast-packed.hsaco",
+        "baseline":  "2409E2C411B8D33D8FA439A69B2A7746199B7DF3B6536828F7A92EF6D6AB8EEE",
+        "installed":  "2409E2C411B8D33D8FA439A69B2A7746199B7DF3B6536828F7A92EF6D6AB8EEE",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "deep_fast.hsaco",
+        "baseline":  "640520F688B5420A5988D19FC4416576F54D8356D212115B67E0317428778A2E",
+        "installed":  "640520F688B5420A5988D19FC4416576F54D8356D212115B67E0317428778A2E",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "deep_reference.hsaco",
+        "baseline":  "0D2E3E9658A8ABC53BE68B6FC108CE57594784D3ED56F237BEDD9766D86DB895",
+        "installed":  "0D2E3E9658A8ABC53BE68B6FC108CE57594784D3ED56F237BEDD9766D86DB895",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "deep_wmma.hsaco",
+        "baseline":  "B562C8986300B0517818AE54A46108E725E1ECC6C6B6C88A3B7FA14C749A5B2F",
+        "installed":  "B562C8986300B0517818AE54A46108E725E1ECC6C6B6C88A3B7FA14C749A5B2F",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "multihead-fast-packed.hsaco",
+        "baseline":  "39D5376CDB6C603130048E1F369DCC9CD7887C23FBA084D9132E6C35073A7795",
+        "installed":  "39D5376CDB6C603130048E1F369DCC9CD7887C23FBA084D9132E6C35073A7795",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "multihead-fast-padded-wave-packed.hsaco",
+        "baseline":  "1EE4C91EC39DF2536C8FACCD99CDB28CCC5C39105F6066494A04CF1739F4FCBE",
+        "installed":  "1EE4C91EC39DF2536C8FACCD99CDB28CCC5C39105F6066494A04CF1739F4FCBE",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "multihead-fast-padded-wave.hsaco",
+        "baseline":  "5E0D77B1E621D1D193BA5152440F0E634CBE3DD2D049FD38B65EF7E97353B311",
+        "installed":  "5E0D77B1E621D1D193BA5152440F0E634CBE3DD2D049FD38B65EF7E97353B311",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "multihead-fast.hsaco",
+        "baseline":  "9FE4B5F7016A5369F4A7995AD9E2BDD56F21C393FA0FAA1561CDA5F6B7A7EB4C",
+        "installed":  "9FE4B5F7016A5369F4A7995AD9E2BDD56F21C393FA0FAA1561CDA5F6B7A7EB4C",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "multihead-reference.hsaco",
+        "baseline":  "1CFA639E9F37B7872C69D738C7332B58EAAF0539CAF720CC29A844E770FC8CBE",
+        "installed":  "1CFA639E9F37B7872C69D738C7332B58EAAF0539CAF720CC29A844E770FC8CBE",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "multihead-tiled.hsaco",
+        "baseline":  "3799AE40ECEC89796132BF6464A76FAF1ADFFFE65DF2F5E6406F47A86F67AA81",
+        "installed":  "3799AE40ECEC89796132BF6464A76FAF1ADFFFE65DF2F5E6406F47A86F67AA81",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "multihead-wmma.hsaco",
+        "baseline":  "BFC99774435FCF89985A795EA6E1C20DE3335053097B40206839ADF687D0E226",
+        "installed":  "BFC99774435FCF89985A795EA6E1C20DE3335053097B40206839ADF687D0E226",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "multihead_fused_attention.hsaco",
+        "baseline":  "F7F23560D490868EACB161D7E49C958548FAAA1D61384014EA0859B5E8CEF1B9",
+        "installed":  "F7F23560D490868EACB161D7E49C958548FAAA1D61384014EA0859B5E8CEF1B9",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "prefix_fast.hsaco",
+        "baseline":  "A195C115F8930A467D2113D076435BE5EE784106C9F15215832EEE54C5680F34",
+        "installed":  "A195C115F8930A467D2113D076435BE5EE784106C9F15215832EEE54C5680F34",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "vit-stream.hsaco",
+        "baseline":  "AD59F7BEC8296C4D975969722343727AA345310B273D764A14A0FD053D962D47",
+        "installed":  "AD59F7BEC8296C4D975969722343727AA345310B273D764A14A0FD053D962D47",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "vit-wide-deep.hsaco",
+        "baseline":  "B9D8D4418993A210C71001FC603C2E9E7F4D808D887A8F0993BC2B460EA2CB8B",
+        "installed":  "B9D8D4418993A210C71001FC603C2E9E7F4D808D887A8F0993BC2B460EA2CB8B",
+        "same":  true
+    },
+    {
+        "arch":  "gfx1201",
+        "module":  "wave-pointwise.hsaco",
+        "baseline":  "5E65693DA46044B697218194BB17EC8453952FA4A4A684C6ECC59DF1CECF12AA",
+        "installed":  "5E65693DA46044B697218194BB17EC8453952FA4A4A684C6ECC59DF1CECF12AA",
+        "same":  true
+    }
+]

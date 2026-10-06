@@ -1,0 +1,85 @@
+{
+  "scope": "One preserved original-CUBIN random RGB fixture, seed0, reset, all71 blocks, raw network RGB (no codec), same 1920x1152 reflected input. Visible metrics crop first1080 rows. Not a game-image quality judgement.",
+  "oracle_sha256": "c1d6ab580e4d3bfb46acb90646d1a65d609cbcf6dbdcdde12d1bef18703afbe3",
+  "outputs_sha256": {
+    "A": "c754b3e25584d88b4e9d5a96df88306dcb4b23e3f727129cb0a2a8366d7b0c70",
+    "F": "063f261b27d4101841903e8c13e29844047f7759629b40f4593e46d59836e0ef",
+    "H": "46f9606e2c8b1bf2b430b6dab3acfc36e441157d763762ccf5e116fe8981f22a"
+  },
+  "vs_nvidia": {
+    "A": {
+      "visible1080": {
+        "values": 6220800,
+        "bit_different": 6216043,
+        "mae": 0.009454413611042302,
+        "rmse": 0.012220508953531323,
+        "max_abs": 0.0963134765625,
+        "psnr_peak1_db": 38.25821412882945
+      },
+      "processing1152": {
+        "values": 6635520,
+        "bit_different": 6630449,
+        "mae": 0.009448250892783557,
+        "rmse": 0.01221218265033078,
+        "max_abs": 0.0963134765625,
+        "psnr_peak1_db": 38.264134176826225
+      }
+    },
+    "F": {
+      "visible1080": {
+        "values": 6220800,
+        "bit_different": 6216167,
+        "mae": 0.009441410573769491,
+        "rmse": 0.012202808098082454,
+        "max_abs": 0.09107208251953125,
+        "psnr_peak1_db": 38.27080436819151
+      },
+      "processing1152": {
+        "values": 6635520,
+        "bit_different": 6630574,
+        "mae": 0.009430429324349439,
+        "rmse": 0.012188975722867893,
+        "max_abs": 0.09107208251953125,
+        "psnr_peak1_db": 38.280655758996495
+      }
+    },
+    "H": {
+      "visible1080": {
+        "values": 6220800,
+        "bit_different": 6216078,
+        "mae": 0.00939826844796661,
+        "rmse": 0.012157375461048229,
+        "max_abs": 0.0858001708984375,
+        "psnr_peak1_db": 38.30320341213432
+      },
+      "processing1152": {
+        "values": 6635520,
+        "bit_different": 6630458,
+        "mae": 0.009393395127447962,
+        "rmse": 0.012150368294240007,
+        "max_abs": 0.0858001708984375,
+        "psnr_peak1_db": 38.30821115615782
+      }
+    }
+  },
+  "vs_current": {
+    "F": {
+      "values": 6220800,
+      "bit_different": 6211981,
+      "mae": 0.004935797265981833,
+      "rmse": 0.006291944053472039,
+      "max_abs": 0.0535888671875,
+      "psnr_peak1_db": 44.0243029535764
+    },
+    "H": {
+      "values": 6220800,
+      "bit_different": 6213373,
+      "mae": 0.005871460477149865,
+      "rmse": 0.0074897426929332435,
+      "max_abs": 0.05335235595703125,
+      "psnr_peak1_db": 42.51066204109408
+    }
+  },
+  "valid_comparison": false,
+  "invalid_reason": "Oracle used post_shift=0 but runner used post_shift=3; do not use these distances as aligned NVIDIA accuracy. Superseded by ../float-fma-20260928/oracle-comparison.json."
+}

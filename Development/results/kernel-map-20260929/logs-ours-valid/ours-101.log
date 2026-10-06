@@ -1,0 +1,13 @@
+START,ours-101,vit_expand_blocked_fp8_frag_bytein
+BUFFER,ours-101,b2,invalid=0,nonzero=2587652
+CHECK,ours-101,guards=0,invalid=0,nonzero=2587652
+TIME,ours-101,0,34.289844
+TIME,ours-101,1,33.586718
+TIME,ours-101,2,30.285001
+TIME,ours-101,3,30.514063
+TIME,ours-101,4,30.533750
+TIME,ours-101,5,30.446719
+TIME,ours-101,6,30.457657
+BUFFER,ours-101,b2,invalid=0,nonzero=2587652
+CHECK,ours-101,guards=0,invalid=0,nonzero=2587652
+RESULT,ours-101,30.514063,128,7

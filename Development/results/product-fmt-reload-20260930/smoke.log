@@ -1,0 +1,46 @@
+SAME 900-static-False 900-static-True
+SAME 900-motion-False 900-motion-True
+SAME 1080-static-False 1080-static-True
+SAME 1080-motion-False 1080-motion-True
+SAME 720-motion-False 720-motion-True
+SAME 900-history-False 900-history-True
+SAME 1080-history-False 1080-history-True
+SAME 900-static-False 900-static-True
+SAME 900-motion-False 900-motion-True
+SAME 1080-static-False 1080-static-True
+SAME 1080-motion-False 1080-motion-True
+SAME 720-motion-False 720-motion-True
+SAME 900-history-False 900-history-True
+SAME 1080-history-False 1080-history-True
+AE CSV SAME
+RUNTIME SAME 900 b2980ada643da964
+RUNTIME SAME 1080 758674a8bbd0206d
+NEW fmt=67 exit=0 fmt=67 round=0 size=1707x961 mean_ms=7.830 hash=6f41ba76030acf27 vram_mib=1447 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1707x961 weights=
+HEAD fmt=67 exit=0 fmt=67 round=0 size=1707x961 mean_ms=7.828 hash=6f41ba76030acf27 vram_mib=1447 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1707x961 weights
+NEW fmt=88 exit=0 fmt=88 round=0 size=1707x961 mean_ms=7.782 hash=4c017399f64b8870 vram_mib=1447 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1707x961 weights=
+NEW fmt=92 exit=0 fmt=92 round=0 size=1707x961 mean_ms=7.544 hash=4c017399f64b8870 vram_mib=1447 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1707x961 weights=
+NEW fmt=24 exit=0 fmt=24 round=0 size=1707x961 mean_ms=7.756 hash=ca5172b93156fc3f vram_mib=1447 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1707x961 weights=
+NEW fmt=2 exit=0 fmt=2 round=0 size=1707x961 mean_ms=7.594 hash=5bd4d5ba00d0718c vram_mib=1467 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1707x961 weights=1 
+NEW fmt=6 exit=0 fmt=6 round=0 size=1707x961 mean_ms=7.730 hash=5bd4d5ba00d0718c vram_mib=1459 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1707x961 weights=1 
+NEW fmt=13 exit=0 fmt=13 round=0 size=1707x961 mean_ms=7.567 hash=a321bb60a63326ee vram_mib=1454 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1707x961 weights=
+NEW fmt=31 exit=0 fmt=31 round=0 size=1707x961 mean_ms=7.791 hash=b4d86486163955bd vram_mib=1447 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1707x961 weights=
+NEW fmt=85 exit=0 fmt=85 round=0 size=1707x961 mean_ms=7.570 hash=20d60d52733388a4 vram_mib=1443 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1707x961 weights=
+NEW fmt=86 exit=0 fmt=86 round=0 size=1707x961 mean_ms=7.596 hash=c4864c6b0f499942 vram_mib=1443 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1707x961 weights=
+NEW fmt=115 exit=0 fmt=115 round=0 size=1707x961 mean_ms=7.583 hash=ae3ea2acfff23882 vram_mib=1443 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1707x961 weight
+NEW fmt=10 fmt=10 round=0 size=1707x961 mean_ms=7.538 hash=b2980ada643da964 vram_mib=1454 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1707x961 weights=1 recre
+convert_smoke: FAIL 10
+fmt=R9G9B9E5_SHAREDEXP(67) view=R9G9B9E5_SHAREDEXP PASS max_abs_err=0 out_of_half_rounding=0 alpha=ok
+fmt=B8G8R8X8_UNORM(88) view=B8G8R8X8_UNORM PASS max_abs_err=0.000486 out_of_half_rounding=0 alpha=ok
+fmt=B8G8R8X8_TYPELESS(92) view=B8G8R8X8_UNORM PASS max_abs_err=0.000486 out_of_half_rounding=0 alpha=ok
+fmt=R10G10B10A2_UNORM(24) view=R10G10B10A2_UNORM PASS max_abs_err=0.000391 out_of_half_rounding=0 alpha=ok
+fmt=R10G10B10A2_TYPELESS(23) view=R10G10B10A2_UNORM PASS max_abs_err=0.000391 out_of_half_rounding=0 alpha=ok
+fmt=R32G32B32A32_FLOAT(2) view=R32G32B32A32_FLOAT PASS max_abs_err=0.000488 out_of_half_rounding=0 alpha=ok
+fmt=R32G32B32A32_TYPELESS(1) view=R32G32B32A32_FLOAT PASS max_abs_err=0.000488 out_of_half_rounding=0 alpha=ok
+fmt=R32G32B32_FLOAT(6) view=R32G32B32_FLOAT PASS max_abs_err=0.000488 out_of_half_rounding=0 alpha=ok
+fmt=R32G32B32_TYPELESS(5) view=R32G32B32_FLOAT PASS max_abs_err=0.000488 out_of_half_rounding=0 alpha=ok
+fmt=R16G16B16A16_SNORM(13) view=R16G16B16A16_SNORM PASS max_abs_err=0.000485 out_of_half_rounding=0 alpha=ok
+fmt=R8G8B8A8_SNORM(31) view=R8G8B8A8_SNORM PASS max_abs_err=0.000481 out_of_half_rounding=0 alpha=ok
+fmt=B5G6R5_UNORM(85) view=B5G6R5_UNORM PASS max_abs_err=0.000465 out_of_half_rounding=0 alpha=ok
+fmt=B5G5R5A1_UNORM(86) view=B5G5R5A1_UNORM PASS max_abs_err=0.000394 out_of_half_rounding=0 alpha=ok
+fmt=B4G4R4A4_UNORM(115) view=B4G4R4A4_UNORM PASS max_abs_err=0.000456 out_of_half_rounding=0 alpha=ok
+convert_smoke: ok

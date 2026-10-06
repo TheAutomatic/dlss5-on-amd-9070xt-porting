@@ -1,0 +1,18 @@
+[
+  {
+    "check": "default-off",
+    "arch": "gfx1200",
+    "same": true
+  },
+  {
+    "check": "default-off",
+    "arch": "gfx1201",
+    "same": true
+  },
+  {
+    "check": "production-vs-candidate-whole-sections",
+    "arch": "gfx1201",
+    "same": false,
+    "note": "Source concatenation order differs; all 91 function bodies match (kernel-code-identity.json), final production independently passed 168 frames."
+  }
+]

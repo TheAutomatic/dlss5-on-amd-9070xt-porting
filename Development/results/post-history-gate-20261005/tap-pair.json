@@ -1,0 +1,59 @@
+{
+  "module_sha256": "f46b8af25841a9878ce34544f4b3465f71da36fec9f08f48ad33b48f08c1ee52",
+  "compiler": "canonical LLVM23 c32-wave1-fast (built by build_install)",
+  "RGB_bitdiff": 0,
+  "cases": 12,
+  "input": "actual post weights, generated finite FP8 low/skip patterns; not video capture",
+  "features": {
+    "features-32x32-s0-p0.f16": {
+      "bytes": 65536,
+      "sha256": "e0d79660bf0a005bff78699078ec72530e13415252e90741fff4d4b6947b1743"
+    },
+    "features-32x32-s0-p1.f16": {
+      "bytes": 65536,
+      "sha256": "47df2bb6a5fd963efe3b60fd6ac8631215b5b72d2210464c5621df280a5f50d5"
+    },
+    "features-32x32-s0-p2.f16": {
+      "bytes": 65536,
+      "sha256": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31"
+    },
+    "features-32x32-s4-p0.f16": {
+      "bytes": 65536,
+      "sha256": "1e77eaef21e08e08eff312b91f103e8ab8e7e7865cc0e9db6b96dd0eafb39e7f"
+    },
+    "features-32x32-s4-p1.f16": {
+      "bytes": 65536,
+      "sha256": "dbbe2c744f7a08e618b096ca45ac4730b65cde555083c024d5833188a80f4036"
+    },
+    "features-32x32-s4-p2.f16": {
+      "bytes": 65536,
+      "sha256": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31"
+    },
+    "features-64x48-s0-p0.f16": {
+      "bytes": 196608,
+      "sha256": "eb5bc2c660644bb95f400927650b405ce6eaf3e8080312a20cfbcffc84dea45b"
+    },
+    "features-64x48-s0-p1.f16": {
+      "bytes": 196608,
+      "sha256": "edf8a240db829d288f7d37030aa7c0eb4e33e09d28ca51944397785810e09f0b"
+    },
+    "features-64x48-s0-p2.f16": {
+      "bytes": 196608,
+      "sha256": "3381de4ca9f3a477f25989dfc8b744e7916046b7aa369f61a9a2f7dc0963ec9e"
+    },
+    "features-64x48-s4-p0.f16": {
+      "bytes": 196608,
+      "sha256": "f17940c5bab7c0d8945ae0e4833bd3285cade7870b9bc0ab1fc36b3df2fa9c32"
+    },
+    "features-64x48-s4-p1.f16": {
+      "bytes": 196608,
+      "sha256": "4c5af4113998fce5dcbcc5bdf0d3d76dbfb8ad74d18c459c09f6d03189a83b78"
+    },
+    "features-64x48-s4-p2.f16": {
+      "bytes": 196608,
+      "sha256": "3381de4ca9f3a477f25989dfc8b744e7916046b7aa369f61a9a2f7dc0963ec9e"
+    }
+  },
+  "GPU_lock_released": true,
+  "scope": "same-source tap RGB equality only, not original temporal parity"
+}

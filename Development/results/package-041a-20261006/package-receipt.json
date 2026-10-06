@@ -1,0 +1,30 @@
+{
+  "version": "0.41-a",
+  "kind": "regular OptiScaler only",
+  "zip": "OptiScaler-DLSS5-AMD-0.41-a.zip",
+  "bytes": 374749280,
+  "sha256": "62943839ed969497636e814ed4ec7dd295991e7bfe7d90281b78d67732adcee4",
+  "local_path": "/home/lmxxf/work/dlss5-release-0.41-a/OptiScaler-DLSS5-AMD-0.41-a.zip",
+  "windows_path": "D:\\給網友打包\\OptiScaler-DLSS5-AMD-0.41-a.zip",
+  "runtime_source_freeze": "1a22ee9616cee4c724f6e9e94be9203feac73a4f",
+  "addon_sha256": "760dc55096ad7890891921b5c6770e96aa0a5f912f6517bbbc837b5ba864ec63",
+  "files": 625,
+  "modules": 84,
+  "verification": [
+    "all ZIP member SHA readback",
+    "Windows final filename SHA readback",
+    "84 ELF correct architecture targets",
+    "new temporal twin exports identical; one unused historical stock cold-tap export difference documented",
+    "Windows disposable fixture marker present/absent/off-on-off first backup/BOM/native/otherkeys/restore/newfile/env rejection/failure rollback"
+  ],
+  "scope": "default off, explicit regular FFX MP1 experiment; MV unjittered admitted assumption, no depth gate, no RE9/Magpie support",
+  "installed_locally": false,
+  "player_configs_modified": false,
+  "formal_041_changed": false,
+  "push_tag_release_created": false,
+  "reference_cost_1080_short_8frames_ms": {
+    "off": 9.14589,
+    "on": 14.179483,
+    "diagnostic_only": true
+  }
+}

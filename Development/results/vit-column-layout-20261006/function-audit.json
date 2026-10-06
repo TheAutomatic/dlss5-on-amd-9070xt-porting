@@ -1,0 +1,18 @@
+{
+  "producer": {
+    "functions": 86,
+    "changed": [
+      "vit_stream_qkv_frag_bin_w5f8"
+    ],
+    "missing": [],
+    "ABI_diff": []
+  },
+  "consumer": {
+    "functions": 78,
+    "changed": [
+      "vit_attention_fused_640_bytein_bout"
+    ],
+    "missing": [],
+    "ABI_diff": []
+  }
+}

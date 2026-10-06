@@ -1,0 +1,214 @@
+{
+  "producer": {
+    "old": {
+      "SHA": "a085694b8679aee18b169a5aa2d886b12d579809b9f2bbfd4e097d4cf692b986",
+      "resource": {
+        ".vgpr_count": 76,
+        ".sgpr_count": 22,
+        ".group_segment_fixed_size": 16384,
+        ".private_segment_fixed_size": 0,
+        ".vgpr_spill_count": 0
+      },
+      "ABI": {
+        ".args": [
+          {
+            ".address_space": "global",
+            ".offset": 0,
+            ".size": 8,
+            ".value_kind": "global_buffer"
+          },
+          {
+            ".address_space": "global",
+            ".offset": 8,
+            ".size": 8,
+            ".value_kind": "global_buffer"
+          },
+          {
+            ".address_space": "global",
+            ".offset": 16,
+            ".size": 8,
+            ".value_kind": "global_buffer"
+          },
+          {
+            ".offset": 24,
+            ".size": 4,
+            ".value_kind": "by_value"
+          },
+          {
+            ".address_space": "global",
+            ".offset": 32,
+            ".size": 8,
+            ".value_kind": "global_buffer"
+          }
+        ],
+        ".kernarg_segment_size": 40,
+        ".kernarg_segment_align": 8,
+        ".wavefront_size": 32
+      },
+      "counts": {
+        "global_store_b8": 16,
+        "global_store_b64": 0,
+        "global_load_u8": 0,
+        "global_load_b64": 8,
+        "global_load_tr_b64": 0,
+        "ds_bpermute_b32": 0
+      },
+      "exports": 86
+    },
+    "new": {
+      "SHA": "876fca9c5d7cb7bd124c8bcd7df6b7e5b5be79bb8a1e3764af89cd4e452789ff",
+      "resource": {
+        ".vgpr_count": 76,
+        ".sgpr_count": 22,
+        ".group_segment_fixed_size": 16384,
+        ".private_segment_fixed_size": 0,
+        ".vgpr_spill_count": 0
+      },
+      "ABI": {
+        ".args": [
+          {
+            ".address_space": "global",
+            ".offset": 0,
+            ".size": 8,
+            ".value_kind": "global_buffer"
+          },
+          {
+            ".address_space": "global",
+            ".offset": 8,
+            ".size": 8,
+            ".value_kind": "global_buffer"
+          },
+          {
+            ".address_space": "global",
+            ".offset": 16,
+            ".size": 8,
+            ".value_kind": "global_buffer"
+          },
+          {
+            ".offset": 24,
+            ".size": 4,
+            ".value_kind": "by_value"
+          },
+          {
+            ".address_space": "global",
+            ".offset": 32,
+            ".size": 8,
+            ".value_kind": "global_buffer"
+          }
+        ],
+        ".kernarg_segment_size": 40,
+        ".kernarg_segment_align": 8,
+        ".wavefront_size": 32
+      },
+      "counts": {
+        "global_store_b8": 16,
+        "global_store_b64": 2,
+        "global_load_u8": 0,
+        "global_load_b64": 8,
+        "global_load_tr_b64": 0,
+        "ds_bpermute_b32": 0
+      },
+      "exports": 86
+    }
+  },
+  "consumer": {
+    "old": {
+      "SHA": "11a25ae3fea75f83763ab6d5729c4f426dabda11299d1be6092d142b810e27b8",
+      "resource": {
+        ".vgpr_count": 68,
+        ".sgpr_count": 12,
+        ".group_segment_fixed_size": 0,
+        ".private_segment_fixed_size": 0,
+        ".vgpr_spill_count": 0
+      },
+      "ABI": {
+        ".args": [
+          {
+            ".address_space": "global",
+            ".offset": 0,
+            ".size": 8,
+            ".value_kind": "global_buffer"
+          },
+          {
+            ".address_space": "global",
+            ".offset": 8,
+            ".size": 8,
+            ".value_kind": "global_buffer"
+          },
+          {
+            ".offset": 16,
+            ".size": 4,
+            ".value_kind": "by_value"
+          },
+          {
+            ".address_space": "global",
+            ".offset": 24,
+            ".size": 8,
+            ".value_kind": "global_buffer"
+          }
+        ],
+        ".kernarg_segment_size": 32,
+        ".kernarg_segment_align": 8,
+        ".wavefront_size": 32
+      },
+      "counts": {
+        "global_store_b8": 0,
+        "global_store_b64": 2,
+        "global_load_u8": 16,
+        "global_load_b64": 4,
+        "global_load_tr_b64": 0,
+        "ds_bpermute_b32": 0
+      },
+      "exports": 78
+    },
+    "new": {
+      "SHA": "38da9a34c803ccef0a3f0623418db06b4eb18d29b61f22d5e629922ff60514cf",
+      "resource": {
+        ".vgpr_count": 64,
+        ".sgpr_count": 18,
+        ".group_segment_fixed_size": 0,
+        ".private_segment_fixed_size": 0,
+        ".vgpr_spill_count": 0
+      },
+      "ABI": {
+        ".args": [
+          {
+            ".address_space": "global",
+            ".offset": 0,
+            ".size": 8,
+            ".value_kind": "global_buffer"
+          },
+          {
+            ".address_space": "global",
+            ".offset": 8,
+            ".size": 8,
+            ".value_kind": "global_buffer"
+          },
+          {
+            ".offset": 16,
+            ".size": 4,
+            ".value_kind": "by_value"
+          },
+          {
+            ".address_space": "global",
+            ".offset": 24,
+            ".size": 8,
+            ".value_kind": "global_buffer"
+          }
+        ],
+        ".kernarg_segment_size": 32,
+        ".kernarg_segment_align": 8,
+        ".wavefront_size": 32
+      },
+      "counts": {
+        "global_store_b8": 0,
+        "global_store_b64": 2,
+        "global_load_u8": 16,
+        "global_load_b64": 6,
+        "global_load_tr_b64": 4,
+        "ds_bpermute_b32": 0
+      },
+      "exports": 78
+    }
+  }
+}

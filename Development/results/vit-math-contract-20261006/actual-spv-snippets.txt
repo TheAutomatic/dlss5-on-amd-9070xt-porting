@@ -1,0 +1,180 @@
+SPIR-V lines 292-301
+               OpDecorate %__3 Binding 1
+               OpDecorate %__3 DescriptorSet 0
+       %void = OpTypeVoid
+          %3 = OpTypeFunction %void
+       %half = OpTypeFloat 16
+%_ptr_Function_half = OpTypePointer Function %half
+    %fp8e4m3 = OpTypeFloat 8 Float8E4M3EXT
+          %9 = OpTypeFunction %fp8e4m3 %_ptr_Function_half
+      %float = OpTypeFloat 32
+%_ptr_Function_float = OpTypePointer Function %float
+
+SPIR-V lines 355-413
+%_ptr_Function_int = OpTypePointer Function %int
+      %int_0 = OpConstant %int 0
+     %uint_3 = OpConstant %uint 3
+        %243 = OpTypeCooperativeMatrixKHR %float %uint_3 %uint_16 %uint_16 %uint_2
+%_arr_243_uint_2 = OpTypeArray %243 %uint_2
+%_arr__arr_243_uint_2_uint_2 = OpTypeArray %_arr_243_uint_2 %uint_2
+%_ptr_Function__arr__arr_243_uint_2_uint_2 = OpTypePointer Function %_arr__arr_243_uint_2_uint_2
+        %249 = OpConstantComposite %243 %float_0
+%_ptr_Function_243 = OpTypePointer Function %243
+      %int_1 = OpConstant %int 1
+  %uint_3072 = OpConstant %uint 3072
+      %uchar = OpTypeInt 8 0
+    %v4uchar = OpTypeVector %uchar 4
+%_ptr_Function_v4uchar = OpTypePointer Function %v4uchar
+%_runtimearr_uint = OpTypeRuntimeArray %uint
+   %ActE4M3v = OpTypeStruct %_runtimearr_uint
+%_ptr_StorageBuffer_ActE4M3v = OpTypePointer StorageBuffer %ActE4M3v
+          %_ = OpVariable %_ptr_StorageBuffer_ActE4M3v StorageBuffer
+%_ptr_StorageBuffer_uint = OpTypePointer StorageBuffer %uint
+        %334 = OpTypeCooperativeMatrixKHR %fp8e4m3 %uint_3 %uint_16 %uint_16 %uint_1
+%_arr_334_uint_2 = OpTypeArray %334 %uint_2
+%_arr__arr_334_uint_2_uint_2 = OpTypeArray %_arr_334_uint_2 %uint_2
+%_ptr_Function__arr__arr_334_uint_2_uint_2 = OpTypePointer Function %_arr__arr_334_uint_2_uint_2
+%_ptr_Function_uchar = OpTypePointer Function %uchar
+%_ptr_Function_fp8e4m3 = OpTypePointer Function %fp8e4m3
+      %false = OpConstantFalse %bool
+%_arr_float_uint_2 = OpTypeArray %float %uint_2
+%_ptr_Function__arr_float_uint_2 = OpTypePointer Function %_arr_float_uint_2
+    %uint_64 = OpConstant %uint 64
+   %uint_768 = OpConstant %uint 768
+  %v4fp8e4m3 = OpTypeVector %fp8e4m3 4
+%_ptr_Function_v4fp8e4m3 = OpTypePointer Function %v4fp8e4m3
+%_runtimearr_uint_0 = OpTypeRuntimeArray %uint
+   %ActE4M3u = OpTypeStruct %_runtimearr_uint_0
+%_ptr_StorageBuffer_ActE4M3u = OpTypePointer StorageBuffer %ActE4M3u
+        %__0 = OpVariable %_ptr_StorageBuffer_ActE4M3u StorageBuffer
+        %494 = OpTypeCooperativeMatrixKHR %fp8e4m3 %uint_3 %uint_16 %uint_16 %uint_0
+%_arr_494_uint_2 = OpTypeArray %494 %uint_2
+%_ptr_Function__arr_494_uint_2 = OpTypePointer Function %_arr_494_uint_2
+%_ptr_Function_494 = OpTypePointer Function %494
+      %int_5 = OpConstant %int 5
+      %int_6 = OpConstant %int 6
+     %v2uint = OpTypeVector %uint 2
+               OpTypeForwardPointer %_ptr_PhysicalStorageBuffer_NrActRef PhysicalStorageBuffer
+%_runtimearr_uint_1 = OpTypeRuntimeArray %uint
+   %NrActRef = OpTypeStruct %_runtimearr_uint_1
+%_ptr_PhysicalStorageBuffer_NrActRef = OpTypePointer PhysicalStorageBuffer %NrActRef
+%_ptr_PhysicalStorageBuffer_uint = OpTypePointer PhysicalStorageBuffer %uint
+%_ptr_Function_334 = OpTypePointer Function %334
+%_arr_v2half_uint_4 = OpTypeArray %v2half %uint_4
+%_ptr_Function__arr_v2half_uint_4 = OpTypePointer Function %_arr_v2half_uint_4
+        %619 = OpTypeCooperativeMatrixKHR %half %uint_3 %uint_16 %uint_16 %uint_2
+%_ptr_Function_619 = OpTypePointer Function %619
+      %int_3 = OpConstant %int 3
+%_arr__arr_v2half_uint_4_uint_2 = OpTypeArray %_arr_v2half_uint_4 %uint_2
+%_ptr_Function__arr__arr_v2half_uint_4_uint_2 = OpTypePointer Function %_arr__arr_v2half_uint_4_uint_2
+        %766 = OpTypeCooperativeMatrixKHR %fp8e4m3 %uint_3 %uint_16 %uint_16 %uint_2
+%_ptr_Function_766 = OpTypePointer Function %766
+%fp8e4m3_0x0p_0 = OpConstant %fp8e4m3 0x0p+0
+
+SPIR-V lines 1877-1915
+       %1244 = OpISub %uint %1243 %uint_1
+       %1245 = OpUDiv %uint %1244 %uint_64
+       %1246 = OpIMul %uint %1245 %uint_64
+       %1247 = OpAccessChain %_ptr_PushConstant_uint %pc %int_2
+       %1248 = OpLoad %uint %1247
+       %1249 = OpISub %uint %1246 %1248
+               OpStore %pad_keys %1249
+       %1251 = OpLoad %uint %pad_keys
+       %1252 = OpConvertUToF %float %1251
+               OpStore %param_25 %float_0
+       %1254 = OpFunctionCall %float %nr_vit_exp_f1_ %param_25
+       %1255 = OpFMul %float %1252 %1254
+       %1256 = OpFConvert %half %1255
+               OpStore %padding %1256
+               OpStore %b_4 %uint_0
+               OpBranch %1258
+       %1258 = OpLabel
+               OpLoopMerge %1260 %1261 None
+               OpBranch %1262
+       %1262 = OpLabel
+       %1263 = OpLoad %uint %b_4
+       %1264 = OpULessThan %bool %1263 %uint_2
+               OpBranchConditional %1264 %1259 %1260
+       %1259 = OpLabel
+       %1265 = OpLoad %uint %b_4
+       %1266 = OpLoad %uint %b_4
+       %1267 = OpAccessChain %_ptr_Function_float %den %1266
+       %1268 = OpLoad %float %1267
+       %1269 = OpFConvert %half %1268
+       %1270 = OpLoad %half %padding
+       %1271 = OpFSub %half %1269 %1270
+       %1272 = OpFConvert %float %1271
+       %1273 = OpAccessChain %_ptr_Function_float %den %1265
+               OpStore %1273 %1272
+               OpBranch %1261
+       %1261 = OpLabel
+       %1274 = OpLoad %uint %b_4
+       %1275 = OpIAdd %uint %1274 %int_1
+               OpStore %b_4 %1275
+
+SPIR-V lines 1952-1965
+       %1307 = OpLabel
+       %1310 = OpLoad %uint %b_5
+       %1311 = OpAccessChain %_ptr_Function_float %den %1310
+       %1312 = OpLoad %float %1311
+       %1313 = OpLoad %float %floor_l
+       %1314 = OpExtInst %float %1 FMax %1312 %1313
+       %1315 = OpFDiv %float %float_1 %1314
+       %1316 = OpFConvert %half %1315
+               OpStore %inv %1316
+               OpStore %n_3 %uint_0
+               OpBranch %1318
+       %1318 = OpLabel
+               OpLoopMerge %1320 %1321 None
+               OpBranch %1322
+
+SPIR-V lines 1980-2000
+       %1327 = OpLabel
+       %1336 = OpLoad %int %c_4
+       %1337 = OpLoad %uint %b_5
+       %1338 = OpLoad %uint %n_3
+       %1339 = OpLoad %int %c_4
+       %1340 = OpAccessChain %_ptr_Function_float %ctx %1337 %1338 %1339
+       %1341 = OpLoad %float %1340
+       %1342 = OpFConvert %half %1341
+       %1343 = OpLoad %half %inv
+       %1344 = OpFMul %half %1342 %1343
+               OpStore %param_26 %1344
+       %1346 = OpFunctionCall %fp8e4m3 %nr_quant_e4m3_f161_ %param_26
+       %1347 = OpAccessChain %_ptr_Function_fp8e4m3 %qv %1336
+               OpStore %1347 %1346
+               OpBranch %1329
+       %1329 = OpLabel
+       %1348 = OpLoad %int %c_4
+       %1349 = OpIAdd %int %1348 %int_1
+               OpStore %c_4 %1349
+               OpBranch %1326
+       %1328 = OpLabel
+
+SPIR-V lines 2131-2156
+%nr_vit_exp2_vf2_ = OpFunction %v2half None %37
+        %x_0 = OpFunctionParameter %_ptr_Function_v2float
+         %40 = OpLabel
+        %y_0 = OpVariable %_ptr_Function_v2half Function
+        %114 = OpLoad %v2float %x_0
+        %115 = OpFConvert %v2half %114
+        %118 = OpExtInst %v2half %1 Fma %115 %116 %117
+        %121 = OpExtInst %v2half %1 FClamp %118 %119 %120
+               OpStore %y_0 %121
+        %122 = OpLoad %v2half %y_0
+        %123 = OpBitcast %uint %122
+        %124 = OpShiftLeftLogical %uint %123 %uint_4
+        %126 = OpIAdd %uint %124 %uint_1073496064
+        %127 = OpBitcast %v2half %126
+               OpReturnValue %127
+               OpFunctionEnd
+%nr_out_ch_u1_u1_ = OpFunction %uint None %41
+       %head = OpFunctionParameter %_ptr_Function_uint
+          %d = OpFunctionParameter %_ptr_Function_uint
+         %45 = OpLabel
+        %133 = OpVariable %_ptr_Function_uint Function
+        %130 = OpLoad %uint %d
+        %132 = OpULessThan %bool %130 %uint_16
+               OpSelectionMerge %135 None
+               OpBranchConditional %132 %134 %140
+        %134 = OpLabel

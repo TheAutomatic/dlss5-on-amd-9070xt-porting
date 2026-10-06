@@ -1,0 +1,11 @@
+{
+  "row": "deep_fast-packed-fast",
+  "compiler": "",
+  "opts": [],
+  "shape": "existing16query, K16 order, FP32 QK/AV, original denominator unchanged",
+  "B": "only f32 score ->half RNE then half FMA/clamp/map",
+  "A_sha256": "bbbe7ce7713396a3d6204a37344159ef453aa60153034d2642783d33d65ebb4d",
+  "B_sha256": "f0f037b25b31e3c675d865c14d57e748fe084eb4baf4c01e79b26bad52a0015a",
+  "C_sha256": "494a1838da2634ec144d6146a54d5e51a619564fd464394ea4c93f461066378b",
+  "C_contract": "64-key half tree in existing16query layout;640fullchunks match locked math;400tail16zero-missing-keys experiment, not448token opponent"
+}

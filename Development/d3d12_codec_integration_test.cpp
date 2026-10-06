@@ -11,6 +11,7 @@
 #include <stdexcept>
 #include "native_game_codec.h"
 #include "native_game_submission.h"
+#include "native_format_convert.h"
 using Microsoft::WRL::ComPtr;
 static constexpr auto Read = D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE;
 static void Check(HRESULT hr) { if(FAILED(hr)) throw std::runtime_error("HRESULT="+std::to_string(unsigned(hr))); }
@@ -35,9 +36,9 @@ struct Harness {
   rd.Dimension=D3D12_RESOURCE_DIMENSION_BUFFER;rd.Width=bytes;rd.Height=rd.DepthOrArraySize=rd.MipLevels=rd.SampleDesc.Count=1;rd.Layout=D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
   ComPtr<ID3D12Resource> r;Check(d->CreateCommittedResource(&hp,D3D12_HEAP_FLAG_NONE,&rd,type==D3D12_HEAP_TYPE_UPLOAD?D3D12_RESOURCE_STATE_GENERIC_READ:D3D12_RESOURCE_STATE_COPY_DEST,nullptr,IID_PPV_ARGS(&r)));return r;
  }
- ComPtr<ID3D12Resource> Texture(UINT w,UINT h,DXGI_FORMAT fmt,const std::vector<unsigned char>&data) {
+ ComPtr<ID3D12Resource> Texture(UINT w,UINT h,DXGI_FORMAT fmt,const std::vector<unsigned char>&data,bool uav=false) {
   D3D12_HEAP_PROPERTIES hp{};hp.Type=D3D12_HEAP_TYPE_DEFAULT;D3D12_RESOURCE_DESC rd{};
-  rd.Dimension=D3D12_RESOURCE_DIMENSION_TEXTURE2D;rd.Width=w;rd.Height=h;rd.DepthOrArraySize=rd.MipLevels=rd.SampleDesc.Count=1;rd.Format=fmt;
+  rd.Dimension=D3D12_RESOURCE_DIMENSION_TEXTURE2D;rd.Width=w;rd.Height=h;rd.DepthOrArraySize=rd.MipLevels=rd.SampleDesc.Count=1;rd.Format=fmt;if(uav)rd.Flags=D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS;
   ComPtr<ID3D12Resource> r;Check(d->CreateCommittedResource(&hp,D3D12_HEAP_FLAG_NONE,&rd,D3D12_RESOURCE_STATE_COPY_DEST,nullptr,IID_PPV_ARGS(&r)));
   D3D12_PLACED_SUBRESOURCE_FOOTPRINT fp{};UINT64 size,row;d->GetCopyableFootprints(&rd,0,1,0,&fp,nullptr,&row,&size);
   Require(data.size()==row*h,"upload payload size");auto up=Buffer(size,D3D12_HEAP_TYPE_UPLOAD);void *p;D3D12_RANGE no{};Check(up->Map(0,&no,&p));
@@ -64,7 +65,8 @@ static std::vector<unsigned char> Half(UINT w,UINT h,unsigned kind) {
  for(size_t i=0;i<size_t(w)*h;++i)memcpy(b.data()+i*8,colors[kind],8);return b;
 }
 int wmain(int argc,wchar_t**argv) { try {
- Require(argc>=3,"usage: test shaders legacy-shaders [amd]");_wputenv_s(L"DLSS5_SHADER_DISK_CACHE",L"0");_wputenv_s(L"DLSS5_NETWORK_HEIGHT",L"1080");Harness h(argc>3);const std::wstring shaders=argv[1],legacy=argv[2];
+ Require(argc>=3,"usage: test shaders legacy-shaders [amd|fallback-off]");
+ if(argc>3&&!wcscmp(argv[3],L"fallback-off")){_wputenv_s(L"DLSS5_FORMAT_FALLBACK",L"0");for(auto f:{DXGI_FORMAT_R10G10B10A2_UNORM,DXGI_FORMAT_R10G10B10A2_TYPELESS})Require(!NativeIsGameColor(f)&&NativeFallbackColor(f)==DXGI_FORMAT_UNKNOWN,"disabled fallback rejects both R10 formats");puts("PASS: disabled R10 fallback");return 0;}_wputenv_s(L"DLSS5_SHADER_DISK_CACHE",L"0");_wputenv_s(L"DLSS5_NETWORK_HEIGHT",L"1080");Harness h(argc>3);const std::wstring shaders=argv[1],legacy=argv[2];
  NativeCodecParameters valid;valid.debug_view=static_cast<NativeCodecDebugView>(0x10001);Require(!valid.Valid(),"reject flags injected into debug enum");
  NativeResolveNetworkGeometry(65,7);auto geo=NativeCurrentNetworkGeometry();
  auto proxy=h.Texture(geo.valid_width,geo.valid_height,DXGI_FORMAT_R16G16B16A16_FLOAT,Half(geo.valid_width,geo.valid_height,0));
@@ -98,11 +100,22 @@ int wmain(int argc,wchar_t**argv) { try {
  _wputenv_s(L"DLSS5_CODEC_SRGB",L"0");
  for(UINT width:{65u,1920u}){const UINT height=width==65?7:1080;std::vector<unsigned char>pattern(size_t(width)*height*4);const UINT levels[]={0,1,2,511,512,1022,1023};
   for(size_t i=0;i<pattern.size()/4;++i){uint32_t v=levels[i%7]|(levels[(i+2)%7]<<10)|(levels[(i+4)%7]<<20)|(UINT(i%4)<<30);memcpy(pattern.data()+i*4,&v,4);}
-  auto r10=h.Texture(width,height,DXGI_FORMAT_R10G10B10A2_UNORM,pattern);auto target=h.Texture(width,height,DXGI_FORMAT_R10G10B10A2_UNORM,pattern);
-  NativeGameCodec dec;dec.Create(h.d.Get(),{proxy.Get(),neural.Get(),r10.Get()},shaders);Require(dec.BufferOutput()&&dec.BufferFootprint().Format==DXGI_FORMAT_R10G10B10A2_UNORM&&dec.BufferFootprint().RowPitch==((width*4+255)&~255u),"R10 format and row pitch");
-  NativeCodecParameters p;p.transfer_strength=0;p.color_strength=0;Require(h.Run(dec,p,3,target.Get())==pattern,"R10 packed texture round-trip including alpha and boundaries");
-  auto other=pattern;for(size_t i=0;i<other.size();++i)other[i]^=0x55;auto alternate=h.Texture(width,height,DXGI_FORMAT_R10G10B10A2_UNORM,other);dec.RebindInputAfterCompletion(2,alternate.Get());Require(h.Run(dec,p,3,target.Get())==other,"R10 rebind UAV route round-trip");
-  NativeGameCodec fp;fp.Create(h.d.Get(),{proxy.Get(),neural.Get(),r10.Get()},shaders,true);Require(!fp.BufferOutput()&&fp.Output()->GetDesc().Format==DXGI_FORMAT_R16G16B16A16_FLOAT,"R10 private FP16 route retained");h.Run(fp,p,3);
+  std::vector<unsigned char> baseline;
+  for(auto format:{DXGI_FORMAT_R10G10B10A2_UNORM,DXGI_FORMAT_R10G10B10A2_TYPELESS}) {
+   Require(!NativeIsGameColor(format)&&NativeFallbackColor(format)==DXGI_FORMAT_R10G10B10A2_UNORM,"both R10 formats use fallback");
+   auto r10=h.Texture(width,height,format,pattern);
+   NativeGameCodec fp;fp.Create(h.d.Get(),{proxy.Get(),neural.Get(),r10.Get()},shaders,true);
+   Require(!fp.BufferOutput()&&fp.Output()->GetDesc().Format==DXGI_FORMAT_R16G16B16A16_FLOAT,"R10 private FP16 route");
+   NativeCodecParameters p;p.transfer_strength=0;p.color_strength=0;auto result=h.Run(fp,p,3);
+   if(baseline.empty())baseline=result;else Require(baseline==result,"typed and typeless R10 decode identically");
+   auto converted=h.Texture(width,height,DXGI_FORMAT_R16G16B16A16_FLOAT,Half(width,height,0),true);
+   NativeFormatConvert convert;convert.shader_path=shaders+L"/native_format_convert.hlsl";
+   h.submit.Submit([&](ID3D12GraphicsCommandList*c){convert.Record(c,r10.Get(),NativeFallbackColor(format),Read,converted.Get(),Read,width,height);});
+   auto convertedBytes=h.ReadTexture(converted.Get());
+   Require(convertedBytes.size()==size_t(width)*height*8,"addon conversion output extent");
+   // Conversion preserves all alpha codes and matches the codec's no-transfer output.
+   Require(convertedBytes==result,"addon FP16 conversion equals private codec fallback");
+  }
  }
- h.CheckDebug();puts("PASS: legacy HDR/sRGB bytes, opt-ins, four debug views, R10 real texture write-back/rebind/alpha/row-pitch/private-FP16");return 0;
+ h.CheckDebug();puts("PASS: legacy HDR/sRGB bytes, opt-ins, four debug views, R10 typed/typeless fallback and addon conversion/private-FP16");return 0;
  }catch(const std::exception&e){fprintf(stderr,"FAIL: %s\n",e.what());return 1;}}

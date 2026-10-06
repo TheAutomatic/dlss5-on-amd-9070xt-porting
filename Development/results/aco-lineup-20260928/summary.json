@@ -1,0 +1,87 @@
+{
+  "C": {
+    "timing": {
+      "900-r1": {
+        "baseline_ms": 9.351363750000004,
+        "candidate_ms": 9.274342499999989,
+        "delta_ms": -0.07702125000001558,
+        "delta_percent": -0.8236365524762701
+      },
+      "1080-r1": {
+        "baseline_ms": 12.669468125,
+        "candidate_ms": 12.57420875,
+        "delta_ms": -0.09525937499999948,
+        "delta_percent": -0.7518814054398137
+      },
+      "900-r2": {
+        "baseline_ms": 9.353040624999995,
+        "candidate_ms": 9.29239437500001,
+        "delta_ms": -0.06064624999998536,
+        "delta_percent": -0.648412130680609
+      },
+      "1080-r2": {
+        "baseline_ms": 12.673560625,
+        "candidate_ms": 12.579318749999999,
+        "delta_ms": -0.09424187500000158,
+        "delta_percent": -0.7436100855042982
+      }
+    },
+    "correctness": {
+      "correct": 84,
+      "adaptive": 84
+    },
+    "adaptive": {
+      "matched_decisions": 84,
+      "reuse_counts": {
+        "0": 41,
+        "1": 43
+      }
+    }
+  },
+  "M": {
+    "timing": {},
+    "correctness": {
+      "correct": 84
+    },
+    "adaptive": {}
+  },
+  "R": {
+    "timing": {
+      "900-r1": {
+        "baseline_ms": 9.253406875,
+        "candidate_ms": 9.210896250000001,
+        "delta_ms": -0.04251062499999847,
+        "delta_percent": -0.4594051204519056
+      },
+      "1080-r1": {
+        "baseline_ms": 12.6178275,
+        "candidate_ms": 12.574236875,
+        "delta_ms": -0.043590625000000216,
+        "delta_percent": -0.34546854440671293
+      },
+      "900-r2": {
+        "baseline_ms": 9.277562500000005,
+        "candidate_ms": 9.250854375,
+        "delta_ms": -0.026708125000006078,
+        "delta_percent": -0.28787868580789633
+      },
+      "1080-r2": {
+        "baseline_ms": 12.63651,
+        "candidate_ms": 12.589555,
+        "delta_ms": -0.04695499999999875,
+        "delta_percent": -0.37158202699952847
+      }
+    },
+    "correctness": {
+      "correct": 84,
+      "adaptive": 84
+    },
+    "adaptive": {
+      "matched_decisions": 84,
+      "reuse_counts": {
+        "0": 41,
+        "1": 43
+      }
+    }
+  }
+}

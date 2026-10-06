@@ -1,0 +1,272 @@
+{
+  "sessions": {
+    "r1": 87130,
+    "r2": 7346,
+    "r3": 49361
+  },
+  "all_exit0_lock_released": true,
+  "decision": "All three necessary rounds separately mean/p99PASS GPU andwall; no extra rounds",
+  "frozen_source": "21de7863",
+  "exe_sha256": "bad4badde30ae4bc78fbbe51aa0834f9eef27cd0d0355c642a3e950398714fae",
+  "pooled_assistive_only": {
+    "gpu_ms": {
+      "eager": {
+        "n": 960,
+        "mean": 8.894972790284376,
+        "p99": 9.10842515935
+      },
+      "replay": {
+        "n": 960,
+        "mean": 8.804171247273958,
+        "p99": 8.97831284488
+      },
+      "delta": {
+        "mean": -0.09080154301041787,
+        "p99": -0.1301123144700007
+      }
+    },
+    "wall_ms": {
+      "eager": {
+        "n": 960,
+        "mean": 9.138044791666667,
+        "p99": 9.354280000000001
+      },
+      "replay": {
+        "n": 960,
+        "mean": 9.037354166666667,
+        "p99": 9.25569
+      },
+      "delta": {
+        "mean": -0.10069062500000037,
+        "p99": -0.09859000000000151
+      }
+    }
+  },
+  "raws": [
+    {
+      "round": 1,
+      "slot": 0,
+      "edge": "first",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 1,
+      "slot": 0,
+      "edge": "selected-first",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 1,
+      "slot": 0,
+      "edge": "last",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 1,
+      "slot": 1,
+      "edge": "first",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 1,
+      "slot": 1,
+      "edge": "selected-first",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 1,
+      "slot": 1,
+      "edge": "last",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 1,
+      "slot": 2,
+      "edge": "first",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 1,
+      "slot": 2,
+      "edge": "selected-first",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 1,
+      "slot": 2,
+      "edge": "last",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 1,
+      "slot": 3,
+      "edge": "first",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 1,
+      "slot": 3,
+      "edge": "selected-first",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 1,
+      "slot": 3,
+      "edge": "last",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 2,
+      "slot": 0,
+      "edge": "first",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 2,
+      "slot": 0,
+      "edge": "selected-first",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 2,
+      "slot": 0,
+      "edge": "last",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 2,
+      "slot": 1,
+      "edge": "first",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 2,
+      "slot": 1,
+      "edge": "selected-first",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 2,
+      "slot": 1,
+      "edge": "last",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 2,
+      "slot": 2,
+      "edge": "first",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 2,
+      "slot": 2,
+      "edge": "selected-first",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 2,
+      "slot": 2,
+      "edge": "last",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 2,
+      "slot": 3,
+      "edge": "first",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 2,
+      "slot": 3,
+      "edge": "selected-first",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 2,
+      "slot": 3,
+      "edge": "last",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 3,
+      "slot": 0,
+      "edge": "first",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 3,
+      "slot": 0,
+      "edge": "selected-first",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 3,
+      "slot": 0,
+      "edge": "last",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 3,
+      "slot": 1,
+      "edge": "first",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 3,
+      "slot": 1,
+      "edge": "selected-first",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 3,
+      "slot": 1,
+      "edge": "last",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 3,
+      "slot": 2,
+      "edge": "first",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 3,
+      "slot": 2,
+      "edge": "selected-first",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 3,
+      "slot": 2,
+      "edge": "last",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 3,
+      "slot": 3,
+      "edge": "first",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 3,
+      "slot": 3,
+      "edge": "selected-first",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "round": 3,
+      "slot": 3,
+      "edge": "last",
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    }
+  ],
+  "scope": "1088FAST1MP1AE0historyoffseed0 Style1PDL0pulse0 opt.graphfalse current161SP workload",
+  "sample_method": "eachround ABBA160samples/slot after chosenwarm80; perround original CSV linearp99; no selection/discard ofslots",
+  "actual_replay_gate": "everyreplay161orderedDAG,241GraphLaunch APIcalls; eager0; all36reads153ac+finite",
+  "limits": [
+    "Fixed pure workload only; no APP, dynamicseed/history/rollover/recovery, productionroute or installation acceptance",
+    "Independentcandidate deltas cannot be subtracted from originalMgap or added toH/pulse APP gains",
+    "Common preparationwarm80 +selectedfirst/warm80 +steady160; setupcost not included steady",
+    "No proof GraphLaunch is one PAL OS submission; hostSPSTATS notGPUreplaycount"
+  ]
+}

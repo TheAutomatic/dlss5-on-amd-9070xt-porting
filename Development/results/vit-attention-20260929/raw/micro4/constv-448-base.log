@@ -1,0 +1,13 @@
+START,constv-448-base,vit_attention_fused_640_bytein_bout
+BUFFER,constv-448-base,output,invalid=0,nonzero=458752
+CHECK,constv-448-base,guards=0,invalid=0,nonzero=458752
+TIME,constv-448-base,0,47.636725
+TIME,constv-448-base,1,51.546875
+TIME,constv-448-base,2,48.958898
+TIME,constv-448-base,3,38.231242
+TIME,constv-448-base,4,49.756728
+TIME,constv-448-base,5,50.075468
+TIME,constv-448-base,6,45.454219
+BUFFER,constv-448-base,output,invalid=0,nonzero=458752
+CHECK,constv-448-base,guards=0,invalid=0,nonzero=458752
+RESULT,constv-448-base,48.958898,128,7

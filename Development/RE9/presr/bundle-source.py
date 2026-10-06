@@ -7,7 +7,7 @@ out=Path('/tmp/re9-presr-source.tar.gz')
 # Refresh HIP source/build recipes too: the runtime uses the current common kernels.
 import shutil
 for p in (root/'hip').iterdir():
- if p.is_file() and p.suffix in ('.hip','.h','.cpp','.ps1','.md'):
+ if p.is_file() and p.suffix in ('.hip','.h','.inc','.cpp','.ps1','.md','.txt'):
   shutil.copyfile(p,host/'third_party/lmxxf/hip'/p.name)
 notes='''Modified RE9 OptiScaler host and lmxxf HIP runtime source.
 Upstream: https://github.com/TheAutomatic/dlss-5-amd-project/tree/release/1.9.0
@@ -32,8 +32,7 @@ Their upstream URLs are recorded in .gitmodules; their own licenses remain appli
 '''
 build='''#!/usr/bin/env bash
 set -euo pipefail
-rt=OptiScaler-DLSSNR-PreSR-Multipass-main/OptiScaler/dlssnr/backend/lmxxf_runtime
-x86_64-w64-mingw32-g++ -std=c++17 -O2 -shared -static -D_WIN32_WINNT=0x0A00 -DLMXXF_NR_RUNTIME_EXPORTS -I "$rt" -I third_party/lmxxf/src -I third_party/lmxxf/Development/HIP "$rt/LmxxfNrRuntime.cpp" -o LmxxfNrRuntime.dll -ld3d12 -ldxgi -ld3dcompiler -ldxguid
+x86_64-w64-mingw32-g++ -std=c++17 -O2 -shared -static -static-libgcc -static-libstdc++ -D_WIN32_WINNT=0x0A00 -DLMXXF_NR_RUNTIME_EXPORTS -I third_party/lmxxf/include -I third_party/lmxxf/src -I third_party/lmxxf/Development/HIP third_party/lmxxf/src/LmxxfNrRuntime.cpp -o LmxxfNrRuntime.dll -Wl,--image-base=0x2d0dc0000 -Wl,--no-insert-timestamp -ld3d12 -ldxgi -ld3dcompiler -ldxguid
 '''
 prefix='OptiScaler-DLSSNR-PreSR-Multipass-main/OptiScaler/'
 extra={'BUILD-SOURCE.txt':notes,'build-lmxxf-runtime.sh':build,prefix+'resource_build_date.h':'#define VER_BUILD_DATE "20260922_RE9_PreSR"\n',prefix+'resource_build_commit.h':'#define VER_BUILD_COMMIT "8f71f73_lmxxf_staged"\n'}

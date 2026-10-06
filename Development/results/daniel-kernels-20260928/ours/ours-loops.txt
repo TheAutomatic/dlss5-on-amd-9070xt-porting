@@ -1,0 +1,623 @@
+c32-wave1:c32_wave1_chain LOOP 0 .LBB10_2:                               ; =>This Loop Header: Depth=1
+PRE v_lshrrev_b32_e32 v74, 3, v22 | v_dual_mov_b32 v25, v84 :: v_dual_and_b32 v90, 7, v22 | v_dual_mov_b32 v19, v84 :: v_dual_mov_b32 v20, v84 | v_mov_b32_e32 v27, v84 | v_dual_mov_b32 v21, v84 :: v_dual_mov_b32 v22, v84 | v_dual_mov_b32 v29, v84 :: v_dual_mov_b32 v42, v84 | v_mov_b32_e32 v44, v84 | v_mov_b32_e32 v46, v84 | s_mov_b32 s3, 0 | s_lshl_b32 s4, s1, 3 | s_lshr_b32 s5, s16, 3 | s_mov_b32 s12, 0xbd650000
+BODY s_cbranch_execz .LBB10_4 | s_cbranch_execz .LBB10_6 | s_mov_b32 s2, 0 | s_add_co_i32 s2, s2, 16 | s_cmp_lg_u32 s2, 0x80 | s_cbranch_scc1 .LBB10_7 | s_add_co_i32 s3, s3, 1 | s_cmp_eq_u32 s3, 4 | s_cbranch_scc0 .LBB10_2
+
+c32-wave1:c32_wave1_chain LOOP 1 .LBB10_7:                               ;   Parent Loop BB10_2 Depth=1
+PRE s_wait_loadcnt 0x4 | v_wmma_f32_16x16x16_fp8_fp8 v[48:55], v[101:102], v[77:78], v[48:55] | s_wait_loadcnt 0x3 | s_delay_alu instid0(VALU_DEP_2) | instskip(SKIP_1) | instid1(VALU_DEP_2) | v_wmma_f32_16x16x16_fp8_fp8 v[56:63], v[103:104], v[75:76], v[56:63] | s_wait_loadcnt 0x2 | v_wmma_f32_16x16x16_fp8_fp8 v[48:55], v[105:106], v[75:76], v[48:55] | s_wait_loadcnt 0x1 | s_delay_alu instid0(VALU_DEP_2) | instskip(SKIP_1) | instid1(VALU_DEP_2) | v_wmma_f32_16x16x16_fp8_fp8 v[56:63], v[107:108], v[77:78], v[56:63] | s_wait_loadcnt 0x0 | v_wmma_f32_16x16x16_fp8_fp8 v[48:55], v[109:110], v[77:78], v[48:55]
+BODY s_add_co_i32 s2, s2, 16 | s_cmp_lg_u32 s2, 0x80 | s_cbranch_scc1 .LBB10_7
+
+c32-wave1:c32_wave1_chain LOOP 2 .LBB10_10:                              ; =>This Inner Loop Header: Depth=1
+PRE v_add_co_u32 v55, s0, s8, v55 | s_wait_alu 0xf1ff | v_lshl_or_b32 v54, ttmp9, 11, v85 | v_add_co_ci_u32_e64 v56, null, s9, 0, s0 | s_mov_b32 s0, 0x3c003c00 | s_mov_b64 s[4:5], 0 | s_mov_b32 s6, 3 | s_mov_b32 s7, 0x3f840000 | s_wait_alu 0xfffe | s_mov_b32 s1, s0 | s_mov_b32 s2, s0 | s_mov_b32 s3, s0
+BODY s_add_co_i32 m0, s6, -3 | s_add_co_i32 m0, s6, -2 | s_add_co_i32 m0, s6, -1 | s_mov_b32 m0, s6 | s_add_nc_u64 s[4:5], s[4:5], 0x1000 | s_add_co_i32 s6, s6, 4 | s_cmp_lg_u32 s4, 0x4000 | s_cbranch_scc1 .LBB10_10
+
+c32-wave1:c32_wave1_mapped LOOP 0 .LBB11_2:                               ; =>This Loop Header: Depth=1
+PRE v_mov_b32_e32 v26, v75 | v_dual_mov_b32 v20, v75 :: v_dual_mov_b32 v47, v75 | s_mov_b32 s16, 0x3c003c00 | s_mov_b32 s3, 0 | s_mov_b32 s20, 0xc3e00000 | s_mov_b32 s21, 0xbd650000 | s_lshl_b32 s14, s14, 3 | s_wait_alu 0xfffe | s_mov_b32 s17, s16 | s_mov_b32 s18, s16 | s_mov_b32 s19, s16 | v_cmp_lt_i32_e32 vcc_lo, -1, v95
+BODY s_cbranch_execz .LBB11_4 | s_cbranch_execz .LBB11_6 | s_mov_b32 s2, 0 | s_add_co_i32 s2, s2, 16 | s_cmp_lg_u32 s2, 0x80 | s_cbranch_scc1 .LBB11_7 | s_add_co_i32 s3, s3, 1 | s_cmp_eq_u32 s3, 4 | s_cbranch_scc0 .LBB11_2
+
+c32-wave1:c32_wave1_mapped LOOP 1 .LBB11_7:                               ;   Parent Loop BB11_2 Depth=1
+PRE s_wait_loadcnt 0x0 | v_dual_mul_f32 v51, v102, v87 :: v_dual_mul_f32 v52, v103, v96 | v_dual_mul_f32 v53, v104, v97 :: v_dual_mul_f32 v54, v105, v98 | v_dual_mul_f32 v55, v106, v99 :: v_dual_mov_b32 v84, v80 | ;;#ASMSTART | s_setreg_imm32_b32 hwreg(HW_REG_MODE, 23, 1), 1 | v_cvt_pk_fp8_f32 v86, v64, v65 | v_cvt_pk_fp8_f32 v87, v68, v69 | v_cvt_pk_fp8_f32 v86, v66, v67 op_sel:[0,0,1] | v_cvt_pk_fp8_f32 v87, v70, v71 op_sel:[0,0,1] | s_setreg_imm32_b32 hwreg(HW_REG_MODE, 23, 1), 0 | ;;#ASMEND
+BODY s_add_co_i32 s2, s2, 16 | s_cmp_lg_u32 s2, 0x80 | s_cbranch_scc1 .LBB11_7
+
+c32-wave1:c32_wave1_mapped LOOP 2 .LBB11_10:                              ; =>This Inner Loop Header: Depth=1
+PRE v_add_co_u32 v55, s0, s8, v55 | s_wait_alu 0xf1ff | v_lshl_or_b32 v54, ttmp9, 11, v91 | v_add_co_ci_u32_e64 v56, null, s9, 0, s0 | s_mov_b32 s0, 0x3c003c00 | s_mov_b64 s[4:5], 0 | s_mov_b32 s6, 3 | s_mov_b32 s7, 0x3f840000 | s_wait_alu 0xfffe | s_mov_b32 s1, s0 | s_mov_b32 s2, s0 | s_mov_b32 s3, s0
+BODY s_add_co_i32 m0, s6, -3 | s_add_co_i32 m0, s6, -2 | s_add_co_i32 m0, s6, -1 | s_mov_b32 m0, s6 | s_add_nc_u64 s[4:5], s[4:5], 0x1000 | s_add_co_i32 s6, s6, 4 | s_cmp_lg_u32 s4, 0x4000 | s_cbranch_scc1 .LBB11_10
+
+c32-wave1:c32_wave1_finish LOOP 0 .LBB12_2:                               ; =>This Loop Header: Depth=1
+PRE v_cmp_lt_i32_e32 vcc_lo, -1, v20 | v_cmp_gt_i32_e64 s0, s12, v20 | v_lshrrev_b32_e32 v75, 3, v23 | v_dual_mov_b32 v24, v86 :: v_dual_and_b32 v91, 7, v23 | v_dual_mov_b32 v20, v86 :: v_dual_mov_b32 v21, v86 | v_dual_mov_b32 v23, v86 :: v_dual_mov_b32 v28, v86 | v_mov_b32_e32 v45, v86 | v_mov_b32_e32 v47, v86 | s_mov_b32 s3, 0 | s_lshl_b32 s17, s1, 3 | s_lshr_b32 s4, s16, 3 | s_mov_b32 s5, 0xbd650000
+BODY s_cbranch_execz .LBB12_4 | s_cbranch_execz .LBB12_6 | s_mov_b32 s2, 0 | s_add_co_i32 s2, s2, 16 | s_cmp_lg_u32 s2, 0x80 | s_cbranch_scc1 .LBB12_7 | s_add_co_i32 s3, s3, 1 | s_cmp_eq_u32 s3, 4 | s_cbranch_scc0 .LBB12_2
+
+c32-wave1:c32_wave1_finish LOOP 1 .LBB12_7:                               ;   Parent Loop BB12_2 Depth=1
+PRE s_wait_loadcnt 0x4 | v_wmma_f32_16x16x16_fp8_fp8 v[49:56], v[102:103], v[78:79], v[49:56] | s_wait_loadcnt 0x3 | s_delay_alu instid0(VALU_DEP_2) | instskip(SKIP_1) | instid1(VALU_DEP_2) | v_wmma_f32_16x16x16_fp8_fp8 v[57:64], v[104:105], v[76:77], v[57:64] | s_wait_loadcnt 0x2 | v_wmma_f32_16x16x16_fp8_fp8 v[49:56], v[106:107], v[76:77], v[49:56] | s_wait_loadcnt 0x1 | s_delay_alu instid0(VALU_DEP_2) | instskip(SKIP_1) | instid1(VALU_DEP_2) | v_wmma_f32_16x16x16_fp8_fp8 v[57:64], v[108:109], v[78:79], v[57:64] | s_wait_loadcnt 0x0 | v_wmma_f32_16x16x16_fp8_fp8 v[49:56], v[110:111], v[78:79], v[49:56]
+BODY s_add_co_i32 s2, s2, 16 | s_cmp_lg_u32 s2, 0x80 | s_cbranch_scc1 .LBB12_7
+
+c32-wave1:c32_wave1_finish LOOP 2 .LBB12_10:                              ; =>This Inner Loop Header: Depth=1
+PRE v_lshl_or_b32 v51, v85, 8, v49 | v_add_co_u32 v49, s0, s8, v49 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v50, null, s9, 0, s0 | v_add_co_u32 v51, s0, s8, v51 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v52, null, s9, 0, s0 | s_mov_b32 s0, 0x3c003c00 | s_wait_alu 0xfffe | s_mov_b32 s1, s0 | s_mov_b32 s2, s0 | s_mov_b32 s3, s0
+BODY s_add_co_i32 m0, s6, -3 | s_add_co_i32 m0, s6, -2 | s_add_co_i32 m0, s6, -1 | s_mov_b32 m0, s6 | s_add_nc_u64 s[4:5], s[4:5], 0x1000 | s_add_co_i32 s6, s6, 4 | s_cmp_eq_u32 s4, 0x4000 | s_cbranch_scc0 .LBB12_10
+
+c32-wave1:c32_wave1_finish LOOP 3 .LBB12_16:                              ; =>This Inner Loop Header: Depth=1
+PRE s_cbranch_scc0 .LBB12_19 | ; %bb.14: | s_cmp_eq_u64 s[10:11], 0 | s_cbranch_scc1 .LBB12_17 | ; %bb.15: | v_dual_mov_b32 v2, 0 :: v_dual_lshlrev_b32 v1, 1, v0 | s_sub_co_i32 s3, s17, s15 | s_sub_co_i32 s4, s23, s14 | s_mov_b32 s5, 0 | s_delay_alu instid0(VALU_DEP_1) | v_and_b32_e32 v3, 16, v1 | s_mov_b32 s6, 0xdf00
+BODY s_add_co_i32 s2, s5, 1 | s_add_co_i32 s7, s5, 2 | s_add_co_i32 s8, s5, 3 | s_add_co_i32 s9, s3, s1 | s_add_co_i32 s8, s8, s4 | s_add_co_i32 s0, s8, s0 | s_add_co_i32 s1, s8, s1 | s_add_co_i32 s2, s8, s2 | s_add_co_i32 s8, s8, s7 | s_add_co_i32 s5, s5, 4 | s_cmp_lg_u32 s5, 64 | s_cbranch_scc1 .LBB12_16
+
+c32-wave1:c32_wave1_finish LOOP 4 .LBB12_25:                              ; =>This Inner Loop Header: Depth=1
+PRE v_dual_mov_b32 v2, 0 :: v_dual_lshlrev_b32 v1, 1, v0 | s_sub_co_i32 s0, s17, s15 | s_mov_b32 s2, 0 | s_mov_b32 s3, 0xdf00 | s_delay_alu instid0(VALU_DEP_1) | v_and_b32_e32 v3, 16, v1 | s_branch .LBB12_25 | .LBB12_24:                              ;   in Loop: Header=BB12_25 Depth=1 | s_add_co_i32 s2, s2, 2 | s_wait_alu 0xfffe | s_cmp_lg_u32 s2, 64 | s_cbranch_scc0 .LBB12_29
+BODY s_add_co_i32 s2, s2, 2 | s_cmp_lg_u32 s2, 64 | s_cbranch_scc0 .LBB12_29 | s_add_co_i32 s5, s8, s0 | s_sub_co_i32 s7, s4, s14 | s_cmp_gt_i32 s4, -1 | s_cmp_lt_i32 s7, s12 | s_cmp_lt_i32 s5, s13 | s_cbranch_vccnz .LBB12_27 | s_add_co_i32 s7, s4, s7 | s_add_co_i32 s8, s2, 1 | s_sub_co_i32 s7, s7, s14 | s_cmp_gt_i32 s5, -1 | s_cmp_lt_i32 s7, s12 | s_cbranch_vccnz .LBB12_24 | s_add_co_i32 s7, s7, s4
+
+c32-wave1:c32_wave1_finish_dcrop LOOP 0 .LBB13_2:                               ; =>This Loop Header: Depth=1
+PRE v_cmp_lt_i32_e32 vcc_lo, -1, v20 | v_cmp_gt_i32_e64 s0, s12, v20 | v_lshrrev_b32_e32 v75, 3, v23 | v_dual_mov_b32 v24, v86 :: v_dual_and_b32 v91, 7, v23 | v_dual_mov_b32 v20, v86 :: v_dual_mov_b32 v21, v86 | v_dual_mov_b32 v23, v86 :: v_dual_mov_b32 v28, v86 | v_mov_b32_e32 v45, v86 | v_mov_b32_e32 v47, v86 | s_mov_b32 s3, 0 | s_lshl_b32 s17, s1, 3 | s_lshr_b32 s4, s16, 3 | s_mov_b32 s5, 0xbd650000
+BODY s_cbranch_execz .LBB13_4 | s_cbranch_execz .LBB13_6 | s_mov_b32 s2, 0 | s_add_co_i32 s2, s2, 16 | s_cmp_lg_u32 s2, 0x80 | s_cbranch_scc1 .LBB13_7 | s_add_co_i32 s3, s3, 1 | s_cmp_eq_u32 s3, 4 | s_cbranch_scc0 .LBB13_2
+
+c32-wave1:c32_wave1_finish_dcrop LOOP 1 .LBB13_7:                               ;   Parent Loop BB13_2 Depth=1
+PRE s_wait_loadcnt 0x4 | v_wmma_f32_16x16x16_fp8_fp8 v[49:56], v[102:103], v[78:79], v[49:56] | s_wait_loadcnt 0x3 | s_delay_alu instid0(VALU_DEP_2) | instskip(SKIP_1) | instid1(VALU_DEP_2) | v_wmma_f32_16x16x16_fp8_fp8 v[57:64], v[104:105], v[76:77], v[57:64] | s_wait_loadcnt 0x2 | v_wmma_f32_16x16x16_fp8_fp8 v[49:56], v[106:107], v[76:77], v[49:56] | s_wait_loadcnt 0x1 | s_delay_alu instid0(VALU_DEP_2) | instskip(SKIP_1) | instid1(VALU_DEP_2) | v_wmma_f32_16x16x16_fp8_fp8 v[57:64], v[108:109], v[78:79], v[57:64] | s_wait_loadcnt 0x0 | v_wmma_f32_16x16x16_fp8_fp8 v[49:56], v[110:111], v[78:79], v[49:56]
+BODY s_add_co_i32 s2, s2, 16 | s_cmp_lg_u32 s2, 0x80 | s_cbranch_scc1 .LBB13_7
+
+c32-wave1:c32_wave1_finish_dcrop LOOP 2 .LBB13_10:                              ; =>This Inner Loop Header: Depth=1
+PRE v_lshl_or_b32 v51, v85, 8, v49 | v_add_co_u32 v49, s0, s8, v49 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v50, null, s9, 0, s0 | v_add_co_u32 v51, s0, s8, v51 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v52, null, s9, 0, s0 | s_mov_b32 s0, 0x3c003c00 | s_wait_alu 0xfffe | s_mov_b32 s1, s0 | s_mov_b32 s2, s0 | s_mov_b32 s3, s0
+BODY s_add_co_i32 m0, s6, -3 | s_add_co_i32 m0, s6, -2 | s_add_co_i32 m0, s6, -1 | s_mov_b32 m0, s6 | s_add_nc_u64 s[4:5], s[4:5], 0x1000 | s_add_co_i32 s6, s6, 4 | s_cmp_eq_u32 s4, 0x4000 | s_cbranch_scc0 .LBB13_10
+
+c32-wave1:c32_wave1_finish_dcrop LOOP 3 .LBB13_17:                              ; =>This Inner Loop Header: Depth=1
+PRE s_cbranch_scc0 .LBB13_21 | ; %bb.15: | s_cmp_eq_u64 s[10:11], 0 | s_cbranch_scc1 .LBB13_18 | ; %bb.16: | v_dual_mov_b32 v2, 0 :: v_dual_lshlrev_b32 v1, 1, v0 | s_sub_co_i32 s3, s17, s15 | s_sub_co_i32 s4, s19, s14 | s_mov_b32 s5, 0 | s_delay_alu instid0(VALU_DEP_1) | v_and_b32_e32 v3, 16, v1 | s_mov_b32 s6, 0xdf00
+BODY s_add_co_i32 s2, s5, 1 | s_add_co_i32 s7, s5, 2 | s_add_co_i32 s8, s5, 3 | s_add_co_i32 s9, s3, s1 | s_add_co_i32 s8, s8, s4 | s_add_co_i32 s0, s8, s0 | s_add_co_i32 s1, s8, s1 | s_add_co_i32 s2, s8, s2 | s_add_co_i32 s8, s8, s7 | s_add_co_i32 s5, s5, 4 | s_cmp_lg_u32 s5, 64 | s_cbranch_scc1 .LBB13_17
+
+c32-wave1:c32_wave1_finish_dcrop LOOP 4 .LBB13_25:                              ; =>This Inner Loop Header: Depth=1
+PRE s_delay_alu instid0(VALU_DEP_1) | v_and_b32_e32 v4, 16, v3 | v_mov_b32_e32 v2, 0 | s_sub_co_i32 s0, s17, s15 | s_mov_b32 s1, 0 | s_mov_b32 s2, 0xdf00 | s_branch .LBB13_25 | .LBB13_24:                              ;   in Loop: Header=BB13_25 Depth=1 | s_add_co_i32 s1, s1, 2 | s_wait_alu 0xfffe | s_cmp_lg_u32 s1, 64 | s_cbranch_scc0 .LBB13_29
+BODY s_add_co_i32 s1, s1, 2 | s_cmp_lg_u32 s1, 64 | s_cbranch_scc0 .LBB13_29 | s_add_co_i32 s4, s7, s0 | s_sub_co_i32 s6, s3, s14 | s_cmp_gt_i32 s3, -1 | s_cmp_lt_i32 s6, s12 | s_cmp_lt_i32 s4, s13 | s_cbranch_vccnz .LBB13_27 | s_add_co_i32 s6, s3, s6 | s_add_co_i32 s7, s1, 1 | s_sub_co_i32 s6, s6, s14 | s_cmp_gt_i32 s4, -1 | s_cmp_lt_i32 s6, s12 | s_cbranch_vccnz .LBB13_24 | s_add_co_i32 s6, s6, s3
+
+c32-wave1:c32_wave1_finish_dcrop LOOP 5 .LBB13_32:                              ; =>This Inner Loop Header: Depth=1
+PRE s_lshr_b32 s2, s12, 1 | s_lshr_b32 s3, s13, 1 | s_mov_b32 s4, 0 | s_mov_b32 s5, 0xc3e00000 | s_mov_b32 s6, 0 | s_branch .LBB13_32 | .LBB13_31:                              ;   in Loop: Header=BB13_32 Depth=1 | s_add_co_i32 s6, s6, 1 | s_add_co_i32 s4, s4, 2 | s_wait_alu 0xfffe | s_cmp_eq_u32 s6, 16 | s_cbranch_scc1 .LBB13_34
+BODY s_add_co_i32 s6, s6, 1 | s_add_co_i32 s4, s4, 2 | s_cmp_eq_u32 s6, 16 | s_cbranch_scc1 .LBB13_34 | s_sub_co_i32 s7, s8, s0 | s_sub_co_i32 s8, s9, s1 | s_cmp_gt_i32 s9, -1 | s_cmp_lt_u32 s7, s2 | s_cmp_lt_u32 s8, s3 | s_cbranch_vccnz .LBB13_31 | s_add_co_i32 s8, s8, s7
+
+c32-wave1:c32_wave1_post LOOP 0 .LBB14_2:                               ; =>This Loop Header: Depth=1
+PRE v_mov_b32_e32 v47, v68 | s_mov_b32 s24, 0x3c003c00 | s_mov_b32 s3, 0 | s_lshr_b32 s30, s21, 1 | s_lshl_b32 s9, s26, 3 | s_mov_b32 s31, 0xc3e00000 | s_mov_b32 s33, 0xbd650000 | s_wait_alu 0xfffe | s_mov_b32 s25, s24 | s_mov_b32 s26, s24 | s_mov_b32 s27, s24 | v_cmp_lt_i32_e32 vcc_lo, -1, v92
+BODY s_cbranch_execz .LBB14_4 | s_cbranch_execz .LBB14_6 | s_mov_b32 s2, 0 | s_add_co_i32 s2, s2, 16 | s_cmp_lg_u32 s2, 0x80 | s_cbranch_scc1 .LBB14_7 | s_add_co_i32 s3, s3, 1 | s_cmp_eq_u32 s3, 4 | s_cbranch_scc0 .LBB14_2
+
+c32-wave1:c32_wave1_post LOOP 1 .LBB14_7:                               ;   Parent Loop BB14_2 Depth=1
+PRE s_wait_loadcnt 0x0 | v_dual_mul_f32 v53, v109, v102 :: v_dual_mul_f32 v54, v110, v103 | v_dual_mul_f32 v55, v111, v104 :: v_dual_mul_f32 v56, v112, v105 | v_dual_mov_b32 v82, v78 :: v_dual_mov_b32 v81, v77 | ;;#ASMSTART | s_setreg_imm32_b32 hwreg(HW_REG_MODE, 23, 1), 1 | v_cvt_pk_fp8_f32 v83, v101, v100 | v_cvt_pk_fp8_f32 v84, v97, v96 | v_cvt_pk_fp8_f32 v83, v99, v98 op_sel:[0,0,1] | v_cvt_pk_fp8_f32 v84, v95, v94 op_sel:[0,0,1] | s_setreg_imm32_b32 hwreg(HW_REG_MODE, 23, 1), 0 | ;;#ASMEND
+BODY s_add_co_i32 s2, s2, 16 | s_cmp_lg_u32 s2, 0x80 | s_cbranch_scc1 .LBB14_7
+
+c32-wave1:c32_wave1_post LOOP 2 .LBB14_10:                              ; =>This Inner Loop Header: Depth=1
+PRE v_add_co_ci_u32_e64 v52, null, s13, 0, s0 | v_add_co_u32 v53, s0, s12, v53 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v54, null, s13, 0, s0 | s_mov_b32 s0, 0x3c003c00 | s_mov_b64 s[4:5], 0 | s_mov_b32 s6, 3 | s_mov_b32 s7, 0x3f840000 | s_wait_alu 0xfffe | s_mov_b32 s1, s0 | s_mov_b32 s2, s0 | s_mov_b32 s3, s0
+BODY s_add_co_i32 m0, s6, -3 | s_add_co_i32 m0, s6, -2 | s_add_co_i32 m0, s6, -1 | s_mov_b32 m0, s6 | s_add_nc_u64 s[4:5], s[4:5], 0x1000 | s_add_co_i32 s6, s6, 4 | s_cmp_eq_u32 s4, 0x4000 | s_cbranch_scc0 .LBB14_10
+
+c32-wave1:c32_wave1_post LOOP 3 .LBB14_14:                              ; =>This Inner Loop Header: Depth=1
+PRE s_xor_b32 s0, s0, -1 | v_add_nc_u32_e32 v9, 0x400, v9 | v_add_nc_u32_e32 v0, s2, v0 | v_add_nc_u32_e32 v2, s3, v2 | v_add_nc_u32_e32 v4, 4, v4 | s_wait_alu 0xfffe | s_and_b32 s0, exec_lo, s0 | s_wait_alu 0xfffe | s_or_b32 s4, s0, s4 | s_wait_alu 0xfffe | s_and_not1_b32 exec_lo, exec_lo, s4 | s_cbranch_execz .LBB14_16
+BODY s_cbranch_execz .LBB14_16 | s_cbranch_execz .LBB14_13
+
+c32-wave1:c32_wave1_prefix LOOP 0 .LBB15_2:                               ; =>This Loop Header: Depth=1
+PRE v_dual_mov_b32 v40, v71 :: v_dual_mov_b32 v37, v71 | v_dual_mov_b32 v42, v71 :: v_dual_mov_b32 v39, v71 | v_dual_mov_b32 v44, v71 :: v_dual_mov_b32 v41, v71 | v_dual_mov_b32 v46, v71 :: v_dual_mov_b32 v43, v71 | v_dual_mov_b32 v48, v71 :: v_dual_mov_b32 v45, v71 | v_mov_b32_e32 v47, v71 | s_mov_b32 s16, 0x3c003c00 | s_mov_b32 s3, 0xbd650000 | s_wait_alu 0xfffe | s_mov_b32 s17, s16 | s_mov_b32 s18, s16 | s_mov_b32 s19, s16
+BODY s_cbranch_vccnz .LBB15_4 | s_mov_b32 s21, 0 | s_add_co_i32 s21, s21, 16 | s_cmp_lg_u32 s21, 0x80 | s_cbranch_scc1 .LBB15_6 | s_add_co_i32 s20, s20, 1 | s_cmp_eq_u32 s20, 4 | s_cbranch_scc0 .LBB15_2
+
+c32-wave1:c32_wave1_prefix LOOP 1 .LBB15_6:                               ;   Parent Loop BB15_2 Depth=1
+PRE v_dual_mul_f32 v51, v101, v51 :: v_dual_mul_f32 v52, v102, v52 | s_wait_loadcnt 0x0 | v_dual_mul_f32 v53, v103, v53 :: v_dual_mul_f32 v54, v104, v54 | v_dual_mul_f32 v55, v105, v55 :: v_dual_mul_f32 v56, v106, v56 | ;;#ASMSTART | s_setreg_imm32_b32 hwreg(HW_REG_MODE, 23, 1), 1 | v_cvt_pk_fp8_f32 v86, v70, v107 | v_cvt_pk_fp8_f32 v87, v110, v111 | v_cvt_pk_fp8_f32 v86, v108, v109 op_sel:[0,0,1] | v_cvt_pk_fp8_f32 v87, v112, v113 op_sel:[0,0,1] | s_setreg_imm32_b32 hwreg(HW_REG_MODE, 23, 1), 0 | ;;#ASMEND
+BODY s_add_co_i32 s21, s21, 16 | s_cmp_lg_u32 s21, 0x80 | s_cbranch_scc1 .LBB15_6
+
+c32-wave1:c32_wave1_prefix LOOP 2 .LBB15_9:                               ; =>This Inner Loop Header: Depth=1
+PRE v_add_co_ci_u32_e64 v50, null, s11, 0, s0 | v_add_co_u32 v51, s0, s10, v51 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v52, null, s11, 0, s0 | v_add_co_u32 v53, s0, s10, v53 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v54, null, s11, 0, s0 | s_mov_b32 s0, 0x3c003c00 | s_wait_alu 0xfffe | s_mov_b32 s1, s0 | s_mov_b32 s2, s0 | s_mov_b32 s3, s0
+BODY s_add_co_i32 m0, s6, -3 | s_add_co_i32 m0, s6, -2 | s_add_co_i32 m0, s6, -1 | s_mov_b32 m0, s6 | s_add_nc_u64 s[4:5], s[4:5], 0x1000 | s_add_co_i32 s6, s6, 4 | s_cmp_eq_u32 s4, 0x4000 | s_cbranch_scc0 .LBB15_9
+
+c32-wave1:c32_wave1_prefix LOOP 3 .LBB15_12:                              ; =>This Inner Loop Header: Depth=1
+PRE s_lshl_b32 s0, s0, 3 | s_wait_alu 0xfffe | s_sub_co_i32 s3, ttmp9, s2 | s_cmp_eq_u64 s[12:13], 0 | s_cbranch_scc1 .LBB15_13 | ; %bb.11: | v_lshlrev_b32_e32 v1, 1, v0 | s_wait_alu 0xfffe | s_lshl_b32 s2, s3, 3 | s_mov_b32 s4, 0xc3e00000 | s_delay_alu instid0(VALU_DEP_1) | v_and_b32_e32 v1, 16, v1
+BODY s_add_co_i32 s7, s1, 1 | s_add_co_i32 s8, s1, 2 | s_add_co_i32 s9, s1, 3 | s_add_co_i32 s6, s6, s0 | s_add_co_i32 s5, s5, s6 | s_add_co_i32 s7, s7, s6 | s_add_co_i32 s8, s8, s6 | s_add_co_i32 s1, s1, 4 | s_add_co_i32 s9, s9, s6 | s_cmp_lg_u32 s1, 64 | s_cbranch_scc1 .LBB15_12
+
+c64-wave2:c64_wave2_bi LOOP 0 .LBB89_18:                              ; =>This Loop Header: Depth=1
+PRE v_or_b32_e32 v29, 0x10100, v1 | s_add_nc_u64 s[14:15], s[6:7], 0x200 | s_mov_b32 s1, 0 | v_add_co_u32 v27, s0, 0x10100, v3 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v28, null, 0, 0, s0 | v_add_nc_u32_e32 v30, 0x11000, v2 | v_or_b32_e32 v31, 0x10000, v2 | s_mov_b32 s24, 0xbd650000 | s_wait_dscnt 0x0 | s_barrier_signal -1 | s_barrier_wait -1
+BODY s_mov_b32 s26, -2 | s_mov_b64 s[20:21], s[6:7] | s_add_co_i32 s26, s26, 2 | s_add_nc_u64 s[20:21], s[20:21], 0x200 | s_cmp_gt_u32 s26, 5 | s_cbranch_scc0 .LBB89_19 | s_add_co_i32 s1, s1, 1 | s_cmp_eq_u32 s1, 4 | s_cbranch_scc0 .LBB89_18
+
+c64-wave2:c64_wave2_bi LOOP 1 .LBB89_19:                              ;   Parent Loop BB89_18 Depth=1
+PRE v_or_b32_e32 v33, s25, v52 | v_dual_mov_b32 v34, v20 :: v_dual_mov_b32 v9, 0 | v_dual_mov_b32 v10, v26 :: v_dual_mov_b32 v11, v26 | v_dual_mov_b32 v12, v26 :: v_dual_mov_b32 v13, v26 | v_dual_mov_b32 v14, v26 :: v_dual_mov_b32 v15, v26 | v_dual_mov_b32 v16, v26 :: v_dual_mov_b32 v1, 0 | v_dual_mov_b32 v2, v26 :: v_dual_mov_b32 v3, v26 | v_dual_mov_b32 v4, v26 :: v_dual_mov_b32 v5, v26 | v_dual_mov_b32 v6, v26 :: v_dual_mov_b32 v7, v26 | v_mov_b32_e32 v8, v26 | s_mov_b32 s26, -2 | s_mov_b64 s[20:21], s[6:7]
+BODY s_add_co_i32 s26, s26, 2 | s_add_nc_u64 s[20:21], s[20:21], 0x200 | s_cmp_gt_u32 s26, 5 | s_cbranch_scc0 .LBB89_19
+
+c64-wave2:c64_wave2_bi LOOP 2 .LBB89_23:                              ; =>This Inner Loop Header: Depth=1
+PRE v_cvt_pk_fp8_f32 v22, v37, v38 | s_delay_alu instid0(VALU_DEP_2) | instskip(NEXT) | instid1(VALU_DEP_2) | v_cvt_pk_fp8_f32 v21, v35, v36 op_sel:[0,0,1] | v_cvt_pk_fp8_f32 v22, v39, v40 op_sel:[0,0,1] | s_setreg_imm32_b32 hwreg(HW_REG_MODE, 23, 1), 0 | v_add_nc_u32_e32 v31, s6, v31 | v_add_nc_u32_e32 v30, 2, v30 | s_addk_co_i32 s2, 0x400 | ds_store_b64 v32, v[21:22] offset:256 | s_wait_alu 0xfffe | s_cmp_eq_u32 s2, 0x1000 | s_cbranch_scc1 .LBB89_27
+BODY s_addk_co_i32 s2, 0x400 | s_cmp_eq_u32 s2, 0x1000 | s_cbranch_scc1 .LBB89_27 | s_cbranch_execz .LBB89_25 | s_cbranch_execz .LBB89_22
+
+c64-wave2:c64_wave2_bi LOOP 3 .LBB89_28:                              ; =>This Inner Loop Header: Depth=1
+PRE s_mov_b32 s14, 0x3f840000 | v_or3_b32 v65, v65, v66, v49 | v_or_b32_e32 v64, 0x1000, v64 | s_wait_alu 0xfffe | s_mov_b32 s2, s0 | s_mov_b32 s3, s0 | v_lshlrev_b32_e32 v65, 2, v65 | s_delay_alu instid0(VALU_DEP_1) | v_add_co_u32 v65, s1, s8, v65 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v66, null, s9, 0, s1 | s_mov_b32 s1, s0
+BODY s_add_co_i32 m0, s7, -3 | s_add_co_i32 m0, s7, -2 | s_add_co_i32 m0, s7, -1 | s_mov_b32 m0, s7 | s_add_nc_u64 s[4:5], s[4:5], 0x1000 | s_add_co_i32 s7, s7, 4 | s_cmp_eq_u32 s4, 0x4000 | s_cbranch_scc0 .LBB89_28
+
+c64-wave2:c64_wave2_bi LOOP 4 .LBB89_32:                              ; =>This Inner Loop Header: Depth=1
+PRE .LBB89_30:                              ;   in Loop: Header=BB89_32 Depth=1 | global_store_b32 v[16:17], v0, off offset:92 | .LBB89_31:                              ; %Flow684 | ;   in Loop: Header=BB89_32 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s2 | v_add_nc_u32_e32 v48, s6, v48 | v_add_nc_u32_e32 v76, 2, v76 | s_addk_co_i32 s3, 0x400 | s_wait_alu 0xfffe | s_cmp_lg_u32 s3, 0x1000 | s_cbranch_scc0 .LBB89_193
+BODY s_cbranch_vccnz .LBB89_101 | s_cbranch_execz .LBB89_102 | s_cmp_eq_u32 s18, 3 | s_mov_b32 s8, -1 | s_cbranch_scc0 .LBB89_184 | s_mov_b32 s8, 0 | s_cmp_lg_u32 s18, 0 | s_mov_b32 s7, -1 | s_cbranch_vccnz .LBB89_106 | s_cbranch_execz .LBB89_107 | s_cmp_eq_u32 s18, 3 | s_mov_b32 s8, -1 | s_cbranch_scc0 .LBB89_189 | s_mov_b32 s8, 0 | s_cmp_lg_u32 s18, 0 | s_mov_b32 s7, -1 | s_cbranch_vccnz .LBB89_111 | s_cbranch_execnz .LBB89_30
+
+c64-wave2:c64_wave2_bo LOOP 0 .LBB90_2:                               ; =>This Loop Header: Depth=1
+PRE v_or3_b32 v32, v42, v37, v38 | v_or3_b32 v33, v39, v40, v41 | v_cmp_lt_i32_e64 s0, -1, v1 | ds_store_2addr_b64 v24, v[2:3], v[4:5] offset1:32 | ds_store_2addr_b64 v24, v[6:7], v[8:9] offset0:128 offset1:160 | ds_store_2addr_b64 v155, v[10:11], v[12:13] offset1:32 | ds_store_2addr_b64 v155, v[14:15], v[32:33] offset0:128 offset1:160 | v_or_b32_e32 v32, 0x10000, v156 | s_add_nc_u64 s[2:3], s[10:11], 0x100 | s_wait_dscnt 0x0 | s_barrier_signal -1 | s_barrier_wait -1
+BODY s_mov_b32 s27, -2 | s_mov_b64 s[6:7], s[10:11] | s_add_co_i32 s27, s27, 2 | s_add_nc_u64 s[6:7], s[6:7], 0x200 | s_cmp_gt_u32 s27, 5 | s_cbranch_scc0 .LBB90_3 | s_add_co_i32 s24, s24, 1 | s_cmp_eq_u32 s24, 4 | s_cbranch_scc0 .LBB90_2
+
+c64-wave2:c64_wave2_bo LOOP 1 .LBB90_3:                               ;   Parent Loop BB90_2 Depth=1
+PRE v_or_b32_e32 v34, s26, v53 | v_dual_mov_b32 v35, v21 :: v_dual_mov_b32 v10, v17 | v_dual_mov_b32 v9, 0 :: v_dual_mov_b32 v12, v17 | v_dual_mov_b32 v11, v17 :: v_dual_mov_b32 v14, v17 | v_dual_mov_b32 v13, v17 :: v_dual_mov_b32 v16, v17 | v_dual_mov_b32 v15, v17 :: v_dual_mov_b32 v2, v17 | v_dual_mov_b32 v1, 0 :: v_dual_mov_b32 v4, v17 | v_dual_mov_b32 v3, v17 :: v_dual_mov_b32 v6, v17 | v_dual_mov_b32 v5, v17 :: v_dual_mov_b32 v8, v17 | v_mov_b32_e32 v7, v17 | s_mov_b32 s27, -2 | s_mov_b64 s[6:7], s[10:11]
+BODY s_add_co_i32 s27, s27, 2 | s_add_nc_u64 s[6:7], s[6:7], 0x200 | s_cmp_gt_u32 s27, 5 | s_cbranch_scc0 .LBB90_3
+
+c64-wave2:c64_wave2_bo LOOP 2 .LBB90_6:                               ; =>This Inner Loop Header: Depth=1
+PRE v_add_co_ci_u32_e64 v20, null, s5, 0, s1 | v_add_co_u32 v21, s1, s4, v62 | v_add_co_ci_u32_e64 v16, null, s5, 0, s2 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v22, null, s5, 0, s1 | v_or_b32_e32 v69, 0x1000, v53 | v_mov_b32_e32 v30, v61 | s_mov_b32 s3, 0 | s_lshl_b32 s6, s16, 7 | s_wait_dscnt 0x0 | s_barrier_signal -1 | s_barrier_wait -1
+BODY s_addk_co_i32 s3, 0x400 | s_cmp_eq_u32 s3, 0x1000 | s_cbranch_scc0 .LBB90_6
+
+c64-wave2:c64_wave2_bo LOOP 3 .LBB90_8:                               ; =>This Inner Loop Header: Depth=1
+PRE s_mov_b32 s8, 0x3f840000 | v_or3_b32 v65, v65, v66, v49 | v_or_b32_e32 v55, 0x1000, v55 | s_wait_alu 0xfffe | s_mov_b32 s2, s0 | s_mov_b32 s3, s0 | v_lshlrev_b32_e32 v65, 2, v65 | s_delay_alu instid0(VALU_DEP_1) | v_add_co_u32 v65, s1, s12, v65 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v66, null, s13, 0, s1 | s_mov_b32 s1, s0
+BODY s_add_co_i32 m0, s7, -3 | s_add_co_i32 m0, s7, -2 | s_add_co_i32 m0, s7, -1 | s_mov_b32 m0, s7 | s_add_nc_u64 s[4:5], s[4:5], 0x1000 | s_add_co_i32 s7, s7, 4 | s_cmp_eq_u32 s4, 0x4000 | s_cbranch_scc0 .LBB90_8
+
+c64-wave2:c64_wave2_bo LOOP 4 .LBB90_12:                              ; =>This Inner Loop Header: Depth=1
+PRE s_setreg_imm32_b32 hwreg(HW_REG_MODE, 23, 1), 0 | global_store_b64 v[8:9], v[0:1], off offset:16 | .LBB90_11:                              ; %Flow | ;   in Loop: Header=BB90_12 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s2 | v_add_nc_u32_e32 v70, s6, v70 | v_add_nc_u32_e32 v68, 2, v68 | s_addk_co_i32 s4, 0x400 | s_wait_alu 0xfffe | s_cmp_lg_u32 s4, 0x1000 | s_cbranch_scc0 .LBB90_45
+BODY s_cbranch_vccz .LBB90_41 | s_cbranch_vccz .LBB90_42 | s_cbranch_vccz .LBB90_43 | s_cbranch_vccnz .LBB90_10 | s_cbranch_vccnz .LBB90_15 | s_cbranch_vccnz .LBB90_16 | s_cbranch_vccnz .LBB90_17 | s_cbranch_vccnz .LBB90_18 | s_cbranch_vccnz .LBB90_19 | s_cbranch_vccnz .LBB90_20 | s_cbranch_vccnz .LBB90_21 | s_cbranch_vccnz .LBB90_23 | s_cbranch_vccnz .LBB90_24 | s_cbranch_vccnz .LBB90_25 | s_cbranch_vccnz .LBB90_26 | s_cbranch_vccnz .LBB90_27 | s_cbranch_vccnz .LBB90_28 | s_cbranch_vccnz .LBB90_10
+
+c64-wave2:c64_wave2_bi_bo LOOP 0 .LBB91_18:                              ; =>This Loop Header: Depth=1
+PRE v_or_b32_e32 v29, 0x10100, v1 | s_add_nc_u64 s[14:15], s[6:7], 0x200 | s_mov_b32 s1, 0 | v_add_co_u32 v27, s0, 0x10100, v3 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v28, null, 0, 0, s0 | v_add_nc_u32_e32 v30, 0x11000, v2 | v_or_b32_e32 v31, 0x10000, v2 | s_mov_b32 s24, 0xbd650000 | s_wait_dscnt 0x0 | s_barrier_signal -1 | s_barrier_wait -1
+BODY s_mov_b32 s26, -2 | s_mov_b64 s[20:21], s[6:7] | s_add_co_i32 s26, s26, 2 | s_add_nc_u64 s[20:21], s[20:21], 0x200 | s_cmp_gt_u32 s26, 5 | s_cbranch_scc0 .LBB91_19 | s_add_co_i32 s1, s1, 1 | s_cmp_eq_u32 s1, 4 | s_cbranch_scc0 .LBB91_18
+
+c64-wave2:c64_wave2_bi_bo LOOP 1 .LBB91_19:                              ;   Parent Loop BB91_18 Depth=1
+PRE v_or_b32_e32 v33, s25, v52 | v_dual_mov_b32 v34, v20 :: v_dual_mov_b32 v9, 0 | v_dual_mov_b32 v10, v26 :: v_dual_mov_b32 v11, v26 | v_dual_mov_b32 v12, v26 :: v_dual_mov_b32 v13, v26 | v_dual_mov_b32 v14, v26 :: v_dual_mov_b32 v15, v26 | v_dual_mov_b32 v16, v26 :: v_dual_mov_b32 v1, 0 | v_dual_mov_b32 v2, v26 :: v_dual_mov_b32 v3, v26 | v_dual_mov_b32 v4, v26 :: v_dual_mov_b32 v5, v26 | v_dual_mov_b32 v6, v26 :: v_dual_mov_b32 v7, v26 | v_mov_b32_e32 v8, v26 | s_mov_b32 s26, -2 | s_mov_b64 s[20:21], s[6:7]
+BODY s_add_co_i32 s26, s26, 2 | s_add_nc_u64 s[20:21], s[20:21], 0x200 | s_cmp_gt_u32 s26, 5 | s_cbranch_scc0 .LBB91_19
+
+c64-wave2:c64_wave2_bi_bo LOOP 2 .LBB91_23:                              ; =>This Inner Loop Header: Depth=1
+PRE v_cvt_pk_fp8_f32 v22, v37, v38 | s_delay_alu instid0(VALU_DEP_2) | instskip(NEXT) | instid1(VALU_DEP_2) | v_cvt_pk_fp8_f32 v21, v35, v36 op_sel:[0,0,1] | v_cvt_pk_fp8_f32 v22, v39, v40 op_sel:[0,0,1] | s_setreg_imm32_b32 hwreg(HW_REG_MODE, 23, 1), 0 | v_add_nc_u32_e32 v31, s6, v31 | v_add_nc_u32_e32 v30, 2, v30 | s_addk_co_i32 s2, 0x400 | ds_store_b64 v32, v[21:22] offset:256 | s_wait_alu 0xfffe | s_cmp_eq_u32 s2, 0x1000 | s_cbranch_scc1 .LBB91_27
+BODY s_addk_co_i32 s2, 0x400 | s_cmp_eq_u32 s2, 0x1000 | s_cbranch_scc1 .LBB91_27 | s_cbranch_execz .LBB91_25 | s_cbranch_execz .LBB91_22
+
+c64-wave2:c64_wave2_bi_bo LOOP 3 .LBB91_28:                              ; =>This Inner Loop Header: Depth=1
+PRE s_mov_b32 s14, 0x3f840000 | v_or3_b32 v65, v65, v66, v49 | v_or_b32_e32 v64, 0x1000, v64 | s_wait_alu 0xfffe | s_mov_b32 s2, s0 | s_mov_b32 s3, s0 | v_lshlrev_b32_e32 v65, 2, v65 | s_delay_alu instid0(VALU_DEP_1) | v_add_co_u32 v65, s1, s8, v65 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v66, null, s9, 0, s1 | s_mov_b32 s1, s0
+BODY s_add_co_i32 m0, s7, -3 | s_add_co_i32 m0, s7, -2 | s_add_co_i32 m0, s7, -1 | s_mov_b32 m0, s7 | s_add_nc_u64 s[4:5], s[4:5], 0x1000 | s_add_co_i32 s7, s7, 4 | s_cmp_eq_u32 s4, 0x4000 | s_cbranch_scc0 .LBB91_28
+
+c64-wave2:c64_wave2_bi_bo LOOP 4 .LBB91_32:                              ; =>This Inner Loop Header: Depth=1
+PRE s_setreg_imm32_b32 hwreg(HW_REG_MODE, 23, 1), 0 | global_store_b64 v[8:9], v[0:1], off offset:16 | .LBB91_31:                              ; %Flow | ;   in Loop: Header=BB91_32 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s2 | v_add_nc_u32_e32 v70, s6, v70 | v_add_nc_u32_e32 v68, 2, v68 | s_addk_co_i32 s4, 0x400 | s_wait_alu 0xfffe | s_cmp_lg_u32 s4, 0x1000 | s_cbranch_scc0 .LBB91_65
+BODY s_cbranch_vccz .LBB91_61 | s_cbranch_vccz .LBB91_62 | s_cbranch_vccz .LBB91_63 | s_cbranch_vccnz .LBB91_30 | s_cbranch_vccnz .LBB91_35 | s_cbranch_vccnz .LBB91_36 | s_cbranch_vccnz .LBB91_37 | s_cbranch_vccnz .LBB91_38 | s_cbranch_vccnz .LBB91_39 | s_cbranch_vccnz .LBB91_40 | s_cbranch_vccnz .LBB91_41 | s_cbranch_vccnz .LBB91_43 | s_cbranch_vccnz .LBB91_44 | s_cbranch_vccnz .LBB91_45 | s_cbranch_vccnz .LBB91_46 | s_cbranch_vccnz .LBB91_47 | s_cbranch_vccnz .LBB91_48 | s_cbranch_vccnz .LBB91_30
+
+c64-wave2:c128_wave2_bi LOOP 0 .LBB93_18:                              ; =>This Loop Header: Depth=1
+PRE v_add_co_u32 v2, s0, v2, s6 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v4, null, 0, s7, s0 | v_add_co_u32 v19, s0, 0x40100, v1 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v20, null, 0, v3, s0 | v_add_co_u32 v21, s0, 0x42000, v2 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v22, null, 0, v4, s0 | v_add_co_u32 v23, s0, 0x40000, v2 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v24, null, 0, v4, s0
+BODY s_mov_b32 s22, -2 | s_add_co_i32 s22, s22, 2 | s_cmp_gt_u32 s22, 5 | s_cbranch_scc0 .LBB93_19 | s_add_co_i32 s1, s1, 1 | s_cmp_eq_u32 s1, 4 | s_cbranch_scc0 .LBB93_18
+
+c64-wave2:c128_wave2_bi LOOP 1 .LBB93_19:                              ;   Parent Loop BB93_18 Depth=1
+PRE v_dual_mov_b32 v28, v22 :: v_dual_mov_b32 v27, v21 | v_dual_mov_b32 v44, v40 :: v_dual_mov_b32 v45, v39 | v_dual_mov_b32 v31, v17 :: v_dual_mov_b32 v10, v42 | v_dual_mov_b32 v9, 0 :: v_dual_mov_b32 v12, v42 | v_dual_mov_b32 v11, v42 :: v_dual_mov_b32 v14, v42 | v_dual_mov_b32 v13, v42 :: v_dual_mov_b32 v16, v42 | v_dual_mov_b32 v15, v42 :: v_dual_mov_b32 v2, v42 | v_dual_mov_b32 v1, 0 :: v_dual_mov_b32 v4, v42 | v_dual_mov_b32 v3, v42 :: v_dual_mov_b32 v6, v42 | v_dual_mov_b32 v5, v42 :: v_dual_mov_b32 v8, v42 | v_mov_b32_e32 v7, v42 | s_mov_b32 s22, -2
+BODY s_add_co_i32 s22, s22, 2 | s_cmp_gt_u32 s22, 5 | s_cbranch_scc0 .LBB93_19
+
+c64-wave2:c128_wave2_bi LOOP 2 .LBB93_23:                              ; =>This Inner Loop Header: Depth=1
+PRE v_cvt_pk_fp8_f32 v30, v72, v73 | s_delay_alu instid0(VALU_DEP_2) | instskip(NEXT) | instid1(VALU_DEP_2) | v_cvt_pk_fp8_f32 v29, v70, v71 op_sel:[0,0,1] | v_cvt_pk_fp8_f32 v30, v74, v75 op_sel:[0,0,1] | s_setreg_imm32_b32 hwreg(HW_REG_MODE, 23, 1), 0 | v_add_nc_u32_e32 v43, s6, v43 | v_add_nc_u32_e32 v42, 2, v42 | s_addk_co_i32 s2, 0x800 | ds_store_b64 v44, v[29:30] offset:256 | s_wait_alu 0xfffe | s_cmp_eq_u32 s2, 0x2000 | s_cbranch_scc1 .LBB93_27
+BODY s_addk_co_i32 s2, 0x800 | s_cmp_eq_u32 s2, 0x2000 | s_cbranch_scc1 .LBB93_27 | s_cbranch_execz .LBB93_25 | s_cbranch_execz .LBB93_22
+
+c64-wave2:c128_wave2_bi LOOP 3 .LBB93_28:                              ; =>This Inner Loop Header: Depth=1
+PRE s_mov_b32 s15, 0x3f840000 | v_or3_b32 v69, v69, v70, v65 | v_or_b32_e32 v63, 0x2000, v63 | s_wait_alu 0xfffe | s_mov_b32 s2, s0 | s_mov_b32 s3, s0 | v_lshlrev_b32_e32 v69, 2, v69 | s_delay_alu instid0(VALU_DEP_1) | v_add_co_u32 v69, s1, s8, v69 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v70, null, s9, 0, s1 | s_mov_b32 s1, s0
+BODY s_add_co_i32 m0, s7, -3 | s_add_co_i32 m0, s7, -2 | s_add_co_i32 m0, s7, -1 | s_mov_b32 m0, s7 | s_add_nc_u64 s[4:5], s[4:5], 0x1000 | s_add_co_i32 s7, s7, 4 | s_cmp_eq_u32 s4, 0x4000 | s_cbranch_scc0 .LBB93_28
+
+c64-wave2:c128_wave2_bi LOOP 4 .LBB93_32:                              ; =>This Inner Loop Header: Depth=1
+PRE .LBB93_30:                              ;   in Loop: Header=BB93_32 Depth=1 | global_store_b32 v[16:17], v0, off offset:92 | .LBB93_31:                              ; %Flow860 | ;   in Loop: Header=BB93_32 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s2 | v_add_nc_u32_e32 v64, s6, v64 | v_add_nc_u32_e32 v108, 2, v108 | s_addk_co_i32 s3, 0x800 | s_wait_alu 0xfffe | s_cmp_lg_u32 s3, 0x2000 | s_cbranch_scc0 .LBB93_193
+BODY s_cbranch_vccnz .LBB93_101 | s_cbranch_execz .LBB93_102 | s_cmp_eq_u32 s18, 3 | s_mov_b32 s8, -1 | s_cbranch_scc0 .LBB93_184 | s_mov_b32 s8, 0 | s_cmp_lg_u32 s18, 0 | s_mov_b32 s7, -1 | s_cbranch_vccnz .LBB93_106 | s_cbranch_execz .LBB93_107 | s_cmp_eq_u32 s18, 3 | s_mov_b32 s8, -1 | s_cbranch_scc0 .LBB93_189 | s_mov_b32 s8, 0 | s_cmp_lg_u32 s18, 0 | s_mov_b32 s7, -1 | s_cbranch_vccnz .LBB93_111 | s_cbranch_execnz .LBB93_30
+
+c64-wave2:c128_wave2_bo LOOP 0 .LBB94_2:                               ; =>This Loop Header: Depth=1
+PRE s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v21, null, 0, v156, s1 | v_add_co_u32 v22, s1, 0x42000, v1 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v23, null, 0, v2, s1 | v_add_co_u32 v24, s1, 0x40000, v1 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v25, null, 0, v2, s1 | s_add_nc_u64 s[2:3], s[10:11], 0x100 | s_wait_dscnt 0x0 | s_barrier_signal -1 | s_barrier_wait -1
+BODY s_mov_b32 s23, -2 | s_add_co_i32 s23, s23, 2 | s_cmp_gt_u32 s23, 5 | s_cbranch_scc0 .LBB94_3 | s_add_co_i32 s18, s18, 1 | s_cmp_eq_u32 s18, 4 | s_cbranch_scc0 .LBB94_2
+
+c64-wave2:c128_wave2_bo LOOP 1 .LBB94_3:                               ;   Parent Loop BB94_2 Depth=1
+PRE v_dual_mov_b32 v29, v23 :: v_dual_mov_b32 v28, v22 | v_dual_mov_b32 v43, v40 :: v_dual_mov_b32 v44, v39 | v_dual_mov_b32 v45, v39 :: v_dual_mov_b32 v30, v20 | v_dual_mov_b32 v32, v18 :: v_dual_mov_b32 v9, 0 | v_dual_mov_b32 v12, v17 :: v_dual_mov_b32 v11, v17 | v_dual_mov_b32 v14, v17 :: v_dual_mov_b32 v13, v17 | v_dual_mov_b32 v16, v17 :: v_dual_mov_b32 v15, v17 | v_dual_mov_b32 v2, v17 :: v_dual_mov_b32 v1, 0 | v_dual_mov_b32 v4, v17 :: v_dual_mov_b32 v3, v17 | v_dual_mov_b32 v6, v17 :: v_dual_mov_b32 v5, v17 | v_dual_mov_b32 v8, v17 :: v_dual_mov_b32 v7, v17 | s_mov_b32 s23, -2
+BODY s_add_co_i32 s23, s23, 2 | s_cmp_gt_u32 s23, 5 | s_cbranch_scc0 .LBB94_3
+
+c64-wave2:c128_wave2_bo LOOP 2 .LBB94_6:                               ; =>This Inner Loop Header: Depth=1
+PRE v_lshlrev_b32_e32 v68, 7, v1 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v28, null, s3, 0, s1 | v_add_co_u32 v29, s1, s2, v62 | v_mov_b32_e32 v42, v68 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v30, null, s3, 0, s1 | s_mov_b32 s3, 0 | s_lshl_b32 s7, s16, 8 | s_wait_dscnt 0x0 | s_barrier_signal -1 | s_barrier_wait -1
+BODY s_addk_co_i32 s3, 0x800 | s_cmp_eq_u32 s3, 0x2000 | s_cbranch_scc0 .LBB94_6
+
+c64-wave2:c128_wave2_bo LOOP 3 .LBB94_8:                               ; =>This Inner Loop Header: Depth=1
+PRE s_mov_b32 s9, 0x3f840000 | v_or3_b32 v69, v69, v70, v65 | v_or_b32_e32 v51, 0x2000, v51 | s_wait_alu 0xfffe | s_mov_b32 s2, s0 | s_mov_b32 s3, s0 | v_lshlrev_b32_e32 v69, 2, v69 | s_delay_alu instid0(VALU_DEP_1) | v_add_co_u32 v69, s1, s12, v69 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v70, null, s13, 0, s1 | s_mov_b32 s1, s0
+BODY s_add_co_i32 m0, s8, -3 | s_add_co_i32 m0, s8, -2 | s_add_co_i32 m0, s8, -1 | s_mov_b32 m0, s8 | s_add_nc_u64 s[4:5], s[4:5], 0x1000 | s_add_co_i32 s8, s8, 4 | s_cmp_eq_u32 s4, 0x4000 | s_cbranch_scc0 .LBB94_8
+
+c64-wave2:c128_wave2_bo LOOP 4 .LBB94_12:                              ; =>This Inner Loop Header: Depth=1
+PRE s_setreg_imm32_b32 hwreg(HW_REG_MODE, 23, 1), 0 | global_store_b64 v[8:9], v[0:1], off offset:16 | .LBB94_11:                              ; %Flow | ;   in Loop: Header=BB94_12 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s2 | v_add_nc_u32_e32 v102, s7, v102 | v_add_nc_u32_e32 v100, 2, v100 | s_addk_co_i32 s4, 0x800 | s_wait_alu 0xfffe | s_cmp_lg_u32 s4, 0x2000 | s_cbranch_scc0 .LBB94_45
+BODY s_cbranch_vccz .LBB94_41 | s_cbranch_vccz .LBB94_42 | s_cbranch_vccz .LBB94_43 | s_cbranch_vccnz .LBB94_10 | s_cbranch_vccnz .LBB94_15 | s_cbranch_vccnz .LBB94_16 | s_cbranch_vccnz .LBB94_17 | s_cbranch_vccnz .LBB94_18 | s_cbranch_vccnz .LBB94_19 | s_cbranch_vccnz .LBB94_20 | s_cbranch_vccnz .LBB94_21 | s_cbranch_vccnz .LBB94_23 | s_cbranch_vccnz .LBB94_24 | s_cbranch_vccnz .LBB94_25 | s_cbranch_vccnz .LBB94_26 | s_cbranch_vccnz .LBB94_27 | s_cbranch_vccnz .LBB94_28 | s_cbranch_vccnz .LBB94_10
+
+c64-wave2:c128_wave2_bi_bo LOOP 0 .LBB95_18:                              ; =>This Loop Header: Depth=1
+PRE v_add_co_u32 v2, s0, v2, s6 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v4, null, 0, s7, s0 | v_add_co_u32 v19, s0, 0x40100, v1 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v20, null, 0, v3, s0 | v_add_co_u32 v21, s0, 0x42000, v2 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v22, null, 0, v4, s0 | v_add_co_u32 v23, s0, 0x40000, v2 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v24, null, 0, v4, s0
+BODY s_mov_b32 s22, -2 | s_add_co_i32 s22, s22, 2 | s_cmp_gt_u32 s22, 5 | s_cbranch_scc0 .LBB95_19 | s_add_co_i32 s1, s1, 1 | s_cmp_eq_u32 s1, 4 | s_cbranch_scc0 .LBB95_18
+
+c64-wave2:c128_wave2_bi_bo LOOP 1 .LBB95_19:                              ;   Parent Loop BB95_18 Depth=1
+PRE v_dual_mov_b32 v28, v22 :: v_dual_mov_b32 v27, v21 | v_dual_mov_b32 v44, v40 :: v_dual_mov_b32 v45, v39 | v_dual_mov_b32 v31, v17 :: v_dual_mov_b32 v10, v42 | v_dual_mov_b32 v9, 0 :: v_dual_mov_b32 v12, v42 | v_dual_mov_b32 v11, v42 :: v_dual_mov_b32 v14, v42 | v_dual_mov_b32 v13, v42 :: v_dual_mov_b32 v16, v42 | v_dual_mov_b32 v15, v42 :: v_dual_mov_b32 v2, v42 | v_dual_mov_b32 v1, 0 :: v_dual_mov_b32 v4, v42 | v_dual_mov_b32 v3, v42 :: v_dual_mov_b32 v6, v42 | v_dual_mov_b32 v5, v42 :: v_dual_mov_b32 v8, v42 | v_mov_b32_e32 v7, v42 | s_mov_b32 s22, -2
+BODY s_add_co_i32 s22, s22, 2 | s_cmp_gt_u32 s22, 5 | s_cbranch_scc0 .LBB95_19
+
+c64-wave2:c128_wave2_bi_bo LOOP 2 .LBB95_23:                              ; =>This Inner Loop Header: Depth=1
+PRE v_cvt_pk_fp8_f32 v30, v72, v73 | s_delay_alu instid0(VALU_DEP_2) | instskip(NEXT) | instid1(VALU_DEP_2) | v_cvt_pk_fp8_f32 v29, v70, v71 op_sel:[0,0,1] | v_cvt_pk_fp8_f32 v30, v74, v75 op_sel:[0,0,1] | s_setreg_imm32_b32 hwreg(HW_REG_MODE, 23, 1), 0 | v_add_nc_u32_e32 v43, s6, v43 | v_add_nc_u32_e32 v42, 2, v42 | s_addk_co_i32 s2, 0x800 | ds_store_b64 v44, v[29:30] offset:256 | s_wait_alu 0xfffe | s_cmp_eq_u32 s2, 0x2000 | s_cbranch_scc1 .LBB95_27
+BODY s_addk_co_i32 s2, 0x800 | s_cmp_eq_u32 s2, 0x2000 | s_cbranch_scc1 .LBB95_27 | s_cbranch_execz .LBB95_25 | s_cbranch_execz .LBB95_22
+
+c64-wave2:c128_wave2_bi_bo LOOP 3 .LBB95_28:                              ; =>This Inner Loop Header: Depth=1
+PRE s_mov_b32 s15, 0x3f840000 | v_or3_b32 v69, v69, v70, v65 | v_or_b32_e32 v63, 0x2000, v63 | s_wait_alu 0xfffe | s_mov_b32 s2, s0 | s_mov_b32 s3, s0 | v_lshlrev_b32_e32 v69, 2, v69 | s_delay_alu instid0(VALU_DEP_1) | v_add_co_u32 v69, s1, s8, v69 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v70, null, s9, 0, s1 | s_mov_b32 s1, s0
+BODY s_add_co_i32 m0, s7, -3 | s_add_co_i32 m0, s7, -2 | s_add_co_i32 m0, s7, -1 | s_mov_b32 m0, s7 | s_add_nc_u64 s[4:5], s[4:5], 0x1000 | s_add_co_i32 s7, s7, 4 | s_cmp_eq_u32 s4, 0x4000 | s_cbranch_scc0 .LBB95_28
+
+c64-wave2:c128_wave2_bi_bo LOOP 4 .LBB95_32:                              ; =>This Inner Loop Header: Depth=1
+PRE s_setreg_imm32_b32 hwreg(HW_REG_MODE, 23, 1), 0 | global_store_b64 v[8:9], v[0:1], off offset:16 | .LBB95_31:                              ; %Flow | ;   in Loop: Header=BB95_32 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s2 | v_add_nc_u32_e32 v102, s6, v102 | v_add_nc_u32_e32 v100, 2, v100 | s_addk_co_i32 s4, 0x800 | s_wait_alu 0xfffe | s_cmp_lg_u32 s4, 0x2000 | s_cbranch_scc0 .LBB95_65
+BODY s_cbranch_vccz .LBB95_61 | s_cbranch_vccz .LBB95_62 | s_cbranch_vccz .LBB95_63 | s_cbranch_vccnz .LBB95_30 | s_cbranch_vccnz .LBB95_35 | s_cbranch_vccnz .LBB95_36 | s_cbranch_vccnz .LBB95_37 | s_cbranch_vccnz .LBB95_38 | s_cbranch_vccnz .LBB95_39 | s_cbranch_vccnz .LBB95_40 | s_cbranch_vccnz .LBB95_41 | s_cbranch_vccnz .LBB95_43 | s_cbranch_vccnz .LBB95_44 | s_cbranch_vccnz .LBB95_45 | s_cbranch_vccnz .LBB95_46 | s_cbranch_vccnz .LBB95_47 | s_cbranch_vccnz .LBB95_48 | s_cbranch_vccnz .LBB95_30
+
+c64-wave2:c256_attn_wave LOOP 0 .LBB100_5:                              ; %.preheader
+PRE s_delay_alu instid0(VALU_DEP_1) | v_and_b32_e32 v1, 0x3ffffffc, v1 | global_load_b32 v2, v1, s[4:5] scope:SCOPE_DEV | s_wait_loadcnt 0x0 | s_wait_kmcnt 0x0 | v_cmp_gt_u32_e32 vcc_lo, s7, v2 | s_and_b32 exec_lo, exec_lo, vcc_lo | s_cbranch_execz .LBB100_6 | ; %bb.4:                                ; %.preheader.preheader | v_add_co_u32 v1, s4, s4, v1 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v2, null, s5, 0, s4
+BODY s_cbranch_execnz .LBB100_5
+
+c64-wave2:c256_attn_wave LOOP 1 .LBB100_8:                              ; =>This Inner Loop Header: Depth=1
+PRE s_barrier_signal -1 | s_barrier_wait -1 | s_delay_alu instid0(VALU_DEP_1) | instskip(NEXT) | instid1(VALU_DEP_1) | v_or3_b32 v17, v17, v18, v145 | v_lshlrev_b32_e32 v17, 2, v17 | s_delay_alu instid0(VALU_DEP_1) | v_add_co_u32 v58, s4, s6, v17 | v_dual_mov_b32 v17, s20 :: v_dual_mov_b32 v20, s23 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v59, null, s7, 0, s4 | v_dual_mov_b32 v18, s21 :: v_dual_mov_b32 v19, s22 | s_mov_b32 s4, 0x3f840000
+BODY s_add_co_i32 m0, s8, -3 | s_add_co_i32 m0, s8, -2 | s_add_co_i32 m0, s8, -1 | s_mov_b32 m0, s8 | s_add_nc_u64 s[2:3], s[2:3], 0x1000 | s_add_co_i32 s8, s8, 4 | s_cmp_eq_u32 s2, 0x4000 | s_cbranch_scc0 .LBB100_8
+
+c64-wave2:c256_attn_wave LOOP 2 .LBB100_11:                             ; =>This Loop Header: Depth=1
+PRE s_wait_dscnt 0x0 | s_barrier_signal -1 | s_barrier_wait -1 | s_branch .LBB100_11 | .LBB100_10:                             ; %Flow423 | ;   in Loop: Header=BB100_11 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s4 | s_add_co_i32 s5, s5, 1 | s_wait_alu 0xfffe | s_cmp_lg_u32 s5, 4 | s_cbranch_scc0 .LBB100_94
+BODY s_cbranch_vccnz .LBB100_42 | s_cbranch_execz .LBB100_43 | s_cmp_eq_u32 s18, 3 | s_mov_b32 s14, -1 | s_cbranch_scc0 .LBB100_85 | s_mov_b32 s14, 0 | s_cmp_lg_u32 s18, 0 | s_mov_b32 s13, -1 | s_cbranch_vccnz .LBB100_47 | s_cbranch_execz .LBB100_48 | s_cmp_eq_u32 s18, 3 | s_mov_b32 s13, -1 | s_cbranch_scc0 .LBB100_90 | s_mov_b32 s13, 0 | s_cmp_lg_u32 s18, 0 | s_mov_b32 s9, -1 | s_cbranch_vccnz .LBB100_52 | s_cbranch_execnz .LBB100_13
+
+c64-wave2:c256_attn_wave LOOP 3 .LBB100_14:                             ;   Parent Loop BB100_11 Depth=1
+PRE v_wmma_f32_16x16x16_fp8_fp8 v[1:8], v[72:73], v[19:20], v[1:8] | s_wait_loadcnt 0x0 | v_wmma_f32_16x16x16_fp8_fp8 v[9:16], v[74:75], v[19:20], v[9:16] | v_lshl_or_b32 v19, v21, 8, v144 | s_branch .LBB100_14 | .LBB100_13:                             ;   in Loop: Header=BB100_14 Depth=2 | s_mov_b32 s13, 1 | s_and_not1_b32 vcc_lo, exec_lo, s8 | s_mov_b32 s8, 0 | global_store_b32 v[17:18], v21, off offset:28 | s_wait_alu 0xfffe | s_cbranch_vccz .LBB100_10
+BODY s_cbranch_vccnz .LBB100_42 | s_cbranch_execz .LBB100_43 | s_cmp_eq_u32 s18, 3 | s_mov_b32 s14, -1 | s_cbranch_scc0 .LBB100_85 | s_mov_b32 s14, 0 | s_cmp_lg_u32 s18, 0 | s_mov_b32 s13, -1 | s_cbranch_vccnz .LBB100_47 | s_cbranch_execz .LBB100_48 | s_cmp_eq_u32 s18, 3 | s_mov_b32 s13, -1 | s_cbranch_scc0 .LBB100_90 | s_mov_b32 s13, 0 | s_cmp_lg_u32 s18, 0 | s_mov_b32 s9, -1 | s_cbranch_vccnz .LBB100_52 | s_cbranch_execnz .LBB100_13
+
+c64-wave2:c256_attn_wave_bo LOOP 0 .LBB101_5:                              ; %.preheader
+PRE s_delay_alu instid0(VALU_DEP_1) | v_and_b32_e32 v1, 0x3ffffffc, v1 | global_load_b32 v2, v1, s[4:5] scope:SCOPE_DEV | s_wait_loadcnt 0x0 | s_wait_kmcnt 0x0 | v_cmp_gt_u32_e32 vcc_lo, s7, v2 | s_and_b32 exec_lo, exec_lo, vcc_lo | s_cbranch_execz .LBB101_6 | ; %bb.4:                                ; %.preheader.preheader | v_add_co_u32 v1, s4, s4, v1 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v2, null, s5, 0, s4
+BODY s_cbranch_execnz .LBB101_5
+
+c64-wave2:c256_attn_wave_bo LOOP 1 .LBB101_8:                              ; =>This Inner Loop Header: Depth=1
+PRE s_barrier_wait -1 | s_delay_alu instid0(VALU_DEP_1) | instskip(NEXT) | instid1(VALU_DEP_1) | v_or3_b32 v17, v17, v18, v67 | v_lshlrev_b32_e32 v17, 2, v17 | s_delay_alu instid0(VALU_DEP_1) | v_add_co_u32 v60, s4, s6, v17 | v_dual_mov_b32 v17, s20 :: v_dual_mov_b32 v20, s23 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v61, null, s7, 0, s4 | s_wait_alu 0xfffe | v_dual_mov_b32 v18, s21 :: v_dual_mov_b32 v19, s22 | s_mov_b32 s4, 0x3f840000
+BODY s_add_co_i32 m0, s8, -3 | s_add_co_i32 m0, s8, -2 | s_add_co_i32 m0, s8, -1 | s_mov_b32 m0, s8 | s_add_nc_u64 s[2:3], s[2:3], 0x1000 | s_add_co_i32 s8, s8, 4 | s_cmp_eq_u32 s2, 0x4000 | s_cbranch_scc0 .LBB101_8
+
+c64-wave2:c256_attn_wave_bo LOOP 2 .LBB101_12:                             ; =>This Inner Loop Header: Depth=1
+PRE s_setreg_imm32_b32 hwreg(HW_REG_MODE, 23, 1), 0 | global_store_b64 v[1:2], v[3:4], off offset:16 | .LBB101_11:                             ; %Flow388 | ;   in Loop: Header=BB101_12 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s4 | v_add_nc_u32_e32 v136, s7, v136 | v_add_nc_u32_e32 v135, 2, v135 | s_addk_co_i32 s6, 0x1000 | s_wait_alu 0xfffe | s_cmp_lg_u32 s6, 0x4000 | s_cbranch_scc0 .LBB101_45
+BODY s_cbranch_vccz .LBB101_33 | s_cbranch_vccz .LBB101_34 | s_cbranch_vccz .LBB101_35 | s_cbranch_vccz .LBB101_36 | s_cbranch_vccnz .LBB101_10 | s_cbranch_vccnz .LBB101_24 | s_cbranch_vccnz .LBB101_25 | s_cbranch_vccnz .LBB101_26 | s_cbranch_vccnz .LBB101_27 | s_cbranch_vccnz .LBB101_28 | s_cbranch_vccnz .LBB101_29 | s_cbranch_vccnz .LBB101_10 | s_cbranch_vccnz .LBB101_15 | s_cbranch_vccnz .LBB101_16 | s_cbranch_vccnz .LBB101_17 | s_cbranch_vccnz .LBB101_18 | s_cbranch_vccnz .LBB101_19 | s_cbranch_vccnz .LBB101_20
+
+vit-stream:vit_stream_project_n64_bh LOOP 0 .LBB78_5:                               ; =>This Loop Header: Depth=1
+PRE v_dual_mov_b32 v60, 0 :: v_dual_mov_b32 v61, 0 | v_dual_mov_b32 v62, 0 :: v_dual_mov_b32 v63, 0 | v_dual_mov_b32 v64, 0 :: v_dual_mov_b32 v65, 0 | v_dual_mov_b32 v66, 0 :: v_dual_mov_b32 v67, 0 | v_dual_mov_b32 v68, 0 :: v_dual_mov_b32 v69, 0 | v_dual_mov_b32 v70, 0 :: v_dual_mov_b32 v71, 0 | v_dual_mov_b32 v72, 0 :: v_dual_mov_b32 v73, 0 | v_dual_mov_b32 v74, 0 :: v_dual_mov_b32 v75, 0 | v_dual_mov_b32 v79, 0 :: v_dual_mov_b32 v80, 0 | v_dual_mov_b32 v76, 0 :: v_dual_mov_b32 v77, 0 | v_dual_mov_b32 v78, 0 :: v_dual_mov_b32 v81, 0 | s_mov_b64 s[2:3], 0
+BODY s_cmp_eq_u32 s9, 0 | s_cmp_lg_u32 s9, 0 | s_cbranch_scc1 .LBB78_7 | s_add_co_i32 s9, s9, 1 | s_mov_b64 s[4:5], 0 | s_add_nc_u64 s[4:5], s[4:5], 64 | s_add_co_i32 s0, s2, s4 | s_cmp_lt_u32 s0, s1 | s_cbranch_scc1 .LBB78_8 | s_cmp_lg_u32 s9, 4 | s_add_nc_u64 s[2:3], s[2:3], 0x100 | s_cbranch_scc1 .LBB78_5
+
+vit-stream:vit_stream_project_n64_bh LOOP 1 .LBB78_8:                               ;   Parent Loop BB78_5 Depth=1
+PRE v_cvt_f32_f16 v14, v89 | ;;#ASMEND | ;;#ASMSTART | v_cvt_f32_f16 v15, v90 | ;;#ASMEND | .LBB78_7:                               ;   in Loop: Header=BB78_5 Depth=1 | v_dual_mov_b32 v1, v48 :: v_dual_mov_b32 v2, v49 | v_dual_mov_b32 v3, v46 :: v_dual_mov_b32 v4, v47 | s_add_co_i32 s9, s9, 1 | s_mov_b64 s[4:5], 0 | s_wait_alu 0xfffe | s_lshl_b32 s1, s9, 8
+BODY s_add_nc_u64 s[4:5], s[4:5], 64 | s_add_co_i32 s0, s2, s4 | s_cmp_lt_u32 s0, s1 | s_cbranch_scc1 .LBB78_8
+
+vit-stream:vit_stream_qkv_frag_hin LOOP 0 .LBB79_5:                               ; =>This Inner Loop Header: Depth=1
+PRE v_add_co_u32 v9, vcc_lo, 0x8e00, v3 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v10, null, 0, v4, vcc_lo | v_add_co_u32 v11, vcc_lo, 0xe0, v1 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v12, null, 0, v2, vcc_lo | v_dual_mov_b32 v2, v18 :: v_dual_mov_b32 v23, v18 | v_dual_mov_b32 v4, v18 :: v_dual_mov_b32 v1, v18 | v_dual_mov_b32 v6, v18 :: v_dual_mov_b32 v3, v18 | v_dual_mov_b32 v8, v18 :: v_dual_mov_b32 v5, v18 | v_mov_b32_e32 v7, v18 | s_mov_b32 s0, -16
+BODY s_addk_co_i32 s0, 0x80 | s_cmp_gt_u32 s0, 0x3ef | s_cbranch_scc0 .LBB79_5
+
+vit-stream:vit_stream_contract_frag_hout LOOP 0 .LBB80_6:                               ; =>This Inner Loop Header: Depth=1
+PRE ;;#ASMSTART | v_cvt_f32_f16 v147, v60 | ;;#ASMEND | ;;#ASMSTART | v_cvt_f32_f16 v148, v62 | ;;#ASMEND | ;;#ASMSTART | v_cvt_f32_f16 v149, v63 | ;;#ASMEND | ;;#ASMSTART | v_cvt_f32_f16 v150, v61 | ;;#ASMEND
+BODY s_add_nc_u64 s[4:5], s[4:5], 64 | s_sub_co_i32 s8, s4, 20 | s_cmp_lt_u32 s8, 0x3f0 | s_cbranch_scc1 .LBB80_6
+
+vit-stream:vit_stream_contract_frag_hout LOOP 1 .LBB80_8:                               ; %.preheader3
+PRE v_dual_mov_b32 v50, v32 :: v_dual_mov_b32 v43, v32 | v_dual_mov_b32 v52, v32 :: v_dual_mov_b32 v45, v32 | v_dual_mov_b32 v54, v32 :: v_dual_mov_b32 v47, v32 | v_dual_mov_b32 v56, v32 :: v_dual_mov_b32 v49, v32 | v_dual_mov_b32 v58, v32 :: v_dual_mov_b32 v51, v32 | v_dual_mov_b32 v60, v32 :: v_dual_mov_b32 v53, v32 | v_dual_mov_b32 v62, v32 :: v_dual_mov_b32 v55, v32 | v_mov_b32_e32 v57, v32 | v_mov_b32_e32 v59, v32 | v_mov_b32_e32 v61, v32 | v_mov_b32_e32 v63, v32 | s_mov_b64 s[2:3], 4
+BODY s_add_nc_u64 s[2:3], s[2:3], 64 | s_add_co_i32 s4, s2, 0x3ec | s_cmp_lt_u32 s4, 0x7f0 | s_cbranch_scc1 .LBB80_8
+
+vit-stream:vit_stream_contract_frag_hout LOOP 2 .LBB80_10:                              ; %.preheader2
+PRE v_dual_mov_b32 v75, v64 :: v_dual_mov_b32 v76, v64 | v_dual_mov_b32 v77, v64 :: v_dual_mov_b32 v78, v64 | v_dual_mov_b32 v79, v64 :: v_dual_mov_b32 v80, v64 | v_dual_mov_b32 v81, v64 :: v_dual_mov_b32 v82, v64 | v_dual_mov_b32 v83, v64 :: v_dual_mov_b32 v84, v64 | v_dual_mov_b32 v85, v64 :: v_dual_mov_b32 v86, v64 | v_dual_mov_b32 v87, v64 :: v_dual_mov_b32 v88, v64 | v_dual_mov_b32 v89, v64 :: v_dual_mov_b32 v90, v64 | v_dual_mov_b32 v91, v64 :: v_dual_mov_b32 v92, v64 | v_dual_mov_b32 v93, v64 :: v_dual_mov_b32 v94, v64 | v_mov_b32_e32 v95, v64 | s_mov_b64 s[2:3], 4
+BODY s_add_nc_u64 s[2:3], s[2:3], 64 | s_add_co_i32 s4, s2, 0x7ec | s_cmp_lt_u32 s4, 0xbf0 | s_cbranch_scc1 .LBB80_10
+
+vit-stream:vit_stream_contract_frag_hout LOOP 3 .LBB80_12:                              ; %.preheader
+PRE v_dual_mov_b32 v107, v96 :: v_dual_mov_b32 v108, v96 | v_dual_mov_b32 v109, v96 :: v_dual_mov_b32 v110, v96 | v_dual_mov_b32 v111, v96 :: v_dual_mov_b32 v112, v96 | v_dual_mov_b32 v113, v96 :: v_dual_mov_b32 v114, v96 | v_dual_mov_b32 v115, v96 :: v_dual_mov_b32 v116, v96 | v_dual_mov_b32 v117, v96 :: v_dual_mov_b32 v118, v96 | v_dual_mov_b32 v119, v96 :: v_dual_mov_b32 v120, v96 | v_dual_mov_b32 v121, v96 :: v_dual_mov_b32 v122, v96 | v_dual_mov_b32 v123, v96 :: v_dual_mov_b32 v124, v96 | v_dual_mov_b32 v125, v96 :: v_dual_mov_b32 v126, v96 | v_mov_b32_e32 v127, v96 | s_movk_i32 s2, 0xbf0
+BODY s_add_co_i32 s2, s2, 64 | s_cmp_lt_u32 s2, 0xff0 | s_cbranch_scc1 .LBB80_12
+
+c512-m32-deep:split_mix_blocked_h16w_m32 LOOP 0 .LBB76_4:                               ; =>This Inner Loop Header: Depth=1
+PRE v_wmma_f32_16x16x16_f16 v[24:31], v[64:67], v[76:79], v[24:31] | s_wait_loadcnt 0x2 | v_wmma_f32_16x16x16_f16 v[16:23], v[64:67], v[80:83], v[16:23] | v_wmma_f32_16x16x16_f16 v[56:63], v[84:87], v[76:79], v[56:63] | v_wmma_f32_16x16x16_f16 v[48:55], v[84:87], v[80:83], v[48:55] | s_wait_loadcnt 0x1 | v_wmma_f32_16x16x16_f16 v[8:15], v[64:67], v[88:91], v[8:15] | s_wait_loadcnt 0x0 | v_wmma_f32_16x16x16_f16 v[0:7], v[64:67], v[92:95], v[0:7] | v_wmma_f32_16x16x16_f16 v[40:47], v[84:87], v[88:91], v[40:47] | v_wmma_f32_16x16x16_f16 v[32:39], v[84:87], v[92:95], v[32:39] | s_cbranch_scc1 .LBB76_6
+BODY s_add_co_i32 s1, s1, 16 | s_cmp_gt_u32 s1, 0x1ef | s_cbranch_scc1 .LBB76_6 | s_cbranch_vccnz .LBB76_2
+
+multihead-fast-padded-wave-packed:mh_pool_project_production_h16w LOOP 0 .LBB14_20:                              ; =>This Inner Loop Header: Depth=1
+PRE s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v42, null, 0, v1, vcc_lo | s_branch .LBB14_20 | .LBB14_19:                              ;   in Loop: Header=BB14_20 Depth=1 | v_add_co_u32 v41, vcc_lo, v41, 64 | v_add_nc_u32_e32 v39, 32, v39 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v42, null, 0, v42, vcc_lo | s_add_co_i32 s13, s13, -1 | s_wait_alu 0xfffe | s_cmp_eq_u32 s13, 0 | s_cbranch_scc1 .LBB14_125
+BODY s_cbranch_execnz .LBB14_108 | s_cbranch_vccnz .LBB14_108 | s_mov_b32 s10, -1 | s_cbranch_vccnz .LBB14_110 | s_cbranch_execnz .LBB14_112 | s_cbranch_vccnz .LBB14_112 | s_mov_b32 s10, -1 | s_cbranch_vccnz .LBB14_114 | s_cbranch_execnz .LBB14_116 | s_cbranch_vccnz .LBB14_116 | s_mov_b32 s10, -1 | s_cbranch_vccnz .LBB14_118 | s_cbranch_execnz .LBB14_120 | s_cbranch_vccnz .LBB14_120 | s_mov_b32 s10, -1 | s_cbranch_vccnz .LBB14_122 | s_cbranch_execnz .LBB14_19 | s_cbranch_vccnz .LBB14_19
+
+multihead-fast-padded-wave-packed:mh_pool_project_group_c64 LOOP 0 .LBB15_3:                               ; =>This Inner Loop Header: Depth=1
+PRE s_mov_b32 s20, s1 | s_add_co_i32 s16, s0, s21 | s_mov_b32 s0, s3 | s_branch .LBB15_3 | .LBB15_2:                               ;   in Loop: Header=BB15_3 Depth=1 | v_add_nc_u32_e32 v4, s20, v3 | s_addk_co_i32 s20, 0x90 | s_add_co_i32 s0, s0, 1 | s_wait_alu 0xfffe | s_cmp_eq_u32 s20, 0x900 | ds_store_b16 v4, v1 | s_cbranch_scc1 .LBB15_10
+BODY s_add_co_i32 s22, s23, 1 | s_sub_co_i32 s21, s0, s21 | s_sub_co_i32 s24, s21, s12 | s_cmp_ge_u32 s21, s12 | s_add_co_i32 s21, s22, 1 | s_cmp_ge_u32 s23, s12 | s_cbranch_vccz .LBB15_6 | s_sub_co_i32 s22, s0, s22 | s_cmp_lt_u32 s22, s15 | s_cmp_lt_u32 s21, s18 | s_cbranch_execz .LBB15_7 | s_mov_b32 s25, 0 | s_sub_co_i32 s22, s23, s12 | s_mov_b32 s25, -1 | s_cbranch_vccnz .LBB15_2 | s_add_co_i32 s23, s23, s22 | s_add_co_i32 s21, s21, s14 | s_add_co_i32 s21, s21, s22
+
+multihead-fast-padded-wave-packed:mh_pool_project_group_c64 LOOP 1 .LBB15_11:                              ; =>This Inner Loop Header: Depth=1
+PRE v_dual_mov_b32 v34, 0 :: v_dual_mov_b32 v31, 0 | v_dual_mov_b32 v32, 0 :: v_dual_mov_b32 v29, 0 | v_dual_mov_b32 v30, 0 :: v_dual_mov_b32 v19, 0 | v_dual_mov_b32 v20, 0 :: v_dual_mov_b32 v21, 0 | v_dual_mov_b32 v22, 0 :: v_dual_mov_b32 v23, 0 | v_dual_mov_b32 v25, 0 :: v_dual_mov_b32 v26, 0 | v_mov_b32_e32 v37, 0 | s_mov_b32 s1, 0 | s_mov_b32 s0, -1 | s_wait_dscnt 0x0 | s_barrier_signal -1 | s_barrier_wait -1
+BODY s_mov_b32 s1, 1 | s_mov_b32 s0, 0 | s_cbranch_vccz .LBB15_11
+
+multihead-fast-padded-wave-packed:mh_pool_project_group_c128 LOOP 0 .LBB16_3:                               ; =>This Inner Loop Header: Depth=1
+PRE s_mov_b32 s20, s1 | s_add_co_i32 s16, s0, s21 | s_mov_b32 s0, s3 | s_branch .LBB16_3 | .LBB16_2:                               ;   in Loop: Header=BB16_3 Depth=1 | v_add_nc_u32_e32 v3, s20, v8 | s_addk_co_i32 s20, 0x110 | s_add_co_i32 s0, s0, 1 | s_wait_alu 0xfffe | s_cmp_eq_u32 s20, 0x1100 | ds_store_b16 v3, v1 | s_cbranch_scc1 .LBB16_10
+BODY s_add_co_i32 s22, s23, 1 | s_sub_co_i32 s21, s0, s21 | s_sub_co_i32 s24, s21, s12 | s_cmp_ge_u32 s21, s12 | s_add_co_i32 s21, s22, 1 | s_cmp_ge_u32 s23, s12 | s_cbranch_vccz .LBB16_6 | s_sub_co_i32 s22, s0, s22 | s_cmp_lt_u32 s22, s15 | s_cmp_lt_u32 s21, s18 | s_cbranch_execz .LBB16_7 | s_mov_b32 s25, 0 | s_sub_co_i32 s22, s23, s12 | s_mov_b32 s25, -1 | s_cbranch_vccnz .LBB16_2 | s_add_co_i32 s23, s23, s22 | s_add_co_i32 s21, s21, s14 | s_add_co_i32 s21, s21, s22
+
+multihead-fast-padded-wave-packed:mh_pool_project_group_c128 LOOP 1 .LBB16_11:                              ; =>This Inner Loop Header: Depth=1
+PRE v_dual_mov_b32 v35, 0 :: v_dual_mov_b32 v20, 0 | v_dual_mov_b32 v33, 0 :: v_dual_mov_b32 v22, 0 | v_dual_mov_b32 v31, 0 :: v_dual_mov_b32 v24, 0 | v_mov_b32_e32 v29, 0 | v_mov_b32_e32 v17, 0 | v_mov_b32_e32 v21, 0 | v_mov_b32_e32 v23, 0 | v_mov_b32_e32 v37, 0 | s_mov_b32 s0, 0 | s_wait_dscnt 0x0 | s_barrier_signal -1 | s_barrier_wait -1
+BODY s_add_co_i32 s0, s0, 64 | s_cmp_eq_u32 s0, 0x100 | s_cbranch_scc0 .LBB16_11
+
+multihead-fast-padded-wave-packed:mh_pool_project_group_c256 LOOP 0 .LBB17_3:                               ; =>This Inner Loop Header: Depth=1
+PRE s_mov_b32 s20, s1 | s_add_co_i32 s16, s0, s21 | s_mov_b32 s0, s3 | s_branch .LBB17_3 | .LBB17_2:                               ;   in Loop: Header=BB17_3 Depth=1 | v_add_nc_u32_e32 v3, s20, v8 | s_addk_co_i32 s20, 0x210 | s_add_co_i32 s0, s0, 1 | s_wait_alu 0xfffe | s_cmp_eq_u32 s20, 0x2100 | ds_store_b16 v3, v1 | s_cbranch_scc1 .LBB17_10
+BODY s_add_co_i32 s22, s23, 1 | s_sub_co_i32 s21, s0, s21 | s_sub_co_i32 s24, s21, s12 | s_cmp_ge_u32 s21, s12 | s_add_co_i32 s21, s22, 1 | s_cmp_ge_u32 s23, s12 | s_cbranch_vccz .LBB17_6 | s_sub_co_i32 s22, s0, s22 | s_cmp_lt_u32 s22, s15 | s_cmp_lt_u32 s21, s18 | s_cbranch_execz .LBB17_7 | s_mov_b32 s25, 0 | s_sub_co_i32 s22, s23, s12 | s_mov_b32 s25, -1 | s_cbranch_vccnz .LBB17_2 | s_add_co_i32 s23, s23, s22 | s_add_co_i32 s21, s21, s14 | s_add_co_i32 s21, s21, s22
+
+multihead-fast-padded-wave-packed:mh_pool_project_group_c256 LOOP 1 .LBB17_11:                              ; =>This Inner Loop Header: Depth=1
+PRE v_dual_mov_b32 v36, 0 :: v_dual_mov_b32 v33, 0 | v_dual_mov_b32 v34, 0 :: v_dual_mov_b32 v31, 0 | v_dual_mov_b32 v32, 0 :: v_dual_mov_b32 v29, 0 | v_dual_mov_b32 v30, 0 :: v_dual_mov_b32 v17, 0 | v_dual_mov_b32 v18, 0 :: v_dual_mov_b32 v21, 0 | v_dual_mov_b32 v20, 0 :: v_dual_mov_b32 v23, 0 | v_dual_mov_b32 v22, 0 :: v_dual_mov_b32 v37, 0 | v_mov_b32_e32 v24, 0 | s_mov_b64 s[0:1], 0 | s_wait_dscnt 0x0 | s_barrier_signal -1 | s_barrier_wait -1
+BODY s_add_nc_u64 s[0:1], s[0:1], 0x400 | s_cmp_eq_u32 s0, 0x2000 | s_cbranch_scc0 .LBB17_11
+
+multihead-fast-padded-wave-packed:mh_attention_project_frag_c512 LOOP 0 .LBB23_67:                              ; =>This Inner Loop Header: Depth=1
+PRE s_wait_alu 0xfffe | s_cmp_gt_u32 s0, 0x1df | s_add_nc_u64 s[2:3], s[2:3], 0x400 | s_wait_loadcnt 0x3 | v_wmma_f32_16x16x16_fp8_fp8 v[1:8], v[45:46], v[59:60], v[1:8] | s_wait_loadcnt 0x2 | v_wmma_f32_16x16x16_fp8_fp8 v[25:32], v[45:46], v[76:77], v[25:32] | s_wait_loadcnt 0x1 | v_wmma_f32_16x16x16_fp8_fp8 v[17:24], v[45:46], v[78:79], v[17:24] | s_wait_loadcnt 0x0 | v_wmma_f32_16x16x16_fp8_fp8 v[9:16], v[45:46], v[57:58], v[9:16] | s_cbranch_scc1 .LBB23_75
+BODY s_add_nc_u64 s[8:9], s[8:9], 64 | s_sub_co_i32 s0, s8, 32 | s_cmp_gt_u32 s0, 0x1df | s_add_nc_u64 s[2:3], s[2:3], 0x400 | s_cbranch_scc1 .LBB23_75 | s_cbranch_execz .LBB23_69 | s_cbranch_execz .LBB23_71 | s_cbranch_execz .LBB23_73 | s_cbranch_execz .LBB23_66
+
+multihead-fast-padded-wave-packed:mh_attention_project_frag_c512 LOOP 1 .LBB23_77:                              ; =>This Inner Loop Header: Depth=1
+PRE .LBB23_76:                              ; %Flow595 | ;   in Loop: Header=BB23_77 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s13 | v_add_co_u32 v37, vcc_lo, v37, s7 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v38, null, 0, v38, vcc_lo | v_add_nc_u32_e32 v42, 0x200, v42 | s_add_co_i32 s10, s10, 1 | s_wait_alu 0xfffe | s_cmp_lg_u32 s10, 8 | s_cbranch_scc0 .LBB23_94
+BODY s_cbranch_scc0 .LBB23_86 | s_cbranch_vccnz .LBB23_89 | s_cbranch_vccz .LBB23_90 | s_cbranch_vccz .LBB23_91 | s_cbranch_vccnz .LBB23_92 | s_cbranch_execz .LBB23_85 | s_cbranch_execz .LBB23_76 | s_cmp_eq_u32 s21, 4 | s_mov_b32 s1, -1 | s_cbranch_scc0 .LBB23_88 | s_mov_b32 s1, 0 | s_cmp_lg_u32 s21, 3 | s_mov_b32 s0, -1 | s_cbranch_vccnz .LBB23_81 | s_cbranch_execnz .LBB23_82 | s_cbranch_vccz .LBB23_83 | s_mov_b32 s0, -1 | s_cbranch_execz .LBB23_76
+
+multihead-fast-padded-wave-packed:mh_attention_project_frag_c512 LOOP 2 .LBB23_96:                              ; %.preheader60
+PRE .LBB23_95:                              ; %Flow588 | ;   in Loop: Header=BB23_96 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s13 | v_add_co_u32 v2, vcc_lo, v2, s7 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v3, null, 0, v3, vcc_lo | v_add_nc_u32_e32 v5, 0x200, v5 | s_add_co_i32 s10, s10, 1 | s_wait_alu 0xfffe | s_cmp_lg_u32 s10, 8 | s_cbranch_scc0 .LBB23_113
+BODY s_cbranch_scc0 .LBB23_105 | s_cbranch_vccnz .LBB23_108 | s_cbranch_vccz .LBB23_109 | s_cbranch_vccz .LBB23_110 | s_cbranch_vccnz .LBB23_111 | s_cbranch_execz .LBB23_104 | s_cbranch_execz .LBB23_95 | s_cmp_eq_u32 s21, 4 | s_mov_b32 s1, -1 | s_cbranch_scc0 .LBB23_107 | s_mov_b32 s1, 0 | s_cmp_lg_u32 s21, 3 | s_mov_b32 s0, -1 | s_cbranch_vccnz .LBB23_100 | s_cbranch_execnz .LBB23_101 | s_cbranch_vccz .LBB23_102 | s_mov_b32 s0, -1 | s_cbranch_execz .LBB23_95
+
+multihead-fast-padded-wave-packed:mh_attention_project_frag_c512 LOOP 3 .LBB23_115:                             ; %.preheader59
+PRE .LBB23_114:                             ; %Flow581 | ;   in Loop: Header=BB23_115 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s12 | v_add_co_u32 v2, vcc_lo, v2, s7 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v3, null, 0, v3, vcc_lo | v_add_nc_u32_e32 v5, 0x200, v5 | s_add_co_i32 s10, s10, 1 | s_wait_alu 0xfffe | s_cmp_lg_u32 s10, 8 | s_cbranch_scc0 .LBB23_132
+BODY s_cbranch_scc0 .LBB23_124 | s_cbranch_vccnz .LBB23_127 | s_cbranch_vccz .LBB23_128 | s_cbranch_vccz .LBB23_129 | s_cbranch_vccnz .LBB23_130 | s_cbranch_execz .LBB23_123 | s_cbranch_execz .LBB23_114 | s_cmp_eq_u32 s21, 4 | s_mov_b32 s1, -1 | s_cbranch_scc0 .LBB23_126 | s_mov_b32 s1, 0 | s_cmp_lg_u32 s21, 3 | s_mov_b32 s0, -1 | s_cbranch_vccnz .LBB23_119 | s_cbranch_execnz .LBB23_120 | s_cbranch_vccz .LBB23_121 | s_mov_b32 s0, -1 | s_cbranch_execz .LBB23_114
+
+multihead-fast-padded-wave-packed:mh_attention_project_frag_c512 LOOP 4 .LBB23_134:                             ; %.preheader
+PRE .LBB23_133:                             ; %Flow573 | ;   in Loop: Header=BB23_134 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s12 | v_add_co_u32 v33, vcc_lo, v33, s7 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v34, null, 0, v34, vcc_lo | v_add_nc_u32_e32 v3, 0x200, v3 | s_add_co_i32 s10, s10, 1 | s_wait_alu 0xfffe | s_cmp_eq_u32 s10, 8 | s_cbranch_scc1 .LBB23_151
+BODY s_cbranch_scc0 .LBB23_143 | s_cbranch_vccnz .LBB23_146 | s_cbranch_vccz .LBB23_147 | s_cbranch_vccz .LBB23_148 | s_cbranch_vccnz .LBB23_149 | s_cbranch_execz .LBB23_142 | s_cbranch_execz .LBB23_133 | s_cmp_eq_u32 s21, 4 | s_mov_b32 s1, -1 | s_cbranch_scc0 .LBB23_145 | s_mov_b32 s1, 0 | s_cmp_lg_u32 s21, 3 | s_mov_b32 s0, -1 | s_cbranch_vccnz .LBB23_138 | s_cbranch_execnz .LBB23_139 | s_cbranch_vccz .LBB23_140 | s_mov_b32 s0, -1 | s_cbranch_execz .LBB23_133
+
+multihead-fast-padded-wave-packed:mh_ffn_fused_c256_frag_project_g128_qkv_bytein_fb_pdl LOOP 0 .LBB92_6:                               ; %.preheader
+PRE v_lshlrev_b64_e32 v[1:2], 2, v[1:2] | s_delay_alu instid0(VALU_DEP_1) | v_add_co_u32 v1, vcc_lo, s12, v1 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v2, null, s13, v2, vcc_lo | global_load_b32 v3, v[1:2], off scope:SCOPE_DEV | s_wait_loadcnt 0x0 | v_cmp_gt_u32_e32 vcc_lo, s8, v3 | s_and_b32 exec_lo, exec_lo, vcc_lo | s_cbranch_execz .LBB92_7 | ; %bb.5:                                ; %.preheader.preheader | s_mov_b32 s2, 0
+BODY s_cbranch_execnz .LBB92_6
+
+multihead-fast-padded-wave-packed:mh_ffn_fused_c256_frag_project_g128_qkv_fb_pdl LOOP 0 .LBB93_6:                               ; %.preheader9
+PRE v_lshlrev_b64_e32 v[1:2], 2, v[1:2] | s_delay_alu instid0(VALU_DEP_1) | v_add_co_u32 v1, vcc_lo, s12, v1 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v2, null, s13, v2, vcc_lo | global_load_b32 v3, v[1:2], off scope:SCOPE_DEV | s_wait_loadcnt 0x0 | v_cmp_gt_u32_e32 vcc_lo, s8, v3 | s_and_b32 exec_lo, exec_lo, vcc_lo | s_cbranch_execz .LBB93_7 | ; %bb.5:                                ; %.preheader9.preheader | s_mov_b32 s2, 0
+BODY s_cbranch_execnz .LBB93_6
+
+multihead-fast-padded-wave-packed:mh_ffn_fused_c256_frag_project_g128_qkv_fb_pdl LOOP 1 .LBB93_11:                              ; %.preheader
+PRE s_branch .LBB93_11 | .LBB93_10:                              ;   in Loop: Header=BB93_11 Depth=1 | s_or_b32 exec_lo, exec_lo, s14 | v_add_nc_u32_e32 v5, 0x200, v4 | v_cmp_lt_u32_e32 vcc_lo, 0x20f, v4 | ds_store_b32 v3, v1 | v_dual_mov_b32 v4, v5 :: v_dual_add_nc_u32 v3, 0x800, v3 | s_wait_alu 0xfffe | s_or_b32 s3, vcc_lo, s3 | s_wait_alu 0xfffe | s_and_not1_b32 exec_lo, exec_lo, s3 | s_cbranch_execz .LBB93_13
+BODY s_cbranch_execz .LBB93_13 | s_mov_b32 s14, exec_lo | s_cbranch_execz .LBB93_10
+
+multihead-fast-padded-wave-packed:mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl LOOP 0 .LBB94_6:                               ; %.preheader
+PRE v_lshlrev_b64_e32 v[1:2], 2, v[1:2] | s_delay_alu instid0(VALU_DEP_1) | v_add_co_u32 v1, vcc_lo, s18, v1 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v2, null, s19, v2, vcc_lo | global_load_b32 v3, v[1:2], off scope:SCOPE_DEV | s_wait_loadcnt 0x0 | v_cmp_gt_u32_e32 vcc_lo, s4, v3 | s_and_b32 exec_lo, exec_lo, vcc_lo | s_cbranch_execz .LBB94_7 | ; %bb.5:                                ; %.preheader.preheader | s_mov_b32 s2, 0
+BODY s_cbranch_execnz .LBB94_6
+
+multihead-fast-padded-wave-packed:mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl LOOP 1 .LBB94_23:                              ; =>This Inner Loop Header: Depth=1
+PRE .LBB94_21: | v_add_co_u32 v1, s2, s10, v1 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v2, null, s11, 0, s2 | v_mov_b32_e32 v3, 0 | global_store_b8 v[1:2], v3, off | .LBB94_22: | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s3 | v_dual_mov_b32 v1, 0 :: v_dual_mov_b32 v2, v0 | s_mul_i32 s3, ttmp9, 0x3000 | s_mov_b32 s2, 0
+BODY s_cbranch_execnz .LBB94_23
+
+multihead-fast-padded-wave-packed:mh_ffn_fused_c256_frag_project_mapped_g128_qkv_fb_pdl LOOP 0 .LBB95_6:                               ; %.preheader14
+PRE v_lshlrev_b64_e32 v[1:2], 2, v[1:2] | s_delay_alu instid0(VALU_DEP_1) | v_add_co_u32 v1, vcc_lo, s18, v1 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v2, null, s19, v2, vcc_lo | global_load_b32 v3, v[1:2], off scope:SCOPE_DEV | s_wait_loadcnt 0x0 | v_cmp_gt_u32_e32 vcc_lo, s4, v3 | s_and_b32 exec_lo, exec_lo, vcc_lo | s_cbranch_execz .LBB95_7 | ; %bb.5:                                ; %.preheader14.preheader | s_mov_b32 s2, 0
+BODY s_cbranch_execnz .LBB95_6
+
+multihead-fast-padded-wave-packed:mh_ffn_fused_c256_frag_project_mapped_g128_qkv_fb_pdl LOOP 1 .LBB95_13:                              ; %.preheader
+PRE s_add_co_i32 s23, s20, s3 | s_branch .LBB95_13 | .LBB95_12:                              ;   in Loop: Header=BB95_13 Depth=1 | s_or_b32 exec_lo, exec_lo, s20 | v_add_nc_u32_e32 v1, 0x200, v4 | v_cmp_lt_u32_e32 vcc_lo, 0x20f, v4 | ds_store_b32 v3, v5 | v_dual_mov_b32 v4, v1 :: v_dual_add_nc_u32 v3, 0x800, v3 | s_or_b32 s21, vcc_lo, s21 | s_delay_alu instid0(SALU_CYCLE_1) | s_and_not1_b32 exec_lo, exec_lo, s21 | s_cbranch_execz .LBB95_15
+BODY s_cbranch_execz .LBB95_15 | s_mov_b32 s20, exec_lo | s_cbranch_execz .LBB95_12
+
+multihead-fast-padded-wave-packed:mh_ffn_fused_c256_frag_project_mapped_g128_qkv_fb_pdl LOOP 2 .LBB95_27:                              ; =>This Inner Loop Header: Depth=1
+PRE .LBB95_25: | v_add_co_u32 v1, s2, s10, v1 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v2, null, s11, 0, s2 | v_mov_b32_e32 v3, 0 | global_store_b8 v[1:2], v3, off | .LBB95_26: | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s3 | v_dual_mov_b32 v1, 0 :: v_dual_mov_b32 v2, v0 | s_mul_i32 s3, ttmp9, 0x3000 | s_mov_b32 s2, 0
+BODY s_cbranch_execnz .LBB95_27
+
+deep_fast-packed:vit_attention_fused_400_bytein_bout LOOP 0 .LBB7_8:                                ; =>This Inner Loop Header: Depth=1
+PRE v_lshl_or_b32 v57, v60, 8, v59 | v_lshlrev_b32_e32 v58, 16, v61 | v_lshlrev_b32_e32 v59, 24, v67 | v_or3_b32 v43, v43, v44, v45 | v_or3_b32 v44, v46, v51, v52 | v_or3_b32 v45, v54, v55, v56 | s_delay_alu instid0(VALU_DEP_4) | instskip(NEXT) | instid1(VALU_DEP_3) | v_or3_b32 v46, v57, v58, v59 | v_wmma_f32_16x16x16_fp8_fp8 v[8:15], v[41:42], v[43:44], v[8:15] | s_delay_alu instid0(VALU_DEP_2) | v_wmma_f32_16x16x16_fp8_fp8 v[0:7], v[41:42], v[45:46], v[0:7] | s_cbranch_scc1 .LBB7_86
+BODY s_cbranch_execz .LBB7_57 | s_mov_b32 s14, exec_lo | s_mov_b32 s12, exec_lo | s_cbranch_execz .LBB7_68 | s_mov_b32 s13, exec_lo | s_cbranch_execz .LBB7_67 | s_mov_b32 s14, exec_lo | s_mov_b32 s12, exec_lo | s_cbranch_execz .LBB7_78 | s_mov_b32 s13, exec_lo | s_cbranch_execz .LBB7_77 | s_mov_b32 s14, exec_lo | s_mov_b32 s12, exec_lo | s_cbranch_execz .LBB7_7 | s_mov_b32 s13, exec_lo | s_cbranch_execz .LBB7_6 | s_mov_b32 s14, exec_lo | s_cbranch_execz .LBB7_5
+
+deep_fast-packed:vit_attention_fused_640_bytein_bout LOOP 0 .LBB8_8:                                ; =>This Inner Loop Header: Depth=1
+PRE v_lshl_or_b32 v57, v60, 8, v59 | v_lshlrev_b32_e32 v58, 16, v61 | v_lshlrev_b32_e32 v59, 24, v67 | v_or3_b32 v43, v43, v44, v45 | v_or3_b32 v44, v46, v51, v52 | v_or3_b32 v45, v54, v55, v56 | s_delay_alu instid0(VALU_DEP_4) | instskip(NEXT) | instid1(VALU_DEP_3) | v_or3_b32 v46, v57, v58, v59 | v_wmma_f32_16x16x16_fp8_fp8 v[8:15], v[41:42], v[43:44], v[8:15] | s_delay_alu instid0(VALU_DEP_2) | v_wmma_f32_16x16x16_fp8_fp8 v[0:7], v[41:42], v[45:46], v[0:7] | s_cbranch_scc1 .LBB8_86
+BODY s_cbranch_execz .LBB8_57 | s_mov_b32 s14, exec_lo | s_mov_b32 s12, exec_lo | s_cbranch_execz .LBB8_68 | s_mov_b32 s13, exec_lo | s_cbranch_execz .LBB8_67 | s_mov_b32 s14, exec_lo | s_mov_b32 s12, exec_lo | s_cbranch_execz .LBB8_78 | s_mov_b32 s13, exec_lo | s_cbranch_execz .LBB8_77 | s_mov_b32 s14, exec_lo | s_mov_b32 s12, exec_lo | s_cbranch_execz .LBB8_7 | s_mov_b32 s13, exec_lo | s_cbranch_execz .LBB8_6 | s_mov_b32 s14, exec_lo | s_cbranch_execz .LBB8_5
+
+deep_fast-packed:decoder_project2x_h16w LOOP 0 .LBB19_8:                               ; =>This Loop Header: Depth=1
+PRE v_mad_co_u64_u32 v[21:22], null, s16, v11, v[18:19] | s_mov_b32 s3, 0 | s_wait_alu 0xfffe | s_lshr_b32 s1, s16, s1 | s_mov_b32 s23, 0 | v_add_co_u32 v8, vcc_lo, s6, v8 | s_delay_alu instid0(VALU_DEP_1) | instskip(NEXT) | instid1(VALU_DEP_2) | v_add_co_ci_u32_e64 v9, null, s7, v9, vcc_lo | v_add_co_u32 v22, vcc_lo, v8, v10 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v24, null, 0, v9, vcc_lo | v_mov_b32_e32 v8, 0
+BODY s_add_co_i32 s2, s2, 16 | s_cmp_ge_u32 s2, s24 | s_cbranch_scc1 .LBB19_27 | s_cbranch_execz .LBB19_13 | s_cbranch_execz .LBB19_15 | s_cbranch_execz .LBB19_17 | s_cbranch_execz .LBB19_19 | s_cbranch_execz .LBB19_21 | s_cbranch_execnz .LBB19_24 | s_cbranch_execnz .LBB19_25 | s_cbranch_execz .LBB19_10 | s_cbranch_execz .LBB19_23 | s_cbranch_execz .LBB19_10 | s_add_co_i32 s2, s23, 1 | s_cmp_eq_u32 s23, 0 | s_cmp_lt_u32 s23, 3 | s_cbranch_vccnz .LBB19_29 | s_mov_b32 s23, s2
+
+deep_fast-packed:decoder_project2x_h16w LOOP 1 .LBB19_11:                              ; %.preheader100
+PRE s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v34, null, s27, v24, vcc_lo | v_perm_b32 v30, v30, v29, 0x5040100 | v_perm_b32 v29, v28, v27, 0x5040100 | v_perm_b32 v28, v26, v25, 0x5040100 | global_load_b128 v[33:36], v[33:34], off | s_add_co_i32 s2, s2, 16 | s_wait_alu 0xfffe | s_cmp_ge_u32 s2, s24 | s_wait_loadcnt 0x0 | v_wmma_f32_16x16x16_f16 v[9:16], v[28:31], v[33:36], v[9:16] | s_cbranch_scc1 .LBB19_27
+BODY s_add_co_i32 s2, s2, 16 | s_cmp_ge_u32 s2, s24 | s_cbranch_scc1 .LBB19_27 | s_cbranch_execz .LBB19_13 | s_cbranch_execz .LBB19_15 | s_cbranch_execz .LBB19_17 | s_cbranch_execz .LBB19_19 | s_cbranch_execz .LBB19_21 | s_cbranch_execnz .LBB19_24 | s_cbranch_execnz .LBB19_25 | s_cbranch_execz .LBB19_10 | s_cbranch_execz .LBB19_23 | s_cbranch_execz .LBB19_10
+
+deep_fast-packed:decoder_project2x_h16w LOOP 2 .LBB19_32:                              ; =>This Inner Loop Header: Depth=1
+PRE v_add_co_u32 v13, vcc_lo, s10, v13 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v14, null, s11, v14, vcc_lo | global_store_b32 v[13:14], v15, off | .LBB19_31:                              ; %Flow900 | ;   in Loop: Header=BB19_32 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s25 | s_add_co_i32 s3, s3, 1 | s_wait_alu 0xfffe | s_cmp_lg_u32 s3, 8 | s_cbranch_scc0 .LBB19_48
+BODY s_add_co_i32 s3, s3, 1 | s_cmp_lg_u32 s3, 8 | s_cbranch_scc0 .LBB19_48 | s_mov_b32 s25, exec_lo | s_cbranch_execz .LBB19_31 | s_mov_b32 m0, s3 | s_cbranch_execz .LBB19_37 | s_cbranch_vccnz .LBB19_36 | s_cbranch_execz .LBB19_41 | s_cbranch_vccnz .LBB19_40 | s_cbranch_execz .LBB19_45 | s_cbranch_vccnz .LBB19_44 | s_cbranch_execz .LBB19_31 | s_cbranch_vccnz .LBB19_30
+
+deep_fast-packed:decoder_project2x_h16w LOOP 3 .LBB19_51:                              ; =>This Loop Header: Depth=1
+PRE s_lshr_b32 s2, s16, s0 | s_mov_b32 s3, 0 | v_lshlrev_b64_e32 v[8:9], 1, v[19:20] | v_mad_co_u64_u32 v[21:22], null, s16, v10, v[18:19] | s_delay_alu instid0(VALU_DEP_2) | v_add_co_u32 v8, vcc_lo, s6, v8 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v9, null, s7, v9, vcc_lo | v_add_co_u32 v22, vcc_lo, v8, v11 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v24, null, 0, v9, vcc_lo | v_mov_b32_e32 v8, 0
+BODY s_add_co_i32 s22, s0, s2 | s_cmp_ge_u32 s0, s22 | s_cbranch_scc1 .LBB19_54 | s_add_co_i32 s0, s0, 16 | s_cmp_ge_u32 s0, s22 | s_cbranch_scc0 .LBB19_53 | s_add_co_i32 s0, s3, 1 | s_cmp_eq_u32 s3, 0 | s_cmp_lt_u32 s3, 3 | s_cbranch_vccnz .LBB19_56 | s_mov_b32 s3, s0
+
+deep_fast-packed:decoder_project2x_h16w LOOP 4 .LBB19_53:                              ; %.preheader97
+PRE s_add_co_i32 s22, s0, s2 | s_wait_alu 0xfffe | s_cmp_ge_u32 s0, s22 | s_cbranch_scc1 .LBB19_54 | ; %bb.52:                               ; %.preheader97.preheader | ;   in Loop: Header=BB19_51 Depth=1 | v_mov_b32_e32 v9, 0 | s_delay_alu instid0(VALU_DEP_1) | v_dual_mov_b32 v10, v9 :: v_dual_mov_b32 v11, v9 | v_dual_mov_b32 v12, v9 :: v_dual_mov_b32 v13, v9 | v_dual_mov_b32 v14, v9 :: v_dual_mov_b32 v15, v9 | v_mov_b32_e32 v16, v9
+BODY s_add_co_i32 s0, s0, 16 | s_cmp_ge_u32 s0, s22 | s_cbranch_scc0 .LBB19_53
+
+deep_fast-packed:decoder_project2x_h16w LOOP 5 .LBB19_59:                              ; =>This Inner Loop Header: Depth=1
+PRE v_add_co_u32 v13, vcc_lo, s10, v13 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v14, null, s11, v14, vcc_lo | global_store_b32 v[13:14], v15, off | .LBB19_58:                              ; %Flow907 | ;   in Loop: Header=BB19_59 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s0 | s_add_co_i32 s3, s3, 1 | s_wait_alu 0xfffe | s_cmp_eq_u32 s3, 8 | s_cbranch_scc1 .LBB19_74
+BODY s_add_co_i32 s3, s3, 1 | s_cmp_eq_u32 s3, 8 | s_cbranch_scc1 .LBB19_74 | s_mov_b32 m0, s3 | s_cbranch_execz .LBB19_63 | s_cbranch_vccnz .LBB19_62 | s_cbranch_execz .LBB19_67 | s_cbranch_vccnz .LBB19_66 | s_cbranch_execnz .LBB19_69 | s_cbranch_execz .LBB19_58 | s_cbranch_vccnz .LBB19_71 | s_cbranch_execz .LBB19_58 | s_cbranch_vccnz .LBB19_57
+
+deep_fast-packed:decoder_project2x_h16w LOOP 6 .LBB19_144:                             ; =>This Inner Loop Header: Depth=1
+PRE s_add_co_i32 s18, s0, s1 | s_wait_loadcnt 0x0 | v_wmma_f32_16x16x16_f16 v[1:8], v[19:22], v[15:18], v[1:8] | s_branch .LBB19_144 | .LBB19_143:                             ; %Flow920 | ;   in Loop: Header=BB19_144 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s20 | s_add_co_i32 s17, s17, 1 | s_wait_alu 0xfffe | s_cmp_eq_u32 s17, 8 | s_cbranch_scc1 .LBB19_153
+BODY s_add_co_i32 s17, s17, 1 | s_cmp_eq_u32 s17, 8 | s_cbranch_scc1 .LBB19_153 | s_mov_b32 s20, exec_lo | s_cbranch_execz .LBB19_143 | s_mov_b32 m0, s17 | s_cbranch_execz .LBB19_147 | s_cbranch_execz .LBB19_149 | s_cbranch_execz .LBB19_151 | s_cbranch_execz .LBB19_143
+
+deep_fast-packed:decoder_project2x_h16w LOOP 7 .LBB19_157:                             ; =>This Inner Loop Header: Depth=1
+PRE v_add_nc_u32_e32 v14, s2, v54 | s_mov_b32 s2, 0 | s_wait_alu 0xfffe | s_add_co_i32 s3, s0, s1 | s_branch .LBB19_157 | .LBB19_156:                             ;   in Loop: Header=BB19_157 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s0 | s_add_co_i32 s2, s2, 1 | s_wait_alu 0xfffe | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB19_165
+BODY s_add_co_i32 s2, s2, 1 | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB19_165 | s_mov_b32 m0, s2 | s_cbranch_execz .LBB19_159 | s_cbranch_execz .LBB19_161 | s_cbranch_execnz .LBB19_163 | s_cbranch_execz .LBB19_156 | s_cbranch_execz .LBB19_156
+
+deep_fast-packed:decoder_project2x_h16w LOOP 8 .LBB19_171:                             ; =>This Inner Loop Header: Depth=1
+PRE v_perm_b32 v21, v21, v20, 0x5040100 | v_perm_b32 v20, v19, v18, 0x5040100 | v_perm_b32 v19, v17, v16, 0x5040100 | v_add_co_u32 v11, s0, v11, 32 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v12, null, 0, v12, s0 | s_add_co_i32 s1, s1, 16 | s_wait_alu 0xfffe | s_cmp_gt_u32 s1, 0x6f | s_wait_loadcnt 0x0 | v_wmma_f32_16x16x16_f16 v[1:8], v[19:22], v[24:27], v[1:8] | s_cbranch_scc1 .LBB19_187
+BODY s_add_co_i32 s1, s1, 16 | s_cmp_gt_u32 s1, 0x6f | s_cbranch_scc1 .LBB19_187 | s_cbranch_execz .LBB19_173 | s_cbranch_execz .LBB19_175 | s_cbranch_execz .LBB19_177 | s_cbranch_execz .LBB19_179 | s_cbranch_execz .LBB19_181 | s_cbranch_execnz .LBB19_184 | s_cbranch_execnz .LBB19_185 | s_cbranch_execz .LBB19_170 | s_cbranch_execz .LBB19_183 | s_cbranch_execz .LBB19_170
+
+deep_fast-packed:decoder_project2x_h16w LOOP 9 .LBB19_189:                             ; =>This Inner Loop Header: Depth=1
+PRE s_mul_hi_u32 s1, s0, s1 | s_wait_alu 0xfffe | s_add_co_i32 s3, s0, s1 | s_branch .LBB19_189 | .LBB19_188:                             ; %Flow931 | ;   in Loop: Header=BB19_189 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s17 | s_add_co_i32 s2, s2, 1 | s_wait_alu 0xfffe | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB19_198
+BODY s_add_co_i32 s2, s2, 1 | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB19_198 | s_mov_b32 s17, exec_lo | s_cbranch_execz .LBB19_188 | s_mov_b32 m0, s2 | s_cbranch_execz .LBB19_192 | s_cbranch_execz .LBB19_194 | s_cbranch_execz .LBB19_196 | s_cbranch_execz .LBB19_188
+
+deep_fast-packed:decoder_project2x_h16w LOOP 10 .LBB19_202:                             ; =>This Inner Loop Header: Depth=1
+PRE s_add_co_i32 s3, s0, s1 | s_wait_loadcnt 0x0 | v_wmma_f32_16x16x16_f16 v[1:8], v[14:17], v[18:21], v[1:8] | v_add_nc_u32_e32 v14, s28, v24 | s_branch .LBB19_202 | .LBB19_201:                             ;   in Loop: Header=BB19_202 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s0 | s_add_co_i32 s2, s2, 1 | s_wait_alu 0xfffe | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB19_210
+BODY s_add_co_i32 s2, s2, 1 | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB19_210 | s_mov_b32 m0, s2 | s_cbranch_execz .LBB19_204 | s_cbranch_execz .LBB19_206 | s_cbranch_execnz .LBB19_208 | s_cbranch_execz .LBB19_201 | s_cbranch_execz .LBB19_201
+
+deep_fast-packed:decoder_project2x_h16w LOOP 11 .LBB19_216:                             ; =>This Inner Loop Header: Depth=1
+PRE v_perm_b32 v21, v21, v20, 0x5040100 | v_perm_b32 v20, v19, v18, 0x5040100 | v_perm_b32 v19, v17, v16, 0x5040100 | v_add_co_u32 v11, s0, v11, 32 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v12, null, 0, v12, s0 | s_add_co_i32 s1, s1, 16 | s_wait_alu 0xfffe | s_cmp_gt_u32 s1, 0xef | s_wait_loadcnt 0x0 | v_wmma_f32_16x16x16_f16 v[1:8], v[19:22], v[24:27], v[1:8] | s_cbranch_scc1 .LBB19_232
+BODY s_add_co_i32 s1, s1, 16 | s_cmp_gt_u32 s1, 0xef | s_cbranch_scc1 .LBB19_232 | s_cbranch_execz .LBB19_218 | s_cbranch_execz .LBB19_220 | s_cbranch_execz .LBB19_222 | s_cbranch_execz .LBB19_224 | s_cbranch_execz .LBB19_226 | s_cbranch_execnz .LBB19_229 | s_cbranch_execnz .LBB19_230 | s_cbranch_execz .LBB19_215 | s_cbranch_execz .LBB19_228 | s_cbranch_execz .LBB19_215
+
+deep_fast-packed:decoder_project2x_h16w LOOP 12 .LBB19_234:                             ; =>This Inner Loop Header: Depth=1
+PRE s_mul_hi_u32 s1, s0, s1 | s_wait_alu 0xfffe | s_add_co_i32 s3, s0, s1 | s_branch .LBB19_234 | .LBB19_233:                             ; %Flow943 | ;   in Loop: Header=BB19_234 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s17 | s_add_co_i32 s2, s2, 1 | s_wait_alu 0xfffe | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB19_243
+BODY s_add_co_i32 s2, s2, 1 | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB19_243 | s_mov_b32 s17, exec_lo | s_cbranch_execz .LBB19_233 | s_mov_b32 m0, s2 | s_cbranch_execz .LBB19_237 | s_cbranch_execz .LBB19_239 | s_cbranch_execz .LBB19_241 | s_cbranch_execz .LBB19_233
+
+deep_fast-packed:decoder_project2x_h16w LOOP 13 .LBB19_246:                             ; =>This Inner Loop Header: Depth=1
+PRE s_delay_alu instid0(VALU_DEP_4) | instskip(SKIP_3) | instid1(VALU_DEP_4) | v_and_or_b32 v9, v0, 16, v5 | v_mov_b32_e32 v5, v10 | v_lshl_or_b32 v15, v8, 8, v14 | v_mov_b32_e32 v8, v10 | v_add_co_u32 v9, s0, v9, s6 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v12, null, 0, s7, s0 | s_mov_b32 s0, 0 | v_add_co_u32 v11, vcc_lo, v9, 32 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v12, null, 0, v12, vcc_lo
+BODY s_add_co_i32 s1, s0, 16 | s_add_co_i32 s0, s0, 32 | s_cmp_gt_u32 s1, 0xef | s_cbranch_scc0 .LBB19_246
+
+deep_fast-packed:decoder_project2x_h16w LOOP 14 .LBB19_249:                             ; =>This Inner Loop Header: Depth=1
+PRE s_wait_alu 0xfffe | s_mul_hi_u32 s1, s0, s1 | s_wait_alu 0xfffe | s_add_co_i32 s3, s0, s1 | s_branch .LBB19_249 | .LBB19_248:                             ;   in Loop: Header=BB19_249 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s0 | s_add_co_i32 s2, s2, 1 | s_wait_alu 0xfffe | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB19_257
+BODY s_add_co_i32 s2, s2, 1 | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB19_257 | s_mov_b32 m0, s2 | s_cbranch_execz .LBB19_251 | s_cbranch_execz .LBB19_253 | s_cbranch_execnz .LBB19_255 | s_cbranch_execz .LBB19_248 | s_cbranch_execz .LBB19_248
+
+deep_fast-packed:decoder_project2x_h16w LOOP 15 .LBB19_263:                             ; =>This Inner Loop Header: Depth=1
+PRE v_perm_b32 v21, v21, v20, 0x5040100 | v_perm_b32 v20, v19, v18, 0x5040100 | v_perm_b32 v19, v17, v16, 0x5040100 | v_add_co_u32 v11, s0, v11, 32 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v12, null, 0, v12, s0 | s_add_co_i32 s1, s1, 16 | s_wait_alu 0xfffe | s_cmp_gt_u32 s1, 0x1ef | s_wait_loadcnt 0x0 | v_wmma_f32_16x16x16_f16 v[1:8], v[19:22], v[24:27], v[1:8] | s_cbranch_scc1 .LBB19_279
+BODY s_add_co_i32 s1, s1, 16 | s_cmp_gt_u32 s1, 0x1ef | s_cbranch_scc1 .LBB19_279 | s_cbranch_execz .LBB19_265 | s_cbranch_execz .LBB19_267 | s_cbranch_execz .LBB19_269 | s_cbranch_execz .LBB19_271 | s_cbranch_execz .LBB19_273 | s_cbranch_execnz .LBB19_276 | s_cbranch_execnz .LBB19_277 | s_cbranch_execz .LBB19_262 | s_cbranch_execz .LBB19_275 | s_cbranch_execz .LBB19_262
+
+deep_fast-packed:decoder_project2x_h16w LOOP 16 .LBB19_281:                             ; =>This Inner Loop Header: Depth=1
+PRE s_mul_hi_u32 s1, s0, s1 | s_wait_alu 0xfffe | s_add_co_i32 s3, s0, s1 | s_branch .LBB19_281 | .LBB19_280:                             ; %Flow956 | ;   in Loop: Header=BB19_281 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s17 | s_add_co_i32 s2, s2, 1 | s_wait_alu 0xfffe | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB19_290
+BODY s_add_co_i32 s2, s2, 1 | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB19_290 | s_mov_b32 s17, exec_lo | s_cbranch_execz .LBB19_280 | s_mov_b32 m0, s2 | s_cbranch_execz .LBB19_284 | s_cbranch_execz .LBB19_286 | s_cbranch_execz .LBB19_288 | s_cbranch_execz .LBB19_280
+
+deep_fast-packed:decoder_project2x_h16w LOOP 17 .LBB19_293:                             ; =>This Inner Loop Header: Depth=1
+PRE s_delay_alu instid0(VALU_DEP_4) | instskip(SKIP_3) | instid1(VALU_DEP_4) | v_and_or_b32 v9, v0, 16, v5 | v_mov_b32_e32 v5, v10 | v_lshl_or_b32 v15, v8, 9, v14 | v_mov_b32_e32 v8, v10 | v_add_co_u32 v9, s0, v9, s6 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v12, null, 0, s7, s0 | s_mov_b32 s0, 0 | v_add_co_u32 v11, vcc_lo, v9, 32 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v12, null, 0, v12, vcc_lo
+BODY s_add_co_i32 s1, s0, 16 | s_add_co_i32 s0, s0, 32 | s_cmp_gt_u32 s1, 0x1ef | s_cbranch_scc0 .LBB19_293
+
+deep_fast-packed:decoder_project2x_h16w LOOP 18 .LBB19_296:                             ; =>This Inner Loop Header: Depth=1
+PRE s_wait_alu 0xfffe | s_mul_hi_u32 s1, s0, s1 | s_wait_alu 0xfffe | s_add_co_i32 s3, s0, s1 | s_branch .LBB19_296 | .LBB19_295:                             ;   in Loop: Header=BB19_296 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s0 | s_add_co_i32 s2, s2, 1 | s_wait_alu 0xfffe | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB19_304
+BODY s_add_co_i32 s2, s2, 1 | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB19_304 | s_mov_b32 m0, s2 | s_cbranch_execz .LBB19_298 | s_cbranch_execz .LBB19_300 | s_cbranch_execnz .LBB19_302 | s_cbranch_execz .LBB19_295 | s_cbranch_execz .LBB19_295
+
+deep_fast-packed:decoder_project2x_h16w LOOP 19 .LBB19_310:                             ; =>This Inner Loop Header: Depth=1
+PRE v_add_co_u32 v9, s0, v9, 32 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v10, null, 0, v10, s0 | v_add_co_u32 v11, s0, v11, 64 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v12, null, 0, v12, s0 | s_add_co_i32 s1, s1, 16 | s_wait_alu 0xfffe | s_cmp_lt_u32 s1, 0xf0 | s_wait_loadcnt 0x0 | v_wmma_f32_16x16x16_f16 v[1:8], v[17:20], v[22:25], v[1:8] | s_cbranch_scc0 .LBB19_326
+BODY s_add_co_i32 s1, s1, 16 | s_cmp_lt_u32 s1, 0xf0 | s_cbranch_scc0 .LBB19_326 | s_cbranch_execz .LBB19_312 | s_cbranch_execz .LBB19_314 | s_cbranch_execz .LBB19_316 | s_cbranch_execz .LBB19_318 | s_cbranch_execz .LBB19_320 | s_cbranch_execnz .LBB19_323 | s_cbranch_execnz .LBB19_324 | s_cbranch_execz .LBB19_309 | s_cbranch_execz .LBB19_322 | s_cbranch_execz .LBB19_309
+
+deep_fast-packed:decoder_project2x_h16w LOOP 20 .LBB19_328:                             ; %.preheader87
+PRE v_add_co_u32 v17, s0, v17, 32 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v18, null, 0, v18, s0 | v_add_co_u32 v19, s0, v19, 64 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v20, null, 0, v20, s0 | s_add_co_i32 s1, s1, 16 | s_wait_alu 0xfffe | s_cmp_lt_u32 s1, 0x1f0 | s_wait_loadcnt 0x0 | v_wmma_f32_16x16x16_f16 v[9:16], v[24:27], v[34:37], v[9:16] | s_cbranch_scc0 .LBB19_344
+BODY s_add_co_i32 s1, s1, 16 | s_cmp_lt_u32 s1, 0x1f0 | s_cbranch_scc0 .LBB19_344 | s_cbranch_execz .LBB19_330 | s_cbranch_execz .LBB19_332 | s_cbranch_execz .LBB19_334 | s_cbranch_execz .LBB19_336 | s_cbranch_execz .LBB19_338 | s_cbranch_execnz .LBB19_341 | s_cbranch_execnz .LBB19_342 | s_cbranch_execz .LBB19_327 | s_cbranch_execz .LBB19_340 | s_cbranch_execz .LBB19_327
+
+deep_fast-packed:decoder_project2x_h16w LOOP 21 .LBB19_346:                             ; %.preheader196
+PRE v_add_co_u32 v25, s0, v25, 32 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v26, null, 0, v26, s0 | v_add_co_u32 v27, s0, v27, 64 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v28, null, 0, v28, s0 | s_add_co_i32 s1, s1, 16 | s_wait_alu 0xfffe | s_cmp_lt_u32 s1, 0x2f0 | s_wait_loadcnt 0x0 | v_wmma_f32_16x16x16_f16 v[17:24], v[46:49], v[42:45], v[17:24] | s_cbranch_scc0 .LBB19_362
+BODY s_add_co_i32 s1, s1, 16 | s_cmp_lt_u32 s1, 0x2f0 | s_cbranch_scc0 .LBB19_362 | s_cbranch_execz .LBB19_348 | s_cbranch_execz .LBB19_350 | s_cbranch_execz .LBB19_352 | s_cbranch_execz .LBB19_354 | s_cbranch_execz .LBB19_356 | s_cbranch_execnz .LBB19_359 | s_cbranch_execnz .LBB19_360 | s_cbranch_execz .LBB19_345 | s_cbranch_execz .LBB19_358 | s_cbranch_execz .LBB19_345
+
+deep_fast-packed:decoder_project2x_h16w LOOP 22 .LBB19_364:                             ; %.preheader194
+PRE v_perm_b32 v45, v45, v44, 0x5040100 | v_perm_b32 v44, v43, v42, 0x5040100 | v_perm_b32 v43, v41, v40, 0x5040100 | v_add_co_u32 v36, s0, v36, 32 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v37, null, 0, v37, s0 | s_add_co_i32 s1, s1, 16 | s_wait_alu 0xfffe | s_cmp_lt_u32 s1, 0x3f0 | s_wait_loadcnt 0x0 | v_wmma_f32_16x16x16_f16 v[25:32], v[43:46], v[48:51], v[25:32] | s_cbranch_scc0 .LBB19_380
+BODY s_add_co_i32 s1, s1, 16 | s_cmp_lt_u32 s1, 0x3f0 | s_cbranch_scc0 .LBB19_380 | s_cbranch_execz .LBB19_366 | s_cbranch_execz .LBB19_368 | s_cbranch_execz .LBB19_370 | s_cbranch_execz .LBB19_372 | s_cbranch_execz .LBB19_374 | s_cbranch_execnz .LBB19_377 | s_cbranch_execnz .LBB19_378 | s_cbranch_execz .LBB19_363 | s_cbranch_execz .LBB19_376 | s_cbranch_execz .LBB19_363
+
+deep_fast-packed:decoder_project2x_h16w LOOP 23 .LBB19_382:                             ; =>This Inner Loop Header: Depth=1
+PRE s_wait_alu 0xfffe | s_add_co_i32 s3, s0, s1 | s_mov_b32 s16, 0xc3e00000 | s_branch .LBB19_382 | .LBB19_381:                             ; %Flow969 | ;   in Loop: Header=BB19_382 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s17 | s_add_co_i32 s2, s2, 1 | s_wait_alu 0xfffe | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB19_391
+BODY s_add_co_i32 s2, s2, 1 | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB19_391 | s_mov_b32 s17, exec_lo | s_cbranch_execz .LBB19_381 | s_mov_b32 m0, s2 | s_cbranch_execz .LBB19_385 | s_cbranch_execz .LBB19_387 | s_cbranch_execz .LBB19_389 | s_cbranch_execz .LBB19_381
+
+deep_fast-packed:decoder_project2x_h16w LOOP 24 .LBB19_394:                             ; =>This Inner Loop Header: Depth=1
+PRE v_add_co_u32 v2, s0, v12, s6 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v3, null, 0, s7, s0 | v_add_co_u32 v8, vcc_lo, 0x5c, v0 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v9, null, 0, v1, vcc_lo | v_add_co_u32 v10, vcc_lo, v2, 32 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v11, null, 0, v3, vcc_lo | v_dual_mov_b32 v0, v33 :: v_dual_mov_b32 v1, v33 | v_dual_mov_b32 v2, v33 :: v_dual_mov_b32 v3, v33 | s_mov_b32 s0, -16
+BODY s_add_co_i32 s0, s0, 32 | s_cmp_lt_u32 s0, 0xf0 | s_cbranch_scc1 .LBB19_394
+
+deep_fast-packed:decoder_project2x_h16w LOOP 25 .LBB19_396:                             ; %.preheader
+PRE v_dual_mov_b32 v9, 0 :: v_dual_add_nc_u32 v20, v8, v37 | v_add_co_u32 v16, vcc_lo, 0x200, v30 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v17, null, 0, v31, vcc_lo | v_dual_mov_b32 v11, v9 :: v_dual_add_nc_u32 v8, 0x100, v20 | v_dual_mov_b32 v10, v9 :: v_dual_mov_b32 v13, v9 | v_dual_mov_b32 v12, v9 :: v_dual_mov_b32 v15, v9 | s_delay_alu instid0(VALU_DEP_3) | v_lshlrev_b64_e32 v[18:19], 2, v[8:9] | v_mov_b32_e32 v8, v9 | v_mov_b32_e32 v14, v9 | s_mov_b64 s[0:1], s[4:5]
+BODY s_add_co_i32 s2, s2, 32 | s_add_nc_u64 s[0:1], s[0:1], 0x80 | s_cmp_lt_u32 s2, 0x1f0 | s_cbranch_scc1 .LBB19_396
+
+deep_fast-packed:decoder_project2x_h16w LOOP 26 .LBB19_398:                             ; %.preheader189
+PRE ; %bb.397:                              ; %.preheader189.preheader | v_dual_mov_b32 v17, 0 :: v_dual_add_nc_u32 v16, 0x200, v20 | v_add_co_u32 v26, vcc_lo, 0x400, v30 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v27, null, 0, v31, vcc_lo | v_lshlrev_b64_e32 v[28:29], 2, v[16:17] | v_dual_mov_b32 v16, v17 :: v_dual_mov_b32 v19, v17 | v_dual_mov_b32 v18, v17 :: v_dual_mov_b32 v21, v17 | v_dual_mov_b32 v20, v17 :: v_dual_mov_b32 v23, v17 | v_mov_b32_e32 v22, v17 | s_movk_i32 s2, 0x1f0 | s_mov_b64 s[0:1], s[4:5]
+BODY s_add_co_i32 s2, s2, 32 | s_add_nc_u64 s[0:1], s[0:1], 0x80 | s_cmp_lt_u32 s2, 0x2f0 | s_cbranch_scc1 .LBB19_398
+
+deep_fast-packed:decoder_project2x_h16w LOOP 27 .LBB19_400:                             ; %.preheader188
+PRE v_wmma_f32_16x16x16_f16 v[16:23], v[39:42], v[55:58], v[16:23] | s_cbranch_scc1 .LBB19_398 | ; %bb.399:                              ; %.preheader188.preheader | v_mov_b32_e32 v34, 0 | v_add_co_u32 v35, vcc_lo, 0x620, v30 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v36, null, 0, v31, vcc_lo | v_dual_mov_b32 v24, v34 :: v_dual_mov_b32 v25, v34 | v_dual_mov_b32 v26, v34 :: v_dual_mov_b32 v27, v34 | v_dual_mov_b32 v28, v34 :: v_dual_mov_b32 v29, v34 | v_dual_mov_b32 v30, v34 :: v_dual_mov_b32 v31, v34 | s_movk_i32 s0, 0x2f0
+BODY s_add_co_i32 s0, s0, 32 | s_cmp_lt_u32 s0, 0x3f0 | s_cbranch_scc1 .LBB19_400
+
+deep_fast-packed:decoder_project2x_h16w LOOP 28 .LBB19_403:                             ; =>This Inner Loop Header: Depth=1
+PRE s_mov_b32 s2, 0 | s_wait_alu 0xfffe | s_add_co_i32 s3, s0, s1 | s_mov_b32 s4, 0xc3e00000 | s_branch .LBB19_403 | .LBB19_402:                             ;   in Loop: Header=BB19_403 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s0 | s_add_co_i32 s2, s2, 1 | s_wait_alu 0xfffe | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB19_411
+BODY s_add_co_i32 s2, s2, 1 | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB19_411 | s_mov_b32 m0, s2 | s_cbranch_execz .LBB19_405 | s_cbranch_execz .LBB19_407 | s_cbranch_execnz .LBB19_409 | s_cbranch_execz .LBB19_402 | s_cbranch_execz .LBB19_402
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 0 .LBB20_8:                               ; =>This Loop Header: Depth=1
+PRE v_mad_co_u64_u32 v[21:22], null, s2, v11, v[18:19] | s_mov_b32 s17, 0 | s_wait_alu 0xfffe | s_lshr_b32 s1, s2, s1 | s_mov_b32 s22, 0 | v_add_co_u32 v8, vcc_lo, s6, v8 | s_delay_alu instid0(VALU_DEP_1) | instskip(NEXT) | instid1(VALU_DEP_2) | v_add_co_ci_u32_e64 v9, null, s7, v9, vcc_lo | v_add_co_u32 v22, vcc_lo, v8, v10 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v24, null, 0, v9, vcc_lo | v_mov_b32_e32 v8, 0
+BODY s_add_co_i32 s16, s16, 16 | s_cmp_ge_u32 s16, s23 | s_cbranch_scc1 .LBB20_27 | s_cbranch_execz .LBB20_13 | s_cbranch_execz .LBB20_15 | s_cbranch_execz .LBB20_17 | s_cbranch_execz .LBB20_19 | s_cbranch_execz .LBB20_21 | s_cbranch_execnz .LBB20_24 | s_cbranch_execnz .LBB20_25 | s_cbranch_execz .LBB20_10 | s_cbranch_execz .LBB20_23 | s_cbranch_execz .LBB20_10 | s_add_co_i32 s16, s22, 1 | s_cmp_eq_u32 s22, 0 | s_cmp_lt_u32 s22, 3 | s_cbranch_vccnz .LBB20_29 | s_mov_b32 s22, s16
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 1 .LBB20_11:                              ; %.preheader100
+PRE s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v34, null, s25, v24, vcc_lo | v_perm_b32 v30, v30, v29, 0x5040100 | v_perm_b32 v29, v28, v27, 0x5040100 | v_perm_b32 v28, v26, v25, 0x5040100 | global_load_b128 v[33:36], v[33:34], off | s_add_co_i32 s16, s16, 16 | s_wait_alu 0xfffe | s_cmp_ge_u32 s16, s23 | s_wait_loadcnt 0x0 | v_wmma_f32_16x16x16_f16 v[9:16], v[28:31], v[33:36], v[9:16] | s_cbranch_scc1 .LBB20_27
+BODY s_add_co_i32 s16, s16, 16 | s_cmp_ge_u32 s16, s23 | s_cbranch_scc1 .LBB20_27 | s_cbranch_execz .LBB20_13 | s_cbranch_execz .LBB20_15 | s_cbranch_execz .LBB20_17 | s_cbranch_execz .LBB20_19 | s_cbranch_execz .LBB20_21 | s_cbranch_execnz .LBB20_24 | s_cbranch_execnz .LBB20_25 | s_cbranch_execz .LBB20_10 | s_cbranch_execz .LBB20_23 | s_cbranch_execz .LBB20_10
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 2 .LBB20_31:                              ; =>This Inner Loop Header: Depth=1
+PRE s_mul_hi_u32 s1, s0, s1 | s_wait_alu 0xfffe | s_add_co_i32 s17, s0, s1 | s_branch .LBB20_31 | .LBB20_30:                              ; %Flow1057 | ;   in Loop: Header=BB20_31 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s23 | s_add_co_i32 s16, s16, 1 | s_wait_alu 0xfffe | s_cmp_lg_u32 s16, 8 | s_cbranch_scc0 .LBB20_40
+BODY s_add_co_i32 s16, s16, 1 | s_cmp_lg_u32 s16, 8 | s_cbranch_scc0 .LBB20_40 | s_mov_b32 s23, exec_lo | s_cbranch_execz .LBB20_30 | s_mov_b32 m0, s16 | s_cbranch_execz .LBB20_34 | s_cbranch_execz .LBB20_36 | s_cbranch_execz .LBB20_38 | s_cbranch_execz .LBB20_30
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 3 .LBB20_43:                              ; =>This Loop Header: Depth=1
+PRE s_lshr_b32 s16, s2, s0 | s_mov_b32 s17, 0 | v_lshlrev_b64_e32 v[8:9], 1, v[19:20] | v_mad_co_u64_u32 v[21:22], null, s2, v10, v[18:19] | s_delay_alu instid0(VALU_DEP_2) | v_add_co_u32 v8, vcc_lo, s6, v8 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v9, null, s7, v9, vcc_lo | v_add_co_u32 v22, vcc_lo, v8, v11 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v24, null, 0, v9, vcc_lo | v_mov_b32_e32 v8, 0
+BODY s_add_co_i32 s21, s0, s16 | s_cmp_ge_u32 s0, s21 | s_cbranch_scc1 .LBB20_46 | s_add_co_i32 s0, s0, 16 | s_cmp_ge_u32 s0, s21 | s_cbranch_scc0 .LBB20_45 | s_add_co_i32 s0, s17, 1 | s_cmp_eq_u32 s17, 0 | s_cmp_lt_u32 s17, 3 | s_cbranch_vccnz .LBB20_48 | s_mov_b32 s17, s0
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 4 .LBB20_45:                              ; %.preheader97
+PRE s_add_co_i32 s21, s0, s16 | s_wait_alu 0xfffe | s_cmp_ge_u32 s0, s21 | s_cbranch_scc1 .LBB20_46 | ; %bb.44:                               ; %.preheader97.preheader | ;   in Loop: Header=BB20_43 Depth=1 | v_mov_b32_e32 v9, 0 | s_delay_alu instid0(VALU_DEP_1) | v_dual_mov_b32 v10, v9 :: v_dual_mov_b32 v11, v9 | v_dual_mov_b32 v12, v9 :: v_dual_mov_b32 v13, v9 | v_dual_mov_b32 v14, v9 :: v_dual_mov_b32 v15, v9 | v_mov_b32_e32 v16, v9
+BODY s_add_co_i32 s0, s0, 16 | s_cmp_ge_u32 s0, s21 | s_cbranch_scc0 .LBB20_45
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 5 .LBB20_50:                              ; =>This Inner Loop Header: Depth=1
+PRE s_wait_alu 0xfffe | s_mul_hi_u32 s1, s0, s1 | s_wait_alu 0xfffe | s_add_co_i32 s16, s0, s1 | s_branch .LBB20_50 | .LBB20_49:                              ;   in Loop: Header=BB20_50 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s0 | s_add_co_i32 s2, s2, 1 | s_wait_alu 0xfffe | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB20_58
+BODY s_add_co_i32 s2, s2, 1 | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB20_58 | s_mov_b32 m0, s2 | s_cbranch_execz .LBB20_52 | s_cbranch_execz .LBB20_54 | s_cbranch_execnz .LBB20_56 | s_cbranch_execz .LBB20_49 | s_cbranch_execz .LBB20_49
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 6 .LBB20_128:                             ; =>This Inner Loop Header: Depth=1
+PRE s_add_co_i32 s18, s0, s1 | s_wait_loadcnt 0x0 | v_wmma_f32_16x16x16_f16 v[1:8], v[19:22], v[15:18], v[1:8] | s_branch .LBB20_128 | .LBB20_127:                             ; %Flow1071 | ;   in Loop: Header=BB20_128 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s20 | s_add_co_i32 s17, s17, 1 | s_wait_alu 0xfffe | s_cmp_eq_u32 s17, 8 | s_cbranch_scc1 .LBB20_137
+BODY s_add_co_i32 s17, s17, 1 | s_cmp_eq_u32 s17, 8 | s_cbranch_scc1 .LBB20_137 | s_mov_b32 s20, exec_lo | s_cbranch_execz .LBB20_127 | s_mov_b32 m0, s17 | s_cbranch_execz .LBB20_131 | s_cbranch_execz .LBB20_133 | s_cbranch_execz .LBB20_135 | s_cbranch_execz .LBB20_127
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 7 .LBB20_141:                             ; =>This Inner Loop Header: Depth=1
+PRE v_add_nc_u32_e32 v14, s2, v54 | s_mov_b32 s2, 0 | s_wait_alu 0xfffe | s_add_co_i32 s3, s0, s1 | s_branch .LBB20_141 | .LBB20_140:                             ;   in Loop: Header=BB20_141 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s0 | s_add_co_i32 s2, s2, 1 | s_wait_alu 0xfffe | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB20_149
+BODY s_add_co_i32 s2, s2, 1 | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB20_149 | s_mov_b32 m0, s2 | s_cbranch_execz .LBB20_143 | s_cbranch_execz .LBB20_145 | s_cbranch_execnz .LBB20_147 | s_cbranch_execz .LBB20_140 | s_cbranch_execz .LBB20_140
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 8 .LBB20_155:                             ; =>This Inner Loop Header: Depth=1
+PRE v_perm_b32 v21, v21, v20, 0x5040100 | v_perm_b32 v20, v19, v18, 0x5040100 | v_perm_b32 v19, v17, v16, 0x5040100 | v_add_co_u32 v11, s0, v11, 32 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v12, null, 0, v12, s0 | s_add_co_i32 s1, s1, 16 | s_wait_alu 0xfffe | s_cmp_gt_u32 s1, 0x6f | s_wait_loadcnt 0x0 | v_wmma_f32_16x16x16_f16 v[1:8], v[19:22], v[24:27], v[1:8] | s_cbranch_scc1 .LBB20_171
+BODY s_add_co_i32 s1, s1, 16 | s_cmp_gt_u32 s1, 0x6f | s_cbranch_scc1 .LBB20_171 | s_cbranch_execz .LBB20_157 | s_cbranch_execz .LBB20_159 | s_cbranch_execz .LBB20_161 | s_cbranch_execz .LBB20_163 | s_cbranch_execz .LBB20_165 | s_cbranch_execnz .LBB20_168 | s_cbranch_execnz .LBB20_169 | s_cbranch_execz .LBB20_154 | s_cbranch_execz .LBB20_167 | s_cbranch_execz .LBB20_154
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 9 .LBB20_173:                             ; =>This Inner Loop Header: Depth=1
+PRE s_mul_hi_u32 s1, s0, s1 | s_wait_alu 0xfffe | s_add_co_i32 s3, s0, s1 | s_branch .LBB20_173 | .LBB20_172:                             ; %Flow1082 | ;   in Loop: Header=BB20_173 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s17 | s_add_co_i32 s2, s2, 1 | s_wait_alu 0xfffe | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB20_182
+BODY s_add_co_i32 s2, s2, 1 | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB20_182 | s_mov_b32 s17, exec_lo | s_cbranch_execz .LBB20_172 | s_mov_b32 m0, s2 | s_cbranch_execz .LBB20_176 | s_cbranch_execz .LBB20_178 | s_cbranch_execz .LBB20_180 | s_cbranch_execz .LBB20_172
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 10 .LBB20_186:                             ; =>This Inner Loop Header: Depth=1
+PRE s_add_co_i32 s3, s0, s1 | s_wait_loadcnt 0x0 | v_wmma_f32_16x16x16_f16 v[1:8], v[14:17], v[18:21], v[1:8] | v_add_nc_u32_e32 v14, s28, v24 | s_branch .LBB20_186 | .LBB20_185:                             ;   in Loop: Header=BB20_186 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s0 | s_add_co_i32 s2, s2, 1 | s_wait_alu 0xfffe | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB20_194
+BODY s_add_co_i32 s2, s2, 1 | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB20_194 | s_mov_b32 m0, s2 | s_cbranch_execz .LBB20_188 | s_cbranch_execz .LBB20_190 | s_cbranch_execnz .LBB20_192 | s_cbranch_execz .LBB20_185 | s_cbranch_execz .LBB20_185
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 11 .LBB20_200:                             ; =>This Inner Loop Header: Depth=1
+PRE v_perm_b32 v21, v21, v20, 0x5040100 | v_perm_b32 v20, v19, v18, 0x5040100 | v_perm_b32 v19, v17, v16, 0x5040100 | v_add_co_u32 v11, s0, v11, 32 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v12, null, 0, v12, s0 | s_add_co_i32 s1, s1, 16 | s_wait_alu 0xfffe | s_cmp_gt_u32 s1, 0xef | s_wait_loadcnt 0x0 | v_wmma_f32_16x16x16_f16 v[1:8], v[19:22], v[24:27], v[1:8] | s_cbranch_scc1 .LBB20_216
+BODY s_add_co_i32 s1, s1, 16 | s_cmp_gt_u32 s1, 0xef | s_cbranch_scc1 .LBB20_216 | s_cbranch_execz .LBB20_202 | s_cbranch_execz .LBB20_204 | s_cbranch_execz .LBB20_206 | s_cbranch_execz .LBB20_208 | s_cbranch_execz .LBB20_210 | s_cbranch_execnz .LBB20_213 | s_cbranch_execnz .LBB20_214 | s_cbranch_execz .LBB20_199 | s_cbranch_execz .LBB20_212 | s_cbranch_execz .LBB20_199
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 12 .LBB20_218:                             ; =>This Inner Loop Header: Depth=1
+PRE s_mul_hi_u32 s1, s0, s1 | s_wait_alu 0xfffe | s_add_co_i32 s3, s0, s1 | s_branch .LBB20_218 | .LBB20_217:                             ; %Flow1094 | ;   in Loop: Header=BB20_218 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s17 | s_add_co_i32 s2, s2, 1 | s_wait_alu 0xfffe | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB20_227
+BODY s_add_co_i32 s2, s2, 1 | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB20_227 | s_mov_b32 s17, exec_lo | s_cbranch_execz .LBB20_217 | s_mov_b32 m0, s2 | s_cbranch_execz .LBB20_221 | s_cbranch_execz .LBB20_223 | s_cbranch_execz .LBB20_225 | s_cbranch_execz .LBB20_217
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 13 .LBB20_230:                             ; =>This Inner Loop Header: Depth=1
+PRE s_delay_alu instid0(VALU_DEP_4) | instskip(SKIP_3) | instid1(VALU_DEP_4) | v_and_or_b32 v9, v0, 16, v5 | v_mov_b32_e32 v5, v10 | v_lshl_or_b32 v15, v8, 8, v14 | v_mov_b32_e32 v8, v10 | v_add_co_u32 v9, s0, v9, s6 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v12, null, 0, s7, s0 | s_mov_b32 s0, 0 | v_add_co_u32 v11, vcc_lo, v9, 32 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v12, null, 0, v12, vcc_lo
+BODY s_add_co_i32 s1, s0, 16 | s_add_co_i32 s0, s0, 32 | s_cmp_gt_u32 s1, 0xef | s_cbranch_scc0 .LBB20_230
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 14 .LBB20_233:                             ; =>This Inner Loop Header: Depth=1
+PRE s_wait_alu 0xfffe | s_mul_hi_u32 s1, s0, s1 | s_wait_alu 0xfffe | s_add_co_i32 s3, s0, s1 | s_branch .LBB20_233 | .LBB20_232:                             ;   in Loop: Header=BB20_233 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s0 | s_add_co_i32 s2, s2, 1 | s_wait_alu 0xfffe | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB20_241
+BODY s_add_co_i32 s2, s2, 1 | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB20_241 | s_mov_b32 m0, s2 | s_cbranch_execz .LBB20_235 | s_cbranch_execz .LBB20_237 | s_cbranch_execnz .LBB20_239 | s_cbranch_execz .LBB20_232 | s_cbranch_execz .LBB20_232
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 15 .LBB20_247:                             ; =>This Inner Loop Header: Depth=1
+PRE v_perm_b32 v21, v21, v20, 0x5040100 | v_perm_b32 v20, v19, v18, 0x5040100 | v_perm_b32 v19, v17, v16, 0x5040100 | v_add_co_u32 v11, s0, v11, 32 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v12, null, 0, v12, s0 | s_add_co_i32 s1, s1, 16 | s_wait_alu 0xfffe | s_cmp_gt_u32 s1, 0x1ef | s_wait_loadcnt 0x0 | v_wmma_f32_16x16x16_f16 v[1:8], v[19:22], v[24:27], v[1:8] | s_cbranch_scc1 .LBB20_263
+BODY s_add_co_i32 s1, s1, 16 | s_cmp_gt_u32 s1, 0x1ef | s_cbranch_scc1 .LBB20_263 | s_cbranch_execz .LBB20_249 | s_cbranch_execz .LBB20_251 | s_cbranch_execz .LBB20_253 | s_cbranch_execz .LBB20_255 | s_cbranch_execz .LBB20_257 | s_cbranch_execnz .LBB20_260 | s_cbranch_execnz .LBB20_261 | s_cbranch_execz .LBB20_246 | s_cbranch_execz .LBB20_259 | s_cbranch_execz .LBB20_246
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 16 .LBB20_265:                             ; =>This Inner Loop Header: Depth=1
+PRE s_mul_hi_u32 s1, s0, s1 | s_wait_alu 0xfffe | s_add_co_i32 s3, s0, s1 | s_branch .LBB20_265 | .LBB20_264:                             ; %Flow1107 | ;   in Loop: Header=BB20_265 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s17 | s_add_co_i32 s2, s2, 1 | s_wait_alu 0xfffe | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB20_274
+BODY s_add_co_i32 s2, s2, 1 | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB20_274 | s_mov_b32 s17, exec_lo | s_cbranch_execz .LBB20_264 | s_mov_b32 m0, s2 | s_cbranch_execz .LBB20_268 | s_cbranch_execz .LBB20_270 | s_cbranch_execz .LBB20_272 | s_cbranch_execz .LBB20_264
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 17 .LBB20_277:                             ; =>This Inner Loop Header: Depth=1
+PRE s_delay_alu instid0(VALU_DEP_4) | instskip(SKIP_3) | instid1(VALU_DEP_4) | v_and_or_b32 v9, v0, 16, v5 | v_mov_b32_e32 v5, v10 | v_lshl_or_b32 v15, v8, 9, v14 | v_mov_b32_e32 v8, v10 | v_add_co_u32 v9, s0, v9, s6 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v12, null, 0, s7, s0 | s_mov_b32 s0, 0 | v_add_co_u32 v11, vcc_lo, v9, 32 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v12, null, 0, v12, vcc_lo
+BODY s_add_co_i32 s1, s0, 16 | s_add_co_i32 s0, s0, 32 | s_cmp_gt_u32 s1, 0x1ef | s_cbranch_scc0 .LBB20_277
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 18 .LBB20_280:                             ; =>This Inner Loop Header: Depth=1
+PRE s_wait_alu 0xfffe | s_mul_hi_u32 s1, s0, s1 | s_wait_alu 0xfffe | s_add_co_i32 s3, s0, s1 | s_branch .LBB20_280 | .LBB20_279:                             ;   in Loop: Header=BB20_280 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s0 | s_add_co_i32 s2, s2, 1 | s_wait_alu 0xfffe | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB20_288
+BODY s_add_co_i32 s2, s2, 1 | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB20_288 | s_mov_b32 m0, s2 | s_cbranch_execz .LBB20_282 | s_cbranch_execz .LBB20_284 | s_cbranch_execnz .LBB20_286 | s_cbranch_execz .LBB20_279 | s_cbranch_execz .LBB20_279
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 19 .LBB20_294:                             ; =>This Inner Loop Header: Depth=1
+PRE v_add_co_u32 v9, s0, v9, 32 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v10, null, 0, v10, s0 | v_add_co_u32 v11, s0, v11, 64 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v12, null, 0, v12, s0 | s_add_co_i32 s1, s1, 16 | s_wait_alu 0xfffe | s_cmp_lt_u32 s1, 0xf0 | s_wait_loadcnt 0x0 | v_wmma_f32_16x16x16_f16 v[1:8], v[17:20], v[22:25], v[1:8] | s_cbranch_scc0 .LBB20_310
+BODY s_add_co_i32 s1, s1, 16 | s_cmp_lt_u32 s1, 0xf0 | s_cbranch_scc0 .LBB20_310 | s_cbranch_execz .LBB20_296 | s_cbranch_execz .LBB20_298 | s_cbranch_execz .LBB20_300 | s_cbranch_execz .LBB20_302 | s_cbranch_execz .LBB20_304 | s_cbranch_execnz .LBB20_307 | s_cbranch_execnz .LBB20_308 | s_cbranch_execz .LBB20_293 | s_cbranch_execz .LBB20_306 | s_cbranch_execz .LBB20_293
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 20 .LBB20_312:                             ; %.preheader87
+PRE v_add_co_u32 v17, s0, v17, 32 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v18, null, 0, v18, s0 | v_add_co_u32 v19, s0, v19, 64 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v20, null, 0, v20, s0 | s_add_co_i32 s1, s1, 16 | s_wait_alu 0xfffe | s_cmp_lt_u32 s1, 0x1f0 | s_wait_loadcnt 0x0 | v_wmma_f32_16x16x16_f16 v[9:16], v[24:27], v[34:37], v[9:16] | s_cbranch_scc0 .LBB20_328
+BODY s_add_co_i32 s1, s1, 16 | s_cmp_lt_u32 s1, 0x1f0 | s_cbranch_scc0 .LBB20_328 | s_cbranch_execz .LBB20_314 | s_cbranch_execz .LBB20_316 | s_cbranch_execz .LBB20_318 | s_cbranch_execz .LBB20_320 | s_cbranch_execz .LBB20_322 | s_cbranch_execnz .LBB20_325 | s_cbranch_execnz .LBB20_326 | s_cbranch_execz .LBB20_311 | s_cbranch_execz .LBB20_324 | s_cbranch_execz .LBB20_311
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 21 .LBB20_330:                             ; %.preheader196
+PRE v_add_co_u32 v25, s0, v25, 32 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v26, null, 0, v26, s0 | v_add_co_u32 v27, s0, v27, 64 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v28, null, 0, v28, s0 | s_add_co_i32 s1, s1, 16 | s_wait_alu 0xfffe | s_cmp_lt_u32 s1, 0x2f0 | s_wait_loadcnt 0x0 | v_wmma_f32_16x16x16_f16 v[17:24], v[46:49], v[42:45], v[17:24] | s_cbranch_scc0 .LBB20_346
+BODY s_add_co_i32 s1, s1, 16 | s_cmp_lt_u32 s1, 0x2f0 | s_cbranch_scc0 .LBB20_346 | s_cbranch_execz .LBB20_332 | s_cbranch_execz .LBB20_334 | s_cbranch_execz .LBB20_336 | s_cbranch_execz .LBB20_338 | s_cbranch_execz .LBB20_340 | s_cbranch_execnz .LBB20_343 | s_cbranch_execnz .LBB20_344 | s_cbranch_execz .LBB20_329 | s_cbranch_execz .LBB20_342 | s_cbranch_execz .LBB20_329
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 22 .LBB20_348:                             ; %.preheader194
+PRE v_perm_b32 v45, v45, v44, 0x5040100 | v_perm_b32 v44, v43, v42, 0x5040100 | v_perm_b32 v43, v41, v40, 0x5040100 | v_add_co_u32 v36, s0, v36, 32 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v37, null, 0, v37, s0 | s_add_co_i32 s1, s1, 16 | s_wait_alu 0xfffe | s_cmp_lt_u32 s1, 0x3f0 | s_wait_loadcnt 0x0 | v_wmma_f32_16x16x16_f16 v[25:32], v[43:46], v[48:51], v[25:32] | s_cbranch_scc0 .LBB20_364
+BODY s_add_co_i32 s1, s1, 16 | s_cmp_lt_u32 s1, 0x3f0 | s_cbranch_scc0 .LBB20_364 | s_cbranch_execz .LBB20_350 | s_cbranch_execz .LBB20_352 | s_cbranch_execz .LBB20_354 | s_cbranch_execz .LBB20_356 | s_cbranch_execz .LBB20_358 | s_cbranch_execnz .LBB20_361 | s_cbranch_execnz .LBB20_362 | s_cbranch_execz .LBB20_347 | s_cbranch_execz .LBB20_360 | s_cbranch_execz .LBB20_347
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 23 .LBB20_366:                             ; =>This Inner Loop Header: Depth=1
+PRE s_wait_alu 0xfffe | s_add_co_i32 s3, s0, s1 | s_mov_b32 s16, 0xc3e00000 | s_branch .LBB20_366 | .LBB20_365:                             ; %Flow1120 | ;   in Loop: Header=BB20_366 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s17 | s_add_co_i32 s2, s2, 1 | s_wait_alu 0xfffe | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB20_375
+BODY s_add_co_i32 s2, s2, 1 | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB20_375 | s_mov_b32 s17, exec_lo | s_cbranch_execz .LBB20_365 | s_mov_b32 m0, s2 | s_cbranch_execz .LBB20_369 | s_cbranch_execz .LBB20_371 | s_cbranch_execz .LBB20_373 | s_cbranch_execz .LBB20_365
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 24 .LBB20_378:                             ; =>This Inner Loop Header: Depth=1
+PRE v_add_co_u32 v2, s0, v12, s6 | s_wait_alu 0xf1ff | v_add_co_ci_u32_e64 v3, null, 0, s7, s0 | v_add_co_u32 v8, vcc_lo, 0x5c, v0 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v9, null, 0, v1, vcc_lo | v_add_co_u32 v10, vcc_lo, v2, 32 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v11, null, 0, v3, vcc_lo | v_dual_mov_b32 v0, v33 :: v_dual_mov_b32 v1, v33 | v_dual_mov_b32 v2, v33 :: v_dual_mov_b32 v3, v33 | s_mov_b32 s0, -16
+BODY s_add_co_i32 s0, s0, 32 | s_cmp_lt_u32 s0, 0xf0 | s_cbranch_scc1 .LBB20_378
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 25 .LBB20_380:                             ; %.preheader
+PRE v_dual_mov_b32 v9, 0 :: v_dual_add_nc_u32 v20, v8, v37 | v_add_co_u32 v16, vcc_lo, 0x200, v30 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v17, null, 0, v31, vcc_lo | v_dual_mov_b32 v11, v9 :: v_dual_add_nc_u32 v8, 0x100, v20 | v_dual_mov_b32 v10, v9 :: v_dual_mov_b32 v13, v9 | v_dual_mov_b32 v12, v9 :: v_dual_mov_b32 v15, v9 | s_delay_alu instid0(VALU_DEP_3) | v_lshlrev_b64_e32 v[18:19], 2, v[8:9] | v_mov_b32_e32 v8, v9 | v_mov_b32_e32 v14, v9 | s_mov_b64 s[0:1], s[4:5]
+BODY s_add_co_i32 s2, s2, 32 | s_add_nc_u64 s[0:1], s[0:1], 0x80 | s_cmp_lt_u32 s2, 0x1f0 | s_cbranch_scc1 .LBB20_380
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 26 .LBB20_382:                             ; %.preheader189
+PRE ; %bb.381:                              ; %.preheader189.preheader | v_dual_mov_b32 v17, 0 :: v_dual_add_nc_u32 v16, 0x200, v20 | v_add_co_u32 v26, vcc_lo, 0x400, v30 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v27, null, 0, v31, vcc_lo | v_lshlrev_b64_e32 v[28:29], 2, v[16:17] | v_dual_mov_b32 v16, v17 :: v_dual_mov_b32 v19, v17 | v_dual_mov_b32 v18, v17 :: v_dual_mov_b32 v21, v17 | v_dual_mov_b32 v20, v17 :: v_dual_mov_b32 v23, v17 | v_mov_b32_e32 v22, v17 | s_movk_i32 s2, 0x1f0 | s_mov_b64 s[0:1], s[4:5]
+BODY s_add_co_i32 s2, s2, 32 | s_add_nc_u64 s[0:1], s[0:1], 0x80 | s_cmp_lt_u32 s2, 0x2f0 | s_cbranch_scc1 .LBB20_382
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 27 .LBB20_384:                             ; %.preheader188
+PRE v_wmma_f32_16x16x16_f16 v[16:23], v[39:42], v[55:58], v[16:23] | s_cbranch_scc1 .LBB20_382 | ; %bb.383:                              ; %.preheader188.preheader | v_mov_b32_e32 v34, 0 | v_add_co_u32 v35, vcc_lo, 0x620, v30 | s_wait_alu 0xfffd | v_add_co_ci_u32_e64 v36, null, 0, v31, vcc_lo | v_dual_mov_b32 v24, v34 :: v_dual_mov_b32 v25, v34 | v_dual_mov_b32 v26, v34 :: v_dual_mov_b32 v27, v34 | v_dual_mov_b32 v28, v34 :: v_dual_mov_b32 v29, v34 | v_dual_mov_b32 v30, v34 :: v_dual_mov_b32 v31, v34 | s_movk_i32 s0, 0x2f0
+BODY s_add_co_i32 s0, s0, 32 | s_cmp_lt_u32 s0, 0x3f0 | s_cbranch_scc1 .LBB20_384
+
+deep_fast-packed:decoder_project2x_h16w_byteout LOOP 28 .LBB20_387:                             ; =>This Inner Loop Header: Depth=1
+PRE s_mov_b32 s2, 0 | s_wait_alu 0xfffe | s_add_co_i32 s3, s0, s1 | s_mov_b32 s4, 0xc3e00000 | s_branch .LBB20_387 | .LBB20_386:                             ;   in Loop: Header=BB20_387 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s0 | s_add_co_i32 s2, s2, 1 | s_wait_alu 0xfffe | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB20_395
+BODY s_add_co_i32 s2, s2, 1 | s_cmp_eq_u32 s2, 8 | s_cbranch_scc1 .LBB20_395 | s_mov_b32 m0, s2 | s_cbranch_execz .LBB20_389 | s_cbranch_execz .LBB20_391 | s_cbranch_execnz .LBB20_393 | s_cbranch_execz .LBB20_386 | s_cbranch_execz .LBB20_386
+
+deep_fast-packed:vit_expand_blocked_fp8_frag_bytein LOOP 0 .LBB48_7:                               ; =>This Inner Loop Header: Depth=1
+PRE v_dual_mov_b32 v17, v1 :: v_dual_mov_b32 v20, v1 | v_dual_mov_b32 v19, v1 :: v_dual_mov_b32 v22, v1 | v_dual_mov_b32 v21, v1 :: v_dual_mov_b32 v24, v1 | v_dual_mov_b32 v23, v1 :: v_dual_mov_b32 v26, v1 | v_dual_mov_b32 v25, v1 :: v_dual_mov_b32 v28, v1 | v_dual_mov_b32 v27, v1 :: v_dual_mov_b32 v30, v1 | v_dual_mov_b32 v29, v1 :: v_dual_mov_b32 v32, v1 | v_mov_b32_e32 v31, v1 | s_wait_alu 0xfffe | s_mul_i32 s14, s3, s13 | s_mov_b32 s15, 0 | s_lshl_b32 s14, s14, 2
+BODY s_add_co_i32 s15, s15, 16 | s_add_co_i32 s16, s16, s14 | s_add_co_i32 s16, s16, s13 | s_add_co_i32 s12, s12, 2 | s_add_co_i32 s18, s16, s13 | s_add_co_i32 s18, s18, s13 | s_cmp_ge_u32 s15, s9 | s_cbranch_scc0 .LBB48_7
+
+deep_fast-packed:vit_expand_blocked_fp8_frag_bytein LOOP 1 .LBB48_12:                              ; =>This Inner Loop Header: Depth=1
+PRE v_dual_mov_b32 v12, v1 :: v_dual_mov_b32 v13, v1 | v_dual_mov_b32 v14, v1 :: v_dual_mov_b32 v15, v1 | v_dual_mov_b32 v16, v1 :: v_dual_mov_b32 v17, v1 | v_dual_mov_b32 v18, v1 :: v_dual_mov_b32 v19, v1 | v_dual_mov_b32 v20, v1 :: v_dual_mov_b32 v21, v1 | v_dual_mov_b32 v22, v1 :: v_dual_mov_b32 v23, v1 | v_dual_mov_b32 v24, v1 :: v_dual_mov_b32 v25, v1 | v_dual_mov_b32 v26, v1 :: v_dual_mov_b32 v27, v1 | v_dual_mov_b32 v28, v1 :: v_dual_mov_b32 v29, v1 | v_dual_mov_b32 v30, v1 :: v_dual_mov_b32 v31, v1 | v_mov_b32_e32 v32, v1 | s_mov_b32 s3, -16
+BODY s_add_co_i32 s3, s3, 64 | s_cmp_gt_u32 s3, 0x3ef | s_cbranch_scc0 .LBB48_12
+
+deep_fast-packed:split_projection_frag LOOP 0 .LBB55_2:                               ; =>This Inner Loop Header: Depth=1
+PRE ;;#ASMSTART | v_cvt_f32_f16 v4, v57 | ;;#ASMEND | ;;#ASMSTART | v_cvt_f32_f16 v5, v58 | ;;#ASMEND | ;;#ASMSTART | v_cvt_f32_f16 v6, v59 | ;;#ASMEND | ;;#ASMSTART | v_cvt_f32_f16 v7, v60 | ;;#ASMEND
+BODY s_add_nc_u64 s[2:3], s[2:3], 0x400 | s_cmp_lg_u32 s2, 0x2000 | s_cbranch_scc1 .LBB55_2
+
+c512-m32-mh:mh_qkv_normalize_frag_c512_m32 LOOP 0 .LBB88_3:                               ; =>This Inner Loop Header: Depth=1
+PRE s_wait_loadcnt 0x2 | v_wmma_f32_16x16x16_fp8_fp8 v[17:24], v[93:94], v[124:125], v[17:24] | v_wmma_f32_16x16x16_fp8_fp8 v[25:32], v[93:94], v[105:106], v[25:32] | v_wmma_f32_16x16x16_fp8_fp8 v[33:40], v[95:96], v[105:106], v[33:40] | v_wmma_f32_16x16x16_fp8_fp8 v[41:48], v[95:96], v[124:125], v[41:48] | s_wait_loadcnt 0x1 | v_wmma_f32_16x16x16_fp8_fp8 v[9:16], v[93:94], v[126:127], v[9:16] | v_wmma_f32_16x16x16_fp8_fp8 v[49:56], v[95:96], v[126:127], v[49:56] | s_wait_loadcnt 0x0 | v_wmma_f32_16x16x16_fp8_fp8 v[1:8], v[93:94], v[128:129], v[1:8] | v_wmma_f32_16x16x16_fp8_fp8 v[57:64], v[95:96], v[128:129], v[57:64] | s_cbranch_scc1 .LBB88_11
+BODY s_add_nc_u64 s[4:5], s[4:5], 0x400 | s_cmp_eq_u32 s4, 0x2000 | s_cbranch_scc1 .LBB88_11 | s_cbranch_vccnz .LBB88_5 | s_add_nc_u64 s[8:9], s[2:3], s[4:5] | s_add_co_i32 s9, s8, 0x2000 | s_add_co_i32 s14, s8, 0x6000 | s_cbranch_vccnz .LBB88_7 | s_cbranch_vccnz .LBB88_9 | s_add_co_i32 s15, s8, 0x200 | s_add_co_i32 s14, s8, 0x2200 | s_add_co_i32 s9, s8, 0x4200 | s_addk_co_i32 s8, 0x6200 | s_cbranch_vccnz .LBB88_2
+
+c512-m32-mh:mh_qkv_normalize_frag_c512_m32 LOOP 1 .LBB88_13:                              ; =>This Inner Loop Header: Depth=1
+PRE s_mov_b32 s1, 0xc3e00000 | s_branch .LBB88_13 | .LBB88_12:                              ;   in Loop: Header=BB88_13 Depth=1 | s_wait_alu 0xfffe | s_or_b32 exec_lo, exec_lo, s3 | s_and_b32 s2, s12, s2 | s_mov_b32 s3, 16 | s_wait_alu 0xfffe | s_and_b32 vcc_lo, exec_lo, s2 | s_mov_b32 s2, 0 | s_wait_alu 0xfffe | s_cbranch_vccz .LBB88_21
+BODY s_mov_b32 s3, 16 | s_mov_b32 s2, 0 | s_cbranch_vccz .LBB88_21 | s_cbranch_vccnz .LBB88_15 | s_cbranch_execz .LBB88_19 | s_cbranch_vccnz .LBB88_18 | s_mov_b32 s3, exec_lo | s_cbranch_execz .LBB88_12
+
+multihead_fused_attention:mh_attention_fused_fp8_out LOOP 0 .LBB2_11:                               ; =>This Inner Loop Header: Depth=1
+PRE s_add_co_i32 s11, s0, 1 | s_cmp_ge_u32 s1, s3 | s_cselect_b32 s0, s11, s0 | s_lshl_b32 s14, s2, 5 | s_mul_i32 s1, s0, s3 | s_delay_alu instid0(SALU_CYCLE_1) | instskip(SKIP_2) | instid1(SALU_CYCLE_1) | s_sub_co_i32 s1, s9, s1 | s_lshl_b32 s9, s0, 3 | s_lshl_b32 s16, s1, 3 | v_and_or_b32 v1, v2, 7, s16 | s_wait_kmcnt 0x0 | s_add_nc_u64 s[0:1], s[4:5], s[14:15]
+BODY s_cbranch_execnz .LBB2_11

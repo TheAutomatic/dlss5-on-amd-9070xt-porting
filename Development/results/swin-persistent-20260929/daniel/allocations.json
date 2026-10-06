@@ -1,0 +1,597 @@
+[
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003ef98: movq qword ptr [rsi + 0x2a0], xmm0",
+      "18003efa0: movsxd rax, ebp",
+      "18003efa3: movsxd rcx, ebx",
+      "18003efa6: imul rcx, rax",
+      "18003efaa: shl rcx, 2",
+      "18003efae: lea rbx, [rcx + rcx*2]",
+      "18003efb2: lea rcx, [rsp + 0x110]",
+      "18003efba: mov rdx, rbx",
+      "18003efbd: call 0x18007ccd0",
+      "18003efc2: mov rcx, qword ptr [rsp + 0x110]",
+      "18003efca: xor edx, edx",
+      "18003efcc: mov r8, rbx"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003f009: mov rax, qword ptr [rsp + 0x110]",
+      "18003f011: mov qword ptr [rsi + 0x138], rax",
+      "18003f018: movsxd rax, dword ptr [rsi + 0x28]",
+      "18003f01c: movsxd rbx, dword ptr [rsi + 0x2c]",
+      "18003f020: imul rbx, rax",
+      "18003f024: shl rbx, 4",
+      "18003f028: lea rcx, [rsp + 0x110]",
+      "18003f030: mov rdx, rbx",
+      "18003f033: call 0x18007ccd0",
+      "18003f038: mov rcx, qword ptr [rsp + 0x110]",
+      "18003f040: xor edx, edx",
+      "18003f042: mov r8, rbx"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003f087: mov qword ptr [rsi + 0x140], rax",
+      "18003f08e: movsxd rax, dword ptr [rsi + 0x28]",
+      "18003f092: movsxd rcx, dword ptr [rsi + 0x2c]",
+      "18003f096: imul rcx, rax",
+      "18003f09a: shl rcx, 2",
+      "18003f09e: lea rbx, [rcx + rcx*2]",
+      "18003f0a2: lea rcx, [rsp + 0x110]",
+      "18003f0aa: mov rdx, rbx",
+      "18003f0ad: call 0x18007ccd0",
+      "18003f0b2: mov rcx, qword ptr [rsp + 0x110]",
+      "18003f0ba: xor edx, edx",
+      "18003f0bc: mov r8, rbx"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003f0f9: mov rax, qword ptr [rsp + 0x110]",
+      "18003f101: mov qword ptr [rsi + 0x148], rax",
+      "18003f108: movsxd rax, dword ptr [rsi + 0x28]",
+      "18003f10c: movsxd rbx, dword ptr [rsi + 0x2c]",
+      "18003f110: imul rbx, rax",
+      "18003f114: shl rbx, 4",
+      "18003f118: lea rcx, [rsp + 0x110]",
+      "18003f120: mov rdx, rbx",
+      "18003f123: call 0x18007ccd0",
+      "18003f128: mov rcx, qword ptr [rsp + 0x110]",
+      "18003f130: xor edx, edx",
+      "18003f132: mov r8, rbx"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003f19c: test ecx, ecx",
+      "18003f19e: cmovns edx, ecx",
+      "18003f1a1: sar edx, 2",
+      "18003f1a4: movsxd rbx, edx",
+      "18003f1a7: imul rbx, rax",
+      "18003f1ab: shl rbx, 9",
+      "18003f1af: lea rcx, [rsp + 0x110]",
+      "18003f1b7: mov rdx, rbx",
+      "18003f1ba: call 0x18007ccd0",
+      "18003f1bf: mov rcx, qword ptr [rsp + 0x110]",
+      "18003f1c7: xor edx, edx",
+      "18003f1c9: mov r8, rbx"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003f20e: mov qword ptr [rsi + 0x2e8], rax",
+      "18003f215: movsxd rax, dword ptr [rsi + 0x260]",
+      "18003f21c: movsxd rcx, dword ptr [rsi + 0x264]",
+      "18003f223: imul rcx, rax",
+      "18003f227: movsxd rbx, dword ptr [rsi + 0x268]",
+      "18003f22e: imul rbx, rcx",
+      "18003f232: lea rcx, [rsp + 0x110]",
+      "18003f23a: mov rdx, rbx",
+      "18003f23d: call 0x18007ccd0",
+      "18003f242: mov rcx, qword ptr [rsp + 0x110]",
+      "18003f24a: xor edx, edx",
+      "18003f24c: mov r8, rbx"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003f30f: cmovns edx, ecx",
+      "18003f312: sar edx, 2",
+      "18003f315: movsxd rcx, edx",
+      "18003f318: imul r14, rax",
+      "18003f31c: imul r14, rcx",
+      "18003f320: shl r14, 4",
+      "18003f324: mov rcx, rbx",
+      "18003f327: mov rdx, r14",
+      "18003f32a: call 0x18007ccd0",
+      "18003f32f: mov rcx, qword ptr [rsp + 0x110]",
+      "18003f337: xor edx, edx",
+      "18003f339: mov r8, r14"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003f383: mov qword ptr [r15 - 0x128], rax",
+      "18003f38a: movsxd rax, dword ptr [rsi + rbp - 8]",
+      "18003f38f: movsxd rcx, dword ptr [rsi + rbp - 4]",
+      "18003f394: imul rcx, rax",
+      "18003f398: movsxd r14, dword ptr [rsi + rbp]",
+      "18003f39c: imul r14, rcx",
+      "18003f3a0: mov rcx, rbx",
+      "18003f3a3: mov rdx, r14",
+      "18003f3a6: call 0x18007ccd0",
+      "18003f3ab: mov rcx, qword ptr [rsp + 0x110]",
+      "18003f3b3: xor edx, edx",
+      "18003f3b5: mov r8, r14"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003f42b: cmovns edx, ecx",
+      "18003f42e: sar edx, 2",
+      "18003f431: movsxd rcx, edx",
+      "18003f434: imul r14, rax",
+      "18003f438: imul r14, rcx",
+      "18003f43c: shl r14, 4",
+      "18003f440: mov rcx, rbx",
+      "18003f443: mov rdx, r14",
+      "18003f446: call 0x18007ccd0",
+      "18003f44b: mov rcx, qword ptr [rsp + 0x110]",
+      "18003f453: xor edx, edx",
+      "18003f455: mov r8, r14"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003f4c8: cmovns edx, ecx",
+      "18003f4cb: sar edx, 2",
+      "18003f4ce: movsxd rcx, edx",
+      "18003f4d1: imul r14, rax",
+      "18003f4d5: imul r14, rcx",
+      "18003f4d9: shl r14, 4",
+      "18003f4dd: mov rcx, rbx",
+      "18003f4e0: mov rdx, r14",
+      "18003f4e3: call 0x18007ccd0",
+      "18003f4e8: mov rcx, qword ptr [rsp + 0x110]",
+      "18003f4f0: xor edx, edx",
+      "18003f4f2: mov r8, r14"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003f533: mov qword ptr [r15 - 0x20], rax",
+      "18003f537: movsxd rax, dword ptr [r12 - 8]",
+      "18003f53c: movsxd rcx, dword ptr [r12 - 4]",
+      "18003f541: imul rcx, rax",
+      "18003f545: movsxd r14, dword ptr [r12]",
+      "18003f549: imul r14, rcx",
+      "18003f54d: mov rcx, rbx",
+      "18003f550: mov rdx, r14",
+      "18003f553: call 0x18007ccd0",
+      "18003f558: mov rcx, qword ptr [rsp + 0x110]",
+      "18003f560: xor edx, edx",
+      "18003f562: mov r8, r14"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003f71e: cmovns eax, r12d",
+      "18003f722: sar eax, 2",
+      "18003f725: cdqe ",
+      "18003f727: imul r14, r15",
+      "18003f72b: imul r14, rax",
+      "18003f72f: shl r14, 4",
+      "18003f733: lea rcx, [rsp + 0x110]",
+      "18003f73b: mov rdx, r14",
+      "18003f73e: call 0x18007ccd0",
+      "18003f743: mov rcx, qword ptr [rsp + 0x110]",
+      "18003f74b: xor edx, edx",
+      "18003f74d: mov r8, r14"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003f778: jmp 0x18003f792",
+      "18003f77a: lea r8, [rsp + 0x110]",
+      "18003f782: mov rcx, rdi",
+      "18003f785: call 0x180029c00",
+      "18003f78a: mov rax, qword ptr [rsp + 0x110]",
+      "18003f792: mov qword ptr [rsi + 0x2f8], rax",
+      "18003f799: lea rcx, [rsp + 0x110]",
+      "18003f7a1: mov rdx, r14",
+      "18003f7a4: call 0x18007ccd0",
+      "18003f7a9: mov rcx, qword ptr [rsp + 0x110]",
+      "18003f7b1: xor edx, edx",
+      "18003f7b3: mov r8, r14"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003f7de: jmp 0x18003f7f8",
+      "18003f7e0: lea r8, [rsp + 0x110]",
+      "18003f7e8: mov rcx, rdi",
+      "18003f7eb: call 0x180029c00",
+      "18003f7f0: mov rax, qword ptr [rsp + 0x110]",
+      "18003f7f8: mov qword ptr [rsi + 0x300], rax",
+      "18003f7ff: lea rcx, [rsp + 0x110]",
+      "18003f807: mov rdx, r14",
+      "18003f80a: call 0x18007ccd0",
+      "18003f80f: mov rcx, qword ptr [rsp + 0x110]",
+      "18003f817: xor edx, edx",
+      "18003f819: mov r8, r14"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003f844: jmp 0x18003f85e",
+      "18003f846: lea r8, [rsp + 0x110]",
+      "18003f84e: mov rcx, rdi",
+      "18003f851: call 0x180029c00",
+      "18003f856: mov rax, qword ptr [rsp + 0x110]",
+      "18003f85e: mov qword ptr [rsi + 0x308], rax",
+      "18003f865: lea rcx, [rsp + 0x110]",
+      "18003f86d: mov rdx, r14",
+      "18003f870: call 0x18007ccd0",
+      "18003f875: mov rcx, qword ptr [rsp + 0x110]",
+      "18003f87d: xor edx, edx",
+      "18003f87f: mov r8, r14"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003f8b9: mov rcx, rdi",
+      "18003f8bc: call 0x180029c00",
+      "18003f8c1: mov rax, qword ptr [rsp + 0x110]",
+      "18003f8c9: mov qword ptr [rsi + 0x310], rax",
+      "18003f8d0: movsxd r15, dword ptr [rsi + 0x3f4]",
+      "18003f8d7: shl r15, 0xd",
+      "18003f8db: lea rcx, [rsp + 0x110]",
+      "18003f8e3: mov rdx, r15",
+      "18003f8e6: call 0x18007ccd0",
+      "18003f8eb: mov rcx, qword ptr [rsp + 0x110]",
+      "18003f8f3: xor edx, edx",
+      "18003f8f5: mov r8, r15"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003f92a: mov rcx, rdi",
+      "18003f92d: call 0x180029c00",
+      "18003f932: mov rax, qword ptr [rsp + 0x110]",
+      "18003f93a: mov qword ptr [rsi + 0x318], rax",
+      "18003f941: movsxd r15, dword ptr [rsi + 0x3f4]",
+      "18003f948: shl r15, 0xe",
+      "18003f94c: lea rcx, [rsp + 0x110]",
+      "18003f954: mov rdx, r15",
+      "18003f957: call 0x18007ccd0",
+      "18003f95c: mov rcx, qword ptr [rsp + 0x110]",
+      "18003f964: xor edx, edx",
+      "18003f966: mov r8, r15"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003f99e: call 0x180029c00",
+      "18003f9a3: mov rax, qword ptr [rsp + 0x110]",
+      "18003f9ab: mov qword ptr [rsi + 0x320], rax",
+      "18003f9b2: movsxd rbp, dword ptr [rsi + 0x3fc]",
+      "18003f9b9: mov r15, rbp",
+      "18003f9bc: shl r15, 0xa",
+      "18003f9c0: lea rcx, [rsp + 0x110]",
+      "18003f9c8: mov rdx, r15",
+      "18003f9cb: call 0x18007ccd0",
+      "18003f9d0: mov rcx, qword ptr [rsp + 0x110]",
+      "18003f9d8: xor edx, edx",
+      "18003f9da: mov r8, r15"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003fa14: mov rcx, rdi",
+      "18003fa17: call 0x180029c00",
+      "18003fa1c: mov rax, qword ptr [rsp + 0x110]",
+      "18003fa24: mov qword ptr [rsi + 0x328], rax",
+      "18003fa2b: mov r12, rbp",
+      "18003fa2e: shl r12, 0xc",
+      "18003fa32: lea rcx, [rsp + 0x110]",
+      "18003fa3a: mov rdx, r12",
+      "18003fa3d: call 0x18007ccd0",
+      "18003fa42: mov rcx, qword ptr [rsp + 0x110]",
+      "18003fa4a: xor edx, edx",
+      "18003fa4c: mov r8, r12"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003fa77: jmp 0x18003fa91",
+      "18003fa79: lea r8, [rsp + 0x110]",
+      "18003fa81: mov rcx, rdi",
+      "18003fa84: call 0x180029c00",
+      "18003fa89: mov rax, qword ptr [rsp + 0x110]",
+      "18003fa91: mov qword ptr [rsi + 0x330], rax",
+      "18003fa98: lea rcx, [rsp + 0x110]",
+      "18003faa0: mov rdx, r15",
+      "18003faa3: call 0x18007ccd0",
+      "18003faa8: mov rcx, qword ptr [rsp + 0x110]",
+      "18003fab0: xor edx, edx",
+      "18003fab2: mov r8, r15"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003faea: call 0x180029c00",
+      "18003faef: mov rax, qword ptr [rsp + 0x110]",
+      "18003faf7: mov qword ptr [rsi + 0x338], rax",
+      "18003fafe: shl rbp, 0xd",
+      "18003fb02: lea r12, [rbp*2]",
+      "18003fb0a: add r12, rbp",
+      "18003fb0d: lea rcx, [rsp + 0x110]",
+      "18003fb15: mov rdx, r12",
+      "18003fb18: call 0x18007ccd0",
+      "18003fb1d: mov rcx, qword ptr [rsp + 0x110]",
+      "18003fb25: xor edx, edx",
+      "18003fb27: mov r8, r12"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003fb7c: test eax, eax",
+      "18003fb7e: cmovns ecx, eax",
+      "18003fb81: sar ecx, 6",
+      "18003fb84: shl ecx, 4",
+      "18003fb87: lea eax, [rcx + rcx*4]",
+      "18003fb8a: movsxd r12, eax",
+      "18003fb8d: lea rcx, [rsp + 0x110]",
+      "18003fb95: mov rdx, r12",
+      "18003fb98: call 0x18007ccd0",
+      "18003fb9d: mov rcx, qword ptr [rsp + 0x110]",
+      "18003fba5: xor edx, edx",
+      "18003fba7: mov r8, r12"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003fbd4: lea r8, [rsp + 0x110]",
+      "18003fbdc: mov rcx, rdi",
+      "18003fbdf: call 0x180029c00",
+      "18003fbe4: mov rax, qword ptr [rsp + 0x110]",
+      "18003fbec: mov r12, qword ptr [rsp + 0x58]",
+      "18003fbf1: mov qword ptr [rsi + 0x380], rax",
+      "18003fbf8: lea rcx, [rsp + 0x110]",
+      "18003fc00: mov rdx, r15",
+      "18003fc03: call 0x18007ccd0",
+      "18003fc08: mov rcx, qword ptr [rsp + 0x110]",
+      "18003fc10: xor edx, edx",
+      "18003fc12: mov r8, r15"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003fc3d: jmp 0x18003fc57",
+      "18003fc3f: lea r8, [rsp + 0x110]",
+      "18003fc47: mov rcx, rdi",
+      "18003fc4a: call 0x180029c00",
+      "18003fc4f: mov rax, qword ptr [rsp + 0x110]",
+      "18003fc57: mov qword ptr [rsi + 0x340], rax",
+      "18003fc5e: lea rcx, [rsp + 0x110]",
+      "18003fc66: mov rdx, r15",
+      "18003fc69: call 0x18007ccd0",
+      "18003fc6e: mov rcx, qword ptr [rsp + 0x110]",
+      "18003fc76: xor edx, edx",
+      "18003fc78: mov r8, r15"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003fca3: jmp 0x18003fcbd",
+      "18003fca5: lea r8, [rsp + 0x110]",
+      "18003fcad: mov rcx, rdi",
+      "18003fcb0: call 0x180029c00",
+      "18003fcb5: mov rax, qword ptr [rsp + 0x110]",
+      "18003fcbd: mov qword ptr [rsi + 0x348], rax",
+      "18003fcc4: lea rcx, [rsp + 0x110]",
+      "18003fccc: mov rdx, r15",
+      "18003fccf: call 0x18007ccd0",
+      "18003fcd4: mov rcx, qword ptr [rsp + 0x110]",
+      "18003fcdc: xor edx, edx",
+      "18003fcde: mov r8, r15"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003fd09: jmp 0x18003fd23",
+      "18003fd0b: lea r8, [rsp + 0x110]",
+      "18003fd13: mov rcx, rdi",
+      "18003fd16: call 0x180029c00",
+      "18003fd1b: mov rax, qword ptr [rsp + 0x110]",
+      "18003fd23: mov qword ptr [rsi + 0x350], rax",
+      "18003fd2a: lea rcx, [rsp + 0x110]",
+      "18003fd32: mov rdx, r15",
+      "18003fd35: call 0x18007ccd0",
+      "18003fd3a: mov rcx, qword ptr [rsp + 0x110]",
+      "18003fd42: xor edx, edx",
+      "18003fd44: mov r8, r15"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003fd6f: jmp 0x18003fd89",
+      "18003fd71: lea r8, [rsp + 0x110]",
+      "18003fd79: mov rcx, rdi",
+      "18003fd7c: call 0x180029c00",
+      "18003fd81: mov rax, qword ptr [rsp + 0x110]",
+      "18003fd89: mov qword ptr [rsi + 0x358], rax",
+      "18003fd90: lea rcx, [rsp + 0x110]",
+      "18003fd98: mov rdx, r15",
+      "18003fd9b: call 0x18007ccd0",
+      "18003fda0: mov rcx, qword ptr [rsp + 0x110]",
+      "18003fda8: xor edx, edx",
+      "18003fdaa: mov r8, r15"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003fdd7: lea r8, [rsp + 0x110]",
+      "18003fddf: mov rcx, rdi",
+      "18003fde2: call 0x180029c00",
+      "18003fde7: mov rax, qword ptr [rsp + 0x110]",
+      "18003fdef: mov r15, qword ptr [rsp + 0x60]",
+      "18003fdf4: mov qword ptr [rsi + 0x360], rax",
+      "18003fdfb: lea rcx, [rsp + 0x110]",
+      "18003fe03: mov rdx, r14",
+      "18003fe06: call 0x18007ccd0",
+      "18003fe0b: mov rcx, qword ptr [rsp + 0x110]",
+      "18003fe13: xor edx, edx",
+      "18003fe15: mov r8, r14"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003fe4a: mov rcx, rdi",
+      "18003fe4d: call 0x180029c00",
+      "18003fe52: mov rax, qword ptr [rsp + 0x110]",
+      "18003fe5a: mov qword ptr [rsi + 0x370], rax",
+      "18003fe61: imul rbx, r15",
+      "18003fe65: imul rbx, r12",
+      "18003fe69: lea rcx, [rsp + 0x110]",
+      "18003fe71: mov rdx, rbx",
+      "18003fe74: call 0x18007ccd0",
+      "18003fe79: mov rcx, qword ptr [rsp + 0x110]",
+      "18003fe81: xor edx, edx",
+      "18003fe83: mov r8, rbx"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003fec0: mov rax, qword ptr [rsp + 0x110]",
+      "18003fec8: mov qword ptr [rsi + 0x378], rax",
+      "18003fecf: movsxd rax, dword ptr [rsi + 0x28]",
+      "18003fed3: movsxd rbx, dword ptr [rsi + 0x2c]",
+      "18003fed7: imul rbx, rax",
+      "18003fedb: shl rbx, 3",
+      "18003fedf: lea rcx, [rsp + 0x110]",
+      "18003fee7: mov rdx, rbx",
+      "18003feea: call 0x18007ccd0",
+      "18003feef: mov rcx, qword ptr [rsp + 0x110]",
+      "18003fef7: xor edx, edx",
+      "18003fef9: mov r8, rbx"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "18003ffdd: movsxd r9, r10d",
+      "18003ffe0: imul r9, r8",
+      "18003ffe4: lea rdx, [rdx + r9*8]",
+      "18003ffe8: jmp 0x18003ff70",
+      "18003ffea: lea rbx, [rdx*4 + 0x100]",
+      "18003fff2: mov qword ptr [rsi + 0x430], rbx",
+      "18003fff9: lea rcx, [rsp + 0x110]",
+      "180040001: mov rdx, rbx",
+      "180040004: call 0x18007ccd0",
+      "180040009: mov rcx, qword ptr [rsp + 0x110]",
+      "180040011: xor edx, edx",
+      "180040013: mov r8, rbx"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "180040117: cmova rbx, r10",
+      "18004011b: jmp 0x180040080",
+      "180040120: mov qword ptr [rsi + 0x230], r8",
+      "180040127: add rbx, r8",
+      "18004012a: shl rbx, 2",
+      "18004012e: mov qword ptr [rsi + 0x1e8], rbx",
+      "180040135: lea rcx, [rsp + 0x110]",
+      "18004013d: mov rdx, rbx",
+      "180040140: call 0x18007ccd0",
+      "180040145: mov rcx, qword ptr [rsp + 0x110]",
+      "18004014d: xor edx, edx",
+      "18004014f: mov r8, rbx"
+    ]
+  },
+  {
+    "api": "hipHostMalloc",
+    "context": [
+      "180040187: call 0x180029c00",
+      "18004018c: mov rax, qword ptr [rsp + 0x110]",
+      "180040194: mov qword ptr [rsi + 0x1e0], rax",
+      "18004019b: cmp qword ptr [rsi + 0x250], 0",
+      "1800401a3: jne 0x1800401df",
+      "1800401a5: lea rcx, [rsi + 0x250]",
+      "1800401ac: mov edx, 4",
+      "1800401b1: mov r8d, 2",
+      "1800401b7: call 0x18007cca0",
+      "1800401bc: mov rax, qword ptr [rsi + 0x250]",
+      "1800401c3: mov dword ptr [rax], 0",
+      "1800401c9: mov rdx, qword ptr [rsi + 0x250]"
+    ]
+  },
+  {
+    "api": "hipHostGetDevicePointer",
+    "context": [
+      "1800401ac: mov edx, 4",
+      "1800401b1: mov r8d, 2",
+      "1800401b7: call 0x18007cca0",
+      "1800401bc: mov rax, qword ptr [rsi + 0x250]",
+      "1800401c3: mov dword ptr [rax], 0",
+      "1800401c9: mov rdx, qword ptr [rsi + 0x250]",
+      "1800401d0: lea rcx, [rsi + 0x258]",
+      "1800401d7: xor r8d, r8d",
+      "1800401da: call 0x18007cc90",
+      "1800401df: lea rcx, [rip + 0x5bcd3]",
+      "1800401e6: call 0x18005fca4",
+      "1800401eb: test rax, rax"
+    ]
+  },
+  {
+    "api": "hipMalloc",
+    "context": [
+      "1800401d7: xor r8d, r8d",
+      "1800401da: call 0x18007cc90",
+      "1800401df: lea rcx, [rip + 0x5bcd3]",
+      "1800401e6: call 0x18005fca4",
+      "1800401eb: test rax, rax",
+      "1800401ee: je 0x18004025b",
+      "1800401f0: lea rcx, [rsp + 0x110]",
+      "1800401f8: mov edx, 0xa0000",
+      "1800401fd: call 0x18007ccd0",
+      "180040202: mov rcx, qword ptr [rsp + 0x110]",
+      "18004020a: mov r8d, 0xa0000",
+      "180040210: xor edx, edx"
+    ]
+  }
+]

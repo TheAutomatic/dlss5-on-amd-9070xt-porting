@@ -1,0 +1,41 @@
+{
+  "raw": {
+    "old-0": {
+      "sha": "624d9d1a2f5cedb300182bb7766df1c3b421d57555c9edc20220baa14431a612",
+      "finite": true,
+      "alpha1": true,
+      "min_RGB": 0.024408739060163498,
+      "max_RGB": 1.0
+    },
+    "old-1": {
+      "sha": "624d9d1a2f5cedb300182bb7766df1c3b421d57555c9edc20220baa14431a612",
+      "finite": true,
+      "alpha1": true,
+      "min_RGB": 0.024408739060163498,
+      "max_RGB": 1.0
+    },
+    "new-0": {
+      "sha": "e2a4daea4a33328278cca4d6f84005617ba4de7c6fcc5e8caf563e91259b871a",
+      "finite": true,
+      "alpha1": true,
+      "min_RGB": 0.02236761525273323,
+      "max_RGB": 1.0
+    },
+    "new-1": {
+      "sha": "e2a4daea4a33328278cca4d6f84005617ba4de7c6fcc5e8caf563e91259b871a",
+      "finite": true,
+      "alpha1": true,
+      "min_RGB": 0.02236761525273323,
+      "max_RGB": 1.0
+    }
+  },
+  "own_crossprocess_repeat_bitdiff": 0,
+  "relative_old_M_RGB": {
+    "mse": 5.3386134708017006e-06,
+    "mae": 0.001708935267368196,
+    "maxabs": 0.031023219227790833,
+    "psnr_peak1_dB": 52.725715220292955,
+    "different_float_count": 6220751
+  },
+  "scope": "valid1920x1080RGB; relativeoldM, noNV/production acceptance;onlyfinalperprocessoutputs"
+}

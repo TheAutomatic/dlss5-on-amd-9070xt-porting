@@ -1,0 +1,106 @@
+{
+  "session": 53360,
+  "exit_code": 0,
+  "lock_released": true,
+  "source_commit": "b88afddf",
+  "exe_sha256": "f40ce5497a7b6fdc27595a4b8a26f539ee28685563c9ba48e1040e6e1809b4e0",
+  "source_review": "remaining7e625af1 plusmeasurementquiet fairnessPASS",
+  "decision": "STOP singlefirstscreen mean worsened+.006975ms; noformal/retry/productiongraph substitution",
+  "scope": "originalbyteidenticalFrameO2/HDR actualvalid1920x1080proc1152F1MP1PRED1inactiveAE0noneHistseed0resettruePDL0NET0overlap0, opt.graphfalse",
+  "roles": [
+    "EagerAuto2",
+    "ReplayOff0",
+    "ReplayOff0",
+    "EagerAuto2"
+  ],
+  "true_auto_each": {
+    "warm": 4,
+    "selected_frames": 160,
+    "ordinary_enqueues": 163,
+    "formula": "4+160\u22121",
+    "driver_validated": 1,
+    "caps": 1,
+    "create_ok": 1,
+    "record_ok": 163,
+    "accepted": 163,
+    "reject_mask": 0,
+    "destroy_ok": 1,
+    "drain": 1,
+    "graph": 0
+  },
+  "off_each": {
+    "graph_calls": 160,
+    "warm_ordinary": 4,
+    "CreateRecordAccepted": 0,
+    "kernels": 161,
+    "edges": 160
+  },
+  "raws": [
+    {
+      "slot": 0,
+      "edge": "o-first",
+      "bytes": 7464960,
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "slot": 0,
+      "edge": "o",
+      "bytes": 7464960,
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "slot": 1,
+      "edge": "o-first",
+      "bytes": 7464960,
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "slot": 1,
+      "edge": "o",
+      "bytes": 7464960,
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "slot": 2,
+      "edge": "o-first",
+      "bytes": 7464960,
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "slot": 2,
+      "edge": "o",
+      "bytes": 7464960,
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "slot": 3,
+      "edge": "o-first",
+      "bytes": 7464960,
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "slot": 3,
+      "edge": "o",
+      "bytes": 7464960,
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    }
+  ],
+  "all160_rows_each_finite_positive": true,
+  "cold_preserved": true,
+  "sampler": "all80steady/slot afterdiscard80, pooled160/rolelinearp99; nofilteredoutlier",
+  "limits": [
+    "Mean+.006975 smallerthanAmean drift+.0132125: doesnot prove universalgraph slowdown; insufficientproductgain andstopsacceptance",
+    "P99\u2212.0451 withcontroltaildrift+.08804 cannot aloneoverride mean gate",
+    "Oldoff/off graphgaincannotaddtoauto orsubtractfromoldMgap",
+    "PDL0conditionalproductpolicycomparison, notfullproductionPDL1 orMP3",
+    "NoReplayAuto/eventcapture, noinstall/default/userconfig/pkg/push"
+  ]
+}

@@ -1,0 +1,5 @@
+# Independent finalCOMGR main candidate review
+
+83565 artifacts /tmp/vit-av-trload-comgr-20261006 read-only audited. Independently parsed ELF64section/symbol tables andcomparedall78 STT_FUNC completebytes: onlyvit_attention_fused_640_bytein_bout differs; other77samebytes. OldwholeELF11a25ae3fea75f83763ab6d5729c4f426dabda11299d1be6092d142b810e27b8 equalsfresh60566production; new965f9348f3f689a4b63e33140a75e5649dbdff604e6a6a7edcae8e830847b36f. ActualnewTRinstructions at19c0c/19c18(secondoffset16),2TR and0scalaru8Vloads. NoEXECwrite/saveexec; uniformearlyreturn/keyloop structuralconditions preserved.
+
+Sourceifconstexpr640&&ByteInput&&ByteOut soleVload change, correctedworkitembuiltin; Q/K/P/den/AVoperands/WMMAproducer/store unchanged. CanonicalCOMGRemptyopts, notLLVMdiagnostic. Target68→62VGPR/12→10SGPR, LDS/private/spill0; allocationmaystill72 under24registergranularity, nooccupancygainclaimed. Unit32laneHWgold50448 separatelyestablishedfragmentbyte0diff, butwholeNNgold/performance still requiretheir actualgate. Reviewer ran noGPU andeditednocandidate source.

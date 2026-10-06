@@ -1,0 +1,21 @@
+{
+  "scope": "controlled original-CUBIN post-only, not game/API texture-format parity or video reproduction",
+  "width": 16,
+  "height": 16,
+  "texture_format": "self-created CUDA_ARRAY FLOAT4, linear clamp, normalized coordinates, half-exact texel values",
+  "packet_layout_source": "original NGX310.8 legal second Eval Reset0, valid1920x1080 observed; full-rect transforms adapted to16x16",
+  "cases": [
+    "closed-history",
+    "zero-motion",
+    "one-pixel-motion"
+  ],
+  "main_skip": "zero native views; head logit expected zero, sigmoid0.5",
+  "input_scale": 0.03125,
+  "rgb_mode": 1,
+  "history6float_offset": "0x74",
+  "motion6float_offset": "0x8c",
+  "motion_uv_scale_offsets": [
+    "0xa4",
+    "0xa8"
+  ]
+}

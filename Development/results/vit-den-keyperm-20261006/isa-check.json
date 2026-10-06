@@ -1,0 +1,28 @@
+{
+  "vit_attention_fused_400_bytein_bout": {
+    "C": 405,
+    "C2": 405,
+    "instructions_equal": true,
+    "VALU": [
+      251,
+      251
+    ],
+    "DS": [
+      4,
+      4
+    ]
+  },
+  "vit_attention_fused_640_bytein_bout": {
+    "C": 405,
+    "C2": 398,
+    "instructions_equal": false,
+    "VALU": [
+      251,
+      255
+    ],
+    "DS": [
+      4,
+      3
+    ]
+  }
+}

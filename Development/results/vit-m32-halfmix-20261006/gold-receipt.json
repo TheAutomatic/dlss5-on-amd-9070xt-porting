@@ -1,0 +1,25 @@
+{
+  "handle": 82714,
+  "exit": 0,
+  "lock_released": true,
+  "compiler": "LLVM23 primitive only; production old/new COMGR separately",
+  "fixtures": 3,
+  "bytes_each": 655360,
+  "byte_diff": [
+    0,
+    0,
+    0
+  ],
+  "nan_code_count": [
+    0,
+    0,
+    0
+  ],
+  "hashes": {
+    "/tmp/vit-m32-halfmix-20261006/gold.hip": "a093ae05e958a23d4452375fabe8ff6fac36d326d059ae98d9dccff5121fab0d",
+    "/tmp/vit-m32-halfmix-20261006/gold.exe": "1bc60ede90fe319886bdc2f06003364ddb14a4c7912809f6666e2663eb317650",
+    "/tmp/vit-m32-halfmix-20261006/gold-canonical.hsaco": "7b4c4eabeabe3379f49d6aa14f9ed7e09fcfc9d5b594a4998077fc292edcb942",
+    "/tmp/vit-m32-halfmix-20261006/new.hip": "9d1af229aad6eab2ca9056f7eb25778e39d6c0e1df5861286e780097ba639f15",
+    "/tmp/vit-m32-halfmix-20261006/old.hip": "bbbe7ce7713396a3d6204a37344159ef453aa60153034d2642783d33d65ebb4d"
+  }
+}

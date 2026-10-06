@@ -1,0 +1,17 @@
+{
+  "cubin_sha256": "feb368ff5279a7408b1e55554db6e468d7f114a24b18b2af8d7e6989a410c612",
+  "symbol": "cc_tinlayout_fused_post_block_swin_1h_32_fp8",
+  "source": "cuobjdump --dump-sass --function SYMBOL original cubin, CPU only",
+  "gate_head": "two HMMA.16816.F16 chunks, half logit -> f32 (c640)",
+  "sigmoid": "mul.ftz f32 -log2(e), MUFU.EX2, add.ftz1, MUFU.RCP",
+  "blend_scale": "optional f16 device scalar, finite handling+SAT at c5b0-c600; default1 if absent",
+  "gate_weight": "FFMA.FTZ.SAT(sigmoid, clamped_scale, +0) at cdf0",
+  "rgb_preblend": "SAT at c540-c560",
+  "blend_rgb": "FFMA(norm_history, reciprocal_weights, -currentRGB), then FFMA(gate, delta, currentRGB), cf40-cf90, no final SAT in this symbol",
+  "not_proven": [
+    "cross-vendor MUFU bit equality",
+    "post head HMMA parity on portable features",
+    "full temporal packet +70..a8 semantics and texture binding",
+    "game temporal quality/flicker improvement"
+  ]
+}

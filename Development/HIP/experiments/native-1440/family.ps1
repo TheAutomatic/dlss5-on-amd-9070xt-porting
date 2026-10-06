@@ -1,0 +1,8 @@
+$ErrorActionPreference='Stop';$root=$PSScriptRoot;$prev='D:\DLSSNR-Lab\hip-backend\free-res-20261002';$lock='D:\DLSSNR-Lab\gpu.lock'
+& 'D:\DLSSNR-Lab\game-check.ps1' Stellar Onimusha Magpie Forza Cyberpunk;if($LASTEXITCODE -ne 1){throw 'game active'}
+$f=[IO.File]::Open($lock,[IO.FileMode]::CreateNew,[IO.FileAccess]::Write,[IO.FileShare]::Read);$b=[Text.Encoding]::UTF8.GetBytes('native-1440-20261004');$f.Write($b,0,$b.Length);$f.Close()
+try{$prev='D:\DLSSNR-Lab\hip-backend\free-res-20261002';$base=@(Get-Content "$root\baseline-single-2560x1440\flags.txt"|?{$_ -notmatch '^DLSS5_MULTI_PASS'})
+$env:BENCH_W='2560';$env:BENCH_H='1440';Remove-Item Env:BENCH_RAW_OUTPUT -EA 0
+foreach($prefix in 'c32_wave1','c256_wave2','split_','vit_'){foreach($dup in 1,2,2,1){$idx=if($null -eq $idx){0}else{$idx+1};$d="$root\family-$prefix-$dup-$idx";New-Item -ItemType Directory -Force $d|Out-Null;[IO.File]::WriteAllLines("$d\flags.txt",$base+@('DLSS5_MULTI_PASS=1','DLSS5_MULTI_PASS_PREDICT=0','DLSS5_LAB_C2561440=1',"DLSS5_HIP_DUP_PREFIX=$prefix","DLSS5_HIP_DUP_COUNT=$dup"));$ErrorActionPreference='Continue';& "$root\ngx-timing.exe" "$root\assets" "$d\flags.txt" "$prev\in\in-2560x1440.f16" "$d\o" 72 0 "$root\flat" 0 1 1 0 > "$d\run.log" 2> "$d\stderr.log";$rc=$LASTEXITCODE;$ErrorActionPreference='Stop';if($rc){throw "family failed $prefix $rc"};$v=@(Import-Csv "$d\o.csv"|Select-Object -Skip 24|%{[double]$_.wall_ms});"FAMILY $prefix $dup avg=$((($v|Measure-Object -Average).Average))"}}
+}finally{if((Test-Path $lock) -and (Get-Content $lock -Raw).Trim() -eq 'native-1440-20261004'){Remove-Item $lock -Force}}
+'FAMILY_DONE'

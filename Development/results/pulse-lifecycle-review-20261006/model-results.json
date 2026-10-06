@@ -1,0 +1,164 @@
+{
+  "scope": "CPU proposed optional-pulse control model, not actual HIP implementation",
+  "cases": [
+    {
+      "failures": [],
+      "calls": [
+        "select_device",
+        "export",
+        "create0",
+        "create1",
+        "record0",
+        "record1",
+        "record0",
+        "record1",
+        "select_cleanup_device",
+        "drain",
+        "destroy_create0",
+        "destroy_create1"
+      ],
+      "retained_handles": [],
+      "old_work": 2
+    },
+    {
+      "failures": [
+        "export"
+      ],
+      "calls": [
+        "select_device",
+        "export"
+      ],
+      "retained_handles": [],
+      "old_work": 2
+    },
+    {
+      "failures": [
+        "create0"
+      ],
+      "calls": [
+        "select_device",
+        "export",
+        "create0"
+      ],
+      "retained_handles": [],
+      "old_work": 2
+    },
+    {
+      "failures": [
+        "create1"
+      ],
+      "calls": [
+        "select_device",
+        "export",
+        "create0",
+        "create1",
+        "select_cleanup_device",
+        "destroy_create0"
+      ],
+      "retained_handles": [],
+      "old_work": 2
+    },
+    {
+      "failures": [
+        "record0"
+      ],
+      "calls": [
+        "select_device",
+        "export",
+        "create0",
+        "create1",
+        "record0",
+        "select_cleanup_device",
+        "destroy_create0",
+        "destroy_create1"
+      ],
+      "retained_handles": [],
+      "old_work": 2
+    },
+    {
+      "failures": [
+        "record1"
+      ],
+      "calls": [
+        "select_device",
+        "export",
+        "create0",
+        "create1",
+        "record0",
+        "record1",
+        "select_cleanup_device",
+        "drain",
+        "destroy_create0",
+        "destroy_create1"
+      ],
+      "retained_handles": [],
+      "old_work": 2
+    },
+    {
+      "failures": [
+        "drain"
+      ],
+      "calls": [
+        "select_device",
+        "export",
+        "create0",
+        "create1",
+        "record0",
+        "record1",
+        "record0",
+        "record1",
+        "select_cleanup_device",
+        "drain"
+      ],
+      "retained_handles": [
+        "create0",
+        "create1"
+      ],
+      "old_work": 2
+    },
+    {
+      "failures": [
+        "select_cleanup_device"
+      ],
+      "calls": [
+        "select_device",
+        "export",
+        "create0",
+        "create1",
+        "record0",
+        "record1",
+        "record0",
+        "record1",
+        "select_cleanup_device"
+      ],
+      "retained_handles": [
+        "create0",
+        "create1"
+      ],
+      "old_work": 2
+    },
+    {
+      "failures": [
+        "destroy_create0"
+      ],
+      "calls": [
+        "select_device",
+        "export",
+        "create0",
+        "create1",
+        "record0",
+        "record1",
+        "record0",
+        "record1",
+        "select_cleanup_device",
+        "drain",
+        "destroy_create0",
+        "destroy_create1"
+      ],
+      "retained_handles": [
+        "create0"
+      ],
+      "old_work": 2
+    }
+  ]
+}

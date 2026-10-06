@@ -1,0 +1,12 @@
+[1/5] Building CXX object lib/Target/AMDGPU/CMakeFiles/LLVMAMDGPUCodeGen.dir/GCNCreateVOPD.cpp.o
+In file included from /home/lmxxf/work/llvm-project/llvm/lib/Target/AMDGPU/GCNSubtarget.h:22,
+                 from /home/lmxxf/work/llvm-project/llvm/lib/Target/AMDGPU/GCNCreateVOPD.cpp:21:
+/home/lmxxf/work/llvm-project/llvm/lib/Target/AMDGPU/SIInstrInfo.h: In member function ‘unsigned int llvm::SIInstrInfo::getOpSize(uint16_t, unsigned int) const’:
+/home/lmxxf/work/llvm-project/llvm/lib/Target/AMDGPU/SIInstrInfo.h:1230: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+ 1230 |     const MCOperandInfo &OpInfo = get(Opcode).operands()[OpNo];
+      |
+/home/lmxxf/work/llvm-project/llvm/lib/Target/AMDGPU/SIInstrInfo.h:1230: note: the temporary was destroyed at the end of the full expression ‘(&((const llvm::SIInstrInfo*)this)->llvm::SIInstrInfo::<anonymous>.llvm::AMDGPUGenInstrInfo::<anonymous>.llvm::TargetInstrInfo::<anonymous>.llvm::MCInstrInfo::get(((unsigned int)Opcode)))->llvm::MCInstrDesc::operands().llvm::ArrayRef<llvm::MCOperandInfo>::operator[](((size_t)OpNo))’
+[2/5] Linking CXX static library lib/libLLVMAMDGPUCodeGen.a
+[3/5] Linking CXX executable bin/llc
+[4/5] Linking CXX executable bin/clang-21
+[5/5] Creating executable symlink bin/clang

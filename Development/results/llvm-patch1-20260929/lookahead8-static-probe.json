@@ -1,0 +1,186 @@
+[
+  {
+    "module": "c32-wave1",
+    "kernel": "c32_wave1_chain",
+    "instructions4": 1033,
+    "instructions8": 1032,
+    "pairs4": 157,
+    "pairs8": 161
+  },
+  {
+    "module": "c32-wave1",
+    "kernel": "c32_wave1_mapped",
+    "instructions4": 1090,
+    "instructions8": 1090,
+    "pairs4": 168,
+    "pairs8": 171
+  },
+  {
+    "module": "c32-wave1",
+    "kernel": "c32_wave1_finish",
+    "instructions4": 2509,
+    "instructions8": 2509,
+    "pairs4": 178,
+    "pairs8": 181
+  },
+  {
+    "module": "c32-wave1",
+    "kernel": "c32_wave1_finish_dcrop",
+    "instructions4": 2003,
+    "instructions8": 2003,
+    "pairs4": 169,
+    "pairs8": 172
+  },
+  {
+    "module": "c32-wave1",
+    "kernel": "c32_wave1_post",
+    "instructions4": 1609,
+    "instructions8": 1606,
+    "pairs4": 227,
+    "pairs8": 230
+  },
+  {
+    "module": "c32-wave1",
+    "kernel": "c32_wave1_prefix",
+    "instructions4": 1968,
+    "instructions8": 1967,
+    "pairs4": 186,
+    "pairs8": 188
+  },
+  {
+    "module": "c32-wave1",
+    "kernel": "c32_wave1_up",
+    "instructions4": 1829,
+    "instructions8": 1826,
+    "pairs4": 189,
+    "pairs8": 192
+  },
+  {
+    "module": "c64-wave2",
+    "kernel": "c64_wave2",
+    "instructions4": 3986,
+    "instructions8": 3989,
+    "pairs4": 310,
+    "pairs8": 311
+  },
+  {
+    "module": "c64-wave2",
+    "kernel": "c64_wave2_bi",
+    "instructions4": 3834,
+    "instructions8": 3838,
+    "pairs4": 271,
+    "pairs8": 271
+  },
+  {
+    "module": "c64-wave2",
+    "kernel": "c64_wave2_bo",
+    "instructions4": 3281,
+    "instructions8": 3284,
+    "pairs4": 325,
+    "pairs8": 326
+  },
+  {
+    "module": "c64-wave2",
+    "kernel": "c64_wave2_bi_bo",
+    "instructions4": 3131,
+    "instructions8": 3135,
+    "pairs4": 283,
+    "pairs8": 283
+  },
+  {
+    "module": "c64-wave2",
+    "kernel": "c128_wave2",
+    "instructions4": 4651,
+    "instructions8": 4653,
+    "pairs4": 322,
+    "pairs8": 322
+  },
+  {
+    "module": "c64-wave2",
+    "kernel": "c128_wave2_bi",
+    "instructions4": 4503,
+    "instructions8": 4505,
+    "pairs4": 276,
+    "pairs8": 278
+  },
+  {
+    "module": "c64-wave2",
+    "kernel": "c128_wave2_bo",
+    "instructions4": 3950,
+    "instructions8": 3952,
+    "pairs4": 332,
+    "pairs8": 332
+  },
+  {
+    "module": "c64-wave2",
+    "kernel": "c128_wave2_bi_bo",
+    "instructions4": 3802,
+    "instructions8": 3804,
+    "pairs4": 286,
+    "pairs8": 288
+  },
+  {
+    "module": "c64-wave2",
+    "kernel": "c256_wave2",
+    "instructions4": 5192,
+    "instructions8": 5192,
+    "pairs4": 315,
+    "pairs8": 316
+  },
+  {
+    "module": "c64-wave2",
+    "kernel": "c256_wave2_bi",
+    "instructions4": 5022,
+    "instructions8": 5023,
+    "pairs4": 277,
+    "pairs8": 277
+  },
+  {
+    "module": "c64-wave2",
+    "kernel": "c256_wave2_bo",
+    "instructions4": 4500,
+    "instructions8": 4500,
+    "pairs4": 325,
+    "pairs8": 326
+  },
+  {
+    "module": "c64-wave2",
+    "kernel": "c256_wave2_bi_bo",
+    "instructions4": 4336,
+    "instructions8": 4337,
+    "pairs4": 265,
+    "pairs8": 266
+  },
+  {
+    "module": "c64-wave2",
+    "kernel": "c64_wave2_up",
+    "instructions4": 4046,
+    "instructions8": 4047,
+    "pairs4": 307,
+    "pairs8": 309
+  },
+  {
+    "module": "c64-wave2",
+    "kernel": "c128_wave2_up",
+    "instructions4": 4509,
+    "instructions8": 4511,
+    "pairs4": 298,
+    "pairs8": 299
+  },
+  {
+    "module": "c64-wave2",
+    "kernel": "c256_attn_wave",
+    "instructions4": 1632,
+    "instructions8": 1632,
+    "pairs4": 77,
+    "pairs8": 77
+  },
+  {
+    "module": "c64-wave2",
+    "kernel": "c256_attn_wave_bo",
+    "instructions4": 1351,
+    "instructions8": 1351,
+    "pairs4": 87,
+    "pairs8": 87
+  }
+]

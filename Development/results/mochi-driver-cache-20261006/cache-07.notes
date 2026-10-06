@@ -1,0 +1,100 @@
+Displaying notes found in: .note
+  Owner                Data size 	Description
+  AMD                  0x00000017	NT_AMD_HSA_ISA_NAME (AMD HSA ISA Name)
+    AMD HSA ISA Name:
+        amdgcn--amdpal--gfx1201
+  AMDGPU               0x0000039f	NT_AMDGPU_METADATA (AMDGPU Metadata)
+    AMDGPU Metadata:
+        ---
+amdpal.pipelines:
+  - .api:            Vulkan
+    .compute_registers:
+      .tg_size_en:     true
+      .tgid_x_en:      true
+      .tgid_y_en:      true
+      .tgid_z_en:      true
+      .tidig_comp_cnt: 0
+      .x_interleave:   0
+      .y_interleave:   0
+    .hardware_stages:
+      .cs:
+        .checksum_value: 2106998006
+        .debug_mode:     false
+        .entry_point_symbol: _amdgpu_cs_main
+        .excp_en:        0
+        .float_mode:     192
+        .forward_progress: true
+        .image_op:       false
+        .lds_size:       21504
+        .mem_ordered:    true
+        .scratch_en:     false
+        .scratch_memory_size: 0
+        .sgpr_count:     22
+        .sgpr_limit:     106
+        .threadgroup_dimensions:
+          - 128
+          - 1
+          - 1
+        .trap_present:   false
+        .user_data_reg_map:
+          - 268435456
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 4294967295
+          - 4294967295
+          - 4294967295
+          - 4294967295
+          - 4294967295
+          - 4294967295
+          - 4294967295
+          - 4294967295
+          - 4294967295
+          - 4294967295
+          - 4294967295
+          - 4294967295
+          - 4294967295
+          - 4294967295
+          - 4294967295
+          - 4294967295
+          - 4294967295
+          - 4294967295
+          - 4294967295
+          - 4294967295
+          - 4294967295
+          - 4294967295
+          - 4294967295
+        .user_sgprs:     9
+        .vgpr_count:     118
+        .vgpr_limit:     256
+        .wavefront_size: 32
+        .wg_round_robin: false
+        .wgp_mode:       false
+    .internal_pipeline_hash:
+      - 11051737915158814600
+      - 11990052640392201573
+    .shaders:
+      .compute:
+        .api_shader_hash:
+          - 15856910628062706987
+          - 9180987840265943586
+        .hardware_mapping:
+          - .cs
+    .spill_threshold: 65535
+    .type:           Cs
+    .user_data_limit: 9
+    .xgl_cache_info:
+      .128_bit_cache_hash:
+        - 14843238805800333968
+        - 2049423253700721050
+      .llpc_version:   !str '83.0'
+amdpal.version:
+  - 3
+  - 6
+...
+

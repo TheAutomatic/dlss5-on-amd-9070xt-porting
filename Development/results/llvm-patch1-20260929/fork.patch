@@ -1,0 +1,342 @@
+commit 269832faf25b4fe740a98de4e861101e3ab57707
+Author:     lmxxf <lmxxf@hotmail.com>
+AuthorDate: Tue Sep 29 14:47:58 2026 +0800
+Commit:     lmxxf <lmxxf@hotmail.com>
+CommitDate: Tue Sep 29 14:47:58 2026 +0800
+
+    AMDGPU: add opt-in gfx12 local VOPD lookahead experiment
+
+diff --git a/dlss5/README.md b/dlss5/README.md
+index 3ff89b6dce59..2f8c23984197 100644
+--- a/dlss5/README.md
++++ b/dlss5/README.md
+@@ -1,8 +1,8 @@
+ # DLSS5 / gfx12 compiler branch
+
+ This branch establishes an independently built AMDGPU compiler for the
+-DLSSNR-on-RDNA4 project. It currently contains **no compiler optimization
+-patches**.
++DLSSNR-on-RDNA4 project. The first experimental optimization is a default-off
++post-RA VOPD lookahead in `GCNCreateVOPD.cpp`.
+
+ ## Baseline
+
+@@ -36,9 +36,22 @@ results and per-kernel code/resource differences.
+
+ ## First patch policy
+
+-Initial candidates are documented, not implemented: provable min/max-to-med3
+-folds, range-constrained corrected reciprocals, exact cast round-trips,
+-restricted multiply-plus-zero contraction, VOPD pairing, and wait/MODE
+-dependency handling. No blanket fast-math or silent change to rounding,
+-non-finite values or signed zero is permitted. Each proposed patch needs a
+-small semantic counterexample suite and full network validation.
++`-mllvm -amdgpu-dlss5-vopd-lookahead=4` searches for independent nearby VOPD
++partners on gfx1200/gfx1201 wave32 only. Default `0` preserves the ordinary
++adjacent-only pass. The opt-in pass stops at memory, WMMA/MFMA, inline assembly,
++bundles and synchronization, checks physical register aliases and implicit
++dependencies, and clears obsolete kill flags. The original downstream passes
++recompute waits and hazards. Strict-FP functions retain the original behavior.
++
++Two MIR/FileCheck tests cover the enable/disable and target gates, dependencies,
++aliasing, kill flags, boundaries and search distance. Default-off rebuilding
++matches all 60 previous public21 module code/metadata sections. Enabled modules
++pass all 168 EXACT/AE golden frames, with identical adaptive decisions.
++
++The 2026-09-29 measurements did **not** meet the 0.5% whole-network gate against
++the deployed driver compiler: 900p improved 0.15–0.36%, 1080p regressed
++0.03–0.15%. It remains an experimental switch, not a production default.
++[Evidence and reproduction](https://github.com/lmxxf/dlss5-on-amd-9070xt-porting/tree/main/Development/results/llvm-patch1-20260929).
++
++No blanket fast-math or silent change to rounding, non-finite values or signed
++zero is permitted. Existing source-level arithmetic workarounds were not changed.
+diff --git a/llvm/lib/Target/AMDGPU/GCNCreateVOPD.cpp b/llvm/lib/Target/AMDGPU/GCNCreateVOPD.cpp
+index 27f40f1705bb..25dd0eb1cea7 100644
+--- a/llvm/lib/Target/AMDGPU/GCNCreateVOPD.cpp
++++ b/llvm/lib/Target/AMDGPU/GCNCreateVOPD.cpp
+@@ -29,12 +29,20 @@
+ #include "llvm/CodeGen/MachineOperand.h"
+ #include "llvm/CodeGen/MachinePassManager.h"
+ #include "llvm/Support/Debug.h"
++#include "llvm/Support/CommandLine.h"
+
+ #define DEBUG_TYPE "gcn-create-vopd"
+ STATISTIC(NumVOPDCreated, "Number of VOPD Insts Created.");
+
+ using namespace llvm;
+
++// Experimental local post-RA repair for the gfx12 inference pipeline. Keep the
++// generic compiler unchanged unless the module build explicitly opts in.
++static cl::opt<unsigned> DLSS5VOPDLookahead(
++    "amdgpu-dlss5-vopd-lookahead", cl::Hidden, cl::init(0),
++    cl::desc("Search up to N nearby instructions for independent gfx1200/1201 "
++             "VOPD partners (0 preserves the normal adjacent-only pass)"));
++
+ namespace {
+
+ class GCNCreateVOPD {
+@@ -54,6 +62,48 @@ private:
+ public:
+   const GCNSubtarget *ST = nullptr;
+
++  // Move a later VALU instruction earlier only over ordinary, independent
++  // register operations. Do not cross memory, matrix, MODE, EXEC changes,
++  // inline assembly, bundles, or synchronization. Register queries include
++  // implicit operands and physical subregister aliases.
++  bool isOrdinaryRegisterOp(const SIInstrInfo &SII,
++                            const MachineInstr &Crossed) const {
++    if (Crossed.isMetaInstruction() || Crossed.isInlineAsm() ||
++        Crossed.isBundle() || Crossed.isBundled() ||
++        Crossed.isTerminator() || Crossed.isCall() ||
++        Crossed.mayLoadOrStore() || Crossed.hasUnmodeledSideEffects() ||
++        SII.isWMMA(Crossed) || SII.isMFMA(Crossed) ||
++        (!SII.isSALU(Crossed) && !SII.isVALU(Crossed)))
++      return false;
++    StringRef Name = SII.getName(Crossed.getOpcode());
++    if (Name.starts_with("S_GETREG") || Name.starts_with("S_SETREG") ||
++        Name.starts_with("S_WAIT") || Name.starts_with("S_DELAY") ||
++        Name.starts_with("S_NOP") || Name.starts_with("S_BARRIER"))
++      return false;
++    bool HasDef = false;
++    for (const auto &Op : Crossed.operands())
++      HasDef |= Op.isReg() && Op.isDef() && Op.getReg();
++    return HasDef;
++  }
++
++  bool canCross(const SIInstrInfo &SII, const MachineInstr &Moving,
++                const MachineInstr &Crossed) const {
++    if (!isOrdinaryRegisterOp(SII, Crossed))
++      return false;
++
++    const TargetRegisterInfo *TRI = ST->getRegisterInfo();
++    for (const auto &Op : Moving.operands()) {
++      if (!Op.isReg() || !Op.getReg())
++        continue;
++      if (Op.isUse() && Crossed.modifiesRegister(Op.getReg(), TRI))
++        return false; // RAW, including implicit EXEC/MODE.
++      if (Op.isDef() && (Crossed.readsRegister(Op.getReg(), TRI) ||
++                         Crossed.modifiesRegister(Op.getReg(), TRI)))
++        return false; // WAR or WAW.
++    }
++    return true;
++  }
++
+   bool doReplace(const SIInstrInfo *SII, VOPDCombineInfo &CI) {
+     auto *FirstMI = CI.FirstMI;
+     auto *SecondMI = CI.SecondMI;
+@@ -137,6 +187,11 @@ public:
+     bool Changed = false;
+     unsigned EncodingFamily = AMDGPU::getVOPDEncodingFamily(*ST);
+     bool HasVOPD3 = ST->hasVOPD3();
++    const unsigned Lookahead =
++        (ST->getCPU() == "gfx1200" || ST->getCPU() == "gfx1201") &&
++                !MF.getFunction().hasFnAttribute(Attribute::StrictFP)
++            ? DLSS5VOPDLookahead.getValue()
++            : 0;
+
+     SmallVector<VOPDCombineInfo> ReplaceCandidates;
+
+@@ -172,7 +227,41 @@ public:
+                                                VOPD3);
+         };
+
+-        if (checkVOPD(false) || (HasVOPD3 && checkVOPD(true))) {
++        bool CanCombine = checkVOPD(false) || (HasVOPD3 && checkVOPD(true));
++        if (!CanCombine && Lookahead && !FirstMI->isBundled()) {
++          auto Candidate = std::next(MII);
++          for (unsigned Distance = 2;
++               Candidate != E && Distance <= Lookahead;
++               ++Candidate, ++Distance) {
++            auto *Later = &*Candidate;
++            // A barrier also bounds the search, rather than merely rejecting
++            // that particular possible partner.
++            if (!isOrdinaryRegisterOp(*SII, *std::prev(Candidate)))
++              break;
++            if (Later->isDebugInstr() || Later->isBundled())
++              break;
++            SecondMI = Later;
++            Opc2 = SecondMI->getOpcode();
++            if (!(checkVOPD(false) || (HasVOPD3 && checkVOPD(true))))
++              continue;
++            bool Independent = true;
++            for (auto I = MII; I != Candidate; ++I)
++              Independent &= canCross(*SII, *SecondMI, *I);
++            if (!Independent)
++              continue;
++
++            // The old kill markers describe the old order. Missing kills are
++            // safe here; retaining a moved last-use marker would be wrong.
++            for (auto &Op : SecondMI->operands())
++              if (Op.isReg() && Op.isUse())
++                Op.setIsKill(false);
++            MBB.splice(MII, &MBB, Candidate);
++            MII = SecondMI->getIterator();
++            CanCombine = true;
++            break;
++          }
++        }
++        if (CanCombine) {
+           ReplaceCandidates.push_back(CI);
+           ++MII;
+         }
+diff --git a/llvm/test/CodeGen/AMDGPU/dlss5-vopd-boundaries.mir b/llvm/test/CodeGen/AMDGPU/dlss5-vopd-boundaries.mir
+new file mode 100644
+index 000000000000..f689edb3e43a
+--- /dev/null
++++ b/llvm/test/CodeGen/AMDGPU/dlss5-vopd-boundaries.mir
+@@ -0,0 +1,49 @@
++# RUN: llc -mtriple=amdgcn -mcpu=gfx1201 -verify-machineinstrs -run-pass=gcn-create-vopd -amdgpu-dlss5-vopd-lookahead=4 %s -o - | FileCheck %s --check-prefix=FOUR
++# RUN: llc -mtriple=amdgcn -mcpu=gfx1201 -verify-machineinstrs -run-pass=gcn-create-vopd -amdgpu-dlss5-vopd-lookahead=2 %s -o - | FileCheck %s --check-prefix=TWO
++
++---
++name: mode_boundary
++tracksRegLiveness: true
++body: |
++  bb.0:
++    ; FOUR-LABEL: name: mode_boundary
++    ; FOUR: $vgpr0 = V_MOV_B32_e32 1, implicit $exec
++    ; FOUR-NEXT: S_SETREG_IMM32_B32 0, 1, implicit-def $mode, implicit $mode
++    ; FOUR-NEXT: $vgpr1 = V_MOV_B32_e32 2, implicit $exec
++    $vgpr0 = V_MOV_B32_e32 1, implicit $exec
++    S_SETREG_IMM32_B32 0, 1, implicit-def $mode, implicit $mode
++    $vgpr1 = V_MOV_B32_e32 2, implicit $exec
++...
++---
++name: memory_boundary
++tracksRegLiveness: true
++body: |
++  bb.0:
++    liveins: $sgpr4_sgpr5
++    ; FOUR-LABEL: name: memory_boundary
++    ; FOUR: $vgpr0 = V_MOV_B32_e32 1, implicit $exec
++    ; FOUR-NEXT: $sgpr0 = S_LOAD_DWORD_IMM $sgpr4_sgpr5, 0, 0
++    ; FOUR-NEXT: $vgpr1 = V_MOV_B32_e32 2, implicit $exec
++    $vgpr0 = V_MOV_B32_e32 1, implicit $exec
++    $sgpr0 = S_LOAD_DWORD_IMM $sgpr4_sgpr5, 0, 0 :: (load (s32), addrspace 4)
++    $vgpr1 = V_MOV_B32_e32 2, implicit $exec
++...
++---
++name: bounded_window
++tracksRegLiveness: true
++body: |
++  bb.0:
++    ; FOUR-LABEL: name: bounded_window
++    ; FOUR: $vgpr0, $vgpr1 = V_DUAL_MOV_B32_e32_X_MOV_B32_e32_gfx12 1, 2,
++    ; FOUR-NEXT: $sgpr0 = S_MOV_B32 7
++    ; FOUR-NEXT: $sgpr1 = S_MOV_B32 8
++    ; TWO-LABEL: name: bounded_window
++    ; TWO: $vgpr0 = V_MOV_B32_e32 1, implicit $exec
++    ; TWO-NEXT: $sgpr0 = S_MOV_B32 7
++    ; TWO-NEXT: $sgpr1 = S_MOV_B32 8
++    ; TWO-NEXT: $vgpr1 = V_MOV_B32_e32 2, implicit $exec
++    $vgpr0 = V_MOV_B32_e32 1, implicit $exec
++    $sgpr0 = S_MOV_B32 7
++    $sgpr1 = S_MOV_B32 8
++    $vgpr1 = V_MOV_B32_e32 2, implicit $exec
++...
+diff --git a/llvm/test/CodeGen/AMDGPU/dlss5-vopd-lookahead.mir b/llvm/test/CodeGen/AMDGPU/dlss5-vopd-lookahead.mir
+new file mode 100644
+index 000000000000..8ce3ecb9262d
+--- /dev/null
++++ b/llvm/test/CodeGen/AMDGPU/dlss5-vopd-lookahead.mir
+@@ -0,0 +1,100 @@
++# RUN: llc -mtriple=amdgcn -mcpu=gfx1201 -verify-machineinstrs -run-pass=gcn-create-vopd %s -o - | FileCheck %s --check-prefix=OFF
++# RUN: llc -mtriple=amdgcn -mcpu=gfx1201 -verify-machineinstrs -run-pass=gcn-create-vopd -amdgpu-dlss5-vopd-lookahead=4 %s -o - | FileCheck %s --check-prefix=ON
++# RUN: llc -mtriple=amdgcn -mcpu=gfx1100 -verify-machineinstrs -run-pass=gcn-create-vopd -amdgpu-dlss5-vopd-lookahead=4 %s -o - | FileCheck %s --check-prefix=OFF
++
++---
++name: independent_salu
++tracksRegLiveness: true
++body: |
++  bb.0:
++    ; OFF-LABEL: name: independent_salu
++    ; OFF: $vgpr0 = V_MOV_B32_e32 1, implicit $exec
++    ; OFF-NEXT: $sgpr0 = S_MOV_B32 7
++    ; OFF-NEXT: $vgpr1 = V_MOV_B32_e32 2, implicit $exec
++    ; ON-LABEL: name: independent_salu
++    ; ON: $vgpr0, $vgpr1 = V_DUAL_MOV_B32_e32_X_MOV_B32_e32_gfx12 1, 2,
++    ; ON-NEXT: $sgpr0 = S_MOV_B32 7
++    $vgpr0 = V_MOV_B32_e32 1, implicit $exec
++    $sgpr0 = S_MOV_B32 7
++    $vgpr1 = V_MOV_B32_e32 2, implicit $exec
++...
++---
++name: raw_sgpr
++tracksRegLiveness: true
++body: |
++  bb.0:
++    ; ON-LABEL: name: raw_sgpr
++    ; ON: $vgpr0 = V_MOV_B32_e32 1, implicit $exec
++    ; ON-NEXT: $sgpr0 = S_MOV_B32 7
++    ; ON-NEXT: $vgpr1 = V_MOV_B32_e32 killed $sgpr0, implicit $exec
++    $vgpr0 = V_MOV_B32_e32 1, implicit $exec
++    $sgpr0 = S_MOV_B32 7
++    $vgpr1 = V_MOV_B32_e32 killed $sgpr0, implicit $exec
++...
++---
++name: war_vgpr
++tracksRegLiveness: true
++body: |
++  bb.0:
++    liveins: $vgpr1
++    ; ON-LABEL: name: war_vgpr
++    ; ON: $vgpr0 = V_MOV_B32_e32 1, implicit $exec
++    ; ON-NEXT: $sgpr0 = V_READFIRSTLANE_B32 $vgpr1, implicit $exec
++    ; ON-NEXT: $vgpr1 = V_MOV_B32_e32 2, implicit $exec
++    $vgpr0 = V_MOV_B32_e32 1, implicit $exec
++    $sgpr0 = V_READFIRSTLANE_B32 $vgpr1, implicit $exec
++    $vgpr1 = V_MOV_B32_e32 2, implicit $exec
++...
++---
++name: waw_vgpr
++tracksRegLiveness: true
++body: |
++  bb.0:
++    liveins: $vgpr2
++    ; ON-LABEL: name: waw_vgpr
++    ; ON: $vgpr0 = V_MOV_B32_e32 1, implicit $exec
++    ; ON-NEXT: $vgpr1 = V_NOT_B32_e32 $vgpr2, implicit $exec
++    ; ON-NEXT: $vgpr1 = V_MOV_B32_e32 2, implicit $exec
++    $vgpr0 = V_MOV_B32_e32 1, implicit $exec
++    $vgpr1 = V_NOT_B32_e32 $vgpr2, implicit $exec
++    $vgpr1 = V_MOV_B32_e32 2, implicit $exec
++...
++---
++name: exec_alias
++tracksRegLiveness: true
++body: |
++  bb.0:
++    ; ON-LABEL: name: exec_alias
++    ; ON: $vgpr0 = V_MOV_B32_e32 1, implicit $exec
++    ; ON-NEXT: $exec_lo = S_MOV_B32 0
++    ; ON-NEXT: $vgpr1 = V_MOV_B32_e32 2, implicit $exec
++    $vgpr0 = V_MOV_B32_e32 1, implicit $exec
++    $exec_lo = S_MOV_B32 0
++    $vgpr1 = V_MOV_B32_e32 2, implicit $exec
++...
++---
++name: synchronization_boundary
++tracksRegLiveness: true
++body: |
++  bb.0:
++    ; ON-LABEL: name: synchronization_boundary
++    ; ON: $vgpr0 = V_MOV_B32_e32 1, implicit $exec
++    ; ON-NEXT: S_NOP 0
++    ; ON-NEXT: $vgpr1 = V_MOV_B32_e32 2, implicit $exec
++    $vgpr0 = V_MOV_B32_e32 1, implicit $exec
++    S_NOP 0
++    $vgpr1 = V_MOV_B32_e32 2, implicit $exec
++...
++---
++name: clear_moved_kill
++tracksRegLiveness: true
++body: |
++  bb.0:
++    liveins: $vgpr2
++    ; ON-LABEL: name: clear_moved_kill
++    ; ON: $vgpr0, $vgpr1 = V_DUAL_MOV_B32_e32_X_MOV_B32_e32_gfx12 1, $vgpr2,
++    ; ON-NEXT: $sgpr0 = V_READFIRSTLANE_B32 $vgpr2, implicit $exec
++    $vgpr0 = V_MOV_B32_e32 1, implicit $exec
++    $sgpr0 = V_READFIRSTLANE_B32 $vgpr2, implicit $exec
++    $vgpr1 = V_MOV_B32_e32 killed $vgpr2, implicit $exec
++...

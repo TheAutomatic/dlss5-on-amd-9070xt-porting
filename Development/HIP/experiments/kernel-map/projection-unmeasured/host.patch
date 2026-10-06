@@ -1,0 +1,12 @@
+--- a/Development/HIP/hip_reference_network.h
++++ b/Development/HIP/hip_reference_network.h
+@@ -0,0 +1,3 @@
++#ifndef C512_PROJECTION_M32_HOST
++#define C512_PROJECTION_M32_HOST 0
++#endif
+@@ -252,0 +256,5 @@
++#if C512_PROJECTION_M32_HOST
++  if(c512_m32_active&&module=="mh_fast"&&kernel=="mh_attention_project_frag_c512"){
++   module="c512_m32_mh";kernel="mh_attention_project_frag_c512_m32";groups=((count/512+31)/32)*8;threads=32;
++  }
++#endif

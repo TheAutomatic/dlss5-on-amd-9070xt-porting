@@ -1,0 +1,11 @@
+# Bounded fixed-address replay: source review
+
+Actual `/tmp/graph0-bounded-replay-20261006/benchmark.cpp` SHA57b4a1e7c263add73b5d5beeb746f4071323656bc9fb572981c9485e3221e660. Read-only reviewer; no edit/build/GPU. **Source pass for3fixed and1changed replay**, not performance/production support.
+
+CapturedNetwork is never Enqueue'd after recording; its pool/SPnodes/state/weights/module/inputoutput references stay fixed and live through graph/executable destruction. Three same-input replays each poison the sink, synchronize, launch, synchronize and compare allfiniteRGB to locked153ac. Host SP launch counters do not become GPU replaycounts; the four explicitlaunch calls are the bounded execution intent.
+
+Changed input modifies onlyR of valid1080rows in the typedRGBAf32 processingbuffer by a checkerboard±1/64, preserving otherchannels/alpha/padding. H2D updates the same existingGPUinputaddress after previousreplay synchronization. It is a syntheticworking-domain data update, not a new nativecodec/HDR/exposure/seed contract. Fixedseed0 and sameopt/model/module recipe remain.
+
+IndependentReferenceNetwork has its own pool/weights/plans/stream, reads the shared externallyownedinput, eagercomputes to a separatesink, synchronizes and copies finiteCPUgold. It is destroyed before changedgraphlaunch; the graph borrows none of those referenceallocations/functionhandles, but only the stillalive CapturedNetwork resources. Reference destructor does not free externalin/resetdevice/destroycontext, so sourceownership remains valid under the knownsame-device/TLS scope. No claim of general DLL/context or changing-module interoperability.
+
+Fourth replay poisons its own finalsink and must equal independentchangedreference bitwise/finite **and differ from initialoutput**, rejecting a no-effect/stale-image gate. No CapturedNetwork Enqueue supplies a substitute output. Normal cleanup drains, destroys exec/graph and clears handles before originalinput/output release; previously reviewed _Exit73 stops process if ownerdrain fails instead of continuing resource destruction. Only this boundedfresh-data/fixed-pointer sequence is approved at source level; actualhardware result is separately required, and no arbitrarySP rollover/error/seed/history/shape/time behavior is claimed.

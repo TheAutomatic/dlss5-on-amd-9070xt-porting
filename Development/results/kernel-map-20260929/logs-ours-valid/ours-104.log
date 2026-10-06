@@ -1,0 +1,13 @@
+START,ours-104,vit_attention_fused_640_bytein_bout
+BUFFER,ours-104,b1,invalid=0,nonzero=607270
+CHECK,ours-104,guards=0,invalid=0,nonzero=607270
+TIME,ours-104,0,73.500000
+TIME,ours-104,1,73.573753
+TIME,ours-104,2,70.462033
+TIME,ours-104,3,72.831720
+TIME,ours-104,4,71.876563
+TIME,ours-104,5,70.373438
+TIME,ours-104,6,71.838126
+BUFFER,ours-104,b1,invalid=0,nonzero=607270
+CHECK,ours-104,guards=0,invalid=0,nonzero=607270
+RESULT,ours-104,71.876563,128,7

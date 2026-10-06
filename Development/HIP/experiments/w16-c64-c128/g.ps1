@@ -1,0 +1,1 @@
+Select-String -Path D:\DLSSNR-Lab\hip-backend\w16-c64-c128-20260930\full-*.log -Pattern 'FULL_DONE','FAIL','SAME','DIFF','changed','Exception','W2_C','W2_UP' | ForEach-Object {$_.Filename+': '+$_.Line}

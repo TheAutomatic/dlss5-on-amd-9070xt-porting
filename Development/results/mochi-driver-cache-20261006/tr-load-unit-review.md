@@ -1,0 +1,5 @@
+# Independent tiny unit review
+
+Read-only experiments/vit-av-trload-20261006/probe.hip andgold.cpp align with1008285e contract. Head7/key16 fixture base1327328=(2*640+16)*1024+7*32. Read rr=(lane/8)*4+(lane&3),cc=lane bit2?8:0; desiredbyte V(key+lane/16*8+e,head7*32+c*16+lane%16). Base16aligned/stride1024/per-lane8aligned. Output32lanes×8u32=1024bytes, oldandnewwordindex/goldhoststride agree. Noaliasofinput/output andnofloatarithmetic inserted.
+
+Actualprobe-canonical ISA has2global_load_tr_b64 at1820 and191c(offset16), noEXECmodification orconditionalbranch before either. Launch32threads fullwave andbothconstantctiles execute uniformly. PayloadSHA72139f30a7250e4fd7a5e4112261ed46c5bf0790fae93fd1bc0365578c9fe2d4,1966080bytes recordedbycandidate. This is source/ISA contract review for onehead/key unit, nothardwarebyteproof orfullattentionintegrationreview. Nootherhead/key hardwarecoverage implied. Wholecandidateproducer/math/order cannot be accepted until itssoleVloadsource diff and necessarygold exist. NoGPU orconcurrentcandidate sourceedits performed byreviewer.

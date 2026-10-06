@@ -1,0 +1,31 @@
+seed=1 pattern=0
+input format=RGBA16_FLOAT W=2560 H=1440 invalid=0 min=0 max=1 luma=0.357899353 roi_luma=0.389746571
+adapter=AMD Radeon RX 9070 XT
+NET frame=0 gpu_ms=1156.195312
+GEOMETRY valid=2560x1440 processing=2560x1472 tokens=960
+frame=0 reset=1 wall_ms=1165.655 invalid=0 luma=0.3596833 roi=0.4035345 dark=1325 roi_dark=232 changed_first=0 maxabs_first=0
+NET frame=1 gpu_ms=16.813101
+frame=1 reset=0 wall_ms=19.907 invalid=0 luma=0.3608142 roi=0.4056405 dark=1530 roi_dark=344 changed_first=10967154 maxabs_first=0.9576111
+NET frame=2 gpu_ms=17.214800
+frame=2 reset=0 wall_ms=19.723 invalid=0 luma=0.3628988 roi=0.4085212 dark=1543 roi_dark=340 changed_first=11018133 maxabs_first=0.9702911
+NET frame=3 gpu_ms=16.599100
+frame=3 reset=0 wall_ms=19.166 invalid=0 luma=0.3641282 roi=0.4108252 dark=1567 roi_dark=342 changed_first=11027851 maxabs_first=0.9820175
+NET frame=4 gpu_ms=16.788500
+frame=4 reset=0 wall_ms=19.584 invalid=0 luma=0.3661452 roi=0.4140766 dark=1498 roi_dark=341 changed_first=11037284 maxabs_first=0.9838867
+NET frame=5 gpu_ms=17.715000
+frame=5 reset=0 wall_ms=20.649 invalid=0 luma=0.3678375 roi=0.4169797 dark=1417 roi_dark=321 changed_first=11040891 maxabs_first=0.9902344
+NET frame=6 gpu_ms=16.582899
+frame=6 reset=0 wall_ms=19.207 invalid=0 luma=0.3697837 roi=0.4201646 dark=1417 roi_dark=322 changed_first=11044068 maxabs_first=0.9995117
+NET frame=7 gpu_ms=16.832100
+frame=7 reset=0 wall_ms=19.322 invalid=0 luma=0.3671006 roi=0.418484 dark=1566 roi_dark=393 changed_first=11038651 maxabs_first=0.9887695
+NET frame=8 gpu_ms=16.618299
+frame=8 reset=0 wall_ms=19.816 invalid=0 luma=0.3656385 roi=0.4179939 dark=1653 roi_dark=402 changed_first=11034848 maxabs_first=0.9746094
+NET frame=9 gpu_ms=16.793301
+frame=9 reset=0 wall_ms=19.502 invalid=0 luma=0.3638626 roi=0.4173365 dark=1644 roi_dark=415 changed_first=11028881 maxabs_first=0.9995117
+NET frame=10 gpu_ms=16.608299
+frame=10 reset=0 wall_ms=19.202 invalid=0 luma=0.361893 roi=0.4160848 dark=1698 roi_dark=436 changed_first=11023970 maxabs_first=0.9677734
+NET frame=11 gpu_ms=17.001499
+frame=11 reset=0 wall_ms=19.515 invalid=0 luma=0.3601428 roi=0.414873 dark=1731 roi_dark=452 changed_first=11020909 maxabs_first=0.9995117
+RAW floats=11304960 invalid=0
+SP_STATS runs=0 fallback=0 rollover=0 jobs=0 disabled=0 errors=0
+RESULT frames=12 temporal=1 mean_wall_ms=115.104 invalid_total=0 restored_capture_every_frame=1 HDR_preserved=1

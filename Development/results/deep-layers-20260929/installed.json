@@ -1,0 +1,30 @@
+{
+    "backup":  "D:\\DLSSNR-Lab\\hip-backend\\deep-layers\\backups\\stellar-20260929-010247",
+    "files":  [
+                  {
+                      "source":  "dlss5-amd.addon64",
+                      "target":  "dlss5-amd.addon64",
+                      "sha":  "b5ab8c3a4d2059b0d55e7819931c11695a62b462598f63c521669420be6fbcba"
+                  },
+                  {
+                      "source":  "production\\gfx1200\\c512-m32-mh.hsaco",
+                      "target":  "DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1200\\c512-m32-mh.hsaco",
+                      "sha":  "ec9e8d92dc4ac6b171f0cc50b3c4b9daaa4925b95c37d5bb7865de2aa879d787"
+                  },
+                  {
+                      "source":  "production\\gfx1201\\c512-m32-mh.hsaco",
+                      "target":  "DLSS5-AMD\\native-game-tiled-assets\\HIP\\gfx1201\\c512-m32-mh.hsaco",
+                      "sha":  "4bb9b847649773a521cbeaaa3ab0b569aa485d94868560e2e25e923c6e8b943c"
+                  }
+              ],
+    "direct_io":  3,
+    "make_resident_every":  60,
+    "protected":  {
+                      "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-flags.txt":  "48E60891965B2E8DDB03D0C8B3652C2F5EB8E1944F65B5ED7D019214A7F2C214",
+                      "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\DLSS5-AMD\\native-game-tiled-assets\\native_game_rgb_input.hlsl":  "5BE59A4130E66E9F9F4D370843EF080E0783042D1F730B7A06C072421C92C2B6",
+                      "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\OptiScaler.ini":  "6630654CEFE238A8F4E0B509F5A0B47031C90B769C3087330331A9E3AECAA220",
+                      "C:\\Program Files (x86)\\Steam\\steamapps\\common\\StellarBlade\\SB\\Binaries\\Win64\\dxgi.dll":  "FBFB6676B829DAD7E020FB830586A16AA0EC6ADD78016DB48EF12E2AE1803231"
+                  },
+    "other_modules_unchanged":  58,
+    "release_published":  false
+}

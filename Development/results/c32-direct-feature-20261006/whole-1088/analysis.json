@@ -1,0 +1,148 @@
+{
+  "handle": 26429,
+  "exit": 0,
+  "lock_released": true,
+  "layout": "rowmajor[processing1088][width1920][RGB3],float32 Network post70 normalized output; first1080 valid rows,last8 processing padding",
+  "input": "commonalreadyencodedhalfexactsyntheticgradient/Style1seed0/full71MP1AE0historyoff",
+  "reference": "OLD variant, NOT originalNV; PSNR peak1 chosen normalized output domain",
+  "variant_repeat_bitdiff": {
+    "old": 0,
+    "new": 0
+  },
+  "validRGB": {
+    "samples": 6220800,
+    "finite": true,
+    "old_range": [
+      0.02679768204689026,
+      1.0
+    ],
+    "new_range": [
+      0.027499258518218994,
+      1.0
+    ],
+    "changed_float_bits": 6220744,
+    "changed_channel_fraction": 0.9999909979423869,
+    "changed_pixel_fraction": 1.0,
+    "MAE": 0.0020278407376520184,
+    "max_abs": 0.03351917862892151,
+    "RMSE": 0.0027719801028603963,
+    "PSNR_peak1_db": 51.14419782787813,
+    "absolute_error_quantiles": {
+      "0.5": 0.0015214085578918457,
+      "0.9": 0.004375159740447998,
+      "0.99": 0.008888662457466112,
+      "0.999": 0.01412186729908027,
+      "1": 0.03351917862892151
+    }
+  },
+  "paddingRGB": {
+    "samples": 46080,
+    "finite": true,
+    "old_range": [
+      0.15342652797698975,
+      0.9884902238845825
+    ],
+    "new_range": [
+      0.15652123093605042,
+      0.9884674549102783
+    ],
+    "changed_float_bits": 46080,
+    "changed_channel_fraction": 1.0,
+    "changed_pixel_fraction": 1.0,
+    "MAE": 0.0037384246391916854,
+    "max_abs": 0.02886107563972473,
+    "RMSE": 0.004927407110807309,
+    "PSNR_peak1_db": 46.14763108178848,
+    "absolute_error_quantiles": {
+      "0.5": 0.0029238462448120117,
+      "0.9": 0.007976546883583069,
+      "0.99": 0.01475263655185699,
+      "0.999": 0.021741417467594247,
+      "1": 0.02886107563972473
+    }
+  },
+  "channels": {
+    "R": {
+      "samples": 2073600,
+      "finite": true,
+      "old_range": [
+        0.02679768204689026,
+        1.0
+      ],
+      "new_range": [
+        0.027499258518218994,
+        1.0
+      ],
+      "changed_float_bits": 2073567,
+      "changed_channel_fraction": 0.9999840856481481,
+      "changed_pixel_fraction": 0.9999840856481481,
+      "MAE": 0.0022042923455017354,
+      "max_abs": 0.03351917862892151,
+      "RMSE": 0.003067373098678935,
+      "PSNR_peak1_db": 50.26466791143895,
+      "absolute_error_quantiles": {
+        "0.5": 0.0016222596168518066,
+        "0.9": 0.0047539472579956055,
+        "0.99": 0.01032507449388504,
+        "0.999": 0.01622820004820831,
+        "1": 0.03351917862892151
+      }
+    },
+    "G": {
+      "samples": 2073600,
+      "finite": true,
+      "old_range": [
+        0.029446005821228027,
+        0.9459490776062012
+      ],
+      "new_range": [
+        0.03432062268257141,
+        0.9432718753814697
+      ],
+      "changed_float_bits": 2073586,
+      "changed_channel_fraction": 0.9999932484567902,
+      "changed_pixel_fraction": 0.9999932484567902,
+      "MAE": 0.0019377953148400986,
+      "max_abs": 0.024684011936187744,
+      "RMSE": 0.0026392189945958233,
+      "PSNR_peak1_db": 51.57049143623162,
+      "absolute_error_quantiles": {
+        "0.5": 0.0014455318450927734,
+        "0.9": 0.004232466220855713,
+        "0.99": 0.008378506302833558,
+        "0.999": 0.012605118870735177,
+        "1": 0.024684011936187744
+      }
+    },
+    "B": {
+      "samples": 2073600,
+      "finite": true,
+      "old_range": [
+        0.3830767273902893,
+        0.5312456488609314
+      ],
+      "new_range": [
+        0.380479633808136,
+        0.5313616394996643
+      ],
+      "changed_float_bits": 2073591,
+      "changed_channel_fraction": 0.9999956597222223,
+      "changed_pixel_fraction": 0.9999956597222223,
+      "MAE": 0.0019414345526142208,
+      "max_abs": 0.02602440118789673,
+      "RMSE": 0.002584060069740489,
+      "PSNR_peak1_db": 51.75394789671556,
+      "absolute_error_quantiles": {
+        "0.5": 0.0015025734901428223,
+        "0.9": 0.004163563251495361,
+        "0.99": 0.007825793325901033,
+        "0.999": 0.011490780234336861,
+        "1": 0.02602440118789673
+      }
+    }
+  },
+  "raw_sha": {
+    "old": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1",
+    "new": "ea5ee6cb98f99ed2f66f24099928127c028656dba8784d7133a127ed35eb1f7c"
+  }
+}

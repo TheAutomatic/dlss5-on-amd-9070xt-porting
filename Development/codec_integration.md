@@ -19,11 +19,11 @@ All four debug views mask out the policy bits. C++ callers must use the boolean
 members rather than injecting flags into `NativeCodecDebugView`; invalid enums
 are rejected.
 
-R10G10B10A2_UNORM now has a full raw-buffer write-back path, with 10/10/10/2
-quantization, RGBA bit order and preserved two-bit alpha. `BufferFootprint()`
-returns the R10 format and 256-byte-aligned row pitch. The existing frame's
-`CopyTextureRegion` path therefore writes the result into an R10 target.
-The opt-in private FP16 output path remains available.
+R10G10B10A2_UNORM and TYPELESS retain upstream's format fallback. Neither
+is classified as a direct game-colour format. The addon converts both through
+`NativeFormatConvert` to private FP16; codec consumers use private FP16 output
+and retain `SourceView()` for typed source views. Disabling format fallback
+rejects both formats. This PR does not add direct packed R10 write-back.
 
 ## Run
 
@@ -33,7 +33,7 @@ From an MSVC x64 developer shell at the repository root:
 powershell -NoProfile -ExecutionPolicy Bypass -File Development/test_codec_integration.ps1 -Amd
 ```
 
-Omit `-Amd` for WARP only. Requires the pre-PR commit `54e14de5` locally to
+Omit `-Amd` for WARP only. Requires the upstream commit `297b032ac55f005d78568e684f30608651044f62` locally to
 compile the original shaders as an independent compatibility reference.
 No weights, HIP modules or game captures are required.
 
@@ -43,10 +43,9 @@ The test checks:
   pre-exposure and multiple ColorStrength values.
 - Legacy RGBA8/BGRA8 (Magpie-style), R11G11B10 and UNORM16 packed output.
 - Explicit pre-exposure and hue-safe opt-ins, and all four debug views with flags.
-- R10 texture write-back at 65×7 (padded row pitch) and 1920×1080, boundary values,
-  all alpha codes, source rebinding and private FP16 output.
+- Both R10 formats at 65x7 and 1920x1080, including boundary and alpha values:
+  identical private FP16 decode, equality with the addon's actual format-conversion
+  shader, and disabled-fallback rejection in a separate process.
 
-These are synthetic GPU tests, not Magpie or game visual validation. The earlier
-integration test of R10 input with FP16 output did not cover upstream R10
-write-back; this regression explicitly copies back into an R10 texture and reads
-its packed pixels.
+These are synthetic GPU tests, not Magpie or game visual validation. WARP passed
+on 2026-10-06; the D3D12 debug layer was unavailable on the test machine.

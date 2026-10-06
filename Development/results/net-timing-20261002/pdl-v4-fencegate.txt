@@ -1,0 +1,60 @@
+FULL E OK
+SAME-count E: 19
+E 1 900: avg 7.0953 -> 7.2326 (+0.1373 ms, +1.94%)  p99 7.2880 -> 7.5420
+E 1 1080: avg 9.8170 -> 9.9842 (+0.1673 ms, +1.70%)  p99 10.1170 -> 10.3000
+E 2 900: avg 7.1455 -> 7.2897 (+0.1442 ms, +2.02%)  p99 7.3770 -> 7.4840
+E 2 1080: avg 9.8724 -> 10.0156 (+0.1431 ms, +1.45%)  p99 10.1370 -> 10.2610
+E 3 900: avg 7.1378 -> 7.2934 (+0.1556 ms, +2.18%)  p99 7.3370 -> 7.4870
+E 3 1080: avg 9.9101 -> 10.0156 (+0.1055 ms, +1.06%)  p99 10.2540 -> 10.2990
+E 900 merged: avg 7.1262 -> 7.2719  p99 7.3500 -> 7.4960
+E 1080 merged: avg 9.8665 -> 10.0051  p99 10.1950 -> 10.2760
+old runtime 73D4C25C
+new runtime B3C54EA4
+RUNTIME 900 old=b2980ada643da964 new=b2980ada643da964 rt_timing=b2980ada643da964 exit=0 SAME
+round=0 size=1707x961 mean_ms=6.938 hash=b2980ada643da964 vram_mib=1394 status=lmxxf modules_ok=62 hip=1 net=1600x900 color_job=1707x961 weights=1 recreates=0 net_gpu_ms=off wave_owned=1/1 c512_m32=1/1 vit_proj_n64=1/1 p
+RUNTIME 1080 old=758674a8bbd0206d new=758674a8bbd0206d rt_timing=758674a8bbd0206d exit=3 MISMATCH
+round=0 size=1707x961 mean_ms=9.667 hash=758674a8bbd0206d vram_mib=1367 status=lmxxf modules_ok=62 hip=1 net=1920x1080 color_job=1707x961 weights=1 recreates=0 net_gpu_ms=off wave_owned=1/1 c512_m32=1/1 vit_proj_n64=1/1 
+TIMING 720 exit=0 abi: v1-size ok (GetTimings slot untouched) | abi: wrong size rejected | abi: full size ok, GetTimings argument checks ok | abi: before first frame valid=0 ok | net_timing size=1707x961 median_ms=4.750 min_ms=4.582 max_ms=4.991 n=300 | lag_mismatch=0 tiny_reads=0 pipe=0
+TIMING 900 exit=3 abi: v1-size ok (GetTimings slot untouched) | abi: wrong size rejected | abi: full size ok, GetTimings argument checks ok | abi: before first frame valid=0 ok | net_timing size=1707x961 median_ms=6.649 min_ms=6.404 max_ms=6.902 n=300 | lag_mismatch=1 tiny_reads=0 pipe=0
+TIMING 1080 exit=3 abi: v1-size ok (GetTimings slot untouched) | abi: wrong size rejected | abi: full size ok, GetTimings argument checks ok | abi: before first frame valid=0 ok | net_timing size=1707x961 median_ms=9.248 min_ms=0.009 max_ms=9.651 n=300 | lag_mismatch=39 tiny_reads=52 pipe=0
+RT_ABBA round=1 900 old=7.127 new=7.092 delta=-0.035
+RT_ABBA round=1 1080 old=9.897 new=9.893 delta=-0.004
+RT_ABBA round=2 900 old=7.089 new=7.095 delta=+0.006
+RT_ABBA round=2 1080 old=9.902 new=10.011 delta=+0.108
+RT_ABBA round=3 900 old=7.090 new=7.098 delta=+0.008
+RT_ABBA round=3 1080 old=9.903 new=9.915 delta=+0.012
+SMOKE exit=0
+HIP rc=0 error=
+SP_STATS runs=4 fallback=0 rollover=0 jobs=2496 disabled=0 errors=0
+lmxxf_nr_gpu: ok
+RT_DONE
+LOCK DROPPED
+GO_DONE
+GUARD_DONE
+SERIAL 720 short=0
+SERIAL 900 short=0
+SERIAL 1080 short=52
+RT hip-game-flags dll=bin\v4\LmxxfNrRuntime.dll pipe=1 fence=1 1080 exit=0 tiny_reads=0 pdl=pdl=1/0 n=990 med=9.253 min=9.069 lt1ms=0 lt70pct=0 lows= | span n=0 med=0.000 lt70pct=0
+ADDON hip-game-flags extra= fence=1 1080 exit=0 n=980 med=8.334 min=7.578 lt1ms=0 lt70pct=0 lows= | span n=0 med=0.000 lt70pct=0
+RT hip-magpie-flags dll=bin\v4\LmxxfNrRuntime.dll pipe=1 fence=1 1080 exit=0 tiny_reads=0 pdl=pdl=1/0 n=990 med=9.260 min=9.130 lt1ms=0 lt70pct=0 lows= | span n=0 med=0.000 lt70pct=0
+ADDON hip-magpie-flags extra= fence=1 1080 exit=0 n=976 med=9.497 min=0.046 lt1ms=1 lt70pct=1 lows=0.046 | span n=0 med=0.000 lt70pct=0
+RT hip-re9-flags dll=bin\v4\LmxxfNrRuntime.dll pipe=1 fence=1 1080 exit=0 tiny_reads=0 pdl=pdl=1/0 n=990 med=9.269 min=9.154 lt1ms=0 lt70pct=0 lows= | span n=0 med=0.000 lt70pct=0
+ADDON hip-re9-flags extra= fence=1 1080 exit=0 n=981 med=9.484 min=8.639 lt1ms=0 lt70pct=0 lows= | span n=0 med=0.000 lt70pct=0
+PDL_DONE
+LOCK DROPPED
+RT hip-game-flags dll=bin\v4\LmxxfNrRuntime.dll pipe=1 fence=1 720 exit=0 tiny_reads=0 pdl=pdl=1/1 n=990 med=4.605 min=4.228 lt1ms=0 lt70pct=0 lows= | span n=0 med=0.000 lt70pct=0
+ADDON hip-game-flags extra= fence=1 720 exit=0 n=982 med=4.337 min=3.647 lt1ms=0 lt70pct=0 lows= | span n=0 med=0.000 lt70pct=0
+RT hip-magpie-flags dll=bin\v4\LmxxfNrRuntime.dll pipe=1 fence=1 720 exit=0 tiny_reads=0 pdl=pdl=1/1 n=990 med=4.627 min=3.911 lt1ms=0 lt70pct=0 lows= | span n=0 med=0.000 lt70pct=0
+ADDON hip-magpie-flags extra= fence=1 720 exit=0 n=980 med=4.846 min=3.645 lt1ms=0 lt70pct=0 lows= | span n=0 med=0.000 lt70pct=0
+RT hip-re9-flags dll=bin\v4\LmxxfNrRuntime.dll pipe=1 fence=1 720 exit=0 tiny_reads=0 pdl=pdl=1/1 n=990 med=4.648 min=3.945 lt1ms=0 lt70pct=0 lows= | span n=0 med=0.000 lt70pct=0
+ADDON hip-re9-flags extra= fence=1 720 exit=0 n=981 med=4.862 min=3.807 lt1ms=0 lt70pct=0 lows= | span n=0 med=0.000 lt70pct=0
+PDL_DONE
+LOCK DROPPED
+RT hip-game-flags dll=bin\v4\LmxxfNrRuntime.dll pipe=1 fence=1 900 exit=0 tiny_reads=0 pdl=pdl=1/1 n=990 med=6.520 min=6.324 lt1ms=0 lt70pct=0 lows= | span n=0 med=0.000 lt70pct=0
+ADDON hip-game-flags extra= fence=1 900 exit=0 n=982 med=6.089 min=5.388 lt1ms=0 lt70pct=0 lows= | span n=0 med=0.000 lt70pct=0
+RT hip-magpie-flags dll=bin\v4\LmxxfNrRuntime.dll pipe=1 fence=1 900 exit=0 tiny_reads=0 pdl=pdl=1/1 n=990 med=6.523 min=6.372 lt1ms=0 lt70pct=0 lows= | span n=0 med=0.000 lt70pct=0
+ADDON hip-magpie-flags extra= fence=1 900 exit=0 n=983 med=6.835 min=4.463 lt1ms=0 lt70pct=1 lows=4.463 | span n=0 med=0.000 lt70pct=0
+RT hip-re9-flags dll=bin\v4\LmxxfNrRuntime.dll pipe=1 fence=1 900 exit=0 tiny_reads=0 pdl=pdl=1/1 n=990 med=6.525 min=6.350 lt1ms=0 lt70pct=0 lows= | span n=0 med=0.000 lt70pct=0
+ADDON hip-re9-flags extra= fence=1 900 exit=0 n=980 med=6.795 min=6.207 lt1ms=0 lt70pct=0 lows= | span n=0 med=0.000 lt70pct=0
+PDL_DONE
+LOCK DROPPED

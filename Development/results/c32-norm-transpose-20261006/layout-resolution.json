@@ -1,0 +1,27 @@
+{
+  "raw_independent_exactdot_diff": 0,
+  "square_integer_units_denominator": 1024,
+  "row_sum_integer_units": [
+    307,
+    295,
+    421,
+    307,
+    295,
+    421,
+    307,
+    295,
+    421,
+    307,
+    295,
+    421,
+    307,
+    295,
+    421,
+    307
+  ],
+  "sum_exact_diff": 0,
+  "same_lane_all8_C_elements_sum_identical": true,
+  "correct_A_C_layout": "token=lane%16, feature=ci*16+(lane/16)*8+element",
+  "previous_trace_axes": "token=(lane/16)*8+element, feature=ci*16+lane%16; wrong, undo each16tiletranspose",
+  "scope": "immutable captured signedfinitefixture, exact multiples1/1024; not allinputhardwaregold nor orderingproof for unequal wideexponent inputs"
+}

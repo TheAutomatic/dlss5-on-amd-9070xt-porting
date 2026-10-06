@@ -1,0 +1,72 @@
+{
+  "standard_candidate_frames": 1512,
+  "standard_adaptive_decisions": 756,
+  "extra_stress_candidate_frames": 120,
+  "total_candidate_frames": 1632,
+  "all_frame_hash_rows": 3264,
+  "wrap_traces": [
+    {
+      "set": "S",
+      "batch": "wrap",
+      "case": "900-history-True",
+      "trace": "TCHAIN c512=156 vit=0 wraps=18"
+    },
+    {
+      "set": "S",
+      "batch": "wrap",
+      "case": "1080-history-True",
+      "trace": "TCHAIN c512=156 vit=0 wraps=19"
+    },
+    {
+      "set": "S",
+      "batch": "wrapae",
+      "case": "900-static-True",
+      "trace": "TCHAIN c512=156 vit=0 wraps=18"
+    },
+    {
+      "set": "S",
+      "batch": "wrapae",
+      "case": "1080-static-True",
+      "trace": "TCHAIN c512=156 vit=0 wraps=19"
+    },
+    {
+      "set": "V",
+      "batch": "wrap",
+      "case": "900-history-True",
+      "trace": "TCHAIN c512=0 vit=96 wraps=23"
+    },
+    {
+      "set": "V",
+      "batch": "wrap",
+      "case": "1080-history-True",
+      "trace": "TCHAIN c512=0 vit=96 wraps=23"
+    },
+    {
+      "set": "F",
+      "batch": "wrap",
+      "case": "900-history-True",
+      "trace": "TCHAIN c512=0 vit=96 wraps=23"
+    },
+    {
+      "set": "F",
+      "batch": "wrap",
+      "case": "1080-history-True",
+      "trace": "TCHAIN c512=0 vit=96 wraps=23"
+    },
+    {
+      "set": "F",
+      "batch": "wrapae",
+      "case": "900-static-True",
+      "trace": "TCHAIN c512=0 vit=96 wraps=23"
+    },
+    {
+      "set": "F",
+      "batch": "wrapae",
+      "case": "1080-static-True",
+      "trace": "TCHAIN c512=0 vit=96 wraps=23"
+    }
+  ],
+  "group4_replaced_per_frame": 13,
+  "installed_modules_checked": 60,
+  "installed_modules_unchanged": true
+}

@@ -7,6 +7,7 @@
 #include "LmxxfProductionOptions.h"
 #include "native_device_identity.h"
 #include "native_game_codec.h"
+#include "runtime_strength_config.h"
 #include "native_lab_paths.h"
 #include "native_game_rgb_input.h"
 #include "native_network_geometry.h"
@@ -15,6 +16,7 @@
 
 #include <atomic>
 #include <mutex>
+#include <cstddef>
 #include <cstdio>
 #include <cstring>
 #include <cstdlib>
@@ -265,14 +267,15 @@ struct Job
     ID3D12Resource *sourceExposure = nullptr;
     D3D12_RESOURCE_STATES sourceExposureState = D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE;
     bool codec_passthrough = false;
+    uint64_t frame_id = 0; /* LmxxfNrFrameInfo::frame_id; tags the network timing of this frame */
 };
 
 /* 2026-09-26: the RE9 package used to read only DLSS5_FIT_LARGE from native-game-flags.txt, so users could not
    switch the optimised kernels (TheAutomatic/ouco report). Now the network/kernel lines (DLSS5_HIP_*, DLSS5_SKIP_BLOCKS,
-   DLSS5_FIT_LARGE, DLSS5_NETWORK_HEIGHT) are put into the process environment once (a key already present in the
+   DLSS5_FIT_LARGE, DLSS5_NETWORK_HEIGHT, DLSS5_NETWORK_1080_ROWS, since 2026-10-01 DLSS5_STYLE, since 2026-10-02 DLSS5_NETWORK_FREE_RES and DLSS5_DIRECT_IO, since 2026-10-03 DLSS5_FAST_NUMERIC, DLSS5_MULTI_PASS and DLSS5_FRAME_STATS, then DLSS5_MULTI_PASS_SKIP_BLOCKS and DLSS5_MULTI_PASS_PREDICT; the MULTI_PASS hotkey is add-on only, this runtime has no hot reload) are put into the process environment once (a key already present in the
    environment wins), as the regular add-on does before creating its network; LmxxfProductionOptions then applies the
-   same DLSS5_HIP_* parser. The file is searched next to the DLL
-   (DLSS5-AMD\native-game-flags.txt) and upwards from the assets directory. */
+   same DLSS5_HIP_* parser. Since 2026-10-03 the three config layers (default-config.txt -> custom-config.txt -> native-game-flags.txt,
+   native_config_layers.h) are merged; the folder is searched next to the DLL (DLSS5-AMD\) and upwards from the assets directory. */
 std::string &FlagsInfo()
 {
     static std::string info = "flags: none";
@@ -282,48 +285,47 @@ void LoadFlagsFileOnce(const std::wstring &assets)
 {
     static std::once_flag once;
     std::call_once(once, [&] {
-        std::vector<std::wstring> candidates{JoinPath(DllDirectory(), L"DLSS5-AMD\\native-game-flags.txt")};
+        // The config folder: DLSS5-AMD next to the DLL, else the assets directory and up to four parents; the first folder
+        // that holds any of the three layers (default-config.txt, custom-config.txt, native-game-flags.txt) is used.
+        std::vector<std::wstring> candidates{JoinPath(DllDirectory(), L"DLSS5-AMD")};
         std::wstring dir = assets;
         for (int up = 0; up < 4 && !dir.empty(); ++up)
         {
-            candidates.push_back(JoinPath(dir, L"native-game-flags.txt"));
+            candidates.push_back(dir);
             const size_t cut = dir.find_last_of(L"\\/");
             if (cut == std::wstring::npos)
                 break;
             dir = dir.substr(0, cut);
         }
-        for (const auto &path : candidates)
+        const NativeConfig &env = NativeConfigSystemEnvironment();
+        for (const auto &folder : candidates)
         {
-            FILE *f = _wfopen(path.c_str(), L"rb");
-            if (!f)
+            if (!NativeConfigDirHasAny(folder))
                 continue;
-            unsigned applied = 0, kept = 0;
-            char line[512];
-            while (fgets(line, sizeof line, f))
+            unsigned applied = 0, kept = 0, layers = 0;
+            for (const auto &e : NativeConfigLoadDir(folder, &layers))
             {
-                size_t n = std::strlen(line);
-                while (n && (line[n - 1] == '\n' || line[n - 1] == '\r' || line[n - 1] == ' '))
-                    line[--n] = 0;
-                const char *eq = std::strchr(line, '=');
-                if (n < 8 || std::strncmp(line, "DLSS5_", 6) || !eq)
-                    continue;
-                const std::string key(line, size_t(eq - line));
-                // Only the network/kernel keys: codec, present and pre-upscale keys of the add-on templates
+                const std::string &key = e.key;
+                // Network/kernel keys plus explicit output strength: other codec, present and pre-upscale keys of the add-on templates
                 // (DLSS5_CODEC_SRGB, DLSS5_PRE_UPSCALE, ...) do not apply to this runtime and stay ignored.
                 const bool allowed = !key.compare(0, 10, "DLSS5_HIP_") || key == "DLSS5_SKIP_BLOCKS" ||
-                                     key == "DLSS5_FIT_LARGE" || key == "DLSS5_NETWORK_HEIGHT";
+                                     key == "DLSS5_FIT_LARGE" || key == "DLSS5_NETWORK_HEIGHT" ||
+                                     key == "DLSS5_NETWORK_1080_ROWS" || key == "DLSS5_STYLE" || key == "DLSS5_DIRECT_IO" ||
+                                     key == "DLSS5_NETWORK_FREE_RES" || key == "DLSS5_FAST_NUMERIC" ||
+                                     key == "DLSS5_MULTI_PASS" || key == "DLSS5_MULTI_PASS_SKIP_BLOCKS" || key == "DLSS5_MULTI_PASS_SKIN_PROTECT" || key == "DLSS5_MULTI_PASS_PREDICT" ||
+                                     key == "DLSS5_FRAME_STATS" || key == "DLSS5_STRENGTH";
                 if (!allowed)
                     continue;
-                if (std::getenv(key.c_str()))
+                if (NativeConfigFind(env, key))
                 {
                     ++kept;
                     continue;
                 }
-                if (!_putenv(line))
+                if (!_putenv((key + "=" + e.value).c_str()))
                     ++applied;
             }
-            std::fclose(f);
-            FlagsInfo() = "flags: " + Utf8(path) + " applied=" + std::to_string(applied) +
+            FlagsInfo() = "flags: " + Utf8(folder) + " layers=" + std::string(layers & 1 ? "D" : "-") +
+                          (layers & 2 ? "C" : "-") + (layers & 4 ? "N" : "-") + " applied=" + std::to_string(applied) +
                           " env_kept=" + std::to_string(kept);
             break;
         }
@@ -352,12 +354,15 @@ hip_reference::Options RuntimeOptions(unsigned w, unsigned h, const std::wstring
         return any || FileExists(JoinPath(modulesDir, f));
     };
     const unsigned requestedStream=opt.vit_stream;
+    const bool requestedSwin=opt.swin_run;
     const bool requestedWave = opt.wave_owned, requestedM32 = opt.c512_m32, requestedVit = opt.vit_proj_n64;
     std::string gates;
     if (opt.wave_owned && !(has(L"c32-wave1.hsaco") && has(L"c64-wave2.hsaco")))
         opt.wave_owned = false, gates += " wave_owned:nomodule";
     if (opt.c512_m32 && !(has(L"c512-m32-mh.hsaco") && has(L"c512-m32-deep.hsaco")))
         opt.c512_m32 = false, gates += " c512_m32:nomodule";
+    if(opt.swin_run && !has(L"swin-persistent.hsaco"))
+        opt.swin_run=false, gates += " swin_run:nomodule";
     if (opt.vit_stream && !has(L"vit-stream.hsaco"))
         opt.vit_stream=0, gates += " vit_stream:nomodule";
     if (opt.vit_proj_n64 && !has(L"vit-wide-deep.hsaco"))
@@ -365,13 +370,14 @@ hip_reference::Options RuntimeOptions(unsigned w, unsigned h, const std::wstring
     if (note)
     {
         char t[256];
+        std::snprintf(t,sizeof t," swin_run=%u/%u",unsigned(requestedSwin),unsigned(hip_reference::SwinRunCompatible(opt)));gates+=t;
         std::snprintf(t,sizeof t," vit_stream=%u/%u",requestedStream,hip_reference::VitStreamCompatible(opt)?opt.vit_stream:0);gates+=t;
         std::snprintf(t, sizeof t, "wave_owned=%u/%u c512_m32=%u/%u vit_proj_n64=%u/%u pdl=%u skip=%zu",
                       unsigned(requestedWave), unsigned(hip_reference::WaveOwnedCompatible(opt)),
                       unsigned(requestedM32), unsigned(hip_reference::C512M32Compatible(opt)),
                       unsigned(requestedVit), unsigned(hip_reference::VitProjN64Compatible(opt)),
                       unsigned(opt.pdl), opt.skip_blocks.size());
-        *note = t + gates;
+        *note = t + gates + " multi_pass=" + std::to_string(hip_reference::MultiPassFromEnvironment()) + " predict=" + std::to_string(unsigned(hip_reference::MultiPredictFromEnvironment())) + " skin=" + std::to_string(unsigned(hip_reference::MultiSkinFromEnvironment()));
     }
     return opt;
 }
@@ -416,6 +422,9 @@ struct Session
     UINT allocWidth = 0, allocHeight = 0;
     /* Count of codec+HIP teardowns triggered by geoChanged (exposure/valid/format/alloc). */
     uint32_t codecRecreates = 0;
+    /* Set by the first GetTimings call: network timing records hipEvents only from then on (always-on measured
+     * +0.01..+0.10 ms in the rt_bench ABBA, results/net-timing-20261002), and again after a HIP recreate. */
+    bool timingRequested = false;
     std::string optionsNote;
     unsigned loggedColorW=0, loggedColorH=0, loggedNetW=0, loggedNetH=0, loggedProcW=0, loggedProcH=0;
     unsigned builtProcW=0, builtProcH=0;
@@ -661,7 +670,7 @@ const char *ColorInputProblem(const D3D12_RESOURCE_DESC &desc)
 {
     if (desc.Dimension != D3D12_RESOURCE_DIMENSION_TEXTURE2D)
         return "not TEXTURE2D";
-    if (!NativeInputGeometry::Supported(desc.Width, desc.Height, NativeFitLargeInput()))
+    if (!NativeInputGeometry::Supported(desc.Width, desc.Height, NativeAdmitLargeInput()))
         return "outside admitted geometry";
     if (desc.DepthOrArraySize != 1)
         return "DepthOrArraySize != 1";
@@ -669,11 +678,26 @@ const char *ColorInputProblem(const D3D12_RESOURCE_DESC &desc)
         return "MipLevels != 1";
     if (desc.SampleDesc.Count != 1)
         return "SampleDesc.Count != 1";
-    if (!(NativeIsGameColor(desc.Format) || desc.Format == DXGI_FORMAT_R9G9B9E5_SHAREDEXP))
+    // RGB9E5 (always, since 0.28) and the 0.38 fallback table (native_format_fallback.h, DLSS5_FORMAT_FALLBACK)
+    // take the private FP16 output route; the encoder's typed SRV is the format conversion.
+    if (!(NativeIsGameColor(desc.Format) || desc.Format == DXGI_FORMAT_R9G9B9E5_SHAREDEXP ||
+          NativeFallbackColor(desc.Format) != DXGI_FORMAT_UNKNOWN))
         return "unsupported DXGI format";
     if (desc.Flags & D3D12_RESOURCE_FLAG_DENY_SHADER_RESOURCE)
         return "DENY_SHADER_RESOURCE";
     return nullptr;
+}
+
+/* DLSS5_DIRECT_IO bit 1 (2026-10-02, results/outside-net-20261002): the RGB input pass writes the network input straight into
+   the HIP bridge's shared buffer, so RecordInputs no longer copies 35 MB (1080) into it. Same switch and default (1) as the
+   add-on; 0 restores the copy. Network input bytes are unchanged. Read once (flags file or environment). */
+bool RuntimeDirectInput()
+{
+    static const bool on = [] {
+        const char *v = std::getenv("DLSS5_DIRECT_IO");
+        return v ? (std::strtoul(v, nullptr, 10) & 1u) != 0 : true;
+    }();
+    return on;
 }
 
 void RequireSession(Session *s)
@@ -936,24 +960,21 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
                 model_scale = info->model_scale;
             }
         }
-        if (!(info->flags & LMXXF_NR_FRAME_FLAG_STRENGTH))
-        {
-            if (const wchar_t *e = _wgetenv(L"DLSS5_STRENGTH"))
-            {
-                float a = 1.f, b = 1.f;
-                if (swscanf(e, L"%f,%f", &a, &b) == 2 && a >= 0.f && b >= 0.f)
-                {
-                    transfer_strength = a;
-                    color_strength = b;
-                }
-            }
-        }
         if (debug_view == 0 && _wgetenv(L"DLSS5_DEBUG_TINT") && !wcscmp(_wgetenv(L"DLSS5_DEBUG_TINT"), L"1"))
         {
             debug_view = 4; // Tint
         }
-        if (transfer_strength < 0.0f || transfer_strength > 1.0f || color_strength < 0.0f || color_strength > 1.0f)
+        if (!std::isfinite(transfer_strength) || !std::isfinite(color_strength) || transfer_strength < 0.0f || transfer_strength > 1.0f || color_strength < 0.0f || color_strength > 1.0f)
             return Fail(LMXXF_NR_INVALID_ARGUMENT, "PrepareFrame: transfer_strength and color_strength must be in [0, 1]");
+
+        // An explicit numeric user setting wins over host/menu parameters; auto preserves the host contract.
+        const auto configured = runtime_strength::Parse(_wgetenv(L"DLSS5_STRENGTH"));
+        runtime_strength::Override(configured, transfer_strength, color_strength);
+        if (configured.state == runtime_strength::State::Invalid) {
+            static std::atomic_flag warned = ATOMIC_FLAG_INIT;
+            if (!warned.test_and_set()) std::fprintf(stderr, "DLSS5_STRENGTH invalid: expected two finite values in [0,1]; using host/default strength\n");
+        }
+
 
         // Match upstream auto tier: <=1280x720 -> 720, <=1600x900 -> 900, else 1080.
         // Prefer CRT _putenv so MinGW std::getenv sees "auto" (SetEnvironmentVariable alone may not).
@@ -973,7 +994,9 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
             if (opt.graph)
                 return Fail(LMXXF_NR_FAILED, "PrepareFrame: graph must stay off");
             session->bridge = new hip_reference::D3D12Bridge();
+            if (RuntimeDirectInput()) session->bridge->RequestDirectInput();
             session->bridge->Create(session->queue, opt, {});
+            if (session->timingRequested) session->bridge->EnableNetworkTiming(); /* kept across a recreate once a host asked */
             session->builtProcW=geo.processing_width; session->builtProcH=geo.processing_height;
             session->hipPrepared = true;
             char geoMsg[192] {};
@@ -995,11 +1018,11 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
         const UINT ch = cdesc.Height;
         if (const char *why = ColorInputProblem(cdesc))
         {
-            char msg[224];
+            char msg[288];
             std::snprintf(msg, sizeof msg,
-                          "PrepareFrame: colour rejected (%s): fmt=%u %llux%llu arr=%u mips=%u "
+                          "PrepareFrame: colour rejected (%s): fmt=%s(%u) %llux%llu arr=%u mips=%u "
                           "samples=%u flags=0x%x fitLarge=%d",
-                          why, unsigned(cfmt), static_cast<unsigned long long>(cdesc.Width),
+                          why, NativeDxgiFormatName(cfmt), unsigned(cfmt), static_cast<unsigned long long>(cdesc.Width),
                           static_cast<unsigned long long>(cdesc.Height), unsigned(cdesc.DepthOrArraySize),
                           unsigned(cdesc.MipLevels), unsigned(cdesc.SampleDesc.Count), unsigned(cdesc.Flags),
                           NativeFitLargeInput() ? 1 : 0);
@@ -1170,7 +1193,9 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
                 if (opt.graph)
                     return Fail(LMXXF_NR_FAILED, "PrepareFrame: graph must stay off");
                 session->bridge = new hip_reference::D3D12Bridge();
+                if (RuntimeDirectInput()) session->bridge->RequestDirectInput();
                 session->bridge->Create(session->queue, opt, {});
+                if (session->timingRequested) session->bridge->EnableNetworkTiming(); /* kept across a recreate once a host asked */
                 session->builtProcW=geo.processing_width; session->builtProcH=geo.processing_height;
                 session->hipPrepared = true;
                 char geoMsg[192] {};
@@ -1198,7 +1223,8 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
                 // format cannot be a UAV target and is never written, only read. Driven by the
                 // input format rather than game identity; every other format keeps its existing
                 // output route.
-                const bool privateFloatOutput = (cfmt == DXGI_FORMAT_R9G9B9E5_SHAREDEXP);
+                const bool privateFloatOutput = (cfmt == DXGI_FORMAT_R9G9B9E5_SHAREDEXP) ||
+                                                (NativeFallbackColor(cfmt) != DXGI_FORMAT_UNKNOWN);
                 enc = new NativeGameCodec();
                 session->boundExposure = bindExposure;
                 session->allocWidth = cw;
@@ -1206,6 +1232,9 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
                 enc->Create(session->device, {color}, session->shaderDir, privateFloatOutput, bindExposure);
                 rgbIn = new NativeGameRgbInput();
                 rgbIn->Create(session->device, enc->Output(), session->shaderDir);
+                /* Direct input (as the add-on since 2026-09-28): the RGB input pass writes the bridge's shared buffer, no 35 MB copy. */
+                if (ID3D12Resource *direct = session->bridge->DirectInput())
+                    rgbIn->RedirectOutput(direct);
                 rgbOut = new NativeRgbTexture();
                 rgbOut->Create(session->device, session->bridge->Output(), session->shaderDir);
                 dec = new NativeGameCodec();
@@ -1280,6 +1309,7 @@ int32_t PrepareFrame(void *context, const LmxxfNrFrameInfo *info, LmxxfNrJob *jo
         session->job.codec_passthrough = (info->flags & LMXXF_NR_FRAME_FLAG_CODEC_PASSTHROUGH) != 0;
         session->colorFormat = cfmt;
         session->job.seed = 1;
+        session->job.frame_id = info->frame_id;
         session->job.state = LMXXF_NR_JOB_PREPARED;
         job->handle = &session->job;
         if (!session->decode)
@@ -1377,7 +1407,7 @@ int32_t RecordInputs(void *context, void *job, void *command_list)
 int32_t EnqueueHip(void *context, void *job, void *command_queue)
 {
     auto *session = static_cast<Session *>(context);
-    return GuardSession(session, [&] {
+    const int32_t rc = GuardSession(session, [&] {
         if (!session)
             return Fail(LMXXF_NR_INVALID_ARGUMENT, "EnqueueHip: null context");
         if (!session->hipPrepared)
@@ -1441,6 +1471,7 @@ int32_t EnqueueHip(void *context, void *job, void *command_queue)
         QueueContract(session, targetQueue);
         try
         {
+            session->bridge->SetTimingTag(j->frame_id);
             session->bridge->EnqueueAfterProducer(targetQueue, j->seed, false);
             if (j->state == LMXXF_NR_JOB_PRODUCER_SUBMITTED)
                 j->state = LMXXF_NR_JOB_NR_COMPLETE;
@@ -1473,6 +1504,20 @@ int32_t EnqueueHip(void *context, void *job, void *command_queue)
             }
         }
     });
+    // DLSS5_FRAME_STATS (native_frame_stats.h): read once, after Create exported the flags file to the environment.
+    static NativeFrameStats *stats = [] {
+        auto *x = new NativeFrameStats;
+        unsigned sec = 0;
+        try { sec = NativeFrameStatsSeconds(std::getenv("DLSS5_FRAME_STATS")); } catch (...) { sec = 0; }
+        if (sec) {
+            CreateDirectoryW(NativeLabPath(L"logs").c_str(), nullptr);
+            x->Configure(sec, NativeLabPath(L"logs\\frame-stats.txt"));
+        }
+        return x;
+    }();
+    if (stats->On())
+        stats->Frame(rc == static_cast<int32_t>(LMXXF_NR_OK) ? NFS_RUN : NFS_ERROR);
+    return rc;
 }
 
 int32_t RecordOutputs(void *context, void *job, void *command_list)
@@ -1622,7 +1667,7 @@ int32_t GetStatus(void *context, char *buf, uint32_t buf_chars)
         if (!buf || buf_chars == 0)
             return Fail(LMXXF_NR_INVALID_ARGUMENT, "GetStatus: empty buffer");
         auto *session = static_cast<Session *>(context);
-        char text[640] {};
+        char text[768] {};
         if (!session)
             std::snprintf(text, sizeof text, "no session");
         else if (session->failed)
@@ -1633,11 +1678,18 @@ int32_t GetStatus(void *context, char *buf, uint32_t buf_chars)
             if (session->hipPrepared && NativeNetworkGeometryResolved())
             {
                 auto geo = NativeCurrentNetworkGeometry();
+                char net[64] {};
+                const auto t = session->bridge ? session->bridge->PollNetworkTiming()
+                                               : hip_reference::D3D12Bridge::NetworkTiming{false, 0.f, 0};
+                if (t.valid)
+                    std::snprintf(net, sizeof net, " net_gpu_ms=%.2f (frame %llu)", t.ms, static_cast<unsigned long long>(t.tag));
+                else
+                    std::snprintf(net, sizeof net, session->timingRequested ? " net_gpu_ms=n/a" : " net_gpu_ms=off");
                 std::snprintf(text, sizeof text,
-                              "lmxxf modules_ok=%u hip=1 net=%ux%u color_job=%ux%u weights=%u recreates=%u %s | %s",
+                              "lmxxf modules_ok=%u hip=1 net=%ux%u color_job=%ux%u weights=%u recreates=%u%s %s | %s",
                               static_cast<unsigned>(session->hsacoCount), geo.valid_width, geo.valid_height,
                               session->job.width, session->job.height,
-                              session->weightsDir.empty() ? 0u : 1u, session->codecRecreates,
+                              session->weightsDir.empty() ? 0u : 1u, session->codecRecreates, net,
                               session->EffectiveOptionsNote().c_str(), FlagsInfo().c_str());
             }
             else
@@ -1650,6 +1702,39 @@ int32_t GetStatus(void *context, char *buf, uint32_t buf_chars)
         std::strncpy(buf, text, buf_chars - 1);
         buf[buf_chars - 1] = 0;
         SetError("");
+        return static_cast<int32_t>(LMXXF_NR_OK);
+    });
+}
+
+/* Network GPU time (LmxxfNrApi.h, LmxxfNrTimings). Non-blocking; never poisons the session. LMXXF_NR_OK with valid=0
+   when there is no measurement (no network yet, timing unavailable). Success leaves the error slot alone, so a notice
+   PrepareFrame left for the host survives an overlay calling this in between. */
+int32_t GetTimings(void *context, LmxxfNrTimings *out)
+{
+    return Guard([&] {
+        if (!out)
+            return Fail(LMXXF_NR_INVALID_ARGUMENT, "GetTimings: null out");
+        if (out->struct_size != sizeof(LmxxfNrTimings))
+            return Fail(LMXXF_NR_INVALID_ARGUMENT, "GetTimings: struct_size mismatch");
+        auto *session = static_cast<Session *>(context);
+        out->valid = 0;
+        out->network_ms = 0.f;
+        out->reserved = 0;
+        out->frame_id = 0;
+        if (!session)
+            return Fail(LMXXF_NR_INVALID_ARGUMENT, "GetTimings: null context");
+        session->timingRequested = true;
+        if (session->failed || !session->hipPrepared || !session->bridge)
+            return static_cast<int32_t>(LMXXF_NR_OK);
+        if (!session->bridge->NetworkTimingEnabled() && !session->bridge->EnableNetworkTiming())
+            return static_cast<int32_t>(LMXXF_NR_OK);
+        const auto t = session->bridge->PollNetworkTiming();
+        if (t.valid)
+        {
+            out->valid = 1;
+            out->network_ms = t.ms;
+            out->frame_id = t.tag;
+        }
         return static_cast<int32_t>(LMXXF_NR_OK);
     });
 }
@@ -1676,19 +1761,24 @@ int32_t EnqueueHipTwoArgument(void *context, void *job)
 }
 } // namespace
 
+static_assert(offsetof(LmxxfNrApi, GetTimings) == LMXXF_NR_API_V1_SIZE, "LMXXF_NR_API_V1_SIZE must end before GetTimings");
+static_assert(sizeof(LmxxfNrTimings) == 24, "LmxxfNrTimings layout");
+
 extern "C" int32_t LmxxfNrGetApi(uint32_t abi_version, LmxxfNrApi *out)
 {
     return Guard([&] {
         if (!out)
             return Fail(LMXXF_NR_INVALID_ARGUMENT, "GetApi: null out");
-        if (out->struct_size != sizeof(LmxxfNrApi))
+        /* LMXXF_NR_API_V1_SIZE = a host built before GetTimings was appended; it gets the table without it. */
+        const uint32_t size = out->struct_size;
+        if (size != sizeof(LmxxfNrApi) && size != LMXXF_NR_API_V1_SIZE)
             return Fail(LMXXF_NR_INVALID_ARGUMENT, "GetApi: struct_size mismatch");
         /* 2 = the RE9 package host (Development/RE9/presr patch bumped the header when it appended the exposure
            fields); the function table is identical and PrepareFrame accepts every FrameInfo size, so both hosts work. */
         if (abi_version != LMXXF_NR_ABI_VERSION && abi_version != 2u)
             return Fail(LMXXF_NR_UNSUPPORTED_ABI, "GetApi: unsupported abi_version");
-        std::memset(out, 0, sizeof(*out));
-        out->struct_size = sizeof(LmxxfNrApi);
+        std::memset(out, 0, size);
+        out->struct_size = size;
         out->abi_version = abi_version;
         out->QueryCapabilities = QueryCapabilities;
         out->Create = Create;
@@ -1708,6 +1798,8 @@ extern "C" int32_t LmxxfNrGetApi(uint32_t abi_version, LmxxfNrApi *out)
         out->Drain = Drain;
         out->GetStatus = GetStatus;
         out->GetLastError = GetLastError;
+        if (size >= offsetof(LmxxfNrApi, GetTimings) + sizeof(out->GetTimings))
+            out->GetTimings = GetTimings;
         SetError("");
         return static_cast<int32_t>(LMXXF_NR_OK);
     });

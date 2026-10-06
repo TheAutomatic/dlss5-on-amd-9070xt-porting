@@ -1,0 +1,62 @@
+## bv1
+XL21 vit-stream SAME=19
+XL21 multihead-fast-padded-wave-packed SAME=19
+XL21nu vit-stream SAME=19
+XL21nu multihead-fast-padded-wave-packed SAME=19
+XL23nu vit-stream FAIL after SAME=0: Output changed 900-static-True (12/12)
+XL23nu multihead-fast-padded-wave-packed FAIL after SAME=0: Output changed 900-static-True (12/12)
+XH1 vit-stream FAIL after SAME=0: Output changed 900-static-True (12/12)
+XH1 multihead-fast-padded-wave-packed FAIL after SAME=0: Output changed 900-static-True (12/12)
+XL23fu4 vit-stream FAIL after SAME=0: Output changed 900-static-True (12/12)
+XL23fu4 multihead-fast-padded-wave-packed FAIL after SAME=0: Output changed 900-static-True (12/12)
+## bv2
+XL23x vit-stream FAIL after SAME=0: Output changed 900-static-True (12/12)
+XL23x multihead-fast-padded-wave-packed FAIL after SAME=0: Output changed 900-static-True (12/12)
+XL21x vit-stream SAME=19
+XL21x multihead-fast-padded-wave-packed SAME=19
+## bv3
+XT0 vit-stream SAME=19
+XT0 multihead-fast-padded-wave-packed SAME=19
+## bv4
+XS0 vit-stream SAME=19
+XS0 multihead-fast-padded-wave-packed SAME=19
+XS1 vit-stream SAME=19
+XS1 multihead-fast-padded-wave-packed FAIL after SAME=0: Output changed 900-static-True (12/12)
+XS2 vit-stream SAME=19
+XS2 multihead-fast-padded-wave-packed FAIL after SAME=0: Output changed 900-static-True (12/12)
+## bv5
+XL23f0 vit-stream FAIL after SAME=0: Output changed 900-static-True (12/12)
+XL23f0 multihead-fast-padded-wave-packed FAIL after SAME=0: Output changed 900-static-True (12/12)
+XVa vit-stream SAME=19
+XVb vit-stream FAIL after SAME=0: Output changed 900-static-True (12/12)
+XS3 multihead-fast-padded-wave-packed SAME=19
+XS4 multihead-fast-padded-wave-packed SAME=19
+XS5 multihead-fast-padded-wave-packed SAME=19
+XS6 multihead-fast-padded-wave-packed SAME=19
+## bv6
+XQ1 vit-stream SAME=19
+XQ2 vit-stream SAME=19
+XQ3 vit-stream SAME=19
+XQ4 vit-stream FAIL after SAME=0: Output changed 900-static-True (12/12)
+## bv7
+XK73 vit-stream SAME=19
+XK74 vit-stream SAME=19
+XK75 vit-stream SAME=19
+XK76 vit-stream SAME=19
+XK77 vit-stream SAME=19
+XK78 vit-stream SAME=19
+## bv8
+XH1 vit-stream SAME=19
+XH2 vit-stream FAIL after SAME=0: Output changed 900-static-True (12/12)
+## bv9
+XR vit-stream SAME=19
+XR multihead-fast-padded-wave-packed SAME=19
+## bv10
+XK80 vit-stream SAME=19
+XK81 vit-stream FAIL after SAME=0: Output changed 900-static-True (12/12)
+## bv11
+XL23bf vit-stream SAME=19
+XL23bf multihead-fast-padded-wave-packed SAME=19
+## bv12
+XL22bf vit-stream SAME=19
+XL22bf multihead-fast-padded-wave-packed SAME=19

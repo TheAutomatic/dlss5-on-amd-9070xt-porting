@@ -1,0 +1,20 @@
+[
+  {
+    "name": "vit_attention_fused_400_bytein_bout",
+    "vgpr_count": 72,
+    "sgpr_count": 16,
+    "group_segment_fixed_size": 0,
+    "private_segment_fixed_size": 0,
+    "barrier_count": 0,
+    "wmma_lines": 5
+  },
+  {
+    "name": "vit_attention_fused_640_bytein_bout",
+    "vgpr_count": 72,
+    "sgpr_count": 16,
+    "group_segment_fixed_size": 0,
+    "private_segment_fixed_size": 0,
+    "barrier_count": 0,
+    "wmma_lines": 5
+  }
+]

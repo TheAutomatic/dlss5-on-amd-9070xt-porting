@@ -1,0 +1,211 @@
+{
+  "timings": [
+    {
+      "batch": "r1",
+      "height": 900,
+      "baseline_ms": 9.194928749999999,
+      "production_ms": 9.085036874999997,
+      "delta_ms": -0.10989187500000241,
+      "percent": -1.1951356882455744,
+      "slots": {
+        "0": 9.15246625,
+        "1": 9.07461875,
+        "2": 9.09545499999999,
+        "3": 9.23739125
+      }
+    },
+    {
+      "batch": "r1",
+      "height": 1080,
+      "baseline_ms": 12.551211250000001,
+      "production_ms": 12.399851250000001,
+      "delta_ms": -0.15136000000000038,
+      "percent": -1.205939386925703,
+      "slots": {
+        "0": 12.5388625,
+        "1": 12.39601,
+        "2": 12.4036925,
+        "3": 12.56356
+      }
+    },
+    {
+      "batch": "r2",
+      "height": 900,
+      "baseline_ms": 9.265324999999995,
+      "production_ms": 9.150821874999995,
+      "delta_ms": -0.1145031250000006,
+      "percent": -1.2358241615917476,
+      "slots": {
+        "0": 9.25352125,
+        "1": 9.149915,
+        "2": 9.15172874999999,
+        "3": 9.27712874999999
+      }
+    },
+    {
+      "batch": "r2",
+      "height": 1080,
+      "baseline_ms": 12.57805625,
+      "production_ms": 12.43014875,
+      "delta_ms": -0.14790749999999875,
+      "percent": -1.1759169863785446,
+      "slots": {
+        "0": 12.57568875,
+        "1": 12.4357925,
+        "2": 12.424505,
+        "3": 12.58042375
+      }
+    }
+  ],
+  "frame_changes": [
+    {
+      "mode": "EXACT",
+      "case": "900-static",
+      "frames": 12,
+      "changed": 12
+    },
+    {
+      "mode": "EXACT",
+      "case": "900-motion",
+      "frames": 12,
+      "changed": 12
+    },
+    {
+      "mode": "EXACT",
+      "case": "1080-static",
+      "frames": 12,
+      "changed": 12
+    },
+    {
+      "mode": "EXACT",
+      "case": "1080-motion",
+      "frames": 12,
+      "changed": 12
+    },
+    {
+      "mode": "EXACT",
+      "case": "720-motion",
+      "frames": 12,
+      "changed": 12
+    },
+    {
+      "mode": "EXACT",
+      "case": "900-history",
+      "frames": 12,
+      "changed": 12
+    },
+    {
+      "mode": "EXACT",
+      "case": "1080-history",
+      "frames": 12,
+      "changed": 12
+    },
+    {
+      "mode": "AE",
+      "case": "900-static",
+      "frames": 12,
+      "changed": 12
+    },
+    {
+      "mode": "AE",
+      "case": "900-motion",
+      "frames": 12,
+      "changed": 12
+    },
+    {
+      "mode": "AE",
+      "case": "1080-static",
+      "frames": 12,
+      "changed": 12
+    },
+    {
+      "mode": "AE",
+      "case": "1080-motion",
+      "frames": 12,
+      "changed": 12
+    },
+    {
+      "mode": "AE",
+      "case": "720-motion",
+      "frames": 12,
+      "changed": 12
+    },
+    {
+      "mode": "AE",
+      "case": "900-history",
+      "frames": 12,
+      "changed": 12
+    },
+    {
+      "mode": "AE",
+      "case": "1080-history",
+      "frames": 12,
+      "changed": 12
+    }
+  ],
+  "adaptive": [
+    {
+      "case": "900-static",
+      "frames": 12,
+      "reuse_changed": 0,
+      "control_changed": 0,
+      "any_field_changed": 0,
+      "baseline_reuse": 10,
+      "production_reuse": 10
+    },
+    {
+      "case": "900-motion",
+      "frames": 12,
+      "reuse_changed": 0,
+      "control_changed": 0,
+      "any_field_changed": 10,
+      "baseline_reuse": 7,
+      "production_reuse": 7
+    },
+    {
+      "case": "1080-static",
+      "frames": 12,
+      "reuse_changed": 0,
+      "control_changed": 0,
+      "any_field_changed": 0,
+      "baseline_reuse": 10,
+      "production_reuse": 10
+    },
+    {
+      "case": "1080-motion",
+      "frames": 12,
+      "reuse_changed": 0,
+      "control_changed": 0,
+      "any_field_changed": 10,
+      "baseline_reuse": 7,
+      "production_reuse": 7
+    },
+    {
+      "case": "720-motion",
+      "frames": 12,
+      "reuse_changed": 0,
+      "control_changed": 0,
+      "any_field_changed": 10,
+      "baseline_reuse": 8,
+      "production_reuse": 8
+    },
+    {
+      "case": "900-history",
+      "frames": 12,
+      "reuse_changed": 0,
+      "control_changed": 0,
+      "any_field_changed": 10,
+      "baseline_reuse": 1,
+      "production_reuse": 1
+    },
+    {
+      "case": "1080-history",
+      "frames": 12,
+      "reuse_changed": 1,
+      "control_changed": 3,
+      "any_field_changed": 10,
+      "baseline_reuse": 0,
+      "production_reuse": 1
+    }
+  ]
+}

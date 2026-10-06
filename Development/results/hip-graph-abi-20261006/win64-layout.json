@@ -1,0 +1,23 @@
+{
+  "compiler": "x86_64-w64-mingw32-g++ -std=c++17 -O2 -static",
+  "exit": 0,
+  "exeSHA": "ebbef50a926239267b5e5e94e0dab3fdd33aca37385d4bfc466e2fc38b50f04d",
+  "KernelNodeParams": {
+    "size": 64,
+    "alignment": 8,
+    "offsets": {
+      "blockDim": 0,
+      "extra": 16,
+      "func": 24,
+      "gridDim": 32,
+      "kernelParams": 48,
+      "sharedMemBytes": 56
+    }
+  },
+  "dim3": {
+    "size": 12,
+    "alignment": 4
+  },
+  "NodeTypeEnumSize": 4,
+  "GPU_run": false
+}

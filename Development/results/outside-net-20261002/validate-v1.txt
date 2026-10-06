@@ -1,0 +1,34 @@
+== rt ÏÂÎç 07:07:47
+HASH 720 base=88106a934af4c183/e0 D=88106a934af4c183/e0 DQ=88106a934af4c183/e0 D0=88106a934af4c183/e0 SAME
+HASH 900 base=b2980ada643da964/e0 D=b2980ada643da964/e0 DQ=b2980ada643da964/e0 D0=b2980ada643da964/e0 SAME
+HASH 1080 base=758674a8bbd0206d/e0 D=758674a8bbd0206d/e0 DQ=758674a8bbd0206d/e0 D0=758674a8bbd0206d/e0 SAME
+HASH native base=626b87531bb84f40,63104e9d7f15a0de/e0 D=626b87531bb84f40,63104e9d7f15a0de/e0 DQ=626b87531bb84f40,63104e9d7f15a0de/e0 D0=626b87531bb84f40,63104e9d7f15a0de/e0 SAME
+RT_ABBA D round=1 900 serial 7.018->7.010 (-0.008)  pipe 6.747->6.710 (-0.037)
+RT_ABBA D round=1 1080 serial 9.896->9.888 (-0.008)  pipe 9.651->9.574 (-0.077)
+RT_ABBA D round=2 900 serial 7.076->7.071 (-0.005)  pipe 6.783->6.749 (-0.034)
+RT_ABBA D round=2 1080 serial 9.892->9.915 (+0.023)  pipe 9.667->9.599 (-0.068)
+RT_ABBA D round=3 900 serial 7.094->7.096 (+0.002)  pipe 6.805->6.761 (-0.044)
+RT_ABBA D round=3 1080 serial 9.907->9.927 (+0.021)  pipe 9.674->9.597 (-0.077)
+RT_ABBA DQ round=1 900 serial 7.106->7.040 (-0.066)  pipe 6.797->6.773 (-0.024)
+RT_ABBA DQ round=1 1080 serial 9.907->9.904 (-0.003)  pipe 9.672->9.602 (-0.071)
+RT_ABBA DQ round=2 900 serial 7.123->7.063 (-0.059)  pipe 6.800->6.783 (-0.017)
+RT_ABBA DQ round=2 1080 serial 9.905->9.890 (-0.015)  pipe 9.675->9.613 (-0.063)
+RT_ABBA DQ round=3 900 serial 7.096->7.062 (-0.034)  pipe 6.794->6.785 (-0.009)
+RT_ABBA DQ round=3 1080 serial 9.893->9.904 (+0.011)  pipe 9.680->9.608 (-0.072)
+SMOKE D exit=0 SP_STATS runs=4 fallback=0 rollover=0 jobs=2496 disabled=0 errors=0 | lmxxf_nr_gpu: ok
+SMOKE DQ exit=0 SP_STATS runs=4 fallback=0 rollover=0 jobs=2496 disabled=0 errors=0 | lmxxf_nr_gpu: ok
+RT_DONE
+== addonQ ÏÂÎç 07:16:58
+FULL Q OK
+SAME-count Q: 19
+Q 1 900: avg 7.0823 -> 7.0684 (-0.0138 ms, -0.20%)  p99 7.2930 -> 7.3620
+Q 1 1080: avg 9.9092 -> 9.8508 (-0.0584 ms, -0.59%)  p99 10.2110 -> 10.1540
+Q 2 900: avg 7.1695 -> 7.0674 (-0.1021 ms, -1.42%)  p99 7.4910 -> 7.2720
+Q 2 1080: avg 9.9844 -> 9.8676 (-0.1168 ms, -1.17%)  p99 10.6680 -> 10.5790
+Q 3 900: avg 7.2094 -> 7.1266 (-0.0828 ms, -1.15%)  p99 7.9220 -> 7.7970
+Q 3 1080: avg 9.9497 -> 9.9036 (-0.0461 ms, -0.46%)  p99 10.6090 -> 10.5460
+Q 900 merged: avg 7.1537 -> 7.0874  p99 7.8320 -> 7.7080
+Q 1080 merged: avg 9.9478 -> 9.8740  p99 10.6090 -> 10.5350
+LOCK DROPPED
+GO_DONE
+GUARD_DONE

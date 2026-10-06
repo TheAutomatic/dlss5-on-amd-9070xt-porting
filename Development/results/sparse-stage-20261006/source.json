@@ -1,0 +1,11 @@
+{
+  "base_sha256": "144cdf947ea23a01b3322c826d5013f6d2370464cb6520a22f36af1caf575ffc",
+  "instrumented_sha256": "c59b74656aa56f096053b050fc40b8a6bf0ff2272cfa2e6de47adb0b3e3bad3a",
+  "new_pairs_per_frame": 1,
+  "existing_total_pair_per_frame": 1,
+  "kinds": {
+    "1": "C512 encoder Body23..30",
+    "2": "ViT Adaptive31..38 AE0 only"
+  },
+  "ordering": "Read requires stage pdl_delta0 AND full-frame pdl_calls0; otherwise rejects"
+}

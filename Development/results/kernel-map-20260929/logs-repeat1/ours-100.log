@@ -1,0 +1,13 @@
+START,ours-100,vit_pack_input
+BUFFER,ours-100,b1,invalid=0,nonzero=655360
+CHECK,ours-100,guards=0,invalid=0,nonzero=655360
+TIME,ours-100,0,2.276562
+TIME,ours-100,1,4.013281
+TIME,ours-100,2,2.696563
+TIME,ours-100,3,2.707812
+TIME,ours-100,4,2.711562
+TIME,ours-100,5,2.740000
+TIME,ours-100,6,2.691563
+BUFFER,ours-100,b1,invalid=0,nonzero=655360
+CHECK,ours-100,guards=0,invalid=0,nonzero=655360
+RESULT,ours-100,2.707812,128,7

@@ -1,0 +1,253 @@
+{
+  "compat": {
+    "pairs": [
+      {
+        "tag": "1080-history-AE0",
+        "side": "H",
+        "frames": 12,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      },
+      {
+        "tag": "fallback-G",
+        "side": "G",
+        "frames": 12,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      },
+      {
+        "tag": "900-motion-AE1",
+        "side": "H",
+        "frames": 12,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      },
+      {
+        "tag": "roll-actual-900-AE1",
+        "side": "H",
+        "frames": 12,
+        "raw_sha_diff": 0,
+        "rollover_actual": [
+          "24"
+        ]
+      },
+      {
+        "tag": "1080-history-AE1",
+        "side": "H",
+        "frames": 12,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      },
+      {
+        "tag": "MP3-fallback",
+        "side": "H",
+        "frames": 12,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      },
+      {
+        "tag": "FAST0-1080",
+        "side": "H",
+        "frames": 12,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      },
+      {
+        "tag": "1080-static-AE0",
+        "side": "H",
+        "frames": 12,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      },
+      {
+        "tag": "900-history-AE1",
+        "side": "H",
+        "frames": 12,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      },
+      {
+        "tag": "720-motion-AE1",
+        "side": "H",
+        "frames": 12,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      },
+      {
+        "tag": "900-motion-AE0",
+        "side": "H",
+        "frames": 12,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      },
+      {
+        "tag": "900-history-AE0",
+        "side": "H",
+        "frames": 12,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      },
+      {
+        "tag": "1080-static-AE1",
+        "side": "H",
+        "frames": 12,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      },
+      {
+        "tag": "MP2-fallback",
+        "side": "H",
+        "frames": 12,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      },
+      {
+        "tag": "roll-actual-900-AE0",
+        "side": "H",
+        "frames": 12,
+        "raw_sha_diff": 0,
+        "rollover_actual": [
+          "24"
+        ]
+      },
+      {
+        "tag": "1080-motion-AE0",
+        "side": "H",
+        "frames": 12,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      },
+      {
+        "tag": "900-static-AE1",
+        "side": "H",
+        "frames": 12,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      },
+      {
+        "tag": "FAST0-900",
+        "side": "H",
+        "frames": 12,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      },
+      {
+        "tag": "seed-37",
+        "side": "H",
+        "frames": 12,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      },
+      {
+        "tag": "roll-actual-1080-AE0",
+        "side": "H",
+        "frames": 12,
+        "raw_sha_diff": 0,
+        "rollover_actual": [
+          "24"
+        ]
+      },
+      {
+        "tag": "900-static-AE0",
+        "side": "H",
+        "frames": 12,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      },
+      {
+        "tag": "seed-65535",
+        "side": "H",
+        "frames": 12,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      },
+      {
+        "tag": "roll-actual-1080-AE1",
+        "side": "H",
+        "frames": 12,
+        "raw_sha_diff": 0,
+        "rollover_actual": [
+          "24"
+        ]
+      },
+      {
+        "tag": "fallback-M",
+        "side": "M",
+        "frames": 12,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      },
+      {
+        "tag": "720-motion-AE0",
+        "side": "H",
+        "frames": 12,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      },
+      {
+        "tag": "1080-motion-AE1",
+        "side": "H",
+        "frames": 12,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      },
+      {
+        "tag": "fallback-B",
+        "side": "B",
+        "frames": 12,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      }
+    ],
+    "all_matched": true,
+    "failed_trigger_case": "roll-900-AE0-A (SP env ignored macro0)"
+  },
+  "smoke": {
+    "pairs": [
+      {
+        "tag": "eligible900",
+        "side": "H",
+        "frames": 6,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      },
+      {
+        "tag": "old1152",
+        "side": "H",
+        "frames": 6,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      },
+      {
+        "tag": "validmissingexport",
+        "side": "B",
+        "frames": 6,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      },
+      {
+        "tag": "hotmp3",
+        "side": "H",
+        "frames": 6,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      },
+      {
+        "tag": "missing",
+        "side": "M",
+        "frames": 6,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      },
+      {
+        "tag": "hotmp3-actual",
+        "side": "H",
+        "frames": 6,
+        "raw_sha_diff": 0,
+        "rollover_actual": null
+      }
+    ],
+    "all_matched": true,
+    "failed_trigger_case": "hotmp3 initial env setter didnot advance NativeHotFlagsgeneration"
+  }
+}

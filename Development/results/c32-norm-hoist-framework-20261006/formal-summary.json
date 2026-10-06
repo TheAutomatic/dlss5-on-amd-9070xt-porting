@@ -1,0 +1,29 @@
+{
+  "rounds": [
+    {
+      "round": 1,
+      "avg_delta_ms": -0.04492916666666691,
+      "p99_delta_ms": -0.11655999999999889,
+      "pass": true,
+      "raw_equal": true
+    },
+    {
+      "round": 2,
+      "avg_delta_ms": -0.04924791666666639,
+      "p99_delta_ms": -0.07877000000000134,
+      "pass": true,
+      "raw_equal": true
+    },
+    {
+      "round": 3,
+      "avg_delta_ms": -0.045162499999999994,
+      "p99_delta_ms": 0.00014000000000180535,
+      "pass": false,
+      "raw_equal": true
+    }
+  ],
+  "stop_round": 3,
+  "strict_tail_fail_no_retries": true,
+  "normal19_started": false,
+  "scope": "900only;1152firstscreennegative remains; no production acceptance or completegoal"
+}

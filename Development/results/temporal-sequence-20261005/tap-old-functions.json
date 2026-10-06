@@ -1,0 +1,19 @@
+{
+  "scope": "CPU symbol machine-code comparison against published0.41 actual module",
+  "arch": "gfx1201",
+  "old_functions": 25,
+  "missing": [],
+  "changed": [
+    "c32_fast_ffn_attention_fused_half_prefix_finish_main8",
+    "c32_wave1_prefix",
+    "c32_wave1_prefix_b8d"
+  ],
+  "added": [
+    "c32_wave1_post_b8_features"
+  ],
+  "new_sha256": "f46b8af25841a9878ce34544f4b3465f71da36fec9f08f48ad33b48f08c1ee52",
+  "rodata_growth": 64,
+  "trailing_constant_old": "0000003c",
+  "trailing_constant_new": "0000003c",
+  "note": "22/25 old function bytes identical including both old post exports. Three prefix functions need PC-relative-address normalization; raw changed list is retained, not called whole-machinecode identical."
+}

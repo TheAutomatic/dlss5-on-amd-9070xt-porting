@@ -1,0 +1,2661 @@
+{
+  "c32-wave1.hsaco:c32_wave1_prefix": {
+    "module_file": "flat-A/c32-wave1.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 24,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 32,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 40,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 48,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 52,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 56,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 60,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 64,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 68,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 72,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 4096,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 76,
+    ".max_flat_workgroup_size": 32,
+    ".name": "c32_wave1_prefix",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 32,
+    ".sgpr_spill_count": 0,
+    ".symbol": "c32_wave1_prefix.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 129,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 0
+  },
+  "c32-wave1.hsaco:c32_wave1_mapped": {
+    "module_file": "flat-A/c32-wave1.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 24,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 32,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 36,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 40,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 44,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 48,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 52,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 56,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 4096,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 60,
+    ".max_flat_workgroup_size": 32,
+    ".name": "c32_wave1_mapped",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 25,
+    ".sgpr_spill_count": 0,
+    ".symbol": "c32_wave1_mapped.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 133,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 0
+  },
+  "c32-wave1.hsaco:c32_wave1_chain": {
+    "module_file": "flat-A/c32-wave1.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 24,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 32,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 36,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 40,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 44,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 48,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 52,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 56,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 60,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 64,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 68,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 4096,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 72,
+    ".max_flat_workgroup_size": 32,
+    ".name": "c32_wave1_chain",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 26,
+    ".sgpr_spill_count": 0,
+    ".symbol": "c32_wave1_chain.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 134,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 0
+  },
+  "c32-wave1.hsaco:c32_wave1_finish_dcrop": {
+    "module_file": "flat-A/c32-wave1.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 24,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 32,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 40,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 44,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 48,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 52,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 56,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 60,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 64,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 68,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 72,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 76,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 4096,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 80,
+    ".max_flat_workgroup_size": 32,
+    ".name": "c32_wave1_finish_dcrop",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 30,
+    ".sgpr_spill_count": 0,
+    ".symbol": "c32_wave1_finish_dcrop.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 131,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 0
+  },
+  "multihead-fast-padded-wave-packed.hsaco:mh_pool_project_production_h16w": {
+    "module_file": "flat-A/multihead-fast-padded-wave-packed.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 24,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 28,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 32,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 36,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 40,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 0,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 44,
+    ".max_flat_workgroup_size": 32,
+    ".name": "mh_pool_project_production_h16w",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 20,
+    ".sgpr_spill_count": 0,
+    ".symbol": "mh_pool_project_production_h16w.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 62,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "c64-wave2.hsaco:c64_wave2_bo": {
+    "module_file": "flat-A/c64-wave2.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 24,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 32,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 36,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 40,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 44,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 48,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 52,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 56,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 8192,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 60,
+    ".max_flat_workgroup_size": 64,
+    ".name": "c64_wave2_bo",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 31,
+    ".sgpr_spill_count": 0,
+    ".symbol": "c64_wave2_bo.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 156,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "c64-wave2.hsaco:c64_wave2_bi_bo": {
+    "module_file": "flat-A/c64-wave2.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 24,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 32,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 36,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 40,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 44,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 48,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 52,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 56,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 8192,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 60,
+    ".max_flat_workgroup_size": 64,
+    ".name": "c64_wave2_bi_bo",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 30,
+    ".sgpr_spill_count": 0,
+    ".symbol": "c64_wave2_bi_bo.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 140,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "c64-wave2.hsaco:c64_wave2_bi": {
+    "module_file": "flat-A/c64-wave2.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 24,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 32,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 36,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 40,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 44,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 48,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 52,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 56,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 8192,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 60,
+    ".max_flat_workgroup_size": 64,
+    ".name": "c64_wave2_bi",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 30,
+    ".sgpr_spill_count": 0,
+    ".symbol": "c64_wave2_bi.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 140,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "multihead-fast-padded-wave-packed.hsaco:mh_pool_project_group_c64": {
+    "module_file": "flat-A/multihead-fast-padded-wave-packed.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 24,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 28,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 32,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 36,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 40,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 2304,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 44,
+    ".max_flat_workgroup_size": 64,
+    ".name": "mh_pool_project_group_c64",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 29,
+    ".sgpr_spill_count": 0,
+    ".symbol": "mh_pool_project_group_c64.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 100,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "c64-wave2.hsaco:c128_wave2_bo": {
+    "module_file": "flat-A/c64-wave2.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 24,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 32,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 36,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 40,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 44,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 48,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 52,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 56,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 16384,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 60,
+    ".max_flat_workgroup_size": 128,
+    ".name": "c128_wave2_bo",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 28,
+    ".sgpr_spill_count": 0,
+    ".symbol": "c128_wave2_bo.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 159,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "c64-wave2.hsaco:c128_wave2_bi_bo": {
+    "module_file": "flat-A/c64-wave2.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 24,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 32,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 36,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 40,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 44,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 48,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 52,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 56,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 16384,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 60,
+    ".max_flat_workgroup_size": 128,
+    ".name": "c128_wave2_bi_bo",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 25,
+    ".sgpr_spill_count": 0,
+    ".symbol": "c128_wave2_bi_bo.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 159,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "c64-wave2.hsaco:c128_wave2_bi": {
+    "module_file": "flat-A/c64-wave2.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 24,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 32,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 36,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 40,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 44,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 48,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 52,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 56,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 16384,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 60,
+    ".max_flat_workgroup_size": 128,
+    ".name": "c128_wave2_bi",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 25,
+    ".sgpr_spill_count": 0,
+    ".symbol": "c128_wave2_bi.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 159,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "multihead-fast-padded-wave-packed.hsaco:mh_pool_project_group_c128": {
+    "module_file": "flat-A/multihead-fast-padded-wave-packed.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 24,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 28,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 32,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 36,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 40,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 4352,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 44,
+    ".max_flat_workgroup_size": 128,
+    ".name": "mh_pool_project_group_c128",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 29,
+    ".sgpr_spill_count": 0,
+    ".symbol": "mh_pool_project_group_c128.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 98,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "c64-wave2.hsaco:c256_wave2_bo": {
+    "module_file": "flat-A/c64-wave2.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 24,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 32,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 36,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 40,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 44,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 48,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 52,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 56,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 32768,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 60,
+    ".max_flat_workgroup_size": 256,
+    ".name": "c256_wave2_bo",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 34,
+    ".sgpr_spill_count": 0,
+    ".symbol": "c256_wave2_bo.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 159,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "c64-wave2.hsaco:c256_wave2_bi_bo": {
+    "module_file": "flat-A/c64-wave2.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 24,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 32,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 36,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 40,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 44,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 48,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 52,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 56,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 32768,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 60,
+    ".max_flat_workgroup_size": 256,
+    ".name": "c256_wave2_bi_bo",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 33,
+    ".sgpr_spill_count": 0,
+    ".symbol": "c256_wave2_bi_bo.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 154,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "c64-wave2.hsaco:c256_wave2_bi": {
+    "module_file": "flat-A/c64-wave2.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 24,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 32,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 36,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 40,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 44,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 48,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 52,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 56,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 32768,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 60,
+    ".max_flat_workgroup_size": 256,
+    ".name": "c256_wave2_bi",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 33,
+    ".sgpr_spill_count": 0,
+    ".symbol": "c256_wave2_bi.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 154,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "multihead-fast-padded-wave-packed.hsaco:mh_pool_project_group_c256": {
+    "module_file": "flat-A/multihead-fast-padded-wave-packed.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 24,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 28,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 32,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 36,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 40,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 8448,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 44,
+    ".max_flat_workgroup_size": 256,
+    ".name": "mh_pool_project_group_c256",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 29,
+    ".sgpr_spill_count": 0,
+    ".symbol": "mh_pool_project_group_c256.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 98,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "c512-m32-deep.hsaco:split_mix_blocked_h16w_m32": {
+    "module_file": "flat-A/c512-m32-deep.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 24,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 0,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 28,
+    ".max_flat_workgroup_size": 32,
+    ".name": "split_mix_blocked_h16w_m32",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 13,
+    ".sgpr_spill_count": 0,
+    ".symbol": "split_mix_blocked_h16w_m32.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 96,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "deep_fast-packed.hsaco:split_ffn_fused_fp8_t8": {
+    "module_file": "flat-A/deep_fast-packed.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 24,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 32,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 4160,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 36,
+    ".max_flat_workgroup_size": 128,
+    ".name": "split_ffn_fused_fp8_t8",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 14,
+    ".sgpr_spill_count": 0,
+    ".symbol": "split_ffn_fused_fp8_t8.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 111,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "deep_fast-packed.hsaco:split_projection_frag": {
+    "module_file": "flat-A/deep_fast-packed.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 24,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 32,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 40,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 0,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 44,
+    ".max_flat_workgroup_size": 32,
+    ".name": "split_projection_frag",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 17,
+    ".sgpr_spill_count": 0,
+    ".symbol": "split_projection_frag.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 83,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "c512-m32-mh.hsaco:c512_qkv_attention_compact": {
+    "module_file": "flat-A/c512-m32-mh.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 24,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 28,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 32,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 36,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 40,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 44,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 6144,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 48,
+    ".max_flat_workgroup_size": 64,
+    ".name": "c512_qkv_attention_compact",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 30,
+    ".sgpr_spill_count": 0,
+    ".symbol": "c512_qkv_attention_compact.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 141,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "multihead-fast-padded-wave-packed.hsaco:mh_attention_project_frag_c512": {
+    "module_file": "flat-A/multihead-fast-padded-wave-packed.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 24,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 32,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 36,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 40,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 44,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 48,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 52,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 56,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 0,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 60,
+    ".max_flat_workgroup_size": 32,
+    ".name": "mh_attention_project_frag_c512",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 28,
+    ".sgpr_spill_count": 0,
+    ".symbol": "mh_attention_project_frag_c512.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 80,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "multihead-reference.hsaco:mh_pool": {
+    "module_file": "flat-A/multihead-reference.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 16,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 20,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 24,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 28,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 32,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 36,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 0,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 40,
+    ".max_flat_workgroup_size": 1024,
+    ".name": "mh_pool",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 12,
+    ".sgpr_spill_count": 0,
+    ".symbol": "mh_pool.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 12,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "deep_reference.hsaco:vit_gather": {
+    "module_file": "flat-A/deep_reference.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 24,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 0,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 28,
+    ".max_flat_workgroup_size": 1024,
+    ".name": "vit_gather",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 10,
+    ".sgpr_spill_count": 0,
+    ".symbol": "vit_gather.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 6,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "deep_fast-packed.hsaco:vit_pack_input": {
+    "module_file": "flat-A/deep_fast-packed.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 16,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 24,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      }
+    ],
+    ".group_segment_fixed_size": 0,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 32,
+    ".max_flat_workgroup_size": 256,
+    ".name": "vit_pack_input",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 7,
+    ".sgpr_spill_count": 0,
+    ".symbol": "vit_pack_input.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 7,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "deep_fast-packed.hsaco:vit_expand_blocked_fp8_frag_bytein": {
+    "module_file": "flat-A/deep_fast-packed.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 24,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 28,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 32,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 40,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      }
+    ],
+    ".group_segment_fixed_size": 0,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 48,
+    ".max_flat_workgroup_size": 32,
+    ".name": "vit_expand_blocked_fp8_frag_bytein",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 23,
+    ".sgpr_spill_count": 0,
+    ".symbol": "vit_expand_blocked_fp8_frag_bytein.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 77,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "vit-stream.hsaco:vit_stream_contract_frag_hout": {
+    "module_file": "flat-A/vit-stream.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 24,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 32,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 36,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 40,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 48,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      }
+    ],
+    ".group_segment_fixed_size": 0,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 56,
+    ".max_flat_workgroup_size": 32,
+    ".name": "vit_stream_contract_frag_hout",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 12,
+    ".sgpr_spill_count": 0,
+    ".symbol": "vit_stream_contract_frag_hout.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 205,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "vit-stream.hsaco:vit_stream_qkv_frag_hin": {
+    "module_file": "flat-A/vit-stream.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 24,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 32,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      }
+    ],
+    ".group_segment_fixed_size": 2112,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 40,
+    ".max_flat_workgroup_size": 32,
+    ".name": "vit_stream_qkv_frag_hin",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 22,
+    ".sgpr_spill_count": 0,
+    ".symbol": "vit_stream_qkv_frag_hin.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 96,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "deep_fast-packed.hsaco:vit_attention_fused_640_bytein_bout": {
+    "module_file": "flat-A/deep_fast-packed.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 16,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 24,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      }
+    ],
+    ".group_segment_fixed_size": 1536,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 32,
+    ".max_flat_workgroup_size": 32,
+    ".name": "vit_attention_fused_640_bytein_bout",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 17,
+    ".sgpr_spill_count": 0,
+    ".symbol": "vit_attention_fused_640_bytein_bout.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 75,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "vit-stream.hsaco:vit_stream_project_n64_bh": {
+    "module_file": "flat-A/vit-stream.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 24,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 32,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 36,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 40,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 48,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      }
+    ],
+    ".group_segment_fixed_size": 0,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 56,
+    ".max_flat_workgroup_size": 32,
+    ".name": "vit_stream_project_n64_bh",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 13,
+    ".sgpr_spill_count": 0,
+    ".symbol": "vit_stream_project_n64_bh.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 120,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "deep_fast-packed.hsaco:decoder_project2x_h16w": {
+    "module_file": "flat-A/deep_fast-packed.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 24,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 32,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 36,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 40,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 44,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 48,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 52,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 0,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 56,
+    ".max_flat_workgroup_size": 32,
+    ".name": "decoder_project2x_h16w",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 34,
+    ".sgpr_spill_count": 0,
+    ".symbol": "decoder_project2x_h16w.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 64,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "deep_fast-packed.hsaco:decoder_project2x_h16w_byteout": {
+    "module_file": "flat-A/deep_fast-packed.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 24,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 32,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 36,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 40,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 44,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 48,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 52,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 0,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 56,
+    ".max_flat_workgroup_size": 32,
+    ".name": "decoder_project2x_h16w_byteout",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 34,
+    ".sgpr_spill_count": 0,
+    ".symbol": "decoder_project2x_h16w_byteout.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 64,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "c64-wave2.hsaco:c128_wave2_up": {
+    "module_file": "flat-A/c64-wave2.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 24,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 32,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 36,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 40,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 44,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 48,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 52,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 56,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 64,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 72,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      }
+    ],
+    ".group_segment_fixed_size": 16384,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 80,
+    ".max_flat_workgroup_size": 128,
+    ".name": "c128_wave2_up",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 26,
+    ".sgpr_spill_count": 0,
+    ".symbol": "c128_wave2_up.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 162,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "c64-wave2.hsaco:c64_wave2_up": {
+    "module_file": "flat-A/c64-wave2.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 24,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 32,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 36,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 40,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 44,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 48,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 52,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 56,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 64,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 72,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      }
+    ],
+    ".group_segment_fixed_size": 8192,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 80,
+    ".max_flat_workgroup_size": 64,
+    ".name": "c64_wave2_up",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 27,
+    ".sgpr_spill_count": 0,
+    ".symbol": "c64_wave2_up.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 137,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "c32-wave1.hsaco:c32_wave1_up": {
+    "module_file": "flat-A/c32-wave1.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 24,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 32,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 40,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 48,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 52,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 56,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 60,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 64,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 4096,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 68,
+    ".max_flat_workgroup_size": 32,
+    ".name": "c32_wave1_up",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 26,
+    ".sgpr_spill_count": 0,
+    ".symbol": "c32_wave1_up.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 154,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 0
+  },
+  "c32-wave1.hsaco:c32_wave1_finish": {
+    "module_file": "flat-A/c32-wave1.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 24,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 32,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 40,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 44,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 48,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 52,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 56,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 60,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 64,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 68,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 72,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 76,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 4096,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 80,
+    ".max_flat_workgroup_size": 32,
+    ".name": "c32_wave1_finish",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 30,
+    ".sgpr_spill_count": 0,
+    ".symbol": "c32_wave1_finish.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 131,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 0
+  },
+  "c32-wave1.hsaco:c32_wave1_post": {
+    "module_file": "flat-A/c32-wave1.hsaco",
+    ".args": [
+      {
+        ".address_space": "global",
+        ".offset": 0,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 8,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 16,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 24,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 32,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 40,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 48,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".address_space": "global",
+        ".offset": 56,
+        ".size": 8,
+        ".value_kind": "global_buffer"
+      },
+      {
+        ".offset": 64,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 68,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 72,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 76,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 80,
+        ".size": 4,
+        ".value_kind": "by_value"
+      },
+      {
+        ".offset": 84,
+        ".size": 4,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 4096,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 88,
+    ".max_flat_workgroup_size": 32,
+    ".name": "c32_wave1_post",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 37,
+    ".sgpr_spill_count": 0,
+    ".symbol": "c32_wave1_post.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 132,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 0
+  }
+}

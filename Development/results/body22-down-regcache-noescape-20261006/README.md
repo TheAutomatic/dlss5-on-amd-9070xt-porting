@@ -1,0 +1,11 @@
+# Register-cache noescape lowering fix: gold PASS, performance STOP
+
+Singleauthorizedsourcefix removesdown_capture andfinish mutablebyreferenceclosure escape, directlyinlinescaptureatqt siteandusesuniformfullbool. Sameqtloop/unroll/math/raw/owner8wordgather/cache8slots/two barriers/80ABI; compileroptsunchanged. Originalprivate192 variant7b1faa96 remainsstaticSTOP; thisfixis notproof originalclosurecost harmless. Local70212 exit0, SHA7d556cfce621b251009a14fd1466555b150b4be329522e9baee2014c67374335; actualVGPR242/SGPR18/LDS32768/private0/spill0/wave32. TargetfrontIRallocasempty, ISA scratchinstructions0.
+
+Actualreusebarrier1958bc/195908 precedes4b64pooledstores19590c..195924 withoffset0/2112/4224/6336. DScompletionwait19592c thenconsumerbarrier195930/195964 thenpooledloads195980/195988. plane0lastbodyreadsarecompletebeforefirstbarrier, so noLLVMnakedbarrier/lifetimeguess. Independentremaining source/IR/resource/routing reviewpassed.
+
+42029 stagingfrontfail wasmissinglocalworkdir/scriptfile, noGPU/no lock, notnumericalfailure. 41531 correctedscript same5027a59...caller andnew7d556payload, old/new each2frames actualwholegoldhashsame/repeat0/finite, 161→160/fused0→2, Pad16capacity4194304/valid4177920, SP4runs/fallback0. Sameindependent newonlyexport, allordinarymodulesstock65848/e452, full71FAST1MP1AE0/historyoff/commonencoded1088Style1seed0. No newhostroutechangeorpooledsemantics.
+
+70217 oneABBA firstscreen warm80/measure160 per slot, firstrawbeforewarm/nomidreadback, Fntraceloggingoff, scalarcountassertsymmetricsamecaller5027. Rawallfirst/lastSHAequal/repeat0/finite, actual161/160eachframe/fused0/241, capacityguardsallpassed. GPUavg9.204395/9.2199935/9.220084375/9.235694875; mergedGPUavg−.000006ms (effectivelyzero),p99+.0099048ms. Wallavg+.0112ms,p99+.03254ms. BaselineGPUdrift+.031299875/wall+.026675ms. Allslots/CSV/p99 retained. **STOP**, noformal/APP/integration/samevariantretry/resource-optssearch.
+
+ReducingLDS/scratch isrealbutdoesnotguaranteeperformance: extra32DS/headwave andaddedWGbarrier/plustilepaddingwork remain. Do notupdatefreshlocked-Mochigap1.04628575 fromthese9.2msdiagnostichostabsolutevalues orsubtractweakdelta. Goalnotcomplete; noinstall/defaultflags/ZIP/push.

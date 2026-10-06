@@ -1,0 +1,42 @@
+{
+  "gfx1200": {
+    ".text": true,
+    ".rodata": true,
+    ".note": true
+  },
+  "gfx1201": {
+    ".text": true,
+    ".rodata": true,
+    ".note": true
+  },
+  "persistent_functions": {
+    "sp_init": {
+      "same_code": true,
+      "same_metadata": true
+    },
+    "sp_run64": {
+      "same_code": true,
+      "same_metadata": true
+    },
+    "sp_run128": {
+      "same_code": true,
+      "same_metadata": true
+    },
+    "sp_run256": {
+      "same_code": true,
+      "same_metadata": true
+    },
+    "sp_recover64": {
+      "same_code": true,
+      "same_metadata": true
+    },
+    "sp_recover128": {
+      "same_code": true,
+      "same_metadata": true
+    },
+    "sp_recover256": {
+      "same_code": true,
+      "same_metadata": true
+    }
+  }
+}

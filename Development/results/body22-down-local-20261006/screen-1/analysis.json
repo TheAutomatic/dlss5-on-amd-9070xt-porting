@@ -1,0 +1,45 @@
+{
+  "slots": [
+    {
+      "slot": 0,
+      "kind": "A",
+      "gpu_avg": 9.20429225,
+      "gpu_p99": 9.3371474,
+      "wall_avg": 9.36455,
+      "wall_p99": 9.50092
+    },
+    {
+      "slot": 1,
+      "kind": "N",
+      "gpu_avg": 9.19241025,
+      "gpu_p99": 9.407425199999999,
+      "wall_avg": 9.360725,
+      "wall_p99": 9.68446
+    },
+    {
+      "slot": 2,
+      "kind": "N",
+      "gpu_avg": 9.219952375,
+      "gpu_p99": 9.4781424,
+      "wall_avg": 9.393531249999999,
+      "wall_p99": 9.62564
+    },
+    {
+      "slot": 3,
+      "kind": "A",
+      "gpu_avg": 9.23720675,
+      "gpu_p99": 9.4088412,
+      "wall_avg": 9.410006249999999,
+      "wall_p99": 9.65668
+    }
+  ],
+  "deltas": {
+    "gpu_avg_delta": -0.014568187500000107,
+    "wall_avg_delta": -0.010149999999999437,
+    "gpu_p99_delta": 0.06321740000000098,
+    "wall_p99_delta": 0.07611999999999952
+  },
+  "baseline_gpu_drift": 0.0329145000000004,
+  "baseline_wall_drift": 0.04545624999999909,
+  "scope": "single firstscreen only; same copied diagnostic caller, encodedcommongradient, pureNN; noAPP/perfacceptance"
+}

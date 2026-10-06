@@ -1,0 +1,37 @@
+{
+  "base_commit": "8c9a61db",
+  "production_source_sha256": {
+    "hip/c512_qkv_attention_fused.inc": "f139986789840de37c7369efcada3b6804a91d02e50853ea04b0dee1578d7013",
+    "hip/wave_owned_mh.inc": "d9d2359ef101e66161f5d0724a92cdd274fd08685efea73a9dfa56667344ddeb",
+    "hip/build-modules.ps1": "e05be56508b36f10ea04b5559f50bf48876668f32e29280ca9400bdfd7f27a54",
+    "hip/SHA256SUMS": "1fe5af2b493fa7aa5f8f20a24d25d37a784d23a0fa6d325c4f4815786b8b4810",
+    "Development/HIP/hip_reference_network.h": "3366550c46085093a22de7c3633e627788e51199d488bc574590e1e10bf3d7e8",
+    "src/native_game_frame.h": "d155dcc59bcf48d724b0457af08ab35b2a5156999d40b4dc3bb52cf3495dc3ed",
+    "src/native_hip_network.h": "90c3e21a20c5f805dc1a91f9d40ff9bd98ab51636478cf60cadc0f1b3cc1ebcc",
+    "shaders/native_game_rgb_input.hlsl": "5be59a4130e66e9f9f4d370843ef080e0783042d1f730b7a06c072421c92c2b6"
+  },
+  "runner_compiler": "x86_64-w64-mingw32-g++ (GCC) 13-win32",
+  "installed_base_addon": "61a81c75",
+  "direct_io": 3,
+  "make_resident_every": 60,
+  "geometry": {
+    "900": [
+      1600,
+      960
+    ],
+    "1080": [
+      1920,
+      1152
+    ]
+  },
+  "post_shift": [
+    -4,
+    -4
+  ],
+  "enabled_source_macros": {
+    "C512_FUSED_QKV_ATTN": 1,
+    "W2_FFN_QT_SMALL_MASK": 3
+  },
+  "source_feature_defaults": 0,
+  "validation": "432 candidate frames vs float FMA goldens +24 current-game-codec paired frames; 80 timing slots; gfx1201 GPU, gfx1200 compile-only"
+}

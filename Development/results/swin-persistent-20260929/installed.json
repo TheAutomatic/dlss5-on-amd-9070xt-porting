@@ -1,0 +1,28 @@
+{
+    "direct_io":  3,
+    "modules":  62,
+    "make_resident_every":  60,
+    "payload":  {
+                    "files":  [
+                                  {
+                                      "source":  "dlss5-amd.addon64",
+                                      "relative":  "dlss5-amd.addon64",
+                                      "sha256":  "046e1a6350b009153ae6ae210ee10c6855330f2885e4320606487eb8995bcce3"
+                                  },
+                                  {
+                                      "source":  "gfx1200-swin-persistent.hsaco",
+                                      "relative":  "DLSS5-AMD/native-game-tiled-assets/HIP/gfx1200/swin-persistent.hsaco",
+                                      "sha256":  "0fee8a961a095315f1bbbb041f1006d6182ff778c01e9fb8806355aae807aa3c"
+                                  },
+                                  {
+                                      "source":  "gfx1201-swin-persistent.hsaco",
+                                      "relative":  "DLSS5-AMD/native-game-tiled-assets/HIP/gfx1201/swin-persistent.hsaco",
+                                      "sha256":  "48c71bff68ba6c3ed928440ed3c42fc5e9765bdce8db78ab8a2aea5de0984779"
+                                  }
+                              ]
+                },
+    "backup":  "D:\\DLSSNR-Lab\\hip-backend\\swin-persistent-20260929\\backups\\stellar-20260929-172155",
+    "addon":  "046E1A6350B009153AE6AE210EE10C6855330F2885E4320606487EB8995BCCE3",
+    "preserved_modules":  60,
+    "swin_run":  1
+}

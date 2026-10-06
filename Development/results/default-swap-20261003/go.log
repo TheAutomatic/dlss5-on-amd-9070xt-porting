@@ -1,0 +1,79 @@
+== B 上午 06:57:04
+B 1 900: avg 6.9309 -> 7.1311 (+0.2002 ms, +2.89%)  p99 7.1590 -> 7.3390
+B 1 1080: avg 9.7060 -> 10.0043 (+0.2984 ms, +3.07%)  p99 9.9760 -> 10.3240
+B 2 900: avg 7.0310 -> 7.2290 (+0.1980 ms, +2.82%)  p99 7.2550 -> 7.4590
+B 2 1080: avg 9.7527 -> 10.0863 (+0.3335 ms, +3.42%)  p99 9.9970 -> 10.3230
+B 3 900: avg 7.0452 -> 7.2475 (+0.2023 ms, +2.87%)  p99 7.2770 -> 7.4960
+B 3 1080: avg 9.7586 -> 10.0735 (+0.3149 ms, +3.23%)  p99 10.0320 -> 10.4350
+B 900 merged: avg 7.0024 -> 7.2025  p99 7.2530 -> 7.4510
+B 1080 merged: avg 9.7391 -> 10.0547  p99 10.0110 -> 10.3780
+== C 上午 07:01:31
+C 1 900: avg 7.0422 -> 7.1621 (+0.1199 ms, +1.70%)  p99 7.2570 -> 7.3920
+C 1 1080: avg 9.7692 -> 9.9532 (+0.1841 ms, +1.88%)  p99 10.0250 -> 10.2090
+C 2 900: avg 7.0846 -> 7.1803 (+0.0957 ms, +1.35%)  p99 7.3190 -> 7.5260
+C 2 1080: avg 9.7813 -> 9.9710 (+0.1897 ms, +1.94%)  p99 10.0800 -> 10.3140
+C 3 900: avg 7.0627 -> 7.2002 (+0.1375 ms, +1.95%)  p99 7.3030 -> 7.5560
+C 3 1080: avg 9.7796 -> 9.9655 (+0.1860 ms, +1.90%)  p99 10.0800 -> 10.2760
+C 900 merged: avg 7.0632 -> 7.1809  p99 7.2970 -> 7.5260
+C 1080 merged: avg 9.7767 -> 9.9632  p99 10.0720 -> 10.2660
+== D 上午 07:05:56
+D 1 900: avg 7.0481 -> 7.0412 (-0.0069 ms, -0.10%)  p99 7.2720 -> 7.3250
+D 1 1080: avg 9.7772 -> 9.6818 (-0.0954 ms, -0.98%)  p99 10.0990 -> 9.9980
+D 2 900: avg 7.1091 -> 6.9921 (-0.1170 ms, -1.65%)  p99 7.3390 -> 7.2250
+D 2 1080: avg 9.7840 -> 9.6813 (-0.1028 ms, -1.05%)  p99 10.0670 -> 9.9500
+D 3 900: avg 7.0829 -> 6.9773 (-0.1056 ms, -1.49%)  p99 7.4380 -> 7.2180
+D 3 1080: avg 9.7809 -> 9.6831 (-0.0978 ms, -1.00%)  p99 10.0310 -> 9.9810
+D 900 merged: avg 7.0800 -> 7.0035  p99 7.3480 -> 7.2560
+D 1080 merged: avg 9.7807 -> 9.6821  p99 10.0570 -> 9.9810
+== Q 上午 07:10:19
+
+D:\DLSSNR-Lab\hip-backend\default-swap-20261003\cmp-QA.log:5:CMP 900-static-False 900-static-True diff=12/12
+D:\DLSSNR-Lab\hip-backend\default-swap-20261003\cmp-QA.log:10:CMP 900-motion-False 900-motion-True diff=12/12
+D:\DLSSNR-Lab\hip-backend\default-swap-20261003\cmp-QA.log:15:CMP 1080-static-False 1080-static-True diff=12/12
+D:\DLSSNR-Lab\hip-backend\default-swap-20261003\cmp-QA.log:20:CMP 1080-motion-False 1080-motion-True diff=12/12
+D:\DLSSNR-Lab\hip-backend\default-swap-20261003\cmp-QA.log:25:CMP 720-motion-False 720-motion-True diff=12/12
+D:\DLSSNR-Lab\hip-backend\default-swap-20261003\cmp-QA.log:30:CMP 900-history-False 900-history-True diff=12/12
+D:\DLSSNR-Lab\hip-backend\default-swap-20261003\cmp-QA.log:35:CMP 1080-history-False 1080-history-True diff=12/12
+-- QA vs B
+900-static psnr_all 51.25 worst_frame 51.25
+900-motion psnr_all 51.19 worst_frame 50.83
+1080-static psnr_all 50.90 worst_frame 50.90
+1080-motion psnr_all 50.96 worst_frame 50.77
+720-motion psnr_all 51.74 worst_frame 51.24
+900-history psnr_all 51.91 worst_frame 51.25
+1080-history psnr_all 51.38 worst_frame 50.69
+D:\DLSSNR-Lab\hip-backend\default-swap-20261003\cmp-QC.log:5:CMP 900-static-False 900-static-True diff=12/12
+D:\DLSSNR-Lab\hip-backend\default-swap-20261003\cmp-QC.log:10:CMP 900-motion-False 900-motion-True diff=12/12
+D:\DLSSNR-Lab\hip-backend\default-swap-20261003\cmp-QC.log:15:CMP 1080-static-False 1080-static-True diff=12/12
+D:\DLSSNR-Lab\hip-backend\default-swap-20261003\cmp-QC.log:20:CMP 1080-motion-False 1080-motion-True diff=12/12
+D:\DLSSNR-Lab\hip-backend\default-swap-20261003\cmp-QC.log:25:CMP 720-motion-False 720-motion-True diff=12/12
+D:\DLSSNR-Lab\hip-backend\default-swap-20261003\cmp-QC.log:30:CMP 900-history-False 900-history-True diff=12/12
+D:\DLSSNR-Lab\hip-backend\default-swap-20261003\cmp-QC.log:35:CMP 1080-history-False 1080-history-True diff=12/12
+-- QC vs B
+900-static psnr_all 54.10 worst_frame 54.10
+900-motion psnr_all 54.16 worst_frame 53.47
+1080-static psnr_all 54.16 worst_frame 54.16
+1080-motion psnr_all 54.58 worst_frame 54.16
+720-motion psnr_all 53.61 worst_frame 52.68
+900-history psnr_all 55.88 worst_frame 54.10
+1080-history psnr_all 56.01 worst_frame 54.16
+D:\DLSSNR-Lab\hip-backend\default-swap-20261003\cmp-QD.log:5:CMP 900-static-False 900-static-True diff=12/12
+D:\DLSSNR-Lab\hip-backend\default-swap-20261003\cmp-QD.log:10:CMP 900-motion-False 900-motion-True diff=12/12
+D:\DLSSNR-Lab\hip-backend\default-swap-20261003\cmp-QD.log:15:CMP 1080-static-False 1080-static-True diff=12/12
+D:\DLSSNR-Lab\hip-backend\default-swap-20261003\cmp-QD.log:20:CMP 1080-motion-False 1080-motion-True diff=12/12
+D:\DLSSNR-Lab\hip-backend\default-swap-20261003\cmp-QD.log:25:CMP 720-motion-False 720-motion-True diff=12/12
+D:\DLSSNR-Lab\hip-backend\default-swap-20261003\cmp-QD.log:30:CMP 900-history-False 900-history-True diff=12/12
+D:\DLSSNR-Lab\hip-backend\default-swap-20261003\cmp-QD.log:35:CMP 1080-history-False 1080-history-True diff=12/12
+-- QD vs B
+900-static psnr_all 50.49 worst_frame 50.49
+900-motion psnr_all 50.17 worst_frame 49.32
+1080-static psnr_all 50.36 worst_frame 50.36
+1080-motion psnr_all 50.34 worst_frame 50.09
+720-motion psnr_all 50.52 worst_frame 49.34
+900-history psnr_all 51.68 worst_frame 50.49
+1080-history psnr_all 51.04 worst_frame 50.36
+LOCK DROPPED
+GO_DONE
+
+
+GUARD_DONE

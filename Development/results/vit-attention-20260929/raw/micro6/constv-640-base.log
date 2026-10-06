@@ -1,0 +1,13 @@
+START,constv-640-base,vit_attention_fused_640_bytein_bout
+BUFFER,constv-640-base,output,invalid=0,nonzero=655360
+CHECK,constv-640-base,guards=0,invalid=0,nonzero=655360
+TIME,constv-640-base,0,76.943755
+TIME,constv-640-base,1,80.455467
+TIME,constv-640-base,2,72.690628
+TIME,constv-640-base,3,69.547176
+TIME,constv-640-base,4,72.358124
+TIME,constv-640-base,5,67.944854
+TIME,constv-640-base,6,70.938282
+BUFFER,constv-640-base,output,invalid=0,nonzero=655360
+CHECK,constv-640-base,guards=0,invalid=0,nonzero=655360
+RESULT,constv-640-base,72.358124,128,7

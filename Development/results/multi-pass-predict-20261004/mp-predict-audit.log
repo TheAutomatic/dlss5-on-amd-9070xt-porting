@@ -1,0 +1,71 @@
+C:\Program Files (x86)\Steam\steamapps\common\StellarBlade\SB\Binaries\Win64
+CONFIG default-config.txt
+
+DLSS5_SKIP_BLOCKS=
+DLSS5_FAST_NUMERIC=1
+DLSS5_MULTI_PASS=1
+DLSS5_MULTI_PASS_PREDICT=0
+DLSS5_PRE_UPSCALE=auto
+CONFIG custom-config.txt
+DLSS5_MULTI_PASS=3
+DLSS5_MULTI_PASS_PREDICT=1
+CONFIG native-game-flags.txt
+DLSS5_SKIP_BLOCKS=
+DLSS5_FAST_NUMERIC=1
+DLSS5_PRE_UPSCALE=1
+DLSS5_MULTI_PASS=3
+
+
+
+
+Path : C:\Program Files (x86)\Steam\steamapps\common\StellarBlade\SB\Binaries\Win64\dlss5-amd.addon64
+Hash : 50C453C5B0CF93FA031B175FBCB6B3705A9B5B4DDD8C95BF80034ADC81A8FEAB
+
+
+
+C:\XboxGames\Onimusha- Way of the Sword\Content
+CONFIG default-config.txt
+
+DLSS5_SKIP_BLOCKS=
+DLSS5_FAST_NUMERIC=1
+DLSS5_MULTI_PASS=1
+DLSS5_MULTI_PASS_PREDICT=0
+DLSS5_PRE_UPSCALE=auto
+CONFIG custom-config.txt
+DLSS5_MULTI_PASS_PREDICT=1
+DLSS5_MULTI_PASS=3
+CONFIG native-game-flags.txt
+DLSS5_SKIP_BLOCKS=
+DLSS5_FAST_NUMERIC=1
+DLSS5_PRE_UPSCALE=0
+DLSS5_MULTI_PASS=3
+
+
+
+
+Path : C:\XboxGames\Onimusha- Way of the Sword\Content\LmxxfNrRuntime.dll
+Hash : DD606C1AC649D6D16C651C4000FE50F0C3C2D8600A896DEFD1EDCEC30D7FFF1A
+
+
+
+
+
+Path : C:\XboxGames\Onimusha- Way of the Sword\Content\_storage_\LmxxfNrRuntime.dll
+Hash : DD606C1AC649D6D16C651C4000FE50F0C3C2D8600A896DEFD1EDCEC30D7FFF1A
+
+
+
+stellar : EXACT   addon 50C453C5 flags AC8CFE14 sums 067B7DAC
+   gfx1200 c32-wave1 4D458C28  c64-wave2 A3E1EBA2  deep_fast-packed B582B7F8  c32-wave1-rtz 64C9CCF6
+   gfx1201 c32-wave1 D2DDF122  c64-wave2 EB4A486E  deep_fast-packed B582B7F8  c32-wave1-rtz 99B0B1E2
+oni : EXACT   runtime DD606C1A flags 3517946C sums 067B7DAC
+   gfx1200 c32-wave1 4D458C28  c64-wave2 A3E1EBA2  deep_fast-packed B582B7F8  c32-wave1-rtz 64C9CCF6
+   gfx1201 c32-wave1 D2DDF122  c64-wave2 EB4A486E  deep_fast-packed B582B7F8  c32-wave1-rtz 99B0B1E2
+EXACT = 正式模块（不是逐位输出）；现默认 flags：DLSS5_SKIP_BLOCKS= 全 71 块 + DLSS5_FAST_NUMERIC=1 / EXACT = release modules, not bit-exact output; default flags: all 71 blocks + FAST_NUMERIC=1
+
+Name         Used         Free
+----         ----         ----
+D    582232178688 417728692224
+
+
+AUDIT_DONE

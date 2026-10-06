@@ -1,0 +1,44 @@
+{
+  "handle": 66405,
+  "exit_code": 1,
+  "lock_released": true,
+  "basis_expected_bit_diff": 0,
+  "actual_model_last_block": 47,
+  "window": 0,
+  "head": 0,
+  "actual_words": 1024,
+  "all_distinct_bit_patterns": 1,
+  "all_distinct_float_values": [
+    0.00390625
+  ],
+  "tile_distinct_counts": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "within_lane_e_bit_diff": 0,
+  "raw_and_fixture_hashes": [
+    {
+      "Path": "D:\\DLSSNR-Lab\\c512-den-gold-20261006\\baseline\\first.rgb32f",
+      "Hash": "F3E4CA370908EA9E66AA0030F65711A1D4DB3063C743A989E64A3C392F438755"
+    },
+    {
+      "Path": "D:\\DLSSNR-Lab\\c512-den-gold-20261006\\trace\\first.rgb32f",
+      "Hash": "F3E4CA370908EA9E66AA0030F65711A1D4DB3063C743A989E64A3C392F438755"
+    },
+    {
+      "Path": "D:\\DLSSNR-Lab\\sync-network-gap-20261006\\fixture\\processing.rgba32f",
+      "Hash": "62F4D12777EB8EB5E049FF34981CFC84CB4A1D65CF5E31415143C94C8AAA325A"
+    },
+    {
+      "Path": "D:\\DLSSNR-Lab\\sync-network-gap-20261006\\fast1.flags",
+      "Hash": "EF6C769C2CACB773C95A1C1F9F8797314339F75B1DCD6DD7A707E88E125D782B"
+    },
+    {
+      "Path": "D:\\DLSSNR-Lab\\c512-den-gold-20261006\\run_gold.ps1",
+      "Hash": "A5125480EE760EFE61F2E1A54E5F97E2A65E388301F368258FEB6BAC703C3BFB"
+    }
+  ],
+  "decision": "basis pass; stock-trace raw same; actual trace wholly clamp-floor-degenerate: non-asymmetric model gate FAIL, no8to1/no performance/no GPU retry"
+}

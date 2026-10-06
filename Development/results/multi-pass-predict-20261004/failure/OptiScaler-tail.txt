@@ -1,0 +1,80 @@
+﻿[01:00:39.273279] [I] WrappedIDXGISwapChain4::WrappedIDXGISwapChain4 lmxxf ProxyWrap after swapchain 1: true (submission hook must be ready)
+[01:00:39.343125] [E] StreamlineHooks::streamlineLogCallback [01-00-39][streamline][error][tid:6592][5s:080ms:045us]sl.cpp:185[slValidateFeatureContext] 'kFeatureDLSS_G' context is missing.
+[01:00:39.352347] [I] LibraryLoadHooks::LoadLibraryCheckW nvapi64.dll call!
+[01:00:39.355816] [I] AntiLag2::init FSR Anti-Lag 2.0 DX12 initialized
+[01:00:39.355838] [I] LowLatency::update_low_latency_tech LowLatency algo: FSR Anti-Lag 2.0
+[01:00:39.386416] [I] OptiInput::Initialize Initialize requested target:0x1c0e30 input:0x0 isUwp:0 useSubclass:1 currentPid:5688
+[01:00:39.386451] [I] OptiInput::SetTargetWindow target window set hwnd:0x1c0e30 root:0x1c0e30 pid:5688 tid:11640 currentPid:5688 external:0 isUwp:0 useSubclass:1
+[01:00:39.386463] [I] OptiInput::SetInputWindow input window set hwnd:0x1c0e30 root:0x1c0e30 pid:5688 tid:11640 explicitInput:0 useSubclass:1
+[01:00:39.386479] [I] OptiInput::InstallWindowSubclass subclass installed hwnd:0x1c0e30 previousWndProc:5374344032 optiWndProc:140730119484208
+[01:00:39.386489] [I] OptiInput::InstallHooks installing Win32 input hooks currentPid:5688 targetPid:5688 inputPid:5688
+[01:00:39.386603] [I] OptiInput::InstallHooks Win32 message hooks installed
+[01:00:39.386668] [I] OptiInput::InstallHooks Win32 key state hooks installed
+[01:00:39.386712] [I] OptiInput::InstallHooks Win32 GetMessagePos hooks installed
+[01:00:39.386756] [I] OptiInput::InstallHooks Win32 clip cursor hooks installed
+[01:00:39.386841] [I] OptiInput::InstallHooks Win32 message hooks installed
+[01:00:39.386918] [I] OptiInput::InstallHooks Win32 HID hooks installed
+[01:00:39.386978] [I] OptiInput::InstallHooks Win32 raw input hooks installed
+[01:00:39.387030] [I] OptiInput::InstallHooks Win32 windows input hooks installed
+[01:00:39.387087] [I] OptiInput::InstallHooks Win32 position input hooks installed
+[01:00:39.387097] [I] OptiInput::Initialize Initialize completed hooksInstalled:1 target:0x1c0e30 targetPid:5688 input:0x1c0e30 inputPid:5688 externalTarget:0 subclassed:1
+[01:00:39.387176] [I] OptiInput::UpdateXInputIntegrationLocked XInput hooks installed module:0x7ffee2a60000 getState:1 getStateEx:1 getKeystroke:1 setState:1
+[01:00:39.387240] [I] OptiInput::`anonymous-namespace'::InstallDirectInputExportHookLocked DirectInput8Create hook installed module:0x7ffe4a4b0000
+[01:00:39.424983] [I] CreateRenderTargetDx12 done!
+[01:00:39.502189] [W] OptiInput::ValidateWindowSubclassLocked subclass lost input:0x1c0e30 currentWndProc:140729870662992 previousOriginal:5374344032 restoredToOriginal:0
+[01:00:39.502224] [W] OptiInput::ValidateWindowSubclassLocked subclass lost to another WndProc; preserving previous original to avoid recursive WndProc chain input:0x1c0e30 current:140729870662992 preservedOriginal:5374344032
+[01:00:39.775749] [I] LibraryLoadHooks::LoadLibraryCheckW dxgi.dll call, returning this dll!
+[01:00:39.780521] [W] DxgiFactoryHooks::CreateSwapChainForComposition Composition overlay/helper call! Width: 1, Height: 1
+[01:00:40.877454] [I] OptiInput::`anonymous-namespace'::HookDirectInputInterfaceLocked DirectInput CreateDevice hook installed wide:1
+[01:00:40.877534] [I] OptiInput::`anonymous-namespace'::TrackDirectInputDeviceLocked DirectInput device captured device:0xf23c7ee8 kind:keyboard
+[01:00:41.344800] [I] CreateRenderTargetDx12 done!
+[01:00:42.112241] [I] ffxCreateContext_Dx12 Custom context index:7912
+[01:00:42.112286] [I] ffxCreateContext_Dx12 context created: 1EE8
+[01:00:42.129683] [I] CreateDLSSContext renderWidth: 1712, maxWidth: 2560, ratio: 1.4953271
+[01:00:42.129731] [I] TryCreateOptiFeature Creating OptiScaler feature, HandleId: 1000000
+[01:00:42.129738] [I] TryCreateOptiFeature Creating FSR 3.X upscaler feature
+[01:00:42.129790] [I] IFeature::SetHandle Handle: 1000000
+[01:00:42.129800] [I] IFeature::SetInitParameters Init Flag AutoExposure: false
+[01:00:42.129804] [I] IFeature::SetInitParameters Init Flag DepthInverted: true
+[01:00:42.129808] [I] IFeature::SetInitParameters Init Flag IsHdr: true
+[01:00:42.129812] [I] IFeature::SetInitParameters Init Flag JitteredMV: false
+[01:00:42.129816] [I] IFeature::SetInitParameters Init Flag LowResMV: true
+[01:00:42.129820] [I] IFeature::SetInitParameters Init Flag SharpenEnabled: false
+[01:00:42.129827] [I] IFeature::SetInitParameters Render Resolution: 1712x960, Display Resolution 2560x1440, Quality: 2
+[01:00:42.129833] [I] FFXFeatureDx12::FFXFeatureDx12 amd_fidelityfx_dx12.dll methods loaded!
+[01:00:42.129846] [I] Amdxc64Hooks::hkAmdExtD3DCreateInterface IAmdExtFfxApi queried, returning custom AmdExtFfxApi
+[01:00:42.129867] [I] UpdateFfxApiProviderEx for: Upscaling, result: 0x0
+[01:00:42.129882] [I] Amdxc64Hooks::hkAmdExtD3DCreateInterface IAmdExtD3DFactory queried, returning custom AmdExtD3DFactory
+[01:00:42.129900] [I] AmdExtD3DFactory::CreateInterface Custom IAmdExtD3DShaderIntrinsics queried, returning custom AmdExtD3DShaderIntrinsics
+[01:00:42.129908] [I] Amdxc64Hooks::hkAmdExtD3DCreateInterface IAmdExtD3DFactory queried, returning custom AmdExtD3DFactory
+[01:00:42.129913] [I] AmdExtD3DFactory::CreateInterface Custom IAmdExtD3DShaderIntrinsics queried, returning custom AmdExtD3DShaderIntrinsics
+[01:00:42.129918] [I] Amdxc64Hooks::hkAmdExtD3DCreateInterface IAmdExtFfxApi queried, returning custom AmdExtFfxApi
+[01:00:42.129926] [I] UpdateFfxApiProviderEx for: Upscaling, result: 0x0
+[01:00:42.129932] [I] Amdxc64Hooks::hkAmdExtD3DCreateInterface IAmdExtD3DFactory queried, returning custom AmdExtD3DFactory
+[01:00:42.129937] [I] AmdExtD3DFactory::CreateInterface Custom IAmdExtD3DShaderIntrinsics queried, returning custom AmdExtD3DShaderIntrinsics
+[01:00:42.129944] [I] Amdxc64Hooks::hkAmdExtD3DCreateInterface IAmdExtD3DFactory queried, returning custom AmdExtD3DFactory
+[01:00:42.129949] [I] AmdExtD3DFactory::CreateInterface Custom IAmdExtD3DShaderIntrinsics queried, returning custom AmdExtD3DShaderIntrinsics
+[01:00:42.129954] [I] Amdxc64Hooks::hkAmdExtD3DCreateInterface IAmdExtFfxApi queried, returning custom AmdExtFfxApi
+[01:00:42.129969] [I] UpdateFfxApiProviderEx for: Upscaling, result: 0x0
+[01:00:42.129979] [I] Amdxc64Hooks::hkAmdExtD3DCreateInterface IAmdExtD3DFactory queried, returning custom AmdExtD3DFactory
+[01:00:42.129985] [I] AmdExtD3DFactory::CreateInterface Custom IAmdExtD3DShaderIntrinsics queried, returning custom AmdExtD3DShaderIntrinsics
+[01:00:42.130067] [I] Amdxc64Hooks::hkAmdExtD3DCreateInterface IAmdExtD3DFactory queried, returning custom AmdExtD3DFactory
+[01:00:42.130074] [I] AmdExtD3DFactory::CreateInterface Custom IAmdExtD3DShaderIntrinsics queried, returning custom AmdExtD3DShaderIntrinsics
+[01:00:42.152570] [I] CreateDLSSContext context created: 1EE8
+[01:00:42.152792] [I] `anonymous-namespace'::ReportSkipOnce DLSS-NR did not run: AMD neural: the upscaler could not restore state this frame
+[01:00:42.156217] [I] LibraryLoadHooks::LoadLibraryCheckW dxgi.dll call, returning this dll!
+[01:00:42.157261] [I] DlssNr::AmdBridge::`anonymous-namespace'::IsAmd AMD pre-SR physical adapter vendor: 1002, AMD: true
+[01:00:42.157644] [I] DlssNr::Backend::LmxxfBackend::LmxxfBackend lmxxf diagnostic: mode=off (restart to change; off/original/copy-current/staging-current/staging-previous/proxy-original/split-original)
+[01:00:42.157651] [I] DlssNr::Backend::LmxxfBackend::SetStatus lmxxf status: lmxxf: constructed (session not ready)
+[01:00:42.251308] [I] DlssNr::AmdBridge::`anonymous-namespace'::IsAmd AMD pre-SR physical adapter vendor: 1002, AMD: true
+[01:00:42.260718] [I] DlssNr::AmdBridge::`anonymous-namespace'::IsAmd AMD pre-SR physical adapter vendor: 1002, AMD: true
+[01:00:42.271639] [I] DlssNr::AmdBridge::`anonymous-namespace'::IsAmd AMD pre-SR physical adapter vendor: 1002, AMD: true
+[01:00:42.318894] [I] DlssNr::AmdBridge::`anonymous-namespace'::IsAmd AMD pre-SR physical adapter vendor: 1002, AMD: true
+[01:00:42.521477] [I] DlssNr::Backend::LmxxfBackend::EnsureSession lmxxf: DLSS5_NETWORK_HEIGHT defaulted to auto
+[01:00:42.521786] [W] DlssNr::Backend::LmxxfBackend::EnsureSession lmxxf: LMXXF_WEIGHTS_DIR unset (PrepareSession may fail without tiled weights)
+[01:00:42.521931] [I] DlssNr::Backend::LmxxfBackend::EnsureSession lmxxf: assets/modules dir=C:\Program Files\WindowsApps\F024294D.63383C66B8708_1.0.3.0_x64__8fty0by30jkny\DLSS5-AMD\native-game-tiled-assets\HIP
+[01:00:42.534518] [I] DlssNr::Backend::LmxxfBackend::EnsureSession lmxxf: after Create status=lmxxf modules_ok=74 hip=0 prepared=0 queue=0 weights=1 recreates=0
+[01:00:42.534536] [I] DlssNr::Backend::LmxxfBackend::SetStatus lmxxf status: lmxxf: session ready
+[01:00:43.890057] [I] DlssNr::Backend::LmxxfBackend::Record lmxxf: after PrepareFrame HIP/net geometry status=lmxxf modules_ok=74 hip=1 net=1600x900 color_job=1712x960 weights=1 recreates=0 net_gpu_ms=off wave_owned=1/1 c512_m32=1/1 vit_proj_n64=1/1 pdl=1/1 skip=0 swin_run=1/1 vit_stream=3/3 | flags: C:\Program Files\WindowsApps\F024294D.63383C66B8708_1.0.3.0_x64
+[01:00:43.891418] [I] DlssNr::Backend::LmxxfBackend::SetStatus lmxxf status: lmxxf: Record ok (pending EnqueueHip)
+[01:00:43.891441] [I] DlssNr::Backend::LmxxfBackend::Record lmxxf nr: eval=1 output=0x20315c850 betweenHits=0 enqueueCalls=0 skippedHits=0 lastEnqueueRc=0 transfer=1.00 color=1.00 debugView=0 scale=1.00 producerSubmitted=0 continuationSubmitted=0 submitFailures=0

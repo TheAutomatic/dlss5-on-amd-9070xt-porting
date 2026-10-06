@@ -1,0 +1,30 @@
+{
+  "phase": "CPU replayAuto isolated preparation only noGPU/perf",
+  "minimal_gate_source": "359d6b3d",
+  "build": "80231exit0; final77848 ownedEventKey/failurelogs exit0",
+  "exe_sha256": "279984dfaf8b453edc7d0502dd5725a051042a47fd0e5dd0fb4cdd27c2da02cb",
+  "source_sha256": {
+    "benchmark.cpp": "a36f7661ac66016e4f784e8bd985b2eeb79645f2f0934037c7043a4611d43f4c",
+    "hip_reference_network.h": "352e01eaab7dcf9779e24cd258d4a99fc8bcaabe945b541a0fd17d60ffba73f5",
+    "hip_d3d12_bridge.h": "1ef1b9472ff005e2fc49d20c27ded65edb7f2244674afc838b0ef0e437a97bd5",
+    "submit_pulse.h": "bb84eccedd5f8841730b667c3b25d09626d47931cc06747ab65c9fd4e42eabfb",
+    "native_hip_network.h": "bc530ba6f674f1390e2c39a042f2bbaaecf1b78323567f7ca7699133019a379f"
+  },
+  "scope": "currentOrigFrame1152F1MP1PRED1inactiveAE0noneHistseed0resettruePDL0NET0overlap0 Style1/HDR12seq2",
+  "roles": [
+    "actualEagerAuto2 unchangedphysicalmarker",
+    "ReplayAuto2 withsameownedlease event inNNgraph"
+  ],
+  "event_API_gate": "ActualDLL optionalhipGraphEventRecordNodeGetEvent resolved beforecapture; absencecasefail, no fallback/anothermarker",
+  "owned_event": "privatelease read-only active/count1 handle; actualEventRecordNodegetter mustsamehandle; everyreplayhandlematches recordedkey",
+  "DAG_gate": "162nodes exactly161Kernel+1EventRecord7. UniqueTopo preservesactualeager161function sequence withEvent immediatelybetween mh_pool_project_group_c256 andsplit_ffn_one_w2f8",
+  "eligibility": "Everygraphlaunch outsidecapture rechecks fixedmaps/seed/history/nativePulseRejectMask(false)/driver/caps/lease/Swinactive/style; siteorder provenDAG notstalehostorderedDownflag",
+  "counter_domains": "WarmexecutedordinaryRecords separate; capturehostRecord1 separately; GraphLaunchN APIs not reportedasRecord API norindependentGPUmarker count",
+  "cleanup": "Ownerdevice/drain\u2192graphExecdestroy\u2192graphdestroy\u2192leaseClose\u2192imports/semaphore/Network. NativeRecordfailure retainedevent never skipped; invalidcapture/endstatus abortownprocess withoutunsafeleasefree",
+  "limits": [
+    "NoactualDLL/export/node/rawhardwareproofyet",
+    "GraphEventRecordtypedidentity+runtimebinding not standalone observedGPUmarkerN; counter log GPU_marker_count_unobserved1 explicit",
+    "NoReplayAuto performance/production/MP3/PDL1hotmutation broadclaim",
+    "NoDevHistory write duringcompression, noamend/install/userconfig/ZIP/push"
+  ]
+}

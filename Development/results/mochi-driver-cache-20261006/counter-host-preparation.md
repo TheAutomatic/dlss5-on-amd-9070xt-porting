@@ -1,0 +1,9 @@
+# Locked M counter capture host CPU preparation
+
+Exactlockedsource windows/src/core/nrvk.hpp andnr_graph.cpp atd1185d2. Runnergraph vkCmdDispatch1158, graphFillBuffer1125/1127, buffertransfercopy498, imagecopies667/670; graphsubmit1195→Contextsubmit61. Graphconstruction noisejobdispatch nr_graph3681 isoutsideframe. Thesecommandclasses mustbe recordedseparately; noassumption thatGPUdriver internallylowerscopy/fill tozeroComputeOps.
+
+Criticalcounterdomain: run_graph_once1110 supportsrecord=false, replayingsamecommandbuffer; chunk1 run_graph1068–1104 submits/fencewaits perframe while reusingrecording. CountingvkCmdDispatch APIinvocations countsrecording, not actual replayeddispatches perframe. Accuratehostdiagnostic recordsper-commandbufferfunctionsequence/dispatch/fill/copycounts thenincrements executedcounts atsubmit bythatrecording. Includeinitialnoise/copies andzero fills, andkeeptoolglobalrender-op mapping separate. Oldstdout123steps isnotactualRDPglobaldispatchcount.
+
+LockedCLI warm pathnr_graph5356–5361 warmsbeforemeasuredrun, writesurfaceafterrun; no defaultfirstrawbeforewarm. Minimaldiagnostichost addsinitialoneframe+firstreadback beforereusedwarm80, thenlongrepeats2000/chunk1, retainingexactshaderSPV/model/commoninput/style1seed0/FP32/host-boundary/reuse plan. ThisisnewCPUdiagnostichost, notidenticaloldbenchmarktimingbinary, andmustpassfirst/finalrawreferencegate. No--per-layer/perstep timestamps; existingwholegraphquery behavior remains accounted, notaddedperkernel events.
+
+Actual Vkframecommandsequence/referencehash mustcome from recording/submission observer, notstatickernelcount inference. Shader andpipelineidentities lockedelsewhere inthisfolder andfresh60566; no shaderrecompile/toolinstallation/GPUexecution/concurrenthostbuild performedinthisreview. Sharedexactentrypoints withmeasurement.

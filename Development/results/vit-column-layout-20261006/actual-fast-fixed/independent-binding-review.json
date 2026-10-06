@@ -1,0 +1,42 @@
+{
+  "scope": "Read-only independent review; no GPU or source edits",
+  "source_sha256": {
+    "hip_reference_network.h": "75b5055ea191eecd2f3756fcaf89dcf63d8fa849566027dbee08816cbdcc2b73",
+    "benchmark.cpp": "5df4d328aaedfb791f8fcffac30f8fb780ffc7d2bee8980cf9c3cdcc3fe68a74",
+    "whole.cpp": "d7214941fe31dfa1468840db94619dd4a9736b614b506907d9ef012cbce5c785"
+  },
+  "verdict": "No hard block in corrected isolated FAST pair binding",
+  "binding": [
+    "LoadModule receives the logged effective FastTwin filename; successful returned handle is stored in modules[vit_stream/deep_fast].",
+    "Fn resolves and caches hipModuleGetFunction from that same handle; first-target log prints that handle and cached Fn used by actual launch.",
+    "run_whole_fast freezes old/new producer and consumer hashes then copies to actual FAST filenames. run_nn_fast verifies these copied FAST filenames equal the frozen row artifacts before spawning PAIR_READY=1."
+  ],
+  "observed_gold": {
+    "producer_effective": "modules-new/vit-stream-fast.hsaco",
+    "producer_module": "000001cc049883a0",
+    "producer_fn": "000001cc04d423e0",
+    "consumer_effective": "modules-new/deep_fast-packed-fast.hsaco",
+    "consumer_module": "000001cc04987b20",
+    "consumer_fn": "000001cc057268a0",
+    "producer_calls": 16,
+    "consumer_calls": 16,
+    "frames": 2,
+    "producer_grid_threads": [
+      768,
+      160
+    ],
+    "consumer_grid_threads": [
+      1280,
+      32
+    ],
+    "history_reuse_gate": "null",
+    "H900_scope": 0,
+    "pulse_record": 0
+  },
+  "limits": [
+    "READY is external preflight attestation; caller itself does not hash files or validate all runtime formats. This is isolated frozen pair validation, not production atomic fallback/hot-reload compatibility.",
+    "First-target Fn logs print once per role. Per-target getenv/string guard and scalar counts remain on both sides of the same benchmark caller; instrumentation is not zero.",
+    "Eight producer and eight consumer target calls per frame follow observed 16/16 over two frames and full71 schedule; no claim for arbitrary geometry/MP/profile.",
+    "Earlier normal a085/876f binding is withdrawn as actual FAST1 identity; corrected active producer is 877e/03de."
+  ]
+}

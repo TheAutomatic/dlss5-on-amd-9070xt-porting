@@ -1,0 +1,3430 @@
+{
+  "900": [
+    {
+      "stage_before": "block70",
+      "module": "c32-wave1",
+      "kernel": "c32_wave1_prefix",
+      "groups": 24000,
+      "threads": 32,
+      "waves": 24000
+    },
+    {
+      "stage_before": "block0",
+      "module": "c32-wave1",
+      "kernel": "c32_wave1_mapped",
+      "groups": 6000,
+      "threads": 32,
+      "waves": 6000
+    },
+    {
+      "stage_before": "block0",
+      "module": "c32-wave1",
+      "kernel": "c32_wave1_chain",
+      "groups": 6161,
+      "threads": 32,
+      "waves": 6161
+    },
+    {
+      "stage_before": "block0",
+      "module": "c32-wave1",
+      "kernel": "c32_wave1_chain",
+      "groups": 6060,
+      "threads": 32,
+      "waves": 6060
+    },
+    {
+      "stage_before": "block0",
+      "module": "c32-wave1",
+      "kernel": "c32_wave1_finish_dcrop",
+      "groups": 6100,
+      "threads": 32,
+      "waves": 6100
+    },
+    {
+      "stage_before": "block4-down",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_pool_project_production_h16w",
+      "groups": 24000,
+      "threads": 32,
+      "waves": 24000
+    },
+    {
+      "stage_before": "block4-down",
+      "module": "c64-wave2",
+      "kernel": "c64_wave2_bo",
+      "groups": 1500,
+      "threads": 64,
+      "waves": 3000
+    },
+    {
+      "stage_before": "block5",
+      "module": "c64-wave2",
+      "kernel": "c64_wave2_bi_bo",
+      "groups": 1581,
+      "threads": 64,
+      "waves": 3162
+    },
+    {
+      "stage_before": "block6",
+      "module": "c64-wave2",
+      "kernel": "c64_wave2_bi_bo",
+      "groups": 1530,
+      "threads": 64,
+      "waves": 3060
+    },
+    {
+      "stage_before": "block7",
+      "module": "c64-wave2",
+      "kernel": "c64_wave2_bi",
+      "groups": 1550,
+      "threads": 64,
+      "waves": 3100
+    },
+    {
+      "stage_before": "block8",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_pool_project_group_c64",
+      "groups": 1500,
+      "threads": 64,
+      "waves": 3000
+    },
+    {
+      "stage_before": "block8",
+      "module": "c64-wave2",
+      "kernel": "c128_wave2_bo",
+      "groups": 375,
+      "threads": 128,
+      "waves": 1500
+    },
+    {
+      "stage_before": "block9",
+      "module": "c64-wave2",
+      "kernel": "c128_wave2_bi_bo",
+      "groups": 416,
+      "threads": 128,
+      "waves": 1664
+    },
+    {
+      "stage_before": "block10",
+      "module": "c64-wave2",
+      "kernel": "c128_wave2_bi_bo",
+      "groups": 390,
+      "threads": 128,
+      "waves": 1560
+    },
+    {
+      "stage_before": "block11",
+      "module": "c64-wave2",
+      "kernel": "c128_wave2_bi_bo",
+      "groups": 400,
+      "threads": 128,
+      "waves": 1600
+    },
+    {
+      "stage_before": "block12",
+      "module": "c64-wave2",
+      "kernel": "c128_wave2_bi_bo",
+      "groups": 375,
+      "threads": 128,
+      "waves": 1500
+    },
+    {
+      "stage_before": "block13",
+      "module": "c64-wave2",
+      "kernel": "c128_wave2_bi",
+      "groups": 416,
+      "threads": 128,
+      "waves": 1664
+    },
+    {
+      "stage_before": "block14",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_pool_project_group_c128",
+      "groups": 375,
+      "threads": 128,
+      "waves": 1500
+    },
+    {
+      "stage_before": "block14",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_fb_pdl",
+      "groups": 416,
+      "threads": 512,
+      "waves": 6656
+    },
+    {
+      "stage_before": "block14",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave_bo",
+      "groups": 104,
+      "threads": 256,
+      "waves": 832
+    },
+    {
+      "stage_before": "block15",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl",
+      "groups": 416,
+      "threads": 512,
+      "waves": 6656
+    },
+    {
+      "stage_before": "block15",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave_bo",
+      "groups": 104,
+      "threads": 256,
+      "waves": 832
+    },
+    {
+      "stage_before": "block16",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl",
+      "groups": 416,
+      "threads": 512,
+      "waves": 6656
+    },
+    {
+      "stage_before": "block16",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave_bo",
+      "groups": 104,
+      "threads": 256,
+      "waves": 832
+    },
+    {
+      "stage_before": "block17",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl",
+      "groups": 416,
+      "threads": 512,
+      "waves": 6656
+    },
+    {
+      "stage_before": "block17",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave_bo",
+      "groups": 104,
+      "threads": 256,
+      "waves": 832
+    },
+    {
+      "stage_before": "block18",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl",
+      "groups": 416,
+      "threads": 512,
+      "waves": 6656
+    },
+    {
+      "stage_before": "block18",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave_bo",
+      "groups": 104,
+      "threads": 256,
+      "waves": 832
+    },
+    {
+      "stage_before": "block19",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl",
+      "groups": 416,
+      "threads": 512,
+      "waves": 6656
+    },
+    {
+      "stage_before": "block19",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave_bo",
+      "groups": 104,
+      "threads": 256,
+      "waves": 832
+    },
+    {
+      "stage_before": "block20",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl",
+      "groups": 416,
+      "threads": 512,
+      "waves": 6656
+    },
+    {
+      "stage_before": "block20",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave_bo",
+      "groups": 104,
+      "threads": 256,
+      "waves": 832
+    },
+    {
+      "stage_before": "block21",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl",
+      "groups": 416,
+      "threads": 512,
+      "waves": 6656
+    },
+    {
+      "stage_before": "block21",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave",
+      "groups": 104,
+      "threads": 256,
+      "waves": 832
+    },
+    {
+      "stage_before": "block22",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_pool_project_group_c256",
+      "groups": 94,
+      "threads": 256,
+      "waves": 752
+    },
+    {
+      "stage_before": "block22",
+      "module": "multihead-reference",
+      "kernel": "mh_shift_pack",
+      "groups": 3584,
+      "threads": 256,
+      "waves": 28672
+    },
+    {
+      "stage_before": "block22",
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "groups": 448,
+      "threads": 32,
+      "waves": 448
+    },
+    {
+      "stage_before": "block22",
+      "module": "deep_fast-packed",
+      "kernel": "split_ffn_fused_fp8_t8",
+      "groups": 896,
+      "threads": 128,
+      "waves": 3584
+    },
+    {
+      "stage_before": "block22",
+      "module": "deep_fast-packed",
+      "kernel": "split_projection_frag",
+      "groups": 896,
+      "threads": 32,
+      "waves": 896
+    },
+    {
+      "stage_before": "block22",
+      "module": "c512-m32-mh",
+      "kernel": "mh_qkv_normalize_frag_c512_m32",
+      "groups": 1344,
+      "threads": 32,
+      "waves": 1344
+    },
+    {
+      "stage_before": "block22",
+      "module": "multihead_fused_attention",
+      "kernel": "mh_attention_fused_fp8_out",
+      "groups": 448,
+      "threads": 128,
+      "waves": 1792
+    },
+    {
+      "stage_before": "block22",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_attention_project_frag_c512",
+      "groups": 896,
+      "threads": 32,
+      "waves": 896
+    },
+    {
+      "stage_before": "block23",
+      "module": "multihead-reference",
+      "kernel": "mh_shift_pack",
+      "groups": 4480,
+      "threads": 256,
+      "waves": 35840
+    },
+    {
+      "stage_before": "block23",
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "groups": 560,
+      "threads": 32,
+      "waves": 560
+    },
+    {
+      "stage_before": "block23",
+      "module": "deep_fast-packed",
+      "kernel": "split_ffn_fused_fp8_t8",
+      "groups": 1120,
+      "threads": 128,
+      "waves": 4480
+    },
+    {
+      "stage_before": "block23",
+      "module": "deep_fast-packed",
+      "kernel": "split_projection_frag",
+      "groups": 1120,
+      "threads": 32,
+      "waves": 1120
+    },
+    {
+      "stage_before": "block23",
+      "module": "c512-m32-mh",
+      "kernel": "mh_qkv_normalize_frag_c512_m32",
+      "groups": 1680,
+      "threads": 32,
+      "waves": 1680
+    },
+    {
+      "stage_before": "block23",
+      "module": "multihead_fused_attention",
+      "kernel": "mh_attention_fused_fp8_out",
+      "groups": 560,
+      "threads": 128,
+      "waves": 2240
+    },
+    {
+      "stage_before": "block23",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_attention_project_frag_c512",
+      "groups": 1120,
+      "threads": 32,
+      "waves": 1120
+    },
+    {
+      "stage_before": "block24",
+      "module": "multihead-reference",
+      "kernel": "mh_shift_pack",
+      "groups": 3584,
+      "threads": 256,
+      "waves": 28672
+    },
+    {
+      "stage_before": "block24",
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "groups": 448,
+      "threads": 32,
+      "waves": 448
+    },
+    {
+      "stage_before": "block24",
+      "module": "deep_fast-packed",
+      "kernel": "split_ffn_fused_fp8_t8",
+      "groups": 896,
+      "threads": 128,
+      "waves": 3584
+    },
+    {
+      "stage_before": "block24",
+      "module": "deep_fast-packed",
+      "kernel": "split_projection_frag",
+      "groups": 896,
+      "threads": 32,
+      "waves": 896
+    },
+    {
+      "stage_before": "block24",
+      "module": "c512-m32-mh",
+      "kernel": "mh_qkv_normalize_frag_c512_m32",
+      "groups": 1344,
+      "threads": 32,
+      "waves": 1344
+    },
+    {
+      "stage_before": "block24",
+      "module": "multihead_fused_attention",
+      "kernel": "mh_attention_fused_fp8_out",
+      "groups": 448,
+      "threads": 128,
+      "waves": 1792
+    },
+    {
+      "stage_before": "block24",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_attention_project_frag_c512",
+      "groups": 896,
+      "threads": 32,
+      "waves": 896
+    },
+    {
+      "stage_before": "block25",
+      "module": "multihead-reference",
+      "kernel": "mh_shift_pack",
+      "groups": 4480,
+      "threads": 256,
+      "waves": 35840
+    },
+    {
+      "stage_before": "block25",
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "groups": 560,
+      "threads": 32,
+      "waves": 560
+    },
+    {
+      "stage_before": "block25",
+      "module": "deep_fast-packed",
+      "kernel": "split_ffn_fused_fp8_t8",
+      "groups": 1120,
+      "threads": 128,
+      "waves": 4480
+    },
+    {
+      "stage_before": "block25",
+      "module": "deep_fast-packed",
+      "kernel": "split_projection_frag",
+      "groups": 1120,
+      "threads": 32,
+      "waves": 1120
+    },
+    {
+      "stage_before": "block25",
+      "module": "c512-m32-mh",
+      "kernel": "mh_qkv_normalize_frag_c512_m32",
+      "groups": 1680,
+      "threads": 32,
+      "waves": 1680
+    },
+    {
+      "stage_before": "block25",
+      "module": "multihead_fused_attention",
+      "kernel": "mh_attention_fused_fp8_out",
+      "groups": 560,
+      "threads": 128,
+      "waves": 2240
+    },
+    {
+      "stage_before": "block25",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_attention_project_frag_c512",
+      "groups": 1120,
+      "threads": 32,
+      "waves": 1120
+    },
+    {
+      "stage_before": "block26",
+      "module": "multihead-reference",
+      "kernel": "mh_shift_pack",
+      "groups": 3584,
+      "threads": 256,
+      "waves": 28672
+    },
+    {
+      "stage_before": "block26",
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "groups": 448,
+      "threads": 32,
+      "waves": 448
+    },
+    {
+      "stage_before": "block26",
+      "module": "deep_fast-packed",
+      "kernel": "split_ffn_fused_fp8_t8",
+      "groups": 896,
+      "threads": 128,
+      "waves": 3584
+    },
+    {
+      "stage_before": "block26",
+      "module": "deep_fast-packed",
+      "kernel": "split_projection_frag",
+      "groups": 896,
+      "threads": 32,
+      "waves": 896
+    },
+    {
+      "stage_before": "block26",
+      "module": "c512-m32-mh",
+      "kernel": "mh_qkv_normalize_frag_c512_m32",
+      "groups": 1344,
+      "threads": 32,
+      "waves": 1344
+    },
+    {
+      "stage_before": "block26",
+      "module": "multihead_fused_attention",
+      "kernel": "mh_attention_fused_fp8_out",
+      "groups": 448,
+      "threads": 128,
+      "waves": 1792
+    },
+    {
+      "stage_before": "block26",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_attention_project_frag_c512",
+      "groups": 896,
+      "threads": 32,
+      "waves": 896
+    },
+    {
+      "stage_before": "block27",
+      "module": "multihead-reference",
+      "kernel": "mh_shift_pack",
+      "groups": 4480,
+      "threads": 256,
+      "waves": 35840
+    },
+    {
+      "stage_before": "block27",
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "groups": 560,
+      "threads": 32,
+      "waves": 560
+    },
+    {
+      "stage_before": "block27",
+      "module": "deep_fast-packed",
+      "kernel": "split_ffn_fused_fp8_t8",
+      "groups": 1120,
+      "threads": 128,
+      "waves": 4480
+    },
+    {
+      "stage_before": "block27",
+      "module": "deep_fast-packed",
+      "kernel": "split_projection_frag",
+      "groups": 1120,
+      "threads": 32,
+      "waves": 1120
+    },
+    {
+      "stage_before": "block27",
+      "module": "c512-m32-mh",
+      "kernel": "mh_qkv_normalize_frag_c512_m32",
+      "groups": 1680,
+      "threads": 32,
+      "waves": 1680
+    },
+    {
+      "stage_before": "block27",
+      "module": "multihead_fused_attention",
+      "kernel": "mh_attention_fused_fp8_out",
+      "groups": 560,
+      "threads": 128,
+      "waves": 2240
+    },
+    {
+      "stage_before": "block27",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_attention_project_frag_c512",
+      "groups": 1120,
+      "threads": 32,
+      "waves": 1120
+    },
+    {
+      "stage_before": "block28",
+      "module": "multihead-reference",
+      "kernel": "mh_shift_pack",
+      "groups": 3584,
+      "threads": 256,
+      "waves": 28672
+    },
+    {
+      "stage_before": "block28",
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "groups": 448,
+      "threads": 32,
+      "waves": 448
+    },
+    {
+      "stage_before": "block28",
+      "module": "deep_fast-packed",
+      "kernel": "split_ffn_fused_fp8_t8",
+      "groups": 896,
+      "threads": 128,
+      "waves": 3584
+    },
+    {
+      "stage_before": "block28",
+      "module": "deep_fast-packed",
+      "kernel": "split_projection_frag",
+      "groups": 896,
+      "threads": 32,
+      "waves": 896
+    },
+    {
+      "stage_before": "block28",
+      "module": "c512-m32-mh",
+      "kernel": "mh_qkv_normalize_frag_c512_m32",
+      "groups": 1344,
+      "threads": 32,
+      "waves": 1344
+    },
+    {
+      "stage_before": "block28",
+      "module": "multihead_fused_attention",
+      "kernel": "mh_attention_fused_fp8_out",
+      "groups": 448,
+      "threads": 128,
+      "waves": 1792
+    },
+    {
+      "stage_before": "block28",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_attention_project_frag_c512",
+      "groups": 896,
+      "threads": 32,
+      "waves": 896
+    },
+    {
+      "stage_before": "block29",
+      "module": "multihead-reference",
+      "kernel": "mh_shift_pack",
+      "groups": 4480,
+      "threads": 256,
+      "waves": 35840
+    },
+    {
+      "stage_before": "block29",
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "groups": 560,
+      "threads": 32,
+      "waves": 560
+    },
+    {
+      "stage_before": "block29",
+      "module": "deep_fast-packed",
+      "kernel": "split_ffn_fused_fp8_t8",
+      "groups": 1120,
+      "threads": 128,
+      "waves": 4480
+    },
+    {
+      "stage_before": "block29",
+      "module": "deep_fast-packed",
+      "kernel": "split_projection_frag",
+      "groups": 1120,
+      "threads": 32,
+      "waves": 1120
+    },
+    {
+      "stage_before": "block29",
+      "module": "c512-m32-mh",
+      "kernel": "mh_qkv_normalize_frag_c512_m32",
+      "groups": 1680,
+      "threads": 32,
+      "waves": 1680
+    },
+    {
+      "stage_before": "block29",
+      "module": "multihead_fused_attention",
+      "kernel": "mh_attention_fused_fp8_out",
+      "groups": 560,
+      "threads": 128,
+      "waves": 2240
+    },
+    {
+      "stage_before": "block29",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_attention_project_frag_c512",
+      "groups": 1120,
+      "threads": 32,
+      "waves": 1120
+    },
+    {
+      "stage_before": "block30",
+      "module": "multihead-reference",
+      "kernel": "mh_pool",
+      "groups": 800,
+      "threads": 256,
+      "waves": 6400
+    },
+    {
+      "stage_before": "block30",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_pool_project_production_h16w",
+      "groups": 1600,
+      "threads": 32,
+      "waves": 1600
+    },
+    {
+      "stage_before": "head",
+      "module": "deep_reference",
+      "kernel": "vit_gather",
+      "groups": 1600,
+      "threads": 256,
+      "waves": 12800
+    },
+    {
+      "stage_before": "head",
+      "module": "deep_fast-packed",
+      "kernel": "vit_pack_input",
+      "groups": 400,
+      "threads": 256,
+      "waves": 3200
+    },
+    {
+      "stage_before": "head",
+      "module": "deep_fast-packed",
+      "kernel": "vit_expand_blocked_fp8_frag_bytein",
+      "groups": 1600,
+      "threads": 32,
+      "waves": 1600
+    },
+    {
+      "stage_before": "head",
+      "module": "vit-stream",
+      "kernel": "vit_stream_contract_frag_hout",
+      "groups": 400,
+      "threads": 32,
+      "waves": 400
+    },
+    {
+      "stage_before": "head",
+      "module": "vit-stream",
+      "kernel": "vit_stream_qkv_frag_hin",
+      "groups": 2400,
+      "threads": 32,
+      "waves": 2400
+    },
+    {
+      "stage_before": "head",
+      "module": "deep_fast-packed",
+      "kernel": "vit_attention_fused_400_bytein_bout",
+      "groups": 800,
+      "threads": 32,
+      "waves": 800
+    },
+    {
+      "stage_before": "head",
+      "module": "vit-stream",
+      "kernel": "vit_stream_project_n64_bh",
+      "groups": 400,
+      "threads": 32,
+      "waves": 400
+    },
+    {
+      "stage_before": "block31",
+      "module": "deep_fast-packed",
+      "kernel": "vit_pack_input",
+      "groups": 400,
+      "threads": 256,
+      "waves": 3200
+    },
+    {
+      "stage_before": "block31",
+      "module": "deep_fast-packed",
+      "kernel": "vit_expand_blocked_fp8_frag_bytein",
+      "groups": 1600,
+      "threads": 32,
+      "waves": 1600
+    },
+    {
+      "stage_before": "block31",
+      "module": "vit-stream",
+      "kernel": "vit_stream_contract_frag_hout",
+      "groups": 400,
+      "threads": 32,
+      "waves": 400
+    },
+    {
+      "stage_before": "block31",
+      "module": "vit-stream",
+      "kernel": "vit_stream_qkv_frag_hin",
+      "groups": 2400,
+      "threads": 32,
+      "waves": 2400
+    },
+    {
+      "stage_before": "block31",
+      "module": "deep_fast-packed",
+      "kernel": "vit_attention_fused_400_bytein_bout",
+      "groups": 800,
+      "threads": 32,
+      "waves": 800
+    },
+    {
+      "stage_before": "block31",
+      "module": "vit-stream",
+      "kernel": "vit_stream_project_n64_bh",
+      "groups": 400,
+      "threads": 32,
+      "waves": 400
+    },
+    {
+      "stage_before": "block32",
+      "module": "deep_fast-packed",
+      "kernel": "vit_pack_input",
+      "groups": 400,
+      "threads": 256,
+      "waves": 3200
+    },
+    {
+      "stage_before": "block32",
+      "module": "deep_fast-packed",
+      "kernel": "vit_expand_blocked_fp8_frag_bytein",
+      "groups": 1600,
+      "threads": 32,
+      "waves": 1600
+    },
+    {
+      "stage_before": "block32",
+      "module": "vit-stream",
+      "kernel": "vit_stream_contract_frag_hout",
+      "groups": 400,
+      "threads": 32,
+      "waves": 400
+    },
+    {
+      "stage_before": "block32",
+      "module": "vit-stream",
+      "kernel": "vit_stream_qkv_frag_hin",
+      "groups": 2400,
+      "threads": 32,
+      "waves": 2400
+    },
+    {
+      "stage_before": "block32",
+      "module": "deep_fast-packed",
+      "kernel": "vit_attention_fused_400_bytein_bout",
+      "groups": 800,
+      "threads": 32,
+      "waves": 800
+    },
+    {
+      "stage_before": "block32",
+      "module": "vit-stream",
+      "kernel": "vit_stream_project_n64_bh",
+      "groups": 400,
+      "threads": 32,
+      "waves": 400
+    },
+    {
+      "stage_before": "block33",
+      "module": "deep_fast-packed",
+      "kernel": "vit_pack_input",
+      "groups": 400,
+      "threads": 256,
+      "waves": 3200
+    },
+    {
+      "stage_before": "block33",
+      "module": "deep_fast-packed",
+      "kernel": "vit_expand_blocked_fp8_frag_bytein",
+      "groups": 1600,
+      "threads": 32,
+      "waves": 1600
+    },
+    {
+      "stage_before": "block33",
+      "module": "vit-stream",
+      "kernel": "vit_stream_contract_frag_hout",
+      "groups": 400,
+      "threads": 32,
+      "waves": 400
+    },
+    {
+      "stage_before": "block33",
+      "module": "vit-stream",
+      "kernel": "vit_stream_qkv_frag_hin",
+      "groups": 2400,
+      "threads": 32,
+      "waves": 2400
+    },
+    {
+      "stage_before": "block33",
+      "module": "deep_fast-packed",
+      "kernel": "vit_attention_fused_400_bytein_bout",
+      "groups": 800,
+      "threads": 32,
+      "waves": 800
+    },
+    {
+      "stage_before": "block33",
+      "module": "vit-stream",
+      "kernel": "vit_stream_project_n64_bh",
+      "groups": 400,
+      "threads": 32,
+      "waves": 400
+    },
+    {
+      "stage_before": "block34",
+      "module": "deep_fast-packed",
+      "kernel": "vit_pack_input",
+      "groups": 400,
+      "threads": 256,
+      "waves": 3200
+    },
+    {
+      "stage_before": "block34",
+      "module": "deep_fast-packed",
+      "kernel": "vit_expand_blocked_fp8_frag_bytein",
+      "groups": 1600,
+      "threads": 32,
+      "waves": 1600
+    },
+    {
+      "stage_before": "block34",
+      "module": "vit-stream",
+      "kernel": "vit_stream_contract_frag_hout",
+      "groups": 400,
+      "threads": 32,
+      "waves": 400
+    },
+    {
+      "stage_before": "block34",
+      "module": "vit-stream",
+      "kernel": "vit_stream_qkv_frag_hin",
+      "groups": 2400,
+      "threads": 32,
+      "waves": 2400
+    },
+    {
+      "stage_before": "block34",
+      "module": "deep_fast-packed",
+      "kernel": "vit_attention_fused_400_bytein_bout",
+      "groups": 800,
+      "threads": 32,
+      "waves": 800
+    },
+    {
+      "stage_before": "block34",
+      "module": "vit-stream",
+      "kernel": "vit_stream_project_n64_bh",
+      "groups": 400,
+      "threads": 32,
+      "waves": 400
+    },
+    {
+      "stage_before": "block35",
+      "module": "deep_fast-packed",
+      "kernel": "vit_pack_input",
+      "groups": 400,
+      "threads": 256,
+      "waves": 3200
+    },
+    {
+      "stage_before": "block35",
+      "module": "deep_fast-packed",
+      "kernel": "vit_expand_blocked_fp8_frag_bytein",
+      "groups": 1600,
+      "threads": 32,
+      "waves": 1600
+    },
+    {
+      "stage_before": "block35",
+      "module": "vit-stream",
+      "kernel": "vit_stream_contract_frag_hout",
+      "groups": 400,
+      "threads": 32,
+      "waves": 400
+    },
+    {
+      "stage_before": "block35",
+      "module": "vit-stream",
+      "kernel": "vit_stream_qkv_frag_hin",
+      "groups": 2400,
+      "threads": 32,
+      "waves": 2400
+    },
+    {
+      "stage_before": "block35",
+      "module": "deep_fast-packed",
+      "kernel": "vit_attention_fused_400_bytein_bout",
+      "groups": 800,
+      "threads": 32,
+      "waves": 800
+    },
+    {
+      "stage_before": "block35",
+      "module": "vit-stream",
+      "kernel": "vit_stream_project_n64_bh",
+      "groups": 400,
+      "threads": 32,
+      "waves": 400
+    },
+    {
+      "stage_before": "block36",
+      "module": "deep_fast-packed",
+      "kernel": "vit_pack_input",
+      "groups": 400,
+      "threads": 256,
+      "waves": 3200
+    },
+    {
+      "stage_before": "block36",
+      "module": "deep_fast-packed",
+      "kernel": "vit_expand_blocked_fp8_frag_bytein",
+      "groups": 1600,
+      "threads": 32,
+      "waves": 1600
+    },
+    {
+      "stage_before": "block36",
+      "module": "vit-stream",
+      "kernel": "vit_stream_contract_frag_hout",
+      "groups": 400,
+      "threads": 32,
+      "waves": 400
+    },
+    {
+      "stage_before": "block36",
+      "module": "vit-stream",
+      "kernel": "vit_stream_qkv_frag_hin",
+      "groups": 2400,
+      "threads": 32,
+      "waves": 2400
+    },
+    {
+      "stage_before": "block36",
+      "module": "deep_fast-packed",
+      "kernel": "vit_attention_fused_400_bytein_bout",
+      "groups": 800,
+      "threads": 32,
+      "waves": 800
+    },
+    {
+      "stage_before": "block36",
+      "module": "vit-stream",
+      "kernel": "vit_stream_project_n64_bh",
+      "groups": 400,
+      "threads": 32,
+      "waves": 400
+    },
+    {
+      "stage_before": "block37",
+      "module": "deep_fast-packed",
+      "kernel": "vit_pack_input",
+      "groups": 400,
+      "threads": 256,
+      "waves": 3200
+    },
+    {
+      "stage_before": "block37",
+      "module": "deep_fast-packed",
+      "kernel": "vit_expand_blocked_fp8_frag_bytein",
+      "groups": 1600,
+      "threads": 32,
+      "waves": 1600
+    },
+    {
+      "stage_before": "block37",
+      "module": "vit-stream",
+      "kernel": "vit_stream_contract_frag_hout",
+      "groups": 400,
+      "threads": 32,
+      "waves": 400
+    },
+    {
+      "stage_before": "block37",
+      "module": "vit-stream",
+      "kernel": "vit_stream_qkv_frag_hin",
+      "groups": 2400,
+      "threads": 32,
+      "waves": 2400
+    },
+    {
+      "stage_before": "block37",
+      "module": "deep_fast-packed",
+      "kernel": "vit_attention_fused_400_bytein_bout",
+      "groups": 800,
+      "threads": 32,
+      "waves": 800
+    },
+    {
+      "stage_before": "block37",
+      "module": "vit-stream",
+      "kernel": "vit_stream_project_n64_bh",
+      "groups": 400,
+      "threads": 32,
+      "waves": 400
+    },
+    {
+      "stage_before": "block38",
+      "module": "deep_reference",
+      "kernel": "vit_gather",
+      "groups": 1600,
+      "threads": 256,
+      "waves": 12800
+    },
+    {
+      "stage_before": "block38",
+      "module": "deep_fast-packed",
+      "kernel": "decoder_project2x_h16w",
+      "groups": 800,
+      "threads": 32,
+      "waves": 800
+    },
+    {
+      "stage_before": "block39",
+      "module": "multihead-reference",
+      "kernel": "mh_shift_pack",
+      "groups": 3584,
+      "threads": 256,
+      "waves": 28672
+    },
+    {
+      "stage_before": "block39",
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "groups": 448,
+      "threads": 32,
+      "waves": 448
+    },
+    {
+      "stage_before": "block39",
+      "module": "deep_fast-packed",
+      "kernel": "split_ffn_fused_fp8_t8",
+      "groups": 896,
+      "threads": 128,
+      "waves": 3584
+    },
+    {
+      "stage_before": "block39",
+      "module": "deep_fast-packed",
+      "kernel": "split_projection_frag",
+      "groups": 896,
+      "threads": 32,
+      "waves": 896
+    },
+    {
+      "stage_before": "block39",
+      "module": "c512-m32-mh",
+      "kernel": "mh_qkv_normalize_frag_c512_m32",
+      "groups": 1344,
+      "threads": 32,
+      "waves": 1344
+    },
+    {
+      "stage_before": "block39",
+      "module": "multihead_fused_attention",
+      "kernel": "mh_attention_fused_fp8_out",
+      "groups": 448,
+      "threads": 128,
+      "waves": 1792
+    },
+    {
+      "stage_before": "block39",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_attention_project_frag_c512",
+      "groups": 896,
+      "threads": 32,
+      "waves": 896
+    },
+    {
+      "stage_before": "block40",
+      "module": "multihead-reference",
+      "kernel": "mh_shift_pack",
+      "groups": 4480,
+      "threads": 256,
+      "waves": 35840
+    },
+    {
+      "stage_before": "block40",
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "groups": 560,
+      "threads": 32,
+      "waves": 560
+    },
+    {
+      "stage_before": "block40",
+      "module": "deep_fast-packed",
+      "kernel": "split_ffn_fused_fp8_t8",
+      "groups": 1120,
+      "threads": 128,
+      "waves": 4480
+    },
+    {
+      "stage_before": "block40",
+      "module": "deep_fast-packed",
+      "kernel": "split_projection_frag",
+      "groups": 1120,
+      "threads": 32,
+      "waves": 1120
+    },
+    {
+      "stage_before": "block40",
+      "module": "c512-m32-mh",
+      "kernel": "mh_qkv_normalize_frag_c512_m32",
+      "groups": 1680,
+      "threads": 32,
+      "waves": 1680
+    },
+    {
+      "stage_before": "block40",
+      "module": "multihead_fused_attention",
+      "kernel": "mh_attention_fused_fp8_out",
+      "groups": 560,
+      "threads": 128,
+      "waves": 2240
+    },
+    {
+      "stage_before": "block40",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_attention_project_frag_c512",
+      "groups": 1120,
+      "threads": 32,
+      "waves": 1120
+    },
+    {
+      "stage_before": "block43",
+      "module": "multihead-reference",
+      "kernel": "mh_shift_pack",
+      "groups": 3584,
+      "threads": 256,
+      "waves": 28672
+    },
+    {
+      "stage_before": "block43",
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "groups": 448,
+      "threads": 32,
+      "waves": 448
+    },
+    {
+      "stage_before": "block43",
+      "module": "deep_fast-packed",
+      "kernel": "split_ffn_fused_fp8_t8",
+      "groups": 896,
+      "threads": 128,
+      "waves": 3584
+    },
+    {
+      "stage_before": "block43",
+      "module": "deep_fast-packed",
+      "kernel": "split_projection_frag",
+      "groups": 896,
+      "threads": 32,
+      "waves": 896
+    },
+    {
+      "stage_before": "block43",
+      "module": "c512-m32-mh",
+      "kernel": "mh_qkv_normalize_frag_c512_m32",
+      "groups": 1344,
+      "threads": 32,
+      "waves": 1344
+    },
+    {
+      "stage_before": "block43",
+      "module": "multihead_fused_attention",
+      "kernel": "mh_attention_fused_fp8_out",
+      "groups": 448,
+      "threads": 128,
+      "waves": 1792
+    },
+    {
+      "stage_before": "block43",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_attention_project_frag_c512",
+      "groups": 896,
+      "threads": 32,
+      "waves": 896
+    },
+    {
+      "stage_before": "block44",
+      "module": "multihead-reference",
+      "kernel": "mh_shift_pack",
+      "groups": 4480,
+      "threads": 256,
+      "waves": 35840
+    },
+    {
+      "stage_before": "block44",
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "groups": 560,
+      "threads": 32,
+      "waves": 560
+    },
+    {
+      "stage_before": "block44",
+      "module": "deep_fast-packed",
+      "kernel": "split_ffn_fused_fp8_t8",
+      "groups": 1120,
+      "threads": 128,
+      "waves": 4480
+    },
+    {
+      "stage_before": "block44",
+      "module": "deep_fast-packed",
+      "kernel": "split_projection_frag",
+      "groups": 1120,
+      "threads": 32,
+      "waves": 1120
+    },
+    {
+      "stage_before": "block44",
+      "module": "c512-m32-mh",
+      "kernel": "mh_qkv_normalize_frag_c512_m32",
+      "groups": 1680,
+      "threads": 32,
+      "waves": 1680
+    },
+    {
+      "stage_before": "block44",
+      "module": "multihead_fused_attention",
+      "kernel": "mh_attention_fused_fp8_out",
+      "groups": 560,
+      "threads": 128,
+      "waves": 2240
+    },
+    {
+      "stage_before": "block44",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_attention_project_frag_c512",
+      "groups": 1120,
+      "threads": 32,
+      "waves": 1120
+    },
+    {
+      "stage_before": "block46",
+      "module": "multihead-reference",
+      "kernel": "mh_shift_pack",
+      "groups": 4480,
+      "threads": 256,
+      "waves": 35840
+    },
+    {
+      "stage_before": "block46",
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "groups": 560,
+      "threads": 32,
+      "waves": 560
+    },
+    {
+      "stage_before": "block46",
+      "module": "deep_fast-packed",
+      "kernel": "split_ffn_fused_fp8_t8",
+      "groups": 1120,
+      "threads": 128,
+      "waves": 4480
+    },
+    {
+      "stage_before": "block46",
+      "module": "deep_fast-packed",
+      "kernel": "split_projection_frag",
+      "groups": 1120,
+      "threads": 32,
+      "waves": 1120
+    },
+    {
+      "stage_before": "block46",
+      "module": "c512-m32-mh",
+      "kernel": "mh_qkv_normalize_frag_c512_m32",
+      "groups": 1680,
+      "threads": 32,
+      "waves": 1680
+    },
+    {
+      "stage_before": "block46",
+      "module": "multihead_fused_attention",
+      "kernel": "mh_attention_fused_fp8_out",
+      "groups": 560,
+      "threads": 128,
+      "waves": 2240
+    },
+    {
+      "stage_before": "block46",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_attention_project_frag_c512",
+      "groups": 1120,
+      "threads": 32,
+      "waves": 1120
+    },
+    {
+      "stage_before": "block47",
+      "module": "deep_fast-packed",
+      "kernel": "decoder_project2x_h16w_byteout",
+      "groups": 1504,
+      "threads": 32,
+      "waves": 1504
+    },
+    {
+      "stage_before": "block47",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl",
+      "groups": 416,
+      "threads": 512,
+      "waves": 6656
+    },
+    {
+      "stage_before": "block47",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave_bo",
+      "groups": 104,
+      "threads": 256,
+      "waves": 832
+    },
+    {
+      "stage_before": "block48",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl",
+      "groups": 416,
+      "threads": 512,
+      "waves": 6656
+    },
+    {
+      "stage_before": "block48",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave_bo",
+      "groups": 104,
+      "threads": 256,
+      "waves": 832
+    },
+    {
+      "stage_before": "block49",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl",
+      "groups": 416,
+      "threads": 512,
+      "waves": 6656
+    },
+    {
+      "stage_before": "block49",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave_bo",
+      "groups": 104,
+      "threads": 256,
+      "waves": 832
+    },
+    {
+      "stage_before": "block50",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl",
+      "groups": 416,
+      "threads": 512,
+      "waves": 6656
+    },
+    {
+      "stage_before": "block50",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave_bo",
+      "groups": 104,
+      "threads": 256,
+      "waves": 832
+    },
+    {
+      "stage_before": "block51",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl",
+      "groups": 416,
+      "threads": 512,
+      "waves": 6656
+    },
+    {
+      "stage_before": "block51",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave_bo",
+      "groups": 104,
+      "threads": 256,
+      "waves": 832
+    },
+    {
+      "stage_before": "block52",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl",
+      "groups": 416,
+      "threads": 512,
+      "waves": 6656
+    },
+    {
+      "stage_before": "block52",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave_bo",
+      "groups": 104,
+      "threads": 256,
+      "waves": 832
+    },
+    {
+      "stage_before": "block53",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl",
+      "groups": 416,
+      "threads": 512,
+      "waves": 6656
+    },
+    {
+      "stage_before": "block53",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave_bo",
+      "groups": 104,
+      "threads": 256,
+      "waves": 832
+    },
+    {
+      "stage_before": "block54",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl",
+      "groups": 416,
+      "threads": 512,
+      "waves": 6656
+    },
+    {
+      "stage_before": "block54",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave",
+      "groups": 104,
+      "threads": 256,
+      "waves": 832
+    },
+    {
+      "stage_before": "block55",
+      "module": "deep_fast-packed",
+      "kernel": "decoder_project2x_h16w_byteout",
+      "groups": 3000,
+      "threads": 32,
+      "waves": 3000
+    },
+    {
+      "stage_before": "block55",
+      "module": "c64-wave2",
+      "kernel": "c128_wave2_bi_bo",
+      "groups": 390,
+      "threads": 128,
+      "waves": 1560
+    },
+    {
+      "stage_before": "block56",
+      "module": "c64-wave2",
+      "kernel": "c128_wave2_bi_bo",
+      "groups": 400,
+      "threads": 128,
+      "waves": 1600
+    },
+    {
+      "stage_before": "block57",
+      "module": "c64-wave2",
+      "kernel": "c128_wave2_bi_bo",
+      "groups": 375,
+      "threads": 128,
+      "waves": 1500
+    },
+    {
+      "stage_before": "block58",
+      "module": "c64-wave2",
+      "kernel": "c128_wave2_bi_bo",
+      "groups": 416,
+      "threads": 128,
+      "waves": 1664
+    },
+    {
+      "stage_before": "block59",
+      "module": "c64-wave2",
+      "kernel": "c128_wave2_bi_bo",
+      "groups": 390,
+      "threads": 128,
+      "waves": 1560
+    },
+    {
+      "stage_before": "block60",
+      "module": "c64-wave2",
+      "kernel": "c128_wave2_bi",
+      "groups": 400,
+      "threads": 128,
+      "waves": 1600
+    },
+    {
+      "stage_before": "block61",
+      "module": "deep_fast-packed",
+      "kernel": "decoder_project2x_h16w_byteout",
+      "groups": 6000,
+      "threads": 32,
+      "waves": 6000
+    },
+    {
+      "stage_before": "block61",
+      "module": "c64-wave2",
+      "kernel": "c64_wave2_bi_bo",
+      "groups": 1500,
+      "threads": 64,
+      "waves": 3000
+    },
+    {
+      "stage_before": "block62",
+      "module": "c64-wave2",
+      "kernel": "c64_wave2_bi_bo",
+      "groups": 1581,
+      "threads": 64,
+      "waves": 3162
+    },
+    {
+      "stage_before": "block63",
+      "module": "c64-wave2",
+      "kernel": "c64_wave2_bi_bo",
+      "groups": 1530,
+      "threads": 64,
+      "waves": 3060
+    },
+    {
+      "stage_before": "block64",
+      "module": "c64-wave2",
+      "kernel": "c64_wave2_bi",
+      "groups": 1550,
+      "threads": 64,
+      "waves": 3100
+    },
+    {
+      "stage_before": "block65",
+      "module": "deep_fast-packed",
+      "kernel": "decoder_project2x_h16w",
+      "groups": 12000,
+      "threads": 32,
+      "waves": 12000
+    },
+    {
+      "stage_before": "block65",
+      "module": "c32-wave1",
+      "kernel": "c32_wave1_mapped",
+      "groups": 6000,
+      "threads": 32,
+      "waves": 6000
+    },
+    {
+      "stage_before": "block65",
+      "module": "c32-wave1",
+      "kernel": "c32_wave1_chain",
+      "groups": 6161,
+      "threads": 32,
+      "waves": 6161
+    },
+    {
+      "stage_before": "block65",
+      "module": "c32-wave1",
+      "kernel": "c32_wave1_chain",
+      "groups": 6060,
+      "threads": 32,
+      "waves": 6060
+    },
+    {
+      "stage_before": "block65",
+      "module": "c32-wave1",
+      "kernel": "c32_wave1_finish",
+      "groups": 6100,
+      "threads": 32,
+      "waves": 6100
+    },
+    {
+      "stage_before": "block69",
+      "module": "c32-wave1",
+      "kernel": "c32_wave1_post",
+      "groups": 24321,
+      "threads": 32,
+      "waves": 24321
+    }
+  ],
+  "1080": [
+    {
+      "stage_before": "block70",
+      "module": "c32-wave1",
+      "kernel": "c32_wave1_prefix",
+      "groups": 34560,
+      "threads": 32,
+      "waves": 34560
+    },
+    {
+      "stage_before": "block0",
+      "module": "c32-wave1",
+      "kernel": "c32_wave1_mapped",
+      "groups": 8640,
+      "threads": 32,
+      "waves": 8640
+    },
+    {
+      "stage_before": "block0",
+      "module": "c32-wave1",
+      "kernel": "c32_wave1_chain",
+      "groups": 8833,
+      "threads": 32,
+      "waves": 8833
+    },
+    {
+      "stage_before": "block0",
+      "module": "c32-wave1",
+      "kernel": "c32_wave1_chain",
+      "groups": 8712,
+      "threads": 32,
+      "waves": 8712
+    },
+    {
+      "stage_before": "block0",
+      "module": "c32-wave1",
+      "kernel": "c32_wave1_finish_dcrop",
+      "groups": 8760,
+      "threads": 32,
+      "waves": 8760
+    },
+    {
+      "stage_before": "block4-down",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_pool_project_production_h16w",
+      "groups": 34560,
+      "threads": 32,
+      "waves": 34560
+    },
+    {
+      "stage_before": "block4-down",
+      "module": "c64-wave2",
+      "kernel": "c64_wave2_bo",
+      "groups": 2160,
+      "threads": 64,
+      "waves": 4320
+    },
+    {
+      "stage_before": "block5",
+      "module": "c64-wave2",
+      "kernel": "c64_wave2_bi_bo",
+      "groups": 2257,
+      "threads": 64,
+      "waves": 4514
+    },
+    {
+      "stage_before": "block6",
+      "module": "c64-wave2",
+      "kernel": "c64_wave2_bi_bo",
+      "groups": 2196,
+      "threads": 64,
+      "waves": 4392
+    },
+    {
+      "stage_before": "block7",
+      "module": "c64-wave2",
+      "kernel": "c64_wave2_bi",
+      "groups": 2220,
+      "threads": 64,
+      "waves": 4440
+    },
+    {
+      "stage_before": "block8",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_pool_project_group_c64",
+      "groups": 2160,
+      "threads": 64,
+      "waves": 4320
+    },
+    {
+      "stage_before": "block8",
+      "module": "c64-wave2",
+      "kernel": "c128_wave2_bo",
+      "groups": 540,
+      "threads": 128,
+      "waves": 2160
+    },
+    {
+      "stage_before": "block9",
+      "module": "c64-wave2",
+      "kernel": "c128_wave2_bi_bo",
+      "groups": 589,
+      "threads": 128,
+      "waves": 2356
+    },
+    {
+      "stage_before": "block10",
+      "module": "c64-wave2",
+      "kernel": "c128_wave2_bi_bo",
+      "groups": 558,
+      "threads": 128,
+      "waves": 2232
+    },
+    {
+      "stage_before": "block11",
+      "module": "c64-wave2",
+      "kernel": "c128_wave2_bi_bo",
+      "groups": 570,
+      "threads": 128,
+      "waves": 2280
+    },
+    {
+      "stage_before": "block12",
+      "module": "c64-wave2",
+      "kernel": "c128_wave2_bi_bo",
+      "groups": 540,
+      "threads": 128,
+      "waves": 2160
+    },
+    {
+      "stage_before": "block13",
+      "module": "c64-wave2",
+      "kernel": "c128_wave2_bi",
+      "groups": 589,
+      "threads": 128,
+      "waves": 2356
+    },
+    {
+      "stage_before": "block14",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_pool_project_group_c128",
+      "groups": 540,
+      "threads": 128,
+      "waves": 2160
+    },
+    {
+      "stage_before": "block14",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_g128_qkv_fb_pdl",
+      "groups": 540,
+      "threads": 512,
+      "waves": 8640
+    },
+    {
+      "stage_before": "block14",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave_bo",
+      "groups": 135,
+      "threads": 256,
+      "waves": 1080
+    },
+    {
+      "stage_before": "block15",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl",
+      "groups": 640,
+      "threads": 512,
+      "waves": 10240
+    },
+    {
+      "stage_before": "block15",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave_bo",
+      "groups": 160,
+      "threads": 256,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block16",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl",
+      "groups": 576,
+      "threads": 512,
+      "waves": 9216
+    },
+    {
+      "stage_before": "block16",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave_bo",
+      "groups": 144,
+      "threads": 256,
+      "waves": 1152
+    },
+    {
+      "stage_before": "block17",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl",
+      "groups": 600,
+      "threads": 512,
+      "waves": 9600
+    },
+    {
+      "stage_before": "block17",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave_bo",
+      "groups": 150,
+      "threads": 256,
+      "waves": 1200
+    },
+    {
+      "stage_before": "block18",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_g128_qkv_bytein_fb_pdl",
+      "groups": 540,
+      "threads": 512,
+      "waves": 8640
+    },
+    {
+      "stage_before": "block18",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave_bo",
+      "groups": 135,
+      "threads": 256,
+      "waves": 1080
+    },
+    {
+      "stage_before": "block19",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl",
+      "groups": 640,
+      "threads": 512,
+      "waves": 10240
+    },
+    {
+      "stage_before": "block19",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave_bo",
+      "groups": 160,
+      "threads": 256,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block20",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl",
+      "groups": 576,
+      "threads": 512,
+      "waves": 9216
+    },
+    {
+      "stage_before": "block20",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave_bo",
+      "groups": 144,
+      "threads": 256,
+      "waves": 1152
+    },
+    {
+      "stage_before": "block21",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl",
+      "groups": 600,
+      "threads": 512,
+      "waves": 9600
+    },
+    {
+      "stage_before": "block21",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave",
+      "groups": 150,
+      "threads": 256,
+      "waves": 1200
+    },
+    {
+      "stage_before": "block22",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_pool_project_group_c256",
+      "groups": 135,
+      "threads": 256,
+      "waves": 1080
+    },
+    {
+      "stage_before": "block22",
+      "module": "multihead-reference",
+      "kernel": "mh_shift_pack",
+      "groups": 5120,
+      "threads": 256,
+      "waves": 40960
+    },
+    {
+      "stage_before": "block22",
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "block22",
+      "module": "deep_fast-packed",
+      "kernel": "split_ffn_fused_fp8_t8",
+      "groups": 1280,
+      "threads": 128,
+      "waves": 5120
+    },
+    {
+      "stage_before": "block22",
+      "module": "deep_fast-packed",
+      "kernel": "split_projection_frag",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block22",
+      "module": "c512-m32-mh",
+      "kernel": "mh_qkv_normalize_frag_c512_m32",
+      "groups": 1920,
+      "threads": 32,
+      "waves": 1920
+    },
+    {
+      "stage_before": "block22",
+      "module": "multihead_fused_attention",
+      "kernel": "mh_attention_fused_fp8_out",
+      "groups": 640,
+      "threads": 128,
+      "waves": 2560
+    },
+    {
+      "stage_before": "block22",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_attention_project_frag_c512",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block23",
+      "module": "multihead-reference",
+      "kernel": "mh_shift_pack",
+      "groups": 5120,
+      "threads": 256,
+      "waves": 40960
+    },
+    {
+      "stage_before": "block23",
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "block23",
+      "module": "deep_fast-packed",
+      "kernel": "split_ffn_fused_fp8_t8",
+      "groups": 1280,
+      "threads": 128,
+      "waves": 5120
+    },
+    {
+      "stage_before": "block23",
+      "module": "deep_fast-packed",
+      "kernel": "split_projection_frag",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block23",
+      "module": "c512-m32-mh",
+      "kernel": "mh_qkv_normalize_frag_c512_m32",
+      "groups": 1920,
+      "threads": 32,
+      "waves": 1920
+    },
+    {
+      "stage_before": "block23",
+      "module": "multihead_fused_attention",
+      "kernel": "mh_attention_fused_fp8_out",
+      "groups": 640,
+      "threads": 128,
+      "waves": 2560
+    },
+    {
+      "stage_before": "block23",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_attention_project_frag_c512",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block24",
+      "module": "multihead-reference",
+      "kernel": "mh_shift_pack",
+      "groups": 5120,
+      "threads": 256,
+      "waves": 40960
+    },
+    {
+      "stage_before": "block24",
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "block24",
+      "module": "deep_fast-packed",
+      "kernel": "split_ffn_fused_fp8_t8",
+      "groups": 1280,
+      "threads": 128,
+      "waves": 5120
+    },
+    {
+      "stage_before": "block24",
+      "module": "deep_fast-packed",
+      "kernel": "split_projection_frag",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block24",
+      "module": "c512-m32-mh",
+      "kernel": "mh_qkv_normalize_frag_c512_m32",
+      "groups": 1920,
+      "threads": 32,
+      "waves": 1920
+    },
+    {
+      "stage_before": "block24",
+      "module": "multihead_fused_attention",
+      "kernel": "mh_attention_fused_fp8_out",
+      "groups": 640,
+      "threads": 128,
+      "waves": 2560
+    },
+    {
+      "stage_before": "block24",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_attention_project_frag_c512",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block25",
+      "module": "multihead-reference",
+      "kernel": "mh_shift_pack",
+      "groups": 5120,
+      "threads": 256,
+      "waves": 40960
+    },
+    {
+      "stage_before": "block25",
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "block25",
+      "module": "deep_fast-packed",
+      "kernel": "split_ffn_fused_fp8_t8",
+      "groups": 1280,
+      "threads": 128,
+      "waves": 5120
+    },
+    {
+      "stage_before": "block25",
+      "module": "deep_fast-packed",
+      "kernel": "split_projection_frag",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block25",
+      "module": "c512-m32-mh",
+      "kernel": "mh_qkv_normalize_frag_c512_m32",
+      "groups": 1920,
+      "threads": 32,
+      "waves": 1920
+    },
+    {
+      "stage_before": "block25",
+      "module": "multihead_fused_attention",
+      "kernel": "mh_attention_fused_fp8_out",
+      "groups": 640,
+      "threads": 128,
+      "waves": 2560
+    },
+    {
+      "stage_before": "block25",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_attention_project_frag_c512",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block26",
+      "module": "multihead-reference",
+      "kernel": "mh_shift_pack",
+      "groups": 5120,
+      "threads": 256,
+      "waves": 40960
+    },
+    {
+      "stage_before": "block26",
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "block26",
+      "module": "deep_fast-packed",
+      "kernel": "split_ffn_fused_fp8_t8",
+      "groups": 1280,
+      "threads": 128,
+      "waves": 5120
+    },
+    {
+      "stage_before": "block26",
+      "module": "deep_fast-packed",
+      "kernel": "split_projection_frag",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block26",
+      "module": "c512-m32-mh",
+      "kernel": "mh_qkv_normalize_frag_c512_m32",
+      "groups": 1920,
+      "threads": 32,
+      "waves": 1920
+    },
+    {
+      "stage_before": "block26",
+      "module": "multihead_fused_attention",
+      "kernel": "mh_attention_fused_fp8_out",
+      "groups": 640,
+      "threads": 128,
+      "waves": 2560
+    },
+    {
+      "stage_before": "block26",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_attention_project_frag_c512",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block27",
+      "module": "multihead-reference",
+      "kernel": "mh_shift_pack",
+      "groups": 5120,
+      "threads": 256,
+      "waves": 40960
+    },
+    {
+      "stage_before": "block27",
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "block27",
+      "module": "deep_fast-packed",
+      "kernel": "split_ffn_fused_fp8_t8",
+      "groups": 1280,
+      "threads": 128,
+      "waves": 5120
+    },
+    {
+      "stage_before": "block27",
+      "module": "deep_fast-packed",
+      "kernel": "split_projection_frag",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block27",
+      "module": "c512-m32-mh",
+      "kernel": "mh_qkv_normalize_frag_c512_m32",
+      "groups": 1920,
+      "threads": 32,
+      "waves": 1920
+    },
+    {
+      "stage_before": "block27",
+      "module": "multihead_fused_attention",
+      "kernel": "mh_attention_fused_fp8_out",
+      "groups": 640,
+      "threads": 128,
+      "waves": 2560
+    },
+    {
+      "stage_before": "block27",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_attention_project_frag_c512",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block28",
+      "module": "multihead-reference",
+      "kernel": "mh_shift_pack",
+      "groups": 5120,
+      "threads": 256,
+      "waves": 40960
+    },
+    {
+      "stage_before": "block28",
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "block28",
+      "module": "deep_fast-packed",
+      "kernel": "split_ffn_fused_fp8_t8",
+      "groups": 1280,
+      "threads": 128,
+      "waves": 5120
+    },
+    {
+      "stage_before": "block28",
+      "module": "deep_fast-packed",
+      "kernel": "split_projection_frag",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block28",
+      "module": "c512-m32-mh",
+      "kernel": "mh_qkv_normalize_frag_c512_m32",
+      "groups": 1920,
+      "threads": 32,
+      "waves": 1920
+    },
+    {
+      "stage_before": "block28",
+      "module": "multihead_fused_attention",
+      "kernel": "mh_attention_fused_fp8_out",
+      "groups": 640,
+      "threads": 128,
+      "waves": 2560
+    },
+    {
+      "stage_before": "block28",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_attention_project_frag_c512",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block29",
+      "module": "multihead-reference",
+      "kernel": "mh_shift_pack",
+      "groups": 5120,
+      "threads": 256,
+      "waves": 40960
+    },
+    {
+      "stage_before": "block29",
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "block29",
+      "module": "deep_fast-packed",
+      "kernel": "split_ffn_fused_fp8_t8",
+      "groups": 1280,
+      "threads": 128,
+      "waves": 5120
+    },
+    {
+      "stage_before": "block29",
+      "module": "deep_fast-packed",
+      "kernel": "split_projection_frag",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block29",
+      "module": "c512-m32-mh",
+      "kernel": "mh_qkv_normalize_frag_c512_m32",
+      "groups": 1920,
+      "threads": 32,
+      "waves": 1920
+    },
+    {
+      "stage_before": "block29",
+      "module": "multihead_fused_attention",
+      "kernel": "mh_attention_fused_fp8_out",
+      "groups": 640,
+      "threads": 128,
+      "waves": 2560
+    },
+    {
+      "stage_before": "block29",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_attention_project_frag_c512",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block30",
+      "module": "multihead-reference",
+      "kernel": "mh_pool",
+      "groups": 1280,
+      "threads": 256,
+      "waves": 10240
+    },
+    {
+      "stage_before": "block30",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_pool_project_production_h16w",
+      "groups": 2560,
+      "threads": 32,
+      "waves": 2560
+    },
+    {
+      "stage_before": "head",
+      "module": "deep_reference",
+      "kernel": "vit_gather",
+      "groups": 2560,
+      "threads": 256,
+      "waves": 20480
+    },
+    {
+      "stage_before": "head",
+      "module": "deep_fast-packed",
+      "kernel": "vit_pack_input",
+      "groups": 640,
+      "threads": 256,
+      "waves": 5120
+    },
+    {
+      "stage_before": "head",
+      "module": "deep_fast-packed",
+      "kernel": "vit_expand_blocked_fp8_frag_bytein",
+      "groups": 2560,
+      "threads": 32,
+      "waves": 2560
+    },
+    {
+      "stage_before": "head",
+      "module": "vit-stream",
+      "kernel": "vit_stream_contract_frag_hout",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "head",
+      "module": "vit-stream",
+      "kernel": "vit_stream_qkv_frag_hin",
+      "groups": 3840,
+      "threads": 32,
+      "waves": 3840
+    },
+    {
+      "stage_before": "head",
+      "module": "deep_fast-packed",
+      "kernel": "vit_attention_fused_640_bytein_bout",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "head",
+      "module": "vit-stream",
+      "kernel": "vit_stream_project_n64_bh",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "block31",
+      "module": "deep_fast-packed",
+      "kernel": "vit_pack_input",
+      "groups": 640,
+      "threads": 256,
+      "waves": 5120
+    },
+    {
+      "stage_before": "block31",
+      "module": "deep_fast-packed",
+      "kernel": "vit_expand_blocked_fp8_frag_bytein",
+      "groups": 2560,
+      "threads": 32,
+      "waves": 2560
+    },
+    {
+      "stage_before": "block31",
+      "module": "vit-stream",
+      "kernel": "vit_stream_contract_frag_hout",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "block31",
+      "module": "vit-stream",
+      "kernel": "vit_stream_qkv_frag_hin",
+      "groups": 3840,
+      "threads": 32,
+      "waves": 3840
+    },
+    {
+      "stage_before": "block31",
+      "module": "deep_fast-packed",
+      "kernel": "vit_attention_fused_640_bytein_bout",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block31",
+      "module": "vit-stream",
+      "kernel": "vit_stream_project_n64_bh",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "block32",
+      "module": "deep_fast-packed",
+      "kernel": "vit_pack_input",
+      "groups": 640,
+      "threads": 256,
+      "waves": 5120
+    },
+    {
+      "stage_before": "block32",
+      "module": "deep_fast-packed",
+      "kernel": "vit_expand_blocked_fp8_frag_bytein",
+      "groups": 2560,
+      "threads": 32,
+      "waves": 2560
+    },
+    {
+      "stage_before": "block32",
+      "module": "vit-stream",
+      "kernel": "vit_stream_contract_frag_hout",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "block32",
+      "module": "vit-stream",
+      "kernel": "vit_stream_qkv_frag_hin",
+      "groups": 3840,
+      "threads": 32,
+      "waves": 3840
+    },
+    {
+      "stage_before": "block32",
+      "module": "deep_fast-packed",
+      "kernel": "vit_attention_fused_640_bytein_bout",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block32",
+      "module": "vit-stream",
+      "kernel": "vit_stream_project_n64_bh",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "block33",
+      "module": "deep_fast-packed",
+      "kernel": "vit_pack_input",
+      "groups": 640,
+      "threads": 256,
+      "waves": 5120
+    },
+    {
+      "stage_before": "block33",
+      "module": "deep_fast-packed",
+      "kernel": "vit_expand_blocked_fp8_frag_bytein",
+      "groups": 2560,
+      "threads": 32,
+      "waves": 2560
+    },
+    {
+      "stage_before": "block33",
+      "module": "vit-stream",
+      "kernel": "vit_stream_contract_frag_hout",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "block33",
+      "module": "vit-stream",
+      "kernel": "vit_stream_qkv_frag_hin",
+      "groups": 3840,
+      "threads": 32,
+      "waves": 3840
+    },
+    {
+      "stage_before": "block33",
+      "module": "deep_fast-packed",
+      "kernel": "vit_attention_fused_640_bytein_bout",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block33",
+      "module": "vit-stream",
+      "kernel": "vit_stream_project_n64_bh",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "block34",
+      "module": "deep_fast-packed",
+      "kernel": "vit_pack_input",
+      "groups": 640,
+      "threads": 256,
+      "waves": 5120
+    },
+    {
+      "stage_before": "block34",
+      "module": "deep_fast-packed",
+      "kernel": "vit_expand_blocked_fp8_frag_bytein",
+      "groups": 2560,
+      "threads": 32,
+      "waves": 2560
+    },
+    {
+      "stage_before": "block34",
+      "module": "vit-stream",
+      "kernel": "vit_stream_contract_frag_hout",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "block34",
+      "module": "vit-stream",
+      "kernel": "vit_stream_qkv_frag_hin",
+      "groups": 3840,
+      "threads": 32,
+      "waves": 3840
+    },
+    {
+      "stage_before": "block34",
+      "module": "deep_fast-packed",
+      "kernel": "vit_attention_fused_640_bytein_bout",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block34",
+      "module": "vit-stream",
+      "kernel": "vit_stream_project_n64_bh",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "block35",
+      "module": "deep_fast-packed",
+      "kernel": "vit_pack_input",
+      "groups": 640,
+      "threads": 256,
+      "waves": 5120
+    },
+    {
+      "stage_before": "block35",
+      "module": "deep_fast-packed",
+      "kernel": "vit_expand_blocked_fp8_frag_bytein",
+      "groups": 2560,
+      "threads": 32,
+      "waves": 2560
+    },
+    {
+      "stage_before": "block35",
+      "module": "vit-stream",
+      "kernel": "vit_stream_contract_frag_hout",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "block35",
+      "module": "vit-stream",
+      "kernel": "vit_stream_qkv_frag_hin",
+      "groups": 3840,
+      "threads": 32,
+      "waves": 3840
+    },
+    {
+      "stage_before": "block35",
+      "module": "deep_fast-packed",
+      "kernel": "vit_attention_fused_640_bytein_bout",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block35",
+      "module": "vit-stream",
+      "kernel": "vit_stream_project_n64_bh",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "block36",
+      "module": "deep_fast-packed",
+      "kernel": "vit_pack_input",
+      "groups": 640,
+      "threads": 256,
+      "waves": 5120
+    },
+    {
+      "stage_before": "block36",
+      "module": "deep_fast-packed",
+      "kernel": "vit_expand_blocked_fp8_frag_bytein",
+      "groups": 2560,
+      "threads": 32,
+      "waves": 2560
+    },
+    {
+      "stage_before": "block36",
+      "module": "vit-stream",
+      "kernel": "vit_stream_contract_frag_hout",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "block36",
+      "module": "vit-stream",
+      "kernel": "vit_stream_qkv_frag_hin",
+      "groups": 3840,
+      "threads": 32,
+      "waves": 3840
+    },
+    {
+      "stage_before": "block36",
+      "module": "deep_fast-packed",
+      "kernel": "vit_attention_fused_640_bytein_bout",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block36",
+      "module": "vit-stream",
+      "kernel": "vit_stream_project_n64_bh",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "block37",
+      "module": "deep_fast-packed",
+      "kernel": "vit_pack_input",
+      "groups": 640,
+      "threads": 256,
+      "waves": 5120
+    },
+    {
+      "stage_before": "block37",
+      "module": "deep_fast-packed",
+      "kernel": "vit_expand_blocked_fp8_frag_bytein",
+      "groups": 2560,
+      "threads": 32,
+      "waves": 2560
+    },
+    {
+      "stage_before": "block37",
+      "module": "vit-stream",
+      "kernel": "vit_stream_contract_frag_hout",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "block37",
+      "module": "vit-stream",
+      "kernel": "vit_stream_qkv_frag_hin",
+      "groups": 3840,
+      "threads": 32,
+      "waves": 3840
+    },
+    {
+      "stage_before": "block37",
+      "module": "deep_fast-packed",
+      "kernel": "vit_attention_fused_640_bytein_bout",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block37",
+      "module": "vit-stream",
+      "kernel": "vit_stream_project_n64_bh",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "block38",
+      "module": "deep_reference",
+      "kernel": "vit_gather",
+      "groups": 2560,
+      "threads": 256,
+      "waves": 20480
+    },
+    {
+      "stage_before": "block38",
+      "module": "deep_fast-packed",
+      "kernel": "decoder_project2x_h16w",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block39",
+      "module": "multihead-reference",
+      "kernel": "mh_shift_pack",
+      "groups": 5120,
+      "threads": 256,
+      "waves": 40960
+    },
+    {
+      "stage_before": "block39",
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "block39",
+      "module": "deep_fast-packed",
+      "kernel": "split_ffn_fused_fp8_t8",
+      "groups": 1280,
+      "threads": 128,
+      "waves": 5120
+    },
+    {
+      "stage_before": "block39",
+      "module": "deep_fast-packed",
+      "kernel": "split_projection_frag",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block39",
+      "module": "c512-m32-mh",
+      "kernel": "mh_qkv_normalize_frag_c512_m32",
+      "groups": 1920,
+      "threads": 32,
+      "waves": 1920
+    },
+    {
+      "stage_before": "block39",
+      "module": "multihead_fused_attention",
+      "kernel": "mh_attention_fused_fp8_out",
+      "groups": 640,
+      "threads": 128,
+      "waves": 2560
+    },
+    {
+      "stage_before": "block39",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_attention_project_frag_c512",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block40",
+      "module": "multihead-reference",
+      "kernel": "mh_shift_pack",
+      "groups": 5120,
+      "threads": 256,
+      "waves": 40960
+    },
+    {
+      "stage_before": "block40",
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "block40",
+      "module": "deep_fast-packed",
+      "kernel": "split_ffn_fused_fp8_t8",
+      "groups": 1280,
+      "threads": 128,
+      "waves": 5120
+    },
+    {
+      "stage_before": "block40",
+      "module": "deep_fast-packed",
+      "kernel": "split_projection_frag",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block40",
+      "module": "c512-m32-mh",
+      "kernel": "mh_qkv_normalize_frag_c512_m32",
+      "groups": 1920,
+      "threads": 32,
+      "waves": 1920
+    },
+    {
+      "stage_before": "block40",
+      "module": "multihead_fused_attention",
+      "kernel": "mh_attention_fused_fp8_out",
+      "groups": 640,
+      "threads": 128,
+      "waves": 2560
+    },
+    {
+      "stage_before": "block40",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_attention_project_frag_c512",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block43",
+      "module": "multihead-reference",
+      "kernel": "mh_shift_pack",
+      "groups": 5120,
+      "threads": 256,
+      "waves": 40960
+    },
+    {
+      "stage_before": "block43",
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "block43",
+      "module": "deep_fast-packed",
+      "kernel": "split_ffn_fused_fp8_t8",
+      "groups": 1280,
+      "threads": 128,
+      "waves": 5120
+    },
+    {
+      "stage_before": "block43",
+      "module": "deep_fast-packed",
+      "kernel": "split_projection_frag",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block43",
+      "module": "c512-m32-mh",
+      "kernel": "mh_qkv_normalize_frag_c512_m32",
+      "groups": 1920,
+      "threads": 32,
+      "waves": 1920
+    },
+    {
+      "stage_before": "block43",
+      "module": "multihead_fused_attention",
+      "kernel": "mh_attention_fused_fp8_out",
+      "groups": 640,
+      "threads": 128,
+      "waves": 2560
+    },
+    {
+      "stage_before": "block43",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_attention_project_frag_c512",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block44",
+      "module": "multihead-reference",
+      "kernel": "mh_shift_pack",
+      "groups": 5120,
+      "threads": 256,
+      "waves": 40960
+    },
+    {
+      "stage_before": "block44",
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "block44",
+      "module": "deep_fast-packed",
+      "kernel": "split_ffn_fused_fp8_t8",
+      "groups": 1280,
+      "threads": 128,
+      "waves": 5120
+    },
+    {
+      "stage_before": "block44",
+      "module": "deep_fast-packed",
+      "kernel": "split_projection_frag",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block44",
+      "module": "c512-m32-mh",
+      "kernel": "mh_qkv_normalize_frag_c512_m32",
+      "groups": 1920,
+      "threads": 32,
+      "waves": 1920
+    },
+    {
+      "stage_before": "block44",
+      "module": "multihead_fused_attention",
+      "kernel": "mh_attention_fused_fp8_out",
+      "groups": 640,
+      "threads": 128,
+      "waves": 2560
+    },
+    {
+      "stage_before": "block44",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_attention_project_frag_c512",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block46",
+      "module": "multihead-reference",
+      "kernel": "mh_shift_pack",
+      "groups": 5120,
+      "threads": 256,
+      "waves": 40960
+    },
+    {
+      "stage_before": "block46",
+      "module": "c512-m32-deep",
+      "kernel": "split_mix_blocked_h16w_m32",
+      "groups": 640,
+      "threads": 32,
+      "waves": 640
+    },
+    {
+      "stage_before": "block46",
+      "module": "deep_fast-packed",
+      "kernel": "split_ffn_fused_fp8_t8",
+      "groups": 1280,
+      "threads": 128,
+      "waves": 5120
+    },
+    {
+      "stage_before": "block46",
+      "module": "deep_fast-packed",
+      "kernel": "split_projection_frag",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block46",
+      "module": "c512-m32-mh",
+      "kernel": "mh_qkv_normalize_frag_c512_m32",
+      "groups": 1920,
+      "threads": 32,
+      "waves": 1920
+    },
+    {
+      "stage_before": "block46",
+      "module": "multihead_fused_attention",
+      "kernel": "mh_attention_fused_fp8_out",
+      "groups": 640,
+      "threads": 128,
+      "waves": 2560
+    },
+    {
+      "stage_before": "block46",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_attention_project_frag_c512",
+      "groups": 1280,
+      "threads": 32,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block47",
+      "module": "deep_fast-packed",
+      "kernel": "decoder_project2x_h16w_byteout",
+      "groups": 2160,
+      "threads": 32,
+      "waves": 2160
+    },
+    {
+      "stage_before": "block47",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_g128_qkv_bytein_fb_pdl",
+      "groups": 540,
+      "threads": 512,
+      "waves": 8640
+    },
+    {
+      "stage_before": "block47",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave_bo",
+      "groups": 135,
+      "threads": 256,
+      "waves": 1080
+    },
+    {
+      "stage_before": "block48",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl",
+      "groups": 640,
+      "threads": 512,
+      "waves": 10240
+    },
+    {
+      "stage_before": "block48",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave_bo",
+      "groups": 160,
+      "threads": 256,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block49",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl",
+      "groups": 576,
+      "threads": 512,
+      "waves": 9216
+    },
+    {
+      "stage_before": "block49",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave_bo",
+      "groups": 144,
+      "threads": 256,
+      "waves": 1152
+    },
+    {
+      "stage_before": "block50",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl",
+      "groups": 600,
+      "threads": 512,
+      "waves": 9600
+    },
+    {
+      "stage_before": "block50",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave_bo",
+      "groups": 150,
+      "threads": 256,
+      "waves": 1200
+    },
+    {
+      "stage_before": "block51",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_g128_qkv_bytein_fb_pdl",
+      "groups": 540,
+      "threads": 512,
+      "waves": 8640
+    },
+    {
+      "stage_before": "block51",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave_bo",
+      "groups": 135,
+      "threads": 256,
+      "waves": 1080
+    },
+    {
+      "stage_before": "block52",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl",
+      "groups": 640,
+      "threads": 512,
+      "waves": 10240
+    },
+    {
+      "stage_before": "block52",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave_bo",
+      "groups": 160,
+      "threads": 256,
+      "waves": 1280
+    },
+    {
+      "stage_before": "block53",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl",
+      "groups": 576,
+      "threads": 512,
+      "waves": 9216
+    },
+    {
+      "stage_before": "block53",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave_bo",
+      "groups": 144,
+      "threads": 256,
+      "waves": 1152
+    },
+    {
+      "stage_before": "block54",
+      "module": "multihead-fast-padded-wave-packed",
+      "kernel": "mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl",
+      "groups": 600,
+      "threads": 512,
+      "waves": 9600
+    },
+    {
+      "stage_before": "block54",
+      "module": "c64-wave2",
+      "kernel": "c256_attn_wave",
+      "groups": 150,
+      "threads": 256,
+      "waves": 1200
+    },
+    {
+      "stage_before": "block55",
+      "module": "deep_fast-packed",
+      "kernel": "decoder_project2x_h16w_byteout",
+      "groups": 4320,
+      "threads": 32,
+      "waves": 4320
+    },
+    {
+      "stage_before": "block55",
+      "module": "c64-wave2",
+      "kernel": "c128_wave2_bi_bo",
+      "groups": 558,
+      "threads": 128,
+      "waves": 2232
+    },
+    {
+      "stage_before": "block56",
+      "module": "c64-wave2",
+      "kernel": "c128_wave2_bi_bo",
+      "groups": 570,
+      "threads": 128,
+      "waves": 2280
+    },
+    {
+      "stage_before": "block57",
+      "module": "c64-wave2",
+      "kernel": "c128_wave2_bi_bo",
+      "groups": 540,
+      "threads": 128,
+      "waves": 2160
+    },
+    {
+      "stage_before": "block58",
+      "module": "c64-wave2",
+      "kernel": "c128_wave2_bi_bo",
+      "groups": 589,
+      "threads": 128,
+      "waves": 2356
+    },
+    {
+      "stage_before": "block59",
+      "module": "c64-wave2",
+      "kernel": "c128_wave2_bi_bo",
+      "groups": 558,
+      "threads": 128,
+      "waves": 2232
+    },
+    {
+      "stage_before": "block60",
+      "module": "c64-wave2",
+      "kernel": "c128_wave2_bi",
+      "groups": 570,
+      "threads": 128,
+      "waves": 2280
+    },
+    {
+      "stage_before": "block61",
+      "module": "deep_fast-packed",
+      "kernel": "decoder_project2x_h16w_byteout",
+      "groups": 8640,
+      "threads": 32,
+      "waves": 8640
+    },
+    {
+      "stage_before": "block61",
+      "module": "c64-wave2",
+      "kernel": "c64_wave2_bi_bo",
+      "groups": 2160,
+      "threads": 64,
+      "waves": 4320
+    },
+    {
+      "stage_before": "block62",
+      "module": "c64-wave2",
+      "kernel": "c64_wave2_bi_bo",
+      "groups": 2257,
+      "threads": 64,
+      "waves": 4514
+    },
+    {
+      "stage_before": "block63",
+      "module": "c64-wave2",
+      "kernel": "c64_wave2_bi_bo",
+      "groups": 2196,
+      "threads": 64,
+      "waves": 4392
+    },
+    {
+      "stage_before": "block64",
+      "module": "c64-wave2",
+      "kernel": "c64_wave2_bi",
+      "groups": 2220,
+      "threads": 64,
+      "waves": 4440
+    },
+    {
+      "stage_before": "block65",
+      "module": "deep_fast-packed",
+      "kernel": "decoder_project2x_h16w",
+      "groups": 17280,
+      "threads": 32,
+      "waves": 17280
+    },
+    {
+      "stage_before": "block65",
+      "module": "c32-wave1",
+      "kernel": "c32_wave1_mapped",
+      "groups": 8640,
+      "threads": 32,
+      "waves": 8640
+    },
+    {
+      "stage_before": "block65",
+      "module": "c32-wave1",
+      "kernel": "c32_wave1_chain",
+      "groups": 8833,
+      "threads": 32,
+      "waves": 8833
+    },
+    {
+      "stage_before": "block65",
+      "module": "c32-wave1",
+      "kernel": "c32_wave1_chain",
+      "groups": 8712,
+      "threads": 32,
+      "waves": 8712
+    },
+    {
+      "stage_before": "block65",
+      "module": "c32-wave1",
+      "kernel": "c32_wave1_finish",
+      "groups": 8760,
+      "threads": 32,
+      "waves": 8760
+    },
+    {
+      "stage_before": "block69",
+      "module": "c32-wave1",
+      "kernel": "c32_wave1_post",
+      "groups": 34945,
+      "threads": 32,
+      "waves": 34945
+    }
+  ]
+}

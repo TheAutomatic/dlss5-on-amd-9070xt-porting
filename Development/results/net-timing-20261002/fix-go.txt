@@ -1,0 +1,55 @@
+FULL T OK
+SAME-count T: 19
+T 1 900: avg 7.0746 -> 7.0806 (+0.0061 ms, +0.09%)  p99 7.2970 -> 7.2890
+T 1 1080: avg 9.9292 -> 9.9186 (-0.0106 ms, -0.11%)  p99 10.2150 -> 10.1900
+T 2 900: avg 7.1480 -> 7.1378 (-0.0102 ms, -0.14%)  p99 7.3840 -> 7.3780
+T 2 1080: avg 9.9392 -> 9.9251 (-0.0141 ms, -0.14%)  p99 10.2410 -> 10.2160
+T 3 900: avg 7.1379 -> 7.1775 (+0.0396 ms, +0.55%)  p99 7.3690 -> 7.3960
+T 3 1080: avg 9.9410 -> 9.9468 (+0.0059 ms, +0.06%)  p99 10.2570 -> 10.2980
+T 900 merged: avg 7.1202 -> 7.1320  p99 7.3680 -> 7.3750
+T 1080 merged: avg 9.9365 -> 9.9302  p99 10.2390 -> 10.2370
+FULL E OK
+SAME-count E: 19
+E 1 900: avg 7.0767 -> 7.1672 (+0.0905 ms, +1.28%)  p99 7.3190 -> 7.4280
+E 1 1080: avg 9.9230 -> 10.0394 (+0.1164 ms, +1.17%)  p99 10.2340 -> 10.3530
+E 2 900: avg 7.1774 -> 7.2350 (+0.0576 ms, +0.80%)  p99 7.3930 -> 7.4820
+E 2 1080: avg 9.9467 -> 10.0536 (+0.1069 ms, +1.08%)  p99 10.2170 -> 10.3720
+E 3 900: avg 7.1660 -> 7.2493 (+0.0833 ms, +1.16%)  p99 7.3870 -> 7.5270
+E 3 1080: avg 9.9569 -> 10.1076 (+0.1507 ms, +1.51%)  p99 10.2740 -> 10.4570
+E 900 merged: avg 7.1400 -> 7.2171  p99 7.3810 -> 7.4970
+E 1080 merged: avg 9.9422 -> 10.0669  p99 10.2480 -> 10.4200
+old runtime 77A35681
+new runtime A9BA5502
+RUNTIME 720 old=88106a934af4c183 new=88106a934af4c183 exit=0/0 SAME status old pdl=1/1 new pdl=1/1
+RUNTIME 900 old=b2980ada643da964 new=b2980ada643da964 exit=0/0 SAME status old pdl=1/1 new pdl=1/1
+RUNTIME 1080 old=758674a8bbd0206d new=758674a8bbd0206d exit=0/0 SAME status old pdl=1/0 new pdl=1/0
+RT_ABBA round=1 900 old=7.061 new=7.064 delta=+0.003
+RT_ABBA round=1 1080 old=9.916 new=9.919 delta=+0.003
+RT_ABBA round=2 900 old=7.090 new=7.088 delta=-0.002
+RT_ABBA round=2 1080 old=9.888 new=9.883 delta=-0.005
+RT_ABBA round=3 900 old=7.127 new=7.155 delta=+0.028
+RT_ABBA round=3 1080 old=9.878 new=9.891 delta=+0.013
+SMOKE exit=0
+HIP rc=0 error=
+SP_STATS runs=4 fallback=0 rollover=0 jobs=2496 disabled=0 errors=0
+lmxxf_nr_gpu: ok
+RT_DONE
+REPRO after old pdl=1 720 exit=3 valid=999/1000 collapsed=0 first_collapsed= med=4.782 min=2.49268 lag_mismatch=998 tiny_reads=0 collapsed_lt0.01=0 pipe=0 after_wait=1 pdl=1/1 hash=88106a934af4c183
+REPRO after new pdl=1 720 exit=0 valid=1000/1000 collapsed=0 first_collapsed= med=4.770 min=2.8997 lag_mismatch=0 tiny_reads=0 collapsed_lt0.01=0 pipe=0 after_wait=1 pdl=1/1 hash=88106a934af4c183
+REPRO after old pdl=1 900 exit=3 valid=999/1000 collapsed=1 first_collapsed=122 med=6.607 min=0.00432 lag_mismatch=998 tiny_reads=4 collapsed_lt0.01=1 pipe=0 after_wait=1 pdl=1/1 hash=b2980ada643da964
+REPRO after new pdl=1 900 exit=0 valid=1000/1000 collapsed=0 first_collapsed= med=6.617 min=2.8316 lag_mismatch=0 tiny_reads=0 collapsed_lt0.01=0 pipe=0 after_wait=1 pdl=1/1 hash=b2980ada643da964
+REPRO after old pdl=1 1080 exit=3 valid=999/1000 collapsed=70 first_collapsed=30 med=0.093 min=0.0001 lag_mismatch=1000 tiny_reads=701 collapsed_lt0.01=70 pipe=0 after_wait=1 pdl=1/0 hash=758674a8bbd0206d
+REPRO after new pdl=1 1080 exit=0 valid=1000/1000 collapsed=0 first_collapsed= med=9.281 min=8.96032 lag_mismatch=0 tiny_reads=0 collapsed_lt0.01=0 pipe=0 after_wait=1 pdl=1/0 hash=758674a8bbd0206d
+REPRO after old pdl=0 720 exit=3 valid=999/1000 collapsed=1 first_collapsed=150 med=4.802 min=0.0021 lag_mismatch=999 tiny_reads=1 collapsed_lt0.01=1 pipe=0 after_wait=1 pdl=0/0 hash=88106a934af4c183
+REPRO after new pdl=0 720 exit=0 valid=1000/1000 collapsed=0 first_collapsed= med=4.808 min=2.89852 lag_mismatch=0 tiny_reads=0 collapsed_lt0.01=0 pipe=0 after_wait=1 pdl=0/0 hash=88106a934af4c183
+REPRO after old pdl=0 900 exit=3 valid=999/1000 collapsed=0 first_collapsed= med=6.636 min=0.01414 lag_mismatch=999 tiny_reads=2 collapsed_lt0.01=0 pipe=0 after_wait=1 pdl=0/0 hash=b2980ada643da964
+REPRO after new pdl=0 900 exit=0 valid=1000/1000 collapsed=0 first_collapsed= med=6.647 min=6.39236 lag_mismatch=0 tiny_reads=0 collapsed_lt0.01=0 pipe=0 after_wait=1 pdl=0/0 hash=b2980ada643da964
+REPRO after old pdl=0 1080 exit=3 valid=999/1000 collapsed=92 first_collapsed=4 med=0.078 min=0.00016 lag_mismatch=1000 tiny_reads=806 collapsed_lt0.01=92 pipe=0 after_wait=1 pdl=0/0 hash=758674a8bbd0206d
+REPRO after new pdl=0 1080 exit=0 valid=1000/1000 collapsed=0 first_collapsed= med=9.290 min=9.00892 lag_mismatch=0 tiny_reads=0 collapsed_lt0.01=0 pipe=0 after_wait=1 pdl=0/0 hash=758674a8bbd0206d
+REPRO default new pdl=1 720 exit=0 valid=999/1000 collapsed=0 first_collapsed= med=4.803 min=2.70924 lag_mismatch=0 tiny_reads=0 collapsed_lt0.01=0 pipe=0 after_wait=0 pdl=1/1 hash=88106a934af4c183
+REPRO default new pdl=1 900 exit=0 valid=999/1000 collapsed=0 first_collapsed= med=6.635 min=2.6563 lag_mismatch=0 tiny_reads=0 collapsed_lt0.01=0 pipe=0 after_wait=0 pdl=1/1 hash=b2980ada643da964
+REPRO default new pdl=1 1080 exit=0 valid=999/1000 collapsed=0 first_collapsed= med=9.301 min=8.99992 lag_mismatch=0 tiny_reads=0 collapsed_lt0.01=0 pipe=0 after_wait=0 pdl=1/0 hash=758674a8bbd0206d
+REPRO_DONE
+LOCK DROPPED
+GO_DONE
+GUARD_DONE

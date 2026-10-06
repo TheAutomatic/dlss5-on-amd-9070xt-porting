@@ -1,0 +1,23 @@
+{
+  "source_commit": "044f2cd4",
+  "base_H_core_commit": "25c2df78",
+  "source": {
+    "Development/HIP/hip_reference_network.h": "a2cb222bb8e63323b3f4d0fee0f1284c5c62c4dbdebd3da0dcb26b357362af2a",
+    "Development/HIP/hip_d3d12_bridge.h": "49fa6ba9ed5f976774eb8e73e08f6e1b37dc4889bd3cc531062d88400fbb5a18",
+    "Development/HIP/submit_pulse.h": "2eac98db8006f4c8e6557d59a0803d0232324bf2dba85b8569ce524949097bcd",
+    "Development/HIP/submit_pulse_hip.h": "cc122e5b0795d841f9075a32b24014c4021cad986b019a1bfbc4da1cfbe806a2",
+    "src/native_hip_env_options.h": "eac5574ddcbb62cdc8549a1abd38bd4612f69f1cce095d5852b02b9d70224983"
+  },
+  "artifacts": {
+    "/tmp/dlss5-pulse-pred1-build/LmxxfNrRuntime.dll": "37f605e811c6da35c9f6450e6e13099cf611c38ad018d2575a9bf275e6263fc4",
+    "/tmp/dlss5-pulse-pred1-build/DLSS5-AMD.addon64": "4fb5840c3a34021870257bfcdaf201018ea0f380e6ea40ba0575ac5c2d921bca",
+    "/tmp/dlss5-pulse-prod-compat/benchmark-prod-compat.exe": "afc28ff7eabdb090cc6648c0556511de5e306bfdee18f5ea11d34ce1c78999e8"
+  },
+  "mode": "canonical O2/NET0; production source, compatibility-only fiveframe switch in testcaller",
+  "driver": "DXGI32.0.31007.2048 bits00200000791f0800",
+  "GPU_verified": "11516 initialcapfailure raw0 preserved; 6904 PRED0auto and8696 MP1PRED1 trueauto5Record/raw0; 32413 all10cases all30raw/resource rows closed via stdout CPU verification, originalexit1 retained",
+  "payload_modules": "old validated stock39 at D:/DLSSNR-Lab/history-trial-041a-20261006/modules/gfx1201; Hcombined will add norm900 with its own recipe manifest",
+  "no_install": true,
+  "previous_source_commit": "3c58d97a",
+  "effective_predict": "only multipass==3&&multi_predict; MP1PRED1 inactive; MP2/3 rejected by MP!=1"
+}

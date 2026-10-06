@@ -1,0 +1,734 @@
+[
+ {
+  "id": "ours-1504-base",
+  "module": "c512_m32_deep",
+  "module_file": "build-g0/gfx1201/c512-m32-deep.hsaco",
+  "symbol": "split_mix_blocked_h16w_m32",
+  "grid": [
+   376,
+   1,
+   1
+  ],
+  "block": [
+   32,
+   1,
+   1
+  ],
+  "arg_bytes": 28,
+  "buffers": [
+   {
+    "id": "in",
+    "bytes": 3080192,
+    "init": "f32",
+    "amplitude": 0.25,
+    "check": "none"
+   },
+   {
+    "id": "w",
+    "bytes": 2097152,
+    "init": "half",
+    "amplitude": 0.25,
+    "check": "none"
+   },
+   {
+    "id": "out",
+    "bytes": 3080192,
+    "init": "zero",
+    "check": "f32"
+   }
+  ],
+  "args": [
+   {
+    "offset": 0,
+    "type": "ptr",
+    "buffer": "in"
+   },
+   {
+    "offset": 8,
+    "type": "ptr",
+    "buffer": "w"
+   },
+   {
+    "offset": 16,
+    "type": "ptr",
+    "buffer": "out"
+   },
+   {
+    "offset": 24,
+    "type": "u32",
+    "value": 1504
+   }
+  ]
+ },
+ {
+  "id": "ours-1504-u4",
+  "module": "c512_m32_deep",
+  "module_file": "build-u4/gfx1201/c512-m32-deep.hsaco",
+  "symbol": "split_mix_blocked_h16w_m32_lds",
+  "grid": [
+   96,
+   1,
+   1
+  ],
+  "block": [
+   128,
+   1,
+   1
+  ],
+  "arg_bytes": 28,
+  "buffers": [
+   {
+    "id": "in",
+    "bytes": 3080192,
+    "init": "f32",
+    "amplitude": 0.25,
+    "check": "none"
+   },
+   {
+    "id": "w",
+    "bytes": 2097152,
+    "init": "half",
+    "amplitude": 0.25,
+    "check": "none"
+   },
+   {
+    "id": "out",
+    "bytes": 3080192,
+    "init": "zero",
+    "check": "f32"
+   }
+  ],
+  "args": [
+   {
+    "offset": 0,
+    "type": "ptr",
+    "buffer": "in"
+   },
+   {
+    "offset": 8,
+    "type": "ptr",
+    "buffer": "w"
+   },
+   {
+    "offset": 16,
+    "type": "ptr",
+    "buffer": "out"
+   },
+   {
+    "offset": 24,
+    "type": "u32",
+    "value": 1504
+   }
+  ]
+ },
+ {
+  "id": "ours-1504-u2",
+  "module": "c512_m32_deep",
+  "module_file": "build-u2/gfx1201/c512-m32-deep.hsaco",
+  "symbol": "split_mix_blocked_h16w_m32_lds",
+  "grid": [
+   96,
+   1,
+   1
+  ],
+  "block": [
+   128,
+   1,
+   1
+  ],
+  "arg_bytes": 28,
+  "buffers": [
+   {
+    "id": "in",
+    "bytes": 3080192,
+    "init": "f32",
+    "amplitude": 0.25,
+    "check": "none"
+   },
+   {
+    "id": "w",
+    "bytes": 2097152,
+    "init": "half",
+    "amplitude": 0.25,
+    "check": "none"
+   },
+   {
+    "id": "out",
+    "bytes": 3080192,
+    "init": "zero",
+    "check": "f32"
+   }
+  ],
+  "args": [
+   {
+    "offset": 0,
+    "type": "ptr",
+    "buffer": "in"
+   },
+   {
+    "offset": 8,
+    "type": "ptr",
+    "buffer": "w"
+   },
+   {
+    "offset": 16,
+    "type": "ptr",
+    "buffer": "out"
+   },
+   {
+    "offset": 24,
+    "type": "u32",
+    "value": 1504
+   }
+  ]
+ },
+ {
+  "id": "ours-1504-u1",
+  "module": "c512_m32_deep",
+  "module_file": "build-u1/gfx1201/c512-m32-deep.hsaco",
+  "symbol": "split_mix_blocked_h16w_m32_lds",
+  "grid": [
+   96,
+   1,
+   1
+  ],
+  "block": [
+   128,
+   1,
+   1
+  ],
+  "arg_bytes": 28,
+  "buffers": [
+   {
+    "id": "in",
+    "bytes": 3080192,
+    "init": "f32",
+    "amplitude": 0.25,
+    "check": "none"
+   },
+   {
+    "id": "w",
+    "bytes": 2097152,
+    "init": "half",
+    "amplitude": 0.25,
+    "check": "none"
+   },
+   {
+    "id": "out",
+    "bytes": 3080192,
+    "init": "zero",
+    "check": "f32"
+   }
+  ],
+  "args": [
+   {
+    "offset": 0,
+    "type": "ptr",
+    "buffer": "in"
+   },
+   {
+    "offset": 8,
+    "type": "ptr",
+    "buffer": "w"
+   },
+   {
+    "offset": 16,
+    "type": "ptr",
+    "buffer": "out"
+   },
+   {
+    "offset": 24,
+    "type": "u32",
+    "value": 1504
+   }
+  ]
+ },
+ {
+  "id": "ours-1504-g2u2",
+  "module": "c512_m32_deep",
+  "module_file": "build-g2u2/gfx1201/c512-m32-deep.hsaco",
+  "symbol": "split_mix_blocked_h16w_m32_lds",
+  "grid": [
+   192,
+   1,
+   1
+  ],
+  "block": [
+   64,
+   1,
+   1
+  ],
+  "arg_bytes": 28,
+  "buffers": [
+   {
+    "id": "in",
+    "bytes": 3080192,
+    "init": "f32",
+    "amplitude": 0.25,
+    "check": "none"
+   },
+   {
+    "id": "w",
+    "bytes": 2097152,
+    "init": "half",
+    "amplitude": 0.25,
+    "check": "none"
+   },
+   {
+    "id": "out",
+    "bytes": 3080192,
+    "init": "zero",
+    "check": "f32"
+   }
+  ],
+  "args": [
+   {
+    "offset": 0,
+    "type": "ptr",
+    "buffer": "in"
+   },
+   {
+    "offset": 8,
+    "type": "ptr",
+    "buffer": "w"
+   },
+   {
+    "offset": 16,
+    "type": "ptr",
+    "buffer": "out"
+   },
+   {
+    "offset": 24,
+    "type": "u32",
+    "value": 1504
+   }
+  ]
+ },
+ {
+  "id": "ours-1504-g2u1",
+  "module": "c512_m32_deep",
+  "module_file": "build-g2u1/gfx1201/c512-m32-deep.hsaco",
+  "symbol": "split_mix_blocked_h16w_m32_lds",
+  "grid": [
+   192,
+   1,
+   1
+  ],
+  "block": [
+   64,
+   1,
+   1
+  ],
+  "arg_bytes": 28,
+  "buffers": [
+   {
+    "id": "in",
+    "bytes": 3080192,
+    "init": "f32",
+    "amplitude": 0.25,
+    "check": "none"
+   },
+   {
+    "id": "w",
+    "bytes": 2097152,
+    "init": "half",
+    "amplitude": 0.25,
+    "check": "none"
+   },
+   {
+    "id": "out",
+    "bytes": 3080192,
+    "init": "zero",
+    "check": "f32"
+   }
+  ],
+  "args": [
+   {
+    "offset": 0,
+    "type": "ptr",
+    "buffer": "in"
+   },
+   {
+    "offset": 8,
+    "type": "ptr",
+    "buffer": "w"
+   },
+   {
+    "offset": 16,
+    "type": "ptr",
+    "buffer": "out"
+   },
+   {
+    "offset": 24,
+    "type": "u32",
+    "value": 1504
+   }
+  ]
+ },
+ {
+  "id": "ours-2160-base",
+  "module": "c512_m32_deep",
+  "module_file": "build-g0/gfx1201/c512-m32-deep.hsaco",
+  "symbol": "split_mix_blocked_h16w_m32",
+  "grid": [
+   544,
+   1,
+   1
+  ],
+  "block": [
+   32,
+   1,
+   1
+  ],
+  "arg_bytes": 28,
+  "buffers": [
+   {
+    "id": "in",
+    "bytes": 4423680,
+    "init": "f32",
+    "amplitude": 0.25,
+    "check": "none"
+   },
+   {
+    "id": "w",
+    "bytes": 2097152,
+    "init": "half",
+    "amplitude": 0.25,
+    "check": "none"
+   },
+   {
+    "id": "out",
+    "bytes": 4423680,
+    "init": "zero",
+    "check": "f32"
+   }
+  ],
+  "args": [
+   {
+    "offset": 0,
+    "type": "ptr",
+    "buffer": "in"
+   },
+   {
+    "offset": 8,
+    "type": "ptr",
+    "buffer": "w"
+   },
+   {
+    "offset": 16,
+    "type": "ptr",
+    "buffer": "out"
+   },
+   {
+    "offset": 24,
+    "type": "u32",
+    "value": 2160
+   }
+  ]
+ },
+ {
+  "id": "ours-2160-u4",
+  "module": "c512_m32_deep",
+  "module_file": "build-u4/gfx1201/c512-m32-deep.hsaco",
+  "symbol": "split_mix_blocked_h16w_m32_lds",
+  "grid": [
+   136,
+   1,
+   1
+  ],
+  "block": [
+   128,
+   1,
+   1
+  ],
+  "arg_bytes": 28,
+  "buffers": [
+   {
+    "id": "in",
+    "bytes": 4423680,
+    "init": "f32",
+    "amplitude": 0.25,
+    "check": "none"
+   },
+   {
+    "id": "w",
+    "bytes": 2097152,
+    "init": "half",
+    "amplitude": 0.25,
+    "check": "none"
+   },
+   {
+    "id": "out",
+    "bytes": 4423680,
+    "init": "zero",
+    "check": "f32"
+   }
+  ],
+  "args": [
+   {
+    "offset": 0,
+    "type": "ptr",
+    "buffer": "in"
+   },
+   {
+    "offset": 8,
+    "type": "ptr",
+    "buffer": "w"
+   },
+   {
+    "offset": 16,
+    "type": "ptr",
+    "buffer": "out"
+   },
+   {
+    "offset": 24,
+    "type": "u32",
+    "value": 2160
+   }
+  ]
+ },
+ {
+  "id": "ours-2160-u2",
+  "module": "c512_m32_deep",
+  "module_file": "build-u2/gfx1201/c512-m32-deep.hsaco",
+  "symbol": "split_mix_blocked_h16w_m32_lds",
+  "grid": [
+   136,
+   1,
+   1
+  ],
+  "block": [
+   128,
+   1,
+   1
+  ],
+  "arg_bytes": 28,
+  "buffers": [
+   {
+    "id": "in",
+    "bytes": 4423680,
+    "init": "f32",
+    "amplitude": 0.25,
+    "check": "none"
+   },
+   {
+    "id": "w",
+    "bytes": 2097152,
+    "init": "half",
+    "amplitude": 0.25,
+    "check": "none"
+   },
+   {
+    "id": "out",
+    "bytes": 4423680,
+    "init": "zero",
+    "check": "f32"
+   }
+  ],
+  "args": [
+   {
+    "offset": 0,
+    "type": "ptr",
+    "buffer": "in"
+   },
+   {
+    "offset": 8,
+    "type": "ptr",
+    "buffer": "w"
+   },
+   {
+    "offset": 16,
+    "type": "ptr",
+    "buffer": "out"
+   },
+   {
+    "offset": 24,
+    "type": "u32",
+    "value": 2160
+   }
+  ]
+ },
+ {
+  "id": "ours-2160-u1",
+  "module": "c512_m32_deep",
+  "module_file": "build-u1/gfx1201/c512-m32-deep.hsaco",
+  "symbol": "split_mix_blocked_h16w_m32_lds",
+  "grid": [
+   136,
+   1,
+   1
+  ],
+  "block": [
+   128,
+   1,
+   1
+  ],
+  "arg_bytes": 28,
+  "buffers": [
+   {
+    "id": "in",
+    "bytes": 4423680,
+    "init": "f32",
+    "amplitude": 0.25,
+    "check": "none"
+   },
+   {
+    "id": "w",
+    "bytes": 2097152,
+    "init": "half",
+    "amplitude": 0.25,
+    "check": "none"
+   },
+   {
+    "id": "out",
+    "bytes": 4423680,
+    "init": "zero",
+    "check": "f32"
+   }
+  ],
+  "args": [
+   {
+    "offset": 0,
+    "type": "ptr",
+    "buffer": "in"
+   },
+   {
+    "offset": 8,
+    "type": "ptr",
+    "buffer": "w"
+   },
+   {
+    "offset": 16,
+    "type": "ptr",
+    "buffer": "out"
+   },
+   {
+    "offset": 24,
+    "type": "u32",
+    "value": 2160
+   }
+  ]
+ },
+ {
+  "id": "ours-2160-g2u2",
+  "module": "c512_m32_deep",
+  "module_file": "build-g2u2/gfx1201/c512-m32-deep.hsaco",
+  "symbol": "split_mix_blocked_h16w_m32_lds",
+  "grid": [
+   272,
+   1,
+   1
+  ],
+  "block": [
+   64,
+   1,
+   1
+  ],
+  "arg_bytes": 28,
+  "buffers": [
+   {
+    "id": "in",
+    "bytes": 4423680,
+    "init": "f32",
+    "amplitude": 0.25,
+    "check": "none"
+   },
+   {
+    "id": "w",
+    "bytes": 2097152,
+    "init": "half",
+    "amplitude": 0.25,
+    "check": "none"
+   },
+   {
+    "id": "out",
+    "bytes": 4423680,
+    "init": "zero",
+    "check": "f32"
+   }
+  ],
+  "args": [
+   {
+    "offset": 0,
+    "type": "ptr",
+    "buffer": "in"
+   },
+   {
+    "offset": 8,
+    "type": "ptr",
+    "buffer": "w"
+   },
+   {
+    "offset": 16,
+    "type": "ptr",
+    "buffer": "out"
+   },
+   {
+    "offset": 24,
+    "type": "u32",
+    "value": 2160
+   }
+  ]
+ },
+ {
+  "id": "ours-2160-g2u1",
+  "module": "c512_m32_deep",
+  "module_file": "build-g2u1/gfx1201/c512-m32-deep.hsaco",
+  "symbol": "split_mix_blocked_h16w_m32_lds",
+  "grid": [
+   272,
+   1,
+   1
+  ],
+  "block": [
+   64,
+   1,
+   1
+  ],
+  "arg_bytes": 28,
+  "buffers": [
+   {
+    "id": "in",
+    "bytes": 4423680,
+    "init": "f32",
+    "amplitude": 0.25,
+    "check": "none"
+   },
+   {
+    "id": "w",
+    "bytes": 2097152,
+    "init": "half",
+    "amplitude": 0.25,
+    "check": "none"
+   },
+   {
+    "id": "out",
+    "bytes": 4423680,
+    "init": "zero",
+    "check": "f32"
+   }
+  ],
+  "args": [
+   {
+    "offset": 0,
+    "type": "ptr",
+    "buffer": "in"
+   },
+   {
+    "offset": 8,
+    "type": "ptr",
+    "buffer": "w"
+   },
+   {
+    "offset": 16,
+    "type": "ptr",
+    "buffer": "out"
+   },
+   {
+    "offset": 24,
+    "type": "u32",
+    "value": 2160
+   }
+  ]
+ }
+]

@@ -1,0 +1,17 @@
+kernel,scenario,status,issued_static,vector_slots,SMEM,WAIT,SALU,mov,VOPD,VOPD_slots,VALU,VMEM,VMEM_read_requests,VMEM_read_bytes_per_lane_static,WMMA,pack,DS,VMEM_write_requests,VMEM_write_bytes_per_lane_static,clamp,VMEM_other_requests,VMEM_other_bytes_per_lane_static
+c32-wave1:c32_wave1_chain,upper,loop-expanded path-sum upper; boundary paths summed,5397,4093,4,905,418,142,695,1390,2703,320,312,2784,336,448,16,8,64,,,
+c32-wave1:c32_wave1_mapped,upper,loop-expanded path-sum upper; boundary paths summed,5671,4438,3,877,435,166,682,1364,3074,296,288,2848,288,480,16,8,64,,,
+c32-wave1:c32_wave1_finish,tail16,two mutually exclusive tail loop scenarios; nonloop alternative blocks still upper,8251,5720,5,1475,797,217,697,1394,4326,399,304,2784,336,640,216,95,380,,,
+c32-wave1:c32_wave1_finish,tail32,two mutually exclusive tail loop scenarios; nonloop alternative blocks still upper,9963,5752,5,2291,1661,249,697,1394,4358,399,304,2784,336,640,216,95,380,,,
+c32-wave1:c32_wave1_finish_dcrop,full,"exclusive full vs edge; downcrop edge loop16, full downcrop unrolled; nonloop alternatives remain summed",7656,5305,5,1386,781,204,693,1386,3919,384,304,2784,336,560,152,80,320,,,
+c32-wave1:c32_wave1_finish_dcrop,edge,"exclusive full vs edge; downcrop edge loop16, full downcrop unrolled; nonloop alternatives remain summed",10760,5849,5,2586,2077,236,709,1418,4431,400,304,2784,336,640,216,96,384,,,
+c32-wave1:c32_wave1_post,upper,"loop-expanded path-sum upper; t=lane,+32,<64 implies two tail iterations",6801,5453,3,1112,453,172,928,1856,3597,388,382,4216,288,582,32,6,24,6,,
+c32-wave1:c32_wave1_prefix,upper,loop-expanded path-sum upper; prefix tail included,7992,5868,5,1331,788,235,828,1656,4212,368,288,2944,304,780,156,80,128,,,
+c64-wave2:c64_wave2_bi,upper,loop-expanded path-sum upper; mutually exclusive boundary loads summed,10878,6062,3,2440,1957,739,688,1376,4686,508,444,3920,456,704,140,64,256,,,
+c64-wave2:c64_wave2_bo,upper,loop-expanded path-sum upper; mutually exclusive boundary loads summed,8159,5445,3,1698,701,244,748,1496,3949,468,460,4304,456,608,136,8,64,,,
+c64-wave2:c64_wave2_bi_bo,upper,loop-expanded path-sum upper; mutually exclusive boundary loads summed,8081,5273,3,1728,750,233,721,1442,3831,452,444,3920,456,544,140,8,64,,,
+c64-wave2:c128_wave2_bi,upper,loop-expanded path-sum upper; mutually exclusive boundary loads summed,12226,6316,3,2921,1936,746,702,1404,4912,796,732,6224,744,704,212,64,256,,,
+c64-wave2:c128_wave2_bo,upper,loop-expanded path-sum upper; mutually exclusive boundary loads summed,9577,5698,3,2249,680,257,761,1522,4176,756,748,6608,744,608,208,8,64,,,
+c64-wave2:c128_wave2_bi_bo,upper,loop-expanded path-sum upper; mutually exclusive boundary loads summed,9434,5527,3,2225,729,240,746,1492,4035,740,732,6224,744,544,212,8,64,,,
+c64-wave2:c256_attn_wave,upper,"conditional path-sum upper with PDL once; output ci=0,1 nested in qt4; actual spin unbounded",6563,2822,6,1583,1813,728,296,592,2230,283,218,1992,232,352,120,64,256,,1,4
+c64-wave2:c256_attn_wave_bo,upper,conditional upper with PDL spin exactly once; actual spin unbounded,3562,1951,6,862,483,82,319,638,1313,231,218,1992,232,208,116,12,96,,1,4

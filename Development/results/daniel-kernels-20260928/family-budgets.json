@@ -1,0 +1,114 @@
+{
+  "geometry_model": [
+    {
+      "family": "C32",
+      "ours_historical_ms": 3.74310377440625,
+      "daniel_matched_waves": 139010,
+      "daniel_default_waves": 131314,
+      "geometry_wave_fraction": 0.055362923530681285,
+      "geometry_equivalent_ms": 0.2072291680298577,
+      "meaning": "if historical own family time scales with Daniel same-family waves; excludes math, layer count and fusion changes"
+    },
+    {
+      "family": "C256",
+      "ours_historical_ms": 1.59526881575,
+      "daniel_matched_waves": 18848,
+      "daniel_default_waves": 17856,
+      "geometry_wave_fraction": 0.052631578947368474,
+      "geometry_equivalent_ms": 0.08396151661842113,
+      "meaning": "if historical own family time scales with Daniel same-family waves; excludes math, layer count and fusion changes"
+    },
+    {
+      "family": "C64",
+      "ours_historical_ms": 1.40473031259375,
+      "daniel_matched_waves": 35332,
+      "daniel_default_waves": 33396,
+      "geometry_wave_fraction": 0.0547945205479452,
+      "geometry_equivalent_ms": 0.07697152397773972,
+      "meaning": "if historical own family time scales with Daniel same-family waves; excludes math, layer count and fusion changes"
+    },
+    {
+      "family": "C128",
+      "ours_historical_ms": 1.3859443739062498,
+      "daniel_matched_waves": 27084,
+      "daniel_default_waves": 25620,
+      "geometry_wave_fraction": 0.05405405405405406,
+      "geometry_equivalent_ms": 0.07491591210304054,
+      "meaning": "if historical own family time scales with Daniel same-family waves; excludes math, layer count and fusion changes"
+    }
+  ],
+  "geometry_total_ms": 0.44307812072905906,
+  "intermediate_bandwidth_equivalents": [
+    {
+      "tier": 900,
+      "item": "C256 feature plus QKV intermediate read+write",
+      "logical_bytes": 218103808,
+      "decimal_MB": 218.103808,
+      "ms_at_peak_640GBs": 0.3407872,
+      "meaning": "bandwidth-equivalent only: assumes all these logical bytes hit external memory; cache reuse can make cost near zero, real achieved bandwidth can make cost higher"
+    },
+    {
+      "tier": 900,
+      "item": "C512 mixed float intermediate read+write",
+      "logical_bytes": 108265472,
+      "decimal_MB": 108.265472,
+      "ms_at_peak_640GBs": 0.1691648,
+      "meaning": "bandwidth-equivalent only: assumes all these logical bytes hit external memory; cache reuse can make cost near zero, real achieved bandwidth can make cost higher"
+    },
+    {
+      "tier": 900,
+      "item": "C512 contract8 intermediate read+write",
+      "logical_bytes": 27066368,
+      "decimal_MB": 27.066368,
+      "ms_at_peak_640GBs": 0.0422912,
+      "meaning": "bandwidth-equivalent only: assumes all these logical bytes hit external memory; cache reuse can make cost near zero, real achieved bandwidth can make cost higher"
+    },
+    {
+      "tier": 900,
+      "item": "ViT 8 input packs: f32 read plus FP8 write",
+      "logical_bytes": 16384000,
+      "decimal_MB": 16.384,
+      "ms_at_peak_640GBs": 0.025599999999999998,
+      "meaning": "bandwidth-equivalent only: assumes all these logical bytes hit external memory; cache reuse can make cost near zero, real achieved bandwidth can make cost higher"
+    },
+    {
+      "tier": 1080,
+      "item": "C256 feature plus QKV intermediate read+write",
+      "logical_bytes": 308805632,
+      "decimal_MB": 308.805632,
+      "ms_at_peak_640GBs": 0.48250879999999996,
+      "meaning": "bandwidth-equivalent only: assumes all these logical bytes hit external memory; cache reuse can make cost near zero, real achieved bandwidth can make cost higher"
+    },
+    {
+      "tier": 1080,
+      "item": "C512 mixed float intermediate read+write",
+      "logical_bytes": 136314880,
+      "decimal_MB": 136.31488,
+      "ms_at_peak_640GBs": 0.21299200000000001,
+      "meaning": "bandwidth-equivalent only: assumes all these logical bytes hit external memory; cache reuse can make cost near zero, real achieved bandwidth can make cost higher"
+    },
+    {
+      "tier": 1080,
+      "item": "C512 contract8 intermediate read+write",
+      "logical_bytes": 34078720,
+      "decimal_MB": 34.07872,
+      "ms_at_peak_640GBs": 0.053248000000000004,
+      "meaning": "bandwidth-equivalent only: assumes all these logical bytes hit external memory; cache reuse can make cost near zero, real achieved bandwidth can make cost higher"
+    },
+    {
+      "tier": 1080,
+      "item": "ViT 8 input packs: f32 read plus FP8 write",
+      "logical_bytes": 26214400,
+      "decimal_MB": 26.2144,
+      "ms_at_peak_640GBs": 0.04096,
+      "meaning": "bandwidth-equivalent only: assumes all these logical bytes hit external memory; cache reuse can make cost near zero, real achieved bandwidth can make cost higher"
+    }
+  ],
+  "unidentified_family_gap_ms": null,
+  "notes": [
+    "No per-family Daniel timing trace. Do not apportion the estimated 0.65ms total GPU gap by these numbers.",
+    "Deep geometry is identical for Daniel 1088 and1152, C51260x36/ViT640; 900 differs in both geometry and split-K selection.",
+    "Daniel full16 C512 blocks vs ours13. Decoder up/down work is fused into Swin boundary variants.",
+    "C512 mixed/contract removal is a fusion budget hypothesis, not a proven byte-for-byte comparison of closed-source traffic."
+  ]
+}

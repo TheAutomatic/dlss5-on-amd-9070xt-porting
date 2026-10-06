@@ -1,0 +1,32 @@
+{
+  "accepted": true,
+  "jobs_file": "after-jobs.json",
+  "logs_dir": "logs-final-map",
+  "remove_measurement_ids": [
+    "ours-067",
+    "ours-068"
+  ],
+  "add_jobs": [
+    {
+      "measurement_job_id": "ours-head-group",
+      "group_id": "b030.head_boundary"
+    }
+  ],
+  "replace_measurement_ids": {
+    "ours-074": "after-ours-074",
+    "ours-080": "after-ours-080",
+    "ours-086": "after-ours-086",
+    "ours-092": "after-ours-092",
+    "ours-098": "after-ours-098",
+    "ours-104": "after-ours-104",
+    "ours-110": "after-ours-110",
+    "ours-116": "after-ours-116"
+  },
+  "repeat_measurement_ids": [
+    "after-ours-092"
+  ],
+  "repeat_logs_dirs": [
+    "logs-final-repeat1",
+    "logs-final-repeat2"
+  ]
+}

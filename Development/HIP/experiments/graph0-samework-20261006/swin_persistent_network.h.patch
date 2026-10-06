@@ -1,0 +1,30 @@
+--- swin_persistent_network.h
++++ isolated/swin_persistent_network.h
+@@ -40,6 +40,7 @@
+ SpPlan &SpGetPlan(U w,U h,U c,U first,U layers){
+  auto key=std::make_tuple(w,h,c,first);auto it=sp_plans.find(key);
+  if(it!=sp_plans.end())return it->second;
++ if(graph_capturing)throw std::runtime_error("capture SP plan cache miss");
+  SpPlan plan;plan.offsets.push_back(0);plan.next_ticket=SpEnv("SP_TICKET_START");
+  if(layers>8)throw std::runtime_error("SP layer limit");
+  if(!sp_error_allocation){
+@@ -124,15 +125,15 @@
+    U ql=SpEnv("SP_TICKET_LIMIT",std::numeric_limits<U>::max());if(ql<q.total)ql=q.total;if(q.next_ticket>ql-q.total)continue;partner=&q;break;}
+  if(plan.pre_inited&&plan.pre_base==plan.next_ticket){plan.pre_inited=false;}
+  else if(partner){U*s2=static_cast<U*>(P(partner->state));U t2=partner->total,b2=partner->next_ticket,f2=partner->first;void*pargs[]={&p,&s2,&t2,&b2,&f2};
+-  api.Check(api.hipModuleLaunchKernel(Fn("sp","sp_init_pair"),U((3*size_t(std::max(plan.total,t2))+255)/256),1,1,256,1,1,0,stream,pargs,nullptr),"SP init pair");
++  api.Check(LabLaunch(Fn("sp","sp_init_pair"),U((3*size_t(std::max(plan.total,t2))+255)/256),1,1,256,1,1,0,stream,pargs,nullptr),"SP init pair");
+   partner->pre_inited=true;partner->pre_base=b2;}
+- else{plan.pre_inited=false;api.Check(api.hipModuleLaunchKernel(Fn("sp","sp_init"),U((3*size_t(plan.total)+255)/256),1,1,256,1,1,0,stream,args,nullptr),"SP init");}
++ else{plan.pre_inited=false;api.Check(LabLaunch(Fn("sp","sp_init"),U((3*size_t(plan.total)+255)/256),1,1,256,1,1,0,stream,args,nullptr),"SP init");}
+  const char*sfx=plan.w16?"_w16":"";
+  std::string kernel="sp_run"+std::to_string(c)+sfx;
+  auto start=std::chrono::steady_clock::now();
+- api.Check(api.hipModuleLaunchKernel(Fn("sp",kernel),plan.total,1,1,c,1,1,0,stream,args,nullptr),"SP run");
++ api.Check(LabLaunch(Fn("sp",kernel),plan.total,1,1,c,1,1,0,stream,args,nullptr),"SP run");
+  std::string recovery="sp_recover"+std::to_string(c)+sfx;
+- api.Check(api.hipModuleLaunchKernel(Fn("sp",recovery),1,1,1,c,1,1,0,stream,args,nullptr),"SP bounded recovery");
++ api.Check(LabLaunch(Fn("sp",recovery),1,1,1,c,1,1,0,stream,args,nullptr),"SP bounded recovery");
+  plan.next_ticket+=plan.total;sp_runs++;sp_jobs+=plan.total;
+  if(SpEnv("SP_VALIDATE")||SpEnv("SP_TRACE")){
+   api.Check(api.hipStreamSynchronize(stream),"SP diagnostic completion");

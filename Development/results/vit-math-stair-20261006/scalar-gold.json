@@ -1,0 +1,14 @@
+{
+  "score_samples": 161795,
+  "score_scope": "63488 finitehalf inputs +98307 f32half boundary neighborhoods; NaN/Inf not claimed",
+  "denominator_scope": "64queries\u00d7640 matches10fullchunks;400 uses explicit16keytail, not mochi448 geometry",
+  "locked_source": "d1185d2 windows/shaders/rdna4/vit_attn.comp nr_vit_exp2;include/vit_attn_vt_chunk.glsl91-110",
+  "files": {
+    "den-640.f16": "b5d27c847fcf43c27c47df8bcc794cc2ec5a8e940a26093f7df690097cc8c5be",
+    "den-400-gold.f16": "3ea8e59548c70e08e448a96f4017399c20bb0590251e5f460764a3385daf6345",
+    "den-640-gold.f16": "566829fd213d5b969b46c95dd821a97d2d1edec8aaa4bec95cc8593e35d80dea",
+    "scores.f32": "01f890cc92dbe73089bf7e042525f381e4dd17442fb4af2cab42c6a1b7a8d0f4",
+    "score-gold.f16bits": "5d480f294af4360e2dc88c049a1be4c4031b70dc3d3cddb327456a7067f93ec3",
+    "den-400.f16": "c1766e51fe068966bc3628e1ab26663daadef0d6fb120b7a5bfb3bc67bcfe341"
+  }
+}

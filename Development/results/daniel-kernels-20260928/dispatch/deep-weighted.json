@@ -1,0 +1,296 @@
+[
+  {
+    "resolution": "900-default",
+    "family": "C512",
+    "symbol": "_Z14k_reg_vit_ffwdILi1ELb1ELb0EEv13VitFfwdParams",
+    "calls": 1,
+    "waves": 832
+  },
+  {
+    "resolution": "900-default",
+    "family": "C512",
+    "symbol": "_Z14k_reg_vit_convILi1ELi1ELb0EEv13VitConvParams",
+    "calls": 1,
+    "waves": 832
+  },
+  {
+    "resolution": "900-default",
+    "family": "C512",
+    "symbol": "_Z15k_reg_vit_attn3ILb0EEv10AttnParams",
+    "calls": 16,
+    "waves": 16128
+  },
+  {
+    "resolution": "900-default",
+    "family": "C512",
+    "symbol": "_Z14k_reg_vit_convILi1ELi0ELb0EEv13VitConvParams",
+    "calls": 29,
+    "waves": 24128
+  },
+  {
+    "resolution": "900-default",
+    "family": "C512",
+    "symbol": "_Z14k_reg_vit_ffwdILi1ELb0ELb0EEv13VitFfwdParams",
+    "calls": 15,
+    "waves": 12480
+  },
+  {
+    "resolution": "900-default",
+    "family": "C512",
+    "symbol": "_Z14k_reg_vit_convILi1ELi4ELb0EEv13VitConvParams",
+    "calls": 1,
+    "waves": 832
+  },
+  {
+    "resolution": "900-default",
+    "family": "C512",
+    "symbol": "_Z14k_reg_vit_convILi1ELi2ELb0EEv13VitConvParams",
+    "calls": 1,
+    "waves": 832
+  },
+  {
+    "resolution": "900-default",
+    "family": "ViT",
+    "symbol": "_Z9k_expand2ILi1ELb1ELb0EEv12ExpandParams",
+    "calls": 8,
+    "waves": 14336
+  },
+  {
+    "resolution": "900-default",
+    "family": "ViT",
+    "symbol": "_Z12k_reg1d_convILi1ELb1ELb0EEv12ConvParams1d",
+    "calls": 16,
+    "waves": 28672
+  },
+  {
+    "resolution": "900-default",
+    "family": "ViT",
+    "symbol": "_Z11k_reg1d_qkvILb0ELb0EEv14Reg1dQkvParams",
+    "calls": 8,
+    "waves": 5376
+  },
+  {
+    "resolution": "900-default",
+    "family": "ViT",
+    "symbol": "_Z12k_reg1d_attnILi1ELb0EEv15Reg1dAttnParams",
+    "calls": 8,
+    "waves": 7168
+  },
+  {
+    "resolution": "900-default",
+    "family": "ViT-repack",
+    "symbol": "_Z8k_repack12RepackParams",
+    "calls": 2,
+    "waves": 4096
+  },
+  {
+    "resolution": "900-default",
+    "family": "head",
+    "symbol": "_Z10k_reg_headILi4EEv13HeadRegParams",
+    "calls": 1,
+    "waves": 448
+  },
+  {
+    "resolution": "900-default",
+    "family": "decoder",
+    "symbol": "_Z11k_reg_decupILb0EEv14DecUpRegParams",
+    "calls": 1,
+    "waves": 224
+  },
+  {
+    "resolution": "1080-daniel-default",
+    "family": "C512",
+    "symbol": "_Z14k_reg_vit_ffwdILi2ELb1ELb0EEv13VitFfwdParams",
+    "calls": 1,
+    "waves": 544
+  },
+  {
+    "resolution": "1080-daniel-default",
+    "family": "C512",
+    "symbol": "_Z14k_reg_vit_convILi2ELi1ELb0EEv13VitConvParams",
+    "calls": 1,
+    "waves": 544
+  },
+  {
+    "resolution": "1080-daniel-default",
+    "family": "C512",
+    "symbol": "_Z15k_reg_vit_attn3ILb0EEv10AttnParams",
+    "calls": 16,
+    "waves": 20480
+  },
+  {
+    "resolution": "1080-daniel-default",
+    "family": "C512",
+    "symbol": "_Z14k_reg_vit_convILi2ELi0ELb0EEv13VitConvParams",
+    "calls": 29,
+    "waves": 15776
+  },
+  {
+    "resolution": "1080-daniel-default",
+    "family": "C512",
+    "symbol": "_Z14k_reg_vit_ffwdILi2ELb0ELb0EEv13VitFfwdParams",
+    "calls": 15,
+    "waves": 8160
+  },
+  {
+    "resolution": "1080-daniel-default",
+    "family": "C512",
+    "symbol": "_Z14k_reg_vit_convILi2ELi4ELb0EEv13VitConvParams",
+    "calls": 1,
+    "waves": 544
+  },
+  {
+    "resolution": "1080-daniel-default",
+    "family": "C512",
+    "symbol": "_Z14k_reg_vit_convILi2ELi2ELb0EEv13VitConvParams",
+    "calls": 1,
+    "waves": 544
+  },
+  {
+    "resolution": "1080-daniel-default",
+    "family": "ViT",
+    "symbol": "_Z9k_expand2ILi1ELb1ELb0EEv12ExpandParams",
+    "calls": 8,
+    "waves": 20480
+  },
+  {
+    "resolution": "1080-daniel-default",
+    "family": "ViT",
+    "symbol": "_Z12k_reg1d_convILi1ELb0ELb0EEv12ConvParams1d",
+    "calls": 16,
+    "waves": 10240
+  },
+  {
+    "resolution": "1080-daniel-default",
+    "family": "ViT",
+    "symbol": "_Z11k_reg1d_qkvILb0ELb0EEv14Reg1dQkvParams",
+    "calls": 8,
+    "waves": 7680
+  },
+  {
+    "resolution": "1080-daniel-default",
+    "family": "ViT",
+    "symbol": "_Z12k_reg1d_attnILi1ELb0EEv15Reg1dAttnParams",
+    "calls": 8,
+    "waves": 10240
+  },
+  {
+    "resolution": "1080-daniel-default",
+    "family": "ViT-repack",
+    "symbol": "_Z8k_repack12RepackParams",
+    "calls": 2,
+    "waves": 4096
+  },
+  {
+    "resolution": "1080-daniel-default",
+    "family": "head",
+    "symbol": "_Z10k_reg_headILi4EEv13HeadRegParams",
+    "calls": 1,
+    "waves": 640
+  },
+  {
+    "resolution": "1080-daniel-default",
+    "family": "decoder",
+    "symbol": "_Z11k_reg_decupILb0EEv14DecUpRegParams",
+    "calls": 1,
+    "waves": 320
+  },
+  {
+    "resolution": "1080-matched-ours",
+    "family": "C512",
+    "symbol": "_Z14k_reg_vit_ffwdILi2ELb1ELb0EEv13VitFfwdParams",
+    "calls": 1,
+    "waves": 544
+  },
+  {
+    "resolution": "1080-matched-ours",
+    "family": "C512",
+    "symbol": "_Z14k_reg_vit_convILi2ELi1ELb0EEv13VitConvParams",
+    "calls": 1,
+    "waves": 544
+  },
+  {
+    "resolution": "1080-matched-ours",
+    "family": "C512",
+    "symbol": "_Z15k_reg_vit_attn3ILb0EEv10AttnParams",
+    "calls": 16,
+    "waves": 20480
+  },
+  {
+    "resolution": "1080-matched-ours",
+    "family": "C512",
+    "symbol": "_Z14k_reg_vit_convILi2ELi0ELb0EEv13VitConvParams",
+    "calls": 29,
+    "waves": 15776
+  },
+  {
+    "resolution": "1080-matched-ours",
+    "family": "C512",
+    "symbol": "_Z14k_reg_vit_ffwdILi2ELb0ELb0EEv13VitFfwdParams",
+    "calls": 15,
+    "waves": 8160
+  },
+  {
+    "resolution": "1080-matched-ours",
+    "family": "C512",
+    "symbol": "_Z14k_reg_vit_convILi2ELi4ELb0EEv13VitConvParams",
+    "calls": 1,
+    "waves": 544
+  },
+  {
+    "resolution": "1080-matched-ours",
+    "family": "C512",
+    "symbol": "_Z14k_reg_vit_convILi2ELi2ELb0EEv13VitConvParams",
+    "calls": 1,
+    "waves": 544
+  },
+  {
+    "resolution": "1080-matched-ours",
+    "family": "ViT",
+    "symbol": "_Z9k_expand2ILi1ELb1ELb0EEv12ExpandParams",
+    "calls": 8,
+    "waves": 20480
+  },
+  {
+    "resolution": "1080-matched-ours",
+    "family": "ViT",
+    "symbol": "_Z12k_reg1d_convILi1ELb0ELb0EEv12ConvParams1d",
+    "calls": 16,
+    "waves": 10240
+  },
+  {
+    "resolution": "1080-matched-ours",
+    "family": "ViT",
+    "symbol": "_Z11k_reg1d_qkvILb0ELb0EEv14Reg1dQkvParams",
+    "calls": 8,
+    "waves": 7680
+  },
+  {
+    "resolution": "1080-matched-ours",
+    "family": "ViT",
+    "symbol": "_Z12k_reg1d_attnILi1ELb0EEv15Reg1dAttnParams",
+    "calls": 8,
+    "waves": 10240
+  },
+  {
+    "resolution": "1080-matched-ours",
+    "family": "ViT-repack",
+    "symbol": "_Z8k_repack12RepackParams",
+    "calls": 2,
+    "waves": 4096
+  },
+  {
+    "resolution": "1080-matched-ours",
+    "family": "head",
+    "symbol": "_Z10k_reg_headILi4EEv13HeadRegParams",
+    "calls": 1,
+    "waves": 640
+  },
+  {
+    "resolution": "1080-matched-ours",
+    "family": "decoder",
+    "symbol": "_Z11k_reg_decupILb0EEv14DecUpRegParams",
+    "calls": 1,
+    "waves": 320
+  }
+]

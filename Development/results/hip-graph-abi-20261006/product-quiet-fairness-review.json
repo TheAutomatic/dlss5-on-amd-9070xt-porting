@@ -1,0 +1,27 @@
+{
+  "CPU_result": "PASS currentquiettwo-role scope; noGPU/build/edits",
+  "gold_byteidentical_files": {
+    "benchmark.cpp": true,
+    "hip_d3d12_bridge.h": true,
+    "native_hip_network.h": true,
+    "submit_pulse.h": true,
+    "submit_pulse_hip.h": true
+  },
+  "steady_hotpath": "LabProductOrdinary=originalEnqueue+ordinarycounter; noGolddriver/caps/acceptedDelta postchecks; selectedFramescounter bothroles andGraphcounter replay;labrecordfalse aftersetup",
+  "original_pulse_logic": "PulseRejectMask/lease/recordsite unchanged; acceptedandOpsRecordOk stillactual nativecounters",
+  "cold_gate": "realDriver/caps/LeaseActive/CreateOk1 beforewarm;recordAccepted=recordOk=ordinaryEnqueues=WarmN afterwarm",
+  "final_auto_gate": "recordAccepted=recordOk=ordinaryEnqueues=WarmN+SelectedFrames-1;CreateOk1;validatedDriver/caps;GraphCalls0",
+  "final_replay_off_gate": "CreateCalls0/RecordCalls0;GraphCalls=SelectedFrames;ordinary=WarmN;capturedhostcall excluded",
+  "final_failure": "invalidcalls_Exit74 afterflushlog; nofakeRecordclaim",
+  "postSignalQuery": "Bridgebyteidentical/originalquery kept; noHIPqueryadded",
+  "no_actual_GPUactivation_claim": true,
+  "profile_limit": "PDL0/NET0/PRED1inactiveMP1 controls; notPDL1production-equivalence; noReplayAuto",
+  "sourceSHA": {
+    "benchmark.cpp": "a36f7661ac66016e4f784e8bd985b2eeb79645f2f0934037c7043a4611d43f4c",
+    "hip_reference_network.h": "82ea8830e1597d456a465e2a6c577766d5e4238f01eaef64205a24261f403c30",
+    "hip_d3d12_bridge.h": "5814ed60a6424f6580b7253d48fb38dd0689788f5a169f191ec28dfeec5885e4",
+    "native_hip_network.h": "d352e32756b3e0043d6fb460f555d62dbef81a3a51c7f45c1d801b7fb9326f69",
+    "submit_pulse.h": "2eac98db8006f4c8e6557d59a0803d0232324bf2dba85b8569ce524949097bcd",
+    "submit_pulse_hip.h": "cc122e5b0795d841f9075a32b24014c4021cad986b019a1bfbc4da1cfbe806a2"
+  }
+}

@@ -1,0 +1,714 @@
+D3D_HEAP ptr=0000020826c54040 type=1 flags=1 cpu=208ab084f00 gpu=5678a0000ff00 count=3 step=32
+D3D_HEAP ptr=00000208af69c140 type=0 flags=1 cpu=208ab1b5000 gpu=15678a00110000 count=2048 step=32
+D3D_HEAP ptr=00000208af69b8f0 type=0 flags=0 cpu=20867a200a0 gpu=25678a00000000 count=2048 step=32
+D3D_UAV eval=0 cpu=20867a200a0 gpu=25678a00000000 fmt=39 dimension=1
+ RESOURCE ptr=000002080989f390 dim=1 w=212519936 h=1 fmt=0 flags=4
+D3D_UAV eval=0 cpu=208ab1b5000 gpu=15678a00110000 fmt=41 dimension=1
+D3D_CREATE eval=0 heap=1 state=1024
+ RESOURCE ptr=0000020809b5f690 dim=3 w=1920 h=1080 fmt=10 flags=4
+D3D_CREATE eval=0 heap=1 state=1024
+ RESOURCE ptr=00000208b144ffb0 dim=3 w=1920 h=1080 fmt=10 flags=4
+D3D_CREATE eval=0 heap=1 state=8
+ RESOURCE ptr=00000208b1445f00 dim=3 w=1920 h=1080 fmt=2 flags=4
+D3D_CREATE eval=0 heap=1 state=1024
+ RESOURCE ptr=00000208b1446830 dim=3 w=1920 h=1080 fmt=41 flags=4
+D3D_CREATE eval=0 heap=1 state=1024
+ RESOURCE ptr=00000208af511460 dim=3 w=1920 h=1080 fmt=34 flags=4
+D3D_COPY eval=0 dsttype=0 srctype=1 xyz=0,0,0
+ RESOURCE ptr=00000208b1446830 dim=3 w=1920 h=1080 fmt=41 flags=4
+ RESOURCE ptr=00000208af511d90 dim=1 w=8294400 h=1 fmt=0 flags=0
+D3D_COPY eval=0 dsttype=0 srctype=1 xyz=0,0,0
+ RESOURCE ptr=00000208af511460 dim=3 w=1920 h=1080 fmt=34 flags=4
+ RESOURCE ptr=00000208af511d90 dim=1 w=8294400 h=1 fmt=0 flags=0
+D3D_COPY eval=0 dsttype=0 srctype=1 xyz=0,0,0
+ RESOURCE ptr=00000208b144ffb0 dim=3 w=1920 h=1080 fmt=10 flags=4
+ RESOURCE ptr=00000208af511d90 dim=1 w=16588800 h=1 fmt=0 flags=0
+D3D_CREATE eval=0 heap=1 state=1024
+ RESOURCE ptr=00000208af511d90 dim=3 w=1920 h=1080 fmt=10 flags=4
+D3D_CREATE eval=0 heap=1 state=1024
+ RESOURCE ptr=00000208b1f892d0 dim=3 w=1920 h=1080 fmt=10 flags=4
+D3D_SRV eval=0 cpu=208ab1b5020 gpu=15678a00110020 fmt=10 dimension=4
+ RESOURCE ptr=00000208b144ffb0 dim=3 w=1920 h=1080 fmt=10 flags=4
+D3D_SRV eval=0 cpu=208ab1b5020 gpu=15678a00110020 fmt=41 dimension=1
+BACKEND_TEX eval=0 mode=2 result=0 object=7fa00008801
+ WRAPPER ptr=00000208b144ffb0 q0=7ffbd6991e58 q1=0 q2=20809876b20 q3=0 q4=0 q5=0 q6=0 q7=0 q8=0 q9=9e5a2385 q10=7ffbd6990000 q11=0 q12=0 q13=0 q14=1 q15=2
+D3D_UAV eval=0 cpu=20867a200e0 gpu=25678a00000040 fmt=10 dimension=4
+ RESOURCE ptr=00000208b1f892d0 dim=3 w=1920 h=1080 fmt=10 flags=4
+D3D_UAV eval=0 cpu=208ab1b5040 gpu=15678a00110040 fmt=41 dimension=1
+BACKEND_SURFACE eval=0 result=0 object=8802
+ WRAPPER ptr=00000208b1f892d0 q0=7ffbd6991e58 q1=0 q2=208098770c0 q3=0 q4=0 q5=2080aa0a910 q6=2080aa0a900 q7=0 q8=0 q9=9e5a2550 q10=7ffbd6990000 q11=0 q12=0 q13=0 q14=5f72326700000001 q15=2
+BACKEND_TEX eval=0 mode=2 result=0 object=7fa00008801
+ WRAPPER ptr=00000208b144ffb0 q0=7ffbd6991e58 q1=0 q2=20809876b20 q3=0 q4=0 q5=0 q6=0 q7=0 q8=0 q9=9e5a2385 q10=7ffbd6990000 q11=0 q12=0 q13=0 q14=1 q15=2
+D3D_UAV eval=0 cpu=20867a20100 gpu=25678a00000060 fmt=10 dimension=4
+ RESOURCE ptr=00000208af511d90 dim=3 w=1920 h=1080 fmt=10 flags=4
+D3D_UAV eval=0 cpu=208ab1b5060 gpu=15678a00110060 fmt=41 dimension=1
+BACKEND_SURFACE eval=0 result=0 object=8803
+ WRAPPER ptr=00000208af511d90 q0=7ffbd6991e58 q1=0 q2=20809876ad0 q3=0 q4=0 q5=2080aa0ab90 q6=2080aa0ab80 q7=0 q8=0 q9=9e5a2546 q10=7ffbd6990000 q11=0 q12=0 q13=0 q14=1 q15=2
+ALL_LAUNCH eval=0 kernel=cc_cb_clear grid=379,1,1 bytes=16
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_pre_block_swin_1h_32_1_ds_fp8 grid=240,144,1 bytes=264
+BACKEND self=00000208b11782e0 ctx=00000208b0aac0d0
+VT index=0 fn=00007ffb6c2eb840 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5b840
+VT index=1 fn=00007ffb6c2edca0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5dca0
+VT index=2 fn=00007ffb6c2eeae0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5eae0
+VT index=3 fn=00007ffb6c2d6b60 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=46b60
+VT index=4 fn=00007ffb6c2d7500 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=47500
+VT index=5 fn=00007ffb6c2ed3d0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5d3d0
+VT index=6 fn=00007ffb6c2e9620 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=59620
+VT index=7 fn=00007ffb6c2d7c60 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=47c60
+VT index=8 fn=00007ffb6c2d7c70 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=47c70
+VT index=9 fn=00007ffb6c2d7cf0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=47cf0
+VT index=10 fn=00007ffb6c2edb40 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5db40
+VT index=11 fn=00007ffb6c2d6350 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=46350
+VT index=12 fn=00007ffb6c2ec3f0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5c3f0
+VT index=13 fn=00007ffb6c2d8ec0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=48ec0
+VT index=14 fn=00007ffb6c2d6860 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=46860
+VT index=15 fn=00007ffb6c2d6be0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=46be0
+VT index=16 fn=00007ffb6c2d6c00 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=46c00
+VT index=17 fn=00007ffb6c2d6730 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=46730
+VT index=18 fn=00007ffb6c2e1d20 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=51d20
+VT index=19 fn=00007ffb6c2ecec0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5cec0
+VT index=20 fn=00007ffb6c2d7600 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=47600
+VT index=21 fn=00007ffb6c2ed640 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5d640
+VT index=22 fn=00007ffb6c2ed5d0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5d5d0
+VT index=23 fn=00007ffb6c2ed590 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5d590
+VT index=24 fn=00007ffb6c2ed590 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5d590
+VT index=25 fn=00007ffb6c29b8e0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=b8e0
+VT index=26 fn=00007ffb6c29b8e0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=b8e0
+VT index=27 fn=00007ffb6c2dd1b0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=4d1b0
+VT index=28 fn=00007ffb6c2eba30 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5ba30
+VT index=29 fn=00007ffb6c2e2070 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=52070
+VT index=30 fn=00007ffb6c2e1fb0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=51fb0
+VT index=31 fn=00007ffb6c2e2180 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=52180
+VT index=32 fn=00007ffb6c2e1dd0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=51dd0
+VT index=33 fn=00007ffb6c2e1d30 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=51d30
+VT index=34 fn=00007ffb6c2e1f10 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=51f10
+VT index=35 fn=00007ffb6c2e1e70 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=51e70
+VT index=36 fn=00007ffb6c2ee8b0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5e8b0
+VT index=37 fn=00007ffb6c2ee7c0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5e7c0
+VT index=38 fn=00007ffb6c2ee720 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5e720
+VT index=39 fn=00007ffb6c2ee720 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5e720
+VT index=40 fn=00007ffb6c2ed050 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5d050
+VT index=41 fn=00007ffb6c2eb9c0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5b9c0
+VT index=42 fn=00007ffb6c2ee280 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5e280
+VT index=43 fn=00007ffb6c2ee320 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5e320
+VT index=44 fn=00007ffb6c2d9430 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=49430
+VT index=45 fn=00007ffb6c2ec0f0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5c0f0
+VT index=46 fn=00007ffb6c2ec070 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5c070
+VT index=47 fn=00007ffb6c2ebd00 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5bd00
+VT index=48 fn=00007ffb6c2ebec0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5bec0
+VT index=49 fn=00007ffb6c29b5c0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=b5c0
+VT index=50 fn=00007ffb6c2edb90 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5db90
+VT index=51 fn=00007ffb6c2ed260 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5d260
+VT index=52 fn=00007ffb6c2ebb80 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5bb80
+VT index=53 fn=00007ffb6c2ebc40 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5bc40
+VT index=54 fn=00007ffb6c2ebaa0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5baa0
+VT index=55 fn=00007ffb6c2e0070 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=50070
+VT index=56 fn=00007ffb6c2e0080 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=50080
+VT index=57 fn=00007ffb6c2ee4a0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5e4a0
+VT index=58 fn=00007ffb6c2d8870 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=48870
+VT index=59 fn=00007ffb6c2d8900 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=48900
+VT index=60 fn=00007ffb6c29b8e0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=b8e0
+VT index=61 fn=00007ffb6c29b8e0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=b8e0
+VT index=62 fn=00007ffb6c2e4050 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=54050
+VT index=63 fn=00007ffb6c2e3d70 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=53d70
+eval=0 kernel=cc_tinlayout_fused_pre_block_swin_1h_32_1_ds_fp8 grid=240,144,1 bytes=264
+PARAMHEX 01880000fa070000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f044000087448988083ad6b9723a8988083ad6b9723a000000000000803f0000803f0000003c0000803f0000803f010000000000803d0000000000000000380400008007000000ec05e00200000000008006000000000000000000000000800400008007000000ec3de40200000040020000c0030000
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_1h_32_1_inpview_tilesync_fp8 grid=120,72,1 bytes=96
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_1h_32_1_chained_fp8 grid=121,73,1 bytes=96
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_1h_32_1_chained_fp8 grid=121,72,1 bytes=96
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_1h_32_1_ds_wait_fp8 grid=120,73,1 bytes=96
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_2h_64_2_inpview_tilesync_fp8 grid=60,36,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_2h_64_2_chained_fp8 grid=61,37,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_2h_64_2_chained_fp8 grid=61,36,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_2h_64_2_ds_wait_fp8 grid=60,37,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_4h_128_4_inpview_tilesync_fp8 grid=30,18,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_4h_128_4_chained_fp8 grid=31,19,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_4h_128_4_chained_fp8 grid=31,18,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_4h_128_4_chained_fp8 grid=30,19,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_4h_128_4_chained_fp8 grid=30,18,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_4h_128_4_ds_wait_fp8 grid=31,19,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_8h_256_8_inpview_tilesync_fp8 grid=15,9,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_8h_256_8_chained_fp8 grid=16,10,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_8h_256_8_chained_fp8 grid=16,9,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_8h_256_8_chained_fp8 grid=15,10,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_8h_256_8_chained_fp8 grid=15,9,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_8h_256_8_chained_fp8 grid=16,10,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_8h_256_8_chained_fp8 grid=16,9,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_8h_256_8_ds_wait_fp8 grid=15,10,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_inpview_512_tilesync_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_proj_inpview_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_proj_pool_512_chained_fp8 grid=16,5,1 bytes=80
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_final_head_512_wait_fp8 grid=16,3,1 bytes=40
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_repack_2d_to_1d_fp8 grid=640,1,1 bytes=24
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_ffn_expand_publish_fp8 grid=160,1,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_ffn_contract_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_qkv_chained_fp8 grid=80,1,2 bytes=80
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_attention_chained_fp8 grid=32,3,1 bytes=64
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_projection_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_ffn_expand_chained_fp8 grid=160,1,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_ffn_contract_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_qkv_chained_fp8 grid=80,1,2 bytes=80
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_attention_chained_fp8 grid=32,3,1 bytes=64
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_projection_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_ffn_expand_chained_fp8 grid=160,1,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_ffn_contract_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_qkv_chained_fp8 grid=80,1,2 bytes=80
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_attention_chained_fp8 grid=32,3,1 bytes=64
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_projection_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_ffn_expand_chained_fp8 grid=160,1,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_ffn_contract_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_qkv_chained_fp8 grid=80,1,2 bytes=80
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_attention_chained_fp8 grid=32,3,1 bytes=64
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_projection_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_ffn_expand_chained_fp8 grid=160,1,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_ffn_contract_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_qkv_chained_fp8 grid=80,1,2 bytes=80
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_attention_chained_fp8 grid=32,3,1 bytes=64
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_projection_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_ffn_expand_chained_fp8 grid=160,1,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_ffn_contract_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_qkv_chained_fp8 grid=80,1,2 bytes=80
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_attention_chained_fp8 grid=32,3,1 bytes=64
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_projection_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_ffn_expand_chained_fp8 grid=160,1,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_ffn_contract_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_qkv_chained_fp8 grid=80,1,2 bytes=80
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_attention_chained_fp8 grid=32,3,1 bytes=64
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_projection_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_ffn_expand_chained_fp8 grid=160,1,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_ffn_contract_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_qkv_chained_fp8 grid=80,1,2 bytes=80
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_attention_chained_fp8 grid=32,3,1 bytes=64
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_projection_wait_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_vit_1d_repack_1d_to_2d_fp8 grid=640,1,1 bytes=24
+ALL_LAUNCH eval=0 kernel=cc_dec_input_upsample_1024_512_tilesync_fp8 grid=16,5,4 bytes=80
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=0 kernel=cc_split_swin_16h_proj_512_outview_wait_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_8h_256_8_upsample_tilesync_fp8 grid=15,9,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_8h_256_8_chained_fp8 grid=16,10,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_8h_256_8_chained_fp8 grid=16,9,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_8h_256_8_chained_fp8 grid=15,10,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_8h_256_8_chained_fp8 grid=15,9,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_8h_256_8_chained_fp8 grid=16,10,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_8h_256_8_chained_fp8 grid=16,9,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_8h_256_8_outview_wait_fp8 grid=15,10,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_4h_128_4_upsample_tilesync_fp8 grid=31,18,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_4h_128_4_chained_fp8 grid=30,19,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_4h_128_4_chained_fp8 grid=30,18,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_4h_128_4_chained_fp8 grid=31,19,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_4h_128_4_chained_fp8 grid=31,18,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_4h_128_4_outview_wait_fp8 grid=30,19,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_2h_64_2_upsample_tilesync_fp8 grid=60,36,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_2h_64_2_chained_fp8 grid=61,37,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_2h_64_2_chained_fp8 grid=61,36,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_2h_64_2_outview_wait_fp8 grid=60,37,1 bytes=88
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_1h_32_1_upsample_tilesync_fp8 grid=120,72,1 bytes=96
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_1h_32_1_chained_fp8 grid=121,73,1 bytes=96
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_1h_32_1_chained_fp8 grid=121,72,1 bytes=96
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_swin_1h_32_1_outview_wait_fp8 grid=120,73,1 bytes=96
+ALL_LAUNCH eval=0 kernel=cc_tinlayout_fused_post_block_swin_1h_32_fp8 grid=241,145,1 bytes=184
+BACKEND self=00000208b11782e0 ctx=00000208b0aac0d0
+VT index=0 fn=00007ffb6c2eb840 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5b840
+VT index=1 fn=00007ffb6c2edca0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5dca0
+VT index=2 fn=00007ffb6c2eeae0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5eae0
+VT index=3 fn=00007ffb6c2d6b60 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=46b60
+VT index=4 fn=00007ffb6c2d7500 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=47500
+VT index=5 fn=00007ffb6c2ed3d0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5d3d0
+VT index=6 fn=00007ffb6c2e9620 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=59620
+VT index=7 fn=00007ffb6c2d7c60 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=47c60
+VT index=8 fn=00007ffb6c2d7c70 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=47c70
+VT index=9 fn=00007ffb6c2d7cf0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=47cf0
+VT index=10 fn=00007ffb6c2edb40 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5db40
+VT index=11 fn=00007ffb6c2d6350 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=46350
+VT index=12 fn=00007ffb6c2ec3f0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5c3f0
+VT index=13 fn=00007ffb6c2d8ec0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=48ec0
+VT index=14 fn=00007ffb6c2d6860 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=46860
+VT index=15 fn=00007ffb6c2d6be0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=46be0
+VT index=16 fn=00007ffb6c2d6c00 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=46c00
+VT index=17 fn=00007ffb6c2d6730 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=46730
+VT index=18 fn=00007ffb6c2e1d20 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=51d20
+VT index=19 fn=00007ffb6c2ecec0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5cec0
+VT index=20 fn=00007ffb6c2d7600 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=47600
+VT index=21 fn=00007ffb6c2ed640 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5d640
+VT index=22 fn=00007ffb6c2ed5d0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5d5d0
+VT index=23 fn=00007ffb6c2ed590 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5d590
+VT index=24 fn=00007ffb6c2ed590 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5d590
+VT index=25 fn=00007ffb6c29b8e0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=b8e0
+VT index=26 fn=00007ffb6c29b8e0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=b8e0
+VT index=27 fn=00007ffb6c2dd1b0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=4d1b0
+VT index=28 fn=00007ffb6c2eba30 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5ba30
+VT index=29 fn=00007ffb6c2e2070 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=52070
+VT index=30 fn=00007ffb6c2e1fb0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=51fb0
+VT index=31 fn=00007ffb6c2e2180 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=52180
+VT index=32 fn=00007ffb6c2e1dd0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=51dd0
+VT index=33 fn=00007ffb6c2e1d30 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=51d30
+VT index=34 fn=00007ffb6c2e1f10 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=51f10
+VT index=35 fn=00007ffb6c2e1e70 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=51e70
+VT index=36 fn=00007ffb6c2ee8b0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5e8b0
+VT index=37 fn=00007ffb6c2ee7c0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5e7c0
+VT index=38 fn=00007ffb6c2ee720 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5e720
+VT index=39 fn=00007ffb6c2ee720 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5e720
+VT index=40 fn=00007ffb6c2ed050 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5d050
+VT index=41 fn=00007ffb6c2eb9c0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5b9c0
+VT index=42 fn=00007ffb6c2ee280 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5e280
+VT index=43 fn=00007ffb6c2ee320 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5e320
+VT index=44 fn=00007ffb6c2d9430 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=49430
+VT index=45 fn=00007ffb6c2ec0f0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5c0f0
+VT index=46 fn=00007ffb6c2ec070 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5c070
+VT index=47 fn=00007ffb6c2ebd00 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5bd00
+VT index=48 fn=00007ffb6c2ebec0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5bec0
+VT index=49 fn=00007ffb6c29b5c0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=b5c0
+VT index=50 fn=00007ffb6c2edb90 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5db90
+VT index=51 fn=00007ffb6c2ed260 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5d260
+VT index=52 fn=00007ffb6c2ebb80 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5bb80
+VT index=53 fn=00007ffb6c2ebc40 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5bc40
+VT index=54 fn=00007ffb6c2ebaa0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5baa0
+VT index=55 fn=00007ffb6c2e0070 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=50070
+VT index=56 fn=00007ffb6c2e0080 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=50080
+VT index=57 fn=00007ffb6c2ee4a0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5e4a0
+VT index=58 fn=00007ffb6c2d8870 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=48870
+VT index=59 fn=00007ffb6c2d8900 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=48900
+VT index=60 fn=00007ffb6c29b8e0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=b8e0
+VT index=61 fn=00007ffb6c29b8e0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=b8e0
+VT index=62 fn=00007ffb6c2e4050 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=54050
+VT index=63 fn=00007ffb6c2e3d70 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=53d70
+eval=0 kernel=cc_tinlayout_fused_post_block_swin_1h_32_fp8 grid=241,145,1 bytes=184
+PARAMHEX 00ec67e70200000000ec05e0020000000388000000000000009a490f000000008004000080070000fcfffffffcffffff0000003d0100000001880000fa07000000000000000000000000f044000087448988083ad6b9723a000000000000000000000000000000000098490f00000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000008988083ad6b9723a800700003804000000000000
+TEXTURE name=color object=7fa00008801 current_context=0000000000000000 context_result=0 descriptor_unavailable_no_current_context
+TEXTURE name=history object=0
+TEXTURE name=motion object=0
+D3D_SRV eval=0 cpu=208ab1b5080 gpu=15678a00110080 fmt=10 dimension=4
+ RESOURCE ptr=00000208af511d90 dim=3 w=1920 h=1080 fmt=10 flags=4
+D3D_SRV eval=0 cpu=208ab1b5080 gpu=15678a00110080 fmt=41 dimension=1
+BACKEND_TEX eval=0 mode=2 result=0 object=7fa00008804
+ WRAPPER ptr=00000208af511d90 q0=7ffbd6991e58 q1=0 q2=20809876ad0 q3=0 q4=0 q5=2080aa0ab90 q6=2080aa0ab80 q7=0 q8=0 q9=9e5a2546 q10=7ffbd6990000 q11=0 q12=0 q13=0 q14=1 q15=2
+D3D_UAV eval=0 cpu=20867a20140 gpu=25678a000000a0 fmt=10 dimension=4
+ RESOURCE ptr=0000020809b5f690 dim=3 w=1920 h=1080 fmt=10 flags=4
+D3D_UAV eval=0 cpu=208ab1b50a0 gpu=15678a001100a0 fmt=41 dimension=1
+BACKEND_SURFACE eval=0 result=0 object=8805
+ WRAPPER ptr=0000020809b5f690 q0=7ffbd6991e58 q1=0 q2=20809877980 q3=0 q4=0 q5=2080aa0b3d0 q6=2080aa0b3c0 q7=0 q8=0 q9=9e5a230e q10=7ffbd6990000 q11=0 q12=0 q13=0 q14=1 q15=2
+D3D_UAV eval=0 cpu=20867a20160 gpu=25678a000000c0 fmt=2 dimension=4
+ RESOURCE ptr=00000208b1445f00 dim=3 w=1920 h=1080 fmt=2 flags=4
+D3D_UAV eval=0 cpu=208ab1b50c0 gpu=15678a001100c0 fmt=41 dimension=1
+BACKEND_SURFACE eval=0 result=0 object=8806
+ WRAPPER ptr=00000208b1445f00 q0=7ffbd6991e58 q1=0 q2=20809876940 q3=0 q4=0 q5=0 q6=0 q7=0 q8=0 q9=9e5a238f q10=7ffbd6990000 q11=0 q12=0 q13=0 q14=74756c6f00000001 q15=2
+BACKEND_TEX eval=0 mode=2 result=0 object=7fa00008804
+ WRAPPER ptr=00000208af511d90 q0=7ffbd6991e58 q1=0 q2=20809876ad0 q3=0 q4=0 q5=2080aa0ab90 q6=2080aa0ab80 q7=0 q8=0 q9=9e5a2546 q10=7ffbd6990000 q11=0 q12=0 q13=0 q14=1 q15=2
+D3D_SRV eval=0 cpu=208ab1b50e0 gpu=15678a001100e0 fmt=10 dimension=4
+ RESOURCE ptr=00000208b1f892d0 dim=3 w=1920 h=1080 fmt=10 flags=4
+D3D_SRV eval=0 cpu=208ab1b50e0 gpu=15678a001100e0 fmt=41 dimension=1
+BACKEND_TEX eval=0 mode=2 result=0 object=7fa00008807
+ WRAPPER ptr=00000208b1f892d0 q0=7ffbd6991e58 q1=0 q2=208098770c0 q3=0 q4=0 q5=2080aa0a910 q6=2080aa0a900 q7=0 q8=0 q9=9e5a2550 q10=7ffbd6990000 q11=0 q12=0 q13=0 q14=5f72326700000001 q15=2
+D3D_COPY eval=0 dsttype=1 srctype=0 xyz=0,0,0
+ RESOURCE ptr=000002080983e440 dim=1 w=16588800 h=1 fmt=0 flags=0
+ RESOURCE ptr=0000020809b5f690 dim=3 w=1920 h=1080 fmt=10 flags=4
+D3D_COPY eval=0 dsttype=1 srctype=0 xyz=0,0,0
+ RESOURCE ptr=00000208b1f89c00 dim=1 w=16588800 h=1 fmt=0 flags=0
+ RESOURCE ptr=00000208b144ffb0 dim=3 w=1920 h=1080 fmt=10 flags=4
+D3D_COPY eval=0 dsttype=1 srctype=0 xyz=0,0,0
+ RESOURCE ptr=00000208b1f89c00 dim=1 w=33177600 h=1 fmt=0 flags=0
+ RESOURCE ptr=00000208b1445f00 dim=3 w=1920 h=1080 fmt=2 flags=4
+D3D_COPY eval=0 dsttype=1 srctype=0 xyz=0,0,0
+ RESOURCE ptr=00000208b1f89c00 dim=1 w=16588800 h=1 fmt=0 flags=0
+ RESOURCE ptr=00000208af511d90 dim=3 w=1920 h=1080 fmt=10 flags=4
+D3D_COPY eval=0 dsttype=1 srctype=0 xyz=0,0,0
+ RESOURCE ptr=00000208b1f89c00 dim=1 w=16588800 h=1 fmt=0 flags=0
+ RESOURCE ptr=00000208b1f892d0 dim=3 w=1920 h=1080 fmt=10 flags=4
+D3D_COPY eval=0 dsttype=0 srctype=1 xyz=0,0,0
+ RESOURCE ptr=00000208b144ffb0 dim=3 w=1920 h=1080 fmt=10 flags=4
+ RESOURCE ptr=00000208b1f89c00 dim=1 w=16588800 h=1 fmt=0 flags=0
+BACKEND_TEX eval=1 mode=2 result=0 object=7fa00008801
+ WRAPPER ptr=00000208b144ffb0 q0=7ffbd6991e58 q1=0 q2=20809876b20 q3=0 q4=0 q5=0 q6=0 q7=0 q8=0 q9=9e5a2385 q10=7ffbd6990000 q11=0 q12=0 q13=0 q14=1 q15=2
+BACKEND_SURFACE eval=1 result=0 object=8802
+ WRAPPER ptr=00000208b1f892d0 q0=7ffbd6991e58 q1=0 q2=208098770c0 q3=0 q4=0 q5=2080aa0a910 q6=2080aa0a900 q7=0 q8=0 q9=9e5a2550 q10=7ffbd6990000 q11=0 q12=0 q13=0 q14=5f72326700000001 q15=2
+BACKEND_TEX eval=1 mode=2 result=0 object=7fa00008801
+ WRAPPER ptr=00000208b144ffb0 q0=7ffbd6991e58 q1=0 q2=20809876b20 q3=0 q4=0 q5=0 q6=0 q7=0 q8=0 q9=9e5a2385 q10=7ffbd6990000 q11=0 q12=0 q13=0 q14=1 q15=2
+BACKEND_SURFACE eval=1 result=0 object=8803
+ WRAPPER ptr=00000208af511d90 q0=7ffbd6991e58 q1=0 q2=20809876ad0 q3=0 q4=0 q5=2080aa0ab90 q6=2080aa0ab80 q7=0 q8=0 q9=9e5a2546 q10=7ffbd6990000 q11=0 q12=0 q13=0 q14=1 q15=2
+D3D_SRV eval=1 cpu=208ab1b5100 gpu=15678a00110100 fmt=10 dimension=4
+ RESOURCE ptr=0000020809b5f690 dim=3 w=1920 h=1080 fmt=10 flags=4
+D3D_SRV eval=1 cpu=208ab1b5100 gpu=15678a00110100 fmt=41 dimension=1
+BACKEND_TEX eval=1 mode=0 result=0 object=7f800008808
+ WRAPPER ptr=0000020809b5f690 q0=7ffbd6991e58 q1=0 q2=20809877980 q3=0 q4=0 q5=2080aa0b3d0 q6=2080aa0b3c0 q7=0 q8=0 q9=9e5a230e q10=7ffbd6990000 q11=0 q12=0 q13=0 q14=1 q15=2
+D3D_SRV eval=1 cpu=208ab1b5120 gpu=15678a00110120 fmt=34 dimension=4
+ RESOURCE ptr=00000208af511460 dim=3 w=1920 h=1080 fmt=34 flags=4
+D3D_SRV eval=1 cpu=208ab1b5120 gpu=15678a00110120 fmt=41 dimension=1
+BACKEND_TEX eval=1 mode=2 result=0 object=7fa00008809
+ WRAPPER ptr=00000208af511460 q0=7ffbd6991e58 q1=0 q2=20809877ca0 q3=0 q4=0 q5=0 q6=0 q7=0 q8=0 q9=9e5a23d0 q10=7ffbd6990000 q11=0 q12=0 q13=0 q14=1 q15=2
+ALL_LAUNCH eval=1 kernel=cc_cb_clear grid=379,1,1 bytes=16
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_pre_block_swin_1h_32_1_ds_fp8 grid=240,144,1 bytes=264
+BACKEND self=00000208b11782e0 ctx=00000208b0aac0d0
+VT index=0 fn=00007ffb6c2eb840 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5b840
+VT index=1 fn=00007ffb6c2edca0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5dca0
+VT index=2 fn=00007ffb6c2eeae0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5eae0
+VT index=3 fn=00007ffb6c2d6b60 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=46b60
+VT index=4 fn=00007ffb6c2d7500 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=47500
+VT index=5 fn=00007ffb6c2ed3d0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5d3d0
+VT index=6 fn=00007ffb6c2e9620 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=59620
+VT index=7 fn=00007ffb6c2d7c60 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=47c60
+VT index=8 fn=00007ffb6c2d7c70 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=47c70
+VT index=9 fn=00007ffb6c2d7cf0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=47cf0
+VT index=10 fn=00007ffb6c2edb40 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5db40
+VT index=11 fn=00007ffb6c2d6350 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=46350
+VT index=12 fn=00007ffb6c2ec3f0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5c3f0
+VT index=13 fn=00007ffb6c2d8ec0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=48ec0
+VT index=14 fn=00007ffb6c2d6860 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=46860
+VT index=15 fn=00007ffb6c2d6be0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=46be0
+VT index=16 fn=00007ffb6c2d6c00 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=46c00
+VT index=17 fn=00007ffb6c2d6730 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=46730
+VT index=18 fn=00007ffb6c2e1d20 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=51d20
+VT index=19 fn=00007ffb6c2ecec0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5cec0
+VT index=20 fn=00007ffb6c2d7600 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=47600
+VT index=21 fn=00007ffb6c2ed640 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5d640
+VT index=22 fn=00007ffb6c2ed5d0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5d5d0
+VT index=23 fn=00007ffb6c2ed590 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5d590
+VT index=24 fn=00007ffb6c2ed590 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5d590
+VT index=25 fn=00007ffb6c29b8e0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=b8e0
+VT index=26 fn=00007ffb6c29b8e0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=b8e0
+VT index=27 fn=00007ffb6c2dd1b0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=4d1b0
+VT index=28 fn=00007ffb6c2eba30 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5ba30
+VT index=29 fn=00007ffb6c2e2070 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=52070
+VT index=30 fn=00007ffb6c2e1fb0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=51fb0
+VT index=31 fn=00007ffb6c2e2180 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=52180
+VT index=32 fn=00007ffb6c2e1dd0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=51dd0
+VT index=33 fn=00007ffb6c2e1d30 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=51d30
+VT index=34 fn=00007ffb6c2e1f10 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=51f10
+VT index=35 fn=00007ffb6c2e1e70 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=51e70
+VT index=36 fn=00007ffb6c2ee8b0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5e8b0
+VT index=37 fn=00007ffb6c2ee7c0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5e7c0
+VT index=38 fn=00007ffb6c2ee720 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5e720
+VT index=39 fn=00007ffb6c2ee720 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5e720
+VT index=40 fn=00007ffb6c2ed050 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5d050
+VT index=41 fn=00007ffb6c2eb9c0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5b9c0
+VT index=42 fn=00007ffb6c2ee280 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5e280
+VT index=43 fn=00007ffb6c2ee320 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5e320
+VT index=44 fn=00007ffb6c2d9430 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=49430
+VT index=45 fn=00007ffb6c2ec0f0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5c0f0
+VT index=46 fn=00007ffb6c2ec070 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5c070
+VT index=47 fn=00007ffb6c2ebd00 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5bd00
+VT index=48 fn=00007ffb6c2ebec0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5bec0
+VT index=49 fn=00007ffb6c29b5c0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=b5c0
+VT index=50 fn=00007ffb6c2edb90 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5db90
+VT index=51 fn=00007ffb6c2ed260 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5d260
+VT index=52 fn=00007ffb6c2ebb80 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5bb80
+VT index=53 fn=00007ffb6c2ebc40 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5bc40
+VT index=54 fn=00007ffb6c2ebaa0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5baa0
+VT index=55 fn=00007ffb6c2e0070 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=50070
+VT index=56 fn=00007ffb6c2e0080 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=50080
+VT index=57 fn=00007ffb6c2ee4a0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5e4a0
+VT index=58 fn=00007ffb6c2d8870 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=48870
+VT index=59 fn=00007ffb6c2d8900 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=48900
+VT index=60 fn=00007ffb6c29b8e0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=b8e0
+VT index=61 fn=00007ffb6c29b8e0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=b8e0
+VT index=62 fn=00007ffb6c2e4050 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=54050
+VT index=63 fn=00007ffb6c2e3d70 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=53d70
+eval=1 kernel=cc_tinlayout_fused_pre_block_swin_1h_32_1_ds_fp8 grid=240,144,1 bytes=264
+PARAMHEX 01880000fa07000008880000f807000009880000fa0700000000000000000000000000000000000000000000000000000000f044000087448988083ad6b9723a00000000000000000000f044000087448988083ad6b9723a00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f044000087448988083ad6b9723a8988083ad6b9723a000000000000803f0000803f0000003c0000803f0000803f010000000000803d0100000000000000380400008007000000ec05e00200000000008006000000000000000000000000800400008007000000ec3de40200000040020000c0030000
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_1h_32_1_inpview_tilesync_fp8 grid=120,72,1 bytes=96
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_1h_32_1_chained_fp8 grid=121,73,1 bytes=96
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_1h_32_1_chained_fp8 grid=121,72,1 bytes=96
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_1h_32_1_ds_wait_fp8 grid=120,73,1 bytes=96
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_2h_64_2_inpview_tilesync_fp8 grid=60,36,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_2h_64_2_chained_fp8 grid=61,37,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_2h_64_2_chained_fp8 grid=61,36,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_2h_64_2_ds_wait_fp8 grid=60,37,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_4h_128_4_inpview_tilesync_fp8 grid=30,18,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_4h_128_4_chained_fp8 grid=31,19,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_4h_128_4_chained_fp8 grid=31,18,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_4h_128_4_chained_fp8 grid=30,19,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_4h_128_4_chained_fp8 grid=30,18,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_4h_128_4_ds_wait_fp8 grid=31,19,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_8h_256_8_inpview_tilesync_fp8 grid=15,9,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_8h_256_8_chained_fp8 grid=16,10,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_8h_256_8_chained_fp8 grid=16,9,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_8h_256_8_chained_fp8 grid=15,10,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_8h_256_8_chained_fp8 grid=15,9,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_8h_256_8_chained_fp8 grid=16,10,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_8h_256_8_chained_fp8 grid=16,9,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_8h_256_8_ds_wait_fp8 grid=15,10,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_inpview_512_tilesync_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_proj_inpview_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_proj_pool_512_chained_fp8 grid=16,5,1 bytes=80
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_final_head_512_wait_fp8 grid=16,3,1 bytes=40
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_repack_2d_to_1d_fp8 grid=640,1,1 bytes=24
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_ffn_expand_publish_fp8 grid=160,1,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_ffn_contract_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_qkv_chained_fp8 grid=80,1,2 bytes=80
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_attention_chained_fp8 grid=32,3,1 bytes=64
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_projection_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_ffn_expand_chained_fp8 grid=160,1,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_ffn_contract_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_qkv_chained_fp8 grid=80,1,2 bytes=80
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_attention_chained_fp8 grid=32,3,1 bytes=64
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_projection_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_ffn_expand_chained_fp8 grid=160,1,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_ffn_contract_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_qkv_chained_fp8 grid=80,1,2 bytes=80
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_attention_chained_fp8 grid=32,3,1 bytes=64
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_projection_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_ffn_expand_chained_fp8 grid=160,1,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_ffn_contract_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_qkv_chained_fp8 grid=80,1,2 bytes=80
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_attention_chained_fp8 grid=32,3,1 bytes=64
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_projection_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_ffn_expand_chained_fp8 grid=160,1,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_ffn_contract_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_qkv_chained_fp8 grid=80,1,2 bytes=80
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_attention_chained_fp8 grid=32,3,1 bytes=64
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_projection_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_ffn_expand_chained_fp8 grid=160,1,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_ffn_contract_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_qkv_chained_fp8 grid=80,1,2 bytes=80
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_attention_chained_fp8 grid=32,3,1 bytes=64
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_projection_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_ffn_expand_chained_fp8 grid=160,1,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_ffn_contract_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_qkv_chained_fp8 grid=80,1,2 bytes=80
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_attention_chained_fp8 grid=32,3,1 bytes=64
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_projection_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_ffn_expand_chained_fp8 grid=160,1,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_ffn_contract_chained_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_qkv_chained_fp8 grid=80,1,2 bytes=80
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_attention_chained_fp8 grid=32,3,1 bytes=64
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_projection_wait_fp8 grid=40,1,4 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_vit_1d_repack_1d_to_2d_fp8 grid=640,1,1 bytes=24
+ALL_LAUNCH eval=1 kernel=cc_dec_input_upsample_1024_512_tilesync_fp8 grid=16,5,4 bytes=80
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_512_chained_fp8 grid=8,5,2 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_ffwd_proj_512_chained_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_qkv_512_chained_fp8 grid=8,5,4 bytes=56
+ALL_LAUNCH eval=1 kernel=cc_split_swin_16h_proj_512_outview_wait_fp8 grid=16,5,1 bytes=72
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_8h_256_8_upsample_tilesync_fp8 grid=15,9,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_8h_256_8_chained_fp8 grid=16,10,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_8h_256_8_chained_fp8 grid=16,9,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_8h_256_8_chained_fp8 grid=15,10,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_8h_256_8_chained_fp8 grid=15,9,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_8h_256_8_chained_fp8 grid=16,10,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_8h_256_8_chained_fp8 grid=16,9,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_8h_256_8_outview_wait_fp8 grid=15,10,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_4h_128_4_upsample_tilesync_fp8 grid=31,18,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_4h_128_4_chained_fp8 grid=30,19,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_4h_128_4_chained_fp8 grid=30,18,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_4h_128_4_chained_fp8 grid=31,19,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_4h_128_4_chained_fp8 grid=31,18,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_4h_128_4_outview_wait_fp8 grid=30,19,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_2h_64_2_upsample_tilesync_fp8 grid=60,36,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_2h_64_2_chained_fp8 grid=61,37,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_2h_64_2_chained_fp8 grid=61,36,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_2h_64_2_outview_wait_fp8 grid=60,37,1 bytes=88
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_1h_32_1_upsample_tilesync_fp8 grid=120,72,1 bytes=96
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_1h_32_1_chained_fp8 grid=121,73,1 bytes=96
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_1h_32_1_chained_fp8 grid=121,72,1 bytes=96
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_swin_1h_32_1_outview_wait_fp8 grid=120,73,1 bytes=96
+ALL_LAUNCH eval=1 kernel=cc_tinlayout_fused_post_block_swin_1h_32_fp8 grid=241,145,1 bytes=184
+BACKEND self=00000208b11782e0 ctx=00000208b0aac0d0
+VT index=0 fn=00007ffb6c2eb840 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5b840
+VT index=1 fn=00007ffb6c2edca0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5dca0
+VT index=2 fn=00007ffb6c2eeae0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5eae0
+VT index=3 fn=00007ffb6c2d6b60 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=46b60
+VT index=4 fn=00007ffb6c2d7500 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=47500
+VT index=5 fn=00007ffb6c2ed3d0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5d3d0
+VT index=6 fn=00007ffb6c2e9620 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=59620
+VT index=7 fn=00007ffb6c2d7c60 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=47c60
+VT index=8 fn=00007ffb6c2d7c70 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=47c70
+VT index=9 fn=00007ffb6c2d7cf0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=47cf0
+VT index=10 fn=00007ffb6c2edb40 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5db40
+VT index=11 fn=00007ffb6c2d6350 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=46350
+VT index=12 fn=00007ffb6c2ec3f0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5c3f0
+VT index=13 fn=00007ffb6c2d8ec0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=48ec0
+VT index=14 fn=00007ffb6c2d6860 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=46860
+VT index=15 fn=00007ffb6c2d6be0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=46be0
+VT index=16 fn=00007ffb6c2d6c00 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=46c00
+VT index=17 fn=00007ffb6c2d6730 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=46730
+VT index=18 fn=00007ffb6c2e1d20 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=51d20
+VT index=19 fn=00007ffb6c2ecec0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5cec0
+VT index=20 fn=00007ffb6c2d7600 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=47600
+VT index=21 fn=00007ffb6c2ed640 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5d640
+VT index=22 fn=00007ffb6c2ed5d0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5d5d0
+VT index=23 fn=00007ffb6c2ed590 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5d590
+VT index=24 fn=00007ffb6c2ed590 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5d590
+VT index=25 fn=00007ffb6c29b8e0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=b8e0
+VT index=26 fn=00007ffb6c29b8e0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=b8e0
+VT index=27 fn=00007ffb6c2dd1b0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=4d1b0
+VT index=28 fn=00007ffb6c2eba30 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5ba30
+VT index=29 fn=00007ffb6c2e2070 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=52070
+VT index=30 fn=00007ffb6c2e1fb0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=51fb0
+VT index=31 fn=00007ffb6c2e2180 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=52180
+VT index=32 fn=00007ffb6c2e1dd0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=51dd0
+VT index=33 fn=00007ffb6c2e1d30 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=51d30
+VT index=34 fn=00007ffb6c2e1f10 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=51f10
+VT index=35 fn=00007ffb6c2e1e70 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=51e70
+VT index=36 fn=00007ffb6c2ee8b0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5e8b0
+VT index=37 fn=00007ffb6c2ee7c0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5e7c0
+VT index=38 fn=00007ffb6c2ee720 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5e720
+VT index=39 fn=00007ffb6c2ee720 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5e720
+VT index=40 fn=00007ffb6c2ed050 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5d050
+VT index=41 fn=00007ffb6c2eb9c0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5b9c0
+VT index=42 fn=00007ffb6c2ee280 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5e280
+VT index=43 fn=00007ffb6c2ee320 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5e320
+VT index=44 fn=00007ffb6c2d9430 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=49430
+VT index=45 fn=00007ffb6c2ec0f0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5c0f0
+VT index=46 fn=00007ffb6c2ec070 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5c070
+VT index=47 fn=00007ffb6c2ebd00 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5bd00
+VT index=48 fn=00007ffb6c2ebec0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5bec0
+VT index=49 fn=00007ffb6c29b5c0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=b5c0
+VT index=50 fn=00007ffb6c2edb90 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5db90
+VT index=51 fn=00007ffb6c2ed260 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5d260
+VT index=52 fn=00007ffb6c2ebb80 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5bb80
+VT index=53 fn=00007ffb6c2ebc40 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5bc40
+VT index=54 fn=00007ffb6c2ebaa0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5baa0
+VT index=55 fn=00007ffb6c2e0070 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=50070
+VT index=56 fn=00007ffb6c2e0080 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=50080
+VT index=57 fn=00007ffb6c2ee4a0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=5e4a0
+VT index=58 fn=00007ffb6c2d8870 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=48870
+VT index=59 fn=00007ffb6c2d8900 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=48900
+VT index=60 fn=00007ffb6c29b8e0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=b8e0
+VT index=61 fn=00007ffb6c29b8e0 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=b8e0
+VT index=62 fn=00007ffb6c2e4050 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=54050
+VT index=63 fn=00007ffb6c2e3d70 module=D:\DLSSNR-Oracle\issue13\core615\nvngx_dlssnr.dll rva=53d70
+eval=1 kernel=cc_tinlayout_fused_post_block_swin_1h_32_fp8 grid=241,145,1 bytes=184
+PARAMHEX 00ec67e70200000000ec05e0020000000388000000000000009a490f000000008004000080070000fcfffffffcffffff0000003d0100000001880000fa07000000000000000000000000f044000087448988083ad6b9723a08880000f807000009880000fa0700000098490f000000000100000000000000000000000000f044000087448988083ad6b9723a00000000000000000000f044000087448988083ad6b9723a8988083ad6b9723a800700003804000000000000
+TEXTURE name=color object=7fa00008801 current_context=0000000000000000 context_result=0 descriptor_unavailable_no_current_context
+TEXTURE name=history object=7f800008808 current_context=0000000000000000 context_result=0 descriptor_unavailable_no_current_context
+TEXTURE name=motion object=7fa00008809 current_context=0000000000000000 context_result=0 descriptor_unavailable_no_current_context
+CONTROLLED_CLOSE_POST eval=1 prefix_unchanged=1 seed_unchanged=1
+BACKEND_TEX eval=1 mode=2 result=0 object=7fa00008804
+ WRAPPER ptr=00000208af511d90 q0=7ffbd6991e58 q1=0 q2=20809876ad0 q3=0 q4=0 q5=2080aa0ab90 q6=2080aa0ab80 q7=0 q8=0 q9=9e5a2546 q10=7ffbd6990000 q11=0 q12=0 q13=0 q14=1 q15=2
+BACKEND_SURFACE eval=1 result=0 object=8805
+ WRAPPER ptr=0000020809b5f690 q0=7ffbd6991e58 q1=0 q2=20809877980 q3=0 q4=0 q5=2080aa0b3d0 q6=2080aa0b3c0 q7=0 q8=0 q9=9e5a230e q10=7ffbd6990000 q11=0 q12=0 q13=0 q14=1 q15=2
+BACKEND_SURFACE eval=1 result=0 object=8806
+ WRAPPER ptr=00000208b1445f00 q0=7ffbd6991e58 q1=0 q2=20809876940 q3=0 q4=0 q5=0 q6=0 q7=0 q8=0 q9=9e5a238f q10=7ffbd6990000 q11=0 q12=0 q13=0 q14=74756c6f00000001 q15=2
+BACKEND_TEX eval=1 mode=2 result=0 object=7fa00008804
+ WRAPPER ptr=00000208af511d90 q0=7ffbd6991e58 q1=0 q2=20809876ad0 q3=0 q4=0 q5=2080aa0ab90 q6=2080aa0ab80 q7=0 q8=0 q9=9e5a2546 q10=7ffbd6990000 q11=0 q12=0 q13=0 q14=1 q15=2
+BACKEND_TEX eval=1 mode=2 result=0 object=7fa00008807
+ WRAPPER ptr=00000208b1f892d0 q0=7ffbd6991e58 q1=0 q2=208098770c0 q3=0 q4=0 q5=2080aa0a910 q6=2080aa0a900 q7=0 q8=0 q9=9e5a2550 q10=7ffbd6990000 q11=0 q12=0 q13=0 q14=5f72326700000001 q15=2
+D3D_COPY eval=1 dsttype=1 srctype=0 xyz=0,0,0
+ RESOURCE ptr=000002080983e440 dim=1 w=16588800 h=1 fmt=0 flags=0
+ RESOURCE ptr=0000020809b5f690 dim=3 w=1920 h=1080 fmt=10 flags=4
+D3D_COPY eval=1 dsttype=1 srctype=0 xyz=0,0,0
+ RESOURCE ptr=00000208b1f89c00 dim=1 w=16588800 h=1 fmt=0 flags=0
+ RESOURCE ptr=00000208b144ffb0 dim=3 w=1920 h=1080 fmt=10 flags=4
+D3D_COPY eval=1 dsttype=1 srctype=0 xyz=0,0,0
+ RESOURCE ptr=00000208b1f89c00 dim=1 w=33177600 h=1 fmt=0 flags=0
+ RESOURCE ptr=00000208b1445f00 dim=3 w=1920 h=1080 fmt=2 flags=4
+D3D_COPY eval=1 dsttype=1 srctype=0 xyz=0,0,0
+ RESOURCE ptr=00000208b1f89c00 dim=1 w=16588800 h=1 fmt=0 flags=0
+ RESOURCE ptr=00000208af511d90 dim=3 w=1920 h=1080 fmt=10 flags=4
+D3D_COPY eval=1 dsttype=1 srctype=0 xyz=0,0,0
+ RESOURCE ptr=00000208b1f89c00 dim=1 w=16588800 h=1 fmt=0 flags=0
+ RESOURCE ptr=00000208b1f892d0 dim=3 w=1920 h=1080 fmt=10 flags=4

@@ -1,0 +1,31 @@
+{
+  "handle": 94788,
+  "exit": 1,
+  "lock_released": true,
+  "block": 23,
+  "window": 0,
+  "head": 0,
+  "all_distinct_bits": 2,
+  "all_float_values": [
+    0.00390625,
+    0.0067138671875
+  ],
+  "tile_distinct_counts": [
+    1,
+    1,
+    1,
+    2
+  ],
+  "within_lane_e_diff": 0,
+  "raw_hashes": [
+    {
+      "Path": "D:\\DLSSNR-Lab\\c512-den-gold-20261006\\baseline\\first.rgb32f",
+      "Hash": "F3E4CA370908EA9E66AA0030F65711A1D4DB3063C743A989E64A3C392F438755"
+    },
+    {
+      "Path": "D:\\DLSSNR-Lab\\c512-den-gold-20261006\\trace-first23\\first.rgb32f",
+      "Hash": "F3E4CA370908EA9E66AA0030F65711A1D4DB3063C743A989E64A3C392F438755"
+    }
+  ],
+  "decision": "PASS complete128lane/4tile non-asymmetric model gate:2 distinct values,e8bit0,fullrawsame; original first16-only runtime failed and retained; no GPU rerun"
+}

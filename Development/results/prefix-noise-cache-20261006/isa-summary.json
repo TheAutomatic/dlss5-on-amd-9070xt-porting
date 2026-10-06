@@ -1,0 +1,42 @@
+{
+  "c32-wave1": {
+    "c32_wave1_prefix_b8d": {
+      "sfu_static_counts": {
+        "v_log_f32": 1,
+        "v_sqrt_f32": 1,
+        "v_cos_f32": 1,
+        "v_sin_f32": 1
+      },
+      "wmma_static_count": 48
+    },
+    "c32_wave1_prefix_b8d_noise": {
+      "sfu_static_counts": {
+        "v_log_f32": 0,
+        "v_sqrt_f32": 0,
+        "v_cos_f32": 0,
+        "v_sin_f32": 0
+      },
+      "wmma_static_count": 48
+    }
+  },
+  "c32-wave1-fast": {
+    "c32_wave1_prefix_b8d": {
+      "sfu_static_counts": {
+        "v_log_f32": 1,
+        "v_sqrt_f32": 1,
+        "v_cos_f32": 1,
+        "v_sin_f32": 1
+      },
+      "wmma_static_count": 48
+    },
+    "c32_wave1_prefix_b8d_noise": {
+      "sfu_static_counts": {
+        "v_log_f32": 0,
+        "v_sqrt_f32": 0,
+        "v_cos_f32": 0,
+        "v_sin_f32": 0
+      },
+      "wmma_static_count": 48
+    }
+  }
+}

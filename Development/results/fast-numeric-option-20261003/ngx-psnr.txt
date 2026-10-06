@@ -1,0 +1,7 @@
+1920x1080 mochizuki psnr=45.56 ssim=0.99605 | input psnr=26.44
+1920x1080 fn0-rel.f16 psnr=44.26 ssim=0.99555 mean_diff=[ 0.148  0.228 -0.02 ] within1=62.6% vs_mochizuki=43.25
+1920x1080 fn1-rel.f16 psnr=44.23 ssim=0.99552 mean_diff=[0.181 0.236 0.003] within1=63.3% vs_mochizuki=43.21
+1920x1080 fn0-full.f16 psnr=47.43 ssim=0.99630 mean_diff=[-0.024  0.053  0.089] within1=76.9% vs_mochizuki=45.61
+1920x1080 fn1-full.f16 psnr=47.55 ssim=0.99634 mean_diff=[-0.013  0.047  0.104] within1=77.3% vs_mochizuki=45.71
+1920x1080 fn0-full-1088.f16 psnr=45.76 ssim=0.99593 mean_diff=[0.125 0.358 0.431] within1=66.8% vs_mochizuki=46.80
+1920x1080 fn1-full-1088.f16 psnr=45.67 ssim=0.99596 mean_diff=[0.132 0.367 0.459] within1=66.8% vs_mochizuki=47.26

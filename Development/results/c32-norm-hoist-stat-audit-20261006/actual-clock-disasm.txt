@@ -1,0 +1,104 @@
+<std::chrono::_V2::steady_clock::now()>:
+   140197bf0:	48 83 ec 38          	sub    $0x38,%rsp
+   140197bf4:	31 d2                	xor    %edx,%edx
+   140197bf6:	48 8d 4c 24 28       	lea    0x28(%rsp),%rcx
+   140197bfb:	e8 60 47 e8 ff       	call   14001c360 <gettimeofday>
+   140197c00:	48 63 44 24 28       	movslq 0x28(%rsp),%rax
+   140197c05:	48 63 54 24 2c       	movslq 0x2c(%rsp),%rdx
+   140197c0a:	48 69 c0 40 42 0f 00 	imul   $0xf4240,%rax,%rax
+   140197c11:	48 01 d0             	add    %rdx,%rax
+   140197c14:	48 69 c0 e8 03 00 00 	imul   $0x3e8,%rax,%rax
+   140197c1b:	48 83 c4 38          	add    $0x38,%rsp
+   140197c1f:	c3                   	ret
+
+<gettimeofday>:
+   14001c360:	55                   	push   %rbp
+   14001c361:	53                   	push   %rbx
+   14001c362:	48 83 ec 38          	sub    $0x38,%rsp
+   14001c366:	48 8d 6c 24 30       	lea    0x30(%rsp),%rbp
+   14001c36b:	48 89 cb             	mov    %rcx,%rbx
+   14001c36e:	48 8d 4d f0          	lea    -0x10(%rbp),%rcx
+   14001c372:	e8 f9 fe ff ff       	call   14001c270 <getntptimeofday>
+   14001c377:	85 c0                	test   %eax,%eax
+   14001c379:	75 2d                	jne    14001c3a8 <gettimeofday+0x48>
+   14001c37b:	48 8b 55 f0          	mov    -0x10(%rbp),%rdx
+   14001c37f:	89 13                	mov    %edx,(%rbx)
+   14001c381:	48 63 55 f8          	movslq -0x8(%rbp),%rdx
+   14001c385:	48 89 d1             	mov    %rdx,%rcx
+   14001c388:	48 69 d2 d3 4d 62 10 	imul   $0x10624dd3,%rdx,%rdx
+   14001c38f:	c1 f9 1f             	sar    $0x1f,%ecx
+   14001c392:	48 c1 fa 26          	sar    $0x26,%rdx
+   14001c396:	29 ca                	sub    %ecx,%edx
+   14001c398:	89 53 04             	mov    %edx,0x4(%rbx)
+   14001c39b:	48 83 c4 38          	add    $0x38,%rsp
+   14001c39f:	5b                   	pop    %rbx
+   14001c3a0:	5d                   	pop    %rbp
+   14001c3a1:	c3                   	ret
+   14001c3a2:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+   14001c3a8:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
+   14001c3ad:	eb ec                	jmp    14001c39b <gettimeofday+0x3b>
+   14001c3af:	90                   	nop
+
+<getntptimeofday>:
+   14001c270:	55                   	push   %rbp
+   14001c271:	56                   	push   %rsi
+   14001c272:	53                   	push   %rbx
+   14001c273:	48 81 ec e0 00 00 00 	sub    $0xe0,%rsp
+   14001c27a:	48 8d ac 24 e0 00 00 	lea    0xe0(%rsp),%rbp
+   14001c281:	00 
+   14001c282:	48 89 cb             	mov    %rcx,%rbx
+   14001c285:	48 89 d6             	mov    %rdx,%rsi
+   14001c288:	48 85 d2             	test   %rdx,%rdx
+   14001c28b:	74 26                	je     14001c2b3 <getntptimeofday+0x43>
+   14001c28d:	48 8d 8d 50 ff ff ff 	lea    -0xb0(%rbp),%rcx
+   14001c294:	ff 15 b6 85 1f 00    	call   *0x1f85b6(%rip)        # 140214850 <__imp_GetTimeZoneInformation>
+   14001c29a:	83 f8 ff             	cmp    $0xffffffff,%eax
+   14001c29d:	74 71                	je     14001c310 <getntptimeofday+0xa0>
+   14001c29f:	83 f8 02             	cmp    $0x2,%eax
+   14001c2a2:	8b 95 50 ff ff ff    	mov    -0xb0(%rbp),%edx
+   14001c2a8:	0f 94 c0             	sete   %al
+   14001c2ab:	0f b6 c0             	movzbl %al,%eax
+   14001c2ae:	89 16                	mov    %edx,(%rsi)
+   14001c2b0:	89 46 04             	mov    %eax,0x4(%rsi)
+   14001c2b3:	48 85 db             	test   %rbx,%rbx
+   14001c2b6:	74 4a                	je     14001c302 <getntptimeofday+0x92>
+   14001c2b8:	48 8b 05 21 6f 1f 00 	mov    0x1f6f21(%rip),%rax        # 1402131e0 <GetSystemTimeAsFileTime_p.0>
+   14001c2bf:	48 85 c0             	test   %rax,%rax
+   14001c2c2:	74 5c                	je     14001c320 <getntptimeofday+0xb0>
+   14001c2c4:	48 8d 8d 48 ff ff ff 	lea    -0xb8(%rbp),%rcx
+   14001c2cb:	ff d0                	call   *%rax
+   14001c2cd:	48 b9 00 80 c1 2a 21 	movabs $0xfe624e212ac18000,%rcx
+   14001c2d4:	4e 62 fe 
+   14001c2d7:	48 03 8d 48 ff ff ff 	add    -0xb8(%rbp),%rcx
+   14001c2de:	48 b8 bd 42 7a e5 d5 	movabs $0xd6bf94d5e57a42bd,%rax
+   14001c2e5:	94 bf d6 
+   14001c2e8:	48 f7 e1             	mul    %rcx
+   14001c2eb:	48 c1 ea 17          	shr    $0x17,%rdx
+   14001c2ef:	48 89 13             	mov    %rdx,(%rbx)
+   14001c2f2:	48 69 d2 80 96 98 00 	imul   $0x989680,%rdx,%rdx
+   14001c2f9:	48 29 d1             	sub    %rdx,%rcx
+   14001c2fc:	6b c9 64             	imul   $0x64,%ecx,%ecx
+   14001c2ff:	89 4b 08             	mov    %ecx,0x8(%rbx)
+   14001c302:	31 c0                	xor    %eax,%eax
+   14001c304:	48 81 c4 e0 00 00 00 	add    $0xe0,%rsp
+   14001c30b:	5b                   	pop    %rbx
+   14001c30c:	5e                   	pop    %rsi
+   14001c30d:	5d                   	pop    %rbp
+   14001c30e:	c3                   	ret
+   14001c30f:	90                   	nop
+   14001c310:	48 c7 06 00 00 00 00 	movq   $0x0,(%rsi)
+   14001c317:	eb 9a                	jmp    14001c2b3 <getntptimeofday+0x43>
+   14001c319:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+   14001c320:	48 8d 0d 69 83 1b 00 	lea    0x1b8369(%rip),%rcx        # 1401d4690 <.rdata>
+   14001c327:	ff 15 db 84 1f 00    	call   *0x1f84db(%rip)        # 140214808 <__imp_GetModuleHandleA>
+   14001c32d:	48 8d 15 6c 83 1b 00 	lea    0x1b836c(%rip),%rdx        # 1401d46a0 <.rdata+0x10>
+   14001c334:	48 89 c1             	mov    %rax,%rcx
+   14001c337:	ff 15 e3 84 1f 00    	call   *0x1f84e3(%rip)        # 140214820 <__imp_GetProcAddress>
+   14001c33d:	48 85 c0             	test   %rax,%rax
+   14001c340:	48 0f 44 05 e8 84 1f 	cmove  0x1f84e8(%rip),%rax        # 140214830 <__imp_GetSystemTimeAsFileTime>
+   14001c347:	00 
+   14001c348:	48 89 05 91 6e 1f 00 	mov    %rax,0x1f6e91(%rip)        # 1402131e0 <GetSystemTimeAsFileTime_p.0>
+   14001c34f:	e9 70 ff ff ff       	jmp    14001c2c4 <getntptimeofday+0x54>
+   14001c354:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+   14001c35b:	00 00 00 00 
+   14001c35f:	90                   	nop

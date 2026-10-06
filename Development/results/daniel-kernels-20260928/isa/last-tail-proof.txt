@@ -1,0 +1,12 @@
+Source proof: hip/wave_owned_c32.inc:305 (Post t=lane;t<64;t+=32); :350 (main t<64 unrolled4 full/unrolled2 edge); :351 (downcrop k<16); :358 (full/edge exclusive). hip/wave_owned_mh.inc:338,360-362 (qt<4,ci<2,float outputs).
+ASM: post v8=lane|0xffffffe0 then v_add_co_u32 +32, carry retains lanes first time, no carry removes second time. dcrop edge s6=0,+1,==16.
+
+c32-wave1:c32_wave1_post
+upper: trips=[4, 8, 4, 2]; issued=6801; WMMA=288; vector_slots=5453
+c32-wave1:c32_wave1_finish_dcrop
+full: trips=[4, 8, 4, 16, 0, 0]; issued=7656; WMMA=336; vector_slots=5305
+edge: trips=[4, 8, 4, 0, 32, 16]; issued=10760; WMMA=336; vector_slots=5849
+c64-wave2:c256_attn_wave
+upper: trips=[1, 4, 4, 2]; issued=6563; WMMA=232; vector_slots=2822
+C32 900: covered_calls=10/10; covered_waves=96963/96963; counts={'SMEM': 387731, 'WAIT': 121382662, 'SALU': 68167969, 'mov': 18244476, 'VOPD': 76189678, 'VOPD_slots': 152379356, 'VALU': 345138263, 'VMEM': 34515888, 'VMEM_read_requests': 30993326, 'VMEM_read_bytes_per_lane_static': 309380664, 'WMMA': 30068160, 'pack': 57392838, 'DS': 7740544, 'VMEM_write_requests': 3522562, 'VMEM_write_bytes_per_lane_static': 10648392, 'issued_static': 683590895, 'vector_slots': 497517619, 'clamp': 145926}
+C32 1080: covered_calls=10/10; covered_waves=139395/139395; counts={'SMEM': 557435, 'WAIT': 174491730, 'SALU': 97992665, 'mov': 26232000, 'VOPD': 109533710, 'VOPD_slots': 219067420, 'VALU': 496222515, 'VMEM': 49619660, 'VMEM_read_requests': 44553070, 'VMEM_read_bytes_per_lane_static': 444752440, 'WMMA': 43224000, 'pack': 82522310, 'DS': 11131840, 'VMEM_write_requests': 5066590, 'VMEM_write_bytes_per_lane_static': 15306680, 'issued_static': 982773555, 'vector_slots': 715289935, 'clamp': 209670}

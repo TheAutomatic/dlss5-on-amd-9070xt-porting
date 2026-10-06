@@ -1,0 +1,32 @@
+{
+  "source_sha256": "197024afb1f78602dc08cfd5ae87c413385237c5f537dd5dcfeae742be85eca8",
+  "source_bytes": 21808,
+  "source_head_offset": 20784,
+  "head_shape": [
+    16,
+    32
+  ],
+  "RGB_rows_preserved": [
+    0,
+    2,
+    4
+  ],
+  "history_row": 6,
+  "gate_features": "row-major [processing_y][processing_x][32], IEEE f16, little endian",
+  "blend_f16_bits": "0x39eb",
+  "blend_float": 0.73974609375,
+  "assets": {
+    "post70-blend.f16": {
+      "bytes": 2,
+      "sha256": "1ee636d657c0e4bc41b1f1efe5a2007be7a8fbf8b0267bb26298039f6d0c2cfb"
+    },
+    "post70-history-head.f32": {
+      "bytes": 128,
+      "sha256": "8c8a821c6c258eb07368ad2c36769e1e9debcb53f8786fbcaa1c82029d223952"
+    },
+    "post70-history-head.f16": {
+      "bytes": 64,
+      "sha256": "77c745c4e1d84a6227a2224291d83c37d1e9bd18d45e95add166b1174225ce8f"
+    }
+  }
+}

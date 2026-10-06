@@ -1,0 +1,38 @@
+[
+  {
+    "check": "default-off-vs-baseline",
+    "arch": "gfx1200",
+    "module": "deep_fast-packed",
+    "same": true
+  },
+  {
+    "check": "default-off-vs-baseline",
+    "arch": "gfx1200",
+    "module": "multihead-fast-padded-wave-packed",
+    "same": true
+  },
+  {
+    "check": "default-off-vs-baseline",
+    "arch": "gfx1201",
+    "module": "deep_fast-packed",
+    "same": true
+  },
+  {
+    "check": "production-vs-candidate",
+    "arch": "gfx1201",
+    "module": "deep_fast-packed",
+    "same": true
+  },
+  {
+    "check": "default-off-vs-baseline",
+    "arch": "gfx1201",
+    "module": "multihead-fast-padded-wave-packed",
+    "same": true
+  },
+  {
+    "check": "production-vs-candidate",
+    "arch": "gfx1201",
+    "module": "multihead-fast-padded-wave-packed",
+    "same": true
+  }
+]

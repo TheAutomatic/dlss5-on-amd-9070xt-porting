@@ -1,0 +1,28 @@
+[
+  {
+    "tier": "900",
+    "case": "900-static-frame0",
+    "half_values": 3732480,
+    "different_bits": 2678614,
+    "different_numeric": 2678614,
+    "max_abs": 0.46826171875,
+    "rmse": 0.04265844728985384,
+    "mae": 0.014103085221020079,
+    "nonfinite": 0,
+    "baseline_sha": "54d7c1b454cd475ad2c12c2375aa6908fb9a3a7226f0901961eb49145eaad689",
+    "candidate_sha": "9c0ceca58f967b4766c2d6f8ffce36a9960c729db3ea82bb28c6a53cf05dea7c"
+  },
+  {
+    "tier": "720",
+    "case": "720-motion-frame11",
+    "half_values": 3732480,
+    "different_bits": 2793120,
+    "different_numeric": 2793120,
+    "max_abs": 0.307861328125,
+    "rmse": 0.03361062489390931,
+    "mae": 0.012330409729775343,
+    "nonfinite": 0,
+    "baseline_sha": "c90688a2e7e641a03df002d81b77251384c93ef3992e9f57d747009433b76a5d",
+    "candidate_sha": "660a9163c91eee4ee8aa1a88b89a95a82d1e5ae7d81e27811fb6a1db92576e19"
+  }
+]

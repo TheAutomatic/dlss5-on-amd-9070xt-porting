@@ -1,0 +1,22 @@
+{
+  "result": "PASS actual source current two-role fixed scope; GPUtrueactivation still pending",
+  "CPUonly": true,
+  "roles": "EagerPulseAuto2 vsReplayPulseOff0; noReplayAuto",
+  "factory": "native_hip_network21 conditionalo.submit_pulse/graphfalsePDLfalse",
+  "admission": "helper880 exactrolecheck; fixed1152/seed0/historyoffMP1/AE0",
+  "actual_auto_gate": "LabProductOrdinary876 aftereveryNN requiresvalidateddriver/caps/leaseActive/createOk1/acceptedDelta1/recordOkEqualsAccepted; noHIPqueryadded",
+  "actual_off_gate": "pulseCreate/Record0 requiredduringordinarywarm; replaynoEnqueue; captureKernel-only",
+  "counters": "ordinaryEnqueues excludescapturing; FINALmode/driver/caps/create/record/accepted/GraphCalls; countwarm+actualeagerframes separately",
+  "postSignalQuery": "originalBridge220/281 preserved/defaultenabled",
+  "cleanup": "Bridge195WaitForSubmittedWork\u2192ClosePulse\u2192196LabAppClose\u2192importsfree validbecauseEager hasnoGraph/ReplayhasnoLease; noeventborrowedbygraph",
+  "lifetime_scope": "sameownedHIPdevice/streamfixedbenchmarkthread; nohotrolesgeneralization",
+  "not_production_PDL1_equivalence": true,
+  "scripts_pending_at_review": "new runflags mustshowPRED1inactive/NET0/sameHDR/PDL0 explicitly; source alone notactualdriveractivation",
+  "sourceSHA": {
+    "native_hip_network.h": "d352e32756b3e0043d6fb460f555d62dbef81a3a51c7f45c1d801b7fb9326f69",
+    "hip_reference_network.h": "e1a746f1c6e623dcc68dcd21e30e15a3e520fd6e1f9dc01f58626da2ceb8fb40",
+    "hip_d3d12_bridge.h": "5814ed60a6424f6580b7253d48fb38dd0689788f5a169f191ec28dfeec5885e4",
+    "submit_pulse.h": "2eac98db8006f4c8e6557d59a0803d0232324bf2dba85b8569ce524949097bcd",
+    "submit_pulse_hip.h": "cc122e5b0795d841f9075a32b24014c4021cad986b019a1bfbc4da1cfbe806a2"
+  }
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "ref": "rocm-7.0.2",
+    "commit": "0dda3adf56766e0aac0d03173ced3759e1ffecbc",
+    "description": "2025-09-26 11:42:56 -0400 [AMDGPU] Identify vector idiom to unlock SROA (#3967)",
+    "version_file": "# The LLVM Version number information\n\nif(NOT DEFINED LLVM_VERSION_MAJOR)\n  set(LLVM_VERSION_MAJOR 20)\nendif()\nif(NOT DEFINED LLVM_VERSION_MINOR)\n  set(LLVM_VERSION_MINOR 0)\nendif()\nif(NOT DEFINED LLVM_VERSION_PATCH)\n  set(LLVM_VERSION_PATCH 0)\nendif()\nif(NOT DEFINED LLVM_VERSION_SUFFIX)\n  set(LLVM_VERSION_SUFFIX git)\nendif()"
+  },
+  {
+    "ref": "rocm-7.1.1",
+    "commit": "27682a16360e33e37c4f3cc6adf9a620733f8fe1",
+    "description": "2025-11-05 17:06:57 -0800 [Clang/AMDGPU] Zero sized arrays not allowed in HIP device code. (#113470) (#4650)",
+    "version_file": "# The LLVM Version number information\n\nif(NOT DEFINED LLVM_VERSION_MAJOR)\n  set(LLVM_VERSION_MAJOR 20)\nendif()\nif(NOT DEFINED LLVM_VERSION_MINOR)\n  set(LLVM_VERSION_MINOR 0)\nendif()\nif(NOT DEFINED LLVM_VERSION_PATCH)\n  set(LLVM_VERSION_PATCH 0)\nendif()\nif(NOT DEFINED LLVM_VERSION_SUFFIX)\n  set(LLVM_VERSION_SUFFIX git)\nendif()"
+  },
+  {
+    "ref": "rocm-7.2.4",
+    "commit": "f58b06dce1f9c15707c5f808fd002e18c2accf7e",
+    "description": "2026-02-26 09:12:44 -0800 Revert \"AMDGPU: Fix runtime unrolling when cascaded GEPs present (#147700)\" (#1348)",
+    "version_file": "# The LLVM Version number information\n\nif(NOT DEFINED LLVM_VERSION_MAJOR)\n  set(LLVM_VERSION_MAJOR 22)\nendif()\nif(NOT DEFINED LLVM_VERSION_MINOR)\n  set(LLVM_VERSION_MINOR 0)\nendif()\nif(NOT DEFINED LLVM_VERSION_PATCH)\n  set(LLVM_VERSION_PATCH 0)\nendif()\nif(NOT DEFINED LLVM_VERSION_SUFFIX)\n  set(LLVM_VERSION_SUFFIX git)\nendif()"
+  },
+  {
+    "ref": "6d585d872fbd3c594da7a3c09ac9b22eef4167f6",
+    "commit": "6d585d872fbd3c594da7a3c09ac9b22eef4167f6",
+    "description": "2025-07-15 17:02:14 -0400 Added option to only build flang symlink if Flang is not being built (#3108)",
+    "version_file": "# The LLVM Version number information\n\nif(NOT DEFINED LLVM_VERSION_MAJOR)\n  set(LLVM_VERSION_MAJOR 21)\nendif()\nif(NOT DEFINED LLVM_VERSION_MINOR)\n  set(LLVM_VERSION_MINOR 0)\nendif()\nif(NOT DEFINED LLVM_VERSION_PATCH)\n  set(LLVM_VERSION_PATCH 0)\nendif()\nif(NOT DEFINED LLVM_VERSION_SUFFIX)\n  set(LLVM_VERSION_SUFFIX git)\nendif()"
+  },
+  {
+    "ref": "dec49e58ddaa7ff93825aed98c1d98da43903807",
+    "commit": "dec49e58ddaa7ff93825aed98c1d98da43903807",
+    "description": "2025-07-15 17:33:50 -0500 merge main into amd-staging (#3112)",
+    "version_file": "# The LLVM Version number information\n\nif(NOT DEFINED LLVM_VERSION_MAJOR)\n  set(LLVM_VERSION_MAJOR 22)\nendif()\nif(NOT DEFINED LLVM_VERSION_MINOR)\n  set(LLVM_VERSION_MINOR 0)\nendif()\nif(NOT DEFINED LLVM_VERSION_PATCH)\n  set(LLVM_VERSION_PATCH 0)\nendif()\nif(NOT DEFINED LLVM_VERSION_SUFFIX)\n  set(LLVM_VERSION_SUFFIX git)\nendif()"
+  }
+]

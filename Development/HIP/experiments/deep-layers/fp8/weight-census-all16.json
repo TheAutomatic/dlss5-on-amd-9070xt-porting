@@ -1,0 +1,600 @@
+{
+  "sources": [
+    {
+      "block": 23,
+      "path": "/home/lmxxf/work/ai-theorys-study/wechat/assets/297/release/native-rgb-valid1080/amd-full/block23-ffwd.f32",
+      "sha256": "52806e517640c4175bde352d30915f60daeafcc08a2cf0781a71b37ceb4db810",
+      "parts": {
+        "mix": {
+          "count": 262144,
+          "finite": true,
+          "fp8_exact_raw": 262144,
+          "fp8_exact_after_half": 262144,
+          "half_changed_bits": 0,
+          "min": -0.203125,
+          "max": 0.21875,
+          "bad_examples": []
+        },
+        "expand": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.5,
+          "max": 0.5625,
+          "bad_examples": []
+        },
+        "contract": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.375,
+          "max": 0.34375,
+          "bad_examples": []
+        }
+      }
+    },
+    {
+      "block": 24,
+      "path": "/home/lmxxf/work/ai-theorys-study/wechat/assets/297/release/native-rgb-valid1080/amd-full/block24-ffwd.f32",
+      "sha256": "47f24c7f79ef2fcc40ef0dcc151800674bfeab370829f99d2a540403744a94e5",
+      "parts": {
+        "mix": {
+          "count": 262144,
+          "finite": true,
+          "fp8_exact_raw": 262144,
+          "fp8_exact_after_half": 262144,
+          "half_changed_bits": 0,
+          "min": -0.203125,
+          "max": 0.21875,
+          "bad_examples": []
+        },
+        "expand": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.4375,
+          "max": 0.46875,
+          "bad_examples": []
+        },
+        "contract": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.28125,
+          "max": 0.28125,
+          "bad_examples": []
+        }
+      }
+    },
+    {
+      "block": 25,
+      "path": "/home/lmxxf/work/ai-theorys-study/wechat/assets/297/release/native-rgb-valid1080/amd-full/block25-ffwd.f32",
+      "sha256": "d955e0c7238ac427a6145641e9a23b6266d7580b5da7d13c7072bb72cfb25684",
+      "parts": {
+        "mix": {
+          "count": 262144,
+          "finite": true,
+          "fp8_exact_raw": 262144,
+          "fp8_exact_after_half": 262144,
+          "half_changed_bits": 0,
+          "min": -0.25,
+          "max": 0.21875,
+          "bad_examples": []
+        },
+        "expand": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.625,
+          "max": 0.5625,
+          "bad_examples": []
+        },
+        "contract": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.5,
+          "max": 0.625,
+          "bad_examples": []
+        }
+      }
+    },
+    {
+      "block": 26,
+      "path": "/home/lmxxf/work/ai-theorys-study/wechat/assets/297/release/native-rgb-valid1080/amd-full/block26-ffwd.f32",
+      "sha256": "cca42d460122353fbb031cb57e64f9f1b4604bbc17ca15340ffecb5194c885c8",
+      "parts": {
+        "mix": {
+          "count": 262144,
+          "finite": true,
+          "fp8_exact_raw": 262144,
+          "fp8_exact_after_half": 262144,
+          "half_changed_bits": 0,
+          "min": -0.25,
+          "max": 0.25,
+          "bad_examples": []
+        },
+        "expand": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.5,
+          "max": 0.5,
+          "bad_examples": []
+        },
+        "contract": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.28125,
+          "max": 0.3125,
+          "bad_examples": []
+        }
+      }
+    },
+    {
+      "block": 27,
+      "path": "/home/lmxxf/work/ai-theorys-study/wechat/assets/297/release/native-rgb-valid1080/amd-full/block27-ffwd.f32",
+      "sha256": "5d249cbde0c76d02db36b71799c2d459e7edec369e470b3e1b60b4e3820ac64c",
+      "parts": {
+        "mix": {
+          "count": 262144,
+          "finite": true,
+          "fp8_exact_raw": 262144,
+          "fp8_exact_after_half": 262144,
+          "half_changed_bits": 0,
+          "min": -0.21875,
+          "max": 0.25,
+          "bad_examples": []
+        },
+        "expand": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.5625,
+          "max": 0.5625,
+          "bad_examples": []
+        },
+        "contract": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.28125,
+          "max": 0.28125,
+          "bad_examples": []
+        }
+      }
+    },
+    {
+      "block": 28,
+      "path": "/home/lmxxf/work/ai-theorys-study/wechat/assets/297/release/native-rgb-valid1080/amd-full/block28-ffwd.f32",
+      "sha256": "950c64428335420bf99fc2c93e5a3a110ded5da2ee2a8dc3b60cfa43216621ad",
+      "parts": {
+        "mix": {
+          "count": 262144,
+          "finite": true,
+          "fp8_exact_raw": 262144,
+          "fp8_exact_after_half": 262144,
+          "half_changed_bits": 0,
+          "min": -0.234375,
+          "max": 0.25,
+          "bad_examples": []
+        },
+        "expand": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.5625,
+          "max": 0.5625,
+          "bad_examples": []
+        },
+        "contract": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.28125,
+          "max": 0.3125,
+          "bad_examples": []
+        }
+      }
+    },
+    {
+      "block": 29,
+      "path": "/home/lmxxf/work/ai-theorys-study/wechat/assets/297/release/native-rgb-valid1080/amd-full/block29-ffwd.f32",
+      "sha256": "c720d60d1364db768a35830a292ef6afdcda5bb4f0b5d458bf9e5aea13f21141",
+      "parts": {
+        "mix": {
+          "count": 262144,
+          "finite": true,
+          "fp8_exact_raw": 262144,
+          "fp8_exact_after_half": 262144,
+          "half_changed_bits": 0,
+          "min": -0.21875,
+          "max": 0.234375,
+          "bad_examples": []
+        },
+        "expand": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.5625,
+          "max": 0.5,
+          "bad_examples": []
+        },
+        "contract": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.28125,
+          "max": 0.28125,
+          "bad_examples": []
+        }
+      }
+    },
+    {
+      "block": 30,
+      "path": "/home/lmxxf/work/ai-theorys-study/wechat/assets/297/release/native-rgb-valid1080/amd-full/block30-ffwd.f32",
+      "sha256": "510316c46f295160d4df6c37a4df75b721aff676462e6d7165e32d2ab4cb529e",
+      "parts": {
+        "mix": {
+          "count": 262144,
+          "finite": true,
+          "fp8_exact_raw": 262144,
+          "fp8_exact_after_half": 262144,
+          "half_changed_bits": 0,
+          "min": -0.25,
+          "max": 0.203125,
+          "bad_examples": []
+        },
+        "expand": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.46875,
+          "max": 0.5,
+          "bad_examples": []
+        },
+        "contract": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.3125,
+          "max": 0.3125,
+          "bad_examples": []
+        }
+      }
+    },
+    {
+      "block": 40,
+      "path": "/home/lmxxf/work/ai-theorys-study/wechat/assets/297/release/native-rgb-valid1080/amd-full/block40-ffwd.f32",
+      "sha256": "61a4d7cbcee9d28a649019000f0f6a4420ad7575ab09a1ebcd8fd54bbde50826",
+      "parts": {
+        "mix": {
+          "count": 262144,
+          "finite": true,
+          "fp8_exact_raw": 262144,
+          "fp8_exact_after_half": 262144,
+          "half_changed_bits": 0,
+          "min": -0.234375,
+          "max": 0.21875,
+          "bad_examples": []
+        },
+        "expand": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.5,
+          "max": 0.46875,
+          "bad_examples": []
+        },
+        "contract": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.3125,
+          "max": 0.375,
+          "bad_examples": []
+        }
+      }
+    },
+    {
+      "block": 41,
+      "path": "/home/lmxxf/work/ai-theorys-study/wechat/assets/297/release/native-rgb-valid1080/amd-full/block41-ffwd.f32",
+      "sha256": "4a29d9dd8fc3616d57bab0dcb312426b4724e3cfb101a6afd3c643bedbdacb02",
+      "parts": {
+        "mix": {
+          "count": 262144,
+          "finite": true,
+          "fp8_exact_raw": 262144,
+          "fp8_exact_after_half": 262144,
+          "half_changed_bits": 0,
+          "min": -0.234375,
+          "max": 0.1875,
+          "bad_examples": []
+        },
+        "expand": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.5,
+          "max": 0.5,
+          "bad_examples": []
+        },
+        "contract": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.34375,
+          "max": 0.40625,
+          "bad_examples": []
+        }
+      }
+    },
+    {
+      "block": 42,
+      "path": "/home/lmxxf/work/ai-theorys-study/wechat/assets/297/release/native-rgb-valid1080/amd-full/block42-ffwd.f32",
+      "sha256": "cf2ab9b3402eb5d4dd4bf80c8a2e0b2794e5d97bc6e93e0a1bf92ab7bf7469c6",
+      "parts": {
+        "mix": {
+          "count": 262144,
+          "finite": true,
+          "fp8_exact_raw": 262144,
+          "fp8_exact_after_half": 262144,
+          "half_changed_bits": 0,
+          "min": -0.21875,
+          "max": 0.21875,
+          "bad_examples": []
+        },
+        "expand": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.5,
+          "max": 0.5625,
+          "bad_examples": []
+        },
+        "contract": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.34375,
+          "max": 0.3125,
+          "bad_examples": []
+        }
+      }
+    },
+    {
+      "block": 43,
+      "path": "/home/lmxxf/work/ai-theorys-study/wechat/assets/297/release/native-rgb-valid1080/amd-full/block43-ffwd.f32",
+      "sha256": "6f1e120c31226ae89519a72b2d0f02a0b70fcc4adb2f77c352d89d6bb249474f",
+      "parts": {
+        "mix": {
+          "count": 262144,
+          "finite": true,
+          "fp8_exact_raw": 262144,
+          "fp8_exact_after_half": 262144,
+          "half_changed_bits": 0,
+          "min": -0.21875,
+          "max": 0.21875,
+          "bad_examples": []
+        },
+        "expand": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.5,
+          "max": 0.5,
+          "bad_examples": []
+        },
+        "contract": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.375,
+          "max": 0.28125,
+          "bad_examples": []
+        }
+      }
+    },
+    {
+      "block": 44,
+      "path": "/home/lmxxf/work/ai-theorys-study/wechat/assets/297/release/native-rgb-valid1080/amd-full/block44-ffwd.f32",
+      "sha256": "c2af7dda84a4f0b998404b8a609aec7ae1ac36a3025b63892a56cfbf084b660d",
+      "parts": {
+        "mix": {
+          "count": 262144,
+          "finite": true,
+          "fp8_exact_raw": 262144,
+          "fp8_exact_after_half": 262144,
+          "half_changed_bits": 0,
+          "min": -0.21875,
+          "max": 0.21875,
+          "bad_examples": []
+        },
+        "expand": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.5,
+          "max": 0.625,
+          "bad_examples": []
+        },
+        "contract": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.34375,
+          "max": 0.3125,
+          "bad_examples": []
+        }
+      }
+    },
+    {
+      "block": 45,
+      "path": "/home/lmxxf/work/ai-theorys-study/wechat/assets/297/release/native-rgb-valid1080/amd-full/block45-ffwd.f32",
+      "sha256": "bd39bc4eca887062a001d84b13d332fc55cbfd0b6dffa9af716fce44772f7df0",
+      "parts": {
+        "mix": {
+          "count": 262144,
+          "finite": true,
+          "fp8_exact_raw": 262144,
+          "fp8_exact_after_half": 262144,
+          "half_changed_bits": 0,
+          "min": -0.234375,
+          "max": 0.21875,
+          "bad_examples": []
+        },
+        "expand": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.5625,
+          "max": 0.5,
+          "bad_examples": []
+        },
+        "contract": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.375,
+          "max": 0.375,
+          "bad_examples": []
+        }
+      }
+    },
+    {
+      "block": 46,
+      "path": "/home/lmxxf/work/ai-theorys-study/wechat/assets/297/release/native-rgb-valid1080/amd-full/block46-ffwd.f32",
+      "sha256": "03c39275b8e1d1ff5776bee3ec984e609d8519e713bc93a2663e3aa73b38c3ba",
+      "parts": {
+        "mix": {
+          "count": 262144,
+          "finite": true,
+          "fp8_exact_raw": 262144,
+          "fp8_exact_after_half": 262144,
+          "half_changed_bits": 0,
+          "min": -0.21875,
+          "max": 0.21875,
+          "bad_examples": []
+        },
+        "expand": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.5625,
+          "max": 0.5,
+          "bad_examples": []
+        },
+        "contract": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.34375,
+          "max": 0.3125,
+          "bad_examples": []
+        }
+      }
+    },
+    {
+      "block": 47,
+      "path": "/home/lmxxf/work/ai-theorys-study/wechat/assets/297/release/native-rgb-valid1080/amd-full/block47-ffwd.f32",
+      "sha256": "1c2b648652ce08526a49e2fe076eb88b01484b7085446619e93b93a6a7e6dc80",
+      "parts": {
+        "mix": {
+          "count": 262144,
+          "finite": true,
+          "fp8_exact_raw": 262144,
+          "fp8_exact_after_half": 262144,
+          "half_changed_bits": 0,
+          "min": -0.25,
+          "max": 0.234375,
+          "bad_examples": []
+        },
+        "expand": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.5,
+          "max": 0.5,
+          "bad_examples": []
+        },
+        "contract": {
+          "count": 131072,
+          "finite": true,
+          "fp8_exact_raw": 131072,
+          "fp8_exact_after_half": 131072,
+          "half_changed_bits": 0,
+          "min": -0.375,
+          "max": 0.3125,
+          "bad_examples": []
+        }
+      }
+    }
+  ],
+  "weight_elements": 8388608,
+  "bad_after_half": 0,
+  "scope": "finite E4M3 representability only; does not prove FP16/FP8 WMMA equivalence",
+  "old_arithmetic_counterexample": "Development/history/DevHistory-full-20260923.md:1738-1750; block46 pattern2; only FP8 expansion reproduces 10 float-bit differences"
+}

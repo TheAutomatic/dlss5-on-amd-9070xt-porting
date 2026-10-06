@@ -1,0 +1,21 @@
+--- a/hip/deep_fast.hip
++++ b/hip/deep_fast.hip
+@@ -306 +306,4 @@
+-template<bool Tiled=false,bool ByteInput=false,bool Frag=false,bool TiledInput=false>
++#ifndef VIT_EXPAND_CONSUMER_FLOAT
++#define VIT_EXPAND_CONSUMER_FLOAT 0
++#endif
++template<bool Tiled=false,bool ByteInput=false,bool Frag=false,bool TiledInput=false,bool ConsumerFloat=false>
+@@ -311 +314,6 @@
+-  if constexpr(TiledInput){__builtin_memcpy(&a,reinterpret_cast<const unsigned char*>(in)+vit_tile_offset(first+rc(),k+gr()*8,inputs),8);}
++  if constexpr(ConsumerFloat){
++   f8 v;__builtin_memcpy(&v,in+(first+rc())*inputs+k+gr()*8,32);
++   uint p[4];_Pragma("unroll") for(uint j=0;j<4;j++)p[j]=uint(__builtin_amdgcn_cvt_pk_fp8_f32(clampf(v[j*2],-448.f,448.f),clampf(v[j*2+1],-448.f,448.f),0,false));
++   a=i2{int((p[0]&65535u)|((p[1]&65535u)<<16)),int((p[2]&65535u)|((p[3]&65535u)<<16))};
++  }
++  else if constexpr(TiledInput){__builtin_memcpy(&a,reinterpret_cast<const unsigned char*>(in)+vit_tile_offset(first+rc(),k+gr()*8,inputs),8);}
+@@ -712,0 +721,4 @@
++
++#if VIT_EXPAND_CONSUMER_FLOAT
++WAVE void vit_expand_blocked_fp8_frag_floatin(const float*in,const float*w,float*out,uint tokens,uint inputs,uint outputs,const uint*reuse_gate){if(reuse_gate&&reuse_gate[0])return;if(inputs==1024&&outputs==4096)vit_expand_blocked_body<true,false,true,false,true>(in,w,out,tokens,1024,4096);else vit_expand_blocked_body<true,false,true,false,true>(in,w,out,tokens,inputs,outputs);}
++#endif

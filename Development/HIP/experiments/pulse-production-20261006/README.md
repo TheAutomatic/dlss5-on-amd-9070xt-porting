@@ -1,0 +1,7 @@
+# Scoped production pulse integration
+
+Core is the actual production Network/bridge/NativeApplyHipEnvironment; no copiednetwork is used by the compatibilitycaller. The newkey is auto/0/1. Auto pins DXGI driverbits0x00200000791f0800, gfx1201/Runtime7, validatedfullprofile and ordinaryC256Down boundary; 1 keepsarchitecture/topology/API restrictions and explicitly marksunvalidated-driver; 0 createsnothing. No timinggetter/extraquery is called.
+
+Differences from the six-roundvalidatedisolation: realconfigurationkey anddriverquery, strictrequested/activecapabilitychecks, H900productionroutebase25c2df78 (oldstock used forpulse-alone tests), device-TLS warm/cleanup fixes, resourceexitcounts and one-shot active/fallback logs. Frame/math/codec defaults stayunchanged. OptionalSP init_pair requirement wasinitiallywrong: actualstock520cd2fe...doesnotexportit and usespair_fnfalse. Failed11516auto-created0/Record0 withraw0 is preserved ascapabilitygate, notperformance. Corrected6904two5-frameprocesses showedtrueautoRecord5 andcold/warm/controlledHDRseed7/returnraw0finite/PDL1/orderedboundary. Its oldPASStext mentionsMP/history but those wereoutside theresume coverage.
+
+CPU tests: actualSubmitPulseLease18cases+actualOpsABI failureinjection ASAN/UBSAN passed. DXGICPU probe reports32.0.31007.2048. OriginalO2benchmark andcanonicalruntime/addon complete links; finalrebuild manifestpending latestcapcorrection. GPU scopecompat for1/MP/history/graph/resize stillpending; noperformance afterproductionintegration yet. No installation/playerconfiguration/ZIP/push.

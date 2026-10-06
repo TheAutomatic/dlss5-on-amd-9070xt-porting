@@ -1,0 +1,9 @@
+{
+  "glslang_version": "16.5.0",
+  "glslang_x86_sha256": "6f7b6b2a89822998094393c3561f3f60add01311885cd72b53b500a625de9f24",
+  "wrapper": "#!/bin/sh\nexec box64 \"$(dirname \"$0\")/glslang.x86\" \"$@\" 2>/dev/null\n",
+  "quad": true,
+  "NR_Q32_DIRECT": 1,
+  "network_pipelines": 48,
+  "local_remote_equal_artifacts": 70
+}

@@ -1,0 +1,106 @@
+flat-MF <- mf c64-wave2
+flat-MS <- ms swin-persistent
+flat-FAST2 <- cf3 c32-wave1
+flat-FAST2 <- ksf8 deep_fast-packed
+flat-FAST2 <- mf c64-wave2
+flat-FAST2 <- ms swin-persistent
+locked
+
+CMP 900-static-False 900-static-True diff=0/12
+CMP 900-motion-False 900-motion-True diff=1/12
+CMP 1080-static-False 1080-static-True diff=0/12
+CMP 1080-motion-False 1080-motion-True diff=0/12
+CMP 720-motion-False 720-motion-True diff=0/12
+CMP 900-history-False 900-history-True diff=0/12
+CMP 1080-history-False 1080-history-True diff=1/12
+900-static psnr_all 999.00 worst_frame 999.00
+900-motion psnr_all 66.25 worst_frame 55.46
+1080-static psnr_all 999.00 worst_frame 999.00
+1080-motion psnr_all 999.00 worst_frame 999.00
+720-motion psnr_all 999.00 worst_frame 999.00
+900-history psnr_all 999.00 worst_frame 999.00
+1080-history psnr_all 70.43 worst_frame 59.64
+KS 1 900: avg 7.1985 -> 7.2074 (+0.0089 ms, +0.12%)  p99 7.4170 -> 7.4170
+KS 1 1080: avg 9.9409 -> 9.9849 (+0.0441 ms, +0.44%)  p99 10.2330 -> 10.2710
+KS 2 900: avg 7.2578 -> 7.2615 (+0.0037 ms, +0.05%)  p99 7.4710 -> 7.4630
+KS 2 1080: avg 9.9709 -> 10.0233 (+0.0524 ms, +0.53%)  p99 10.2940 -> 10.3600
+KS 3 900: avg 7.2794 -> 7.2989 (+0.0195 ms, +0.27%)  p99 7.4910 -> 7.5880
+KS 3 1080: avg 9.9933 -> 10.0351 (+0.0419 ms, +0.42%)  p99 10.3070 -> 10.3440
+KS 900 merged: avg 7.2453 -> 7.2559  p99 7.4710 -> 7.5350
+KS 1080 merged: avg 9.9683 -> 10.0144  p99 10.2890 -> 10.3390
+unlocked
+locked
+CMP 900-static-False 900-static-True diff=12/12
+CMP 900-motion-False 900-motion-True diff=12/12
+CMP 1080-static-False 1080-static-True diff=12/12
+CMP 1080-motion-False 1080-motion-True diff=12/12
+CMP 720-motion-False 720-motion-True diff=12/12
+CMP 900-history-False 900-history-True diff=12/12
+CMP 1080-history-False 1080-history-True diff=12/12
+900-static psnr_all 54.58 worst_frame 54.58
+900-motion psnr_all 54.48 worst_frame 53.97
+1080-static psnr_all 54.60 worst_frame 54.60
+1080-motion psnr_all 54.75 worst_frame 54.36
+720-motion psnr_all 54.76 worst_frame 53.62
+900-history psnr_all 56.03 worst_frame 54.58
+1080-history psnr_all 55.66 worst_frame 54.60
+MF 1 900: avg 7.2056 -> 7.1756 (-0.0299 ms, -0.42%)  p99 7.4060 -> 7.3640
+MF 1 1080: avg 9.9587 -> 9.9318 (-0.0269 ms, -0.27%)  p99 10.2380 -> 10.2530
+MF 2 900: avg 7.2735 -> 7.2564 (-0.0170 ms, -0.23%)  p99 7.4820 -> 7.4920
+MF 2 1080: avg 9.9743 -> 9.9498 (-0.0245 ms, -0.25%)  p99 10.2530 -> 10.2640
+MF 3 900: avg 7.2798 -> 7.2524 (-0.0273 ms, -0.38%)  p99 7.4880 -> 7.4710
+MF 3 1080: avg 10.0118 -> 9.9652 (-0.0466 ms, -0.47%)  p99 10.3390 -> 10.2370
+MF 900 merged: avg 7.2529 -> 7.2282  p99 7.4750 -> 7.4650
+MF 1080 merged: avg 9.9816 -> 9.9489  p99 10.2900 -> 10.2600
+unlocked
+locked
+CMP 900-static-False 900-static-True diff=12/12
+CMP 900-motion-False 900-motion-True diff=12/12
+CMP 1080-static-False 1080-static-True diff=12/12
+CMP 1080-motion-False 1080-motion-True diff=12/12
+CMP 720-motion-False 720-motion-True diff=0/12
+CMP 900-history-False 900-history-True diff=12/12
+CMP 1080-history-False 1080-history-True diff=12/12
+900-static psnr_all 54.82 worst_frame 54.82
+900-motion psnr_all 55.02 worst_frame 54.47
+1080-static psnr_all 55.15 worst_frame 55.15
+1080-motion psnr_all 55.22 worst_frame 55.07
+720-motion psnr_all 999.00 worst_frame 999.00
+900-history psnr_all 55.88 worst_frame 54.82
+1080-history psnr_all 56.01 worst_frame 55.15
+MS 1 900: avg 7.1850 -> 7.1934 (+0.0084 ms, +0.12%)  p99 7.3930 -> 7.3900
+MS 1 1080: avg 9.9424 -> 9.9584 (+0.0161 ms, +0.16%)  p99 10.2310 -> 10.2960
+MS 2 900: avg 7.2574 -> 7.2639 (+0.0065 ms, +0.09%)  p99 7.4630 -> 7.4720
+MS 2 1080: avg 9.9715 -> 9.9701 (-0.0013 ms, -0.01%)  p99 10.2790 -> 10.2800
+MS 3 900: avg 7.2668 -> 7.2840 (+0.0172 ms, +0.24%)  p99 7.4770 -> 7.4870
+MS 3 1080: avg 9.9985 -> 9.9849 (-0.0135 ms, -0.14%)  p99 10.2760 -> 10.2720
+MS 900 merged: avg 7.2364 -> 7.2471  p99 7.4550 -> 7.4710
+MS 1080 merged: avg 9.9708 -> 9.9712  p99 10.2640 -> 10.2810
+unlocked
+locked
+CMP 900-static-False 900-static-True diff=12/12
+CMP 900-motion-False 900-motion-True diff=12/12
+CMP 1080-static-False 1080-static-True diff=12/12
+CMP 1080-motion-False 1080-motion-True diff=12/12
+CMP 720-motion-False 720-motion-True diff=12/12
+CMP 900-history-False 900-history-True diff=12/12
+CMP 1080-history-False 1080-history-True diff=12/12
+900-static psnr_all 53.14 worst_frame 53.14
+900-motion psnr_all 53.23 worst_frame 52.40
+1080-static psnr_all 52.91 worst_frame 52.91
+1080-motion psnr_all 52.91 worst_frame 52.35
+720-motion psnr_all 53.07 worst_frame 51.83
+900-history psnr_all 55.56 worst_frame 53.14
+1080-history psnr_all 54.70 worst_frame 52.91
+FAST2 1 900: avg 7.1449 -> 7.0366 (-0.1083 ms, -1.52%)  p99 7.3230 -> 7.1960
+FAST2 1 1080: avg 9.8937 -> 9.3375 (-0.5562 ms, -5.62%)  p99 10.0890 -> 9.5060
+FAST2 2 900: avg 7.2406 -> 7.1270 (-0.1136 ms, -1.57%)  p99 7.4220 -> 7.3090
+FAST2 2 1080: avg 9.9346 -> 9.3728 (-0.5618 ms, -5.65%)  p99 10.1090 -> 9.5520
+FAST2 3 900: avg 7.2548 -> 7.1438 (-0.1111 ms, -1.53%)  p99 7.4200 -> 7.3280
+FAST2 3 1080: avg 9.9774 -> 9.4103 (-0.5672 ms, -5.68%)  p99 10.1710 -> 9.6140
+FAST2 900 merged: avg 7.2134 -> 7.1025  p99 7.4100 -> 7.2990
+FAST2 1080 merged: avg 9.9352 -> 9.3735  p99 10.1410 -> 9.5800
+unlocked
+ALL2 DONE 2026-10-01T10:12:45
+
+

@@ -1,0 +1,683 @@
+L21 completed two 900/1080 ABBA batches
+{
+    "candidate_frames":  168,
+    "version":  "L22",
+    "pass":  false,
+    "baseline_frames":  168,
+    "golden_mismatches":  [
+                              {
+                                  "sha":  "9C0CECA58F967B4766C2D6F8FFCE36A9960C729DB3EA82BB28C6A53CF05DEA7C",
+                                  "case":  "900-static",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-0.f16"
+                              },
+                              {
+                                  "sha":  "9ED293BFFC7854A5C9F35184C4D8CBFE273379292C9B519DA99543E4AF21A2A5",
+                                  "case":  "900-static",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-1.f16"
+                              },
+                              {
+                                  "sha":  "61EBDF0D47CD6E422953498597C3988B4988CEE974705D9BF5508075F1D11241",
+                                  "case":  "900-static",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-10.f16"
+                              },
+                              {
+                                  "sha":  "5C5A2C74D93275FC65DB95082496A2B7CCAF3AE9DE3CBDF287D873EC3E271F0B",
+                                  "case":  "900-static",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-11.f16"
+                              },
+                              {
+                                  "sha":  "BF89A406FEE11C5A195DA948547011C73684DD8C0F7AC409701D44B0643A068B",
+                                  "case":  "900-static",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-2.f16"
+                              },
+                              {
+                                  "sha":  "AE2A4B29488A1A4351481834CAB72DD75D95881E1B09089796375A438C5B41AD",
+                                  "case":  "900-static",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-3.f16"
+                              },
+                              {
+                                  "sha":  "BE59F7876BDC999E17BC06D2D4CF82D5E5675C1D09B79A82BD67E703BCB7BE16",
+                                  "case":  "900-static",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-4.f16"
+                              },
+                              {
+                                  "sha":  "C5E4A749A189F5766BACA7C4746503F36EFC43680B69D9ABF25AF991F2329799",
+                                  "case":  "900-static",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-5.f16"
+                              },
+                              {
+                                  "sha":  "E9D0404935D70E66A43253AF3318C4DF3C5D2D856AC137BB43BEC61C14013D28",
+                                  "case":  "900-static",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-6.f16"
+                              },
+                              {
+                                  "sha":  "7E8FB3C379CC80B2FF62C24220A85A3DB3E34F0E98C6F4C54D998528E1A1A6E6",
+                                  "case":  "900-static",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-7.f16"
+                              },
+                              {
+                                  "sha":  "45316420045945EB3F27FA012B4C7E7DF90E9EA3FB60D66C5217621EA13E5F17",
+                                  "case":  "900-static",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-8.f16"
+                              },
+                              {
+                                  "sha":  "E742A320AEF11F150CC3F849BE2105F625551B51ED812CC70FE33C7C222C026D",
+                                  "case":  "900-static",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-9.f16"
+                              },
+                              {
+                                  "sha":  "80A268CC567CF090AB650605E02A27149F2B548ADECBD612A5032E0DBB347076",
+                                  "case":  "900-motion",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-0.f16"
+                              },
+                              {
+                                  "sha":  "D5397CE31CDEE892A29E271F0EE01DE0E5ADE322857B4526A575D34BF82627FA",
+                                  "case":  "900-motion",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-1.f16"
+                              },
+                              {
+                                  "sha":  "B13BDADB0B3C9F411A1DEB42F573E7B31E7C6583CA0F4630E407D4B8F6CD7559",
+                                  "case":  "900-motion",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-10.f16"
+                              },
+                              {
+                                  "sha":  "8E65D663826B70C6106719014A93D47C177B2B4383A822598226AD647DCB5965",
+                                  "case":  "900-motion",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-11.f16"
+                              },
+                              {
+                                  "sha":  "5C73E3E22C42D31189C8DCE103097FD6C7548064F52298DAAC6B8D77B67A009C",
+                                  "case":  "900-motion",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-2.f16"
+                              },
+                              {
+                                  "sha":  "37A6D0AE5F1B905CE1C0CA0B9BE0C6CF932F631495FF61977010C0C430DAC345",
+                                  "case":  "900-motion",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-3.f16"
+                              },
+                              {
+                                  "sha":  "BC6408D2ADB902DDF976CDD9E290A53A03F676E312715C2869A1CDD83B6D54FB",
+                                  "case":  "900-motion",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-4.f16"
+                              },
+                              {
+                                  "sha":  "1ACDA18DCF55029DD09249AF98A057043D6D3778BD908A94191AACB60E332E89",
+                                  "case":  "900-motion",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-5.f16"
+                              },
+                              {
+                                  "sha":  "A34B798DAF3512756D8BB96C0129221BD4193A5EF98D3A30B68D63E252385507",
+                                  "case":  "900-motion",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-6.f16"
+                              },
+                              {
+                                  "sha":  "84405AD1A8F428AD19E43FFDFD9787ADEA28CBB9946A39057D372E7169485D9B",
+                                  "case":  "900-motion",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-7.f16"
+                              },
+                              {
+                                  "sha":  "F9BC5BA0A534F6C62E1B08937573784FC087EA2C83951B65F5D9A7BDC37AA25D",
+                                  "case":  "900-motion",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-8.f16"
+                              },
+                              {
+                                  "sha":  "1C228D16F1863B6A932CF5F5477F3C88DDF9D872C48CEFD54C8FA26F0622FD41",
+                                  "case":  "900-motion",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-9.f16"
+                              },
+                              {
+                                  "sha":  "8ED3F7C68C51A3A4FFEB6AA58789F181388127ADD1F9242542B5003DFB967DCD",
+                                  "case":  "720-motion",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-0.f16"
+                              },
+                              {
+                                  "sha":  "73BE081B55AAD651798E98C62D10A173049237216B184C722C1F63ACDF4A44F6",
+                                  "case":  "720-motion",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-1.f16"
+                              },
+                              {
+                                  "sha":  "1D8E3506BE9B1D0C8AAAA3650FC654C837A401AB96CC6106134B36C84923458E",
+                                  "case":  "720-motion",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-10.f16"
+                              },
+                              {
+                                  "sha":  "660A9163C91EEE4EE8AA1A88B89A95A82D1E5AE7D81E27811FB6A1DB92576E19",
+                                  "case":  "720-motion",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-11.f16"
+                              },
+                              {
+                                  "sha":  "E47B5812D5713ABF5F3D1D9082E69027A3761A7A41DEEEA0CFEDF363FD3C510A",
+                                  "case":  "720-motion",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-2.f16"
+                              },
+                              {
+                                  "sha":  "CEF0ACEF98227165FB79DAAF23A2153E83DFD21CD05AB9D5E3333E24AB04CA50",
+                                  "case":  "720-motion",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-3.f16"
+                              },
+                              {
+                                  "sha":  "07173DCE03FB996B167DF8EB01E9D553A42BCD0E2107C17DD89407477B7B1461",
+                                  "case":  "720-motion",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-4.f16"
+                              },
+                              {
+                                  "sha":  "7D8E0DBF8D17C7E76CE6363BAAFAE120E7B0E6A28A2D945693F81FB019F78E13",
+                                  "case":  "720-motion",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-5.f16"
+                              },
+                              {
+                                  "sha":  "02B714585992A51507CBCB1AD03F2DF4BB25AFD8C9AC7E6946F240C4A793F38F",
+                                  "case":  "720-motion",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-6.f16"
+                              },
+                              {
+                                  "sha":  "60B3068857EAB40395F5D848BF48B156AE42B3E0B5249DF567C331A4AFE27AA9",
+                                  "case":  "720-motion",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-7.f16"
+                              },
+                              {
+                                  "sha":  "50B2D65CE92C3F9A2EC765AC2987838026DD3AFD94DAA3465CD655A65ED5C0FB",
+                                  "case":  "720-motion",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-8.f16"
+                              },
+                              {
+                                  "sha":  "13501B300DEE22EBE5F0B62B8F0E6CA6AA2C98A632FAEB0E433FE07FE050E9BA",
+                                  "case":  "720-motion",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-9.f16"
+                              },
+                              {
+                                  "sha":  "B06AE4930AC4556E5CAA77DEF40004FD234758206CEF7AA3E594399E6091167C",
+                                  "case":  "900-history",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-0.f16"
+                              },
+                              {
+                                  "sha":  "205D0A56A653BEE0285959AED9F97D8EA7968B5CDA6783E0298990C09B45D89B",
+                                  "case":  "900-history",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-1.f16"
+                              },
+                              {
+                                  "sha":  "290993B9190A4D70EEA9C9FE6D9024C45CD9D44A441BE320E33F40AD1AF89FD8",
+                                  "case":  "900-history",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-10.f16"
+                              },
+                              {
+                                  "sha":  "C9F0EE1A6EF13057CBF77F48E3513DAB5A13119D72A0707AE520D5D2F9CA3368",
+                                  "case":  "900-history",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-11.f16"
+                              },
+                              {
+                                  "sha":  "925A0460CDBA8B3904F0286EE07EBEBC444B396528AA13CD920330B883DC4BCE",
+                                  "case":  "900-history",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-2.f16"
+                              },
+                              {
+                                  "sha":  "36809DD6F0D471AE2087CBC520F5EB14DC0AF3B97AC3B5DEFFB1FC269A26F672",
+                                  "case":  "900-history",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-3.f16"
+                              },
+                              {
+                                  "sha":  "C6FC0FA10A763A8670E43CB12FD9749A81CDA496B392C3BAF56005B15F57457D",
+                                  "case":  "900-history",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-4.f16"
+                              },
+                              {
+                                  "sha":  "01A0C0914EF29CBAD383BE7D0AF87B31D76151F490F368EF4026B1B8E2BC6877",
+                                  "case":  "900-history",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-5.f16"
+                              },
+                              {
+                                  "sha":  "59D7154B24A5DB210802CA45145A81FB3DB37597D69FA004D3321B8E3F427FDF",
+                                  "case":  "900-history",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-6.f16"
+                              },
+                              {
+                                  "sha":  "A2CB1194A7B6550ACB4B03EC29FB23DEEFFFE6BE2E7EB2388B7D1853FF118DC9",
+                                  "case":  "900-history",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-7.f16"
+                              },
+                              {
+                                  "sha":  "C79011D44CBB8680F0A4D7CE83844628ADBB14B63D90DA4AD53E28DF12A63212",
+                                  "case":  "900-history",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-8.f16"
+                              },
+                              {
+                                  "sha":  "2A6271DBDAD4DF857D3FEECA35DAE19B02B97357F840611CBDE429AA1BAA9403",
+                                  "case":  "900-history",
+                                  "side":  "True",
+                                  "mode":  "EXACT",
+                                  "frame":  "rgb-frame-9.f16"
+                              },
+                              {
+                                  "sha":  "39CF03C4EF595758DEECF522B9B0E5FD7267FFA82AAB3A47391F54A909BFAD3C",
+                                  "case":  "900-static",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-0.f16"
+                              },
+                              {
+                                  "sha":  "9DE185EF153A6B5200CA42CF52C3A1081A8C193736F627346081E95165290265",
+                                  "case":  "900-static",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-1.f16"
+                              },
+                              {
+                                  "sha":  "F808DF683CE69D5B06896B7D4BE2A4AB0B8BD533E10E9A48C0677501AE38ED50",
+                                  "case":  "900-static",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-10.f16"
+                              },
+                              {
+                                  "sha":  "CECA7B561ED43F7A234215A005B3B2EB43F910C1C1DA91194994E4C6E399146F",
+                                  "case":  "900-static",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-11.f16"
+                              },
+                              {
+                                  "sha":  "B4D141DE0CD1DCA26E45AED6F564726EEA8555995E3D6781E0C4E18EF82BB2FC",
+                                  "case":  "900-static",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-2.f16"
+                              },
+                              {
+                                  "sha":  "BF82252E8033BBC9B71D9FB6AF8DBD0CB41AAE0C2597C7C2CCC7A984C0D31705",
+                                  "case":  "900-static",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-3.f16"
+                              },
+                              {
+                                  "sha":  "F07D315ED4C77149411A2F723E730AA8B80F50A8AFEFE9D810217FE6318B8202",
+                                  "case":  "900-static",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-4.f16"
+                              },
+                              {
+                                  "sha":  "AB080FF02D8AB59ED67045F0D1D37EE7987B978F2F71AB058A5F2BD9E608E99A",
+                                  "case":  "900-static",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-5.f16"
+                              },
+                              {
+                                  "sha":  "F55B22082482F8B715A81EB892B3569752D234B1A0D0764DEAAA63873142B1FF",
+                                  "case":  "900-static",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-6.f16"
+                              },
+                              {
+                                  "sha":  "0B2FA8F8F28C3DAE61D7FC55B145418CF2591A0A84D4E97D78AA48083933C117",
+                                  "case":  "900-static",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-7.f16"
+                              },
+                              {
+                                  "sha":  "A022CDD7F382697A277817BD0E19D55316529D9FB4A5A549B278758967AEB281",
+                                  "case":  "900-static",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-8.f16"
+                              },
+                              {
+                                  "sha":  "F6499F7B06B1ABAE1C08CAD47EA65A269400A307F3989E344D91B37C076FF4D2",
+                                  "case":  "900-static",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-9.f16"
+                              },
+                              {
+                                  "sha":  "E11C87688F1ECD3A5803F2EB19D18A5DEB2F7EAF325FE4C4B7ACB3D5EEC06E88",
+                                  "case":  "900-motion",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-0.f16"
+                              },
+                              {
+                                  "sha":  "19AC061C9F459F972C8907D94B4E3DB348B1D92676F7A6F184F272BECE02011B",
+                                  "case":  "900-motion",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-1.f16"
+                              },
+                              {
+                                  "sha":  "BF583F0E5C7B766C0ED5BA53BEA5E5400788E5126FC43F05B8211C47DF783A75",
+                                  "case":  "900-motion",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-10.f16"
+                              },
+                              {
+                                  "sha":  "35BE2FC19220E1D19B7E81BD83CAE6E0F25D64C60AE1D88B44E41DD1783EBFF3",
+                                  "case":  "900-motion",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-11.f16"
+                              },
+                              {
+                                  "sha":  "A7E0065247EA75D82DE95BBA8A9097D721691C7B46504CFFF0CD84E94FA288BB",
+                                  "case":  "900-motion",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-2.f16"
+                              },
+                              {
+                                  "sha":  "41488E0F77CBFE69459B500C6E2AE62A175F7CE6733AEF427B399A46714C15D8",
+                                  "case":  "900-motion",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-3.f16"
+                              },
+                              {
+                                  "sha":  "8A6C2DB08AD37CDA1365ECED82CBD18909E15A4FF1A9C386657E891FE05BFF0C",
+                                  "case":  "900-motion",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-4.f16"
+                              },
+                              {
+                                  "sha":  "F324BDBFC070C5D8CCC74293CD66BBD24FDCA472B803825C52D6FBE360AAD912",
+                                  "case":  "900-motion",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-5.f16"
+                              },
+                              {
+                                  "sha":  "26A71C195CBB5AE8DB12E54366AB0D821CDB5B02B3EA71295BDB5E24797FBDA9",
+                                  "case":  "900-motion",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-6.f16"
+                              },
+                              {
+                                  "sha":  "67E91CBB001C4AAF1A474B417DFEC6D22B8669C535B7001170458F04F8161E1D",
+                                  "case":  "900-motion",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-7.f16"
+                              },
+                              {
+                                  "sha":  "E1FA73515094871C3546B2741FBE1FE6465647EF13F64343BE8A7EBDEDECC824",
+                                  "case":  "900-motion",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-8.f16"
+                              },
+                              {
+                                  "sha":  "05DD3E3B5C31C0D0DE44ED1B7EF60EF2191837E3F3D75DF5733924281B4A4C1C",
+                                  "case":  "900-motion",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-9.f16"
+                              },
+                              {
+                                  "sha":  "3E13061D9CF0845AB519FE2DB3FA93CA0DE2AAEE795B42B9F86B97286187547E",
+                                  "case":  "720-motion",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-0.f16"
+                              },
+                              {
+                                  "sha":  "002420323B7AFB90AA3741BB4F9AB317475E7A65126D29CBDBDBD33415A78A1A",
+                                  "case":  "720-motion",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-1.f16"
+                              },
+                              {
+                                  "sha":  "11094E1706BBE042195A568B09BA4DAD1BBE6F6D7305F1C6836686D42CE9C109",
+                                  "case":  "720-motion",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-10.f16"
+                              },
+                              {
+                                  "sha":  "EB3DF0C143762781079FD609C9BFD1C44235DC7881E4CDC0B2C7877204E25152",
+                                  "case":  "720-motion",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-11.f16"
+                              },
+                              {
+                                  "sha":  "99B3C1448993E61384E89FE6D4EA4D6EC221E2E8C6E5A4B02EB2DD44139F5961",
+                                  "case":  "720-motion",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-2.f16"
+                              },
+                              {
+                                  "sha":  "2A35B1CC1F4FAB8C456B63A954164833F9F921E5BD0A98F90AB28E9466D32C8C",
+                                  "case":  "720-motion",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-3.f16"
+                              },
+                              {
+                                  "sha":  "9C23491E294DDDEA8D9BDF1B661AEFD96E02D281A7444F83D1E84F6B28CC7C02",
+                                  "case":  "720-motion",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-4.f16"
+                              },
+                              {
+                                  "sha":  "BBFD3B3F608B8C1726131A1564ABC74E37A6DE64D2C5A0582182443723471AE5",
+                                  "case":  "720-motion",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-5.f16"
+                              },
+                              {
+                                  "sha":  "95C3A5AB773158D820EB1AA36D0D798DD4EA39B0420705B510AB1D7ACC6AEED4",
+                                  "case":  "720-motion",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-6.f16"
+                              },
+                              {
+                                  "sha":  "961321B9E2F252AF7FB549626F0ECDC6E3CAD65D4C1EC75790FA4B44F3F5AD45",
+                                  "case":  "720-motion",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-7.f16"
+                              },
+                              {
+                                  "sha":  "998C5DCA5B71C2A73D2EB516C3C90F730518CC446D40718724592A9B918CA088",
+                                  "case":  "720-motion",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-8.f16"
+                              },
+                              {
+                                  "sha":  "63DA2222DB9129571BB59E79CCE92B6FAFB7897131727743A62D402F654A0CFC",
+                                  "case":  "720-motion",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-9.f16"
+                              },
+                              {
+                                  "sha":  "0054D97F78EEC865D8286DCBF6315EAEBB208392CE36EF7A60569E9EC570DD6F",
+                                  "case":  "900-history",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-0.f16"
+                              },
+                              {
+                                  "sha":  "89FB278478D1F7D979F2E19A9FDF9363608B9B6D9474B3EFCEAB6AD21F076414",
+                                  "case":  "900-history",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-1.f16"
+                              },
+                              {
+                                  "sha":  "F605A6C3DBEE3A63525D506334EAC41A750E5761D6EED888FF5E5EEC0B9172E3",
+                                  "case":  "900-history",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-10.f16"
+                              },
+                              {
+                                  "sha":  "220F0F14A7F29AC9D10D60C1F911345D75133D2836132FB74671C7087C97A981",
+                                  "case":  "900-history",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-11.f16"
+                              },
+                              {
+                                  "sha":  "08412026580C4B3B50911B303112F867DE1CDAD350FE8D352DB27FFDD6FE0D36",
+                                  "case":  "900-history",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-2.f16"
+                              },
+                              {
+                                  "sha":  "DE542E697A39E9615BCF1C11F0C2E79D74B5812417E86EBB958E0B11D0D7CDDA",
+                                  "case":  "900-history",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-3.f16"
+                              },
+                              {
+                                  "sha":  "2F2DB5A3147B69C3789923281EFC02676B6306F39B58C974F951D279909FCFF8",
+                                  "case":  "900-history",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-4.f16"
+                              },
+                              {
+                                  "sha":  "4AA3B52673A61FAC219A1BAEC4DAB52332A801EFDD74071D36917CE89280272B",
+                                  "case":  "900-history",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-5.f16"
+                              },
+                              {
+                                  "sha":  "6F36E46B569D3BA66EBE0C6001EDA29F30A9AAD1983572CCE1F4F313715754D3",
+                                  "case":  "900-history",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-6.f16"
+                              },
+                              {
+                                  "sha":  "34DD5CF0A4146B997DAEFC7B613E54F740CBDC66E2731CDF021E2E615C7A299E",
+                                  "case":  "900-history",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-7.f16"
+                              },
+                              {
+                                  "sha":  "648327A33E623F6843550D047EC2AD4C4EA4710DB8B91BA7B4B12D2989F33648",
+                                  "case":  "900-history",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-8.f16"
+                              },
+                              {
+                                  "sha":  "5DDB3D00DE7E7E5A3A6A9897CC03A117A2E40287C24E44D62C2A3B059540A732",
+                                  "case":  "900-history",
+                                  "side":  "True",
+                                  "mode":  "AE",
+                                  "frame":  "rgb-frame-9.f16"
+                              }
+                          ],
+    "ae_unequal":  40
+}
+L22 rejected by numerical gate; no timing

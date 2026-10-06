@@ -1,0 +1,61 @@
+{
+  "slots": [
+    {
+      "slot": 0,
+      "wall_mean": 9.8632125,
+      "wall_p99": 10.244599999999998,
+      "net_mean_ready": 9.193821584750001,
+      "net_p99_ready": 9.354244407,
+      "samples": 80,
+      "records": 160,
+      "ready_all": 160,
+      "ready_steady": 80,
+      "invalid": 0
+    },
+    {
+      "slot": 1,
+      "wall_mean": 9.689475,
+      "wall_p99": 10.04544,
+      "net_mean_ready": 9.070127999499999,
+      "net_p99_ready": 9.179923459,
+      "samples": 80,
+      "records": 160,
+      "ready_all": 160,
+      "ready_steady": 80,
+      "invalid": 0
+    },
+    {
+      "slot": 2,
+      "wall_mean": 9.6828375,
+      "wall_p99": 10.143469999999999,
+      "net_mean_ready": 9.066308248375,
+      "net_p99_ready": 9.267658595699999,
+      "samples": 80,
+      "records": 160,
+      "ready_all": 160,
+      "ready_steady": 80,
+      "invalid": 0
+    },
+    {
+      "slot": 3,
+      "wall_mean": 9.8861875,
+      "wall_p99": 10.22392,
+      "net_mean_ready": 9.205521786750001,
+      "net_p99_ready": 9.454177817099998,
+      "samples": 80,
+      "records": 160,
+      "ready_all": 160,
+      "ready_steady": 80,
+      "invalid": 0
+    }
+  ],
+  "avg_delta": -0.1885437500000009,
+  "merged_p99_delta": -0.11172999999999966,
+  "net_avg_delta_ready": -0.131453561812501,
+  "net_p99_delta_ready": -0.15858018069999957,
+  "allBfaster": true,
+  "raw_same": true,
+  "finite": true,
+  "all_current_ready": true,
+  "screen_pass": true
+}

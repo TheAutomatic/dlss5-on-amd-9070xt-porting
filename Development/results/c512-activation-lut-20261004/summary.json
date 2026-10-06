@@ -1,0 +1,152 @@
+{
+  "scope": "isolated production FFN kernel, true block23 weights, synthetic exact-FP8 input; not full-frame regression",
+  "all_half_codes": 65536,
+  "finite_codes": 63488,
+  "nonfinite_codes": 2048,
+  "all_half_byte_mismatch": 0,
+  "ffn_byte_mismatch": {
+    "1792": 0,
+    "2240": 0
+  },
+  "timing_rounds": [
+    {
+      "tokens": 1792,
+      "round": 0,
+      "base": {
+        "per_event_us": 30.6720985,
+        "per_wall_us": 32.035833
+      },
+      "candidate": {
+        "per_event_us": 22.106499499999998,
+        "per_wall_us": 23.2258335
+      },
+      "delta_event_us": -8.565599000000002,
+      "delta_wall_us": -8.809999499999996
+    },
+    {
+      "tokens": 1792,
+      "round": 1,
+      "base": {
+        "per_event_us": 40.726868,
+        "per_wall_us": 41.7266665
+      },
+      "candidate": {
+        "per_event_us": 21.6821995,
+        "per_wall_us": 22.750833
+      },
+      "delta_event_us": -19.044668500000004,
+      "delta_wall_us": -18.9758335
+    },
+    {
+      "tokens": 1792,
+      "round": 2,
+      "base": {
+        "per_event_us": 36.748068,
+        "per_wall_us": 37.9183335
+      },
+      "candidate": {
+        "per_event_us": 21.38825,
+        "per_wall_us": 22.5
+      },
+      "delta_event_us": -15.359818000000004,
+      "delta_wall_us": -15.418333500000003
+    },
+    {
+      "tokens": 2240,
+      "round": 0,
+      "base": {
+        "per_event_us": 26.991849000000002,
+        "per_wall_us": 28.1208335
+      },
+      "candidate": {
+        "per_event_us": 26.6659505,
+        "per_wall_us": 27.7991665
+      },
+      "delta_event_us": -0.325898500000001,
+      "delta_wall_us": -0.3216670000000015
+    },
+    {
+      "tokens": 2240,
+      "round": 1,
+      "base": {
+        "per_event_us": 26.924281999999998,
+        "per_wall_us": 28.079166999999998
+      },
+      "candidate": {
+        "per_event_us": 27.256949499999997,
+        "per_wall_us": 28.4
+      },
+      "delta_event_us": 0.33266749999999945,
+      "delta_wall_us": 0.32083300000000037
+    },
+    {
+      "tokens": 2240,
+      "round": 2,
+      "base": {
+        "per_event_us": 27.110516500000003,
+        "per_wall_us": 28.1891665
+      },
+      "candidate": {
+        "per_event_us": 27.1117335,
+        "per_wall_us": 28.2175
+      },
+      "delta_event_us": 0.001216999999996915,
+      "delta_wall_us": 0.028333500000002232
+    }
+  ],
+  "macro0_proof": {
+    "gfx1200": {
+      "code_sections_equal": {
+        ".text": true,
+        ".rodata": true,
+        ".note": true
+      },
+      "sha256": {
+        "macro0.hsaco": "6042a906efc0afdd811928fe6ae91fc9f94ae9543ee096c5e5f2c6047ab0c31b",
+        "candidate.hsaco": "c6393a2dfef09a2aa0ecf8a04463d71b5a8dde5e98660305ef7b1aa8dde9e8f0",
+        "baseline.hsaco": "29349c731a52facad9e2ab329bfbdbd1f69f0d6519e5d264c5c061383b7765c0"
+      },
+      "elf_flags": {
+        "macro0.hsaco": "0x48",
+        "candidate.hsaco": "0x48",
+        "baseline.hsaco": "0x48"
+      }
+    },
+    "gfx1201": {
+      "code_sections_equal": {
+        ".text": true,
+        ".rodata": true,
+        ".note": true
+      },
+      "sha256": {
+        "macro0.hsaco": "dd10aed7d8e44149d7ff3f11565fd7211067539fc2da61e57938f8aa76db4f6d",
+        "candidate.hsaco": "e146397e3d1e6f4ad6bf48e32d34b0c3743ecdb0a941e01a232a73ed0f2ab1bc",
+        "baseline.hsaco": "e048a4e2fe9b1704f6305d716dbe723f432e6c925dca7ab339e49346516942d1"
+      },
+      "elf_flags": {
+        "macro0.hsaco": "0x4e",
+        "candidate.hsaco": "0x4e",
+        "baseline.hsaco": "0x4e"
+      }
+    }
+  },
+  "gpu_table_sha256": "e6c645c6478ab172d53896313d17ee1219890c105f461051215d9aec98ab0d80",
+  "weight_f16_sha256": "8a2ddc670d85f5ce32f2c749610c22e855f3876b2a673b0f5fdf91d3662e09ee",
+  "decision": "stop: 1080 isolated rounds faster/slower/tie; no reliable gain, no full-network trial or production integration",
+  "generated_source_sha256": {
+    "candidate.generated.hip": "3036211bbab3981468a3fba3770d406b6e73cc5e3fff8fd3f6a43929504944f0",
+    "macro0.generated.hip": "22b83b7fcf12f6de6d5fd8d7a5372e6a6f630013adb0e5915cc34102a3947397",
+    "baseline.generated.hip": "d5e22b8c9a58d5138292dfface95f284e06346845ab5f4168c8cd6b4c4ccf3e8"
+  },
+  "isa_w2f8": {
+    "baseline_lines": 964,
+    "candidate_lines": 903,
+    "baseline_fma": 8,
+    "candidate_fma": 0,
+    "candidate_table_global_load_u8": 8,
+    "vgpr_both": 116,
+    "sgpr_both": 42,
+    "spill_both": 0,
+    "wmma_both": 24
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "compiler": "COMGR",
+  "row": "vit-stream",
+  "defines": [
+    "HIP_ISA_HALF 1",
+    "VIT_CONTRACT_BYTE_EDGE 1",
+    "HIP_PREPACKED_WEIGHTS 1",
+    "HIP_BRANCHLESS_F 1",
+    "HIP_VIT_STREAM_KERNELS 1",
+    "HIP_VIT_QKV_W5 1",
+    "VIT_CONTRACT_OCC_LDS 4096",
+    "VIT_QKV_F8W 1"
+  ],
+  "opts": [],
+  "oldSHA": "4766365417d4ad4eabe3c3b68e84456c555648e02d6df2d643d1574aa516d7a3",
+  "newSHA": "4cd6e03e0a9efbfe02e16f892522a738b482c16000af6d42062f07c22ab883f1",
+  "scope": "sole active bin_w5f8 tail, tokens640; originalquant math+producerAoS preserved, non640oldfallback;16DS plus byteperm/mask and dependencies, no new LDS/barrier"
+}

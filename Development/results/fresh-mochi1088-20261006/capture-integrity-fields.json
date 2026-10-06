@@ -1,0 +1,224 @@
+{
+  "HIP": {
+    "trace_sha": "dce5dab7b4144612621ddd0318f74167e361963604fa57d8075c9b4274586e6a",
+    "SQTT": [
+      {
+        "version": 5,
+        "header_u32_raw": [
+          262144,
+          0,
+          12,
+          1,
+          0,
+          0,
+          78643200,
+          0,
+          0,
+          32763
+        ],
+        "bytes": 2136544,
+        "status_semantics": "unknown RDFv5; do not substitute legacyMesa registers"
+      },
+      {
+        "version": 5,
+        "header_u32_raw": [
+          262144,
+          1,
+          12,
+          1,
+          0,
+          0,
+          78643200,
+          0,
+          0,
+          32763
+        ],
+        "bytes": 2135744,
+        "status_semantics": "unknown RDFv5; do not substitute legacyMesa registers"
+      },
+      {
+        "version": 5,
+        "header_u32_raw": [
+          262144,
+          2,
+          12,
+          1,
+          0,
+          0,
+          78643200,
+          0,
+          0,
+          32763
+        ],
+        "bytes": 2131648,
+        "status_semantics": "unknown RDFv5; do not substitute legacyMesa registers"
+      },
+      {
+        "version": 5,
+        "header_u32_raw": [
+          262144,
+          3,
+          12,
+          1,
+          0,
+          0,
+          78643200,
+          0,
+          0,
+          32763
+        ],
+        "bytes": 2129856,
+        "status_semantics": "unknown RDFv5; do not substitute legacyMesa registers"
+      }
+    ],
+    "SPM": {
+      "header_raw": [
+        262144,
+        0,
+        4096,
+        5763,
+        1227
+      ],
+      "count_matches_data": true,
+      "strict_increasing": true,
+      "first": 12866118969551,
+      "last": 12866119997903,
+      "delta_min": 160,
+      "delta_max": 388,
+      "delta_top5": [
+        [
+          184,
+          1313
+        ],
+        [
+          180,
+          1046
+        ],
+        [
+          164,
+          751
+        ],
+        [
+          188,
+          707
+        ],
+        [
+          172,
+          652
+        ]
+      ],
+      "no_drop_proven": false
+    }
+  },
+  "M": {
+    "trace_sha": "b36374162e6d35ed33c1bac891e1a55c8b5aecd39901553fd852ff937fe7862d",
+    "SQTT": [
+      {
+        "version": 5,
+        "header_u32_raw": [
+          262144,
+          0,
+          12,
+          1,
+          5,
+          0,
+          78643200,
+          0,
+          0,
+          91
+        ],
+        "bytes": 1756160,
+        "status_semantics": "unknown RDFv5; do not substitute legacyMesa registers"
+      },
+      {
+        "version": 5,
+        "header_u32_raw": [
+          262144,
+          1,
+          12,
+          1,
+          5,
+          0,
+          78643200,
+          0,
+          0,
+          91
+        ],
+        "bytes": 1758752,
+        "status_semantics": "unknown RDFv5; do not substitute legacyMesa registers"
+      },
+      {
+        "version": 5,
+        "header_u32_raw": [
+          262144,
+          2,
+          12,
+          1,
+          5,
+          0,
+          78643200,
+          0,
+          0,
+          91
+        ],
+        "bytes": 1742656,
+        "status_semantics": "unknown RDFv5; do not substitute legacyMesa registers"
+      },
+      {
+        "version": 5,
+        "header_u32_raw": [
+          262144,
+          3,
+          12,
+          1,
+          5,
+          0,
+          78643200,
+          0,
+          0,
+          91
+        ],
+        "bytes": 1742208,
+        "status_semantics": "unknown RDFv5; do not substitute legacyMesa registers"
+      }
+    ],
+    "SPM": {
+      "header_raw": [
+        262144,
+        0,
+        4096,
+        5296,
+        1227
+      ],
+      "count_matches_data": true,
+      "strict_increasing": true,
+      "first": 12913284998183,
+      "last": 12913285954375,
+      "delta_min": 160,
+      "delta_max": 496,
+      "delta_top5": [
+        [
+          180,
+          1117
+        ],
+        [
+          188,
+          1009
+        ],
+        [
+          184,
+          963
+        ],
+        [
+          176,
+          893
+        ],
+        [
+          164,
+          387
+        ]
+      ],
+      "no_drop_proven": false
+    }
+  }
+}

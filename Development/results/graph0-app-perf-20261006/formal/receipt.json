@@ -1,0 +1,222 @@
+{
+  "sessions": {
+    "r1": 37548,
+    "r2": 65206,
+    "r3": 52791
+  },
+  "all_exit0_lock_released": true,
+  "frozen_source": "e05173fe",
+  "exe_sha256": "ed4b8af1bd57b3172eab5c37202c4804e0944f94529a7e9c2d1a9046c4c485ad",
+  "decision": "Three rounds separatelymergedmean/p99PASS under originalplannedroundpooling. NoR4. Not everycandidate slot tailpassed.",
+  "pooled_assistive_only": {
+    "eager": {
+      "n": 480,
+      "mean": 9.690939583333334,
+      "p99": 9.94925,
+      "max": 10.182
+    },
+    "replay": {
+      "n": 480,
+      "mean": 9.620091666666667,
+      "p99": 9.8551,
+      "max": 11.745
+    },
+    "delta": {
+      "mean": -0.07084791666666668,
+      "p99": -0.09414999999999907
+    }
+  },
+  "raw24": [
+    {
+      "round": 1,
+      "slot": 0,
+      "edge": "o-first",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "round": 1,
+      "slot": 0,
+      "edge": "o",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "round": 1,
+      "slot": 1,
+      "edge": "o-first",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "round": 1,
+      "slot": 1,
+      "edge": "o",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "round": 1,
+      "slot": 2,
+      "edge": "o-first",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "round": 1,
+      "slot": 2,
+      "edge": "o",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "round": 1,
+      "slot": 3,
+      "edge": "o-first",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "round": 1,
+      "slot": 3,
+      "edge": "o",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "round": 2,
+      "slot": 0,
+      "edge": "o-first",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "round": 2,
+      "slot": 0,
+      "edge": "o",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "round": 2,
+      "slot": 1,
+      "edge": "o-first",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "round": 2,
+      "slot": 1,
+      "edge": "o",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "round": 2,
+      "slot": 2,
+      "edge": "o-first",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "round": 2,
+      "slot": 2,
+      "edge": "o",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "round": 2,
+      "slot": 3,
+      "edge": "o-first",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "round": 2,
+      "slot": 3,
+      "edge": "o",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "round": 3,
+      "slot": 0,
+      "edge": "o-first",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "round": 3,
+      "slot": 0,
+      "edge": "o",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "round": 3,
+      "slot": 1,
+      "edge": "o-first",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "round": 3,
+      "slot": 1,
+      "edge": "o",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "round": 3,
+      "slot": 2,
+      "edge": "o-first",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "round": 3,
+      "slot": 2,
+      "edge": "o",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "round": 3,
+      "slot": 3,
+      "edge": "o-first",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "round": 3,
+      "slot": 3,
+      "edge": "o",
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    }
+  ],
+  "all160rows_per_slot_finite_positive": true,
+  "actual_graph_calls_each_round": [
+    0,
+    160,
+    160,
+    0
+  ],
+  "actual_kernel_DAG": {
+    "kernels": 161,
+    "edges": 160
+  },
+  "sampling": "80steady/slot frames80..159; first80/coldFrame0retained; linearp99 at0.99*(n-1), nooutlierfiltering",
+  "exceptions_preserved": [
+    "R2B2p9910.304040 >bothA; frame157max11.745ms",
+    "R3B2p9910.022260 >bothA; maxima/topfiveexact rows in tails.json"
+  ],
+  "scope": "fixedrealHDRoriginalO2sameFrame1152PDL0pulse0NET0MP1AE0noneHistseed0resettrue/opt.graphfalse",
+  "limits": [
+    "FinitefixedAPPinterfaceformal doesnot imply futuretailguarantee or eachslottailimprovement",
+    "No naturalgame/productionPDL1pulseauto comparison, no combinedgainaddition or oldMgapdelta subtraction",
+    "No dynamicgeometry/history/seed/rollover/fault recovery gate",
+    "Noinstallation/config/ZIP/push orgoalcomplete"
+  ]
+}

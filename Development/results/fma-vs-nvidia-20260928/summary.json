@@ -1,0 +1,210 @@
+{
+  "timings": [
+    {
+      "candidate": "F",
+      "batch": "r1",
+      "height": 900,
+      "baseline_ms": 9.247043749999996,
+      "candidate_ms": 9.15052312499999,
+      "delta_ms": -0.09652062500000547,
+      "percent": -1.0437998089930733,
+      "slots": {
+        "0": 9.22320625,
+        "1": 9.14630999999999,
+        "2": 9.15473624999999,
+        "3": 9.27088124999999
+      }
+    },
+    {
+      "candidate": "F",
+      "batch": "r1",
+      "height": 1080,
+      "baseline_ms": 12.571624374999999,
+      "candidate_ms": 12.439728125,
+      "delta_ms": -0.13189624999999872,
+      "percent": -1.049158374969339,
+      "slots": {
+        "0": 12.5634,
+        "1": 12.4377175,
+        "2": 12.44173875,
+        "3": 12.57984875
+      }
+    },
+    {
+      "candidate": "F",
+      "batch": "r2",
+      "height": 900,
+      "baseline_ms": 9.304893750000005,
+      "candidate_ms": 9.203369375000005,
+      "delta_ms": -0.10152437500000033,
+      "percent": -1.091085806326375,
+      "slots": {
+        "0": 9.30333375000001,
+        "1": 9.20012125,
+        "2": 9.20661750000001,
+        "3": 9.30645375
+      }
+    },
+    {
+      "candidate": "F",
+      "batch": "r2",
+      "height": 1080,
+      "baseline_ms": 12.619726875000001,
+      "candidate_ms": 12.484836875,
+      "delta_ms": -0.13489000000000217,
+      "percent": -1.0688820870380589,
+      "slots": {
+        "0": 12.61478875,
+        "1": 12.4914775,
+        "2": 12.47819625,
+        "3": 12.624665
+      }
+    },
+    {
+      "candidate": "H",
+      "batch": "r1",
+      "height": 900,
+      "baseline_ms": 9.29465249999999,
+      "candidate_ms": 10.135764375,
+      "delta_ms": 0.84111187500001,
+      "percent": 9.04941712452414,
+      "slots": {
+        "0": 9.28695124999999,
+        "1": 10.13778625,
+        "2": 10.1337425,
+        "3": 9.30235374999999
+      }
+    },
+    {
+      "candidate": "H",
+      "batch": "r1",
+      "height": 1080,
+      "baseline_ms": 12.60412375,
+      "candidate_ms": 13.852280624999999,
+      "delta_ms": 1.2481568749999994,
+      "percent": 9.902765949913817,
+      "slots": {
+        "0": 12.59720625,
+        "1": 13.852445,
+        "2": 13.85211625,
+        "3": 12.61104125
+      }
+    },
+    {
+      "candidate": "H",
+      "batch": "r2",
+      "height": 900,
+      "baseline_ms": 9.296239374999999,
+      "candidate_ms": 10.135118125,
+      "delta_ms": 0.838878750000001,
+      "percent": 9.023850571834057,
+      "slots": {
+        "0": 9.29358999999999,
+        "1": 10.13504375,
+        "2": 10.1351925,
+        "3": 9.29888875000001
+      }
+    },
+    {
+      "candidate": "H",
+      "batch": "r2",
+      "height": 1080,
+      "baseline_ms": 12.625111875,
+      "candidate_ms": 13.858493750000001,
+      "delta_ms": 1.233381875000001,
+      "percent": 9.769274816822172,
+      "slots": {
+        "0": 12.62876875,
+        "1": 13.85622125,
+        "2": 13.86076625,
+        "3": 12.621455
+      }
+    }
+  ],
+  "frame_checks": [
+    {
+      "candidate": "F",
+      "case": "900-static",
+      "frames": 12,
+      "changed": 12
+    },
+    {
+      "candidate": "F",
+      "case": "900-motion",
+      "frames": 12,
+      "changed": 12
+    },
+    {
+      "candidate": "F",
+      "case": "1080-static",
+      "frames": 12,
+      "changed": 12
+    },
+    {
+      "candidate": "F",
+      "case": "1080-motion",
+      "frames": 12,
+      "changed": 12
+    },
+    {
+      "candidate": "F",
+      "case": "720-motion",
+      "frames": 12,
+      "changed": 12
+    },
+    {
+      "candidate": "F",
+      "case": "900-history",
+      "frames": 12,
+      "changed": 12
+    },
+    {
+      "candidate": "F",
+      "case": "1080-history",
+      "frames": 12,
+      "changed": 12
+    },
+    {
+      "candidate": "H",
+      "case": "900-static",
+      "frames": 12,
+      "changed": 12
+    },
+    {
+      "candidate": "H",
+      "case": "900-motion",
+      "frames": 12,
+      "changed": 12
+    },
+    {
+      "candidate": "H",
+      "case": "1080-static",
+      "frames": 12,
+      "changed": 12
+    },
+    {
+      "candidate": "H",
+      "case": "1080-motion",
+      "frames": 12,
+      "changed": 12
+    },
+    {
+      "candidate": "H",
+      "case": "720-motion",
+      "frames": 12,
+      "changed": 12
+    },
+    {
+      "candidate": "H",
+      "case": "900-history",
+      "frames": 12,
+      "changed": 12
+    },
+    {
+      "candidate": "H",
+      "case": "1080-history",
+      "frames": 12,
+      "changed": 12
+    }
+  ]
+}

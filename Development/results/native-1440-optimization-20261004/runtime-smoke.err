@@ -1,0 +1,9 @@
+runtime-smoke.exe : multi_pass=3 multi_pass_predict=1 actual_network_passes=2
+At D:\DLSSNR-Lab\native-1440-optimization-20261004\rt.ps1:14 char:35
++ ... ='Continue';& 'D:\DLSSNR-Lab\re9-presr\runtime-smoke.exe' "$root\rt-n ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (multi_pass=3 mu...etwork_passes=2:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+DLSS5_FAST_NUMERIC=1: multihead-fast-padded-wave-packed-fast.hsaco missing, using multihead-fast-padded-wave-packed.hsa
+co

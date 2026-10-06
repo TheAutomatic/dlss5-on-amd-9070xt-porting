@@ -1,0 +1,42 @@
+SYNC_PROFILE wave_owned=1 c512_m32=1 pdl=1 vit_stream=3 swin_run=1 FAST=1 full71=1
+SP_PLAN c=256 first=16 layers=6 tasks=846 initial=144 state_bytes=10168 w16=1
+SP_PLAN c=256 first=49 layers=6 tasks=846 initial=144 state_bytes=10168 w16=1
+WHOLE_NN_DIAGNOSTIC frames=2 processing=1920x1088 valid1080 tokens640 full71=1 Style1=1 seed0=1 AE0=1 MP1=1 historyoff=1 repeated_bitdiff=0 finite=1 reference=old_variant_not_NV
+SP_STATS runs=4 fallback=0 rollover=0 jobs=3384 disabled=0 errors=0
+
+SYNC_PROFILE wave_owned=1 c512_m32=1 pdl=1 vit_stream=3 swin_run=1 FAST=1 full71=1
+SP_PLAN c=256 first=16 layers=6 tasks=846 initial=144 state_bytes=10168 w16=1
+SP_PLAN c=256 first=49 layers=6 tasks=846 initial=144 state_bytes=10168 w16=1
+WHOLE_NN_DIAGNOSTIC frames=2 processing=1920x1088 valid1080 tokens640 full71=1 Style1=1 seed0=1 AE0=1 MP1=1 historyoff=1 repeated_bitdiff=0 finite=1 reference=old_variant_not_NV
+SP_STATS runs=4 fallback=0 rollover=0 jobs=3384 disabled=0 errors=0
+
+[
+    {
+        "Path":  "D:\\DLSSNR-Lab\\vit-av-trload-20261006\\whole-old\\first.rgb32f",
+        "Hash":  "153AC018F5DD5744CFF9157661C46C469D01DB6018A97C93AEC2B1E2E05647F1"
+    },
+    {
+        "Path":  "D:\\DLSSNR-Lab\\vit-av-trload-20261006\\whole-old\\last.rgb32f",
+        "Hash":  "153AC018F5DD5744CFF9157661C46C469D01DB6018A97C93AEC2B1E2E05647F1"
+    },
+    {
+        "Path":  "D:\\DLSSNR-Lab\\vit-av-trload-20261006\\whole-new\\first.rgb32f",
+        "Hash":  "153AC018F5DD5744CFF9157661C46C469D01DB6018A97C93AEC2B1E2E05647F1"
+    },
+    {
+        "Path":  "D:\\DLSSNR-Lab\\vit-av-trload-20261006\\whole-new\\last.rgb32f",
+        "Hash":  "153AC018F5DD5744CFF9157661C46C469D01DB6018A97C93AEC2B1E2E05647F1"
+    },
+    {
+        "Path":  "D:\\DLSSNR-Lab\\vit-av-trload-20261006\\old-comgr.hsaco",
+        "Hash":  "11A25AE3FEA75F83763AB6D5729C4F426DABDA11299D1BE6092D142B810E27B8"
+    },
+    {
+        "Path":  "D:\\DLSSNR-Lab\\vit-av-trload-20261006\\new-comgr.hsaco",
+        "Hash":  "965F9348F3F689A4B63E33140A75E5649DBDFF604E6A6A7EDCAE8E830847B36F"
+    },
+    {
+        "Path":  "D:\\DLSSNR-Lab\\vit-av-trload-20261006\\whole_diag.exe",
+        "Hash":  "2A5DA385F3B127FD8856B11A09617B8031956858BE7A388FFA4CF6B3095BC06F"
+    }
+]

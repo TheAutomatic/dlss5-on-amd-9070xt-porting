@@ -1,4 +1,6 @@
 param([string]$Candidate='r960',[string]$Runner='benchmark_production.exe',[string]$Reference='reference_production.exe',[string]$Modules='decoder-tail-modules',[string]$ExpectedFull='047C36E1B84F32FAE71CEAF6E0667402D6BCD53A06055BDC1892003F23CCB141',[string]$ExpectedReset='B4F66E9DBF0EC0D3CDB0D21D46E6D54836D665A42DE3FEE80B5BC0B780431467',[string]$ExpectedHistory='0E4AFD8383889F9593A382CCC370CD043441B64DC4D16A3144D793100B714A30',[string]$Assets='D:\DLSSNR-Lab\network-720p\DLSS5-AMD\native-game-tiled-assets',[string[]]$ExtraFlags=@(),[string[]]$ReferenceArgs=@())
+# Historical pre-2026-09-28 separate-rounding goldens. Do not use them as the new float-FMA production oracle.
+# New baseline/checker: experiments/float-fma/README.md and results/float-fma-20260928/new-baseline-hashes.csv.
 # The three bit-exact checks on the shipped 900 tier (1600x900 padded to 960 rows, 0.22+): 40-frame HDR, 24-frame reset-every-8, seed-123 history via the
 # reference chain (--960, input960.rgba32f). Corrected 2026-09-19 after fixing decoder48 partial-tile dispatch.
 # The old 0.22 goldens included 3072 unwritten latent values; do not use an old host with these expected hashes.

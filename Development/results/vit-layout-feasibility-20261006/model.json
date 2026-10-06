@@ -1,0 +1,9 @@
+{
+  "producer_tile_bytes": 512,
+  "bijection": true,
+  "two8B_perlane_aligned": true,
+  "Q_K_target": "token=l%16/channel=j16+gr8+e viaTR on physicalchannelrows",
+  "V_target": "token=gr8+e/channel=j16+l%16 via direct8B",
+  "whole_plane_extent": "640*1024;3disjointplanes",
+  "scope": "CPU symbol mapping, not HW new layoutgold"
+}

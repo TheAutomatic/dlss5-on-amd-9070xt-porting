@@ -1,0 +1,176 @@
+{
+  "_Z14k_reg_swin_runILi64ELb0EEv9RunParams": {
+    ".args": [
+      {
+        ".offset": 0,
+        ".size": 392,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 4096,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 392,
+    ".language": "OpenCL C",
+    ".language_version": [
+      2,
+      0
+    ],
+    ".max_flat_workgroup_size": 64,
+    ".name": "_Z14k_reg_swin_runILi64ELb0EEv9RunParams",
+    ".private_segment_fixed_size": 80,
+    ".sgpr_count": 44,
+    ".sgpr_spill_count": 0,
+    ".symbol": "_Z14k_reg_swin_runILi64ELb0EEv9RunParams.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 168,
+    ".vgpr_spill_count": 3,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "_Z14k_reg_swin_runILi64ELb1EEv9RunParams": {
+    ".args": [
+      {
+        ".offset": 0,
+        ".size": 392,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 8192,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 392,
+    ".language": "OpenCL C",
+    ".language_version": [
+      2,
+      0
+    ],
+    ".max_flat_workgroup_size": 64,
+    ".name": "_Z14k_reg_swin_runILi64ELb1EEv9RunParams",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 44,
+    ".sgpr_spill_count": 0,
+    ".symbol": "_Z14k_reg_swin_runILi64ELb1EEv9RunParams.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 174,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "_Z14k_reg_swin_runILi128ELb0EEv9RunParams": {
+    ".args": [
+      {
+        ".offset": 0,
+        ".size": 392,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 16384,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 392,
+    ".language": "OpenCL C",
+    ".language_version": [
+      2,
+      0
+    ],
+    ".max_flat_workgroup_size": 128,
+    ".name": "_Z14k_reg_swin_runILi128ELb0EEv9RunParams",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 45,
+    ".sgpr_spill_count": 0,
+    ".symbol": "_Z14k_reg_swin_runILi128ELb0EEv9RunParams.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 186,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "_Z14k_reg_swin_runILi128ELb1EEv9RunParams": {
+    ".args": [
+      {
+        ".offset": 0,
+        ".size": 392,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 16384,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 392,
+    ".language": "OpenCL C",
+    ".language_version": [
+      2,
+      0
+    ],
+    ".max_flat_workgroup_size": 128,
+    ".name": "_Z14k_reg_swin_runILi128ELb1EEv9RunParams",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 44,
+    ".sgpr_spill_count": 0,
+    ".symbol": "_Z14k_reg_swin_runILi128ELb1EEv9RunParams.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 172,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "_Z14k_reg_swin_runILi256ELb0EEv9RunParams": {
+    ".args": [
+      {
+        ".offset": 0,
+        ".size": 392,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 32768,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 392,
+    ".language": "OpenCL C",
+    ".language_version": [
+      2,
+      0
+    ],
+    ".max_flat_workgroup_size": 256,
+    ".name": "_Z14k_reg_swin_runILi256ELb0EEv9RunParams",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 44,
+    ".sgpr_spill_count": 0,
+    ".symbol": "_Z14k_reg_swin_runILi256ELb0EEv9RunParams.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 159,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  },
+  "_Z14k_reg_swin_runILi256ELb1EEv9RunParams": {
+    ".args": [
+      {
+        ".offset": 0,
+        ".size": 392,
+        ".value_kind": "by_value"
+      }
+    ],
+    ".group_segment_fixed_size": 32768,
+    ".kernarg_segment_align": 8,
+    ".kernarg_segment_size": 392,
+    ".language": "OpenCL C",
+    ".language_version": [
+      2,
+      0
+    ],
+    ".max_flat_workgroup_size": 256,
+    ".name": "_Z14k_reg_swin_runILi256ELb1EEv9RunParams",
+    ".private_segment_fixed_size": 0,
+    ".sgpr_count": 44,
+    ".sgpr_spill_count": 0,
+    ".symbol": "_Z14k_reg_swin_runILi256ELb1EEv9RunParams.kd",
+    ".uniform_work_group_size": 1,
+    ".uses_dynamic_stack": false,
+    ".vgpr_count": 172,
+    ".vgpr_spill_count": 0,
+    ".wavefront_size": 32,
+    ".workgroup_processor_mode": 1
+  }
+}

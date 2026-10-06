@@ -1,0 +1,13 @@
+{
+  "command": [
+    "x86_64-w64-mingw32-g++",
+    "-std=c++17",
+    "-O2",
+    "-static",
+    "/home/lmxxf/work/compiler-versions-20260929/tools/rtc_compile-comgr2.cpp",
+    "-o",
+    "/home/lmxxf/work/compiler-versions-20260929/tools/rtc_compile-comgr2.exe"
+  ],
+  "source_sha256": "4abff10941ebf07be02f66062f9198796ebe726520830296d270c8c0d5d7882c",
+  "exe_sha256": "f107857d841e7f91def15714704dea5443dfc09de1a0ee60e7a5d409fc643101"
+}

@@ -1,0 +1,26 @@
+{
+  "base_commit": "4f0a62f7",
+  "production_source_sha256": {
+    "hip/wave_owned_mh.inc": "e2331d2d231e779c7fe80f9f760147fc6e1fb6f073cd5933a368ef46e01841eb",
+    "hip/build-modules.ps1": "f5d56be0235b5937f2e6a00de9229a71f747a293d94038c6815a9929c4fe482b",
+    "hip/SHA256SUMS": "76eb549051c78813f2b1b1114aa32866d7af4dad22b32b344d7627ac72b60abc",
+    "Development/HIP/hip_reference_network.h": "9218b90b7734f1ecce71baa6af9fbe0a568f20d0f1fc3777fc321bc30762d025",
+    "src/native_game_frame.h": "d155dcc59bcf48d724b0457af08ab35b2a5156999d40b4dc3bb52cf3495dc3ed",
+    "src/native_hip_network.h": "90c3e21a20c5f805dc1a91f9d40ff9bd98ab51636478cf60cadc0f1b3cc1ebcc",
+    "shaders/native_game_rgb_input.hlsl": "5be59a4130e66e9f9f4d370843ef080e0783042d1f730b7a06c072421c92c2b6"
+  },
+  "runner_compiler": "x86_64-w64-mingw32-g++ (GCC) 13-win32",
+  "installed_base_addon": "abef6155",
+  "direct_io": 3,
+  "processing_size_1080": [
+    1920,
+    1152
+  ],
+  "post_shift": [
+    -4,
+    -4
+  ],
+  "macro": "W2_FFN_QT_BATCH=2 (source default 0)",
+  "host_route": "C256 whole block only if opt.width==1920 and opt.height==1152",
+  "validation": "168 formal +72 screen candidate frames; 64 timing slots; gfx1201 GPU, gfx1200 compile-only"
+}

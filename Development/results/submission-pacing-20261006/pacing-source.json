@@ -1,0 +1,11 @@
+{
+  "host_sha256": "040e8e2726c26bae4ba2931a88ef1385194e747de7ec3213d24530c2f9f89b1d",
+  "point": "before C512 Body23..30",
+  "modes": {
+    "0": "none",
+    "3": "empty pair both recorded at same point",
+    "4": "hipStreamQuery one snapshot; no poll loop/sync",
+    "5": "CPU busy delay calibrated to pair-call time"
+  },
+  "API_scope": "documented record/query contracts; Windows submit/flush side effects are hypotheses"
+}

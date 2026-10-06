@@ -1,0 +1,22 @@
+== vit-stream
+vit_stream_contract_frag_hout                                fma 0->0 mul 31->29 add 65->69 mad 1->1 wmma 0->0
+vit_stream_project_n64_bh                                    fma 0->0 mul 16->16 add 18->22 mad 0->0 wmma 0->0
+-- L23
+vit_stream_contract_frag_hout                                fma 0->0 mul 31->8 add 65->16 mad 1->1 wmma 0->0
+vit_stream_project_n64_bh                                    fma 0->32 mul 16->0 add 18->8 mad 0->0 wmma 0->0
+vit_stream_qkv_frag_hin_w5f8                                 fma 16->16 mul 18->20 add 0->0 mad 1->1 wmma 0->0
+== multihead-fast-padded-wave-packed
+mh_attention_project_frag_c512                               fma 0->0 mul 32->32 add 0->0 mad 5->2 wmma 0->0
+mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl fma 32->32 mul 91->87 add 58->57 mad 11->11 wmma 0->0
+mh_ffn_fused_c256_frag_project_mapped_g128_qkv_fb_pdl        fma 32->32 mul 84->92 add 58->57 mad 15->15 wmma 0->0
+mh_pool_project_group_c128_hin                               fma 0->0 mul 1->1 add 81->19 mad 1->1 wmma 0->0
+mh_pool_project_group_c256                                   fma 0->0 mul 1->1 add 20->19 mad 1->1 wmma 0->0
+mh_pool_project_group_c512                                   fma 0->0 mul 1->1 add 21->20 mad 1->1 wmma 0->0
+-- L23
+mh_attention_project_frag_c512                               fma 0->0 mul 32->32 add 0->0 mad 5->4 wmma 0->0
+mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl fma 32->32 mul 91->84 add 58->58 mad 11->12 wmma 0->0
+mh_ffn_fused_c256_frag_project_mapped_g128_qkv_fb_pdl        fma 32->32 mul 84->78 add 58->58 mad 15->16 wmma 0->0
+mh_pool_project_group_c128_hin                               fma 0->2 mul 1->1 add 81->9 mad 1->1 wmma 0->0
+mh_pool_project_group_c256                                   fma 0->0 mul 1->1 add 20->11 mad 1->1 wmma 0->0
+mh_pool_project_group_c512                                   fma 0->0 mul 1->1 add 21->10 mad 1->1 wmma 0->0
+mh_pool_project_group_c64_hin                                fma 0->2 mul 1->1 add 39->9 mad 1->1 wmma 0->0

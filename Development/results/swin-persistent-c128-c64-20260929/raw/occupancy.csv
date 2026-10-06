@@ -1,0 +1,11 @@
+device=AMD Radeon RX 9070 XT multiprocessors=32 max_threads_per_mp=2048
+module,kernel,block_threads,active_blocks_per_mp,active_threads_per_mp,theoretical_percent
+c64-wave2.hsaco,c64_wave2_bi_bo,64,8,512,25
+c64-wave2.hsaco,c128_wave2_bi_bo,128,4,512,25
+c64-wave2.hsaco,c256_wave2_bi_bo,256,2,512,25
+swin-persistent.hsaco,sp_run64,64,8,512,25
+swin-persistent.hsaco,sp_recover64,64,8,512,25
+swin-persistent.hsaco,sp_run128,128,4,512,25
+swin-persistent.hsaco,sp_recover128,128,4,512,25
+swin-persistent.hsaco,sp_run256,256,2,512,25
+swin-persistent.hsaco,sp_recover256,256,2,512,25

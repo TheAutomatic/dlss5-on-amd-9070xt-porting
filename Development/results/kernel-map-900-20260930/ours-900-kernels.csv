@@ -1,0 +1,41 @@
+rank,kernel,family,calls,total_us,per_call_us,share_pct,shapes
+1,c32_wave1_prefix,C32,1,654.9,654.89,9.02,24000x32
+2,sp_run256_init_run_recover_est,C256,2,649.9,324.94,8.95,624x256
+3,c32_wave1_post,C32,1,603.6,603.55,8.32,24321x32
+4,c512_qkv_attention_compact,C512,13,601.7,46.29,8.29,448x64 560x64
+5,c32_wave1_chain,C32,4,497.5,124.38,6.85,6060x32 6161x32
+6,c128_wave2_bi_bo,C128,8,467.6,58.45,6.44,375x128 390x128 400x128 416x128
+7,c64_wave2_bi_bo,C64,4,330.9,82.72,4.56,1530x64 1581x64
+8,mh_attention_project_frag_c512,C512,13,214.4,16.49,2.95,752x32
+9,vit_stream_qkv_frag_hin_w5,ViT,8,212.6,26.58,2.93,480x160
+10,c64_wave2_bi,C64,2,210.9,105.43,2.91,1550x64
+11,split_mix_blocked_h16w_m32,C512,13,209.4,16.11,2.89,376x32
+12,vit_stream_contract_frag_hout,ViT,8,197.3,24.67,2.72,400x32
+13,c32_wave1_up,C32,1,187.8,187.85,2.59,6000x32
+14,split_ffn_fused_fp8_t8,C512,13,187.8,14.45,2.59,752x128
+15,vit_expand_blocked_fp8_frag_bytein,ViT,8,173.7,21.71,2.39,1600x32
+16,c32_wave1_finish_dcrop,C32,1,156.2,156.17,2.15,6100x32
+17,mh_ffn_fused_c256_frag_project_mapped_g128_qkv_bytein_fb_pdl,C256,3,144.4,48.13,1.99,416x512
+18,c128_wave2_bi,C128,2,141.7,70.85,1.95,400x128 416x128
+19,c32_wave1_finish,C32,1,141.7,141.68,1.95,6100x32
+20,mh_shift_pack,C512,13,128.7,9.90,1.77,3008x256
+21,split_projection_frag,C512,13,127.1,9.78,1.75,752x32
+22,c32_wave1_mapped,C32,1,121.1,121.10,1.67,6000x32
+23,c64_wave2_up,C64,1,118.9,118.88,1.64,1500x64
+24,vit_attention_fused_400_bytein_bout,ViT,8,117.2,14.65,1.61,800x32
+25,c64_wave2_bo,C64,1,84.6,84.60,1.17,1500x64
+26,c128_wave2_up,C128,1,83.2,83.20,1.15,390x128
+27,vit_stream_project_n64_bh,ViT,8,71.9,8.99,0.99,400x32
+28,c256_attn_wave,C256,2,67.0,33.52,0.92,104x256
+29,c128_wave2_bo,C128,1,59.4,59.41,0.82,375x128
+30,mh_ffn_fused_c256_frag_project_mapped_g128_qkv_fb_pdl,C256,1,51.5,51.45,0.71,416x512
+31,c256_attn_wave_bo,C256,2,37.0,18.52,0.51,104x256
+32,decoder_project2x_h16w_byteout,C256,1,35.2,35.24,0.49,1504x32
+33,mh_pool_project_group_c64,C64,1,34.4,34.38,0.47,1500x64
+34,mh_pool_project_production_h16w,C32,1,27.8,27.79,0.38,24000x32
+35,vit_pack_input,ViT,8,23.8,2.98,0.33,400x256
+36,mh_pool_project_group_c128,C128,1,22.1,22.10,0.30,375x128
+37,decoder_project2x_h16w,decoder,1,19.7,19.70,0.27,800x32
+38,mh_pool_project_group_c512,head,1,18.8,18.81,0.26,25x512
+39,mh_pool_project_group_c256,C256,1,16.1,16.14,0.22,94x256
+40,vit_gather,ViT,2,9.0,4.50,0.12,1600x256

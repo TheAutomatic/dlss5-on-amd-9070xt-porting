@@ -1,0 +1,25 @@
+{
+  "base_kind3": "same-position timed pair, inner elapsed disabled in this control",
+  "kind6": "same-position two events created with hipEventDisableTiming0x2",
+  "point": "before C512 encoder Body23..30 ONLY",
+  "create": "once before warmup, optional export mandatory if selected",
+  "destroy": "after existing owned-stream synchronize, before stream destruction",
+  "no_added": "query/sync/DisableSystemFence/any location grid",
+  "outer_GPU_timed_events": "unchanged",
+  "scope": "candidate may still generate timestamps/markers; no flush or speed guarantee",
+  "host_sha256": "27c838dcb7dadfafa0c187bc5b2192675f6fdddbdd3c9c28fb5223bf87ebf233",
+  "core_source_sha256": "705d4f996711c8f5f5ca49234ff2d2c8b031651ef943ad3eaf339eb5b3ecd984",
+  "compile": [
+    "x86_64-w64-mingw32-g++",
+    "-w",
+    "-std=c++17",
+    "-O2",
+    "-static",
+    "-I/tmp/submission-untimed-20261006",
+    "-I/home/lmxxf/work/ai-theorys-study/wechat/assets/297/Development/HIP",
+    "-I/home/lmxxf/work/ai-theorys-study/wechat/assets/297/src",
+    "/tmp/submission-untimed-20261006/benchmark.cpp",
+    "-o",
+    "/tmp/submission-untimed-20261006/benchmark-untimed.exe"
+  ]
+}

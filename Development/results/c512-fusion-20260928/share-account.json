@@ -1,0 +1,170 @@
+{
+  "base": {
+    "c64_wave2_bi_bo": {
+      "trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "whole_path_upper": {
+        "SMEM": 3,
+        "vector_slots": 5273,
+        "WAIT": 1728,
+        "SALU": 750,
+        "VALU": 3831,
+        "VOPD": 721,
+        "VMEM": 452,
+        "VMEM_read_bytes_per_lane": 3920,
+        "DS": 140,
+        "DS_write_bytes_per_lane": 256,
+        "DS_read_bytes_per_lane": 1216,
+        "WMMA": 456,
+        "VMEM_write_bytes_per_lane": 64,
+        "issued": 8081
+      },
+      "ffn_ht_loop": {
+        "SMEM": 0,
+        "vector_slots": 1648,
+        "WAIT": 576,
+        "SALU": 128,
+        "VALU": 1392,
+        "VOPD": 128,
+        "VMEM": 192,
+        "VMEM_read_bytes_per_lane": 1536,
+        "DS": 32,
+        "DS_write_bytes_per_lane": 0,
+        "DS_read_bytes_per_lane": 512,
+        "WMMA": 192,
+        "VMEM_write_bytes_per_lane": 0,
+        "issued": 2640
+      }
+    },
+    "c128_wave2_bi_bo": {
+      "trips": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "whole_path_upper": {
+        "SMEM": 3,
+        "vector_slots": 5527,
+        "WAIT": 2225,
+        "SALU": 729,
+        "VALU": 4035,
+        "VOPD": 746,
+        "VMEM": 740,
+        "VMEM_read_bytes_per_lane": 6224,
+        "DS": 212,
+        "DS_write_bytes_per_lane": 256,
+        "DS_read_bytes_per_lane": 2368,
+        "WMMA": 744,
+        "VMEM_write_bytes_per_lane": 64,
+        "issued": 9434
+      },
+      "ffn_ht_loop": {
+        "SMEM": 0,
+        "vector_slots": 1712,
+        "WAIT": 752,
+        "SALU": 112,
+        "VALU": 1424,
+        "VOPD": 144,
+        "VMEM": 320,
+        "VMEM_read_bytes_per_lane": 2560,
+        "DS": 64,
+        "DS_write_bytes_per_lane": 0,
+        "DS_read_bytes_per_lane": 1024,
+        "WMMA": 320,
+        "VMEM_write_bytes_per_lane": 0,
+        "issued": 3136
+      }
+    }
+  },
+  "Sboth": {
+    "c64_wave2_bi_bo": {
+      "trips": [
+        2,
+        4,
+        4,
+        4,
+        4
+      ],
+      "whole_path_upper": {
+        "SMEM": 3,
+        "vector_slots": 5049,
+        "WAIT": 1492,
+        "SALU": 709,
+        "VALU": 3615,
+        "VOPD": 717,
+        "VMEM": 356,
+        "VMEM_read_bytes_per_lane": 3152,
+        "DS": 140,
+        "DS_write_bytes_per_lane": 256,
+        "DS_read_bytes_per_lane": 1216,
+        "WMMA": 456,
+        "VMEM_write_bytes_per_lane": 64,
+        "issued": 7488
+      },
+      "ffn_ht_loop": {
+        "SMEM": 0,
+        "vector_slots": 1432,
+        "WAIT": 360,
+        "SALU": 96,
+        "VALU": 1192,
+        "VOPD": 120,
+        "VMEM": 96,
+        "VMEM_read_bytes_per_lane": 768,
+        "DS": 32,
+        "DS_write_bytes_per_lane": 0,
+        "DS_read_bytes_per_lane": 512,
+        "WMMA": 192,
+        "VMEM_write_bytes_per_lane": 0,
+        "issued": 2088
+      }
+    },
+    "c128_wave2_bi_bo": {
+      "trips": [
+        2,
+        4,
+        4,
+        4,
+        4
+      ],
+      "whole_path_upper": {
+        "SMEM": 3,
+        "vector_slots": 5257,
+        "WAIT": 1910,
+        "SALU": 698,
+        "VALU": 3843,
+        "VOPD": 707,
+        "VMEM": 580,
+        "VMEM_read_bytes_per_lane": 4944,
+        "DS": 212,
+        "DS_write_bytes_per_lane": 256,
+        "DS_read_bytes_per_lane": 2368,
+        "WMMA": 744,
+        "VMEM_write_bytes_per_lane": 64,
+        "issued": 8697
+      },
+      "ffn_ht_loop": {
+        "SMEM": 0,
+        "vector_slots": 1464,
+        "WAIT": 440,
+        "SALU": 88,
+        "VALU": 1224,
+        "VOPD": 120,
+        "VMEM": 160,
+        "VMEM_read_bytes_per_lane": 1280,
+        "DS": 64,
+        "DS_write_bytes_per_lane": 0,
+        "DS_read_bytes_per_lane": 1024,
+        "WMMA": 320,
+        "VMEM_write_bytes_per_lane": 0,
+        "issued": 2416
+      }
+    }
+  }
+}

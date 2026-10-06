@@ -1,0 +1,15 @@
+START,ours-640-g4_u1_h1,vit_probe_g4_u1_h1
+EXACT,ours-640-g4_u1_h1,different=0
+BUFFER,ours-640-g4_u1_h1,output,invalid=0,nonzero=607270
+CHECK,ours-640-g4_u1_h1,guards=0,invalid=0,nonzero=607270
+TIME,ours-640-g4_u1_h1,0,79.256251
+TIME,ours-640-g4_u1_h1,1,69.247805
+TIME,ours-640-g4_u1_h1,2,74.837655
+TIME,ours-640-g4_u1_h1,3,68.526261
+TIME,ours-640-g4_u1_h1,4,70.228904
+TIME,ours-640-g4_u1_h1,5,73.571719
+TIME,ours-640-g4_u1_h1,6,71.903124
+EXACT,ours-640-g4_u1_h1,different=0
+BUFFER,ours-640-g4_u1_h1,output,invalid=0,nonzero=607270
+CHECK,ours-640-g4_u1_h1,guards=0,invalid=0,nonzero=607270
+RESULT,ours-640-g4_u1_h1,71.903124,128,7

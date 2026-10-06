@@ -1,0 +1,5 @@
+SP_PLAN c=256 first=16 layers=6 tasks=624 initial=104 state_bytes=7504 w16=1
+SP_PLAN c=256 first=49 layers=6 tasks=624 initial=104 state_bytes=7504 w16=1
+round=0 size=1707x961 mean_ms=13.333 hash=e7695110e1c1ec32 vram_mib=1454 status=lmxxf modules_ok=76 hip=1 net=1600x900 color_job=1707x961 weights=1 recreates=0 net_gpu_ms=off wave_owned=1/1 c512_m32=1/1 vit_proj_n64=1/1 pdl=1/1 skip=0 swin_run=1/1 vit_stream=3/3 multi_pass=3 predict=1 skin=0 | flags: D:\DLSSNR-Lab\native-1440-optimization-20261004\rt-old\DLSS5-AMD layers=--N applied=6 env_kept=0
+SP_STATS runs=52 fallback=0 rollover=0 jobs=32448 disabled=0 errors=0
+rt_bench: ok

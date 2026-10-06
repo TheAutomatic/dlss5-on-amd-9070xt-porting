@@ -1,0 +1,64 @@
+[
+  {
+    "case": "900-static",
+    "mode": "skin",
+    "core": 29798,
+    "zero": 1428920,
+    "cpu_gpu_mask_maxabs": 4.76837158203125e-07,
+    "core_exact": true,
+    "non_skin_exact": true,
+    "face_luma_one": 0.06953570246696472,
+    "face_luma_protected": 0.06695681065320969
+  },
+  {
+    "case": "900-static",
+    "mode": "predict-skin",
+    "core": 29798,
+    "zero": 1428920,
+    "cpu_gpu_mask_maxabs": 4.76837158203125e-07,
+    "core_exact": true,
+    "face_luma_one": 0.06953570246696472,
+    "face_luma_protected": 0.06713790446519852
+  },
+  {
+    "case": "1080-motion",
+    "mode": "skin",
+    "core": 42959,
+    "zero": 2062241,
+    "cpu_gpu_mask_maxabs": 4.76837158203125e-07,
+    "core_exact": true,
+    "non_skin_exact": true,
+    "face_luma_one": 0.07537419348955154,
+    "face_luma_protected": 0.07370658963918686
+  },
+  {
+    "case": "1080-motion",
+    "mode": "predict-skin",
+    "core": 42959,
+    "zero": 2062241,
+    "cpu_gpu_mask_maxabs": 4.76837158203125e-07,
+    "core_exact": true,
+    "face_luma_one": 0.07537419348955154,
+    "face_luma_protected": 0.07370948791503906
+  },
+  {
+    "case": "1080-history",
+    "mode": "skin",
+    "core": 43331,
+    "zero": 2061388,
+    "cpu_gpu_mask_maxabs": 5.364418029785156e-07,
+    "core_exact": true,
+    "face_luma_one": 0.07623063772916794,
+    "face_luma_protected": 0.07457943260669708
+  },
+  {
+    "case": "1080-history",
+    "mode": "predict-skin",
+    "core": 43331,
+    "zero": 2061388,
+    "cpu_gpu_mask_maxabs": 5.364418029785156e-07,
+    "core_exact": true,
+    "face_luma_one": 0.07454629242420197,
+    "face_luma_protected": 0.07172035425901413
+  }
+]

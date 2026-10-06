@@ -1,0 +1,12 @@
+{
+  "handle": 41002,
+  "exit": 1,
+  "lock_released": true,
+  "failure": "own process60s timeout",
+  "phase": "first oldgrid process; no first.rgb32f",
+  "cache_directory_exists": false,
+  "stdout_stderr_available": false,
+  "reason_missing_logs": "timeout branch did not write asynchronous captured results",
+  "numerical_claim": null,
+  "correction": "create cache dir; persist timeout output; samecallcounter endonly logging; no GPU retry yet"
+}

@@ -1,0 +1,17 @@
+{
+  "source": "procedural single color1280x720 RGBA16F repeated2; explicit synthetic zeroMV, exposure1, jitter not applied; no game capture",
+  "converter_network": "valid1280x720/proc1280x768",
+  "encoded_finite": true,
+  "coordinates_finite": true,
+  "alpha1": true,
+  "bottom_mirror_bit_equal": true,
+  "diagnostic_uv_to_pixel_max_residual": 6.103515625e-05,
+  "prepared_uses": "direct native coordinates UV, no pixel reconstruction roundtrip",
+  "replay_rows": 12,
+  "nonfinite": 0,
+  "baseline_byte_diff": 0,
+  "repeat_byte_diff": 0,
+  "history_store": "explicit RTZ, effective internal blend RGB alpha1; widened half storage",
+  "timing_valid": false,
+  "game_quality_verified": false
+}

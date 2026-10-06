@@ -1,0 +1,5545 @@
+{
+  "method": "Reachable static ISA and old loop weighting [4,8,4] for FFN/window, hidden, attention qt loops; tail loops assigned weight 1 as previous audit (not exact full-kernel dynamic counts). VOPD=one encoded pair, VALU_slots=2 for VOPD. Resources from AMD metadata; MODE scan lexical.",
+  "kernels": {
+    "c32_wave1_chain": {
+      "Z32": {
+        "resources": {
+          "group_segment_fixed_size": 4096,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 26,
+          "sgpr_spill_count": 0,
+          "vgpr_count": 134,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 4,
+          "VALU_slots": 820,
+          "zero_mov_slots": 8,
+          "WAIT": 151,
+          "SALU": 101,
+          "VOPD": 138,
+          "VALU": 544,
+          "VMEM": 52,
+          "global_load": 50,
+          "global_load_b64": 35,
+          "WMMA": 56,
+          "fp8_cvt": 68,
+          "DS": 4
+        },
+        "loop_weighted": {
+          "SMEM": 4,
+          "VALU_slots": 4093,
+          "zero_mov_slots": 20,
+          "WAIT": 905,
+          "SALU": 418,
+          "VOPD": 695,
+          "VALU": 2703,
+          "VMEM": 320,
+          "global_load": 312,
+          "global_load_b64": 252,
+          "WMMA": 336,
+          "fp8_cvt": 384,
+          "DS": 16
+        },
+        "loops": [
+          {
+            "header": 108,
+            "trips": 4
+          },
+          {
+            "header": 198,
+            "trips": 8
+          },
+          {
+            "header": 586,
+            "trips": 4
+          }
+        ],
+        "mode": {
+          "segments": 17,
+          "empty_segments": 0,
+          "fp8_inside": 68,
+          "fp8_outside": 0,
+          "half_narrow_inside": 0,
+          "detail": [
+            {
+              "start": 242,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 32,
+              "end": 247
+            },
+            {
+              "start": 307,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 312
+            },
+            {
+              "start": 322,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 327
+            },
+            {
+              "start": 403,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 408
+            },
+            {
+              "start": 430,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 435
+            },
+            {
+              "start": 500,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 505
+            },
+            {
+              "start": 513,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 518
+            },
+            {
+              "start": 536,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 541
+            },
+            {
+              "start": 548,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 553
+            },
+            {
+              "start": 906,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 911
+            },
+            {
+              "start": 918,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 923
+            },
+            {
+              "start": 929,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 934
+            },
+            {
+              "start": 941,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 946
+            },
+            {
+              "start": 952,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 957
+            },
+            {
+              "start": 960,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 965
+            },
+            {
+              "start": 1038,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1043
+            },
+            {
+              "start": 1113,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1118
+            }
+          ],
+          "outside_lines": []
+        }
+      },
+      "Q": {
+        "resources": {
+          "group_segment_fixed_size": 4096,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 26,
+          "sgpr_spill_count": 0,
+          "vgpr_count": 146,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 4,
+          "VALU_slots": 844,
+          "zero_mov_slots": 8,
+          "WAIT": 163,
+          "SALU": 101,
+          "VALU": 558,
+          "VOPD": 143,
+          "VMEM": 52,
+          "global_load": 50,
+          "global_load_b64": 35,
+          "WMMA": 56,
+          "fp8_cvt": 68,
+          "DS": 4
+        },
+        "loop_weighted": {
+          "SMEM": 4,
+          "VALU_slots": 4129,
+          "zero_mov_slots": 20,
+          "WAIT": 896,
+          "SALU": 418,
+          "VALU": 2711,
+          "VOPD": 709,
+          "VMEM": 284,
+          "global_load": 276,
+          "global_load_b64": 216,
+          "WMMA": 336,
+          "fp8_cvt": 384,
+          "DS": 16
+        },
+        "loops": [
+          {
+            "header": 181,
+            "trips": 4
+          },
+          {
+            "header": 271,
+            "trips": 8
+          },
+          {
+            "header": 632,
+            "trips": 4
+          }
+        ],
+        "mode": {
+          "segments": 17,
+          "empty_segments": 0,
+          "fp8_inside": 68,
+          "fp8_outside": 0,
+          "half_narrow_inside": 0,
+          "detail": [
+            {
+              "start": 315,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 32,
+              "end": 320
+            },
+            {
+              "start": 380,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 385
+            },
+            {
+              "start": 395,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 400
+            },
+            {
+              "start": 467,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 472
+            },
+            {
+              "start": 543,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 548
+            },
+            {
+              "start": 553,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 558
+            },
+            {
+              "start": 569,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 574
+            },
+            {
+              "start": 581,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 586
+            },
+            {
+              "start": 593,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 598
+            },
+            {
+              "start": 954,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 959
+            },
+            {
+              "start": 966,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 971
+            },
+            {
+              "start": 977,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 982
+            },
+            {
+              "start": 988,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 993
+            },
+            {
+              "start": 997,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1002
+            },
+            {
+              "start": 1007,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1012
+            },
+            {
+              "start": 1091,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1096
+            },
+            {
+              "start": 1168,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1173
+            }
+          ],
+          "outside_lines": []
+        },
+        "delta_vs_Z32": {
+          "resources": {
+            "sgpr_spill_count": 0,
+            "vgpr_spill_count": 0,
+            "private_segment_fixed_size": 0,
+            "vgpr_count": 12,
+            "group_segment_fixed_size": 0,
+            "sgpr_count": 0
+          },
+          "static": {
+            "VALU_slots": 24,
+            "VALU": 14,
+            "global_load_b64": 0,
+            "global_load": 0,
+            "DS": 0,
+            "VOPD": 5,
+            "SALU": 0,
+            "VMEM": 0,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": 12,
+            "fp8_cvt": 0
+          },
+          "loop_weighted": {
+            "VALU_slots": 36,
+            "VALU": 8,
+            "global_load_b64": -36,
+            "global_load": -36,
+            "DS": 0,
+            "VOPD": 14,
+            "SALU": 0,
+            "VMEM": -36,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": -9,
+            "fp8_cvt": 0
+          }
+        }
+      },
+      "R": {
+        "resources": {
+          "group_segment_fixed_size": 4096,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 26,
+          "sgpr_spill_count": 0,
+          "vgpr_count": 136,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 4,
+          "VALU_slots": 820,
+          "zero_mov_slots": 8,
+          "WAIT": 148,
+          "SALU": 101,
+          "VOPD": 154,
+          "VALU": 512,
+          "VMEM": 52,
+          "global_load": 50,
+          "global_load_b64": 35,
+          "WMMA": 56,
+          "fp8_cvt": 68,
+          "DS": 4
+        },
+        "loop_weighted": {
+          "SMEM": 4,
+          "VALU_slots": 4093,
+          "zero_mov_slots": 20,
+          "WAIT": 881,
+          "SALU": 418,
+          "VOPD": 762,
+          "VALU": 2569,
+          "VMEM": 308,
+          "global_load": 300,
+          "global_load_b64": 240,
+          "WMMA": 336,
+          "fp8_cvt": 384,
+          "DS": 16
+        },
+        "loops": [
+          {
+            "header": 109,
+            "trips": 4
+          },
+          {
+            "header": 199,
+            "trips": 8
+          },
+          {
+            "header": 603,
+            "trips": 4
+          }
+        ],
+        "mode": {
+          "segments": 17,
+          "empty_segments": 0,
+          "fp8_inside": 68,
+          "fp8_outside": 0,
+          "half_narrow_inside": 0,
+          "detail": [
+            {
+              "start": 243,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 32,
+              "end": 248
+            },
+            {
+              "start": 308,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 313
+            },
+            {
+              "start": 323,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 328
+            },
+            {
+              "start": 404,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 409
+            },
+            {
+              "start": 431,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 436
+            },
+            {
+              "start": 501,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 506
+            },
+            {
+              "start": 514,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 519
+            },
+            {
+              "start": 537,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 542
+            },
+            {
+              "start": 549,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 554
+            },
+            {
+              "start": 902,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 907
+            },
+            {
+              "start": 915,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 920
+            },
+            {
+              "start": 927,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 932
+            },
+            {
+              "start": 941,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 946
+            },
+            {
+              "start": 950,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 955
+            },
+            {
+              "start": 959,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 964
+            },
+            {
+              "start": 1032,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1037
+            },
+            {
+              "start": 1102,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1107
+            }
+          ],
+          "outside_lines": []
+        },
+        "delta_vs_Z32": {
+          "resources": {
+            "sgpr_spill_count": 0,
+            "vgpr_spill_count": 0,
+            "private_segment_fixed_size": 0,
+            "vgpr_count": 2,
+            "group_segment_fixed_size": 0,
+            "sgpr_count": 0
+          },
+          "static": {
+            "VALU_slots": 0,
+            "VALU": -32,
+            "global_load_b64": 0,
+            "global_load": 0,
+            "DS": 0,
+            "VOPD": 16,
+            "SALU": 0,
+            "VMEM": 0,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": -3,
+            "fp8_cvt": 0
+          },
+          "loop_weighted": {
+            "VALU_slots": 0,
+            "VALU": -134,
+            "global_load_b64": -12,
+            "global_load": -12,
+            "DS": 0,
+            "VOPD": 67,
+            "SALU": 0,
+            "VMEM": -12,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": -24,
+            "fp8_cvt": 0
+          }
+        }
+      },
+      "C": {
+        "resources": {
+          "group_segment_fixed_size": 4096,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 26,
+          "sgpr_spill_count": 0,
+          "vgpr_count": 146,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 4,
+          "VALU_slots": 844,
+          "zero_mov_slots": 8,
+          "WAIT": 158,
+          "SALU": 101,
+          "VALU": 528,
+          "VOPD": 158,
+          "VMEM": 52,
+          "global_load": 50,
+          "global_load_b64": 35,
+          "WMMA": 56,
+          "fp8_cvt": 68,
+          "DS": 4
+        },
+        "loop_weighted": {
+          "SMEM": 4,
+          "VALU_slots": 4129,
+          "zero_mov_slots": 20,
+          "WAIT": 864,
+          "SALU": 418,
+          "VALU": 2591,
+          "VOPD": 769,
+          "VMEM": 272,
+          "global_load": 264,
+          "global_load_b64": 204,
+          "WMMA": 336,
+          "fp8_cvt": 384,
+          "DS": 16
+        },
+        "loops": [
+          {
+            "header": 181,
+            "trips": 4
+          },
+          {
+            "header": 271,
+            "trips": 8
+          },
+          {
+            "header": 648,
+            "trips": 4
+          }
+        ],
+        "mode": {
+          "segments": 17,
+          "empty_segments": 0,
+          "fp8_inside": 68,
+          "fp8_outside": 0,
+          "half_narrow_inside": 0,
+          "detail": [
+            {
+              "start": 315,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 32,
+              "end": 320
+            },
+            {
+              "start": 380,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 385
+            },
+            {
+              "start": 395,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 400
+            },
+            {
+              "start": 467,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 472
+            },
+            {
+              "start": 543,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 548
+            },
+            {
+              "start": 553,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 558
+            },
+            {
+              "start": 569,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 574
+            },
+            {
+              "start": 581,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 586
+            },
+            {
+              "start": 593,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 598
+            },
+            {
+              "start": 957,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 962
+            },
+            {
+              "start": 968,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 973
+            },
+            {
+              "start": 981,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 986
+            },
+            {
+              "start": 993,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 998
+            },
+            {
+              "start": 1002,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1007
+            },
+            {
+              "start": 1011,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1016
+            },
+            {
+              "start": 1086,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1091
+            },
+            {
+              "start": 1156,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1161
+            }
+          ],
+          "outside_lines": []
+        },
+        "delta_vs_Z32": {
+          "resources": {
+            "sgpr_spill_count": 0,
+            "vgpr_spill_count": 0,
+            "private_segment_fixed_size": 0,
+            "vgpr_count": 12,
+            "group_segment_fixed_size": 0,
+            "sgpr_count": 0
+          },
+          "static": {
+            "VALU_slots": 24,
+            "VALU": -16,
+            "global_load_b64": 0,
+            "global_load": 0,
+            "DS": 0,
+            "VOPD": 20,
+            "SALU": 0,
+            "VMEM": 0,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": 7,
+            "fp8_cvt": 0
+          },
+          "loop_weighted": {
+            "VALU_slots": 36,
+            "VALU": -112,
+            "global_load_b64": -48,
+            "global_load": -48,
+            "DS": 0,
+            "VOPD": 74,
+            "SALU": 0,
+            "VMEM": -48,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": -41,
+            "fp8_cvt": 0
+          }
+        }
+      },
+      "waves_old_topology": {
+        "900": 24442,
+        "1080": 35090
+      }
+    },
+    "c32_wave1_finish": {
+      "Z32": {
+        "resources": {
+          "group_segment_fixed_size": 4096,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 30,
+          "sgpr_spill_count": 0,
+          "vgpr_count": 131,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 5,
+          "VALU_slots": 1702,
+          "zero_mov_slots": 17,
+          "WAIT": 431,
+          "SALU": 258,
+          "VOPD": 150,
+          "VALU": 1402,
+          "VMEM": 85,
+          "global_load": 48,
+          "global_load_b64": 34,
+          "WMMA": 56,
+          "fp8_cvt": 98,
+          "DS": 140
+        },
+        "loop_weighted": {
+          "SMEM": 5,
+          "VALU_slots": 4822,
+          "zero_mov_slots": 29,
+          "WAIT": 1167,
+          "SALU": 563,
+          "VOPD": 668,
+          "VALU": 3486,
+          "VMEM": 341,
+          "global_load": 304,
+          "global_load_b64": 248,
+          "WMMA": 336,
+          "fp8_cvt": 390,
+          "DS": 158
+        },
+        "loops": [
+          {
+            "header": 112,
+            "trips": 4
+          },
+          {
+            "header": 202,
+            "trips": 8
+          },
+          {
+            "header": 583,
+            "trips": 4
+          },
+          {
+            "header": 1108,
+            "trips": 1
+          },
+          {
+            "header": 2129,
+            "trips": 1
+          }
+        ],
+        "mode": {
+          "segments": 15,
+          "empty_segments": 0,
+          "fp8_inside": 60,
+          "fp8_outside": 38,
+          "half_narrow_inside": 0,
+          "detail": [
+            {
+              "start": 246,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 32,
+              "end": 251
+            },
+            {
+              "start": 311,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 316
+            },
+            {
+              "start": 326,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 331
+            },
+            {
+              "start": 407,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 412
+            },
+            {
+              "start": 434,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 439
+            },
+            {
+              "start": 504,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 509
+            },
+            {
+              "start": 517,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 522
+            },
+            {
+              "start": 540,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 545
+            },
+            {
+              "start": 552,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 557
+            },
+            {
+              "start": 906,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 911
+            },
+            {
+              "start": 917,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 922
+            },
+            {
+              "start": 928,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 933
+            },
+            {
+              "start": 940,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 945
+            },
+            {
+              "start": 950,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 955
+            },
+            {
+              "start": 959,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 964
+            }
+          ],
+          "outside_lines": [
+            1187,
+            1188,
+            1189,
+            1190,
+            1322,
+            1366,
+            1399,
+            1469,
+            1526,
+            1567,
+            1617,
+            1669,
+            1737,
+            1801,
+            1833,
+            1923,
+            1948,
+            1995,
+            2072,
+            2088,
+            2174,
+            2224,
+            2340,
+            2384,
+            2417,
+            2487,
+            2544,
+            2585,
+            2635,
+            2687,
+            2755,
+            2819,
+            2851,
+            2941,
+            2966,
+            3013,
+            3090,
+            3106
+          ]
+        }
+      },
+      "Q": {
+        "resources": {
+          "group_segment_fixed_size": 4096,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 31,
+          "sgpr_spill_count": 0,
+          "vgpr_count": 147,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 5,
+          "VALU_slots": 1702,
+          "zero_mov_slots": 17,
+          "WAIT": 437,
+          "SALU": 258,
+          "VALU": 1390,
+          "VOPD": 156,
+          "VMEM": 85,
+          "global_load": 48,
+          "global_load_b64": 34,
+          "WMMA": 56,
+          "fp8_cvt": 98,
+          "DS": 140
+        },
+        "loop_weighted": {
+          "SMEM": 5,
+          "VALU_slots": 4834,
+          "zero_mov_slots": 29,
+          "WAIT": 1137,
+          "SALU": 563,
+          "VALU": 3426,
+          "VOPD": 704,
+          "VMEM": 305,
+          "global_load": 268,
+          "global_load_b64": 212,
+          "WMMA": 336,
+          "fp8_cvt": 390,
+          "DS": 158
+        },
+        "loops": [
+          {
+            "header": 166,
+            "trips": 4
+          },
+          {
+            "header": 255,
+            "trips": 8
+          },
+          {
+            "header": 609,
+            "trips": 4
+          },
+          {
+            "header": 1132,
+            "trips": 1
+          },
+          {
+            "header": 2153,
+            "trips": 1
+          }
+        ],
+        "mode": {
+          "segments": 15,
+          "empty_segments": 0,
+          "fp8_inside": 60,
+          "fp8_outside": 38,
+          "half_narrow_inside": 0,
+          "detail": [
+            {
+              "start": 299,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 32,
+              "end": 304
+            },
+            {
+              "start": 364,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 369
+            },
+            {
+              "start": 379,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 384
+            },
+            {
+              "start": 451,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 456
+            },
+            {
+              "start": 527,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 532
+            },
+            {
+              "start": 537,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 542
+            },
+            {
+              "start": 553,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 558
+            },
+            {
+              "start": 565,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 570
+            },
+            {
+              "start": 577,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 582
+            },
+            {
+              "start": 931,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 936
+            },
+            {
+              "start": 943,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 948
+            },
+            {
+              "start": 954,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 959
+            },
+            {
+              "start": 967,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 972
+            },
+            {
+              "start": 977,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 982
+            },
+            {
+              "start": 986,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 991
+            }
+          ],
+          "outside_lines": [
+            1211,
+            1212,
+            1213,
+            1214,
+            1346,
+            1390,
+            1423,
+            1493,
+            1550,
+            1591,
+            1641,
+            1693,
+            1761,
+            1825,
+            1857,
+            1947,
+            1972,
+            2019,
+            2096,
+            2112,
+            2198,
+            2248,
+            2364,
+            2408,
+            2441,
+            2511,
+            2568,
+            2609,
+            2659,
+            2711,
+            2779,
+            2843,
+            2875,
+            2965,
+            2990,
+            3037,
+            3114,
+            3130
+          ]
+        },
+        "delta_vs_Z32": {
+          "resources": {
+            "sgpr_spill_count": 0,
+            "vgpr_spill_count": 0,
+            "private_segment_fixed_size": 0,
+            "vgpr_count": 16,
+            "group_segment_fixed_size": 0,
+            "sgpr_count": 1
+          },
+          "static": {
+            "VALU_slots": 0,
+            "VALU": -12,
+            "global_load_b64": 0,
+            "global_load": 0,
+            "DS": 0,
+            "VOPD": 6,
+            "SALU": 0,
+            "VMEM": 0,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": 6,
+            "fp8_cvt": 0
+          },
+          "loop_weighted": {
+            "VALU_slots": 12,
+            "VALU": -60,
+            "global_load_b64": -36,
+            "global_load": -36,
+            "DS": 0,
+            "VOPD": 36,
+            "SALU": 0,
+            "VMEM": -36,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": -30,
+            "fp8_cvt": 0
+          }
+        }
+      },
+      "R": {
+        "resources": {
+          "group_segment_fixed_size": 4096,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 30,
+          "sgpr_spill_count": 0,
+          "vgpr_count": 135,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 5,
+          "VALU_slots": 1702,
+          "zero_mov_slots": 17,
+          "WAIT": 433,
+          "SALU": 258,
+          "VALU": 1400,
+          "VOPD": 151,
+          "VMEM": 85,
+          "global_load": 48,
+          "global_load_b64": 34,
+          "WMMA": 56,
+          "fp8_cvt": 98,
+          "DS": 140
+        },
+        "loop_weighted": {
+          "SMEM": 5,
+          "VALU_slots": 4822,
+          "zero_mov_slots": 29,
+          "WAIT": 1166,
+          "SALU": 563,
+          "VALU": 3478,
+          "VOPD": 672,
+          "VMEM": 329,
+          "global_load": 292,
+          "global_load_b64": 236,
+          "WMMA": 336,
+          "fp8_cvt": 390,
+          "DS": 158
+        },
+        "loops": [
+          {
+            "header": 112,
+            "trips": 4
+          },
+          {
+            "header": 202,
+            "trips": 8
+          },
+          {
+            "header": 598,
+            "trips": 4
+          },
+          {
+            "header": 1117,
+            "trips": 1
+          },
+          {
+            "header": 2138,
+            "trips": 1
+          }
+        ],
+        "mode": {
+          "segments": 15,
+          "empty_segments": 0,
+          "fp8_inside": 60,
+          "fp8_outside": 38,
+          "half_narrow_inside": 0,
+          "detail": [
+            {
+              "start": 246,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 32,
+              "end": 251
+            },
+            {
+              "start": 311,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 316
+            },
+            {
+              "start": 326,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 331
+            },
+            {
+              "start": 407,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 412
+            },
+            {
+              "start": 434,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 439
+            },
+            {
+              "start": 504,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 509
+            },
+            {
+              "start": 517,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 522
+            },
+            {
+              "start": 540,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 545
+            },
+            {
+              "start": 552,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 557
+            },
+            {
+              "start": 919,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 924
+            },
+            {
+              "start": 933,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 938
+            },
+            {
+              "start": 945,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 950
+            },
+            {
+              "start": 957,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 962
+            },
+            {
+              "start": 966,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 971
+            },
+            {
+              "start": 975,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 980
+            }
+          ],
+          "outside_lines": [
+            1196,
+            1197,
+            1198,
+            1199,
+            1331,
+            1375,
+            1408,
+            1478,
+            1535,
+            1576,
+            1626,
+            1678,
+            1746,
+            1810,
+            1842,
+            1932,
+            1957,
+            2004,
+            2081,
+            2097,
+            2183,
+            2233,
+            2349,
+            2393,
+            2426,
+            2496,
+            2553,
+            2594,
+            2644,
+            2696,
+            2764,
+            2828,
+            2860,
+            2950,
+            2975,
+            3022,
+            3099,
+            3115
+          ]
+        },
+        "delta_vs_Z32": {
+          "resources": {
+            "sgpr_spill_count": 0,
+            "vgpr_spill_count": 0,
+            "private_segment_fixed_size": 0,
+            "vgpr_count": 4,
+            "group_segment_fixed_size": 0,
+            "sgpr_count": 0
+          },
+          "static": {
+            "VALU_slots": 0,
+            "VALU": -2,
+            "global_load_b64": 0,
+            "global_load": 0,
+            "DS": 0,
+            "VOPD": 1,
+            "SALU": 0,
+            "VMEM": 0,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": 2,
+            "fp8_cvt": 0
+          },
+          "loop_weighted": {
+            "VALU_slots": 0,
+            "VALU": -8,
+            "global_load_b64": -12,
+            "global_load": -12,
+            "DS": 0,
+            "VOPD": 4,
+            "SALU": 0,
+            "VMEM": -12,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": -1,
+            "fp8_cvt": 0
+          }
+        }
+      },
+      "C": {
+        "resources": {
+          "group_segment_fixed_size": 4096,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 31,
+          "sgpr_spill_count": 0,
+          "vgpr_count": 147,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 5,
+          "VALU_slots": 1702,
+          "zero_mov_slots": 17,
+          "WAIT": 437,
+          "SALU": 258,
+          "VALU": 1378,
+          "VOPD": 162,
+          "VMEM": 85,
+          "global_load": 48,
+          "global_load_b64": 34,
+          "WMMA": 56,
+          "fp8_cvt": 98,
+          "DS": 140
+        },
+        "loop_weighted": {
+          "SMEM": 5,
+          "VALU_slots": 4834,
+          "zero_mov_slots": 29,
+          "WAIT": 1128,
+          "SALU": 563,
+          "VALU": 3378,
+          "VOPD": 728,
+          "VMEM": 293,
+          "global_load": 256,
+          "global_load_b64": 200,
+          "WMMA": 336,
+          "fp8_cvt": 390,
+          "DS": 158
+        },
+        "loops": [
+          {
+            "header": 166,
+            "trips": 4
+          },
+          {
+            "header": 255,
+            "trips": 8
+          },
+          {
+            "header": 624,
+            "trips": 4
+          },
+          {
+            "header": 1134,
+            "trips": 1
+          },
+          {
+            "header": 2155,
+            "trips": 1
+          }
+        ],
+        "mode": {
+          "segments": 15,
+          "empty_segments": 0,
+          "fp8_inside": 60,
+          "fp8_outside": 38,
+          "half_narrow_inside": 0,
+          "detail": [
+            {
+              "start": 299,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 32,
+              "end": 304
+            },
+            {
+              "start": 364,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 369
+            },
+            {
+              "start": 379,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 384
+            },
+            {
+              "start": 451,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 456
+            },
+            {
+              "start": 527,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 532
+            },
+            {
+              "start": 537,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 542
+            },
+            {
+              "start": 553,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 558
+            },
+            {
+              "start": 565,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 570
+            },
+            {
+              "start": 577,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 582
+            },
+            {
+              "start": 943,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 948
+            },
+            {
+              "start": 954,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 959
+            },
+            {
+              "start": 966,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 971
+            },
+            {
+              "start": 977,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 982
+            },
+            {
+              "start": 987,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 992
+            },
+            {
+              "start": 996,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1001
+            }
+          ],
+          "outside_lines": [
+            1213,
+            1214,
+            1215,
+            1216,
+            1348,
+            1392,
+            1425,
+            1495,
+            1552,
+            1593,
+            1643,
+            1695,
+            1763,
+            1827,
+            1859,
+            1949,
+            1974,
+            2021,
+            2098,
+            2114,
+            2200,
+            2250,
+            2366,
+            2410,
+            2443,
+            2513,
+            2570,
+            2611,
+            2661,
+            2713,
+            2781,
+            2845,
+            2877,
+            2967,
+            2992,
+            3039,
+            3116,
+            3132
+          ]
+        },
+        "delta_vs_Z32": {
+          "resources": {
+            "sgpr_spill_count": 0,
+            "vgpr_spill_count": 0,
+            "private_segment_fixed_size": 0,
+            "vgpr_count": 16,
+            "group_segment_fixed_size": 0,
+            "sgpr_count": 1
+          },
+          "static": {
+            "VALU_slots": 0,
+            "VALU": -24,
+            "global_load_b64": 0,
+            "global_load": 0,
+            "DS": 0,
+            "VOPD": 12,
+            "SALU": 0,
+            "VMEM": 0,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": 6,
+            "fp8_cvt": 0
+          },
+          "loop_weighted": {
+            "VALU_slots": 12,
+            "VALU": -108,
+            "global_load_b64": -48,
+            "global_load": -48,
+            "DS": 0,
+            "VOPD": 60,
+            "SALU": 0,
+            "VMEM": -48,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": -39,
+            "fp8_cvt": 0
+          }
+        }
+      },
+      "waves_old_topology": {
+        "900": 6100,
+        "1080": 8760
+      }
+    },
+    "c32_wave1_finish_dcrop": {
+      "Z32": {
+        "resources": {
+          "group_segment_fixed_size": 4096,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 30,
+          "sgpr_spill_count": 0,
+          "vgpr_count": 131,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 5,
+          "VALU_slots": 1319,
+          "zero_mov_slots": 16,
+          "WAIT": 366,
+          "SALU": 269,
+          "VOPD": 147,
+          "VALU": 1025,
+          "VMEM": 71,
+          "global_load": 48,
+          "global_load_b64": 34,
+          "WMMA": 56,
+          "fp8_cvt": 83,
+          "DS": 80
+        },
+        "loop_weighted": {
+          "SMEM": 5,
+          "VALU_slots": 4439,
+          "zero_mov_slots": 28,
+          "WAIT": 1102,
+          "SALU": 574,
+          "VOPD": 665,
+          "VALU": 3109,
+          "VMEM": 327,
+          "global_load": 304,
+          "global_load_b64": 248,
+          "WMMA": 336,
+          "fp8_cvt": 375,
+          "DS": 98
+        },
+        "loops": [
+          {
+            "header": 112,
+            "trips": 4
+          },
+          {
+            "header": 202,
+            "trips": 8
+          },
+          {
+            "header": 583,
+            "trips": 4
+          },
+          {
+            "header": 1116,
+            "trips": 1
+          },
+          {
+            "header": 2161,
+            "trips": 1
+          },
+          {
+            "header": 2288,
+            "trips": 1
+          }
+        ],
+        "mode": {
+          "segments": 15,
+          "empty_segments": 0,
+          "fp8_inside": 60,
+          "fp8_outside": 23,
+          "half_narrow_inside": 0,
+          "detail": [
+            {
+              "start": 246,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 32,
+              "end": 251
+            },
+            {
+              "start": 311,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 316
+            },
+            {
+              "start": 326,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 331
+            },
+            {
+              "start": 407,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 412
+            },
+            {
+              "start": 434,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 439
+            },
+            {
+              "start": 504,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 509
+            },
+            {
+              "start": 517,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 522
+            },
+            {
+              "start": 540,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 545
+            },
+            {
+              "start": 552,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 557
+            },
+            {
+              "start": 906,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 911
+            },
+            {
+              "start": 917,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 922
+            },
+            {
+              "start": 928,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 933
+            },
+            {
+              "start": 940,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 945
+            },
+            {
+              "start": 950,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 955
+            },
+            {
+              "start": 959,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 964
+            }
+          ],
+          "outside_lines": [
+            1195,
+            1196,
+            1197,
+            1198,
+            1340,
+            1355,
+            1438,
+            1478,
+            1535,
+            1589,
+            1653,
+            1685,
+            1769,
+            1829,
+            1865,
+            1935,
+            1981,
+            2033,
+            2099,
+            2118,
+            2205,
+            2256,
+            2375
+          ]
+        }
+      },
+      "Q": {
+        "resources": {
+          "group_segment_fixed_size": 4096,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 30,
+          "sgpr_spill_count": 0,
+          "vgpr_count": 147,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 5,
+          "VALU_slots": 1319,
+          "zero_mov_slots": 16,
+          "WAIT": 372,
+          "SALU": 269,
+          "VALU": 1013,
+          "VOPD": 153,
+          "VMEM": 71,
+          "global_load": 48,
+          "global_load_b64": 34,
+          "WMMA": 56,
+          "fp8_cvt": 83,
+          "DS": 80
+        },
+        "loop_weighted": {
+          "SMEM": 5,
+          "VALU_slots": 4451,
+          "zero_mov_slots": 28,
+          "WAIT": 1072,
+          "SALU": 574,
+          "VALU": 3049,
+          "VOPD": 701,
+          "VMEM": 291,
+          "global_load": 268,
+          "global_load_b64": 212,
+          "WMMA": 336,
+          "fp8_cvt": 375,
+          "DS": 98
+        },
+        "loops": [
+          {
+            "header": 166,
+            "trips": 4
+          },
+          {
+            "header": 255,
+            "trips": 8
+          },
+          {
+            "header": 609,
+            "trips": 4
+          },
+          {
+            "header": 1140,
+            "trips": 1
+          },
+          {
+            "header": 2185,
+            "trips": 1
+          },
+          {
+            "header": 2312,
+            "trips": 1
+          }
+        ],
+        "mode": {
+          "segments": 15,
+          "empty_segments": 0,
+          "fp8_inside": 60,
+          "fp8_outside": 23,
+          "half_narrow_inside": 0,
+          "detail": [
+            {
+              "start": 299,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 32,
+              "end": 304
+            },
+            {
+              "start": 364,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 369
+            },
+            {
+              "start": 379,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 384
+            },
+            {
+              "start": 451,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 456
+            },
+            {
+              "start": 527,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 532
+            },
+            {
+              "start": 537,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 542
+            },
+            {
+              "start": 553,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 558
+            },
+            {
+              "start": 565,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 570
+            },
+            {
+              "start": 577,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 582
+            },
+            {
+              "start": 931,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 936
+            },
+            {
+              "start": 943,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 948
+            },
+            {
+              "start": 954,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 959
+            },
+            {
+              "start": 967,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 972
+            },
+            {
+              "start": 977,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 982
+            },
+            {
+              "start": 986,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 991
+            }
+          ],
+          "outside_lines": [
+            1219,
+            1220,
+            1221,
+            1222,
+            1364,
+            1379,
+            1462,
+            1502,
+            1559,
+            1613,
+            1677,
+            1709,
+            1793,
+            1853,
+            1889,
+            1959,
+            2005,
+            2057,
+            2123,
+            2142,
+            2229,
+            2280,
+            2399
+          ]
+        },
+        "delta_vs_Z32": {
+          "resources": {
+            "sgpr_spill_count": 0,
+            "vgpr_spill_count": 0,
+            "private_segment_fixed_size": 0,
+            "vgpr_count": 16,
+            "group_segment_fixed_size": 0,
+            "sgpr_count": 0
+          },
+          "static": {
+            "VALU_slots": 0,
+            "VALU": -12,
+            "global_load_b64": 0,
+            "global_load": 0,
+            "DS": 0,
+            "VOPD": 6,
+            "SALU": 0,
+            "VMEM": 0,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": 6,
+            "fp8_cvt": 0
+          },
+          "loop_weighted": {
+            "VALU_slots": 12,
+            "VALU": -60,
+            "global_load_b64": -36,
+            "global_load": -36,
+            "DS": 0,
+            "VOPD": 36,
+            "SALU": 0,
+            "VMEM": -36,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": -30,
+            "fp8_cvt": 0
+          }
+        }
+      },
+      "R": {
+        "resources": {
+          "group_segment_fixed_size": 4096,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 30,
+          "sgpr_spill_count": 0,
+          "vgpr_count": 135,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 5,
+          "VALU_slots": 1319,
+          "zero_mov_slots": 16,
+          "WAIT": 368,
+          "SALU": 269,
+          "VALU": 1023,
+          "VOPD": 148,
+          "VMEM": 71,
+          "global_load": 48,
+          "global_load_b64": 34,
+          "WMMA": 56,
+          "fp8_cvt": 83,
+          "DS": 80
+        },
+        "loop_weighted": {
+          "SMEM": 5,
+          "VALU_slots": 4439,
+          "zero_mov_slots": 28,
+          "WAIT": 1101,
+          "SALU": 574,
+          "VALU": 3101,
+          "VOPD": 669,
+          "VMEM": 315,
+          "global_load": 292,
+          "global_load_b64": 236,
+          "WMMA": 336,
+          "fp8_cvt": 375,
+          "DS": 98
+        },
+        "loops": [
+          {
+            "header": 112,
+            "trips": 4
+          },
+          {
+            "header": 202,
+            "trips": 8
+          },
+          {
+            "header": 598,
+            "trips": 4
+          },
+          {
+            "header": 1125,
+            "trips": 1
+          },
+          {
+            "header": 2170,
+            "trips": 1
+          },
+          {
+            "header": 2297,
+            "trips": 1
+          }
+        ],
+        "mode": {
+          "segments": 15,
+          "empty_segments": 0,
+          "fp8_inside": 60,
+          "fp8_outside": 23,
+          "half_narrow_inside": 0,
+          "detail": [
+            {
+              "start": 246,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 32,
+              "end": 251
+            },
+            {
+              "start": 311,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 316
+            },
+            {
+              "start": 326,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 331
+            },
+            {
+              "start": 407,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 412
+            },
+            {
+              "start": 434,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 439
+            },
+            {
+              "start": 504,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 509
+            },
+            {
+              "start": 517,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 522
+            },
+            {
+              "start": 540,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 545
+            },
+            {
+              "start": 552,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 557
+            },
+            {
+              "start": 919,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 924
+            },
+            {
+              "start": 933,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 938
+            },
+            {
+              "start": 945,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 950
+            },
+            {
+              "start": 957,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 962
+            },
+            {
+              "start": 966,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 971
+            },
+            {
+              "start": 975,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 980
+            }
+          ],
+          "outside_lines": [
+            1204,
+            1205,
+            1206,
+            1207,
+            1349,
+            1364,
+            1447,
+            1487,
+            1544,
+            1598,
+            1662,
+            1694,
+            1778,
+            1838,
+            1874,
+            1944,
+            1990,
+            2042,
+            2108,
+            2127,
+            2214,
+            2265,
+            2384
+          ]
+        },
+        "delta_vs_Z32": {
+          "resources": {
+            "sgpr_spill_count": 0,
+            "vgpr_spill_count": 0,
+            "private_segment_fixed_size": 0,
+            "vgpr_count": 4,
+            "group_segment_fixed_size": 0,
+            "sgpr_count": 0
+          },
+          "static": {
+            "VALU_slots": 0,
+            "VALU": -2,
+            "global_load_b64": 0,
+            "global_load": 0,
+            "DS": 0,
+            "VOPD": 1,
+            "SALU": 0,
+            "VMEM": 0,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": 2,
+            "fp8_cvt": 0
+          },
+          "loop_weighted": {
+            "VALU_slots": 0,
+            "VALU": -8,
+            "global_load_b64": -12,
+            "global_load": -12,
+            "DS": 0,
+            "VOPD": 4,
+            "SALU": 0,
+            "VMEM": -12,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": -1,
+            "fp8_cvt": 0
+          }
+        }
+      },
+      "C": {
+        "resources": {
+          "group_segment_fixed_size": 4096,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 30,
+          "sgpr_spill_count": 0,
+          "vgpr_count": 147,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 5,
+          "VALU_slots": 1319,
+          "zero_mov_slots": 16,
+          "WAIT": 372,
+          "SALU": 269,
+          "VALU": 1001,
+          "VOPD": 159,
+          "VMEM": 71,
+          "global_load": 48,
+          "global_load_b64": 34,
+          "WMMA": 56,
+          "fp8_cvt": 83,
+          "DS": 80
+        },
+        "loop_weighted": {
+          "SMEM": 5,
+          "VALU_slots": 4451,
+          "zero_mov_slots": 28,
+          "WAIT": 1063,
+          "SALU": 574,
+          "VALU": 3001,
+          "VOPD": 725,
+          "VMEM": 279,
+          "global_load": 256,
+          "global_load_b64": 200,
+          "WMMA": 336,
+          "fp8_cvt": 375,
+          "DS": 98
+        },
+        "loops": [
+          {
+            "header": 166,
+            "trips": 4
+          },
+          {
+            "header": 255,
+            "trips": 8
+          },
+          {
+            "header": 624,
+            "trips": 4
+          },
+          {
+            "header": 1142,
+            "trips": 1
+          },
+          {
+            "header": 2187,
+            "trips": 1
+          },
+          {
+            "header": 2314,
+            "trips": 1
+          }
+        ],
+        "mode": {
+          "segments": 15,
+          "empty_segments": 0,
+          "fp8_inside": 60,
+          "fp8_outside": 23,
+          "half_narrow_inside": 0,
+          "detail": [
+            {
+              "start": 299,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 32,
+              "end": 304
+            },
+            {
+              "start": 364,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 369
+            },
+            {
+              "start": 379,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 384
+            },
+            {
+              "start": 451,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 456
+            },
+            {
+              "start": 527,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 532
+            },
+            {
+              "start": 537,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 542
+            },
+            {
+              "start": 553,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 558
+            },
+            {
+              "start": 565,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 570
+            },
+            {
+              "start": 577,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 582
+            },
+            {
+              "start": 943,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 948
+            },
+            {
+              "start": 954,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 959
+            },
+            {
+              "start": 966,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 971
+            },
+            {
+              "start": 977,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 982
+            },
+            {
+              "start": 987,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 992
+            },
+            {
+              "start": 996,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1001
+            }
+          ],
+          "outside_lines": [
+            1221,
+            1222,
+            1223,
+            1224,
+            1366,
+            1381,
+            1464,
+            1504,
+            1561,
+            1615,
+            1679,
+            1711,
+            1795,
+            1855,
+            1891,
+            1961,
+            2007,
+            2059,
+            2125,
+            2144,
+            2231,
+            2282,
+            2401
+          ]
+        },
+        "delta_vs_Z32": {
+          "resources": {
+            "sgpr_spill_count": 0,
+            "vgpr_spill_count": 0,
+            "private_segment_fixed_size": 0,
+            "vgpr_count": 16,
+            "group_segment_fixed_size": 0,
+            "sgpr_count": 0
+          },
+          "static": {
+            "VALU_slots": 0,
+            "VALU": -24,
+            "global_load_b64": 0,
+            "global_load": 0,
+            "DS": 0,
+            "VOPD": 12,
+            "SALU": 0,
+            "VMEM": 0,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": 6,
+            "fp8_cvt": 0
+          },
+          "loop_weighted": {
+            "VALU_slots": 12,
+            "VALU": -108,
+            "global_load_b64": -48,
+            "global_load": -48,
+            "DS": 0,
+            "VOPD": 60,
+            "SALU": 0,
+            "VMEM": -48,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": -39,
+            "fp8_cvt": 0
+          }
+        }
+      },
+      "waves_old_topology": {
+        "900": 6100,
+        "1080": 8760
+      }
+    },
+    "c32_wave1_mapped": {
+      "Z32": {
+        "resources": {
+          "group_segment_fixed_size": 4096,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 25,
+          "sgpr_spill_count": 0,
+          "vgpr_count": 133,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 3,
+          "VALU_slots": 901,
+          "zero_mov_slots": 17,
+          "WAIT": 147,
+          "SALU": 106,
+          "VALU": 611,
+          "VOPD": 145,
+          "VMEM": 46,
+          "global_load": 44,
+          "fp8_cvt": 76,
+          "global_load_b64": 21,
+          "WMMA": 44,
+          "DS": 4
+        },
+        "loop_weighted": {
+          "SMEM": 3,
+          "VALU_slots": 4438,
+          "zero_mov_slots": 65,
+          "WAIT": 877,
+          "SALU": 435,
+          "VALU": 3074,
+          "VOPD": 682,
+          "VMEM": 296,
+          "global_load": 288,
+          "fp8_cvt": 416,
+          "global_load_b64": 196,
+          "WMMA": 288,
+          "DS": 16
+        },
+        "loops": [
+          {
+            "header": 111,
+            "trips": 4
+          },
+          {
+            "header": 248,
+            "trips": 8
+          },
+          {
+            "header": 643,
+            "trips": 4
+          }
+        ],
+        "mode": {
+          "segments": 19,
+          "empty_segments": 0,
+          "fp8_inside": 76,
+          "fp8_outside": 0,
+          "half_narrow_inside": 0,
+          "detail": [
+            {
+              "start": 158,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 163
+            },
+            {
+              "start": 242,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 247
+            },
+            {
+              "start": 294,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 32,
+              "end": 299
+            },
+            {
+              "start": 356,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 361
+            },
+            {
+              "start": 373,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 378
+            },
+            {
+              "start": 456,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 461
+            },
+            {
+              "start": 481,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 486
+            },
+            {
+              "start": 559,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 564
+            },
+            {
+              "start": 571,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 576
+            },
+            {
+              "start": 594,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 599
+            },
+            {
+              "start": 606,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 611
+            },
+            {
+              "start": 969,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 974
+            },
+            {
+              "start": 981,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 986
+            },
+            {
+              "start": 992,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 997
+            },
+            {
+              "start": 1004,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1009
+            },
+            {
+              "start": 1013,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1018
+            },
+            {
+              "start": 1023,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1028
+            },
+            {
+              "start": 1099,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1104
+            },
+            {
+              "start": 1173,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1178
+            }
+          ],
+          "outside_lines": []
+        }
+      },
+      "Q": {
+        "resources": {
+          "group_segment_fixed_size": 4096,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 25,
+          "sgpr_spill_count": 0,
+          "vgpr_count": 146,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 3,
+          "VALU_slots": 925,
+          "zero_mov_slots": 17,
+          "WAIT": 150,
+          "SALU": 106,
+          "VALU": 615,
+          "VOPD": 155,
+          "VMEM": 46,
+          "global_load": 44,
+          "global_load_b64": 21,
+          "fp8_cvt": 76,
+          "WMMA": 44,
+          "DS": 4
+        },
+        "loop_weighted": {
+          "SMEM": 3,
+          "VALU_slots": 4462,
+          "zero_mov_slots": 65,
+          "WAIT": 841,
+          "SALU": 435,
+          "VALU": 3054,
+          "VOPD": 704,
+          "VMEM": 260,
+          "global_load": 252,
+          "global_load_b64": 160,
+          "fp8_cvt": 416,
+          "WMMA": 288,
+          "DS": 16
+        },
+        "loops": [
+          {
+            "header": 181,
+            "trips": 4
+          },
+          {
+            "header": 319,
+            "trips": 8
+          },
+          {
+            "header": 681,
+            "trips": 4
+          }
+        ],
+        "mode": {
+          "segments": 19,
+          "empty_segments": 0,
+          "fp8_inside": 76,
+          "fp8_outside": 0,
+          "half_narrow_inside": 0,
+          "detail": [
+            {
+              "start": 229,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 234
+            },
+            {
+              "start": 313,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 318
+            },
+            {
+              "start": 365,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 32,
+              "end": 370
+            },
+            {
+              "start": 427,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 432
+            },
+            {
+              "start": 444,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 449
+            },
+            {
+              "start": 515,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 520
+            },
+            {
+              "start": 594,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 599
+            },
+            {
+              "start": 604,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 609
+            },
+            {
+              "start": 619,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 624
+            },
+            {
+              "start": 631,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 636
+            },
+            {
+              "start": 643,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 648
+            },
+            {
+              "start": 1004,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1009
+            },
+            {
+              "start": 1016,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1021
+            },
+            {
+              "start": 1027,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1032
+            },
+            {
+              "start": 1039,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1044
+            },
+            {
+              "start": 1048,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1053
+            },
+            {
+              "start": 1058,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1063
+            },
+            {
+              "start": 1138,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1143
+            },
+            {
+              "start": 1214,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1219
+            }
+          ],
+          "outside_lines": []
+        },
+        "delta_vs_Z32": {
+          "resources": {
+            "sgpr_spill_count": 0,
+            "vgpr_spill_count": 0,
+            "private_segment_fixed_size": 0,
+            "vgpr_count": 13,
+            "group_segment_fixed_size": 0,
+            "sgpr_count": 0
+          },
+          "static": {
+            "VALU_slots": 24,
+            "VALU": 4,
+            "global_load_b64": 0,
+            "global_load": 0,
+            "DS": 0,
+            "VOPD": 10,
+            "SALU": 0,
+            "VMEM": 0,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": 3,
+            "fp8_cvt": 0
+          },
+          "loop_weighted": {
+            "VALU_slots": 24,
+            "VALU": -20,
+            "global_load_b64": -36,
+            "global_load": -36,
+            "DS": 0,
+            "VOPD": 22,
+            "SALU": 0,
+            "VMEM": -36,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": -36,
+            "fp8_cvt": 0
+          }
+        }
+      },
+      "R": {
+        "resources": {
+          "group_segment_fixed_size": 4096,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 25,
+          "sgpr_spill_count": 0,
+          "vgpr_count": 138,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 3,
+          "VALU_slots": 901,
+          "zero_mov_slots": 17,
+          "WAIT": 145,
+          "SALU": 106,
+          "VOPD": 168,
+          "VALU": 565,
+          "VMEM": 46,
+          "global_load": 44,
+          "fp8_cvt": 76,
+          "global_load_b64": 21,
+          "WMMA": 44,
+          "DS": 4
+        },
+        "loop_weighted": {
+          "SMEM": 3,
+          "VALU_slots": 4438,
+          "zero_mov_slots": 65,
+          "WAIT": 863,
+          "SALU": 435,
+          "VOPD": 821,
+          "VALU": 2796,
+          "VMEM": 284,
+          "global_load": 276,
+          "fp8_cvt": 416,
+          "global_load_b64": 184,
+          "WMMA": 288,
+          "DS": 16
+        },
+        "loops": [
+          {
+            "header": 107,
+            "trips": 4
+          },
+          {
+            "header": 245,
+            "trips": 8
+          },
+          {
+            "header": 645,
+            "trips": 4
+          }
+        ],
+        "mode": {
+          "segments": 19,
+          "empty_segments": 0,
+          "fp8_inside": 76,
+          "fp8_outside": 0,
+          "half_narrow_inside": 0,
+          "detail": [
+            {
+              "start": 155,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 160
+            },
+            {
+              "start": 239,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 244
+            },
+            {
+              "start": 289,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 32,
+              "end": 294
+            },
+            {
+              "start": 351,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 356
+            },
+            {
+              "start": 368,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 373
+            },
+            {
+              "start": 450,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 455
+            },
+            {
+              "start": 475,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 480
+            },
+            {
+              "start": 545,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 550
+            },
+            {
+              "start": 558,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 563
+            },
+            {
+              "start": 581,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 586
+            },
+            {
+              "start": 593,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 598
+            },
+            {
+              "start": 959,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 964
+            },
+            {
+              "start": 971,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 976
+            },
+            {
+              "start": 982,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 987
+            },
+            {
+              "start": 994,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 999
+            },
+            {
+              "start": 1003,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1008
+            },
+            {
+              "start": 1013,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1018
+            },
+            {
+              "start": 1086,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1091
+            },
+            {
+              "start": 1156,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1161
+            }
+          ],
+          "outside_lines": []
+        },
+        "delta_vs_Z32": {
+          "resources": {
+            "sgpr_spill_count": 0,
+            "vgpr_spill_count": 0,
+            "private_segment_fixed_size": 0,
+            "vgpr_count": 5,
+            "group_segment_fixed_size": 0,
+            "sgpr_count": 0
+          },
+          "static": {
+            "VALU_slots": 0,
+            "VALU": -46,
+            "global_load_b64": 0,
+            "global_load": 0,
+            "DS": 0,
+            "VOPD": 23,
+            "SALU": 0,
+            "VMEM": 0,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": -2,
+            "fp8_cvt": 0
+          },
+          "loop_weighted": {
+            "VALU_slots": 0,
+            "VALU": -278,
+            "global_load_b64": -12,
+            "global_load": -12,
+            "DS": 0,
+            "VOPD": 139,
+            "SALU": 0,
+            "VMEM": -12,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": -14,
+            "fp8_cvt": 0
+          }
+        }
+      },
+      "C": {
+        "resources": {
+          "group_segment_fixed_size": 4096,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 25,
+          "sgpr_spill_count": 0,
+          "vgpr_count": 146,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 3,
+          "VALU_slots": 925,
+          "zero_mov_slots": 17,
+          "WAIT": 159,
+          "SALU": 106,
+          "VALU": 601,
+          "VOPD": 162,
+          "VMEM": 46,
+          "global_load": 44,
+          "global_load_b64": 21,
+          "fp8_cvt": 76,
+          "WMMA": 44,
+          "DS": 4
+        },
+        "loop_weighted": {
+          "SMEM": 3,
+          "VALU_slots": 4462,
+          "zero_mov_slots": 65,
+          "WAIT": 868,
+          "SALU": 435,
+          "VALU": 2998,
+          "VOPD": 732,
+          "VMEM": 248,
+          "global_load": 240,
+          "global_load_b64": 148,
+          "fp8_cvt": 416,
+          "WMMA": 288,
+          "DS": 16
+        },
+        "loops": [
+          {
+            "header": 181,
+            "trips": 4
+          },
+          {
+            "header": 319,
+            "trips": 8
+          },
+          {
+            "header": 698,
+            "trips": 4
+          }
+        ],
+        "mode": {
+          "segments": 19,
+          "empty_segments": 0,
+          "fp8_inside": 76,
+          "fp8_outside": 0,
+          "half_narrow_inside": 0,
+          "detail": [
+            {
+              "start": 229,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 234
+            },
+            {
+              "start": 313,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 318
+            },
+            {
+              "start": 365,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 32,
+              "end": 370
+            },
+            {
+              "start": 427,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 432
+            },
+            {
+              "start": 444,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 449
+            },
+            {
+              "start": 517,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 522
+            },
+            {
+              "start": 597,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 602
+            },
+            {
+              "start": 606,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 611
+            },
+            {
+              "start": 621,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 626
+            },
+            {
+              "start": 633,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 638
+            },
+            {
+              "start": 645,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 650
+            },
+            {
+              "start": 1016,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1021
+            },
+            {
+              "start": 1028,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1033
+            },
+            {
+              "start": 1040,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1045
+            },
+            {
+              "start": 1053,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1058
+            },
+            {
+              "start": 1062,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1067
+            },
+            {
+              "start": 1071,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1076
+            },
+            {
+              "start": 1151,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1156
+            },
+            {
+              "start": 1224,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1229
+            }
+          ],
+          "outside_lines": []
+        },
+        "delta_vs_Z32": {
+          "resources": {
+            "sgpr_spill_count": 0,
+            "vgpr_spill_count": 0,
+            "private_segment_fixed_size": 0,
+            "vgpr_count": 13,
+            "group_segment_fixed_size": 0,
+            "sgpr_count": 0
+          },
+          "static": {
+            "VALU_slots": 24,
+            "VALU": -10,
+            "global_load_b64": 0,
+            "global_load": 0,
+            "DS": 0,
+            "VOPD": 17,
+            "SALU": 0,
+            "VMEM": 0,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": 12,
+            "fp8_cvt": 0
+          },
+          "loop_weighted": {
+            "VALU_slots": 24,
+            "VALU": -76,
+            "global_load_b64": -48,
+            "global_load": -48,
+            "DS": 0,
+            "VOPD": 50,
+            "SALU": 0,
+            "VMEM": -48,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": -9,
+            "fp8_cvt": 0
+          }
+        }
+      },
+      "waves_old_topology": {
+        "900": 12000,
+        "1080": 17280
+      }
+    },
+    "c32_wave1_post": {
+      "Z32": {
+        "resources": {
+          "group_segment_fixed_size": 4096,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 37,
+          "sgpr_spill_count": 0,
+          "vgpr_count": 132,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 3,
+          "VALU_slots": 1316,
+          "zero_mov_slots": 18,
+          "WAIT": 253,
+          "SALU": 125,
+          "VALU": 874,
+          "VOPD": 221,
+          "VMEM": 84,
+          "global_load": 81,
+          "global_load_b64": 23,
+          "fp8_cvt": 68,
+          "WMMA": 44,
+          "DS": 10
+        },
+        "loop_weighted": {
+          "SMEM": 3,
+          "VALU_slots": 5159,
+          "zero_mov_slots": 66,
+          "WAIT": 1019,
+          "SALU": 442,
+          "VALU": 3405,
+          "VOPD": 877,
+          "VMEM": 358,
+          "global_load": 355,
+          "global_load_b64": 204,
+          "fp8_cvt": 384,
+          "WMMA": 288,
+          "DS": 28
+        },
+        "loops": [
+          {
+            "header": 111,
+            "trips": 4
+          },
+          {
+            "header": 530,
+            "trips": 8
+          },
+          {
+            "header": 915,
+            "trips": 4
+          },
+          {
+            "header": 1457,
+            "trips": 1
+          }
+        ],
+        "mode": {
+          "segments": 17,
+          "empty_segments": 0,
+          "fp8_inside": 68,
+          "fp8_outside": 0,
+          "half_narrow_inside": 0,
+          "detail": [
+            {
+              "start": 302,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 307
+            },
+            {
+              "start": 524,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 529
+            },
+            {
+              "start": 574,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 32,
+              "end": 579
+            },
+            {
+              "start": 639,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 644
+            },
+            {
+              "start": 654,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 659
+            },
+            {
+              "start": 736,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 741
+            },
+            {
+              "start": 762,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 767
+            },
+            {
+              "start": 835,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 840
+            },
+            {
+              "start": 847,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 852
+            },
+            {
+              "start": 870,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 875
+            },
+            {
+              "start": 882,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 887
+            },
+            {
+              "start": 1247,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1252
+            },
+            {
+              "start": 1258,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1263
+            },
+            {
+              "start": 1269,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1274
+            },
+            {
+              "start": 1280,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1285
+            },
+            {
+              "start": 1291,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1296
+            },
+            {
+              "start": 1299,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1304
+            }
+          ],
+          "outside_lines": []
+        }
+      },
+      "Q": {
+        "resources": {
+          "group_segment_fixed_size": 4096,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 37,
+          "sgpr_spill_count": 0,
+          "vgpr_count": 152,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 3,
+          "VALU_slots": 1340,
+          "zero_mov_slots": 18,
+          "WAIT": 250,
+          "SALU": 125,
+          "VALU": 894,
+          "VMEM": 84,
+          "global_load": 81,
+          "global_load_b64": 23,
+          "VOPD": 223,
+          "fp8_cvt": 68,
+          "WMMA": 44,
+          "DS": 10
+        },
+        "loop_weighted": {
+          "SMEM": 3,
+          "VALU_slots": 5183,
+          "zero_mov_slots": 66,
+          "WAIT": 959,
+          "SALU": 442,
+          "VALU": 3431,
+          "VMEM": 322,
+          "global_load": 319,
+          "global_load_b64": 168,
+          "VOPD": 876,
+          "fp8_cvt": 384,
+          "WMMA": 288,
+          "DS": 28
+        },
+        "loops": [
+          {
+            "header": 184,
+            "trips": 4
+          },
+          {
+            "header": 603,
+            "trips": 8
+          },
+          {
+            "header": 961,
+            "trips": 4
+          },
+          {
+            "header": 1500,
+            "trips": 1
+          }
+        ],
+        "mode": {
+          "segments": 17,
+          "empty_segments": 0,
+          "fp8_inside": 68,
+          "fp8_outside": 0,
+          "half_narrow_inside": 0,
+          "detail": [
+            {
+              "start": 375,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 380
+            },
+            {
+              "start": 597,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 602
+            },
+            {
+              "start": 647,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 32,
+              "end": 652
+            },
+            {
+              "start": 712,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 717
+            },
+            {
+              "start": 727,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 732
+            },
+            {
+              "start": 800,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 805
+            },
+            {
+              "start": 878,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 883
+            },
+            {
+              "start": 888,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 893
+            },
+            {
+              "start": 904,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 909
+            },
+            {
+              "start": 916,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 921
+            },
+            {
+              "start": 927,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 932
+            },
+            {
+              "start": 1290,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1295
+            },
+            {
+              "start": 1301,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1306
+            },
+            {
+              "start": 1312,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1317
+            },
+            {
+              "start": 1324,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1329
+            },
+            {
+              "start": 1335,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1340
+            },
+            {
+              "start": 1343,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1348
+            }
+          ],
+          "outside_lines": []
+        },
+        "delta_vs_Z32": {
+          "resources": {
+            "sgpr_spill_count": 0,
+            "vgpr_spill_count": 0,
+            "private_segment_fixed_size": 0,
+            "vgpr_count": 20,
+            "group_segment_fixed_size": 0,
+            "sgpr_count": 0
+          },
+          "static": {
+            "VALU_slots": 24,
+            "VALU": 20,
+            "global_load_b64": 0,
+            "global_load": 0,
+            "DS": 0,
+            "VOPD": 2,
+            "SALU": 0,
+            "VMEM": 0,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": -3,
+            "fp8_cvt": 0
+          },
+          "loop_weighted": {
+            "VALU_slots": 24,
+            "VALU": 26,
+            "global_load_b64": -36,
+            "global_load": -36,
+            "DS": 0,
+            "VOPD": -1,
+            "SALU": 0,
+            "VMEM": -36,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": -60,
+            "fp8_cvt": 0
+          }
+        }
+      },
+      "R": {
+        "resources": {
+          "group_segment_fixed_size": 4096,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 37,
+          "sgpr_spill_count": 0,
+          "vgpr_count": 137,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 3,
+          "VALU_slots": 1316,
+          "zero_mov_slots": 18,
+          "WAIT": 243,
+          "SALU": 125,
+          "VALU": 876,
+          "VOPD": 220,
+          "VMEM": 84,
+          "global_load": 81,
+          "global_load_b64": 23,
+          "fp8_cvt": 68,
+          "WMMA": 44,
+          "DS": 10
+        },
+        "loop_weighted": {
+          "SMEM": 3,
+          "VALU_slots": 5159,
+          "zero_mov_slots": 66,
+          "WAIT": 967,
+          "SALU": 442,
+          "VALU": 3401,
+          "VOPD": 879,
+          "VMEM": 346,
+          "global_load": 343,
+          "global_load_b64": 192,
+          "fp8_cvt": 384,
+          "WMMA": 288,
+          "DS": 28
+        },
+        "loops": [
+          {
+            "header": 113,
+            "trips": 4
+          },
+          {
+            "header": 526,
+            "trips": 8
+          },
+          {
+            "header": 924,
+            "trips": 4
+          },
+          {
+            "header": 1456,
+            "trips": 1
+          }
+        ],
+        "mode": {
+          "segments": 17,
+          "empty_segments": 0,
+          "fp8_inside": 68,
+          "fp8_outside": 0,
+          "half_narrow_inside": 0,
+          "detail": [
+            {
+              "start": 302,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 307
+            },
+            {
+              "start": 520,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 525
+            },
+            {
+              "start": 570,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 32,
+              "end": 575
+            },
+            {
+              "start": 635,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 640
+            },
+            {
+              "start": 650,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 655
+            },
+            {
+              "start": 731,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 736
+            },
+            {
+              "start": 757,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 762
+            },
+            {
+              "start": 827,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 832
+            },
+            {
+              "start": 840,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 845
+            },
+            {
+              "start": 863,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 868
+            },
+            {
+              "start": 875,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 880
+            },
+            {
+              "start": 1245,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1250
+            },
+            {
+              "start": 1259,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1264
+            },
+            {
+              "start": 1271,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1276
+            },
+            {
+              "start": 1283,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1288
+            },
+            {
+              "start": 1292,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1297
+            },
+            {
+              "start": 1301,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1306
+            }
+          ],
+          "outside_lines": []
+        },
+        "delta_vs_Z32": {
+          "resources": {
+            "sgpr_spill_count": 0,
+            "vgpr_spill_count": 0,
+            "private_segment_fixed_size": 0,
+            "vgpr_count": 5,
+            "group_segment_fixed_size": 0,
+            "sgpr_count": 0
+          },
+          "static": {
+            "VALU_slots": 0,
+            "VALU": 2,
+            "global_load_b64": 0,
+            "global_load": 0,
+            "DS": 0,
+            "VOPD": -1,
+            "SALU": 0,
+            "VMEM": 0,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": -10,
+            "fp8_cvt": 0
+          },
+          "loop_weighted": {
+            "VALU_slots": 0,
+            "VALU": -4,
+            "global_load_b64": -12,
+            "global_load": -12,
+            "DS": 0,
+            "VOPD": 2,
+            "SALU": 0,
+            "VMEM": -12,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": -52,
+            "fp8_cvt": 0
+          }
+        }
+      },
+      "C": {
+        "resources": {
+          "group_segment_fixed_size": 4096,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 37,
+          "sgpr_spill_count": 0,
+          "vgpr_count": 152,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 3,
+          "VALU_slots": 1340,
+          "zero_mov_slots": 18,
+          "WAIT": 244,
+          "SALU": 125,
+          "VALU": 882,
+          "VMEM": 84,
+          "global_load": 81,
+          "global_load_b64": 23,
+          "VOPD": 229,
+          "fp8_cvt": 68,
+          "WMMA": 44,
+          "DS": 10
+        },
+        "loop_weighted": {
+          "SMEM": 3,
+          "VALU_slots": 5183,
+          "zero_mov_slots": 66,
+          "WAIT": 923,
+          "SALU": 442,
+          "VALU": 3383,
+          "VMEM": 310,
+          "global_load": 307,
+          "global_load_b64": 156,
+          "VOPD": 900,
+          "fp8_cvt": 384,
+          "WMMA": 288,
+          "DS": 28
+        },
+        "loops": [
+          {
+            "header": 184,
+            "trips": 4
+          },
+          {
+            "header": 603,
+            "trips": 8
+          },
+          {
+            "header": 976,
+            "trips": 4
+          },
+          {
+            "header": 1496,
+            "trips": 1
+          }
+        ],
+        "mode": {
+          "segments": 17,
+          "empty_segments": 0,
+          "fp8_inside": 68,
+          "fp8_outside": 0,
+          "half_narrow_inside": 0,
+          "detail": [
+            {
+              "start": 375,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 380
+            },
+            {
+              "start": 597,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 602
+            },
+            {
+              "start": 647,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 32,
+              "end": 652
+            },
+            {
+              "start": 712,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 717
+            },
+            {
+              "start": 727,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 732
+            },
+            {
+              "start": 800,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 805
+            },
+            {
+              "start": 877,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 882
+            },
+            {
+              "start": 887,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 892
+            },
+            {
+              "start": 903,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 908
+            },
+            {
+              "start": 915,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 920
+            },
+            {
+              "start": 926,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 931
+            },
+            {
+              "start": 1291,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1296
+            },
+            {
+              "start": 1303,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1308
+            },
+            {
+              "start": 1314,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1319
+            },
+            {
+              "start": 1326,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1331
+            },
+            {
+              "start": 1335,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1340
+            },
+            {
+              "start": 1345,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1350
+            }
+          ],
+          "outside_lines": []
+        },
+        "delta_vs_Z32": {
+          "resources": {
+            "sgpr_spill_count": 0,
+            "vgpr_spill_count": 0,
+            "private_segment_fixed_size": 0,
+            "vgpr_count": 20,
+            "group_segment_fixed_size": 0,
+            "sgpr_count": 0
+          },
+          "static": {
+            "VALU_slots": 24,
+            "VALU": 8,
+            "global_load_b64": 0,
+            "global_load": 0,
+            "DS": 0,
+            "VOPD": 8,
+            "SALU": 0,
+            "VMEM": 0,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": -9,
+            "fp8_cvt": 0
+          },
+          "loop_weighted": {
+            "VALU_slots": 24,
+            "VALU": -22,
+            "global_load_b64": -48,
+            "global_load": -48,
+            "DS": 0,
+            "VOPD": 23,
+            "SALU": 0,
+            "VMEM": -48,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": -96,
+            "fp8_cvt": 0
+          }
+        }
+      },
+      "waves_old_topology": {
+        "900": 24321,
+        "1080": 34945
+      }
+    },
+    "c32_wave1_prefix": {
+      "Z32": {
+        "resources": {
+          "group_segment_fixed_size": 4096,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 32,
+          "sgpr_spill_count": 0,
+          "vgpr_count": 129,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 5,
+          "VALU_slots": 1464,
+          "zero_mov_slots": 7,
+          "WAIT": 310,
+          "SALU": 174,
+          "VOPD": 172,
+          "VALU": 1120,
+          "VMEM": 64,
+          "global_load": 44,
+          "DS": 75,
+          "WMMA": 48,
+          "fp8_cvt": 88,
+          "global_load_b64": 20
+        },
+        "loop_weighted": {
+          "SMEM": 5,
+          "VALU_slots": 5238,
+          "zero_mov_slots": 7,
+          "WAIT": 1106,
+          "SALU": 473,
+          "VOPD": 768,
+          "VALU": 3702,
+          "VMEM": 308,
+          "global_load": 288,
+          "DS": 96,
+          "WMMA": 304,
+          "fp8_cvt": 404,
+          "global_load_b64": 192
+        },
+        "loops": [
+          {
+            "header": 124,
+            "trips": 4
+          },
+          {
+            "header": 561,
+            "trips": 8
+          },
+          {
+            "header": 946,
+            "trips": 4
+          },
+          {
+            "header": 1467,
+            "trips": 1
+          }
+        ],
+        "mode": {
+          "segments": 17,
+          "empty_segments": 0,
+          "fp8_inside": 68,
+          "fp8_outside": 20,
+          "half_narrow_inside": 0,
+          "detail": [
+            {
+              "start": 433,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 438
+            },
+            {
+              "start": 555,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 560
+            },
+            {
+              "start": 605,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 32,
+              "end": 610
+            },
+            {
+              "start": 670,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 675
+            },
+            {
+              "start": 685,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 690
+            },
+            {
+              "start": 767,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 772
+            },
+            {
+              "start": 792,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 797
+            },
+            {
+              "start": 865,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 870
+            },
+            {
+              "start": 877,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 882
+            },
+            {
+              "start": 900,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 905
+            },
+            {
+              "start": 912,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 917
+            },
+            {
+              "start": 1271,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1276
+            },
+            {
+              "start": 1283,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1288
+            },
+            {
+              "start": 1295,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1300
+            },
+            {
+              "start": 1306,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1311
+            },
+            {
+              "start": 1315,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1320
+            },
+            {
+              "start": 1325,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1330
+            }
+          ],
+          "outside_lines": [
+            1541,
+            1542,
+            1543,
+            1544,
+            1651,
+            1704,
+            1725,
+            1802,
+            1850,
+            1925,
+            1956,
+            2028,
+            2074,
+            2139,
+            2179,
+            2239,
+            2291,
+            2345,
+            2412,
+            2431
+          ]
+        }
+      },
+      "Q": {
+        "resources": {
+          "group_segment_fixed_size": 4096,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 36,
+          "sgpr_spill_count": 0,
+          "vgpr_count": 153,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 5,
+          "VALU_slots": 1462,
+          "zero_mov_slots": 7,
+          "WAIT": 319,
+          "SALU": 175,
+          "VOPD": 172,
+          "VALU": 1118,
+          "VMEM": 64,
+          "global_load": 44,
+          "global_load_b64": 20,
+          "DS": 75,
+          "WMMA": 48,
+          "fp8_cvt": 88
+        },
+        "loop_weighted": {
+          "SMEM": 5,
+          "VALU_slots": 5248,
+          "zero_mov_slots": 7,
+          "WAIT": 1076,
+          "SALU": 474,
+          "VOPD": 780,
+          "VALU": 3688,
+          "VMEM": 272,
+          "global_load": 252,
+          "global_load_b64": 156,
+          "DS": 96,
+          "WMMA": 304,
+          "fp8_cvt": 404
+        },
+        "loops": [
+          {
+            "header": 184,
+            "trips": 4
+          },
+          {
+            "header": 622,
+            "trips": 8
+          },
+          {
+            "header": 981,
+            "trips": 4
+          },
+          {
+            "header": 1499,
+            "trips": 1
+          }
+        ],
+        "mode": {
+          "segments": 17,
+          "empty_segments": 0,
+          "fp8_inside": 68,
+          "fp8_outside": 20,
+          "half_narrow_inside": 0,
+          "detail": [
+            {
+              "start": 493,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 498
+            },
+            {
+              "start": 616,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 621
+            },
+            {
+              "start": 666,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 32,
+              "end": 671
+            },
+            {
+              "start": 731,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 736
+            },
+            {
+              "start": 746,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 751
+            },
+            {
+              "start": 820,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 825
+            },
+            {
+              "start": 900,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 905
+            },
+            {
+              "start": 909,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 914
+            },
+            {
+              "start": 926,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 931
+            },
+            {
+              "start": 938,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 943
+            },
+            {
+              "start": 949,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 954
+            },
+            {
+              "start": 1303,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1308
+            },
+            {
+              "start": 1316,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1321
+            },
+            {
+              "start": 1328,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1333
+            },
+            {
+              "start": 1340,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1345
+            },
+            {
+              "start": 1350,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1355
+            },
+            {
+              "start": 1359,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1364
+            }
+          ],
+          "outside_lines": [
+            1573,
+            1574,
+            1575,
+            1576,
+            1683,
+            1736,
+            1757,
+            1834,
+            1882,
+            1957,
+            1988,
+            2060,
+            2106,
+            2171,
+            2211,
+            2271,
+            2323,
+            2377,
+            2444,
+            2463
+          ]
+        },
+        "delta_vs_Z32": {
+          "resources": {
+            "sgpr_spill_count": 0,
+            "vgpr_spill_count": 0,
+            "private_segment_fixed_size": 0,
+            "vgpr_count": 24,
+            "group_segment_fixed_size": 0,
+            "sgpr_count": 4
+          },
+          "static": {
+            "VALU_slots": -2,
+            "VALU": -2,
+            "global_load_b64": 0,
+            "global_load": 0,
+            "DS": 0,
+            "VOPD": 0,
+            "SALU": 1,
+            "VMEM": 0,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": 9,
+            "fp8_cvt": 0
+          },
+          "loop_weighted": {
+            "VALU_slots": 10,
+            "VALU": -14,
+            "global_load_b64": -36,
+            "global_load": -36,
+            "DS": 0,
+            "VOPD": 12,
+            "SALU": 1,
+            "VMEM": -36,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": -30,
+            "fp8_cvt": 0
+          }
+        }
+      },
+      "R": {
+        "resources": {
+          "group_segment_fixed_size": 4096,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 32,
+          "sgpr_spill_count": 0,
+          "vgpr_count": 137,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 5,
+          "VALU_slots": 1462,
+          "zero_mov_slots": 7,
+          "WAIT": 308,
+          "SALU": 174,
+          "VOPD": 166,
+          "VALU": 1130,
+          "VMEM": 64,
+          "global_load": 44,
+          "DS": 75,
+          "WMMA": 48,
+          "fp8_cvt": 88,
+          "global_load_b64": 20
+        },
+        "loop_weighted": {
+          "SMEM": 5,
+          "VALU_slots": 5236,
+          "zero_mov_slots": 7,
+          "WAIT": 1086,
+          "SALU": 473,
+          "VOPD": 738,
+          "VALU": 3760,
+          "VMEM": 296,
+          "global_load": 276,
+          "DS": 96,
+          "WMMA": 304,
+          "fp8_cvt": 404,
+          "global_load_b64": 180
+        },
+        "loops": [
+          {
+            "header": 123,
+            "trips": 4
+          },
+          {
+            "header": 560,
+            "trips": 8
+          },
+          {
+            "header": 958,
+            "trips": 4
+          },
+          {
+            "header": 1477,
+            "trips": 1
+          }
+        ],
+        "mode": {
+          "segments": 17,
+          "empty_segments": 0,
+          "fp8_inside": 68,
+          "fp8_outside": 20,
+          "half_narrow_inside": 0,
+          "detail": [
+            {
+              "start": 432,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 437
+            },
+            {
+              "start": 554,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 559
+            },
+            {
+              "start": 604,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 32,
+              "end": 609
+            },
+            {
+              "start": 669,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 674
+            },
+            {
+              "start": 684,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 689
+            },
+            {
+              "start": 766,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 771
+            },
+            {
+              "start": 791,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 796
+            },
+            {
+              "start": 864,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 869
+            },
+            {
+              "start": 876,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 881
+            },
+            {
+              "start": 899,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 904
+            },
+            {
+              "start": 911,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 916
+            },
+            {
+              "start": 1278,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1283
+            },
+            {
+              "start": 1291,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1296
+            },
+            {
+              "start": 1302,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1307
+            },
+            {
+              "start": 1316,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1321
+            },
+            {
+              "start": 1325,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1330
+            },
+            {
+              "start": 1334,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1339
+            }
+          ],
+          "outside_lines": [
+            1551,
+            1552,
+            1553,
+            1554,
+            1661,
+            1714,
+            1735,
+            1812,
+            1860,
+            1935,
+            1966,
+            2038,
+            2084,
+            2149,
+            2189,
+            2249,
+            2301,
+            2355,
+            2422,
+            2441
+          ]
+        },
+        "delta_vs_Z32": {
+          "resources": {
+            "sgpr_spill_count": 0,
+            "vgpr_spill_count": 0,
+            "private_segment_fixed_size": 0,
+            "vgpr_count": 8,
+            "group_segment_fixed_size": 0,
+            "sgpr_count": 0
+          },
+          "static": {
+            "VALU_slots": -2,
+            "VALU": 10,
+            "global_load_b64": 0,
+            "global_load": 0,
+            "DS": 0,
+            "VOPD": -6,
+            "SALU": 0,
+            "VMEM": 0,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": -2,
+            "fp8_cvt": 0
+          },
+          "loop_weighted": {
+            "VALU_slots": -2,
+            "VALU": 58,
+            "global_load_b64": -12,
+            "global_load": -12,
+            "DS": 0,
+            "VOPD": -30,
+            "SALU": 0,
+            "VMEM": -12,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": -20,
+            "fp8_cvt": 0
+          }
+        }
+      },
+      "C": {
+        "resources": {
+          "group_segment_fixed_size": 4096,
+          "private_segment_fixed_size": 0,
+          "sgpr_count": 36,
+          "sgpr_spill_count": 0,
+          "vgpr_count": 153,
+          "vgpr_spill_count": 0
+        },
+        "static": {
+          "SMEM": 5,
+          "VALU_slots": 1462,
+          "zero_mov_slots": 7,
+          "WAIT": 314,
+          "SALU": 175,
+          "VOPD": 168,
+          "VALU": 1126,
+          "VMEM": 64,
+          "global_load": 44,
+          "global_load_b64": 20,
+          "DS": 75,
+          "WMMA": 48,
+          "fp8_cvt": 88
+        },
+        "loop_weighted": {
+          "SMEM": 5,
+          "VALU_slots": 5248,
+          "zero_mov_slots": 7,
+          "WAIT": 1047,
+          "SALU": 474,
+          "VOPD": 764,
+          "VALU": 3720,
+          "VMEM": 260,
+          "global_load": 240,
+          "global_load_b64": 144,
+          "DS": 96,
+          "WMMA": 304,
+          "fp8_cvt": 404
+        },
+        "loops": [
+          {
+            "header": 184,
+            "trips": 4
+          },
+          {
+            "header": 622,
+            "trips": 8
+          },
+          {
+            "header": 993,
+            "trips": 4
+          },
+          {
+            "header": 1506,
+            "trips": 1
+          }
+        ],
+        "mode": {
+          "segments": 17,
+          "empty_segments": 0,
+          "fp8_inside": 68,
+          "fp8_outside": 20,
+          "half_narrow_inside": 0,
+          "detail": [
+            {
+              "start": 493,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 498
+            },
+            {
+              "start": 616,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 621
+            },
+            {
+              "start": 666,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 32,
+              "end": 671
+            },
+            {
+              "start": 731,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 736
+            },
+            {
+              "start": 746,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 751
+            },
+            {
+              "start": 818,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 823
+            },
+            {
+              "start": 897,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 902
+            },
+            {
+              "start": 906,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 911
+            },
+            {
+              "start": 923,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 928
+            },
+            {
+              "start": 935,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 940
+            },
+            {
+              "start": 946,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 951
+            },
+            {
+              "start": 1316,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1321
+            },
+            {
+              "start": 1328,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1333
+            },
+            {
+              "start": 1339,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1344
+            },
+            {
+              "start": 1351,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1356
+            },
+            {
+              "start": 1360,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1365
+            },
+            {
+              "start": 1370,
+              "fp8": 4,
+              "half_narrow": [],
+              "weight": 4,
+              "end": 1375
+            }
+          ],
+          "outside_lines": [
+            1580,
+            1581,
+            1582,
+            1583,
+            1690,
+            1743,
+            1764,
+            1841,
+            1889,
+            1964,
+            1995,
+            2067,
+            2113,
+            2178,
+            2218,
+            2278,
+            2330,
+            2384,
+            2451,
+            2470
+          ]
+        },
+        "delta_vs_Z32": {
+          "resources": {
+            "sgpr_spill_count": 0,
+            "vgpr_spill_count": 0,
+            "private_segment_fixed_size": 0,
+            "vgpr_count": 24,
+            "group_segment_fixed_size": 0,
+            "sgpr_count": 4
+          },
+          "static": {
+            "VALU_slots": -2,
+            "VALU": 6,
+            "global_load_b64": 0,
+            "global_load": 0,
+            "DS": 0,
+            "VOPD": -4,
+            "SALU": 1,
+            "VMEM": 0,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": 4,
+            "fp8_cvt": 0
+          },
+          "loop_weighted": {
+            "VALU_slots": 10,
+            "VALU": 18,
+            "global_load_b64": -48,
+            "global_load": -48,
+            "DS": 0,
+            "VOPD": -4,
+            "SALU": 1,
+            "VMEM": -48,
+            "SMEM": 0,
+            "WMMA": 0,
+            "zero_mov_slots": 0,
+            "WAIT": -59,
+            "fp8_cvt": 0
+          }
+        }
+      },
+      "waves_old_topology": {
+        "900": 24000,
+        "1080": 34560
+      }
+    }
+  }
+}

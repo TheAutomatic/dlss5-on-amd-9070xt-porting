@@ -1,0 +1,250 @@
+[
+  {
+    "slot": 0,
+    "route": "A",
+    "wall_mean": 9.899062500000001,
+    "wall_p99": 10.28762,
+    "gpu_mean": 9.272170102750001,
+    "gpu_p99": 9.5146094703,
+    "remainder_mean": 0.62689239725,
+    "remainder_p99": 0.9634304801,
+    "wall_gpu_pearson": 0.3855973315852874,
+    "top_wall_frames": [
+      {
+        "frame": 191,
+        "wall_ms": 10.531,
+        "net_gpu_ms": 9.13994026,
+        "wall_minus_net_ms": 1.391059740000001
+      },
+      {
+        "frame": 288,
+        "wall_ms": 10.511,
+        "net_gpu_ms": 9.39560032,
+        "wall_minus_net_ms": 1.1153996799999994
+      },
+      {
+        "frame": 212,
+        "wall_ms": 10.304,
+        "net_gpu_ms": 9.43519974,
+        "wall_minus_net_ms": 0.8688002600000004
+      },
+      {
+        "frame": 201,
+        "wall_ms": 10.262,
+        "net_gpu_ms": 9.65544033,
+        "wall_minus_net_ms": 0.6065596700000011
+      },
+      {
+        "frame": 127,
+        "wall_ms": 10.259,
+        "net_gpu_ms": 9.49182034,
+        "wall_minus_net_ms": 0.76717966
+      },
+      {
+        "frame": 256,
+        "wall_ms": 10.21,
+        "net_gpu_ms": 9.36594009,
+        "wall_minus_net_ms": 0.8440599100000004
+      },
+      {
+        "frame": 257,
+        "wall_ms": 10.138,
+        "net_gpu_ms": 9.29115963,
+        "wall_minus_net_ms": 0.8468403700000007
+      },
+      {
+        "frame": 195,
+        "wall_ms": 10.126,
+        "net_gpu_ms": 9.52917957,
+        "wall_minus_net_ms": 0.5968204299999993
+      }
+    ],
+    "scope": "same frame label aftercompletion polling; no proof exact latest tag equals frame, observational association only"
+  },
+  {
+    "slot": 1,
+    "route": "B",
+    "wall_mean": 9.854016666666666,
+    "wall_p99": 10.40376,
+    "gpu_mean": 9.209473806708335,
+    "gpu_p99": 9.480229165399999,
+    "remainder_mean": 0.6445428599583333,
+    "remainder_p99": 1.1552805482000004,
+    "wall_gpu_pearson": 0.5947249882519786,
+    "top_wall_frames": [
+      {
+        "frame": 206,
+        "wall_ms": 11.823,
+        "net_gpu_ms": 11.1852999,
+        "wall_minus_net_ms": 0.6377001
+      },
+      {
+        "frame": 191,
+        "wall_ms": 10.439,
+        "net_gpu_ms": 9.2796402,
+        "wall_minus_net_ms": 1.1593598000000007
+      },
+      {
+        "frame": 151,
+        "wall_ms": 10.41,
+        "net_gpu_ms": 9.26109982,
+        "wall_minus_net_ms": 1.14890018
+      },
+      {
+        "frame": 289,
+        "wall_ms": 10.394,
+        "net_gpu_ms": 9.07073975,
+        "wall_minus_net_ms": 1.3232602500000006
+      },
+      {
+        "frame": 150,
+        "wall_ms": 10.337,
+        "net_gpu_ms": 9.59047985,
+        "wall_minus_net_ms": 0.7465201500000003
+      },
+      {
+        "frame": 153,
+        "wall_ms": 10.117,
+        "net_gpu_ms": 9.3112402,
+        "wall_minus_net_ms": 0.8057598000000006
+      },
+      {
+        "frame": 135,
+        "wall_ms": 10.111,
+        "net_gpu_ms": 9.29623985,
+        "wall_minus_net_ms": 0.8147601500000015
+      },
+      {
+        "frame": 295,
+        "wall_ms": 10.103,
+        "net_gpu_ms": 9.20234013,
+        "wall_minus_net_ms": 0.9006598700000001
+      }
+    ],
+    "scope": "same frame label aftercompletion polling; no proof exact latest tag equals frame, observational association only"
+  },
+  {
+    "slot": 2,
+    "route": "B",
+    "wall_mean": 9.818754166666668,
+    "wall_p99": 10.19074,
+    "gpu_mean": 9.206329981500001,
+    "gpu_p99": 9.3741996155,
+    "remainder_mean": 0.6124241851666665,
+    "remainder_p99": 0.9638527992000006,
+    "wall_gpu_pearson": 0.4172278585981537,
+    "top_wall_frames": [
+      {
+        "frame": 191,
+        "wall_ms": 10.446,
+        "net_gpu_ms": 9.23015976,
+        "wall_minus_net_ms": 1.2158402400000003
+      },
+      {
+        "frame": 289,
+        "wall_ms": 10.205,
+        "net_gpu_ms": 9.17638016,
+        "wall_minus_net_ms": 1.0286198399999993
+      },
+      {
+        "frame": 160,
+        "wall_ms": 10.204,
+        "net_gpu_ms": 9.23995972,
+        "wall_minus_net_ms": 0.9640402800000007
+      },
+      {
+        "frame": 223,
+        "wall_ms": 10.17,
+        "net_gpu_ms": 9.42527962,
+        "wall_minus_net_ms": 0.7447203800000004
+      },
+      {
+        "frame": 158,
+        "wall_ms": 10.124,
+        "net_gpu_ms": 9.16044044,
+        "wall_minus_net_ms": 0.9635595600000002
+      },
+      {
+        "frame": 138,
+        "wall_ms": 10.122,
+        "net_gpu_ms": 9.24921989,
+        "wall_minus_net_ms": 0.872780109999999
+      },
+      {
+        "frame": 159,
+        "wall_ms": 10.088,
+        "net_gpu_ms": 9.22208023,
+        "wall_minus_net_ms": 0.8659197699999996
+      },
+      {
+        "frame": 156,
+        "wall_ms": 10.078,
+        "net_gpu_ms": 9.27612019,
+        "wall_minus_net_ms": 0.8018798099999991
+      }
+    ],
+    "scope": "same frame label aftercompletion polling; no proof exact latest tag equals frame, observational association only"
+  },
+  {
+    "slot": 3,
+    "route": "A",
+    "wall_mean": 9.8769875,
+    "wall_p99": 10.1592,
+    "gpu_mean": 9.246008912708335,
+    "gpu_p99": 9.461679763,
+    "remainder_mean": 0.6309785872916668,
+    "remainder_p99": 0.8924137186999993,
+    "wall_gpu_pearson": 0.45490322486744306,
+    "top_wall_frames": [
+      {
+        "frame": 288,
+        "wall_ms": 10.307,
+        "net_gpu_ms": 9.33265972,
+        "wall_minus_net_ms": 0.9743402799999998
+      },
+      {
+        "frame": 170,
+        "wall_ms": 10.174,
+        "net_gpu_ms": 9.40882015,
+        "wall_minus_net_ms": 0.7651798499999991
+      },
+      {
+        "frame": 200,
+        "wall_ms": 10.167,
+        "net_gpu_ms": 9.57839966,
+        "wall_minus_net_ms": 0.5886003399999993
+      },
+      {
+        "frame": 181,
+        "wall_ms": 10.147,
+        "net_gpu_ms": 9.53773975,
+        "wall_minus_net_ms": 0.6092602500000002
+      },
+      {
+        "frame": 187,
+        "wall_ms": 10.134,
+        "net_gpu_ms": 9.42387962,
+        "wall_minus_net_ms": 0.7101203800000011
+      },
+      {
+        "frame": 305,
+        "wall_ms": 10.109,
+        "net_gpu_ms": 9.2364397,
+        "wall_minus_net_ms": 0.8725603
+      },
+      {
+        "frame": 108,
+        "wall_ms": 10.103,
+        "net_gpu_ms": 9.20802021,
+        "wall_minus_net_ms": 0.8949797899999989
+      },
+      {
+        "frame": 309,
+        "wall_ms": 10.102,
+        "net_gpu_ms": 9.46916008,
+        "wall_minus_net_ms": 0.6328399200000003
+      }
+    ],
+    "scope": "same frame label aftercompletion polling; no proof exact latest tag equals frame, observational association only"
+  }
+]

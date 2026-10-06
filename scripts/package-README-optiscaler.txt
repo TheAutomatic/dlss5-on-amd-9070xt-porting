@@ -55,7 +55,7 @@ F6关闭时直接走原始FSR派发，跳过新任务捕获和私有颜色复制
    状态也可查DLSS5-AMD\logs\native-pre-upscale.txt，持续出现processed=1、replay=0表示网络处理和超分派发正常。
 
 屏幕显示
-在DLSS5-AMD\native-game-flags.txt中设置DLSS5_SHOW_FPS=0，隐藏FPS数字；DLSS5_NOTICE=0隐藏整行状态提示。
+在DLSS5-AMD\custom-config.txt中设置DLSS5_SHOW_FPS=0，隐藏FPS数字；DLSS5_NOTICE=0隐藏整行状态提示。
 DLSS5_NOTICE=1同样不绘制屏幕提示；默认2显示状态。修改后完全退出游戏再启动。
 
 OptiScaler 设置
@@ -74,7 +74,10 @@ FSR的质量/平衡/性能档决定内部输入尺寸，网络再自动适配720
 尝试4K时，质量档通常会超过网络输入上限，需要降低到性能或超级性能；以日志render尺寸为准。
 有些游戏会给内部尺寸多加一两像素，标称1080p也可能超限；超限时本版保留普通FSR，跳过DLSS5。
 本包不是Magpie截图放大版。
-DLSS5网络与0.23相同，默认跳过42/43/46块；900档插件显存约1.2GB。
+DLSS5网络与0.23相同。默认输出：全 71 块 + 快速数值（DLSS5_SKIP_BLOCKS= 留空、DLSS5_FAST_NUMERIC=1，对 NVIDIA 原版 47.55 dB、无整体偏色）；
+想提速可在 custom-config.txt 里写 DLSS5_SKIP_BLOCKS=42,43,46（有损：每帧快约 0.20/0.32ms，对 NVIDIA 约掉 3.3 dB、有整体偏色，删掉该行恢复默认）；
+叠层 DLSS5_MULTI_PASS=1/2/3（默认 1）把输出再跑 1～2 遍，风格更浓、耗时约 N 倍，游戏里按 F9 轮换（DLSS5_MULTI_PASS_HOTKEY 改键，0 关闭）；
+配置分三层：default-config.txt → custom-config.txt → 旧安装遗留的 native-game-flags.txt，系统环境变量最高，同一文件重复键取最后一行，值留空 = 内置默认。900档插件显存约1.2GB。
 其它游戏即使OptiScaler本身可用，仍可能需要适配DLSS5的资源格式、运动向量或提交时序。
 前置路径依赖游戏命令列表的提交位置，目前只在《剑星》验证，不是所有游戏都能直接使用。
 不要把本包配置复制给Magpie。新版DLL关闭DLSS5_PRE_UPSCALE时保留旧路径，但尚未做Magpie回归。
@@ -86,7 +89,7 @@ DLSS5网络与0.23相同，默认跳过42/43/46块；900档插件显存约1.2GB�
 SHA256SUMS.txt为包内文件校验表，zip旁的.sha256为整个压缩包校验值。
 
 配置与回退
-DLSS5-AMD\native-game-flags.txt中已设置DLSS5_PRE_UPSCALE=1和DLSS5_PRE_UPSCALE_ASYNC=1。
+DLSS5-AMD\default-config.txt里已设置DLSS5_PRE_UPSCALE=1和DLSS5_PRE_UPSCALE_ASYNC=1。
 不要关闭异步提交；首版同步等待曾明显降低实玩帧率。
 若要完全回退，请退出游戏后恢复旧0.23整包及其配置。将DLSS5_PRE_UPSCALE改0会走旧的超分后处理，此时游戏输出也必须降至1080p或以下。
 

@@ -1,0 +1,59 @@
+--- a/hip/wave_owned_mh.inc
++++ b/hip/wave_owned_mh.inc
+@@ -180 +180,33 @@
+-template<uint C,bool ByteIn,bool ByteOut>
++#ifndef W2_DOWN_FUSED
++#define W2_DOWN_FUSED 0
++#endif
++// Reuse only this head/qt's dead feature region; the AV plane stays untouched.
++template<uint C> DEV void w2_down_pool(unsigned char*plane,uint qt,uint head,f8 lo,f8 hi){
++ uint rc=w2_rc(),gr=w2_gr(),left=(rc&6u)+gr*16;
++ for(uint ci=0;ci<2;ci++)for(uint e=0;e<8;e++){
++  float v=Hrtz(ci?hi[e]:lo[e]);
++  float a=w2_shuffle(v,left),b=w2_shuffle(v,left+1),c=w2_shuffle(v,left+8),d=w2_shuffle(v,left+9);
++  float top=H(a+b),bottom=H(c+d),pooled=F(H(H(top+bottom)*.25f));
++  if(rc<8&&!(rc&1u))reinterpret_cast<_Float16*>(plane+qt*16*C+head*512)[(rc/2)*32+ci*16+gr*8+e]=(_Float16)pooled;
++ }
++}
++template<uint C> DEV void w2_down_project(const unsigned char*plane,const float*wf,float*out,uint win,uint width,uint height,uint workw,uint sx,uint sy){
++ uint head=__builtin_amdgcn_workitem_id_x()/32,rc=w2_rc(),gr=w2_gr(),colg=head*64;
++ const _Float16*w16=reinterpret_cast<const _Float16*>(wf);f8 acc[4]{};
++ for(uint chunk=0;chunk<C/32;chunk++){f8 sum[4]{};
++  for(uint half=0;half<2;half++){
++   uint sidx=chunk*2+half;h8 a;
++   for(uint e=0;e<8;e++){
++    uint ch=sidx*16+gr*8+e;
++    a[e]=reinterpret_cast<const _Float16*>(plane+(rc/4)*16*C+(ch/32)*512)[(rc%4)*32+ch%32];
++   }
++   for(uint j=0;j<4;j++){h8 b;uint nt=colg/16+j;__builtin_memcpy(&b,w16+(nt*(C/16)+sidx)*256+(gr*16+rc)*8,16);sum[j]=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32_gfx12(a,b,sum[j]);}
++  }
++  for(uint j=0;j<4;j++)for(uint e=0;e<8;e++)acc[j][e]=H(acc[j][e]+sum[j][e]);
++ }
++ for(uint j=0;j<4;j++)for(uint e=0;e<8;e++){
++  uint q=gr*8+e;int x=(int((win%(workw/8))*8)-int(sx))/2+int(q%4),y=(int((win/(workw/8))*8)-int(sy))/2+int(q/4);
++  if(x>=0&&y>=0&&x<int(width/2)&&y<int(height/2))out[(uint(y)*(width/2)+uint(x))*(2*C)+colg+j*16+rc]=F(acc[j][e]);
++ }
++}
++template<uint C,bool ByteIn,bool ByteOut,bool Down=false>
+@@ -182 +214 @@
+- uint width,uint height,uint workw,uint workh,uint sx,uint sy,uint post){
++ uint width,uint height,uint workw,uint workh,uint sx,uint sy,uint post,const float*downw=nullptr,float*downout=nullptr){
+@@ -410,0 +443,3 @@
++#ifndef W2_ATTENTION_ONLY
++  if constexpr(Down)w2_down_pool<C>(plane0,qt,head,result[0],result[1]);
++#endif
+@@ -442,0 +478,3 @@
++#ifndef W2_ATTENTION_ONLY
++  if constexpr(Down)w2_down_pool<C>(plane0,qt,head,result[0],result[1]);
++#endif
+@@ -455,0 +494,3 @@
++#endif
++#ifndef W2_ATTENTION_ONLY
++ if constexpr(Down){w2_sync();w2_down_project<C>(plane0,downw,downout,win,width,height,workw,sx,sy);}
+@@ -470,0 +512,6 @@
++
++#if W2_DOWN_FUSED
++#define W2_DOWN_KERNEL(NAME,C) KERNEL __attribute__((amdgpu_flat_work_group_size(C,C))) void NAME(const float*in,const float*fw,const float*aw,float*out,uint w,uint h,uint ww,uint hh,uint sx,uint sy,uint post,const float*dw,float*down){swin_wave2_body<C,true,false,true>(in,fw,aw,out,w,h,ww,hh,sx,sy,post,dw,down);}
++W2_DOWN_KERNEL(c64_wave2_down,64)
++W2_DOWN_KERNEL(c128_wave2_down,128)
++#endif

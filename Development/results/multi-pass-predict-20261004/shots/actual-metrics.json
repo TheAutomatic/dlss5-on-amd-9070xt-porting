@@ -1,0 +1,112 @@
+[
+  {
+    "case": "1080-history",
+    "method": "real2",
+    "psnr": 41.674888491595716,
+    "hf_psnr": 50.976963082868025,
+    "dark_psnr": 61.99085924471869,
+    "color_error": 0.001091968733817339,
+    "finite": true,
+    "min": 0.0,
+    "max": 0.9936599731445312
+  },
+  {
+    "case": "1080-history",
+    "method": "gpu-predict",
+    "psnr": 45.28410710773307,
+    "hf_psnr": 52.34841489176879,
+    "dark_psnr": 59.98911100238004,
+    "color_error": 0.0012212799629196525,
+    "finite": true,
+    "min": 0.0,
+    "max": 1.0
+  },
+  {
+    "case": "1080-motion",
+    "method": "real2",
+    "psnr": 41.43813852119153,
+    "hf_psnr": 51.00587130158539,
+    "dark_psnr": 62.34094824180069,
+    "color_error": 0.001330479048192501,
+    "finite": true,
+    "min": 0.0,
+    "max": 1.0
+  },
+  {
+    "case": "1080-motion",
+    "method": "gpu-predict",
+    "psnr": 49.82850531707616,
+    "hf_psnr": 55.78455205341988,
+    "dark_psnr": 64.59270993554833,
+    "color_error": 0.0008266051881946623,
+    "finite": true,
+    "min": 0.0,
+    "max": 1.0
+  },
+  {
+    "case": "1080-static",
+    "method": "real2",
+    "psnr": 41.32070985144477,
+    "hf_psnr": 50.94558851488063,
+    "dark_psnr": 62.402295981531246,
+    "color_error": 0.0013378614094108343,
+    "finite": true,
+    "min": 0.0,
+    "max": 0.9185562133789062
+  },
+  {
+    "case": "1080-static",
+    "method": "gpu-predict",
+    "psnr": 49.356137916438215,
+    "hf_psnr": 55.384737199199265,
+    "dark_psnr": 64.65090733358088,
+    "color_error": 0.0008308961987495422,
+    "finite": true,
+    "min": 0.0,
+    "max": 1.0
+  },
+  {
+    "case": "900-motion",
+    "method": "real2",
+    "psnr": 41.602862209188785,
+    "hf_psnr": 50.45553840535919,
+    "dark_psnr": 62.144695800947844,
+    "color_error": 0.0012209218693897128,
+    "finite": true,
+    "min": 0.0,
+    "max": 0.882110595703125
+  },
+  {
+    "case": "900-motion",
+    "method": "gpu-predict",
+    "psnr": 49.52200615991947,
+    "hf_psnr": 55.58367995800352,
+    "dark_psnr": 63.868433690014754,
+    "color_error": 0.0008297740714624524,
+    "finite": true,
+    "min": 0.0,
+    "max": 0.9744451642036438
+  },
+  {
+    "case": "900-static",
+    "method": "real2",
+    "psnr": 41.051805362679545,
+    "hf_psnr": 50.13494365475623,
+    "dark_psnr": 62.87525724729197,
+    "color_error": 0.0014824633253738284,
+    "finite": true,
+    "min": 0.0,
+    "max": 1.0
+  },
+  {
+    "case": "900-static",
+    "method": "gpu-predict",
+    "psnr": 49.662223831694476,
+    "hf_psnr": 55.6757715154947,
+    "dark_psnr": 63.56501703586926,
+    "color_error": 0.0009867303306236863,
+    "finite": true,
+    "min": 0.0,
+    "max": 1.0
+  }
+]

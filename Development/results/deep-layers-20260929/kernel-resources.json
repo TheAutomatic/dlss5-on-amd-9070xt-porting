@@ -1,0 +1,47 @@
+[
+  {
+    "candidate": "P",
+    "kernel": "c512_qkv_attention_fused",
+    "vgpr_count": 122,
+    "sgpr_count": 32,
+    "group_segment_fixed_size": 6144,
+    "private_segment_fixed_size": 0,
+    "wavefront_size": 32
+  },
+  {
+    "candidate": "P",
+    "kernel": "c512_qkv_attention_compact",
+    "vgpr_count": 141,
+    "sgpr_count": 30,
+    "group_segment_fixed_size": 6144,
+    "private_segment_fixed_size": 0,
+    "wavefront_size": 32
+  },
+  {
+    "candidate": "R",
+    "kernel": "split_ffn_register_t8",
+    "vgpr_count": 101,
+    "sgpr_count": 22,
+    "group_segment_fixed_size": 0,
+    "private_segment_fixed_size": 0,
+    "wavefront_size": 32
+  },
+  {
+    "candidate": "R",
+    "kernel": "split_ffn_mix_register_t8",
+    "vgpr_count": 98,
+    "sgpr_count": 23,
+    "group_segment_fixed_size": 0,
+    "private_segment_fixed_size": 0,
+    "wavefront_size": 32
+  },
+  {
+    "candidate": "V",
+    "kernel": "vit_expand_blocked_fp8_frag_floatin",
+    "vgpr_count": 58,
+    "sgpr_count": 24,
+    "group_segment_fixed_size": 0,
+    "private_segment_fixed_size": 0,
+    "wavefront_size": 32
+  }
+]

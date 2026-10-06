@@ -1,0 +1,315 @@
+{
+  "timings": [
+    {
+      "batch": "runtime-regression-C-direct-r1",
+      "height": 900,
+      "frames_per_slot": 200,
+      "baseline_ms": 9.04094642857143,
+      "candidate_ms": 9.064190476190479,
+      "delta_ms": 0.023244047619048303,
+      "percent": 0.2570975041461532,
+      "slots": {
+        "0": 9.07465476190477,
+        "1": 9.08469642857143,
+        "2": 9.04368452380953,
+        "3": 9.00723809523809
+      }
+    },
+    {
+      "batch": "runtime-regression-C-direct-r1",
+      "height": 1080,
+      "frames_per_slot": 200,
+      "baseline_ms": 12.29073214285715,
+      "candidate_ms": 12.285059523809501,
+      "delta_ms": -0.005672619047649263,
+      "percent": -0.046153630082534924,
+      "slots": {
+        "0": 12.2972261904762,
+        "1": 12.2916369047619,
+        "2": 12.2784821428571,
+        "3": 12.2842380952381
+      }
+    },
+    {
+      "batch": "runtime-regression-C-direct-r2",
+      "height": 900,
+      "frames_per_slot": 200,
+      "baseline_ms": 9.077372023809525,
+      "candidate_ms": 9.095714285714285,
+      "delta_ms": 0.018342261904759738,
+      "percent": 0.20206577252368518,
+      "slots": {
+        "0": 9.10772619047619,
+        "1": 9.11857142857143,
+        "2": 9.07285714285714,
+        "3": 9.04701785714286
+      }
+    },
+    {
+      "batch": "runtime-regression-C-direct-r2",
+      "height": 1080,
+      "frames_per_slot": 200,
+      "baseline_ms": 12.30070833333335,
+      "candidate_ms": 12.311696428571452,
+      "delta_ms": 0.010988095238101181,
+      "percent": 0.08932896334372664,
+      "slots": {
+        "0": 12.3065416666667,
+        "1": 12.3099761904762,
+        "2": 12.3134166666667,
+        "3": 12.294875
+      }
+    },
+    {
+      "batch": "runtime-regression-C-screen1",
+      "height": 900,
+      "frames_per_slot": 200,
+      "baseline_ms": 9.068047619047618,
+      "candidate_ms": 9.055979166666665,
+      "delta_ms": -0.012068452380953332,
+      "percent": -0.13308765996776772,
+      "slots": {
+        "0": 9.07101785714286,
+        "1": 9.05739880952381,
+        "2": 9.05455952380952,
+        "3": 9.06507738095238
+      }
+    },
+    {
+      "batch": "runtime-regression-C-screen1",
+      "height": 1080,
+      "frames_per_slot": 200,
+      "baseline_ms": 12.36253571428575,
+      "candidate_ms": 12.3445982142857,
+      "delta_ms": -0.01793750000005012,
+      "percent": -0.14509563745342957,
+      "slots": {
+        "0": 12.3575416666667,
+        "1": 12.3461488095238,
+        "2": 12.3430476190476,
+        "3": 12.3675297619048
+      }
+    },
+    {
+      "batch": "runtime-regression-C-screen2",
+      "height": 900,
+      "frames_per_slot": 200,
+      "baseline_ms": 9.105217261904766,
+      "candidate_ms": 9.08764880952381,
+      "delta_ms": -0.0175684523809565,
+      "percent": -0.19294929352714485,
+      "slots": {
+        "0": 9.10261904761905,
+        "1": 9.08779761904762,
+        "2": 9.0875,
+        "3": 9.10781547619048
+      }
+    },
+    {
+      "batch": "runtime-regression-C-screen2",
+      "height": 1080,
+      "frames_per_slot": 200,
+      "baseline_ms": 12.38806845238095,
+      "candidate_ms": 12.387315476190501,
+      "delta_ms": -0.000752976190447896,
+      "percent": -0.006078237243700713,
+      "slots": {
+        "0": 12.3451666666667,
+        "1": 12.3932916666667,
+        "2": 12.3813392857143,
+        "3": 12.4309702380952
+      }
+    },
+    {
+      "batch": "runtime-regression-P-r1",
+      "height": 900,
+      "frames_per_slot": 1000,
+      "baseline_ms": 9.019265625000006,
+      "candidate_ms": 9.02568249999999,
+      "delta_ms": 0.006416874999983335,
+      "percent": 0.07114631353350998,
+      "slots": {
+        "0": 8.96962375000001,
+        "1": 9.01229749999999,
+        "2": 9.03906749999999,
+        "3": 9.0689075
+      }
+    },
+    {
+      "batch": "runtime-regression-P-r1",
+      "height": 1080,
+      "frames_per_slot": 1000,
+      "baseline_ms": 12.334196875,
+      "candidate_ms": 12.324008124999999,
+      "delta_ms": -0.010188750000001079,
+      "percent": -0.08260570269194023,
+      "slots": {
+        "0": 12.316815,
+        "1": 12.32585625,
+        "2": 12.32216,
+        "3": 12.35157875
+      }
+    },
+    {
+      "batch": "runtime-regression-P-r2",
+      "height": 900,
+      "frames_per_slot": 1000,
+      "baseline_ms": 9.10526562499999,
+      "candidate_ms": 9.095688124999999,
+      "delta_ms": -0.009577499999991801,
+      "percent": -0.10518638768423072,
+      "slots": {
+        "0": 9.09741624999999,
+        "1": 9.0909675,
+        "2": 9.10040875,
+        "3": 9.11311499999999
+      }
+    },
+    {
+      "batch": "runtime-regression-P-r2",
+      "height": 1080,
+      "frames_per_slot": 1000,
+      "baseline_ms": 12.37701625,
+      "candidate_ms": 12.362337499999999,
+      "delta_ms": -0.014678750000001628,
+      "percent": -0.11859683871709992,
+      "slots": {
+        "0": 12.36616125,
+        "1": 12.35683375,
+        "2": 12.36784125,
+        "3": 12.38787125
+      }
+    },
+    {
+      "batch": "runtime-regression-Q-screen1",
+      "height": 900,
+      "frames_per_slot": 200,
+      "baseline_ms": 9.003684523809525,
+      "candidate_ms": 9.005702380952378,
+      "delta_ms": 0.0020178571428530745,
+      "percent": 0.022411459858640015,
+      "slots": {
+        "0": 9.00182142857143,
+        "1": 9.00345833333333,
+        "2": 9.00794642857143,
+        "3": 9.00554761904762
+      }
+    },
+    {
+      "batch": "runtime-regression-Q-screen1",
+      "height": 1080,
+      "frames_per_slot": 200,
+      "baseline_ms": 12.33546726190475,
+      "candidate_ms": 12.34340773809525,
+      "delta_ms": 0.007940476190499979,
+      "percent": 0.06437110181487515,
+      "slots": {
+        "0": 12.3154642857143,
+        "1": 12.3462797619048,
+        "2": 12.3405357142857,
+        "3": 12.3554702380952
+      }
+    },
+    {
+      "batch": "runtime-regression-Q-screen2",
+      "height": 900,
+      "frames_per_slot": 200,
+      "baseline_ms": 9.088711309523816,
+      "candidate_ms": 9.08145238095238,
+      "delta_ms": -0.00725892857143684,
+      "percent": -0.07986752273483333,
+      "slots": {
+        "0": 9.10604761904762,
+        "1": 9.0780119047619,
+        "2": 9.08489285714286,
+        "3": 9.07137500000001
+      }
+    },
+    {
+      "batch": "runtime-regression-Q-screen2",
+      "height": 1080,
+      "frames_per_slot": 200,
+      "baseline_ms": 12.3740773809524,
+      "candidate_ms": 12.3748035714286,
+      "delta_ms": 0.0007261904762003724,
+      "percent": 0.005868643405437801,
+      "slots": {
+        "0": 12.374505952381,
+        "1": 12.3746904761905,
+        "2": 12.3749166666667,
+        "3": 12.3736488095238
+      }
+    },
+    {
+      "batch": "runtime-regression-R-screen1",
+      "height": 900,
+      "frames_per_slot": 200,
+      "baseline_ms": 9.04699404761905,
+      "candidate_ms": 9.04468452380952,
+      "delta_ms": -0.0023095238095294235,
+      "percent": -0.02552807924237621,
+      "slots": {
+        "0": 9.03477380952381,
+        "1": 9.04163095238095,
+        "2": 9.04773809523809,
+        "3": 9.05921428571429
+      }
+    },
+    {
+      "batch": "runtime-regression-R-screen1",
+      "height": 1080,
+      "frames_per_slot": 200,
+      "baseline_ms": 12.3639851190476,
+      "candidate_ms": 12.3505386904762,
+      "delta_ms": -0.01344642857140066,
+      "percent": -0.10875481037813106,
+      "slots": {
+        "0": 12.3772857142857,
+        "1": 12.3534583333333,
+        "2": 12.3476190476191,
+        "3": 12.3506845238095
+      }
+    },
+    {
+      "batch": "runtime-regression-R-screen2",
+      "height": 900,
+      "frames_per_slot": 200,
+      "baseline_ms": 9.08161607142857,
+      "candidate_ms": 9.09183630952381,
+      "delta_ms": 0.010220238095239864,
+      "percent": 0.11253765865959497,
+      "slots": {
+        "0": 9.08375595238095,
+        "1": 9.09227976190476,
+        "2": 9.09139285714286,
+        "3": 9.07947619047619
+      }
+    },
+    {
+      "batch": "runtime-regression-R-screen2",
+      "height": 1080,
+      "frames_per_slot": 200,
+      "baseline_ms": 12.3652738095238,
+      "candidate_ms": 12.37559523809525,
+      "delta_ms": 0.010321428571451463,
+      "percent": 0.08347108790669466,
+      "slots": {
+        "0": 12.3712083333333,
+        "1": 12.4058988095238,
+        "2": 12.3452916666667,
+        "3": 12.3593392857143
+      }
+    }
+  ],
+  "candidate_frames_matching_float_fma": 228,
+  "candidate_frames_by_batch": {
+    "runtime-regression-P-correct": 84,
+    "runtime-regression-P-adaptive": 84,
+    "runtime-regression-Q-screen-correct": 12,
+    "runtime-regression-R-screen-correct": 12,
+    "runtime-regression-C-screen-correct": 12,
+    "runtime-regression-P-direct-correct": 24
+  },
+  "AE_pairs": 84,
+  "AE_all_fields_different": 0
+}

@@ -1,0 +1,21 @@
+{
+  "gpu_tested": false,
+  "compiler": "local LLVM23 source recipe; production original COMGR row, trace not production binary identity",
+  "host_build": "MinGW O2 stdc++17 static fullNetwork adapter; no HIP events/time queries",
+  "files": {
+    "actual.hip": "1a5462a97bf01b364dad037ffa5a51c61d1d5f2f883cde900a6fd9c610a4bad1",
+    "actual-canonical.hsaco": "d668411ddec4ed4802daa9d2cc0f6442a3734376cd833c34ca07c062e02e2a13",
+    "actual-canonical.o": "0de524af0ac64e1da1dcf2581adb00159d9b1c5309cfdead89c8d9855fbd40c3",
+    "trace-source.json": "b62f696b61e269d9e5ad59660bd3e77b7949d715cc0056f6837445c8d503eeda",
+    "latest-build.json": "dba5365f740d225a9ebf6716b8995f0f695adcd515f0e8487a9ab6667aae1d13",
+    "actual-canonical.build.log": "049b2bda55e94f83c7d112b7c80812a080321c0c7e068b79bb304d8056ab640f",
+    "actual_probe.exe": "2fd67c13438bf22d0ca8294d69187819195bb1a522065347864ea357b10bde38",
+    "actual_probe.cpp": "c61c30274694c59aaa3b392df194f2b09c2b52d9b871b9697bee8bd6f2e35ef9",
+    "actual-canonical.notes": "8ecbbe7785b028c7f10ef7c3aa4e48e00added2fe66162c45e944a9d423383f5",
+    "actual-canonical.bc": "64ede0e23d80c7d6b10b341fda958f866ea7a00850189bfa5872b2e629f9d713",
+    "actual-canonical.isa": "0856f98b8fa7526d8e60f7d5189e8fe1a8986a9456a01dac079debb2bfe9166e",
+    "native_hip_env_options.h": "8c312bfee52553e4d8f137a5d138c0422375c4e34a1dc8280563bfd63afb7792",
+    "production_options.generated.h": "7e7d709539165f241febcf36678a56887cc21e6c9fceea8925ef4600c3cfb3ee",
+    "hip_reference_network.h": "93c71818f2af22b72ed435572ab6e6018945f46a3037e749ed2702b03af46082"
+  }
+}

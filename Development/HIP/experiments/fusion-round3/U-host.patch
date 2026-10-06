@@ -1,0 +1,22 @@
+--- a/Development/HIP/hip_reference_network.h
++++ b/Development/HIP/hip_reference_network.h
+@@ -436,0 +437,11 @@
++#ifndef W2_UP_FUSED_HOST
++#define W2_UP_FUSED_HOST 0
++#endif
++ Tensor UpBody(Tensor low,Tensor skip,U w,U h,U c,U block){
++  U shift=Shift(block),sx=(shift&1)?4:0,sy=(shift&2)?4:0,ww=(w+sx+7)&~7u,hh=(h+sy+7)&~7u;
++  pdl_prev={};pdl_ffn_flags=nullptr;pdl_anyorder=false;
++  auto out=New(size_t(w)*h*c/4);
++  std::string name="c"+std::to_string(c)+"_wave2_up";
++  Run("c64_wave2",name.c_str(),size_t(ww)*hh/64,P(low),PackedFusedMhWeightFrag(Block(block,"ffn"),c),WaveOwnedAttentionWeight(Block(block,"attention"),c),P(out),w,h,ww,hh,sx,sy,U(4),PackedDecoderHalf(Block(block,"weights"),size_t(2*c)*c),P(skip));
++  Stage("block"+std::to_string(block),out);return out;
++ }
+@@ -478 +489,6 @@
+- U ups[]={48,56,62},cs[]={256,128,64},ends[]={55,61,65};for(U g=0;g<3;g++){U ow=W/(16u>>g),oh=H/(16u>>g);const bool byte_up=opt.decoder_byte&&opt.mh_byte_stream&&opt.decoder_h16w&&opt.fast_deep;source=Up(source,skips[3-g],ow/2,oh/2,ow,oh,cs[g]*2,cs[g],Block(ups[g],"weights"),byte_up);skips[3-g].reset();for(U b=ups[g];b<=ends[g];b++)source=Body(source,ow,oh,cs[g],Shift(b),b,false,opt.mh_byte_stream&&(b>ups[g]||byte_up),opt.mh_byte_stream&&b<ends[g]);}source=Up(source,skips[0],W/4,H/4,W/2,H/2,64,32,"block66-weights.f32");skips[0].reset();C32Result chain{};for(U b=66;b<=69;b++){if(opt.skip_blocks.count(b)){if(!opt.raw_chain)throw std::runtime_error("C32 skip needs the raw chain");if(b==69)SkipChainFinish(chain,W/2,H/2,false);if(chain.main)source=chain.main;continue;}chain=opt.raw_chain?C32Chain(source,chain.raw?&chain:nullptr,W/2,H/2,Shift(b),Block(b,"ffn"),Block(b,"attention"),b==69,false):C32(source,W/2,H/2,Shift(b),Block(b,"ffn"),Block(b,"attention"));source=chain.main;if(source)Stage("block"+std::to_string(b),source);}chain={};
++ U ups[]={48,56,62},cs[]={256,128,64},ends[]={55,61,65};for(U g=0;g<3;g++){U ow=W/(16u>>g),oh=H/(16u>>g);const bool byte_up=opt.decoder_byte&&opt.mh_byte_stream&&opt.decoder_h16w&&opt.fast_deep;U begin=ups[g];
++#if W2_UP_FUSED_HOST
++ if(g>0&&wave_owned_active&&byte_up&&opt.packed_weights&&opt.grouped_mh_contract&&opt.mh_proj_diag_fb&&opt.mh_project_crop&&opt.mh_input_mapped&&!opt.skip_blocks.count(begin)&&ow%2==0&&oh%2==0){source=UpBody(source,skips[3-g],ow,oh,cs[g],begin);++begin;}
++ else
++#endif
++ source=Up(source,skips[3-g],ow/2,oh/2,ow,oh,cs[g]*2,cs[g],Block(ups[g],"weights"),byte_up);skips[3-g].reset();for(U b=begin;b<=ends[g];b++)source=Body(source,ow,oh,cs[g],Shift(b),b,false,opt.mh_byte_stream&&(b>ups[g]||byte_up),opt.mh_byte_stream&&b<ends[g]);}source=Up(source,skips[0],W/4,H/4,W/2,H/2,64,32,"block66-weights.f32");skips[0].reset();C32Result chain{};for(U b=66;b<=69;b++){if(opt.skip_blocks.count(b)){if(!opt.raw_chain)throw std::runtime_error("C32 skip needs the raw chain");if(b==69)SkipChainFinish(chain,W/2,H/2,false);if(chain.main)source=chain.main;continue;}chain=opt.raw_chain?C32Chain(source,chain.raw?&chain:nullptr,W/2,H/2,Shift(b),Block(b,"ffn"),Block(b,"attention"),b==69,false):C32(source,W/2,H/2,Shift(b),Block(b,"ffn"),Block(b,"attention"));source=chain.main;if(source)Stage("block"+std::to_string(b),source);}chain={};

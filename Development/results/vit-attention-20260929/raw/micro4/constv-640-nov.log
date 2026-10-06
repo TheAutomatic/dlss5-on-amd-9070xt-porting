@@ -1,0 +1,15 @@
+START,constv-640-nov,vit_probe_native_constv
+EXACT,constv-640-nov,different=0
+BUFFER,constv-640-nov,output,invalid=0,nonzero=655360
+CHECK,constv-640-nov,guards=0,invalid=0,nonzero=655360
+TIME,constv-640-nov,0,51.817186
+TIME,constv-640-nov,1,44.010781
+TIME,constv-640-nov,2,41.945618
+TIME,constv-640-nov,3,42.900313
+TIME,constv-640-nov,4,39.872196
+TIME,constv-640-nov,5,40.904999
+TIME,constv-640-nov,6,40.360000
+EXACT,constv-640-nov,different=0
+BUFFER,constv-640-nov,output,invalid=0,nonzero=655360
+CHECK,constv-640-nov,guards=0,invalid=0,nonzero=655360
+RESULT,constv-640-nov,41.945618,128,7

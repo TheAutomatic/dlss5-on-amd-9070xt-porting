@@ -1,0 +1,45 @@
+{
+  "handle": 70170,
+  "exit": 0,
+  "lock_released": true,
+  "sample_count": 1518,
+  "residual_oldnew_bitdiff": 0,
+  "finite_count": 1514,
+  "finite_residual_CPU_bitdiff": 0,
+  "finite_feature_code_diff_count": 252,
+  "finite_feature_CPU_code_mismatch_count": 0,
+  "exceptions": [
+    {
+      "a_bits": "7f800000",
+      "residual_old": "0x7c00",
+      "residual_new": "0x7c00",
+      "feature_old": "0x7f",
+      "feature_direct": "0x7f"
+    },
+    {
+      "a_bits": "7fc00000",
+      "residual_old": "0x7e00",
+      "residual_new": "0x7e00",
+      "feature_old": "0xff",
+      "feature_direct": "0xff"
+    },
+    {
+      "a_bits": "ff800000",
+      "residual_old": "0xfc00",
+      "residual_new": "0xfc00",
+      "feature_old": "0xff",
+      "feature_direct": "0xff"
+    },
+    {
+      "a_bits": "ffc00000",
+      "residual_old": "0xfe00",
+      "residual_new": "0xfe00",
+      "feature_old": "0xff",
+      "feature_direct": "0xff"
+    }
+  ],
+  "main_module_SHA_unchanged_after_diagnostic_fix": {
+    "old": true,
+    "new": true
+  }
+}

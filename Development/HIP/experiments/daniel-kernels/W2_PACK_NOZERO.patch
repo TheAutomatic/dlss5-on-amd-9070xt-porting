@@ -1,0 +1,30 @@
+--- a/hip/wave_owned_mh.inc
++++ b/hip/wave_owned_mh.inc
+@@ -133,2 +133,25 @@
+-DEV i2 w2_pack8(const float*t){W2_OVFL(1);int lo=__builtin_amdgcn_cvt_pk_fp8_f32(w2_z(t[0]),w2_z(t[1]),0,false);lo=__builtin_amdgcn_cvt_pk_fp8_f32(w2_z(t[2]),w2_z(t[3]),lo,true);
+- int hi=__builtin_amdgcn_cvt_pk_fp8_f32(w2_z(t[4]),w2_z(t[5]),0,false);hi=__builtin_amdgcn_cvt_pk_fp8_f32(w2_z(t[6]),w2_z(t[7]),hi,true);W2_OVFL(0);i2 a;a[0]=lo;a[1]=hi;return a;}
++#ifndef W2_PACK_NOZERO
++#define W2_PACK_NOZERO 0
++#endif
++DEV i2 w2_pack8(const float*t){
++#if W2_PACK_NOZERO && (W2_PACK8==4 || W2_PACK8==6)
++ // Like production cw_pack8: each destination's low and high halves are both overwritten before use.
++ // The intrinsic's initial old=0 creates needless VGPR clears; early-clobber outputs need no old value.
++ // Preserve w2_z (+0 for mode 4, identity for mode 6), conversion order within each word and saturation.
++ // Keep the existing four conversions and MODE scope together. No half arithmetic is introduced.
++ int lo,hi;
++ asm volatile("s_setreg_imm32_b32 hwreg(HW_REG_MODE, 23, 1), 1\n\t"
++              "v_cvt_pk_fp8_f32 %0, %2, %3\n\t"
++              "v_cvt_pk_fp8_f32 %1, %6, %7\n\t"
++              "v_cvt_pk_fp8_f32 %0, %4, %5 op_sel:[0,0,1]\n\t"
++              "v_cvt_pk_fp8_f32 %1, %8, %9 op_sel:[0,0,1]\n\t"
++              "s_setreg_imm32_b32 hwreg(HW_REG_MODE, 23, 1), 0"
++              : "=&v"(lo),"=&v"(hi)
++              : "v"(w2_z(t[0])),"v"(w2_z(t[1])),"v"(w2_z(t[2])),"v"(w2_z(t[3])),
++                "v"(w2_z(t[4])),"v"(w2_z(t[5])),"v"(w2_z(t[6])),"v"(w2_z(t[7])) : "memory");
++ return i2{lo,hi};
++#else
++ W2_OVFL(1);int lo=__builtin_amdgcn_cvt_pk_fp8_f32(w2_z(t[0]),w2_z(t[1]),0,false);lo=__builtin_amdgcn_cvt_pk_fp8_f32(w2_z(t[2]),w2_z(t[3]),lo,true);
++ int hi=__builtin_amdgcn_cvt_pk_fp8_f32(w2_z(t[4]),w2_z(t[5]),0,false);hi=__builtin_amdgcn_cvt_pk_fp8_f32(w2_z(t[6]),w2_z(t[7]),hi,true);W2_OVFL(0);i2 a;a[0]=lo;a[1]=hi;return a;
++#endif
++}

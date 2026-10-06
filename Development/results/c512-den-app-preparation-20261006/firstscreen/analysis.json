@@ -1,0 +1,48 @@
+{
+  "handle": 77060,
+  "exit": 0,
+  "lock_released": true,
+  "scope": "same original O2 NET0 noPulse completeAPP1152 frozenHDR; onlycanonicalCOMGR compact old/new; single4slot, noPresent/gamerender/FSR",
+  "slots": [
+    {
+      "slot": 0,
+      "side": "old",
+      "cold0_ms": 1214.209,
+      "steady_count": 80,
+      "mean": 9.69325,
+      "p99": 10.035309999999999
+    },
+    {
+      "slot": 1,
+      "side": "new",
+      "cold0_ms": 1215.278,
+      "steady_count": 80,
+      "mean": 9.691225,
+      "p99": 10.051019999999998
+    },
+    {
+      "slot": 2,
+      "side": "new",
+      "cold0_ms": 1222.05,
+      "steady_count": 80,
+      "mean": 9.6802875,
+      "p99": 10.079089999999999
+    },
+    {
+      "slot": 3,
+      "side": "old",
+      "cold0_ms": 1217.241,
+      "steady_count": 80,
+      "mean": 9.67885,
+      "p99": 9.938609999999999
+    }
+  ],
+  "old_mean": 9.68605,
+  "new_mean": 9.68575625,
+  "mean_delta": -0.00029374999999909335,
+  "old_p99": 10.037510000000001,
+  "new_p99": 10.09168,
+  "p99_delta": 0.05416999999999916,
+  "discard": 80,
+  "all8_edge_hashes_same": true
+}

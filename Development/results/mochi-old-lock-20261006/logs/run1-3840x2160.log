@@ -1,0 +1,80 @@
+model pack: dlssnr.bin (599 entries)
+accumulation: fp32 (FP32 hardware)
+Swin position bias storage: fp32; FP32 logit addition
+152 steps from plan-3840x2160.txt
+152 of 152 layers have a kernel
+model pack: dlssnr.bin (599 entries)
+accumulation: fp32 (FP32 hardware)
+Swin position bias storage: fp32; FP32 logit addition
+152 steps from plan-3840x2160.txt
+152 of 152 layers have a kernel
+math profile: 3 (4096-byte activation table; baked exp bias=1)
+pre conditioning [style,tone,structure,skin,other]=[0,1,1,1,1]
+Automatic Mask: requested=1, conditioning=enabled; external ControlMask absent
+Overall Intensity: requested=1, GPU push=1, mapping=nr-delta-v1
+N-pair FP8 weight layout: 332 matrices
+persist: C=64 layers b005l0..b008l0 (4, last is DS) windows 8349 items 33017 wg 512
+persist: C=128 layers b009l0..b014l0 (6, last is DS) windows 2135 items 12524 wg 256
+persist: C=256 layers b015l0..b022l0 (8, last is DS) windows 558 items 4270 wg 128
+persist: C=256 layers b049l0..b055l0 (8, first is UPS) windows 558 items 4270 wg 128
+persist: C=128 layers b057l0..b061l0 (6, first is UPS) windows 2135 items 12523 wg 256
+persist: C=64 layers b063l0..b065l0 (4, first is UPS) windows 8349 items 33017 wg 512
+persist: 6 merged runs, 123 dispatches left
+arena reuse: unsized slot 247 (block 30) aliases value 0 (block 0 layer 0) +0
+activation arena 1543.2 MB over 185 values, shared by lifetime (4074.3 MB without)
+unpacking weights from artifacts
+math profile: 3 (4096-byte activation table; baked exp bias=1)
+pre conditioning [style,tone,structure,skin,other]=[0,1,1,1,1]
+Automatic Mask: requested=1, conditioning=enabled; external ControlMask absent
+Overall Intensity: requested=1, GPU push=1, mapping=nr-delta-v1
+weight arena 219.8 MB over 153 dispatches
+N-pair FP8 weight layout: 332 matrices
+persist: C=64 layers b005l0..b008l0 (4, last is DS) windows 8349 items 33017 wg 512
+persist: C=128 layers b009l0..b014l0 (6, last is DS) windows 2135 items 12524 wg 256
+persist: C=256 layers b015l0..b022l0 (8, last is DS) windows 558 items 4270 wg 128
+persist: C=256 layers b049l0..b055l0 (8, first is UPS) windows 558 items 4270 wg 128
+persist: C=128 layers b057l0..b061l0 (6, first is UPS) windows 2135 items 12523 wg 256
+persist: C=64 layers b063l0..b065l0 (4, first is UPS) windows 8349 items 33017 wg 512
+persist: 6 merged runs, 123 dispatches left
+GPU    AMD Radeon RX 9070 XT
+allocating arenas: activation 1544.4 MB, weights 222.6 MB
+[nr] activation arena through its device address: yes
+native working extent 3840x2176; source/output 3840x2160
+images in 3840x2160, out 3840x2160 (x2)
+input image: 132.7 MB host + 132.7 MB mapped staging
+uploading weights: 222.6 MB through a mapped staging buffer of the same size
+inter-dispatch barrier: execution + invalidate (no availability op)
+[nr] graph build 1.45s: plan 0.39s  weights-unpack 0.32s  arena-alloc 0.21s  input-image 0.06s  weights-upload 0.04s  noise-field 0.00s  pipelines 0.42s  arena-zero 0.01s  (23 pipelines, 1.8 MB of pipeline cache)
+
+123 dispatches, one submit: 29.463 ms  @ 0 MHz
+measurement wall 14888.179 ms, GPU total 14731.369 ms over 500 frames
+surface 0: 3840x2160 RGBA32F, 100.0% non-zero, rms 0.6942, range [0.01637, 1]
+
+family                             dispatches
+CCDecInputUpsample                      2
+CCSplitSwin16HFfwd                     16
+CCSplitSwin16HFfwdProj                 16
+CCSplitSwin16HFinalHead                 1
+CCSplitSwin16HProj                     15
+CCSplitSwin16HProjPool                  1
+CCSplitSwin16HQKVAttn                  16
+CCTinlayoutFusedPostBlockSwin1H         1
+CCTinlayoutFusedPreBlockSwin1H          1
+CCTinlayoutFusedSwin1H                  8
+CCTinlayoutFusedSwin2H                  2
+CCTinlayoutFusedSwin4H                  2
+CCTinlayoutFusedSwin8H                  2
+CCVit1DAttention                        8
+CCVit1DFfnContract                      8
+CCVit1DFfnExpand                        8
+CCVit1DProjection                       8
+CCVit1DQKV                              8
+.\nr_graph.exe :   ** b030l4 CCSplitSwin16HFinalHead (gemmnores) reads and writes offset 0: one dispatch, no ordering b
+etween workgroups **
+At D:\DLSSNR-Lab\competitor-timing-20260930\mz2.ps1:6 char:6
++   $o=.\nr_graph.exe --plan "plan-$($c[0]).txt" --model-pack dlssnr.bi ...
++      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (  ** b030l4 CCS...n workgroups **:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  ** 1 dispatches alias their own input **

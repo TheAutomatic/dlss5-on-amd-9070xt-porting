@@ -1,0 +1,16 @@
+{
+  "result": "PASS currentoverlap0 firstcapturediagnostic scope; no new hostwait cycle",
+  "CPUonly": true,
+  "source_sha": {
+    "native_game_frame.h": "e12263f8e5b8d2a979a3c8df8a7fb56f1d5d289082ccf05ac8522a02d2d5726a",
+    "native_game_submission.h": "0b8ec4a4770d9815c985844e22039d48c51afdad93e507af9d272e38b48f7377",
+    "hip_d3d12_bridge.h": "73bb4d25f0e0d24d22f92249f2d3dd8fc5d7022413d8b0b2ef90ee6526339ba1",
+    "hip_reference_network.h": "e92c71f3e3ca1ecd5431e09e40b8a74285d6b190e1e79c7325dbaee56cd7208f"
+  },
+  "same_queue": "Frame181 submit.Create(q);230network.Create(q) overlap0",
+  "producer_submission": "Frame406 encode/input Submit; submission93/101 ExecuteOwned\u2192queueSignal beforeSubmitreturns; ExecuteOwned29 executesD3Dcommandlist",
+  "bridge_order": "Run410 inputcopySubmit returns\u2192411Enqueue;272queueinputSignal\u2192HIPexternalwait\u2192275helper",
+  "first_warm_sync": "helper880originaleager thenHIPSync; producerD3Dsignal alreadyqueuedbeforewait",
+  "future_operations": "HIPoutputsignal278,D3Doutputwait282,outputreadable412,postcodecFrame414\u2013418 happenafterhelperreturns; no warmdependency onfuturepostsignal",
+  "excludes": "overlap/multiGPU/productionhotroute; no GPU/build/sourcechange"
+}

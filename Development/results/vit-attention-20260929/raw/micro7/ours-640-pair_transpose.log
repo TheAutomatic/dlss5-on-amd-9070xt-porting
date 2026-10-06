@@ -1,0 +1,15 @@
+START,ours-640-pair_transpose,vit_probe_pair_transpose
+EXACT,ours-640-pair_transpose,different=0
+BUFFER,ours-640-pair_transpose,output,invalid=0,nonzero=607270
+CHECK,ours-640-pair_transpose,guards=0,invalid=0,nonzero=607270
+TIME,ours-640-pair_transpose,0,50.646875
+TIME,ours-640-pair_transpose,1,42.557970
+TIME,ours-640-pair_transpose,2,36.042657
+TIME,ours-640-pair_transpose,3,37.884686
+TIME,ours-640-pair_transpose,4,37.028126
+TIME,ours-640-pair_transpose,5,37.052970
+TIME,ours-640-pair_transpose,6,39.225157
+EXACT,ours-640-pair_transpose,different=0
+BUFFER,ours-640-pair_transpose,output,invalid=0,nonzero=607270
+CHECK,ours-640-pair_transpose,guards=0,invalid=0,nonzero=607270
+RESULT,ours-640-pair_transpose,37.884686,128,7

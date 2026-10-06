@@ -1,0 +1,27 @@
+{
+  "scope": "same current complete NativeGameFrame, same one C512 start point",
+  "flags": "none / DLSS5_LAB_SUBMIT_PAIR=1 / DLSS5_LAB_SUBMIT_UNTIMED_PAIR=1; both1 reject",
+  "API_disabled_timing": 2,
+  "source_sha256": "f6c9afffc6cd53c8fb67407727167765c6cc3f690f54acd95ce778da0d077291",
+  "host_sha256": "b5e6958ca5fefb03900933271b0e89d6b5ce5eaa0339d8d78f497bc88bd59120",
+  "no_advance": "no GPU/runtime flag-acceptance/speed claim; prepare/build only",
+  "command": [
+    "x86_64-w64-mingw32-g++",
+    "-w",
+    "-std=c++17",
+    "-O2",
+    "-static",
+    "-municode",
+    "-DDLSS5_USE_HIP=1",
+    "-I/tmp/framework-untimed-20261006",
+    "-I/home/lmxxf/work/ai-theorys-study/wechat/assets/297/src",
+    "-I/home/lmxxf/work/ai-theorys-study/wechat/assets/297/Development/HIP",
+    "/tmp/framework-untimed-20261006/benchmark.cpp",
+    "-o",
+    "/tmp/framework-untimed-20261006/benchmark-framework-untimed.exe",
+    "-ld3d12",
+    "-ldxgi",
+    "-ld3dcompiler",
+    "-ldxguid"
+  ]
+}

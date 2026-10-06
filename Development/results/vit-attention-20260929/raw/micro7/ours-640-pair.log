@@ -1,0 +1,15 @@
+START,ours-640-pair,vit_probe_pair
+EXACT,ours-640-pair,different=0
+BUFFER,ours-640-pair,output,invalid=0,nonzero=607270
+CHECK,ours-640-pair,guards=0,invalid=0,nonzero=607270
+TIME,ours-640-pair,0,49.597666
+TIME,ours-640-pair,1,46.921562
+TIME,ours-640-pair,2,45.469064
+TIME,ours-640-pair,3,41.945931
+TIME,ours-640-pair,4,40.210944
+TIME,ours-640-pair,5,37.900936
+TIME,ours-640-pair,6,39.585155
+EXACT,ours-640-pair,different=0
+BUFFER,ours-640-pair,output,invalid=0,nonzero=607270
+CHECK,ours-640-pair,guards=0,invalid=0,nonzero=607270
+RESULT,ours-640-pair,41.945931,128,7
