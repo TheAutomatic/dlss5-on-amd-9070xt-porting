@@ -1,0 +1,9 @@
+# C2 640-only key permutation, CPU evidence
+
+C numerical contract preserved by representation design, not yet hardware gold: permute Krow4..7/8..11 before QK, K0/K16 reduction and Q row unchanged. Half probabilities physical lowgroup keys0..3/8..11, highgroup4..7/12..15; pair locally then accumulate fourtile partials in half. Two half2 boundary exchanges restore canonical a0..a7 tree. One dword exchange per16tile restores natural P before unchanged V load/AV key order. 640 ten fullchunks only. 400 actual instruction text identical to C.
+
+COMGR21 actual gfx1201 C640405→C2 398 instructions, ordinary VALU247→251 (exclude4WMMA), DSstatic4→3; dynamic64key DS16→6 (4 P restore +2 boundary). VGPR62→56, SGPR15, LDS/private/spills0, kernarg32/wave32; both round72 allocation, no occupancy gain. Initial loose substring VALU282 included disassembly comments; withdrawn, authority isa-check.json exact parsed lines. Doublearch compiled, no GPU C2 execution yet. CPU session24644 exit0 LOCK_RELEASED, game/RTC/process/space guards preserved.
+
+Independent natural key eight×640 finite half probabilities: every64prefix and restored P0diff. This tests tree ordering/representation, not WMMA implementation. Trace gold source generated separately from actual C/C2 body; one 32-thread wave, 16queries/head0, zeros/signed checker/spike finiteFP8 fixtures. Trace raw QK logicalkeys, natural FP8 P, each64halfdenprefix, FP32 AV and finalbytes. Both rawQK/AV must bitmatch as well as finalbytes; failure blocks performance. No NaN or FP8 special128 inputs, no negativezero propagation claim. Trace compiledLLVM23 CPU and hostMinGW; COMGR trace and actualgold pending root queue. Traced probes never timing.
+
+No variants/production/deployment changes. CPU C2 object alone is not evidence of improved network speed. B2 gate remains weak and not accepted.
