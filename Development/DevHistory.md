@@ -1762,3 +1762,10 @@ GPU均值FAST0我6.706866对M6.017463、差0.689404ms；FAST1我6.628813对M6.02
 当前FAST1 canonical深核隔离B只half score FMA/map，C再64key半分母树、保16query/原FP32 QK/AV。真GPU独立gold161795score及64query×400/640 denominator全部halfcode0diff；双archA/B68VGPR、C62，无LDS/private/spill。1088/640 full71/MP1/AE0/history0首ABBA：B平均+0.007611ms、p99−0.015198，C+0.036425/p99+0.028335且两C均慢，按门不收、不D、不旧M32扩扫。raw有限/自重复bit0，单共同synthetic相对A PSNR52.20/52.63dB；无性能候选不扩画质/900刷轮。实际640 ISA A/B/C WMMA5/5/4、VMEM22同、VALU216/228/247、bpermute0/0/4；Bscalar转换/floatclamp往返与C更多halfadd/shuffle是执行组织代价，不判纯数学更贵，62VGPR不认已提高occupancy。结果vit-math-stair-20261006。
 
 随后隔离当前host在C51223–30或ViT31–38仅一pair，保常规totalpair；无插/C512/无插/ViT/无插五slot，整个执行pdl_calls0/ordered，raw同finite。无插约8.901/8.898/8.918ms，插C512 total8.741、插ViT8.794ms，stage raw0.6305/1.2796ms；明显负扰动约1.8/1.3%，不均摊修正为真实族份额。下一仅C512起点无pair/空pair/nonblockingquery/匹配CPUdelay，检提交节奏而非直接收插桩刀。初smallrunner误用PS$args造成Usage、修arguments后通过；sparse隔离header重复include由复制EnvOptions一致入口修正，非GPU数学失败。所有GPU按单队列lock/gamecheck/15s看门狗/D约409GB，释放后交下家；生产/玩家配置/安装/正式包不改。
+
+
+### 2026-10-06 1080同步首账与锁定ViT数学合同
+
+共同half-exact encoded gradient1920×1080、Style1/seed0、full71/MP1/AE0/historyoff，双方逐帧submit；first raw移到warm之前，80暖160测。1088同640token首ABBA：FAST1我8.880759对M7.867191、差1.013568ms；FAST0我9.025781对M7.882941、差1.142840ms。生产1152我FAST1/0为9.344975/9.491284ms，对M固定1088为7.891163/7.902309，处理高不同明列不可作同工作量归因。全CSV正值/有限，首尾与重复process逐位一致；CPU单列，无锁频证明，不新增矩阵。source/input/module/model/flags/边界与noise成本见results/sync-network-gap1080-20261006。
+
+锁定d1185d2实际SPV确认QK/AV FP32 cooperative accum，NR_ACC_F16=0，half score FMA与64key half分母树，P恢复natural key后AV，只有出口ctx/inverse/product半化，不补猜中途half截断。小CPU独立树/出口gold与实际source/SPV身份见results/vit-math-contract-20261006；source-RNE gold不冒充原驱动逐值证据。62与68VGPR按gfx12 wave32 granule24均分配72，不支持occupancy提升。

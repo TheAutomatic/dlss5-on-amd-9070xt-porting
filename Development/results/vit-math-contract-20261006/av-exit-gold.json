@@ -1,0 +1,20 @@
+{
+  "rows": 160,
+  "columns": [
+    "RNE_half(ctx_fp32)",
+    "RNE_half(fp32(1/max(den_half,6.198883056640625e-5)))",
+    "RNE_half(ctx_half*inv_half)"
+  ],
+  "domain": "finite signed ctx, positive tree den; includes half overflow and signed zero/subnormal/boundaries",
+  "not_claimed": "LLPC divide accuracy, NaN input and final FP8 byte semantics require primitive confirmation",
+  "files": {
+    "av-exit-input-160x2.f32": {
+      "bytes": 1280,
+      "sha256": "2d8b69189f6d1cd8cbb9d994d09332e6e6cecc04848776a10d513be2d7959be9"
+    },
+    "av-exit-gold-160x3.u16": {
+      "bytes": 960,
+      "sha256": "409fba2d55ac09ccbfed0b124c02cf10ae3801a99ee84abbb26274fa9dced9c7"
+    }
+  }
+}

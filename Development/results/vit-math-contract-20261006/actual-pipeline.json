@@ -1,0 +1,23 @@
+{
+  "source": "vit_attn.comp",
+  "defines": [
+    "NR_COHERENT_ACT=0",
+    "NR_C=1024",
+    "NR_HEADS=32",
+    "NR_VWAVES=1",
+    "NR_KC=64",
+    "NR_QT=32",
+    "NR_VTRANS=1",
+    "NR_VPRENORMALIZED=1",
+    "NR_VPACKED_DEN=1",
+    "NR_VSPLIT_TAIL=1",
+    "NR_VQCLAMP=1",
+    "NR_VADDR=1",
+    "NR_VKMAN=1",
+    "NR_VOUT_VEC=1",
+    "NR_QUANT_EXPLICIT=1",
+    "NR_QPAD=0",
+    "NR_VBDA=1",
+    "NR_VKPERM=1"
+  ]
+}
