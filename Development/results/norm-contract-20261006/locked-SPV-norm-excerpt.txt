@@ -1,0 +1,64 @@
+      %83706 = OpLoad %float %q_849
+      %83707 = OpAccessChain %_ptr_Function_float %sqp_18 %int_3
+      %83708 = OpLoad %float %83707
+      %83709 = OpExtInst %float %1 Fma %83705 %83706 %83708
+      %83710 = OpAccessChain %_ptr_Function_float %sqp_18 %int_3
+               OpStore %83710 %83709
+      %83711 = OpLoad %float %k_318
+      %83712 = OpLoad %float %k_318
+      %83713 = OpAccessChain %_ptr_Function_float %skp_18 %int_3
+      %83714 = OpLoad %float %83713
+      %83715 = OpExtInst %float %1 Fma %83711 %83712 %83714
+      %83716 = OpAccessChain %_ptr_Function_float %skp_18 %int_3
+               OpStore %83716 %83715
+      %83718 = OpAccessChain %_ptr_Function_float %sqp_18 %int_0
+      %83719 = OpLoad %float %83718
+      %83720 = OpAccessChain %_ptr_Function_float %sqp_18 %int_1
+      %83721 = OpLoad %float %83720
+      %83722 = OpFAdd %float %83719 %83721
+      %83723 = OpAccessChain %_ptr_Function_float %sqp_18 %int_2
+      %83724 = OpLoad %float %83723
+      %83725 = OpAccessChain %_ptr_Function_float %sqp_18 %int_3
+      %83726 = OpLoad %float %83725
+      %83727 = OpFAdd %float %83724 %83726
+      %83728 = OpFAdd %float %83722 %83727
+      %83729 = OpAccessChain %_ptr_Function_float %skp_18 %int_0
+      %83730 = OpLoad %float %83729
+      %83731 = OpAccessChain %_ptr_Function_float %skp_18 %int_1
+      %83732 = OpLoad %float %83731
+      %83733 = OpFAdd %float %83730 %83732
+      %83734 = OpAccessChain %_ptr_Function_float %skp_18 %int_2
+      %83735 = OpLoad %float %83734
+      %83736 = OpAccessChain %_ptr_Function_float %skp_18 %int_3
+      %83737 = OpLoad %float %83736
+      %83738 = OpFAdd %float %83735 %83737
+      %83739 = OpFAdd %float %83733 %83738
+      %83740 = OpCompositeConstruct %v2float %83728 %83739
+      %83741 = OpFConvert %v2half %83740
+      %83742 = OpAccessChain %_ptr_Function_v2half %sqk_18 %int_0
+               OpStore %83742 %83741
+      %83743 = OpAccessChain %_ptr_Function_v2half %sqk_18 %int_0
+      %83744 = OpLoad %v2half %83743
+      %83745 = OpAccessChain %_ptr_Function_v2half %sqk_18 %int_0
+      %83746 = OpLoad %v2half %83745
+      %83747 = OpBitcast %uint %83746
+      %83748 = OpGroupNonUniformShuffleXor %uint %uint_3 %83747 %uint_16
+      %83749 = OpBitcast %v2half %83748
+      %83750 = OpFAdd %v2half %83744 %83749
+      %83751 = OpAccessChain %_ptr_Function_v2half %sqk_18 %int_0
+               OpStore %83751 %83750
+      %83753 = OpAccessChain %_ptr_Function_half %sqk_18 %int_0 %uint_0
+      %83754 = OpLoad %half %83753
+      %83755 = OpExtInst %half %1 FMax %83754 %half_0x1_04pn14
+      %83756 = OpFConvert %float %83755
+      %83757 = OpExtInst %float %1 InverseSqrt %83756
+      %83758 = OpFConvert %half %83757
+               OpStore %nq_18 %83758
+      %83760 = OpAccessChain %_ptr_Function_half %sqk_18 %int_0 %uint_1
+      %83761 = OpLoad %half %83760
+      %83762 = OpExtInst %half %1 FMax %83761 %half_0x1_04pn14
+      %83763 = OpFConvert %float %83762
+      %83764 = OpExtInst %float %1 InverseSqrt %83763
+      %83765 = OpFConvert %half %83764
+               OpStore %nk_18 %83765
+      %83767 = OpLoad %uint %tok0_3
