@@ -1779,3 +1779,8 @@ B数学同域表达式消除half→float clamp→half往返，COMGR21真实640 V
 ### 2026-10-06 C2 keyperm保持C数学的真实gold与短筛
 
 仅640完整chunk：Krow置换就地half分母/P恢复natural，再原AV；COMGR总静态405→398、VALU247→251、DS动态16→6/64，VGPR56仍allocation72，400原C指令完全同。四fixture含±0，实际逐层QK/P/denprefix/AV/finalbyte全0差/有限，整网对前C逐floatbit0差。1088 A/C2/C2/A首ABBA delta−0.004771ms/p99−0.068848，但两C2不都胜两A，弱短筛不收不formal。相对当前A合成PSNR52.632604/maxabs.0335403，非生产画质验收。source/COMGR实际ISA/dualarchSHA/tracegold与CSV见results/vit-den-keyperm-20261006；CPU44001/GPU38113均exit0锁释放，队列交integrator，无部署。
+
+
+### 2026-10-06 C32norm转置CPU权威baseline校准
+
+最小原型6ed1ae68旧-S CPU169→193VGPR不是实际active ELF；撤回allocation192→216/occupancy变坏说法。补完整canonical WindowsABI/C++14/-real-true16/rowopts/BC→-c internalize→link，A实际hsaco SHA f46b8af2…ee52与stock c32-wave1-fast逐byte相同，FAST3/type/RTZ身份真锁。真实A/T prefix128→128、chain131→129、post132→128，均allocation144；LDS4096→4608。真ISA chain1030→1119、prefix1517→1536、post1524→1544，三者DS+36、rsq16→2。静态止依据为恢复FP8片段DS/总指令/LDS增加，非VGPR占用退步；未GPU/未数学同值claim。新actual-object-isa-summary与命令/ELF身份覆盖旧-S资源结论，见results/c32-norm-transpose-20261006。
