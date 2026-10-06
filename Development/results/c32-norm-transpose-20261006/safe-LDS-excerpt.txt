@@ -1,0 +1,59 @@
+	v_cvt_pk_fp8_f32 v50.h, v55, v56 op_sel:[0,0,1]            // 00000004E73C: D7694032 02027137
+	s_setreg_imm32_b32 hwreg(HW_REG_WAVE_MODE, 23, 1), 0       // 00000004E744: B98005C1 00000000
+	ds_store_b64 v97, v[49:50]                                 // 00000004E74C: D9340000 00003161
+	s_setreg_imm32_b32 hwreg(HW_REG_WAVE_MODE, 23, 1), 1       // 00000004E754: B98005C1 00000001
+	v_cvt_pk_fp8_f32 v49.l, v57, v58                           // 00000004E75C: D7690031 02027539
+	v_cvt_pk_fp8_f32 v50.l, v61, v62                           // 00000004E764: D7690032 02027D3D
+	v_cvt_pk_fp8_f32 v49.h, v59, v60 op_sel:[0,0,1]            // 00000004E76C: D7694031 0202793B
+	v_cvt_pk_fp8_f32 v50.h, v63, v64 op_sel:[0,0,1]            // 00000004E774: D7694032 0202813F
+	s_setreg_imm32_b32 hwreg(HW_REG_WAVE_MODE, 23, 1), 0       // 00000004E77C: B98005C1 00000000
+	ds_store_b64 v97, v[49:50] offset:16                       // 00000004E784: D9340010 00003161
+	s_wait_dscnt 0x0                                           // 00000004E78C: BFC60000
+	ds_load_u8 v49, v96 offset:96                              // 00000004E790: D8E80060 31000060
+	ds_load_u8 v50, v96 offset:64                              // 00000004E798: D8E80040 32000060
+	ds_load_u8 v51, v96                                        // 00000004E7A0: D8E80000 33000060
+
+	v_cvt_pk_fp8_f32 v50.h, v63, v64 op_sel:[0,0,1]            // 00000004E774: D7694032 0202813F
+	s_setreg_imm32_b32 hwreg(HW_REG_WAVE_MODE, 23, 1), 0       // 00000004E77C: B98005C1 00000000
+	ds_store_b64 v97, v[49:50] offset:16                       // 00000004E784: D9340010 00003161
+	s_wait_dscnt 0x0                                           // 00000004E78C: BFC60000
+	ds_load_u8 v49, v96 offset:96                              // 00000004E790: D8E80060 31000060
+	ds_load_u8 v50, v96 offset:64                              // 00000004E798: D8E80040 32000060
+	ds_load_u8 v51, v96                                        // 00000004E7A0: D8E80000 33000060
+	ds_load_u8 v52, v96 offset:32                              // 00000004E7A8: D8E80020 34000060
+	ds_load_u8 v53, v96 offset:160                             // 00000004E7B0: D8E800A0 35000060
+	ds_load_u8 v54, v96 offset:128                             // 00000004E7B8: D8E80080 36000060
+	ds_load_u8 v55, v96 offset:224                             // 00000004E7C0: D8E800E0 37000060
+	ds_load_u8 v56, v96 offset:192                             // 00000004E7C8: D8E800C0 38000060
+	s_wait_dscnt 0x6                                           // 00000004E7D0: BFC60006
+	v_perm_b32 v49, v50, v49, 0xc0c0004                        // 00000004E7D4: D6440031 03FE6332 0C0C0004
+
+	v_cvt_pk_fp8_f32 v50.h, v55, v56 op_sel:[0,0,1]            // 00000004EA48: D7694032 02027137
+	s_setreg_imm32_b32 hwreg(HW_REG_WAVE_MODE, 23, 1), 0       // 00000004EA50: B98005C1 00000000
+	ds_store_b64 v97, v[49:50]                                 // 00000004EA58: D9340000 00003161
+	s_setreg_imm32_b32 hwreg(HW_REG_WAVE_MODE, 23, 1), 1       // 00000004EA60: B98005C1 00000001
+	v_cvt_pk_fp8_f32 v49.l, v57, v58                           // 00000004EA68: D7690031 02027539
+	v_cvt_pk_fp8_f32 v50.l, v61, v62                           // 00000004EA70: D7690032 02027D3D
+	v_cvt_pk_fp8_f32 v49.h, v59, v60 op_sel:[0,0,1]            // 00000004EA78: D7694031 0202793B
+	v_cvt_pk_fp8_f32 v50.h, v63, v64 op_sel:[0,0,1]            // 00000004EA80: D7694032 0202813F
+	s_setreg_imm32_b32 hwreg(HW_REG_WAVE_MODE, 23, 1), 0       // 00000004EA88: B98005C1 00000000
+	ds_store_b64 v97, v[49:50] offset:16                       // 00000004EA90: D9340010 00003161
+	s_wait_dscnt 0x0                                           // 00000004EA98: BFC60000
+	ds_load_u8 v49, v96 offset:96                              // 00000004EA9C: D8E80060 31000060
+	ds_load_u8 v50, v96 offset:64                              // 00000004EAA4: D8E80040 32000060
+	ds_load_u8 v51, v96                                        // 00000004EAAC: D8E80000 33000060
+
+	v_cvt_pk_fp8_f32 v50.h, v63, v64 op_sel:[0,0,1]            // 00000004EA80: D7694032 0202813F
+	s_setreg_imm32_b32 hwreg(HW_REG_WAVE_MODE, 23, 1), 0       // 00000004EA88: B98005C1 00000000
+	ds_store_b64 v97, v[49:50] offset:16                       // 00000004EA90: D9340010 00003161
+	s_wait_dscnt 0x0                                           // 00000004EA98: BFC60000
+	ds_load_u8 v49, v96 offset:96                              // 00000004EA9C: D8E80060 31000060
+	ds_load_u8 v50, v96 offset:64                              // 00000004EAA4: D8E80040 32000060
+	ds_load_u8 v51, v96                                        // 00000004EAAC: D8E80000 33000060
+	ds_load_u8 v52, v96 offset:32                              // 00000004EAB4: D8E80020 34000060
+	ds_load_u8 v53, v96 offset:160                             // 00000004EABC: D8E800A0 35000060
+	ds_load_u8 v54, v96 offset:128                             // 00000004EAC4: D8E80080 36000060
+	ds_load_u8 v55, v96 offset:224                             // 00000004EACC: D8E800E0 37000060
+	ds_load_u8 v56, v96 offset:192                             // 00000004EAD4: D8E800C0 38000060
+	s_wait_dscnt 0x6                                           // 00000004EADC: BFC60006
+	v_perm_b32 v49, v50, v49, 0xc0c0004                        // 00000004EAE0: D6440031 03FE6332 0C0C0004

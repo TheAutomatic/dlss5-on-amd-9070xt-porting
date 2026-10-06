@@ -16,7 +16,7 @@ newbody='''   __attribute__((shared)) unsigned char transpose_bytes[512];
     if(part<2)__builtin_memcpy(transpose_bytes+r*32+ci*16+g*8,&a,8);
     else{values[qt*4+ci*2]=a[0];values[qt*4+ci*2+1]=a[1];}
    }
-   if(part<2){__builtin_amdgcn_sched_barrier(0);for(uint ci=0;ci<2;ci++){i2 a{};for(uint e=0;e<8;e++)a[e/4]=int(uint(a[e/4])|(uint(transpose_bytes[(g*8+e)*32+ci*16+r])<<(8*(e%4))));
+   if(part<2){sync_window();for(uint ci=0;ci<2;ci++){i2 a{};for(uint e=0;e<8;e++)a[e/4]=int(uint(a[e/4])|(uint(transpose_bytes[(g*8+e)*32+ci*16+r])<<(8*(e%4))));
     if(part==0){queries[qt*4+ci*2]=a[0];queries[qt*4+ci*2+1]=a[1];}else{keys[qt*4+ci*2]=a[0];keys[qt*4+ci*2+1]=a[1];}
-   }}'''
+   }sync_window();}'''
 s=s[:start]+newbody+s[end:];a.out.parent.mkdir(parents=True,exist_ok=True);a.out.write_text(s)
