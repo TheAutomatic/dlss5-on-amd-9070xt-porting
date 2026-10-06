@@ -1,0 +1,27 @@
+{
+  "phase": "CPU productbaseline +12stepnumericgold preparation only, noGPU/perf",
+  "build": "72859/51594 syntax preflightfail extrafprintfparenthesis; corrected36034 exit0",
+  "exe_sha256": "f298245b70259a64e0fc63808e366e84954e51ca7dc5e9210de74294e05af47e",
+  "source_sha256": {
+    "benchmark.cpp": "a36f7661ac66016e4f784e8bd985b2eeb79645f2f0934037c7043a4611d43f4c",
+    "hip_reference_network.h": "e1a746f1c6e623dcc68dcd21e30e15a3e520fd6e1f9dc01f58626da2ceb8fb40",
+    "hip_d3d12_bridge.h": "5814ed60a6424f6580b7253d48fb38dd0689788f5a169f191ec28dfeec5885e4",
+    "native_hip_network.h": "d352e32756b3e0043d6fb460f555d62dbef81a3a51c7f45c1d801b7fb9326f69",
+    "hip_api.h": "a02b0bd87d52ee23b1b6e671d881afccbf467ae49547dbffa1d55389fd7cdeda"
+  },
+  "roles": {
+    "eager": "opt.submit_pulse2=currentAuto enum, originalphysicalConfigure/lease/driver path",
+    "replay": "opt.submit_pulse0, noCreate/Recordleasedevents allowed; noReplayAuto"
+  },
+  "scope": "currentOrigFrame actual1152F1MP1PRED1inactiveAE0noneHistseed0resettrue/PDL0NET0overlap0/HDR12seq2, opt.graphfalse",
+  "actual_eager_gate": "EveryordinaryEnqueue requiresdriver/caps/leaseActive/CreateOk1, accepted increments1 andrecord_ok==accepted; Record0 is casefail, noGPUquery added",
+  "actual_counts": "Warmordinary+laterEagerFrames counted; capture traversal excluded ordinary; realGraphCalls countedseparately; finalprintf actualpulse/driver/caps/ordinary fields",
+  "gold_plan": "twoindependentFrameprocesses12seq2 controlledrealHDR, samecodec/modules/PRED1inactive/source; fullstepF16exactfinite gate",
+  "math": "No module/shader/input/layout/codec changes; submitorganization/policy experiment",
+  "limits": [
+    "No hardware autoRecord or numericgate yet",
+    "DiagnosticpostEnqueuecounterassertions not automatically performanceequivalent; futureperf source needs fairnessreview",
+    "NoReplayAuto/eventnodecapture, no production/userconfig/pkg/install/push",
+    "Priorpure/APPbenefitsnotadded; originalMbaseline unchanged"
+  ]
+}
