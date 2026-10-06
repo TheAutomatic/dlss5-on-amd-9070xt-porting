@@ -55,7 +55,9 @@
 - 16-query数学阶梯B（仅score halfFMA/map）及C（加64key half树）原语gold0diff、双arch无spill，但同1088整网首ABBA B平均+0.00761ms，C+0.03643ms且p99变差。不收，不D、不旧M32扩扫；52.20/52.63dB仅对当前FAST1一份synthetic输出，非NVIDIA oracle。ISA显示Bscalar转换往返、C更多halfadd/shuffle，不能判纯数学无解。结果vit-math-stair-20261006。
 - 当前低扰动stage只探C51223–30/ViT31–38一pair，ordered/pdl_calls0、raw同；插桩反使total快，不能认精确族贡献或均摊。空timedpair正、非blocking query与1us CPU delay负，支持event特有效应但未证明driver flush。完整框架既有真实HDR双档首筛正，NETspan与完整wall分项记账。
 - 同batchT/U没有支持untimed优于timed。正式timedpair三round900平均/p99均正，1152平均均正但round3 p99+0.08934ms，按门不收、不刷samevariant；当前没有足够新生产优化，900仍差约0.6ms、同1088差1.01ms。旧logger无tag只可受限分布关联，不据NET尾下降就定CPU全因果。
-- 同位置single timed Record首900 mean−0.16251/p99−0.01925ms、640条tag100%匹配，raw同/finite。独立safelease/HIPadapter版本1152首筛mean−0.18854/p99−0.11173ms、tag100%匹配，源码与旧900throwprototype分列。真实template18case+实际ABI adapterfake注入通过，bridge-only私有配置、own-device warm/cleanup、close失败保整个owner资源；默认off/不部署。同safeexe900正式round1已失败：mean+0.020946/p99+0.10405ms，NETready也慢，1280tag全匹配/raw同finite；诊断环境立即止，不跑1152formal/更多round/normal19/同诊断variant重刷。默认不收，positive首屏不能覆盖负正式门。仅O1/static/NET_TIMING1负账，不能认APP有效或无效；已CPU准备canonicalO2/NET_TIMING0原完整入口，禁所有timing getter/SetTag/Poll，退出scalar计数区分pulse与原post_signal_query，无新增query。待独立HnormAPP900/1152后根进程决定一次必要实际APPgate，不开新模式/位置。
+- 无guard旧single900prototype首筛mean/p99正（different source）；safe1152首筛也正但旧记录计数缺。**更正：safe900formal旧stderr有frame-scope-fallback；APP900新权威计数Create1/Destroy1/Record0，均不是有效pulse性能试验，撤回正式性能负账归类。** 原CSV/平均/p99保留作normalNN/资源条件观察，不认single Record慢。
+- APP900 O2/NET0确outertimingCreate/Record/Query0、normalpostquery160、raw同finite，却未Record，不收。Ctor初始化不能代表C512真实点位active；PDLCalls是累计AnyOrderAPI调用，900继续保守unsupported、不关baselinePDL1。CPU已修一次性requested/active/reason/点位mask+pdl与退出Record成功计数，无新增query/sync。下一只有1152(actualpdl0)实际APP on/off必须Record=N和资源balance先过才能认gain；单scope不称全档追平。
+
 - C32原fragment轴已纠正，不再把原布局误判列向。保两WMMA/原矩阵布局仅rsqrt hoist独立unit/prefix/fullraw0、occupancy16，1088首screen约−0.0611ms，待另900/正式p99门；不与pulse收益相加、不混数学与提交。B2/C2短筛无足够稳定收益不收。
 
 ## 第二优先：解释mochizuki差距（备用CPU工作；新实验未执行）

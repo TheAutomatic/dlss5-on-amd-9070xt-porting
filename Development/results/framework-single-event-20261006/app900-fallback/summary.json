@@ -1,0 +1,174 @@
+{
+  "slots": [
+    {
+      "slot": 0,
+      "wall_mean": 6.987937499999999,
+      "wall_p99": 7.273019999999998,
+      "net_mean_ready": null,
+      "net_p99_ready": null,
+      "samples": 80,
+      "records": 0,
+      "ready_all": 0,
+      "ready_steady": 0,
+      "invalid": 0
+    },
+    {
+      "slot": 1,
+      "wall_mean": 6.919900000000001,
+      "wall_p99": 7.1912199999999995,
+      "net_mean_ready": null,
+      "net_p99_ready": null,
+      "samples": 80,
+      "records": 0,
+      "ready_all": 0,
+      "ready_steady": 0,
+      "invalid": 0
+    },
+    {
+      "slot": 2,
+      "wall_mean": 6.9315,
+      "wall_p99": 7.3224599999999995,
+      "net_mean_ready": null,
+      "net_p99_ready": null,
+      "samples": 80,
+      "records": 0,
+      "ready_all": 0,
+      "ready_steady": 0,
+      "invalid": 0
+    },
+    {
+      "slot": 3,
+      "wall_mean": 6.898987499999999,
+      "wall_p99": 7.1178399999999975,
+      "net_mean_ready": null,
+      "net_p99_ready": null,
+      "samples": 80,
+      "records": 0,
+      "ready_all": 0,
+      "ready_steady": 0,
+      "invalid": 0
+    }
+  ],
+  "avg_delta": -0.01776249999999724,
+  "merged_p99_delta": -0.014389999999998793,
+  "net_avg_delta_ready": null,
+  "net_p99_delta_ready": null,
+  "allBfaster": false,
+  "raw_same": true,
+  "finite": true,
+  "all_current_ready": false,
+  "receipt": [
+    {
+      "slot": 0,
+      "diagnostic": [
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "160"
+        ]
+      ],
+      "pulse": [
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "diagnostics_off": true,
+      "valid": true
+    },
+    {
+      "slot": 1,
+      "diagnostic": [
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "160"
+        ]
+      ],
+      "pulse": [
+        [
+          "1",
+          "1",
+          "0",
+          "0",
+          "1",
+          "1",
+          "0"
+        ]
+      ],
+      "diagnostics_off": true,
+      "valid": false
+    },
+    {
+      "slot": 2,
+      "diagnostic": [
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "160"
+        ]
+      ],
+      "pulse": [
+        [
+          "1",
+          "1",
+          "0",
+          "0",
+          "1",
+          "1",
+          "0"
+        ]
+      ],
+      "diagnostics_off": true,
+      "valid": false
+    },
+    {
+      "slot": 3,
+      "diagnostic": [
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "160"
+        ]
+      ],
+      "pulse": [
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "diagnostics_off": true,
+      "valid": true
+    }
+  ],
+  "all_diagnostics_off": true,
+  "all_pulse_effective": false,
+  "trial_kind": "candidate-fallback-not-effective",
+  "screen_pass": false
+}

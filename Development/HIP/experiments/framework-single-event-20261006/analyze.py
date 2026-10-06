@@ -20,13 +20,14 @@ if a.app_net0:
   log=(a.directory/f'slot-{i}'/'stderr.log').read_text()
   diag=re.findall(r'APP_DIAGNOSTIC_RECEIPT timer_on=(\d+) timer_creates=(\d+) timer_records=(\d+) timer_queries=(\d+) span_probe=(\d+) poll_records=(\d+) post_signal_queries=(\d+)',log)
   pulse=re.findall(r'APP_PULSE_RECEIPT create=(\d+) create_ok=(\d+) record=(\d+) record_ok=(\d+) destroy=(\d+) destroy_ok=(\d+) drain=(\d+)',log)
-  records_ok=False
+  records_ok=False;diagnostics_off=False
   if len(diag)==1 and len(pulse)==1:
    x=list(map(int,diag[0]));y=list(map(int,pulse[0]));n=len(list(csv.DictReader((a.directory/f'slot-{i}'/'frame.csv').open())))
-   records_ok=all(v==0 for v in x[:6]) and x[6]==n and (y==[1,1,n,n,1,1,1] if i in [1,2] else all(v==0 for v in y))
-  receipts.append(dict(slot=i,diagnostic=diag,pulse=pulse,valid=records_ok))
- s['receipt']=receipts;s['all_diagnostics_off']=all(x['valid'] for x in receipts);s['all_current_ready']=False
- s['screen_pass']=s['avg_delta']<0 and s['merged_p99_delta']<0 and s['allBfaster'] and raw_same and finite and s['all_diagnostics_off']
+   diagnostics_off=all(v==0 for v in x[:6]) and x[6]==n
+   records_ok=diagnostics_off and (y==[1,1,n,n,1,1,1] if i in [1,2] else all(v==0 for v in y))
+  receipts.append(dict(slot=i,diagnostic=diag,pulse=pulse,diagnostics_off=diagnostics_off,valid=records_ok))
+ s['receipt']=receipts;s['all_diagnostics_off']=all(x['diagnostics_off'] for x in receipts);s['all_pulse_effective']=all(x['valid'] for x in receipts);s['trial_kind']='effective-single' if s['all_pulse_effective'] else 'candidate-fallback-not-effective';s['all_current_ready']=False
+ s['screen_pass']=s['avg_delta']<0 and s['merged_p99_delta']<0 and s['allBfaster'] and raw_same and finite and s['all_diagnostics_off'] and s['all_pulse_effective']
 else:
  s['screen_pass']=s['avg_delta']<0 and s['merged_p99_delta']<0 and s['allBfaster'] and raw_same and finite and s['all_current_ready']
 (a.directory/'summary.json').write_text(json.dumps(s,indent=2)+'\n');(a.directory/'raw-hashes.json').write_text(json.dumps(hashes,indent=2)+'\n');print(json.dumps(s,indent=2))

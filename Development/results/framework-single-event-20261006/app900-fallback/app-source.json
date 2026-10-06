@@ -1,0 +1,16 @@
+{
+  "scope": "original complete NativeGameFrame caller; O2/static planned; NET_TIMING0; no GetTimings/GetStatus/Poll/SetTag; exit-only counter printing; candidate same old safe1event/samepoint",
+  "required_flags": {
+    "DLSS5_NET_TIMING": 0,
+    "DLSS5_GAME_PROBE": 0,
+    "DLSS5_HIP_SPAN_PROBE": 0,
+    "DLSS5_HIP_INPUT_POLL": 0
+  },
+  "unchanged_default_post_signal_stream_query": true,
+  "files": {
+    "benchmark.cpp": "a36f7661ac66016e4f784e8bd985b2eeb79645f2f0934037c7043a4611d43f4c",
+    "submit_pulse_hip.h": "cc122e5b0795d841f9075a32b24014c4021cad986b019a1bfbc4da1cfbe806a2",
+    "hip_reference_network.h": "e62124441459be8cda47e4e7e5a4b888cf8a02de17dd192d416ea28b94fa778d",
+    "hip_d3d12_bridge.h": "9971b08b4a896764ee9c44084ee799fd78e25864037ab8418fcc708789e91293"
+  }
+}

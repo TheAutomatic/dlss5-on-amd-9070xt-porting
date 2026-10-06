@@ -1825,3 +1825,9 @@ B数学同域表达式消除half→float clamp→half往返，COMGR21真实640 V
 - 已正式负账仅O1/NET_TIMING1条件；不能据此判APP无效，也不能拿旧positive首屏判APP有效。paired/single诊断线仍封存，无GPU重刷。根进程随后要求准备一次必要实际APP条件，等独立HnormAPP双档门后再决定执行。
 - prepare_app恢复原NativeGameFrame benchmark loop、canonicalO2/static、NET_TIMING0/allprobes0，完全无GetTimings/GetStatus/Poll/SetTag；禁lazy-enable诊断入口。保原directIO/async/inputpoll0与默认post_signal_streamquery。新增普通CPU计数并退出打印pulseCreate/Record/Destroy及outertimerAPI数，未新增query/sync。O2完整链接0，实际counter版本adapter/leaseCPU ASAN/UBSAN faulttests过，toolingparser能拒非零诊断query，非GPU/质量实验。
 - 权威原O2/HDR/fullFrame/模块overlay参数已交math代理做HnormAPP主测；本代理没有上传或执行APPpulse，以免扰正在GPU窗口。app-cpu-preparation.json绑定source/exeSHA，玩家配置/载荷/ZIP未改。
+
+### 2026-10-06 撤回safe900性能负账归类：运行时未生效
+
+- 新APP900 O2/NET0权威退出计数候选Create1/Destroy1/Record0/drain0，stderr frame-scope-fallback；outertimer APIs0、正常post_signalquery160，raw同/finite。平均−0.01776/p99−0.01439ms无有效Record，不能归pulse。40018exit0/LOCK_RELEASED。
+- 回看a792f33c旧safe900formal原stderr也有fallback，先前只看构造active1与正常NN时序而错归性能负账。现明确撤回single Record性能失败断言；保留原CSV/数值/历史记录，不删负数据，归类为eligible/fallback门。旧无guardprototype900和safe1152为分离条件，不相互补证。
+- pdl_calls在实际AnyOrderAPI处累计；ctor0不保证C64/C128/C256后C512marker处0，pdl_anyorderfalse也不是GPU完成证据。CPU加一次性runtime requested/active/rejectmask/pdl/record尝试成功数；startup改initialized/pending-first-record。默认baselinePDL1未关，900保守unsupported。下一1152真正on/off需actualRecord=N、pdl0、资源销毁平衡，不能创建事件就认已启用。此处修正未新跑GPU。

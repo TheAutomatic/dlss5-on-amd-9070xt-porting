@@ -19,7 +19,7 @@ s=s.replace('return stream_sync&&stream?stream_sync(*stream):801;', 'if(!stream_
 s=s.replace('return event_destroy?event_destroy(handle):801;', 'if(!event_destroy)return 801;++destroy_calls;int result=event_destroy(handle);destroy_ok+=result==0;return result;')
 p.write_text(s)
 p=a.output/'hip_reference_network.h';s=p.read_text();needle='api.hipSetDevice(int(opt.device));api.hipStreamSynchronize(stream);experimental_history.reset();';assert s.count(needle)==1
-s=s.replace(needle,'''std::fprintf(stderr,"APP_PULSE_RECEIPT create=%llu create_ok=%llu record=%llu record_ok=%llu destroy=%llu destroy_ok=%llu drain=%llu\\n",pulse_ops.create_calls,pulse_ops.create_ok,pulse_ops.record_calls,pulse_ops.record_ok,pulse_ops.destroy_calls,pulse_ops.destroy_ok,pulse_ops.drain_calls);'''+needle,1);p.write_text(s)
+s=s.replace(needle,'''std::fprintf(stderr,"APP_PULSE_RECEIPT create=%llu create_ok=%llu record=%llu record_ok=%llu destroy=%llu destroy_ok=%llu drain=%llu pdl_calls=%u site_visits=%llu attempts=%llu accepted=%llu reject_mask=%u\\n",pulse_ops.create_calls,pulse_ops.create_ok,pulse_ops.record_calls,pulse_ops.record_ok,pulse_ops.destroy_calls,pulse_ops.destroy_ok,pulse_ops.drain_calls,pdl_calls,pulse_site_visits,pulse_record_attempts,pulse_record_accepted,pulse_last_reject_mask);'''+needle,1);p.write_text(s)
 p=a.output/'hip_d3d12_bridge.h';s=p.read_text()
 s=s.replace('bool timing_on{};', 'unsigned long long app_timer_creates{},app_timer_records{},app_timer_queries{},app_post_queries{},app_poll_records{};bool timing_on{};',1)
 s=s.replace('const int q=timing_query(timing_end[k]);', 'const int q=(++app_timer_queries,timing_query(timing_end[k]));')
