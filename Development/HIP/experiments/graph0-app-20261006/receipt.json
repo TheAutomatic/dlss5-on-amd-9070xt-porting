@@ -1,0 +1,24 @@
+{
+  "phase": "APP CPUgold preparation only no GPU",
+  "build_initial": "48480 failed copiedinclude duplicates and missingLabRecording, fixed",
+  "build_final": "45302 O2static municode exit0",
+  "exe_sha256": "d6bc9bb9b5cf49b81d1476065472138137d6f94a861b90d5df5ed5137a5b4f7b",
+  "source_sha256": {
+    "benchmark.cpp": "a36f7661ac66016e4f784e8bd985b2eeb79645f2f0934037c7043a4611d43f4c",
+    "hip_reference_network.h": "8adfd931598c2de0b706c345e764ddd95353653607b086b86fcc060af8cbd3d4",
+    "hip_d3d12_bridge.h": "73bb4d25f0e0d24d22f92249f2d3dd8fc5d7022413d8b0b2ef90ee6526339ba1",
+    "native_hip_network.h": "4c5035daea0462328b1bda3df52073bccbd4ca3d6b5f9f7ce9b9857624eb37b8",
+    "native_game_frame.h": "e12263f8e5b8d2a979a3c8df8a7fb56f1d5d289082ccf05ac8522a02d2d5726a"
+  },
+  "scope": "originalHDR1296x720 menu\u21921920x1152 FAST1MP1AE0historyoffseed0Style1NET0 PDL0pulse0 opt.graphfalse",
+  "insert": "Bridge.Enqueuenetwork-only between original externalWait and externalSignal; codec and D3D transitions remain outside capture",
+  "first_real_frame": "originalPrepareStaged(seed1) unchanged; actualseed0 eagerwarm once then capture161orderedkernels\u2192instantiate\u2192initialreplay; lateronlyGraphLaunch",
+  "lifetime": "BridgeClose LabAppgraph before releasing external imports; sameNetworkweights/pool/SPplans alive until graphdrain+execgraphdestroy; PrepareStagedaftercapture rejects",
+  "gold_plan": "two independent originalFrame processes, samecopiedcaller/source/modules/codec/HDR, mode0eager versusmode1replay; controlledbenchmarksequence2 RNEHDR scaling 12steps each frame saved; spatialresettrue everyframe and fixedseed0",
+  "limits": [
+    "Not performance: eagergoldmode traces161Fn/check/log each frame",
+    "No broadhot/resize/multipass/history route or fallback behavior implemented",
+    "No actualAPP hardware gold yet; fixed161scope must be verified",
+    "CapturedNetworkneverEnqueueaftercapture; independentFrame reference separateprocess preserves buffers"
+  ]
+}

@@ -1,0 +1,38 @@
+--- Development/HIP/hip_d3d12_bridge.h
++++ isolated/hip_d3d12_bridge.h
+@@ -10,7 +10,7 @@
+ #include <thread>
+ #include <filesystem>
+ #include "hip_reference_network.h"
+-#include "../../src/native_device_identity.h"
++#include "native_device_identity.h"
+ #include <d3d12.h>
+ #include <dxgi1_4.h>
+ namespace hip_reference {
+@@ -193,7 +193,7 @@
+  }
+  ~D3D12Bridge(){
+   if(!WaitForSubmittedWork()||(network&&!network->CloseSubmitPulse()))return;
+-  if(clear_cmd)clear_cmd->Release();if(clear_alloc)clear_alloc->Release();if(zero_upload)zero_upload->Release();
++  if(network)network->LabAppClose();if(clear_cmd)clear_cmd->Release();if(clear_alloc)clear_alloc->Release();if(zero_upload)zero_upload->Release();
+   if(network){DestroyTiming();TeardownPoll();Release(input);Release(history);Release(output);if(semaphore)network->Runtime().hipDestroyExternalSemaphore(semaphore);delete network;}
+   if(fence_handle)CloseHandle(fence_handle);if(event)CloseHandle(event);if(fence)fence->Release();if(queue)queue->Release();if(device)device->Release();
+  }
+@@ -272,7 +272,7 @@
+    else{Check(queue->Signal(fence,++value),"D3D input signal");hip_probe::WaitParams wait{};wait.params.fence.value=value;api.Check(api.hipWaitExternalSemaphoresAsync(&semaphore,&wait,1,network->Stream()),"HIP input wait");}
+    if(span_probe){if(span_pending){float ms=-1;int sync=api.hipEventSynchronize(span_end),status=api.hipEventElapsedTime(&ms,span_begin,span_end);fprintf(stderr,"hip_span gpu_ms=%.3f cpu_enqueue_ms=%.3f sync=%d status=%d\n",ms,span_cpu,sync,status);span_pending=false;}api.Check(api.hipEventRecord(span_begin,network->Stream()),"span begin");}
+    const bool timed=TimingBegin();
+-   auto start=std::chrono::steady_clock::now();network->Enqueue(input.mapped,temporal?history.mapped:nullptr,output.mapped,seed);
++   auto start=std::chrono::steady_clock::now();network->LabAppEnqueue(input.mapped,output.mapped,seed,temporal);
+    if(timed)TimingEnd();
+    if(span_probe){span_cpu=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-start).count();api.Check(api.hipEventRecord(span_end,network->Stream()),"span end");span_pending=true;}
+    hip_probe::SignalParams signal{};signal.params.fence.value=++value;api.Check(api.hipSignalExternalSemaphoresAsync(&semaphore,&signal,1,network->Stream()),"HIP output signal");
+@@ -292,7 +292,7 @@
+  // Optional host preparation before recording the first staged frame. Lazy
+  // weight uploads synchronize the HIP stream; perform them before inserting an
+  // external producer wait, rather than inside a game's Execute callback.
+- void PrepareStagedKernels(){
++ void PrepareStagedKernels(){if(network&&network->LabAppCaptured())throw std::runtime_error("APP prepare after capture prohibited");
+   Require(Phase::Ready);
+   if(pending||value||readable||network->GraphEnabled())throw std::runtime_error("bridge preparation requires fresh graph-off session");
+   auto&api=network->Runtime();

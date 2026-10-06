@@ -1,0 +1,63 @@
+--- /tmp/graph0-single-replay-20261006/hip_reference_network.h
++++ isolated/hip_reference_network.h
+@@ -2,7 +2,7 @@
+ #pragma once
+ // SDKless HIP host graph. Scalar numerical validation path, not a realtime backend.
+ #include "hip_api.h"
+-#include "/home/lmxxf/work/ai-theorys-study/wechat/assets/297/src/native_experimental_history.h"
++#include "native_experimental_history.h"
+ #include "packed_weights.h"
+ #include <cstdint>
+ #include <cstring>
+@@ -181,8 +181,8 @@
+ }
+ inline std::atomic<int> AdaptivePreviewState{0};
+ class Network {friend class D3D12Bridge;
+- std::vector<Handle> lab_launches;
+- template<class... A> int LabLaunch(Handle f,A...a){lab_launches.push_back(f);return api.hipModuleLaunchKernel(f,a...);}
++ std::vector<Handle> lab_launches;bool lab_record=true;
++ template<class... A> int LabLaunch(Handle f,A...a){if(lab_record)lab_launches.push_back(f);return api.hipModuleLaunchKernel(f,a...);}
+ 
+  bool sp1440_ready=false;bool final_direct_compatible=false;bool pool64_byte_available=false;
+  bool vit_contract_byte_edge=false; // paired exact representation of an already E4M3-valued edge
+@@ -765,7 +765,7 @@
+ }
+ 
+ if(wave_owned_active)HasFn("c32_wave1","c32_wave1_post_b8_rgba");if(multi_predict||std::ifstream(opt.modules+"/multi-pass-predict.hsaco").good())EnsurePredictModule();if(multi_pass>1)PrepareMultiPassFeeds();if(multi_skin)PrepareSkin();}catch(...){if(!pulse_lease.Close()){std::fprintf(stderr,"submit_pulse ctor cleanup retained owner stream\n");throw;}if(pdl_flags){api.hipStreamSynchronize(stream);api.hipFree(pdl_flags);pdl_flags=nullptr;}for(auto&m:modules)api.hipModuleUnload(m.second);api.hipStreamDestroy(stream);throw;}}
+- ~Network(){if(!pulse_lease.Close()){std::fprintf(stderr,"submit_pulse direct destructor retained owner stream; bridge must preclose\n");return;}std::fprintf(stderr,"submit_pulse resources create=%llu create_ok=%llu record=%llu record_ok=%llu destroy=%llu destroy_ok=%llu drain=%llu site_visits=%llu accepted=%llu reject_mask=%u lifetime_pdl_calls=%u\n",pulse_ops.create_calls,pulse_ops.create_ok,pulse_ops.record_calls,pulse_ops.record_ok,pulse_ops.destroy_calls,pulse_ops.destroy_ok,pulse_ops.drain_calls,pulse_site_visits,pulse_record_accepted,pulse_last_reject_mask,pdl_calls);api.hipSetDevice(int(opt.device));api.hipStreamSynchronize(stream);experimental_history.reset();experimental_prefix.reset();experimental_raw.reset();experimental_logit.reset();experimental_weights.reset();experimental_sig.reset();experimental_recip.reset();temporal_features.reset();SpReport();pdl_keep.clear();if(pdl_flags){api.hipFree(pdl_flags);pdl_flags=nullptr;}if(opt.graph)std::printf("graph_stats builds=%u replays=%u\n",graph_builds,graph_replays);ClearGraph();for(auto&t:timings){api.hipEventDestroy(t.begin);api.hipEventDestroy(t.end);}adaptive_image_anchor.reset();adaptive_image_signature.reset();adaptive_image_delta.reset();adaptive_anchor_in.reset();adaptive_anchor_out.reset();adaptive_gain.reset();adaptive_stats.reset();adaptive_state.reset();device_noise.reset();gather_maps[0].clear();gather_maps[1].clear();weights.clear();pool.clear();for(auto&m:modules)api.hipModuleUnload(m.second);api.hipStreamDestroy(stream);}
++ ~Network(){LabAppClose();if(!pulse_lease.Close()){std::fprintf(stderr,"submit_pulse direct destructor retained owner stream; bridge must preclose\n");return;}std::fprintf(stderr,"submit_pulse resources create=%llu create_ok=%llu record=%llu record_ok=%llu destroy=%llu destroy_ok=%llu drain=%llu site_visits=%llu accepted=%llu reject_mask=%u lifetime_pdl_calls=%u\n",pulse_ops.create_calls,pulse_ops.create_ok,pulse_ops.record_calls,pulse_ops.record_ok,pulse_ops.destroy_calls,pulse_ops.destroy_ok,pulse_ops.drain_calls,pulse_site_visits,pulse_record_accepted,pulse_last_reject_mask,pdl_calls);api.hipSetDevice(int(opt.device));api.hipStreamSynchronize(stream);experimental_history.reset();experimental_prefix.reset();experimental_raw.reset();experimental_logit.reset();experimental_weights.reset();experimental_sig.reset();experimental_recip.reset();temporal_features.reset();SpReport();pdl_keep.clear();if(pdl_flags){api.hipFree(pdl_flags);pdl_flags=nullptr;}if(opt.graph)std::printf("graph_stats builds=%u replays=%u\n",graph_builds,graph_replays);ClearGraph();for(auto&t:timings){api.hipEventDestroy(t.begin);api.hipEventDestroy(t.end);}adaptive_image_anchor.reset();adaptive_image_signature.reset();adaptive_image_delta.reset();adaptive_anchor_in.reset();adaptive_anchor_out.reset();adaptive_gain.reset();adaptive_stats.reset();adaptive_state.reset();device_noise.reset();gather_maps[0].clear();gather_maps[1].clear();weights.clear();pool.clear();for(auto&m:modules)api.hipModuleUnload(m.second);api.hipStreamDestroy(stream);}
+  void PrintMemory(){size_t bytes=0,free=0,total=0;std::set<void*>seen;auto add=[&](const Tensor&t){if(t&&t->owned&&seen.insert(t->ptr).second)bytes+=t->capacity;};for(auto&t:pool)add(t);for(auto&w:weights)add(w.second);for(auto&maps:gather_maps)for(auto&m:maps)add(m.second);add(device_noise);api.Check(api.hipMemGetInfo(&free,&total),"memory stats");std::printf("memory owned_MiB=%.1f allocations=%zu device_free_MiB=%.1f total_MiB=%.1f\n",bytes/1048576.,seen.size(),free/1048576.,total/1048576.);}
+  /* DLSS5_HIP_MEMORY=1 (diagnostic): device memory by category after the pool has warmed — weights by key, pool tensors by capacity, gather maps, noise, and the runtime's free/total. */
+  void MemoryReport(FILE*f){std::set<void*>seen;size_t wsum=0,psum=0,gsum=0,nsum=0;std::vector<std::pair<size_t,std::string>>w,p;
+@@ -861,12 +861,30 @@
+  bool VitProjN64Active()const{return vit_proj_n64_active;}
+  void* TemporalFeatureBuffer()const{return temporal_feature_tap_active&&temporal_features?temporal_features->ptr:nullptr;}
+  void LabCapturePoolGuard(bool v){graph_capturing=v;}
++ void LabRecording(bool v){lab_record=v;}
+  void LabResetLaunches(){lab_launches.clear();}const std::vector<Handle>&LabLaunches()const{return lab_launches;}
+  void LabCapturePreflight(){if(opt.graph||opt.pdl||!opt.pooled||opt.profile||opt.wall_profile||observer||!opt.dump_dir.empty()||!SwinRunActive()||multi_pass!=1)throw std::runtime_error("capture scope");
+  for(const char*k:{"SP_TRACE","SP_VALIDATE","SP_TICKET_LIMIT","SP_FORCE_TIMEOUT","SP_TICKET_START","DLSS5_SP_TRACE","DLSS5_SP_VALIDATE","DLSS5_SP_TICKET_LIMIT"}){const char*v=std::getenv(k);if(v&&*v&&std::strcmp(v,"0"))throw std::runtime_error("capture SP diagnostic/limit forbidden");}
+  if(sp_plans.size()!=2)throw std::runtime_error("capture requires two warmed SP plans");for(auto&kv:sp_plans){auto&p=kv.second;if(p.pre_inited||p.next_ticket>std::numeric_limits<U>::max()-p.total)throw std::runtime_error("SP rollover/pair not capturable");printf("CAPTURE_PLAN first=%u base=%u jobs=%u\n",p.first,p.next_ticket,p.total);}}
+ 
+- Handle Stream()const{return stream;}
++
++ Handle lab_app_graph{},lab_app_exec{};void*lab_app_in{},*lab_app_out{};unsigned lab_app_replays=0;
++public:
++ bool LabAppCaptured()const{return lab_app_exec!=nullptr;}
++ void LabAppClose(){if(!lab_app_graph&&!lab_app_exec)return;try{Synchronize();}catch(...){fprintf(stderr,"APP_GRAPH_DRAIN_FAIL\n");fflush(nullptr);std::_Exit(73);}if(lab_app_exec){api.Check(api.hipGraphExecDestroy(lab_app_exec),"APP exec destroy");lab_app_exec=nullptr;}if(lab_app_graph){api.Check(api.hipGraphDestroy(lab_app_graph),"APP graph destroy");lab_app_graph=nullptr;}fprintf(stderr,"APP_GRAPH_CLOSE replay_calls=%u\n",lab_app_replays);}
++ void LabAppEnqueue(void*in,void*out,U seed,bool temporal){
++ if(W!=1920||H!=1152||seed||temporal||opt.graph||opt.pdl||opt.submit_pulse||multi_pass!=1||multi_skin||opt.experimental_temporal||adaptive_active)throw std::runtime_error("APP graph frozen scope");
++ const char*setting=std::getenv("DLSS5_LAB_APP_GRAPH");const bool enabled=setting&&!strcmp(setting,"1");if(!enabled){if(lab_app_exec)throw std::runtime_error("APP graph mode changed");LabRecording(true);LabResetLaunches();Enqueue(in,nullptr,out,0);if(lab_launches.size()!=161)throw std::runtime_error("APP eager kernels not161");LabRecording(false);fprintf(stderr,"APP_GRAPH_MODE eager kernel_count=161\n");return;}
++ if(lab_app_exec){if(in!=lab_app_in||out!=lab_app_out)throw std::runtime_error("APP graph imported pointers changed");api.Check(api.hipGraphLaunch(lab_app_exec,stream),"APP graph replay");lab_app_replays++;return;}
++ // Cold bridge prepare happened before this first real frame. Warm the actual seed0 input once.
++ LabRecording(true);LabResetLaunches();Enqueue(in,nullptr,out,0);Synchronize();auto eager=lab_launches;if(eager.size()!=161)throw std::runtime_error("APP first eager count");LabCapturePreflight();LabResetLaunches();api.EnableGraphs();
++ bool active=false;try{api.Check(api.hipStreamBeginCapture(stream,1),"APP NN-only capture begin");active=true;LabCapturePoolGuard(true);Enqueue(in,nullptr,out,0);LabCapturePoolGuard(false);int end=api.hipStreamEndCapture(stream,&lab_app_graph);active=false;using IsCapturing=int(*)(Handle,int*);IsCapturing query{};api.Load(query,"hipStreamIsCapturing");int status=-1;api.Check(query(stream,&status),"APP capture status");if(status)throw std::runtime_error("APP capture not None");api.Check(end,"APP capture end");if(lab_launches!=eager)throw std::runtime_error("APP captured launches changed");
++ struct Dim{unsigned x,y,z;};struct Params{Dim blockDim;void**extra;void*func;Dim gridDim;void**kernelParams;unsigned sharedMemBytes;};static_assert(sizeof(Params)==64,"official node ABI");using Nodes=int(*)(Handle,Handle*,size_t*);using Type=int(*)(Handle,int*);using Edges=int(*)(Handle,Handle*,Handle*,size_t*);using GetParams=int(*)(Handle,Params*);Nodes nodesFn{};Type typeFn{};Edges edgesFn{};GetParams paramsFn{};api.Load(nodesFn,"hipGraphGetNodes");api.Load(typeFn,"hipGraphNodeGetType");api.Load(edgesFn,"hipGraphGetEdges");api.Load(paramsFn,"hipGraphKernelNodeGetParams");size_t n=0;api.Check(nodesFn(lab_app_graph,nullptr,&n),"APP node count");if(n!=161)throw std::runtime_error("APP graph node count");std::vector<Handle>nodes(n);api.Check(nodesFn(lab_app_graph,nodes.data(),&n),"APP nodes");std::map<Handle,size_t>index;for(size_t i=0;i<n;i++){int type=-1;api.Check(typeFn(nodes[i],&type),"APP node type");if(type)throw std::runtime_error("APP graph includes nonkernel interop");index[nodes[i]]=i;}
++ size_t ec=0;api.Check(edgesFn(lab_app_graph,nullptr,nullptr,&ec),"APP edge count");std::vector<Handle>from(ec),to(ec);api.Check(edgesFn(lab_app_graph,from.data(),to.data(),&ec),"APP edges");std::vector<unsigned>deg(n);std::vector<std::vector<size_t>>adj(n);for(size_t i=0;i<ec;i++){adj.at(index.at(from[i])).push_back(index.at(to[i]));deg.at(index.at(to[i]))++;}std::vector<bool>done(n);for(size_t k=0;k<n;k++){size_t ready=0,j=n;for(size_t i=0;i<n;i++)if(!done[i]&&!deg[i]){ready++;j=i;}if(ready!=1)throw std::runtime_error("APP graph not strong ordered");Params p{};api.Check(paramsFn(nodes[j],&p),"APP ordered params");if(p.func!=eager[k])throw std::runtime_error("APP graph ordered Fn mismatch");done[j]=true;for(auto next:adj[j])deg[next]--;}
++ api.Check(api.hipGraphInstantiate(&lab_app_exec,lab_app_graph,nullptr,nullptr,0),"APP instantiate");lab_app_in=in;lab_app_out=out;LabRecording(false);fprintf(stderr,"APP_GRAPH_MODE captured nodes=161 edges=%zu interop_nodes=0 opt_graph=0\n",ec);api.Check(api.hipGraphLaunch(lab_app_exec,stream),"APP initial graph replay");lab_app_replays++;}
++ catch(...){LabCapturePoolGuard(false);if(active){Handle abandoned{};int end=api.hipStreamEndCapture(stream,&abandoned);if(!end&&abandoned)api.hipGraphDestroy(abandoned);}LabAppClose();throw;}}
++private:
++ public: Handle Stream()const{return stream;}
+  Api& Runtime(){return api;}
+  void Synchronize(){api.Check(api.hipStreamSynchronize(stream),"network completion");}
+  void Enqueue(void*rgba,void*history,void*rgb_output,U seed){pulse_ordered_down_c256=false;pulse_frame_pdl_start=pdl_calls;pulse_frame_history=history!=nullptr;if(adaptive_prev_history!=history||adaptive_prev_seed!=seed||adaptive_prev_input!=rgba){adaptive_dirty=true;adaptive_prev_history=history;adaptive_prev_seed=seed;adaptive_prev_input=rgba;}
