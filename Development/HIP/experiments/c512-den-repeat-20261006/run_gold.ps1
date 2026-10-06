@@ -13,8 +13,8 @@ Idle;if([IO.DriveInfo]::new('D:\').AvailableFreeSpace -lt 100GB){throw 'D free<1
 if((Get-Item $InputF32).Length -ne 1600*960*16){throw 'requires existing locked 900/960 processing input F32'}
 if(Test-Path "$root\basis.u32"){throw 'existing gold result; no overwrite'}
 New-Item -ItemType Directory -Force "$root\cache","$root\baseline","$root\trace","$root\modules-trace"|Out-Null
-foreach($f in Get-ChildItem "$StockModules\*.hsaco"){if(!(Test-Path "$root\modules-trace\$($f.Name)")){New-Item -ItemType HardLink -Path "$root\modules-trace\$($f.Name)" -Target $f.FullName|Out-Null}}
-# Never overwrite a hardlink: detach just the isolated module path first.
+foreach($f in Get-ChildItem "$StockModules\*.hsaco"){if(!(Test-Path "$root\modules-trace\$($f.Name)")){Copy-Item $f.FullName "$root\modules-trace\$($f.Name)"}}
+# Detach any earlier staged link before replacing the isolated module path.
 Remove-Item "$root\modules-trace\c512-m32-mh.hsaco";Copy-Item "$root\actual-canonical.hsaco" "$root\modules-trace\c512-m32-mh.hsaco"
 $owner=[IO.File]::Open('D:\DLSSNR-Lab\gpu.lock',[IO.FileMode]::CreateNew,[IO.FileAccess]::Write,[IO.FileShare]::None)
 try {
