@@ -2,7 +2,7 @@
   "phase": "CPU capture-only strengthened; no GPU, no graph instantiate/replay code",
   "compile_initial": "relative copied include fail; fixed absolute repo source references",
   "compile_fixed": "35050,6344,35219,99760,87114,final76511 all terminal exit0; final source includes capture-only and cancel/status gates",
-  "source_sha256": "38b18bd2222288b89299e80a7ba502231f842a629364fb761f7c88a9c9280a29",
+  "source_sha256": "85eaa2f5caa73ae1cd1b5e180059e7b96e61e8f2bbf4e98f44fdf22d4d1879b5",
   "current_header_sha256": "a2cb222bb8e63323b3f4d0fee0f1284c5c62c4dbdebd3da0dcb26b357362af2a",
   "private_header_delta": "LabCapturePoolGuard public setter of existing graph_capturing only; relative src includes expanded",
   "api_gate": [
@@ -18,7 +18,7 @@
   ],
   "guard": "opt.graph=false, opt.pdl=false, submit_pulse=0; no graph1 fallback",
   "cleanup": "capture exception clears poolguard, ends capture and destroys abandoned graph; final prototype destroys unaudited graph before intentional prerequisite error",
-  "exe_sha256": "747fe174e6258a79f8a17fce1c81351497d9c4f7fae7ee2e7a13c5ee203e63b1",
+  "exe_sha256": "87fe10fa89ed73741f0aa757351fb0bb0699be472453c93c946ebdfeac539cee",
   "actual_guards": [
     "SP_* actual config keys forbidden, DIAGNOSTICS0 staticassert",
     "two warmed plans, pre_inited false, maxUInt ticket headroom before capture",
@@ -27,5 +27,7 @@
     "same-thread EndCapture exactly once; IsCapturingNone required; failure stop no retry"
   ],
   "official_ABI": "/tmp/hip-graph-abi-20261006/hip_runtime_api.h:1404,1428",
-  "replay": "absent, not merely flag-disabled"
+  "replay": "absent, not merely flag-disabled",
+  "compile_final": "52401 O2 static terminal exit0",
+  "eager_gate": "read locked fresh153ac reference and compare every float bit before warm/capture"
 }
