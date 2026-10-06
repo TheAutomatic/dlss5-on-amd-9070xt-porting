@@ -137,3 +137,9 @@
 - SP_SMALL旧d7b29df2/APP/normal配方负账不是当前W16/FAST1/pure1088整stageDS/UPS融合同条件复测；原内层4→3/2→3组织不赚仍封存，新条件本身不构成重开证据。ViTproducerpack、consumerinlinepackV、gather各负账明确，不能换名重复。M1kernel仍写globaltiles；HIP6层各独立FP8output存储12,533,760B/stage，不将allocation当DRAM流量。
 - 当前SP16..21之后先Body22再Down，不能挂pool在SP21或扩SP22混recovery。Body22实际c64-wave2-fast/W2_FAST_NUM3，raw?3调用Hrtz有效identity、写fullF32；Down缺fasttwin实际加载normalpacked/H半RNE链。实际loadedSHA已锁，融合必须两helper独立，不偷偷补fastmodule或half化raw。
 - Body22 shift2(sx0,sy4)/8×8窗口同WG全256channel，2×2pool可windowlocal；完整Down256→512投影需保pool_H/F、K32两K16WMMA+Hacc顺序。已有Down16连续rasterhelper跨多producerWG不能直接尾call。新的register→pooledLDS约8448B/屏障/寄存器成本待编；135窗口projectiontiles vs原128(+5.47%)，rawskips3仍decoder48读不得删写。只静态可行，不收益结论；math下一CPU隔离设计，旧C64/C128 fence+rawreread负账不泛盖该directreg方案。
+
+## 2026-10-06 Body22路线停止与下一唯一Up边界CPU候选
+
+- Body22→Down路线全STOP：共享pooledLDS41216版本gold/raw/count161→160过，首GPU mean−0.014568/p99+0.0632174ms、wall−0.01015/+0.07612；regcache private192静态止，noescape private0/LDS32768/VGPR242、gold0/count161→160过却GPUmean约0/p99+0.0099048、wall+0.0112/+0.03254且control漂移，root不APP/formal/继续调。86300694/7b1faa96/3ed96f5e/fbd2f6e0留真实证，不算生产收益。
+- actual下一边界是Up48→普通Body48→SP49..54，非Prefix49/SP50..54（up48-body48-audit）。deep11a25/Body65848 SHA锁；Up独立RNEH(total)/RNEmerge(F(skip3)*scale)→fp8add0 bytes，BodyFAST3原每head32 Q/K norm及原w2_rtz8 byte残差保。不能直接复用FAST H改Up半边界。
+- 单WG8×8高→4×4低/完整256channel supply可静态构造，Up中间2,088,960B可少materialize但skips3原raw仍必读、SP不扩。135lowwindowtile vs原128 flat tile使UpWMMA+5.47%，寄存器/LDS活跃度未证。旧UP_DIRECT4倍MMA/W16small/SPinterior负账不是该C256边界同形；仅一个CPU隔离候选由math生成，未GPU/未生产。

@@ -1922,3 +1922,9 @@ root认可900正式均值改善/第三轮p99在1µs实际计时内未分辨退�
 - Root授权89772 HIP首cold161Fn key记录、15597锁M原--wiring finaldisp123小门，均rawsamefinite/原资产/guard过并释放，无profiling/events。HIPFn普通/ext与SP四API分支源映射记录，未打印opaquehandle；Mflag仅print不改变reuse/折叠，cmd重放区别明确。161cold与steady总161不推出steady逐名同。
 - extra38逐阶段闭合而非全attention：encoder/decoder小通道整stage融合差28，ViTpack+反gather9，前C32/head+2与decoder39−1，其余0。M持久化含DS/UPS仍全球tile写，SP独立FP8outputs仅allocation footprint，不据此算带宽/耗时。完整source/序列/模块SHA/表归dispatch-sequence-20261006。
 - 更正早期融合前提：SP尾21并不直连Down，中间Body22；raw?3调用Hrtz在当前W2FASTNUM3是identity(fullF32)，Downnormalpacked缺fasttwin却保RNEhalfH链，不能按名字断half。同WG2×2依赖可行但需windowlocal映射及原投影累加，rawskip必须保；8448B pooledLDS估、135vs128投影WG与barrier成本待编，不自动优于旧路径。只CPU机制交math，无新fusionGPU/生产改动，旧负账按实际范围保留。
+
+### 2026-10-06 Up48/Body48新边界只读审与Body22停止
+
+- Root停止Body22整个路线：最初LDS41216候选数值/count过但尾负；regcache私有192止，noescape私有0/LDS32K/VGPR242数值/count过却mean约0与尾负（86300694/7b1faa96/3ed96f5e，真实gold身份fbd2f6e0）。不APP/formal/继续该路线，不将它从mochi差距扣除。
+- CPU只读下一actual161序列：Up48 deep11a25→普通Body48 c256_wave2_bi_bo_w16/65848→SP49..54，撤回未经证Prefix49编号。Up通用H仍normalRNEhalf，merge后fp8add0 byte出口，BodyFAST3自己的norm/残差不能代其数学；完整256channel只是矩阵供数，每head32 Q/K归一化原序、w2_rtz8 byte残差原样。
+- windowlocal8×8高像素映4×4低像素可无跨WG Up-result依赖，Up intermediate2,088,960B只有Body48消费者；rawskips3仍必读保留。135vs128tile/UpMMA+5.47%和活跃度成本未验，不承诺收益。历史UP_DIRECT/小W16/内部SP负账实际范围不同，最多一个新CPU候选；源/loadedSHA/边界与门归up48-body48-audit-20261006。此次无新GPU/实现/现装配置变化。
