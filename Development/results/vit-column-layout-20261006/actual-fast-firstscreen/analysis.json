@@ -1,0 +1,129 @@
+{
+  "scope": "single1088 A16 same-math pairedcolumnlayout FAST877/11a25 vs03de/38da; outerGPU vswall",
+  "slots": [
+    {
+      "slot": 0,
+      "side": "old",
+      "gpu_ms": {
+        "mean": 8.870614250000001,
+        "p99": 9.110675200000001
+      },
+      "cpu_ms": {
+        "mean": 9.0991,
+        "p99": 9.34407
+      }
+    },
+    {
+      "slot": 1,
+      "side": "new",
+      "gpu_ms": {
+        "mean": 8.8900935,
+        "p99": 9.0639466
+      },
+      "cpu_ms": {
+        "mean": 9.11895,
+        "p99": 9.309069999999998
+      }
+    },
+    {
+      "slot": 2,
+      "side": "new",
+      "gpu_ms": {
+        "mean": 8.879516375,
+        "p99": 9.0788286
+      },
+      "cpu_ms": {
+        "mean": 9.116037500000001,
+        "p99": 9.35287
+      }
+    },
+    {
+      "slot": 3,
+      "side": "old",
+      "gpu_ms": {
+        "mean": 8.91067775,
+        "p99": 9.0909014
+      },
+      "cpu_ms": {
+        "mean": 9.1243125,
+        "p99": 9.32669
+      }
+    }
+  ],
+  "merged": {
+    "gpu_ms": {
+      "old_mean": 8.890646,
+      "new_mean": 8.8848049375,
+      "mean_delta": -0.005841062500000049,
+      "old_p99": 9.0992176,
+      "new_p99": 9.0656506,
+      "p99_delta": -0.03356699999999968
+    },
+    "cpu_ms": {
+      "old_mean": 9.11170625,
+      "new_mean": 9.11749375,
+      "mean_delta": 0.0057875000000002785,
+      "old_p99": 9.33281,
+      "new_p99": 9.33715,
+      "p99_delta": 0.004339999999999122
+    }
+  },
+  "gpu_control_drift": 0.0400634999999987,
+  "edge_checks": [
+    {
+      "slot": 0,
+      "edge": "first",
+      "SHA": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1",
+      "finite": true
+    },
+    {
+      "slot": 0,
+      "edge": "last",
+      "SHA": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1",
+      "finite": true
+    },
+    {
+      "slot": 1,
+      "edge": "first",
+      "SHA": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1",
+      "finite": true
+    },
+    {
+      "slot": 1,
+      "edge": "last",
+      "SHA": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1",
+      "finite": true
+    },
+    {
+      "slot": 2,
+      "edge": "first",
+      "SHA": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1",
+      "finite": true
+    },
+    {
+      "slot": 2,
+      "edge": "last",
+      "SHA": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1",
+      "finite": true
+    },
+    {
+      "slot": 3,
+      "edge": "first",
+      "SHA": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1",
+      "finite": true
+    },
+    {
+      "slot": 3,
+      "edge": "last",
+      "SHA": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1",
+      "finite": true
+    }
+  ],
+  "actual_target_calls_each_slot": {
+    "producer": 1928,
+    "consumer": 1928
+  },
+  "frames_per_slot": 241,
+  "decision": "STOP: wallmean andp99negative, GPUtinymean benefit belowcontroldrift; noAPP/formal/integration/repeat",
+  "host_SHA": "dd1ebc8549cb0e7db59789516ae4b1325bc7bd49727b1eda7961a7f6c24039c9"
+}
