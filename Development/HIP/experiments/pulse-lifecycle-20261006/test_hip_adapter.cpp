@@ -29,5 +29,6 @@ int main(){
  {s=State{};auto o=ops();hip_reference::SubmitPulseLease<hip_reference::HipSubmitPulseOps> p(o);assert(p.Configure(true,true));p.Record();s.tls=9;s.fail="select";assert(!p.Close()&&p.HasHandles()&&s.pending&&s.destroys==0);s.fail.clear();assert(p.Close()&&s.tls==s.owner);}
  for(int missing=0;missing<6;++missing){s=State{};auto o=ops();switch(missing){case 0:o.event_create=nullptr;break;case 1:o.event_record=nullptr;break;case 2:o.stream_sync=nullptr;break;case 3:o.event_destroy=nullptr;break;case 4:o.stream=nullptr;break;case 5:o.set_device=nullptr;break;}hip_reference::SubmitPulseLease<hip_reference::HipSubmitPulseOps> p(o);assert(!p.Configure(true,true)&&!p.HasHandles()&&s.creates==0);}
  {s=State{};auto o=ops();hip_reference::SubmitPulseLease<hip_reference::HipSubmitPulseOps> p(o);assert(!p.Configure(true,true,1,2)&&s.creates==0);}
+ {s=State{};auto o=ops();void* saved=stream;stream=nullptr;hip_reference::SubmitPulseLease<hip_reference::HipSubmitPulseOps> p(o);assert(!p.Configure(true,true)&&s.creates==0&&!p.HasHandles());stream=saved;}
  std::cout<<"PASS actual HipSubmitPulseOps: 6 failure cases, cleanup TLS failure, 6 missing ABI entries, flags2 rejection\n";
 }
