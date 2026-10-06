@@ -1,0 +1,29 @@
+{
+  "old": {
+    "SHA": "877eaf122f827af6e00824582f5ca918b5d61499d4ad7c7cde7ab6e422516a57",
+    "resource": {
+      ".vgpr_count": 76,
+      ".sgpr_count": 22,
+      ".group_segment_fixed_size": 16384,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".wavefront_size": 32
+    }
+  },
+  "new": {
+    "SHA": "03de16af1b01d57ce77ba6411e649852b6affef8a640f17597ec2f7422d7fb84",
+    "resource": {
+      ".vgpr_count": 76,
+      ".sgpr_count": 22,
+      ".group_segment_fixed_size": 16384,
+      ".private_segment_fixed_size": 0,
+      ".vgpr_spill_count": 0,
+      ".wavefront_size": 32
+    }
+  },
+  "changed_functions": [
+    "vit_stream_qkv_frag_bin_w5f8"
+  ],
+  "export_count": 86,
+  "ABI_diffs": []
+}
