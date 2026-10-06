@@ -3,8 +3,6 @@ Not a GPU intrinsic/NaN-mode proof. Enumerate every critical FP8 midpoint.
 """
 import bisect,struct,json,hashlib
 from pathlib import Path
-out=Path(__file__).resolve().parents[2]/'results/c32-direct-feature-20261006'
-# Resolve explicitly relative to experiments directory.
 out=Path(__file__).resolve().parents[3]/'results/c32-direct-feature-20261006';out.mkdir(parents=True,exist_ok=True)
 def f(bits):return struct.unpack('<f',struct.pack('<I',bits))[0]
 def bits(x):return struct.unpack('<I',struct.pack('<f',x))[0]
