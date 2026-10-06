@@ -1971,3 +1971,9 @@ root认可900正式均值改善/第三轮p99在1µs实际计时内未分辨退�
 - 70977权威exit1/release（bae176b7）：eager12原Frame各有限，replay仅首seed0warm1，capture Newguard发现额外分配而停止，未有可执行图/重放。本人此前把PrepareStaged方法存在当成本Frame运行过seed1prepare，判断错误并撤回；它是Runtime-only路径，不能补调用冒原Frame合同。
 - Root短时将CAPTURE_PLAN first160误作NNdispatch，原日志实际上SPinitialready160/eagerFn161；已纠正未写160新kernel事实。保失败数据，不归数学/API。
 - e351892d新source只读warm门PASS：hipMallocRaw真实调用与成功数、upload/Fn/planmiss/缓存sizes/rollover 连续2nochange且Fn同才在≤80内捕获，warm方法void返回/局部Tensor退出、未Runtimeprepare。原CaptureNew拒/失败refs/SPowners日志保持、动态nodegate/effectivekeys真实。源门不等温热硬件结果/pairedgold；审者无编/GPU/修改candidate，记录warm-source-review。
+
+### 2026-10-06 APP真实12HDR通过与性能新源公平性审
+
+- 19487/85abc115稳定暖池修后actualPASS：原HDR1296×720源→NNvalid1920×1080/proc1152；warm0 malloc209/pool23，warm1再4/pool27，warm2/3零新增和cache稳定，4次warm建立末2稳态后cap；161kernel/160强DAG、12GraphAPI、两独立Frame逐12F16输出bit0finite。原70977/noRuntimeprepare校正不抹，Style−1仅stock1不覆盖标记。
+- 原benchmark.cpp不改的APP性能e051新header只读sourcePASS：common首cold两mode同暖池，graphsetupCPUcost单列、160计时弃80；首末两readbacks在wall之外，steady关Fnvector/lastFn/log/getenv/no新getter，原pre/postcodec/semwaitsignal/postSignalQuery/FrameDrain全保。不是pure3reads/零诊断API。原chrono源码无positiveassert保持byte同，执行者CPU统计必须reject非finite/≤0行，不为此加新gold。
+- 审者无GPU/编/修改candidate，性能结果仍待single4slot，不提前收生产/发包/修改玩家配置。记录APPperf-source-review。

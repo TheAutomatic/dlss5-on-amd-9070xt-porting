@@ -164,3 +164,6 @@
 
 - APP70977/bae176b7真实前置失败保：eager独立Frame12seq2全finite；replay第一capture Newguard拒新alloc，无capturedgraph/instantiate/replay/pairedraw。原Frame未调用Runtime-only seed1 Prepare，我此前推调用路径错误已显式撤回；SP.initial160不是NNkernel数，实际eager每frame Fn161。不认数学/API失败或图不支持，不假已经温热。
 - math唯一CPU暖池修e351892d源审PASS：真实hipMallocRaw calls/success+upload/Fn/planmiss与所有cache容器/rollover连续2次无变化+同Fn，≤80 seed0 Enq/Sync后局部outTensor已退栈才cap；未插Runtime.prepare，New/Upload/Fn/Plan捕获guard保，动态nodes来自真实eager Fn，actualW/H/span/maps/loadedfile/style记录。只是源门，尚待真实warm计数/随后capture12gold，不新增其他实验/生产。
+
+- APP稳定暖池/12HDR gold19487已实际PASS（85abc115）：原1296×720F16 menu源，actualNN valid1920×1080/proc1920×1152，mappedspans35,389,440/26,542,080B/noalias；warm4=(malloc209→213→213→213,pool23→27→27→27)连续末2稳定才cap；actual161kernel/160DAG、graph12、逐stepF16bit0finite和mappedptr稳定。70977失败仍保，未Runtime.prepare；StyleFeature−1是stockStyle1“不覆盖”标记，非负style。此前CPUpending已由此true门闭，但没有APP性能/生产接受。
+- APP性能e05173fe actual新源独立审PASS：原benchmark.cpp byte同Frame.ProcessSubmittedFrame+原Drain wall，两mode同原codec/interop/NET0/PDL0/pulse0；160total弃80=80steady，每slot仅首末2D2H在计时外。两mode首Frame共同boundedstablewarm、候选capture+DAG/instantiate单列，ready无getenv/Fnvector/lastFnstore/打印、新timinggetter；原postSignalQuery/外wait+signal+drain保，不写零API。GraphAPI160/ordinary0终态核，all160wallrows finite/>0数据门后才能mean/p99。只是当前singleABBA源审，实际结果待执行者，不套pure3reads或跨批扣Mgap/生产长期声明。
