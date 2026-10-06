@@ -1,0 +1,7 @@
+SYNC_PROFILE wave_owned=1 c512_m32=1 pdl=1 vit_stream=3 swin_run=1 FAST=1 full71=1
+SP_PLAN c=256 first=16 layers=6 tasks=846 initial=144 state_bytes=10168 w16=1
+COLUMN_PRODUCER_SHADOW tokens=640 groups=768 threads=160 input_bytes=655360 weights_bytes=3145856 output_bytes=1966080 original_chain_unchanged=1 captures=1
+SP_PLAN c=256 first=49 layers=6 tasks=846 initial=144 state_bytes=10168 w16=1
+WHOLE_NN_DIAGNOSTIC frames=2 processing=1920x1088 valid1080 tokens640 full71=1 Style1=1 seed0=1 AE0=1 MP1=1 historyoff=1 repeated_bitdiff=0 finite=1 reference=old_variant_not_NV
+SP_STATS runs=4 fallback=0 rollover=0 jobs=3384 disabled=0 errors=0
+
