@@ -1,0 +1,64 @@
+{
+  "untimed": {
+    "0": {
+      "wall_mean_ms": 7.12985,
+      "p99_ms": 7.447389999999998,
+      "NET_GPU_mean_ms": 6.50210094975
+    },
+    "1": {
+      "wall_mean_ms": 6.974275,
+      "p99_ms": 7.4000699999999995,
+      "NET_GPU_mean_ms": 6.496252262625
+    },
+    "2": {
+      "wall_mean_ms": 6.9662875,
+      "p99_ms": 7.302649999999999,
+      "NET_GPU_mean_ms": 6.493581992375
+    },
+    "3": {
+      "wall_mean_ms": 7.075,
+      "p99_ms": 7.478829999999998,
+      "NET_GPU_mean_ms": 6.55353026425
+    },
+    "ABBA": {
+      "A_wall_mean_ms": 7.102425,
+      "B_wall_mean_ms": 6.97028125,
+      "wall_delta_ms": -0.13214375,
+      "A_merged_p99_ms": 7.5421999999999985,
+      "B_merged_p99_ms": 7.36712,
+      "NET_GPU_delta_ms": -0.03289847950000002,
+      "cross_group_absolute_comparison": "not a direct timed-vs-untimed control"
+    }
+  },
+  "timed": {
+    "0": {
+      "wall_mean_ms": 7.0207125,
+      "p99_ms": 7.319999999999999,
+      "NET_GPU_mean_ms": 6.550437247875
+    },
+    "1": {
+      "wall_mean_ms": 6.967525,
+      "p99_ms": 7.26241,
+      "NET_GPU_mean_ms": 6.48625474
+    },
+    "2": {
+      "wall_mean_ms": 6.939625,
+      "p99_ms": 7.316409999999999,
+      "NET_GPU_mean_ms": 6.4911940155
+    },
+    "3": {
+      "wall_mean_ms": 7.0327375,
+      "p99_ms": 7.311539999999999,
+      "NET_GPU_mean_ms": 6.56456573575
+    },
+    "ABBA": {
+      "A_wall_mean_ms": 7.026725,
+      "B_wall_mean_ms": 6.953575,
+      "wall_delta_ms": -0.07315000000000005,
+      "A_merged_p99_ms": 7.34,
+      "B_merged_p99_ms": 7.28392,
+      "NET_GPU_delta_ms": -0.06877711406250064,
+      "cross_group_absolute_comparison": "not a direct timed-vs-untimed control"
+    }
+  }
+}

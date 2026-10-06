@@ -1,0 +1,14 @@
+{
+  "scope": "CPU static PE file parsing; no LoadLibrary or HIP API call",
+  "dll": "C:/WINDOWS/System32/amdhip64_7.dll",
+  "dll_sha256": "f6ac69c322b0ba729fdc2dbdcba8a62a9d52cc2c18e5b690e9ff14258e49c5e7",
+  "file_version": "10.0.3679.0",
+  "exports": [
+    "hipEventCreate",
+    "hipEventCreateWithFlags",
+    "hipEventRecord",
+    "hipEventElapsedTime",
+    "hipEventDestroy"
+  ],
+  "flags2_runtime_acceptance": "confirmed by subsequent complete framework untimed trial creation"
+}
