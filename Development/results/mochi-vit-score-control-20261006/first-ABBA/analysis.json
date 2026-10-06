@@ -1,0 +1,42 @@
+{
+  "slots": [
+    {
+      "slot": 0,
+      "side": "old",
+      "gpu_avg_ms": 7.8325125,
+      "host_avg_ms": 7.9778312499999995,
+      "gpu_total_printed_ms": 1253.202,
+      "host_total_printed_ms": 1276.453
+    },
+    {
+      "slot": 1,
+      "side": "new",
+      "gpu_avg_ms": 7.851793750000001,
+      "host_avg_ms": 7.992425,
+      "gpu_total_printed_ms": 1256.287,
+      "host_total_printed_ms": 1278.788
+    },
+    {
+      "slot": 2,
+      "side": "new",
+      "gpu_avg_ms": 7.85716875,
+      "host_avg_ms": 7.99285,
+      "gpu_total_printed_ms": 1257.147,
+      "host_total_printed_ms": 1278.856
+    },
+    {
+      "slot": 3,
+      "side": "old",
+      "gpu_avg_ms": 7.857725,
+      "host_avg_ms": 7.99764375,
+      "gpu_total_printed_ms": 1257.236,
+      "host_total_printed_ms": 1279.623
+    }
+  ],
+  "gpu_delta_new_minus_old_ms": 0.00936249999999994,
+  "host_delta_new_minus_old_ms": 0.0049000000000001265,
+  "old_gpu_drift_ms": 0.025212500000000304,
+  "old_host_drift_ms": 0.019812500000000455,
+  "p99_available": false,
+  "scope": "oneM-only counterfactual score cost control;notnew competitorbaseline/goalcompletion"
+}
