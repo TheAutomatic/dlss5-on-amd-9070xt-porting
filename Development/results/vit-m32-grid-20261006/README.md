@@ -5,3 +5,5 @@ Same canonical8d5 halfmath module; explicit labhost grid selector changes onlyde
 Generatedkernel first=(bid/32)*32/head=bid%32. Livebid0..639 covers640queries×32heads exactlyonce usingtwo16-queryblocks. Droppedbid640..1279 returnsuniformly atfirst>=640 beforeinputs/outputs; noK/V/score/den/AV changes. Twooriginal ABI-independent hostbuilds local10574/79669 exit0.
 
 Goldscript prepared foroldgrid/newgrid each2frames, same8d5 module, finite/repeat andexact933e2a5f oldNEWmathoutputSHA. Logs actualtargetcall grid. Scope is fixed known640module; no production route/fallback claims. GPU NOT run/authorized yet. Nextperfifauthorized comparesonlynewmathgrid1280 vs640, neveroldA16math.
+
+93868 repairedgold exit0/lockreleased; bothgrid twoframes exact933e reference/finite/repeat. Targetactual16calls each; groups20480→10240, reducedcalls0→16. First41002 timeout retained; cache absence not established as sole timeout cause. No performance yet.
