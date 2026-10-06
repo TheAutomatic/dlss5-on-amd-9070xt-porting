@@ -1,11 +1,11 @@
 {
   "phase": "CPU prerequisitefix only; no new GPU run authorized",
   "build_initial": "48480 failed copiedinclude duplicates and missingLabRecording, fixed",
-  "build_final": "25052 actualkey/stablewarm O2 terminal exit0 (44658 preliminary exit0)",
-  "exe_sha256": "29d7ae92c85c6cd3ce3dc6afa584d4b9366c5ab5deee77efece1dfb91c973e6f",
+  "build_final": "90228 terminalexit0 after style actualkey log only; stablewarm25052exit0",
+  "exe_sha256": "57c56b1e2cebd820cd81b324451a6ac998ac95070c73830eb82d7d41442d429b",
   "source_sha256": {
     "benchmark.cpp": "a36f7661ac66016e4f784e8bd985b2eeb79645f2f0934037c7043a4611d43f4c",
-    "hip_reference_network.h": "aa385c2fd9102a59e5cb37691035b9a84be89d13f9582a0a89e8b9b6545d6cf3",
+    "hip_reference_network.h": "ffadb6c34abf191b03b03bab2943c86b2da46ca1bc8fb73249a3855402eea5d8",
     "hip_d3d12_bridge.h": "250e6b388563a2ae4b6db50f1846bfaafc5012b94a7602a10511c6844d672c00",
     "native_hip_network.h": "914625a53e924e32d90c17855024b0962bdcf99450501ef03e436b85e524fa8b",
     "native_game_frame.h": "e12263f8e5b8d2a979a3c8df8a7fb56f1d5d289082ccf05ac8522a02d2d5726a",
@@ -24,6 +24,6 @@
     "CapturedNetworkneverEnqueueaftercapture; independentFrame reference separateprocess preserves buffers"
   ],
   "warmed_gate": "ActualApi hipMalloc calls/successes, Upload calls, Fn/SpPlan misses plus pool/weights/modules/functions/plans/gather cardinalities/SProllovers allstable two calls; no retainedwarmTensor; dynamicexpectedFn sequence",
-  "graph_key": "actualNativegeometry valid/processing, NetW/H/span bytes, actualLoadModule filepath/handle, Bridge mapping/capacity/noalias and capturedsame mappedptr",
+  "graph_key": "actualNativegeometry valid/processing, NetW/H/span bytes, actualLoadModule filepath/handle, Bridge mapping/capacity/noalias and capturedsame mappedptr; api.style_feature actual normalized module constant value",
   "failure_diagnostic": "Newcaptureguard printsreqbytes, lastFnkey and poolcapacity/refcount/SPplanowner/inlineowner; originalNewguard never relaxed"
 }
