@@ -1,0 +1,39 @@
+{
+  "row": "c32-wave1-fast",
+  "compiler": "llvm23",
+  "defines": [
+    "HIP_ISA_HALF 1",
+    "CW_UP_FUSED 1",
+    "CW_ACT_FMED3 1",
+    "HIP_PREPACKED_WEIGHTS 1",
+    "CW_ROLL_HIDDEN 1",
+    "CW_ROLL_WINDOW 1",
+    "CW_VEC_INPUT 1",
+    "CW_PREFIX_SPLIT 1",
+    "CW_PACK8 1",
+    "HIP_FP8_SAT_MODE 3",
+    "CW_DIRECT_OUT 1",
+    "CW_RTZ_PAIR 1",
+    "CW_PACK_MODE_MASK 127",
+    "CW_PREFIX_DIRECT_OUT 1",
+    "CW_PREFIX_FULL_TILE 1",
+    "CW_FINISH_FULL_TILE 1",
+    "CW_SKIP_BYTE 1",
+    "CW_DIAG_ONLY 1",
+    "CW_INPUT_HALF 7",
+    "CW_PREFIX_HALF_SOURCE 1",
+    "CW_PREPOST_BYTE 1",
+    "CW_PREFIX_TAIL_VEC 1",
+    "CW_FINISH_TAIL_VEC 1",
+    "CW_HOIST_UP 3",
+    "CW_FAST_NUM 3"
+  ],
+  "opts": [
+    "-enable-post-misched=0",
+    "-amdgpu-sched-strategy=max-ilp"
+  ],
+  "residual_statement_sha": "9fd969513298177ea77b9fb886f26ab6de0e79d592f83b23abf1e7555516a642",
+  "old_source_sha": "0d5a0af407224ebfabd9b99765f745691d261ebb874cef111b9234edcb1a4d25",
+  "new_source_sha": "d2b534dc10ecd54b2ef4b3a66613fd44b7ce0d7dd38714fa4fb89f70b66e7c79",
+  "scope": "onlyone CW_RTZ_PAIR feature exit changed; all residual rounding/stores and all other math unchanged; intended numerical difference"
+}
