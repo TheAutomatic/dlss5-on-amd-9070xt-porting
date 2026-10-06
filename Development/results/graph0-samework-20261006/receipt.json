@@ -1,0 +1,27 @@
+{
+  "session": 43912,
+  "exit_code": 0,
+  "lock_released": true,
+  "source_commit": "842a3ac8",
+  "source_review": "measurement final PASS on fixed1088FAST1MP1AE0PDL0plainHIP scope",
+  "exe_sha256": "87fe10fa89ed73741f0aa757351fb0bb0699be472453c93c946ebdfeac539cee",
+  "input_sha256": "3ef42d34cebd1bc847e5caa3a95b3c3b70f45c9eeed4e828a3e2f85615b49b68",
+  "eager_reference_sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1",
+  "warm": 80,
+  "eager_api_launches": 161,
+  "capture_host_function_sequence_equal": true,
+  "graph_nodes": 161,
+  "all_node_type": 0,
+  "node_function_multiset_equal_eager": true,
+  "capture_end_status_none": true,
+  "graph_destroy_success": true,
+  "instantiate_calls": 0,
+  "graph_launch_calls": 0,
+  "performance_claim": false,
+  "limits": [
+    "GetNodes unordered multiset does not prove DAG dependency order",
+    "No replay performed; SP fixedbase replay/timeout recovery remains untested",
+    "SP_STATS host runs166 includes capture recording traversal, not execution count",
+    "No post-replay output exists; eager raw golden supports original path only"
+  ]
+}
