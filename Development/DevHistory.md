@@ -1998,3 +1998,8 @@ root认可900正式均值改善/第三轮p99在1µs实际计时内未分辨退�
 
 - /tmp/graph0-product-perf实际新源码只读PASS：原benchmark.cpp与gold字节同，nativePulse全scope/masks/marker source片段逐字同，非为对称删掉真实Record逻辑。只移gold重后验热检查，保setup/finalCreate/driver/caps/Record=N与Off资源0/GraphN实门，普通计数排capturehost。
 - 当前Frame160弃80/2edge外读/NET0/PDL0/PRED1inactive，两role有简单累计，不新增HIPquery/每帧诊断打印，原postSignalQuery/codec/drain/借用寿命保；实际性能尚无新数据，sourcePASS不替硬件counter/raw与统计门。审者无编/GPU/改candidate/noamend，记录quiet-performance-review。
+
+### 2026-10-06 真Auto产品对照首筛止与ReplayAuto最小CPU门
+
+- 6afdb3ba/53360实际Auto163 RecordAccepted对Off160 Graph、8F16rawsamefinite：mean+0.006975ms/p99−0.0451ms，控制mean漂移+0.013213ms。首筛未达收益门即止，不formal/default替换；旧f7a只原pulse0对照范围，结果不相加。
+- 只读官方锁头确认EventRecord枚举7及GetEvent typed接口，当前组合缺162node事件身份/强DAG位置、leasehandle暴露、图先于事件销毁和重放前host scope复核；captureCPU Record不冒GPU执行证明。详见replay-auto-minimal-review，无新增GPU/编译/生产修改/noamend。

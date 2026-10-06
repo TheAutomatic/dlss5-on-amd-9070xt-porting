@@ -178,3 +178,6 @@
 - 下一quietproductperf待actual新源审：原O2benchmark/同HDR/NET0PDL0 EagerAuto2对ReplayOff0，只移gold热后验检查；nativePulseScope/真实EventRecord逻辑不改，setup与末CPUcounters核RecordAccepted=warm+frames−1、no newHIPquery/逐帧打印。源未到不复旧gold，不承诺APP新baseline收益/生产；sharedamend禁，纯/APP/marker收益不相加。
 
 - quietProduct actual新源已落且独立性能公平审PASS（quiet-performance-review）：原benchmark.cpp byte同gold；nativePulse Configure/eligibility/RejectMask/marker片段逐字同，不删生产scope/Record。热gold后验移setup/final，ordinary只Enq+累计、两role选定Frame累计，无新增HIPquery/打印/环境读取诊断；原nativePulse自身guard照留。setup真AutoCreate/driver/caps/warmRecords，末Auto N=actualwarm+frames−1普通/record/accepted相等且Graph0，Off资源0/ordinarywarm/Graphframes；错计数非0拒批。原Frame160弃80/2edge读取外/NET0/PDL0/PRED1inactive/codec/postsignalquery/drain/lifetime同域，实际新性能数据待单ABBA，不加旧收益/no生产。
+
+- directproduct实际53360/6afdb3ba首筛STOP：Auto2 Create1/ordinary与RecordAccepted163，对Off Graph160/资源0；8F16rawsamefinite、时间有效。steady mean ReplayOff比Auto **+0.006975ms**、p99−0.0451ms；control mean漂移+0.013213ms，不能证明普遍变慢，也不满足替换收益门。不formal/重刷/defaultGraph，不借旧off/off三轮或相加收益。
+- 下一仅CPU ReplayAuto最小机制准备：官方EventRecord7/GetEvent接口已见；需162节点(161kernel+1真实lease事件)的dtype/handle/强DAG位置门，graph/exec先销后leaseClose、每帧host eligibility及固定key复核。capture时host Record累计不等GPU重放次数；实际DLL导出/节点支持和raw尚未验证，仍无生产变化。
