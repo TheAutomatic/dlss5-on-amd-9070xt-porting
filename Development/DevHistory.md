@@ -1774,3 +1774,8 @@ GPU均值FAST0我6.706866对M6.017463、差0.689404ms；FAST1我6.628813对M6.02
 ### 2026-10-06 B2半clamp去转换真实短筛
 
 B数学同域表达式消除half→float clamp→half往返，COMGR21真实640 VALU228→213、转换16+16→8+8，资源68VGPR同/分配72。GPU161795score独立gold0halfcode差；1088同full71 A/B2/B2/A均值delta−0.006105ms、p99+0.054664ms，两个B2不都快于两A，弱短筛暂不收不formal。整网B2对先前B逐floatbit0差；对A合成baseline PSNR52.1965、maxabs0.0348168，不作为生产画质验收。锁释放exit0，源/ABI/dualarch SHA/原CSV/原ISA与CPU有限域边界见results/vit-score-halfclamp-20261006。未部署。
+
+
+### 2026-10-06 C2 keyperm保持C数学的真实gold与短筛
+
+仅640完整chunk：Krow置换就地half分母/P恢复natural，再原AV；COMGR总静态405→398、VALU247→251、DS动态16→6/64，VGPR56仍allocation72，400原C指令完全同。四fixture含±0，实际逐层QK/P/denprefix/AV/finalbyte全0差/有限，整网对前C逐floatbit0差。1088 A/C2/C2/A首ABBA delta−0.004771ms/p99−0.068848，但两C2不都胜两A，弱短筛不收不formal。相对当前A合成PSNR52.632604/maxabs.0335403，非生产画质验收。source/COMGR实际ISA/dualarchSHA/tracegold与CSV见results/vit-den-keyperm-20261006；CPU44001/GPU38113均exit0锁释放，队列交integrator，无部署。
