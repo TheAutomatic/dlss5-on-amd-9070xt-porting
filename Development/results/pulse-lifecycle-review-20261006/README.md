@@ -1,0 +1,24 @@
+# Optional pulse production lifecycle review
+
+CPU-only review of current source and isolated prepare scripts. Nine failure-control model cases pass; model.py is a proposed control flow, not a mock of the actual Windows HIP runtime. No GPU, installation, configuration or package change.
+
+## Required changes before production adoption
+
+1. Optional marker failures must not enter Api::Check and throw through the whole frame. Current isolated framework prepare.py:10,14 does this deliberately for trial rejection; bridge Enqueue catch (hip_d3d12_bridge.h:278) marks the bridge failed. Missing CreateWithFlags, either Create failure, or either Record failure should log requested/active/reason, disable pulse, and continue existing NN submissions. A first successful Record followed by a failed second Record can remain ordered on the stream; do not synchronize/destroy in the hot callback. Actual HIP Record errors may also indicate a sick runtime/device: continuing preserves the old-path attempt, not guaranteed recovery from device failure.
+2. Constructor setup precedes later HasFn/prediction/skin initialization. Network constructor catch at hip_reference_network.h:745 currently has no pulse handle cleanup. Add cleanup for both partial creation and later constructor failure; after possible submitted work, drain the owned stream before Destroy. Production destructor must never throw.
+3. Construction calls hipSetDevice(opt.device) before StreamCreate (hip_reference_network.h:692); events created later therefore share the selected device and owned stream. Enqueue bridge explicitly hipSetDevice(hip_device) at :255 before external wait/network/pulse. Network::Enqueue itself does not select a device (:817). PrepareStagedKernels (:289-294) and destructor/WaitForSubmittedWork (:187-197) lack explicit selection. A callback thread different from the constructor thread, or another HIP consumer changing its thread-local device, cannot be assumed safe. Select the owning device at warm preparation and cleanup boundaries; handle cleanup selection/drain failure conservatively, preserving possibly live handles rather than destroying in-flight objects. This is an existing broader bridge edge, not evidence the single-device probe failed.
+4. Destroy results must be checked/logged without throwing. Existing trial ignores results, so no runtime resource-pressure proof. On failed cleanup selection or drain, do not claim release succeeded; bridge already intentionally retains all state when WaitForSubmittedWork fails. Do not add device-wide synchronization.
+
+## Scope and compatibility
+
+- Two handles per Network, reusable through warmup and repeated stream-ordered frames; no per-frame allocation or elapsed/query/sync required. Ensure once-disabled remains disabled for the instance and failed-record handles remain owned until cleanup.
+- Graph must fallback pulse off before capture, not abort network construction or introduce pulse capture/replay. No graph compatibility measurement exists.
+- PDL/any-order, non-full71, MP3, history experiment, alternate module profiles and other hardware are unmeasured. Conservative optional eligibility should match tested full71 FAST1 MP1 graph0 profile, with clear fallback reason. EventRecord supplies stream ordering, not a documented flush guarantee or restoration of PDL ordering.
+- Resize rebuilds Frame/Network: old stream must retire before deleting its events; the new geometry owns fresh events and starts cold. No cache or event sharing between instances. Module/geometry/flags determine profile eligibility, not event ABI; no hsaco changes needed.
+- If an event is successfully recorded, closing requires owned-stream drain first. If event never recorded, partial-constructor cleanup can destroy without an extra hot-path drain. Repeated frame records reuse handles only under the bridge's documented single host thread / one staged frame contract (:281).
+- No worker-side lazy Create. Keep optional event creation on the existing initialized constructor thread. Do not hold global submission locks or introduce cross-thread exceptions.
+- API flags2 accepted by prior single-HIP-device probe. This does not prove cheaper hardware timestamps, multi-HIP-device correctness, context-loss recovery, concurrent network stress, or complete Destroy success. None are claimed.
+
+## Model coverage
+
+Missing export; first/second Create failure; first/second Record failure; cleanup device selection failure; drain failure; Destroy failure; success. All preserve two old-path frame attempts, disable after Record error, and retain ownership when cleanup fails. Separate production integration should adopt the control flow and have its actual helper exercised by API injection; this report does not substitute the helper tests or formal performance data.
