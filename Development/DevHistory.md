@@ -1944,3 +1944,8 @@ root认可900正式均值改善/第三轮p99在1µs实际计时内未分辨退�
 - math fbedb85e Up48整路线数值/count161160全过但92402 wall尾+0.11964ms、mean弱且controldrift大，root停止不APP/formal/调同variant。Mo score-onlyfb5c136f单SPV数值改变PSNR52.7257，对锁oldMoGPU+0.00936ms弱/漂移/noP99，不换baseline也不推1ms归因。原数据/失败与全部proof保留，无生产修改。
 - reviewer仅CPU审actualgraph0外捕获原型：最初Upload/planmiss漏guard与SP诊断env错前缀及时指出，owner修为SP_*及DIAG0staticassert、warmedcache/票据门，Endonce/IsCapturingNone、Ownerdrain/destroy。最终842a3scope源审PASS，fixedSPinit清状态说明不是未来replaygold；Kernel161Fn多重集不DAG顺序。
 - finalcaptureonly无instantiate/launch，只在source/interface/node检查后销图；official64Params/copies有独立3cc来源，old同recipeTDR未找到源反证，不把假设当阻塞。审者无GPU/build/编辑原型，报告graph0-samework-source-review；不能称ReplayReady或已提速。
+
+### 2026-10-06 graph0单次实际通过与bounded新源审
+
+- 单replay72596权威exit0/LOCK_RELEASED、03ef727f已归：161Kernel/160edges强排序、一次instantiate/launch，poison输出后raw153ac bit0finite，scope仅固定source1088/FAST1/seed0，不继续把它写未硬件run。没有速度结论。
+- 新bounded57b4a1e7只读sourcePASS：CapturedNet记录后无Enqueue，3固定+1相同GPU地址换R数据，独立RefNet owns pool/plans/weights/stream给finite新gold；第四graph要同gold且异initial。Ref不拥有graph借用资源，CapturedNet到销图存活，原_Exit失败清理边界保。尚无新bounded硬件数据、未改生产/config；审者无编/GPU。
