@@ -1904,3 +1904,9 @@ root认可900正式均值改善/第三轮p99在1µs实际计时内未分辨退�
 - 只读CLI1.0.0/AST及rawreference SHA核通过；31928同exe首输出与freshstock153ac018…647f1同。按root授权单候选13042/count161抓取，97053exit0/LOCK_RELEASED、2000frames稳定每161派发、首末rawbit0finite并与reference同。没有D3D上下文/outertimingevents/Instr/shaderinstrumentation；现装/config/ZIP未动。
 - 驱动日志明确setclockspeak+restored，未独立读硬件clock；实际TraceConfig13042/161、4SqttData，所以不是SPMonly。真实derived5763samples/4096interval，每ratio核引用计数；窗口memorybusy87.275%、stall19.784%、L0hit77.317%、L2hit96.863%，不当native性能或帧/族份额。rawtimestamp跨度1028352尚未转换时间单位。
 - globalrenderop与hostAPI是否含初始化偏移仍待gfx12SQTT/eventexport与实际fn序列门，现工具缺reader，不伪造161名字。不因mapping未闭丢弃窗口观测，也不先写完整frame瓶颈；单trace/source/hash/log/counters已归results/fullnn-spm-20261006，旧mixed输出变化与旧热核范围仍保留。
+
+### 2026-10-06 锁定mochi同条件硬件窗口3747
+
+- 原d1185exe/模型/plan/SPV未改；83819两nocapture末输出自身重复/finite/alpha1并与freshM624d9d1a…612同。actual123日志是steps.size动态值，源码逐step录dispatch且chunk1每frame复用cmd提交；不把记录API次数或固定文案当工具全局派发。原exe仅最后write_surface，未造firstbeforewarm。
+- 3747单SPM+SQTT校准exit0/LOCK_RELEASED，warm80/repeats2000同Style1seed0/common1088/640/full71，candidate9842/123初始化偏移未证；captured末raw对ownreference同，旧资产metadata未改，driver成功restore日志过、未独立clockquery。5296samples/4096interval，memoryunitbusy90.236/stall12.944%、icache65.075%、L0/L2hit75.191/95.293%，全部derivedratio引用raw核过。
+- memorybusy明确访存单元活跃且含stall，同分母commandprocessorbusycycles，不是整GPU利用率；rawticks无频率、不硬算带宽/compute份额。global/完整frame及实际provider比较仍CPU审；现窗不归因native1.046ms差，不借旧mixed撤回的21.7%stall。源码脚本/traceSHA/定义/logs已归档，未安装/改现装/config/ZIP。
