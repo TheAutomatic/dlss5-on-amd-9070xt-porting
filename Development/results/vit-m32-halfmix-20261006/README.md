@@ -9,3 +9,7 @@ Primitive gold99444 CPU /82714 GPU passed three non-symmetric finite FP8 inputs 
 ## Canonical wholeNN diagnostic
 
 30879 exit0/lockreleased: old/new each2frames repeatbit0 and finite. Common encoded1920×1088 input, Style1seed0/full71/AE0; not gameHDR. ValidRGB first1080 rows vsOLD: MAE0.00168913, max0.03354031, PSNRpeak1=52.71317dB, all pixels changed. Last8 padding rows separately PSNR47.21506dB. This is intentional changed mathematics, not lossless and not NV accuracy evidence. No performance run. Fullraw remains local /tmp/vit-m32-halfmix-20261006/whole-{old,new}; hashes and identities archived.
+
+## Single performance firstscreen: STOP
+
+61386 exit0/lockreleased,160 measured frames after80warm in fourABBA slots. Samevariant all8edge raw hashes match and finite passed. GPUmean OLD8.864276→NEW9.013569ms (+0.149293),p99+0.129314ms;wallmean+0.153728ms,p99+0.180980ms. BothB means exceed bothA. GPUcontrol drift+0.011147ms. Combination is slower despite82VGPR vs historical95; currentA16 remains68. STOP: no formal,APP,integration or rerun. Mathematical output change remains52.713dB vsOLD, not NV accuracy.
