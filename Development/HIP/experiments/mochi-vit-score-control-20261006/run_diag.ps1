@@ -6,6 +6,9 @@ if(Get-Process|Where-Object {$_.ProcessName -match 'benchmark|nr_graph|rtc_compi
 if((Get-PSDrive D).Free -lt 100GB){throw 'Free D<100GB'}
 if((Get-FileHash "$mz\nr_graph.exe").Hash.ToLower() -ne '8ad3ac1cfd5d83f58fb9a223e21d7a970118518839bada3abcaba66af5e8d153'){throw 'locked exe drift'}
 if((Get-FileHash "$mz\dlssnr.bin").Hash.ToLower() -ne '2b41c888cf4155b8958c665ba64018ab0bd25c85fc71a2b6db86d0d04d1f7fbd'){throw 'model drift'}
+if((Get-FileHash $fixture).Hash.ToLower() -ne '17b2e09bf9757a5a98fbd65a08f618100ec42f4d7abb7036cb03cb19e3ae4e2a'){throw 'common valid input drift'}
+if((Get-FileHash "$mz\plan-1920x1080.txt").Hash.ToLower() -ne '93f8ab6976d235c7383e17f9c67ba7ba694fd440d7a0238b19516ad75761f2e0'){throw 'plan drift'}
+if(Get-Process|Where-Object {$_.ProcessName -eq 'RadeonDeveloperPanelCLI'}){throw 'capture controller active'}
 $m=Get-Content "$r\overlay-manifest.json" -Raw|ConvertFrom-Json
 foreach($e in $m.rows){if((Get-FileHash "$mz\spv\$($e.path)").Hash.ToLower() -ne $e.oldSHA){throw 'old SPVtree drift'};if((Get-FileHash "$r\overlay-spv\$($e.path)").Hash.ToLower() -ne $e.newSHA){throw 'new SPVtree drift'}}
 $out="$r\diag-1";if(Test-Path $out){throw 'refuse overwrite'};New-Item -ItemType Directory -Force $out,"$out\cache"|Out-Null
