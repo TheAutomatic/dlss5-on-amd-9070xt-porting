@@ -1982,3 +1982,9 @@ root认可900正式均值改善/第三轮p99在1µs实际计时内未分辨退�
 
 - 535eab68权威首ABBA37548 exit0/release：same原Frame/correctedquietheaders，160total弃80/每slot80steady，wall9.678319→9.603994，mean−0.074325/p99−0.07518ms，bothB快；A漂移mean+0.011963/p99−0.07324仍保。8首末F16raw对原gold bit0finite，640时间行finitepositive、candidateGraph160/161DAG及recordfalse门过。冷1.27–1.46s未删，不当steadyavg。
 - 两arm严格pulse0PDL0NET0/nonoverlap，原codec/interop/postsignalquery/drain不改；只是actualAPPinterface首筛，不FPS/NETGPU/生产接受，不与pure4ef收益相加/扣独立Mgap。Root只授权同freezeR2/R3逐轮必要门、负止无R4，后续actual数据才追加；CPU源审者未新GPU或远程干扰/现装配置改动。
+
+### 2026-10-06 APP三轮合并门完成与productbaseline gold源审
+
+- f7a48855实际三APP轮通过原合并mean/p99 gate，pooled−0.070848/−0.09415ms、24F16rawsamefinite/Graph160；R2/R3B2自身p99坏、R2max11.745ms高于pooledcontrolmax10.182真实保，不能写所有slot尾改善/未来无卡顿/已生产。原实验commit被sharedamend竞态后root CAS恢复，8168仅独立文档；审者不amend、也未改实验数据。
+- 新actualproduct e45源只读小12gold PASS：Auto2 genuineCreate1/drivercaps/accepted+1/record_ok门对Replay0全无create/record，ordinary排captureTraversal并包含真实setupwarm，noHIPquery/每frame打印；PRED1在MP1未执行数学predict、codeprofile新freeze不冒旧PRED0。后验CPUcountergold不替性能公平源门。
+- 本次仅源审/归档/计划同步，无GPU/远程扰动/构建/修改候选/现装配置；性能收益不相加、不扣独立Mgap、未部署。
