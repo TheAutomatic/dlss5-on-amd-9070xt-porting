@@ -1949,3 +1949,9 @@ root认可900正式均值改善/第三轮p99在1µs实际计时内未分辨退�
 
 - 单replay72596权威exit0/LOCK_RELEASED、03ef727f已归：161Kernel/160edges强排序、一次instantiate/launch，poison输出后raw153ac bit0finite，scope仅固定source1088/FAST1/seed0，不继续把它写未硬件run。没有速度结论。
 - 新bounded57b4a1e7只读sourcePASS：CapturedNet记录后无Enqueue，3固定+1相同GPU地址换R数据，独立RefNet owns pool/plans/weights/stream给finite新gold；第四graph要同gold且异initial。Ref不拥有graph借用资源，CapturedNet到销图存活，原_Exit失败清理边界保。尚无新bounded硬件数据、未改生产/config；审者无编/GPU。
+
+### 2026-10-06 bounded实际过与samework图性能公平性源审
+
+- 单72596之后74023 bounded4launch已实过（bf2c7e4b）：3fixed153ac、changed同GPUptr/独立ReferenceNet eager7fe026…对图bit0finite且异initial，非实际game/history/seedshape变化。更新计划不再写未硬件run。
+- 只读新samecaller性能0087d9d0审PASS：发现文案2reads不符actual3(commonsetup1+selected2)并明确全steady外，owner加GPUtimerfinite/>0拒批；common缓存warm与DAG/capture/instantiate在steady之外，selected80warm160、相同outerEvent界，无热Fnvector/打印，241GraphAPI不伪称GPU/OSsubmit次数。审者无GPU/构建/编辑candidate。
+- 执行者首87130/26358fb3真实GPUmean−0.080413/p99−0.084621、wall−0.100147/−0.08799ms，12raw153ac/finite与SPerrorsdisabled0；root同协议R2均值/p99正，R3既定进行。未正式/APP/生产接受，不跨批扣原M1.046ms；记录performance-review边界，现装/config/ZIP不动。
