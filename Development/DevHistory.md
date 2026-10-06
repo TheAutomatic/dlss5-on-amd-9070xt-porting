@@ -1841,3 +1841,10 @@ B数学同域表达式消除half→float clamp→half往返，COMGR21真实640 V
 ### 2026-10-06 H900 p99 CPU测量分辨率校准
 
 不新性能轮/不改CSV/不改临时容差，审三formal原数据与实际O2exe。steady_clock::now实际gettimeofday→getntptimeofday，以µs值乘1000成名义ns；原CSV壁时全部整数µs。轻CPU同compiler probe min/gcd1000ns，QPF10MHz/100ns另读但不是此walltimer路径。R3+.14µs是exactDecimal插值非float误差：A475/476序统计7255/7326µs，H7269/7274，权重.21，端点差+14/−52合成+.14。低于1µs实际量化，仅正号不能证明真实尾退步；解释为测量层未分辨/兼容0，非无限future统计等价。控制A3−A0 p99三轮−35.74/+47.76/+43.31µs；三轮全1440/arm pooledp99A7333.44/H7258.86µs，差−74.58，不用pooled静默替旧逐轮门。旧按严格正号停是真历史；root据新误差证据决定能否继续900兼容门。1152+73.99µs独立负账不随此放过。原表/时钟反汇编/QPF/CSV SHA见results/c32-norm-hoist-stat-audit-20261006。
+
+### 2026-10-06 ordinaryDown边界修正后真RecordN APP首双档
+
+- 独立6ecf9a0c primary审与根进程授权：pdl_calls非pending，原C256链后普通Down→原C512起点可测试单marker。只knownDown普通Run成功后立per-Enqueueflag/当前anyorderfalse；保PDL1及原graph/MP/full71/history-used等限制，不换位置/新mode，不关 baselinePDL。
+- 实际90051314数据门 cold/warm/改真实HDR(+shift7/gain1.01)+seed7/return，A/B5帧逐位0finite，candidateRecord5成功/PDL20/firstprefix2/currentanyorder0/资源balance；MP3initMask128零events，legacyhistory冷首Record1后mask1回退，对应全raw0finite。非自然时序质量结论。
+- sameO2NET0scope真on90028126 mean−0.092794/p99−0.19514ms，115281547 −0.092088/−0.12544ms，160弃80；两B均快，各Record160成功160/createDestroy1/siteAccepted160，diagnosticouterAPI0、原postquery160；900PDL640、1152PDL0，raw同finite。均exit0/LOCK_RELEASED给H900compat，尚未正式/默认收，不与H收益相加。
+- H900计时裁决采用f38c3cb4：1us原计时量化、round3p99插值+0.14us保留不改/不抹数，低于分辨率且全三roundpooledp99−74.58us、controls漂移35–48us，根进程裁测量内持平进900-only兼容；1152+73.99us仍负。此方法不是随意增加容差，不称三轮全部p99负。整体追平目标未完成。

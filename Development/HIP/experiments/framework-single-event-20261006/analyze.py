@@ -25,7 +25,14 @@ if a.app_net0:
    x=list(map(int,diag[0]));y=list(map(int,pulse[0]));n=len(list(csv.DictReader((a.directory/f'slot-{i}'/'frame.csv').open())))
    diagnostics_off=all(v==0 for v in x[:6]) and x[6]==n
    records_ok=diagnostics_off and (y==[1,1,n,n,1,1,1] if i in [1,2] else all(v==0 for v in y))
-  receipts.append(dict(slot=i,diagnostic=diag,pulse=pulse,diagnostics_off=diagnostics_off,valid=records_ok))
+  boundary=re.findall(r'APP_PULSE_RECEIPT.*pdl_calls=(\d+) site_visits=(\d+) attempts=(\d+) accepted=(\d+) reject_mask=(\d+)',log)
+  firstsite=re.findall(r'site=C512_encoder_start preceding=ordered_Down_c256 launch_mode=hipModuleLaunchKernel mode=timed_single current_anyorder=0.*frame_prefix_pdl=(\d+)',log)
+  if boundary:
+   n=len(list(csv.DictReader((a.directory/f'slot-{i}'/'frame.csv').open())))
+   b=list(map(int,boundary[0]));records_ok=records_ok and b[1:]==([n,n,n,0] if i in [1,2] else [0,0,0,0])
+   if i in [1,2]:records_ok=records_ok and len(firstsite)==1
+  elif 'app-boundary' in a.directory.name:records_ok=False
+  receipts.append(dict(slot=i,diagnostic=diag,pulse=pulse,boundary=boundary,firstsite=firstsite,diagnostics_off=diagnostics_off,valid=records_ok))
  s['receipt']=receipts;s['all_diagnostics_off']=all(x['diagnostics_off'] for x in receipts);s['all_pulse_effective']=all(x['valid'] for x in receipts);s['trial_kind']='effective-single' if s['all_pulse_effective'] else 'candidate-fallback-not-effective';s['all_current_ready']=False
  s['screen_pass']=s['avg_delta']<0 and s['merged_p99_delta']<0 and s['allBfaster'] and raw_same and finite and s['all_diagnostics_off'] and s['all_pulse_effective']
 else:

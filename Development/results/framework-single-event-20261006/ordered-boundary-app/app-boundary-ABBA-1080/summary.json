@@ -1,0 +1,218 @@
+{
+  "slots": [
+    {
+      "slot": 0,
+      "wall_mean": 9.7182,
+      "wall_p99": 10.0903,
+      "net_mean_ready": null,
+      "net_p99_ready": null,
+      "samples": 80,
+      "records": 0,
+      "ready_all": 0,
+      "ready_steady": 0,
+      "invalid": 0
+    },
+    {
+      "slot": 1,
+      "wall_mean": 9.6374625,
+      "wall_p99": 9.878209999999997,
+      "net_mean_ready": null,
+      "net_p99_ready": null,
+      "samples": 80,
+      "records": 0,
+      "ready_all": 0,
+      "ready_steady": 0,
+      "invalid": 0
+    },
+    {
+      "slot": 2,
+      "wall_mean": 9.623275,
+      "wall_p99": 9.928379999999997,
+      "net_mean_ready": null,
+      "net_p99_ready": null,
+      "samples": 80,
+      "records": 0,
+      "ready_all": 0,
+      "ready_steady": 0,
+      "invalid": 0
+    },
+    {
+      "slot": 3,
+      "wall_mean": 9.726712500000001,
+      "wall_p99": 10.081369999999996,
+      "net_mean_ready": null,
+      "net_p99_ready": null,
+      "samples": 80,
+      "records": 0,
+      "ready_all": 0,
+      "ready_steady": 0,
+      "invalid": 0
+    }
+  ],
+  "avg_delta": -0.09208749999999988,
+  "merged_p99_delta": -0.1254400000000011,
+  "net_avg_delta_ready": null,
+  "net_p99_delta_ready": null,
+  "allBfaster": true,
+  "raw_same": true,
+  "finite": true,
+  "all_current_ready": false,
+  "receipt": [
+    {
+      "slot": 0,
+      "diagnostic": [
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "160"
+        ]
+      ],
+      "pulse": [
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "boundary": [
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "firstsite": [],
+      "diagnostics_off": true,
+      "valid": true
+    },
+    {
+      "slot": 1,
+      "diagnostic": [
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "160"
+        ]
+      ],
+      "pulse": [
+        [
+          "1",
+          "1",
+          "160",
+          "160",
+          "1",
+          "1",
+          "1"
+        ]
+      ],
+      "boundary": [
+        [
+          "0",
+          "160",
+          "160",
+          "160",
+          "0"
+        ]
+      ],
+      "firstsite": [
+        "0"
+      ],
+      "diagnostics_off": true,
+      "valid": true
+    },
+    {
+      "slot": 2,
+      "diagnostic": [
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "160"
+        ]
+      ],
+      "pulse": [
+        [
+          "1",
+          "1",
+          "160",
+          "160",
+          "1",
+          "1",
+          "1"
+        ]
+      ],
+      "boundary": [
+        [
+          "0",
+          "160",
+          "160",
+          "160",
+          "0"
+        ]
+      ],
+      "firstsite": [
+        "0"
+      ],
+      "diagnostics_off": true,
+      "valid": true
+    },
+    {
+      "slot": 3,
+      "diagnostic": [
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "160"
+        ]
+      ],
+      "pulse": [
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "boundary": [
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "firstsite": [],
+      "diagnostics_off": true,
+      "valid": true
+    }
+  ],
+  "all_diagnostics_off": true,
+  "all_pulse_effective": true,
+  "trial_kind": "effective-single",
+  "screen_pass": true
+}

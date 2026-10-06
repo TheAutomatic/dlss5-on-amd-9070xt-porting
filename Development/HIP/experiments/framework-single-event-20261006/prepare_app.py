@@ -7,6 +7,12 @@ subprocess.run([sys.executable,str(Path(__file__).with_name('prepare_safe.py')),
 # The original persistent Frame caller has no GetTimings/Poll/SetTimingTag.
 b=(r/'Development/HIP/benchmark_vit_reuse.cpp').read_text()
 for banned in ['GetTimings(','GetStatus(','PollNetworkTiming(','PacingNetworkTiming(','PacingTimingTag(']:assert banned not in b
+# Isolated correctness-only switch: cold A0 / warm A0 / shifted+gain B7 /
+# return A0 / warm return A0, in one persistent Frame. No quality/perf claim.
+b=b.replace('for(UINT i=0;i<N;i++){', '''const char*data_gate_env=std::getenv("DLSS5_LAB_PULSE_DATA_GATE");const bool pulse_data_gate=data_gate_env&&!std::strcmp(data_gate_env,"1");if(pulse_data_gate&&(N!=5||temporal||pattern||sequence))throw std::runtime_error("pulse data gate requires five real-HDR historyoff frames");
+for(UINT i=0;i<N;i++){if(pulse_data_gate){void*gp=nullptr;ck(up->Map(0,&none,&gp));for(UINT y=0;y<H;y++)for(UINT x=0;x<W;x++){UINT sx=i==2?(x+7)%W:x;uint16_t pixel[4];memcpy(pixel,frozen.data()+(size_t(y)*W+sx)*4,8);if(i==2)for(UINT c=0;c<3;c++)pixel[c]=Float16ForSequence(NativeHalfToFloat(pixel[c])*1.01f);memcpy(static_cast<char*>(gp)+fp.Offset+size_t(y)*fp.Footprint.RowPitch+size_t(x)*8,pixel,8);}up->Unmap(0,nullptr);}
+const UINT pulse_frame_seed=pulse_data_gate&&i==2?7:seed;''',1)
+b=b.replace('COPY_DEST,seed,false,temporal?', 'COPY_DEST,pulse_frame_seed,false,temporal?',1)
 (a.output/'benchmark.cpp').write_text(b)
 p=a.output/'submit_pulse_hip.h';s=p.read_text()
 s=s.replace('int owner{};Handle* stream{};', 'int owner{};Handle* stream{};unsigned long long create_calls{},create_ok{},record_calls{},record_ok{},destroy_calls{},destroy_ok{},drain_calls{};')

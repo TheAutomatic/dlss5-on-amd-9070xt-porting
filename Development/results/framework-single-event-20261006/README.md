@@ -50,3 +50,18 @@ Bridge config occursbeforeNN. Runtime point occursafterencoderC64/C128/C256 andD
 CPUupdatedone-time runtime logging includesrequested/active/reason/rejectmask/pdlcalls/history/shape; startup nowinitialized/pending-first-record. Exitcountsinclude sitevisits/attempts/accepted/pdlcalls/rejectmask, withnoaddedquery/sync and no per-framelogging. `PulseRejectMask` bit4096 cumulativePDL,2048nextlaunchanyorder; otherbitsmatchhistory/graph/profile/AE/MP/etc. Nextordered1152actualAPP on/off requiresRecord=N andpdl_calls0 beforeanythingcalledgain. CurrentnewO2receipt sourceCPUlinked0, noGPUyet.
 
 Public [HIP EventRecord](https://rocmdocs.amd.com/projects/HIP/en/develop/reference/hip_runtime_api/modules/event_management.html) completioncoverspreviousnonNULLstreamcommands; [AnyOrder launch](https://rocm.docs.amd.com/projects/HIP/en/latest/reference/hip_runtime_api/modules/execution_control.html) permitsunorderedkernelstart. ExistingordinaryDownafterthechainisAPI-levelorderingbasis, but it doesnotproveWindows7privatepacketimplementation, fixPDLacquire/progress, orproveflush. Keep the conservativeunsupportedgatependingindependentcontractreview. Eventhandle reuse also depends on normalFramecompletion before nextRecord; do notreuse a currentlyrecording event.
+
+## Site-specific ordered boundary: actualRecordNAPP dual firstscreen
+
+After independentprimaryreview6ecf9a0c, root authorized onlytheexistingC512start site afterknownordinaryC256Down. pdl_calls is lifetimecount, notpendingwork; remove thatveto. SetboundaryflagonlyaftertheactualknownDown(!head,c256,pool_project_group) ordinaryRun returns successfully, reset it everyEnqueue; requirethatflag andcurrentpdl_anyorderfalse atmarker. Keepgraph/history-used/MP1/profile/full71/AE/currentshape eligibility. This is neitherarbitraryPDL compatibilitynor a newposition. OriginalPDL1 remainson. No baseline/kernel/shader math change.
+
+Actual900datagate51314passed: samepersistentFrame coldA0/warmA0/controlledshift7+gain1.01HDRB7/returnA0/warmA0, baselinevsmarkerall5framesbyte0/finite; changedframe differs, returnframesidentical. CandidateRecord=attempts=accepted5/CreateDestroy1; lifetimePDL20, firstprefixPDL2/currentanyorder0/ordinaryDown site. MP3initmask128 creates0/records0; legacyhistory-sessioncoldrecord1 thenhistoryusedmask1fallback, allcorrespondingframesbyte0finite. This testsoldlegacyhistoryfallback, notprivateoriginalhistorysemantics/flickerquality. Header/helper failuresremainCPUinjectedevidence. AllGPUdiagnostics0, defaultpostqueryretained.
+
+SameO2/NET0/Stock39/full71/HDRcalleroneABBA160discard80pergeometry (noGetTimings/Poll/SetTag):
+
+|scope|wallmean delta ms|mergedp99 delta ms|actual candidate Records|lifetimePDL|
+|---|---:|---:|---:|---:|
+|900/proc960|−0.092794|−0.19514|160/160 bothB|640|
+|1080/proc1152|−0.092088|−0.12544|160/160 bothB|0|
+
+BothB means lower than bothA eachscope. APIcreate/destroy1 balanced, drain1, sitevisits/attempts/accepted160,reject0; timerCreate/Record/Query/span/poll0 andnormalpost_signalquery160. First/lastrawSHAsame/finite. Sessions28126/81547exit0/LOCK_RELEASED; queuegivenH900compat. NoNETGPUcomponentexistsinthisAPPcondition. AllCSV/log/rawSHA/source/exe receipts underordered-boundary-app. Firstscreenonly, defaultnotadopted; noadditionofindependentHnormgain. Necessaryformalnextsamecandidate320discard80oneABBAroundthenimmediatemean/p99/RecordN/raw review, rejectinvalidscopebeforeperformanceclassification. Previouspseudo-on allocations/fallbacklogsremainseparate.
