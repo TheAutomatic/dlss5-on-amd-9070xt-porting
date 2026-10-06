@@ -1,0 +1,22 @@
+{
+  "phase": "CPU only single-replay preparation; not GPU authorized",
+  "parent_capture_commit": "2bfccb16",
+  "source_sha256": "8d5ce44f54826b054bb6f94255758a539072e34294f54b898dc9ce92becefb15",
+  "headers": "Exact private capture-only headers with warmed cache/SP guards from842a3ac8; no selector/math modifications",
+  "build_session": 29500,
+  "gate": [
+    "GetEdges endpoints must be among161kernel nodes",
+    "Kahn topological traversal must have exactly one ready node at every position; verifies total dependency ordering rather than arbitrary GetNodes order",
+    "ordered module Fn sequence equals actual eager161 launch sequence",
+    "all Network pool/weights/SPplans/modulehandles/input/output remain alive until graph/exec destroyed and stream drained",
+    "once instantiate, poison output withff outside graph on same stream, once replay, sync, download finite and full bit0 vs153ac eager"
+  ],
+  "limits": [
+    "Single replay not arbitrary history/seed/ticketrollover/error recovery equivalence",
+    "Function order does not independently decode every node kernel argument; runtime-owned deep copies remain graph lifetime and actual raw is numerical gate",
+    "No proof of one PAL OS queue submit and no timing claim",
+    "Unique DAG order stricter than parallel correctness; failure stops without mutating dependency graph"
+  ],
+  "build_terminal": "29500 exit0",
+  "exe_sha256": "d3ddd6eec8ec24f1b79df0d74fa9a67a59a95b5ec1833f03b7803041c632b4f3"
+}
