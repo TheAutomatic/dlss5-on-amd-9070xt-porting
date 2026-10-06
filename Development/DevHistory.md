@@ -1993,3 +1993,8 @@ root认可900正式均值改善/第三轮p99在1µs实际计时内未分辨退�
 
 - 60494权威actualPASS：Auto2 validateddriver/caps1/Create1、ordinary15(4warm+12−1)/RecordAccepted15/site15/reject0/PDL0及DestroyDrain1；Off普通4warm+图12/CreateRecord0/161DAG。12HDRF16输出两侧bit0finite，不冒requestedauto已启，也不将capturehost遍历算执行。
 - 该gold热后验诊断不对称、不计性能。Root只CPU准备quiet性能新source，移诊断不改nativePulseScope/Record，setup/末countertrue门与NET0/原Frame框架保持；源到再审，审者无新增GPU/remote扰动/noamend/现装配置改动。
+
+### 2026-10-06 quietProduct性能新源审
+
+- /tmp/graph0-product-perf实际新源码只读PASS：原benchmark.cpp与gold字节同，nativePulse全scope/masks/marker source片段逐字同，非为对称删掉真实Record逻辑。只移gold重后验热检查，保setup/finalCreate/driver/caps/Record=N与Off资源0/GraphN实门，普通计数排capturehost。
+- 当前Frame160弃80/2edge外读/NET0/PDL0/PRED1inactive，两role有简单累计，不新增HIPquery/每帧诊断打印，原postSignalQuery/codec/drain/借用寿命保；实际性能尚无新数据，sourcePASS不替硬件counter/raw与统计门。审者无编/GPU/改candidate/noamend，记录quiet-performance-review。
