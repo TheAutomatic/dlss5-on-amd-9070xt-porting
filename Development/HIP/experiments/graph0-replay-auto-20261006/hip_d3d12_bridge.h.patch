@@ -1,0 +1,13 @@
+--- validated-quietproduct/hip_d3d12_bridge.h
++++ isolated-replayauto/hip_d3d12_bridge.h
+@@ -192,8 +192,8 @@
+   pending=false;return true;
+  }
+  ~D3D12Bridge(){
+-  if(!WaitForSubmittedWork()||(network&&!network->CloseSubmitPulse()))return;
+-  if(network)network->LabAppClose();if(clear_cmd)clear_cmd->Release();if(clear_alloc)clear_alloc->Release();if(zero_upload)zero_upload->Release();
++  if(!WaitForSubmittedWork())return;
++  if(network)network->LabAppClose();if(network&&!network->CloseSubmitPulse())return;if(clear_cmd)clear_cmd->Release();if(clear_alloc)clear_alloc->Release();if(zero_upload)zero_upload->Release();
+   if(network){DestroyTiming();TeardownPoll();Release(input);Release(history);Release(output);if(semaphore)network->Runtime().hipDestroyExternalSemaphore(semaphore);delete network;}
+   if(fence_handle)CloseHandle(fence_handle);if(event)CloseHandle(event);if(fence)fence->Release();if(queue)queue->Release();if(device)device->Release();
+  }
