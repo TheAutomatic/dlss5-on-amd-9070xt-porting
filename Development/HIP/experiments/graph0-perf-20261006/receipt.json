@@ -1,8 +1,8 @@
 {
   "phase": "CPU preparation, no GPU authorization/run",
-  "build": "8068 initial exit0,1547 final exit0",
-  "source_sha256": "820477ba2f208606cd90488b3839acbb7adbc5d72b450244130e3b0e44df5ac2",
-  "exe_sha256": "426fa6f95db9242f06d9550420f134ce08e4b0fc9668d2f459feab10271f4967",
+  "build": "39039 final elapsed finite/positive guard exit0",
+  "source_sha256": "0087d9d03741f024700f17f7df11a28182f750b1ca11be0c4f7b35c05cb133b8",
+  "exe_sha256": "bad4badde30ae4bc78fbbe51aa0834f9eef27cd0d0355c642a3e950398714fae",
   "baseline_recipe": "Current1088FAST1/full71MP1AE0historyoffStyle1seed0 PDL0pulse0 opt.graphfalse, stockmodules same",
   "prior_hardware_gates": [
     "2bfccb16 captureonly",
@@ -22,5 +22,7 @@
     "Absolute diagnosticcaller time cannot rewrite freshMgap baseline; only ownABBA effect",
     "No PALOSsubmit count inferred from GraphLaunch",
     "Source fairness review pending; no performance result yet"
-  ]
+  ],
+  "readback_scope": "three total: common setup eagerfirst1 + chosenpath first/last2, all outside steady",
+  "review": "measurement no scope hardblock; sole elapsed guard applied; no midreadback"
 }

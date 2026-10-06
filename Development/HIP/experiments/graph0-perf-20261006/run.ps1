@@ -3,7 +3,7 @@ $r='D:\DLSSNR-Lab\graph0-perf-20261006';$mods='D:\DLSSNR-Lab\combined-vs041-2026
 function Idle {& D:\DLSSNR-Lab\game-check.ps1 'SB-Win64 Onimusha re9.exe SandFall Magpie';if($LASTEXITCODE -ne 1){throw 'game check busy/error'};if(Get-Process|Where-Object {$_.ProcessName -match $games -or $_.ProcessName -match 'rtc_compile|benchmark|pure_fullnn|nr_graph|graph0-capture'}){throw 'game/job live'}}
 Idle;if((Get-PSDrive D).Free -lt 100GB){throw 'D free<100GB'}
 if((Get-FileHash "$f\fixture\processing1088.rgba32f").Hash -ne '3ef42d34cebd1bc847e5caa3a95b3c3b70f45c9eeed4e828a3e2f85615b49b68'){throw 'input lock'}
-if((Get-FileHash "$r\graph0-perf.exe").Hash -ne '426fa6f95db9242f06d9550420f134ce08e4b0fc9668d2f459feab10271f4967'){throw 'caller lock'}
+if((Get-FileHash "$r\graph0-perf.exe").Hash -ne 'bad4badde30ae4bc78fbbe51aa0834f9eef27cd0d0355c642a3e950398714fae'){throw 'caller lock'}
 foreach($e in (Get-Content "$r\expected-modules.json" -Raw|ConvertFrom-Json)){if((Get-FileHash "$mods\$($e.name)").Hash -ne $e.sha256){throw "module lock $($e.name)"}}
 if((Get-FileHash 'D:\DLSSNR-Lab\fresh-mochi1088-20261006\1088-00-F1\first.rgb32f').Hash -ne '153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1'){throw 'reference lock'};Copy-Item 'D:\DLSSNR-Lab\fresh-mochi1088-20261006\1088-00-F1\first.rgb32f' "$r\reference.rgb32f";if(Test-Path "$r\first.rgb32f"){throw 'prior run exists no retry'};New-Item -ItemType Directory -Force "$r\cache"|Out-Null
 Get-CimInstance Win32_VideoController|Select Name,DriverVersion|ConvertTo-Json|Set-Content "$r\driver.json"
