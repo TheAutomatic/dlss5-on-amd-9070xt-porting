@@ -1,0 +1,9 @@
+# Minimal C32 norm transpose prototype: static stop
+
+CPU only, generated canonical current c32-wave1-fast source (compile-modules.py.recipe), not cachednoise source. Q/K QKV operands swapped perK0/K16 with zero initialacc; V unchanged. Half square(v*v) and two f16inputFP32accum WMMA remain, swapping squares/ones to transpose norm. Tokenlane norm uses sum[0] and one rsqrt rather than eight elementrsqrt. Current Q/K FP8 fragment restored through one512B pergroupLDS plane; no production edits.
+
+Pure layout check512positions/all256bytecodes: restoredoldfragment0bitdiff. This is byte representation proof only. RawQKV/squares/WMMA sum/rsqrt/normFP8 arithmetic requires realhardwaregold including ±0/Inf and overflow; no GPU was launched, so no equivalence claim. Existing generic transpose probes do not replace this exactstagegold. Shared samewave communication also needs gold before any acceptance.
+
+Same LLVM23 CPUroute/O3/ffp-contractoff/no-post-misched/max-ilp A/T compare (not substitute for actual stock Windows compiledmodule): chain rsq16→2, instructions1023→1057, ordinaryVALU695→687, DS4→40, VGPR169→193, LDS4096→4608. Prefix1464→1502 and post1472→1509 similarly, DS+36. granule24 wave32 VGPR allocation192→216 worsens an actual boundary. The restoredfragment cost offsets norm rsqrt savings and increases resources. Thus this minimal representation candidate stops statically, no GPUgold/performance cost, no registertranspose matrix expansion or new norm math.
+
+Source T reconstruction prepare.py; A generated from current recipe. Gold SIMDswap order still pending; failed staticcost is not mathematical failure and does not prove allpossibletranspose representations slow. Most concrete useful finding is that saving duplicatedrsqrt alone is insufficient if rebuildingoldfragment costs36extraDSsites.

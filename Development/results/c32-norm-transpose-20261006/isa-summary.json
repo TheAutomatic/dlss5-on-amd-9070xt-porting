@@ -1,0 +1,80 @@
+{
+  "c32_wave1_mapped_b8": {
+    "A": {
+      "instructions": 1023,
+      "rsq": 16,
+      "DS": 4,
+      "VALU": 695,
+      "VGPR": [
+        "169"
+      ],
+      "LDS": [
+        "4096"
+      ]
+    },
+    "T": {
+      "instructions": 1057,
+      "rsq": 2,
+      "DS": 40,
+      "VALU": 687,
+      "VGPR": [
+        "193"
+      ],
+      "LDS": [
+        "4608"
+      ]
+    }
+  },
+  "c32_wave1_prefix_b8d": {
+    "A": {
+      "instructions": 1464,
+      "rsq": 16,
+      "DS": 23,
+      "VALU": 945,
+      "VGPR": [
+        "169"
+      ],
+      "LDS": [
+        "4096"
+      ]
+    },
+    "T": {
+      "instructions": 1502,
+      "rsq": 2,
+      "DS": 59,
+      "VALU": 939,
+      "VGPR": [
+        "193"
+      ],
+      "LDS": [
+        "4608"
+      ]
+    }
+  },
+  "c32_wave1_post_b8": {
+    "A": {
+      "instructions": 1472,
+      "rsq": 16,
+      "DS": 10,
+      "VALU": 978,
+      "VGPR": [
+        "169"
+      ],
+      "LDS": [
+        "4096"
+      ]
+    },
+    "T": {
+      "instructions": 1509,
+      "rsq": 2,
+      "DS": 46,
+      "VALU": 972,
+      "VGPR": [
+        "193"
+      ],
+      "LDS": [
+        "4608"
+      ]
+    }
+  }
+}
