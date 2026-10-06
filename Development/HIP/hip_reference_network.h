@@ -183,7 +183,7 @@ class Network {
  bool sp1440_ready=false;bool final_direct_compatible=false;bool pool64_byte_available=false;
  bool vit_contract_byte_edge=false; // paired exact representation of an already E4M3-valued edge
  bool free_geometry=false; /* DLSS5_NETWORK_FREE_RES geometry (FreeGeometry): generic ViT grid, no 640-token cap */
- bool wave_owned_active=false;bool c32_skip_byte=false;bool c32_pre_down_byte=false;bool c32_post_low_byte=false;bool c512_m32_active=false;bool vit_proj_n64_active=false;unsigned vit_stream_active=0;bool fast_numeric=false; /* DLSS5_FAST_NUMERIC (cached at construction): load the lossy *-fast module twins where present */
+ bool wave_owned_active=false;bool c32_skip_byte=false;bool c32_pre_down_byte=false;bool c32_post_low_byte=false;bool c512_m32_active=false;bool vit_proj_n64_active=false;unsigned vit_stream_active=0;bool c32_norm900_loaded=false;bool fast_numeric=false; /* DLSS5_FAST_NUMERIC (cached at construction): load the lossy *-fast module twins where present */
  /* ---- programmatic-dependent-launch emulation (opt.pdl; results/pdl-chain-20260925) ----
     C64/C128/C256 chain launches after the chain head go out with hipExtAnyOrderLaunch (no AQL barrier bit) and the _pdl
     kernel twins wait on / publish per-tile counters. One counter array per (kind,c,ww,hh) so every use bumps every tile
@@ -346,7 +346,8 @@ class Network {
  }
  /* Optional export probe: modules without the symbol keep the old launch shape. */
  bool HasFn(const std::string&m,const std::string&name){std::string key=m+":"+name;if(functions.count(key))return true;if(missing_functions.count(key))return false;auto mi=modules.find(m);if(mi==modules.end())return false;Handle f{};if(api.hipModuleGetFunction(&f,mi->second,name.c_str())){missing_functions.insert(key);return false;}functions.emplace(key,f);return true;} /* 2026-10-01 rebuild-baseline: misses are cached too -- per-frame probes (ViT _ks2, ...) otherwise call hipModuleGetFunction every frame (+0.01..0.02ms ABBA) */
- Handle Fn(const std::string&m,const std::string&name){std::string key=m+":"+name;auto it=functions.find(key);if(it!=functions.end())return it->second;Handle f{};api.Check(api.hipModuleGetFunction(&f,modules.at(m),name.c_str()),name.c_str());functions.emplace(key,f);return f;}
+ bool C32Norm900Active()const{return c32_norm900_loaded&&fast_numeric&&W==1600&&H==960&&multi_pass==1&&!opt.graph&&!opt.experimental_temporal;}
+ Handle Fn(const std::string&m,const std::string&name){static const std::string normkey="c32_norm900";const std::string&actual=m=="c32_wave1"&&C32Norm900Active()?normkey:m;std::string key=actual+":"+name;auto it=functions.find(key);if(it!=functions.end())return it->second;Handle f{};api.Check(api.hipModuleGetFunction(&f,modules.at(actual),name.c_str()),name.c_str());functions.emplace(key,f);return f;}
  /* DLSS5_FAST_NUMERIC twin (2026-10-03 fast-vit-c512): <stem>.hsaco -> <stem>-fast.hsaco when the option is 1 and the file
     exists; missing twin falls back to the exact module with one stderr line (same contract as the C32/C64 swap). */
  std::string FastTwin(const std::string&stem)const{if(!fast_numeric)return stem;const std::string fast=stem+"-fast";
@@ -703,7 +704,23 @@ if(wave_owned_active){
  const bool rtz_tall=HIP_C32_RTZ_TALL&&W==1920&&(H==1152||H==1088)&&std::ifstream(std::filesystem::u8path(opt.modules+"/c32-wave1-rtz.hsaco"),std::ios::binary).good();
  std::string extra[][2]={{"c64_wave2","c64-wave2"},{"c32_wave1",rtz_tall?"c32-wave1-rtz":"c32-wave1"}};
  for(auto&entry:extra)entry[1]=entry[0]==std::string("c32_wave1")&&opt.experimental_temporal?(fast_numeric?"c32-wave1-temporal-fast":"c32-wave1-temporal"):FastTwin(entry[0]==std::string("c32_wave1")?"c32-wave1":entry[1]); /* c32: the rtz build of the fast C32 disassembles identically, so the twin stem is always c32-wave1 */
- for(auto&entry:extra){entry[1]+=".hsaco";Handle m{};api.Check(api.LoadModule(&m,(opt.modules+"/"+entry[1]).c_str()),entry[1].c_str());modules[entry[0]]=m;}}
+ for(auto&entry:extra){entry[1]+=".hsaco";Handle m{};
+  api.Check(api.LoadModule(&m,(opt.modules+"/"+entry[1]).c_str()),entry[1].c_str());modules[entry[0]]=m;
+  if(entry[0]=="c32_wave1"){
+   const bool geometry=fast_numeric&&W==1600&&H==960&&!opt.graph&&!opt.experimental_temporal;
+   const char*norm900="c32-wave1-fast-norm900.hsaco";Handle candidate{};
+   if(geometry&&std::ifstream(std::filesystem::u8path(opt.modules+"/"+norm900),std::ios::binary).good()){
+    int ec=api.LoadModule(&candidate,(opt.modules+"/"+norm900).c_str());bool complete=!ec;const char*missing=nullptr;
+    // Locked fast-numeric baseline/hoist ABI contains26 exports, including postfeatures.
+    // Whole fallback on any missing legacy export; never partially select an old callee.
+    const char*required[]={"c32_fast_ffn_attention_fused","c32_fast_ffn_attention_fused_half","c32_fast_ffn_attention_fused_half_mapped","c32_fast_ffn_attention_fused_half_chain","c32_fast_ffn_attention_fused_half_finish_main8","c32_fast_ffn_attention_fused_half_chain_finish","c32_fast_ffn_attention_fused_half_prefix_finish_main8","c32_fast_ffn_attention_fused_half_chain_finish_dcrop","c32_post_merge_head_half","c32_post_merge_fused_half","c32_wave1_chain","c32_wave1_mapped","c32_wave1_finish","c32_wave1_finish_dcrop","c32_wave1_post","c32_wave1_prefix","c32_wave1_finish_dcrop_b8","c32_wave1_finish_dcrop_b8d","c32_wave1_prefix_b8d","c32_wave1_mapped_b8","c32_wave1_finish_b8","c32_wave1_post_b8","c32_wave1_post_b8_rgba","c32_wave1_post_b8_features","c32_wave1_up_b8","c32_wave1_up"};
+    if(complete)for(const char*name:required){Handle f{};if(api.hipModuleGetFunction(&f,candidate,name)){complete=false;missing=name;break;}}
+    if(complete){modules["c32_norm900"]=candidate;c32_norm900_loaded=true;}
+    else{if(candidate)api.hipModuleUnload(candidate);std::fprintf(stderr,"c32_norm900 active=0 reason=optional-load-or-full26-export-fallback load_status=%d missing_export=%s\n",ec,missing?missing:"none");}
+   }
+   std::fprintf(stderr,"c32_norm900 scope=%u loaded=%u selected=%s processing=%ux%u fast_numeric=%u mp=%u graph=%u experimental=%u\n",unsigned(geometry&&multi_pass==1),unsigned(c32_norm900_loaded),C32Norm900Active()?norm900:entry[1].c_str(),W,H,unsigned(fast_numeric),multi_pass,unsigned(opt.graph),unsigned(opt.experimental_temporal));
+  }
+ }}
 if(SwinRunCompatible(opt)){
  const bool new1440=Sp1440Geometry(opt);const std::string file=new1440&&fast_numeric?"swin-persistent-fast.hsaco":"swin-persistent.hsaco";
  if(new1440&&(!fast_numeric||opt.graph||observer||!opt.dump_dir.empty())){opt.swin_run=false;}

@@ -316,3 +316,10 @@ The default remains **1x** (`DLSS5_MULTI_PASS=1`). When 3x is selected, two real
 - **Packages and docs**: 38 modules per architecture (76 total), five LLVM23.1.2 rows and 33 driver-COMGR rows; rebuilt CPU hosts, refreshed RE9 source bundle, separate English/Chinese configuration references linked to all annotated defaults. Default files ship with MP1/PRED1/SKIN0; personal custom/native files are not included. The mirrors are available; no GitHub release or tag was created.
 
 User observations on the installed development build: Stellar Blade 1x about 57.6 fps, fast 3x about 37 fps; Onimusha 900p fast 3x about 49 fps, unchanged and without anomalies. These are user observations, not controlled ABBA evidence of package speed-ups. gfx1200 receives build/ELF checks; hardware validation remains on gfx1201.
+
+
+## Unreleased source update — 2026-10-06
+
+- C32 normalization reuses its replicated per-lane inverse square root. The optional `c32-wave1-fast-norm900.hsaco` is selected with fast numerics on, processing size 1600×960, one real pass, graph off and experimental temporal history off. Other processing sizes and modes use their original modules. All 26 existing exports are checked together; a missing module or export falls back to the original module. No new user setting.
+- On the RX 9070 XT, the original O2, timing-disabled HDR frame replay improved 900-tier mean time by 0.045–0.049 ms across three formal rounds; p99 improved in two rounds and was indistinguishable within the original 1 µs measurement resolution in the third. The 1152-row screen had a p99 regression and keeps its original route. These are frozen frame replays covering codec, bridge, network and decode, rather than full game frame rates.
+- Standard 19 compatibility checks, controlled seed/history cases and module fallback checks were bit-identical. AE correctness was checked; performance was measured with AE off. This source update has not been installed or packaged. `Development/results/c32-norm-hoist-framework-20261006`, `c32-norm-hoist-stat-audit-20261006` and `c32-norm-hoist-compat-20261006`.
