@@ -1,0 +1,94 @@
+{
+  "session": 70977,
+  "exit_code": 1,
+  "lock_released": true,
+  "source_commit": "74b54cb4",
+  "exe_sha256": "7537b895ae35431a22be23ea88d707d6f09b0340a678f6af632302908e3926d5",
+  "source_review": "measurement current12step source PASS; remaining firstsync interop PASS",
+  "result": "capture precondition fail, no replay/output comparison",
+  "failure": "graph capture requires warmed allocation pool",
+  "eager_reference_12_steps": [
+    {
+      "step": 0,
+      "bytes": 7464960,
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "invalid_half": 0
+    },
+    {
+      "step": 1,
+      "bytes": 7464960,
+      "sha256": "6687259ba49a870c2ff006538c214026dede2d0050dff93d90abceee8c846274",
+      "invalid_half": 0
+    },
+    {
+      "step": 2,
+      "bytes": 7464960,
+      "sha256": "6d8c7e1ac440b1511ba11a3b85bf57b54c474fdbf0127520c3bfb8a0d57b127d",
+      "invalid_half": 0
+    },
+    {
+      "step": 3,
+      "bytes": 7464960,
+      "sha256": "e961181fd16d0009e69c53d13f3fda4492b3a2f6cd933c141606b666056e7cf5",
+      "invalid_half": 0
+    },
+    {
+      "step": 4,
+      "bytes": 7464960,
+      "sha256": "232f4ff1fb2dccf97c61dacbd9bbe3e615c5d827b65811c7bf8fa8dd272ebd56",
+      "invalid_half": 0
+    },
+    {
+      "step": 5,
+      "bytes": 7464960,
+      "sha256": "d4a94bf22090fdf7ddc07af9a1ab2f6b67d47d08252d15205551d66ed16908f6",
+      "invalid_half": 0
+    },
+    {
+      "step": 6,
+      "bytes": 7464960,
+      "sha256": "dcce16f8672d2107ad6cedc60ab4846a7d8105f69a7403b3e095ed4fcb362641",
+      "invalid_half": 0
+    },
+    {
+      "step": 7,
+      "bytes": 7464960,
+      "sha256": "1b6324999be99c57e8582edc1ae13e50010efbd8dcf39d3c835b6ce1ceccd247",
+      "invalid_half": 0
+    },
+    {
+      "step": 8,
+      "bytes": 7464960,
+      "sha256": "0cb3c8506434a89477af9ba31eec6148842fb2ee0fb3eb9c5b77023768db41b3",
+      "invalid_half": 0
+    },
+    {
+      "step": 9,
+      "bytes": 7464960,
+      "sha256": "1e9c01b207582219f1863e526b8d921f918ed9708d5824a86c247c8c8807b758",
+      "invalid_half": 0
+    },
+    {
+      "step": 10,
+      "bytes": 7464960,
+      "sha256": "7cb4af928bc6b704de8afa6114111a12c954e9c351c244ba2e6101d09443724a",
+      "invalid_half": 0
+    },
+    {
+      "step": 11,
+      "bytes": 7464960,
+      "sha256": "341fae0fb52baee61df08b6011a29d90a37dc799f3f643494dd7e1facc181d47",
+      "invalid_half": 0
+    }
+  ],
+  "eager_invalid_total": 0,
+  "captured_graph_success": false,
+  "graph_launch_calls": 0,
+  "CPU_correction": "NativeGameFrame/NativeHipNetwork does not call PrepareStagedKernels; only src/LmxxfNrRuntime.cpp1214 stagedruntime path calls it. Earlier assertion coldseed1prepare happened in this caller withdrawn. ActualSPbase893 matches one seed0 warm before failed capture.",
+  "limits": [
+    "No pairgoldpassed claim; eager12completed but replay had no completed Frame",
+    "Warmedpool rejection not proof mathematical mismatch or HIPcaptureunsupported",
+    "No repeat/performance/installation/productionconfig",
+    "Next allowed work onlyCPU prerequisite warm/allocation lifecycle audit untilroot new authorization"
+  ]
+}
