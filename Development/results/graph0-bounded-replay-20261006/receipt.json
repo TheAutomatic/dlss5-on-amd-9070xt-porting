@@ -1,0 +1,33 @@
+{
+  "session": 74023,
+  "exit_code": 0,
+  "lock_released": true,
+  "source_commit": "62682a22",
+  "script_commit": "8bc5e4df",
+  "exe_sha256": "be52c2acf3480751aada205e7cc0ff972102d29fbbed269b52e285d3192db899",
+  "source_review": "measurement final PASS current3fixed+1changed knownGPU scope",
+  "graph_nodes": 161,
+  "edges": 160,
+  "strong_order_matches_eager": true,
+  "instantiate": 1,
+  "replay": 4,
+  "fixed_replays": 3,
+  "fixed_all_sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1",
+  "changed_encoded_input_sha256": "5f5706e3b12c874c007b8c369866d42d5d43d7cb92c1e36a7e86bbfaccd34714",
+  "changed_reference_and_replay_sha256": "7fe026b95c2b3d5d335c0b96c26a3e8fa9fb09e7d6f1b9fe2fa1c3b366bb9e2a",
+  "hash_authority": "remote Get-FileHash after terminal",
+  "all_outputs_finite": true,
+  "all_compared_bitdiff": 0,
+  "all_replay_sinks_poisoned": true,
+  "captured_network_enqueue_after_recording": 0,
+  "independent_reference_network_eager": 1,
+  "same_gpu_input_address": true,
+  "timing": false,
+  "limits": [
+    "Four bounded graph executions, not unbounded replay/recovery/rollover proof",
+    "Changed RGB working-domain source is controlled input, not captured continuous game/exposure/history test",
+    "No PAL OS submit count proof",
+    "SP host statistics include capture and are not replay GPU counters",
+    "Original fresh competitor gap unchanged"
+  ]
+}
