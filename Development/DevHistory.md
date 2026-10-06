@@ -1879,3 +1879,10 @@ root认可900正式均值改善/第三轮p99在1µs实际计时内未分辨退�
 - 32413原exit1/LOCK_RELEASED：全部10slots已跑，MP3/history/reset/graph同PDL0/真实Frame重建30pairedraw0finite。末守门stdout重建日志误查stderr，CPU核stdout900→1152→900和3个Network资源rows完整，candidate每重建Record1/createdestroy1，controls0；仅修parser，不重GPU、不抹exit1。
 - 78164旧组合MP1PRED1实际predictinactive却pulse误按requestedflag拒mask256，所以不是完整组合。源码MultiPassRest仅MP3&&predict实际分支，Enqueue仅MP>1进入；044f2cd4最小改为effectivepredicate，MP2/3由mask128继续排除。10986localcanonicalruntime/addon/O2caller全exit0，8696两5frame真MP1PRED1autoRecord5/resourcebalance/drivercaps/PDLboundary与最终F16raw0finite通过并释放。
 - 完整freeze及失败/真实门原CSV/stdout/stderr/flags/rawSHA、scope-cpu-closure在results/pulse-production-20261006；044fprod库runtime37f605e8.../addon4fb5840c...已送math。小门支线结束，未安装/改usercfg/ZIP/push。正式041→当前各cell组合与freshmochi对账是后续，独立局部收益不相加，不markgoalcomplete。
+
+### 2026-10-06 9b1eeaf3四cell组合首筛与下一差距账
+
+- math锁正式041原ZIP/tag/codec/模型与同O2NET0真实APP，当前044fsource：900MP1实际H+PulseRecord160平均−0.200425/p99−0.16323ms；1152MP1 Hscope0/PulseRecord160−0.18551875/−0.13871ms。组合是直接实测，不将单项相加。全部对应raw0finite，仅单首ABBA160弃80。
+- MP3两档H/P均fallback，900−0.04396875/−0.03935ms、1152−0.071875/−0.03256ms：弱/漂移可能、不宣H/P在此scope稳定收益。No安装/usercfg/ZIP/push，未完成追平目标。
+- C512 denominator实际APP1152 mean−0.294us/p99+54.17us已negative止，不收不刷。Root下一fresh1088 same640直接纯NN对账；Bridge-onlyPulse与900-onlyH不进该路径，结果不能判APPpulse效果。
+- 只读C32FFN舍入历史核：mochizuki-022(9/28):13–14/37和DevHistory:868已有NR_Q32_STAGE留f32与half边界、0x3f880001 directFP8 vs经half差码反例；CW_RTZ_PAIR oldACO保typedhalf合同，activation bit4另节点。未找到实际独立“feature直接quant residualhalf不改”A/B结果；若进新阶梯必须标该具体出口有损并锁actualMo配方，不泛删FAST_H。无新增GPU。

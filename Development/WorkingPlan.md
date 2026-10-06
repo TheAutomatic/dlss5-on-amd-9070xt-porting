@@ -102,3 +102,11 @@
 - 11516因我错误mandatorySP optionalinit_pair导致capfalse/Record0，保失败logs不认性能；实测SPpair0已CPUELF锁，6904修后autoRecord5/raw0finite，8696新MP1PRED1inactive-policytrueautoRecord5/raw0finite。runtime预测仅MP3实际active，MP2/3仍fallback，不把requestedPRED1视MP1调用。
 - 32413全部10slots/30pairedframesraw0finite和资源过：MP3off/history用时off/reset无historyon/graph同PDL0off/显式1真实Frame900→1152→900各新租约。原exit1仅stdout误查stderr，CPU真实重建及全部counts闭账，无GPU重刷。freeze.json/canonical库SHA与scope-cpu-closure已归档。小GPU门支线停止，无额外synthetic。
 - H900生产route25c2df78与a25d82df兼容已闭，normal19/seed/validnormal25完整fallback、真实热MP1H→MP3base→MP1H raw0；两路线组合必须从正式0.41ZIP/tag/payload锁同O2NET0真实APP直接比，不加独立百分比。旧78164PRED1导致pulse0不称完整组合；新044fsource需真Record计数。900MP1可H+P，1152MP1仅P，MP3两者实际fallback，分cell明列。目标仍有mochi残差待fresh纯NN更新，不写已追平。
+
+## 2026-10-06 正式0.41→当前组合四cell首筛（9b1eeaf3）
+
+- 同发布041锁定codec/模型输入、各自真实O2/NET0完整APP、单ABBA160弃80，allrawbit0/finite：900MP1平均−0.200425/p99−0.16323ms（实际H+PulseRecord160）；1152MP1−0.185519/−0.13871ms（Hscope0/PulseRecord160）。这是直接组合测量，不是独立收益相加。
+- 900MP3−0.043969/−0.03935ms、1152MP3−0.071875/−0.03256ms，H与Pulse均按scope实际回退。只有单round且MP3弱/可能漂移，不宣称H/P在MP3有新增稳定收益；不擅安装/改cfg/ZIP。
+- C512 denominator新组织八gold/三方NNraw0且1088微小首筛，actualAPP1152平均−0.000294ms/p99+0.05417ms，已止不收不刷，不列待收收益。
+- 新C32FFN feature舍入疑点历史9/28已有NR_Q32_STAGE与half边界讨论/0x3f880001反例；此前未独立跑“feature直接FP8、residual保half”分支。不能重做packed-half activation bit4负账或称Hrtz无效，新方向只能明确该出口有损阶梯，原acc/gold/实际Mo配方先锁。
+- 下一fresh1088/common640纯NN对mochi由根进程排，仅CPU准备/身份边界复核；H900scope和Bridge-onlyPulse不会进此directNN路径，不能据此说APPpulse无效。仍未追平目标，最新余差必须实测，不加百分比。
