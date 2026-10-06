@@ -1872,3 +1872,10 @@ root认可900正式均值改善/第三轮p99在1µs实际计时内未分辨退�
 ### 2026-10-06 正式041原件恢复与current组合首cell实际fallback
 
 原OptiScaler041ZIP对release-ledger SHA同，tag523723fd原core/38gfx1201模块/461codec与模型资产隔离恢复，相关SRC同ffecb5c1freeze。两core同原benchmark CPP/O2/NET0，当前freeze3c58；共用原041codec/weights/HDR输入。96653 manifest误含非加载.hsaco.s前置fail/noGPU/no锁，修实际43hsaco后78164有效900MP1PRED1单batch四槽结束释放，首末raw同/finite。80steady A6.995250/current6.922850/current6.917325/A7.015575ms，avg−0.085325/p99−0.068420，cold初始1.2～1.38s全保。现场Hscope真on，但productionPulse requestedauto、initmask256、active0、Create/Record/Destroy0，MP1下inactivePRED1仍被policy拒；因此只有效currentfallback(H+既往三刀)对041，不能称完整H+Pulse收益。root要求保数据、CPU校正effective预测门并新freeze再其余900/1152×用户MP3PRED1，不换PRED0规避、不加独立收益，不GPU补轮/不发布完工。完整源/载荷/manifest/字段/CSV见results/combined-vs041-20261006。
+
+### 2026-10-06 生产single marker默认/兼容及requested-predict校准闭账
+
+- 3c58d97a生产auto/0/1接入（Hbase25c2），driver实际DXGI32.0.31007.2048/gfx1201/Runtime7/currentactivecaps/full71/MP1/nongraph/AE0/ordinaryDown受限。11516错误requiredsp_init_pair使autoRecord0，所有raw同finite却资源门失败；CPU核实际SPsha520cd2...无optionalpair、w16run/recover存在，修正配方后6904两5frameautoRecord5/coldwarm改HDRseed7returnraw0finite过。保原失败及PASS字符串范围不伪称MP/history已重跑。
+- 32413原exit1/LOCK_RELEASED：全部10slots已跑，MP3/history/reset/graph同PDL0/真实Frame重建30pairedraw0finite。末守门stdout重建日志误查stderr，CPU核stdout900→1152→900和3个Network资源rows完整，candidate每重建Record1/createdestroy1，controls0；仅修parser，不重GPU、不抹exit1。
+- 78164旧组合MP1PRED1实际predictinactive却pulse误按requestedflag拒mask256，所以不是完整组合。源码MultiPassRest仅MP3&&predict实际分支，Enqueue仅MP>1进入；044f2cd4最小改为effectivepredicate，MP2/3由mask128继续排除。10986localcanonicalruntime/addon/O2caller全exit0，8696两5frame真MP1PRED1autoRecord5/resourcebalance/drivercaps/PDLboundary与最终F16raw0finite通过并释放。
+- 完整freeze及失败/真实门原CSV/stdout/stderr/flags/rawSHA、scope-cpu-closure在results/pulse-production-20261006；044fprod库runtime37f605e8.../addon4fb5840c...已送math。小门支线结束，未安装/改usercfg/ZIP/push。正式041→当前各cell组合与freshmochi对账是后续，独立局部收益不相加，不markgoalcomplete。

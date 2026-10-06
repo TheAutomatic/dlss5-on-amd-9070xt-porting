@@ -95,3 +95,10 @@
 - PRE_UPSCALE auto 的 Forza/WoLong实玩待确认；剑星 native PRE1仍覆盖auto。剑星 native STRENGTH=auto覆盖custom数值的层级需设置时明确，不能擅改层级规则。
 - 内存增长尚未复现；D3D/HIP固定交接税与占比已有研究，不推普遍速度越快必停滞或HIP无解，不开展新TDR试验。
 - 已封存负账：C512 LUT、C32固定几何、ViT960 attention常量化、其他LLVM23行盲扫、IO_FUSE尾延迟、无效C512_T8宏、DEC_F8W/COMPACT路线。只有新瓶颈证据才重开；已收 directRGBA、ViT byteedge、C512 directpack、1440融合及三刀不重复当新候选。
+
+## 2026-10-06 生产单marker闭账与组合下一步
+
+- 044f2cd4（Hbase25c2df78）当前可构建生产source；auto锁gfx1201/Runtime7/实际driver32.0.31007.2048/currentactivecaps+full71FAST1/MP1/AE0/nongraph/ordinaryDown boundary，0关、1明确同arch/topology未测driver实验。existingconfig/数字/qualitydefaults/现装/ZIP未改。
+- 11516因我错误mandatorySP optionalinit_pair导致capfalse/Record0，保失败logs不认性能；实测SPpair0已CPUELF锁，6904修后autoRecord5/raw0finite，8696新MP1PRED1inactive-policytrueautoRecord5/raw0finite。runtime预测仅MP3实际active，MP2/3仍fallback，不把requestedPRED1视MP1调用。
+- 32413全部10slots/30pairedframesraw0finite和资源过：MP3off/history用时off/reset无historyon/graph同PDL0off/显式1真实Frame900→1152→900各新租约。原exit1仅stdout误查stderr，CPU真实重建及全部counts闭账，无GPU重刷。freeze.json/canonical库SHA与scope-cpu-closure已归档。小GPU门支线停止，无额外synthetic。
+- H900生产route25c2df78与a25d82df兼容已闭，normal19/seed/validnormal25完整fallback、真实热MP1H→MP3base→MP1H raw0；两路线组合必须从正式0.41ZIP/tag/payload锁同O2NET0真实APP直接比，不加独立百分比。旧78164PRED1导致pulse0不称完整组合；新044fsource需真Record计数。900MP1可H+P，1152MP1仅P，MP3两者实际fallback，分cell明列。目标仍有mochi残差待fresh纯NN更新，不写已追平。
