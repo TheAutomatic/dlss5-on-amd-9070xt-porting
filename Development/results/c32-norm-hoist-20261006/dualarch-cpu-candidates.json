@@ -1,0 +1,38 @@
+{
+  "N1": {
+    "sha256": "b65c517c6c511476ee8811a2fab8e6ecef28605edb862c8c3f0058698e6d36a0",
+    "arch": "gfx1200",
+    "hardware_tested": false,
+    "prefix_resource": {
+      "group_segment_fixed_size": "4096",
+      "private_segment_fixed_size": "0",
+      "sgpr_count": "48",
+      "vgpr_count": "128",
+      "vgpr_spill_count": "0"
+    }
+  },
+  "R1": {
+    "sha256": "07cd7d7caacf2f5192f85ef53f8fa55ad1cc52750a7894f58ee1bf8455d6cb4f",
+    "arch": "gfx1200",
+    "hardware_tested": false,
+    "prefix_resource": {
+      "group_segment_fixed_size": "4096",
+      "private_segment_fixed_size": "0",
+      "sgpr_count": "48",
+      "vgpr_count": "128",
+      "vgpr_spill_count": "0"
+    }
+  },
+  "F1": {
+    "sha256": "071663ba6f58bd26d68c298906fb5c24a03e3ad56eefe5da45190dc5ee831ef4",
+    "arch": "gfx1200",
+    "hardware_tested": false,
+    "prefix_resource": {
+      "group_segment_fixed_size": "4096",
+      "private_segment_fixed_size": "0",
+      "sgpr_count": "48",
+      "vgpr_count": "128",
+      "vgpr_spill_count": "0"
+    }
+  }
+}
