@@ -1,0 +1,7 @@
+SYNC_PROFILE wave_owned=1 c512_m32=1 pdl=1 vit_stream=3 swin_run=1 FAST=1 full71=1
+SP_PLAN c=256 first=16 layers=6 tasks=846 initial=144 state_bytes=10168 w16=1
+SP_PLAN c=256 first=49 layers=6 tasks=846 initial=144 state_bytes=10168 w16=1
+SYNC_NETWORK width=1920 valid_h=1080 proc_h=1088 vit_tokens=640 full71=1 MP1=1 AE0=1 historyoff=1 Style1=1 seed0=1 warm=0 frames=1 gpu_mean_ms=9.499898911 cpu_mean_ms=11.495000000 raw_bitdiff=0 output_finite=1 input_upload_once=1 input_domain=encoded_synthetic
+FUSION_ROUTE dispatch_per_frame=161 fused_calls=2 frames_total=2 module=D:\DLSSNR-Lab\body22-down-local-20261006\candidate.hsaco
+SP_STATS runs=4 fallback=0 rollover=0 jobs=3384 disabled=0 errors=0
+
