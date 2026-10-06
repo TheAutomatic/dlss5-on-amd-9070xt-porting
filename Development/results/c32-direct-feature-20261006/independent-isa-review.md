@@ -1,0 +1,5 @@
+# Independent canonical ISA scope review
+
+For prefix_b8d,chain,mapped_b8,finish_b8,post_b8 canonical old/new delete16 v_cvt_f32_f16 and8 v_lshrrev_b32 sites per disassembled execution body. All halfRTZpack, FP8pack, f16WMMA and FP8WMMA counts remain unchanged. canonical-audit resources have no old/new differences for every recorded export, with0spill. Residual still consumes halfRTZpack and stores: directfeature bypasses only half-word extraction/widening back toF32, not half-save cost or matrix/FP8pack main work.
+
+Raw disassembly symbol-size counts misleadingly show prefix1517→1517 and chain1033→969 because alignment NOPs after the final s_endpgm change+24/−40; executed opcode delta is−24 sites in both, not0/−64. JSON separates trailingpadding and retains complete opcode counts. This is static evidence, not a runtime latency bound; branches/loop repetition and memory/WMMA scheduling require actual timing. No ms or occupancy gain is inferred. Current numerical contract remains lossy featurequantization change while half residual is preserved, and originalNV local feature comes fromF16 accumulator. No GPU used in this review.
