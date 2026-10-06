@@ -1,0 +1,71 @@
+{
+  "scope": "single firstscreen ABBA1088, common encoded synthetic input, canonicalCOMGR old/new, completeNN outerGPU event vs CPUwall separate",
+  "slots": [
+    {
+      "slot": 0,
+      "side": "old",
+      "gpu_ms": {
+        "mean": 8.9120535,
+        "p99": 9.1203316
+      },
+      "cpu_ms": {
+        "mean": 9.1338875,
+        "p99": 9.34141
+      }
+    },
+    {
+      "slot": 1,
+      "side": "new",
+      "gpu_ms": {
+        "mean": 8.9022455,
+        "p99": 9.104092399999999
+      },
+      "cpu_ms": {
+        "mean": 9.1316,
+        "p99": 9.34379
+      }
+    },
+    {
+      "slot": 2,
+      "side": "new",
+      "gpu_ms": {
+        "mean": 8.89811975,
+        "p99": 9.1151368
+      },
+      "cpu_ms": {
+        "mean": 9.1004875,
+        "p99": 9.33858
+      }
+    },
+    {
+      "slot": 3,
+      "side": "old",
+      "gpu_ms": {
+        "mean": 8.91711225,
+        "p99": 9.1160002
+      },
+      "cpu_ms": {
+        "mean": 9.138975,
+        "p99": 9.355690000000001
+      }
+    }
+  ],
+  "merged": {
+    "gpu_ms": {
+      "old_mean": 8.914582875,
+      "new_mean": 8.900182625,
+      "mean_delta": -0.014400250000001336,
+      "old_p99": 9.123902800000002,
+      "new_p99": 9.1047484,
+      "p99_delta": -0.01915440000000146
+    },
+    "cpu_ms": {
+      "old_mean": 9.13643125,
+      "new_mean": 9.11604375,
+      "mean_delta": -0.020387500000000003,
+      "old_p99": 9.350290000000001,
+      "new_p99": 9.35139,
+      "p99_delta": 0.0010999999999992127
+    }
+  }
+}
