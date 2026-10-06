@@ -1831,3 +1831,8 @@ B数学同域表达式消除half→float clamp→half往返，COMGR21真实640 V
 - 新APP900 O2/NET0权威退出计数候选Create1/Destroy1/Record0/drain0，stderr frame-scope-fallback；outertimer APIs0、正常post_signalquery160，raw同/finite。平均−0.01776/p99−0.01439ms无有效Record，不能归pulse。40018exit0/LOCK_RELEASED。
 - 回看a792f33c旧safe900formal原stderr也有fallback，先前只看构造active1与正常NN时序而错归性能负账。现明确撤回single Record性能失败断言；保留原CSV/数值/历史记录，不删负数据，归类为eligible/fallback门。旧无guardprototype900和safe1152为分离条件，不相互补证。
 - pdl_calls在实际AnyOrderAPI处累计；ctor0不保证C64/C128/C256后C512marker处0，pdl_anyorderfalse也不是GPU完成证据。CPU加一次性runtime requested/active/rejectmask/pdl/record尝试成功数；startup改initialized/pending-first-record。默认baselinePDL1未关，900保守unsupported。下一1152真正on/off需actualRecord=N、pdl0、资源销毁平衡，不能创建事件就认已启用。此处修正未新跑GPU。
+
+
+### 2026-10-06 Hnorm真实APP900三formal严格尾门失败
+
+原O2/NET_TIMING0/真实1296×720 HDR完整NativeGameFrame，stock/H，320帧弃80，每轮ABBA原cold/全CSV/raw保留。R1 14321 mean−0.0449291667/p99−0.11656ms过，R2 57250 −0.0492479167/−0.07877过，R3 89525 mean−0.0451625但p99+0.000140ms(+0.14µs)严格门fail立即止，不舍入0/不临时容差/不刷/不挑槽。全部first/last frame SHA相同/finite/invalid0，三轮exit0锁释放。现有native-hip日志最终四pid明确fast1/wave_owned_active1/processing1600×960/hip_device0/modulesA,H,H,A，Factory FastTwin c32-wave1与H实际文件/exports/source锁同，非pulse伪on/非coldcallee；genericMH缺fasttwin是双方stock原路。三轮均值改善真实记录但验收未完成；900normal19/history/normalRTZGPU回归没启动，1152短p99负账保持，不收生产/不称全目标完成。见results/c32-norm-hoist-framework-20261006/formal-summary与active-route原日志。
