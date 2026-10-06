@@ -1,0 +1,104 @@
+{
+  "session": 87130,
+  "exit_code": 0,
+  "lock_released": true,
+  "source_commit": "21de7863",
+  "guard_script_base": "7c9151f8 with currentexeSHA21de",
+  "exe_sha256": "bad4badde30ae4bc78fbbe51aa0834f9eef27cd0d0355c642a3e950398714fae",
+  "source_review": "measurement final timingguard fairness PASS",
+  "input_sha256": "3ef42d34cebd1bc847e5caa3a95b3c3b70f45c9eeed4e828a3e2f85615b49b68",
+  "modules_manifest": "same fresh expected-modules lock, all files checked before actualrun",
+  "steady_sample_count": 160,
+  "warm_chosen": 80,
+  "setup_common_eager_warm": 80,
+  "raw_hashes": [
+    {
+      "slot": 0,
+      "edge": "first",
+      "bytes": 25067520,
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "slot": 0,
+      "edge": "selected-first",
+      "bytes": 25067520,
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "slot": 0,
+      "edge": "last",
+      "bytes": 25067520,
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "slot": 1,
+      "edge": "first",
+      "bytes": 25067520,
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "slot": 1,
+      "edge": "selected-first",
+      "bytes": 25067520,
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "slot": 1,
+      "edge": "last",
+      "bytes": 25067520,
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "slot": 2,
+      "edge": "first",
+      "bytes": 25067520,
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "slot": 2,
+      "edge": "selected-first",
+      "bytes": 25067520,
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "slot": 2,
+      "edge": "last",
+      "bytes": 25067520,
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "slot": 3,
+      "edge": "first",
+      "bytes": 25067520,
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "slot": 3,
+      "edge": "selected-first",
+      "bytes": 25067520,
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    },
+    {
+      "slot": 3,
+      "edge": "last",
+      "bytes": 25067520,
+      "sha256": "153ac018f5dd5744cff9157661c46c469d01db6018a97c93aec2b1e2e05647f1"
+    }
+  ],
+  "scope_logs": [
+    "PERF_SCOPE mode=eager capture_ms=0.000000 instantiate_ms=0.000000 graph_launch_api_calls=0 expected=0 node161_samework=1 raw_bitdiff=0 finite=1 opt_graph=0",
+    "PERF_SCOPE mode=replay capture_ms=0.281000 instantiate_ms=0.104000 graph_launch_api_calls=241 expected=241 node161_samework=1 raw_bitdiff=0 finite=1 opt_graph=0",
+    "PERF_SCOPE mode=replay capture_ms=0.296000 instantiate_ms=0.120000 graph_launch_api_calls=241 expected=241 node161_samework=1 raw_bitdiff=0 finite=1 opt_graph=0",
+    "PERF_SCOPE mode=eager capture_ms=0.000000 instantiate_ms=0.000000 graph_launch_api_calls=0 expected=0 node161_samework=1 raw_bitdiff=0 finite=1 opt_graph=0"
+  ],
+  "stats_method": "pooled all320 samples eachmode; p99 linear interpolation at0.99*(n-1); no discarded badtimings; source rejectsnonfinite/nonpositiveGPU",
+  "result": "singlefirstscreen mean/p99 improvement; no formal/APP/integration authorized or claimed",
+  "limits": [
+    "diagnostic isolatedsamecaller; one samebool branch remains perordinarylaunch but no hotvector/map/fprintf",
+    "three readbacks total perprocess: commonsetup1+chosenfirst/last2 all outside steady",
+    "outereventGPU vs synchronizedwall separate; capture/instantiate cost not in steady",
+    "GraphLaunch241 is API count, not proof onePALsubmit",
+    "SP_STATShost counts do not count GPU replay execution",
+    "Cannot subtract this singleABBA delta from differentfreshM comparison or declaregoalcomplete"
+  ]
+}

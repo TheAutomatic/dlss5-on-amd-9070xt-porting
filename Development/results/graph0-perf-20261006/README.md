@@ -1,0 +1,5 @@
+Same-work graph0 firstscreen87130 exit0/LOCK_RELEASED. Current1088FAST1MP1AE0historyoffseed0 Style1PDL0pulse0/full71 stockmodules. opt.graph remainsfalse, preserving twoSP init/run/recover stages and originalmath. SameO2 caller eager/replay/replay/eager, all160measuredsamplesafter80chosenpathwarm; setupwarm/capture/instantiate excluded. ReplayDAG161Kernel160edges uniquely matches eager order; eachReplay241GraphLaunch APIcalls. All12rawimages exact153ac+finite.
+
+PooledGPUmean8.873355→8.792942ms (−.080413), p999.057615→8.972994 (−.084621); wallmean9.116297→9.016150 (−.100147), p999.307860→9.219870 (−.087990). Bothcandidate slots faster than bothcontrols. Control mean driftGPU+.006763/wall+.011519ms; wallp99drift+.052870 preserved. Capturecosts.281/.296ms, instantiate.104/.120ms outside steady. CSV/raw SHA and every slot preserved.
+
+This is one diagnostic samecaller firstscreen, not formal/APP/production acceptance or onePALOSsubmit proof. CurrentfreshM1.046ms gap remains its own measurement; do not deduct independentdelta. No additional round, game installation, configuration, package or push.
