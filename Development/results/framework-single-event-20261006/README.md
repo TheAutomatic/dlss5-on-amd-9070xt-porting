@@ -80,3 +80,16 @@ EachbothBmeansbelowbothA; Record/siteattempts/accepted320, createDestroy1 balanc
 Necessaryround2/3remainoneABBA thenimmediateparser/stats, onlyaftereachvalidgate. H900compat queue firstifready. No default/installation/ZIP modification, no goalcompletion claim. Method fields andrawCSV/logs inordered-boundary-app rounddirectories; noequivalentGPUcomponentinventedforNET0.
 
 TrueAPP900formalround2单轮即时PASS：wallmean−0.122750ms/mergedp99−0.18906ms，两B快，Record/siteattemptaccepted320/createDestroy1/drain1，PDL1280/currentselector0/knownDown，outerdiagnostics0/postquery320/raw同finite。13395exit0/LOCK_RELEASED；窗口给HRemainingcompat，1152r2与r3尚未开，不提前收。
+
+## TrueAPP all necessary formal rounds pass (no adoption yet)
+
+SamefrozenrealHDR/currentstockO2NET0/full71/MP1/AE0/graph0/PDL1/singlefixedorderedDown boundary, sixone-roundABBA batches eachimmediatelychecked. Everyroundavg/p99negative by51–189us, notmeasurement-floorambiguity. BothBmeansbelowbothA eachround. NoHnormcode/modules mixed; nofuturearithmeticgain summed.
+
+|scope|round1 mean/p99 ms|round2 mean/p99 ms|round3 mean/p99 ms|pooledmean/p99 delta ms|
+|---|---|---|---|---|
+|900|−0.081840/−0.11964|−0.122750/−0.18906|−0.121227/−0.15420|−0.108606/−0.15644|
+|1152|−0.090679/−0.05103|−0.113254/−0.06299|−0.105258/−0.11645|−0.103064/−0.04322|
+
+Pooled1440steady samplesperside/scope; all320coldsamplesperslot retained. 12candidateprocesses×320=3840successfulRecords/siteattemptaccepted; eachcreateDestroy1 balanced/drain1/reject0. 12baselineprocesseszeroevents/Records. Everyprocessnooutertimer/span/pollGPUprobe; originalpost_signalquery320. 900eachlifetimePDL1280/firstmarkerprefix2/currentanyorder0,1152zero. Allrawfirst/lastSHAwithinitsgeometryequal/finite. Last83391exit0/LOCK_RELEASED. DetailedCSV/log/SHA/scope/clock receipts preserved; pooledquantiles are notmeans of roundquantiles.
+
+Nextreviewableproductionoptional-scope integration/library/normal-framefallbackcompat andactualcomboonlyafterindependentH900approval; keepunsupportedgraph/MP/history/nonfull pathsoldNN. Fullgoalnotachievedandactualgamescenequality/perf notprovedbythisfrozenAPPfixture. Noinstallation/playerconfig/ZIP/push. Do notreuseoldpseudo-on data for collection.

@@ -1854,3 +1854,9 @@ B数学同域表达式消除half→float clamp→half往返，COMGR21真实640 V
 - 完全同e30ad811数据/首筛源码与O2NET0 exe、原Stock/PDL1/full71，none/on/on/none320弃80：900mean−0.081840/p99−0.11964ms；1152mean−0.090679/p99−0.05103ms。两档each两B均快，两侧对应raw同finite；candidateRecord/siteattempt/accepted320(CreateDestroy1/drain1)，80warm+240steady无额外NNwarmup，所有outertiming/span/poll APIs0、正常post_query320；900PDL1280/firstprefix2，1152PDL0。
 - 95590/92559各exit0/LOCK_RELEASED，给H900compat准备队列。必要round2/3尚未执行，本轮未提前默认收。独立当前execlockasm确认gettimeofday1us量化，同f38c3cb4原样端点/插值方法；现p99负变化119.64/51.03us明显高于分辨率，不借GPU分项。原cold samples全部保留。
 - ordered-boundary-app各formalround1目录CSV/log/SHA、clock-contract/asm归档；goal未完成，不与Hprefix结果相加，无配置/安装/ZIP/push。
+
+### 2026-10-06 trueAPP单marker三必要轮双档全部通过
+
+- 完全同已冻结O2NET0/HDR/旧stock39/full71/MP1/AE0/graph0/PDL1/已证固定ordinaryDown边界，sixABBA批每轮先scope/raw/counter再stats，没有盲连跑；900round2−0.122750/−0.18906ms，round3−0.121227/−0.15420ms；1152round2−0.113254/−0.06299ms，round3−0.105258/−0.11645ms(平均/p99)。各两B均快，不存在1us临界判。
+- 三轮pooled eachside1440steady：900 A6.991501→B6.882896平均−0.108606ms、p99−0.15644ms；1152 A9.757574→B9.654510平均−0.103064ms、p99−0.04322ms。全部cold原样保留，pooledquantile非逐轮quantile均值。3840candidateRecord全部成功/siteaccepted一致，每进程CreateDestroy1/drain1，controls零Record，outertimer/span/poll0，正常postquery320，raw同/finite。
+- 900实际lifetimePDL1280/firstprefix2/currentselector0，1152PDL0；13395/70037/13570/83391全exit0/LOCK_RELEASED。未与H900混，结果ordered-boundary-app/formal-all-summary与全部原CSV/日志/SHA。局部合格不达追平目标；下一仅评审接入/兼容/真实组合，玩家配置/现装/ZIP/push未改。
