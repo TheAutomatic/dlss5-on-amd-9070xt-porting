@@ -1,0 +1,94 @@
+{
+  "N": {
+    "macro0_sections_equal": {
+      ".text": false,
+      ".rodata": false,
+      ".note": false
+    },
+    "macro0_different_sections": [
+      ".note",
+      ".dynsym",
+      ".gnu.hash",
+      ".hash",
+      ".dynstr",
+      ".rodata",
+      ".eh_frame",
+      ".text",
+      ".dynamic",
+      ".symtab",
+      ".strtab"
+    ],
+    "different_dynstr_symbols": {
+      "stock_only": [
+        "__hip_cuid_e885b40af4351613"
+      ],
+      "guard_only": [
+        "c32_wave1_post_b8_features",
+        "c32_wave1_post_b8_features.kd",
+        "__hip_cuid_107e6e6580c54da3"
+      ]
+    },
+    "H_sha": "c05efbea2f9fe2354f57b45cac5404939da2f0ca4cde1e7de4fcf1aed527f1e1",
+    "H_text_sha": "f3457425b5404e51981a1f5e3af14d00c7b6214149802b0a30ee52ead50115fa",
+    "scope": "gfx1201 canonicalCPU, no normal/rtzGPU validation"
+  },
+  "R": {
+    "macro0_sections_equal": {
+      ".text": false,
+      ".rodata": false,
+      ".note": false
+    },
+    "macro0_different_sections": [
+      ".note",
+      ".dynsym",
+      ".gnu.hash",
+      ".hash",
+      ".dynstr",
+      ".rodata",
+      ".eh_frame",
+      ".text",
+      ".dynamic",
+      ".symtab",
+      ".strtab"
+    ],
+    "different_dynstr_symbols": {
+      "stock_only": [
+        "__hip_cuid_e77b9ff11f4a225d"
+      ],
+      "guard_only": [
+        "c32_wave1_post_b8_features",
+        "c32_wave1_post_b8_features.kd",
+        "__hip_cuid_9e206e7a7ac49c3c"
+      ]
+    },
+    "H_sha": "dda9bf473eb0ad792b8dfd6a8c78104f4c67a316fccd7f3dedcc88b88bafe754",
+    "H_text_sha": "3d1d873b2e186439589b098a4cf33f18ce038d3a35a55431330887dcc1c69ab0",
+    "scope": "gfx1201 canonicalCPU, no normal/rtzGPU validation"
+  },
+  "F": {
+    "macro0_sections_equal": {
+      ".text": true,
+      ".rodata": true,
+      ".note": true
+    },
+    "macro0_different_sections": [
+      ".dynsym",
+      ".gnu.hash",
+      ".hash",
+      ".dynstr",
+      ".strtab"
+    ],
+    "different_dynstr_symbols": {
+      "stock_only": [
+        "__hip_cuid_3f548ca7c4007462"
+      ],
+      "guard_only": [
+        "__hip_cuid_262fa254af5dd539"
+      ]
+    },
+    "H_sha": "99500636b3505c23711fd948c8543258d1eae65cb08ebfdaa7fa928a0116ab77",
+    "H_text_sha": "617dcc3b4366bf980c086cf054840ae3cb3fb527c405dfc30e50051d10089a57",
+    "scope": "gfx1201 canonicalCPU, no normal/rtzGPU validation",
+    "positive_matches_tested_H_text_rodata_note": true
+  }
+}
