@@ -86,3 +86,9 @@ Version 0.28.1 rebuilt only the RE9 package through `Development/tools/package-0
 ### Unreleased 900-tier normalization source update
 
 With FAST_NUMERIC=1, an available `c32-wave1-fast-norm900.hsaco` can be selected for processing 1600×960, MP1, graph off and experimental history off. Other modes retain their original route. A missing or incomplete optional module falls back. This preserves the existing math and requires no extra setting. AE correctness is validated separately from AE-off performance measurements.
+
+### Unreleased scoped HIP submit pulse
+
+`DLSS5_HIP_SUBMIT_PULSE=auto` is the new internal default. Auto applies only to the verified Windows gfx1201/Runtime7 driver32.0.31007.2048, processing1600×960 or1920×1152, current full71 FAST1/MP1/AE0/graph-off/no-active-history recipe, and the actual ordinaryC256Down boundary before C512. It creates one owned timed event and records it there; it never enables timing getters or adds a query/wait in the frame path. `0` disables it. `1` is an explicit experiment on the samearchitecture/runtime/topology and may admit another driver; the log marks that driver unvalidated and no speed claim follows. gfx1200 and other scopes retain the prior path.
+
+Driver lookup failure, missing required active recipe exports, or event creation/recording failure disables the pulse while preserving the old network attempt. OptionalSP init_pair is not mandatory: the measuredstock profile has no such export; auto rejects a differentSP pair recipe. Device/runtime failure is not guaranteed recoverable. Per-frame runtimeeligibility is checked at the known ordinaryDown boundary, not from cumulativePDL count. Resources retire on the owningdevice/stream; failed cleanup retains the owner context. Existingconfiguration values and packagefiles are unchanged. This source change remains local pendingproduction compatibility/resmoke and combinedvalidation.
