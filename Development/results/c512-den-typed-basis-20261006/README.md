@@ -1,0 +1,11 @@
+# Typed C512 denominator basis: CPU locked, hardware pending
+
+Standalone source basis.hip and real HIP dynamic-API host basis_probe.cpp in experiments/c512-den-repeat-20261006. Local LLVM23 device compile/link and MinGW O2 static host build pass; no remote RTC/GPU. Artifacts /tmp/c512-den-basis-20261006 with SHA/commands in latest-build.json and cpu-receipt.json. The device contains exactly the production denominator's operand order and four F16 WMMAs, not FP8 layout assumptions.
+
+Primary mapping: https://rocm-handbook.amd.com/projects/amd-rocm-optimization-guide/en/latest/compiler-builtins/rdna/rdna4-dense-wmma-builtins.html accumulator row=floor(lane/16)*8+e, col=lane%16. srcA rows and srcB columns use lane%16; F16 K interleaves groups of4 between halfwaves. First operand is ones, so mathematical A rows are identical; D rows should be identical. C32 normalization's first operand is squares, so that earlier e-axis mistake does not transfer here.
+
+Non-symmetric half fixture exponent[key][lane][e]=(1+257*key+8*lane+e)/1024. Every input value is exactly representable in half (numerators1..1028), distinctly varies with key/lane/e, finite and positive. Mathematical column j sums all16 K entries across all4 fragments: D[i,j]=28.375+0.5*j, independent of i. These exact dyadic sums are also representable in float, so no summation-order ambiguity for this fixture. CPU expected.u32 covers32lane×8e;16 columns differ, all8 elements within one lane should match. This is a deliberately asymmetric operand fixture, not a selected actualmodel example.
+
+A hardware result differing within any lane disproves direct8→1 for this representation. A hardware match proves this typed fixture only; still capture actualmodel C512 packedinput/weights for one real non-symmetric window/head, all t/lane/e before production inverse, preserving operation order. Do not substitute cold/commonuniform input or this basis for actualmodel capture. No inverse candidate or speed claim has been made.
+
+Next GPU requires root queue confirmation after production compatibility. Run basis_probe.exe MODULE OUTPUT_U32 once, then actualmodel capture if basis passes. Probe must finish before any performance workload; retain first failure, no retries to select pleasing input.
