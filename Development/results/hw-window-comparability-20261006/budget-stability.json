@@ -1,0 +1,107 @@
+{
+  "same_Budget1_Budget3_gates": {
+    "HIP": {
+      "SystemInfo": true,
+      "definitions": true,
+      "gpuperfexp": true,
+      "interval": true
+    },
+    "M": {
+      "SystemInfo": true,
+      "definitions": true,
+      "gpuperfexp": true,
+      "interval": true
+    }
+  },
+  "changes": {
+    "HIP": {
+      "Memory unit busy": {
+        "B1": 87.27515775069055,
+        "B3": 89.81580577785076,
+        "delta_pp": 2.540648027160202
+      },
+      "Memory unit stalled": {
+        "B1": 19.78407372680199,
+        "B3": 20.34889772069971,
+        "delta_pp": 0.564823993897722
+      },
+      "Write unit stalled": {
+        "B1": 0.879205629186623,
+        "B3": 0.9440681201793715,
+        "delta_pp": 0.06486249099274843
+      },
+      "Instruction cache hit": {
+        "B1": 99.38094748723898,
+        "B3": 99.3438215040721,
+        "delta_pp": -0.03712598316688798
+      },
+      "Scalar cache hit": {
+        "B1": 92.60547905265871,
+        "B3": 92.70748130290252,
+        "delta_pp": 0.10200225024381382
+      },
+      "L0 cache hit": {
+        "B1": 77.31666274314185,
+        "B3": 77.29483207431296,
+        "delta_pp": -0.021830668828883404
+      },
+      "L2 cache hit": {
+        "B1": 96.86257105958735,
+        "B3": 96.82736248391797,
+        "delta_pp": -0.03520857566938673
+      },
+      "LDS Bank Conflict": {
+        "B1": 0.0,
+        "B3": 0.0,
+        "delta_pp": 0.0
+      }
+    },
+    "M": {
+      "Memory unit busy": {
+        "B1": 90.23649629807558,
+        "B3": 90.2049638181319,
+        "delta_pp": -0.03153247994367803
+      },
+      "Memory unit stalled": {
+        "B1": 12.943649807052386,
+        "B3": 12.922486582555642,
+        "delta_pp": -0.02116322449674435
+      },
+      "Write unit stalled": {
+        "B1": 0.7327873577171752,
+        "B3": 0.7170830965383189,
+        "delta_pp": -0.01570426117885626
+      },
+      "Instruction cache hit": {
+        "B1": 65.0746750432593,
+        "B3": 65.14299624798599,
+        "delta_pp": 0.06832120472668635
+      },
+      "Scalar cache hit": {
+        "B1": 96.724313376979,
+        "B3": 96.75922024244522,
+        "delta_pp": 0.03490686546622612
+      },
+      "L0 cache hit": {
+        "B1": 75.19144954744074,
+        "B3": 75.16264911976178,
+        "delta_pp": -0.028800427678959295
+      },
+      "L2 cache hit": {
+        "B1": 95.29260033682472,
+        "B3": 95.39201971000946,
+        "delta_pp": 0.09941937318474459
+      },
+      "LDS Bank Conflict": {
+        "B1": 0.505202970888737,
+        "B3": 0.5015886803704437,
+        "delta_pp": -0.003614290518293317
+      }
+    }
+  },
+  "stall_HIP_minus_M_pp": {
+    "B1": 6.840423919749602,
+    "B3": 7.4264111381440685
+  },
+  "decision": "higher observed HIP stalled fraction persists B1/B3; not proved perframe bottleneck/native timing/DRAM throughput; no new capture required"
+}
