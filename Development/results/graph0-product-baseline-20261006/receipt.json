@@ -1,0 +1,133 @@
+{
+  "session": 60494,
+  "exit_code": 0,
+  "lock_released": true,
+  "frozen_source": "e45afd81/a72e403a",
+  "exe_sha256": "f298245b70259a64e0fc63808e366e84954e51ca7dc5e9210de74294e05af47e",
+  "source_review": "remaining78a218c1+measurement current12seq2PASS",
+  "scope": "OrigFrameO2actualproc1152/valid1080 F1MP1PRED1inactiveAE0histoffseed0resetTruePDL0NET0overlap0/currentHDRseq2",
+  "eager_auto": {
+    "option": 2,
+    "driver_validated": 1,
+    "capabilities": 1,
+    "create_ok": 1,
+    "warm": 4,
+    "ordinary_nn_enqueues": 15,
+    "ordinary_formula": "warm4+later selected11; first selectedframe shares finalwarmoutput",
+    "record_ok": 15,
+    "accepted": 15,
+    "site_visits": 15,
+    "reject_mask": 0,
+    "pdl_calls": 0,
+    "destroy_ok": 1,
+    "drain": 1,
+    "graph_calls": 0
+  },
+  "replay_off": {
+    "option": 0,
+    "ordinary_warm_enqueues": 4,
+    "capture_host_traversal_not_counted_as_executed_enq": true,
+    "graph_calls": 12,
+    "kernel_nodes": 161,
+    "edges": 160,
+    "create": 0,
+    "record": 0,
+    "accepted": 0,
+    "capabilities": 0,
+    "capabilities_meaning": "offmode deliberately skips pulse capability probe, not auto fallback"
+  },
+  "pairedsteps": [
+    {
+      "step": 0,
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "bytes": 7464960,
+      "diff_bytes": 0,
+      "invalid_half": 0
+    },
+    {
+      "step": 1,
+      "sha256": "6687259ba49a870c2ff006538c214026dede2d0050dff93d90abceee8c846274",
+      "bytes": 7464960,
+      "diff_bytes": 0,
+      "invalid_half": 0
+    },
+    {
+      "step": 2,
+      "sha256": "6d8c7e1ac440b1511ba11a3b85bf57b54c474fdbf0127520c3bfb8a0d57b127d",
+      "bytes": 7464960,
+      "diff_bytes": 0,
+      "invalid_half": 0
+    },
+    {
+      "step": 3,
+      "sha256": "e961181fd16d0009e69c53d13f3fda4492b3a2f6cd933c141606b666056e7cf5",
+      "bytes": 7464960,
+      "diff_bytes": 0,
+      "invalid_half": 0
+    },
+    {
+      "step": 4,
+      "sha256": "232f4ff1fb2dccf97c61dacbd9bbe3e615c5d827b65811c7bf8fa8dd272ebd56",
+      "bytes": 7464960,
+      "diff_bytes": 0,
+      "invalid_half": 0
+    },
+    {
+      "step": 5,
+      "sha256": "d4a94bf22090fdf7ddc07af9a1ab2f6b67d47d08252d15205551d66ed16908f6",
+      "bytes": 7464960,
+      "diff_bytes": 0,
+      "invalid_half": 0
+    },
+    {
+      "step": 6,
+      "sha256": "dcce16f8672d2107ad6cedc60ab4846a7d8105f69a7403b3e095ed4fcb362641",
+      "bytes": 7464960,
+      "diff_bytes": 0,
+      "invalid_half": 0
+    },
+    {
+      "step": 7,
+      "sha256": "1b6324999be99c57e8582edc1ae13e50010efbd8dcf39d3c835b6ce1ceccd247",
+      "bytes": 7464960,
+      "diff_bytes": 0,
+      "invalid_half": 0
+    },
+    {
+      "step": 8,
+      "sha256": "0cb3c8506434a89477af9ba31eec6148842fb2ee0fb3eb9c5b77023768db41b3",
+      "bytes": 7464960,
+      "diff_bytes": 0,
+      "invalid_half": 0
+    },
+    {
+      "step": 9,
+      "sha256": "1e9c01b207582219f1863e526b8d921f918ed9708d5824a86c247c8c8807b758",
+      "bytes": 7464960,
+      "diff_bytes": 0,
+      "invalid_half": 0
+    },
+    {
+      "step": 10,
+      "sha256": "7cb4af928bc6b704de8afa6114111a12c954e9c351c244ba2e6101d09443724a",
+      "bytes": 7464960,
+      "diff_bytes": 0,
+      "invalid_half": 0
+    },
+    {
+      "step": 11,
+      "sha256": "341fae0fb52baee61df08b6011a29d90a37dc799f3f643494dd7e1facc181d47",
+      "bytes": 7464960,
+      "diff_bytes": 0,
+      "invalid_half": 0
+    }
+  ],
+  "performance": false,
+  "limits": [
+    "Golddiagnostic perordinarypostchecks are asymmetric hotcost; not timingbaseline untilnew perfsource review",
+    "NoReplayAuto/eventcapture attempted",
+    "No source/shader/codec/inputmath changes; pulse policy+graph submitorganization differs",
+    "PRED1 requested butMP1inactive actualpasses1 logs verified",
+    "No productionPDL1test/benefitaddition/oldMgap rewrite/installation/userconfig/ZIP/push"
+  ]
+}
