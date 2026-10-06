@@ -1977,3 +1977,8 @@ root认可900正式均值改善/第三轮p99在1µs实际计时内未分辨退�
 - 19487/85abc115稳定暖池修后actualPASS：原HDR1296×720源→NNvalid1920×1080/proc1152；warm0 malloc209/pool23，warm1再4/pool27，warm2/3零新增和cache稳定，4次warm建立末2稳态后cap；161kernel/160强DAG、12GraphAPI、两独立Frame逐12F16输出bit0finite。原70977/noRuntimeprepare校正不抹，Style−1仅stock1不覆盖标记。
 - 原benchmark.cpp不改的APP性能e051新header只读sourcePASS：common首cold两mode同暖池，graphsetupCPUcost单列、160计时弃80；首末两readbacks在wall之外，steady关Fnvector/lastFn/log/getenv/no新getter，原pre/postcodec/semwaitsignal/postSignalQuery/FrameDrain全保。不是pure3reads/零诊断API。原chrono源码无positiveassert保持byte同，执行者CPU统计必须reject非finite/≤0行，不为此加新gold。
 - 审者无GPU/编/修改candidate，性能结果仍待single4slot，不提前收生产/发包/修改玩家配置。记录APPperf-source-review。
+
+### 2026-10-06 actualAPP首性能门37548已通过
+
+- 535eab68权威首ABBA37548 exit0/release：same原Frame/correctedquietheaders，160total弃80/每slot80steady，wall9.678319→9.603994，mean−0.074325/p99−0.07518ms，bothB快；A漂移mean+0.011963/p99−0.07324仍保。8首末F16raw对原gold bit0finite，640时间行finitepositive、candidateGraph160/161DAG及recordfalse门过。冷1.27–1.46s未删，不当steadyavg。
+- 两arm严格pulse0PDL0NET0/nonoverlap，原codec/interop/postsignalquery/drain不改；只是actualAPPinterface首筛，不FPS/NETGPU/生产接受，不与pure4ef收益相加/扣独立Mgap。Root只授权同freezeR2/R3逐轮必要门、负止无R4，后续actual数据才追加；CPU源审者未新GPU或远程干扰/现装配置改动。
