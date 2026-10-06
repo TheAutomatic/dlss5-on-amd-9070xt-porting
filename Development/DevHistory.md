@@ -1892,3 +1892,9 @@ root认可900正式均值改善/第三轮p99在1µs实际计时内未分辨退�
 - CPU独立复核fresh60566：common1088/640、Style1/seed0/full71、同half-exact编码输入，当前FAST1与锁定mochi均逐帧提交同步；GPU均值8.931545125与7.885259375ms，余差1.046285750ms。当前manifest与前账共享42项SHA同，实际H900不启/Pulse directNN资源0。M只有聚合GPU结果，不能做M逐帧p99，也不能从pureNN差距扣APP组合收益；跨批旧差不判回退。
 - C32 direct-feature生成源只改FFN feature量化操作数，residual half转换/memcpy原样；旧half边界历史反例仍适用，新路线是隔离有损研究。91972 gold残差失败经98d6e633 actual ISA定位为动态vector bitcast重复捕获element0，非生产helper问题；保原exit1/log。70170 gold-only补捕获exit0/release、residual bit0/anchor3c40，主候选模块未改。
 - 接受门仍待actual整网误差/finite/重复性与原NV位点合同；18d8829e原版half累加链证据不因Mo直F32路线被撤回。此轮我只CPU源/身份/边界审与计划归档，无GPU/远程修改、未改生产默认/现装/config/ZIP。
+
+### 2026-10-06 C32/VT供数负账与fullNN硬件诊断前门
+
+- C32 directfeature150cb252解释实验止：valid vsOLD51.1442dB（非NV）、38260 GPU mean−0.014088/p99−0.028294ms，仅局部收益不解释主差、不收有损生产。VT trload24057 raw0finite但GPU p99+0.03204/wallp99+0.02385ms，停止原候选，无APP/formal/集成。PAL f6c7d2bc已真实.text精确映射，production189纠错e63625b5保留不沿用256。
+- CPU工具盘点发现已装RDP CLI有HIP dispatchcapture/SPM；旧mixed全网capture输出变化，旧stall结论撤回。有效旧pureHIP热重复核不代表fullNN，parser无VALU/SALU/阶段wait。只读help实际存在，未启动capture/clocks改变；新caller隔离O2仅hostlaunchcounter，移除outerevents、无D3D。
+- 31928无capture计数门exit0/LOCK_RELEASED：cold161、80warm13041、稳定161dispatch/frame，后两帧repeatrawbit0finite。覆盖普通/ext及SP独立launch；候选窗口13042/count161需独立capture索引核。抓取本身尚未执行，不宣计数等于busy利用率或生产提升；现装/config/ZIP未动。

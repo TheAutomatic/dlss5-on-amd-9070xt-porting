@@ -116,3 +116,11 @@
 - prepare.py主模块唯一变化是FFN feature从half rounded量化改为ffn[ci] F32直量化；cw_rtz_half8与residual memcpy逐字保留，activation bit4/投影/存储/helper不变。canonical old与stock三sections同，old/new 26导出ABI同、prefix128VGPR/4096LDS/0spill；不推占用率或速度收益。
 - 91972原gold失败保留：动态half-vector bitcast捕获误重复element0，anchor读3bc1；98d6e633 ISA与输入定位证明这是gold捕获bug，非生产helper损坏。70170仅修捕获补门已exit0/release，residual bit0且anchor3c40；主候选module不变，小核通过不认生产接受。
 - 下一必要门为锁定actual fullNN old/new输出误差、finite与重复性；有损实验不默认、不以feature差码直接宣画质收益。18d8829e原NV半累加→FP8合同仍成立，Mo直F32位点不能证明新路线更贴原NV；需要相同位点/输入合同才能比较。ViT实际640 QK/AV次数同且无尾padding，额外分母已有B/C/C2负账，不重开旧阶梯。
+
+## 2026-10-06 供数研究停止与硬件诊断准备
+
+- C32 direct-feature（150cb252）：整网valid PSNR51.1442dB相对OLD，非NV oracle；residual保原half/repeatfinite过。38260 GPU均值−0.014088/p99−0.028294ms，wall−0.013644/−0.08372ms但control漂移较大；只局部24VALU，解释实验止，不APP/formal/集成，不能解释1.046ms主差。
+- Mo真实PAL由isolated pipeline-create cache.text/SHA精确映射（f6c7d2bc）：g_attn182VGPR/9216LDS、VT114VGPR/0LDS，wave32/scratch0。production C512为189VGPR/SHA9290…，e63625b5纠正旧256误用；不能直接从182/189推占用率。
+- VT trload仅原AoS地址供数替换、不改producer/数学；1008285e/9a0241a9 CPU及50448 wave32 bytegold通过，b6cf93bd canonical仅1/78函数变、其余77bytes同。实际整网raw0finite；24057 GPU mean−0.03505/p99+0.03204ms、wall−0.01045/+0.02385ms，尾负即止，不formal/APP/集成。与旧物理转置/M32/960合同分开，不换名重开封存负账。
+- 下一诊断复用现成RDTS RDP CLI/SPM+SQTT；旧mixed D3D/HIP capture改输出，21.7%stall已撤回，纯HIP重复核hot-cache也不能当fullNN。现parser实际仅busy/stall/cache/fetch/write/PCIe，未证VALU/SALU/phasewait；CLI help无可见SQTT-off，抓取会改clocks，非native性能。
+- 无capture countvalidation31928已exit0/release：同1088/640当前fullNN、cold161派发、80warm累积13041，每frame稳定161，候选one-based13042/count161整帧窗口。普通/ext Run与SP四直接API分支hostcounter全覆盖，无逐核events；pureHIP首末rawbit0finite，尚待capture边界审/同hostreference与TraceConfig及clocksrestore门，不预写硬件瓶颈结论。
