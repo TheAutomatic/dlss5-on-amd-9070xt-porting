@@ -1784,3 +1784,8 @@ B数学同域表达式消除half→float clamp→half往返，COMGR21真实640 V
 ### 2026-10-06 C32norm转置CPU权威baseline校准
 
 最小原型6ed1ae68旧-S CPU169→193VGPR不是实际active ELF；撤回allocation192→216/occupancy变坏说法。补完整canonical WindowsABI/C++14/-real-true16/rowopts/BC→-c internalize→link，A实际hsaco SHA f46b8af2…ee52与stock c32-wave1-fast逐byte相同，FAST3/type/RTZ身份真锁。真实A/T prefix128→128、chain131→129、post132→128，均allocation144；LDS4096→4608。真ISA chain1030→1119、prefix1517→1536、post1524→1544，三者DS+36、rsq16→2。静态止依据为恢复FP8片段DS/总指令/LDS增加，非VGPR占用退步；未GPU/未数学同值claim。新actual-object-isa-summary与命令/ELF身份覆盖旧-S资源结论，见results/c32-norm-transpose-20261006。
+
+
+### 2026-10-06 C32safeT实际占用与gold首门失败
+
+撤回仅多指令/DS就静态判性能的早停，fd6a201b补safeLDS fences、occupancy与gold。受控GPU4288：实际HIP A三kernel16blocks/multiprocessor、safeT均14，真实LDS4096→4608边界；不是性能裁决。unitgold零fixture六层0，首signedfinitefixture rawQKV/half-square0，但sum/inverse/normalized/FP8各512diff，最早sum表示/索引失败。按门stop，±0/Inf后续fixture没跑、actualprefix没跑、整网ABBA零槽，不声明数学等价或性能胜负；锁释放exit1立即交formal。matrix/原stdout/occupancy/API身份与failure见results/c32-norm-transpose-20261006/hardware-firstgate，后续仅CPU查f16WMMA布局不凭FP8布局套求和。
