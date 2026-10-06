@@ -1,0 +1,26 @@
+{
+  "phase": "CPU only APP performanceprepare no GPU",
+  "build": "29703 first exit0; final77781 warmsetup/captureDag/destructor countlogs exit0",
+  "exe_sha256": "ed4b8af1bd57b3172eab5c37202c4804e0944f94529a7e9c2d1a9046c4c485ad",
+  "source_sha256": {
+    "benchmark.cpp": "a36f7661ac66016e4f784e8bd985b2eeb79645f2f0934037c7043a4611d43f4c",
+    "hip_reference_network.h": "0e768316c51d41d8223804004153e3d48fddb1e2b31c02eec6f74cf1dacdfeb8",
+    "hip_d3d12_bridge.h": "5814ed60a6424f6580b7253d48fb38dd0689788f5a169f191ec28dfeec5885e4",
+    "native_hip_network.h": "914625a53e924e32d90c17855024b0962bdcf99450501ef03e436b85e524fa8b",
+    "hip_api.h": "a02b0bd87d52ee23b1b6e671d881afccbf467ae49547dbffa1d55389fd7cdeda"
+  },
+  "validated_numeric_reference": "85abc115 actualpaired12APP gold",
+  "scope": "originalHDRmenu fixedcontent actualvalid1920x1080/proc1152,MP1AE0histoffStyle1seed0resettruePDL0pulse0NET0overlap0optgraphfalse",
+  "sampling": "Original160Framecalls total/discard80 \u219280steady eachslot; firstframecold setup included originalCSV but notsteady",
+  "first_last_readback": "Original benchmark edges_only1; actual Framewall stopped before first/last texture readback; no intermediate scan",
+  "setup": "Both arms bounded warm<=80/twozeroallocationcachepasses in Frame0; replaycapture+161DAGverification+instantiate separateCPUms, excludeFrame0..79 steady",
+  "hot_source": "lab_app_perf_ready cached fastpath; no newlyaddedgetenv/printf/Fnvector/lastFnstore afterready; LabLaunch one lab_record falsebranch ordinary kernel remains; originalbridgepostsignalquery unchanged",
+  "actual_graph_count": "replay160 =firstFrame1+frames1..79warm79+80steady; eager0; destructorcountlogonce",
+  "timing": "OriginalNET0 ProcessSubmittedFrame wall through existing emptyconsumer+Flush; no GetTimings/networkevent timers",
+  "limits": [
+    "One plannedAPP ABBA only afterindependentreview/roothardwarequeue; no resultyet",
+    "No zero-instrumentationclaim: sameboolbranch, fixedscope/pointer/aliaschecks and allocationcounter wrappers remain",
+    "OriginalgenericFrame hot flag queries unaffected",
+    "No productiondefault/installation/config/ZIP/push"
+  ]
+}
