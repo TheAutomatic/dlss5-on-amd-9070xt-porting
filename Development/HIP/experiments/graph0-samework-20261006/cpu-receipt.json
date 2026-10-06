@@ -1,8 +1,8 @@
 {
-  "phase": "CPU prototype only; no GPU; node type/161-kernel validation pending, replay deliberately prohibited",
+  "phase": "CPU capture-only strengthened; no GPU, no graph instantiate/replay code",
   "compile_initial": "relative copied include fail; fixed absolute repo source references",
-  "compile_fixed": "MinGW O2 static session35050 exit0; final failclosed version session6344 exit0",
-  "source_sha256": "21211955bd3af40e5072f2989324ada271b017bc5e55bd416cfe6d81c3315f83",
+  "compile_fixed": "35050,6344,35219,99760,87114,final76511 all terminal exit0; final source includes capture-only and cancel/status gates",
+  "source_sha256": "38b18bd2222288b89299e80a7ba502231f842a629364fb761f7c88a9c9280a29",
   "current_header_sha256": "a2cb222bb8e63323b3f4d0fee0f1284c5c62c4dbdebd3da0dcb26b357362af2a",
   "private_header_delta": "LabCapturePoolGuard public setter of existing graph_capturing only; relative src includes expanded",
   "api_gate": [
@@ -13,10 +13,19 @@
     "mapped SP error reads and captured by-value ticket do not advance during replay: scope excludes rollover/error-policy changes"
   ],
   "missing": [
-    "Official current HIP graph node type enum and kernel node parameter ABI not present in searched local headers; cannot claim kernel161 from raw node count",
-    "Strong source preflight forbidding SP diagnostics/lowered ticket and authoritative eager launch-count logging still pending independent review"
+    "Independent final source review pending",
+    "No hardware API/graph capture support claim; exact graph DAG/order mapping not established by GetNodes multiset"
   ],
   "guard": "opt.graph=false, opt.pdl=false, submit_pulse=0; no graph1 fallback",
   "cleanup": "capture exception clears poolguard, ends capture and destroys abandoned graph; final prototype destroys unaudited graph before intentional prerequisite error",
-  "exe_sha256": "83191260ca4d3c4e61ec61e645015673a840910656fb829a3f6a09c48d3d3fb1"
+  "exe_sha256": "747fe174e6258a79f8a17fce1c81351497d9c4f7fae7ee2e7a13c5ee203e63b1",
+  "actual_guards": [
+    "SP_* actual config keys forbidden, DIAGNOSTICS0 staticassert",
+    "two warmed plans, pre_inited false, maxUInt ticket headroom before capture",
+    "Upload any cache miss, Fn miss, SP plan miss and new pool allocation prohibited during capture",
+    "eager actualAPI161 list == captured host actualAPI list; node typeKernel0 and moduleFn multiset161 via official Win64 Params64",
+    "same-thread EndCapture exactly once; IsCapturingNone required; failure stop no retry"
+  ],
+  "official_ABI": "/tmp/hip-graph-abi-20261006/hip_runtime_api.h:1404,1428",
+  "replay": "absent, not merely flag-disabled"
 }

@@ -1,0 +1,61 @@
+--- hip_reference_network.h
++++ isolated/hip_reference_network.h
+@@ -2,7 +2,7 @@
+ #pragma once
+ // SDKless HIP host graph. Scalar numerical validation path, not a realtime backend.
+ #include "hip_api.h"
+-#include "../../src/native_experimental_history.h"
++#include "/home/lmxxf/work/ai-theorys-study/wechat/assets/297/src/native_experimental_history.h"
+ #include "packed_weights.h"
+ #include <cstdint>
+ #include <cstring>
+@@ -181,6 +181,9 @@
+ }
+ inline std::atomic<int> AdaptivePreviewState{0};
+ class Network {friend class D3D12Bridge;
++ std::vector<Handle> lab_launches;
++ template<class... A> int LabLaunch(Handle f,A...a){lab_launches.push_back(f);return api.hipModuleLaunchKernel(f,a...);}
++
+  bool sp1440_ready=false;bool final_direct_compatible=false;bool pool64_byte_available=false;
+  bool vit_contract_byte_edge=false; // paired exact representation of an already E4M3-valued edge
+  bool free_geometry=false; /* DLSS5_NETWORK_FREE_RES geometry (FreeGeometry): generic ViT grid, no 640-token cap */
+@@ -233,7 +236,7 @@
+   if(pad>valid)api.Check(api.hipMemsetAsync(static_cast<char*>(t->ptr)+valid*ch*4,0xff,(pad-valid)*ch*4,stream),"pad16 poison"); /* diagnostic: NaN pad rows must not change any output */
+ #endif
+   return t;}
+- Tensor Upload(const void*p,size_t bytes,bool persistent=false){if(!bytes||bytes%4)throw std::runtime_error("upload size");Tensor t;if(persistent){
++ Tensor Upload(const void*p,size_t bytes,bool persistent=false){if(graph_capturing)throw std::runtime_error("capture upload/cache miss prohibited");if(!bytes||bytes%4)throw std::runtime_error("upload size");Tensor t;if(persistent){
+ #if HIP_ADDR_SKEW
+   Allocation::SkewPersistent()=true;t=std::make_shared<Allocation>(api,bytes);Allocation::SkewPersistent()=false;
+ #else
+@@ -349,7 +352,7 @@
+  /* Optional export probe: modules without the symbol keep the old launch shape. */
+  bool HasFn(const std::string&m,const std::string&name){std::string key=m+":"+name;if(functions.count(key))return true;if(missing_functions.count(key))return false;auto mi=modules.find(m);if(mi==modules.end())return false;Handle f{};if(api.hipModuleGetFunction(&f,mi->second,name.c_str())){missing_functions.insert(key);return false;}functions.emplace(key,f);return true;} /* 2026-10-01 rebuild-baseline: misses are cached too -- per-frame probes (ViT _ks2, ...) otherwise call hipModuleGetFunction every frame (+0.01..0.02ms ABBA) */
+  bool C32Norm900Active()const{return c32_norm900_loaded&&fast_numeric&&W==1600&&H==960&&multi_pass==1&&!opt.graph&&!opt.experimental_temporal;}
+- Handle Fn(const std::string&m,const std::string&name){static const std::string normkey="c32_norm900";const std::string&actual=m=="c32_wave1"&&C32Norm900Active()?normkey:m;std::string key=actual+":"+name;auto it=functions.find(key);if(it!=functions.end())return it->second;Handle f{};api.Check(api.hipModuleGetFunction(&f,modules.at(actual),name.c_str()),name.c_str());functions.emplace(key,f);return f;}
++ Handle Fn(const std::string&m,const std::string&name){static const std::string normkey="c32_norm900";const std::string&actual=m=="c32_wave1"&&C32Norm900Active()?normkey:m;std::string key=actual+":"+name;auto it=functions.find(key);if(it!=functions.end())return it->second;if(graph_capturing)throw std::runtime_error("capture function cache miss");Handle f{};api.Check(api.hipModuleGetFunction(&f,modules.at(actual),name.c_str()),name.c_str());functions.emplace(key,f);return f;}
+  /* DLSS5_FAST_NUMERIC twin (2026-10-03 fast-vit-c512): <stem>.hsaco -> <stem>-fast.hsaco when the option is 1 and the file
+     exists; missing twin falls back to the exact module with one stderr line (same contract as the C32/C64 swap). */
+  std::string FastTwin(const std::string&stem)const{if(!fast_numeric)return stem;const std::string fast=stem+"-fast";
+@@ -447,7 +450,7 @@
+ #ifdef HIP_SWIN_PERSISTENT_TRACE
+   std::printf("TOPO,%s,%s,%u,%u,%u\n",module.c_str(),kernel.c_str(),count,unsigned(groups?groups:(count+255ull)/256),threads);
+ #endif
+-  void*reuse_gate_arg=adaptive_active?P(adaptive_state):nullptr;void*argv[]={static_cast<void*>(&args)...,static_cast<void*>(&reuse_gate_arg)};unsigned repeats_here=launch_repeats*((!opt.dup_prefix.empty()&&(opt.dup_prefix.back()=='$'?kernel==opt.dup_prefix.substr(0,opt.dup_prefix.size()-1):kernel.rfind(opt.dup_prefix,0)==0))?opt.dup_count:1u);for(unsigned repeat=0;repeat<repeats_here;repeat++){unsigned gg=unsigned(groups?groups:(count+255ull)/256);if(pdl_anyorder){++pdl_calls;api.Check(ext_launch(Fn(module,kernel),gg*threads,1,1,threads,1,1,0,stream,argv,nullptr,nullptr,nullptr,1u/*hipExtAnyOrderLaunch*/),name);}else api.Check(api.hipModuleLaunchKernel(Fn(module,kernel),gg,1,1,threads,1,1,0,stream,argv,nullptr),name);}if(opt.profile)api.Check(api.hipEventRecord(timing.end,stream),"event end");if(!opt.pooled)api.Check(api.hipStreamSynchronize(stream),name);
++  void*reuse_gate_arg=adaptive_active?P(adaptive_state):nullptr;void*argv[]={static_cast<void*>(&args)...,static_cast<void*>(&reuse_gate_arg)};unsigned repeats_here=launch_repeats*((!opt.dup_prefix.empty()&&(opt.dup_prefix.back()=='$'?kernel==opt.dup_prefix.substr(0,opt.dup_prefix.size()-1):kernel.rfind(opt.dup_prefix,0)==0))?opt.dup_count:1u);for(unsigned repeat=0;repeat<repeats_here;repeat++){unsigned gg=unsigned(groups?groups:(count+255ull)/256);if(pdl_anyorder){++pdl_calls;api.Check(ext_launch(Fn(module,kernel),gg*threads,1,1,threads,1,1,0,stream,argv,nullptr,nullptr,nullptr,1u/*hipExtAnyOrderLaunch*/),name);}else api.Check(LabLaunch(Fn(module,kernel),gg,1,1,threads,1,1,0,stream,argv,nullptr),name);}if(opt.profile)api.Check(api.hipEventRecord(timing.end,stream),"event end");if(!opt.pooled)api.Check(api.hipStreamSynchronize(stream),name);
+   if(opt.wall_profile){api.Check(api.hipStreamSynchronize(stream),"wall profile completion");auto&entry=wall_timings[kernel];entry.first+=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-wall_begin).count()/launch_repeats;++entry.second;}
+  }
+  void Stage(const std::string&name,const Tensor&t){if(progress)progress(name);if(observer){Synchronize();observer(name,P(t),t->bytes);}if(opt.dump_dir.empty()||(!opt.dump_only.empty()&&(","+opt.dump_only+",").find(","+name+",")==std::string::npos))return;api.Check(api.hipStreamSynchronize(stream),"before dump");std::vector<char>b(t->bytes);api.Check(api.hipMemcpy(b.data(),P(t),b.size(),2),"stage dump");std::ofstream f(opt.dump_dir+"/"+name+".f32",std::ios::binary);if(!f.write(b.data(),b.size()))throw std::runtime_error("stage dump write");}
+@@ -857,6 +860,12 @@
+  unsigned VitStreamActive()const{return vit_stream_active;}
+  bool VitProjN64Active()const{return vit_proj_n64_active;}
+  void* TemporalFeatureBuffer()const{return temporal_feature_tap_active&&temporal_features?temporal_features->ptr:nullptr;}
++ void LabCapturePoolGuard(bool v){graph_capturing=v;}
++ void LabResetLaunches(){lab_launches.clear();}const std::vector<Handle>&LabLaunches()const{return lab_launches;}
++ void LabCapturePreflight(){if(opt.graph||opt.pdl||!opt.pooled||opt.profile||opt.wall_profile||observer||!opt.dump_dir.empty()||!SwinRunActive()||multi_pass!=1)throw std::runtime_error("capture scope");
++ for(const char*k:{"SP_TRACE","SP_VALIDATE","SP_TICKET_LIMIT","SP_FORCE_TIMEOUT","SP_TICKET_START","DLSS5_SP_TRACE","DLSS5_SP_VALIDATE","DLSS5_SP_TICKET_LIMIT"}){const char*v=std::getenv(k);if(v&&*v&&std::strcmp(v,"0"))throw std::runtime_error("capture SP diagnostic/limit forbidden");}
++ if(sp_plans.size()!=2)throw std::runtime_error("capture requires two warmed SP plans");for(auto&kv:sp_plans){auto&p=kv.second;if(p.pre_inited||p.next_ticket>std::numeric_limits<U>::max()-p.total)throw std::runtime_error("SP rollover/pair not capturable");printf("CAPTURE_PLAN first=%u base=%u jobs=%u\n",p.first,p.next_ticket,p.total);}}
++
+  Handle Stream()const{return stream;}
+  Api& Runtime(){return api;}
+  void Synchronize(){api.Check(api.hipStreamSynchronize(stream),"network completion");}
