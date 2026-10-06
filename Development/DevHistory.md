@@ -1933,3 +1933,8 @@ root认可900正式均值改善/第三轮p99在1µs实际计时内未分辨退�
 
 - 只读发现初源fdc22 newexport guardpost4错误，实际普通Body48 caller传post0；ByteOut0有w2_hmask后量化，与4非同义。即时报告root/math，旧70521 source/resource保留且未GPU，不能gold旧端造4。owner改唯一guard为0，修后sourcef08c4ad6…bea1f8静态复核无该阻碍。
 - Up独立normalRNE/skipF/fp8add0与BodyFAST助手分离，Body区替换0；plane0原byte残差/每head32 norm、readonlyrawskip3、bottompadding与原屏障源核通过。不认数值/lifetime/资源门已过；actualpost0 oldUpbyte→新tap/Bodyout/fullNN/ABI待。独立报告up48-body48-audit/source-review，审者无修改候选/编译/GPU。
+
+### 2026-10-06 Up48 wholeNN隔离route生命周期独立审
+
+- 只读实际header发现Up sentinel admission未requireactualwave_owned_active，但pending消费仅wave-owned Body，unsupportedflags下可能将F32low误给bytefallback；及时报root/math，owner加actualactive+exactHasFn beforepending。原正常stock已active的50466数据不因此无效；修后source3a4686…另锁新版门。
+- low/skip强Tensor refs使pool use_count>1，原skips3.reset不会使其提前复用；Body48保持原字节New、exactshape/name/inputalias/post0，新main一次launch成功后清refs，SP不变。owner将dtor选device前置再sync/reset；仅当前caller范围，不宣多设备/API失败恢复。No reviewer改源/编/GPU，记录route-review；shadowbyte0/stockfinite证据不代新整图route门。
