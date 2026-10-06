@@ -130,3 +130,10 @@
 - mochi同条件窗口3747已exit0/release（results/mochi-spm-20261006）：原d1185exe未改，nocapture两末reference83819重复/finite并与freshM同；实际steps.size123×chunk1提交闭合modeldispatch/frame，但noise初始化/RDPglobaloffset未证。warm80/2000长活、候选9842/count123，捕获末raw自身same、原资产未改、driverrestore日志过；无firstbeforewarm。5296samples/4096interval、4SQTT，memoryunitbusy90.236/stall12.944%、icache65.075%、L0/L2hit75.191/95.293%，只是窗口观测；不能将busy称GPU利用率或推compute/bandwidth/正常帧份额。当前HIP/M窗口分别161/123renderops未frameverified，provider/device/config与SQTT映射先CPU独立审，不盲再采。
 
 - 两边Budget3单稳健性门53594/96434顺序exit0/release，actualCLI483/369、sameexe/ownrawexact/finite/assets/driverrestore过。sample17326/16496、4096interval/providerconfig同；HIPmemorybusy87.275→89.816/stall19.784→20.349%，M90.236→90.205/12.944→12.922%，cache变幅≤0.103pp。HIPbusy明显窗口敏感，stall/cache差仍只是同provider窗口观察，不能推1.046ms因果或compute/DRAM。3模型预算不称3完整frames，SQTT容量/样本自洽不证无丢包；无下一采集。下一CPU研究仅按独立provider/实际source机制定位，见fullnn-spm预算对照。
+
+## 2026-10-06 实际161/123序列与唯一精确融合点CPU审
+
+- 小门89772/15597顺序exit0/release/rawsamefinite；HIP首cold161实际Fn key、M原--wiring finaldisp123已取，steady只核总count不冒逐名同。extra38由阶段账闭合：C32front+1，encoderC64/C128/C256 +4/+6/+5，C512head+1，ViTpack/反gather+9，decoder39−1，decoderC256/C128/C64+5/+5/+3，其余0（results/dispatch-sequence-20261006）。不将38归attention或估ms。
+- SP_SMALL旧d7b29df2/APP/normal配方负账不是当前W16/FAST1/pure1088整stageDS/UPS融合同条件复测；原内层4→3/2→3组织不赚仍封存，新条件本身不构成重开证据。ViTproducerpack、consumerinlinepackV、gather各负账明确，不能换名重复。M1kernel仍写globaltiles；HIP6层各独立FP8output存储12,533,760B/stage，不将allocation当DRAM流量。
+- 当前SP16..21之后先Body22再Down，不能挂pool在SP21或扩SP22混recovery。Body22实际c64-wave2-fast/W2_FAST_NUM3，raw?3调用Hrtz有效identity、写fullF32；Down缺fasttwin实际加载normalpacked/H半RNE链。实际loadedSHA已锁，融合必须两helper独立，不偷偷补fastmodule或half化raw。
+- Body22 shift2(sx0,sy4)/8×8窗口同WG全256channel，2×2pool可windowlocal；完整Down256→512投影需保pool_H/F、K32两K16WMMA+Hacc顺序。已有Down16连续rasterhelper跨多producerWG不能直接尾call。新的register→pooledLDS约8448B/屏障/寄存器成本待编；135窗口projectiontiles vs原128(+5.47%)，rawskips3仍decoder48读不得删写。只静态可行，不收益结论；math下一CPU隔离设计，旧C64/C128 fence+rawreread负账不泛盖该directreg方案。

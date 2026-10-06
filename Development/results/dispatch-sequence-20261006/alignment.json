@@ -1,0 +1,82 @@
+{
+  "hip_scope": "actual first cold frame; steady total only matched",
+  "mochi_scope": "final disp record; each chunk1 submission replays same complete commandbuffer",
+  "rows": [
+    {
+      "stage": "C32 prefix..4 + pool",
+      "hip": 6,
+      "mochi": 5,
+      "extra": 1
+    },
+    {
+      "stage": "encoder C64 5..8 + down",
+      "hip": 5,
+      "mochi": 1,
+      "extra": 4
+    },
+    {
+      "stage": "encoder C128 9..14 + down",
+      "hip": 7,
+      "mochi": 1,
+      "extra": 6
+    },
+    {
+      "stage": "encoder C256 15..22 + down",
+      "hip": 6,
+      "mochi": 1,
+      "extra": 5
+    },
+    {
+      "stage": "C512 23..30 + head/gather",
+      "hip": 34,
+      "mochi": 33,
+      "extra": 1
+    },
+    {
+      "stage": "ViT31..38 + reverse gather",
+      "hip": 49,
+      "mochi": 40,
+      "extra": 9
+    },
+    {
+      "stage": "decoder39",
+      "hip": 1,
+      "mochi": 2,
+      "extra": -1
+    },
+    {
+      "stage": "C51240..47",
+      "hip": 32,
+      "mochi": 32,
+      "extra": 0
+    },
+    {
+      "stage": "decoderC25648..55",
+      "hip": 6,
+      "mochi": 1,
+      "extra": 5
+    },
+    {
+      "stage": "decoderC12856..61",
+      "hip": 6,
+      "mochi": 1,
+      "extra": 5
+    },
+    {
+      "stage": "decoderC6462..65",
+      "hip": 4,
+      "mochi": 1,
+      "extra": 3
+    },
+    {
+      "stage": "C32up66..post70",
+      "hip": 5,
+      "mochi": 5,
+      "extra": 0
+    }
+  ],
+  "extra_total": 38,
+  "module_manifest_matches_fresh": true,
+  "hip_function_handles_printed": false,
+  "seq_exe_sha256": "3c8a6e02b9ebd9fb6fb9b74aac387523573f0ec168d36644271ea937ca3268d6"
+}

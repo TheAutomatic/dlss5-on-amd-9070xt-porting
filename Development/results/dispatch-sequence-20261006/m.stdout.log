@@ -1,0 +1,197 @@
+model pack: D:\DLSSNR-Lab\competitor-timing-20260930\mz\dlssnr.bin (599 entries)
+accumulation: fp32 (FP32 hardware)
+Swin position bias storage: fp32; FP32 logit addition
+152 steps from D:\DLSSNR-Lab\competitor-timing-20260930\mz\plan-1920x1080.txt
+152 of 152 layers have a kernel
+model pack: D:\DLSSNR-Lab\competitor-timing-20260930\mz\dlssnr.bin (599 entries)
+accumulation: fp32 (FP32 hardware)
+Swin position bias storage: fp32; FP32 logit addition
+152 steps from D:\DLSSNR-Lab\competitor-timing-20260930\mz\plan-1920x1080.txt
+152 of 152 layers have a kernel
+math profile: 3 (4096-byte activation table; baked exp bias=1)
+pre conditioning [style,tone,structure,skin,other]=[0.0078125,1,1,1,1]
+Automatic Mask: requested=1, conditioning=enabled; external ControlMask absent
+Overall Intensity: requested=1, GPU push=1, mapping=nr-delta-v1
+N-pair FP8 weight layout: 332 matrices
+persist: C=64 layers b005l0..b008l0 (4, last is DS) windows 2135 items 8349 wg 384
+persist: C=128 layers b009l0..b014l0 (6, last is DS) windows 558 items 3203 wg 256
+persist: C=256 layers b015l0..b022l0 (8, last is DS) windows 144 items 1116 wg 1116 (one per item)
+persist: C=256 layers b049l0..b055l0 (8, first is UPS) windows 144 items 1116 wg 1116 (one per item)
+persist: C=128 layers b057l0..b061l0 (6, first is UPS) windows 558 items 3202 wg 256
+persist: C=64 layers b063l0..b065l0 (4, first is UPS) windows 2135 items 8349 wg 384
+persist: 6 merged runs, 123 dispatches left
+arena reuse: unsized slot 247 (block 30) aliases value 0 (block 0 layer 0) +0
+activation arena 390.5 MB over 185 values, shared by lifetime (1047.7 MB without)
+unpacking weights from artifacts
+math profile: 3 (4096-byte activation table; baked exp bias=1)
+pre conditioning [style,tone,structure,skin,other]=[0.0078125,1,1,1,1]
+Automatic Mask: requested=1, conditioning=enabled; external ControlMask absent
+Overall Intensity: requested=1, GPU push=1, mapping=nr-delta-v1
+weight arena 169.7 MB over 153 dispatches
+N-pair FP8 weight layout: 332 matrices
+persist: C=64 layers b005l0..b008l0 (4, last is DS) windows 2135 items 8349 wg 384
+persist: C=128 layers b009l0..b014l0 (6, last is DS) windows 558 items 3203 wg 256
+persist: C=256 layers b015l0..b022l0 (8, last is DS) windows 144 items 1116 wg 1116 (one per item)
+persist: C=256 layers b049l0..b055l0 (8, first is UPS) windows 144 items 1116 wg 1116 (one per item)
+persist: C=128 layers b057l0..b061l0 (6, first is UPS) windows 558 items 3202 wg 256
+persist: C=64 layers b063l0..b065l0 (4, first is UPS) windows 2135 items 8349 wg 384
+persist: 6 merged runs, 123 dispatches left
+GPU    AMD Radeon RX 9070 XT
+allocating arenas: activation 390.8 MB, weights 170.4 MB
+[nr] activation arena through its device address: yes
+native working extent 1920x1088; source/output 1920x1080
+images in 1920x1080, out 1920x1080 (x2)
+input image: 33.2 MB host + 33.2 MB mapped staging
+uploading weights: 170.4 MB through a mapped staging buffer of the same size
+layer    kernel                                    reads       writes
+b000l0 fswinimagepreds32                             0    133693440
+b001l0 fswin32                               200540160            0
+b002l0 fswin32                                       0     16711680
+b003l0 fswin32                                16711680            0
+b004l0 fswindsp32                                    0     16711680
+b005l0 fswinpds64                             42417460     97624064
+b009l0 fswinpds128                            42476048     97649536
+b015l0 fswinpds256                            42498660     97659456
+b023l0 ffwd3                                 238387200    240091136
+b023l1 gemmproj                               12889088    240091136
+b023l2 attn                                  241401856    242712576
+b023l3 gemmproj                               13553280    242712576
+b024l0 ffwd3                                 240091136     51118080
+b024l1 gemmproj                               13955200     51118080
+b024l2 attn                                  241401856    242712576
+b024l3 gemmproj                               14619392    242712576
+b025l0 ffwd3                                 240091136     51118080
+b025l1 gemmproj                               15021312     51118080
+b025l2 attn                                  241401856    242712576
+b025l3 gemmproj                               15685504    242712576
+b026l0 ffwd3                                 240091136     51118080
+b026l1 gemmproj                               16087424     51118080
+b026l2 attn                                  241401856    242712576
+b026l3 gemmproj                               16751616    242712576
+b027l0 ffwd3                                 240091136     51118080
+b027l1 gemmproj                               17153536     51118080
+b027l2 attn                                  241401856    242712576
+b027l3 gemmproj                               17817728    242712576
+b028l0 ffwd3                                 240091136     51118080
+b028l1 gemmproj                               18219648     51118080
+b028l2 attn                                  241401856    242712576
+b028l3 gemmproj                               18883840    242712576
+b029l0 ffwd3                                 240091136     51118080
+b029l1 gemmproj                               19285760     51118080
+b029l2 attn                                  241401856    242712576
+b029l3 gemmproj                               19949952    242712576
+b030l0 ffwd3                                 240091136     51118080
+b030l1 gemmproj                               20351872     51118080
+b030l2 attn                                  241401856    242712576
+b030l3 gemmpool                               21016064    242712576
+b030l4 gemmnores                                     0    239697920
+b031l0 gemmvact                                      0     51904512
+b031l1 gemmproj                               25481728    241401856
+b031l2 gemmvqkvnorm                                  0     51118080
+b031l3 vitattn                                37355520    241401856
+b031l4 gemmproj                               27596416    241401856
+b032l0 gemmvact                                      0    242057216
+b032l1 gemmproj                               31808128     33423360
+b032l2 gemmvqkvnorm                                  0    241401856
+b032l3 vitattn                                55050240     57016320
+b032l4 gemmproj                               33922816     57016320
+b033l0 gemmvact                                      0     57671680
+b033l1 gemmproj                               38134528     33423360
+b033l2 gemmvqkvnorm                                  0    241401856
+b033l3 vitattn                               242057216     51118080
+b033l4 gemmproj                               40249216     51118080
+b034l0 gemmvact                                      0     51773440
+b034l1 gemmproj                               44460928     52428800
+b034l2 gemmvqkvnorm                                  0     51118080
+b034l3 vitattn                               241401856    243367936
+b034l4 gemmproj                               46575616    243367936
+b035l0 gemmvact                                      0     51773440
+b035l1 gemmproj                               50787328     52428800
+b035l2 gemmvqkvnorm                                  0     51118080
+b035l3 vitattn                               241401856    243367936
+b035l4 gemmproj                               52902016    243367936
+b036l0 gemmvact                                      0     51773440
+b036l1 gemmproj                               57113728     52428800
+b036l2 gemmvqkvnorm                                  0     51118080
+b036l3 vitattn                               241401856    243367936
+b036l4 gemmproj                               59228416    243367936
+b037l0 gemmvact                                      0     51773440
+b037l1 gemmproj                               63440128     52428800
+b037l2 gemmvqkvnorm                                  0     51118080
+b037l3 vitattn                               241401856    243367936
+b037l4 gemmproj                               65554816    243367936
+b038l0 gemmvact                                      0     51773440
+b038l1 gemmproj                               69766528     52428800
+b038l2 gemmvqkvnorm                                  0     51118080
+b038l3 vitattn                               241401856    243367936
+b038l4 gemmprojt                              71881216    243367936
+b039l0 gemmvqkvs                              72160256     52428800
+b039l0 decups                                 27197440    240091136
+b040l0 ffwd3                                  53084160     33423360
+b040l1 gemmproj                               72562176     33423360
+b040l2 attn                                   51118080    240091136
+b040l3 gemmproj                               73226368    240091136
+b041l0 ffwd3                                 241401856    242712576
+b041l1 gemmproj                               73628288    242712576
+b041l2 attn                                  240091136     51118080
+b041l3 gemmproj                               74292480     51118080
+b042l0 ffwd3                                 241401856    242712576
+b042l1 gemmproj                               74694400    242712576
+b042l2 attn                                  240091136     51118080
+b042l3 gemmproj                               75358592     51118080
+b043l0 ffwd3                                 241401856    242712576
+b043l1 gemmproj                               75760512    242712576
+b043l2 attn                                  240091136     51118080
+b043l3 gemmproj                               76424704     51118080
+b044l0 ffwd3                                 241401856    242712576
+b044l1 gemmproj                               76826624    242712576
+b044l2 attn                                  240091136     51118080
+b044l3 gemmproj                               77490816     51118080
+b045l0 ffwd3                                 241401856    242712576
+b045l1 gemmproj                               77892736    242712576
+b045l2 attn                                  240091136     51118080
+b045l3 gemmproj                               78556928     51118080
+b046l0 ffwd3                                 241401856    242712576
+b046l1 gemmproj                               78958848    242712576
+b046l2 attn                                  240091136     51118080
+b046l3 gemmproj                               79623040     51118080
+b047l0 ffwd3                                 241401856    242712576
+b047l1 gemmproj                               80024960    242712576
+b047l2 attn                                  240091136     51118080
+b047l3 gemmproj                               80689152     51118080
+b049l0 fswinpup256                            42506712     97664000
+b057l0 fswinpup128                            42514764     97668544
+b063l0 fswinpup64                             42537368     97678464
+b066l0 fswinfusedup32                         33423360            0
+b067l0 fswin32                                       0    200540160
+b068l0 fswin32                               200540160            0
+b069l0 fswin32                                       0    200540160
+b070l0 fswinimagepost32                      240091136            0
+inter-dispatch barrier: execution + invalidate (no availability op)
+[nr] graph build 1.05s: plan 0.37s  weights-unpack 0.31s  arena-alloc 0.21s  input-image 0.06s  weights-upload 0.03s  noise-field 0.00s  pipelines 0.08s  arena-zero 0.00s  (22 pipelines, 1.8 MB of pipeline cache)
+
+123 dispatches, one submit: 8.025 ms  @ 0 MHz
+measurement wall 8.225 ms, GPU total 8.025 ms over 1 frames
+surface 0: 1920x1080 RGBA32F, 100.0% non-zero, rms 0.6902, range [0.02441, 1]
+  wrote D:\DLSSNR-Lab\dispatch-sequence-20261006-m\1088-00-M\final.rgba32f
+
+family                             dispatches
+CCDecInputUpsample                      2
+CCSplitSwin16HFfwd                     16
+CCSplitSwin16HFfwdProj                 16
+CCSplitSwin16HFinalHead                 1
+CCSplitSwin16HProj                     15
+CCSplitSwin16HProjPool                  1
+CCSplitSwin16HQKVAttn                  16
+CCTinlayoutFusedPostBlockSwin1H         1
+CCTinlayoutFusedPreBlockSwin1H          1
+CCTinlayoutFusedSwin1H                  8
+CCTinlayoutFusedSwin2H                  2
+CCTinlayoutFusedSwin4H                  2
+CCTinlayoutFusedSwin8H                  2
+CCVit1DAttention                        8
+CCVit1DFfnContract                      8
+CCVit1DFfnExpand                        8
+CCVit1DProjection                       8
+CCVit1DQKV                              8
+

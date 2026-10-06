@@ -1916,3 +1916,9 @@ root认可900正式均值改善/第三轮p99在1µs实际计时内未分辨退�
 - Root授权33213同脚本Budget3，53594 HIP483→96434 M369顺序单次，均exit0/LOCK_RELEASED；actualTraceConfig13042/483与9842/369，sameexe/ownreference rawbit0finite/assets/driverrestore日志过。没有追加20frame/刷新或安装配置修改；caller stdout161只每模型framecount，不替CLI483。
 - 真实sample17326/16496、4096interval、definitions/refunits/gpuperfexp一致，ratio原计数核过。HIP访存活跃87.275→89.816(+2.541pp)/stall19.784→20.349%，M90.236→90.205/12.944→12.922%，缓存各变幅≤.103pp。活跃含stall且分母commandprocessorbusy，不称GPU利用率或以差反推compute。
 - 4SQTT合26.389/19.707MB、样本递增/shape自洽不证无溢出/丢样；rawtickspan2,989,684/2,858,192，仅SystemInfo100MHz同域条件换算29.89684/28.58192ms，非native时间/HWfreq读。globalframe/seq门仍缺，3预算不称3完整帧；现窗口不足把停滞差归因native1.046ms。结果归档fullnn/mochi-spm budget3，无新capture。
+
+### 2026-10-06 实际执行序列和Body22边界归档
+
+- Root授权89772 HIP首cold161Fn key记录、15597锁M原--wiring finaldisp123小门，均rawsamefinite/原资产/guard过并释放，无profiling/events。HIPFn普通/ext与SP四API分支源映射记录，未打印opaquehandle；Mflag仅print不改变reuse/折叠，cmd重放区别明确。161cold与steady总161不推出steady逐名同。
+- extra38逐阶段闭合而非全attention：encoder/decoder小通道整stage融合差28，ViTpack+反gather9，前C32/head+2与decoder39−1，其余0。M持久化含DS/UPS仍全球tile写，SP独立FP8outputs仅allocation footprint，不据此算带宽/耗时。完整source/序列/模块SHA/表归dispatch-sequence-20261006。
+- 更正早期融合前提：SP尾21并不直连Down，中间Body22；raw?3调用Hrtz在当前W2FASTNUM3是identity(fullF32)，Downnormalpacked缺fasttwin却保RNEhalfH链，不能按名字断half。同WG2×2依赖可行但需windowlocal映射及原投影累加，rawskip必须保；8448B pooledLDS估、135vs128投影WG与barrier成本待编，不自动优于旧路径。只CPU机制交math，无新fusionGPU/生产改动，旧负账按实际范围保留。
