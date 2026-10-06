@@ -1,0 +1,144 @@
+{
+  "session": 19487,
+  "exit_code": 0,
+  "lock_released": true,
+  "source_commit": "e351892d",
+  "cpu_build_session": 90228,
+  "source_review": "measurement stablewarmPASS plus remaining counters/lifetimePASS",
+  "input_hdr_sha256": "fa3c18735ac5f105903614a18a9b1475966b9afd9dd4aeb0cd9cad7bc759ec9b",
+  "exe_sha256": "57c56b1e2cebd820cd81b324451a6ac998ac95070c73830eb82d7d41442d429b",
+  "actual_geometry": {
+    "valid": [
+      1920,
+      1080
+    ],
+    "processing": [
+      1920,
+      1152
+    ]
+  },
+  "mapped_spans": [
+    35389440,
+    26542080
+  ],
+  "mapped_pointers_stable_all12": true,
+  "alias": false,
+  "module_identity": "actualLoadModulefile/handle logs match originalstock FastTwin, full preflightmanifestchecked",
+  "style_override_sentinel": -1,
+  "style_meaning": "Style1 leaves stockdefault unchanged; sentinel not negativeactualstyle. API comment/source contract default1/128.",
+  "warm_iterations": 4,
+  "warm_malloc_success_sequence": [
+    209,
+    213,
+    213,
+    213
+  ],
+  "warm_pool_size_sequence": [
+    23,
+    27,
+    27,
+    27
+  ],
+  "last_two_all_counts_and_cache_snapshots_stable": true,
+  "kernels": 161,
+  "DAG_edges": 160,
+  "ordered_Fn_equals_dynamic_eager": true,
+  "graph_launch_calls": 12,
+  "frame_seed": 0,
+  "frame_reset_every_step": true,
+  "temporal": false,
+  "paired_steps": [
+    {
+      "step": 0,
+      "bytes": 7464960,
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "byte_diff": 0,
+      "invalid_half": 0
+    },
+    {
+      "step": 1,
+      "bytes": 7464960,
+      "sha256": "6687259ba49a870c2ff006538c214026dede2d0050dff93d90abceee8c846274",
+      "byte_diff": 0,
+      "invalid_half": 0
+    },
+    {
+      "step": 2,
+      "bytes": 7464960,
+      "sha256": "6d8c7e1ac440b1511ba11a3b85bf57b54c474fdbf0127520c3bfb8a0d57b127d",
+      "byte_diff": 0,
+      "invalid_half": 0
+    },
+    {
+      "step": 3,
+      "bytes": 7464960,
+      "sha256": "e961181fd16d0009e69c53d13f3fda4492b3a2f6cd933c141606b666056e7cf5",
+      "byte_diff": 0,
+      "invalid_half": 0
+    },
+    {
+      "step": 4,
+      "bytes": 7464960,
+      "sha256": "232f4ff1fb2dccf97c61dacbd9bbe3e615c5d827b65811c7bf8fa8dd272ebd56",
+      "byte_diff": 0,
+      "invalid_half": 0
+    },
+    {
+      "step": 5,
+      "bytes": 7464960,
+      "sha256": "d4a94bf22090fdf7ddc07af9a1ab2f6b67d47d08252d15205551d66ed16908f6",
+      "byte_diff": 0,
+      "invalid_half": 0
+    },
+    {
+      "step": 6,
+      "bytes": 7464960,
+      "sha256": "dcce16f8672d2107ad6cedc60ab4846a7d8105f69a7403b3e095ed4fcb362641",
+      "byte_diff": 0,
+      "invalid_half": 0
+    },
+    {
+      "step": 7,
+      "bytes": 7464960,
+      "sha256": "1b6324999be99c57e8582edc1ae13e50010efbd8dcf39d3c835b6ce1ceccd247",
+      "byte_diff": 0,
+      "invalid_half": 0
+    },
+    {
+      "step": 8,
+      "bytes": 7464960,
+      "sha256": "0cb3c8506434a89477af9ba31eec6148842fb2ee0fb3eb9c5b77023768db41b3",
+      "byte_diff": 0,
+      "invalid_half": 0
+    },
+    {
+      "step": 9,
+      "bytes": 7464960,
+      "sha256": "1e9c01b207582219f1863e526b8d921f918ed9708d5824a86c247c8c8807b758",
+      "byte_diff": 0,
+      "invalid_half": 0
+    },
+    {
+      "step": 10,
+      "bytes": 7464960,
+      "sha256": "7cb4af928bc6b704de8afa6114111a12c954e9c351c244ba2e6101d09443724a",
+      "byte_diff": 0,
+      "invalid_half": 0
+    },
+    {
+      "step": 11,
+      "bytes": 7464960,
+      "sha256": "341fae0fb52baee61df08b6011a29d90a37dc799f3f643494dd7e1facc181d47",
+      "byte_diff": 0,
+      "invalid_half": 0
+    }
+  ],
+  "performance": false,
+  "limitations": [
+    "Spatial controlledHDR sequence not realgamecontinuous temporalvalidation",
+    "No Runtime.seed1Prepare inthisFrameentry",
+    "SPinitial160 readyjobs not kernelcount",
+    "Api style sentinel log is overridepolicy, not independent GPUconstantreadback",
+    "No APP performance/production acceptance, installation orpush"
+  ]
+}
