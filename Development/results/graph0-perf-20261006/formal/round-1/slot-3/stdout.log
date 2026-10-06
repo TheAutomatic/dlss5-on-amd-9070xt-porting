@@ -1,0 +1,8 @@
+SYNC_PROFILE wave_owned=1 c512_m32=1 pdl=0 vit_stream=3 swin_run=1 FAST=1 full71=1
+SP_PLAN c=256 first=16 layers=6 tasks=846 initial=144 state_bytes=10168 w16=1
+SP_PLAN c=256 first=49 layers=6 tasks=846 initial=144 state_bytes=10168 w16=1
+CAPTURE_PLAN first=144 base=68526 jobs=846
+CAPTURE_PLAN first=144 base=68526 jobs=846
+PERF_SCOPE mode=eager capture_ms=0.000000 instantiate_ms=0.000000 graph_launch_api_calls=0 expected=0 node161_samework=1 raw_bitdiff=0 finite=1 opt_graph=0
+SP_STATS runs=646 fallback=0 rollover=0 jobs=546516 disabled=0 errors=0
+
