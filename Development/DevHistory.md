@@ -1910,3 +1910,9 @@ root认可900正式均值改善/第三轮p99在1µs实际计时内未分辨退�
 - 原d1185exe/模型/plan/SPV未改；83819两nocapture末输出自身重复/finite/alpha1并与freshM624d9d1a…612同。actual123日志是steps.size动态值，源码逐step录dispatch且chunk1每frame复用cmd提交；不把记录API次数或固定文案当工具全局派发。原exe仅最后write_surface，未造firstbeforewarm。
 - 3747单SPM+SQTT校准exit0/LOCK_RELEASED，warm80/repeats2000同Style1seed0/common1088/640/full71，candidate9842/123初始化偏移未证；captured末raw对ownreference同，旧资产metadata未改，driver成功restore日志过、未独立clockquery。5296samples/4096interval，memoryunitbusy90.236/stall12.944%、icache65.075%、L0/L2hit75.191/95.293%，全部derivedratio引用raw核过。
 - memorybusy明确访存单元活跃且含stall，同分母commandprocessorbusycycles，不是整GPU利用率；rawticks无频率、不硬算带宽/compute份额。global/完整frame及实际provider比较仍CPU审；现窗不归因native1.046ms差，不借旧mixed撤回的21.7%stall。源码脚本/traceSHA/定义/logs已归档，未安装/改现装/config/ZIP。
+
+### 2026-10-06 双方三倍派发预算单诊断
+
+- Root授权33213同脚本Budget3，53594 HIP483→96434 M369顺序单次，均exit0/LOCK_RELEASED；actualTraceConfig13042/483与9842/369，sameexe/ownreference rawbit0finite/assets/driverrestore日志过。没有追加20frame/刷新或安装配置修改；caller stdout161只每模型framecount，不替CLI483。
+- 真实sample17326/16496、4096interval、definitions/refunits/gpuperfexp一致，ratio原计数核过。HIP访存活跃87.275→89.816(+2.541pp)/stall19.784→20.349%，M90.236→90.205/12.944→12.922%，缓存各变幅≤.103pp。活跃含stall且分母commandprocessorbusy，不称GPU利用率或以差反推compute。
+- 4SQTT合26.389/19.707MB、样本递增/shape自洽不证无溢出/丢样；rawtickspan2,989,684/2,858,192，仅SystemInfo100MHz同域条件换算29.89684/28.58192ms，非native时间/HWfreq读。globalframe/seq门仍缺，3预算不称3完整帧；现窗口不足把停滞差归因native1.046ms。结果归档fullnn/mochi-spm budget3，无新capture。

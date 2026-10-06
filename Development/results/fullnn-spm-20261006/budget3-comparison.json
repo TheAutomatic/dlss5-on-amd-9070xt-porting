@@ -1,0 +1,178 @@
+{
+  "fullnn": {
+    "trace_sha256": "a58ca4016ca5d1bf59323c0d59b9b6123dd156fef7c49628fd30d278e003e636",
+    "trace_bytes": 82607309,
+    "controller": {
+      "name": "renderop",
+      "config": {
+        "enabled": true,
+        "renderOpMode": "dispatch",
+        "numPrepRenderOps": 0,
+        "captureRenderOpCount": 483,
+        "captureMode": "absolute",
+        "preparationStartRenderOp": 13042
+      }
+    },
+    "sample_count": 17326,
+    "sample_interval": 4096,
+    "definitions_same_as_budget1": true,
+    "gpuperfexp_same_as_budget1": true,
+    "raw_timestamp_span": 2989684,
+    "timestamps_strictly_increasing": true,
+    "sqtt": [
+      {
+        "version": 5,
+        "data_bytes": 6613376,
+        "header_hex": "00000400000000000c0000000100000000000000000000000000b0040000000000000000fb7f0000"
+      },
+      {
+        "version": 5,
+        "data_bytes": 6614240,
+        "header_hex": "00000400010000000c0000000100000000000000000000000000b0040000000000000000fb7f0000"
+      },
+      {
+        "version": 5,
+        "data_bytes": 6582368,
+        "header_hex": "00000400020000000c0000000100000000000000000000000000b0040000000000000000fb7f0000"
+      },
+      {
+        "version": 5,
+        "data_bytes": 6578784,
+        "header_hex": "00000400030000000c0000000100000000000000000000000000b0040000000000000000fb7f0000"
+      }
+    ],
+    "sqtt_data_bytes": 26388768,
+    "system_info_sha256": "1d1bdf7ef4424b1d688f5dcfcd0585798161f8ae6c0559ce073b9133aebbc1f0",
+    "max_ratio_check_error": 1.4210854715202004e-14,
+    "observed": {
+      "Instruction cache hit": {
+        "budget1_percent": 99.38094748723898,
+        "budget3_percent": 99.3438215040721,
+        "change_percentage_points": -0.03712598316688798
+      },
+      "Scalar cache hit": {
+        "budget1_percent": 92.60547905265871,
+        "budget3_percent": 92.70748130290252,
+        "change_percentage_points": 0.10200225024381382
+      },
+      "L0 cache hit": {
+        "budget1_percent": 77.31666274314185,
+        "budget3_percent": 77.29483207431296,
+        "change_percentage_points": -0.021830668828883404
+      },
+      "L2 cache hit": {
+        "budget1_percent": 96.86257105958735,
+        "budget3_percent": 96.82736248391797,
+        "change_percentage_points": -0.03520857566938673
+      },
+      "LDS Bank Conflict": {
+        "budget1_percent": 0.0,
+        "budget3_percent": 0.0,
+        "change_percentage_points": 0.0
+      },
+      "Memory unit busy": {
+        "budget1_percent": 87.27515775069055,
+        "budget3_percent": 89.81580577785076,
+        "change_percentage_points": 2.540648027160202
+      },
+      "Memory unit stalled": {
+        "budget1_percent": 19.78407372680199,
+        "budget3_percent": 20.34889772069971,
+        "change_percentage_points": 0.564823993897722
+      },
+      "Write unit stalled": {
+        "budget1_percent": 0.879205629186623,
+        "budget3_percent": 0.9440681201793715,
+        "change_percentage_points": 0.06486249099274843
+      }
+    }
+  },
+  "mochi": {
+    "trace_sha256": "5abadb430fe241bd38e27194eff31e742245d891615139b2ca0b66e8ade56950",
+    "trace_bytes": 66327575,
+    "controller": {
+      "name": "renderop",
+      "config": {
+        "enabled": true,
+        "renderOpMode": "dispatch",
+        "numPrepRenderOps": 0,
+        "captureRenderOpCount": 369,
+        "captureMode": "absolute",
+        "preparationStartRenderOp": 9842
+      }
+    },
+    "sample_count": 16496,
+    "sample_interval": 4096,
+    "definitions_same_as_budget1": true,
+    "gpuperfexp_same_as_budget1": true,
+    "raw_timestamp_span": 2858192,
+    "timestamps_strictly_increasing": true,
+    "sqtt": [
+      {
+        "version": 5,
+        "data_bytes": 4935008,
+        "header_hex": "00000400000000000c0000000100000005000000000000000000b0040000000000000000eb000000"
+      },
+      {
+        "version": 5,
+        "data_bytes": 4940736,
+        "header_hex": "00000400010000000c0000000100000005000000000000000000b0040000000000000000eb000000"
+      },
+      {
+        "version": 5,
+        "data_bytes": 4913600,
+        "header_hex": "00000400020000000c0000000100000005000000000000000000b0040000000000000000eb000000"
+      },
+      {
+        "version": 5,
+        "data_bytes": 4917664,
+        "header_hex": "00000400030000000c0000000100000005000000000000000000b0040000000000000000eb000000"
+      }
+    ],
+    "sqtt_data_bytes": 19707008,
+    "system_info_sha256": "1d1bdf7ef4424b1d688f5dcfcd0585798161f8ae6c0559ce073b9133aebbc1f0",
+    "max_ratio_check_error": 1.4210854715202004e-14,
+    "observed": {
+      "Instruction cache hit": {
+        "budget1_percent": 65.0746750432593,
+        "budget3_percent": 65.14299624798599,
+        "change_percentage_points": 0.06832120472668635
+      },
+      "Scalar cache hit": {
+        "budget1_percent": 96.724313376979,
+        "budget3_percent": 96.75922024244522,
+        "change_percentage_points": 0.03490686546622612
+      },
+      "L0 cache hit": {
+        "budget1_percent": 75.19144954744074,
+        "budget3_percent": 75.16264911976178,
+        "change_percentage_points": -0.028800427678959295
+      },
+      "L2 cache hit": {
+        "budget1_percent": 95.29260033682472,
+        "budget3_percent": 95.39201971000946,
+        "change_percentage_points": 0.09941937318474459
+      },
+      "LDS Bank Conflict": {
+        "budget1_percent": 0.505202970888737,
+        "budget3_percent": 0.5015886803704437,
+        "change_percentage_points": -0.003614290518293317
+      },
+      "Memory unit busy": {
+        "budget1_percent": 90.23649629807558,
+        "budget3_percent": 90.2049638181319,
+        "change_percentage_points": -0.03153247994367803
+      },
+      "Memory unit stalled": {
+        "budget1_percent": 12.943649807052386,
+        "budget3_percent": 12.922486582555642,
+        "change_percentage_points": -0.02116322449674435
+      },
+      "Write unit stalled": {
+        "budget1_percent": 0.7327873577171752,
+        "budget3_percent": 0.7170830965383189,
+        "change_percentage_points": -0.01570426117885626
+      }
+    }
+  }
+}
