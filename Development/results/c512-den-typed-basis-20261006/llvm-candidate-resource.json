@@ -1,0 +1,135 @@
+{
+  "compiler": "LLVM23 diagnostic, not yet canonical COMGR/production comparison",
+  "rows": {
+    "old": {
+      ".group_segment_fixed_size": 6144,
+      ".private_segment_fixed_size": 0,
+      ".sgpr_count": 50,
+      ".vgpr_count": 256,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0,
+      ".kernarg_segment_size": 48,
+      ".args": [
+        {
+          ".address_space": "global",
+          ".offset": 0,
+          ".size": 8,
+          ".value_kind": "global_buffer"
+        },
+        {
+          ".address_space": "global",
+          ".offset": 8,
+          ".size": 8,
+          ".value_kind": "global_buffer"
+        },
+        {
+          ".address_space": "global",
+          ".offset": 16,
+          ".size": 8,
+          ".value_kind": "global_buffer"
+        },
+        {
+          ".offset": 24,
+          ".size": 4,
+          ".value_kind": "by_value"
+        },
+        {
+          ".offset": 28,
+          ".size": 4,
+          ".value_kind": "by_value"
+        },
+        {
+          ".offset": 32,
+          ".size": 4,
+          ".value_kind": "by_value"
+        },
+        {
+          ".offset": 36,
+          ".size": 4,
+          ".value_kind": "by_value"
+        },
+        {
+          ".offset": 40,
+          ".size": 4,
+          ".value_kind": "by_value"
+        },
+        {
+          ".offset": 44,
+          ".size": 4,
+          ".value_kind": "by_value"
+        }
+      ],
+      "instruction_counts": {
+        "v_rcp_f32_e32": 8,
+        "v_wmma_f32_16x16x16_fp8_fp8": 400,
+        "v_wmma_f32_16x16x16_f16": 4
+      },
+      "SHA": "4e404665fad67d3d31d7663e00437a43a10781bfa005ef5928180b8e43a3d63a"
+    },
+    "new": {
+      ".group_segment_fixed_size": 6144,
+      ".private_segment_fixed_size": 0,
+      ".sgpr_count": 50,
+      ".vgpr_count": 256,
+      ".vgpr_spill_count": 0,
+      ".sgpr_spill_count": 0,
+      ".kernarg_segment_size": 48,
+      ".args": [
+        {
+          ".address_space": "global",
+          ".offset": 0,
+          ".size": 8,
+          ".value_kind": "global_buffer"
+        },
+        {
+          ".address_space": "global",
+          ".offset": 8,
+          ".size": 8,
+          ".value_kind": "global_buffer"
+        },
+        {
+          ".address_space": "global",
+          ".offset": 16,
+          ".size": 8,
+          ".value_kind": "global_buffer"
+        },
+        {
+          ".offset": 24,
+          ".size": 4,
+          ".value_kind": "by_value"
+        },
+        {
+          ".offset": 28,
+          ".size": 4,
+          ".value_kind": "by_value"
+        },
+        {
+          ".offset": 32,
+          ".size": 4,
+          ".value_kind": "by_value"
+        },
+        {
+          ".offset": 36,
+          ".size": 4,
+          ".value_kind": "by_value"
+        },
+        {
+          ".offset": 40,
+          ".size": 4,
+          ".value_kind": "by_value"
+        },
+        {
+          ".offset": 44,
+          ".size": 4,
+          ".value_kind": "by_value"
+        }
+      ],
+      "instruction_counts": {
+        "v_rcp_f32_e32": 1,
+        "v_wmma_f32_16x16x16_fp8_fp8": 400,
+        "v_wmma_f32_16x16x16_f16": 4
+      },
+      "SHA": "50dcfd67d1f7ec57ab1dad456b3595bc748404b058d1657c99319700efb15180"
+    }
+  }
+}

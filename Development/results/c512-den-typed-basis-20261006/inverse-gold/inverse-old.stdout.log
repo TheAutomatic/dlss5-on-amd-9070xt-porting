@@ -1,0 +1,5 @@
+SYNC_PROFILE wave_owned=1 c512_m32=1 pdl=1 vit_stream=3 swin_run=1 FAST=1 full71=1
+SP_PLAN c=256 first=16 layers=6 tasks=624 initial=104 state_bytes=7504 w16=1
+SP_PLAN c=256 first=49 layers=6 tasks=624 initial=104 state_bytes=7504 w16=1
+SP_STATS runs=2 fallback=0 rollover=0 jobs=1248 disabled=0 errors=0
+
