@@ -1801,3 +1801,8 @@ B数学同域表达式消除half→float clamp→half往返，COMGR21真实640 V
 - 同batch T/U不支持untimed优于timed；timed正式三round320弃80：900平均三轮均快且p99均降，1152平均均快但round3 p99+0.08934ms，按门不收、不刷paired同variant。用户安装/config与正式/临时ZIP未变。
 - 现有尾数据NET分布p99降、wall尾升，但旧logger未写tag且Poll返回最近完成值，不能保证逐frame关联/CPU唯一归因。tag在bridge仅记录标签、无去重，因此全0本身不阻止elapsed更新。下一隔离single timed event同位置/少一次Record，新logger同一次原snapshot打印currentframe/tag/匹配ready，不新增query/sync。CPU链接通过，GPU尚未执行；实际optional失败回退/owner-drain生命周期helper独立准备。
 - 结果与原数据：results/submission-pacing-20261006、results/framework-submit-pair-20261006。仍有约900 0.6ms/同1088 1.01ms对手残差，无足够新生产优化。
+
+
+### 2026-10-06 C32原布局范数rsqrt hoist首账
+
+只H保QKV/half-square/twoWMMA原顺序，rsq(sum0)每lane一次，无transpose/新DS/LDS。canonicalA hsaco逐byte stockFAST1同f46b8af2…ee52；模型201assets/modules/commoninput SHA门全过。实际prefixISA1517→1480、rsq16→2、DS23/LDS4096/VGPR128同0spill，HIP A/H三kernel真实occupancy均16。8unit含±0/±Inf/half-square边界六层0diff且all8sum每lane同；真实prefix实际weights/FFN/encodedinput trace0/有限，全NN first0。93415初prefixCLI多传W报Usage未执行，修PH-only后12716全门exit0锁释放。1088 A/H/H/A warm80测160：8.901741/8.839896/8.844241/8.904607ms，delta−0.061106/p99−0.024127，两H均快两A；所有prefix与四process首尾raw SHA相同/finite/repeat0。首筛真实收益未formal、未扩档/默认/部署；结果source/gold/CSV/ISA/模型与载荷身份见results/c32-norm-hoist-20261006，队列交integrator，不与B2/C2跨批收益相加。
