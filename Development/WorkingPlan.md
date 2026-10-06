@@ -149,3 +149,5 @@
 - Up48→Body48单路线fbedb85e停止：post0/sourceguard新版whole raw0finite/repeat0、actual161→160、shadowproducer/body0均过，92402首GPUmean−0.003447/p99−0.011528ms但wallmean+0.003681/p99+0.11964且GPUcontrol漂移+0.022009更大，root不APP/formal/调同候选。无生产改变，局部gold不等性能收益。
 - Mo score-only反事实fb5c136f：65资产/60SPV仅1变，QK/AV/半den64/布局/末端保；自身repeatfinite过、vs原MoPSNR52.7257/max0.03102，GPU+0.0093625ms/host+0.0049但controldrift+0.0252125/no逐帧p99，解释实验STOP，不替锁baseline，不足解释1.046ms。
 - graph0外层capture-only CPU审PASS（842a3ac8）：warm80/current固定fullNN161SP保持、PDL0/pulse0；实际cache/alloc/plan拒、SP宏0及无前缀env/rollover门、Endonce/statusNone、输入权重pool/SP backing保持与Owner清理源核闭。只枚举Kernel0/64Params/Fnmultiset161然后销图，不instantiate/replay，不ReplayReady；实际GPU/API门仍由执行者交账，旧Graph主动禁SP路线不同不混。
+
+- graph0单次replay新源只读PASS（single-replay-review，96ce799f）：GetEdges/Kahn每步唯一零入度/161逐Fn强排序才instantiate1；同stream0xff poison→launch1→sync→finite/全RGB153ac原位门，不用Enqueue替代。发现Owner drain失败仅留handle却继续Net析构，owner最小改flush+_Exit73不继续借用资源释放；不称API恢复。仍仅CPU源验收，实际单probe结果待执行者，未来输入变化/history/多次/性能均未升级。
