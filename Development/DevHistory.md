@@ -1928,3 +1928,8 @@ root认可900正式均值改善/第三轮p99在1µs实际计时内未分辨退�
 - Root停止Body22整个路线：最初LDS41216候选数值/count过但尾负；regcache私有192止，noescape私有0/LDS32K/VGPR242数值/count过却mean约0与尾负（86300694/7b1faa96/3ed96f5e，真实gold身份fbd2f6e0）。不APP/formal/继续该路线，不将它从mochi差距扣除。
 - CPU只读下一actual161序列：Up48 deep11a25→普通Body48 c256_wave2_bi_bo_w16/65848→SP49..54，撤回未经证Prefix49编号。Up通用H仍normalRNEhalf，merge后fp8add0 byte出口，BodyFAST3自己的norm/残差不能代其数学；完整256channel只是矩阵供数，每head32 Q/K归一化原序、w2_rtz8 byte残差原样。
 - windowlocal8×8高像素映4×4低像素可无跨WG Up-result依赖，Up intermediate2,088,960B只有Body48消费者；rawskips3仍必读保留。135vs128tile/UpMMA+5.47%和活跃度成本未验，不承诺收益。历史UP_DIRECT/小W16/内部SP负账实际范围不同，最多一个新CPU候选；源/loadedSHA/边界与门归up48-body48-audit-20261006。此次无新GPU/实现/现装配置变化。
+
+### 2026-10-06 Up48Body48新源独立审：post4错误先于GPU校正
+
+- 只读发现初源fdc22 newexport guardpost4错误，实际普通Body48 caller传post0；ByteOut0有w2_hmask后量化，与4非同义。即时报告root/math，旧70521 source/resource保留且未GPU，不能gold旧端造4。owner改唯一guard为0，修后sourcef08c4ad6…bea1f8静态复核无该阻碍。
+- Up独立normalRNE/skipF/fp8add0与BodyFAST助手分离，Body区替换0；plane0原byte残差/每head32 norm、readonlyrawskip3、bottompadding与原屏障源核通过。不认数值/lifetime/资源门已过；actualpost0 oldUpbyte→新tap/Bodyout/fullNN/ABI待。独立报告up48-body48-audit/source-review，审者无修改候选/编译/GPU。
