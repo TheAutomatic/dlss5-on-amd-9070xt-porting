@@ -1813,3 +1813,9 @@ B数学同域表达式消除half→float clamp→half往返，COMGR21真实640 V
 - b4a803c3真实共享lease18CPUcase与748787e9实际HIPops adapter fake ABI注入过；新隔离safe版本不再Create/Record throw through bridge。private friend-only在bridge.Create末尾noexcept配置，直接Network不启用事件；warm/Wait显式ownerdevice，bridge析构先wait再Close，失败保整个Network/桥资源。实际device/runtime失效只保证继续旧NN尝试，不保证恢复。
 - safehelper同exe1152首ABBA：wall平均−0.188544/p99−0.11173ms，only-ready NET平均−0.131454/p99−0.158580ms；640tag匹配/raw同/finite/active1无API异常，2447exit0/LOCK_RELEASED。与旧900throwprototype为不同源码，不能跨批比幅度。结果439a0105，results/framework-single-event-20261006。
 - 已备same-safeexe一次正式round320弃80及ready-only analyzer，每轮即时检查尾部后才下一轮；尚未跑正式/normal19/动态fallback，多设备硬件未证。不改生产默认、现装/config/0.41-aZIP，不将首screen认已追平mochi。
+
+### 2026-10-06 single safe900正式首轮负账
+
+- 实际safelease/HIPadapter同exe正式900none/on/on/none320弃80，A7.093942/7.135950、B7.121513/7.150271ms，平均+0.020946ms、合并p99+0.10405ms；matchingNET平均+0.015632/p99+0.009636ms。1280/1280tag当帧匹配，allrawbit0/finite，无记录错配借口。
+- 按门首轮即止，不跑1152formal/剩余轮/normal19/计时off重刷，不默认收。旧throwprototype900与safe1152positive首屏如实保留，各自source分列；不能把跨源码/批次初筛覆盖当前正式负账。当前O1/NET_TIMING1条件不推canonicalO2/默认游戏计时off。
+- session42446exit0/LOCK_RELEASED，results/framework-single-event-20261006/formal-safe900-round1原CSV/tag日志/hash及largest-wallframes归档。玩家现装/config/ZIP未动。下一优化按根进程排独立normhoist门，不将两个未收候选相加。

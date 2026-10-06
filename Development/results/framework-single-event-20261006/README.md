@@ -20,3 +20,9 @@ Distinct generated source/exe from the earlier throw-on-error900prototype; do no
 Only tested regularbridge/full71/FAST1/MP1/AE0/graph0/history0/1600x960 or1920x1088/1152; unsupportedMP3/history/graph/profile/AE/skip falls back withoutpulse. Currentactualpdlcalls0 ordered; no anyorder compatibility claim. CPU actualadapterfakeABI injected tests passed (748787e9), sharedlease18cases b4a803c3; source helper tests do not prove multicard hardware/contextloss safety. MinGW complete link0; runtimefirstscreen2447exit0/LOCK_RELEASED.
 
 Safe1152 A9.863213/9.886188,B9.689475/9.682838ms; wallmean−0.188544/p99−0.11173ms, readyNETmean−0.131454/p99−0.158580ms. Eachslot160/160tagmatches, allsteady80ready; candidate logsactive1/safelease1, rawsamefinite, noAPIerror. Firstscreen only; no production adoption. Nextsame safeexe formal320discard80, singleABBAroundthenimmediatelystatistics/tailgate; no three-roundblindbatch and no hidden samevariantretry afterfailure.
+
+## Safe900 formal round1 negative — stop
+
+Same safeexe/actuallease320frames discard80. A7.093942/7.135950,B7.121513/7.150271ms: wallmean+0.020946ms, mergedp99+0.10405ms; matchingNETmean+0.015632/p99+0.009636ms. Every1280tagcurrentmatches and allsteady240/slotready. Rawstillbitidentical/finite. Thus reliablecurrentframe timing does not rescue performance: stopafterthisround, do notrun1152formal/remainingrounds/normal19 orsamevariant NET_TIMING0 asretries. No default adoption.
+
+Previoussafe1152firstscreenpositive andthrowprototype900positive remain separate observations, not robustpositive evidence for this safe route. Failure does not prove all event submission variants or mathematics impossible. CurrentcallerC++17/O1/static withNET_TIMING1 (outertimedpairs+endquery); productioncanonicalO2/NET_TIMING0 wasnotverified and is not silently inferred. No such final gates run once this mandatoryformal failed. Formal42446exit0/LOCK_RELEASED; rawdata/tagmatchedlargestwallframes archived.
