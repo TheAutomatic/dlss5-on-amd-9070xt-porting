@@ -138,6 +138,17 @@ int wmain(int argc,wchar_t**argv) { try {
   hdr.Create(h.d.Get(),{typeless.Get()},shaders);ldr.Create(h.d.Get(),{typeless.Get()},shaders);
   auto hdrBytes=h.Run(hdr,NativeCodecParameters{},1),ldrBytes=h.Run(ldr,NativeCodecParameters{},1);
   Require(hdrBytes!=ldrBytes,"independent typed interpretations");Require(NativeViewFormat(DXGI_FORMAT_R16G16B16A16_TYPELESS)==DXGI_FORMAT_R16G16B16A16_UNORM,"upstream default mapping unchanged");}
+ // Explicit identity extents must not introduce a bilinear rounding pass.
+ {const UINT w=geo.valid_width,hgt=geo.valid_height;auto pattern=Half(w,hgt,2);
+  for(size_t i=0;i<pattern.size()/2;++i){uint16_t v=uint16_t(0x3000+(i*37)%0x900);memcpy(pattern.data()+i*2,&v,2);}
+  auto src=h.Texture(w,hgt,DXGI_FORMAT_R16G16B16A16_FLOAT,pattern);
+  NativeGameCodec implicitEncode,explicitEncode,implicitDecode,explicitDecode;
+  implicitEncode.Create(h.d.Get(),{src.Get()},shaders);
+  explicitEncode.Create(h.d.Get(),{src.Get()},shaders,false,nullptr,w,hgt);
+  implicitDecode.Create(h.d.Get(),{proxy.Get(),neural.Get(),src.Get()},shaders);
+  explicitDecode.Create(h.d.Get(),{proxy.Get(),neural.Get(),src.Get()},shaders,false,nullptr,w,hgt);
+  Require(h.Run(implicitEncode,{},1)==h.Run(explicitEncode,{},1),"explicit identity encoder equals omitted extents");
+  Require(h.Run(implicitDecode,{},3)==h.Run(explicitDecode,{},3),"explicit identity decoder equals omitted extents");}
  // Active subrect must preserve every byte outside the selected render area.
  {NativeGameCodec sub;sub.Create(h.d.Get(),{proxy.Get(),neural.Get(),original.Get()},shaders,true,nullptr,32,4);
   auto result=h.Run(sub,NativeCodecParameters{},3);auto expected=Half(65,7,2);
@@ -154,6 +165,6 @@ int wmain(int argc,wchar_t**argv) { try {
  {RejectCompiler first(E_ABORT),second(E_ACCESSDENIED);
   auto task=[&](RejectCompiler& compiler){for(int i=0;i<8;i++){ID3DBlob*code=nullptr;Require(CompileNativeShader(shaders+L"/native_codec_encode.hlsl",nullptr,"main",&code,nullptr,&compiler)==compiler.failure&&!code,"file provider isolated from cached default");Require(NativeCompileShaderBlob("x",1,"test",nullptr,nullptr,"main",&code,nullptr,"cs_5_0",0,&compiler)==compiler.failure&&!code,"blob provider isolated");}};
   auto left=std::async(std::launch::async,[&]{task(first);});auto right=std::async(std::launch::async,[&]{task(second);});left.get();right.get();Require(first.calls==16&&second.calls==16,"both providers called independently");}
- {NativeFastHistory::History fast;fast.Create(h.d.Get(),64,32,64);}
+ {NativeFastHistory::History fast;fast.Create(h.d.Get(),64,32,48);}
  h.CheckDebug();puts("PASS: legacy HDR/sRGB bytes, opt-ins, four debug views, R10 fallback, subrect, replay, typed views, provider isolation, History pipeline creation");return 0;
  }catch(const std::exception&e){fprintf(stderr,"FAIL: %s\n",e.what());return 1;}}

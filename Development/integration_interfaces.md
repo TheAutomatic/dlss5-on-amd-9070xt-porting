@@ -136,3 +136,23 @@ byte-for-byte on WARP and AMD. A direct format-conversion shader can differ from
 both by one half ULP on AMD because the codec retains the upstream luminance
 round-trip. The test bounds that difference and checks alpha exactly; it does
 not alter the shader to force two different algorithms to match.
+
+## Optional consumer policies
+
+`Options::integration` defaults to the existing addon behavior. Consumers can
+veto F8 polling or HIP input polling per instance without changing process-wide
+environment variables. These are capability permissions, not new addon defaults.
+`override_multi_pass_skip` supplies a parsed block set; when false, the existing
+environment parser is used unchanged (no new `none` syntax).
+
+The optional `select_module(stem, fast_numeric, module_directory)` callback selects module stems at
+construction. It receives the resolved architecture-specific module directory and
+the exact C32 RTZ candidate before the legacy twin
+normalization. With no callback, the existing module selection and missing-twin
+warnings are unchanged. Consumers own their module bundle's supported fast twins,
+fallback checks and numerical policy; the callback must remain valid for the
+network lifetime. No module recipe or default FAST0 output is changed here.
+
+Explicit identity codec extents now use the same direct sampling as omitted
+extents. This fixes the active-subrect interface's unintended 1:1 interpolation;
+legacy callers with no active extents retain their original fit predicate.
