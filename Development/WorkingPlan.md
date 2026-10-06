@@ -124,3 +124,5 @@
 - VT trload仅原AoS地址供数替换、不改producer/数学；1008285e/9a0241a9 CPU及50448 wave32 bytegold通过，b6cf93bd canonical仅1/78函数变、其余77bytes同。实际整网raw0finite；24057 GPU mean−0.03505/p99+0.03204ms、wall−0.01045/+0.02385ms，尾负即止，不formal/APP/集成。与旧物理转置/M32/960合同分开，不换名重开封存负账。
 - 下一诊断复用现成RDTS RDP CLI/SPM+SQTT；旧mixed D3D/HIP capture改输出，21.7%stall已撤回，纯HIP重复核hot-cache也不能当fullNN。现parser实际仅busy/stall/cache/fetch/write/PCIe，未证VALU/SALU/phasewait；CLI help无可见SQTT-off，抓取会改clocks，非native性能。
 - 无capture countvalidation31928已exit0/release：同1088/640当前fullNN、cold161派发、80warm累积13041，每frame稳定161，候选one-based13042/count161整帧窗口。普通/ext Run与SP四直接API分支hostcounter全覆盖，无逐核events；pureHIP首末rawbit0finite，尚待capture边界审/同hostreference与TraceConfig及clocksrestore门，不预写硬件瓶颈结论。
+
+- 校准capture97053已exit0/release：同31928 exe纯HIP，候选13042/count161，2000frames长活；首末raw与同host无capture/lockedstock逐位同，driver日志setpeak+restore，未独立读硬件clock。TraceConfig一致但global初始化偏移/完整frame名字门未闭，不能称161名序列已经确认。真实5763SPM样本、interval4096，rawtimestamp跨度1028352（单位转换未证）；窗口memorybusy87.275/stall19.784/L0hit77.317/L2hit96.863%，不是正常native帧时份额/核心瓶颈因果。4SqttData证SPM+SQTT，现reader缺gfx12dispatchmarker解码；math找现RGPexport，先CPU解码而非盲重采。详见results/fullnn-spm-20261006。

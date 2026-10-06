@@ -1898,3 +1898,9 @@ root认可900正式均值改善/第三轮p99在1µs实际计时内未分辨退�
 - C32 directfeature150cb252解释实验止：valid vsOLD51.1442dB（非NV）、38260 GPU mean−0.014088/p99−0.028294ms，仅局部收益不解释主差、不收有损生产。VT trload24057 raw0finite但GPU p99+0.03204/wallp99+0.02385ms，停止原候选，无APP/formal/集成。PAL f6c7d2bc已真实.text精确映射，production189纠错e63625b5保留不沿用256。
 - CPU工具盘点发现已装RDP CLI有HIP dispatchcapture/SPM；旧mixed全网capture输出变化，旧stall结论撤回。有效旧pureHIP热重复核不代表fullNN，parser无VALU/SALU/阶段wait。只读help实际存在，未启动capture/clocks改变；新caller隔离O2仅hostlaunchcounter，移除outerevents、无D3D。
 - 31928无capture计数门exit0/LOCK_RELEASED：cold161、80warm13041、稳定161dispatch/frame，后两帧repeatrawbit0finite。覆盖普通/ext及SP独立launch；候选窗口13042/count161需独立capture索引核。抓取本身尚未执行，不宣计数等于busy利用率或生产提升；现装/config/ZIP未动。
+
+### 2026-10-06 pureHIP单窗口RDTS校准97053
+
+- 只读CLI1.0.0/AST及rawreference SHA核通过；31928同exe首输出与freshstock153ac018…647f1同。按root授权单候选13042/count161抓取，97053exit0/LOCK_RELEASED、2000frames稳定每161派发、首末rawbit0finite并与reference同。没有D3D上下文/outertimingevents/Instr/shaderinstrumentation；现装/config/ZIP未动。
+- 驱动日志明确setclockspeak+restored，未独立读硬件clock；实际TraceConfig13042/161、4SqttData，所以不是SPMonly。真实derived5763samples/4096interval，每ratio核引用计数；窗口memorybusy87.275%、stall19.784%、L0hit77.317%、L2hit96.863%，不当native性能或帧/族份额。rawtimestamp跨度1028352尚未转换时间单位。
+- globalrenderop与hostAPI是否含初始化偏移仍待gfx12SQTT/eventexport与实际fn序列门，现工具缺reader，不伪造161名字。不因mapping未闭丢弃窗口观测，也不先写完整frame瓶颈；单trace/source/hash/log/counters已归results/fullnn-spm-20261006，旧mixed输出变化与旧热核范围仍保留。

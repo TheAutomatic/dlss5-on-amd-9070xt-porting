@@ -1,0 +1,20 @@
+#include "hip_reference_network.h"
+#include "production_options.generated.h"
+#include <cstdio>
+#include <chrono>
+#include <fstream>
+using namespace hip_reference;
+static std::vector<char> read(const char*p){std::ifstream f(p,std::ios::binary|std::ios::ate);if(!f)throw std::runtime_error("input missing");std::vector<char>b(size_t(f.tellg()));f.seekg(0);if(!f.read(b.data(),b.size()))throw std::runtime_error("input short");return b;}
+static void flags(const char*p){std::ifstream f(p);if(!f)throw std::runtime_error("flags missing");std::string s;while(std::getline(f,s)){if(s.empty()||s[0]=='#')continue;auto q=s.find('=');if(q==s.npos)continue;auto k=s.substr(0,q),v=s.substr(q+1);if(!v.empty()&&v.back()=='\r')v.pop_back();if(k.rfind("DLSS5_",0)==0)_putenv_s(k.c_str(),v.c_str());}}
+int main(int argc,char**argv){try{
+ if(argc!=9)throw std::runtime_error("bench ASSETS MODULES FLAGS PROCESSING_F32 OUTDIR WARM MEASURED PH");flags(argv[3]);
+ const U w=1920,h=std::stoul(argv[8]),valid=1080,warm=std::stoul(argv[6]),measured=std::stoul(argv[7]);if((h!=1088&&h!=1152)||!warm||!measured||measured>4000)throw std::runtime_error("bounded sample count");
+ for(const char*k:{"DLSS5_MULTI_PASS_PREDICT","DLSS5_MULTI_PASS_SKIN_PROTECT","DLSS5_HIP_GRAPH","DLSS5_OVERLAP","DLSS5_VIT_ADAPTIVE","DLSS5_VIT_REUSE_HOTKEY","DLSS5_TEMPORAL_HISTORY_EXPERIMENT","DLSS5_TEMPORAL_MV_UNJITTERED"})_putenv_s(k,"0");_putenv_s("DLSS5_MULTI_PASS","1");_putenv_s("DLSS5_STYLE","1");_putenv_s("DLSS5_SKIP_BLOCKS","");
+ auto input=read(argv[4]);if(input.size()!=size_t(w)*h*16)throw std::runtime_error("input footprint");auto opt=production_options(argv[1],argv[2],w,h,false);opt.experimental_temporal=false;opt.profile=false;opt.skip_blocks.clear();if(!opt.wave_owned||!opt.c512_m32||!opt.pdl||opt.vit_stream!=3||!opt.swin_run)throw std::runtime_error("production profile missing");printf("SYNC_PROFILE wave_owned=%u c512_m32=%u pdl=%u vit_stream=%u swin_run=%u FAST=%s full71=%u\n",unsigned(opt.wave_owned),unsigned(opt.c512_m32),unsigned(opt.pdl),opt.vit_stream,unsigned(opt.swin_run),std::getenv("DLSS5_FAST_NUMERIC"),unsigned(opt.skip_blocks.empty()));Network net(opt);net.SetNoise({});auto&api=net.Runtime();auto stream=net.Stream();void*in{},*out{};api.Check(api.hipMalloc(&in,input.size()),"allocate input");api.Check(api.hipMalloc(&out,size_t(w)*h*12),"allocate output");api.Check(api.hipMemcpy(in,input.data(),input.size(),1),"upload input once");
+ auto run=[&](){net.Enqueue(in,nullptr,out,0);net.Synchronize();};
+ auto download=[&](const char*name){std::vector<float>v(size_t(w)*h*3);api.Check(api.hipMemcpy(v.data(),out,v.size()*4,2),"read output");for(float x:v)if(!std::isfinite(x))throw std::runtime_error("nonfinite output");std::ofstream f(std::string(argv[5])+"/"+name,std::ios::binary);if(!f.write(reinterpret_cast<char*>(v.data()),v.size()*4))throw std::runtime_error("output write");return v;};
+ const auto before=net.DiagnosticDispatchCount();run();auto first=download("first.rgb32f");const auto cold_end=net.DiagnosticDispatchCount();for(U i=0;i<warm;i++)run();const auto warm_end=net.DiagnosticDispatchCount();const auto per=(warm_end-cold_end)/warm;if(!per||(warm_end-cold_end)%warm)throw std::runtime_error("warm dispatch window not integral");printf("SPM_WINDOW before=%llu cold_end=%llu warm_end=%llu warm_frames=%u dispatch_per_warm=%llu start_one_based=%llu capture_ops=%llu\n",before,cold_end,warm_end,warm,per,warm_end+1,per);fflush(stdout);for(U i=0;i<measured;i++){const auto old=net.DiagnosticDispatchCount();run();if(net.DiagnosticDispatchCount()-old!=per)throw std::runtime_error("dispatch/frame changed");}
+ auto last=download("last.rgb32f");size_t diff=0;for(size_t i=0;i<first.size();i++)diff+=memcmp(&first[i],&last[i],4)!=0;if(diff)throw std::runtime_error("repeated frozen output differs");
+ printf("SPM_RAW repeat_bitdiff=%zu finite=1 frames=%u final_dispatch=%llu no_d3d_context=1 outer_events=0\n",diff,measured,net.DiagnosticDispatchCount());
+ api.hipFree(in);api.hipFree(out);return 0;
+}catch(const std::exception&e){fprintf(stderr,"SYNC_NETWORK_FAIL %s\n",e.what());return 1;}}
