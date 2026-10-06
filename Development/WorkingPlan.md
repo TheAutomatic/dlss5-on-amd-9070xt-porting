@@ -109,4 +109,10 @@
 - 900MP3−0.043969/−0.03935ms、1152MP3−0.071875/−0.03256ms，H与Pulse均按scope实际回退。只有单round且MP3弱/可能漂移，不宣称H/P在MP3有新增稳定收益；不擅安装/改cfg/ZIP。
 - C512 denominator新组织八gold/三方NNraw0且1088微小首筛，actualAPP1152平均−0.000294ms/p99+0.05417ms，已止不收不刷，不列待收收益。
 - 新C32FFN feature舍入疑点历史9/28已有NR_Q32_STAGE与half边界讨论/0x3f880001反例；此前未独立跑“feature直接FP8、residual保half”分支。不能重做packed-half activation bit4负账或称Hrtz无效，新方向只能明确该出口有损阶梯，原acc/gold/实际Mo配方先锁。
-- 下一fresh1088/common640纯NN对mochi由根进程排，仅CPU准备/身份边界复核；H900scope和Bridge-onlyPulse不会进此directNN路径，不能据此说APPpulse无效。仍未追平目标，最新余差必须实测，不加百分比。
+- fresh1088/common640纯NN首对账60566已完成：当前FAST1 GPU均值8.931545125ms、锁定mochi 7.885259375ms，余差1.046285750ms（results/fresh-mochi1088-20261006）。同编码输入/Style1/seed0/full71/逐帧同步边界；当前与此前43项manifest共享42项SHA全同，H900scope不启、Bridge-onlyPulse不进directNN。M只有聚合GPU时域，不能补造逐帧p99；APP约0.2ms不能从此pureNN余差扣除，也不能跨批称回退。目标尚未完成。
+
+## 2026-10-06 C32 feature出口独立审与当前接受门
+
+- prepare.py主模块唯一变化是FFN feature从half rounded量化改为ffn[ci] F32直量化；cw_rtz_half8与residual memcpy逐字保留，activation bit4/投影/存储/helper不变。canonical old与stock三sections同，old/new 26导出ABI同、prefix128VGPR/4096LDS/0spill；不推占用率或速度收益。
+- 91972原gold失败保留：动态half-vector bitcast捕获误重复element0，anchor读3bc1；98d6e633 ISA与输入定位证明这是gold捕获bug，非生产helper损坏。70170仅修捕获补门已exit0/release，residual bit0且anchor3c40；主候选module不变，小核通过不认生产接受。
+- 下一必要门为锁定actual fullNN old/new输出误差、finite与重复性；有损实验不默认、不以feature差码直接宣画质收益。18d8829e原NV半累加→FP8合同仍成立，Mo直F32位点不能证明新路线更贴原NV；需要相同位点/输入合同才能比较。ViT实际640 QK/AV次数同且无尾padding，额外分母已有B/C/C2负账，不重开旧阶梯。

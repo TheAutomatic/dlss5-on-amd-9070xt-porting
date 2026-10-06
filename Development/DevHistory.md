@@ -1886,3 +1886,9 @@ root认可900正式均值改善/第三轮p99在1µs实际计时内未分辨退�
 - MP3两档H/P均fallback，900−0.04396875/−0.03935ms、1152−0.071875/−0.03256ms：弱/漂移可能、不宣H/P在此scope稳定收益。No安装/usercfg/ZIP/push，未完成追平目标。
 - C512 denominator实际APP1152 mean−0.294us/p99+54.17us已negative止，不收不刷。Root下一fresh1088 same640直接纯NN对账；Bridge-onlyPulse与900-onlyH不进该路径，结果不能判APPpulse效果。
 - 只读C32FFN舍入历史核：mochizuki-022(9/28):13–14/37和DevHistory:868已有NR_Q32_STAGE留f32与half边界、0x3f880001 directFP8 vs经half差码反例；CW_RTZ_PAIR oldACO保typedhalf合同，activation bit4另节点。未找到实际独立“feature直接quant residualhalf不改”A/B结果；若进新阶梯必须标该具体出口有损并锁actualMo配方，不泛删FAST_H。无新增GPU。
+
+### 2026-10-06 fresh1088边界复核与C32 feature源/gold审计
+
+- CPU独立复核fresh60566：common1088/640、Style1/seed0/full71、同half-exact编码输入，当前FAST1与锁定mochi均逐帧提交同步；GPU均值8.931545125与7.885259375ms，余差1.046285750ms。当前manifest与前账共享42项SHA同，实际H900不启/Pulse directNN资源0。M只有聚合GPU结果，不能做M逐帧p99，也不能从pureNN差距扣APP组合收益；跨批旧差不判回退。
+- C32 direct-feature生成源只改FFN feature量化操作数，residual half转换/memcpy原样；旧half边界历史反例仍适用，新路线是隔离有损研究。91972 gold残差失败经98d6e633 actual ISA定位为动态vector bitcast重复捕获element0，非生产helper问题；保原exit1/log。70170 gold-only补捕获exit0/release、residual bit0/anchor3c40，主候选模块未改。
+- 接受门仍待actual整网误差/finite/重复性与原NV位点合同；18d8829e原版half累加链证据不因Mo直F32路线被撤回。此轮我只CPU源/身份/边界审与计划归档，无GPU/远程修改、未改生产默认/现装/config/ZIP。
