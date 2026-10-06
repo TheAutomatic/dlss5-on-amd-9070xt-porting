@@ -1769,3 +1769,8 @@ GPU均值FAST0我6.706866对M6.017463、差0.689404ms；FAST1我6.628813对M6.02
 共同half-exact encoded gradient1920×1080、Style1/seed0、full71/MP1/AE0/historyoff，双方逐帧submit；first raw移到warm之前，80暖160测。1088同640token首ABBA：FAST1我8.880759对M7.867191、差1.013568ms；FAST0我9.025781对M7.882941、差1.142840ms。生产1152我FAST1/0为9.344975/9.491284ms，对M固定1088为7.891163/7.902309，处理高不同明列不可作同工作量归因。全CSV正值/有限，首尾与重复process逐位一致；CPU单列，无锁频证明，不新增矩阵。source/input/module/model/flags/边界与noise成本见results/sync-network-gap1080-20261006。
 
 锁定d1185d2实际SPV确认QK/AV FP32 cooperative accum，NR_ACC_F16=0，half score FMA与64key half分母树，P恢复natural key后AV，只有出口ctx/inverse/product半化，不补猜中途half截断。小CPU独立树/出口gold与实际source/SPV身份见results/vit-math-contract-20261006；source-RNE gold不冒充原驱动逐值证据。62与68VGPR按gfx12 wave32 granule24均分配72，不支持occupancy提升。
+
+
+### 2026-10-06 B2半clamp去转换真实短筛
+
+B数学同域表达式消除half→float clamp→half往返，COMGR21真实640 VALU228→213、转换16+16→8+8，资源68VGPR同/分配72。GPU161795score独立gold0halfcode差；1088同full71 A/B2/B2/A均值delta−0.006105ms、p99+0.054664ms，两个B2不都快于两A，弱短筛暂不收不formal。整网B2对先前B逐floatbit0差；对A合成baseline PSNR52.1965、maxabs0.0348168，不作为生产画质验收。锁释放exit0，源/ABI/dualarch SHA/原CSV/原ISA与CPU有限域边界见results/vit-score-halfclamp-20261006。未部署。

@@ -1,0 +1,6 @@
+{
+  "reachable_finite_half_y_codes": 63488,
+  "finite_old_f32_num_clamp_vs_half_num_clamp_bitdiff": 0,
+  "all65536_numpy_raw_codes_diff": 1022,
+  "excluded_explanation": "Numpy half fmax/fmin handles signalingNaN differently from widen-first; B half FMA already quietsNaN. Do not use this as GPU/fullNaN proof. Existing161795finite score gold remains required"
+}
