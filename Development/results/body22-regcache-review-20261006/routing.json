@@ -1,0 +1,9 @@
+{
+  "sourceSHA": "3e889ce2d42aa848e074b61d2399bfa5f38cb4a602be018e28a45b4f0f4ef512",
+  "positions": 4096,
+  "halfword_bijection": true,
+  "source_owner": "2*(lane&3)+16*((lane>>3)&1)",
+  "source_word0": "4*(lane>>4)+2*((lane>>2)&1)",
+  "cache": "2u32/lane/qt,4qt=8u32/lane; owner-only would32u32/lane",
+  "cost": "8 fixed-source gathers/qt,32 extraDS/wave plus selects; no hardware test"
+}
