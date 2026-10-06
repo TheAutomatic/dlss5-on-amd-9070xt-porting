@@ -1,0 +1,7 @@
+# Capture integrity field audit
+
+ActualHIP5115b43d/Mcd7cbdb6 traceheaders savedinJSON. RDF SqttData v5/header40, fourstreams eachcarry rawwordoffset24=78643200(75MiB); identicalrawvalue doesnotprovewhetherallocationistotal/perstream withoutdefinition. Offset16 HIP0/M5 andfinalwordHIP32763/M91 remainunboundsemanticfields, notlabelledoverflow. LocalMesa ac_sqtt.h71–78 legacycur_offset/trace_status/droppedcount andac_sqtt.c98–119 gfx10+ buffer-fullcheck aredifferentstructures; cannotoverlay themonRDFv5header. No compatibledefinitionfoundinavailablelocalheaders.
+
+SPMSession expectedcount andtimestampdatabytesagree, timestampsstrictlyincrease withno duplicate/reversal. Sampleinterval4096 isGPUcycles whereas timestampdeltasuseanotherclockdomain (SystemInfo100MHz documentedbyotheragent); variabledeltaalone isnotdrop evidence, andmonotonicityalone isnotnodrop proof. Lowtracebytes/CLIwarnings absence cannotprovecomplete. SourceGPUOpenmanual https://gpuopen.com/manuals/rdp_manual/features/ sayslargerSQTTbuffer canremedy missingdata, withoutdefiningthisRDFheaderorperstreamallocation.
+
+Threeframe modeldispatchbudget483(HIP)/369(M) is permittedasboundeddiagnosticobservation byroot, notanintegrityguarantee or exactglobalframecaptureclaim. Actualnewtrace must retainits ownraw/config/timestamp/clock gates, withunknownloss/headersemantics preserved. NoGPU/toolinstall/newdecoderengineering performed.
