@@ -1789,3 +1789,8 @@ B数学同域表达式消除half→float clamp→half往返，COMGR21真实640 V
 ### 2026-10-06 C32safeT实际占用与gold首门失败
 
 撤回仅多指令/DS就静态判性能的早停，fd6a201b补safeLDS fences、occupancy与gold。受控GPU4288：实际HIP A三kernel16blocks/multiprocessor、safeT均14，真实LDS4096→4608边界；不是性能裁决。unitgold零fixture六层0，首signedfinitefixture rawQKV/half-square0，但sum/inverse/normalized/FP8各512diff，最早sum表示/索引失败。按门stop，±0/Inf后续fixture没跑、actualprefix没跑、整网ABBA零槽，不声明数学等价或性能胜负；锁释放exit1立即交formal。matrix/原stdout/occupancy/API身份与failure见results/c32-norm-transpose-20261006/hardware-firstgate，后续仅CPU查f16WMMA布局不凭FP8布局套求和。
+
+
+### 2026-10-06 C32 QKV片段轴校正与范数失败定位
+
+从已capturefixture1独立复算input/w ±1/8 F64denseDot，旧rawtrace每ci16×16转置还原后512项0差，证明A真正token=lane%16/feature=ci16+gr8+e。此前“C32 lanefeature需转置”判断反了，撤回；layout纯byte恢复证明同样建立在错轴假设，不作productioncontract证。half平方均1/1024整数倍，32项exactCPU整数sum与实际旧sum512项0差，各lane8个sum相同；safeT的sum0拿错逻辑轴，非FP32累计精度差。原C32已tokenlane，直接保持旧QKV/half-square/twoWMMA，只hoistrsq(sum0)可能才是最小表达式；当前只CPU定位不编新候选不GPU，仍需全gold再性能。见results/c32-norm-transpose-20261006/layout-resolution.json与resolve_layout.py，旧捕获immutable。
