@@ -1,9 +1,9 @@
-# Optional integration interfaces (PR 12 work in progress)
+# Optional integration interfaces (PR 12)
 
-Based on upstream `297b032ac55f005d78568e684f30608651044f62`. The existing
-addon is unchanged. Fast History is a reusable, tested shader helper at this
-stage, **not yet wired into the addon**. Do not claim end-to-end game validation
-or removal of downstream source patches from these interface tests alone.
+Based on upstream `297b032ac55f005d78568e684f30608651044f62`. All new
+integration modes are opt-in. The addon now includes an explicitly opt-in FFX
+pre-upscale Fast History consumer; its default rendering route is unchanged.
+No end-to-end game validation or completed downstream release is claimed.
 
 ## Ownership and defaults
 
@@ -52,6 +52,7 @@ Run `Development/test_integration_interfaces.ps1` from an MSVC x64 shell;
 - Codec WARP: byte equality with the fixed upstream HDR/sRGB shaders, optional
   policies/debug flags, packed legacy formats, both R10 fallback routes and the
   actual addon conversion shader, fallback disabled in a separate process,
+  rotated R10 texture rebind,
   active-area padding, discarded/replayed recording, independent typed views,
   concurrent compiler-provider isolation, History pipeline compilation.
 - Module load fault injection: Style copy failure, missing optional API, load
@@ -60,7 +61,9 @@ Run `Development/test_integration_interfaces.ps1` from an MSVC x64 shell;
 - Fast History WARP and RX 9070 XT: independent double-precision five-tap
   reference, different pre/post motion, edges, reversed depth, model feedback,
   reset/zero recovery, and reflected/partial workgroups through 3840x2176.
-  These tests use synchronous control uploads, not the product replay scheduler.
+  These shader tests use synchronous uploads. A separate addon test pauses the
+  GPU queue, records ten frames with independent controls, then checks deferred
+  feedback, reset, gap and exposure behavior on WARP and RX 9070 XT.
 - Four C32 recipes, both gfx1200/gfx1201: LLVM23.1.2, RowOpts,
   `-real-true16`. Existing kernel code and descriptors compared against the fixed
   upstream build: unchanged except relocation of entry offsets and PC-relative
@@ -68,15 +71,68 @@ Run `Development/test_integration_interfaces.ps1` from an MSVC x64 shell;
 - D3D12 debug layer was unavailable. gfx1200 hardware and full-network auxiliary
   output/replay were not tested. No whole-network speedup claim is made.
 
-## Remaining integration work
+## Downstream adoption and validation boundary
 
-1. Addon: carry FFX depth plus its format/state/ownership alongside motion;
-   preserve per-frame control/descriptor lifetimes for deferred submission. Wire
-   an explicitly opt-in fast path with supported-layout checks, seed/reset policy,
-   missing-guide fallback and ViT exclusion. Keep the reference experiment intact.
-2. Validate auxiliary output in the real network and bridge replay/failure cases.
-3. Migrate the isolated product consumer, keep compiler and product policy locally,
-   review the full upstream delta, then remove corresponding patches/preserved
-   files only after a clean raw-source build and contract tests succeed.
-4. Finish review before updating the existing PR. The current downstream official
-   pin has not moved; this candidate is not an accepted upstream release.
+The isolated downstream Runtime has been migrated to these interfaces and compiled
+against the raw candidate headers: compiler/cache policy stays downstream;
+History uses this helper; codec view selection and replay are per instance;
+bridge history, diagnostics and retirement use explicit requests. This does not
+advance the downstream completed upstream pin or certify all newly introduced
+upstream defaults/modules. Full staged upstream review, matching module rebuild,
+and downstream runtime/game verification remain necessary before adoption.
+
+No promise of zero regressions follows from compilation. In particular, full HIP
+network auxiliary output and replay/failure tests have not yet run against this
+candidate. The synthetic tests are not a substitute for those checks.
+
+## Addon Fast History
+
+Set these restart-required flags explicitly:
+
+```text
+DLSS5_PRE_UPSCALE=1
+DLSS5_FAST_HISTORY=1
+DLSS5_TEMPORAL_MV_UNJITTERED=1
+DLSS5_FAST_HISTORY_DEPTH_INVERTED=1
+DLSS5_MULTI_PASS=1
+DLSS5_HIP_GRAPH=0
+DLSS5_OVERLAP=0
+```
+
+Use depth direction `0` for conventional depth and `1` for reversed depth.
+The addon does not capture the FFX context depth flags, so it deliberately requires
+this declaration instead of guessing. `TEMPORAL_MV_UNJITTERED=1` declares the
+motion-vector convention; do not set it for jittered vectors. Only the captured
+FFX pre-upscale path with a full network viewport is supported. The original
+`TEMPORAL_HISTORY_EXPERIMENT` remains independent and cannot be combined with this
+path. Non-HIP backends, incompatible post layouts/exports, graph/overlap and
+multi-pass are rejected explicitly. To change to multiple passes, disable Fast
+History and restart; the hotkey cannot silently keep one pass while showing two.
+
+Generate `post70-history-head.f16` with the existing
+`Development/HIP/experiments/post-history-gate/extract_gate.py` workflow and place
+it beside the other model assets. It is the original 32-column model row,
+promoted from half to float; this PR adds no weights or tuned coefficients.
+Rebuild the C32 module variants to obtain the new logit exports.
+
+The addon holds frame constants, descriptor heaps and motion/depth references
+through its output fence. It resets on missing/invalid guides, frame gaps,
+exposure changes and explicit reset; a missing-guide frame runs current-frame NR.
+Approximate ViT reuse is gated for the entire Fast History session without
+rewriting the preference. No history allocations or dispatches occur when off.
+The helper exposes numerical parameters to other consumers, which own their own
+reset, seed, guide conventions and UI policies.
+
+Additional bridge services are also opt-in: `RequestReleaseMarkers()` before
+creation, timing pause/epoch/tag methods, and prepared HIP passthrough for
+transport diagnostics. Passthrough must not consume temporal input. Existing
+input-poll/pulse behavior is retained; replay explicitly rejects input-poll.
+
+The build script retains UTF-8 BOM for Windows PowerShell 5.1 parsing of its
+non-ASCII comments; module recipes are unchanged.
+
+R10 numerical evidence: candidate and unchanged upstream decoder outputs match
+byte-for-byte on WARP and AMD. A direct format-conversion shader can differ from
+both by one half ULP on AMD because the codec retains the upstream luminance
+round-trip. The test bounds that difference and checks alpha exactly; it does
+not alter the shader to force two different algorithms to match.

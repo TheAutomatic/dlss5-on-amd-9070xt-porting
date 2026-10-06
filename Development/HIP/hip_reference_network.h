@@ -1022,7 +1022,7 @@ if(wave_owned_active)HasFn("c32_wave1","c32_wave1_post_b8_rgba");if(multi_predic
  public:
  /* Pass count changed at run time (add-on hot reload / hotkey, 2026-10-03). Same value = no-op. A graph is rebuilt; feed buffers
     are allocated on the next multi-pass frame (outside capture: the warm frame). */
- void SetMultiPass(U n){if(temporal_feature_tap_active&&!opt.experimental_temporal&&n!=1)throw std::runtime_error("temporal feature tap is MP1-only");if(n<1||n>3||n==multi_pass)return;if(opt.experimental_temporal){experimental_ready=false;temporal_feature_tap_active=n==1;}if(n>1)PrepareMultiPassFeeds();multi_pass=n;adaptive_dirty=true;if(opt.graph){Synchronize();ClearGraph();graph_warmed=false;}}
+ void SetMultiPass(U n){if(native_post_output&&n!=1)throw std::runtime_error("auxiliary post output is MP1-only; recreate without auxiliary output to change passes");if(temporal_feature_tap_active&&!opt.experimental_temporal&&n!=1)throw std::runtime_error("temporal feature tap is MP1-only");if(n<1||n>3||n==multi_pass)return;if(opt.experimental_temporal){experimental_ready=false;temporal_feature_tap_active=n==1;}if(n>1)PrepareMultiPassFeeds();multi_pass=n;adaptive_dirty=true;if(opt.graph){Synchronize();ClearGraph();graph_warmed=false;}}
  U MultiPass()const{return multi_pass;}
  void SetMultiPassPredict(bool enabled){if(enabled==multi_predict)return;if(enabled){EnsurePredictModule();if(multi_pass>1)PrepareMultiPassFeeds();}multi_predict=enabled;std::fprintf(stderr,"multi_pass_predict=%u requested_passes=%u actual_network_passes=%u\n",unsigned(multi_predict),multi_pass,multi_predict&&multi_pass==3?2:multi_pass);if(opt.graph){Synchronize();ClearGraph();graph_warmed=false;}}
  bool MultiPassPredict()const{return multi_predict;}

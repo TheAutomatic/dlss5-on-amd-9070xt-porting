@@ -124,7 +124,7 @@ public:
   if(!pso||index>=count||!replacement)throw std::runtime_error("codec rebind contract");
   if(replacement==source[index])return;
   auto desc=replacement->GetDesc();
-  if(desc.Dimension!=D3D12_RESOURCE_DIMENSION_TEXTURE2D||desc.Width!=source[index]->GetDesc().Width||desc.Height!=source[index]->GetDesc().Height||desc.Format!=source[index]->GetDesc().Format||desc.DepthOrArraySize!=1||desc.MipLevels!=1||desc.SampleDesc.Count!=1||!(NativeIsGameColor(desc.Format)||(private_float_output&&desc.Format==DXGI_FORMAT_R9G9B9E5_SHAREDEXP))||(desc.Flags&D3D12_RESOURCE_FLAG_DENY_SHADER_RESOURCE))throw std::runtime_error("codec rebind geometry/format");
+  if(desc.Dimension!=D3D12_RESOURCE_DIMENSION_TEXTURE2D||desc.Width!=source[index]->GetDesc().Width||desc.Height!=source[index]->GetDesc().Height||desc.Format!=source[index]->GetDesc().Format||desc.DepthOrArraySize!=1||desc.MipLevels!=1||desc.SampleDesc.Count!=1||!(NativeIsGameColor(desc.Format)||(private_float_output&&(desc.Format==DXGI_FORMAT_R9G9B9E5_SHAREDEXP||NativeFallbackColor(desc.Format)!=DXGI_FORMAT_UNKNOWN)))||(desc.Flags&D3D12_RESOURCE_FLAG_DENY_SHADER_RESOURCE))throw std::runtime_error("codec rebind geometry/format");
   if(replacement==output)throw std::runtime_error("codec rebind output alias");
   for(UINT i=0;i<count;i++)if(i!=index&&source[i]==replacement)throw std::runtime_error("codec rebind input alias");
   ID3D12Device*d=nullptr,*owner=nullptr;check(heap->GetDevice(IID_PPV_ARGS(&d)));

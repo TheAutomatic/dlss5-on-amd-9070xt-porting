@@ -121,8 +121,16 @@ int wmain(int argc,wchar_t**argv) { try {
    h.submit.Submit([&](ID3D12GraphicsCommandList*c){convert.Record(c,r10.Get(),NativeFallbackColor(format),Read,converted.Get(),Read,width,height);});
    auto convertedBytes=h.ReadTexture(converted.Get());
    Require(convertedBytes.size()==size_t(width)*height*8,"addon conversion output extent");
-   // Conversion preserves all alpha codes and matches the codec's no-transfer output.
-   Require(convertedBytes==result,"addon FP16 conversion equals private codec fallback");
+   // The codec retains the upstream luminance round-trip even at zero
+   // transfer. AMD may lose one half ULP there; the direct conversion does not.
+   // Compare identical algorithms byte-for-byte before bounding this difference.
+   NativeGameCodec upstreamFp;upstreamFp.Create(h.d.Get(),{proxy.Get(),neural.Get(),r10.Get()},legacy,true);
+   Require(h.Run(upstreamFp,p,3)==result,"R10 fallback equals unchanged upstream decoder bytes");
+   for(size_t i=0;i<result.size();i+=2){uint16_t a,b;memcpy(&a,convertedBytes.data()+i,2);memcpy(&b,result.data()+i,2);
+    Require(i%8==6?a==b:std::abs(int(a)-int(b))<=1,"direct conversion agrees within one half ULP; alpha exact");}
+   auto rotated=h.Texture(width,height,format,pattern);
+   fp.RebindInputAfterCompletion(2,rotated.Get());
+   Require(h.Run(fp,p,3)==result,"rotating R10 fallback texture rebind");
   }
  }
  {auto typeless=h.Texture(65,7,DXGI_FORMAT_R16G16B16A16_TYPELESS,Half(65,7,2));

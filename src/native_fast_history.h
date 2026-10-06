@@ -204,7 +204,7 @@ public:
     bool Matches(UINT w,UINT h,UINT ph) const { return width==w && height==h && processingHeight==ph; }
     void Create(ID3D12Device *device, UINT w, UINT h, UINT ph, ID3D12Resource* sharedPre=nullptr,NativeShaderCompiler* compiler=nullptr)
     {
-        if(root||postWarp||!device||!w||!h||ph<h||UINT64(w)*ph>UINT_MAX/16)
+        if(root||postWarp||!device||!w||!h||ph<h||UINT64(ph)>=UINT64(h)*2||UINT64(w)*ph>UINT_MAX/16)
             throw std::runtime_error("fast history initialization/geometry contract");
         width=w; height=h; processingHeight=ph;
         postWarp=Buffer(device,UINT64(w)*ph*16);
