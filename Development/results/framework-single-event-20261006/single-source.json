@@ -1,0 +1,14 @@
+{
+  "host_sha256": "5afa4df6cc10ec7c78a67fddd8f999edb5678342c6bd311eb226495a3ce8ca6a",
+  "scope": "one same-position timed Record, one owned event; new logger reuses existing snapshot, adds no query",
+  "default": 0,
+  "files": {
+    "benchmark.cpp": "9441f70ead8bdb5ba946fb856cc66ee18d955c4093038379a2c7cbdc8801616f",
+    "native_hip_network.h": "7a5114f279e4b9cd971cc8acbabdc159f4aebbdc7b34be9705869bc73649bc8b",
+    "native_game_frame.h": "f47dfd89f9f4e8b94fc876da1f1bd304f85c080bfb5a25016708562fd2add5b3",
+    "hip_reference_network.h": "5afa4df6cc10ec7c78a67fddd8f999edb5678342c6bd311eb226495a3ce8ca6a",
+    "hip_d3d12_bridge.h": "47c9660c4c8a370bb5e05b6765dbcdaf96c976f33d221209091a3fef99e71d4d",
+    "native_hip_env_options.h": "77402ea1a863137e95e709996a302c7e461ddeaa536a3cb4b52469a4c4df8253"
+  },
+  "production_helper": "isolated throw-on-error still experimental; actual optional error fallback helper being reviewed separately"
+}
