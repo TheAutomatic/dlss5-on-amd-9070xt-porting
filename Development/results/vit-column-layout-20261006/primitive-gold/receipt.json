@@ -1,0 +1,38 @@
+{
+  "compile_handle": 86251,
+  "compile_exit": 0,
+  "gpu_handle": 97615,
+  "gpu_exit": 0,
+  "lock_released": true,
+  "fixtures": [
+    "raw_allbits_byte_transport",
+    "nonNaN_FP8_bytes"
+  ],
+  "producer_inverse_diff": [
+    0,
+    0
+  ],
+  "old_CPU_fragment_diff": [
+    0,
+    0
+  ],
+  "QK_TR_diff": [
+    0,
+    0
+  ],
+  "V_direct_diff": [
+    0,
+    0
+  ],
+  "input_bytes_each": 1966080,
+  "lanes": 32,
+  "groups": 3840,
+  "all3planes_tokens640": true,
+  "not_complete_QKV_math_oracle": true,
+  "wrapper_label_error": "original\u672blineQB32labelwrong;actualCOLUMN_GOLDfields/sourcearelayoutprobe;CPUlabelcorrectednoGPUrerun",
+  "SHA": {
+    "gold.hip": "692fbf0c9e7268162ba0a9dc212ba1353aef90cae82bfca4a2a568c3500c547d",
+    "gold.exe": "c6f4f89b36a5dc8273248cf2a2bb6af58ff4bd27e412025fb52fe3fa7ee9c83a",
+    "gold-comgr.hsaco": "5e3e2c8f41e956653c988b35ec215c6dab6761a890c382e4ad3640bffff2c3fb"
+  }
+}
