@@ -23,7 +23,7 @@
     if(span_probe){if(span_pending){float ms=-1;int sync=api.hipEventSynchronize(span_end),status=api.hipEventElapsedTime(&ms,span_begin,span_end);fprintf(stderr,"hip_span gpu_ms=%.3f cpu_enqueue_ms=%.3f sync=%d status=%d\n",ms,span_cpu,sync,status);span_pending=false;}api.Check(api.hipEventRecord(span_begin,network->Stream()),"span begin");}
     const bool timed=TimingBegin();
 -   auto start=std::chrono::steady_clock::now();network->Enqueue(input.mapped,temporal?history.mapped:nullptr,output.mapped,seed);
-+   auto start=std::chrono::steady_clock::now();network->LabAppEnqueue(input.mapped,output.mapped,seed,temporal);
++   auto start=std::chrono::steady_clock::now();{uintptr_t a=reinterpret_cast<uintptr_t>(input.mapped),b=reinterpret_cast<uintptr_t>(output.mapped);bool alias=a<b+pixels*12&&b<a+pixels*16;if(alias)throw std::runtime_error("APP imported input/output alias");fprintf(stderr,"APP_BRIDGE_BUFFERS input=%p output=%p in_capacity=%llu out_capacity=%llu input_span=%zu output_span=%zu alias=0\n",input.mapped,output.mapped,(unsigned long long)input.resource->GetDesc().Width,(unsigned long long)output.resource->GetDesc().Width,pixels*16,pixels*12);network->LabAppEnqueue(input.mapped,output.mapped,seed,temporal);}
     if(timed)TimingEnd();
     if(span_probe){span_cpu=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-start).count();api.Check(api.hipEventRecord(span_end,network->Stream()),"span end");span_pending=true;}
     hip_probe::SignalParams signal{};signal.params.fence.value=++value;api.Check(api.hipSignalExternalSemaphoresAsync(&semaphore,&signal,1,network->Stream()),"HIP output signal");

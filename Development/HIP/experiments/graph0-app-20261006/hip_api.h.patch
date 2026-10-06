@@ -1,0 +1,46 @@
+--- Development/HIP/hip_api.h
++++ isolated/hip_api.h
+@@ -16,6 +16,7 @@
+ #include <filesystem>
+ #include <fstream>
+ #include <vector>
++#include <map>
+ #include "hip_device_properties.h"
+ #include <cstddef>
+ #include <cstdio>
+@@ -32,12 +33,12 @@
+ struct MemAllocationProp {unsigned type;unsigned requestedHandleType;struct {unsigned type;int id;} location;void*win32HandleMetaData;struct {unsigned char compressionType,gpuDirectRDMACapable;unsigned short usage;unsigned char reserved[4];} allocFlags;};
+ struct MemAccessDesc {struct {unsigned type;int id;} location;unsigned flags;};
+ static_assert(sizeof(MemoryDesc)==104&&sizeof(BufferDesc)==88&&sizeof(SemaphoreDesc)==96&&sizeof(SignalParams)==144&&sizeof(WaitParams)==144,"HIP external resource ABI");
+-struct Api {
++struct Api {std::map<Handle,std::string>lab_module_files;unsigned long long lab_malloc_calls=0,lab_malloc_success=0;
+  HMODULE dll{};
+  #define HIP_FN(name,args) using name##Fn=int(*)args;name##Fn name{}
+  HIP_FN(hipGetDevicePropertiesR0600,(DevicePropertiesR0600*,int));HIP_FN(hipModuleLoadData,(Handle*,const void*));
+  HIP_FN(hipInit,(unsigned));HIP_FN(hipRuntimeGetVersion,(int*));HIP_FN(hipGetDeviceCount,(int*));HIP_FN(hipDeviceGetName,(char*,int,int));HIP_FN(hipSetDevice,(int));
+- HIP_FN(hipMemGetInfo,(size_t*,size_t*));HIP_FN(hipMalloc,(void**,size_t));HIP_FN(hipHostMalloc,(void**,size_t,unsigned));HIP_FN(hipFree,(void*));HIP_FN(hipMemcpy,(void*,const void*,size_t,int));HIP_FN(hipMemcpyAsync,(void*,const void*,size_t,int,Handle));HIP_FN(hipMemsetAsync,(void*,int,size_t,Handle));
++ HIP_FN(hipMemGetInfo,(size_t*,size_t*));HIP_FN(hipMallocRaw,(void**,size_t));HIP_FN(hipHostMalloc,(void**,size_t,unsigned));HIP_FN(hipFree,(void*));HIP_FN(hipMemcpy,(void*,const void*,size_t,int));HIP_FN(hipMemcpyAsync,(void*,const void*,size_t,int,Handle));HIP_FN(hipMemsetAsync,(void*,int,size_t,Handle));
+  HIP_FN(hipEventCreate,(Handle*));HIP_FN(hipEventRecord,(Handle,Handle));HIP_FN(hipEventElapsedTime,(float*,Handle,Handle));HIP_FN(hipEventDestroy,(Handle));HIP_FN(hipEventSynchronize,(Handle));
+  HIP_FN(hipDeviceSynchronize,());HIP_FN(hipStreamCreate,(Handle*));HIP_FN(hipStreamSynchronize,(Handle));HIP_FN(hipStreamDestroy,(Handle));
+  HIP_FN(hipImportExternalMemory,(Handle*,const MemoryDesc*));HIP_FN(hipExternalMemoryGetMappedBuffer,(void**,Handle,const BufferDesc*));HIP_FN(hipDestroyExternalMemory,(Handle));
+@@ -54,9 +55,10 @@
+  template<class T>void Load(T&f,const char*n){f=reinterpret_cast<T>(GetProcAddress(dll,n));if(!f)throw std::runtime_error(std::string("missing HIP export ")+n);}
+  explicit Api(unsigned version=7){const wchar_t*name=version==6?L"amdhip64_6.dll":L"amdhip64_7.dll";dll=LoadLibraryExW(name,nullptr,LOAD_LIBRARY_SEARCH_SYSTEM32);if(!dll)throw std::runtime_error("HIP runtime not found in System32");
+  #define LOAD(name) Load(name,#name)
+- LOAD(hipGetDevicePropertiesR0600);LOAD(hipModuleLoadData);LOAD(hipEventCreate);LOAD(hipEventRecord);LOAD(hipEventElapsedTime);LOAD(hipEventDestroy);LOAD(hipEventSynchronize);LOAD(hipHostMalloc);LOAD(hipInit);LOAD(hipRuntimeGetVersion);LOAD(hipGetDeviceCount);LOAD(hipDeviceGetName);LOAD(hipSetDevice);LOAD(hipMemGetInfo);LOAD(hipMalloc);LOAD(hipFree);LOAD(hipMemcpy);LOAD(hipMemcpyAsync);LOAD(hipMemsetAsync);LOAD(hipDeviceSynchronize);LOAD(hipStreamCreate);LOAD(hipStreamSynchronize);LOAD(hipStreamDestroy);LOAD(hipImportExternalMemory);LOAD(hipExternalMemoryGetMappedBuffer);LOAD(hipDestroyExternalMemory);LOAD(hipImportExternalSemaphore);LOAD(hipSignalExternalSemaphoresAsync);LOAD(hipWaitExternalSemaphoresAsync);LOAD(hipDestroyExternalSemaphore);LOAD(hipModuleLoad);LOAD(hipModuleGetFunction);LOAD(hipModuleLaunchKernel);LOAD(hipModuleUnload);LOAD(hipGetErrorName);
++ LOAD(hipGetDevicePropertiesR0600);LOAD(hipModuleLoadData);LOAD(hipEventCreate);LOAD(hipEventRecord);LOAD(hipEventElapsedTime);LOAD(hipEventDestroy);LOAD(hipEventSynchronize);LOAD(hipHostMalloc);LOAD(hipInit);LOAD(hipRuntimeGetVersion);LOAD(hipGetDeviceCount);LOAD(hipDeviceGetName);LOAD(hipSetDevice);LOAD(hipMemGetInfo);Load(hipMallocRaw,"hipMalloc");LOAD(hipFree);LOAD(hipMemcpy);LOAD(hipMemcpyAsync);LOAD(hipMemsetAsync);LOAD(hipDeviceSynchronize);LOAD(hipStreamCreate);LOAD(hipStreamSynchronize);LOAD(hipStreamDestroy);LOAD(hipImportExternalMemory);LOAD(hipExternalMemoryGetMappedBuffer);LOAD(hipDestroyExternalMemory);LOAD(hipImportExternalSemaphore);LOAD(hipSignalExternalSemaphoresAsync);LOAD(hipWaitExternalSemaphoresAsync);LOAD(hipDestroyExternalSemaphore);LOAD(hipModuleLoad);LOAD(hipModuleGetFunction);LOAD(hipModuleLaunchKernel);LOAD(hipModuleUnload);LOAD(hipGetErrorName);
+  #undef LOAD
+  }
++ int hipMalloc(void**p,size_t n){lab_malloc_calls++;int rc=hipMallocRaw(p,n);if(!rc)lab_malloc_success++;return rc;}
+  DevicePropertiesR0600 Properties(int device){DevicePropertiesR0600 p{};Check(hipGetDevicePropertiesR0600(&p,device),"device properties");return p;}
+  /* DLSS5_STYLE (2026-10-01): when >=0, every module that defines the device constant `dlss5_style_feature` (preprocess feature 6,
+     Style/128; modules default to 1/128) gets this value right after loading. -1 = leave the module default (no extra HIP calls). */
+@@ -71,7 +73,7 @@
+    if(!hipModuleGetGlobal)Load(hipModuleGetGlobal,"hipModuleGetGlobal");
+    void*p=nullptr;size_t s=0;if(!hipModuleGetGlobal(&p,&s,*module,"dlss5_style_feature")&&p&&s==sizeof(float))Check(hipMemcpy(p,&style_feature,sizeof(float),1),"DLSS5_STYLE");
+   }
+-  return r;
++  if(!r)lab_module_files[*module]=path;return r;
+  }
+  void EnableVmm(){Load(hipMemAddressReserve,"hipMemAddressReserve");Load(hipMemAddressFree,"hipMemAddressFree");Load(hipMemCreate,"hipMemCreate");Load(hipMemRelease,"hipMemRelease");Load(hipMemMap,"hipMemMap");Load(hipMemUnmap,"hipMemUnmap");Load(hipMemSetAccess,"hipMemSetAccess");Load(hipMemGetAllocationGranularity,"hipMemGetAllocationGranularity");}
+  void EnableGraphs(){Load(hipStreamBeginCapture,"hipStreamBeginCapture");Load(hipStreamEndCapture,"hipStreamEndCapture");Load(hipGraphInstantiate,"hipGraphInstantiate");Load(hipGraphLaunch,"hipGraphLaunch");Load(hipGraphDestroy,"hipGraphDestroy");Load(hipGraphExecDestroy,"hipGraphExecDestroy");}
