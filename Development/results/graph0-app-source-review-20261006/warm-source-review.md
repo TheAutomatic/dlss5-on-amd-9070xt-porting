@@ -1,0 +1,11 @@
+# Bounded original-Frame warm prerequisite: CPU correction/review
+
+Actual failure70977/bae176b7 is preserved: original eager12outputs finite; replayprocess stopped on captureNew allocation miss after onlyone realseed0forward, before any successfulgraph/instantiate/replay. Original NativeFrame does not invoke Runtime-onlyPrepareStagedKernels; the earlierreview's seed1call inference was wrong and withdrawn. No seed1Runtime warm is inserted by this repair. NN actualeager vectorcount161 is distinct from SPinitialready160.
+
+Read-only repairedsource/tmp/graph0-app-20261006, ownerfreezee351892d; reviewer did not edit/build/GPU. Sourcehashes in warm-source-hashes.json. **Pass for its boundedwarm-gate logic**, not a statement that hardwarepool is alreadywarm.
+
+Api hipMallocRaw resolves actualhipMalloc; wrapper separately counts everycall and success. Each≤80 seed0 Enqueue/StreamSync completes before snapshots. Enqueue returnsvoid, localoutputTensor ownership ends before snapshot; expectedpersistentNet/SP/pool holders remain. Snapshot compares actualmalloc, upload/Fn/plan misses, pool/weights/modules/function/SPplan/map sizes and rollover. Consecutive2 unchangediterations plus nonemptyidenticalactualFn sequence are required beforeBeginCapture. No retainedlocalWarmTensor is stored by the loop; no guessed firstpass sufficiency.
+
+Capturedphase still rejects New,Upload,Fn,SPplan cachemiss rather than allocating around failures. Missingpool logs requestedcapacity/refcounts/SPowners/inlineowner/lastFn for diagnosis. Nodes count derives from actualeager Fnvector; currentobserved161 remains evidence, not a hardcoded inference from SPfields or model-layercount. ActualW/H/inputoutputspan/importedpointer/effective modulefile/style key logs establish loadedidentity separately from optionalsettings.
+
+Warm StreamSync remains outside graph and waits only for already submittedproducer on the currentknownnonoverlap Framepath. Importedbuffers/maps, Frame and Network owners/captureClose ordering are unchanged. Newcounter/cache logic provides a runtimegate that may still rejectcapture; only actualwarmiterations/allocdelta plus subsequentlycapturednode/rawgold can prove the prerequisite was achieved. No newperformance, production or genericgraph claim.

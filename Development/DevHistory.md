@@ -1965,3 +1965,9 @@ root认可900正式均值改善/第三轮p99在1µs实际计时内未分辨退�
 
 - 对/tmp/graph0-app实际5文件核源/哈希，Bridge wait272→LabEnq275→signal278/consumerwait282，图只neural161强DAG，原codec/外sync在外；firstzero seed1 prepare捕前、real seed0warm同步等待已submitproducer，初replay回helper前调用，不形成当前overlap0同frame互等。
 - captured后Prepare拒且onlyGraphLaunch，mappedin/out/frame固定、Style1cached；Frame/Bridge进口资源与Netweights/pool/SP backing到close保持，Bridge先closeexec/graph再Release进口/删Net。sourcePASS仅paired12 HDR seq2/spatialreset/nohistory同scope，不泛hot/resize/长期/性能/生产。审者无GPU/构建/修改candidate，报告graph0-app-source-review；硬件gold待执行者交账。
+
+### 2026-10-06 APP首次暖池前提失败与源审更正
+
+- 70977权威exit1/release（bae176b7）：eager12原Frame各有限，replay仅首seed0warm1，capture Newguard发现额外分配而停止，未有可执行图/重放。本人此前把PrepareStaged方法存在当成本Frame运行过seed1prepare，判断错误并撤回；它是Runtime-only路径，不能补调用冒原Frame合同。
+- Root短时将CAPTURE_PLAN first160误作NNdispatch，原日志实际上SPinitialready160/eagerFn161；已纠正未写160新kernel事实。保失败数据，不归数学/API。
+- e351892d新source只读warm门PASS：hipMallocRaw真实调用与成功数、upload/Fn/planmiss/缓存sizes/rollover 连续2nochange且Fn同才在≤80内捕获，warm方法void返回/局部Tensor退出、未Runtimeprepare。原CaptureNew拒/失败refs/SPowners日志保持、动态nodegate/effectivekeys真实。源门不等温热硬件结果/pairedgold；审者无编/GPU/修改candidate，记录warm-source-review。
