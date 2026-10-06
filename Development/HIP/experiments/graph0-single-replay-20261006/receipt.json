@@ -1,7 +1,7 @@
 {
   "phase": "CPU only single-replay preparation; not GPU authorized",
   "parent_capture_commit": "2bfccb16",
-  "source_sha256": "8d5ce44f54826b054bb6f94255758a539072e34294f54b898dc9ce92becefb15",
+  "source_sha256": "96ce799fa9e3647ddbaf459e7901d0652e6b9506e511c408dd6c086fd2a9eba0",
   "headers": "Exact private capture-only headers with warmed cache/SP guards from842a3ac8; no selector/math modifications",
   "build_session": 29500,
   "gate": [
@@ -17,6 +17,7 @@
     "No proof of one PAL OS queue submit and no timing claim",
     "Unique DAG order stricter than parallel correctness; failure stops without mutating dependency graph"
   ],
-  "build_terminal": "29500 exit0",
-  "exe_sha256": "d3ddd6eec8ec24f1b79df0d74fa9a67a59a95b5ec1833f03b7803041c632b4f3"
+  "build_terminal": "90627 exit0 after sole Owner drain-failure _Exit73 correction",
+  "exe_sha256": "9c682ebe1a47c522478f26df718404e832a6bd9580590227ba8bf9f543826b10",
+  "review": "measurement normal path PASS; sole cleanup correction applied as instructed"
 }
