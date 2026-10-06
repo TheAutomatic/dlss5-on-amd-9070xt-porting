@@ -145,3 +145,7 @@
 - 单WG8×8高→4×4低/完整256channel supply可静态构造，Up中间2,088,960B可少materialize但skips3原raw仍必读、SP不扩。135lowwindowtile vs原128 flat tile使UpWMMA+5.47%，寄存器/LDS活跃度未证。旧UP_DIRECT4倍MMA/W16small/SPinterior负账不是该C256边界同形；仅一个CPU隔离候选由math生成，未GPU/未生产。
 
 - Up48 shadow42950 actualUp/mainBody/tapBody均byte0，原stockgraph输出153ac finite/hash过；只能认局部producer/Body合同。wholeNN隔离route普通stockgold已由执行者通过，source还发现Up admission缺actualwaveactive导致unsupportedfallback可能消费F32sentinel；owner最小补actualwave_owned_active/HasFn及dtor先选owner，修headerSHA3a4686…待其新版gold，旧正常active数据不作废。低/skip强Tensor持有、Bodypost0/Newbyte/成功launch后reset源审闭；不通用API恢复/生产接受（route-review）。M32×数学候选目前原语门过、整NN误差待，不和losslessUp收益混加。
+
+- Up48→Body48单路线fbedb85e停止：post0/sourceguard新版whole raw0finite/repeat0、actual161→160、shadowproducer/body0均过，92402首GPUmean−0.003447/p99−0.011528ms但wallmean+0.003681/p99+0.11964且GPUcontrol漂移+0.022009更大，root不APP/formal/调同候选。无生产改变，局部gold不等性能收益。
+- Mo score-only反事实fb5c136f：65资产/60SPV仅1变，QK/AV/半den64/布局/末端保；自身repeatfinite过、vs原MoPSNR52.7257/max0.03102，GPU+0.0093625ms/host+0.0049但controldrift+0.0252125/no逐帧p99，解释实验STOP，不替锁baseline，不足解释1.046ms。
+- graph0外层capture-only CPU审PASS（842a3ac8）：warm80/current固定fullNN161SP保持、PDL0/pulse0；实际cache/alloc/plan拒、SP宏0及无前缀env/rollover门、Endonce/statusNone、输入权重pool/SP backing保持与Owner清理源核闭。只枚举Kernel0/64Params/Fnmultiset161然后销图，不instantiate/replay，不ReplayReady；实际GPU/API门仍由执行者交账，旧Graph主动禁SP路线不同不混。

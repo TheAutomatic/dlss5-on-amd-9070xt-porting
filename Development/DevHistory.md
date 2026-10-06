@@ -1938,3 +1938,9 @@ root认可900正式均值改善/第三轮p99在1µs实际计时内未分辨退�
 
 - 只读实际header发现Up sentinel admission未requireactualwave_owned_active，但pending消费仅wave-owned Body，unsupportedflags下可能将F32low误给bytefallback；及时报root/math，owner加actualactive+exactHasFn beforepending。原正常stock已active的50466数据不因此无效；修后source3a4686…另锁新版门。
 - low/skip强Tensor refs使pool use_count>1，原skips3.reset不会使其提前复用；Body48保持原字节New、exactshape/name/inputalias/post0，新main一次launch成功后清refs，SP不变。owner将dtor选device前置再sync/reset；仅当前caller范围，不宣多设备/API失败恢复。No reviewer改源/编/GPU，记录route-review；shadowbyte0/stockfinite证据不代新整图route门。
+
+### 2026-10-06 Up路线停止、Mo反事实与graph0捕获源审
+
+- math fbedb85e Up48整路线数值/count161160全过但92402 wall尾+0.11964ms、mean弱且controldrift大，root停止不APP/formal/调同variant。Mo score-onlyfb5c136f单SPV数值改变PSNR52.7257，对锁oldMoGPU+0.00936ms弱/漂移/noP99，不换baseline也不推1ms归因。原数据/失败与全部proof保留，无生产修改。
+- reviewer仅CPU审actualgraph0外捕获原型：最初Upload/planmiss漏guard与SP诊断env错前缀及时指出，owner修为SP_*及DIAG0staticassert、warmedcache/票据门，Endonce/IsCapturingNone、Ownerdrain/destroy。最终842a3scope源审PASS，fixedSPinit清状态说明不是未来replaygold；Kernel161Fn多重集不DAG顺序。
+- finalcaptureonly无instantiate/launch，只在source/interface/node检查后销图；official64Params/copies有独立3cc来源，old同recipeTDR未找到源反证，不把假设当阻塞。审者无GPU/build/编辑原型，报告graph0-samework-source-review；不能称ReplayReady或已提速。
