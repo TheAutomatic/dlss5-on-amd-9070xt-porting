@@ -1,0 +1,26 @@
+{
+  "phase": "CPU preparation, no GPU authorization/run",
+  "build": "8068 initial exit0,1547 final exit0",
+  "source_sha256": "820477ba2f208606cd90488b3839acbb7adbc5d72b450244130e3b0e44df5ac2",
+  "exe_sha256": "426fa6f95db9242f06d9550420f134ce08e4b0fc9668d2f459feab10271f4967",
+  "baseline_recipe": "Current1088FAST1/full71MP1AE0historyoffStyle1seed0 PDL0pulse0 opt.graphfalse, stockmodules same",
+  "prior_hardware_gates": [
+    "2bfccb16 captureonly",
+    "03ef727f single",
+    "bf2c7e4b threefixed+changedindependentref"
+  ],
+  "modes": [
+    "eager ordinaryEnqueue",
+    "replay outercaptured graph0 same161 orderednodes"
+  ],
+  "setup": "Both ordinaryeagerfirst153ac +80preparationwarm +1actual161Fnproof; graph capture/instantiate additional CPU wall costs separately reported, excluded steady",
+  "steady": "chosenpath first before warm,80warm+160measured, eachsame outerHIPevent boundaries/framewait; first/last raw only, no midscan",
+  "launch_api_count": "Replay1first+80warm+160measure=241; eager0 graphlaunches",
+  "instrumentation": "privateLabLaunch tracevector disabled steady; one extra same boolbranch per ordinary kernel remains; no perkernel map/printf and no GPU counters",
+  "limits": [
+    "Not productionHIP_GRAPH1: keeps SP/body selectors unchanged",
+    "Absolute diagnosticcaller time cannot rewrite freshMgap baseline; only ownABBA effect",
+    "No PALOSsubmit count inferred from GraphLaunch",
+    "Source fairness review pending; no performance result yet"
+  ]
+}

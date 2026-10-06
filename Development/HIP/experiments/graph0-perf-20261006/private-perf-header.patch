@@ -1,0 +1,21 @@
+--- private-single-header
++++ private-perf-header
+@@ -181,8 +181,8 @@
+ }
+ inline std::atomic<int> AdaptivePreviewState{0};
+ class Network {friend class D3D12Bridge;
+- std::vector<Handle> lab_launches;
+- template<class... A> int LabLaunch(Handle f,A...a){lab_launches.push_back(f);return api.hipModuleLaunchKernel(f,a...);}
++ std::vector<Handle> lab_launches;bool lab_record=true;
++ template<class... A> int LabLaunch(Handle f,A...a){if(lab_record)lab_launches.push_back(f);return api.hipModuleLaunchKernel(f,a...);}
+ 
+  bool sp1440_ready=false;bool final_direct_compatible=false;bool pool64_byte_available=false;
+  bool vit_contract_byte_edge=false; // paired exact representation of an already E4M3-valued edge
+@@ -861,6 +861,7 @@
+  bool VitProjN64Active()const{return vit_proj_n64_active;}
+  void* TemporalFeatureBuffer()const{return temporal_feature_tap_active&&temporal_features?temporal_features->ptr:nullptr;}
+  void LabCapturePoolGuard(bool v){graph_capturing=v;}
++ void LabRecording(bool v){lab_record=v;}
+  void LabResetLaunches(){lab_launches.clear();}const std::vector<Handle>&LabLaunches()const{return lab_launches;}
+  void LabCapturePreflight(){if(opt.graph||opt.pdl||!opt.pooled||opt.profile||opt.wall_profile||observer||!opt.dump_dir.empty()||!SwinRunActive()||multi_pass!=1)throw std::runtime_error("capture scope");
+  for(const char*k:{"SP_TRACE","SP_VALIDATE","SP_TICKET_LIMIT","SP_FORCE_TIMEOUT","SP_TICKET_START","DLSS5_SP_TRACE","DLSS5_SP_VALIDATE","DLSS5_SP_TICKET_LIMIT"}){const char*v=std::getenv(k);if(v&&*v&&std::strcmp(v,"0"))throw std::runtime_error("capture SP diagnostic/limit forbidden");}
