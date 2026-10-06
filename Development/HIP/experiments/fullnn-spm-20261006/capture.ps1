@@ -1,5 +1,7 @@
+param([ValidateSet(1,3)][int]$Budget=1)
 $ErrorActionPreference='Stop';$ProgressPreference='SilentlyContinue'
 $r='D:\DLSSNR-Lab\fullnn-spm-20261006-capture';$fixtureRoot='D:\DLSSNR-Lab\sync-network-gap1080-20261006';$modules='D:\DLSSNR-Lab\combined-vs041-20261006\modules-current';$base='D:\DLSSNR-Lab\history-trial-041a-20261006';$mz='D:\DLSSNR-Lab\competitor-timing-20260930\mz';$lock='D:\DLSSNR-Lab\gpu.lock'
+if($Budget -eq 3){$r += '-budget3'} # Model-dispatch budget; complete-frame mapping is not established.
 $games='Shipping|SB-Win64|Onimusha|^re9$|Magpie|SandFall|Wuthering|Client-Win64'
 function CheckGame {if(Get-Process | Where-Object {$_.ProcessName -match $games}){throw 'Game running; do not use GPU'}}
 CheckGame
@@ -18,7 +20,7 @@ if((Get-FileHash $reference).Hash -ne (Get-FileHash $stock).Hash){throw 'Same-ho
 Get-FileHash $exe,$reference,$stock | ConvertTo-Json | Set-Content "$r\reference-hashes.json"
 $owner=[IO.File]::Open($lock,[IO.FileMode]::CreateNew,[IO.FileAccess]::Write,[IO.FileShare]::None);$p=$null
 try {
- $cp=New-Object Diagnostics.ProcessStartInfo;$cp.UseShellExecute=$false;$cp.RedirectStandardOutput=$true;$cp.RedirectStandardError=$true;$cp.RedirectStandardInput=$true;$cp.WorkingDirectory=$tools;$cp.FileName="$tools\RadeonDeveloperPanelCLI.exe";$cp.Arguments="-m profiling -p pure_fullnn_spm -o $r\trace.rgp --rgp-capture-mode dispatch --rgp-auto-capture=dispatch:13042:161 --rgp-render-op-count 161 --rgp-counter-collection --verbose"
+ $cp=New-Object Diagnostics.ProcessStartInfo;$cp.UseShellExecute=$false;$cp.RedirectStandardOutput=$true;$cp.RedirectStandardError=$true;$cp.RedirectStandardInput=$true;$cp.WorkingDirectory=$tools;$cp.FileName="$tools\RadeonDeveloperPanelCLI.exe";$cp.Arguments="-m profiling -p pure_fullnn_spm -o $r\trace.rgp --rgp-capture-mode dispatch --rgp-auto-capture=dispatch:13042:$($Budget*161) --rgp-render-op-count $($Budget*161) --rgp-counter-collection --verbose"
  $cli=New-Object Diagnostics.Process;$cli.StartInfo=$cp;if(!$cli.Start()){throw 'CLI start failed'};$cout=$cli.StandardOutput.ReadToEndAsync();$cerr=$cli.StandardError.ReadToEndAsync();Start-Sleep -Seconds 3
  $tag=[Text.Encoding]::UTF8.GetBytes('sync-network-gap1080-20261006');$owner.Write($tag,0,$tag.Length);CheckGame
  $manifest=@(Get-ChildItem "$modules" -File | ForEach-Object {@{name=$_.Name;bytes=$_.Length;sha256=(Get-FileHash $_.FullName).Hash}})
