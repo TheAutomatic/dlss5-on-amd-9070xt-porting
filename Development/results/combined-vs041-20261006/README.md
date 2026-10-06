@@ -13,3 +13,20 @@ Firstcell78164exit0/LOCK_RELEASED (startedbeforequeued-steeringarrived, rootallo
 ActualcurrentstderrHscope1loaded1/norm900 selected. Pulseplatformgfx1201/runtime70260201/driverquery0validated1/cap1/full26profileall1, but requestedauto/initialized0/active0/init_reject_mask256 andcreate/record/destroy0. PRED1inactiveatMP1 wasstillvetoedbyproductionpolicy. Thus thisiseffectiveH+postreleasefallback vs041, **not H+pulsecompletegain**. DirectproductioncounterlogestablishesRecord0, notjustrequestedsetting. No extraGPUcounter/getters inserted.
 
 Rootorderedkeepvalidfallbackcell; measurementCPUrevisesrequestedpredict/effectiveactivepredicateandwillissuefreshfreeze. Otherthreecellsremainunrun, scriptfail-closedmanifestuntilnewfreeze; nochanginguserPREDtocircumventeligibility. Noinstall/defaultconfiguration/releaseZIP/push. Artifactslargeoutsiderepo /tmp/combined-vs041-20261006 andisolatedDlab. Freshcombinationcandidate source/model/codec/fullprofile/hash/actualscope mustbe relocked.
+
+## 044f2cd4 effective-predict corrected combination firstscreens
+
+Source044f2cd4 original nondiagnostic O2 benchmark SHA833b74dcc3c69a9f3f25937c6c991f045cd483a5737f277f327d63bf5960ef79, 4332625 bytes. Assets, codec, input, original041 baseline, modules and all user PRED1 flags unchanged. Canonical production freeze corrected requested versus effective prediction; MP1 does not execute prediction. Same four-slot ABBA,160 frames/slot, discard80; per-slot cold samples retained in CSV.
+
+| User height / processing | MP | Mean delta ms | P99 delta ms | Actual H | Pulse accepted records per current slot |
+|---|---|---:|---:|---|---:|
+|900 /960|1|−0.200425|−0.163230|on|160|
+|1080 /1152|1|−0.18551875|−0.138710|off|160|
+|900 /960|3 PRED1|−0.04396875|−0.039350|off|0|
+|1080 /1152|3 PRED1|−0.071875|−0.032560|off|0|
+
+Actual current stderr establishes selected module and accepted Record counts, not merely requested auto. MP3 rejects mask384 (multipass plus effective prediction), both new mechanisms fall back; baseline PDL1280 at900 is not pulse. Both current900 MP1 slots have PDL640,1152 MP1 PDL0 and accepted160. Every cell's eight first/last raw hashes are equal and finite; invalid_total0. Sessions71177/98769/83299/67927 each exit0 and LOCK_RELEASED.
+
+These are independent single-round firstscreens versus formal041, not formal combined acceptance or natural continuous game FPS. MP3 gains are weak relative to control drift;900 MP3 current slot1 is slower than baseline slot0. All slots remain included. No isolated gains are added, no bad round replaced, no C512 experiment included. Previous78164 pulse-fallback data and96653 preflight failure remain intact.
+
+Fresh locked-Mochi follow-up should reuse pureNetwork same encoded fixtures and per-frame submission at900 and1088/640tokens, with new production source/39stock+H module identities and historyoff/full71/MP1/AE0. Pulse is bridge-specific and absent from that pure boundary; APP gains cannot be subtracted from the old pureNN gap.900400-versus448tokens remains incomparable work;1152-versusM1088 remains separate raster comparison. Only new actual paired runs can refresh the remaining gap.

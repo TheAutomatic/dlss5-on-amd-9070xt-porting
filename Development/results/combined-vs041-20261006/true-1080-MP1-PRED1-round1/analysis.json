@@ -1,0 +1,92 @@
+{
+  "slots": [
+    {
+      "slot": 0,
+      "side": "0.41",
+      "total_frames": 160,
+      "steady_frames": 80,
+      "cold_frame0_ms": 1201.046,
+      "steady_mean_ms": 9.7184875,
+      "steady_p99_ms": 9.976409999999998,
+      "steady_all_positive_finite": true
+    },
+    {
+      "slot": 1,
+      "side": "current",
+      "total_frames": 160,
+      "steady_frames": 80,
+      "cold_frame0_ms": 1233.016,
+      "steady_mean_ms": 9.5331875,
+      "steady_p99_ms": 9.775819999999998,
+      "steady_all_positive_finite": true
+    },
+    {
+      "slot": 2,
+      "side": "current",
+      "total_frames": 160,
+      "steady_frames": 80,
+      "cold_frame0_ms": 1253.083,
+      "steady_mean_ms": 9.545075,
+      "steady_p99_ms": 9.82504,
+      "steady_all_positive_finite": true
+    },
+    {
+      "slot": 3,
+      "side": "0.41",
+      "total_frames": 160,
+      "steady_frames": 80,
+      "cold_frame0_ms": 1220.622,
+      "steady_mean_ms": 9.7308125,
+      "steady_p99_ms": 9.950199999999999,
+      "steady_all_positive_finite": true
+    }
+  ],
+  "discard": 80,
+  "merged_avg_delta_ms": -0.18551874999999995,
+  "merged_p99_delta_ms": -0.13870999999999967,
+  "avg_and_p99_both_improve": true,
+  "raw": {
+    "0/frame-first.f16": {
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "finite": true,
+      "bytes": 7464960
+    },
+    "0/frame.f16": {
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "finite": true,
+      "bytes": 7464960
+    },
+    "1/frame-first.f16": {
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "finite": true,
+      "bytes": 7464960
+    },
+    "1/frame.f16": {
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "finite": true,
+      "bytes": 7464960
+    },
+    "2/frame-first.f16": {
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "finite": true,
+      "bytes": 7464960
+    },
+    "2/frame.f16": {
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "finite": true,
+      "bytes": 7464960
+    },
+    "3/frame-first.f16": {
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "finite": true,
+      "bytes": 7464960
+    },
+    "3/frame.f16": {
+      "sha256": "0900e489a397302b93074a878c694b9c3e7c3400cfe2dfdd3cc727abe1050f4a",
+      "finite": true,
+      "bytes": 7464960
+    }
+  },
+  "all_first_last_sha_equal": true,
+  "scope": "separate original0.41/current NativeGameFrame O2 NET_TIMING0 wall only, frozen realHDR restorer; includes codec/bridge/NN/decode/copy/consumerflush, excludes gamerender/FSR/Present; not continuousgame source"
+}
