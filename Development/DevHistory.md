@@ -1955,3 +1955,8 @@ root认可900正式均值改善/第三轮p99在1µs实际计时内未分辨退�
 - 单72596之后74023 bounded4launch已实过（bf2c7e4b）：3fixed153ac、changed同GPUptr/独立ReferenceNet eager7fe026…对图bit0finite且异initial，非实际game/history/seedshape变化。更新计划不再写未硬件run。
 - 只读新samecaller性能0087d9d0审PASS：发现文案2reads不符actual3(commonsetup1+selected2)并明确全steady外，owner加GPUtimerfinite/>0拒批；common缓存warm与DAG/capture/instantiate在steady之外，selected80warm160、相同outerEvent界，无热Fnvector/打印，241GraphAPI不伪称GPU/OSsubmit次数。审者无GPU/构建/编辑candidate。
 - 执行者首87130/26358fb3真实GPUmean−0.080413/p99−0.084621、wall−0.100147/−0.08799ms，12raw153ac/finite与SPerrorsdisabled0；root同协议R2均值/p99正，R3既定进行。未正式/APP/生产接受，不跨批扣原M1.046ms；记录performance-review边界，现装/config/ZIP不动。
+
+### 2026-10-06 samework图三轮正式完成与APP待源
+
+- 4efbcf46执行者R3/49361权威PASS：GPUmean/p99−0.096417/−0.123420ms，wall−0.100059/−0.07079。三必要轮各自均值/尾/raw153ac过，pooledGPU−0.090802/−0.130112、wall−0.100691/−0.098590，36raw读数包含共同setup，setupcapture/instantiate单列。固定1088SP161同数学scope已有可重复收益，非APP/生产接受，也不从独立M1.046差简单扣掉。
+- Root启动实际APP1152原menuHDR/codec/interop图CPU原型，独立审者待真实源才核maps/Frame/pool寿命、pre/post外capture、NET0条件与changedHDR独立Framegold；不运行GPU、不预认APP收益或长期图支持，不改现装/config/ZIP。
