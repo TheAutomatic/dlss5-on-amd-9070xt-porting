@@ -1,0 +1,35 @@
+{
+  "rows": [
+    {
+      "slot": 0,
+      "wall_mean_ms": 7.125987499999999,
+      "wall_p99_ms": 7.554729999999999,
+      "net_gpu_samples": 80,
+      "net_gpu_mean_ms": 6.520682007
+    },
+    {
+      "slot": 1,
+      "wall_mean_ms": 6.9527625,
+      "wall_p99_ms": 7.304789999999999,
+      "net_gpu_samples": 80,
+      "net_gpu_mean_ms": 6.493949252625001
+    },
+    {
+      "slot": 2,
+      "wall_mean_ms": 6.9487,
+      "wall_p99_ms": 7.306929999999999,
+      "net_gpu_samples": 80,
+      "net_gpu_mean_ms": 6.505220484624999
+    },
+    {
+      "slot": 3,
+      "wall_mean_ms": 7.103462500000001,
+      "wall_p99_ms": 7.493549999999999,
+      "net_gpu_samples": 80,
+      "net_gpu_mean_ms": 6.565165019625001
+    }
+  ],
+  "wall_avg_delta_ms": -0.16399375000000038,
+  "wall_p99_delta_ms": -0.2327400000000006,
+  "allBmeansBelowAllA": true
+}

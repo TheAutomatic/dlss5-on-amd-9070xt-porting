@@ -1,0 +1,16 @@
+{
+  "scope": "complete unchanged codec/bridge/NN/decode caller; candidate only timedempty event pair before C512",
+  "flag": "DLSS5_LAB_SUBMIT_PAIR default0",
+  "graph": "rejected when on",
+  "resource": "2 preallocated per-Network handles, destructor after stream completion",
+  "files": {
+    "native_game_frame.h": "67635bb357ec1548fe963beaa863837b00fa3a6ab0a4bde3ebfbc13ded5c7534",
+    "benchmark.cpp": "1df6000ef6959b3391412ec464ce6e1b170b7c1299e727e45e0eb20a53007f86",
+    "hip_d3d12_bridge.h": "47c9660c4c8a370bb5e05b6765dbcdaf96c976f33d221209091a3fef99e71d4d",
+    "native_hip_network.h": "5cb7d094e51cf9c34b25884137ee90608dc0944270ecbdd464ef52ea503ec058",
+    "native_hip_env_options.h": "77402ea1a863137e95e709996a302c7e461ddeaa536a3cb4b52469a4c4df8253",
+    "Windows.h": "e931bc163a9980e71982a522879073f41f934c3d94b423d489ee9f387093899f",
+    "source.json": "3b5f237d2c70ac3c539993fd66bfbe18ce591ea5ce958a546bad773c9c5db705",
+    "hip_reference_network.h": "6c44300dcbd4471df8f4990d63511024236b35cf3b012d2809d9302a8436f460"
+  }
+}

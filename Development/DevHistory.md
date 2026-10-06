@@ -1794,3 +1794,10 @@ B数学同域表达式消除half→float clamp→half往返，COMGR21真实640 V
 ### 2026-10-06 C32 QKV片段轴校正与范数失败定位
 
 从已capturefixture1独立复算input/w ±1/8 F64denseDot，旧rawtrace每ci16×16转置还原后512项0差，证明A真正token=lane%16/feature=ci16+gr8+e。此前“C32 lanefeature需转置”判断反了，撤回；layout纯byte恢复证明同样建立在错轴假设，不作productioncontract证。half平方均1/1024整数倍，32项exactCPU整数sum与实际旧sum512项0差，各lane8个sum相同；safeT的sum0拿错逻辑轴，非FP32累计精度差。原C32已tokenlane，直接保持旧QKV/half-square/twoWMMA，只hoistrsq(sum0)可能才是最小表达式；当前只CPU定位不编新候选不GPU，仍需全gold再性能。见results/c32-norm-transpose-20261006/layout-resolution.json与resolve_layout.py，旧捕获immutable。
+
+### 2026-10-06 提交事件完整框架正式门与尾部关联
+
+- 同C512起点空timedpair的纯NN控制正，单非blocking query/匹配1us CPU延时负；不能由此断言Windows驱动必flush。完整NativeGameFrame/原codec/当前FAST1/full71/MP1/AE0/history0、既有真实HDR冻结输入，900/1152短ABBA均值与p99正、first/last同SHA且finite。
+- 同batch T/U不支持untimed优于timed；timed正式三round320弃80：900平均三轮均快且p99均降，1152平均均快但round3 p99+0.08934ms，按门不收、不刷paired同variant。用户安装/config与正式/临时ZIP未变。
+- 现有尾数据NET分布p99降、wall尾升，但旧logger未写tag且Poll返回最近完成值，不能保证逐frame关联/CPU唯一归因。tag在bridge仅记录标签、无去重，因此全0本身不阻止elapsed更新。下一隔离single timed event同位置/少一次Record，新logger同一次原snapshot打印currentframe/tag/匹配ready，不新增query/sync。CPU链接通过，GPU尚未执行；实际optional失败回退/owner-drain生命周期helper独立准备。
+- 结果与原数据：results/submission-pacing-20261006、results/framework-submit-pair-20261006。仍有约900 0.6ms/同1088 1.01ms对手残差，无足够新生产优化。

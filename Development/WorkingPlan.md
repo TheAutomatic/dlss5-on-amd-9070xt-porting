@@ -53,8 +53,9 @@
 
 - 当前1088/640共同编码输入首对账FAST1约8.8808ms、mochi7.8672ms，差1.0136ms；FAST0差1.1428ms。生产1152与mochi1088异proc另列，不选有利小窗口作完成判据。
 - 16-query数学阶梯B（仅score halfFMA/map）及C（加64key half树）原语gold0diff、双arch无spill，但同1088整网首ABBA B平均+0.00761ms，C+0.03643ms且p99变差。不收，不D、不旧M32扩扫；52.20/52.63dB仅对当前FAST1一份synthetic输出，非NVIDIA oracle。ISA显示Bscalar转换往返、C更多halfadd/shuffle，不能判纯数学无解。结果vit-math-stair-20261006。
-- 当前低扰动stage只探C51223–30/ViT31–38一pair，ordered/pdl_calls0、raw同；插桩反使total快约0.16/0.11ms，不能认精确族贡献。stage raw约0.63/1.28ms只是该环境范围，不均摊/强制和。下一C512起点提交节奏控制：无pair/空pair/非blocking query/匹配CPU delay，保GPU总span与CPUwall、同raw，先小ABBA。结果sparse-stage-20261006。
-- 对手actual packed half score少转换，B2由独立代理按ISA立项，复用有限gold；不和C组合盲扫。当前默认、临时history包及用户配置不因上述研究变更。
+- 当前低扰动stage只探C51223–30/ViT31–38一pair，ordered/pdl_calls0、raw同；插桩反使total快，不能认精确族贡献或均摊。空timedpair正、非blocking query与1us CPU delay负，支持event特有效应但未证明driver flush。完整框架既有真实HDR双档首筛正，NETspan与完整wall分项记账。
+- 同batchT/U没有支持untimed优于timed。正式timedpair三round900平均/p99均正，1152平均均正但round3 p99+0.08934ms，按门不收、不刷samevariant；当前没有足够新生产优化，900仍差约0.6ms、同1088差1.01ms。旧logger无tag只可受限分布关联，不据NET尾下降就定CPU全因果。
+- 下一同位置single timed Record隔离首ABBA，只有一个事件/API；新logger同一次snapshot打印tag/currentframe/ready，写入tag不新增query/sync。实际optional helper故障注入与owner/drain生命周期门单独准备，默认off，不部署。B2/C2数学组织短筛无足够稳定平均/p99收益，不收；不和pulse累加混验。
 
 ## 第二优先：解释mochizuki差距（备用CPU工作；新实验未执行）
 

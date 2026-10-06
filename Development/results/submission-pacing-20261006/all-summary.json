@@ -1,0 +1,170 @@
+{
+  "pair": {
+    "slots": [
+      {
+        "slot": 0,
+        "gpu_mean_ms": 8.880963125,
+        "gpu_p99_ms": 9.1140678,
+        "cpu_mean_ms": 9.1334125,
+        "cpu_p99_ms": 9.359200000000001,
+        "pacing_cpu_us_median": 0.0,
+        "pdl_calls": 0,
+        "query_codes": [
+          -1
+        ]
+      },
+      {
+        "slot": 1,
+        "gpu_mean_ms": 8.807299125,
+        "gpu_p99_ms": 8.9627614,
+        "cpu_mean_ms": 9.035562500000001,
+        "cpu_p99_ms": 9.23274,
+        "pacing_cpu_us_median": 1.0,
+        "pdl_calls": 0,
+        "query_codes": [
+          -1
+        ]
+      },
+      {
+        "slot": 2,
+        "gpu_mean_ms": 8.814830750000002,
+        "gpu_p99_ms": 8.9701158,
+        "cpu_mean_ms": 9.049087499999999,
+        "cpu_p99_ms": 9.27045,
+        "pacing_cpu_us_median": 1.0,
+        "pdl_calls": 0,
+        "query_codes": [
+          -1
+        ]
+      },
+      {
+        "slot": 3,
+        "gpu_mean_ms": 8.893294874999999,
+        "gpu_p99_ms": 9.0770754,
+        "cpu_mean_ms": 9.121725000000001,
+        "cpu_p99_ms": 9.341239999999999,
+        "pacing_cpu_us_median": 0.0,
+        "pdl_calls": 0,
+        "query_codes": [
+          -1
+        ]
+      }
+    ],
+    "gpu_avg_delta_ms": -0.07606406249999687,
+    "gpu_p99_delta_ms": -0.12735480000000088,
+    "cpu_avg_delta_ms": -0.08524375000000006,
+    "cpu_p99_delta_ms": -0.11729000000000056
+  },
+  "query": {
+    "slots": [
+      {
+        "slot": 0,
+        "gpu_mean_ms": 8.8961985,
+        "gpu_p99_ms": 9.0889166,
+        "cpu_mean_ms": 9.110175000000002,
+        "cpu_p99_ms": 9.38107,
+        "pacing_cpu_us_median": 0.0,
+        "pdl_calls": 0,
+        "query_codes": [
+          -1
+        ]
+      },
+      {
+        "slot": 1,
+        "gpu_mean_ms": 9.046568124999999,
+        "gpu_p99_ms": 9.296791,
+        "cpu_mean_ms": 9.1755375,
+        "cpu_p99_ms": 9.46002,
+        "pacing_cpu_us_median": 1.0,
+        "pdl_calls": 0,
+        "query_codes": [
+          600
+        ]
+      },
+      {
+        "slot": 2,
+        "gpu_mean_ms": 9.083224375,
+        "gpu_p99_ms": 9.323678,
+        "cpu_mean_ms": 9.21374375,
+        "cpu_p99_ms": 9.5482,
+        "pacing_cpu_us_median": 1.0,
+        "pdl_calls": 0,
+        "query_codes": [
+          600
+        ]
+      },
+      {
+        "slot": 3,
+        "gpu_mean_ms": 8.8961565,
+        "gpu_p99_ms": 9.1201662,
+        "cpu_mean_ms": 9.12011875,
+        "cpu_p99_ms": 9.37051,
+        "pacing_cpu_us_median": 0.0,
+        "pdl_calls": 0,
+        "query_codes": [
+          -1
+        ]
+      }
+    ],
+    "gpu_avg_delta_ms": 0.1687187500000018,
+    "gpu_p99_delta_ms": 0.2068449999999995,
+    "cpu_avg_delta_ms": 0.07949374999999925,
+    "cpu_p99_delta_ms": 0.15475999999999956
+  },
+  "delay": {
+    "slots": [
+      {
+        "slot": 0,
+        "gpu_mean_ms": 8.89236075,
+        "gpu_p99_ms": 9.0809616,
+        "cpu_mean_ms": 9.11399375,
+        "cpu_p99_ms": 9.35582,
+        "pacing_cpu_us_median": 0.0,
+        "pdl_calls": 0,
+        "query_codes": [
+          -1
+        ]
+      },
+      {
+        "slot": 1,
+        "gpu_mean_ms": 8.905019625,
+        "gpu_p99_ms": 9.0942978,
+        "cpu_mean_ms": 9.11820625,
+        "cpu_p99_ms": 9.33725,
+        "pacing_cpu_us_median": 1.0,
+        "pdl_calls": 0,
+        "query_codes": [
+          -1
+        ]
+      },
+      {
+        "slot": 2,
+        "gpu_mean_ms": 8.924664875,
+        "gpu_p99_ms": 9.1076774,
+        "cpu_mean_ms": 9.14186875,
+        "cpu_p99_ms": 9.33392,
+        "pacing_cpu_us_median": 1.0,
+        "pdl_calls": 0,
+        "query_codes": [
+          -1
+        ]
+      },
+      {
+        "slot": 3,
+        "gpu_mean_ms": 8.912031125,
+        "gpu_p99_ms": 9.115491800000001,
+        "cpu_mean_ms": 9.12335,
+        "cpu_p99_ms": 9.33205,
+        "pacing_cpu_us_median": 0.0,
+        "pdl_calls": 0,
+        "query_codes": [
+          -1
+        ]
+      }
+    ],
+    "gpu_avg_delta_ms": 0.012646312499999368,
+    "gpu_p99_delta_ms": 0.014778800000000203,
+    "cpu_avg_delta_ms": 0.011365624999999824,
+    "cpu_p99_delta_ms": -0.0037599999999997635
+  }
+}
