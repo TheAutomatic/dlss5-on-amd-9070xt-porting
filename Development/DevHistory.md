@@ -1806,3 +1806,10 @@ B数学同域表达式消除half→float clamp→half往返，COMGR21真实640 V
 ### 2026-10-06 C32原布局范数rsqrt hoist首账
 
 只H保QKV/half-square/twoWMMA原顺序，rsq(sum0)每lane一次，无transpose/新DS/LDS。canonicalA hsaco逐byte stockFAST1同f46b8af2…ee52；模型201assets/modules/commoninput SHA门全过。实际prefixISA1517→1480、rsq16→2、DS23/LDS4096/VGPR128同0spill，HIP A/H三kernel真实occupancy均16。8unit含±0/±Inf/half-square边界六层0diff且all8sum每lane同；真实prefix实际weights/FFN/encodedinput trace0/有限，全NN first0。93415初prefixCLI多传W报Usage未执行，修PH-only后12716全门exit0锁释放。1088 A/H/H/A warm80测160：8.901741/8.839896/8.844241/8.904607ms，delta−0.061106/p99−0.024127，两H均快两A；所有prefix与四process首尾raw SHA相同/finite/repeat0。首筛真实收益未formal、未扩档/默认/部署；结果source/gold/CSV/ISA/模型与载荷身份见results/c32-norm-hoist-20261006，队列交integrator，不与B2/C2跨批收益相加。
+
+### 2026-10-06 单timed marker与实际lease接线首门
+
+- single同C512位置仅1event/1Record，完整framework既有HDR/当前FAST1/full71/MP1/AE0/history0首900ABBA160弃80：wall平均−0.162513ms、合并p99−0.01925ms，only-ready NET平均−0.120672ms。四slot全部160/160tag=i+1匹配，first/lastSHA同/finite；42116exit0/LOCK_RELEASED。仍首筛，p99余量小未收。
+- b4a803c3真实共享lease18CPUcase与748787e9实际HIPops adapter fake ABI注入过；新隔离safe版本不再Create/Record throw through bridge。private friend-only在bridge.Create末尾noexcept配置，直接Network不启用事件；warm/Wait显式ownerdevice，bridge析构先wait再Close，失败保整个Network/桥资源。实际device/runtime失效只保证继续旧NN尝试，不保证恢复。
+- safehelper同exe1152首ABBA：wall平均−0.188544/p99−0.11173ms，only-ready NET平均−0.131454/p99−0.158580ms；640tag匹配/raw同/finite/active1无API异常，2447exit0/LOCK_RELEASED。与旧900throwprototype为不同源码，不能跨批比幅度。结果439a0105，results/framework-single-event-20261006。
+- 已备same-safeexe一次正式round320弃80及ready-only analyzer，每轮即时检查尾部后才下一轮；尚未跑正式/normal19/动态fallback，多设备硬件未证。不改生产默认、现装/config/0.41-aZIP，不将首screen认已追平mochi。
