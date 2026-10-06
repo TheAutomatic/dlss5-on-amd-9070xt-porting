@@ -24,7 +24,8 @@ class D3D12Bridge {
  size_t zero_upload_bytes{};bool clear_submission_unconfirmed{};
  /* Direct input (2026-09-28): the host producer writes the network input straight into the shared buffer (UAV) and leaves it in
     COMMON; RecordInput then skips the 35 MB D3D12 copy. Requested before Create; the bytes the network reads are unchanged. */
- bool direct_input{};
+ bool direct_input{},direct_history{};std::vector<float> post_auxiliary_row;
+ bool recording_leases{},recording_active{},recording_submission_unconfirmed{};UINT64 recording_completion{};
 public:
  enum class Phase { Ready, InputRecorded, OutputRecordedPendingHip, HipQueued, OutputRecorded };
  Phase CurrentPhase()const{return phase;}
@@ -185,7 +186,7 @@ public:
  // False means resources may still be referenced by unsubmitted/failed work.
  // This also lets wrappers retain their input references until consumers retire.
  bool WaitForSubmittedWork()noexcept{
-  if(phase!=Phase::Ready||clear_submission_unconfirmed)return false;
+  if(phase!=Phase::Ready||clear_submission_unconfirmed||recording_submission_unconfirmed||recording_active)return false;
   if(network&&(network->Runtime().hipSetDevice(hip_device)||network->Runtime().hipStreamSynchronize(network->Stream())))return false;
   if(pending&&queue&&fence){auto target=++value;if(FAILED(queue->Signal(fence,target))||FAILED(fence->SetEventOnCompletion(target,event))||WaitForSingleObject(event,30000)!=WAIT_OBJECT_0||fence->GetCompletedValue()<target)return false;}
   if(device&&FAILED(device->GetDeviceRemovedReason()))return false;
@@ -216,7 +217,11 @@ probe.Check(probe.hipSetDevice(chosen),"select device");size_t total=0;if(probe.
   }
   module_directory=options.modules;
   network=new Network(std::move(options));auto&api=network->Runtime();
-  Share(input,pixels*16,direct_input);Share(history,pixels*16);Share(output,pixels*12,true);Check(device->CreateFence(0,D3D12_FENCE_FLAG_SHARED,IID_PPV_ARGS(&fence)),"shared fence");Check(device->CreateSharedHandle(fence,nullptr,GENERIC_ALL,nullptr,&fence_handle),"fence handle");hip_probe::SemaphoreDesc sd{};sd.type=4;sd.handle.win32.handle=fence_handle;api.Check(api.hipImportExternalSemaphore(&semaphore,&sd),"import fence");event=CreateEventW(nullptr,FALSE,FALSE,nullptr);if(!event)throw std::runtime_error("bridge completion event");if(const char*v=std::getenv("DLSS5_HIP_SPAN_PROBE"))span_probe=!strcmp(v,"1");if(span_probe){api.Check(api.hipEventCreate(&span_begin),"span begin event");api.Check(api.hipEventCreate(&span_end),"span end event");fprintf(stderr,"hip_span probe enabled\n");}network->SetNoise(noise);
+  if((direct_history||!post_auxiliary_row.empty())&&network->ExperimentalTemporalConfigured())throw std::runtime_error("direct history/auxiliary output cannot use experimental temporal layout");
+  if(!post_auxiliary_row.empty()&&!network->NativeHistorySupported())throw std::runtime_error("auxiliary post unsupported network");
+  Share(input,pixels*16,direct_input);Share(history,pixels*16,direct_history);Share(output,pixels*(post_auxiliary_row.empty()?12:20),true);
+  if(!post_auxiliary_row.empty())network->EnableNativePostHistory(post_auxiliary_row,{static_cast<char*>(output.mapped)+pixels*12,pixels*8,network->W,network->H,8});
+  Check(device->CreateFence(0,D3D12_FENCE_FLAG_SHARED,IID_PPV_ARGS(&fence)),"shared fence");Check(device->CreateSharedHandle(fence,nullptr,GENERIC_ALL,nullptr,&fence_handle),"fence handle");hip_probe::SemaphoreDesc sd{};sd.type=4;sd.handle.win32.handle=fence_handle;api.Check(api.hipImportExternalSemaphore(&semaphore,&sd),"import fence");event=CreateEventW(nullptr,FALSE,FALSE,nullptr);if(!event)throw std::runtime_error("bridge completion event");if(const char*v=std::getenv("DLSS5_HIP_SPAN_PROBE"))span_probe=!strcmp(v,"1");if(span_probe){api.Check(api.hipEventCreate(&span_begin),"span begin event");api.Check(api.hipEventCreate(&span_end),"span end event");fprintf(stderr,"hip_span probe enabled\n");}network->SetNoise(noise);
   {const char*v=std::getenv("DLSS5_HIP_POST_SIGNAL_QUERY");if(!(v&&!strcmp(v,"0")))post_query=reinterpret_cast<EventQueryFn>(GetProcAddress(api.dll,"hipStreamQuery"));}
   if(const char*v=std::getenv("DLSS5_NET_TIMING");v&&!strcmp(v,"1"))EnableNetworkTiming();
   if(const char*v=std::getenv("DLSS5_HIP_INPUT_POLL")){if(strcmp(v,"0")&&strcmp(v,"1")&&strcmp(v,"2"))throw std::runtime_error("DLSS5_HIP_INPUT_POLL must be 0, 1 or 2");poll_inline=!strcmp(v,"2");if(strcmp(v,"0")){try{SetupPoll();}catch(const std::exception&e){poll=false;poll_off=true;fprintf(stderr,"hip_input_poll unavailable (%s); fence path\n",e.what());}}}
@@ -230,6 +235,19 @@ probe.Check(probe.hipSetDevice(chosen),"select device");size_t total=0;if(probe.
  ID3D12Resource*Output()const{return output.resource;}
  void RequestDirectInput(){if(network)throw std::runtime_error("direct input must be requested before Create");direct_input=true;}
  ID3D12Resource*DirectInput()const{return direct_input?input.resource:nullptr;}
+ // Request before Create. The producer must leave shared history in COMMON;
+ // all writers/readers use the bridge's producer/consumer queue ordering.
+ void RequestDirectHistory(){if(network||queue)throw std::runtime_error("direct history must precede Create");direct_history=true;}
+ ID3D12Resource*DirectHistory()const{return direct_history?history.resource:nullptr;}
+ void RequestPostAuxiliary(const std::vector<float>&row){
+  if(network||queue||row.size()!=32)throw std::runtime_error("post auxiliary request contract");
+  for(float v:row)if(!std::isfinite(v))throw std::runtime_error("post auxiliary nonfinite weight");
+  post_auxiliary_row=row;
+ }
+ struct AuxiliaryOutput {ID3D12Resource*resource=nullptr;UINT64 offset=0,bytes=0;UINT width=0,height=0,pixel_stride=8;};
+ AuxiliaryOutput PostAuxiliary()const{return network&&!post_auxiliary_row.empty()?AuxiliaryOutput{output.resource,pixels*12,pixels*8,network->W,network->H,8}:AuxiliaryOutput{};}
+ void SetAdaptiveReuseAllowed(bool allowed){Require(Phase::Ready);network->SetAdaptiveReuseAllowed(allowed);}
+
  size_t free_at_create{};int hip_device=-1;/* HIP device index chosen for the D3D12 adapter */
  void MemoryReport(FILE*f){if(!network)return;network->Runtime().hipStreamSynchronize(network->Stream());std::fprintf(f,"hip_memory device_free_before_network_MiB=%.1f shared input_MiB=%.1f history_MiB=%.1f output_MiB=%.1f\n",free_at_create/1048576.,pixels*16/1048576.,pixels*16/1048576.,pixels*12/1048576.);network->MemoryReport(f);}
  bool PdlRequested()const{return network?network->PdlRequested():false;}
@@ -250,7 +268,7 @@ private:
   phase=Phase::InputRecorded;recorded_temporal=temporal!=nullptr;
   try{
    auto copy=[&](ID3D12Resource*src,Shared&dst,size_t bytes_per_pixel=16){Barrier(c,src,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,D3D12_RESOURCE_STATE_COPY_SOURCE);Barrier(c,dst.resource,D3D12_RESOURCE_STATE_COMMON,D3D12_RESOURCE_STATE_COPY_DEST);c->CopyBufferRegion(dst.resource,0,src,0,pixels*bytes_per_pixel);Barrier(c,dst.resource,D3D12_RESOURCE_STATE_COPY_DEST,D3D12_RESOURCE_STATE_COMMON);Barrier(c,src,D3D12_RESOURCE_STATE_COPY_SOURCE,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE);};
-   if(!(direct_input&&rgba==input.resource))copy(rgba,input);/* direct: the producer already wrote input and left it in COMMON */if(temporal)copy(temporal,history,network->ExperimentalTemporalConfigured()?8:16);if(readable)Barrier(c,output.resource,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,D3D12_RESOURCE_STATE_COMMON);readable=false;
+   if(!(direct_input&&rgba==input.resource))copy(rgba,input);/* direct: the producer already wrote input and left it in COMMON */if(temporal&&!(direct_history&&temporal==history.resource))copy(temporal,history,network->ExperimentalTemporalConfigured()?8:16);if(readable)Barrier(c,output.resource,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,D3D12_RESOURCE_STATE_COMMON);readable=false;
    poll_recorded=false;if(poll&&poll_inline&&!poll_off){ID3D12GraphicsCommandList2*c2{};if(SUCCEEDED(c->QueryInterface(IID_PPV_ARGS(&c2)))){poll_recorded_target=poll_frame%kPollSlots+1;D3D12_WRITEBUFFERIMMEDIATE_PARAMETER wp{flag.resource->GetGPUVirtualAddress(),poll_recorded_target};D3D12_WRITEBUFFERIMMEDIATE_MODE wm=D3D12_WRITEBUFFERIMMEDIATE_MODE_MARKER_OUT;c2->WriteBufferImmediate(1,&wp,&wm);c2->Release();poll_recorded=true;}}
   }catch(...){failed=true;throw;}
  }
@@ -295,6 +313,52 @@ public:
  // Optional host preparation before recording the first staged frame. Lazy
  // weight uploads synchronize the HIP stream; perform them before inserting an
  // external producer wait, rather than inside a game's Execute callback.
+ // Optional replayable recording: the caller owns every recorded resource until Reset/Release
+ // and completion, and serializes these methods. Legacy staged callers remain unchanged.
+ void EnableRecordingLeases(){
+  Require(Phase::Ready);
+  if(pending||value||readable||network->GraphEnabled())throw std::runtime_error("recording leases require fresh graph-off bridge");
+  if(poll||poll_inline)throw std::runtime_error("recording leases require input poll off");
+  recording_leases=true;
+ }
+ // Call after the last output reader was recorded. Both shared-buffer boundaries
+ // are COMMON, so discard and replay do not depend on CPU-only readable state.
+ void SealRecordedOutput(ID3D12GraphicsCommandList*c){
+  if(!recording_leases||recording_active)throw std::runtime_error("not a recording lease");
+  Require(Phase::OutputRecordedPendingHip);ListContract(c);
+  Barrier(c,output.resource,D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,D3D12_RESOURCE_STATE_COMMON);
+  readable=false;phase=Phase::Ready;
+ }
+ // BEFORE submitting the producer, order it after the previous actual consumer,
+ // including executions on another same-device queue. Never wait on the CPU here.
+ void BeginRecordedExecution(ID3D12CommandQueue*actual,bool temporal=false){
+  if(!recording_leases||recording_active||recording_submission_unconfirmed)throw std::runtime_error("recording execution unavailable");
+  Require(Phase::Ready);
+  if(!actual||actual->GetDesc().Type!=queue->GetDesc().Type)throw std::runtime_error("recording queue type mismatch");
+  ID3D12Device*owner{};Check(actual->GetDevice(IID_PPV_ARGS(&owner)),"recording queue device");
+  bool same=NativeSameDevice(owner,device);owner->Release();if(!same)throw std::runtime_error("recording queue device mismatch");
+  if(actual!=queue){
+   if(recording_completion)Check(actual->Wait(fence,recording_completion),"previous recorded consumer wait");
+   actual->AddRef();queue->Release();queue=actual;
+  }
+  recorded_temporal=temporal;recording_active=true;phase=Phase::OutputRecordedPendingHip;
+ }
+ // Called for each execution, with submission facts rather than recording state.
+ // A missing consumer is a discard of that execution, not retirement of the lease.
+ void EndRecordedExecution(ID3D12CommandQueue*actual,bool producer_submitted,bool consumer_submitted){
+  if(!recording_leases||!recording_active)throw std::runtime_error("no recording execution");
+  QueueContract(actual);
+  if(consumer_submitted&&!producer_submitted)throw std::runtime_error("consumer without producer");
+  if(producer_submitted){
+   // A failed enqueue cannot be certified by a later successful queue signal.
+   if(failed||phase!=Phase::OutputRecorded){recording_submission_unconfirmed=true;throw std::runtime_error("recorded HIP execution incomplete");}
+   pending=true;const UINT64 target=++value;
+   HRESULT hr=actual->Signal(fence,target);
+   if(FAILED(hr)){recording_submission_unconfirmed=true;Check(hr,"recorded consumer signal");}
+   recording_completion=target;
+  }
+  recording_active=false;readable=false;phase=Phase::Ready;
+ }
  void PrepareStagedKernels(){
   Require(Phase::Ready);
   if(pending||value||readable||network->GraphEnabled())throw std::runtime_error("bridge preparation requires fresh graph-off session");

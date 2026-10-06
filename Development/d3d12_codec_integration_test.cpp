@@ -10,6 +10,9 @@
 #include <cstdio>
 #include <stdexcept>
 #include "native_game_codec.h"
+#include "native_fast_history.h"
+#include <future>
+#include <atomic>
 #include "native_game_submission.h"
 #include "native_format_convert.h"
 using Microsoft::WRL::ComPtr;
@@ -19,6 +22,11 @@ static void Require(bool ok,const char *why) { if(!ok) throw std::runtime_error(
 static void Barrier(ID3D12GraphicsCommandList *c,ID3D12Resource *r,D3D12_RESOURCE_STATES a,D3D12_RESOURCE_STATES b) {
  if(a==b)return; D3D12_RESOURCE_BARRIER v{};v.Type=D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;v.Transition={r,0,a,b};c->ResourceBarrier(1,&v);
 }
+struct RejectCompiler final:NativeShaderCompiler {
+ std::atomic<unsigned> calls{0};HRESULT failure;explicit RejectCompiler(HRESULT hr):failure(hr){}
+ HRESULT File(const std::wstring&,const D3D_SHADER_MACRO*,const char*,ID3DBlob**code,ID3DBlob**errors)override{++calls;*code=nullptr;if(errors)*errors=nullptr;return failure;}
+ HRESULT Blob(const void*,SIZE_T,const char*,const D3D_SHADER_MACRO*,ID3DInclude*,const char*,const char*,UINT,ID3DBlob**code,ID3DBlob**errors)override{++calls;*code=nullptr;if(errors)*errors=nullptr;return failure;}
+};
 struct Harness {
  ComPtr<ID3D12Device> d; ComPtr<ID3D12CommandQueue> q; NativeGameSubmission submit;
  explicit Harness(bool hardware) {
@@ -117,5 +125,27 @@ int wmain(int argc,wchar_t**argv) { try {
    Require(convertedBytes==result,"addon FP16 conversion equals private codec fallback");
   }
  }
- h.CheckDebug();puts("PASS: legacy HDR/sRGB bytes, opt-ins, four debug views, R10 typed/typeless fallback and addon conversion/private-FP16");return 0;
+ {auto typeless=h.Texture(65,7,DXGI_FORMAT_R16G16B16A16_TYPELESS,Half(65,7,2));
+  NativeGameCodec hdr,ldr;hdr.SetTypelessRgba16View(DXGI_FORMAT_R16G16B16A16_FLOAT);
+  hdr.Create(h.d.Get(),{typeless.Get()},shaders);ldr.Create(h.d.Get(),{typeless.Get()},shaders);
+  auto hdrBytes=h.Run(hdr,NativeCodecParameters{},1),ldrBytes=h.Run(ldr,NativeCodecParameters{},1);
+  Require(hdrBytes!=ldrBytes,"independent typed interpretations");Require(NativeViewFormat(DXGI_FORMAT_R16G16B16A16_TYPELESS)==DXGI_FORMAT_R16G16B16A16_UNORM,"upstream default mapping unchanged");}
+ // Active subrect must preserve every byte outside the selected render area.
+ {NativeGameCodec sub;sub.Create(h.d.Get(),{proxy.Get(),neural.Get(),original.Get()},shaders,true,nullptr,32,4);
+  auto result=h.Run(sub,NativeCodecParameters{},3);auto expected=Half(65,7,2);
+  for(UINT y=0;y<7;y++)for(UINT x=0;x<65;x++)if(x>=32||y>=4)Require(!memcmp(result.data()+(y*65+x)*8,expected.data()+(y*65+x)*8,8),"active area preserves padding and alpha");}
+ // Discard the first recording, then execute a new recording and replay it.
+ {NativeGameCodec replay;replay.EnableReplayableRecording();replay.Create(h.d.Get(),{original.Get()},shaders);
+  ComPtr<ID3D12CommandAllocator> alloc;ComPtr<ID3D12GraphicsCommandList> cmd;
+  Check(h.d->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT,IID_PPV_ARGS(&alloc)));
+  Check(h.d->CreateCommandList(0,D3D12_COMMAND_LIST_TYPE_DIRECT,alloc.Get(),nullptr,IID_PPV_ARGS(&cmd)));
+  replay.Record(cmd.Get(),{Read},1,NativeCodecParameters{});Check(cmd->Close());
+  auto baseline=h.Run(replay,NativeCodecParameters{},1);
+  ID3D12CommandList* lists[]={cmd.Get()};h.q->ExecuteCommandLists(1,lists);
+  Require(h.ReadTexture(replay.Output())==baseline,"discard and replay stable resource states");}
+ {RejectCompiler first(E_ABORT),second(E_ACCESSDENIED);
+  auto task=[&](RejectCompiler& compiler){for(int i=0;i<8;i++){ID3DBlob*code=nullptr;Require(CompileNativeShader(shaders+L"/native_codec_encode.hlsl",nullptr,"main",&code,nullptr,&compiler)==compiler.failure&&!code,"file provider isolated from cached default");Require(NativeCompileShaderBlob("x",1,"test",nullptr,nullptr,"main",&code,nullptr,"cs_5_0",0,&compiler)==compiler.failure&&!code,"blob provider isolated");}};
+  auto left=std::async(std::launch::async,[&]{task(first);});auto right=std::async(std::launch::async,[&]{task(second);});left.get();right.get();Require(first.calls==16&&second.calls==16,"both providers called independently");}
+ {NativeFastHistory::History fast;fast.Create(h.d.Get(),64,32,64);}
+ h.CheckDebug();puts("PASS: legacy HDR/sRGB bytes, opt-ins, four debug views, R10 fallback, subrect, replay, typed views, provider isolation, History pipeline creation");return 0;
  }catch(const std::exception&e){fprintf(stderr,"FAIL: %s\n",e.what());return 1;}}

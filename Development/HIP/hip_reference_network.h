@@ -181,6 +181,7 @@ inline bool SwinRunCompatible(const Options&o){
 }
 inline std::atomic<int> AdaptivePreviewState{0};
 class Network {friend class D3D12Bridge;
+ Tensor native_post_row;void* native_post_output=nullptr;
  bool sp1440_ready=false;bool final_direct_compatible=false;bool pool64_byte_available=false;
  bool vit_contract_byte_edge=false; // paired exact representation of an already E4M3-valued edge
  bool free_geometry=false; /* DLSS5_NETWORK_FREE_RES geometry (FreeGeometry): generic ViT grid, no 640-token cap */
@@ -457,7 +458,7 @@ class Network {friend class D3D12Bridge;
   }
   if(module=="c32_fused"||module=="c32_fused_ffn"||module=="mh_fused"){groups=count;threads=128;}
   if(module=="c64_wave2"){groups=count;threads=kernel.rfind("c64_",0)==0?64:kernel.rfind("c128_",0)==0?128:256;}
-  if(module=="c32_wave1"&&(kernel=="c32_wave1_up"||kernel=="c32_wave1_up_b8"||kernel=="c32_wave1_up_lb"||kernel=="c32_wave1_up_b8_lb"||kernel=="c32_wave1_finish_dcrop_b8"||kernel=="c32_wave1_finish_dcrop_b8d"||kernel=="c32_wave1_prefix_b8d"||kernel=="c32_wave1_mapped_b8"||kernel=="c32_wave1_finish_b8"||(kernel=="c32_wave1_post_b8"||kernel=="c32_wave1_post_b8_rgba"||kernel=="c32_wave1_post_b8_features"))){groups=count;threads=32;}
+  if(module=="c32_wave1"&&(kernel=="c32_wave1_up"||kernel=="c32_wave1_up_b8"||kernel=="c32_wave1_up_lb"||kernel=="c32_wave1_up_b8_lb"||kernel=="c32_wave1_finish_dcrop_b8"||kernel=="c32_wave1_finish_dcrop_b8d"||kernel=="c32_wave1_prefix_b8d"||kernel=="c32_wave1_mapped_b8"||kernel=="c32_wave1_finish_b8"||(kernel=="c32_wave1_post_logit"||kernel=="c32_wave1_post_b8_logit"||kernel=="c32_wave1_post_b8"||kernel=="c32_wave1_post_b8_rgba"||kernel=="c32_wave1_post_b8_features"))){groups=count;threads=32;}
   if(module=="c512_m32_mh"||module=="c512_m32_deep"){groups=count/1024;threads=32;}
   if(kernel=="split_ffn_one_w2"||kernel=="split_ffn_one_w2f8")threads=64;
   if(kernel=="split_ffn_proj_fused"){threads=256;groups=count/8192;}
@@ -659,10 +660,10 @@ class Network {friend class D3D12Bridge;
  static long long AdaptiveIdleMs(){static const long long ms=[]{const char*v=std::getenv("DLSS5_VIT_ADAPTIVE_IDLE_MS");if(!v||!*v)return 500LL;char*e=nullptr;long long x=std::strtoll(v,&e,10);return (e&&!*e&&x>=0)?x:500LL;}();return ms;}
  Tensor adaptive_image_anchor,adaptive_image_signature,adaptive_image_delta;void*adaptive_image=nullptr;
  void*adaptive_prev_history=nullptr;void*adaptive_prev_input=nullptr;U adaptive_prev_seed=0;
- bool adaptive_dirty=false,adaptive_key_down=false,adaptive_user_disabled=false;U adaptive_last_mode=0,adaptive_frame=0;
+ bool adaptive_allowed=true,adaptive_dirty=false,adaptive_key_down=false,adaptive_user_disabled=false;U adaptive_last_mode=0,adaptive_frame=0;
  bool adaptive_active=false;U adaptive_n=0;std::chrono::steady_clock::time_point adaptive_last{};
  Tensor AdaptiveVitGroup(Tensor input,U n){
-  const char*mode_s=std::getenv("DLSS5_VIT_ADAPTIVE");U mode=mode_s?U(std::stoul(mode_s)):0;
+  const char*mode_s=std::getenv("DLSS5_VIT_ADAPTIVE");U mode=adaptive_allowed&&mode_s?U(std::stoul(mode_s)):0;
   const char*hotkey=std::getenv("DLSS5_VIT_REUSE_HOTKEY");
   if(hotkey&&!strcmp(hotkey,"1")){bool down=(GetAsyncKeyState(VK_F8)&0x8000)!=0;if(down&&!adaptive_key_down)adaptive_user_disabled=!adaptive_user_disabled;adaptive_key_down=down;if(adaptive_user_disabled)mode=0;}
   AdaptivePreviewState.store(mode?1:0);if(mode!=adaptive_last_mode){adaptive_dirty=true;adaptive_last_mode=mode;}
@@ -679,7 +680,17 @@ class Network {friend class D3D12Bridge;
    else{std::vector<double>product(1024,1.);for(U block=31;block<=38;block++)for(const char*part:{"contract","projection"}){auto weight=ReadWeights(opt.assets+"/block"+std::to_string(block)+"-"+part+".f32");size_t matrix=!strcmp(part,"contract")?4194304:1048576;if(weight.size()!=matrix+1024)throw std::runtime_error("adaptive gain weight shape");for(U i=0;i<1024;i++)product[i]*=double(weight[matrix+i]);}for(U i=0;i<1024;i++)gain[i]=float(product[i]);}
    for(float v:gain)if(!std::isfinite(v))throw std::runtime_error("adaptive gain nonfinite");adaptive_gain=Upload(gain.data(),4096,true);
   }
-  if(reset){U zero[8]{};adaptive_state=Upload(zero,sizeof(zero),true);adaptive_anchor_in=New(size_t(n)*1024);adaptive_anchor_out=New(size_t(n)*1024);adaptive_stats=New(size_t(n)*4);adaptive_n=n;U tiles=((W+31)/32)*((H+31)/32);adaptive_image_anchor=New(size_t(tiles)*3);adaptive_image_signature=New(size_t(tiles)*3);adaptive_image_delta=New(tiles);}
+  if(reset){
+   // PrepareStagedKernels warms the first allocation before producer waits.
+   // Same-geometry resets must not free old anchors or synchronously upload:
+   // queued frames may still use them, waiting for a producer not yet submitted.
+   if(!adaptive_state||adaptive_n!=n){
+    adaptive_state=std::make_shared<Allocation>(api,8*sizeof(U));
+    adaptive_anchor_in=New(size_t(n)*1024);adaptive_anchor_out=New(size_t(n)*1024);adaptive_stats=New(size_t(n)*4);adaptive_n=n;
+    U tiles=((W+31)/32)*((H+31)/32);adaptive_image_anchor=New(size_t(tiles)*3);adaptive_image_signature=New(size_t(tiles)*3);adaptive_image_delta=New(tiles);
+   }
+   api.Check(api.hipMemsetAsync(P(adaptive_state),0,8*sizeof(U),stream),"adaptive reset");
+  }
   U stride=free_geometry?(W/64+3)/4*4:W==1920?32:W/64,tiles=((W+31)/32)*((H+31)/32);
   if(!adaptive_image)throw std::runtime_error("adaptive image missing");
   Run("deep","reuse_image_stats",size_t(tiles)*256,adaptive_image,P(adaptive_image_anchor),P(adaptive_state),P(adaptive_image_signature),P(adaptive_image_delta),W,H);
@@ -807,7 +818,7 @@ if(opt.experimental_temporal){
 }
 
 if(wave_owned_active)HasFn("c32_wave1","c32_wave1_post_b8_rgba");if(multi_predict||std::ifstream(opt.modules+"/multi-pass-predict.hsaco").good())EnsurePredictModule();if(multi_pass>1)PrepareMultiPassFeeds();if(multi_skin)PrepareSkin();}catch(...){if(!pulse_lease.Close()){std::fprintf(stderr,"submit_pulse ctor cleanup retained owner stream\n");throw;}if(pdl_flags){api.hipStreamSynchronize(stream);api.hipFree(pdl_flags);pdl_flags=nullptr;}for(auto&m:modules)api.hipModuleUnload(m.second);api.hipStreamDestroy(stream);throw;}}
- ~Network(){if(!pulse_lease.Close()){std::fprintf(stderr,"submit_pulse direct destructor retained owner stream; bridge must preclose\n");return;}std::fprintf(stderr,"submit_pulse resources create=%llu create_ok=%llu record=%llu record_ok=%llu destroy=%llu destroy_ok=%llu drain=%llu site_visits=%llu accepted=%llu reject_mask=%u lifetime_pdl_calls=%u\n",pulse_ops.create_calls,pulse_ops.create_ok,pulse_ops.record_calls,pulse_ops.record_ok,pulse_ops.destroy_calls,pulse_ops.destroy_ok,pulse_ops.drain_calls,pulse_site_visits,pulse_record_accepted,pulse_last_reject_mask,pdl_calls);api.hipSetDevice(int(opt.device));api.hipStreamSynchronize(stream);experimental_history.reset();experimental_prefix.reset();experimental_raw.reset();experimental_logit.reset();experimental_weights.reset();experimental_sig.reset();experimental_recip.reset();temporal_features.reset();SpReport();pdl_keep.clear();if(pdl_flags){api.hipFree(pdl_flags);pdl_flags=nullptr;}if(opt.graph)std::printf("graph_stats builds=%u replays=%u\n",graph_builds,graph_replays);ClearGraph();for(auto&t:timings){api.hipEventDestroy(t.begin);api.hipEventDestroy(t.end);}adaptive_image_anchor.reset();adaptive_image_signature.reset();adaptive_image_delta.reset();adaptive_anchor_in.reset();adaptive_anchor_out.reset();adaptive_gain.reset();adaptive_stats.reset();adaptive_state.reset();device_noise.reset();gather_maps[0].clear();gather_maps[1].clear();weights.clear();pool.clear();for(auto&m:modules)api.hipModuleUnload(m.second);api.hipStreamDestroy(stream);}
+ ~Network(){if(!pulse_lease.Close()){std::fprintf(stderr,"submit_pulse direct destructor retained owner stream; bridge must preclose\n");return;}std::fprintf(stderr,"submit_pulse resources create=%llu create_ok=%llu record=%llu record_ok=%llu destroy=%llu destroy_ok=%llu drain=%llu site_visits=%llu accepted=%llu reject_mask=%u lifetime_pdl_calls=%u\n",pulse_ops.create_calls,pulse_ops.create_ok,pulse_ops.record_calls,pulse_ops.record_ok,pulse_ops.destroy_calls,pulse_ops.destroy_ok,pulse_ops.drain_calls,pulse_site_visits,pulse_record_accepted,pulse_last_reject_mask,pdl_calls);api.hipSetDevice(int(opt.device));api.hipStreamSynchronize(stream);native_post_row.reset();experimental_history.reset();experimental_prefix.reset();experimental_raw.reset();experimental_logit.reset();experimental_weights.reset();experimental_sig.reset();experimental_recip.reset();temporal_features.reset();SpReport();pdl_keep.clear();if(pdl_flags){api.hipFree(pdl_flags);pdl_flags=nullptr;}if(opt.graph)std::printf("graph_stats builds=%u replays=%u\n",graph_builds,graph_replays);ClearGraph();for(auto&t:timings){api.hipEventDestroy(t.begin);api.hipEventDestroy(t.end);}adaptive_image_anchor.reset();adaptive_image_signature.reset();adaptive_image_delta.reset();adaptive_anchor_in.reset();adaptive_anchor_out.reset();adaptive_gain.reset();adaptive_stats.reset();adaptive_state.reset();device_noise.reset();gather_maps[0].clear();gather_maps[1].clear();weights.clear();pool.clear();for(auto&m:modules)api.hipModuleUnload(m.second);api.hipStreamDestroy(stream);}
  void PrintMemory(){size_t bytes=0,free=0,total=0;std::set<void*>seen;auto add=[&](const Tensor&t){if(t&&t->owned&&seen.insert(t->ptr).second)bytes+=t->capacity;};for(auto&t:pool)add(t);for(auto&w:weights)add(w.second);for(auto&maps:gather_maps)for(auto&m:maps)add(m.second);add(device_noise);api.Check(api.hipMemGetInfo(&free,&total),"memory stats");std::printf("memory owned_MiB=%.1f allocations=%zu device_free_MiB=%.1f total_MiB=%.1f\n",bytes/1048576.,seen.size(),free/1048576.,total/1048576.);}
  /* DLSS5_HIP_MEMORY=1 (diagnostic): device memory by category after the pool has warmed — weights by key, pool tensors by capacity, gather maps, noise, and the runtime's free/total. */
  void MemoryReport(FILE*f){std::set<void*>seen;size_t wsum=0,psum=0,gsum=0,nsum=0;std::vector<std::pair<size_t,std::string>>w,p;
@@ -854,7 +865,10 @@ if(wave_owned_active)HasFn("c32_wave1","c32_wave1_post_b8_rgba");if(multi_predic
  else
  {if(c32_skip_byte)throw std::runtime_error("byte C32 skip needs the wave-owned up");source=Up(source,skips[0],W/4,H/4,W/2,H/2,64,32,"block66-weights.f32");}skips[0].reset();c32_skip_byte=false;for(U b=c32_begin;b<=69;b++){if(opt.skip_blocks.count(b)){if(!opt.raw_chain)throw std::runtime_error("C32 skip needs the raw chain");if(b==69)SkipChainFinish(chain,W/2,H/2,false);if(chain.main)source=chain.main;continue;}chain=opt.raw_chain?C32Chain(source,chain.raw?&chain:nullptr,W/2,H/2,Shift(b),Block(b,"ffn"),Block(b,"attention"),b==69,false):C32(source,W/2,H/2,Shift(b),Block(b,"ffn"),Block(b,"attention"));source=chain.main;if(source)Stage("block"+std::to_string(b),source);}chain={};
  C32Result post{};
- if(opt.post_merge_fold){U sx=(opt.post_shift&1)?4:0,sy=(opt.post_shift&2)?4:0,ww=W+2*sx,hh=H+2*sy,windows=ww*hh/64;if(opt.post_head_fused){const bool lowb=c32_post_low_byte;const bool rgba=request_rgba&&lowb&&HasFn("c32_wave1","c32_wave1_post_b8_rgba");graph_output_stride=rgba?4:3;Tensor out;if(rgba){out=multi_feed[multi_next];multi_next^=1;if(!out)throw std::runtime_error("RGBA outputs must be prepared before producer wait");}else out=(final_rgb?std::make_shared<Allocation>(api,final_rgb,size_t(W)*H*12):New(size_t(W)*H*3));c32_post_low_byte=false;if(temporal_feature_tap_active){
+ if(opt.post_merge_fold){U sx=(opt.post_shift&1)?4:0,sy=(opt.post_shift&2)?4:0,ww=W+2*sx,hh=H+2*sy,windows=ww*hh/64;if(opt.post_head_fused){const bool lowb=c32_post_low_byte;const bool rgba=request_rgba&&lowb&&HasFn("c32_wave1","c32_wave1_post_b8_rgba");graph_output_stride=rgba?4:3;Tensor out;if(rgba){out=multi_feed[multi_next];multi_next^=1;if(!out)throw std::runtime_error("RGBA outputs must be prepared before producer wait");}else out=(final_rgb?std::make_shared<Allocation>(api,final_rgb,size_t(W)*H*12):New(size_t(W)*H*3));c32_post_low_byte=false;if(native_post_output){
+ if(rgba||multi_pass!=1)throw std::runtime_error("auxiliary post requires single pass RGB output");
+ Run("c32_wave1",lowb?"c32_wave1_post_b8_logit":"c32_wave1_post_logit",windows,P(source),P(skip0),Weight("post70-scales.f32"),PackedC32Weight("post70-ffn.f32",false),PackedC32Weight("post70-attention.f32",true),P(color),Weight("post70-head.f32"),P(out),windows,W,H,sx,sy,.03125f,P(native_post_row),native_post_output);
+ }else if(temporal_feature_tap_active){
  if(!lowb||rgba)throw std::runtime_error("temporal feature tap post layout changed");
  Run("c32_wave1","c32_wave1_post_b8_features",windows,P(source),P(skip0),Weight("post70-scales.f32"),PackedC32Weight("post70-ffn.f32",false),PackedC32Weight("post70-attention.f32",true),P(color),Weight("post70-head.f32"),P(out),windows,W,H,sx,sy,.03125f,P(temporal_features));
 }else Run(lowb?"c32_wave1":"c32_fused_ffn",lowb?(rgba?"c32_wave1_post_b8_rgba":"c32_wave1_post_b8"):"c32_post_merge_head_half",windows,P(source),P(skip0),Weight("post70-scales.f32"),PackedC32Weight("post70-ffn.f32",false),PackedC32Weight("post70-attention.f32",true),P(color),Weight("post70-head.f32"),P(out),windows,W,H,sx,sy,.03125f);source.reset();skip0.reset();Stage("block70",out);return out;}
@@ -895,6 +909,19 @@ if(wave_owned_active)HasFn("c32_wave1","c32_wave1_post_b8_rgba");if(multi_predic
  bool PulseProfileCompatible()const noexcept{return opt.runtime==7&&opt.pooled&&opt.wmma&&opt.wave&&opt.fast_prefix&&opt.fast_c32&&opt.fast_mh&&opt.fast_deep&&opt.packed_weights&&opt.packed_c32&&opt.fp8_normalized&&opt.fp8_av&&opt.fp8_deep&&opt.raw_chain&&opt.prefix_inline&&opt.fused_qkv_norm&&opt.ffn_qkv&&opt.ffn_qkv_max_c==256&&opt.grouped_mh_contract&&opt.split_ffn_fused&&opt.split_mix_blocked&&opt.split_project_blocked&&opt.vit_qkv_fused&&opt.vit_attn_fused&&opt.vit_qkv_fp8&&opt.vit_contract_frag&&opt.vit_weight_mask==1&&opt.vit_pack_input&&opt.mh_project_crop&&opt.pool_project_group&&opt.wave_owned&&final_direct_compatible&&opt.dup_prefix.empty()&&opt.mh_byte_stream&&opt.mh_ffn_frag256&&opt.decoder_byte&&opt.c512_m32&&opt.vit_proj_n64&&opt.vit_stream==3&&opt.swin_run&&!opt.vit_byte_stream&&!opt.vit_half_stream&&!opt.vit_qkv_n4&&!opt.vit_split_k&&!opt.sparse_weights;}
  unsigned PulseRejectMask(bool at_site=false)const noexcept{const char*ae=std::getenv("DLSS5_VIT_ADAPTIVE");return (pulse_frame_history?1u:0u)|(!pulse_platform_scope?131072u:0u)|(opt.submit_pulse==2&&!pulse_driver_validated?262144u:0u)|(!PulseProfileCompatible()||!pulse_capabilities_ok?524288u:0u)|(pulse_bridge_diagnostics?2097152u:0u)|(at_site&&!SwinRunActive()?1048576u:0u)|(opt.graph?2u:0u)|(opt.profile?4u:0u)|(opt.wall_profile?8u:0u)|(opt.experimental_temporal?16u:0u)|(opt.temporal_feature_tap?32u:0u)|(!opt.skip_blocks.empty()?64u:0u)|(multi_pass!=1?128u:0u)|(multi_pass==3&&multi_predict?256u:0u)|(multi_skin?512u:0u)|((ae&&*ae&&std::strcmp(ae,"0"))?1024u:0u)|(pdl_anyorder?2048u:0u)|(at_site&&!pulse_ordered_down_c256?65536u:0u)|(!opt.pool_project_group?32768u:0u)|(!fast_numeric?8192u:0u)|(!((W==1600&&H==960)||(W==1920&&H==1152))?16384u:0u);}
  bool PulseEligible()const noexcept{return PulseRejectMask()==0;}
+ // Optional raster auxiliary output: two floats per processing pixel, FP32 logit
+ // followed by its half-RTZ diagnostic value. Caller owns the device buffer until
+ // all enqueued work completes; configuration is serialized before warm-up.
+ struct PostAuxiliary {void* data=nullptr;size_t bytes=0;U width=0,height=0;U pixel_stride=8;};
+ bool NativeHistorySupported()const{return wave_owned_active&&opt.post_merge_fold&&opt.post_head_fused&&!opt.graph&&multi_pass==1&&!opt.experimental_temporal&&!opt.temporal_feature_tap;}
+ void EnableNativePostHistory(const std::vector<float>&row,const PostAuxiliary&aux){
+  if(row.size()!=32||!aux.data||aux.bytes<size_t(W)*H*8||aux.width!=W||aux.height!=H||aux.pixel_stride!=8||native_post_row||!NativeHistorySupported())throw std::runtime_error("auxiliary post layout or network unsupported");
+  for(float v:row)if(!std::isfinite(v))throw std::runtime_error("auxiliary post nonfinite weight");
+  // Fn follows the actual selected module, including norm900. Never silently
+  // replace an optimized upstream module with a different numerical route.
+  Fn("c32_wave1","c32_wave1_post_logit");Fn("c32_wave1","c32_wave1_post_b8_logit");
+  native_post_row=Upload(row.data(),128,true);native_post_output=aux.data;
+ }
  bool GraphEnabled()const{return opt.graph;}
  bool WaveOwnedActive()const{return wave_owned_active;}
  bool SwinRunActive()const{return SwinRunCompatible(opt)&&!sp_disabled&&(!sp_error_host||!sp_error_host[0].load(std::memory_order_acquire));}
@@ -905,6 +932,10 @@ if(wave_owned_active)HasFn("c32_wave1","c32_wave1_post_b8_rgba");if(multi_predic
  Handle Stream()const{return stream;}
  Api& Runtime(){return api;}
  void Synchronize(){api.Check(api.hipStreamSynchronize(stream),"network completion");}
+ // Serialize with Enqueue on this instance. Does not change environment/hotkey
+ // preferences; callers opt out when their temporal policy requires full ViT.
+ void SetAdaptiveReuseAllowed(bool allowed){if(adaptive_allowed!=allowed){adaptive_allowed=allowed;adaptive_dirty=true;}}
+
  void Enqueue(void*rgba,void*history,void*rgb_output,U seed){pulse_ordered_down_c256=false;pulse_frame_pdl_start=pdl_calls;pulse_frame_history=history!=nullptr;if(adaptive_prev_history!=history||adaptive_prev_seed!=seed||adaptive_prev_input!=rgba){adaptive_dirty=true;adaptive_prev_history=history;adaptive_prev_seed=seed;adaptive_prev_input=rgba;}
   if(!rgba||!rgb_output||(!device_noise&&!opt.fast_prefix)||!opt.pooled||opt.profile||opt.wall_profile||observer||!opt.dump_dir.empty())throw std::runtime_error("device graph requires initialized noise, pooled mode and no diagnostic readbacks");
   if(opt.graph){
@@ -969,7 +1000,12 @@ if(wave_owned_active)HasFn("c32_wave1","c32_wave1_post_b8_rgba");if(multi_predic
  using Memcpy2DFn=int(*)(void*,size_t,const void*,size_t,size_t,size_t,int,Handle);Memcpy2DFn memcpy2d{};
  std::set<U> multi_skip;
  U graph_output_stride=3,skin_first_stride=3;bool multi_predict=true,multi_skin=false;Tensor predict_gain,skin_first,skin_mask,skin_result;
- __attribute__((noinline)) Tensor MultiPassRest(Tensor out,const Tensor&hist,const Tensor&original,U stride=3,void*final_rgb=nullptr){
+ #if defined(_MSC_VER)
+ __declspec(noinline)
+ #else
+ __attribute__((noinline))
+ #endif
+ Tensor MultiPassRest(Tensor out,const Tensor&hist,const Tensor&original,U stride=3,void*final_rgb=nullptr){
   if(multi_skin){if(!skin_first)throw std::runtime_error("skin resources must be prepared before producer wait");skin_first_stride=stride;api.Check(api.hipMemcpyAsync(P(skin_first),P(out),size_t(W)*H*stride*4,3,stream),"save first pass for skin");}
   /* passes 2..N: DLSS5_MULTI_PASS_SKIP_BLOCKS added to the configured skip set (restored after, also on a throw) */
   std::set<U> saved;const bool swap=!multi_skip.empty();if(swap){saved=opt.skip_blocks;opt.skip_blocks.insert(multi_skip.begin(),multi_skip.end());}
