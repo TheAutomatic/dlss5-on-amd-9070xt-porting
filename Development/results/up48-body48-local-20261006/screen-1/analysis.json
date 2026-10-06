@@ -1,0 +1,49 @@
+{
+  "slots": [
+    {
+      "slot": 0,
+      "kind": "A",
+      "gpu_avg": 9.165645125000001,
+      "gpu_p99": 9.3057034,
+      "wall_avg": 9.32769375,
+      "wall_p99": 9.47671,
+      "fnseq_env_missing": true
+    },
+    {
+      "slot": 1,
+      "kind": "N",
+      "gpu_avg": 9.166950875000001,
+      "gpu_p99": 9.3278718,
+      "wall_avg": 9.338474999999999,
+      "wall_p99": 9.659249999999998,
+      "fnseq_env_missing": true
+    },
+    {
+      "slot": 2,
+      "kind": "N",
+      "gpu_avg": 9.179453875000002,
+      "gpu_p99": 9.3178614,
+      "wall_avg": 9.34265,
+      "wall_p99": 9.686200000000001,
+      "fnseq_env_missing": true
+    },
+    {
+      "slot": 3,
+      "kind": "A",
+      "gpu_avg": 9.187653875,
+      "gpu_p99": 9.3812936,
+      "wall_avg": 9.34606875,
+      "wall_p99": 9.62751,
+      "fnseq_env_missing": true
+    }
+  ],
+  "deltas": {
+    "gpu_avg_delta": -0.003447124999999218,
+    "wall_avg_delta": 0.003681249999999636,
+    "gpu_p99_delta": -0.01152780000000142,
+    "wall_p99_delta": 0.11964000000000041
+  },
+  "baseline_gpu_drift": 0.022008749999999466,
+  "baseline_wall_drift": 0.018375000000000696,
+  "status": "singlefirstscreen"
+}
