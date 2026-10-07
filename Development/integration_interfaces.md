@@ -44,7 +44,7 @@ No end-to-end game validation or completed downstream release is claimed.
   GPU completion, and supplies frame/reset/seed policy. It must not combine the
   helper with the reference experiment or ViT reuse.
 
-## Validation completed on 2026-10-06
+## Validation completed on 2026-10-06 (initial snapshot)
 
 Run `Development/test_integration_interfaces.ps1` from an MSVC x64 shell;
 `-Amd` also runs the synthetic GPU tests. Results go under `exports/`.
@@ -71,7 +71,7 @@ Run `Development/test_integration_interfaces.ps1` from an MSVC x64 shell;
 - D3D12 debug layer was unavailable. gfx1200 hardware and full-network auxiliary
   output/replay were not tested. No whole-network speedup claim is made.
 
-## Downstream adoption and validation boundary
+## Downstream adoption and validation boundary (initial snapshot)
 
 The isolated downstream Runtime has been migrated to these interfaces and compiled
 against the raw candidate headers: compiler/cache policy stays downstream;
@@ -81,9 +81,9 @@ advance the downstream completed upstream pin or certify all newly introduced
 upstream defaults/modules. Full staged upstream review, matching module rebuild,
 and downstream runtime/game verification remain necessary before adoption.
 
-No promise of zero regressions follows from compilation. In particular, full HIP
-network auxiliary output and replay/failure tests have not yet run against this
-candidate. The synthetic tests are not a substitute for those checks.
+The initial snapshot did not yet have full HIP network auxiliary/replay coverage.
+The follow-up below records the subsequently completed checks and their scope;
+neither set of synthetic results substitutes for game visual acceptance.
 
 ## Addon Fast History
 
@@ -156,3 +156,81 @@ network lifetime. No module recipe or default FAST0 output is changed here.
 Explicit identity codec extents now use the same direct sampling as omitted
 extents. This fixes the active-subrect interface's unintended 1:1 interpolation;
 legacy callers with no active extents retain their original fit predicate.
+
+
+## Final-pass auxiliary scheduling for MP1/2/3 (2026-10-07)
+
+This extends the existing **opt-in bridge interface**, not the addon's default
+rendering or its Fast History policy. `RequestPostAuxiliary(row)` now admits
+MP1/2/3 in the normal non-graph `Enqueue` path. It keeps the same descriptor,
+eight-byte pixel stride, coefficient validation and export checks. No new model
+weights, kernels, module recipes, environment defaults or History shader algorithm
+are introduced by this follow-up.
+
+| Execution | Auxiliary/history routing |
+| --- | --- |
+| MP1 | One real network consumes history and emits auxiliary logits, as before |
+| MP2 | First pass has no temporal prefix and no auxiliary write; second does both |
+| Real MP3 | First two passes have no temporal prefix/auxiliary write; third does both |
+| Predicted MP3 | First pass has neither; second is the final real network and emits logits; prediction does not synthesize third-pass logits |
+| Skin protection | Logits remain those of the final real network, before skin blending |
+
+Intermediate RGB/RGBA kernels remain available. The final real pass uses the
+existing RGB+logit export. Only an instance that explicitly requested auxiliary
+output changes its history routing: ordinary callers still feed their history to
+every pass exactly as before. `SetMultiPass()` no longer rejects this interface
+solely because the pass count changes; graph/reference-feature-tap restrictions
+are retained. `HIP_MP_RAW_EXPORT` is a separate diagnostic schedule and now
+explicitly rejects auxiliary admission instead of accepting an incorrect schedule;
+its unrequested rendering path is unchanged.
+
+The caller owns **one final-frame history chain**: it applies reprojection and
+smoothing once to the final RGB after prediction/skin blending, then retains that
+result for the next frame. The caller must serialize changes, drain outstanding
+work or retain each recorded instance's resources through completion, and reset
+history when pass/prediction/skin mode or input geometry changes. This interface
+does not add per-pass histories, reset policy, a seed rule or UI switches upstream.
+Predicted-MP3 logits are explicitly a pass-2 approximation; there is no claim of
+exact equivalence to three real networks or game-tested image quality.
+
+OptScaler(NR)'s consumer already implements the final-frame chain and retains its
+INI/menu defaults, motion/depth checks, reset/seed policy and History/ViT exclusion.
+The addon Fast History consumer described above **remains MP1-only and off by
+default**. Removing its consumer-side guards needs separate lifecycle/metadata
+work and testing; this interface change does not silently lift them.
+
+### Reproducible validation
+
+From an MSVC x64 shell:
+
+```powershell
+./Development/test_integration_interfaces.ps1 -Amd `
+    -Assets <native-game-tiled-assets> -Modules <modules/gfx1201>
+```
+
+`-Modules` is the matching architecture directory containing the existing logit
+exports. Without both paths, the suite compiles the new tests and explicitly skips
+the full-network GPU run; the normal WARP/shader tests still run. The test uses a
+synthetic 32-value row to verify scheduling/storage and does not distribute model
+coefficients. The optional baseline build uses `TEST_LEGACY_BASELINE` against the
+previous headers (304613aa).
+
+Validation on RX 9070 XT (gfx1201): intermediate RGB/RGBA leaves every auxiliary
+sentinel untouched; final output writes every pixel; MP1/2/real3/predicted3,
+predicted3+skin, MP2+skin and return-to-MP1 succeed on one live instance. Repeating
+the same input/history/seed produces identical RGB. Seven no-aux output hashes
+match PR head 304613aa, including non-null history on each legacy pass. The
+raw-export build separately checks explicit auxiliary rejection. WARP/AMD codec,
+History and deferred-addon fixtures, MSVC bridge compilation and the MinGW
+runtime build also pass.
+
+The matching downstream production scheduling change additionally passed its
+full GPU recording/replay/reset/old-chain tests and local CI/device release checks.
+This is evidence for the implemented scope, not upstream game acceptance. No
+Mochi code, post-SR History support or History/ViT co-execution is added. No gfx1200
+hardware or D3D12 debug-layer validation is available. No performance benefit or
+elimination of all scene-specific flicker is claimed.
+
+Downstream pins stay in place until the author merges the complete PR and the
+actual merge SHA is reviewed. Its previous zero-pin rehearsal applies to 304613aa;
+this scheduling extension must also be present before removing preservation rules.
